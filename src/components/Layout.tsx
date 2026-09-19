@@ -1,1 +1,42 @@
-import type { ReactNode } from 'react'\n\nexport function Layout({\n  children,\n  footer,\n}: {\n  children: ReactNode\n  footer?: ReactNode\n}) {\n  return (\n    \u003cdiv className=\"mx-auto flex min-h-full w-full max-w-md flex-col bg-cream px-4 pb-[env(safe-area-inset-bottom)]\"\u003e\n      \u003cdiv className=\"flex flex-1 flex-col py-4\"\u003e\n        {children}\n      \u003c/div\u003e\n      {footer}\n    \u003c/div\u003e\n  )\n}\n\nexport function TopBar({\n  left,\n  center,\n  right,\n}: {\n  left?: ReactNode\n  center?: ReactNode\n  right?: ReactNode\n}) {\n  return (\n    \u003cheader className=\"mb-4 flex min-h-11 items-center justify-between gap-2\"\u003e\n      \u003cdiv className=\"flex min-w-0 flex-1 items-center justify-start\"\u003e\n        {left}\n      \u003c/div\u003e\n      \u003cdiv className=\"shrink-0 text-center\"\u003e\n        {center}\n      \u003c/div\u003e\n      \u003cdiv className=\"flex min-w-0 flex-1 items-center justify-end\"\u003e\n        {right}\n      \u003c/div\u003e\n    \u003c/header\u003e\n  )\n}\n
+import type { ReactNode } from 'react'
+
+export function Layout({
+  children,
+  footer,
+}: {
+  children: ReactNode
+  footer?: ReactNode
+}) {
+  return (
+    <div className="mx-auto flex min-h-full w-full max-w-md flex-col bg-cream px-4 pb-[env(safe-area-inset-bottom)]">
+      <div className="flex flex-1 flex-col py-4">
+        {children}
+      </div>
+      {footer}
+    </div>
+  )
+}
+
+export function TopBar({
+  left,
+  center,
+  right,
+}: {
+  left?: ReactNode
+  center?: ReactNode
+  right?: ReactNode
+}) {
+  return (
+    <header className="mb-4 flex min-h-11 items-center justify-between gap-2">
+      <div className="flex min-w-0 flex-1 items-center justify-start">
+        {left}
+      </div>
+      <div className="shrink-0 text-center">
+        {center}
+      </div>
+      <div className="flex min-w-0 flex-1 items-center justify-end">
+        {right}
+      </div>
+    </header>
+  )
+}
