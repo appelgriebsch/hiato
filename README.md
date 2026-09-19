@@ -6,7 +6,11 @@ Mobile-first offline language word-guess PWA for learners (EN / PT / DE / ES, CE
 
 Plan locked 2026-09-19. Architecture Decision Records live in `docs/adr/`.
 
-Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily EN A1 → … → **H1** prod harden.
+Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily EN A1 (this branch) → … → **H1** prod harden.
+
+```bash
+bun run packs:check   # pack schema + spoiler rule
+```
 
 ## Stack (locked)
 

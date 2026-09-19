@@ -19,6 +19,7 @@ export default defineConfig({
         'hiato.svg',
         'fonts/*.woff2',
         'icons/*',
+        'packs/en/a1.json',
       ],
       manifest: {
         name: 'Hiato',
@@ -59,7 +60,7 @@ export default defineConfig({
       },
       workbox: {
         // Include woff2 so offline shell does not depend on CDN fonts
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,json}'],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/^\/api\//],
       },
