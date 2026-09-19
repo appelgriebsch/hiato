@@ -1,17 +1,17 @@
 # ADR 0023: In-round learner hints under the puzzle
 
-- Status: Accepted
+- Status: Accepted (amended)
 - Date: 2026-09-19
 - Deciders: Andreas Gerlach
 
 ## Context
-G0 play screen showed gaps without enough learning support during the round. Post-reveal gloss alone is late for pedagogy. Andreas requested small hints below the word while guessing — synonyms (thesaurus-style) and/or a short dictionary explanation.
+G0 play screen needed learning support during the round. Andreas requested small hints below the word while guessing — synonyms and/or a short dictionary explanation. On review he required those hints to be in the **same language** as the puzzle word (so learners see L2 alternatives), not English-only glosses.
 
 ## Decision
-On the word-guessing (play) screen, show a compact hint area under the gap word: short gloss and/or synonym chips. Hints must not print the answer lemma itself. Prefer gentle, level-appropriate wording. Pack schema should carry optional `gloss` / `synonyms` fields for v1 (EN gloss OK for all target langs unless later ADR says otherwise).
+On the word-guessing (play) screen, show a compact hint area under the gap word: short gloss and/or synonym chips **in the selected target language** (EN→EN, DE→DE, ES→ES, PT→PT). Hints must not print the answer lemma itself. Pack schema: optional `gloss` / `synonyms` in the pack language. Graceful empty state if missing.
 
 ## Consequences
-- UX Uma revises G0 play screen before re-accept.
-- Impl Ivy / pack pipeline must populate gloss/synonyms (or graceful empty state).
-- Spoiler risk: gloss must not contain the answer string; engine/UI should strip/forbid that.
+- UX Uma revises G0: same-language mock copy; diacritic hint (ADR 0015) must be functional in the prototype.
+- Impl Ivy / pack pipeline populate same-language gloss/synonyms.
+- Spoiler risk: gloss/synonyms must not contain the answer string.
 - Distinct from the diacritic hint button (ADR 0015).
