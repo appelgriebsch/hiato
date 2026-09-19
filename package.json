@@ -6,15 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "echo \"oxlint optional — not installed in T1 scaffold\"",
+    "lint": "echo \"oxlint optional \u2014 not installed in T1 scaffold\"",
     "preview": "vite preview",
-    "test": "bun test"
+    "test": "bun test",
+    "packs:check": "bun run scripts/packs-check.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4",
     "tailwind-merge": "^3.7.0",
     "zustand": "^5.0.15"
   },

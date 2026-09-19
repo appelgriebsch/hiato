@@ -19,6 +19,7 @@ export default defineConfig({
         'hiato.svg',
         'fonts/*.woff2',
         'icons/*',
+        'packs/en/a1.json',
       ],
       manifest: {
         name: 'Hiato',

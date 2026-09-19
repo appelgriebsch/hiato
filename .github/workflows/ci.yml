@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main, t1-scaffold-pwa]
+    branches: [main]
   pull_request:
 
 jobs:
@@ -14,5 +14,6 @@ jobs:
         with:
           bun-version: '1.4.2'
       - run: bun install --frozen-lockfile
+      - run: bun run packs:check
       - run: bun run build
       - run: bun test
