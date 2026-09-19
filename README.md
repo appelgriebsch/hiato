@@ -19,29 +19,27 @@ Hosting: Cloudflare Pages + Pages Functions `/api/health` stub. Branch previews 
 Requires **Bun 1.4.2** (see `packageManager` / `.tool-versions`).
 
 ```bash
-# assemble lock (same as CF Pages build prefix)
-cat bun.lock.p0 bun.lock.p1 bun.lock.p2 bun.lock.p3 > bun.lock
-bun install
+bun install --frozen-lockfile
 bun run dev          # http://localhost:5173
 bun run build        # → dist/
 bun run preview
 bun test             # optional smoke
 ```
 
-Production-parity install:
+Production-parity install / build:
 
 ```bash
-cat bun.lock.p0 bun.lock.p1 bun.lock.p2 bun.lock.p3 > bun.lock && bun install --frozen-lockfile && bun run build
+bun install --frozen-lockfile && bun run build
 ```
 
 ## Cloudflare Pages
 
 See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 
-- **Build command:** `cat bun.lock.p0 bun.lock.p1 bun.lock.p2 bun.lock.p3 > bun.lock && bun install --frozen-lockfile && bun run build`
+- **Build command:** `bun install --frozen-lockfile && bun run build`
 - **Output directory:** `dist`
 - **Env (Production + Preview):** `BUN_VERSION=1.4.2`, `SKIP_DEPENDENCY_INSTALL=true`
-- Commit **`bun.lock.p0`…`p3`** (assembled to `bun.lock` at build); no npm/pnpm lockfiles
+- Commit **`bun.lock`** only; no npm/pnpm lockfiles
 
 ## License notes
 

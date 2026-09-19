@@ -23,7 +23,7 @@ Build command:
 Build output directory: `dist`
 
 Environment variables (Production **and** Preview):
-- `BUN_VERSION=<exact output of bun --version>`
+- `BUN_VERSION=1.4.2`
 - `SKIP_DEPENDENCY_INSTALL=true`
 
 Lockfile policy:
@@ -31,5 +31,4 @@ Lockfile policy:
 - Do not commit `package-lock.json` or `pnpm-lock.yaml`
 - Never rely on Cloudflare bun.lock autodetection
 
-Exact `BUN_VERSION` string still pending Andreas (or first scaffold machine).
-
+Scaffold pin (T1): `BUN_VERSION=1.4.2` (matches `packageManager` / `.tool-versions`).

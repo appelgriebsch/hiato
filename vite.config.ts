@@ -13,7 +13,13 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'prompt',
-      includeAssets: ['favicon.svg', 'hiato.svg'],
+      // Precache favicon, brand SVG, self-hosted fonts, and PNG/SVG icons
+      includeAssets: [
+        'favicon.svg',
+        'hiato.svg',
+        'fonts/*.woff2',
+        'icons/*',
+      ],
       manifest: {
         name: 'Hiato',
         short_name: 'Hiato',
@@ -24,6 +30,22 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
+            src: 'icons/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'icons/icon-512-maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
             src: 'icons/icon-192.svg',
             sizes: '192x192',
             type: 'image/svg+xml',
@@ -33,16 +55,13 @@ export default defineConfig({
             sizes: '512x512',
             type: 'image/svg+xml',
           },
-          {
-            src: 'icons/icon-512.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
-            purpose: 'maskable',
-          },
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        // Include woff2 so offline shell does not depend on CDN fonts
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
+        navigateFallback: 'index.html',
+        navigateFallbackDenylist: [/^\/api\//],
       },
       devOptions: {
         enabled: false,

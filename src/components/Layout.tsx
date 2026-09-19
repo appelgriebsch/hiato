@@ -8,7 +8,7 @@ export function Layout({
   footer?: ReactNode
 }) {
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col bg-cream px-4 pb-[env(safe-area-inset-bottom)]">
+    <div className="mx-auto flex min-h-full w-full max-w-md flex-col bg-cream px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
       <div className="flex flex-1 flex-col py-4">
         {children}
       </div>

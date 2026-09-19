@@ -1,3 +1,10 @@
+# HTML entry: always revalidate so clients pick up new SW registration
+/
+  Cache-Control: no-cache
+
+/index.html
+  Cache-Control: no-cache
+
 # Service worker + webmanifest: always revalidate (ADR 0011)
 /sw.js
   Cache-Control: no-cache
