@@ -35,6 +35,7 @@ export function Play() {
   const [hintUsed, setHintUsed] = useState(false)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
 
+  // Mount-time dateKey; midnight rollover without remount is T4 (ADR 0004 follow-up).
   const dateKey = localDateKey()
 
   useEffect(() => {
@@ -55,6 +56,8 @@ export function Play() {
         setLives(TOTAL_LIVES)
         setMisses(0)
         setHintUsed(false)
+        // A1 vowel-prefill can already reveal the whole word (W3).
+        setFinished(isWon(initial) ? 'win' : null)
         setLoading(false)
       })
       .catch((e: unknown) => {
@@ -89,7 +92,10 @@ export function Play() {
       if (isWon(next)) endGame('win')
     } else {
       setUsedWrong((s) => new Set(s).add(k))
-      setMisses((m) => m + 1)
+      // ADR 0015: only count misses while an unrevealed diacritic remains (W2).
+      if (hasUnrevealedDiacritic(cells, wordEntry.word)) {
+        setMisses((m) => m + 1)
+      }
       setLives((lv) => {
         const n = lv - 1
         if (n <= 0) endGame('lose')

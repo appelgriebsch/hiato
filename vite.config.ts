@@ -60,7 +60,7 @@ export default defineConfig({
       },
       workbox: {
         // Include woff2 so offline shell does not depend on CDN fonts
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,json}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/^\/api\//],
       },

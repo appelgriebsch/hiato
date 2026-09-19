@@ -6,24 +6,9 @@
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { isPackCefr, isPackLang, type WordPack } from '../src/packs/schema'
+import { spoilerContains } from '../src/packs/spoilers'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
-
-function escapeRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-}
-
-/** True if haystack contains lemma as a whole Unicode word (ADR 0023). */
-export function spoilerContains(haystack: string, lemma: string): boolean {
-  const h = haystack.normalize('NFC')
-  const needle = lemma.normalize('NFC').trim()
-  if (!needle) return false
-  const re = new RegExp(
-    `(?<![\\p{L}\\p{N}])${escapeRegExp(needle)}(?![\\p{L}\\p{N}])`,
-    'iu',
-  )
-  return re.test(h)
-}
 
 function assertString(v: unknown, label: string): string {
   if (typeof v !== 'string' || !v.trim()) {

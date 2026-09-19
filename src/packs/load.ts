@@ -15,8 +15,15 @@ function readLocal(lang: PackLang, cefr: PackCefr): WordPack | null {
   try {
     const raw = localStorage.getItem(cacheKey(lang, cefr))
     if (!raw) return null
-    return JSON.parse(raw) as WordPack
+    const pack = assertPack(JSON.parse(raw))
+    return pack
   } catch {
+    // corrupt or unversioned cache — discard
+    try {
+      localStorage.removeItem(cacheKey(lang, cefr))
+    } catch {
+      /* ignore */
+    }
     return null
   }
 }
@@ -32,11 +39,20 @@ function writeLocal(pack: WordPack): void {
 function assertPack(raw: unknown): WordPack {
   if (!raw || typeof raw !== 'object') throw new Error('invalid pack')
   const o = raw as WordPack
+  if (typeof o.version !== 'number' || !Number.isFinite(o.version)) {
+    throw new Error('pack missing version')
+  }
   if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) throw new Error('bad lang/cefr')
   if (!Array.isArray(o.lemmas) || o.lemmas.length === 0) {
     throw new Error('empty lemmas')
   }
   return o
+}
+
+async function fetchPack(lang: PackLang, cefr: PackCefr): Promise<WordPack> {
+  const res = await fetch(packUrl(lang, cefr))
+  if (!res.ok) throw new Error(`pack fetch ${res.status}`)
+  return assertPack(await res.json())
 }
 
 /** Fetch pack JSON, cache in memory + localStorage (ADR 0006). */
@@ -49,16 +65,35 @@ export async function loadPack(
   if (mem) return mem
 
   const cached = readLocal(lang, cefr)
+
+  // Prefer network when online so a version mismatch discards stale cache (W4).
+  const online =
+    typeof navigator === 'undefined' || navigator.onLine !== false
+  if (online) {
+    try {
+      const pack = await fetchPack(lang, cefr)
+      if (!cached || cached.version !== pack.version) {
+        memory.set(key, pack)
+        writeLocal(pack)
+        return pack
+      }
+      // same version — keep / refresh cache
+      memory.set(key, pack)
+      writeLocal(pack)
+      return pack
+    } catch {
+      // fall through to cache / hard fail
+    }
+  }
+
   if (cached) {
     memory.set(key, cached)
-    // Refresh in background when online
+    // background refresh may still replace if a newer version appears later
     void refreshPack(lang, cefr).catch(() => {})
     return cached
   }
 
-  const res = await fetch(packUrl(lang, cefr))
-  if (!res.ok) throw new Error(`pack fetch ${res.status}`)
-  const pack = assertPack(await res.json())
+  const pack = await fetchPack(lang, cefr)
   memory.set(key, pack)
   writeLocal(pack)
   return pack
@@ -66,10 +101,15 @@ export async function loadPack(
 
 async function refreshPack(lang: PackLang, cefr: PackCefr): Promise<void> {
   if (typeof navigator !== 'undefined' && navigator.onLine === false) return
-  const res = await fetch(packUrl(lang, cefr))
-  if (!res.ok) return
-  const pack = assertPack(await res.json())
-  memory.set(`${lang}/${cefr}`, pack)
+  const pack = await fetchPack(lang, cefr)
+  const key = `${lang}/${cefr}`
+  const prev = memory.get(key)
+  if (prev && prev.version === pack.version) {
+    // still refresh localStorage copy
+    writeLocal(pack)
+    return
+  }
+  memory.set(key, pack)
   writeLocal(pack)
 }
 
