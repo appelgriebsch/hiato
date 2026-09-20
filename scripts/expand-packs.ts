@@ -2,8 +2,9 @@
 /**
  * Expand public/packs to ~400 lemmas each (ADR 0026).
  * Lemma selection: wordhoard samples (EN/DE/ES) + FrequencyWords (PT) + existing packs.
- * Glosses: keep curated non-template glosses; generate real same-language learner glosses
- * for new lemmas via xAI (never letter-count templates). Denylist rejects NSFW/violence.
+ * Glosses: keep curated non-template glosses in pack.lang (ADR 0030); generate real
+ * same-language learner glosses for new lemmas via xAI (never letter-count templates or English
+ * fallbacks). Denylist rejects NSFW/violence.
  * Person names drop only when the lemma is on the name list *and* the gloss is a
  * person-name gloss (keep WILL/MARK/ROSA with a common-noun reading).
  * Language membership: nspell/Hunspell (loanword allowlist; PT pt-PT|pt-BR; DE ß/SS).
@@ -14,18 +15,19 @@ import path from 'node:path'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
-import { isTemplateGloss } from './gloss-quality'
+import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import {
   SYNONYM_COVERAGE_FLOOR,
   filterSynonymChips,
   synonymCoverageRatio,
 } from './synonym-chips'
-import { generateSynonyms } from './synonym-generate'
+import { generateSynonyms, readXaiKey } from './synonym-generate'
+import { spoilerContains } from '../src/packs/spoilers'
 
 const ROOT = path.join(import.meta.dir, '..')
 const TARGET = 400
-const PACK_VERSION = 5
+const PACK_VERSION = 6
 const LANGS = ['en', 'pt', 'de', 'es'] as const
 const CEFRS = ['a1', 'a2', 'b1'] as const
 type Lang = (typeof LANGS)[number]
@@ -201,16 +203,36 @@ function parseFreqPt(): string[] {
   return out.slice(200)
 }
 
-function spoiler(hay: string, lemma: string): boolean {
-  const h = hay.normalize('NFC').toLowerCase()
-  const n = lemma.normalize('NFC').toLowerCase().trim()
-  if (!n) return false
-  const re = new RegExp(`(?:^|[^\\p{L}\\p{M}])${escapeRe(n)}(?:[^\\p{L}\\p{M}]|$)`, 'iu')
-  return re.test(h)
+function glossRejected(
+  lang: Lang,
+  word: string,
+  gloss: string | undefined,
+): boolean {
+  if (!gloss || isTemplateGloss(gloss) || spoilerContains(gloss, word)) {
+    return true
+  }
+  if (isNameGlossLemma(lang, word, gloss)) return true
+  return isWrongLanguageGloss(lang, gloss, isWordOfLang)
 }
 
-function escapeRe(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+function stripLeadingLemma(gloss: string, word: string): string {
+  const g = gloss.normalize('NFC').trim()
+  const first = g.match(/^[\p{L}\p{M}]+/u)?.[0]
+  if (!first || nfcUpper(first) !== nfcUpper(word)) return g
+  const rest = g.slice(first.length).replace(/^[\s,.:;–—-]+/, '').trim()
+  if (!rest) return g
+  return rest.charAt(0).toLocaleUpperCase() + rest.slice(1)
+}
+
+function acceptGeneratedGloss(
+  lang: Lang,
+  word: string,
+  raw: string,
+): string | null {
+  for (const g of [raw.trim(), stripLeadingLemma(raw.trim(), word)]) {
+    if (g && !glossRejected(lang, word, g)) return g
+  }
+  return null
 }
 
 function glossCachePath(lang: Lang) {
@@ -264,9 +286,7 @@ function loadCuratedMaps(): Record<Lang, Map<string, Lemma>> {
       for (const L of pack.lemmas) {
         const word = nfcUpper(L.word)
         if (isDeniedLemma(word, DENY)) continue
-        if (!L.gloss || isTemplateGloss(L.gloss)) continue
-        if (spoiler(L.gloss, word)) continue
-        if (isNameGlossLemma(lang, word, L.gloss)) continue
+        if (glossRejected(lang, word, L.gloss)) continue
         const key = foldKey(lang, word)
         const prev = maps[lang].get(key)
         // Prefer form that still contains ß when both exist
@@ -282,20 +302,6 @@ function loadCuratedMaps(): Record<Lang, Map<string, Lemma>> {
   return maps
 }
 
-function readXaiKey(): string | null {
-  try {
-    const authPath = `${process.env.HOME}/.grok/auth.json`
-    if (!existsSync(authPath)) return null
-    const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<string, { key?: string }>
-    for (const v of Object.values(auth)) {
-      if (v?.key) return v.key
-    }
-  } catch {
-    /* ignore */
-  }
-  return process.env.XAI_API_KEY || null
-}
-
 const LANG_NAME: Record<Lang, string> = {
   en: 'English',
   de: 'German',
@@ -303,17 +309,19 @@ const LANG_NAME: Record<Lang, string> = {
   pt: 'Portuguese',
 }
 
+const GLOSS_STYLE: Record<Lang, string> = {
+  en: 'Prefer "a/an/the …" or "to …" style definitions.',
+  de: 'Schreib ausschließlich auf Deutsch — kein Englisch. Bevorzuge "ein/eine/der …" oder einen Infinitiv ohne "to".',
+  es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
+  pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
+}
+
 async function generateGlosses(
   lang: Lang,
   words: string[],
   cache: Record<string, string>,
 ): Promise<void> {
-  const missing = words.filter((w) => {
-    const g = cache[w]
-    if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
-    if (isNameGlossLemma(lang, w, g)) return true
-    return false
-  })
+  const missing = words.filter((w) => glossRejected(lang, w, cache[w]))
   if (missing.length === 0) return
 
   const key = readXaiKey()
@@ -329,9 +337,9 @@ async function generateGlosses(
     const batch = missing.slice(i, i + BATCH)
     const prompt =
       `Language: ${LANG_NAME[lang]} (${lang}).\n` +
-      `Write a short same-language learner dictionary gloss for each lemma (one simple sentence or clause).\n` +
+      `Write a short learner dictionary gloss for each lemma in ${LANG_NAME[lang]} only (one simple sentence or clause).\n` +
       `Rules: never include the lemma itself as a whole word in its gloss (do not start with the lemma); ` +
-      `no letter-count or classroom-template fluff; no NSFW. Prefer "a/an/the …" or "to …" style definitions.\n` +
+      `no letter-count or classroom-template fluff; no NSFW. ${GLOSS_STYLE[lang]}\n` +
       `Never define a lemma as a given name, first name, surname, family name, or proper name of a person. ` +
       `If it has an ordinary noun/verb/adjective/adverb meaning, use that. If it is only a personal name, omit it from the JSON.\n` +
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
@@ -350,7 +358,7 @@ async function generateGlosses(
           {
             role: 'system',
             content:
-              'You write concise learner-dictionary glosses. Reply with a single JSON object only.',
+              `You write concise learner-dictionary glosses in ${LANG_NAME[lang]} only (ADR 0030). Reply with a single JSON object only.`,
           },
           { role: 'user', content: prompt },
         ],
@@ -377,9 +385,9 @@ async function generateGlosses(
         console.warn(`  missing gloss for ${w}`)
         continue
       }
-      let gloss = g.trim()
-      if (spoiler(gloss, w) || isTemplateGloss(gloss) || isNameGlossLemma(lang, w, gloss)) {
-        console.warn(`  rejected gloss for ${w}: ${gloss.slice(0, 60)}`)
+      const gloss = acceptGeneratedGloss(lang, w, g)
+      if (!gloss) {
+        console.warn(`  rejected gloss for ${w}: ${g.trim().slice(0, 60)}`)
         continue
       }
       cache[w] = gloss
@@ -389,20 +397,15 @@ async function generateGlosses(
   }
 
   // Retry leftovers with stricter anti-spoiler instructions
-  let leftovers = words.filter((w) => {
-    const g = cache[w]
-    if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
-    if (isNameGlossLemma(lang, w, g)) return true
-    return false
-  })
+  let leftovers = words.filter((w) => glossRejected(lang, w, cache[w]))
   for (let attempt = 0; attempt < 3 && leftovers.length; attempt++) {
     console.log(`  ${lang} retry ${attempt + 1}: ${leftovers.length} leftovers`)
     for (let i = 0; i < leftovers.length; i += 20) {
       const batch = leftovers.slice(i, i + 20)
       const prompt =
         `Language: ${LANG_NAME[lang]} (${lang}).\n` +
-        `For each lemma, write a short learner gloss that does NOT contain the lemma letters as a whole word at all.\n` +
-        `Define the meaning using other words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
+        `For each lemma, write a short ${LANG_NAME[lang]} learner gloss that does NOT contain the lemma as a whole word at all.\n` +
+        `${GLOSS_STYLE[lang]} Define the meaning using other ${LANG_NAME[lang]} words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       const res = await fetch('https://api.x.ai/v1/chat/completions', {
         method: 'POST',
@@ -417,7 +420,7 @@ async function generateGlosses(
             {
               role: 'system',
               content:
-                'JSON only. Each gloss must avoid the headword as a whole word (ADR 0023).',
+                `JSON only. Gloss in ${LANG_NAME[lang]} only (ADR 0030). Each gloss must avoid the headword as a whole word (ADR 0023).`,
             },
             { role: 'user', content: prompt },
           ],
@@ -437,9 +440,8 @@ async function generateGlosses(
             parsed[w] ||
             Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
           if (!g || typeof g !== 'string') continue
-          const gloss = g.trim()
-          if (spoiler(gloss, w) || isTemplateGloss(gloss)) continue
-          if (isNameGlossLemma(lang, w, gloss)) continue
+          const gloss = acceptGeneratedGloss(lang, w, g)
+          if (!gloss) continue
           cache[w] = gloss
         }
       } catch {
@@ -447,12 +449,27 @@ async function generateGlosses(
       }
       saveGlossCache(lang, cache)
     }
-    leftovers = words.filter((w) => {
-      const g = cache[w]
-      if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
-      if (isNameGlossLemma(lang, w, g)) return true
-      return false
-    })
+    leftovers = words.filter((w) => glossRejected(lang, w, cache[w]))
+  }
+  const FALLBACK: Partial<Record<Lang, Record<string, string>>> = {
+    de: {
+      WEISE: 'Eine Art, etwas zu tun.',
+      ÜBERALL: 'An allen möglichen Orten.',
+      HIERHER: 'An diesen Ort.',
+      NACHDENKEN: 'Gründlich überlegen.',
+      VERBRINGEN: 'Zeit an einem Ort zubringen.',
+      AUFNEHMEN: 'Etwas aufzeichnen oder in sich nehmen.',
+      BEGEGNEN: 'Jemandem zufällig treffen.',
+    },
+  }
+  leftovers = words.filter((w) => glossRejected(lang, w, cache[w]))
+  const fb = FALLBACK[lang]
+  if (fb) {
+    for (const w of leftovers) {
+      const g = fb[w]
+      if (g && !glossRejected(lang, w, g)) cache[w] = g
+    }
+    leftovers = words.filter((w) => glossRejected(lang, w, cache[w]))
   }
   if (leftovers.length) {
     console.warn(`  ${lang} still missing glosses: ${leftovers.join(', ')}`)
@@ -495,12 +512,10 @@ function selectWords(
     if (slots.size >= TARGET && !slots.has(foldKey(lang, word))) return
     const w = nfcUpper(word)
     if (!w || EXTRA_STOP.has(w) || isDeniedLemma(w, DENY)) return
-    const gloss = (cur?.gloss && !isTemplateGloss(cur.gloss) ? cur.gloss : null) || glossCache[w]
+    const gloss = (cur?.gloss && !glossRejected(lang, w, cur.gloss) ? cur.gloss : null) || glossCache[w]
     // Name-list tokens stay only with a real common-noun gloss (not occupancy for later drop).
-    if (onNameList(w, NAMES)) {
-      if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, w) || isPersonNameGloss(gloss, lang)) {
-        return
-      }
+    if (onNameList(w, NAMES) && glossRejected(lang, w, gloss)) {
+      return
     }
     const key = foldKey(lang, w)
     const ok = hangmanOk(lang, w)
@@ -582,13 +597,8 @@ function buildLemmas(
   for (const s of selected) {
     const w = s.word
     let gloss = s.curated?.gloss
-    if (!gloss || isTemplateGloss(gloss)) gloss = glossCache[w]
-    if (
-      !gloss ||
-      isTemplateGloss(gloss) ||
-      spoiler(gloss, w) ||
-      isNameGlossLemma(lang, w, gloss)
-    ) {
+    if (glossRejected(lang, w, gloss)) gloss = glossCache[w]
+    if (!gloss || glossRejected(lang, w, gloss)) {
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
     const fromCurated = filterSynonymChips(w, s.curated?.synonyms, DENY)
@@ -608,17 +618,89 @@ function hasRealGloss(
   s: { word: string; curated?: Lemma },
   cache: Record<string, string>,
 ): boolean {
-  const g = (s.curated?.gloss && !isTemplateGloss(s.curated.gloss) ? s.curated.gloss : null) || cache[s.word]
-  return !!(
-    g &&
-    !isTemplateGloss(g) &&
-    !spoiler(g, s.word) &&
-    !isNameGlossLemma(lang, s.word, g)
-  )
+  const g =
+    (s.curated?.gloss && !glossRejected(lang, s.word, s.curated.gloss)
+      ? s.curated.gloss
+      : null) || cache[s.word]
+  return !glossRejected(lang, s.word, g)
+}
+
+async function repairGlossLanguage(): Promise<void> {
+  const caches: Record<Lang, Record<string, string>> = {
+    en: loadGlossCache('en'),
+    de: loadGlossCache('de'),
+    es: loadGlossCache('es'),
+    pt: loadGlossCache('pt'),
+  }
+  const failed: string[] = []
+  for (const lang of LANGS) {
+    if (lang === 'en') continue
+    const need: string[] = []
+    for (const cefr of CEFRS) {
+      const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+      if (!existsSync(file)) continue
+      const pack = JSON.parse(readFileSync(file, 'utf8')) as {
+        lemmas: Lemma[]
+      }
+      for (const L of pack.lemmas) {
+        const w = nfcUpper(L.word)
+        if (glossRejected(lang, w, L.gloss)) {
+          if (glossRejected(lang, w, caches[lang][w])) delete caches[lang][w]
+          need.push(w)
+        } else if (glossRejected(lang, w, caches[lang][w])) {
+          delete caches[lang][w]
+        }
+      }
+    }
+    const unique = [...new Set(need)]
+    if (unique.length === 0) {
+      console.log(`${lang}: no English-shaped glosses to repair`)
+      continue
+    }
+    console.log(`${lang}: repairing ${unique.length} glosses (ADR 0030)`)
+    await generateGlosses(lang, unique, caches[lang])
+    saveGlossCache(lang, caches[lang])
+    for (const cefr of CEFRS) {
+      const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+      if (!existsSync(file)) continue
+      const pack = JSON.parse(readFileSync(file, 'utf8')) as {
+        version: number
+        lemmas: Lemma[]
+      }
+      let changed = 0
+      const missing: string[] = []
+      for (const L of pack.lemmas) {
+        const w = nfcUpper(L.word)
+        if (!glossRejected(lang, w, L.gloss)) continue
+        const next = caches[lang][w]
+        if (!next || glossRejected(lang, w, next)) {
+          missing.push(w)
+          continue
+        }
+        L.gloss = next
+        changed++
+      }
+      if (changed) {
+        pack.version = PACK_VERSION
+        writeFileSync(file, JSON.stringify(pack, null, 2) + '\n')
+        console.log(`${lang}/${cefr}: rewrote ${changed} glosses`)
+      }
+      if (missing.length) {
+        failed.push(`${lang}/${cefr}: ${missing.join(', ')}`)
+      }
+    }
+  }
+  if (failed.length) {
+    throw new Error(`still no in-language gloss:\n${failed.join('\n')}`)
+  }
 }
 
 // --- main ---
 await ensureDicts()
+if (process.argv.includes('--repair-gloss-lang')) {
+  await repairGlossLanguage()
+  process.exit(0)
+}
 await ensureSources()
 const curatedMaps = loadCuratedMaps()
 for (const lang of LANGS) {

@@ -1,48 +1,50 @@
 # Classroom internationalisms / nspell false-negatives (uppercase NFC).
+# Format: LANG WORD
+#   LANG is en|de|es|pt, or * for every pack language.
 # Grow only from measured Hunspell misses — not a general English leak list.
-EMAIL
-INTERNET
-TAXI
-HOTEL
-RADIO
-BUS
-CLUB
-VIDEO
-CHEF
-COMPUTER
-OK
-OKAY
+* EMAIL
+* INTERNET
+* TAXI
+* HOTEL
+* RADIO
+* BUS
+* CLUB
+* VIDEO
+* CHEF
+* COMPUTER
+* OK
+* OKAY
 # EN (SCOWL US misses)
-CHEQUE
-CASHPOINT
+en CHEQUE
+en CASHPOINT
 # DE compounds / loans nspell does not join (no COMPOUNDBEGIN)
-HOCHZEIT
-VORSICHT
-GEBURTSTAG
-WOCHENENDE
-FRÜHSTÜCK
-GROßVATER
-GROßMUTTER
-FLUGHAFEN
-AUGENBLICK
-EHEMANN
-ZEITPUNKT
-MITGLIED
-VORSCHLAG
-GEGENTEIL
-NOTFALL
-RAUSFINDEN
-MONSIEUR
-MADAME
-COLONEL
-MAMI
-BRAVO
+de HOCHZEIT
+de VORSICHT
+de GEBURTSTAG
+de WOCHENENDE
+de FRÜHSTÜCK
+de GROßVATER
+de GROßMUTTER
+de FLUGHAFEN
+de AUGENBLICK
+de EHEMANN
+de ZEITPUNKT
+de MITGLIED
+de VORSCHLAG
+de GEGENTEIL
+de NOTFALL
+de RAUSFINDEN
+de MONSIEUR
+de MADAME
+de COLONEL
+de MAMI
+de BRAVO
 # PT (pt-PT morph fields / pre-AO90 spellings nspell does not expose)
-CONNOSCO
-ÓPTIMA
-CORRECTO
-DIRECTOR
+pt CONNOSCO
+pt ÓPTIMA
+pt CORRECTO
+pt DIRECTOR
 # ES classroom forms nspell misses
-ADN
-PAPI
-MAMI
+es ADN
+es PAPI
+es MAMI

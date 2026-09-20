@@ -6,7 +6,7 @@ Do **not** rely on Cloudflare’s `bun.lock` autodetection. Pin Bun explicitly.
 
 | Setting | Value |
 |--------|--------|
-| Build command | `bun install --frozen-lockfile && bun run build` |
+| Build command | `bun install --frozen-lockfile && bun run packs:check && bun run build` |
 | Build output directory | `dist` |
 | Root directory | `/` (repo root) |
 
@@ -20,6 +20,10 @@ Set on **Production** and **Preview**:
 | `SKIP_DEPENDENCY_INSTALL` | `true` |
 
 `SKIP_DEPENDENCY_INSTALL=true` skips CF’s default install so the build command owns `bun install --frozen-lockfile`.
+
+`packs:check` is the Hunspell / name / synonym / same-language-gloss gate (ADR 0030). The command lives in the Cloudflare Pages dashboard — edit **Production and Preview** on merge so a main deploy cannot publish packs that skipped GitHub `build-test`. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
+
+Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revalidate` on `/packs/*` in `public/_headers`).
 
 ## Lockfile
 

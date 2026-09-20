@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "bun run packs:check && tsc -b && vite build",
     "lint": "echo \"oxlint optional \u2014 not installed in T1 scaffold\"",
     "preview": "vite preview",
     "test": "bun test",

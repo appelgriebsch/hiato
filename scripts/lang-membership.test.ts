@@ -1,14 +1,20 @@
-import { beforeAll, describe, expect, test } from 'bun:test'
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import {
   caseProbes,
   installFixtureSpellersFromDir,
+  isAllowlistedLemma,
   isWordOfLang,
   membershipProbes,
+  resetDicts,
 } from './lang-membership'
 
 describe('lang membership (fixture dictionaries)', () => {
   beforeAll(() => {
     installFixtureSpellersFromDir()
+  })
+
+  afterAll(() => {
+    resetDicts()
   })
 
   test('accepts in-dict words and rejects unknown tokens', () => {
@@ -61,5 +67,16 @@ describe('lang membership (fixture dictionaries)', () => {
     expect(isWordOfLang('de', 'EMAIL')).toBe(true)
     expect(isWordOfLang('es', 'INTERNET')).toBe(true)
     expect(isWordOfLang('pt', 'COMPUTER')).toBe(true)
+  })
+
+  test('loanword allowlist is keyed by language', () => {
+    expect(isAllowlistedLemma('en', 'CASHPOINT')).toBe(true)
+    expect(isAllowlistedLemma('de', 'CASHPOINT')).toBe(false)
+    expect(isWordOfLang('de', 'CASHPOINT')).toBe(false)
+    expect(isAllowlistedLemma('pt', 'CONNOSCO')).toBe(true)
+    expect(isAllowlistedLemma('en', 'CONNOSCO')).toBe(false)
+    expect(isWordOfLang('en', 'CONNOSCO')).toBe(false)
+    expect(isAllowlistedLemma('es', 'ADN')).toBe(true)
+    expect(isAllowlistedLemma('en', 'ADN')).toBe(false)
   })
 })

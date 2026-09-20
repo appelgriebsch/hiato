@@ -22,25 +22,58 @@ const ENGLISH_KINSHIP = new Set(
   ['DAD', 'MOM', 'DADDY', 'MOMMY', 'MUM', 'MUMMY'].map(nfcUpper),
 )
 
-let allowCache: Set<string> | null = null
+type AllowLists = {
+  all: Set<string>
+  byLang: Record<MembershipLang, Set<string>>
+}
+
+let allowCache: AllowLists | null = null
 let production: SpellMap | null = null
 let fixtures: SpellMap | null = null
 
-export function loadLoanwordAllowlist(): Set<string> {
+const LANG_TAG = new Set<MembershipLang>(['en', 'de', 'es', 'pt'])
+
+export function loadLoanwordAllowlist(): AllowLists {
   if (allowCache) return allowCache
-  const set = new Set<string>()
-  const text = readFileSync(ALLOW_FILE, 'utf8')
-  for (const line of text.split('\n')) {
-    const w = line.split('#')[0]?.trim()
-    if (!w) continue
-    set.add(nfcUpper(w))
+  const all = new Set<string>()
+  const byLang: Record<MembershipLang, Set<string>> = {
+    en: new Set(),
+    de: new Set(),
+    es: new Set(),
+    pt: new Set(),
   }
-  allowCache = set
-  return set
+  const text = readFileSync(ALLOW_FILE, 'utf8')
+  for (const raw of text.split('\n')) {
+    const line = raw.split('#')[0]?.trim()
+    if (!line) continue
+    const parts = line.split(/\s+/)
+    if (parts.length !== 2) {
+      throw new Error(
+        `loanword-allowlist: expected "LANG WORD", got ${JSON.stringify(line)}`,
+      )
+    }
+    const [tag, word] = parts
+    const w = nfcUpper(word)
+    if (tag === '*') {
+      all.add(w)
+      continue
+    }
+    if (!LANG_TAG.has(tag as MembershipLang)) {
+      throw new Error(`loanword-allowlist: unknown lang ${JSON.stringify(tag)}`)
+    }
+    byLang[tag as MembershipLang].add(w)
+  }
+  allowCache = { all, byLang }
+  return allowCache
 }
 
-export function isAllowlistedLemma(word: string): boolean {
-  return loadLoanwordAllowlist().has(nfcUpper(word))
+export function isAllowlistedLemma(
+  lang: MembershipLang,
+  word: string,
+): boolean {
+  const w = nfcUpper(word)
+  const lists = loadLoanwordAllowlist()
+  return lists.all.has(w) || lists.byLang[lang].has(w)
 }
 
 function titleCase(word: string): string {
@@ -142,11 +175,17 @@ export async function ensureDicts(): Promise<void> {
   production = await loadProduction()
 }
 
+/** Clear process-global spellers so bun:test files cannot leak fixture dicts. */
+export function resetDicts(): void {
+  fixtures = null
+  production = null
+}
+
 export function isWordOfLang(lang: MembershipLang, word: string): boolean {
   const w = nfcUpper(word)
   if (!w) return false
   if (lang !== 'en' && ENGLISH_KINSHIP.has(w)) return false
-  if (isAllowlistedLemma(w)) return true
+  if (isAllowlistedLemma(lang, w)) return true
   for (const spell of spellers()[lang]) {
     if (anyCorrect(spell, word, lang)) return true
     if (lang === 'de' && deCompoundOk(spell, word)) return true

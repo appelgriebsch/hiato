@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
- * NSFW denylist, required non-template gloss, person-name gloss gate,
+ * NSFW denylist, required non-template same-language gloss (ADR 0030), person-name gloss gate,
  * Hunspell language-membership (loanword allowlist), and ≥80% synonym chips.
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
@@ -11,7 +11,11 @@ import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
-import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
+import {
+  isTemplateGloss,
+  isWrongLanguageGloss,
+  TEMPLATE_GLOSS_RE,
+} from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import {
   SYNONYM_CHIP_CAP,
@@ -104,6 +108,11 @@ function validatePack(raw: unknown, file: string): WordPack {
     if (isTemplateGloss(gloss)) {
       throw new Error(
         `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
+      )
+    }
+    if (isWrongLanguageGloss(o.lang as string, gloss, isWordOfLang)) {
+      throw new Error(
+        `${file}: lemmas[${i}] gloss not in pack language ${o.lang} — "${word}" / "${gloss}"`,
       )
     }
     if (spoilerContains(gloss, word)) {
