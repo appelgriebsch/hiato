@@ -1,17 +1,20 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
- * NSFW denylist, and template-gloss rejection (Ask Avery C1/C2).
+ * NSFW denylist, required non-template gloss, and person-name gloss gate.
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { isPackCefr, isPackLang, type WordPack } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
+import { loadNameList, onNameList } from './lemma-names'
+import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 const DENY = loadDenylist()
+const NAMES = loadNameList()
 
 function assertString(v: unknown, label: string): string {
   if (typeof v !== 'string' || !v.trim()) {
@@ -52,10 +55,9 @@ function validatePack(raw: unknown, file: string): WordPack {
     }
     const e = entry as Record<string, unknown>
     const word = assertString(e.word, `${file}: lemmas[${i}].word`).normalize('NFC')
-    const gloss =
-      e.gloss === undefined
-        ? undefined
-        : assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize('NFC')
+    const gloss = assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize(
+      'NFC',
+    )
     let synonyms: string[] | undefined
     if (e.synonyms !== undefined) {
       if (!Array.isArray(e.synonyms)) {
@@ -69,14 +71,19 @@ function validatePack(raw: unknown, file: string): WordPack {
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
-    if (gloss && isTemplateGloss(gloss)) {
+    if (isTemplateGloss(gloss)) {
       throw new Error(
         `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
       )
     }
-    if (gloss && spoilerContains(gloss, word)) {
+    if (spoilerContains(gloss, word)) {
       throw new Error(
         `${file}: lemmas[${i}] spoiler — gloss contains lemma "${word}"`,
+      )
+    }
+    if (onNameList(word, NAMES) && isPersonNameGloss(gloss, o.lang as string)) {
+      throw new Error(
+        `${file}: lemmas[${i}] person-name gloss — "${word}" / "${gloss}"`,
       )
     }
     if (synonyms) {
