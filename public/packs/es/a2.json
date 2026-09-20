@@ -1,30 +1,1293 @@
 {
-  "version": 1,
+  "version": 2,
   "lang": "es",
   "cefr": "a2",
   "license": "CC0-1.0 (curated learner lemmas; glosses original to Hiato)",
   "attribution": [
     "Hiato ES A2 learner pack — original glosses and synonym chips (2026).",
-    "Lemmas selected for CEFR A2 classroom frequency; not a verbatim dump of any proprietary list."
+    "Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).",
+    "Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
-      "word": "CANCIÓN",
-      "gloss": "Pieza musical con letra para cantar.",
+      "word": "ABUELA",
+      "gloss": "madre del padre o de la madre."
+    },
+    {
+      "word": "SALA",
+      "gloss": "habitación amplia de una casa."
+    },
+    {
+      "word": "CLUB",
+      "gloss": "grupo o asociación recreativa."
+    },
+    {
+      "word": "CONTACTO",
+      "gloss": "relación o trato entre personas."
+    },
+    {
+      "word": "CONSEJO",
+      "gloss": "Una sugerencia sobre lo que alguien debería hacer.",
       "synonyms": [
-        "melodía",
-        "tema",
-        "tono"
+        "aviso",
+        "recomendación"
       ]
     },
     {
-      "word": "FÁCIL",
-      "gloss": "Que no es difícil de hacer o entender.",
+      "word": "DON",
+      "gloss": "título de cortesía para hombres."
+    },
+    {
+      "word": "ACCIÓN",
+      "gloss": "acto o hecho realizado."
+    },
+    {
+      "word": "TREN",
+      "gloss": "Vagones sobre raíles que llevan gente.",
       "synonyms": [
-        "sencillo",
-        "simple",
-        "ligero"
+        "ferrocarril",
+        "convoy"
       ]
+    },
+    {
+      "word": "PRISA",
+      "gloss": "falta de tiempo o urgencia."
+    },
+    {
+      "word": "CUMPLEAÑOS",
+      "gloss": "aniversario del nacimiento."
+    },
+    {
+      "word": "VENTANA",
+      "gloss": "Una abertura en la pared que deja pasar la luz.",
+      "synonyms": [
+        "cristal",
+        "vano"
+      ]
+    },
+    {
+      "word": "SUELO",
+      "gloss": "superficie donde se pisa."
+    },
+    {
+      "word": "CÁRCEL",
+      "gloss": "lugar donde se encierra a presos."
+    },
+    {
+      "word": "ENEMIGO",
+      "gloss": "persona que desea el mal ajeno."
+    },
+    {
+      "word": "GOBIERNO",
+      "gloss": "autoridad que dirige un país."
+    },
+    {
+      "word": "NOTA",
+      "gloss": "calificación o apunte breve."
+    },
+    {
+      "word": "NAVIDAD",
+      "gloss": "fiesta del nacimiento de Jesús."
+    },
+    {
+      "word": "EMBARGO",
+      "gloss": "retención judicial de bienes."
+    },
+    {
+      "word": "MAESTRO",
+      "gloss": "Una persona que ayuda a los alumnos a aprender.",
+      "synonyms": [
+        "profesor",
+        "docente"
+      ]
+    },
+    {
+      "word": "TEMA",
+      "gloss": "asunto o materia de que se trata."
+    },
+    {
+      "word": "ESCENA",
+      "gloss": "parte de una obra teatral."
+    },
+    {
+      "word": "SORPRESA",
+      "gloss": "cosa inesperada que sorprende."
+    },
+    {
+      "word": "EJÉRCITO",
+      "gloss": "conjunto de fuerzas armadas."
+    },
+    {
+      "word": "MALDICIÓN",
+      "gloss": "imprecación o deseo de mal."
+    },
+    {
+      "word": "MENTIRA",
+      "gloss": "afirmación falsa a sabiendas."
+    },
+    {
+      "word": "REGLA",
+      "gloss": "norma o pauta de conducta."
+    },
+    {
+      "word": "MIKE",
+      "gloss": "nombre propio masculino."
+    },
+    {
+      "word": "SILENCIO",
+      "gloss": "ausencia de sonido."
+    },
+    {
+      "word": "EDIFICIO",
+      "gloss": "construcción de varios pisos."
+    },
+    {
+      "word": "PISO",
+      "gloss": "planta o nivel de un edificio."
+    },
+    {
+      "word": "FONDO",
+      "gloss": "parte más honda o lejana."
+    },
+    {
+      "word": "TESTIGO",
+      "gloss": "persona que presencia un hecho."
+    },
+    {
+      "word": "CORTE",
+      "gloss": "acción de cortar."
+    },
+    {
+      "word": "GUARDIA",
+      "gloss": "vigilancia o cuerpo de vigilancia."
+    },
+    {
+      "word": "ESPALDA",
+      "gloss": "parte posterior del torso."
+    },
+    {
+      "word": "LOCURA",
+      "gloss": "pérdida de la razón."
+    },
+    {
+      "word": "MUERTO",
+      "gloss": "Un adjetivo del vocabulario inicial."
+    },
+    {
+      "word": "MATRIMONIO",
+      "gloss": "unión legal entre cónyuges."
+    },
+    {
+      "word": "PELIGRO",
+      "gloss": "riesgo de daño o mal."
+    },
+    {
+      "word": "CERVEZA",
+      "gloss": "bebida alcohólica de cebada."
+    },
+    {
+      "word": "JURO",
+      "gloss": "afirmación solemne de verdad."
+    },
+    {
+      "word": "CEREBRO",
+      "gloss": "órgano del pensamiento."
+    },
+    {
+      "word": "TENIENTE",
+      "gloss": "oficial militar de grado medio."
+    },
+    {
+      "word": "BANCO",
+      "gloss": "asiento largo o entidad financiera."
+    },
+    {
+      "word": "ESPACIO",
+      "gloss": "Lugar vacío que permite moverse o colocar cosas."
+    },
+    {
+      "word": "PERMISO",
+      "gloss": "Autorización para hacer algo."
+    },
+    {
+      "word": "BASURA",
+      "gloss": "Residuos que se desechan."
+    },
+    {
+      "word": "COLOR",
+      "gloss": "Tono visible de la luz."
+    },
+    {
+      "word": "BAR",
+      "gloss": "Local donde se sirven bebidas."
+    },
+    {
+      "word": "LIBERTAD",
+      "gloss": "Capacidad de actuar sin restricciones."
+    },
+    {
+      "word": "VAYA",
+      "gloss": "Expresión de sorpresa o admiración."
+    },
+    {
+      "word": "MAR",
+      "gloss": "Extensión de agua salada."
+    },
+    {
+      "word": "INTENTO",
+      "gloss": "Acción de probar algo."
+    },
+    {
+      "word": "PISTA",
+      "gloss": "Señal que ayuda a encontrar algo."
+    },
+    {
+      "word": "HONOR",
+      "gloss": "Respeto por la integridad personal."
+    },
+    {
+      "word": "ABUELO",
+      "gloss": "Padre del padre o de la madre."
+    },
+    {
+      "word": "OPCIÓN",
+      "gloss": "Posibilidad entre varias alternativas."
+    },
+    {
+      "word": "GOLPE",
+      "gloss": "Impacto fuerte y rápido."
+    },
+    {
+      "word": "MISIÓN",
+      "gloss": "Tarea asignada para cumplir."
+    },
+    {
+      "word": "DEDO",
+      "gloss": "Extremidad de la mano."
+    },
+    {
+      "word": "ORO",
+      "gloss": "Metal precioso de color amarillo."
+    },
+    {
+      "word": "OPINIÓN",
+      "gloss": "Lo que piensas sobre un tema.",
+      "synonyms": [
+        "parecer",
+        "criterio",
+        "juicio"
+      ]
+    },
+    {
+      "word": "ÁNGEL",
+      "gloss": "Ser espiritual protector."
+    },
+    {
+      "word": "COCINA",
+      "gloss": "La habitación donde se preparan las comidas.",
+      "synonyms": [
+        "fogón",
+        "office"
+      ]
+    },
+    {
+      "word": "SALUD",
+      "gloss": "Bienestar físico y mental.",
+      "synonyms": [
+        "bienestar",
+        "vitalidad"
+      ]
+    },
+    {
+      "word": "INFORME",
+      "gloss": "Documento que presenta datos."
+    },
+    {
+      "word": "GATO",
+      "gloss": "Una mascota suave que suele ronronear.",
+      "synonyms": [
+        "felino",
+        "michino"
+      ]
+    },
+    {
+      "word": "PARTIDO",
+      "gloss": "Competencia entre equipos."
+    },
+    {
+      "word": "FRÍO",
+      "gloss": "Temperatura baja."
+    },
+    {
+      "word": "BOLSA",
+      "gloss": "Recipiente flexible para llevar cosas."
+    },
+    {
+      "word": "ZONA",
+      "gloss": "Área delimitada."
+    },
+    {
+      "word": "LUNA",
+      "gloss": "El cuerpo brillante que vemos de noche.",
+      "synonyms": [
+        "astro nocturno"
+      ]
+    },
+    {
+      "word": "BASE",
+      "gloss": "Fundamento sobre el que se apoya algo."
+    },
+    {
+      "word": "ÁRBOL",
+      "gloss": "Planta grande con tronco leñoso y ramas.",
+      "synonyms": [
+        "planta",
+        "tronco"
+      ]
+    },
+    {
+      "word": "CAUSA",
+      "gloss": "Motivo que produce un efecto."
+    },
+    {
+      "word": "FLOR",
+      "gloss": "La parte colorida de una planta que se abre.",
+      "synonyms": [
+        "capullo",
+        "pétalo"
+      ]
+    },
+    {
+      "word": "MAYORÍA",
+      "gloss": "Parte más numerosa de un grupo."
+    },
+    {
+      "word": "ENERGÍA",
+      "gloss": "Potencia que hace funcionar o mover las cosas.",
+      "synonyms": [
+        "fuerza",
+        "poder"
+      ]
+    },
+    {
+      "word": "CARNE",
+      "gloss": "Tejido muscular de los animales."
+    },
+    {
+      "word": "POSICIÓN",
+      "gloss": "Lugar que ocupa algo."
+    },
+    {
+      "word": "LLAMA",
+      "gloss": "Fuego visible que sale de algo."
+    },
+    {
+      "word": "ENTRADA",
+      "gloss": "Acceso a un lugar."
+    },
+    {
+      "word": "OBRA",
+      "gloss": "Trabajo realizado por alguien."
+    },
+    {
+      "word": "NIVEL",
+      "gloss": "Altura o grado de algo."
+    },
+    {
+      "word": "JUEZ",
+      "gloss": "Persona que decide en un juicio."
+    },
+    {
+      "word": "VERA",
+      "gloss": "Orilla de un río."
+    },
+    {
+      "word": "ESPERANZA",
+      "gloss": "Confianza en que algo bueno ocurra."
+    },
+    {
+      "word": "ENFERMO",
+      "gloss": "Persona que tiene una enfermedad."
+    },
+    {
+      "word": "ZAPATO",
+      "gloss": "Calzado que cubre el pie."
+    },
+    {
+      "word": "RESULTADO",
+      "gloss": "Lo que ocurre por una acción.",
+      "synonyms": [
+        "desenlace",
+        "efecto"
+      ]
+    },
+    {
+      "word": "PLANETA",
+      "gloss": "Cuerpo celeste que orbita una estrella."
+    },
+    {
+      "word": "NENE",
+      "gloss": "Niño pequeño."
+    },
+    {
+      "word": "ESPECIE",
+      "gloss": "Grupo de seres con características comunes."
+    },
+    {
+      "word": "REINA",
+      "gloss": "Mujer que gobierna un reino."
+    },
+    {
+      "word": "TARJETA",
+      "gloss": "Placa rectangular con información."
+    },
+    {
+      "word": "MÁQUINA",
+      "gloss": "Aparato que realiza trabajo."
+    },
+    {
+      "word": "ESTUDIO",
+      "gloss": "Actividad de aprender."
+    },
+    {
+      "word": "IMAGEN",
+      "gloss": "Representación visual de algo."
+    },
+    {
+      "word": "VUESTRO",
+      "gloss": "Que pertenece a ustedes."
+    },
+    {
+      "word": "PRISIÓN",
+      "gloss": "Lugar donde se encierra a los condenados."
+    },
+    {
+      "word": "ENCUENTRO",
+      "gloss": "Reunión de personas."
+    },
+    {
+      "word": "BANDA",
+      "gloss": "Grupo de músicos."
+    },
+    {
+      "word": "HOGAR",
+      "gloss": "Casa donde vive una familia."
+    },
+    {
+      "word": "ESTACIÓN",
+      "gloss": "Un lugar donde paran trenes o autobuses.",
+      "synonyms": [
+        "apeadero",
+        "terminal"
+      ]
+    },
+    {
+      "word": "ARTE",
+      "gloss": "Expresión creativa de belleza."
+    },
+    {
+      "word": "DESTINO",
+      "gloss": "Lugar adonde se va."
+    },
+    {
+      "word": "VISITA",
+      "gloss": "Acto de ir a ver a alguien."
+    },
+    {
+      "word": "MOTIVO",
+      "gloss": "Razón para hacer algo."
+    },
+    {
+      "word": "OPERACIÓN",
+      "gloss": "Procedimiento quirúrgico."
+    },
+    {
+      "word": "JUICIO",
+      "gloss": "Proceso legal para decidir."
+    },
+    {
+      "word": "MIEMBRO",
+      "gloss": "Parte de un grupo."
+    },
+    {
+      "word": "CUÁNTO",
+      "gloss": "Cantidad de algo."
+    },
+    {
+      "word": "METRO",
+      "gloss": "Unidad de longitud."
+    },
+    {
+      "word": "SARGENTO",
+      "gloss": "Militar de rango intermedio."
+    },
+    {
+      "word": "PORQUÉ",
+      "gloss": "Razón de algo."
+    },
+    {
+      "word": "MOVIMIENTO",
+      "gloss": "Acción de cambiar de lugar o posición."
+    },
+    {
+      "word": "PAREJA",
+      "gloss": "Dos personas que forman una relación romántica."
+    },
+    {
+      "word": "ÉXITO",
+      "gloss": "Lograr un objetivo por el que se trabajó.",
+      "synonyms": [
+        "triunfo",
+        "logro"
+      ]
+    },
+    {
+      "word": "FELICIDAD",
+      "gloss": "Estado de sentir alegría y satisfacción."
+    },
+    {
+      "word": "PRECIO",
+      "gloss": "Cantidad de dinero que cuesta algo."
+    },
+    {
+      "word": "SALIDA",
+      "gloss": "Lugar por donde se sale."
+    },
+    {
+      "word": "RADIO",
+      "gloss": "Distancia desde el centro hasta el borde de un círculo."
+    },
+    {
+      "word": "EJEMPLO",
+      "gloss": "Caso que sirve para explicar una idea."
+    },
+    {
+      "word": "PELEA",
+      "gloss": "Disputa violenta entre personas."
+    },
+    {
+      "word": "VALOR",
+      "gloss": "Cualidad de ser valiente."
+    },
+    {
+      "word": "NORTE",
+      "gloss": "Dirección opuesta al sur."
+    },
+    {
+      "word": "OBJETIVO",
+      "gloss": "Meta que se quiere alcanzar."
+    },
+    {
+      "word": "ELECCIÓN",
+      "gloss": "Decisión entre varias opciones."
+    },
+    {
+      "word": "PARED",
+      "gloss": "Superficie vertical que divide espacios."
+    },
+    {
+      "word": "TOQUE",
+      "gloss": "Contacto breve con algo."
+    },
+    {
+      "word": "TONTERÍA",
+      "gloss": "Cosa sin importancia o sentido."
+    },
+    {
+      "word": "CALMA",
+      "gloss": "Estado de tranquilidad y paz."
+    },
+    {
+      "word": "CUESTIÓN",
+      "gloss": "Asunto o tema que se discute."
+    },
+    {
+      "word": "BESO",
+      "gloss": "Contacto de labios con afecto."
+    },
+    {
+      "word": "RÍO",
+      "gloss": "Una corriente grande de agua hacia el mar.",
+      "synonyms": [
+        "corriente",
+        "cauce"
+      ]
+    },
+    {
+      "word": "RESPECTO",
+      "gloss": "Consideración hacia alguien."
+    },
+    {
+      "word": "REGRESO",
+      "gloss": "Acción de volver al lugar de origen."
+    },
+    {
+      "word": "HÉROE",
+      "gloss": "Persona que realiza actos valientes."
+    },
+    {
+      "word": "COLEGA",
+      "gloss": "Persona que comparte la misma profesión."
+    },
+    {
+      "word": "ÓRDEN",
+      "gloss": "Mandato que debe cumplirse."
+    },
+    {
+      "word": "HUEVO",
+      "gloss": "Un alimento ovalado que pone la gallina.",
+      "synonyms": [
+        "óvalo",
+        "desayuno"
+      ]
+    },
+    {
+      "word": "ESPÍRITU",
+      "gloss": "Parte inmaterial de una persona."
+    },
+    {
+      "word": "VUELO",
+      "gloss": "Desplazamiento por el aire."
+    },
+    {
+      "word": "UNIDAD",
+      "gloss": "Cantidad o elemento individual."
+    },
+    {
+      "word": "EMPRESA",
+      "gloss": "Organización que realiza actividades económicas."
+    },
+    {
+      "word": "INGLÉS",
+      "gloss": "Idioma hablado en Reino Unido y otros países."
+    },
+    {
+      "word": "DEJ",
+      "gloss": "Acción de permitir que algo ocurra."
+    },
+    {
+      "word": "DETALLE",
+      "gloss": "Parte pequeña de algo."
+    },
+    {
+      "word": "VISTAZO",
+      "gloss": "Mirada rápida a algo."
+    },
+    {
+      "word": "MARCHA",
+      "gloss": "Acción de caminar o avanzar."
+    },
+    {
+      "word": "COMANDANTE",
+      "gloss": "Persona que dirige un grupo militar."
+    },
+    {
+      "word": "MARCA",
+      "gloss": "Señal que identifica algo."
+    },
+    {
+      "word": "ESTUDIANTE",
+      "gloss": "Persona que aprende en una escuela."
+    },
+    {
+      "word": "BATALLA",
+      "gloss": "Combate entre fuerzas enemigas."
+    },
+    {
+      "word": "SUR",
+      "gloss": "Dirección opuesta al norte."
+    },
+    {
+      "word": "TRAGO",
+      "gloss": "Cantidad de líquido que se bebe de una vez."
+    },
+    {
+      "word": "PIEL",
+      "gloss": "Capa externa que cubre el cuerpo."
+    },
+    {
+      "word": "SANTO",
+      "gloss": "Persona considerada sagrada."
+    },
+    {
+      "word": "GANA",
+      "gloss": "Deseo de hacer algo."
+    },
+    {
+      "word": "RIESGO",
+      "gloss": "Posibilidad de que ocurra algo malo."
+    },
+    {
+      "word": "ESTILO",
+      "gloss": "Manera particular de hacer algo."
+    },
+    {
+      "word": "ASIENTO",
+      "gloss": "Lugar para sentarse."
+    },
+    {
+      "word": "TRAMPA",
+      "gloss": "Artificio para capturar algo."
+    },
+    {
+      "word": "FANTASMA",
+      "gloss": "Espíritu de una persona muerta."
+    },
+    {
+      "word": "CAMIÓN",
+      "gloss": "Vehículo grande para transportar carga."
+    },
+    {
+      "word": "MONSTRUO",
+      "gloss": "Ser imaginario de aspecto terrorífico."
+    },
+    {
+      "word": "PIEDRA",
+      "gloss": "Fragmento duro de roca."
+    },
+    {
+      "word": "ESTADO",
+      "gloss": "Situación o condición en que algo se encuentra."
+    },
+    {
+      "word": "REGISTRO",
+      "gloss": "Documento que guarda información."
+    },
+    {
+      "word": "JIM",
+      "gloss": "Nombre propio masculino."
+    },
+    {
+      "word": "MAJESTAD",
+      "gloss": "Título de respeto para reyes."
+    },
+    {
+      "word": "MONTAÑA",
+      "gloss": "Tierra muy alta sobre el paisaje alrededor.",
+      "synonyms": [
+        "cima",
+        "pico"
+      ]
+    },
+    {
+      "word": "EXACTO",
+      "gloss": "Que coincide perfectamente con algo."
+    },
+    {
+      "word": "VERANO",
+      "gloss": "Estación más cálida del año."
+    },
+    {
+      "word": "ANILLO",
+      "gloss": "Aro que se lleva en el dedo."
+    },
+    {
+      "word": "HUELLA",
+      "gloss": "Marca que deja el pie al caminar."
+    },
+    {
+      "word": "DIENTE",
+      "gloss": "Pieza dura de la boca para masticar."
+    },
+    {
+      "word": "CUELLO",
+      "gloss": "Parte que une la cabeza con el cuerpo."
+    },
+    {
+      "word": "ENFERMEDAD",
+      "gloss": "Alteración de la salud."
+    },
+    {
+      "word": "DANNY",
+      "gloss": "Nombre propio masculino."
+    },
+    {
+      "word": "EFECTO",
+      "gloss": "Resultado que produce una causa."
+    },
+    {
+      "word": "HUMANO",
+      "gloss": "Que pertenece a la especie humana."
+    },
+    {
+      "word": "PANTALÓN",
+      "gloss": "Prenda que cubre cada pierna por separado."
+    },
+    {
+      "word": "BOTELLA",
+      "gloss": "Recipiente estrecho para líquidos."
+    },
+    {
+      "word": "REPENTE",
+      "gloss": "De manera súbita e inesperada."
+    },
+    {
+      "word": "ANIMAL",
+      "gloss": "Ser vivo que no es vegetal ni humano."
+    },
+    {
+      "word": "SONIDO",
+      "gloss": "Vibración que percibe el oído."
+    },
+    {
+      "word": "DEFENSA",
+      "gloss": "Acción de proteger algo o a alguien."
+    },
+    {
+      "word": "PRESIÓN",
+      "gloss": "Fuerza que empuja, o una demanda urgente.",
+      "synonyms": [
+        "tensión",
+        "fuerza"
+      ]
+    },
+    {
+      "word": "RED",
+      "gloss": "Malla entrecruzada para capturar o contener."
+    },
+    {
+      "word": "TURNO",
+      "gloss": "Momento asignado para actuar."
+    },
+    {
+      "word": "TONY",
+      "gloss": "Nombre propio masculino."
+    },
+    {
+      "word": "RUIDO",
+      "gloss": "Sonido fuerte y molesto."
+    },
+    {
+      "word": "DUEÑO",
+      "gloss": "Persona que posee algo."
+    },
+    {
+      "word": "SILLA",
+      "gloss": "Asiento para una persona, a menudo con respaldo.",
+      "synonyms": [
+        "asiento",
+        "banco"
+      ]
+    },
+    {
+      "word": "RAYO",
+      "gloss": "Descarga eléctrica en la atmósfera."
+    },
+    {
+      "word": "NARIZ",
+      "gloss": "Órgano para oler y respirar."
+    },
+    {
+      "word": "CÓDIGO",
+      "gloss": "Conjunto de reglas o señales."
+    },
+    {
+      "word": "EMERGENCIA",
+      "gloss": "Situación que requiere atención inmediata."
+    },
+    {
+      "word": "COMPRA",
+      "gloss": "Acción de adquirir algo pagando."
+    },
+    {
+      "word": "JUSTICIA",
+      "gloss": "Principio de equidad y derecho."
+    },
+    {
+      "word": "CONDICIÓN",
+      "gloss": "Estado o requisito necesario."
+    },
+    {
+      "word": "DISPARO",
+      "gloss": "the act of firing a gun or weapon"
+    },
+    {
+      "word": "INTERÉS",
+      "gloss": "Atracción o curiosidad por algo."
+    },
+    {
+      "word": "CALOR",
+      "gloss": "Sensación de temperatura elevada."
+    },
+    {
+      "word": "PROYECTO",
+      "gloss": "Plan para realizar algo."
+    },
+    {
+      "word": "RELOJ",
+      "gloss": "Instrumento que mide el tiempo."
+    },
+    {
+      "word": "CINE",
+      "gloss": "Un lugar donde la gente ve películas.",
+      "synonyms": [
+        "sala",
+        "pantalla"
+      ]
+    },
+    {
+      "word": "MEMORIA",
+      "gloss": "Facultad de recordar hechos pasados.",
+      "synonyms": [
+        "recuerdo",
+        "mente",
+        "retentiva"
+      ]
+    },
+    {
+      "word": "INTENCIÓN",
+      "gloss": "Propósito de hacer algo."
+    },
+    {
+      "word": "PROPÓSITO",
+      "gloss": "Objetivo que se persigue."
+    },
+    {
+      "word": "VACACIÓN",
+      "gloss": "Período de descanso laboral."
+    },
+    {
+      "word": "TAXI",
+      "gloss": "Vehículo con conductor que transporta pasajeros."
+    },
+    {
+      "word": "PESAR",
+      "gloss": "Sentir tristeza o arrepentimiento."
+    },
+    {
+      "word": "CONFIANZA",
+      "gloss": "Seguridad en alguien o algo."
+    },
+    {
+      "word": "TIRO",
+      "gloss": "Disparo con arma de fuego."
+    },
+    {
+      "word": "LUCHA",
+      "gloss": "Esfuerzo intenso contra algo."
+    },
+    {
+      "word": "CUCHILLO",
+      "gloss": "Utensilio con hoja cortante."
+    },
+    {
+      "word": "VICTORIA",
+      "gloss": "Triunfo en una competición."
+    },
+    {
+      "word": "LÍDER",
+      "gloss": "Persona que guía a un grupo."
+    },
+    {
+      "word": "CABO",
+      "gloss": "Extremo de una cuerda."
+    },
+    {
+      "word": "CANTIDAD",
+      "gloss": "Número o porción de algo."
+    },
+    {
+      "word": "NECESIDAD",
+      "gloss": "Falta de algo imprescindible."
+    },
+    {
+      "word": "AMENAZA",
+      "gloss": "Advertencia de daño posible."
+    },
+    {
+      "word": "PLATO",
+      "gloss": "Recipiente plano para comer."
+    },
+    {
+      "word": "VIENTO",
+      "gloss": "Aire en movimiento."
+    },
+    {
+      "word": "CUÁNTA",
+      "gloss": "Interrogativo de cantidad."
+    },
+    {
+      "word": "LECHE",
+      "gloss": "Una bebida blanca que viene de la vaca.",
+      "synonyms": [
+        "lácteo",
+        "bebida"
+      ]
+    },
+    {
+      "word": "PIEZA",
+      "gloss": "Parte de un todo."
+    },
+    {
+      "word": "ÁREA",
+      "gloss": "Superficie o zona determinada."
+    },
+    {
+      "word": "INSPECTOR",
+      "gloss": "Persona que examina o vigila."
+    },
+    {
+      "word": "PAN",
+      "gloss": "Alimento básico horneado de harina y levadura.",
+      "synonyms": [
+        "hogaza",
+        "pieza"
+      ]
+    },
+    {
+      "word": "COLEGIO",
+      "gloss": "Centro de enseñanza primaria."
+    },
+    {
+      "word": "BILLY",
+      "gloss": "Nombre propio masculino."
+    },
+    {
+      "word": "PASTEL",
+      "gloss": "Postre dulce horneado."
+    },
+    {
+      "word": "MEDICINA",
+      "gloss": "Una sustancia usada para tratar una enfermedad.",
+      "synonyms": [
+        "fármaco",
+        "remedio"
+      ]
+    },
+    {
+      "word": "PRÍNCIPE",
+      "gloss": "Hijo de un rey."
+    },
+    {
+      "word": "DESASTRE",
+      "gloss": "Suceso que causa gran daño."
+    },
+    {
+      "word": "CUENTA",
+      "gloss": "Registro de operaciones financieras."
+    },
+    {
+      "word": "CONTRATO",
+      "gloss": "Acuerdo escrito entre partes."
+    },
+    {
+      "word": "AGUJERO",
+      "gloss": "Abertura en una superficie."
+    },
+    {
+      "word": "ACTO",
+      "gloss": "Acción realizada por alguien."
+    },
+    {
+      "word": "CABELLO",
+      "gloss": "Conjunto de pelos de la cabeza."
+    },
+    {
+      "word": "ESCALERA",
+      "gloss": "Serie de peldaños para subir."
+    },
+    {
+      "word": "PLAYA",
+      "gloss": "Arena o piedras junto al mar.",
+      "synonyms": [
+        "costa",
+        "orilla"
+      ]
+    },
+    {
+      "word": "EXAMEN",
+      "gloss": "Prueba para evaluar conocimientos."
+    },
+    {
+      "word": "CINTA",
+      "gloss": "Tira larga y estrecha de tela."
+    },
+    {
+      "word": "PECHO",
+      "gloss": "Parte frontal del torso humano."
+    },
+    {
+      "word": "FUENTE",
+      "gloss": "Origen de agua que brota del suelo."
+    },
+    {
+      "word": "SOCIO",
+      "gloss": "Persona que comparte una empresa o club."
+    },
+    {
+      "word": "SHOW",
+      "gloss": "Espectáculo presentado ante público."
+    },
+    {
+      "word": "AUTOBÚS",
+      "gloss": "Vehículo grande para transportar pasajeros."
+    },
+    {
+      "word": "CUENTO",
+      "gloss": "Relato breve de ficción."
+    },
+    {
+      "word": "AMANTE",
+      "gloss": "Persona que mantiene una relación amorosa."
+    },
+    {
+      "word": "PARQUE",
+      "gloss": "Área verde pública para recreo."
+    },
+    {
+      "word": "HUESO",
+      "gloss": "Parte dura del esqueleto."
+    },
+    {
+      "word": "HIELO",
+      "gloss": "Agua congelada y sólida."
+    },
+    {
+      "word": "VOTO",
+      "gloss": "Expresión de preferencia en una elección."
+    },
+    {
+      "word": "PRENSA",
+      "gloss": "Medios impresos que informan noticias."
+    },
+    {
+      "word": "DATO",
+      "gloss": "Información concreta y verificable."
+    },
+    {
+      "word": "PUENTE",
+      "gloss": "Construcción que cruza un obstáculo."
+    },
+    {
+      "word": "PEZ",
+      "gloss": "Un animal que vive en el agua y tiene branquias.",
+      "synonyms": [
+        "pescado"
+      ]
+    },
+    {
+      "word": "VECINO",
+      "gloss": "Persona que vive cerca."
+    },
+    {
+      "word": "TELEVISIÓN",
+      "gloss": "Sistema para transmitir imágenes en movimiento."
+    },
+    {
+      "word": "SERIE",
+      "gloss": "Conjunto de episodios de una historia."
+    },
+    {
+      "word": "EDDIE",
+      "gloss": "Nombre propio masculino."
+    },
+    {
+      "word": "SIGLO",
+      "gloss": "Período de cien años."
+    },
+    {
+      "word": "CARGA",
+      "gloss": "Peso transportado por un vehículo."
+    },
+    {
+      "word": "VIDEO",
+      "gloss": "Grabación de imágenes en movimiento."
+    },
+    {
+      "word": "VELOCIDAD",
+      "gloss": "Rapidez con que algo se mueve."
+    },
+    {
+      "word": "OFERTA",
+      "gloss": "Propuesta de venta a precio reducido."
+    },
+    {
+      "word": "PROPIEDAD",
+      "gloss": "Bien que pertenece a alguien."
+    },
+    {
+      "word": "NATURALEZA",
+      "gloss": "Conjunto de todo lo que existe sin intervención humana."
+    },
+    {
+      "word": "SEÑORÍA",
+      "gloss": "Título de respeto para jueces."
+    },
+    {
+      "word": "PAPI",
+      "gloss": "Forma cariñosa de dirigirse al padre."
+    },
+    {
+      "word": "PELOTA",
+      "gloss": "Objeto esférico para jugar."
+    },
+    {
+      "word": "DISCO",
+      "gloss": "Objeto plano y redondo para almacenar datos."
+    },
+    {
+      "word": "DISTANCIA",
+      "gloss": "Espacio entre dos puntos."
+    },
+    {
+      "word": "ÉPOCA",
+      "gloss": "Período histórico determinado."
+    },
+    {
+      "word": "ESPADA",
+      "gloss": "Arma blanca larga y afilada."
+    },
+    {
+      "word": "CHRI",
+      "gloss": "Nombre propio abreviado."
+    },
+    {
+      "word": "ARTISTA",
+      "gloss": "Persona que crea obras de arte."
+    },
+    {
+      "word": "MANDO",
+      "gloss": "Dispositivo para controlar aparatos."
+    },
+    {
+      "word": "MODELO",
+      "gloss": "Ejemplo o prototipo a seguir."
+    },
+    {
+      "word": "PRINCESA",
+      "gloss": "Hija de un rey."
+    },
+    {
+      "word": "MINISTRO",
+      "gloss": "Miembro del gobierno que dirige un área."
+    },
+    {
+      "word": "PESO",
+      "gloss": "Fuerza con que la gravedad atrae un cuerpo."
+    },
+    {
+      "word": "PLANTA",
+      "gloss": "Ser vivo que crece en la tierra."
+    },
+    {
+      "word": "SOMBRERO",
+      "gloss": "Prenda para cubrir la cabeza."
+    },
+    {
+      "word": "UNIVERSO",
+      "gloss": "Conjunto de todo lo existente."
+    },
+    {
+      "word": "BELLEZA",
+      "gloss": "Cualidad que produce placer estético."
+    },
+    {
+      "word": "POLLO",
+      "gloss": "Ave de corral joven."
+    },
+    {
+      "word": "MIRADA",
+      "gloss": "Acción de dirigir los ojos hacia algo."
     },
     {
       "word": "JARDÍN",
@@ -36,147 +1299,143 @@
       ]
     },
     {
-      "word": "NÚMERO",
-      "gloss": "Valor matemático usado para contar.",
+      "word": "DESCANSO",
+      "gloss": "Pausa para recuperar fuerzas."
+    },
+    {
+      "word": "APOYO",
+      "gloss": "Ayuda o respaldo que se da a alguien."
+    },
+    {
+      "word": "MERCADO",
+      "gloss": "Lugar donde se compran y venden productos."
+    },
+    {
+      "word": "TEORÍA",
+      "gloss": "Explicación sistemática de un fenómeno."
+    },
+    {
+      "word": "PREMIO",
+      "gloss": "Recompensa por un logro."
+    },
+    {
+      "word": "SOCIEDAD",
+      "gloss": "Personas que viven juntas como comunidad.",
       "synonyms": [
-        "cifra",
-        "cantidad",
-        "dígito"
+        "comunidad",
+        "público"
       ]
     },
     {
-      "word": "PEQUEÑO",
-      "gloss": "De poco tamaño; no grande.",
+      "word": "TAREA",
+      "gloss": "Trabajo que debe realizarse."
+    },
+    {
+      "word": "PAGO",
+      "gloss": "Entrega de dinero por un bien o servicio."
+    },
+    {
+      "word": "DOMINGO",
+      "gloss": "Día de la semana que sigue al sábado."
+    },
+    {
+      "word": "ASPECTO",
+      "gloss": "Apariencia externa de algo."
+    },
+    {
+      "word": "TONTA",
+      "gloss": "Persona que actúa sin sensatez."
+    },
+    {
+      "word": "MAGIA",
+      "gloss": "Poder sobrenatural para producir efectos extraordinarios."
+    },
+    {
+      "word": "VERGÜENZA",
+      "gloss": "Sentimiento de humillación por algo hecho."
+    },
+    {
+      "word": "PRISIONERO",
+      "gloss": "Persona privada de libertad."
+    },
+    {
+      "word": "USO",
+      "gloss": "Acción de emplear algo."
+    },
+    {
+      "word": "PÁJARO",
+      "gloss": "Un animal con plumas y alas.",
       "synonyms": [
-        "chico",
-        "diminuto",
-        "mini"
+        "ave",
+        "volador"
       ]
     },
     {
-      "word": "COCINA",
-      "gloss": "La habitación donde se preparan las comidas.",
-      "synonyms": [
-        "fogón",
-        "office"
-      ]
+      "word": "AND",
+      "gloss": "Conjunción que une palabras o frases."
     },
     {
-      "word": "MÉDICO",
-      "gloss": "Una persona formada para tratar enfermedades.",
-      "synonyms": [
-        "doctor",
-        "sanitario"
-      ]
+      "word": "CARRETERA",
+      "gloss": "Vía pavimentada para vehículos."
     },
     {
-      "word": "HOSPITAL",
-      "gloss": "Un edificio donde se cuida a los enfermos.",
-      "synonyms": [
-        "clínica",
-        "sanatorio"
-      ]
+      "word": "PÁGINA",
+      "gloss": "Hoja de un libro o sitio web."
     },
     {
-      "word": "MAESTRO",
-      "gloss": "Una persona que ayuda a los alumnos a aprender.",
-      "synonyms": [
-        "profesor",
-        "docente"
-      ]
+      "word": "CRIATURA",
+      "gloss": "Ser vivo, animal o persona."
     },
     {
-      "word": "ALUMNO",
-      "gloss": "Una persona que estudia en un centro.",
-      "synonyms": [
-        "estudiante",
-        "discípulo"
-      ]
+      "word": "VIERNES",
+      "gloss": "Día anterior al sábado."
     },
     {
-      "word": "DESAYUNO",
-      "gloss": "La primera comida del día.",
-      "synonyms": [
-        "comida matinal"
-      ]
+      "word": "HECHO",
+      "gloss": "Un adjetivo del vocabulario inicial."
     },
     {
-      "word": "CENA",
-      "gloss": "La comida principal por la noche.",
-      "synonyms": [
-        "comida nocturna"
-      ]
+      "word": "BRUJA",
+      "gloss": "Mujer con poderes mágicos."
     },
     {
-      "word": "CLIMA",
-      "gloss": "Lluvia, sol y viento en el exterior.",
-      "synonyms": [
-        "ambiente",
-        "condiciones"
-      ]
+      "word": "CIENCIA",
+      "gloss": "Estudio sistemático de la naturaleza."
     },
     {
-      "word": "NUBE",
-      "gloss": "Una masa blanca o gris que flota en el cielo.",
-      "synonyms": [
-        "vapor",
-        "niebla"
-      ]
+      "word": "HABILIDAD",
+      "gloss": "Capacidad para hacer algo bien."
     },
     {
-      "word": "RÍO",
-      "gloss": "Una corriente grande de agua hacia el mar.",
-      "synonyms": [
-        "corriente",
-        "cauce"
-      ]
+      "word": "TALENTO",
+      "gloss": "Aptitud natural para una actividad."
     },
     {
-      "word": "MONTAÑA",
-      "gloss": "Tierra muy alta sobre el paisaje alrededor.",
-      "synonyms": [
-        "cima",
-        "pico"
-      ]
+      "word": "ENFERMERO",
+      "gloss": "Persona que cuida enfermos."
     },
     {
-      "word": "PLAYA",
-      "gloss": "Arena o piedras junto al mar.",
-      "synonyms": [
-        "costa",
-        "orilla"
-      ]
+      "word": "DATE",
+      "gloss": "Fruto seco de la palmera."
     },
     {
-      "word": "BILLETE",
-      "gloss": "Un papel que permite viajar o entrar.",
-      "synonyms": [
-        "pase",
-        "entrada"
-      ]
+      "word": "META",
+      "gloss": "Objetivo que se desea alcanzar."
     },
     {
-      "word": "ESTACIÓN",
-      "gloss": "Un lugar donde paran trenes o autobuses.",
-      "synonyms": [
-        "apeadero",
-        "terminal"
-      ]
+      "word": "OESTE",
+      "gloss": "Dirección opuesta al este."
     },
     {
-      "word": "AEROPUERTO",
-      "gloss": "Un lugar donde despegan y aterrizan aviones.",
-      "synonyms": [
-        "aeródromo",
-        "terminal"
-      ]
+      "word": "VENTA",
+      "gloss": "Acción de vender algo."
     },
     {
-      "word": "VACACIONES",
-      "gloss": "Tiempo lejos del trabajo o la escuela para descansar.",
+      "word": "ARTÍCULO",
+      "gloss": "Un texto en un periódico o revista.",
       "synonyms": [
-        "descanso",
-        "receso"
+        "pieza",
+        "reportaje"
       ]
     },
     {
@@ -188,83 +1447,140 @@
       ]
     },
     {
-      "word": "SIEMPRE",
-      "gloss": "En todo momento; sin excepción.",
-      "synonyms": [
-        "constantemente",
-        "jamás lo contrario"
-      ]
+      "word": "MOTOR",
+      "gloss": "Máquina que produce movimiento."
     },
     {
-      "word": "NUNCA",
-      "gloss": "En ningún momento.",
-      "synonyms": [
-        "jamás"
-      ]
+      "word": "PÉRDIDA",
+      "gloss": "Falta de algo que se tenía."
     },
     {
-      "word": "PORQUE",
-      "gloss": "Por la razón de que.",
-      "synonyms": [
-        "pues",
-        "ya que"
-      ]
+      "word": "KILÓMETRO",
+      "gloss": "Mil metros de distancia."
     },
     {
-      "word": "ANTES",
-      "gloss": "Más temprano que otra cosa.",
-      "synonyms": [
-        "previamente",
-        "primero"
-      ]
+      "word": "JUGADOR",
+      "gloss": "Persona que participa en un juego."
     },
     {
-      "word": "DESPUÉS",
-      "gloss": "Más tarde que otra cosa.",
-      "synonyms": [
-        "luego",
-        "posteriormente"
-      ]
+      "word": "HUMOR",
+      "gloss": "Estado de ánimo o gracia."
     },
     {
-      "word": "BASTANTE",
-      "gloss": "Tanto como se necesita; un buen tanto.",
-      "synonyms": [
-        "suficiente",
-        "harto"
-      ]
+      "word": "PINTURA",
+      "gloss": "Arte de aplicar color."
     },
     {
-      "word": "IMPORTANTE",
-      "gloss": "De gran valor o significado.",
-      "synonyms": [
-        "relevante",
-        "esencial"
-      ]
+      "word": "COPIA",
+      "gloss": "Reproducción idéntica de algo."
     },
     {
-      "word": "DIFERENTE",
-      "gloss": "Que no es igual a otra cosa.",
-      "synonyms": [
-        "distinto",
-        "otro"
-      ]
+      "word": "FRANK",
+      "gloss": "Nombre propio masculino."
     },
     {
-      "word": "DIFÍCIL",
-      "gloss": "Duro de hacer o entender.",
-      "synonyms": [
-        "arduo",
-        "complicado"
-      ]
+      "word": "CHARLIE",
+      "gloss": "Un verbo frecuente en frases sencillas."
     },
     {
-      "word": "CARO",
-      "gloss": "Que cuesta mucho dinero.",
-      "synonyms": [
-        "costoso",
-        "oneroso"
-      ]
+      "word": "DEJADO",
+      "gloss": "Un adjetivo de 6 letras para cualidades."
+    },
+    {
+      "word": "TRASERO",
+      "gloss": "Un adjetivo del vocabulario inicial."
+    },
+    {
+      "word": "DIVERTIR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "ENGAÑAR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "TOM",
+      "gloss": "Un verbo de 3 letras para acciones cotidianas."
+    },
+    {
+      "word": "IZQUIERDO",
+      "gloss": "Lado opuesto al derecho."
+    },
+    {
+      "word": "COSTAR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "OLER",
+      "gloss": "Un verbo de 4 letras para acciones cotidianas."
+    },
+    {
+      "word": "ACORDAR",
+      "gloss": "Un verbo de 7 letras para acciones cotidianas."
+    },
+    {
+      "word": "CONTROLAR",
+      "gloss": "Ejercer dominio sobre algo."
+    },
+    {
+      "word": "MANEJAR",
+      "gloss": "Guiar un vehículo."
+    },
+    {
+      "word": "ALEJAR",
+      "gloss": "Poner distancia entre cosas."
+    },
+    {
+      "word": "UTILIZAR",
+      "gloss": "Un verbo de 8 letras para acciones cotidianas."
+    },
+    {
+      "word": "BESAR",
+      "gloss": "Tocar con los labios."
+    },
+    {
+      "word": "RECONOCER",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "LIMPIAR",
+      "gloss": "Un verbo de 7 letras para acciones cotidianas."
+    },
+    {
+      "word": "CENAR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "SAL",
+      "gloss": "Condimento blanco y cristalino."
+    },
+    {
+      "word": "ABANDONAR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "BAJO",
+      "gloss": "Un adjetivo del vocabulario inicial."
+    },
+    {
+      "word": "HERIDO",
+      "gloss": "Un adjetivo del vocabulario inicial."
+    },
+    {
+      "word": "RESPIRAR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "REUNIR",
+      "gloss": "Un verbo frecuente en frases sencillas."
+    },
+    {
+      "word": "UNIR",
+      "gloss": "Juntar dos o más cosas."
+    },
+    {
+      "word": "TRISTE",
+      "gloss": "Que siente pena o melancolía."
     },
     {
       "word": "CANSADO",
@@ -275,76 +1591,160 @@
       ]
     },
     {
-      "word": "HAMBRE",
-      "gloss": "Ganas de comer.",
+      "word": "DOLER",
+      "gloss": "Causar dolor físico."
+    },
+    {
+      "word": "ENTREGAR",
+      "gloss": "Dar algo a alguien."
+    },
+    {
+      "word": "ENCARGAR",
+      "gloss": "Pedir que se haga algo."
+    },
+    {
+      "word": "DULCE",
+      "gloss": "De sabor azucarado."
+    },
+    {
+      "word": "PARTIR",
+      "gloss": "Dividir en partes."
+    },
+    {
+      "word": "INTERESAR",
+      "gloss": "Despertar atención o curiosidad."
+    },
+    {
+      "word": "UNIDO",
+      "gloss": "Que está junto o ligado."
+    },
+    {
+      "word": "SUFRIR",
+      "gloss": "Padecer dolor o pena."
+    },
+    {
+      "word": "AGARRAR",
+      "gloss": "Tomar con la mano."
+    },
+    {
+      "word": "NACER",
+      "gloss": "Salir del vientre materno."
+    },
+    {
+      "word": "HUIR",
+      "gloss": "Escapar de un peligro."
+    },
+    {
+      "word": "CERRADO",
+      "gloss": "Que no está abierto."
+    },
+    {
+      "word": "PRECIOSO",
+      "gloss": "Que resulta muy hermoso."
+    },
+    {
+      "word": "DELANTE",
+      "gloss": "En la parte anterior."
+    },
+    {
+      "word": "DISCUTIR",
+      "gloss": "Debatir con alguien."
+    },
+    {
+      "word": "SIMPLE",
+      "gloss": "Que no es complicado."
+    },
+    {
+      "word": "SOBREVIVIR",
+      "gloss": "Seguir vivo tras un peligro."
+    },
+    {
+      "word": "DESCANSAR",
+      "gloss": "Dejar de hacer esfuerzo."
+    },
+    {
+      "word": "ACOSTAR",
+      "gloss": "Poner en posición horizontal."
+    },
+    {
+      "word": "COMPARTIR",
+      "gloss": "Usar algo con otros."
+    },
+    {
+      "word": "ASESINAR",
+      "gloss": "Matar a una persona."
+    },
+    {
+      "word": "ESTUDIAR",
+      "gloss": "Aprender una materia."
+    },
+    {
+      "word": "ESPOSO",
+      "gloss": "Hombre casado."
+    },
+    {
+      "word": "NERVIOSO",
+      "gloss": "Inquieto o preocupado por lo que puede pasar.",
       "synonyms": [
-        "apetito",
-        "voracidad"
+        "ansioso",
+        "tenso"
       ]
     },
     {
-      "word": "PREGUNTA",
-      "gloss": "Algo que se hace para obtener información.",
-      "synonyms": [
-        "consulta",
-        "duda"
-      ]
+      "word": "DEMOSTRAR",
+      "gloss": "Probar algo con evidencia."
     },
     {
-      "word": "BIBLIOTECA",
-      "gloss": "Un lugar con libros que se pueden prestar.",
-      "synonyms": [
-        "hemeroteca",
-        "sala de lectura"
-      ]
+      "word": "CONSTRUIR",
+      "gloss": "Fabricar algo con materiales."
     },
     {
-      "word": "CINE",
-      "gloss": "Un lugar donde la gente ve películas.",
-      "synonyms": [
-        "sala",
-        "pantalla"
-      ]
+      "word": "SENTADO",
+      "gloss": "Que está en una silla."
     },
     {
-      "word": "VIAJAR",
-      "gloss": "Ir de un lugar a otro.",
-      "synonyms": [
-        "desplazarse",
-        "recorrer"
-      ]
+      "word": "DALE",
+      "gloss": "Expresión para animar."
     },
     {
-      "word": "RECORDAR",
-      "gloss": "Tener algo presente en la mente.",
-      "synonyms": [
-        "evocar",
-        "traer a la mente"
-      ]
+      "word": "ACOMPAÑAR",
+      "gloss": "Ir junto a alguien."
     },
     {
-      "word": "ENTENDER",
-      "gloss": "Saber el significado de algo.",
-      "synonyms": [
-        "comprender",
-        "captar"
-      ]
+      "word": "AGRADABLE",
+      "gloss": "Que produce placer."
     },
     {
-      "word": "ESPERAR",
-      "gloss": "Quedarse hasta que ocurra algo.",
-      "synonyms": [
-        "aguardar",
-        "permanecer"
-      ]
+      "word": "CUMPLIR",
+      "gloss": "Realizar lo prometido."
     },
     {
-      "word": "TRAER",
-      "gloss": "Llevar algo consigo a un sitio.",
-      "synonyms": [
-        "acarrear",
-        "portar"
-      ]
+      "word": "RATO",
+      "gloss": "Espacio breve de tiempo."
+    },
+    {
+      "word": "CALLAR",
+      "gloss": "dejar de emitir sonidos con la voz"
+    },
+    {
+      "word": "AUN",
+      "gloss": "indica que algo sigue siendo cierto"
+    },
+    {
+      "word": "ORGULLOSO",
+      "gloss": "que se siente muy satisfecho de sí mismo"
+    },
+    {
+      "word": "EQUIVOCAR",
+      "gloss": "tomar una decisión o acción incorrecta"
+    },
+    {
+      "word": "TIR",
+      "gloss": "tirar con fuerza de algo"
+    },
+    {
+      "word": "FALSO",
+      "gloss": "not true or correct"
     }
   ]
 }

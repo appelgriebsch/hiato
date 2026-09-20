@@ -15,7 +15,8 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
     license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
     attribution: [
       'Hiato EN learner packs — original glosses and synonym chips (2026).',
-      'Lemmas selected for CEFR A1–B1 classroom frequency; not a verbatim dump of any proprietary list.',
+      'Lemmas selected for CEFR A1–B1 classroom frequency from open frequency resources (FrequencyWords MIT; wordhoard samples where used).',
+      'Not a verbatim dump of any proprietary list (ADR 0026).',
     ],
   },
   {
@@ -24,9 +25,9 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
     license:
       'CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)',
     attribution: [
-      'Portuguese lemmas curated from Wiktionary-derived frequency lists (CC-BY-SA).',
-      'Glosses and synonym chips are original Hiato learner copy (2026).',
-      'Share-alike applies to redistributed lemma lists derived from Wiktionary (ADR 0009).',
+      'Portuguese lemmas curated from Wiktionary-derived / OpenSubtitles frequency lists (CC-BY-SA).',
+      'Frequency selection aided by hermitdave/FrequencyWords (MIT); glosses and synonym chips are original Hiato learner copy (2026).',
+      'Share-alike applies to redistributed lemma lists on the Wiktionary path (ADR 0009).',
     ],
   },
   {
@@ -35,7 +36,8 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
     license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
     attribution: [
       'Hiato DE learner packs — original German glosses and synonym chips (2026).',
-      'Lemmas selected for CEFR A1–B1 classroom frequency; not a verbatim dump of any proprietary list.',
+      'Lemmas selected for CEFR A1–B1 classroom frequency from open frequency resources (FrequencyWords MIT; wordhoard samples where used).',
+      'Not a verbatim dump of any proprietary list (ADR 0026).',
     ],
   },
   {
@@ -44,7 +46,8 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
     license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
     attribution: [
       'Hiato ES learner packs — original Spanish glosses and synonym chips (2026).',
-      'Lemmas selected for CEFR A1–B1 classroom frequency; not a verbatim dump of any proprietary list.',
+      'Lemmas selected for CEFR A1–B1 classroom frequency from open frequency resources (FrequencyWords MIT; wordhoard samples where used).',
+      'Not a verbatim dump of any proprietary list (ADR 0026).',
     ],
   },
 ]

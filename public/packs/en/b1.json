@@ -1,21 +1,625 @@
 {
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "cefr": "b1",
   "license": "CC0-1.0 (curated learner lemmas; glosses original to Hiato)",
   "attribution": [
     "Hiato EN B1 learner pack — original glosses and synonym chips (2026).",
-    "Lemmas selected for CEFR B1 classroom frequency; not a verbatim dump of any proprietary list."
+    "Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).",
+    "Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
-      "word": "JOURNEY",
-      "gloss": "Travel from one place to another.",
-      "synonyms": [
-        "trip",
-        "voyage",
-        "passage"
-      ]
+      "word": "ABANDON",
+      "gloss": "leave someone or something completely"
+    },
+    {
+      "word": "ABOARD",
+      "gloss": "on or into a ship, plane, or train"
+    },
+    {
+      "word": "ABSENCE",
+      "gloss": "state of not being present"
+    },
+    {
+      "word": "ABSENT",
+      "gloss": "not present in a place"
+    },
+    {
+      "word": "ABSOLUTE",
+      "gloss": "total and without any limit"
+    },
+    {
+      "word": "ABSOLUTELY",
+      "gloss": "completely and without doubt"
+    },
+    {
+      "word": "ABSORB",
+      "gloss": "take in liquid, heat, or information"
+    },
+    {
+      "word": "ABSTRACT",
+      "gloss": "existing only as an idea, not concrete"
+    },
+    {
+      "word": "ABUNDANCE",
+      "gloss": "very large amount of something"
+    },
+    {
+      "word": "ABUNDANT",
+      "gloss": "present in large quantities"
+    },
+    {
+      "word": "ACADEMIC",
+      "gloss": "relating to education and study"
+    },
+    {
+      "word": "ACADEMY",
+      "gloss": "school or institution for special training"
+    },
+    {
+      "word": "ACCENT",
+      "gloss": "way of pronouncing words that shows origin"
+    },
+    {
+      "word": "ACCEPTANCE",
+      "gloss": "act of agreeing to receive something"
+    },
+    {
+      "word": "ACCESS",
+      "gloss": "means of entering or using something"
+    },
+    {
+      "word": "ACCESSIBLE",
+      "gloss": "easy to reach or use"
+    },
+    {
+      "word": "ACCESSORY",
+      "gloss": "extra item added to complete an outfit"
+    },
+    {
+      "word": "ACCIDENTAL",
+      "gloss": "happening by chance, not on purpose"
+    },
+    {
+      "word": "ACCOMPANY",
+      "gloss": "go somewhere with someone"
+    },
+    {
+      "word": "ACCOMPLISH",
+      "gloss": "succeed in doing or finishing something"
+    },
+    {
+      "word": "ACCOUNT",
+      "gloss": "Record of money or events."
+    },
+    {
+      "word": "ACCOUNTANT",
+      "gloss": "person who keeps financial records"
+    },
+    {
+      "word": "ACCURACY",
+      "gloss": "quality of being correct and exact"
+    },
+    {
+      "word": "ACCURATE",
+      "gloss": "correct and without mistakes"
+    },
+    {
+      "word": "ACCURATELY",
+      "gloss": "in a correct and exact way"
+    },
+    {
+      "word": "ACCUSE",
+      "gloss": "say that someone has done something wrong"
+    },
+    {
+      "word": "ACCUSTOM",
+      "gloss": "make someone used to something"
+    },
+    {
+      "word": "ACHE",
+      "gloss": "continuous dull pain"
+    },
+    {
+      "word": "ACQUIRE",
+      "gloss": "get or obtain something"
+    },
+    {
+      "word": "ACT",
+      "gloss": "Do something or perform."
+    },
+    {
+      "word": "ACTIVE",
+      "gloss": "doing many things or moving often"
+    },
+    {
+      "word": "ACTRESS",
+      "gloss": "woman who performs in plays or films"
+    },
+    {
+      "word": "ADAPT",
+      "gloss": "change to fit new conditions"
+    },
+    {
+      "word": "ADDRESS",
+      "gloss": "Words that tell where someone lives."
+    },
+    {
+      "word": "ADDRESSEE",
+      "gloss": "person to whom a message is sent"
+    },
+    {
+      "word": "ADMIRATION",
+      "gloss": "feeling of respect and approval"
+    },
+    {
+      "word": "ADMISSION",
+      "gloss": "act of allowing entry or confessing"
+    },
+    {
+      "word": "ADOPT",
+      "gloss": "take and raise a child as one's own"
+    },
+    {
+      "word": "ADORABLE",
+      "gloss": "very charming and lovable"
+    },
+    {
+      "word": "ADVANCE",
+      "gloss": "move forward or make progress"
+    },
+    {
+      "word": "ADVERB",
+      "gloss": "word that modifies a verb or adjective"
+    },
+    {
+      "word": "ADVERBIAL",
+      "gloss": "functioning like an adverb"
+    },
+    {
+      "word": "ADVERT",
+      "gloss": "short public notice promoting something"
+    },
+    {
+      "word": "ADVERTISE",
+      "gloss": "publicly promote a product or service"
+    },
+    {
+      "word": "ADVISER",
+      "gloss": "person who gives guidance or counsel"
+    },
+    {
+      "word": "AEROBICS",
+      "gloss": "exercise that increases breathing and heart rate"
+    },
+    {
+      "word": "AFFECT",
+      "gloss": "to produce a change in something"
+    },
+    {
+      "word": "AFFECTION",
+      "gloss": "warm feeling of fondness"
+    },
+    {
+      "word": "AFFORD",
+      "gloss": "have enough money to buy"
+    },
+    {
+      "word": "AFTERWARD",
+      "gloss": "at a later time"
+    },
+    {
+      "word": "AFTERWARDS",
+      "gloss": "at a later time"
+    },
+    {
+      "word": "AGENDA",
+      "gloss": "list of topics to discuss"
+    },
+    {
+      "word": "AGGRESSIVE",
+      "gloss": "ready to attack or confront"
+    },
+    {
+      "word": "AGREEMENT",
+      "gloss": "mutual understanding or contract"
+    },
+    {
+      "word": "AID",
+      "gloss": "help or assistance given"
+    },
+    {
+      "word": "AIM",
+      "gloss": "point or direct toward a target"
+    },
+    {
+      "word": "AIRLINE",
+      "gloss": "company that operates passenger flights"
+    },
+    {
+      "word": "ALARM",
+      "gloss": "Warning sound or signal."
+    },
+    {
+      "word": "ALCOHOL",
+      "gloss": "intoxicating liquid found in drinks"
+    },
+    {
+      "word": "ALCOHOLIC",
+      "gloss": "person addicted to alcohol"
+    },
+    {
+      "word": "ALIKE",
+      "gloss": "similar in appearance or nature"
+    },
+    {
+      "word": "ALLERGIC",
+      "gloss": "having a negative reaction to something"
+    },
+    {
+      "word": "ALLOWANCE",
+      "gloss": "regular sum of money given"
+    },
+    {
+      "word": "ALOUD",
+      "gloss": "in a voice that can be heard"
+    },
+    {
+      "word": "ALPHABET",
+      "gloss": "set of letters used in writing"
+    },
+    {
+      "word": "ALTOGETHER",
+      "gloss": "completely or in total"
+    },
+    {
+      "word": "AMAZED",
+      "gloss": "filled with great surprise"
+    },
+    {
+      "word": "AMAZING",
+      "gloss": "causing great wonder or admiration"
+    },
+    {
+      "word": "AMBITIOUS",
+      "gloss": "having a strong desire to succeed"
+    },
+    {
+      "word": "AMBULANCE",
+      "gloss": "vehicle for transporting the injured"
+    },
+    {
+      "word": "AMOUNT",
+      "gloss": "quantity of something"
+    },
+    {
+      "word": "AMUSING",
+      "gloss": "causing laughter or enjoyment"
+    },
+    {
+      "word": "ANALYSIS",
+      "gloss": "detailed examination of something"
+    },
+    {
+      "word": "ANALYZE",
+      "gloss": "examine in detail"
+    },
+    {
+      "word": "ANGER",
+      "gloss": "strong feeling of displeasure"
+    },
+    {
+      "word": "ANGLE",
+      "gloss": "space between two lines meeting"
+    },
+    {
+      "word": "ANIMATED",
+      "gloss": "full of life and movement"
+    },
+    {
+      "word": "ANIMATION",
+      "gloss": "process of making moving images"
+    },
+    {
+      "word": "ANNOUNCE",
+      "gloss": "make known publicly"
+    },
+    {
+      "word": "ANNOYANCE",
+      "gloss": "feeling of slight anger"
+    },
+    {
+      "word": "ANNOYED",
+      "gloss": "slightly angry or irritated"
+    },
+    {
+      "word": "ANNUAL",
+      "gloss": "happening once every year"
+    },
+    {
+      "word": "ANNUALLY",
+      "gloss": "once every year"
+    },
+    {
+      "word": "ANT",
+      "gloss": "small social insect"
+    },
+    {
+      "word": "ANTI",
+      "gloss": "opposed to something"
+    },
+    {
+      "word": "ANTIQUE",
+      "gloss": "old and often valuable object"
+    },
+    {
+      "word": "ANTONYM",
+      "gloss": "word opposite in meaning"
+    },
+    {
+      "word": "ANXIETY",
+      "gloss": "feeling of worry or unease"
+    },
+    {
+      "word": "ANXIOUSLY",
+      "gloss": "in a worried or uneasy way"
+    },
+    {
+      "word": "ANYHOW",
+      "gloss": "in any case or nevertheless"
+    },
+    {
+      "word": "APE",
+      "gloss": "large primate without a tail"
+    },
+    {
+      "word": "APOLOGY",
+      "gloss": "expression of regret for wrongdoing"
+    },
+    {
+      "word": "APPARENT",
+      "gloss": "clearly visible or obvious"
+    },
+    {
+      "word": "APPEAL",
+      "gloss": "make a serious request"
+    },
+    {
+      "word": "APPETITE",
+      "gloss": "desire for food or drink"
+    },
+    {
+      "word": "APPLAUD",
+      "gloss": "clap hands to show approval or praise"
+    },
+    {
+      "word": "APPLAUSE",
+      "gloss": "sound made by many people clapping"
+    },
+    {
+      "word": "APPOINT",
+      "gloss": "choose someone for a job or role"
+    },
+    {
+      "word": "APPROACH",
+      "gloss": "move closer to a person or place"
+    },
+    {
+      "word": "APPROVAL",
+      "gloss": "positive opinion or permission given"
+    },
+    {
+      "word": "APPROVE",
+      "gloss": "think something is good or acceptable"
+    },
+    {
+      "word": "ARCHITECT",
+      "gloss": "person who designs buildings"
+    },
+    {
+      "word": "ARISE",
+      "gloss": "begin to exist or happen"
+    },
+    {
+      "word": "ARITHMETIC",
+      "gloss": "branch of math using numbers"
+    },
+    {
+      "word": "ARM",
+      "gloss": "Limb between shoulder and hand."
+    },
+    {
+      "word": "ARMY",
+      "gloss": "large organized group of soldiers"
+    },
+    {
+      "word": "ARRANGE",
+      "gloss": "put things in a certain order"
+    },
+    {
+      "word": "ARREST",
+      "gloss": "take someone into police custody"
+    },
+    {
+      "word": "ARRIVAL",
+      "gloss": "act of reaching a destination"
+    },
+    {
+      "word": "ARROW",
+      "gloss": "thin pointed stick shot from a bow"
+    },
+    {
+      "word": "ARTIST",
+      "gloss": "person who creates paintings or drawings"
+    },
+    {
+      "word": "ARTISTIC",
+      "gloss": "showing skill in creating beautiful things"
+    },
+    {
+      "word": "ASHAMED",
+      "gloss": "feeling guilty or embarrassed"
+    },
+    {
+      "word": "ASIDE",
+      "gloss": "to one side or out of the way"
+    },
+    {
+      "word": "ASPECT",
+      "gloss": "particular part or feature of something"
+    },
+    {
+      "word": "ASPIRIN",
+      "gloss": "medicine used to reduce pain or fever"
+    },
+    {
+      "word": "ASSIGN",
+      "gloss": "give someone a task or duty"
+    },
+    {
+      "word": "ASSIGNMENT",
+      "gloss": "task given to be completed"
+    },
+    {
+      "word": "ASSIST",
+      "gloss": "help someone do something"
+    },
+    {
+      "word": "ASSISTANCE",
+      "gloss": "help or support given to someone"
+    },
+    {
+      "word": "ASSISTANT",
+      "gloss": "person who helps."
+    },
+    {
+      "word": "ASSOCIATE",
+      "gloss": "connect or link one thing with another"
+    },
+    {
+      "word": "ASSUME",
+      "gloss": "believe something is true without proof"
+    },
+    {
+      "word": "ASTRONOMER",
+      "gloss": "scientist who studies stars and planets"
+    },
+    {
+      "word": "ATHLETIC",
+      "gloss": "strong and good at physical sports"
+    },
+    {
+      "word": "ATLANTIC",
+      "gloss": "ocean between Europe, Africa and America"
+    },
+    {
+      "word": "ATMOSPHERE",
+      "gloss": "air surrounding the earth"
+    },
+    {
+      "word": "ATOMIC",
+      "gloss": "relating to atoms or nuclear energy"
+    },
+    {
+      "word": "ATTACH",
+      "gloss": "fasten or join one thing to another"
+    },
+    {
+      "word": "ATTACHMENT",
+      "gloss": "extra file sent with an email"
+    },
+    {
+      "word": "ATTAIN",
+      "gloss": "reach or achieve something desired"
+    },
+    {
+      "word": "ATTEMPT",
+      "gloss": "make an effort."
+    },
+    {
+      "word": "ATTEND",
+      "gloss": "be present at an event or place"
+    },
+    {
+      "word": "ATTRACT",
+      "gloss": "draw interest or attention toward something"
+    },
+    {
+      "word": "ATTRACTION",
+      "gloss": "something people want to see or visit"
+    },
+    {
+      "word": "AUTHORITY",
+      "gloss": "power or right to make decisions"
+    },
+    {
+      "word": "AUXILIARY",
+      "gloss": "providing extra help or support"
+    },
+    {
+      "word": "AVAILABLE",
+      "gloss": "ready to be used or obtained"
+    },
+    {
+      "word": "AVENUE",
+      "gloss": "wide street in a city or town"
+    },
+    {
+      "word": "AWARD",
+      "gloss": "prize given for merit."
+    },
+    {
+      "word": "AWARE",
+      "gloss": "knowing that something exists"
+    },
+    {
+      "word": "AWARENESS",
+      "gloss": "knowledge or understanding of something"
+    },
+    {
+      "word": "AWESOME",
+      "gloss": "extremely impressive or great"
+    },
+    {
+      "word": "AWKWARD",
+      "gloss": "uncomfortable or difficult to handle"
+    },
+    {
+      "word": "BABYSIT",
+      "gloss": "look after children while parents are away"
+    },
+    {
+      "word": "BABYSITTER",
+      "gloss": "person paid to watch children"
+    },
+    {
+      "word": "BACKACHE",
+      "gloss": "pain felt in the lower or upper back"
+    },
+    {
+      "word": "BACKPACK",
+      "gloss": "bag carried on the back with straps"
+    },
+    {
+      "word": "BACKPACKER",
+      "gloss": "traveler who carries a backpack"
+    },
+    {
+      "word": "BACON",
+      "gloss": "salted or smoked meat from a pig"
+    },
+    {
+      "word": "BAGGAGE",
+      "gloss": "suitcases and bags taken when traveling"
+    },
+    {
+      "word": "BAKER",
+      "gloss": "person who makes bread and cakes"
+    },
+    {
+      "word": "BAKERY",
+      "gloss": "shop where bread and cakes are sold"
     },
     {
       "word": "BALANCE",
@@ -27,281 +631,489 @@
       ]
     },
     {
-      "word": "PATTERN",
-      "gloss": "A design or habit that repeats.",
+      "word": "BALD",
+      "gloss": "having little or no hair on the head"
+    },
+    {
+      "word": "BANDAGE",
+      "gloss": "strip of cloth used to cover a wound"
+    },
+    {
+      "word": "BANG",
+      "gloss": "sudden loud noise or sharp hit"
+    },
+    {
+      "word": "BAR",
+      "gloss": "Place that sells alcoholic drinks."
+    },
+    {
+      "word": "BARBECUE",
+      "gloss": "outdoor grill for cooking."
+    },
+    {
+      "word": "BARE",
+      "gloss": "not covered or not wearing clothes"
+    },
+    {
+      "word": "BARELY",
+      "gloss": "only just or almost not at all"
+    },
+    {
+      "word": "BARK",
+      "gloss": "loud sound made by a dog"
+    },
+    {
+      "word": "BARMAN",
+      "gloss": "person who serves drinks at a bar"
+    },
+    {
+      "word": "BARREL",
+      "gloss": "large round container for liquids"
+    },
+    {
+      "word": "BASE",
+      "gloss": "lowest part of something."
+    },
+    {
+      "word": "BASEMENT",
+      "gloss": "room below ground level in a building"
+    },
+    {
+      "word": "BASIN",
+      "gloss": "round bowl for holding water"
+    },
+    {
+      "word": "BASIS",
+      "gloss": "main idea or starting point"
+    },
+    {
+      "word": "BAT",
+      "gloss": "Wooden or metal club used in sports."
+    },
+    {
+      "word": "BATHE",
+      "gloss": "wash the body in water"
+    },
+    {
+      "word": "BATTLE",
+      "gloss": "fight between two sides"
+    },
+    {
+      "word": "BEARD",
+      "gloss": "hair growing on a man's face"
+    },
+    {
+      "word": "BEAST",
+      "gloss": "large wild animal"
+    },
+    {
+      "word": "BEAT",
+      "gloss": "hit repeatedly"
+    },
+    {
+      "word": "BEAVER",
+      "gloss": "animal with flat tail that builds dams"
+    },
+    {
+      "word": "BEDSIDE",
+      "gloss": "area next to a bed"
+    },
+    {
+      "word": "BEHALF",
+      "gloss": "in place of someone else"
+    },
+    {
+      "word": "BEHAVE",
+      "gloss": "act in a proper way"
+    },
+    {
+      "word": "BELIEF",
+      "gloss": "something accepted as true"
+    },
+    {
+      "word": "BELOVED",
+      "gloss": "greatly loved by someone"
+    },
+    {
+      "word": "BENEFIT",
+      "gloss": "advantage or helpful result"
+    },
+    {
+      "word": "BENT",
+      "gloss": "curved or not straight"
+    },
+    {
+      "word": "BET",
+      "gloss": "risk money on an outcome"
+    },
+    {
+      "word": "BILINGUAL",
+      "gloss": "able to speak two languages"
+    },
+    {
+      "word": "BILL",
+      "gloss": "written request for payment"
+    },
+    {
+      "word": "BIN",
+      "gloss": "container for storing things"
+    },
+    {
+      "word": "BIOGRAPHY",
+      "gloss": "story of someone's life"
+    },
+    {
+      "word": "BIOLOGY",
+      "gloss": "study of living things"
+    },
+    {
+      "word": "BISHOP",
+      "gloss": "high-ranking church leader"
+    },
+    {
+      "word": "BITE",
+      "gloss": "use teeth to cut into something"
+    },
+    {
+      "word": "BITTER",
+      "gloss": "having a sharp unpleasant taste"
+    },
+    {
+      "word": "BLAME",
+      "gloss": "say someone is responsible for a fault"
+    },
+    {
+      "word": "BLEED",
+      "gloss": "lose blood from the body"
+    },
+    {
+      "word": "BLEND",
+      "gloss": "mix things together smoothly"
+    },
+    {
+      "word": "BLESS",
+      "gloss": "ask for divine protection"
+    },
+    {
+      "word": "BLESSING",
+      "gloss": "prayer for divine favor"
+    },
+    {
+      "word": "BLIND",
+      "gloss": "unable to see"
+    },
+    {
+      "word": "BLOCK",
+      "gloss": "Solid piece of material."
+    },
+    {
+      "word": "BLOG",
+      "gloss": "online personal journal"
+    },
+    {
+      "word": "BLOGGER",
+      "gloss": "person who writes a blog"
+    },
+    {
+      "word": "BLUSH",
+      "gloss": "face turns red from embarrassment"
+    },
+    {
+      "word": "BOARD",
+      "gloss": "Flat surface used for writing or displaying information."
+    },
+    {
+      "word": "BOAST",
+      "gloss": "speak proudly about oneself"
+    },
+    {
+      "word": "BOLD",
+      "gloss": "confident and unafraid"
+    },
+    {
+      "word": "BOLDLY",
+      "gloss": "in a confident fearless way"
+    },
+    {
+      "word": "BOND",
+      "gloss": "close connection between people"
+    },
+    {
+      "word": "BOOK",
+      "gloss": "Pages bound together that you can read.",
       "synonyms": [
-        "motif",
-        "design",
-        "rhythm"
+        "volume",
+        "text",
+        "tome"
       ]
     },
     {
-      "word": "COURAGE",
-      "gloss": "Bravery when facing fear or risk.",
-      "synonyms": [
-        "bravery",
-        "nerve",
-        "valor"
-      ]
+      "word": "BOOKING",
+      "gloss": "arrangement to reserve something"
     },
     {
-      "word": "SILENCE",
-      "gloss": "The absence of sound.",
-      "synonyms": [
-        "quiet",
-        "hush",
-        "stillness"
-      ]
+      "word": "BOOM",
+      "gloss": "loud deep sound"
     },
     {
-      "word": "OPINION",
-      "gloss": "What you think about a topic.",
-      "synonyms": [
-        "view",
-        "belief",
-        "stance"
-      ]
+      "word": "BOOT",
+      "gloss": "strong shoe covering the ankle"
     },
     {
-      "word": "ADVICE",
-      "gloss": "A suggestion about what someone should do.",
-      "synonyms": [
-        "guidance",
-        "counsel",
-        "tip"
-      ]
+      "word": "BORDER",
+      "gloss": "line separating two countries"
     },
     {
-      "word": "EXPERIENCE",
-      "gloss": "Knowledge you gain by doing something.",
-      "synonyms": [
-        "practice",
-        "background"
-      ]
+      "word": "BORE",
+      "gloss": "make someone feel uninterested"
     },
     {
-      "word": "CULTURE",
-      "gloss": "Shared customs, arts, and ways of life.",
-      "synonyms": [
-        "heritage",
-        "traditions"
-      ]
+      "word": "BOREDOM",
+      "gloss": "feeling of being uninterested"
     },
     {
-      "word": "SOCIETY",
-      "gloss": "People living together as a community.",
-      "synonyms": [
-        "community",
-        "public"
-      ]
+      "word": "BOTHER",
+      "gloss": "cause trouble or annoyance to someone"
     },
     {
-      "word": "ENVIRONMENT",
-      "gloss": "The natural world around us.",
-      "synonyms": [
-        "surroundings",
-        "habitat"
-      ]
+      "word": "BOUNCE",
+      "gloss": "spring back after hitting something"
     },
     {
-      "word": "CLIMATE",
-      "gloss": "Typical weather in a region over years.",
-      "synonyms": [
-        "weather pattern"
-      ]
+      "word": "BOUND",
+      "gloss": "tied or fastened tightly"
     },
     {
-      "word": "ENERGY",
-      "gloss": "Power that makes things work or move.",
-      "synonyms": [
-        "power",
-        "force"
-      ]
+      "word": "BOW",
+      "gloss": "bend forward to show respect"
     },
     {
-      "word": "HEALTH",
-      "gloss": "Physical and mental well-being.",
-      "synonyms": [
-        "wellness",
-        "fitness"
-      ]
+      "word": "BOWL",
+      "gloss": "Round dish used for holding food."
     },
     {
-      "word": "MEDICINE",
-      "gloss": "A substance used to treat illness.",
-      "synonyms": [
-        "drug",
-        "remedy",
-        "treatment"
-      ]
+      "word": "BOXING",
+      "gloss": "sport of fighting with fists"
     },
     {
-      "word": "EXERCISE",
-      "gloss": "Physical activity that keeps the body fit.",
-      "synonyms": [
-        "workout",
-        "training"
-      ]
+      "word": "BRACELET",
+      "gloss": "jewelry worn around the wrist"
     },
     {
-      "word": "HABIT",
-      "gloss": "Something you do regularly, often without thinking.",
-      "synonyms": [
-        "routine",
-        "custom"
-      ]
+      "word": "BRANCH",
+      "gloss": "part of a tree that grows from the trunk"
     },
     {
-      "word": "ROUTINE",
-      "gloss": "The usual order of daily activities.",
-      "synonyms": [
-        "schedule",
-        "pattern"
-      ]
+      "word": "BRASS",
+      "gloss": "yellow metal made of copper and zinc"
     },
     {
-      "word": "SUCCESS",
-      "gloss": "Achieving a goal you worked toward.",
-      "synonyms": [
-        "achievement",
-        "triumph"
-      ]
+      "word": "BRAVELY",
+      "gloss": "in a courageous manner"
     },
     {
-      "word": "FAILURE",
-      "gloss": "Not achieving what you tried to do.",
-      "synonyms": [
-        "setback",
-        "defeat"
-      ]
+      "word": "BREAST",
+      "gloss": "front part of the chest"
     },
     {
-      "word": "EFFORT",
-      "gloss": "Hard work you put into a task.",
-      "synonyms": [
-        "exertion",
-        "try"
-      ]
+      "word": "BREATH",
+      "gloss": "air taken into the lungs"
     },
     {
-      "word": "CHALLENGE",
-      "gloss": "A difficult task that tests you.",
-      "synonyms": [
-        "test",
-        "ordeal"
-      ]
+      "word": "BREATHLESS",
+      "gloss": "unable to breathe easily"
     },
     {
-      "word": "DECISION",
-      "gloss": "A choice you make after thinking.",
-      "synonyms": [
-        "choice",
-        "verdict"
-      ]
+      "word": "BREED",
+      "gloss": "produce young animals"
     },
     {
-      "word": "REASON",
-      "gloss": "Why something happens or is true.",
-      "synonyms": [
-        "cause",
-        "motive"
-      ]
+      "word": "BREEDING",
+      "gloss": "producing and raising animals"
     },
     {
-      "word": "RESULT",
-      "gloss": "What happens because of an action.",
-      "synonyms": [
-        "outcome",
-        "effect"
-      ]
+      "word": "BRICK",
+      "gloss": "rectangular block used in building"
     },
     {
-      "word": "IMPROVE",
-      "gloss": "To make something better.",
-      "synonyms": [
-        "enhance",
-        "upgrade"
-      ]
+      "word": "BRIEF",
+      "gloss": "lasting only a short time"
     },
     {
-      "word": "DEVELOP",
-      "gloss": "To grow or build something over time.",
-      "synonyms": [
-        "expand",
-        "evolve"
-      ]
+      "word": "BRIEFLY",
+      "gloss": "for a short period"
     },
     {
-      "word": "CREATE",
-      "gloss": "To make something new.",
-      "synonyms": [
-        "produce",
-        "invent"
-      ]
+      "word": "BRIGHTLY",
+      "gloss": "with strong light or color"
     },
     {
-      "word": "IMAGINE",
-      "gloss": "To form a picture in your mind.",
-      "synonyms": [
-        "picture",
-        "envision"
-      ]
+      "word": "BROAD",
+      "gloss": "wide from side to side"
     },
     {
-      "word": "BELIEVE",
-      "gloss": "To think that something is true.",
-      "synonyms": [
-        "trust",
-        "accept"
-      ]
+      "word": "BROADCAST",
+      "gloss": "send information or a program over radio or television"
     },
     {
-      "word": "RESPECT",
-      "gloss": "A feeling of honour for someone or something.",
-      "synonyms": [
-        "regard",
-        "esteem"
-      ]
+      "word": "BROCCOLI",
+      "gloss": "green vegetable with tight clusters of small flower heads"
     },
     {
-      "word": "CONFIDENT",
-      "gloss": "Sure of your own ability.",
-      "synonyms": [
-        "assured",
-        "certain"
-      ]
+      "word": "BRONZE",
+      "gloss": "brownish metal made from copper and tin"
     },
     {
-      "word": "NERVOUS",
-      "gloss": "Worried or uneasy about what may happen.",
-      "synonyms": [
-        "anxious",
-        "tense"
-      ]
+      "word": "BUBBLE",
+      "gloss": "round pocket of air or gas inside a liquid"
     },
     {
-      "word": "STRESS",
-      "gloss": "Mental or physical pressure from difficulty.",
-      "synonyms": [
-        "strain",
-        "tension"
-      ]
+      "word": "BUDDY",
+      "gloss": "close friend or companion"
     },
     {
-      "word": "MEMORY",
-      "gloss": "The ability to recall past events.",
-      "synonyms": [
-        "recall",
-        "remembrance"
-      ]
+      "word": "BUILDER",
+      "gloss": "person who constructs houses or other structures"
     },
     {
-      "word": "KNOWLEDGE",
-      "gloss": "Facts and skills you have learned.",
-      "synonyms": [
-        "learning",
-        "wisdom"
-      ]
+      "word": "BULL",
+      "gloss": "adult male of cattle or similar large animals"
+    },
+    {
+      "word": "BULLETIN",
+      "gloss": "short official report or news update"
+    },
+    {
+      "word": "BUMP",
+      "gloss": "small raised area on a surface"
+    },
+    {
+      "word": "BUNCH",
+      "gloss": "group of things growing or held together"
+    },
+    {
+      "word": "BURDEN",
+      "gloss": "heavy load or responsibility that is difficult to carry"
+    },
+    {
+      "word": "BUREAU",
+      "gloss": "office or department that handles specific tasks"
+    },
+    {
+      "word": "BURGLAR",
+      "gloss": "person who breaks into buildings to steal"
+    },
+    {
+      "word": "BURN",
+      "gloss": "be on fire or damage with heat"
+    },
+    {
+      "word": "BURNING",
+      "gloss": "on fire or giving off heat and light"
+    },
+    {
+      "word": "BURST",
+      "gloss": "break open suddenly with force"
+    },
+    {
+      "word": "BUST",
+      "gloss": "statue of a person's head and shoulders"
+    },
+    {
+      "word": "BUTCHER",
+      "gloss": "person who cuts and sells meat"
+    },
+    {
+      "word": "BUYER",
+      "gloss": "person who purchases goods or services"
+    },
+    {
+      "word": "CABBAGE",
+      "gloss": "large leafy vegetable with tightly packed leaves"
+    },
+    {
+      "word": "CABIN",
+      "gloss": "small simple wooden house in the countryside"
+    },
+    {
+      "word": "CAGE",
+      "gloss": "metal enclosure with bars for keeping animals"
+    },
+    {
+      "word": "CALCULATE",
+      "gloss": "work out a number or amount using math"
+    },
+    {
+      "word": "CALCULATOR",
+      "gloss": "small electronic device for doing arithmetic"
+    },
+    {
+      "word": "CALF",
+      "gloss": "young cow or bull"
+    },
+    {
+      "word": "CALLER",
+      "gloss": "person who makes a telephone call"
+    },
+    {
+      "word": "CALM",
+      "gloss": "free from strong feelings or agitation"
+    },
+    {
+      "word": "CALMNESS",
+      "gloss": "state of being peaceful and untroubled"
+    },
+    {
+      "word": "CAMEL",
+      "gloss": "large desert animal with one or two humps"
+    },
+    {
+      "word": "CAMPSITE",
+      "gloss": "place where people set up tents to stay overnight"
+    },
+    {
+      "word": "CANAL",
+      "gloss": "artificial waterway for boats or irrigation"
+    },
+    {
+      "word": "CANCEL",
+      "gloss": "decide that something will not happen"
+    },
+    {
+      "word": "CANCER",
+      "gloss": "serious disease caused by abnormal cell growth"
+    },
+    {
+      "word": "CANDLE",
+      "gloss": "stick of wax with a wick that gives light when burned"
+    },
+    {
+      "word": "CANNED",
+      "gloss": "preserved in a sealed metal container"
+    },
+    {
+      "word": "CANTEEN",
+      "gloss": "small cafeteria in a school or workplace"
+    },
+    {
+      "word": "CAPABLE",
+      "gloss": "having the skill or power to do something"
+    },
+    {
+      "word": "CAPACITY",
+      "gloss": "maximum amount that something can hold"
+    },
+    {
+      "word": "CAPSULE",
+      "gloss": "small container that holds medicine to be swallowed"
+    },
+    {
+      "word": "CAPTURE",
+      "gloss": "take someone or something by force"
+    },
+    {
+      "word": "CARE",
+      "gloss": "Look after someone or something."
     },
     {
       "word": "CAREER",
@@ -312,91 +1124,511 @@
       ]
     },
     {
-      "word": "INTERVIEW",
-      "gloss": "A formal meeting to ask questions.",
+      "word": "CARELESS",
+      "gloss": "not paying enough attention"
+    },
+    {
+      "word": "CARELESSLY",
+      "gloss": "in a way that shows lack of attention"
+    },
+    {
+      "word": "CARPET",
+      "gloss": "thick woven fabric used to cover floors"
+    },
+    {
+      "word": "CARRIAGE",
+      "gloss": "vehicle pulled by horses for carrying people"
+    },
+    {
+      "word": "CARTON",
+      "gloss": "light cardboard box for holding goods"
+    },
+    {
+      "word": "CASHPOINT",
+      "gloss": "machine that dispenses cash from a bank account"
+    },
+    {
+      "word": "CASUAL",
+      "gloss": "relaxed and informal in manner"
+    },
+    {
+      "word": "CATEGORIZE",
+      "gloss": "place things into groups according to type"
+    },
+    {
+      "word": "CATEGORY",
+      "gloss": "class or group of things that share features"
+    },
+    {
+      "word": "CATTLE",
+      "gloss": "large farm animals raised for meat or milk"
+    },
+    {
+      "word": "CAUTION",
+      "gloss": "care taken to avoid danger or mistakes"
+    },
+    {
+      "word": "CAUTIOUS",
+      "gloss": "showing care to avoid problems or danger"
+    },
+    {
+      "word": "CAVE",
+      "gloss": "large hollow space inside a rock or hillside"
+    },
+    {
+      "word": "CELEBRITY",
+      "gloss": "famous person known to many people"
+    },
+    {
+      "word": "CELL",
+      "gloss": "small room in a prison or monastery"
+    },
+    {
+      "word": "CENTRAL",
+      "gloss": "located in the middle of something"
+    },
+    {
+      "word": "CEREMONY",
+      "gloss": "formal event with set actions and words"
+    },
+    {
+      "word": "CERTAINTY",
+      "gloss": "state of being completely sure"
+    },
+    {
+      "word": "CHAMPION",
+      "gloss": "person who wins a competition"
+    },
+    {
+      "word": "CHANNEL",
+      "gloss": "narrow passage of water between land areas"
+    },
+    {
+      "word": "CHAOS",
+      "gloss": "complete disorder and confusion"
+    },
+    {
+      "word": "CHARGE",
+      "gloss": "Ask money for a service or product."
+    },
+    {
+      "word": "CHARIOT",
+      "gloss": "Ancient two-wheeled vehicle pulled by horses."
+    },
+    {
+      "word": "CHARITY",
+      "gloss": "Help given freely to people in need."
+    },
+    {
+      "word": "CHARM",
+      "gloss": "Small object believed to bring good luck."
+    },
+    {
+      "word": "CHASE",
+      "gloss": "Run after someone or something to catch it."
+    },
+    {
+      "word": "CHAT",
+      "gloss": "Casual conversation."
+    },
+    {
+      "word": "CHECKOUT",
+      "gloss": "Place where customers pay for goods."
+    },
+    {
+      "word": "CHEERFUL",
+      "gloss": "Showing happiness and a positive mood."
+    },
+    {
+      "word": "CHEMICAL",
+      "gloss": "Substance produced by reactions."
+    },
+    {
+      "word": "CHEMIST",
+      "gloss": "Scientist who studies substances and reactions."
+    },
+    {
+      "word": "CHEMISTRY",
+      "gloss": "Science that examines how substances interact."
+    },
+    {
+      "word": "CHERISH",
+      "gloss": "Value and protect something with deep care."
+    },
+    {
+      "word": "CHIEF",
+      "gloss": "Person who leads or commands a group."
+    },
+    {
+      "word": "CHOIR",
+      "gloss": "Group of singers performing together."
+    },
+    {
+      "word": "CHOKE",
+      "gloss": "Block the throat so breathing stops."
+    },
+    {
+      "word": "CHRISTIAN",
+      "gloss": "Person who follows the teachings of Jesus."
+    },
+    {
+      "word": "CHUCKLE",
+      "gloss": "Quiet laugh made in amusement."
+    },
+    {
+      "word": "CIRCLE",
+      "gloss": "Round shape with no corners."
+    },
+    {
+      "word": "CIRCULAR",
+      "gloss": "Having the shape of a perfect ring."
+    },
+    {
+      "word": "CIRCUS",
+      "gloss": "Traveling show with performers and animals."
+    },
+    {
+      "word": "CIVIL",
+      "gloss": "Relating to ordinary citizens rather than the military."
+    },
+    {
+      "word": "CLAIM",
+      "gloss": "State as true."
+    },
+    {
+      "word": "CLASSICAL",
+      "gloss": "Following traditional forms from ancient times."
+    },
+    {
+      "word": "CLASSIFY",
+      "gloss": "Arrange items into groups by shared traits."
+    },
+    {
+      "word": "CLEAR",
+      "gloss": "Easy to see through or understand."
+    },
+    {
+      "word": "CLICK",
+      "gloss": "Short sharp sound."
+    },
+    {
+      "word": "CLIFF",
+      "gloss": "High, steep face of rock or earth."
+    },
+    {
+      "word": "CLIMATE",
+      "gloss": "Typical weather in a region over years.",
       "synonyms": [
-        "meeting",
-        "hearing"
+        "weather pattern"
       ]
     },
     {
-      "word": "CUSTOMER",
-      "gloss": "A person who buys goods or services.",
-      "synonyms": [
-        "client",
-        "buyer"
-      ]
+      "word": "CLIMBER",
+      "gloss": "Person who ascends mountains or walls."
     },
     {
-      "word": "QUALITY",
-      "gloss": "How good something is.",
-      "synonyms": [
-        "standard",
-        "calibre"
-      ]
+      "word": "CLINIC",
+      "gloss": "Small medical facility for outpatient care."
     },
     {
-      "word": "ARTICLE",
-      "gloss": "A piece of writing in a paper or magazine.",
-      "synonyms": [
-        "piece",
-        "feature"
-      ]
+      "word": "CLIP",
+      "gloss": "Fasten things together with a metal or plastic holder."
     },
     {
-      "word": "PERFORMANCE",
-      "gloss": "How well someone does a task, or a show.",
-      "synonyms": [
-        "show",
-        "execution"
-      ]
+      "word": "CLOSELY",
+      "gloss": "In a way that leaves little space between."
     },
     {
-      "word": "AVERAGE",
-      "gloss": "The usual or middle amount.",
-      "synonyms": [
-        "typical",
-        "mean"
-      ]
+      "word": "COAL",
+      "gloss": "Black rock burned to produce heat."
     },
     {
-      "word": "COMPARE",
-      "gloss": "To look at how two things are alike or not.",
-      "synonyms": [
-        "contrast",
-        "match"
-      ]
+      "word": "COAST",
+      "gloss": "Land next to the sea."
     },
     {
-      "word": "ATTENTION",
-      "gloss": "Careful noticing of something.",
-      "synonyms": [
-        "focus",
-        "notice"
-      ]
+      "word": "COASTAL",
+      "gloss": "Located along or near the sea."
     },
     {
-      "word": "PATIENT",
-      "gloss": "Able to wait without getting angry; also a person in care.",
-      "synonyms": [
-        "calm",
-        "tolerant"
-      ]
+      "word": "COD",
+      "gloss": "Large sea fish often eaten as food."
     },
     {
-      "word": "CURIOUS",
-      "gloss": "Wanting to know or learn more.",
-      "synonyms": [
-        "inquisitive",
-        "interested"
-      ]
+      "word": "COFFIN",
+      "gloss": "Long box used to bury a dead body."
     },
     {
-      "word": "PRESSURE",
-      "gloss": "Force pushing on something, or urgent demand.",
+      "word": "COLLAPSE",
+      "gloss": "Fall down suddenly because of weakness."
+    },
+    {
+      "word": "COLLAR",
+      "gloss": "Band of fabric around the neck of a shirt."
+    },
+    {
+      "word": "COLUMNIST",
+      "gloss": "Writer who regularly produces an opinion piece."
+    },
+    {
+      "word": "COMBINE",
+      "gloss": "Join two or more things into one."
+    },
+    {
+      "word": "COMEDIAN",
+      "gloss": "Entertainer who tells jokes to make people laugh."
+    },
+    {
+      "word": "COMEDY",
+      "gloss": "Play or film intended to amuse an audience."
+    },
+    {
+      "word": "COMET",
+      "gloss": "Icy space object with a glowing tail."
+    },
+    {
+      "word": "COMFORT",
+      "gloss": "State of physical or emotional ease."
+    },
+    {
+      "word": "COMMA",
+      "gloss": "Punctuation mark used to separate items in a list."
+    },
+    {
+      "word": "COMMAND",
+      "gloss": "Order given by someone in authority."
+    },
+    {
+      "word": "COMMENT",
+      "gloss": "Short remark expressing an opinion."
+    },
+    {
+      "word": "COMMERCIAL",
+      "gloss": "Advertisement shown on television or radio."
+    },
+    {
+      "word": "COMMIT",
+      "gloss": "Carry out or promise to do something."
+    },
+    {
+      "word": "COMMONLY",
+      "gloss": "Happening or seen in most situations."
+    },
+    {
+      "word": "COMPANION",
+      "gloss": "Person who spends time with another."
+    },
+    {
+      "word": "COMPARISON",
+      "gloss": "Act of noting similarities and differences."
+    },
+    {
+      "word": "COMPETE",
+      "gloss": "Take part in a contest against others."
+    },
+    {
+      "word": "COMPETITOR",
+      "gloss": "Person or team trying to win against others."
+    },
+    {
+      "word": "COMPLEMENT",
+      "gloss": "Something that completes or improves another."
+    },
+    {
+      "word": "COMPLETE",
+      "gloss": "Having all parts; finished."
+    },
+    {
+      "word": "COMPLETELY",
+      "gloss": "To the fullest degree; totally."
+    },
+    {
+      "word": "COMPLEX",
+      "gloss": "Made of many connected parts."
+    },
+    {
+      "word": "COMPLICATE",
+      "gloss": "Make something harder to understand or do."
+    },
+    {
+      "word": "COMPLIMENT",
+      "gloss": "Polite expression of praise or admiration."
+    },
+    {
+      "word": "COMPOSE",
+      "gloss": "Create a piece of music or writing."
+    },
+    {
+      "word": "COMPOUND",
+      "gloss": "Substance formed by combining two or more elements."
+    },
+    {
+      "word": "COMPROMISE",
+      "gloss": "Agreement reached by each side giving up something."
+    },
+    {
+      "word": "CONCEPT",
+      "gloss": "Abstract idea or general notion."
+    },
+    {
+      "word": "CONCERNED",
+      "gloss": "Feeling worried or interested about something."
+    },
+    {
+      "word": "CONCLUDE",
+      "gloss": "Bring something to an end; decide after reasoning."
+    },
+    {
+      "word": "CONCLUSION",
+      "gloss": "Final decision or ending of an argument."
+    },
+    {
+      "word": "CONDUCT",
+      "gloss": "Organize and carry out an activity or task."
+    },
+    {
+      "word": "CONFIDENCE",
+      "gloss": "a feeling of being sure about one's abilities or decisions"
+    },
+    {
+      "word": "CONFIRM",
+      "gloss": "to state that something is true or correct"
+    },
+    {
+      "word": "CONFLICT",
+      "gloss": "a serious disagreement or struggle between people or ideas"
+    },
+    {
+      "word": "CONFUSING",
+      "gloss": "hard to understand clearly"
+    },
+    {
+      "word": "CONFUSION",
+      "gloss": "a state of not understanding what is happening"
+    },
+    {
+      "word": "CONNECT",
+      "gloss": "to join two or more things together"
+    },
+    {
+      "word": "CONNECTION",
+      "gloss": "a link or relationship between things"
+    },
+    {
+      "word": "CONQUER",
+      "gloss": "to defeat an enemy or overcome a difficulty"
+    },
+    {
+      "word": "CONSCIOUS",
+      "gloss": "aware of what is happening around one"
+    },
+    {
+      "word": "CONSONANT",
+      "gloss": "a speech sound made by blocking air in the mouth"
+    },
+    {
+      "word": "CONSTANTLY",
+      "gloss": "happening again and again without stopping"
+    },
+    {
+      "word": "CONSTITUTE",
+      "gloss": "to form or make up a whole"
+    },
+    {
+      "word": "CONSTRUCT",
+      "gloss": "to build something by putting parts together"
+    },
+    {
+      "word": "CONSUME",
+      "gloss": "to use up something completely"
+    },
+    {
+      "word": "CONSUMER",
+      "gloss": "a person who buys goods or services"
+    },
+    {
+      "word": "CONTAIN",
+      "gloss": "to hold something inside a space or limit"
+    },
+    {
+      "word": "CONTENT",
+      "gloss": "the material or information inside something"
+    },
+    {
+      "word": "CONTINUAL",
+      "gloss": "happening repeatedly over a period of time"
+    },
+    {
+      "word": "CONTINUOUS",
+      "gloss": "going on without any break or pause"
+    },
+    {
+      "word": "CONTRARY",
+      "gloss": "completely different from what is expected"
+    },
+    {
+      "word": "CONTRIBUTE",
+      "gloss": "to give something in order to help achieve a result"
+    },
+    {
+      "word": "CONTROL",
+      "gloss": "Direct or manage how something works."
+    },
+    {
+      "word": "CONVEY",
+      "gloss": "to communicate or make an idea known"
+    },
+    {
+      "word": "CONVINCE",
+      "gloss": "to make someone believe or agree with an idea"
+    },
+    {
+      "word": "COPYRIGHT",
+      "gloss": "the legal right to control the use of creative work"
+    },
+    {
+      "word": "CORRECTION",
+      "gloss": "the act of making something right or accurate"
+    },
+    {
+      "word": "COTTON",
+      "gloss": "a soft white fiber used to make cloth"
+    },
+    {
+      "word": "COUGH",
+      "gloss": "to force air out of the lungs suddenly and noisily"
+    },
+    {
+      "word": "COUNCIL",
+      "gloss": "a group of people chosen to make decisions"
+    },
+    {
+      "word": "COUNSELING",
+      "gloss": "professional help given to solve personal problems"
+    },
+    {
+      "word": "COUNT",
+      "gloss": "Say numbers in sequence to find total."
+    },
+    {
+      "word": "COUNTER",
+      "gloss": "a flat surface in a shop where goods are sold"
+    },
+    {
+      "word": "COUNTLESS",
+      "gloss": "too many to be counted"
+    },
+    {
+      "word": "COUNTY",
+      "gloss": "an area of land with its own local government"
+    },
+    {
+      "word": "COURAGE",
+      "gloss": "Bravery when facing fear or risk.",
       "synonyms": [
-        "strain",
-        "force"
+        "bravery",
+        "nerve",
+        "valor"
       ]
     }
   ]

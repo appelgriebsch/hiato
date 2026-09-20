@@ -25,7 +25,10 @@ export function About() {
       <h1 className="text-xl font-semibold text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         Word packs ship with per-source attribution. Portuguese lemmas are
-        curated from openly licensed Wiktionary-derived lists (CC-BY-SA).
+        curated from Wiktionary-derived / OpenSubtitles frequency lists
+        (CC-BY-SA). Lemma selection for EN/DE/ES/PT also draws on
+        hermitdave/FrequencyWords (MIT; OpenSubtitles-based) and, where used,
+        wordhoard POS/CEFR samples — curated learner lists, not verbatim dumps.
         Gloss and synonym copy is original to Hiato.
       </p>
 
@@ -81,9 +84,12 @@ export function About() {
         </ul>
       </Card>
 
-      <p className="mt-2 mb-6 text-center text-[11px] leading-relaxed text-ink-faint">
+      <p className="mt-2 mb-2 text-center text-[11px] leading-relaxed text-ink-faint">
         Selected-language packs are cached for offline play; other languages
         download on demand (ADR 0006).
+      </p>
+      <p className="mb-6 text-center text-[12px] leading-relaxed text-ink-muted">
+        Built by Grok Bot
       </p>
     </Layout>
   )

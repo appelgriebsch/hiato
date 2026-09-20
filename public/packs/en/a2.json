@@ -1,411 +1,1667 @@
 {
-  "version": 1,
+  "version": 2,
   "lang": "en",
   "cefr": "a2",
   "license": "CC0-1.0 (curated learner lemmas; glosses original to Hiato)",
   "attribution": [
     "Hiato EN A2 learner pack — original glosses and synonym chips (2026).",
-    "Lemmas selected for CEFR A2 classroom frequency; not a verbatim dump of any proprietary list."
+    "Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).",
+    "Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
-      "word": "GARDEN",
-      "gloss": "An outdoor space for growing plants.",
+      "word": "ABILITY",
+      "gloss": "Skill or power to do something."
+    },
+    {
+      "word": "ABROAD",
+      "gloss": "In or to a foreign country."
+    },
+    {
+      "word": "ACCEPT",
+      "gloss": "Agree to receive or take."
+    },
+    {
+      "word": "ACCEPTABLE",
+      "gloss": "Good enough to be approved."
+    },
+    {
+      "word": "ACCIDENT",
+      "gloss": "Unexpected event causing damage or harm."
+    },
+    {
+      "word": "ACCOUNT",
+      "gloss": "Record of money or events."
+    },
+    {
+      "word": "ACHIEVE",
+      "gloss": "Succeed in reaching a goal."
+    },
+    {
+      "word": "ACT",
+      "gloss": "Do something or perform."
+    },
+    {
+      "word": "ACTUALLY",
+      "gloss": "In fact or really."
+    },
+    {
+      "word": "ADDITION",
+      "gloss": "Process of adding numbers."
+    },
+    {
+      "word": "ADDITIONAL",
+      "gloss": "Extra or further."
+    },
+    {
+      "word": "ADJECTIVE",
+      "gloss": "Word describing a noun."
+    },
+    {
+      "word": "ADJUST",
+      "gloss": "Change slightly to fit."
+    },
+    {
+      "word": "ADMIRE",
+      "gloss": "Respect and approve of someone."
+    },
+    {
+      "word": "ADMIT",
+      "gloss": "Confess or allow entry."
+    },
+    {
+      "word": "ADULT",
+      "gloss": "Fully grown person."
+    },
+    {
+      "word": "ADVANCED",
+      "gloss": "At a high or later stage."
+    },
+    {
+      "word": "ADVANTAGE",
+      "gloss": "Favorable condition or benefit."
+    },
+    {
+      "word": "ADVENTURE",
+      "gloss": "Exciting or unusual experience."
+    },
+    {
+      "word": "ADVICE",
+      "gloss": "A suggestion about what someone should do.",
       "synonyms": [
-        "yard",
-        "plot",
-        "grounds"
+        "guidance",
+        "counsel",
+        "tip"
       ]
     },
     {
-      "word": "MARKET",
-      "gloss": "A place where people buy and sell goods.",
+      "word": "ADVISE",
+      "gloss": "Offer suggestions or guidance."
+    },
+    {
+      "word": "AFFAIR",
+      "gloss": "Event or matter of concern."
+    },
+    {
+      "word": "AGED",
+      "gloss": "Having lived for many years."
+    },
+    {
+      "word": "AGENCY",
+      "gloss": "Organization providing a service."
+    },
+    {
+      "word": "AGENT",
+      "gloss": "Person acting for another."
+    },
+    {
+      "word": "AHEAD",
+      "gloss": "In front or in advance."
+    },
+    {
+      "word": "AIR",
+      "gloss": "Invisible gas we breathe."
+    },
+    {
+      "word": "AISLE",
+      "gloss": "Passage between rows of seats."
+    },
+    {
+      "word": "ALARM",
+      "gloss": "Warning sound or signal."
+    },
+    {
+      "word": "ALIVE",
+      "gloss": "Living and not dead."
+    },
+    {
+      "word": "ALLOW",
+      "gloss": "Give permission for something."
+    },
+    {
+      "word": "ALONE",
+      "gloss": "Without any other person nearby."
+    },
+    {
+      "word": "AMBITION",
+      "gloss": "Strong desire to succeed."
+    },
+    {
+      "word": "AMUSED",
+      "gloss": "Finding something funny or entertaining."
+    },
+    {
+      "word": "AMUSEMENT",
+      "gloss": "fun or entertainment."
+    },
+    {
+      "word": "ANCESTOR",
+      "gloss": "person from whom one is descended."
+    },
+    {
+      "word": "ANCIENT",
+      "gloss": "very old."
+    },
+    {
+      "word": "ANGEL",
+      "gloss": "heavenly messenger or guardian spirit."
+    },
+    {
+      "word": "ANGRILY",
+      "gloss": "in a furious manner."
+    },
+    {
+      "word": "ANKLE",
+      "gloss": "joint between foot and leg."
+    },
+    {
+      "word": "ANNOY",
+      "gloss": "irritate or bother."
+    },
+    {
+      "word": "ANNOYING",
+      "gloss": "causing irritation."
+    },
+    {
+      "word": "ANXIOUS",
+      "gloss": "worried or uneasy."
+    },
+    {
+      "word": "ANYMORE",
+      "gloss": "any longer."
+    },
+    {
+      "word": "ANYWAY",
+      "gloss": "nevertheless."
+    },
+    {
+      "word": "ANYWHERE",
+      "gloss": "in or to any place."
+    },
+    {
+      "word": "APART",
+      "gloss": "separated by distance."
+    },
+    {
+      "word": "APARTMENT",
+      "gloss": "set of rooms for living."
+    },
+    {
+      "word": "APOLOGIZE",
+      "gloss": "express regret for a fault."
+    },
+    {
+      "word": "APPARENTLY",
+      "gloss": "as it seems."
+    },
+    {
+      "word": "APPEAR",
+      "gloss": "come into sight."
+    },
+    {
+      "word": "APPEARANCE",
+      "gloss": "outward look."
+    },
+    {
+      "word": "APPLY",
+      "gloss": "make a formal request."
+    },
+    {
+      "word": "APPRECIATE",
+      "gloss": "recognize the value of."
+    },
+    {
+      "word": "AREA",
+      "gloss": "region or space."
+    },
+    {
+      "word": "ARGUE",
+      "gloss": "exchange opposing views."
+    },
+    {
+      "word": "ARGUMENT",
+      "gloss": "reasoned disagreement."
+    },
+    {
+      "word": "ARMCHAIR",
+      "gloss": "chair with side supports."
+    },
+    {
+      "word": "ARMED",
+      "gloss": "carrying weapons."
+    },
+    {
+      "word": "ARTIFICIAL",
+      "gloss": "made by humans, not natural."
+    },
+    {
+      "word": "ASLEEP",
+      "gloss": "in a state of sleep."
+    },
+    {
+      "word": "ASSISTANT",
+      "gloss": "person who helps."
+    },
+    {
+      "word": "ASTRONAUT",
+      "gloss": "space traveler."
+    },
+    {
+      "word": "ATHLETE",
+      "gloss": "person trained in sports."
+    },
+    {
+      "word": "ATOM",
+      "gloss": "smallest unit of an element."
+    },
+    {
+      "word": "ATTACK",
+      "gloss": "act violently against."
+    },
+    {
+      "word": "ATTEMPT",
+      "gloss": "make an effort."
+    },
+    {
+      "word": "ATTENTION",
+      "gloss": "Careful noticing of something.",
       "synonyms": [
-        "bazaar",
-        "marketplace",
-        "fair"
+        "focus",
+        "notice"
       ]
     },
     {
-      "word": "KITCHEN",
-      "gloss": "The room where meals are prepared.",
+      "word": "ATTITUDE",
+      "gloss": "way of thinking or feeling."
+    },
+    {
+      "word": "ATTRACTIVE",
+      "gloss": "pleasing to look at."
+    },
+    {
+      "word": "AUDIENCE",
+      "gloss": "group of listeners or viewers."
+    },
+    {
+      "word": "AUDIO",
+      "gloss": "sound recording or broadcast."
+    },
+    {
+      "word": "AUTHOR",
+      "gloss": "writer of a text."
+    },
+    {
+      "word": "AUTOMATIC",
+      "gloss": "working by itself."
+    },
+    {
+      "word": "AVERAGE",
+      "gloss": "The usual or middle amount.",
       "synonyms": [
-        "cookspace",
-        "galley"
+        "typical",
+        "mean"
       ]
     },
     {
-      "word": "OFFICE",
-      "gloss": "A room or building where people work at desks.",
+      "word": "AVOID",
+      "gloss": "keep away from."
+    },
+    {
+      "word": "AWARD",
+      "gloss": "prize given for merit."
+    },
+    {
+      "word": "AWFUL",
+      "gloss": "very bad."
+    },
+    {
+      "word": "BACKGROUND",
+      "gloss": "setting behind the main scene."
+    },
+    {
+      "word": "BADLY",
+      "gloss": "in a poor manner."
+    },
+    {
+      "word": "BADMINTON",
+      "gloss": "racket sport with a shuttlecock."
+    },
+    {
+      "word": "BAKE",
+      "gloss": "cook in an oven."
+    },
+    {
+      "word": "BALCONY",
+      "gloss": "platform outside an upper window."
+    },
+    {
+      "word": "BALLOON",
+      "gloss": "inflated bag of air."
+    },
+    {
+      "word": "BANK",
+      "gloss": "Place where money is kept and lent."
+    },
+    {
+      "word": "BANKING",
+      "gloss": "business of managing money."
+    },
+    {
+      "word": "BARBECUE",
+      "gloss": "outdoor grill for cooking."
+    },
+    {
+      "word": "BARBER",
+      "gloss": "person who cuts hair."
+    },
+    {
+      "word": "BARGAIN",
+      "gloss": "agreement on price."
+    },
+    {
+      "word": "BASE",
+      "gloss": "lowest part of something."
+    },
+    {
+      "word": "BASIC",
+      "gloss": "fundamental or essential."
+    },
+    {
+      "word": "BASICALLY",
+      "gloss": "in essence."
+    },
+    {
+      "word": "BASKET",
+      "gloss": "container made of woven material."
+    },
+    {
+      "word": "BATCH",
+      "gloss": "group processed together."
+    },
+    {
+      "word": "BATTERY",
+      "gloss": "device that stores electricity."
+    },
+    {
+      "word": "BAY",
+      "gloss": "wide inlet of the sea."
+    },
+    {
+      "word": "BEAR",
+      "gloss": "Large furry wild animal."
+    },
+    {
+      "word": "BEAUTY",
+      "gloss": "quality of being pleasing to the senses."
+    },
+    {
+      "word": "BEER",
+      "gloss": "alcoholic drink made from grain and hops"
+    },
+    {
+      "word": "BEG",
+      "gloss": "ask someone for money or help"
+    },
+    {
+      "word": "BEGINNER",
+      "gloss": "person who is just starting to learn something"
+    },
+    {
+      "word": "BEGINNING",
+      "gloss": "first part of an event or period"
+    },
+    {
+      "word": "BEHAVIOR",
+      "gloss": "way a person acts or conducts themselves"
+    },
+    {
+      "word": "BEING",
+      "gloss": "state of existing or living"
+    },
+    {
+      "word": "BELLY",
+      "gloss": "front part of the body below the chest"
+    },
+    {
+      "word": "BELONG",
+      "gloss": "be the property of someone or fit in a group"
+    },
+    {
+      "word": "BELT",
+      "gloss": "strip of leather or cloth worn around the waist"
+    },
+    {
+      "word": "BENCH",
+      "gloss": "long seat for several people"
+    },
+    {
+      "word": "BEND",
+      "gloss": "curve or force something into a curve"
+    },
+    {
+      "word": "BESIDES",
+      "gloss": "in addition to what has been mentioned"
+    },
+    {
+      "word": "BETTER",
+      "gloss": "Of higher quality than before."
+    },
+    {
+      "word": "BILL",
+      "gloss": "written request for payment"
+    },
+    {
+      "word": "BIT",
+      "gloss": "small piece or amount of something"
+    },
+    {
+      "word": "BITE",
+      "gloss": "use teeth to cut into something"
+    },
+    {
+      "word": "BLACKBOARD",
+      "gloss": "dark surface used for writing with chalk"
+    },
+    {
+      "word": "BLAME",
+      "gloss": "say someone is responsible for a fault"
+    },
+    {
+      "word": "BLANKET",
+      "gloss": "thick cloth used to keep warm in bed"
+    },
+    {
+      "word": "BLONDE",
+      "gloss": "person with light-colored hair"
+    },
+    {
+      "word": "BLOOM",
+      "gloss": "produce flowers on a plant"
+    },
+    {
+      "word": "BLOW",
+      "gloss": "Send air out of the mouth."
+    },
+    {
+      "word": "BOIL",
+      "gloss": "heat liquid until it bubbles and steams"
+    },
+    {
+      "word": "BOILED",
+      "gloss": "cooked in hot bubbling water"
+    },
+    {
+      "word": "BONUS",
+      "gloss": "extra payment or reward given in addition"
+    },
+    {
+      "word": "BOOKCASE",
+      "gloss": "furniture with shelves for holding books"
+    },
+    {
+      "word": "BOOKSHELF",
+      "gloss": "flat surface attached to a wall for books"
+    },
+    {
+      "word": "BOOKSHOP",
+      "gloss": "store that sells books"
+    },
+    {
+      "word": "BORED",
+      "gloss": "feeling tired and uninterested"
+    },
+    {
+      "word": "BOSS",
+      "gloss": "person who directs employees at work"
+    },
+    {
+      "word": "BOTHER",
+      "gloss": "cause trouble or annoyance to someone"
+    },
+    {
+      "word": "BRA",
+      "gloss": "undergarment worn by women to support the chest"
+    },
+    {
+      "word": "BRAINSTORM",
+      "gloss": "group discussion to produce ideas"
+    },
+    {
+      "word": "BRAKE",
+      "gloss": "device that slows or stops a vehicle"
+    },
+    {
+      "word": "BRANCH",
+      "gloss": "part of a tree that grows from the trunk"
+    },
+    {
+      "word": "BRAND",
+      "gloss": "particular make of goods or services"
+    },
+    {
+      "word": "BRAVE",
+      "gloss": "willing to face danger or pain"
+    },
+    {
+      "word": "BREAK",
+      "gloss": "Separate into pieces or stop working."
+    },
+    {
+      "word": "BREEZE",
+      "gloss": "gentle wind"
+    },
+    {
+      "word": "BRIDE",
+      "gloss": "woman on her wedding day"
+    },
+    {
+      "word": "BRILLIANT",
+      "gloss": "very bright or extremely clever"
+    },
+    {
+      "word": "BROWN",
+      "gloss": "Color like soil or chocolate."
+    },
+    {
+      "word": "BUDGET",
+      "gloss": "plan for how money will be spent"
+    },
+    {
+      "word": "BUG",
+      "gloss": "small insect"
+    },
+    {
+      "word": "BULB",
+      "gloss": "glass part of a lamp that produces light"
+    },
+    {
+      "word": "BURN",
+      "gloss": "be on fire or damage with heat"
+    },
+    {
+      "word": "BURY",
+      "gloss": "place something in the ground and cover it"
+    },
+    {
+      "word": "BUSH",
+      "gloss": "plant with many woody stems growing from the ground"
+    },
+    {
+      "word": "CAB",
+      "gloss": "vehicle for hire with a driver"
+    },
+    {
+      "word": "CAFETERIA",
+      "gloss": "self-service restaurant in a school or workplace"
+    },
+    {
+      "word": "CALENDAR",
+      "gloss": "chart showing days, weeks, and months"
+    },
+    {
+      "word": "CALL",
+      "gloss": "Speak to someone on the phone."
+    },
+    {
+      "word": "CAMP",
+      "gloss": "Place where people stay in tents outdoors."
+    },
+    {
+      "word": "CAMPING",
+      "gloss": "living outdoors in tents for recreation"
+    },
+    {
+      "word": "CAMPUS",
+      "gloss": "grounds and buildings of a college or university"
+    },
+    {
+      "word": "CAN",
+      "gloss": "metal container for food or drink"
+    },
+    {
+      "word": "CAPITAL",
+      "gloss": "city where a country’s government is located"
+    },
+    {
+      "word": "CAPTAIN",
+      "gloss": "person in command of a ship or team"
+    },
+    {
+      "word": "CARROT",
+      "gloss": "long orange root vegetable"
+    },
+    {
+      "word": "CASH",
+      "gloss": "money in the form of coins and notes"
+    },
+    {
+      "word": "CASSETTE",
+      "gloss": "plastic case holding magnetic tape for sound"
+    },
+    {
+      "word": "CASTLE",
+      "gloss": "large fortified building from the Middle Ages"
+    },
+    {
+      "word": "CAUSE",
+      "gloss": "make something happen"
+    },
+    {
+      "word": "CENT",
+      "gloss": "one-hundredth of a dollar"
+    },
+    {
+      "word": "CENTER",
+      "gloss": "middle point of something"
+    },
+    {
+      "word": "CENTIMETER",
+      "gloss": "unit of length equal to one-hundredth of a meter"
+    },
+    {
+      "word": "CENTURY",
+      "gloss": "A period of one hundred years."
+    },
+    {
+      "word": "CEREAL",
+      "gloss": "Breakfast food made from grains."
+    },
+    {
+      "word": "CERTAIN",
+      "gloss": "Sure or definite."
+    },
+    {
+      "word": "CERTAINLY",
+      "gloss": "Without doubt; surely."
+    },
+    {
+      "word": "CHAIN",
+      "gloss": "Series of connected metal links."
+    },
+    {
+      "word": "CHAIRMAN",
+      "gloss": "Person who leads a meeting."
+    },
+    {
+      "word": "CHALLENGE",
+      "gloss": "A difficult task that tests you.",
       "synonyms": [
-        "workplace",
-        "bureau"
+        "test",
+        "ordeal"
       ]
     },
     {
-      "word": "DOCTOR",
-      "gloss": "A person trained to treat illness.",
+      "word": "CHAMPAGNE",
+      "gloss": "Sparkling wine from France."
+    },
+    {
+      "word": "CHANCE",
+      "gloss": "Possibility of something happening."
+    },
+    {
+      "word": "CHAPTER",
+      "gloss": "Main section of a book."
+    },
+    {
+      "word": "CHART",
+      "gloss": "Diagram showing information."
+    },
+    {
+      "word": "CHAT",
+      "gloss": "Casual conversation."
+    },
+    {
+      "word": "CHEAP",
+      "gloss": "Low in price."
+    },
+    {
+      "word": "CHECK",
+      "gloss": "Look at something to make sure it is correct."
+    },
+    {
+      "word": "CHEEK",
+      "gloss": "Side of the face."
+    },
+    {
+      "word": "CHEER",
+      "gloss": "Shout of support or joy."
+    },
+    {
+      "word": "CHEF",
+      "gloss": "Professional cook."
+    },
+    {
+      "word": "CHEMICAL",
+      "gloss": "Substance produced by reactions."
+    },
+    {
+      "word": "CHEQUE",
+      "gloss": "Written order for payment."
+    },
+    {
+      "word": "CHESS",
+      "gloss": "Board game for two players."
+    },
+    {
+      "word": "CHEST",
+      "gloss": "Upper front part of the body."
+    },
+    {
+      "word": "CHILDHOOD",
+      "gloss": "Time of being a child."
+    },
+    {
+      "word": "CHILI",
+      "gloss": "Hot spicy pepper."
+    },
+    {
+      "word": "CHIMPANZEE",
+      "gloss": "Large African ape."
+    },
+    {
+      "word": "CHIN",
+      "gloss": "Lower part of the face."
+    },
+    {
+      "word": "CHIRP",
+      "gloss": "Short high-pitched bird sound."
+    },
+    {
+      "word": "CHOICE",
+      "gloss": "Act of selecting."
+    },
+    {
+      "word": "CIGARETTE",
+      "gloss": "Rolled tobacco for smoking."
+    },
+    {
+      "word": "CITIZEN",
+      "gloss": "Member of a country."
+    },
+    {
+      "word": "CLAIM",
+      "gloss": "State as true."
+    },
+    {
+      "word": "CLASSIC",
+      "gloss": "Of high quality and lasting value."
+    },
+    {
+      "word": "CLEANER",
+      "gloss": "Person or product that removes dirt."
+    },
+    {
+      "word": "CLEAR",
+      "gloss": "Easy to see through or understand."
+    },
+    {
+      "word": "CLEARLY",
+      "gloss": "In an easy-to-understand way."
+    },
+    {
+      "word": "CLERK",
+      "gloss": "Office worker handling records."
+    },
+    {
+      "word": "CLICK",
+      "gloss": "Short sharp sound."
+    },
+    {
+      "word": "CLIMB",
+      "gloss": "Move upward using hands and feet."
+    },
+    {
+      "word": "CLIMBING",
+      "gloss": "Activity of going up mountains."
+    },
+    {
+      "word": "CLONE",
+      "gloss": "Exact genetic copy."
+    },
+    {
+      "word": "CLOWN",
+      "gloss": "Comic performer in a circus."
+    },
+    {
+      "word": "CLUE",
+      "gloss": "Hint that helps solve something."
+    },
+    {
+      "word": "COAST",
+      "gloss": "Land next to the sea."
+    },
+    {
+      "word": "COIN",
+      "gloss": "Small metal piece of money."
+    },
+    {
+      "word": "COLA",
+      "gloss": "Sweet brown fizzy drink."
+    },
+    {
+      "word": "COLORFUL",
+      "gloss": "Having many bright colors."
+    },
+    {
+      "word": "COLUMN",
+      "gloss": "Vertical line of text or support."
+    },
+    {
+      "word": "COMB",
+      "gloss": "Tool with teeth for hair."
+    },
+    {
+      "word": "COMIC",
+      "gloss": "Magazine of cartoon strips."
+    },
+    {
+      "word": "COMMITMENT",
+      "gloss": "Promise to do something."
+    },
+    {
+      "word": "COMMITTEE",
+      "gloss": "Group chosen to make decisions."
+    },
+    {
+      "word": "COMMON",
+      "gloss": "Happening often or shared by many."
+    },
+    {
+      "word": "COMPANY",
+      "gloss": "Business organization."
+    },
+    {
+      "word": "COMPARE",
+      "gloss": "To look at how two things are alike or not.",
       "synonyms": [
-        "physician",
-        "medic"
+        "contrast",
+        "match"
       ]
     },
     {
-      "word": "HOSPITAL",
-      "gloss": "A building where sick people receive care.",
+      "word": "COMPLAIN",
+      "gloss": "Express dissatisfaction."
+    },
+    {
+      "word": "COMPLAINT",
+      "gloss": "Expression of dissatisfaction."
+    },
+    {
+      "word": "COMPLETE",
+      "gloss": "Having all parts; finished."
+    },
+    {
+      "word": "COMPOSER",
+      "gloss": "Person who writes music."
+    },
+    {
+      "word": "CONCERN",
+      "gloss": "Worry or matter of interest."
+    },
+    {
+      "word": "CONDITION",
+      "gloss": "State or situation something is in."
+    },
+    {
+      "word": "CONFIDENT",
+      "gloss": "Sure of your own ability.",
       "synonyms": [
-        "clinic",
-        "infirmary"
+        "assured",
+        "certain"
       ]
     },
     {
-      "word": "TEACHER",
-      "gloss": "A person who helps students learn.",
+      "word": "CONFUSE",
+      "gloss": "Make unclear or mixed up."
+    },
+    {
+      "word": "CONFUSED",
+      "gloss": "Unable to think clearly."
+    },
+    {
+      "word": "CONSIDER",
+      "gloss": "Think about carefully."
+    },
+    {
+      "word": "CONSIST",
+      "gloss": "Be made up of."
+    },
+    {
+      "word": "CONTACT",
+      "gloss": "Touch or communication with someone."
+    },
+    {
+      "word": "CONTAINER",
+      "gloss": "Holds or stores items inside."
+    },
+    {
+      "word": "CONTEXT",
+      "gloss": "Surrounding facts that clarify meaning."
+    },
+    {
+      "word": "CONTINENT",
+      "gloss": "Large continuous landmass on Earth."
+    },
+    {
+      "word": "CONTINUE",
+      "gloss": "Keep going without stopping."
+    },
+    {
+      "word": "CONTRAST",
+      "gloss": "Show clear difference between things."
+    },
+    {
+      "word": "CONTROL",
+      "gloss": "Direct or manage how something works."
+    },
+    {
+      "word": "CONVENIENT",
+      "gloss": "Easy and suitable for immediate use."
+    },
+    {
+      "word": "COOKER",
+      "gloss": "Appliance used to prepare hot food."
+    },
+    {
+      "word": "COOKING",
+      "gloss": "Preparing meals by heating ingredients."
+    },
+    {
+      "word": "COOLER",
+      "gloss": "Device that lowers temperature inside."
+    },
+    {
+      "word": "COPY",
+      "gloss": "make something exactly the same"
+    },
+    {
+      "word": "CORRECTLY",
+      "gloss": "In an accurate or proper way."
+    },
+    {
+      "word": "COST",
+      "gloss": "Amount of money required for purchase."
+    },
+    {
+      "word": "COUNT",
+      "gloss": "Say numbers in sequence to find total."
+    },
+    {
+      "word": "COUNTRY",
+      "gloss": "A land with its own government.",
       "synonyms": [
-        "instructor",
-        "educator"
+        "nation",
+        "state",
+        "land"
       ]
     },
     {
-      "word": "STUDENT",
-      "gloss": "A person who studies at a school.",
+      "word": "COUPLE",
+      "gloss": "Two people in a romantic relationship."
+    },
+    {
+      "word": "COURT",
+      "gloss": "Place where legal cases are heard."
+    },
+    {
+      "word": "COVER",
+      "gloss": "place something over to hide or protect"
+    },
+    {
+      "word": "CRAZY",
+      "gloss": "Behaving in an irrational or wild manner."
+    },
+    {
+      "word": "CREAM",
+      "gloss": "thick white part of milk"
+    },
+    {
+      "word": "CREATE",
+      "gloss": "To make something new.",
       "synonyms": [
-        "pupil",
-        "learner"
+        "produce",
+        "invent"
       ]
     },
     {
-      "word": "BREAKFAST",
-      "gloss": "The first meal of the day.",
+      "word": "CREATIVE",
+      "gloss": "Able to produce original ideas or art."
+    },
+    {
+      "word": "CREATIVITY",
+      "gloss": "Skill of making new and original things."
+    },
+    {
+      "word": "CREATURE",
+      "gloss": "Any living being, often an animal."
+    },
+    {
+      "word": "CREDIT",
+      "gloss": "Permission to pay later for goods."
+    },
+    {
+      "word": "CRICKET",
+      "gloss": "Outdoor bat-and-ball sport with wickets."
+    },
+    {
+      "word": "CRIME",
+      "gloss": "Act that breaks the law."
+    },
+    {
+      "word": "CRISP",
+      "gloss": "Firm, dry, and easily broken."
+    },
+    {
+      "word": "CRITICIZE",
+      "gloss": "Point out faults or shortcomings."
+    },
+    {
+      "word": "CROSS",
+      "gloss": "Move from one side to the other."
+    },
+    {
+      "word": "CROWD",
+      "gloss": "Large group of people gathered together."
+    },
+    {
+      "word": "CROWDED",
+      "gloss": "Filled with too many people or things."
+    },
+    {
+      "word": "CROWN",
+      "gloss": "Ornate headwear worn by royalty."
+    },
+    {
+      "word": "CRUISE",
+      "gloss": "Pleasure voyage on a large ship."
+    },
+    {
+      "word": "CRY",
+      "gloss": "shed tears from sadness or pain"
+    },
+    {
+      "word": "CUPBOARD",
+      "gloss": "Cabinet for storing dishes and food."
+    },
+    {
+      "word": "CURRY",
+      "gloss": "Spiced sauce-based dish from South Asia."
+    },
+    {
+      "word": "CURSE",
+      "gloss": "Express anger with offensive words."
+    },
+    {
+      "word": "CUSTOM",
+      "gloss": "Traditional practice of a community."
+    },
+    {
+      "word": "CUSTOMER",
+      "gloss": "A person who buys goods or services.",
       "synonyms": [
-        "morning meal"
+        "client",
+        "buyer"
       ]
     },
     {
-      "word": "DINNER",
-      "gloss": "The main meal in the evening.",
+      "word": "CYCLING",
+      "gloss": "Riding a bicycle as activity or sport."
+    },
+    {
+      "word": "DAILY",
+      "gloss": "Happening or done every day."
+    },
+    {
+      "word": "DAM",
+      "gloss": "Barrier built to hold back water."
+    },
+    {
+      "word": "DANCER",
+      "gloss": "Person who moves rhythmically to music."
+    },
+    {
+      "word": "DANGER",
+      "gloss": "Situation that may cause harm."
+    },
+    {
+      "word": "DANGEROUS",
+      "gloss": "Likely to cause injury or damage."
+    },
+    {
+      "word": "DAYLIGHT",
+      "gloss": "Natural light from the sun during daytime."
+    },
+    {
+      "word": "DEAL",
+      "gloss": "Agreement or arrangement between parties."
+    },
+    {
+      "word": "DEBATE",
+      "gloss": "Formal discussion of opposing views."
+    },
+    {
+      "word": "DECIDE",
+      "gloss": "Make a choice after consideration."
+    },
+    {
+      "word": "DEEP",
+      "gloss": "Extending far down from the surface."
+    },
+    {
+      "word": "DEEPLY",
+      "gloss": "To a great depth or extent."
+    },
+    {
+      "word": "DEGREE",
+      "gloss": "Unit measuring temperature or angle."
+    },
+    {
+      "word": "DELAY",
+      "gloss": "Postpone until a later time."
+    },
+    {
+      "word": "DENTIST",
+      "gloss": "Doctor who treats teeth and gums."
+    },
+    {
+      "word": "DEPEND",
+      "gloss": "Rely on someone or something."
+    },
+    {
+      "word": "DESERT",
+      "gloss": "Dry, barren area with little rain."
+    },
+    {
+      "word": "DESSERT",
+      "gloss": "Sweet course served at the end of a meal."
+    },
+    {
+      "word": "DESTROY",
+      "gloss": "Damage something so badly it no longer exists."
+    },
+    {
+      "word": "DETAIL",
+      "gloss": "Small fact or item of information."
+    },
+    {
+      "word": "DEVELOP",
+      "gloss": "To grow or build something over time.",
       "synonyms": [
-        "supper",
-        "feast"
+        "expand",
+        "evolve"
       ]
     },
     {
-      "word": "WEATHER",
-      "gloss": "Rain, sun, wind, and sky conditions outside.",
+      "word": "DEVELOPED",
+      "gloss": "Advanced in economic or industrial terms."
+    },
+    {
+      "word": "DIAMOND",
+      "gloss": "Hard, brilliant precious stone."
+    },
+    {
+      "word": "DIARY",
+      "gloss": "Personal book for daily written records."
+    },
+    {
+      "word": "DIET",
+      "gloss": "Regular food and drink habits."
+    },
+    {
+      "word": "DIFFICULTY",
+      "gloss": "Problem that makes something hard."
+    },
+    {
+      "word": "DINOSAUR",
+      "gloss": "Extinct reptile from prehistoric times."
+    },
+    {
+      "word": "DIRECT",
+      "gloss": "Straight, without turning or stopping."
+    },
+    {
+      "word": "DIRECTION",
+      "gloss": "The way one moves or faces to reach a place."
+    },
+    {
+      "word": "DIRECTOR",
+      "gloss": "Person who leads and guides a film or company."
+    },
+    {
+      "word": "DISAGREE",
+      "gloss": "To hold a different opinion from someone else."
+    },
+    {
+      "word": "DISAPPEAR",
+      "gloss": "To go out of sight or cease to exist."
+    },
+    {
+      "word": "DISCO",
+      "gloss": "A place where people dance to recorded music."
+    },
+    {
+      "word": "DISCOVER",
+      "gloss": "To find something that was unknown before."
+    },
+    {
+      "word": "DISCUSSION",
+      "gloss": "An exchange of ideas or opinions between people."
+    },
+    {
+      "word": "DISHONEST",
+      "gloss": "Not telling the truth or acting fairly."
+    },
+    {
+      "word": "DISLIKE",
+      "gloss": "To feel that one does not enjoy something."
+    },
+    {
+      "word": "DISPLAY",
+      "gloss": "To show something so others can see it."
+    },
+    {
+      "word": "DISTURB",
+      "gloss": "To interrupt someone or break their calm."
+    },
+    {
+      "word": "DIVIDE",
+      "gloss": "To split something into parts or groups."
+    },
+    {
+      "word": "DIZZY",
+      "gloss": "Feeling that everything around is spinning."
+    },
+    {
+      "word": "DOUBLE",
+      "gloss": "Twice the usual size, amount, or number."
+    },
+    {
+      "word": "DOUBT",
+      "gloss": "A feeling of uncertainty about something."
+    },
+    {
+      "word": "DOWNLOAD",
+      "gloss": "To copy data from the internet to a device."
+    },
+    {
+      "word": "DOWNSTAIRS",
+      "gloss": "On or toward a lower floor of a building."
+    },
+    {
+      "word": "DOWNTOWN",
+      "gloss": "The central business area of a city."
+    },
+    {
+      "word": "DRAW",
+      "gloss": "make a picture with a pen or pencil"
+    },
+    {
+      "word": "DRAWER",
+      "gloss": "A sliding box inside a desk or cabinet."
+    },
+    {
+      "word": "DRAWING",
+      "gloss": "A picture made with a pencil or pen."
+    },
+    {
+      "word": "DREAM",
+      "gloss": "mental images during sleep"
+    },
+    {
+      "word": "DRESS",
+      "gloss": "put on clothes"
+    },
+    {
+      "word": "DRESSED",
+      "gloss": "Wearing clothes of a certain style or type."
+    },
+    {
+      "word": "DRILL",
+      "gloss": "A tool that makes holes in hard surfaces."
+    },
+    {
+      "word": "DRIVE",
+      "gloss": "operate a vehicle"
+    },
+    {
+      "word": "DROP",
+      "gloss": "let something fall"
+    },
+    {
+      "word": "DRUGSTORE",
+      "gloss": "A shop that sells medicines and daily items."
+    },
+    {
+      "word": "DRY",
+      "gloss": "free of moisture"
+    },
+    {
+      "word": "DUCK",
+      "gloss": "A water bird with a flat beak and webbed feet."
+    },
+    {
+      "word": "DUST",
+      "gloss": "Fine dry powder that settles on surfaces."
+    },
+    {
+      "word": "EARLY",
+      "gloss": "before the usual time"
+    },
+    {
+      "word": "EARN",
+      "gloss": "To receive money in return for work done."
+    },
+    {
+      "word": "EARRING",
+      "gloss": "A small ornament worn on the ear lobe."
+    },
+    {
+      "word": "EARTH",
+      "gloss": "The planet on which humans live."
+    },
+    {
+      "word": "EARTHQUAKE",
+      "gloss": "A sudden shaking of the ground caused by movement inside the earth."
+    },
+    {
+      "word": "EASILY",
+      "gloss": "Without difficulty or effort."
+    },
+    {
+      "word": "EAST",
+      "gloss": "The direction where the sun rises."
+    },
+    {
+      "word": "EDITOR",
+      "gloss": "Person who prepares text for publication."
+    },
+    {
+      "word": "EDUCATION",
+      "gloss": "The process of learning and teaching."
+    },
+    {
+      "word": "EFFECT",
+      "gloss": "A change that results from an action."
+    },
+    {
+      "word": "EFFORT",
+      "gloss": "Hard work you put into a task.",
       "synonyms": [
-        "climate",
-        "conditions"
+        "exertion",
+        "try"
       ]
     },
     {
-      "word": "CLOUD",
-      "gloss": "A white or grey mass floating in the sky.",
+      "word": "ELDERLY",
+      "gloss": "Describing people who are old in age."
+    },
+    {
+      "word": "ELECTRIC",
+      "gloss": "Powered by or relating to electricity."
+    },
+    {
+      "word": "ELEPHANT",
+      "gloss": "A very large land mammal with a trunk."
+    },
+    {
+      "word": "ELEVATOR",
+      "gloss": "A machine that carries people between floors."
+    },
+    {
+      "word": "ELSEWHERE",
+      "gloss": "In or to another place."
+    },
+    {
+      "word": "EMAIL",
+      "gloss": "electronic message"
+    },
+    {
+      "word": "EMERGENCY",
+      "gloss": "A sudden serious situation needing quick action."
+    },
+    {
+      "word": "EMPTY",
+      "gloss": "Containing nothing inside."
+    },
+    {
+      "word": "ENCOURAGE",
+      "gloss": "To give support or confidence to someone."
+    },
+    {
+      "word": "END",
+      "gloss": "final point"
+    },
+    {
+      "word": "ENDANGERED",
+      "gloss": "At risk of disappearing forever."
+    },
+    {
+      "word": "ENDING",
+      "gloss": "The final part of a story or event."
+    },
+    {
+      "word": "ENERGETIC",
+      "gloss": "Full of energy and lively activity."
+    },
+    {
+      "word": "ENORMOUS",
+      "gloss": "Extremely large in size or amount."
+    },
+    {
+      "word": "ENTER",
+      "gloss": "To go or come into a place."
+    },
+    {
+      "word": "ENTRANCE",
+      "gloss": "The place where one goes into a building."
+    },
+    {
+      "word": "ENVELOPE",
+      "gloss": "A flat paper cover for a letter."
+    },
+    {
+      "word": "ENVY",
+      "gloss": "A feeling of wanting what someone else has."
+    },
+    {
+      "word": "EPISODE",
+      "gloss": "One part of a series or story."
+    },
+    {
+      "word": "ERROR",
+      "gloss": "A mistake or something done incorrectly."
+    },
+    {
+      "word": "ESCALATOR",
+      "gloss": "Moving stairs that carry people up or down."
+    },
+    {
+      "word": "ESCAPE",
+      "gloss": "To get away from danger or confinement."
+    },
+    {
+      "word": "ESPECIALLY",
+      "gloss": "Particularly or more than usual."
+    },
+    {
+      "word": "ESSAY",
+      "gloss": "A short piece of writing on a topic."
+    },
+    {
+      "word": "ESTABLISH",
+      "gloss": "To set up or create something lasting."
+    },
+    {
+      "word": "EURO",
+      "gloss": "The basic money unit used in many European countries."
+    },
+    {
+      "word": "EVEN",
+      "gloss": "Flat and level; also equally balanced."
+    },
+    {
+      "word": "EVIDENCE",
+      "gloss": "Facts or signs that show something is true."
+    },
+    {
+      "word": "EXACTLY",
+      "gloss": "matches something without any difference"
+    },
+    {
+      "word": "EXAM",
+      "gloss": "test that checks knowledge or skill"
+    },
+    {
+      "word": "EXCHANGE",
+      "gloss": "give one thing and receive another"
+    },
+    {
+      "word": "EXERCISE",
+      "gloss": "Physical activity that keeps the body fit.",
       "synonyms": [
-        "vapour",
-        "mist"
+        "workout",
+        "training"
       ]
     },
     {
-      "word": "RIVER",
-      "gloss": "A large stream of water that flows to the sea.",
+      "word": "EXHIBITION",
+      "gloss": "public display of items or art"
+    },
+    {
+      "word": "EXIST",
+      "gloss": "be real or present somewhere"
+    },
+    {
+      "word": "EXPECT",
+      "gloss": "believe something will happen"
+    },
+    {
+      "word": "EXPERIENCE",
+      "gloss": "Knowledge you gain by doing something.",
       "synonyms": [
-        "stream",
-        "waterway"
+        "practice",
+        "background"
       ]
     },
     {
-      "word": "MOUNTAIN",
-      "gloss": "Very high land that rises above the country around it.",
-      "synonyms": [
-        "peak",
-        "summit"
-      ]
+      "word": "EXPERT",
+      "gloss": "person with great skill or knowledge"
     },
     {
-      "word": "BEACH",
-      "gloss": "Sand or stones beside the sea.",
-      "synonyms": [
-        "shore",
-        "coast"
-      ]
+      "word": "EXPLAIN",
+      "gloss": "make something clear or easy to understand"
     },
     {
-      "word": "TICKET",
-      "gloss": "A paper or pass that lets you travel or enter.",
-      "synonyms": [
-        "pass",
-        "token"
-      ]
+      "word": "EXPLORE",
+      "gloss": "travel through a place to learn about it"
     },
     {
-      "word": "STATION",
-      "gloss": "A place where trains or buses stop.",
-      "synonyms": [
-        "depot",
-        "terminal"
-      ]
+      "word": "EXPRESS",
+      "gloss": "show a thought or feeling"
     },
     {
-      "word": "AIRPORT",
-      "gloss": "A place where planes take off and land.",
-      "synonyms": [
-        "airfield",
-        "terminal"
-      ]
+      "word": "EXPRESSION",
+      "gloss": "look on the face that shows feeling"
     },
     {
-      "word": "HOLIDAY",
-      "gloss": "Time away from work or school for rest.",
-      "synonyms": [
-        "vacation",
-        "break"
-      ]
+      "word": "EXTRA",
+      "gloss": "more than what is usual or needed"
     },
     {
-      "word": "WEEKEND",
-      "gloss": "Saturday and Sunday.",
-      "synonyms": [
-        "days off"
-      ]
+      "word": "EXTREMELY",
+      "gloss": "to a very great degree"
     },
     {
-      "word": "MORNING",
-      "gloss": "The early part of the day after night.",
-      "synonyms": [
-        "dawn hours",
-        "forenoon"
-      ]
+      "word": "FACE",
+      "gloss": "front of the head"
     },
     {
-      "word": "EVENING",
-      "gloss": "The later part of the day before night.",
-      "synonyms": [
-        "dusk",
-        "twilight"
-      ]
+      "word": "FACT",
+      "gloss": "something that is true and can be proved"
     },
     {
-      "word": "ALWAYS",
-      "gloss": "At every time; without exception.",
-      "synonyms": [
-        "forever",
-        "constantly"
-      ]
+      "word": "FAIL",
+      "gloss": "not succeed in doing something"
     },
     {
-      "word": "NEVER",
-      "gloss": "Not at any time.",
-      "synonyms": [
-        "not ever"
-      ]
+      "word": "FAIRLY",
+      "gloss": "to a reasonable degree"
     },
     {
-      "word": "OFTEN",
-      "gloss": "Many times; frequently.",
-      "synonyms": [
-        "frequently",
-        "regularly"
-      ]
+      "word": "FALL",
+      "gloss": "drop down from a higher place"
     },
     {
-      "word": "BECAUSE",
-      "gloss": "For the reason that.",
-      "synonyms": [
-        "since",
-        "as"
-      ]
+      "word": "FAMILIAR",
+      "gloss": "known or recognized from before"
     },
     {
-      "word": "BEFORE",
-      "gloss": "Earlier than something else.",
-      "synonyms": [
-        "earlier",
-        "prior"
-      ]
+      "word": "FANCY",
+      "gloss": "decorated or special in an attractive way"
     },
     {
-      "word": "AFTER",
-      "gloss": "Later than something else.",
-      "synonyms": [
-        "later",
-        "following"
-      ]
+      "word": "FANTASTIC",
+      "gloss": "extremely good or enjoyable"
     },
     {
-      "word": "ENOUGH",
-      "gloss": "As much as you need.",
-      "synonyms": [
-        "sufficient",
-        "adequate"
-      ]
+      "word": "FAR",
+      "gloss": "at a great distance"
     },
     {
-      "word": "ALREADY",
-      "gloss": "Before now; sooner than expected.",
-      "synonyms": [
-        "previously",
-        "by now"
-      ]
+      "word": "FARE",
+      "gloss": "money paid to travel on a vehicle"
     },
     {
-      "word": "IMPORTANT",
-      "gloss": "Having great meaning or value.",
-      "synonyms": [
-        "significant",
-        "major"
-      ]
+      "word": "FASHION",
+      "gloss": "popular style of clothes at a time"
     },
     {
-      "word": "DIFFERENT",
-      "gloss": "Not the same as something else.",
-      "synonyms": [
-        "unlike",
-        "distinct"
-      ]
+      "word": "FAULT",
+      "gloss": "mistake or something wrong"
     },
     {
-      "word": "DIFFICULT",
-      "gloss": "Hard to do or understand.",
-      "synonyms": [
-        "hard",
-        "tough"
-      ]
+      "word": "FAVOR",
+      "gloss": "act of kindness or help"
     },
     {
-      "word": "EXPENSIVE",
-      "gloss": "Costing a lot of money.",
-      "synonyms": [
-        "costly",
-        "pricey"
-      ]
+      "word": "FEAR",
+      "gloss": "feeling of being afraid"
     },
     {
-      "word": "TIRED",
-      "gloss": "Needing rest; low on energy.",
-      "synonyms": [
-        "weary",
-        "exhausted"
-      ]
+      "word": "FEATHER",
+      "gloss": "soft light covering on a bird"
     },
     {
-      "word": "HUNGRY",
-      "gloss": "Wanting food.",
-      "synonyms": [
-        "starving",
-        "peckish"
-      ]
+      "word": "FEATURE",
+      "gloss": "important or noticeable part"
     },
     {
-      "word": "PROBLEM",
-      "gloss": "Something that is wrong and needs a fix.",
-      "synonyms": [
-        "issue",
-        "trouble"
-      ]
+      "word": "FEE",
+      "gloss": "money paid for a service"
     },
     {
-      "word": "QUESTION",
-      "gloss": "Something you ask to get information.",
-      "synonyms": [
-        "query",
-        "inquiry"
-      ]
-    },
-    {
-      "word": "MESSAGE",
-      "gloss": "Information sent from one person to another.",
-      "synonyms": [
-        "note",
-        "dispatch"
-      ]
-    },
-    {
-      "word": "LIBRARY",
-      "gloss": "A place with books you can borrow.",
-      "synonyms": [
-        "archive",
-        "reading room"
-      ]
-    },
-    {
-      "word": "CINEMA",
-      "gloss": "A place where people watch films.",
-      "synonyms": [
-        "movie house",
-        "theatre"
-      ]
-    },
-    {
-      "word": "TRAVEL",
-      "gloss": "To go from one place to another.",
-      "synonyms": [
-        "journey",
-        "trip"
-      ]
-    },
-    {
-      "word": "REMEMBER",
-      "gloss": "To keep something in your mind.",
-      "synonyms": [
-        "recall",
-        "recollect"
-      ]
-    },
-    {
-      "word": "UNDERSTAND",
-      "gloss": "To know the meaning of something.",
-      "synonyms": [
-        "grasp",
-        "follow"
-      ]
-    },
-    {
-      "word": "PRACTICE",
-      "gloss": "Doing something again to get better.",
-      "synonyms": [
-        "drill",
-        "rehearsal"
-      ]
-    },
-    {
-      "word": "CHANGE",
-      "gloss": "To make something different, or coins.",
-      "synonyms": [
-        "alter",
-        "shift"
-      ]
-    },
-    {
-      "word": "START",
-      "gloss": "To begin something.",
-      "synonyms": [
-        "begin",
-        "commence"
-      ]
-    },
-    {
-      "word": "FINISH",
-      "gloss": "To bring something to an end.",
-      "synonyms": [
-        "complete",
-        "end"
-      ]
-    },
-    {
-      "word": "WAIT",
-      "gloss": "To stay until something happens.",
-      "synonyms": [
-        "remain",
-        "hold on"
-      ]
-    },
-    {
-      "word": "BRING",
-      "gloss": "To take something with you to a place.",
-      "synonyms": [
-        "fetch",
-        "carry"
-      ]
+      "word": "FEEL",
+      "gloss": "experience a sensation"
     }
   ]
 }

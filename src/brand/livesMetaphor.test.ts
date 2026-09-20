@@ -81,12 +81,14 @@ describe('Uma polish assets', () => {
     )
   })
 
-  test('StreakChip has no fire emoji', async () => {
+  test('StreakChip shows calm fire streak symbol', async () => {
     const src = await Bun.file(
       path.join(REPO, 'src/components/StreakChip.tsx'),
     ).text()
-    expect(src).not.toContain('🔥')
-    expect(src).toContain('Streak')
+    expect(src).toContain('🔥')
+    expect(src).toContain('aria-hidden')
+    expect(src).toMatch(/aria-label=\{\`Streak \$\{count\}\`\}/)
+    expect(src).not.toMatch(/aria-label=\{[^}]*fire/)
   })
 
   test('Play spinner opts out of spin under reduced motion', async () => {

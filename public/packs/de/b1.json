@@ -1,21 +1,61 @@
 {
-  "version": 1,
+  "version": 2,
   "lang": "de",
   "cefr": "b1",
   "license": "CC0-1.0 (curated learner lemmas; glosses original to Hiato)",
   "attribution": [
     "Hiato DE B1 learner pack — original glosses and synonym chips (2026).",
-    "Lemmas selected for CEFR B1 classroom frequency; not a verbatim dump of any proprietary list."
+    "Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).",
+    "Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
-      "word": "MÖGLICH",
-      "gloss": "Etwas, das getan oder geschehen kann.",
+      "word": "GOTT",
+      "gloss": "höchstes Wesen vieler Religionen"
+    },
+    {
+      "word": "LIEBE",
+      "gloss": "starkes Gefühl der Zuneigung"
+    },
+    {
+      "word": "MUSIK",
+      "gloss": "Töne und Klänge in geordneter Form"
+    },
+    {
+      "word": "FALL",
+      "gloss": "Ereignis oder Situation"
+    },
+    {
+      "word": "GRUND",
+      "gloss": "Warum etwas geschieht oder gilt.",
       "synonyms": [
-        "machbar",
-        "denkbar",
-        "realisierbar"
+        "Ursache",
+        "Motiv"
       ]
+    },
+    {
+      "word": "RUHE",
+      "gloss": "Zustand ohne Lärm oder Bewegung"
+    },
+    {
+      "word": "MISS",
+      "gloss": "junge Frau oder Fräulein"
+    },
+    {
+      "word": "CHANCE",
+      "gloss": "günstige Gelegenheit"
+    },
+    {
+      "word": "WAHRHEIT",
+      "gloss": "das, was wirklich ist"
+    },
+    {
+      "word": "SPAß",
+      "gloss": "freudige Unterhaltung"
+    },
+    {
+      "word": "KRIEG",
+      "gloss": "bewaffnete Auseinandersetzung zwischen Staaten"
     },
     {
       "word": "GEFÜHL",
@@ -27,117 +67,224 @@
       ]
     },
     {
-      "word": "WÖRTERBUCH",
-      "gloss": "Ein Buch mit Wörtern und ihren Bedeutungen.",
-      "synonyms": [
-        "Lexikon",
-        "Nachschlagewerk"
-      ]
+      "word": "TYP",
+      "gloss": "Mensch männlichen Geschlechts"
     },
     {
-      "word": "ÜBERRASCHUNG",
-      "gloss": "Etwas Unerwartetes, das erschreckt oder erfreut.",
-      "synonyms": [
-        "Wunder",
-        "Knüller",
-        "Schock"
-      ]
+      "word": "SORGE",
+      "gloss": "besorgtes Gefühl"
     },
     {
-      "word": "VERSTÄNDNIS",
-      "gloss": "Fähigkeit, Sinn zu erfassen oder Mitgefühl zu zeigen.",
-      "synonyms": [
-        "Einsicht",
-        "Begriff",
-        "Mitgefühl"
-      ]
+      "word": "ELTERN",
+      "gloss": "Vater und Mutter"
     },
     {
-      "word": "MEINUNG",
-      "gloss": "Was jemand zu einem Thema denkt.",
-      "synonyms": [
-        "Ansicht",
-        "Standpunkt"
-      ]
+      "word": "HERZ",
+      "gloss": "zentrales Organ des Blutkreislaufs"
     },
     {
-      "word": "RATSCHLAG",
-      "gloss": "Ein Vorschlag, was jemand tun sollte.",
-      "synonyms": [
-        "Tipp",
-        "Hinweis"
-      ]
+      "word": "KÖNIG",
+      "gloss": "oberster Herrscher eines Königreichs"
     },
     {
-      "word": "ERFAHRUNG",
-      "gloss": "Wissen, das man durch Tun gewinnt.",
-      "synonyms": [
-        "Praxis",
-        "Kenntnis"
-      ]
+      "word": "LUFT",
+      "gloss": "unsichtbares Gasgemisch der Atmosphäre"
     },
     {
-      "word": "KULTUR",
-      "gloss": "Gemeinsame Bräuche, Kunst und Lebensart.",
-      "synonyms": [
-        "Erbe",
-        "Sitten"
-      ]
+      "word": "ONKEL",
+      "gloss": "Bruder eines Elternteils"
     },
     {
-      "word": "GESELLSCHAFT",
-      "gloss": "Menschen, die zusammen als Gemeinschaft leben.",
-      "synonyms": [
-        "Gemeinschaft",
-        "Öffentlichkeit"
-      ]
+      "word": "SINN",
+      "gloss": "Bedeutung oder Zweck"
     },
     {
-      "word": "UMWELT",
-      "gloss": "Die natürliche Welt um uns.",
-      "synonyms": [
-        "Natur",
-        "Umfeld"
-      ]
+      "word": "WAHL",
+      "gloss": "Entscheidung zwischen Möglichkeiten"
     },
     {
-      "word": "KLIMA",
-      "gloss": "Typisches Wetter einer Region über Jahre.",
-      "synonyms": [
-        "Witterung"
-      ]
+      "word": "BEWEIS",
+      "gloss": "Nachweis der Richtigkeit"
     },
     {
-      "word": "ENERGIE",
-      "gloss": "Kraft, die Dinge bewegt oder antreibt.",
-      "synonyms": [
-        "Kraft",
-        "Power"
-      ]
+      "word": "ZUKUNFT",
+      "gloss": "Zeit nach der Gegenwart"
     },
     {
-      "word": "GESUNDHEIT",
-      "gloss": "Körperliches und seelisches Wohlbefinden.",
-      "synonyms": [
-        "Wohl",
-        "Fitness"
-      ]
+      "word": "HIMMEL",
+      "gloss": "Raum über der Erde"
     },
     {
-      "word": "MEDIZIN",
-      "gloss": "Ein Mittel gegen Krankheit, oder die Heilkunde.",
-      "synonyms": [
-        "Arznei",
-        "Heilmittel"
-      ]
+      "word": "GEFÄNGNIS",
+      "gloss": "Ort für Inhaftierte"
     },
     {
-      "word": "GEWOHNHEIT",
-      "gloss": "Etwas, das man oft und fast automatisch tut.",
-      "synonyms": [
-        "Brauch",
-        "Alltag"
-      ]
+      "word": "OPFER",
+      "gloss": "Person, die Schaden erleidet"
+    },
+    {
+      "word": "VERSUCH",
+      "gloss": "Anstrengung, etwas zu erreichen"
+    },
+    {
+      "word": "GEDANKE",
+      "gloss": "Vorstellung im Bewusstsein"
+    },
+    {
+      "word": "BODEN",
+      "gloss": "unterste Fläche eines Raums"
+    },
+    {
+      "word": "SICHERHEIT",
+      "gloss": "Zustand ohne Gefahr"
+    },
+    {
+      "word": "STIMME",
+      "gloss": "Laut, den jemand hervorbringt"
+    },
+    {
+      "word": "VERZEIHUNG",
+      "gloss": "Aufhebung eines Vorwurfs"
+    },
+    {
+      "word": "BEZIEHUNG",
+      "gloss": "Verbindung zwischen Personen"
+    },
+    {
+      "word": "KAMPF",
+      "gloss": "Auseinandersetzung mit körperlichem Einsatz"
+    },
+    {
+      "word": "NÄHE",
+      "gloss": "geringe Entfernung"
+    },
+    {
+      "word": "PUNKT",
+      "gloss": "kleine runde Markierung"
+    },
+    {
+      "word": "MEISTER",
+      "gloss": "Person mit großer Fertigkeit"
+    },
+    {
+      "word": "POLIZIST",
+      "gloss": "Angehöriger der Polizei"
+    },
+    {
+      "word": "GEFAHR",
+      "gloss": "Zustand drohenden Schadens"
+    },
+    {
+      "word": "AUGENBLICK",
+      "gloss": "sehr kurzer Zeitabschnitt"
+    },
+    {
+      "word": "VERBINDUNG",
+      "gloss": "Verknüpfung zwischen Dingen"
+    },
+    {
+      "word": "BEWEGUNG",
+      "gloss": "Veränderung der Lage"
+    },
+    {
+      "word": "SCHRITT",
+      "gloss": "einzelne Fortbewegung mit einem Fuß"
+    },
+    {
+      "word": "GESETZ",
+      "gloss": "verbindliche Rechtsnorm"
+    },
+    {
+      "word": "ROLLE",
+      "gloss": "Aufgabe oder Funktion"
+    },
+    {
+      "word": "KONTROLLE",
+      "gloss": "Überwachung und Lenkung"
+    },
+    {
+      "word": "TANTE",
+      "gloss": "Schwester eines Elternteils"
+    },
+    {
+      "word": "RICHTUNG",
+      "gloss": "Verlauf oder Verlaufslinie"
+    },
+    {
+      "word": "LAGE",
+      "gloss": "Beschreibt, wie etwas gerade steht oder liegt."
+    },
+    {
+      "word": "ERINNERUNG",
+      "gloss": "Bild oder Gedanke, der aus der Vergangenheit kommt."
+    },
+    {
+      "word": "HOFFNUNG",
+      "gloss": "Gefühl, dass etwas Gutes noch passieren kann."
+    },
+    {
+      "word": "LISTE",
+      "gloss": "Aufgeschriebene Reihe von Dingen oder Namen."
+    },
+    {
+      "word": "WUNDER",
+      "gloss": "Ereignis, das man kaum erklären kann."
+    },
+    {
+      "word": "BOOT",
+      "gloss": "Kleines Wasserfahrzeug zum Fahren auf Flüssen oder Seen."
+    },
+    {
+      "word": "BERICHT",
+      "gloss": "Mündliche oder schriftliche Schilderung eines Vorgangs."
+    },
+    {
+      "word": "NASE",
+      "gloss": "Teil des Gesichts, mit dem man riecht."
+    },
+    {
+      "word": "GOLD",
+      "gloss": "Schweres, gelbes Edelmetall."
+    },
+    {
+      "word": "GEBÄUDE",
+      "gloss": "Bauwerk mit Wänden und Dach."
+    },
+    {
+      "word": "PROFESSOR",
+      "gloss": "Lehrperson an einer Hochschule."
+    },
+    {
+      "word": "GEHEIMNIS",
+      "gloss": "Wissen, das nur wenige kennen."
+    },
+    {
+      "word": "LUST",
+      "gloss": "Freude oder Verlangen, etwas zu tun."
+    },
+    {
+      "word": "HEIM",
+      "gloss": "Ort, an dem man wohnt."
+    },
+    {
+      "word": "STEIN",
+      "gloss": "Hartes Stück aus Gestein."
+    },
+    {
+      "word": "ZEICHEN",
+      "gloss": "Sichtbares Merkmal oder Symbol."
+    },
+    {
+      "word": "RICHTER",
+      "gloss": "Person, die vor Gericht Urteile spricht."
+    },
+    {
+      "word": "GEGEND",
+      "gloss": "Bestimmter Bereich einer Landschaft."
+    },
+    {
+      "word": "SYSTEM",
+      "gloss": "Geordnetes Gefüge aus Teilen."
     },
     {
       "word": "ERFOLG",
@@ -148,68 +295,916 @@
       ]
     },
     {
-      "word": "ANSTRENGUNG",
-      "gloss": "Harte Arbeit für eine Aufgabe.",
+      "word": "SPUR",
+      "gloss": "Sichtbare Linie oder Abdruck, der etwas hinterlässt."
+    },
+    {
+      "word": "FREUDE",
+      "gloss": "Gefühl der Zufriedenheit und des Glücks."
+    },
+    {
+      "word": "EHEMANN",
+      "gloss": "Mann, mit dem eine Frau verheiratet ist."
+    },
+    {
+      "word": "TOR",
+      "gloss": "Durchgang in einer Mauer oder einem Zaun."
+    },
+    {
+      "word": "EIS",
+      "gloss": "Gefrorenes Wasser."
+    },
+    {
+      "word": "NEUIGKEIT",
+      "gloss": "Aktuelle Information, die man noch nicht kannte."
+    },
+    {
+      "word": "RISIKO",
+      "gloss": "Mögliche Gefahr oder Verlust."
+    },
+    {
+      "word": "FREIHEIT",
+      "gloss": "Zustand, in dem man ohne Zwang handeln kann."
+    },
+    {
+      "word": "AUFTRAG",
+      "gloss": "Anweisung, eine Aufgabe zu erledigen."
+    },
+    {
+      "word": "OPERATION",
+      "gloss": "Geplanter medizinischer Eingriff."
+    },
+    {
+      "word": "ENERGIE",
+      "gloss": "Kraft, die Dinge bewegt oder antreibt.",
       "synonyms": [
-        "Mühe",
-        "Einsatz"
+        "Kraft",
+        "Power"
       ]
     },
     {
-      "word": "HERAUSFORDERUNG",
-      "gloss": "Eine schwere Aufgabe, die prüft.",
+      "word": "SITZ",
+      "gloss": "Platz, auf dem man sitzt."
+    },
+    {
+      "word": "PATIENT",
+      "gloss": "Person, die ärztlich behandelt wird."
+    },
+    {
+      "word": "WAND",
+      "gloss": "Senkrechte Fläche eines Raums."
+    },
+    {
+      "word": "ZEITPUNKT",
+      "gloss": "Genauer Moment in der Zeit."
+    },
+    {
+      "word": "DRUCK",
+      "gloss": "Kraft, die auf etwas wirkt, oder dringende Forderung.",
       "synonyms": [
-        "Probe",
-        "Prüfung"
+        "Last",
+        "Zwang"
       ]
     },
     {
-      "word": "ENTSCHEIDUNG",
-      "gloss": "Eine Wahl nach dem Nachdenken.",
+      "word": "HUT",
+      "gloss": "Kopfbedeckung mit Krempe."
+    },
+    {
+      "word": "MUT",
+      "gloss": "Bereitschaft, trotz Angst etwas zu tun."
+    },
+    {
+      "word": "KNIE",
+      "gloss": "Gelenk zwischen Ober- und Unterschenkel."
+    },
+    {
+      "word": "FOLGE",
+      "gloss": "Das, was auf etwas anderes folgt."
+    },
+    {
+      "word": "VIDEO",
+      "gloss": "Aufgezeichnete bewegte Bilder."
+    },
+    {
+      "word": "SZENE",
+      "gloss": "Abschnitt eines Films oder Theaterstücks."
+    },
+    {
+      "word": "KRAFT",
+      "gloss": "Fähigkeit, etwas zu bewegen oder zu leisten."
+    },
+    {
+      "word": "ZUFALL",
+      "gloss": "Ungeplantes Zusammentreffen von Ereignissen."
+    },
+    {
+      "word": "HELD",
+      "gloss": "Person, die mutig oder vorbildlich handelt."
+    },
+    {
+      "word": "KUSS",
+      "gloss": "Liebkosung mit den Lippen."
+    },
+    {
+      "word": "FORM",
+      "gloss": "Äußere Gestalt eines Gegenstands."
+    },
+    {
+      "word": "RUNDE",
+      "gloss": "Einzelner Durchgang bei einem Wettbewerb."
+    },
+    {
+      "word": "DIEB",
+      "gloss": "Person, die etwas stiehlt."
+    },
+    {
+      "word": "MITGLIED",
+      "gloss": "Person, die zu einer Gruppe gehört."
+    },
+    {
+      "word": "ABSICHT",
+      "gloss": "Bewusster Plan oder Wille."
+    },
+    {
+      "word": "NATUR",
+      "gloss": "Gesamtheit der nicht vom Menschen geschaffenen Welt."
+    },
+    {
+      "word": "KISTE",
+      "gloss": "Behälter aus Holz oder Pappe."
+    },
+    {
+      "word": "ERKLÄRUNG",
+      "gloss": "Aussage, die etwas verständlich macht."
+    },
+    {
+      "word": "STREIT",
+      "gloss": "Heftige Auseinandersetzung mit Worten."
+    },
+    {
+      "word": "FÄHIGKEIT",
+      "gloss": "Können, eine Tätigkeit gut auszuführen."
+    },
+    {
+      "word": "ZUSTAND",
+      "gloss": "Beschaffenheit oder Verfassung von etwas."
+    },
+    {
+      "word": "KARRIERE",
+      "gloss": "Beruflicher Werdegang einer Person."
+    },
+    {
+      "word": "GANG",
+      "gloss": "Schrittweise Bewegung beim Gehen."
+    },
+    {
+      "word": "DIENST",
+      "gloss": "Tätigkeit, die man für andere ausübt."
+    },
+    {
+      "word": "DETAIL",
+      "gloss": "Einzelheit oder kleiner Teil einer Sache."
+    },
+    {
+      "word": "DIREKTOR",
+      "gloss": "Leitende Person einer Institution."
+    },
+    {
+      "word": "SCHUTZ",
+      "gloss": "Maßnahme, die vor Schaden bewahrt."
+    },
+    {
+      "word": "GREIFEN",
+      "gloss": "Mit der Hand etwas ergreifen oder packen."
+    },
+    {
+      "word": "ZWEIFEL",
+      "gloss": "Unsicherheit, ob etwas stimmt oder wahr ist."
+    },
+    {
+      "word": "NERV",
+      "gloss": "Faser, die Reize im Körper weiterleitet."
+    },
+    {
+      "word": "PFLICHT",
+      "gloss": "Aufgabe, die man erfüllen muss."
+    },
+    {
+      "word": "BOTSCHAFT",
+      "gloss": "Mitteilung, die jemand übermittelt."
+    },
+    {
+      "word": "MOND",
+      "gloss": "Der helle Körper am Nachthimmel.",
       "synonyms": [
-        "Wahl",
-        "Beschluss"
+        "Nachtlicht",
+        "Trabant"
       ]
     },
     {
-      "word": "GRUND",
-      "gloss": "Warum etwas geschieht oder gilt.",
-      "synonyms": [
-        "Ursache",
-        "Motiv"
-      ]
+      "word": "SCHATTEN",
+      "gloss": "Dunkle Fläche, die Licht blockiert."
     },
     {
-      "word": "ERGEBNIS",
-      "gloss": "Was aus einer Handlung folgt.",
-      "synonyms": [
-        "Folge",
-        "Ausgang"
-      ]
+      "word": "SIEG",
+      "gloss": "Erfolg im Wettkampf oder Kampf."
     },
     {
-      "word": "VERBESSERN",
-      "gloss": "Etwas besser machen.",
-      "synonyms": [
-        "steigern",
-        "heben"
-      ]
+      "word": "STEUER",
+      "gloss": "Abgabe an den Staat."
     },
     {
-      "word": "ENTWICKELN",
-      "gloss": "Etwas über die Zeit aufbauen.",
-      "synonyms": [
-        "entfalten",
-        "ausbauen"
-      ]
+      "word": "DRECK",
+      "gloss": "Schmutz oder Erde."
     },
     {
-      "word": "GLAUBEN",
-      "gloss": "Für wahr halten.",
-      "synonyms": [
-        "vertrauen",
-        "annehmen"
-      ]
+      "word": "KNOCHEN",
+      "gloss": "Harte Teile des Skeletts."
+    },
+    {
+      "word": "TALENT",
+      "gloss": "Besondere Begabung oder Fähigkeit."
+    },
+    {
+      "word": "MÜHE",
+      "gloss": "Anstrengung oder Aufwand."
+    },
+    {
+      "word": "THEORIE",
+      "gloss": "System von Erklärungen und Annahmen."
+    },
+    {
+      "word": "FELD",
+      "gloss": "Fläche für Anbau oder Sport."
+    },
+    {
+      "word": "ALKOHOL",
+      "gloss": "Berauschende Flüssigkeit in Getränken."
+    },
+    {
+      "word": "FLUCHT",
+      "gloss": "Weg- oder Fliehen vor Gefahr."
+    },
+    {
+      "word": "VERLUST",
+      "gloss": "Das Verlieren von etwas Wertvollem."
+    },
+    {
+      "word": "ZUGANG",
+      "gloss": "Möglichkeit, etwas zu erreichen."
+    },
+    {
+      "word": "STERN",
+      "gloss": "Leuchtender Himmelskörper."
+    },
+    {
+      "word": "TANZ",
+      "gloss": "Bewegungen im Rhythmus der Musik."
+    },
+    {
+      "word": "STATION",
+      "gloss": "Haltestelle von Zügen oder Bussen."
+    },
+    {
+      "word": "BÜHNE",
+      "gloss": "Plattform für Aufführungen."
+    },
+    {
+      "word": "ERLAUBNIS",
+      "gloss": "Genehmigung, etwas zu tun."
+    },
+    {
+      "word": "HALB",
+      "gloss": "Die Hälfte von etwas Ganzem."
+    },
+    {
+      "word": "PRESSE",
+      "gloss": "Geräte oder Medien zum Drucken."
+    },
+    {
+      "word": "GEDULD",
+      "gloss": "Fähigkeit, ruhig zu warten."
+    },
+    {
+      "word": "ALARM",
+      "gloss": "Warnsignal bei Gefahr."
+    },
+    {
+      "word": "MAL",
+      "gloss": "Einzelner Zeitpunkt oder Gelegenheit."
+    },
+    {
+      "word": "DAMIT",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "NUN",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "WOHL",
+      "gloss": "Zustand des Wohlergehens."
+    },
+    {
+      "word": "HER",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "TREFFEN",
+      "gloss": "Zusammenkommen mit jemandem."
+    },
+    {
+      "word": "GAR",
+      "gloss": "Überhaupt oder völlig."
+    },
+    {
+      "word": "RECHT",
+      "gloss": "Gesetzlich erlaubte Befugnis."
+    },
+    {
+      "word": "DAFÜR",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "STIMMEN",
+      "gloss": "Mit der Stimme übereinstimmen."
+    },
+    {
+      "word": "FÜHLEN",
+      "gloss": "Etwas mit den Sinnen wahrnehmen."
+    },
+    {
+      "word": "REIN",
+      "gloss": "Sauber oder ohne Fremdstoffe."
+    },
+    {
+      "word": "ERINNERN",
+      "gloss": "Sich an etwas Vergangenes besinnen."
+    },
+    {
+      "word": "EINZIG",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "ZIEHEN",
+      "gloss": "Etwas mit Kraft bewegen."
+    },
+    {
+      "word": "SORGEN",
+      "gloss": "Sich um etwas kümmern oder ängstigen."
+    },
+    {
+      "word": "RETTEN",
+      "gloss": "Vor Gefahr bewahren oder befreien."
+    },
+    {
+      "word": "BEREIT",
+      "gloss": "Vorbereitet oder willig."
+    },
+    {
+      "word": "FÜHREN",
+      "gloss": "Leiten oder an der Spitze gehen."
+    },
+    {
+      "word": "VERLASSEN",
+      "gloss": "Einen Ort oder jemanden aufgeben."
+    },
+    {
+      "word": "VERRÜCKT",
+      "gloss": "Nicht bei klarem Verstand."
+    },
+    {
+      "word": "DRIN",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "ZIEMLICH",
+      "gloss": "to a fair degree"
+    },
+    {
+      "word": "SCHLAGEN",
+      "gloss": "Mit der Hand oder einem Gegenstand treffen."
+    },
+    {
+      "word": "REICHEN",
+      "gloss": "Genug sein oder ausreichen."
+    },
+    {
+      "word": "ÜBERHAUPT",
+      "gloss": "in any way at all"
+    },
+    {
+      "word": "STECKEN",
+      "gloss": "Etwas in etwas anderes einfügen."
+    },
+    {
+      "word": "KLINGEN",
+      "gloss": "Einen Ton von sich geben."
+    },
+    {
+      "word": "ETWA",
+      "gloss": "Ungefähr oder vielleicht."
+    },
+    {
+      "word": "SCHULD",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "SCHAUEN",
+      "gloss": "Mit den Augen betrachten."
+    },
+    {
+      "word": "EBEN",
+      "gloss": "Gerade oder flach."
+    },
+    {
+      "word": "VERTRAUEN",
+      "gloss": "Jemandem Glauben schenken."
+    },
+    {
+      "word": "FANGEN",
+      "gloss": "Etwas in Bewegung ergreifen."
+    },
+    {
+      "word": "GESCHEHEN",
+      "gloss": "Passieren oder sich ereignen."
+    },
+    {
+      "word": "BLOß",
+      "gloss": "Nur oder lediglich."
+    },
+    {
+      "word": "SCHIEßEN",
+      "gloss": "Mit einer Waffe abfeuern."
+    },
+    {
+      "word": "FOLGEN",
+      "gloss": "Hinterhergehen oder sich anschließen."
+    },
+    {
+      "word": "EHRLICH",
+      "gloss": "Wahrhaftig und aufrichtig."
+    },
+    {
+      "word": "KÄMPFEN",
+      "gloss": "Sich mit Kraft wehren oder streiten."
+    },
+    {
+      "word": "KAUM",
+      "gloss": "nur mit Mühe oder gerade noch."
+    },
+    {
+      "word": "WERFEN",
+      "gloss": "etwas mit Schwung durch die Luft bewegen."
+    },
+    {
+      "word": "HÜBSCH",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "ERLEDIGEN",
+      "gloss": "to finish a task"
+    },
+    {
+      "word": "BRECHEN",
+      "gloss": "etwas in Stücke zerlegen oder zerreißen."
+    },
+    {
+      "word": "ERFAHREN",
+      "gloss": "etwas Neues durch Erlebnis oder Mitteilung kennenlernen."
+    },
+    {
+      "word": "HIERHER",
+      "gloss": "an diesen Ort oder diese Stelle."
+    },
+    {
+      "word": "BEWEGEN",
+      "gloss": "etwas oder sich selbst in Bewegung setzen."
+    },
+    {
+      "word": "BEREITS",
+      "gloss": "schon vor dem jetzigen Zeitpunkt."
+    },
+    {
+      "word": "BEHALTEN",
+      "gloss": "to keep in possession"
+    },
+    {
+      "word": "ERKENNEN",
+      "gloss": "etwas oder jemanden identifizieren oder verstehen."
+    },
+    {
+      "word": "TROTZDEM",
+      "gloss": "dennoch oder ungeachtet dessen."
+    },
+    {
+      "word": "ZERSTÖREN",
+      "gloss": "etwas völlig unbrauchbar oder kaputt machen."
+    },
+    {
+      "word": "DANACH",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "DESWEGEN",
+      "gloss": "aus diesem Grund oder deshalb."
+    },
+    {
+      "word": "VÖLLIG",
+      "gloss": "ganz oder ohne Einschränkung."
+    },
+    {
+      "word": "ZWAR",
+      "gloss": "although it is true"
+    },
+    {
+      "word": "DREHEN",
+      "gloss": "etwas um seine Achse rotieren lassen."
+    },
+    {
+      "word": "WERT",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "STEHLEN",
+      "gloss": "etwas unrechtmäßig wegnehmen."
+    },
+    {
+      "word": "ÜBERNEHMEN",
+      "gloss": "eine Aufgabe oder Verantwortung annehmen."
+    },
+    {
+      "word": "TRETEN",
+      "gloss": "mit dem Fuß einen Stoß ausführen."
+    },
+    {
+      "word": "GENAUSO",
+      "gloss": "in gleicher Weise oder ebenso."
+    },
+    {
+      "word": "GUCKEN",
+      "gloss": "die Augen auf etwas richten und sehen."
+    },
+    {
+      "word": "BERUHIGEN",
+      "gloss": "jemanden oder sich selbst ruhig machen."
+    },
+    {
+      "word": "EHER",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "NACHDENKEN",
+      "gloss": "to think carefully"
+    },
+    {
+      "word": "MELDEN",
+      "gloss": "eine Nachricht oder Information weitergeben."
+    },
+    {
+      "word": "STOLZ",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "REGELN",
+      "gloss": "etwas ordnen oder bestimmen."
+    },
+    {
+      "word": "VERBRINGEN",
+      "gloss": "to pass time somewhere"
+    },
+    {
+      "word": "BEWEISEN",
+      "gloss": "die Richtigkeit von etwas zeigen."
+    },
+    {
+      "word": "VERZEIHEN",
+      "gloss": "jemandem einen Fehler nicht übelnehmen."
+    },
+    {
+      "word": "STEIGEN",
+      "gloss": "sich nach oben bewegen."
+    },
+    {
+      "word": "ÜBERLEGEN",
+      "gloss": "etwas in Gedanken prüfen."
+    },
+    {
+      "word": "VERLANGEN",
+      "gloss": "etwas fordern oder wünschen."
+    },
+    {
+      "word": "AUFHALTEN",
+      "gloss": "jemanden oder etwas stoppen."
+    },
+    {
+      "word": "ZÄHLEN",
+      "gloss": "die Anzahl von etwas feststellen."
+    },
+    {
+      "word": "SCHÜTZEN",
+      "gloss": "vor Schaden bewahren."
+    },
+    {
+      "word": "PERFEKT",
+      "gloss": "ohne Fehler oder vollendet."
+    },
+    {
+      "word": "NÖTIG",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "SPÜREN",
+      "gloss": "etwas körperlich oder gefühlsmäßig wahrnehmen."
+    },
+    {
+      "word": "ERHALTEN",
+      "gloss": "etwas bekommen oder bewahren."
+    },
+    {
+      "word": "STÄNDIG",
+      "gloss": "immer oder ohne Unterbrechung."
+    },
+    {
+      "word": "RENNEN",
+      "gloss": "schnell laufen."
+    },
+    {
+      "word": "JEMALS",
+      "gloss": "irgendwann einmal."
+    },
+    {
+      "word": "SPRINGEN",
+      "gloss": "sich mit einem Satz vom Boden abheben."
+    },
+    {
+      "word": "ÜBERPRÜFEN",
+      "gloss": "etwas auf Richtigkeit oder Vollständigkeit prüfen."
+    },
+    {
+      "word": "FASSEN",
+      "gloss": "etwas mit der Hand ergreifen."
+    },
+    {
+      "word": "WIRKEN",
+      "gloss": "eine Wirkung haben oder ausstrahlen."
+    },
+    {
+      "word": "HASSEN",
+      "gloss": "jemanden oder etwas sehr nicht mögen."
+    },
+    {
+      "word": "UNTERWEGS",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "TREIBEN",
+      "gloss": "etwas in Bewegung halten oder fördern."
+    },
+    {
+      "word": "DAGEGEN",
+      "gloss": "in contrast to that"
+    },
+    {
+      "word": "BEHANDELN",
+      "gloss": "mit etwas oder jemandem umgehen."
+    },
+    {
+      "word": "BESORGEN",
+      "gloss": "etwas beschaffen oder kaufen."
+    },
+    {
+      "word": "VERHAFTEN",
+      "gloss": "jemanden festnehmen."
+    },
+    {
+      "word": "ABSOLUT",
+      "gloss": "ganz und gar oder unbedingt."
+    },
+    {
+      "word": "ANNEHMEN",
+      "gloss": "etwas akzeptieren oder voraussetzen."
+    },
+    {
+      "word": "BIETEN",
+      "gloss": "etwas zur Verfügung stellen oder anbieten."
+    },
+    {
+      "word": "DATEN",
+      "gloss": "Informationen oder Zahlen speichern."
+    },
+    {
+      "word": "LEIDEN",
+      "gloss": "Schmerz oder Kummer empfinden."
+    },
+    {
+      "word": "FINGER",
+      "gloss": "eines der beweglichen Glieder der Hand."
+    },
+    {
+      "word": "LÖSEN",
+      "gloss": "etwas öffnen oder ein Problem beheben."
+    },
+    {
+      "word": "ZUHAUSE",
+      "gloss": "im eigenen Wohnbereich."
+    },
+    {
+      "word": "NUTZEN",
+      "gloss": "von etwas Gebrauch machen."
+    },
+    {
+      "word": "AUFGEBEN",
+      "gloss": "etwas nicht mehr weiterführen."
+    },
+    {
+      "word": "IRGENDWANN",
+      "gloss": "Zu einem unbestimmten Zeitpunkt in der Zukunft."
+    },
+    {
+      "word": "BISHER",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "BEOBACHTEN",
+      "gloss": "Etwas genau mit den Augen verfolgen."
+    },
+    {
+      "word": "LANDEN",
+      "gloss": "Auf dem Boden aufsetzen."
+    },
+    {
+      "word": "DAHIN",
+      "gloss": "An jenen Ort."
+    },
+    {
+      "word": "WÜTEND",
+      "gloss": "Sehr ärgerlich und aufgebracht."
+    },
+    {
+      "word": "SCHREIEN",
+      "gloss": "Laut und schrill rufen."
+    },
+    {
+      "word": "LEISTEN",
+      "gloss": "Eine Aufgabe oder Pflicht erfüllen."
+    },
+    {
+      "word": "ZUMINDEST",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "SOWIESO",
+      "gloss": "Ohnehin oder ohne besonderen Grund."
+    },
+    {
+      "word": "WARNEN",
+      "gloss": "Vor einer Gefahr hinweisen."
+    },
+    {
+      "word": "SELTSAM",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "KLINGELN",
+      "gloss": "Ein helles, hell klingendes Geräusch erzeugen."
+    },
+    {
+      "word": "MENSCHLICH",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "ERLEBEN",
+      "gloss": "Etwas selbst mitmachen oder erfahren."
+    },
+    {
+      "word": "AUFNEHMEN",
+      "gloss": "to record or accept"
+    },
+    {
+      "word": "DIESMAL",
+      "gloss": "Bei diesem bestimmten Versuch oder Anlass."
+    },
+    {
+      "word": "ENTDECKEN",
+      "gloss": "Etwas bisher Unbekanntes finden."
+    },
+    {
+      "word": "PERSÖNLICH",
+      "gloss": "Selbst und direkt betroffen."
+    },
+    {
+      "word": "LÄCHELN",
+      "gloss": "to smile slightly"
+    },
+    {
+      "word": "NÄMLICH",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "VERMISSEN",
+      "gloss": "Jemanden oder etwas schmerzlich entbehren."
+    },
+    {
+      "word": "KLOPFEN",
+      "gloss": "Leise und rhythmisch an etwas schlagen."
+    },
+    {
+      "word": "EWIG",
+      "gloss": "Unendlich lange andauernd."
+    },
+    {
+      "word": "SCHLAF",
+      "gloss": "Zustand der Ruhe ohne Bewusstsein."
+    },
+    {
+      "word": "VERHALTEN",
+      "gloss": "Sich in bestimmter Weise benehmen."
+    },
+    {
+      "word": "ÜBRIG",
+      "gloss": "Noch vorhanden, nachdem anderes weg ist."
+    },
+    {
+      "word": "ÜBRIGENS",
+      "gloss": "Nebenbei bemerkt oder zusätzlich."
+    },
+    {
+      "word": "VERGNÜGEN",
+      "gloss": "Freude oder Spaß empfinden."
+    },
+    {
+      "word": "SCHADEN",
+      "gloss": "Einen Nachteil oder Verlust verursachen."
+    },
+    {
+      "word": "SCHÄTZEN",
+      "gloss": "Den Wert oder die Bedeutung hoch einschätzen."
+    },
+    {
+      "word": "SCHULDIG",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "VERBINDEN",
+      "gloss": "Zwei Dinge miteinander verknüpfen."
+    },
+    {
+      "word": "GENIEßEN",
+      "gloss": "Etwas mit Freude und Genuss erleben."
+    },
+    {
+      "word": "BEHAUPTEN",
+      "gloss": "Etwas als wahr darstellen."
+    },
+    {
+      "word": "ALLERDINGS",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "ÄHNLICH",
+      "gloss": "In wesentlichen Merkmalen vergleichbar."
+    },
+    {
+      "word": "GELTEN",
+      "gloss": "Als gültig oder anerkannt betrachtet werden."
+    },
+    {
+      "word": "FLIEHEN",
+      "gloss": "Schnell vor etwas davonlaufen."
+    },
+    {
+      "word": "BEMERKEN",
+      "gloss": "Etwas plötzlich wahrnehmen oder feststellen."
+    },
+    {
+      "word": "HEREIN",
+      "gloss": "In den Innenraum hinein."
+    },
+    {
+      "word": "GEMEINSAM",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "BEGLEITEN",
+      "gloss": "Mit jemandem zusammen gehen."
+    },
+    {
+      "word": "UNGEFÄHR",
+      "gloss": "about or approximately"
+    },
+    {
+      "word": "BRENNEN",
+      "gloss": "In Flammen stehen oder Hitze erzeugen."
+    },
+    {
+      "word": "AUFWACHEN",
+      "gloss": "Aus dem Schlaf in den Wachzustand kommen."
+    },
+    {
+      "word": "BESPRECHEN",
+      "gloss": "Über ein Thema reden."
     },
     {
       "word": "RESPEKT",
@@ -220,108 +1215,436 @@
       ]
     },
     {
-      "word": "SELBSTBEWUSST",
-      "gloss": "Sicher in den eigenen Fähigkeiten.",
+      "word": "DIENEN",
+      "gloss": "Jemandem oder einer Sache nützlich sein."
+    },
+    {
+      "word": "HEBEN",
+      "gloss": "Etwas nach oben bewegen."
+    },
+    {
+      "word": "WORÜBER",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "WACHSEN",
+      "gloss": "Größer oder stärker werden."
+    },
+    {
+      "word": "FRESSEN",
+      "gloss": "Nahrung mit dem Mund aufnehmen."
+    },
+    {
+      "word": "ERFÜLLEN",
+      "gloss": "to carry out fully"
+    },
+    {
+      "word": "VERBIETEN",
+      "gloss": "Etwas nicht erlauben."
+    },
+    {
+      "word": "RIESIG",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "KÜSSEN",
+      "gloss": "Mit den Lippen berühren."
+    },
+    {
+      "word": "BESITZEN",
+      "gloss": "Eigentümer von etwas sein."
+    },
+    {
+      "word": "DAHER",
+      "gloss": "Aus diesem Grund oder von dort."
+    },
+    {
+      "word": "ZUFÄLLIG",
+      "gloss": "Ohne Absicht oder Plan geschehen."
+    },
+    {
+      "word": "MITTEN",
+      "gloss": "Genau in der Mitte von etwas."
+    },
+    {
+      "word": "SCHWEIGEN",
+      "gloss": "Kein Wort sagen."
+    },
+    {
+      "word": "KLÄREN",
+      "gloss": "Etwas unklar Gewordenes verständlich machen."
+    },
+    {
+      "word": "ENTWICKELN",
+      "gloss": "Etwas über die Zeit aufbauen.",
       "synonyms": [
-        "sicher",
-        "überzeugt"
+        "entfalten",
+        "ausbauen"
       ]
     },
     {
-      "word": "NERVÖS",
-      "gloss": "Unruhig oder besorgt vor dem, was kommt.",
+      "word": "FAIR",
+      "gloss": "Gerecht und ohne Benachteiligung."
+    },
+    {
+      "word": "KOMPLETT",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "VERHINDERN",
+      "gloss": "Etwas nicht geschehen lassen."
+    },
+    {
+      "word": "WORUM",
+      "gloss": "Über welches Thema oder welchen Grund."
+    },
+    {
+      "word": "MERKWÜRDIG",
+      "gloss": "Seltsam oder ungewöhnlich."
+    },
+    {
+      "word": "BETRUNKEN",
+      "gloss": "Durch Alkohol berauscht."
+    },
+    {
+      "word": "EINSAM",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "LOCH",
+      "gloss": "Eine Öffnung oder Vertiefung."
+    },
+    {
+      "word": "STOPPEN",
+      "gloss": "Etwas zum Stillstand bringen."
+    },
+    {
+      "word": "VERWENDEN",
+      "gloss": "Etwas für einen Zweck nutzen."
+    },
+    {
+      "word": "GEWÖHNEN",
+      "gloss": "to become used to"
+    },
+    {
+      "word": "OFFENBAR",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "STARTEN",
+      "gloss": "to begin an activity"
+    },
+    {
+      "word": "DANKBAR",
+      "gloss": "feeling gratitude"
+    },
+    {
+      "word": "VORHIN",
+      "gloss": "a short time ago"
+    },
+    {
+      "word": "REAGIEREN",
+      "gloss": "to respond to something"
+    },
+    {
+      "word": "DACH",
+      "gloss": "the top covering of a building"
+    },
+    {
+      "word": "OFFIZIELL",
+      "gloss": "approved by authority"
+    },
+    {
+      "word": "BEGEGNEN",
+      "gloss": "to meet by chance"
+    },
+    {
+      "word": "VERMUTEN",
+      "gloss": "to suppose without proof"
+    },
+    {
+      "word": "LEITEN",
+      "gloss": "to guide or direct"
+    },
+    {
+      "word": "STAMMEN",
+      "gloss": "to originate from"
+    },
+    {
+      "word": "DORTHIN",
+      "gloss": "to that place"
+    },
+    {
+      "word": "UMGEHEN",
+      "gloss": "to deal with cleverly"
+    },
+    {
+      "word": "TAUCHEN",
+      "gloss": "to go under water"
+    },
+    {
+      "word": "PRIMA",
+      "gloss": "very good or fine"
+    },
+    {
+      "word": "ANSTELLEN",
+      "gloss": "to hire for work"
+    },
+    {
+      "word": "FESTHALTEN",
+      "gloss": "to hold firmly"
+    },
+    {
+      "word": "ZEUGE",
+      "gloss": "a person who saw an event"
+    },
+    {
+      "word": "ERFINDEN",
+      "gloss": "to create something new"
+    },
+    {
+      "word": "LÄNGST",
+      "gloss": "a long time ago"
+    },
+    {
+      "word": "SCHIEBEN",
+      "gloss": "to push along"
+    },
+    {
+      "word": "PEINLICH",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
+    },
+    {
+      "word": "EINSTELLEN",
+      "gloss": "to adjust or set"
+    },
+    {
+      "word": "ENTLASSEN",
+      "gloss": "to let someone leave"
+    },
+    {
+      "word": "GRÜßEN",
+      "gloss": "to greet someone"
+    },
+    {
+      "word": "SEITDEM",
+      "gloss": "from that time on"
+    },
+    {
+      "word": "WAHNSINNIG",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
+    },
+    {
+      "word": "SENDEN",
+      "gloss": "to transmit or dispatch"
+    },
+    {
+      "word": "BETRÜGEN",
+      "gloss": "to deceive dishonestly"
+    },
+    {
+      "word": "STÜRZEN",
+      "gloss": "to fall suddenly"
+    },
+    {
+      "word": "NACHHER",
+      "gloss": "Später als etwas anderes.",
       "synonyms": [
-        "unruhig",
-        "angespannt"
+        "danach",
+        "hinterher"
       ]
     },
     {
-      "word": "STRESS",
-      "gloss": "Druck durch Schwierigkeit oder Hetze.",
-      "synonyms": [
-        "Anspannung",
-        "Last"
-      ]
+      "word": "BLIND",
+      "gloss": "Ein Adjektiv für einfache Beschreibungen."
     },
     {
-      "word": "WISSEN",
-      "gloss": "Gelerntes und gekannte Fakten.",
-      "synonyms": [
-        "Kenntnis",
-        "Bildung"
-      ]
+      "word": "AUSZIEHEN",
+      "gloss": "to remove clothing from the body"
     },
     {
-      "word": "BERUF",
-      "gloss": "Eine Arbeit, der man lange folgt.",
-      "synonyms": [
-        "Tätigkeit",
-        "Profession"
-      ]
+      "word": "VORHABEN",
+      "gloss": "to plan or intend to do something"
     },
     {
-      "word": "GESPRÄCH",
-      "gloss": "Ein formelles Treffen mit Fragen, oder ein Dialog.",
-      "synonyms": [
-        "Unterredung",
-        "Dialog"
-      ]
+      "word": "EMPFANGEN",
+      "gloss": "to receive a guest or message"
     },
     {
-      "word": "KUNDE",
-      "gloss": "Eine Person, die Waren oder Dienste kauft.",
-      "synonyms": [
-        "Käufer",
-        "Auftraggeber"
-      ]
+      "word": "VERNÜNFTIG",
+      "gloss": "showing sound and sensible judgment"
     },
     {
-      "word": "QUALITÄT",
-      "gloss": "Wie gut etwas ist.",
-      "synonyms": [
-        "Güte",
-        "Niveau"
-      ]
+      "word": "GEBRAUCHEN",
+      "gloss": "to make use of something"
     },
     {
-      "word": "ARTIKEL",
-      "gloss": "Ein Text in einer Zeitung oder Zeitschrift.",
-      "synonyms": [
-        "Beitrag",
-        "Text"
-      ]
+      "word": "AUFTRETEN",
+      "gloss": "to appear or occur in public"
     },
     {
-      "word": "AUFMERKSAMKEIT",
-      "gloss": "Genaues Beachten von etwas.",
-      "synonyms": [
-        "Konzentration",
-        "Beachtung"
-      ]
+      "word": "BESTRAFEN",
+      "gloss": "to impose a penalty for wrongdoing"
     },
     {
-      "word": "GEDULDIG",
-      "gloss": "Fähig zu warten, ohne zornig zu werden.",
-      "synonyms": [
-        "ruhig",
-        "gelassen"
-      ]
+      "word": "ÖFFENTLICH",
+      "gloss": "accessible or known to everyone"
     },
     {
-      "word": "NEUGIERIG",
-      "gloss": "Will mehr wissen oder lernen.",
-      "synonyms": [
-        "wissbegierig",
-        "interessiert"
-      ]
+      "word": "WILD",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
     },
     {
-      "word": "DRUCK",
-      "gloss": "Kraft, die auf etwas wirkt, oder dringende Forderung.",
-      "synonyms": [
-        "Last",
-        "Zwang"
-      ]
+      "word": "GRÜNDEN",
+      "gloss": "to establish an organization or city"
+    },
+    {
+      "word": "EINSETZEN",
+      "gloss": "to place something into position"
+    },
+    {
+      "word": "NEULICH",
+      "gloss": "happening a short time ago"
+    },
+    {
+      "word": "WESHALB",
+      "gloss": "for what reason or purpose"
+    },
+    {
+      "word": "ABLEHNEN",
+      "gloss": "to refuse an offer or request"
+    },
+    {
+      "word": "SATT",
+      "gloss": "no longer wanting more food"
+    },
+    {
+      "word": "UMSONST",
+      "gloss": "without payment or reward"
+    },
+    {
+      "word": "NIRGENDWO",
+      "gloss": "in no place at all"
+    },
+    {
+      "word": "VERSICHERN",
+      "gloss": "to promise that something is true"
+    },
+    {
+      "word": "LÖSCHEN",
+      "gloss": "to put out a fire or light"
+    },
+    {
+      "word": "WENDEN",
+      "gloss": "to turn something around"
+    },
+    {
+      "word": "FORDERN",
+      "gloss": "to ask firmly for something"
+    },
+    {
+      "word": "STINKEN",
+      "gloss": "to give off a bad smell"
+    },
+    {
+      "word": "EBENSO",
+      "gloss": "in the same way or manner"
+    },
+    {
+      "word": "ANGENEHM",
+      "gloss": "pleasant or comfortable to experience"
+    },
+    {
+      "word": "ABNEHMEN",
+      "gloss": "to become smaller or lighter"
+    },
+    {
+      "word": "ÜBLICH",
+      "gloss": "commonly done or accepted"
+    },
+    {
+      "word": "FRÖHLICH",
+      "gloss": "feeling or showing happiness"
+    },
+    {
+      "word": "WETTEN",
+      "gloss": "to risk money on an outcome"
+    },
+    {
+      "word": "SICHERN",
+      "gloss": "to make something safe or protected"
+    },
+    {
+      "word": "ACHTEN",
+      "gloss": "to pay attention to something"
+    },
+    {
+      "word": "BENÖTIGEN",
+      "gloss": "to require something as necessary"
+    },
+    {
+      "word": "ILLEGAL",
+      "gloss": "forbidden by law or rules"
+    },
+    {
+      "word": "MUTIG",
+      "gloss": "showing courage in face of danger"
+    },
+    {
+      "word": "TESTEN",
+      "gloss": "Prüfen, ob etwas funktioniert oder richtig ist."
+    },
+    {
+      "word": "GELINGEN",
+      "gloss": "Erfolgreich sein oder klappen."
+    },
+    {
+      "word": "GEHEIM",
+      "gloss": "Nicht für andere bestimmt oder bekannt."
+    },
+    {
+      "word": "LOCKER",
+      "gloss": "Nicht fest oder straff."
+    },
+    {
+      "word": "KNAPP",
+      "gloss": "Gerade noch ausreichend oder sehr wenig."
+    },
+    {
+      "word": "EBENFALLS",
+      "gloss": "Auch oder genauso."
+    },
+    {
+      "word": "JEDERZEIT",
+      "gloss": "Zu jedem beliebigen Moment."
+    },
+    {
+      "word": "ENTFERNEN",
+      "gloss": "Wegnehmen oder beseitigen."
+    },
+    {
+      "word": "VORN",
+      "gloss": "An der vorderen Seite oder Stelle."
+    },
+    {
+      "word": "INZWISCHEN",
+      "gloss": "In der Zeit dazwischen."
+    },
+    {
+      "word": "SELTEN",
+      "gloss": "Nicht häufig vorkommend."
+    },
+    {
+      "word": "BEGRÜßEN",
+      "gloss": "Jemanden freundlich willkommen heißen."
+    },
+    {
+      "word": "SEIN",
+      "gloss": "Existieren oder sich in einem Zustand befinden."
+    },
+    {
+      "word": "WIE",
+      "gloss": "Ein Umstandswort in einfachen Lerner-Sätzen."
     }
   ]
 }
