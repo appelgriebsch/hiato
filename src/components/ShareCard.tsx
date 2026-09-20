@@ -11,6 +11,8 @@ export function ShareCard(payload: ShareCardPayload) {
   return (
     <div
       id="hiato-share-card"
+      role="img"
+      aria-label="Hiato share card preview"
       className="mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-white to-accent-soft shadow-md"
     >
       <div className="px-6 pt-6 pb-2 text-center">

@@ -84,7 +84,7 @@ export function ensureShareCardFonts(): Promise<void> {
       }
       const face = new FontFace(
         SHARE_CARD_FONT_FAMILY,
-        `url(${url}) format("woff2")`,
+        `url("${url}") format("woff2")`,
         { weight: SHARE_CARD_FONT_WEIGHTS[i], style: 'normal', display: 'swap' },
       )
       loads.push(face.load().then((loaded) => {

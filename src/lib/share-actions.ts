@@ -5,7 +5,12 @@ import {
 } from './share-card'
 import { renderShareCardPng } from './share-render'
 
-export type ShareMethod = 'web-share' | 'download' | 'clipboard' | 'cancelled'
+export type ShareMethod =
+  | 'web-share'
+  | 'download'
+  | 'clipboard'
+  | 'cancelled'
+  | 'unsupported'
 
 export type ShareOutcome = {
   ok: boolean
@@ -61,41 +66,32 @@ async function writeClipboardText(text: string): Promise<boolean> {
   }
 }
 
-async function writeClipboardImage(
-  blob: Blob,
-  text: string,
-): Promise<boolean> {
-  try {
-    if (typeof ClipboardItem === 'undefined' || !navigator.clipboard?.write) {
-      return writeClipboardText(text)
-    }
-    const item = new ClipboardItem({ [blob.type]: blob })
-    await navigator.clipboard.write([item])
-    return true
-  } catch {
-    return writeClipboardText(text)
-  }
-}
-
 async function pngFile(payload: ShareCardPayload): Promise<File> {
   const blob = await renderShareCardPng(payload)
   return new File([blob], shareCardFilename(payload), { type: 'image/png' })
 }
 
-/** Web Share with file when possible; clipboard + download otherwise. */
+const UNSUPPORTED: ShareOutcome = {
+  ok: false,
+  method: 'unsupported',
+  message: 'Share not available — try Copy or Download',
+}
+
+/** Web Share when available; never auto-download. Copy/Download stay explicit. */
 export async function shareResult(
   payload: ShareCardPayload,
 ): Promise<ShareOutcome> {
   const text = formatShareText(payload, pageOrigin())
-  let file: File | null = null
-  try {
-    file = await pngFile(payload)
-  } catch {
-    file = null
-  }
-
   const nav = typeof navigator !== 'undefined' ? navigator : undefined
+
   if (nav && typeof nav.share === 'function') {
+    let file: File | null = null
+    try {
+      file = await pngFile(payload)
+    } catch {
+      file = null
+    }
+
     try {
       if (file && canShareFiles(nav, file, text)) {
         await nav.share({ title: 'Hiato', text, files: [file] })
@@ -107,26 +103,17 @@ export async function shareResult(
       if (isAbort(err)) {
         return { ok: true, method: 'cancelled', message: 'Cancelled' }
       }
+      // Non-abort share failure: soft-fallback to clipboard text only (no download).
+      const copied = await writeClipboardText(text)
+      if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
+      return UNSUPPORTED
     }
   }
 
-  if (file) {
-    try {
-      await triggerDownload(file)
-    } catch {
-      /* still try clipboard */
-    }
-    const copied = await writeClipboardImage(file, text)
-    return {
-      ok: true,
-      method: copied ? 'clipboard' : 'download',
-      message: copied ? 'Image saved · text copied' : 'Image saved',
-    }
-  }
-
+  // navigator.share missing — do not auto-triggerDownload.
   const copied = await writeClipboardText(text)
   if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
-  return { ok: false, message: 'Couldn’t share' }
+  return UNSUPPORTED
 }
 
 export async function downloadShareCard(
@@ -147,5 +134,5 @@ export async function copyShareText(
   const text = formatShareText(payload, pageOrigin())
   const copied = await writeClipboardText(text)
   if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
-  return { ok: false, message: text }
+  return { ok: false, message: 'Couldn’t copy' }
 }
