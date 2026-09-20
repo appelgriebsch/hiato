@@ -23,7 +23,7 @@ export function Language() {
     } catch {
       // Still navigate — Play can fetch on demand.
     }
-    nav('/play')
+    nav('/play?mode=daily')
   }
 
   return (

@@ -1,19 +1,37 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
+import { StreakChip } from '@/components/StreakChip'
 import { Card } from '@/components/ui/card'
+import { isPracticeAvailable } from '@/engine'
+import { isDailyComplete } from '@/lib/daily-record'
 import { getPrefs } from '@/lib/prefs'
+import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
+import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
+import { loadPack } from '@/packs/load'
 import { useShellStore } from '@/store/shell'
 
 export function Home() {
+  const nav = useNavigate()
   const healthOk = useShellStore((s) => s.healthOk)
   const setHealthOk = useShellStore((s) => s.setHealthOk)
   const prefs = getPrefs()
   const selectedLang = prefs?.lang
+  const selectedCefr = prefs?.cefr
+  const dateKey = useLocalDateKey()
+  const streak =
+    selectedLang && selectedCefr
+      ? getStreakCount(selectedLang, selectedCefr, dateKey)
+      : 0
+  const dailyDone =
+    selectedLang && selectedCefr
+      ? isDailyComplete(selectedLang, selectedCefr, dateKey)
+      : false
+  const [practiceOk, setPracticeOk] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -35,6 +53,29 @@ export function Home() {
     void precacheSelectedLanguage(selectedLang).catch(() => {})
   }, [selectedLang])
 
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) return
+    ensureStreakPersisted(selectedLang, selectedCefr, dateKey)
+  }, [selectedLang, selectedCefr, dateKey])
+
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) return
+    let cancelled = false
+    void loadPack(selectedLang, selectedCefr)
+      .then((pack) => {
+        if (cancelled) return
+        setPracticeOk(
+          isPracticeAvailable(pack.lemmas, dateKey, selectedLang, selectedCefr),
+        )
+      })
+      .catch(() => {
+        if (!cancelled) setPracticeOk(true)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [selectedLang, selectedCefr, dateKey])
+
   const dailyLabel = prefs
     ? `Daily ${LANG_CODES[prefs.lang]} ${CEFR_CODES[prefs.cefr]}`
     : 'Choose language & level'
@@ -47,22 +88,29 @@ export function Home() {
             Hiato
           </span>
         }
-        right={<OfflineChip />}
+        right={
+          <div className="flex items-center gap-2">
+            {prefs ? <StreakChip count={streak} /> : null}
+            <OfflineChip />
+          </div>
+        }
       />
 
       <Card className="mb-4">
         <h1 className="mb-2 text-xl font-semibold text-ink">{dailyLabel}</h1>
         <p className="mb-4 text-[15px] leading-relaxed text-ink-muted">
           {prefs
-            ? 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
+            ? dailyDone
+              ? 'Today’s daily is done. Come back after local midnight — or stretch with practice (practice does not affect your streak).'
+              : 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
             : 'Pick a language and CEFR level, then play today’s word. Packs for your language stay cached for offline play.'}
         </p>
         {prefs ? (
           <Link
-            to="/play"
+            to="/play?mode=daily"
             className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
           >
-            Play today
+            {dailyDone ? 'View today’s result' : 'Play today'}
           </Link>
         ) : (
           <Link
@@ -72,6 +120,23 @@ export function Home() {
             Choose language
           </Link>
         )}
+        {prefs ? (
+          <>
+            <button
+              type="button"
+              disabled={!practiceOk}
+              className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45"
+              onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
+            >
+              Practice (endless)
+            </button>
+            {!practiceOk ? (
+              <p className="mt-2 text-center text-xs text-ink-faint">
+                Practice isn’t available — this pack only has today’s daily word.
+              </p>
+            ) : null}
+          </>
+        ) : null}
       </Card>
 
       <nav className="mb-6 flex items-center justify-center gap-4 text-sm">

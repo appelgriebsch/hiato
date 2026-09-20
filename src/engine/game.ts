@@ -86,8 +86,10 @@ function asciiBaseKey(ch: string): string {
 
 /**
  * Whether a *miss* should increment the ADR 0015 hint counter.
- * Count only diacritic-cell misses (wrong accent key, or ASCII base of a hidden
- * diacritic like E vs É) — not every wrong key (G0 still unlocks after 2 such misses).
+ * Count only guesses that target an unrevealed diacritic cell: the ASCII base
+ * of a hidden diacritic (E vs É), or a wrong accent of that same base (È vs É).
+ * Unrelated diacritic keys (Á on CAFÉ) and unrelated ASCII (X) do not count.
+ * Exact matches are hits, not misses.
  */
 export function isDiacriticHintMiss(
   cells: CellState[],
@@ -97,9 +99,24 @@ export function isDiacriticHintMiss(
   const gs = graphemes(word)
   const hidden = gs.filter((ch, i) => hasDiacritic(ch) && !cells[i]!.revealed)
   if (hidden.length === 0) return false
-  if (hasDiacritic(letter)) return true
+  const target = graphemeKey(letter)
+  // Hits (including the exact hidden diacritic) are not misses.
+  if (gs.some((ch, i) => graphemeKey(ch) === target && !cells[i]!.revealed)) {
+    return false
+  }
   const base = asciiBaseKey(letter)
   return hidden.some((ch) => asciiBaseKey(ch) === base)
+}
+
+/** ADR 0015: hint button after 2 diacritic-cell misses, player-triggered. */
+export function isDiacriticHintReady(
+  cells: CellState[],
+  word: string,
+  diacriticMisses: number,
+  opts: { hintUsed?: boolean; finished?: boolean } = {},
+): boolean {
+  if (opts.hintUsed || opts.finished) return false
+  return diacriticMisses >= 2 && hasUnrevealedDiacritic(cells, word)
 }
 
 export function isWon(cells: CellState[]): boolean {
