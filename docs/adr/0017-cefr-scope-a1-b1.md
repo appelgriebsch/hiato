@@ -1,6 +1,6 @@
 # ADR 0017: CEFR pack scope v1 — A1–B1
 
-- Status: Accepted
+- Status: superseded by ADR-0027
 - Date: 2026-09-19
 - Deciders: Andreas Gerlach
 
