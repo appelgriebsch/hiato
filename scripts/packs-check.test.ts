@@ -205,6 +205,33 @@ describe('packs:check completeness', () => {
   })
 })
 
+describe('packs:check person-name gloss (#24)', () => {
+  test('rejects a name-list lemma with a person-name gloss', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'b2',
+          lemmas: [{ word: 'MARIA', gloss: 'a given name used in English' }],
+        }),
+        'en/b2.json',
+      ),
+    ).toThrow(/person-name gloss/)
+  })
+
+  test('keeps a name-list lemma with a common-noun gloss', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'a1',
+        lemmas: [{ word: 'WILL', gloss: 'a legal document of wishes' }],
+      }),
+      'en/a1.json',
+    )
+    expect(p.lemmas[0]?.word).toBe('WILL')
+  })
+})
+
 describe('packs:check gloss language (ADR 0030)', () => {
   test('rejects English-shaped glosses in DE/ES/PT', () => {
     expect(() =>
@@ -229,6 +256,20 @@ describe('packs:check gloss language (ADR 0030)', () => {
       'de/a1.json',
     )
     expect(p.lemmas[0]?.gloss).toContain('Ort')
+  })
+})
+
+describe('packs:check A1–B1 synonym floor (#24)', () => {
+  test('fails A1–B1 below 80% chip coverage', () => {
+    const lemmas = Array.from({ length: 10 }, (_, i) => ({
+      word: `WORD${i}`,
+      gloss: 'a sample',
+    }))
+    const miss = checkSynonymCoverage(
+      'en/a1.json',
+      pack({ lang: 'en', cefr: 'a1', lemmas }),
+    )
+    expect(miss.error).toMatch(/below 80%/)
   })
 })
 

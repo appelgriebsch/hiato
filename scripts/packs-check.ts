@@ -2,7 +2,8 @@
 /**
  * Validate public/packs JSON files — schema, exclusive bands, license matrix,
  * ADR 0023 spoilers, ADR 0026/0028 floors, NSFW denylist, template-gloss,
- * pack-language gloss (ADR 0030), hangman length 3–10.
+ * pack-language gloss (ADR 0030), hangman length 3–10, Hunspell membership,
+ * person-name gloss gate (#24).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
@@ -17,6 +18,7 @@ import {
   validatePack,
   type PackSnapshot,
 } from './packs-check-lib'
+import { ensureDicts } from './lang-membership'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -39,6 +41,8 @@ async function walkJson(dir: string): Promise<string[]> {
   }
   return out
 }
+
+await ensureDicts()
 
 const files = await walkJson(ROOT)
 if (files.length === 0) {

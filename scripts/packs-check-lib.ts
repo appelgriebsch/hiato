@@ -1,5 +1,6 @@
 /**
- * Pack completeness, exclusive bands, floors, and license matrix (ADR 0026–0029).
+ * Pack completeness, exclusive bands, floors, license matrix (ADR 0026–0029),
+ * #24 name/Hunspell/chip gates, and pack-language gloss (ADR 0030).
  * Pure helpers so bun:test can cover exclusive/license without walking disk twice.
  */
 import {
@@ -14,7 +15,16 @@ import {
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist } from './lemma-denylist'
+import { loadNameList, onNameList } from './lemma-names'
+import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
+import { dictsReady, isWordOfLang } from './lang-membership'
+import {
+  SYNONYM_CHIP_CAP,
+  SYNONYM_COVERAGE_FLOOR,
+  invalidSynonymChipReason,
+  synonymCoverageRatio,
+} from './synonym-chips'
 import { EXISTING_CEFRS, foldKey, hangmanOk } from './pack-select'
 
 export const PACK_MIN = 350
@@ -24,6 +34,7 @@ export const SYNONYM_WARN = 0.8
 export const SYNONYM_BROKEN = 0.05
 
 const DENY = loadDenylist()
+const NAMES = loadNameList()
 
 export type PackSnapshot = {
   rel: string
@@ -121,6 +132,16 @@ export function checkSynonymCoverage(
   rel: string,
   pack: WordPack,
 ): { error: string | null; warn: string | null } {
+  if ((EXISTING_CEFRS as readonly string[]).includes(pack.cefr)) {
+    const pct = synonymCoverageRatio(pack.lemmas, DENY)
+    if (pct < SYNONYM_COVERAGE_FLOOR) {
+      return {
+        error: `${rel}: synonym chip coverage ${(pct * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
+        warn: null,
+      }
+    }
+    return { error: null, warn: null }
+  }
   if (pack.cefr !== 'c1' && pack.cefr !== 'c2') {
     return { error: null, warn: null }
   }
@@ -268,22 +289,50 @@ export function validatePack(raw: unknown, file: string): WordPack {
       if (!Array.isArray(e.synonyms)) {
         throw new Error(`${file}: lemmas[${i}].synonyms must be an array`)
       }
-      synonyms = e.synonyms.map((s, j) =>
-        assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`).normalize('NFC'),
-      )
+      if (e.synonyms.length > SYNONYM_CHIP_CAP) {
+        throw new Error(
+          `${file}: lemmas[${i}] synonyms length ${e.synonyms.length} exceeds cap ${SYNONYM_CHIP_CAP}`,
+        )
+      }
+      synonyms = e.synonyms.map((s, j) => {
+        const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
+        const reason = invalidSynonymChipReason(word, raw, DENY)
+        if (reason) {
+          throw new Error(
+            `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,
+          )
+        }
+        return raw.normalize('NFC')
+      })
     }
 
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
+    }
+    if (dictsReady() && !isWordOfLang(o.lang as PackLang, word)) {
+      throw new Error(
+        `${file}: lemmas[${i}] not a word of ${o.lang} — "${word}"`,
+      )
     }
     if (isTemplateGloss(gloss)) {
       throw new Error(
         `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
       )
     }
-    if (isWrongLanguageGloss(o.lang as string, gloss)) {
+    if (
+      isWrongLanguageGloss(
+        o.lang as string,
+        gloss,
+        dictsReady() ? isWordOfLang : undefined,
+      )
+    ) {
       throw new Error(
         `${file}: lemmas[${i}] gloss not in pack language ${o.lang} — "${word}" / "${gloss}"`,
+      )
+    }
+    if (onNameList(word, NAMES) && isPersonNameGloss(gloss, o.lang as string)) {
+      throw new Error(
+        `${file}: lemmas[${i}] person-name gloss — "${word}" / "${gloss}"`,
       )
     }
     if (gloss && spoilerContains(gloss, word)) {

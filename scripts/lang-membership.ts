@@ -125,6 +125,10 @@ function deCompoundOk(spell: SpellChecker, word: string): boolean {
   return false
 }
 
+export function dictsReady(): boolean {
+  return !!(fixtures || production)
+}
+
 function spellers(): SpellMap {
   const map = fixtures ?? production
   if (!map) {

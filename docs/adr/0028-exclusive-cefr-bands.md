@@ -8,4 +8,6 @@ A lemma may appear in **at most one** pack per language. Expand must not top up 
 
 Target remains **~400 lemmas** per lang×CEFR, `packs:check` floor **350** (ADR 0026), including B2 and C1. **C2 only** may use a documented lower floor of **200** if exclusive hangman-fit lemmas (length 3–10) run out — never by copying lower-level words. Raise the C2 floor later if a dry-run shows 350 is easy; do not lower C1.
 
+B2–C2 selection uses the same pack-quality gates as A1–B1 (#24): Hunspell language membership (loanword allowlist), NSFW denylist, hangman length 3–10, and no person-name list lemmas (frequency bands dump proper names). `packs:check` also drops a lemma when it is on the name list **and** the gloss is a person-name gloss.
+
 Rejected: overlapping/cumulative higher packs; lowering the C1 floor in this epic; stuffing C2 with B1 leftovers.

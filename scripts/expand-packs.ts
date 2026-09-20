@@ -2,7 +2,8 @@
 /**
  * Expand public/packs B2–C2 only (ADR 0028, 0029). Never overwrites A1–B1 lemmas.
  * Sources: CEFR-J B2; Octanove C1/C2; wordhoard v0.1.0 frequency-rank bands (DE/ES);
- * FrequencyWords PT. Glosses in pack.lang only (ADR 0030). --dry-run selects without
+ * FrequencyWords PT. Same #24 gates as A1–B1: Hunspell membership, person-name
+ * list skip, denylist, pack-language gloss (ADR 0030). --dry-run selects without
  * xAI or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
  */
 import { Database } from 'bun:sqlite'
@@ -10,7 +11,11 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 import { loadDenylist, nfcUpper } from './lemma-denylist'
+import { loadNameList, onNameList } from './lemma-names'
+import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
+import { ensureDicts, isWordOfLang } from './lang-membership'
+import { filterSynonymChips } from './synonym-chips'
 import {
   DE_ES_BANDS,
   EXISTING_CEFRS,
@@ -36,6 +41,7 @@ const LANGS = ['en', 'pt', 'de', 'es'] as const
 type Lemma = { word: string; gloss?: string; synonyms?: string[] }
 
 const DENY = loadDenylist()
+const NAMES = loadNameList()
 
 const EXTRA_STOP = new Set(
   `
@@ -66,6 +72,10 @@ DANKE GRACIAS THANKS SIR HAUSE DESTA NESTE NESTA DESTES DESTAS TIVE SINTO ESPERO
 function okLemma(lang: Lang, raw: string): string | null {
   const word = hangmanOk(lang, raw, DENY)
   if (!word || EXTRA_STOP.has(word)) return null
+  if (!isWordOfLang(lang, word)) return null
+  // B2–C2 frequency bands dump proper names; skip the #24 name list entirely
+  // (A1–B1 still keep WILL/MARK with a common-noun gloss).
+  if (onNameList(word, NAMES)) return null
   return word
 }
 
@@ -356,7 +366,8 @@ const GLOSS_STYLE: Record<Lang, string> = {
 
 function glossRejected(lang: Lang, word: string, gloss: string | undefined): boolean {
   if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, word)) return true
-  return isWrongLanguageGloss(lang, gloss)
+  if (onNameList(word, NAMES) && isPersonNameGloss(gloss, lang)) return true
+  return isWrongLanguageGloss(lang, gloss, isWordOfLang)
 }
 
 async function xaiChat(key: string, system: string, prompt: string, temperature: number): Promise<string> {
@@ -436,7 +447,7 @@ async function generateGlosses(
       `Language: ${LANG_NAME[lang]} (${lang}).\n` +
       `Write a short learner dictionary gloss for each lemma in ${LANG_NAME[lang]} only (one simple sentence or clause).\n` +
       `Rules: never include the lemma itself as a whole word in its gloss (do not start with the lemma); ` +
-      `no letter-count or classroom-template fluff; no NSFW. ${GLOSS_STYLE[lang]}\n` +
+      `no letter-count or classroom-template fluff; no NSFW; never define a lemma as a given name, surname, or person. ${GLOSS_STYLE[lang]}\n` +
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
 
@@ -504,21 +515,12 @@ async function generateGlosses(
 }
 
 function cleanSynonyms(lemma: string, raw: unknown): string[] {
-  const list = Array.isArray(raw) ? raw : typeof raw === 'string' ? raw.split(/[,;|/]/) : []
-  const out: string[] = []
-  const seen = new Set<string>()
-  for (const item of list) {
-    if (typeof item !== 'string') continue
-    const syn = item.trim().normalize('NFC')
-    if (!syn) continue
-    const key = nfcUpper(syn)
-    if (seen.has(key)) continue
-    if (spoiler(syn, lemma)) continue
-    seen.add(key)
-    out.push(syn)
-    if (out.length >= 3) break
-  }
-  return out
+  const list = Array.isArray(raw)
+    ? raw.filter((x): x is string => typeof x === 'string')
+    : typeof raw === 'string'
+      ? raw.split(/[,;|/]/)
+      : []
+  return filterSynonymChips(lemma, list, DENY)
 }
 
 async function generateSynonyms(
@@ -739,6 +741,7 @@ async function main() {
   const { dryRun, repairGloss, forceGloss, levels, langs } = parseArgs(
     process.argv.slice(2),
   )
+  await ensureDicts()
   await ensureSources()
 
   if (repairGloss) {
