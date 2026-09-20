@@ -1,17 +1,32 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
- * NSFW denylist, and template-gloss rejection (Ask Avery C1/C2).
+ * NSFW denylist, required non-template same-language gloss (ADR 0030), person-name gloss gate,
+ * Hunspell language-membership (loanword allowlist), and ≥80% synonym chips.
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { isPackCefr, isPackLang, type WordPack } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
-import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
+import { loadNameList, onNameList } from './lemma-names'
+import { isPersonNameGloss } from './name-gloss'
+import {
+  isTemplateGloss,
+  isWrongLanguageGloss,
+  TEMPLATE_GLOSS_RE,
+} from './gloss-quality'
+import { ensureDicts, isWordOfLang } from './lang-membership'
+import {
+  SYNONYM_CHIP_CAP,
+  SYNONYM_COVERAGE_FLOOR,
+  invalidSynonymChipReason,
+  synonymCoverageRatio,
+} from './synonym-chips'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 const DENY = loadDenylist()
+const NAMES = loadNameList()
 
 function assertString(v: unknown, label: string): string {
   if (typeof v !== 'string' || !v.trim()) {
@@ -52,31 +67,62 @@ function validatePack(raw: unknown, file: string): WordPack {
     }
     const e = entry as Record<string, unknown>
     const word = assertString(e.word, `${file}: lemmas[${i}].word`).normalize('NFC')
-    const gloss =
-      e.gloss === undefined
-        ? undefined
-        : assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize('NFC')
+    const gloss = assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize(
+      'NFC',
+    )
     let synonyms: string[] | undefined
     if (e.synonyms !== undefined) {
       if (!Array.isArray(e.synonyms)) {
         throw new Error(`${file}: lemmas[${i}].synonyms must be an array`)
       }
-      synonyms = e.synonyms.map((s, j) =>
-        assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`).normalize('NFC'),
-      )
+      if (e.synonyms.length > SYNONYM_CHIP_CAP) {
+        throw new Error(
+          `${file}: lemmas[${i}] synonyms length ${e.synonyms.length} exceeds cap ${SYNONYM_CHIP_CAP}`,
+        )
+      }
+      synonyms = e.synonyms.map((s, j) => {
+        const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
+        if (raw !== raw.normalize('NFC')) {
+          throw new Error(
+            `${file}: lemmas[${i}] synonyms[${j}] is not NFC`,
+          )
+        }
+        const reason = invalidSynonymChipReason(word, raw, DENY)
+        if (reason) {
+          throw new Error(
+            `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,
+          )
+        }
+        return raw.normalize('NFC')
+      })
     }
 
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
-    if (gloss && isTemplateGloss(gloss)) {
+    if (!isWordOfLang(o.lang as 'en' | 'de' | 'es' | 'pt', word)) {
+      throw new Error(
+        `${file}: lemmas[${i}] not a word of ${o.lang} — "${word}"`,
+      )
+    }
+    if (isTemplateGloss(gloss)) {
       throw new Error(
         `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
       )
     }
-    if (gloss && spoilerContains(gloss, word)) {
+    if (isWrongLanguageGloss(o.lang as string, gloss, isWordOfLang)) {
+      throw new Error(
+        `${file}: lemmas[${i}] gloss not in pack language ${o.lang} — "${word}" / "${gloss}"`,
+      )
+    }
+    if (spoilerContains(gloss, word)) {
       throw new Error(
         `${file}: lemmas[${i}] spoiler — gloss contains lemma "${word}"`,
+      )
+    }
+    if (onNameList(word, NAMES) && isPersonNameGloss(gloss, o.lang as string)) {
+      throw new Error(
+        `${file}: lemmas[${i}] person-name gloss — "${word}" / "${gloss}"`,
       )
     }
     if (synonyms) {
@@ -128,6 +174,8 @@ async function walkJson(dir: string): Promise<string[]> {
   return out
 }
 
+await ensureDicts()
+
 const files = await walkJson(ROOT)
 if (files.length === 0) {
   console.error(`No pack JSON under ${ROOT}`)
@@ -175,6 +223,13 @@ for (const file of files) {
     )
   }
 
+  const chipRatio = synonymCoverageRatio(pack.lemmas, DENY)
+  if (chipRatio < SYNONYM_COVERAGE_FLOOR) {
+    throw new Error(
+      `${rel}: synonym chip coverage ${(chipRatio * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
+    )
+  }
+
   // Spot-check: every lemma uppercased via nfcUpper for consistency
   for (const [i, L] of pack.lemmas.entries()) {
     if (nfcUpper(L.word) !== L.word.normalize('NFC')) {
@@ -185,8 +240,11 @@ for (const file of files) {
     }
   }
 
+  const withChips = pack.lemmas.filter(
+    (L) => (L.synonyms?.length ?? 0) > 0,
+  ).length
   console.log(
-    `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr})`,
+    `ok ${rel} — ${pack.lemmas.length} lemmas, synonym chips ${withChips}/${pack.lemmas.length} (${(chipRatio * 100).toFixed(1)}%) (${pack.lang}/${pack.cefr})`,
   )
   ok++
 }

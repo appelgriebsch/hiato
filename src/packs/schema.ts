@@ -17,7 +17,7 @@ export function packUrl(lang: PackLang, cefr: PackCefr): string {
 export interface PackLemma {
   /** Target word (display / answer). NFC recommended. */
   word: string
-  /** Same-language gloss — must not contain `word` (ADR 0023). */
+  /** Same-language gloss in `pack.lang` (ADR 0030) — must not contain `word` (ADR 0023). */
   gloss?: string
   /** Same-language synonym chips (≤3 shown) — must not contain `word`. */
   synonyms?: string[]

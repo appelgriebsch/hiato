@@ -6,3 +6,82 @@ export function isTemplateGloss(gloss: string | undefined | null): boolean {
   if (!gloss || !gloss.trim()) return false
   return TEMPLATE_GLOSS_RE.test(gloss)
 }
+
+export type GlossLang = 'en' | 'de' | 'es' | 'pt'
+
+/** English infinitive / article openers. */
+const EN_OPENER = /^(to|the)\s/i
+/** English frames that do not appear as these tokens in DE/ES/PT learner copy. */
+const EN_FRAMES =
+  /\b(something|someone|somebody|anything|anyone|anybody)\b/i
+const EN_ONLY =
+  /\b(cannot|without|within|itself|themselves|yourself)\b/i
+/**
+ * English "a NOUN of/that/…" dictionary frame.
+ * Must not match PT/DE/ES "a …" articles (no English preposition after the noun).
+ */
+const EN_A_FRAME =
+  /^a\s+[\p{L}'-]+\s+(of|or|that|who|which|used|from|for|with|when|where)\b/iu
+/** Lowercase English "an …" — not German "An der/einem …". */
+const EN_AN_FRAME = /^an\s+(?!der\b|die\b|das\b|dem\b|den\b|einem\b|einer\b|ein\b)/i
+
+/** True when a gloss is shaped like an English learner definition (ADR 0030). */
+export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
+  const g = gloss.normalize('NFC').trim()
+  if (!g) return false
+  if (EN_OPENER.test(g)) return true
+  if (EN_FRAMES.test(g)) return true
+  if (EN_ONLY.test(g)) return true
+  if (EN_A_FRAME.test(g)) return true
+  // English "an …" — not German preposition "an …"
+  if (lang !== 'de' && EN_AN_FRAME.test(g)) return true
+  // German has no article "a"; a leading "a " on a DE gloss is English.
+  if (lang === 'de' && /^a\s/i.test(g)) return true
+  return false
+}
+
+/**
+ * Hunspell vote: gloss tokens are English-only more than pack-language-only.
+ * Used when production/fixture spellers are loaded.
+ */
+export function englishGlossByMembership(
+  lang: Exclude<GlossLang, 'en'>,
+  gloss: string,
+  isWordOfLang: (lang: GlossLang, word: string) => boolean,
+): boolean {
+  const tokens = gloss.normalize('NFC').match(/[\p{L}\p{M}]+/gu) ?? []
+  let enOnly = 0
+  let packOnly = 0
+  let both = 0
+  for (const t of tokens) {
+    if (t.length < 3) continue
+    const en = isWordOfLang('en', t)
+    const pack = isWordOfLang(lang, t)
+    if (en && !pack) enOnly++
+    else if (pack && !en) packOnly++
+    else if (en && pack) both++
+  }
+  const content = enOnly + packOnly + both
+  if (content < 3) return enOnly >= 2 && packOnly === 0
+  return enOnly >= 2 && enOnly > packOnly
+}
+
+/**
+ * Gloss is not in the pack language (ADR 0030).
+ * EN packs are English by construction. DE/ES/PT must not ship English copy.
+ * Pass `isWordOfLang` from lang-membership when dicts are loaded.
+ */
+export function isWrongLanguageGloss(
+  lang: string,
+  gloss: string | undefined | null,
+  isWordOfLang?: (lang: GlossLang, word: string) => boolean,
+): boolean {
+  if (!gloss || !gloss.trim()) return false
+  if (lang === 'en') return false
+  if (lang !== 'de' && lang !== 'es' && lang !== 'pt') return false
+  if (isEnglishShapedGloss(gloss, lang)) return true
+  if (isWordOfLang && englishGlossByMembership(lang, gloss, isWordOfLang)) {
+    return true
+  }
+  return false
+}
