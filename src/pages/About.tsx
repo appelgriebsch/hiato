@@ -44,6 +44,43 @@ export function About() {
         </Card>
       ))}
 
+      <Card className="mb-3">
+        <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>
+        <h2 className="text-[15px] font-semibold text-ink">Inter</h2>
+        <p className="mt-1.5 text-xs font-medium text-accent">
+          SIL Open Font License 1.1
+        </p>
+        <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
+          <li>
+            Copyright (c) 2016 The Inter Project Authors (
+            <a
+              className="text-accent underline-offset-2 hover:underline"
+              href="https://github.com/rsms/inter"
+            >
+              github.com/rsms/inter
+            </a>
+            ).
+          </li>
+          <li>
+            Self-hosted latin woff2 (400 / 500 / 600) under{' '}
+            <code className="text-[12px]">public/fonts</code>. Share cards load
+            these same-origin files only — no Google Fonts or remote CDN (ADR
+            0020).
+          </li>
+          <li>
+            Full license:{' '}
+            <a
+              className="text-accent underline-offset-2 hover:underline"
+              href="/fonts/LICENSE.txt"
+            >
+              /fonts/LICENSE.txt
+            </a>
+            {' · '}
+            repo <code className="text-[12px]">NOTICE</code>.
+          </li>
+        </ul>
+      </Card>
+
       <p className="mt-2 mb-6 text-center text-[11px] leading-relaxed text-ink-faint">
         Selected-language packs are cached for offline play; other languages
         download on demand (ADR 0006).

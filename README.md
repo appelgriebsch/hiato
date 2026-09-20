@@ -6,7 +6,7 @@ Mobile-first offline language word-guess PWA for learners (EN / PT / DE / ES, CE
 
 Plan locked 2026-09-19. Architecture Decision Records live in `docs/adr/`.
 
-Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily EN A1 (this branch) → … → **H1** prod harden.
+Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily EN A1 → **T3** langs → **T4** streaks → **T5** share card (this branch) → **T6** polish → **H1** prod harden.
 
 ```bash
 bun run packs:check   # pack schema + spoiler rule
@@ -48,6 +48,8 @@ See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 ## License notes
 
 Word packs ship with per-source attribution. Portuguese packs may use CC-BY-SA sources.
+
+UI and share-card typeface is self-hosted **Inter** (SIL Open Font License 1.1) — see `NOTICE` and `public/fonts/LICENSE.txt`. Share cards never load Google Fonts or a remote font CDN (ADR 0020).
 
 ## Docs
 
