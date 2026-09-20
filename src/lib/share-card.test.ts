@@ -106,6 +106,21 @@ describe('pickShareCardPayload', () => {
       }),
     ).toBeNull()
   })
+
+  test('accepts unlocked CEFR c2 and rejects garbage c3', () => {
+    const base = {
+      lang: 'en',
+      streak: 1,
+      dateKey: '2026-09-20',
+      wordLength: 5,
+      won: true,
+      mode: 'daily',
+    }
+    expect(pickShareCardPayload({ ...base, cefr: 'c2' })).toMatchObject({
+      cefr: 'c2',
+    })
+    expect(pickShareCardPayload({ ...base, cefr: 'c3' })).toBeNull()
+  })
 })
 
 describe('formatShareText / filename', () => {

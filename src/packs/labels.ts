@@ -18,12 +18,18 @@ export const CEFR_LABELS: Record<PackCefr, string> = {
   a1: 'A1 · Beginner',
   a2: 'A2 · Elementary',
   b1: 'B1 · Intermediate',
+  b2: 'B2 · Upper-intermediate',
+  c1: 'C1 · Advanced',
+  c2: 'C2 · Proficiency',
 }
 
 export const CEFR_CODES: Record<PackCefr, string> = {
   a1: 'A1',
   a2: 'A2',
   b1: 'B1',
+  b2: 'B2',
+  c1: 'C1',
+  c2: 'C2',
 }
 
 /** Localized empty-state for the learner-hint strip. */

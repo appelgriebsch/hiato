@@ -40,6 +40,8 @@ describe('prefs (localStorage)', () => {
   test('round-trips lang + cefr', () => {
     setPrefs({ lang: 'pt', cefr: 'b1' })
     expect(getPrefs()).toEqual({ lang: 'pt', cefr: 'b1' })
+    setPrefs({ lang: 'en', cefr: 'c2' })
+    expect(getPrefs()).toEqual({ lang: 'en', cefr: 'c2' })
   })
 
   test('rejects unknown lang/cefr', () => {
@@ -50,7 +52,7 @@ describe('prefs (localStorage)', () => {
     expect(getPrefs()).toBeNull()
     localStorage.setItem(
       'hiato.prefs',
-      JSON.stringify({ lang: 'en', cefr: 'c2' }),
+      JSON.stringify({ lang: 'en', cefr: 'c3' }),
     )
     expect(getPrefs()).toBeNull()
   })

@@ -36,14 +36,18 @@ describe('purgeLocalPacksExcept (ADR 0006)', () => {
   test('drops other-language pack keys, keeps selected', () => {
     localStorage.setItem(localPackCacheKey('en', 'a1'), '{"keep":true}')
     localStorage.setItem(localPackCacheKey('en', 'b1'), '{"keep":true}')
+    localStorage.setItem(localPackCacheKey('en', 'c2'), '{"keep":true}')
     localStorage.setItem(localPackCacheKey('de', 'a1'), '{"drop":true}')
     localStorage.setItem(localPackCacheKey('pt', 'a2'), '{"drop":true}')
+    localStorage.setItem(localPackCacheKey('pt', 'c2'), '{"drop":true}')
 
     purgeLocalPacksExcept('en')
 
     expect(localStorage.getItem(localPackCacheKey('en', 'a1'))).not.toBeNull()
     expect(localStorage.getItem(localPackCacheKey('en', 'b1'))).not.toBeNull()
+    expect(localStorage.getItem(localPackCacheKey('en', 'c2'))).not.toBeNull()
     expect(localStorage.getItem(localPackCacheKey('de', 'a1'))).toBeNull()
     expect(localStorage.getItem(localPackCacheKey('pt', 'a2'))).toBeNull()
+    expect(localStorage.getItem(localPackCacheKey('pt', 'c2'))).toBeNull()
   })
 })
