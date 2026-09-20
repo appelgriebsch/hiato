@@ -2,15 +2,22 @@
 
 export type PackLang = 'en' | 'de' | 'es' | 'pt'
 
-/** All CEFR codes the app can address (picker still uses PACK_CEFRS). */
+/** All CEFR codes the app can address. */
 export const PACK_CEFR_LEVELS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] as const
 export type PackCefr = (typeof PACK_CEFR_LEVELS)[number]
 
 /** Display order matches G0 LanguageSelect: EN / PT / DE / ES. */
 export const PACK_LANGS: PackLang[] = ['en', 'pt', 'de', 'es']
 
-/** Shipped CEFR bands in the picker and pack completeness (B2–C2 files: #29). */
-export const PACK_CEFRS = ['a1', 'a2', 'b1'] as const satisfies readonly PackCefr[]
+/** Shipped CEFR bands in the picker, precache, purge, and pack completeness. */
+export const PACK_CEFRS = [
+  'a1',
+  'a2',
+  'b1',
+  'b2',
+  'c1',
+  'c2',
+] as const satisfies readonly PackCefr[]
 
 /** Workbox runtime cache for on-demand / selected-lang packs (ADR 0006). */
 export const PACK_SW_CACHE = 'hiato-packs'

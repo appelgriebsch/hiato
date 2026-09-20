@@ -63,7 +63,7 @@ export async function purgeOtherLanguagePacks(
 }
 
 /**
- * Precache A1/A2/B1 for the selected language, then drop other langs
+ * Precache shipped CEFR packs for the selected language, then drop other langs
  * from SW cache + localStorage (ADR 0006).
  */
 export async function precacheSelectedLanguage(

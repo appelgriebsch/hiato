@@ -1,6 +1,6 @@
 # Hiato
 
-Mobile-first offline language word-guess PWA for learners (EN / PT / DE / ES, CEFR A1–B1).
+Mobile-first offline language word-guess PWA for learners (EN / PT / DE / ES, CEFR A1–C2).
 
 ## Status
 
@@ -33,21 +33,21 @@ bun test             # optional smoke
 Production-parity install / build:
 
 ```bash
-bun install --frozen-lockfile && bun run build
+bun install --frozen-lockfile && bun run packs:check && bun run build
 ```
 
 ## Cloudflare Pages
 
 See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 
-- **Build command:** `bun install --frozen-lockfile && bun run build`
+- **Build command:** `bun install --frozen-lockfile && bun run packs:check && bun run build`
 - **Output directory:** `dist`
 - **Env (Production + Preview):** `BUN_VERSION=1.4.2`, `SKIP_DEPENDENCY_INSTALL=true`
 - Commit **`bun.lock`** only; no npm/pnpm lockfiles
 
 ## License notes
 
-Word packs ship with per-source attribution. Portuguese packs may use CC-BY-SA sources.
+Word packs ship with per-source attribution (license bands in `src/packs/licenses.ts` / `NOTICE`). Portuguese packs are CC-BY-SA at all levels; EN C1/C2 and DE/ES B2–C2 are CC-BY-SA; EN B2 is CEFR-J citation / CC0 (not share-alike).
 
 UI and share-card typeface is self-hosted **Inter** (SIL Open Font License 1.1) — see `NOTICE` and `public/fonts/LICENSE.txt`. Share cards never load Google Fonts or a remote font CDN (ADR 0020).
 
