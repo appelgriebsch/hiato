@@ -6,8 +6,15 @@ Word packs
 Per-language licenses and attribution ship in each pack JSON
 (`public/packs/<lang>/<cefr>.json`) and on the in-app About page.
 
-Portuguese lemmas are curated from Wiktionary-derived frequency lists
-(CC-BY-SA-4.0). Gloss and synonym copy is original to Hiato (ADR 0009).
+Portuguese lemmas are curated from Wiktionary-derived / OpenSubtitles
+frequency lists (CC-BY-SA-4.0 path, ADR 0009). Gloss and synonym copy is
+original to Hiato.
+
+Lemma selection for EN/DE/ES/PT also draws on openly licensed frequency
+resources: hermitdave/FrequencyWords (MIT; OpenSubtitles-based) and, where
+used, wordhoard POS/CEFR sample banding (dataset CC-BY-SA-4.0 — selection
+only; Hiato glosses remain original). Packs are curated learner lists, not
+verbatim dumps of any proprietary wordlist (ADR 0026).
 
 Fonts
 -----

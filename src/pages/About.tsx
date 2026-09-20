@@ -81,9 +81,12 @@ export function About() {
         </ul>
       </Card>
 
-      <p className="mt-2 mb-6 text-center text-[11px] leading-relaxed text-ink-faint">
+      <p className="mt-2 mb-2 text-center text-[11px] leading-relaxed text-ink-faint">
         Selected-language packs are cached for offline play; other languages
         download on demand (ADR 0006).
+      </p>
+      <p className="mb-6 text-center text-[12px] leading-relaxed text-ink-muted">
+        Built by Grok Bot
       </p>
     </Layout>
   )

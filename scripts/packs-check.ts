@@ -151,6 +151,14 @@ for (const file of files) {
     }
   }
 
+  // ADR 0026 soft floor — pre-prod packs should be ~400 lemmas, not dozens
+  const SOFT_FLOOR = 350
+  if (pack.lemmas.length < SOFT_FLOOR) {
+    throw new Error(
+      `${rel}: lemma count ${pack.lemmas.length} is below pre-prod soft floor ${SOFT_FLOOR} (ADR 0026 aims ~400)`,
+    )
+  }
+
   console.log(
     `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr})`,
   )
