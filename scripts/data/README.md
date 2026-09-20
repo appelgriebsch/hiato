@@ -13,6 +13,16 @@ Legacy `wordhoard-{en,de,es}.csv` and `cefrj-en.json` (A1–B1 only) must not be
 
 Hiato pack **glosses and synonyms** are original learner copy. Lemma lists are curated selections, not verbatim proprietary dumps.
 
+Shipped pack license bands (pack JSON, ADR 0029):
+
+| Packs | License on lemma list |
+|-------|------------------------|
+| EN A1–B2 | CC0 / CEFR-J citation (Tono Lab) — B2 is **not** share-alike |
+| EN C1–C2 | CC-BY-SA-4.0 (Octanove) |
+| DE/ES A1–B1 | CC0 |
+| DE/ES B2–C2 | CC-BY-SA-4.0 wordhoard-full; frequency-rank bands, not Goethe/Cervantes |
+| PT A1–C2 | CC-BY-SA-4.0; C-levels are frequency slices, not CAPLE |
+
 | `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate |
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips (C1/C2 target ≥80%) |

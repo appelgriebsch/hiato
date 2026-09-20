@@ -23,8 +23,8 @@ describe('isPackCefr (ADR 0027)', () => {
     expect(isPackCefr(null)).toBe(false)
   })
 
-  test('PACK_CEFRS stays the shipped A1–B1 picker list', () => {
-    expect(PACK_CEFRS).toEqual(['a1', 'a2', 'b1'])
+  test('PACK_CEFRS is the shipped A1–C2 picker list', () => {
+    expect(PACK_CEFRS).toEqual(['a1', 'a2', 'b1', 'b2', 'c1', 'c2'])
     expect(PACK_CEFR_LEVELS).toEqual(['a1', 'a2', 'b1', 'b2', 'c1', 'c2'])
   })
 
