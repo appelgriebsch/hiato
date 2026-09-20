@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
- * NSFW denylist, required non-template gloss, person-name gloss gate, and
- * Hunspell language-membership (loanword allowlist).
+ * NSFW denylist, required non-template gloss, person-name gloss gate,
+ * Hunspell language-membership (loanword allowlist), and ≥80% synonym chips.
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
@@ -13,6 +13,12 @@ import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
+import {
+  SYNONYM_CHIP_CAP,
+  SYNONYM_COVERAGE_FLOOR,
+  invalidSynonymChipReason,
+  synonymCoverageRatio,
+} from './synonym-chips'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 const DENY = loadDenylist()
@@ -65,9 +71,26 @@ function validatePack(raw: unknown, file: string): WordPack {
       if (!Array.isArray(e.synonyms)) {
         throw new Error(`${file}: lemmas[${i}].synonyms must be an array`)
       }
-      synonyms = e.synonyms.map((s, j) =>
-        assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`).normalize('NFC'),
-      )
+      if (e.synonyms.length > SYNONYM_CHIP_CAP) {
+        throw new Error(
+          `${file}: lemmas[${i}] synonyms length ${e.synonyms.length} exceeds cap ${SYNONYM_CHIP_CAP}`,
+        )
+      }
+      synonyms = e.synonyms.map((s, j) => {
+        const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
+        if (raw !== raw.normalize('NFC')) {
+          throw new Error(
+            `${file}: lemmas[${i}] synonyms[${j}] is not NFC`,
+          )
+        }
+        const reason = invalidSynonymChipReason(word, raw, DENY)
+        if (reason) {
+          throw new Error(
+            `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,
+          )
+        }
+        return raw.normalize('NFC')
+      })
     }
 
     if (isDeniedLemma(word, DENY)) {
@@ -191,6 +214,13 @@ for (const file of files) {
     )
   }
 
+  const chipRatio = synonymCoverageRatio(pack.lemmas, DENY)
+  if (chipRatio < SYNONYM_COVERAGE_FLOOR) {
+    throw new Error(
+      `${rel}: synonym chip coverage ${(chipRatio * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
+    )
+  }
+
   // Spot-check: every lemma uppercased via nfcUpper for consistency
   for (const [i, L] of pack.lemmas.entries()) {
     if (nfcUpper(L.word) !== L.word.normalize('NFC')) {
@@ -201,8 +231,11 @@ for (const file of files) {
     }
   }
 
+  const withChips = pack.lemmas.filter(
+    (L) => (L.synonyms?.length ?? 0) > 0,
+  ).length
   console.log(
-    `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr})`,
+    `ok ${rel} — ${pack.lemmas.length} lemmas, synonym chips ${withChips}/${pack.lemmas.length} (${(chipRatio * 100).toFixed(1)}%) (${pack.lang}/${pack.cefr})`,
   )
   ok++
 }
