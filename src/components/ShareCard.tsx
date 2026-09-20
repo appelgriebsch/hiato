@@ -1,3 +1,4 @@
+import { BrandMark } from '@/components/brand/BrandMark'
 import { letterCountLabel } from '@/engine'
 import {
   shareCardCefrLabel,
@@ -13,12 +14,13 @@ export function ShareCard(payload: ShareCardPayload) {
       id="hiato-share-card"
       role="img"
       aria-label="Hiato share card preview"
-      className="mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-white to-accent-soft shadow-md"
+      className="motion-share-card mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-white to-accent-soft shadow-md"
     >
       <div className="px-6 pt-6 pb-2 text-center">
-        <div className="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
-          Hiato
+        <div className="mb-2.5 flex justify-center">
+          <BrandMark size="sm" className="opacity-90" />
         </div>
+        <div className="text-kicker">Hiato</div>
         <p className="mt-1 text-sm text-ink-muted">{shareCardKicker(payload)}</p>
       </div>
       <div className="mx-6 my-4 grid grid-cols-2 gap-3 rounded-xl bg-white/80 p-4 text-left text-sm">

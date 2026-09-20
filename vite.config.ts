@@ -13,10 +13,13 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'prompt',
-      // Precache favicon, brand SVG, self-hosted fonts, and PNG/SVG icons
+      // Precache favicon, brand SVG, self-hosted fonts, and PNG icons
       includeAssets: [
         'favicon.svg',
+        'favicon.ico',
+        'favicon-32.png',
         'hiato.svg',
+        'brand/*',
         'fonts/*.woff2',
         'fonts/LICENSE.txt',
         'icons/*',
@@ -36,27 +39,25 @@ export default defineConfig({
             src: 'icons/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
+            purpose: 'any',
           },
           {
             src: 'icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'icons/icon-192-maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
           },
           {
             src: 'icons/icon-512-maskable.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',
-          },
-          {
-            src: 'icons/icon-192.svg',
-            sizes: '192x192',
-            type: 'image/svg+xml',
-          },
-          {
-            src: 'icons/icon-512.svg',
-            sizes: '512x512',
-            type: 'image/svg+xml',
           },
         ],
       },

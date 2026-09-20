@@ -8,12 +8,15 @@ export function Keyboard({
   usedCorrect,
   disabled,
   onKey,
+  shakeKey,
 }: {
   lang: PackLang
   usedWrong: Set<string>
   usedCorrect: Set<string>
   disabled?: boolean
   onKey: (letter: string) => void
+  /** Grapheme key currently shaking (wrong guess feedback) */
+  shakeKey?: string | null
 }) {
   const rows = KEYBOARDS[lang]
   return (
@@ -24,6 +27,7 @@ export function Keyboard({
             const k = graphemeKey(key)
             const wrong = usedWrong.has(k)
             const correct = usedCorrect.has(k)
+            const shaking = shakeKey === k
             return (
               <button
                 key={key}
@@ -31,12 +35,13 @@ export function Keyboard({
                 disabled={disabled || wrong || correct}
                 onClick={() => onKey(key)}
                 className={[
-                  'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase transition-all active:scale-95 sm:min-w-8',
+                  'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
                   wrong
-                    ? 'bg-wrong text-white'
+                    ? 'bg-wrong/90 text-white opacity-70'
                     : correct
                       ? 'bg-accent text-white'
                       : 'bg-white border border-line text-ink hover:bg-cream-dark',
+                  shaking ? 'motion-key-shake' : '',
                 ].join(' ')}
               >
                 {key}

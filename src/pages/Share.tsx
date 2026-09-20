@@ -83,16 +83,16 @@ export function Share() {
         left={
           <button
             type="button"
-            className="text-sm text-ink-muted"
+            className="motion-press text-sm text-ink-muted"
             onClick={() => nav(-1)}
           >
             ← Back
           </button>
         }
-        center={<span className="text-sm font-semibold">Share card</span>}
+        center={<span className="text-sm font-semibold tracking-tight">Share card</span>}
       />
 
-      <p className="mb-4 text-center text-sm text-ink-muted">
+      <p className="text-caption mb-4 text-center tracking-wide">
         Answer never appears on the card.
       </p>
 

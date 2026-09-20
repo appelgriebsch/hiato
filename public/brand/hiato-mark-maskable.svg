@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="112" fill="#f7f6f3"/>
-  <g transform="translate(56, 72) scale(6.25)">
+  <rect width="512" height="512" fill="#f7f6f3"/>
+  <!-- 20% inset safe zone: translate 102.4, scale so 64-unit mark fits in ~307px -->
+  <g transform="translate(102.4, 112) scale(4.8)">
     <rect x="5" y="16" width="16" height="32" rx="5" fill="#eef5f0" stroke="#3d6b55" stroke-width="2"/>
     <path d="M10.2 24.5v15M15.8 24.5v15M10.2 32h5.6" stroke="#3d6b55" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
     <rect x="24" y="16" width="16" height="32" rx="5" fill="#ebe9e4" stroke="#9a968c" stroke-width="1.75" stroke-dasharray="3.5 2.5"/>
