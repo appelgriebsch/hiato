@@ -526,7 +526,7 @@ export function Play() {
                 Hint — reveal one accent
               </Button>
               <p className="text-caption mt-1.5 text-center">
-                Optional. After 2 misses on a diacritic cell.
+                Optional. After 2 accent or base-letter misses while a diacritic remains.
               </p>
             </div>
           )}

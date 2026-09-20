@@ -234,7 +234,7 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintMiss(cells, word, 'C')).toBe(true)
   })
 
-  test('hint enables after 2 diacritic-cell misses (not 2 any-misses)', () => {
+  test('hint enables after 2 accent or base misses (unrelated ASCII does not count)', () => {
     const word = 'CAFÉ'
     const cells = buildInitialCells(word, 'b1')
     let misses = 0
