@@ -3,18 +3,18 @@ import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-xl px-5 min-h-11 text-[15px] font-medium transition-all disabled:pointer-events-none disabled:opacity-45',
+  'motion-press inline-flex items-center justify-center gap-2 rounded-xl px-5 min-h-11 text-[15px] font-medium disabled:pointer-events-none disabled:opacity-45',
   {
     variants: {
       variant: {
         primary:
-          'bg-accent text-white hover:bg-accent-mid active:scale-[0.98] shadow-sm',
+          'bg-accent text-white hover:bg-accent-mid shadow-sm',
         secondary:
-          'bg-accent-soft text-accent hover:bg-helped active:scale-[0.98]',
+          'bg-accent-soft text-accent hover:bg-helped',
         ghost:
-          'bg-transparent text-ink-muted hover:bg-cream-dark active:scale-[0.98]',
+          'bg-transparent text-ink-muted hover:bg-cream-dark',
         outline:
-          'bg-white border border-line text-ink hover:bg-cream-dark active:scale-[0.98]',
+          'bg-white border border-line text-ink hover:bg-cream-dark',
       },
       fullWidth: {
         true: 'w-full',

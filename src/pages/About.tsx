@@ -13,7 +13,7 @@ export function About() {
         left={
           <button
             type="button"
-            className="text-sm text-ink-muted"
+            className="motion-press text-sm text-ink-muted"
             onClick={() => nav('/')}
           >
             ← Back

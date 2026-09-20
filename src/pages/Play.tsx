@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { BrandMark } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { StreakChip } from '@/components/StreakChip'
@@ -81,6 +82,10 @@ export function Play() {
   const [alreadyPlayed, setAlreadyPlayed] = useState(false)
   const [streak, setStreak] = useState(0)
   const [practiceOk, setPracticeOk] = useState(true)
+  const [shakeKey, setShakeKey] = useState<string | null>(null)
+  const [streakPulse, setStreakPulse] = useState(false)
+  const streakShown = useRef(0)
+  const shakeTimer = useRef(0)
 
   const roundRef = useRef({
     cells,
@@ -118,6 +123,16 @@ export function Play() {
     ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
   }, [lang, cefr, dateKey])
+
+  useEffect(() => {
+    if (streak > streakShown.current) {
+      setStreakPulse(true)
+      const t = window.setTimeout(() => setStreakPulse(false), 280)
+      streakShown.current = streak
+      return () => clearTimeout(t)
+    }
+    streakShown.current = streak
+  }, [streak])
 
   const persistDaily = useCallback(
     (result: 'win' | 'lose', entry: PackLemma) => {
@@ -272,6 +287,9 @@ export function Play() {
       setUsedWrong(usedWrong)
       if (misses !== r.misses) setMisses(misses)
       setLives(lives)
+      window.clearTimeout(shakeTimer.current)
+      setShakeKey(k)
+      shakeTimer.current = window.setTimeout(() => setShakeKey(null), 240)
       if (lost) endGame('lose', r.wordEntry)
     }
   }
@@ -316,12 +334,17 @@ export function Play() {
     return (
       <Layout>
         <TopBar
-          left={<OfflineChip />}
+          left={
+            <div className="flex items-center gap-2">
+              <BrandMark size="sm" className="opacity-90" />
+              <OfflineChip />
+            </div>
+          }
           center={<Badge>Practice</Badge>}
-          right={<StreakChip count={streak} />}
+          right={<StreakChip count={streak} pulse={streakPulse} />}
         />
-        <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <h1 className="text-xl font-semibold text-ink">Practice unavailable</h1>
+        <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
+          <h1 className="text-title text-ink">Practice unavailable</h1>
           <p className="max-w-xs text-sm text-ink-muted">
             This pack only has today’s daily word, so endless practice would
             spoil it.
@@ -344,16 +367,21 @@ export function Play() {
     return (
       <Layout>
         <TopBar
-          left={<OfflineChip />}
+          left={
+            <div className="flex items-center gap-2">
+              <BrandMark size="sm" className="opacity-90" />
+              <OfflineChip />
+            </div>
+          }
           center={<Badge tone="accent">Daily</Badge>}
-          right={<StreakChip count={streak} />}
+          right={<StreakChip count={streak} pulse={streakPulse} />}
         />
-        <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
+        <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent">
             ✓
           </div>
-          <h1 className="text-xl font-semibold text-ink">Today’s daily is done</h1>
-          <p className="max-w-xs text-sm text-ink-muted">
+          <h1 className="text-title text-ink">Today’s daily is done</h1>
+          <p className="text-body max-w-xs text-ink-muted">
             Come back tomorrow for a new word — or stretch with practice.
             Practice does not affect your streak.
           </p>
@@ -439,7 +467,12 @@ export function Play() {
   return (
     <Layout>
       <TopBar
-        left={<OfflineChip />}
+        left={
+          <div className="flex items-center gap-2">
+            <BrandMark size="sm" className="opacity-90" />
+            <OfflineChip />
+          </div>
+        }
         center={
           mode === 'daily' ? (
             <Badge tone="accent">Daily</Badge>
@@ -447,19 +480,19 @@ export function Play() {
             <Badge>Practice</Badge>
           )
         }
-        right={<StreakChip count={streak} />}
+        right={<StreakChip count={streak} pulse={streakPulse} />}
       />
 
       <div className="mb-3 flex items-center justify-between">
         <Lives remaining={lives} total={TOTAL_LIVES} />
-        <span className="text-xs text-ink-faint">
+        <span className="text-caption tracking-wide">
           {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
         </span>
       </div>
 
       {loading && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-16">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-line border-t-accent" />
+          <div className="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-2 border-line border-t-accent" />
           <p className="text-sm text-ink-muted">
             {mode === 'daily' ? 'Loading today’s word…' : 'Loading a practice word…'}
           </p>
@@ -488,11 +521,11 @@ export function Play() {
           </div>
 
           {showHint && (
-            <div className="mb-4">
+            <div className="motion-onboarding-enter mb-4">
               <Button fullWidth variant="secondary" onClick={onHint}>
                 Hint — reveal one accent
               </Button>
-              <p className="mt-1.5 text-center text-[11px] text-ink-faint">
+              <p className="text-caption mt-1.5 text-center">
                 Optional. After 2 misses on a diacritic cell.
               </p>
             </div>
@@ -508,6 +541,7 @@ export function Play() {
               cefr={cefr}
               dateKey={dateKey}
               streak={streak}
+              streakPulse={streakPulse}
               practiceOk={practiceOk}
               onPractice={goPractice}
             />
@@ -518,6 +552,7 @@ export function Play() {
               usedCorrect={usedCorrect}
               disabled={false}
               onKey={onKey}
+              shakeKey={shakeKey}
             />
           )}
 
@@ -572,6 +607,7 @@ function EndCard({
   cefr,
   dateKey,
   streak,
+  streakPulse,
   practiceOk,
   onPractice,
 }: {
@@ -583,14 +619,15 @@ function EndCard({
   cefr: PackCefr
   dateKey: string
   streak: number
+  streakPulse: boolean
   practiceOk: boolean
   onPractice: () => void
 }) {
   const nav = useNavigate()
   return (
-    <div className="mb-4 space-y-3">
+    <div className="motion-result-enter mb-4 space-y-3">
       <div className="rounded-xl border border-line bg-white/80 px-4 py-4 text-center">
-        <Badge tone={won ? 'accent' : 'warm'}>
+        <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
           {won ? 'You got it' : 'Out of lives'}
           {mode === 'daily' ? ' · Daily' : ' · Practice'}
         </Badge>
@@ -606,7 +643,7 @@ function EndCard({
           <span className="text-ink-muted">
             {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
           </span>
-          <StreakChip count={streak} />
+          <StreakChip count={streak} pulse={streakPulse} />
         </div>
         {mode === 'daily' && won && (
           <p className="mt-2 text-xs text-accent">Streak updated for {dateKey}</p>

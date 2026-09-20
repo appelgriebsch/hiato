@@ -45,17 +45,17 @@ export function Language() {
         left={
           <button
             type="button"
-            className="text-sm text-ink-muted"
+            className="motion-press text-sm text-ink-muted"
             onClick={() => nav('/')}
           >
             ← Back
           </button>
         }
-        center={<span className="text-sm font-semibold text-ink">Your level</span>}
+        center={<span className="text-sm font-semibold tracking-tight text-ink">Your level</span>}
       />
 
-      <h1 className="text-xl font-semibold text-ink">Language</h1>
-      <p className="mt-1 text-sm text-ink-muted">Pick the language you’re learning.</p>
+      <h1 className="text-title text-ink">Language</h1>
+      <p className="text-body mt-1 text-ink-muted">Pick the language you’re learning.</p>
       <div className="mt-4 grid grid-cols-2 gap-2">
         {PACK_LANGS.map((l) => (
           <button
@@ -63,7 +63,8 @@ export function Language() {
             type="button"
             onClick={() => setLang(l)}
             className={[
-              'min-h-14 rounded-xl border-2 px-3 py-3 text-left transition-all',
+              'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left',
+              'transition-[border-color,background-color] duration-200',
               lang === l
                 ? 'border-accent bg-accent-soft'
                 : 'border-line bg-white hover:bg-cream-dark',
@@ -75,8 +76,8 @@ export function Language() {
         ))}
       </div>
 
-      <h2 className="mt-8 text-xl font-semibold text-ink">CEFR level</h2>
-      <p className="mt-1 text-sm text-ink-muted">
+      <h2 className="text-title mt-8 text-ink">CEFR level</h2>
+      <p className="text-body mt-1 text-ink-muted">
         A1–A2 prefill vowels. B1 starts empty.
       </p>
       <div className="mt-4 flex flex-col gap-2">
@@ -86,7 +87,8 @@ export function Language() {
             type="button"
             onClick={() => setCefr(c)}
             className={[
-              'min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium transition-all',
+              'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium',
+              'transition-[border-color,background-color,color] duration-200',
               cefr === c
                 ? 'border-accent bg-accent-soft text-accent'
                 : 'border-line bg-white text-ink hover:bg-cream-dark',

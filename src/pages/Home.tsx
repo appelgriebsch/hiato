@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
+import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { StreakChip } from '@/components/StreakChip'
@@ -83,11 +84,7 @@ export function Home() {
   return (
     <Layout>
       <TopBar
-        left={
-          <span className="text-lg font-semibold tracking-tight text-ink">
-            Hiato
-          </span>
-        }
+        left={<BrandLockup size="md" />}
         right={
           <div className="flex items-center gap-2">
             {prefs ? <StreakChip count={streak} /> : null}
@@ -96,9 +93,9 @@ export function Home() {
         }
       />
 
-      <Card className="mb-4">
-        <h1 className="mb-2 text-xl font-semibold text-ink">{dailyLabel}</h1>
-        <p className="mb-4 text-[15px] leading-relaxed text-ink-muted">
+      <Card className="motion-onboarding-enter mb-4">
+        <h1 className="text-title mb-2 text-ink">{dailyLabel}</h1>
+        <p className="text-body mb-4 text-ink-muted">
           {prefs
             ? dailyDone
               ? 'Today’s daily is done. Come back after local midnight — or stretch with practice (practice does not affect your streak).'
@@ -108,14 +105,14 @@ export function Home() {
         {prefs ? (
           <Link
             to="/play?mode=daily"
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
+            className="motion-press inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid"
           >
             {dailyDone ? 'View today’s result' : 'Play today'}
           </Link>
         ) : (
           <Link
             to="/language"
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
+            className="motion-press inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid"
           >
             Choose language
           </Link>
@@ -125,7 +122,7 @@ export function Home() {
             <button
               type="button"
               disabled={!practiceOk}
-              className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45"
+              className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
               onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
             >
               Practice (endless)

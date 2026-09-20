@@ -187,6 +187,15 @@ describe('share-card fonts (ADR 0020)', () => {
     expect(notice).toContain('Inter')
   })
 
+  test('ShareCard does not wrap stats in role=img', async () => {
+    const src = await Bun.file(
+      path.join(REPO, 'src/components/ShareCard.tsx'),
+    ).text()
+    expect(src).not.toContain('role="img"')
+    expect(src).not.toContain("role='img'")
+    expect(src).toContain('alt=""')
+  })
+
   test('share-card path sources never mention font CDNs', async () => {
     const files = [
       'src/lib/share-card.ts',
