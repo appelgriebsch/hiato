@@ -6,6 +6,7 @@
  * for new lemmas via xAI (never letter-count templates). Denylist rejects NSFW/violence.
  * Person names drop only when the lemma is on the name list *and* the gloss is a
  * person-name gloss (keep WILL/MARK/ROSA with a common-noun reading).
+ * Language membership: nspell/Hunspell (loanword allowlist; PT pt-PT|pt-BR; DE ß/SS).
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
@@ -13,6 +14,7 @@ import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss } from './gloss-quality'
+import { ensureDicts, isWordOfLang } from './lang-membership'
 
 const ROOT = path.join(import.meta.dir, '..')
 const TARGET = 400
@@ -48,6 +50,7 @@ function hangmanOk(lang: Lang, raw: string): string | null {
   if (!re[lang].test(word)) return null
   if (/^(.)\1+$/.test(word)) return null
   if (isDeniedLemma(word, DENY)) return null
+  if (!isWordOfLang(lang, word)) return null
   return word
 }
 
@@ -584,6 +587,7 @@ function hasRealGloss(
 }
 
 // --- main ---
+await ensureDicts()
 await ensureSources()
 const curatedMaps = loadCuratedMaps()
 for (const lang of LANGS) {
@@ -655,7 +659,7 @@ for (const lang of LANGS) {
     const lemmas = buildLemmas(lang, selected, cache)
     const meta = attribution(lang, cefr)
     const pack = {
-      version: 3,
+      version: 4,
       lang,
       cefr,
       license: meta.license,

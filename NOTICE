@@ -16,6 +16,20 @@ used, wordhoard POS/CEFR sample banding (dataset CC-BY-SA-4.0 — selection
 only; Hiato glosses remain original). Packs are curated learner lists, not
 verbatim dumps of any proprietary wordlist (ADR 0026).
 
+Build-time spellcheck (not shipped)
+-----------------------------------
+Pack expansion and `packs:check` use `nspell` with Hunspell dictionaries
+installed as **devDependencies**. They are language-membership filters at
+build time only — the `.aff`/`.dic` files are not copied into the PWA
+bundle or Workbox `includeAssets`.
+
+  nspell — MIT
+  dictionary-en (SCOWL) — MIT AND BSD
+  dictionary-de (igerman98) — GPL-2.0 OR GPL-3.0
+  dictionary-es (RLA-ES) — GPL-3.0 OR LGPL-3.0 OR MPL-1.1
+  dictionary-pt — LGPL-3.0 OR MPL-2.0
+  dictionary-pt-pt (Natura) — GPL-2.0 OR LGPL-2.1 OR MPL-1.1
+
 Fonts
 -----
 Share cards and the app UI use self-hosted Inter (latin 400 / 500 / 600

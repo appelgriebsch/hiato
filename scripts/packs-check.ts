@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
- * NSFW denylist, required non-template gloss, and person-name gloss gate.
+ * NSFW denylist, required non-template gloss, person-name gloss gate, and
+ * Hunspell language-membership (loanword allowlist).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
@@ -11,6 +12,7 @@ import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
+import { ensureDicts, isWordOfLang } from './lang-membership'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 const DENY = loadDenylist()
@@ -70,6 +72,11 @@ function validatePack(raw: unknown, file: string): WordPack {
 
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
+    }
+    if (!isWordOfLang(o.lang as 'en' | 'de' | 'es' | 'pt', word)) {
+      throw new Error(
+        `${file}: lemmas[${i}] not a word of ${o.lang} — "${word}"`,
+      )
     }
     if (isTemplateGloss(gloss)) {
       throw new Error(
@@ -134,6 +141,8 @@ async function walkJson(dir: string): Promise<string[]> {
   }
   return out
 }
+
+await ensureDicts()
 
 const files = await walkJson(ROOT)
 if (files.length === 0) {
