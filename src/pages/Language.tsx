@@ -29,7 +29,7 @@ export function Language() {
   return (
     <Layout
       footer={
-        <div className="pb-6 pt-2">
+        <div className="pt-2 pb-4">
           <Button
             fullWidth
             disabled={preparing}
@@ -54,13 +54,21 @@ export function Language() {
         center={<span className="text-sm font-semibold tracking-tight text-ink">Your level</span>}
       />
 
-      <h1 className="text-title text-ink">Language</h1>
+      <h1 id="language-heading" className="text-title text-ink">
+        Language
+      </h1>
       <p className="text-body mt-1 text-ink-muted">Pick the language you’re learning.</p>
-      <div className="mt-4 grid grid-cols-2 gap-2">
+      <div
+        role="radiogroup"
+        aria-labelledby="language-heading"
+        className="mt-4 grid grid-cols-2 gap-2"
+      >
         {PACK_LANGS.map((l) => (
           <button
             key={l}
             type="button"
+            role="radio"
+            aria-checked={lang === l}
             onClick={() => setLang(l)}
             className={[
               'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left',
@@ -76,15 +84,23 @@ export function Language() {
         ))}
       </div>
 
-      <h2 className="text-title mt-8 text-ink">CEFR level</h2>
+      <h2 id="cefr-heading" className="text-title mt-8 text-ink">
+        CEFR level
+      </h2>
       <p className="text-body mt-1 text-ink-muted">
-        A1–A2 prefill vowels. B1 starts empty.
+        A1–A2 prefill vowels. B1–C2 start empty.
       </p>
-      <div className="mt-4 flex flex-col gap-2">
+      <div
+        role="radiogroup"
+        aria-labelledby="cefr-heading"
+        className="mt-4 flex flex-col gap-2"
+      >
         {PACK_CEFRS.map((c) => (
           <button
             key={c}
             type="button"
+            role="radio"
+            aria-checked={cefr === c}
             onClick={() => setCefr(c)}
             className={[
               'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium',

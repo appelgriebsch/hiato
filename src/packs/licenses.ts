@@ -10,7 +10,7 @@ export interface PackLicenseBand {
 export interface PackLicenseInfo {
   lang: PackLang
   title: string
-  /** Flattened band summary so About still compiles (copy ticket is separate). */
+  /** Flattened band summary (About renders `bands`; this stays for pack-adjacent copy). */
   license: string
   attribution: string[]
   bands: PackLicenseBand[]
