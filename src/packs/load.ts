@@ -1,26 +1,28 @@
 import type { PackCefr, PackLang, WordPack } from './schema'
-import { isPackCefr, isPackLang } from './schema'
+import {
+  PACK_CEFRS,
+  PACK_LANGS,
+  isPackCefr,
+  isPackLang,
+  packUrl,
+} from './schema'
 
 const memory = new Map<string, WordPack>()
 
-function cacheKey(lang: PackLang, cefr: PackCefr): string {
+export function localPackCacheKey(lang: PackLang, cefr: PackCefr): string {
   return `hiato:pack:${lang}:${cefr}`
-}
-
-function packUrl(lang: PackLang, cefr: PackCefr): string {
-  return `/packs/${lang}/${cefr}.json`
 }
 
 function readLocal(lang: PackLang, cefr: PackCefr): WordPack | null {
   try {
-    const raw = localStorage.getItem(cacheKey(lang, cefr))
+    const raw = localStorage.getItem(localPackCacheKey(lang, cefr))
     if (!raw) return null
     const pack = assertPack(JSON.parse(raw))
     return pack
   } catch {
     // corrupt or unversioned cache — discard
     try {
-      localStorage.removeItem(cacheKey(lang, cefr))
+      localStorage.removeItem(localPackCacheKey(lang, cefr))
     } catch {
       /* ignore */
     }
@@ -30,7 +32,10 @@ function readLocal(lang: PackLang, cefr: PackCefr): WordPack | null {
 
 function writeLocal(pack: WordPack): void {
   try {
-    localStorage.setItem(cacheKey(pack.lang, pack.cefr), JSON.stringify(pack))
+    localStorage.setItem(
+      localPackCacheKey(pack.lang, pack.cefr),
+      JSON.stringify(pack),
+    )
   } catch {
     // quota / private mode — memory cache still works
   }
@@ -113,6 +118,17 @@ async function refreshPack(lang: PackLang, cefr: PackCefr): Promise<void> {
   writeLocal(pack)
 }
 
-/** T2 hardcoded daily target. */
-export const T2_LANG: PackLang = 'en'
-export const T2_CEFR: PackCefr = 'a1'
+/** Drop memory + localStorage copies of packs that are not the selected language. */
+export function purgeLocalPacksExcept(lang: PackLang): void {
+  for (const other of PACK_LANGS) {
+    if (other === lang) continue
+    for (const cefr of PACK_CEFRS) {
+      memory.delete(`${other}/${cefr}`)
+      try {
+        localStorage.removeItem(localPackCacheKey(other, cefr))
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+}

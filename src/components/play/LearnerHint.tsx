@@ -1,4 +1,5 @@
-import type { PackLemma } from '@/packs/schema'
+import { NO_HINT_COPY } from '@/packs/labels'
+import type { PackLang, PackLemma } from '@/packs/schema'
 
 function hasLearnerContent(entry: PackLemma): boolean {
   const gloss = entry.gloss?.trim() ?? ''
@@ -7,19 +8,26 @@ function hasLearnerContent(entry: PackLemma): boolean {
 }
 
 /** Compact dictionary + synonym chips under the gap word. Never shows the lemma. */
-export function LearnerHint({ entry }: { entry: PackLemma }) {
+export function LearnerHint({
+  entry,
+  lang = 'en',
+}: {
+  entry: PackLemma
+  lang?: PackLang
+}) {
   const gloss = entry.gloss?.trim() ?? ''
   const synonyms = (entry.synonyms ?? [])
     .filter((s) => s.trim().length > 0)
     .slice(0, 3)
 
   if (!hasLearnerContent(entry)) {
+    const empty = NO_HINT_COPY[lang]
     return (
       <div
         className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-white/50 px-3 py-2.5 text-center"
-        aria-label="No hint for this word"
+        aria-label={empty}
       >
-        <p className="text-[11px] text-ink-faint">No hint for this word</p>
+        <p className="text-[11px] text-ink-faint">{empty}</p>
       </div>
     )
   }

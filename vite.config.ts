@@ -19,7 +19,8 @@ export default defineConfig({
         'hiato.svg',
         'fonts/*.woff2',
         'icons/*',
-        'packs/en/a1.json',
+        // Packs are NOT precached at install (ADR 0006) — selected language
+        // is cached at runtime; other langs fetch on demand.
       ],
       manifest: {
         name: 'Hiato',
@@ -63,6 +64,23 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/^\/api\//],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) =>
+              /\/packs\/(en|de|es|pt)\/(a1|a2|b1)\.json$/.test(url.pathname),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'hiato-packs', // keep in sync with PACK_SW_CACHE
+              expiration: {
+                maxEntries: 12,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false,

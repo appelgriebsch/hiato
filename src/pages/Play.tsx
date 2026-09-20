@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { Keyboard } from '@/components/play/Keyboard'
@@ -20,10 +20,14 @@ import {
   revealOneDiacritic,
   type CellState,
 } from '@/engine'
-import { T2_CEFR, T2_LANG, loadPack } from '@/packs/load'
+import { getPrefs } from '@/lib/prefs'
+import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
+import { loadPack } from '@/packs/load'
 import type { PackLemma } from '@/packs/schema'
 
 export function Play() {
+  const nav = useNavigate()
+  const prefs = getPrefs()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [wordEntry, setWordEntry] = useState<PackLemma | null>(null)
@@ -37,18 +41,27 @@ export function Play() {
 
   // Mount-time dateKey; midnight rollover without remount is T4 (ADR 0004 follow-up).
   const dateKey = localDateKey()
+  const lang = prefs?.lang
+  const cefr = prefs?.cefr
 
   useEffect(() => {
+    if (!lang || !cefr) {
+      nav('/language', { replace: true })
+    }
+  }, [lang, cefr, nav])
+
+  useEffect(() => {
+    if (!lang || !cefr) return
     let cancelled = false
     setLoading(true)
     setError(null)
     setFinished(null)
 
-    void loadPack(T2_LANG, T2_CEFR)
+    void loadPack(lang, cefr)
       .then((pack) => {
         if (cancelled) return
-        const entry = pickDailyLemma(pack.lemmas, dateKey, T2_LANG, T2_CEFR)
-        const initial = buildInitialCells(entry.word, T2_CEFR)
+        const entry = pickDailyLemma(pack.lemmas, dateKey, lang, cefr)
+        const initial = buildInitialCells(entry.word, cefr)
         setWordEntry(entry)
         setCells(initial)
         setUsedCorrect(correctKeysFromCells(initial))
@@ -56,7 +69,7 @@ export function Play() {
         setLives(TOTAL_LIVES)
         setMisses(0)
         setHintUsed(false)
-        // A1 vowel-prefill can already reveal the whole word (W3).
+        // A1/A2 vowel-prefill can already reveal the whole word (W3).
         setFinished(isWon(initial) ? 'win' : null)
         setLoading(false)
       })
@@ -69,7 +82,7 @@ export function Play() {
     return () => {
       cancelled = true
     }
-  }, [dateKey])
+  }, [dateKey, lang, cefr])
 
   const showHint = useMemo(() => {
     if (!wordEntry || hintUsed || finished) return false
@@ -113,6 +126,10 @@ export function Play() {
     if (isWon(next)) endGame('win')
   }
 
+  if (!lang || !cefr) return null
+
+  const vowelHelp = cefr === 'a1' || cefr === 'a2'
+
   return (
     <Layout>
       <TopBar
@@ -122,7 +139,11 @@ export function Play() {
             Daily
           </span>
         }
-        right={<span className="text-xs text-ink-faint">EN · A1</span>}
+        right={
+          <span className="text-xs text-ink-faint">
+            {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
+          </span>
+        }
       />
 
       <div className="mb-3 flex items-center justify-between">
@@ -150,12 +171,12 @@ export function Play() {
         <>
           <div className="my-5">
             <LetterGrid cells={cells} />
-            {cells.some((c) => c.helped && c.revealed) && (
+            {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
               <p className="mt-3 text-center text-[11px] text-ink-faint">
-                Soft green = vowel help (A1)
+                Soft green = vowel help (A1–A2)
               </p>
             )}
-            <LearnerHint entry={wordEntry} />
+            <LearnerHint entry={wordEntry} lang={lang} />
           </div>
 
           {showHint && (
@@ -187,6 +208,7 @@ export function Play() {
             </div>
           ) : (
             <Keyboard
+              lang={lang}
               usedWrong={usedWrong}
               usedCorrect={usedCorrect}
               disabled={false}
