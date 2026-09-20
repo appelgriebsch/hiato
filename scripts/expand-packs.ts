@@ -1,52 +1,38 @@
 #!/usr/bin/env bun
 /**
- * Expand public/packs to ~400 lemmas each (ADR 0026).
- * Lemma selection: wordhoard samples (EN/DE/ES) + FrequencyWords (PT) + existing packs.
- * Glosses: keep curated non-template glosses; generate real same-language learner glosses
- * for new lemmas via xAI (never letter-count templates). Denylist rejects NSFW/violence.
+ * Expand public/packs B2–C2 only (ADR 0028, 0029). Never overwrites A1–B1.
+ * Sources: CEFR-J B2; Octanove C1/C2; wordhoard v0.1.0 (DE/ES); FrequencyWords PT.
+ * Glosses/synonyms via xAI; --dry-run selects without calling xAI or writing packs.
  */
+import { Database } from 'bun:sqlite'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
-import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
+import { gunzipSync } from 'node:zlib'
+import { loadDenylist, nfcUpper } from './lemma-denylist'
 import { isTemplateGloss } from './gloss-quality'
+import {
+  EXISTING_CEFRS,
+  NEW_CEFRS,
+  PT_BANDS,
+  TARGET,
+  type NewCefr,
+  type SelectLang as Lang,
+  assignExclusiveBands,
+  assertPackWriteAllowed,
+  bandFloor,
+  foldKey,
+  hangmanOk,
+  isNewCefr,
+  loadFoldKeysFromPackLemmas,
+} from './pack-select'
 
 const ROOT = path.join(import.meta.dir, '..')
-const TARGET = 400
+const DATA = path.join(ROOT, 'scripts/data')
 const LANGS = ['en', 'pt', 'de', 'es'] as const
-const CEFRS = ['a1', 'a2', 'b1'] as const
-type Lang = (typeof LANGS)[number]
-type Cefr = (typeof CEFRS)[number]
 
 type Lemma = { word: string; gloss?: string; synonyms?: string[] }
 
-const CONTENT_POS = new Set(['NOUN', 'VERB', 'ADJ', 'ADV', 'PROPN'])
-const SKIP_POS = new Set([
-  'PRON', 'DET', 'ADP', 'AUX', 'CCONJ', 'SCONJ', 'PART', 'INTJ', 'PUNCT', 'SYM', 'X', 'NUM',
-])
-
 const DENY = loadDenylist()
-
-function hangmanOk(lang: Lang, raw: string): string | null {
-  const word = nfcUpper(raw)
-  if (word.length < 3 || word.length > 10) return null
-  if (/[\d\s\-\.'.’_/]/.test(word)) return null
-  const re: Record<Lang, RegExp> = {
-    en: /^[A-Z]+$/,
-    de: /^[A-ZÄÖÜß]+$/,
-    es: /^[A-ZÁÉÍÓÚÜÑ]+$/,
-    pt: /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]+$/,
-  }
-  if (!re[lang].test(word)) return null
-  if (/^(.)\1+$/.test(word)) return null
-  if (isDeniedLemma(word, DENY)) return null
-  return word
-}
-
-/** DE fold for matching STRAßE ↔ STRASSE without preferring damaged SS forms. */
-function foldKey(lang: Lang, word: string): string {
-  const w = nfcUpper(word)
-  return lang === 'de' ? w.replaceAll('ß', 'SS') : w
-}
 
 const EXTRA_STOP = new Set(
   `
@@ -74,90 +60,174 @@ DANKE GRACIAS THANKS SIR HAUSE DESTA NESTE NESTA DESTES DESTAS TIVE SINTO ESPERO
 `.trim().split(/\s+/).map(nfcUpper),
 )
 
-function parseWordhoard(lang: 'en' | 'de' | 'es'): { word: string; pos: string; cefr: string; rank: number }[] {
-  const file = path.join(ROOT, 'scripts/data', `wordhoard-${lang}.csv`)
-  const text = readFileSync(file, 'utf8')
-  const lines = text.trim().split('\n').slice(1)
-  const out: { word: string; pos: string; cefr: string; rank: number }[] = []
-  for (const line of lines) {
-    const parts = line.split(',')
-    const lemma = parts[0]?.trim()
-    const pos = parts[1]?.trim().toUpperCase()
-    const rank = Number(parts[3])
-    const cefr = parts[5]?.trim().toUpperCase()
-    if (!lemma || !pos || !cefr) continue
-    if (SKIP_POS.has(pos)) continue
-    if (!CONTENT_POS.has(pos) && pos !== 'VERB' && pos !== 'ADJ' && pos !== 'ADV' && pos !== 'NOUN') continue
-    if (!['NOUN', 'VERB', 'ADJ', 'ADV'].includes(pos)) continue
-    const word = hangmanOk(lang, lemma)
-    if (!word || EXTRA_STOP.has(word)) continue
-    if (!['A1', 'A2', 'B1'].includes(cefr)) continue
-    out.push({ word, pos, cefr, rank: Number.isFinite(rank) ? rank : 99999 })
+function okLemma(lang: Lang, raw: string): string | null {
+  const word = hangmanOk(lang, raw, DENY)
+  if (!word || EXTRA_STOP.has(word)) return null
+  return word
+}
+
+function uniqueOk(lang: Lang, words: string[]): string[] {
+  const seen = new Set<string>()
+  const out: string[] = []
+  for (const raw of words) {
+    const word = okLemma(lang, raw)
+    if (!word) continue
+    const key = foldKey(lang, word)
+    if (seen.has(key)) continue
+    seen.add(key)
+    out.push(word)
   }
   return out
 }
 
-function parseCefrj(): Record<Cefr, string[]> {
-  const file = path.join(ROOT, 'scripts/data/cefrj-en.json')
-  if (!existsSync(file)) return { a1: [], a2: [], b1: [] }
-  const raw = JSON.parse(readFileSync(file, 'utf8')) as Record<string, string[]>
-  const out: Record<Cefr, string[]> = { a1: [], a2: [], b1: [] }
-  for (const [k, words] of Object.entries(raw)) {
-    const cefr = k.toLowerCase() as Cefr
-    if (!out[cefr]) continue
-    for (const w of words) {
-      const word = hangmanOk('en', w)
-      if (word && !EXTRA_STOP.has(word)) out[cefr].push(word)
-    }
-  }
-  return out
-}
+const CEFRJ_PATH = path.join(DATA, 'cefrj-en-with-b2.json')
+const OCTANOVE_PATH = path.join(DATA, 'octanove-vocabulary-profile-c1c2-1.0.csv')
+const WORDHOARD_GZ = path.join(DATA, 'wordhoard-v0.1.0.db.gz')
+const WORDHOARD_DB = path.join(DATA, 'wordhoard-v0.1.0.db')
+const PT_FREQ_PATH = path.join(DATA, 'pt.txt')
 
-async function download(url: string, dest: string, label: string): Promise<void> {
+const WORDHOARD_GZ_URL =
+  'https://github.com/natema/wordhoard/releases/download/v0.1.0/wordhoard.db.gz'
+const CEFRJ_CSV_URL =
+  'https://raw.githubusercontent.com/openlanguageprofiles/olp-en-cefrj/master/cefrj-vocabulary-profile-1.5.csv'
+const OCTANOVE_CSV_URL =
+  'https://raw.githubusercontent.com/openlanguageprofiles/olp-en-cefrj/master/octanove-vocabulary-profile-c1c2-1.0.csv'
+const PT_FREQ_URL =
+  'https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/pt/pt_50k.txt'
+
+const CONTENT_POS_EN = /^(noun|verb|adjective|adverb)$/i
+
+async function download(url: string, dest: string, label: string, binary = false): Promise<void> {
   if (existsSync(dest)) return
   console.log(`Downloading ${label}…`)
   const res = await fetch(url)
   if (!res.ok) throw new Error(`Failed to download ${label}: ${res.status}`)
-  await Bun.write(dest, await res.text())
+  mkdirSync(path.dirname(dest), { recursive: true })
+  if (binary) {
+    await Bun.write(dest, await res.arrayBuffer())
+  } else {
+    await Bun.write(dest, await res.text())
+  }
+}
+
+function cefrjCacheHasB2(file: string): boolean {
+  if (!existsSync(file)) return false
+  try {
+    const raw = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>
+    const b2 = raw.B2 ?? raw.b2
+    return Array.isArray(b2) && b2.length > 0
+  } catch {
+    return false
+  }
+}
+
+function buildCefrjFromCsv(text: string): Record<string, string[]> {
+  const by: Record<string, string[]> = { A1: [], A2: [], B1: [], B2: [] }
+  for (const line of text.trim().split('\n').slice(1)) {
+    const [head, pos, cefr] = line.split(',')
+    if (!cefr || !by[cefr]) continue
+    if (!CONTENT_POS_EN.test(pos || '')) continue
+    const w = okLemma('en', (head || '').split('/')[0]?.trim() || '')
+    if (w) by[cefr].push(w)
+  }
+  for (const k of Object.keys(by)) by[k] = [...new Set(by[k])]
+  return by
+}
+
+async function ensureCefrj(): Promise<void> {
+  if (cefrjCacheHasB2(CEFRJ_PATH)) return
+  console.log('Building cefrj-en-with-b2.json from CEFR-J CSV…')
+  const res = await fetch(CEFRJ_CSV_URL)
+  if (!res.ok) throw new Error(`CEFR-J download failed: ${res.status}`)
+  const by = buildCefrjFromCsv(await res.text())
+  if (!by.B2?.length) throw new Error('CEFR-J rebuild produced no B2 lemmas')
+  await Bun.write(CEFRJ_PATH, JSON.stringify(by, null, 2) + '\n')
+}
+
+function ensureWordhoardDb(): string {
+  if (existsSync(WORDHOARD_DB)) return WORDHOARD_DB
+  if (!existsSync(WORDHOARD_GZ)) {
+    throw new Error(`Missing ${WORDHOARD_GZ} — download wordhoard v0.1.0 first`)
+  }
+  console.log('Decompressing wordhoard v0.1.0 db…')
+  writeFileSync(WORDHOARD_DB, gunzipSync(readFileSync(WORDHOARD_GZ)))
+  return WORDHOARD_DB
 }
 
 async function ensureSources(): Promise<void> {
-  const data = path.join(ROOT, 'scripts/data')
-  await download(
-    'https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2018/pt/pt_50k.txt',
-    path.join(data, 'pt.txt'),
-    'PT FrequencyWords',
-  )
-  for (const lang of ['en', 'de', 'es'] as const) {
-    await download(
-      `https://raw.githubusercontent.com/natema/wordhoard/main/samples/${lang}.csv`,
-      path.join(data, `wordhoard-${lang}.csv`),
-      `wordhoard ${lang}`,
-    )
+  mkdirSync(DATA, { recursive: true })
+  await download(PT_FREQ_URL, PT_FREQ_PATH, 'PT FrequencyWords')
+  await download(OCTANOVE_CSV_URL, OCTANOVE_PATH, 'Octanove C1/C2')
+  await download(WORDHOARD_GZ_URL, WORDHOARD_GZ, 'wordhoard v0.1.0 db.gz', true)
+  ensureWordhoardDb()
+  await ensureCefrj()
+}
+
+function parseCefrjB2(): string[] {
+  if (!existsSync(CEFRJ_PATH)) return []
+  const raw = JSON.parse(readFileSync(CEFRJ_PATH, 'utf8')) as Record<string, string[]>
+  const words = raw.B2 ?? raw.b2 ?? []
+  return uniqueOk('en', words)
+}
+
+function parseOctanove(): Record<'c1' | 'c2', string[]> {
+  const out: Record<'c1' | 'c2', string[]> = { c1: [], c2: [] }
+  if (!existsSync(OCTANOVE_PATH)) return out
+  const text = readFileSync(OCTANOVE_PATH, 'utf8')
+  for (const line of text.trim().split('\n').slice(1)) {
+    const [head, pos, cefrRaw] = line.split(',')
+    const cefr = (cefrRaw || '').trim().toLowerCase()
+    if (cefr !== 'c1' && cefr !== 'c2') continue
+    if (!CONTENT_POS_EN.test(pos || '')) continue
+    const w = okLemma('en', (head || '').split('/')[0]?.trim() || '')
+    if (w) out[cefr].push(w)
   }
-  const cefrjPath = path.join(data, 'cefrj-en.json')
-  if (!existsSync(cefrjPath)) {
-    console.log('Building cefrj-en.json from CEFR-J CSV…')
-    const csvUrl =
-      'https://raw.githubusercontent.com/openlanguageprofiles/olp-en-cefrj/master/cefrj-vocabulary-profile-1.5.csv'
-    const res = await fetch(csvUrl)
-    if (!res.ok) throw new Error(`CEFR-J download failed: ${res.status}`)
-    const text = await res.text()
-    const by: Record<string, string[]> = { A1: [], A2: [], B1: [] }
-    for (const line of text.trim().split('\n').slice(1)) {
-      const [head, pos, cefr] = line.split(',')
-      if (!cefr || !by[cefr]) continue
-      if (!/^(noun|verb|adjective|adverb)$/i.test(pos || '')) continue
-      const w = hangmanOk('en', (head || '').split('/')[0]?.trim() || '')
-      if (w) by[cefr].push(w)
+  return { c1: uniqueOk('en', out.c1), c2: uniqueOk('en', out.c2) }
+}
+
+function parseWordhoardBands(lang: 'de' | 'es'): Record<NewCefr, string[]> {
+  const db = new Database(ensureWordhoardDb(), { readonly: true })
+  try {
+    const rows = db
+      .query(
+        `SELECT lemma, pos, frequency_rank AS rank, cefr_estimate AS cefr
+         FROM word
+         WHERE lang = ? AND upper(cefr_estimate) IN ('B2', 'C1', 'C2')
+           AND pos IN ('NOUN', 'VERB', 'ADJ', 'ADV')
+         ORDER BY frequency_rank ASC`,
+      )
+      .all(lang) as { lemma: string; pos: string; rank: number; cefr: string }[]
+
+    const buckets: Record<NewCefr, { word: string; pos: string }[]> = {
+      b2: [],
+      c1: [],
+      c2: [],
     }
-    for (const k of Object.keys(by)) by[k] = [...new Set(by[k])]
-    await Bun.write(cefrjPath, JSON.stringify(by, null, 2))
+    for (const r of rows) {
+      const cefr = r.cefr.trim().toLowerCase()
+      if (!isNewCefr(cefr)) continue
+      const word = okLemma(lang, r.lemma)
+      if (!word) continue
+      buckets[cefr].push({ word, pos: r.pos.toUpperCase() })
+    }
+
+    const out = { b2: [] as string[], c1: [] as string[], c2: [] as string[] }
+    for (const cefr of NEW_CEFRS) {
+      const nouns = buckets[cefr].filter((x) => x.pos === 'NOUN')
+      const rest = buckets[cefr].filter((x) => x.pos !== 'NOUN')
+      out[cefr] = uniqueOk(
+        lang,
+        [...nouns, ...rest].map((x) => x.word),
+      )
+    }
+    return out
+  } finally {
+    db.close()
   }
 }
 
 function parseFreqPt(): string[] {
-  const file = path.join(ROOT, 'scripts/data/pt.txt')
+  const file = PT_FREQ_PATH
   const lines = readFileSync(file, 'utf8').split('\n')
   const stop = new Set(
     `QUE PARA COM UMA POR MAIS COMO MAS DOS DAS NOS NAS SEM ELE ELA ELES ELAS
@@ -173,12 +243,17 @@ function parseFreqPt(): string[] {
   for (const line of lines) {
     const raw = line.trim().split(/\s+/)[0]
     if (!raw) continue
-    const word = hangmanOk('pt', raw)
-    if (!word || stop.has(word) || EXTRA_STOP.has(word) || seen.has(word)) continue
+    const word = okLemma('pt', raw)
+    if (!word || stop.has(word) || seen.has(word)) continue
     seen.add(word)
     out.push(word)
   }
   return out.slice(200)
+}
+
+function ptBandSlice(all: string[], cefr: NewCefr): string[] {
+  const [lo, hi] = PT_BANDS[cefr]
+  return all.slice(lo, hi)
 }
 
 function spoiler(hay: string, lemma: string): boolean {
@@ -194,7 +269,11 @@ function escapeRe(s: string) {
 }
 
 function glossCachePath(lang: Lang) {
-  return path.join(ROOT, 'scripts/data/gloss-cache', `${lang}.json`)
+  return path.join(DATA, 'gloss-cache', `${lang}.json`)
+}
+
+function synonymCachePath(lang: Lang) {
+  return path.join(DATA, 'synonym-cache', `${lang}.json`)
 }
 
 function loadGlossCache(lang: Lang): Record<string, string> {
@@ -204,42 +283,45 @@ function loadGlossCache(lang: Lang): Record<string, string> {
 }
 
 function saveGlossCache(lang: Lang, cache: Record<string, string>) {
-  const dir = path.dirname(glossCachePath(lang))
-  mkdirSync(dir, { recursive: true })
+  mkdirSync(path.dirname(glossCachePath(lang)), { recursive: true })
   writeFileSync(glossCachePath(lang), JSON.stringify(cache, null, 2) + '\n')
 }
 
-/** Prefer curated non-template glosses; drop denylisted; fold DE ß/SS. */
-function loadCuratedMaps(): Record<Lang, Map<string, Lemma>> {
-  const maps: Record<Lang, Map<string, Lemma>> = {
-    en: new Map(),
-    de: new Map(),
-    es: new Map(),
-    pt: new Map(),
+function loadSynonymCache(lang: Lang): Record<string, string[]> {
+  const f = synonymCachePath(lang)
+  if (!existsSync(f)) return {}
+  return JSON.parse(readFileSync(f, 'utf8')) as Record<string, string[]>
+}
+
+function saveSynonymCache(lang: Lang, cache: Record<string, string[]>) {
+  mkdirSync(path.dirname(synonymCachePath(lang)), { recursive: true })
+  writeFileSync(synonymCachePath(lang), JSON.stringify(cache, null, 2) + '\n')
+}
+
+function loadExistingFoldKeys(lang: Lang): Set<string> {
+  const packs: { lemmas: { word: string }[] }[] = []
+  for (const cefr of EXISTING_CEFRS) {
+    const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+    if (!existsSync(file)) continue
+    packs.push(JSON.parse(readFileSync(file, 'utf8')) as { lemmas: { word: string }[] })
   }
-  for (const lang of LANGS) {
-    for (const cefr of CEFRS) {
-      const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
-      if (!existsSync(file)) continue
-      const pack = JSON.parse(readFileSync(file, 'utf8')) as { lemmas: Lemma[] }
-      for (const L of pack.lemmas) {
-        const word = nfcUpper(L.word)
-        if (isDeniedLemma(word, DENY)) continue
-        if (!L.gloss || isTemplateGloss(L.gloss)) continue
-        if (spoiler(L.gloss, word)) continue
-        const key = foldKey(lang, word)
-        const prev = maps[lang].get(key)
-        // Prefer form that still contains ß when both exist
-        if (prev && lang === 'de' && prev.word.includes('ß') && !word.includes('ß')) continue
-        maps[lang].set(key, {
-          word,
-          gloss: L.gloss,
-          synonyms: L.synonyms?.slice(0, 3),
-        })
-      }
+  return loadFoldKeysFromPackLemmas(lang, packs)
+}
+
+function sourceCandidates(lang: Lang, ptAll: string[] | null): Record<NewCefr, string[]> {
+  if (lang === 'en') {
+    const oct = parseOctanove()
+    return { b2: parseCefrjB2(), c1: oct.c1, c2: oct.c2 }
+  }
+  if (lang === 'pt') {
+    const all = ptAll ?? parseFreqPt()
+    return {
+      b2: ptBandSlice(all, 'b2'),
+      c1: ptBandSlice(all, 'c1'),
+      c2: ptBandSlice(all, 'c2'),
     }
   }
-  return maps
+  return parseWordhoardBands(lang)
 }
 
 function readXaiKey(): string | null {
@@ -261,6 +343,60 @@ const LANG_NAME: Record<Lang, string> = {
   de: 'German',
   es: 'Spanish',
   pt: 'Portuguese',
+}
+
+async function xaiChat(key: string, system: string, prompt: string, temperature: number): Promise<string> {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const res = await fetch('https://api.x.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        model: 'grok-4-fast-non-reasoning',
+        temperature,
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: prompt },
+        ],
+      }),
+    })
+    if (res.status === 429) {
+      const wait = 1000 * 2 ** attempt
+      console.warn(`  xAI 429, backing off ${wait}ms`)
+      await Bun.sleep(wait)
+      continue
+    }
+    if (!res.ok) {
+      const t = await res.text()
+      throw new Error(`xAI API ${res.status}: ${t.slice(0, 300)}`)
+    }
+    const body = (await res.json()) as {
+      choices?: { message?: { content?: string } }[]
+    }
+    return body.choices?.[0]?.message?.content || ''
+  }
+  throw new Error('xAI API 429: retries exhausted')
+}
+
+function parseJsonObject(content: string): Record<string, unknown> | null {
+  const jsonMatch = content.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) return null
+  try {
+    return JSON.parse(jsonMatch[0]) as Record<string, unknown>
+  } catch {
+    return null
+  }
+}
+
+function lookupParsed(parsed: Record<string, unknown>, w: string): unknown {
+  return (
+    parsed[w] ??
+    parsed[w.toLowerCase()] ??
+    parsed[nfcUpper(w)] ??
+    Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
+  )
 }
 
 async function generateGlosses(
@@ -290,47 +426,21 @@ async function generateGlosses(
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
 
-    const res = await fetch('https://api.x.ai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model: 'grok-4-fast-non-reasoning',
-        temperature: 0.2,
-        messages: [
-          {
-            role: 'system',
-            content:
-              'You write concise learner-dictionary glosses. Reply with a single JSON object only.',
-          },
-          { role: 'user', content: prompt },
-        ],
-      }),
-    })
-    if (!res.ok) {
-      const t = await res.text()
-      throw new Error(`xAI gloss API ${res.status}: ${t.slice(0, 300)}`)
-    }
-    const body = (await res.json()) as {
-      choices?: { message?: { content?: string } }[]
-    }
-    const content = body.choices?.[0]?.message?.content || ''
-    const jsonMatch = content.match(/\{[\s\S]*\}/)
-    if (!jsonMatch) throw new Error(`No JSON in gloss response: ${content.slice(0, 200)}`)
-    const parsed = JSON.parse(jsonMatch[0]) as Record<string, string>
+    const content = await xaiChat(
+      key,
+      'You write concise learner-dictionary glosses. Reply with a single JSON object only.',
+      prompt,
+      0.2,
+    )
+    const parsed = parseJsonObject(content)
+    if (!parsed) throw new Error(`No JSON in gloss response: ${content.slice(0, 200)}`)
     for (const w of batch) {
-      const g =
-        parsed[w] ||
-        parsed[w.toLowerCase()] ||
-        parsed[nfcUpper(w)] ||
-        Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
+      const g = lookupParsed(parsed, w)
       if (!g || typeof g !== 'string') {
         console.warn(`  missing gloss for ${w}`)
         continue
       }
-      let gloss = g.trim()
+      const gloss = g.trim()
       if (spoiler(gloss, w) || isTemplateGloss(gloss)) {
         console.warn(`  rejected gloss for ${w}: ${gloss.slice(0, 60)}`)
         continue
@@ -341,7 +451,6 @@ async function generateGlosses(
     console.log(`  ${lang} glosses ${Math.min(i + BATCH, missing.length)}/${missing.length}`)
   }
 
-  // Retry leftovers with stricter anti-spoiler instructions
   let leftovers = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]) || spoiler(cache[w]!, w))
   for (let attempt = 0; attempt < 3 && leftovers.length; attempt++) {
     console.log(`  ${lang} retry ${attempt + 1}: ${leftovers.length} leftovers`)
@@ -352,45 +461,24 @@ async function generateGlosses(
         `For each lemma, write a short learner gloss that does NOT contain the lemma letters as a whole word at all.\n` +
         `Define the meaning using other words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
         batch.map((w) => `- ${w}`).join('\n')
-      const res = await fetch('https://api.x.ai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${key}`,
-        },
-        body: JSON.stringify({
-          model: 'grok-4-fast-non-reasoning',
-          temperature: 0.4,
-          messages: [
-            {
-              role: 'system',
-              content:
-                'JSON only. Each gloss must avoid the headword as a whole word (ADR 0023).',
-            },
-            { role: 'user', content: prompt },
-          ],
-        }),
-      })
-      if (!res.ok) continue
-      const body = (await res.json()) as {
-        choices?: { message?: { content?: string } }[]
-      }
-      const content = body.choices?.[0]?.message?.content || ''
-      const jsonMatch = content.match(/\{[\s\S]*\}/)
-      if (!jsonMatch) continue
       try {
-        const parsed = JSON.parse(jsonMatch[0]) as Record<string, string>
+        const content = await xaiChat(
+          key,
+          'JSON only. Each gloss must avoid the headword as a whole word (ADR 0023).',
+          prompt,
+          0.4,
+        )
+        const parsed = parseJsonObject(content)
+        if (!parsed) continue
         for (const w of batch) {
-          const g =
-            parsed[w] ||
-            Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
+          const g = lookupParsed(parsed, w)
           if (!g || typeof g !== 'string') continue
           const gloss = g.trim()
           if (spoiler(gloss, w) || isTemplateGloss(gloss)) continue
           cache[w] = gloss
         }
       } catch {
-        /* ignore bad json */
+        /* retry leftover batch later */
       }
       saveGlossCache(lang, cache)
     }
@@ -401,209 +489,260 @@ async function generateGlosses(
   }
 }
 
-function attribution(lang: Lang, cefr: Cefr): { license: string; attribution: string[] } {
+function cleanSynonyms(lemma: string, raw: unknown): string[] {
+  const list = Array.isArray(raw) ? raw : typeof raw === 'string' ? raw.split(/[,;|/]/) : []
+  const out: string[] = []
+  const seen = new Set<string>()
+  for (const item of list) {
+    if (typeof item !== 'string') continue
+    const syn = item.trim().normalize('NFC')
+    if (!syn) continue
+    const key = nfcUpper(syn)
+    if (seen.has(key)) continue
+    if (spoiler(syn, lemma)) continue
+    seen.add(key)
+    out.push(syn)
+    if (out.length >= 3) break
+  }
+  return out
+}
+
+async function generateSynonyms(
+  lang: Lang,
+  words: string[],
+  cache: Record<string, string[]>,
+): Promise<void> {
+  const missing = words.filter((w) => cleanSynonyms(w, cache[w]).length === 0)
+  if (missing.length === 0) return
+
+  const key = readXaiKey()
+  if (!key) {
+    console.warn(
+      `  ${lang}: skip synonym generation for ${missing.length} lemmas (no xAI key)`,
+    )
+    return
+  }
+
+  const BATCH = 60
+  console.log(`Generating ${missing.length} ${lang} synonym lists in batches of ${BATCH}…`)
+  for (let i = 0; i < missing.length; i += BATCH) {
+    const batch = missing.slice(i, i + BATCH)
+    const prompt =
+      `Language: ${LANG_NAME[lang]} (${lang}).\n` +
+      `For each lemma, give 1–3 same-language synonyms or very short near-equivalents (UI cap 3).\n` +
+      `Rules: never include the lemma itself as a whole word in any synonym (ADR 0023); NFC text; no NSFW.\n` +
+      `Unique referents may use an empty array.\n` +
+      `Return JSON object mapping each UPPERCASE lemma to an array of synonym strings.\n` +
+      `Lemmas:\n${batch.join('\n')}`
+
+    try {
+      const content = await xaiChat(
+        key,
+        'You write concise learner synonyms. Reply with a single JSON object only.',
+        prompt,
+        0.2,
+      )
+      const parsed = parseJsonObject(content)
+      if (!parsed) {
+        console.warn(`  no JSON in synonym response: ${content.slice(0, 200)}`)
+        continue
+      }
+      for (const w of batch) {
+        const syns = cleanSynonyms(w, lookupParsed(parsed, w))
+        if (syns.length) cache[w] = syns
+      }
+    } catch (err) {
+      console.warn(`  synonym batch failed: ${err}`)
+    }
+    saveSynonymCache(lang, cache)
+    console.log(`  ${lang} synonyms ${Math.min(i + BATCH, missing.length)}/${missing.length}`)
+  }
+}
+
+function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution: string[] } {
+  const level = cefr.toUpperCase()
+  if (lang === 'en' && cefr === 'b2') {
+    return {
+      license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
+      attribution: [
+        `Hiato EN ${level} learner pack — original glosses and synonym chips (2026).`,
+        'English B2 lemmas selected from the CEFR-J Vocabulary Profile (Tono Laboratory, Tokyo University of Foreign Studies). Cite Tono Lab / CEFR-J; not a verbatim dump.',
+        'Glosses and synonym chips are original Hiato learner copy (2026).',
+      ],
+    }
+  }
+  if (lang === 'en') {
+    return {
+      license:
+        'CC-BY-SA-4.0 (lemmas from Octanove Vocabulary Profile C1/C2; glosses original to Hiato)',
+      attribution: [
+        `Hiato EN ${level} learner pack — original glosses and synonym chips (2026).`,
+        'English C1/C2 lemmas selected from the Octanove Vocabulary Profile (olp-en-cefrj, CC-BY-SA-4.0) as a tagged add-on above CEFR-J.',
+        'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
+      ],
+    }
+  }
   if (lang === 'pt') {
     return {
       license:
         'CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)',
       attribution: [
-        `Hiato PT ${cefr.toUpperCase()} learner pack — original glosses and synonym chips (2026).`,
-        'Portuguese lemmas curated from Wiktionary-derived / OpenSubtitles frequency lists (CC-BY-SA path, ADR 0009).',
+        `Hiato PT ${level} learner pack — original glosses and synonym chips (2026).`,
+        'Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).',
         'Frequency selection aided by hermitdave/FrequencyWords (MIT); not a verbatim dump of any proprietary list.',
         'Glosses and synonym chips are original Hiato learner copy (2026).',
       ],
     }
   }
-  const names: Record<string, string> = { en: 'EN', de: 'DE', es: 'ES' }
+  const names: Record<'de' | 'es', string> = { de: 'DE', es: 'ES' }
   return {
-    license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
+    license:
+      'CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)',
     attribution: [
-      `Hiato ${names[lang]} ${cefr.toUpperCase()} learner pack — original glosses and synonym chips (2026).`,
-      'Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).',
-      'Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy.',
+      `Hiato ${names[lang]} ${level} learner pack — original glosses and synonym chips (2026).`,
+      `${names[lang]} B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not Goethe or Instituto Cervantes lists (ADR 0029).`,
+      'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
     ],
   }
 }
 
-function selectWords(
-  lang: Lang,
-  cefr: Cefr,
-  curated: Map<string, Lemma>,
-): { word: string; posHint?: string; curated?: Lemma }[] {
-    const slots = new Map<string, { word: string; posHint?: string; curated?: Lemma }>()
-
-  const add = (word: string, posHint?: string, cur?: Lemma) => {
-    if (slots.size >= TARGET && !slots.has(foldKey(lang, word))) return
-    const w = nfcUpper(word)
-    if (!w || EXTRA_STOP.has(w) || isDeniedLemma(w, DENY)) return
-    const key = foldKey(lang, w)
-    const ok = hangmanOk(lang, w)
-    if (!ok && !(cur?.gloss && w.length >= 2 && w.length <= 12)) return
-    const form = ok || w
-    const prev = slots.get(key)
-    if (prev) {
-      // Prefer German ß orthography over SS; keep best curated gloss
-      const preferBeta = lang === 'de' && form.includes('ß') && !prev.word.includes('ß')
-      const mergedCur = cur?.gloss ? cur : prev.curated
-      if (preferBeta) {
-        slots.set(key, { word: form, posHint: posHint || prev.posHint, curated: mergedCur })
-      } else if (cur?.gloss && !prev.curated?.gloss) {
-        slots.set(key, { word: prev.word, posHint: prev.posHint || posHint, curated: cur })
-      }
-      return
-    }
-    if (slots.size >= TARGET) return
-    slots.set(key, { word: form, posHint, curated: cur })
-  }
-
-  // 1) Frequency sources first so DE ß forms win over legacy SS pack spellings
-
-
-  // 2) Frequency / wordhoard
-  if (lang === 'en') {
-    const cefrj = parseCefrj()
-    const wh = parseWordhoard('en').filter((x) => x.cefr === cefr.toUpperCase())
-    wh.sort((a, b) => a.rank - b.rank)
-    for (const w of cefrj[cefr]) add(w, 'NOUN', curated.get(foldKey(lang, w)))
-    for (const x of wh) add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
-  } else if (lang === 'de' || lang === 'es') {
-    const wh = parseWordhoard(lang).filter((x) => x.cefr === cefr.toUpperCase())
-    wh.sort((a, b) => a.rank - b.rank)
-    for (const x of wh.filter((x) => x.pos === 'NOUN')) {
-      add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
-    }
-    for (const x of wh.filter((x) => x.pos !== 'NOUN')) {
-      add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
-    }
-    // Extra top-up from other CEFR bands in wordhoard
-    if (slots.size < TARGET) {
-      const more = parseWordhoard(lang).sort((a, b) => a.rank - b.rank)
-      for (const x of more) {
-        if (slots.size >= TARGET) break
-        add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
-      }
-    }
-  } else {
-    const all = parseFreqPt()
-    const bands: Record<Cefr, [number, number]> = {
-      a1: [0, 800],
-      a2: [800, 2000],
-      b1: [2000, 4000],
-    }
-    const [lo, hi] = bands[cefr]
-    for (const w of all.slice(lo, hi)) add(w, 'NOUN', curated.get(foldKey(lang, w)))
-    for (const w of all) {
-      if (slots.size >= TARGET) break
-      add(w, 'NOUN', curated.get(foldKey(lang, w)))
-    }
-  }
-
-  // 2) Overlay remaining curated lemmas (real glosses) to top up / attach glosses
-  for (const L of curated.values()) {
-    add(L.word, undefined, L)
-  }
-
-  return [...slots.values()].slice(0, TARGET)
+function hasRealGloss(word: string, cache: Record<string, string>): boolean {
+  const g = cache[word]
+  return !!(g && !isTemplateGloss(g) && !spoiler(g, word))
 }
 
 function buildLemmas(
   lang: Lang,
-  selected: { word: string; posHint?: string; curated?: Lemma }[],
+  words: string[],
   glossCache: Record<string, string>,
+  synCache: Record<string, string[]>,
 ): Lemma[] {
   const lemmas: Lemma[] = []
-  for (const s of selected) {
-    const w = s.word
-    let gloss = s.curated?.gloss
-    if (!gloss || isTemplateGloss(gloss)) gloss = glossCache[w]
+  for (const w of words) {
+    const gloss = glossCache[w]
     if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, w)) {
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
+    const synonyms = cleanSynonyms(w, synCache[w])
     lemmas.push({
       word: w,
       gloss,
-      synonyms: s.curated?.synonyms?.slice(0, 3),
+      ...(synonyms.length ? { synonyms } : {}),
     })
   }
   return lemmas
 }
 
-function hasRealGloss(
-  lang: Lang,
-  s: { word: string; curated?: Lemma },
-  cache: Record<string, string>,
-): boolean {
-  const g = (s.curated?.gloss && !isTemplateGloss(s.curated.gloss) ? s.curated.gloss : null) || cache[s.word]
-  return !!(g && !isTemplateGloss(g) && !spoiler(g, s.word))
-}
-
-// --- main ---
-await ensureSources()
-const curatedMaps = loadCuratedMaps()
-for (const lang of LANGS) {
-  console.log(`${lang}: ${curatedMaps[lang].size} curated glosses retained`)
-}
-
-const selections: Record<string, { word: string; posHint?: string; curated?: Lemma }[]> = {}
-for (const lang of LANGS) {
-  for (const cefr of CEFRS) {
-    selections[`${lang}/${cefr}`] = selectWords(lang, cefr, curatedMaps[lang])
-  }
-}
-
-// Generate glosses for anything not curated
-for (const lang of LANGS) {
-  const cache = loadGlossCache(lang)
-  for (const L of curatedMaps[lang].values()) {
-    if (L.gloss) cache[L.word] = L.gloss
-  }
-  const need = new Set<string>()
-  for (const cefr of CEFRS) {
-    for (const s of selections[`${lang}/${cefr}`]!) {
-      if (hasRealGloss(lang, s, cache)) continue
-      need.add(s.word)
+function parseArgs(argv: string[]) {
+  let dryRun = false
+  let levels: NewCefr[] = [...NEW_CEFRS]
+  const langs: Lang[] = [...LANGS]
+  for (const a of argv) {
+    if (a === '--dry-run') dryRun = true
+    else if (a.startsWith('--levels=')) {
+      const parts = a
+        .slice('--levels='.length)
+        .split(',')
+        .map((s) => s.trim().toLowerCase())
+        .filter(Boolean)
+      if (parts.length === 0) throw new Error('--levels= must list at least one of b2,c1,c2')
+      for (const p of parts) {
+        assertPackWriteAllowed(`${p}.json`, p)
+        if (!isNewCefr(p)) throw new Error(`invalid level ${p}`)
+      }
+      levels = parts as NewCefr[]
     }
   }
-  await generateGlosses(lang, [...need], cache)
-  saveGlossCache(lang, cache)
+  return { dryRun, levels, langs }
 }
 
-let totalNew = 0
-for (const lang of LANGS) {
-  const cache = loadGlossCache(lang)
-  for (const cefr of CEFRS) {
-    let selected = selections[`${lang}/${cefr}`]!.filter((s) => hasRealGloss(lang, s, cache))
-    // Top up from broader selection if denylist/gloss gaps shrank the pack
-    if (selected.length < TARGET) {
-      const extra = selectWords(lang, cefr, curatedMaps[lang])
-      const have = new Set(selected.map((s) => foldKey(lang, s.word)))
-      for (const s of extra) {
-        if (selected.length >= TARGET) break
-        const key = foldKey(lang, s.word)
-        if (have.has(key)) continue
-        if (!hasRealGloss(lang, s, cache)) continue
-        have.add(key)
-        selected.push(s)
+function writePack(lang: Lang, cefr: NewCefr, lemmas: Lemma[]) {
+  const outFile = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+  assertPackWriteAllowed(outFile, cefr)
+  const meta = attribution(lang, cefr)
+  const pack = {
+    version: 2,
+    lang,
+    cefr,
+    license: meta.license,
+    attribution: meta.attribution,
+    lemmas,
+  }
+  writeFileSync(outFile, JSON.stringify(pack, null, 2) + '\n')
+  console.log(`${lang}/${cefr}: wrote ${lemmas.length} lemmas`)
+}
+
+async function main() {
+  const { dryRun, levels, langs } = parseArgs(process.argv.slice(2))
+  await ensureSources()
+
+  const ptAll = langs.includes('pt') ? parseFreqPt() : null
+
+  const selections: Record<string, Record<NewCefr, string[]>> = {}
+  for (const lang of langs) {
+    const existing = loadExistingFoldKeys(lang)
+    const candidates = sourceCandidates(lang, ptAll)
+    const assigned = assignExclusiveBands(lang, existing, candidates, TARGET, DENY)
+    selections[lang] = assigned
+
+    for (const cefr of NEW_CEFRS) {
+      const sourceOk = candidates[cefr].length
+      const n = assigned[cefr].length
+      console.log(
+        `${lang}/${cefr}: hangman-ok ${sourceOk} in-band → exclusive ${n} (A1–B1 subtract ${existing.size})`,
+      )
+      const floor = bandFloor(cefr)
+      if (n < floor) {
+        throw new Error(
+          `${lang}/${cefr}: exclusive ${n} below floor ${floor} after A1–B1 subtract (no other-band top-up)`,
+        )
       }
     }
-    selected = selected.slice(0, TARGET)
-    if (selected.length < 350) {
-      throw new Error(`${lang}/${cefr}: only ${selected.length} glossed lemmas after filters`)
+  }
+
+  if (dryRun) {
+    console.log('dry-run: skip gloss/synonym generation and pack writes')
+    return
+  }
+
+  for (const lang of langs) {
+    const glossCache = loadGlossCache(lang)
+    const synCache = loadSynonymCache(lang)
+    const needGloss = new Set<string>()
+    const needSyn = new Set<string>()
+    for (const cefr of levels) {
+      for (const w of selections[lang]![cefr]!) {
+        if (!hasRealGloss(w, glossCache)) needGloss.add(w)
+        if (cefr === 'c1' || cefr === 'c2') needSyn.add(w)
+      }
     }
-    const lemmas = buildLemmas(lang, selected, cache)
-    const meta = attribution(lang, cefr)
-    const pack = {
-      version: 2,
-      lang,
-      cefr,
-      license: meta.license,
-      attribution: meta.attribution,
-      lemmas,
+    await generateGlosses(lang, [...needGloss], glossCache)
+    saveGlossCache(lang, glossCache)
+    await generateSynonyms(lang, [...needSyn], synCache)
+    saveSynonymCache(lang, synCache)
+
+    for (const cefr of levels) {
+      const selected = selections[lang]![cefr]!.filter((w) => hasRealGloss(w, glossCache))
+      const floor = bandFloor(cefr)
+      if (selected.length < floor) {
+        throw new Error(
+          `${lang}/${cefr}: only ${selected.length} glossed lemmas after filters (floor ${floor}); no other-band top-up`,
+        )
+      }
+      const sliced = selected.slice(0, TARGET)
+      if (cefr === 'c1' || cefr === 'c2') {
+        const withSyn = sliced.filter((w) => cleanSynonyms(w, synCache[w]).length > 0).length
+        const pct = sliced.length ? withSyn / sliced.length : 0
+        if (pct < 0.8) {
+          console.warn(
+            `  ${lang}/${cefr}: synonym coverage ${(pct * 100).toFixed(0)}% < 80% (unique referents allowed; not failing the run)`,
+          )
+        }
+      }
+      const lemmas = buildLemmas(lang, sliced, glossCache, synCache)
+      writePack(lang, cefr, lemmas)
     }
-    const outFile = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
-    writeFileSync(outFile, JSON.stringify(pack, null, 2) + '\n')
-    console.log(`${lang}/${cefr}: ${lemmas.length} lemmas`)
-    totalNew += lemmas.length
   }
 }
-console.log('total lemmas', totalNew)
+
+await main()
