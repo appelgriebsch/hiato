@@ -86,10 +86,10 @@ function asciiBaseKey(ch: string): string {
 
 /**
  * Whether a *miss* should increment the ADR 0015 hint counter.
- * Count only guesses that target an unrevealed diacritic cell: the ASCII base
- * of a hidden diacritic (E vs É), or a wrong accent of that same base (È vs É).
- * Unrelated diacritic keys (Á on CAFÉ) and unrelated ASCII (X) do not count.
- * Exact matches are hits, not misses.
+ * When a hidden diacritic remains and the guess is a miss, count:
+ * - the ASCII base of a hidden diacritic (N vs Ñ, E vs É), or
+ * - a diacritic grapheme itself (Á/Ó while Ñ remains — common on ES pads).
+ * Unrelated plain ASCII (X, Z) does not count. Exact matches are hits, not misses.
  */
 export function isDiacriticHintMiss(
   cells: CellState[],
@@ -104,6 +104,7 @@ export function isDiacriticHintMiss(
   if (gs.some((ch, i) => graphemeKey(ch) === target && !cells[i]!.revealed)) {
     return false
   }
+  if (hasDiacritic(letter)) return true
   const base = asciiBaseKey(letter)
   return hidden.some((ch) => asciiBaseKey(ch) === base)
 }

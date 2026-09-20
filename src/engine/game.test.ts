@@ -185,12 +185,12 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintMiss(cells, word, 'E')).toBe(true)
   })
 
-  test('a diacritic key that does not target a hidden cell does not count', () => {
+  test('a diacritic grapheme miss counts while a hidden diacritic remains', () => {
     const word = 'CAFÉ'
     const cells = buildInitialCells(word, 'b1')
-    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(false)
-    expect(isDiacriticHintMiss(cells, word, 'ç')).toBe(false)
-    expect(isDiacriticHintMiss(cells, word, 'ñ')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'ç')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'ñ')).toBe(true)
   })
 
   test('a wrong accent of the same base as a hidden diacritic counts', () => {
@@ -253,10 +253,6 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
 
     miss('Á')
-    expect(misses).toBe(1)
-    expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
-
-    miss('È')
     expect(misses).toBe(2)
     expect(isDiacriticHintReady(cells, word, misses)).toBe(true)
     expect(isDiacriticHintReady(cells, word, misses, { hintUsed: true })).toBe(
@@ -265,6 +261,66 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintReady(cells, word, misses, { finished: true })).toBe(
       false,
     )
+  })
+
+  test('ES NIÑO: two accent misses with Ñ hidden enable the hint', () => {
+    const word = 'NIÑO'
+    const cells = buildInitialCells(word, 'a1')
+    expect(hasUnrevealedDiacritic(cells, word)).toBe(true)
+
+    let misses = 0
+    const miss = (letter: string) => {
+      const { hit } = applyGuess(cells, word, letter)
+      expect(hit).toBe(false)
+      if (isDiacriticHintMiss(cells, word, letter)) misses += 1
+    }
+
+    miss('Á')
+    expect(misses).toBe(1)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
+
+    miss('Ó')
+    expect(misses).toBe(2)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(true)
+
+    // N is in NIÑO — hit, not a hint miss.
+    expect(applyGuess(cells, word, 'N').hit).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'N')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'X')).toBe(false)
+  })
+
+  test('ES AÑO: N miss against hidden Ñ counts', () => {
+    const word = 'AÑO'
+    const cells = buildInitialCells(word, 'a1')
+    expect(hasUnrevealedDiacritic(cells, word)).toBe(true)
+    expect(applyGuess(cells, word, 'N').hit).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'N')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'X')).toBe(false)
+  })
+
+  test('ES CAFÉ: two accent misses with É hidden enable the hint', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'a1')
+    expect(hasUnrevealedDiacritic(cells, word)).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'Á')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'Ó')).toBe(true)
+    expect(isDiacriticHintReady(cells, word, 2)).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'X')).toBe(false)
+  })
+
+  test('DE ÜBUNG: umlaut miss counts; ASCII base of hidden Ü counts on TÜR', () => {
+    const ubung = 'ÜBUNG'
+    const ubungCells = buildInitialCells(ubung, 'a1')
+    expect(hasUnrevealedDiacritic(ubungCells, ubung)).toBe(true)
+    expect(isDiacriticHintMiss(ubungCells, ubung, 'ä')).toBe(true)
+    expect(isDiacriticHintMiss(ubungCells, ubung, 'X')).toBe(false)
+
+    const tuer = 'TÜR'
+    const tuerCells = buildInitialCells(tuer, 'a1')
+    expect(hasUnrevealedDiacritic(tuerCells, tuer)).toBe(true)
+    expect(isDiacriticHintMiss(tuerCells, tuer, 'U')).toBe(true)
+    expect(isDiacriticHintMiss(tuerCells, tuer, 'ä')).toBe(true)
+    expect(isDiacriticHintMiss(tuerCells, tuer, 'Z')).toBe(false)
   })
 
   test('hint stays off when no diacritic remains even after 2 misses', () => {
