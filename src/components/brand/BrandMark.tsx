@@ -13,15 +13,18 @@ export function BrandMark({
   size = 'md',
   className = '',
   title = 'Hiato',
+  alt,
 }: {
   size?: Size
   className?: string
   title?: string
+  /** Empty string marks the mark decorative when a wordmark is adjacent. */
+  alt?: string
 }) {
   return (
     <img
       src="/brand/hiato-mark.svg"
-      alt={title}
+      alt={alt ?? title}
       width={32}
       height={32}
       className={cn(sizes[size], 'shrink-0 select-none', className)}
@@ -39,7 +42,7 @@ export function BrandLockup({
 }) {
   return (
     <div className={cn('flex items-center gap-2', className)}>
-      <BrandMark size={size} />
+      <BrandMark size={size} alt="" />
       <span className="text-[15px] font-semibold tracking-tight text-ink">Hiato</span>
     </div>
   )

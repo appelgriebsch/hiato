@@ -256,8 +256,6 @@ button:disabled {
   .motion-onboarding-enter,
   .motion-letter-reveal,
   .motion-key-shake,
-  .motion-life-deplete,
-  .motion-heart-deplete,
   .motion-streak-pulse,
   .motion-result-enter,
   .motion-share-card {
@@ -265,6 +263,17 @@ button:disabled {
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .motion-life-deplete,
+  .motion-heart-deplete {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .animate-spin {
+    animation: none !important;
   }
 
   .motion-share-card:hover {

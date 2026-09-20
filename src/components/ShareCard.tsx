@@ -12,13 +12,11 @@ export function ShareCard(payload: ShareCardPayload) {
   return (
     <div
       id="hiato-share-card"
-      role="img"
-      aria-label="Hiato share card preview"
       className="motion-share-card mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-white to-accent-soft shadow-md"
     >
       <div className="px-6 pt-6 pb-2 text-center">
         <div className="mb-2.5 flex justify-center">
-          <BrandMark size="sm" className="opacity-90" />
+          <BrandMark size="sm" className="opacity-90" alt="" />
         </div>
         <div className="text-kicker">Hiato</div>
         <p className="mt-1 text-sm text-ink-muted">{shareCardKicker(payload)}</p>

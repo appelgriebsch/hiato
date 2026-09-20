@@ -17,6 +17,11 @@ describe('lives metaphor (ADR 0025)', () => {
       path.join(REPO, 'src/components/play/Lives.tsx'),
     ).text()
     expect(src).toContain('lives remaining')
+    expect(src).toContain('role="status"')
+    expect(src).toContain('aria-live="polite"')
+    expect(src).toContain('prefers-reduced-motion')
+    expect(src).toContain('motion-reduce:transition-none')
+    expect(src).not.toContain('opacity-40')
     expect(src).not.toContain('♥')
   })
 })
@@ -70,9 +75,24 @@ describe('Uma polish assets', () => {
     expect(css).toContain('.motion-result-enter')
     expect(css).toContain('.motion-share-card')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
+    expect(css).toContain('.animate-spin')
     expect(css).not.toMatch(
       /https?:\/\/fonts\.(googleapis|gstatic)\.com|\/\/fonts\.(googleapis|gstatic)\.com/i,
     )
+  })
+
+  test('StreakChip has no fire emoji', async () => {
+    const src = await Bun.file(
+      path.join(REPO, 'src/components/StreakChip.tsx'),
+    ).text()
+    expect(src).not.toContain('🔥')
+    expect(src).toContain('Streak')
+  })
+
+  test('Play spinner opts out of spin under reduced motion', async () => {
+    const src = await Bun.file(path.join(REPO, 'src/pages/Play.tsx')).text()
+    expect(src).toContain('animate-spin')
+    expect(src).toContain('motion-reduce:animate-none')
   })
 
   test('packs SW stays NetworkFirst (ADR 0006)', async () => {

@@ -24,6 +24,13 @@ export function Lives({
 
   useEffect(() => {
     if (remaining < prev.current) {
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)',
+      ).matches
+      if (reduceMotion) {
+        prev.current = remaining
+        return
+      }
       setDepleting(remaining)
       const t = window.setTimeout(() => setDepleting(null), 320)
       prev.current = remaining
@@ -37,7 +44,9 @@ export function Lives({
   return (
     <div
       className="flex items-center gap-1"
-      aria-label={`${remaining} of ${total} lives remaining`}
+      role="status"
+      aria-live="polite"
+      aria-label={`${remaining} lives remaining`}
     >
       {Array.from({ length: total }, (_, i) => {
         const alive = i < remaining
@@ -48,11 +57,12 @@ export function Lives({
             className={[
               'inline-flex h-5 w-5 items-center justify-center',
               'transition-[opacity,filter,transform] duration-200',
+              'motion-reduce:transition-none motion-reduce:duration-0',
               isDepleting
                 ? `motion-life-deplete ${accent}`
                 : alive
-                  ? `opacity-100 ${accent}`
-                  : 'opacity-40 text-ink-faint',
+                  ? accent
+                  : 'text-ink-faint',
             ].join(' ')}
             aria-hidden
           >

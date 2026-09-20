@@ -492,7 +492,7 @@ export function Play() {
 
       {loading && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-16">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-line border-t-accent" />
+          <div className="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-2 border-line border-t-accent" />
           <p className="text-sm text-ink-muted">
             {mode === 'daily' ? 'Loading today’s word…' : 'Loading a practice word…'}
           </p>

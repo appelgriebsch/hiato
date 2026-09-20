@@ -67,7 +67,6 @@ export function SeedIcon({ filled = true, ...rest }: IconProps) {
         stroke="currentColor"
         strokeWidth={1.7}
         strokeLinejoin="round"
-        opacity={filled ? 1 : 0.38}
       />
       {/* subtle hilum / center line */}
       <path
