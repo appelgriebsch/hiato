@@ -4,10 +4,14 @@
  * Lemma selection: wordhoard samples (EN/DE/ES) + FrequencyWords (PT) + existing packs.
  * Glosses: keep curated non-template glosses; generate real same-language learner glosses
  * for new lemmas via xAI (never letter-count templates). Denylist rejects NSFW/violence.
+ * Person names drop only when the lemma is on the name list *and* the gloss is a
+ * person-name gloss (keep WILL/MARK/ROSA with a common-noun reading).
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
+import { loadNameList, onNameList } from './lemma-names'
+import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..')
@@ -25,6 +29,11 @@ const SKIP_POS = new Set([
 ])
 
 const DENY = loadDenylist()
+const NAMES = loadNameList()
+
+function isNameGlossLemma(lang: Lang, word: string, gloss: string | undefined): boolean {
+  return !!(gloss && onNameList(word, NAMES) && isPersonNameGloss(gloss, lang))
+}
 
 function hangmanOk(lang: Lang, raw: string): string | null {
   const word = nfcUpper(raw)
@@ -227,6 +236,7 @@ function loadCuratedMaps(): Record<Lang, Map<string, Lemma>> {
         if (isDeniedLemma(word, DENY)) continue
         if (!L.gloss || isTemplateGloss(L.gloss)) continue
         if (spoiler(L.gloss, word)) continue
+        if (isNameGlossLemma(lang, word, L.gloss)) continue
         const key = foldKey(lang, word)
         const prev = maps[lang].get(key)
         // Prefer form that still contains ß when both exist
@@ -268,7 +278,12 @@ async function generateGlosses(
   words: string[],
   cache: Record<string, string>,
 ): Promise<void> {
-  const missing = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]))
+  const missing = words.filter((w) => {
+    const g = cache[w]
+    if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
+    if (isNameGlossLemma(lang, w, g)) return true
+    return false
+  })
   if (missing.length === 0) return
 
   const key = readXaiKey()
@@ -287,6 +302,8 @@ async function generateGlosses(
       `Write a short same-language learner dictionary gloss for each lemma (one simple sentence or clause).\n` +
       `Rules: never include the lemma itself as a whole word in its gloss (do not start with the lemma); ` +
       `no letter-count or classroom-template fluff; no NSFW. Prefer "a/an/the …" or "to …" style definitions.\n` +
+      `Never define a lemma as a given name, first name, surname, family name, or proper name of a person. ` +
+      `If it has an ordinary noun/verb/adjective/adverb meaning, use that. If it is only a personal name, omit it from the JSON.\n` +
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
 
@@ -331,7 +348,7 @@ async function generateGlosses(
         continue
       }
       let gloss = g.trim()
-      if (spoiler(gloss, w) || isTemplateGloss(gloss)) {
+      if (spoiler(gloss, w) || isTemplateGloss(gloss) || isNameGlossLemma(lang, w, gloss)) {
         console.warn(`  rejected gloss for ${w}: ${gloss.slice(0, 60)}`)
         continue
       }
@@ -342,7 +359,12 @@ async function generateGlosses(
   }
 
   // Retry leftovers with stricter anti-spoiler instructions
-  let leftovers = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]) || spoiler(cache[w]!, w))
+  let leftovers = words.filter((w) => {
+    const g = cache[w]
+    if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
+    if (isNameGlossLemma(lang, w, g)) return true
+    return false
+  })
   for (let attempt = 0; attempt < 3 && leftovers.length; attempt++) {
     console.log(`  ${lang} retry ${attempt + 1}: ${leftovers.length} leftovers`)
     for (let i = 0; i < leftovers.length; i += 20) {
@@ -387,6 +409,7 @@ async function generateGlosses(
           if (!g || typeof g !== 'string') continue
           const gloss = g.trim()
           if (spoiler(gloss, w) || isTemplateGloss(gloss)) continue
+          if (isNameGlossLemma(lang, w, gloss)) continue
           cache[w] = gloss
         }
       } catch {
@@ -394,7 +417,12 @@ async function generateGlosses(
       }
       saveGlossCache(lang, cache)
     }
-    leftovers = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]) || spoiler(cache[w]!, w))
+    leftovers = words.filter((w) => {
+      const g = cache[w]
+      if (!g || isTemplateGloss(g) || spoiler(g, w)) return true
+      if (isNameGlossLemma(lang, w, g)) return true
+      return false
+    })
   }
   if (leftovers.length) {
     console.warn(`  ${lang} still missing glosses: ${leftovers.join(', ')}`)
@@ -429,6 +457,7 @@ function selectWords(
   lang: Lang,
   cefr: Cefr,
   curated: Map<string, Lemma>,
+  glossCache: Record<string, string> = {},
 ): { word: string; posHint?: string; curated?: Lemma }[] {
     const slots = new Map<string, { word: string; posHint?: string; curated?: Lemma }>()
 
@@ -436,6 +465,13 @@ function selectWords(
     if (slots.size >= TARGET && !slots.has(foldKey(lang, word))) return
     const w = nfcUpper(word)
     if (!w || EXTRA_STOP.has(w) || isDeniedLemma(w, DENY)) return
+    const gloss = (cur?.gloss && !isTemplateGloss(cur.gloss) ? cur.gloss : null) || glossCache[w]
+    // Name-list tokens stay only with a real common-noun gloss (not occupancy for later drop).
+    if (onNameList(w, NAMES)) {
+      if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, w) || isPersonNameGloss(gloss, lang)) {
+        return
+      }
+    }
     const key = foldKey(lang, w)
     const ok = hangmanOk(lang, w)
     if (!ok && !(cur?.gloss && w.length >= 2 && w.length <= 12)) return
@@ -516,7 +552,12 @@ function buildLemmas(
     const w = s.word
     let gloss = s.curated?.gloss
     if (!gloss || isTemplateGloss(gloss)) gloss = glossCache[w]
-    if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, w)) {
+    if (
+      !gloss ||
+      isTemplateGloss(gloss) ||
+      spoiler(gloss, w) ||
+      isNameGlossLemma(lang, w, gloss)
+    ) {
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
     lemmas.push({
@@ -534,7 +575,12 @@ function hasRealGloss(
   cache: Record<string, string>,
 ): boolean {
   const g = (s.curated?.gloss && !isTemplateGloss(s.curated.gloss) ? s.curated.gloss : null) || cache[s.word]
-  return !!(g && !isTemplateGloss(g) && !spoiler(g, s.word))
+  return !!(
+    g &&
+    !isTemplateGloss(g) &&
+    !spoiler(g, s.word) &&
+    !isNameGlossLemma(lang, s.word, g)
+  )
 }
 
 // --- main ---
@@ -544,19 +590,28 @@ for (const lang of LANGS) {
   console.log(`${lang}: ${curatedMaps[lang].size} curated glosses retained`)
 }
 
-const selections: Record<string, { word: string; posHint?: string; curated?: Lemma }[]> = {}
+const caches: Record<Lang, Record<string, string>> = {
+  en: loadGlossCache('en'),
+  de: loadGlossCache('de'),
+  es: loadGlossCache('es'),
+  pt: loadGlossCache('pt'),
+}
 for (const lang of LANGS) {
-  for (const cefr of CEFRS) {
-    selections[`${lang}/${cefr}`] = selectWords(lang, cefr, curatedMaps[lang])
+  for (const L of curatedMaps[lang].values()) {
+    if (L.gloss && !isNameGlossLemma(lang, L.word, L.gloss)) caches[lang][L.word] = L.gloss
   }
 }
 
-// Generate glosses for anything not curated
+const selections: Record<string, { word: string; posHint?: string; curated?: Lemma }[]> = {}
 for (const lang of LANGS) {
-  const cache = loadGlossCache(lang)
-  for (const L of curatedMaps[lang].values()) {
-    if (L.gloss) cache[L.word] = L.gloss
+  for (const cefr of CEFRS) {
+    selections[`${lang}/${cefr}`] = selectWords(lang, cefr, curatedMaps[lang], caches[lang])
   }
+}
+
+// Generate glosses for anything not curated (skip person-name glosses)
+for (const lang of LANGS) {
+  const cache = caches[lang]
   const need = new Set<string>()
   for (const cefr of CEFRS) {
     for (const s of selections[`${lang}/${cefr}`]!) {
@@ -570,13 +625,20 @@ for (const lang of LANGS) {
 
 let totalNew = 0
 for (const lang of LANGS) {
-  const cache = loadGlossCache(lang)
+  const cache = caches[lang]
   for (const cefr of CEFRS) {
     let selected = selections[`${lang}/${cefr}`]!.filter((s) => hasRealGloss(lang, s, cache))
-    // Top up from broader selection if denylist/gloss gaps shrank the pack
+    // Top up from broader selection if name-gloss / denylist / gloss gaps shrank the pack
     if (selected.length < TARGET) {
-      const extra = selectWords(lang, cefr, curatedMaps[lang])
+      const extra = selectWords(lang, cefr, curatedMaps[lang], cache)
       const have = new Set(selected.map((s) => foldKey(lang, s.word)))
+      const need = extra
+        .filter((s) => !have.has(foldKey(lang, s.word)) && !hasRealGloss(lang, s, cache))
+        .map((s) => s.word)
+      if (need.length) {
+        await generateGlosses(lang, need, cache)
+        saveGlossCache(lang, cache)
+      }
       for (const s of extra) {
         if (selected.length >= TARGET) break
         const key = foldKey(lang, s.word)
@@ -593,7 +655,7 @@ for (const lang of LANGS) {
     const lemmas = buildLemmas(lang, selected, cache)
     const meta = attribution(lang, cefr)
     const pack = {
-      version: 2,
+      version: 3,
       lang,
       cefr,
       license: meta.license,

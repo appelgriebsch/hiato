@@ -15,6 +15,10 @@
 /manifest.webmanifest
   Cache-Control: no-cache
 
+# Learner packs: revalidate so clients pick up version bumps (ADR 0006)
+/packs/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 # Hashed Vite assets: immutable long-cache
 /assets/*
   Cache-Control: public, max-age=31536000, immutable

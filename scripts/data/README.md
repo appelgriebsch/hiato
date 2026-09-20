@@ -10,5 +10,6 @@ Downloaded on demand by `bun run scripts/expand-packs.ts` (not always committed)
 
 Hiato pack **glosses and synonyms** are original learner copy. Lemma lists are curated selections, not verbatim proprietary dumps.
 
-| `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate |
+| `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate (lemma only; no substring) |
+| `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand |
