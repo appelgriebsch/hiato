@@ -68,9 +68,12 @@ export default defineConfig({
           {
             urlPattern: ({ url }) =>
               /\/packs\/(en|de|es|pt)\/(a1|a2|b1)\.json$/.test(url.pathname),
-            handler: 'CacheFirst',
+            // NetworkFirst so load.ts version checks see fresh packs under SW.
+            // Cache fallback if offline or the network exceeds ~3s.
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'hiato-packs', // keep in sync with PACK_SW_CACHE
+              networkTimeoutSeconds: 3,
               expiration: {
                 maxEntries: 12,
                 maxAgeSeconds: 60 * 60 * 24 * 365,

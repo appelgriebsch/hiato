@@ -8,6 +8,7 @@ import {
   graphemes,
   hasDiacritic,
   hasUnrevealedDiacritic,
+  isDiacriticHintMiss,
   hashString,
   isBaseAsciiVowel,
   isWon,
@@ -160,6 +161,45 @@ describe('ADR 0015 diacritic hint', () => {
     const cells = buildInitialCells(word, 'a1')
     expect(hasUnrevealedDiacritic(cells, word)).toBe(false)
     expect(revealOneDiacritic(cells, word)).toEqual(cells)
+  })
+
+  test('wrong ASCII that is not a diacritic base does not count toward the hint', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    expect(isDiacriticHintMiss(cells, word, 'X')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'Z')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'Q')).toBe(false)
+  })
+
+  test('guessing the ASCII base of a hidden diacritic counts (E vs É)', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    expect(isDiacriticHintMiss(cells, word, 'e')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'E')).toBe(true)
+  })
+
+  test('guessing a wrong diacritic key counts as a diacritic-cell miss', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'ç')).toBe(true)
+  })
+
+  test('does not count once every diacritic cell is revealed', () => {
+    const word = 'CAFÉ'
+    const cells = applyGuess(buildInitialCells(word, 'b1'), word, 'é').cells
+    expect(hasUnrevealedDiacritic(cells, word)).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'X')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'e')).toBe(false)
+  })
+
+  test('AÇÃO: C counts (base of Ç); Q does not', () => {
+    const word = 'AÇÃO'
+    const cells = buildInitialCells(word, 'a1')
+    expect(hasUnrevealedDiacritic(cells, word)).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'C')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'Q')).toBe(false)
   })
 })
 

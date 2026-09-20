@@ -11,11 +11,18 @@ export function Language() {
   const saved = getPrefs()
   const [lang, setLang] = useState<PackLang>(saved?.lang ?? 'en')
   const [cefr, setCefr] = useState<PackCefr>(saved?.cefr ?? 'a1')
+  const [preparing, setPreparing] = useState(false)
   const nav = useNavigate()
 
-  function continuePlay() {
+  async function continuePlay() {
+    if (preparing) return
+    setPreparing(true)
     setPrefs({ lang, cefr })
-    void precacheSelectedLanguage(lang).catch(() => {})
+    try {
+      await precacheSelectedLanguage(lang)
+    } catch {
+      // Still navigate — Play can fetch on demand.
+    }
     nav('/play')
   }
 
@@ -23,8 +30,13 @@ export function Language() {
     <Layout
       footer={
         <div className="pb-6 pt-2">
-          <Button fullWidth onClick={continuePlay}>
-            Continue to daily
+          <Button
+            fullWidth
+            disabled={preparing}
+            aria-busy={preparing}
+            onClick={() => void continuePlay()}
+          >
+            {preparing ? 'Preparing packs…' : 'Continue to daily'}
           </Button>
         </div>
       }

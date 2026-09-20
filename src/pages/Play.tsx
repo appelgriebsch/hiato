@@ -14,6 +14,7 @@ import {
   correctKeysFromCells,
   graphemeKey,
   hasUnrevealedDiacritic,
+  isDiacriticHintMiss,
   isWon,
   localDateKey,
   pickDailyLemma,
@@ -105,8 +106,8 @@ export function Play() {
       if (isWon(next)) endGame('win')
     } else {
       setUsedWrong((s) => new Set(s).add(k))
-      // ADR 0015: only count misses while an unrevealed diacritic remains (W2).
-      if (hasUnrevealedDiacritic(cells, wordEntry.word)) {
+      // ADR 0015: only diacritic-cell misses (see isDiacriticHintMiss), not every wrong key.
+      if (isDiacriticHintMiss(cells, wordEntry.word, letter)) {
         setMisses((m) => m + 1)
       }
       setLives((lv) => {
@@ -185,7 +186,7 @@ export function Play() {
                 Hint — reveal one accent
               </Button>
               <p className="mt-1.5 text-center text-[11px] text-ink-faint">
-                Optional. After 2 misses when a diacritic remains.
+                Optional. After 2 misses on a diacritic cell.
               </p>
             </div>
           )}
