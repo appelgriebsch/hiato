@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 /**
  * Validate public/packs JSON files — schema, exclusive bands, license matrix,
- * ADR 0023 spoilers, ADR 0026/0028 floors, NSFW denylist, template-gloss.
+ * ADR 0023 spoilers, ADR 0026/0028 floors, NSFW denylist, template-gloss,
+ * pack-language gloss (ADR 0030), hangman length 3–10.
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'

@@ -19,7 +19,7 @@ export function Layout({
         {children}
       </div>
       {footer ? (
-        <div className="sticky bottom-0 z-10 shrink-0 bg-cream pb-[env(safe-area-inset-bottom)]">
+        <div className="sticky bottom-0 z-10 shrink-0 border-t border-line bg-cream pb-[env(safe-area-inset-bottom)]">
           {footer}
         </div>
       ) : null}

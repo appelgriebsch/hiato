@@ -26,6 +26,7 @@ describe('isEnglishShapedGloss', () => {
     expect(isEnglishShapedGloss('An einem Ort verweilen.')).toBe(false)
     expect(isEnglishShapedGloss('An der Reihe.')).toBe(false)
     expect(isEnglishShapedGloss('An allen möglichen Orten.', 'de')).toBe(false)
+    expect(isEnglishShapedGloss('an diesen Ort oder diese Stelle.')).toBe(false)
     expect(isEnglishShapedGloss('Erwachsene weibliche Person.')).toBe(false)
     expect(isEnglishShapedGloss('Un lugar donde se duerme.')).toBe(false)
   })

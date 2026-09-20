@@ -10,6 +10,7 @@ import {
   exclusiveConflicts,
   expectedPackCount,
   requiresCcBySa,
+  validatePack,
 } from './packs-check-lib'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
@@ -201,6 +202,33 @@ describe('packs:check completeness', () => {
     expect(errors.some((e) => e.includes('stray'))).toBe(true)
     expect(errors.some((e) => e.includes('exactly 24'))).toBe(true)
     expect(errors.some((e) => e.includes('missing'))).toBe(true)
+  })
+})
+
+describe('packs:check gloss language (ADR 0030)', () => {
+  test('rejects English-shaped glosses in DE/ES/PT', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'b2',
+          lemmas: [{ word: 'LACHEN', gloss: 'to make sounds showing amusement' }],
+        }),
+        'de/b2.json',
+      ),
+    ).toThrow(/pack language/)
+  })
+
+  test('keeps German learner glosses', () => {
+    const p = validatePack(
+      pack({
+        lang: 'de',
+        cefr: 'a1',
+        lemmas: [{ word: 'BLEIBEN', gloss: 'An einem Ort verweilen.' }],
+      }),
+      'de/a1.json',
+    )
+    expect(p.lemmas[0]?.gloss).toContain('Ort')
   })
 })
 

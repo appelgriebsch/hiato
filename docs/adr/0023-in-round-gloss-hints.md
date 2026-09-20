@@ -15,3 +15,4 @@ On the word-guessing (play) screen, show a compact hint area under the gap word:
 - Impl Ivy / pack pipeline populate same-language gloss/synonyms.
 - Spoiler risk: gloss/synonyms must not contain the answer string.
 - Distinct from the diacritic hint button (ADR 0015).
+- Pack JSON gloss language is a hard invariant (ADR 0030), not only a play-screen preference.

@@ -1,5 +1,9 @@
 import { describe, expect, test } from 'bun:test'
-import { packLangFromUrl, shouldPurgePackUrl } from './cache'
+import {
+  canPurgeOtherLanguages,
+  packLangFromUrl,
+  shouldPurgePackUrl,
+} from './cache'
 import { PACK_SW_CACHE } from './schema'
 
 describe('selected-language pack URLs (ADR 0006)', () => {
@@ -27,5 +31,13 @@ describe('selected-language pack URLs (ADR 0006)', () => {
 
   test('SW cache name is hiato-packs', () => {
     expect(PACK_SW_CACHE).toBe('hiato-packs')
+  })
+
+  test('canPurgeOtherLanguages requires the selected CEFR (or any pack)', () => {
+    expect(canPurgeOtherLanguages(new Set(), 'b2')).toBe(false)
+    expect(canPurgeOtherLanguages(new Set(['a1', 'a2']), 'b2')).toBe(false)
+    expect(canPurgeOtherLanguages(new Set(['b2']), 'b2')).toBe(true)
+    expect(canPurgeOtherLanguages(new Set())).toBe(false)
+    expect(canPurgeOtherLanguages(new Set(['c1']))).toBe(true)
   })
 })

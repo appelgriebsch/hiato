@@ -37,6 +37,16 @@ export const PT_BANDS: Record<NewCefr, readonly [number, number]> = {
   c2: [11000, 16000],
 }
 
+/**
+ * DE/ES hangman-filtered wordhoard rows (content POS, frequency_rank ASC).
+ * Same index windows as PT — frequency bands, not cefr_estimate (ADR 0029).
+ */
+export const DE_ES_BANDS: Record<NewCefr, readonly [number, number]> = {
+  b2: [4000, 7000],
+  c1: [7000, 11000],
+  c2: [11000, 16000],
+}
+
 export function bandFloor(cefr: NewCefr): number {
   return cefr === 'c2' ? FLOOR_C2 : FLOOR_B2_C1
 }

@@ -39,7 +39,7 @@ describe('isPackCefr (ADR 0027)', () => {
 })
 
 describe('pack hosting', () => {
-  test('_redirects 404s /packs/* before the SPA fallback', async () => {
+  test('_redirects is SPA-only; pack 404s are the Pages Function', async () => {
     const text = await Bun.file(
       new URL('../../public/_redirects', import.meta.url),
     ).text()
@@ -47,12 +47,17 @@ describe('pack hosting', () => {
       .split('\n')
       .map((l) => l.trim())
       .filter((l) => l && !l.startsWith('#'))
-    const packsIdx = lines.findIndex((l) => l.startsWith('/packs/*'))
-    const spaIdx = lines.findIndex((l) => l.startsWith('/*'))
-    expect(packsIdx).toBeGreaterThanOrEqual(0)
-    expect(spaIdx).toBeGreaterThan(packsIdx)
-    expect(lines[packsIdx]).toMatch(/404/)
-    expect(lines[spaIdx]).toMatch(/\/index\.html\s+200/)
+    expect(lines.some((l) => l.startsWith('/packs/*'))).toBe(false)
+    expect(lines.find((l) => l.startsWith('/*'))).toMatch(/\/index\.html\s+200/)
+    expect(text).toContain('functions/packs/[[path]].ts')
+  })
+
+  test('Workbox pack cache refuses non-JSON 200s', async () => {
+    const vite = await Bun.file(
+      new URL('../../vite.config.ts', import.meta.url),
+    ).text()
+    expect(vite).toContain('cacheWillUpdate')
+    expect(vite).toContain('application/json')
   })
 
   test('pack Pages Function 404s HTML fallback and passes JSON', async () => {

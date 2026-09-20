@@ -17,5 +17,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["scripts/pack-select.ts", "scripts/lemma-denylist.ts"]
+  "include": ["scripts/**/*.ts", "scripts/**/*.d.ts"]
 }

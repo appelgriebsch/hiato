@@ -4,6 +4,7 @@ import {
   PACK_SW_CACHE,
   isPackLang,
   packUrl,
+  type PackCefr,
   type PackLang,
 } from './schema'
 
@@ -26,6 +27,15 @@ export function packLangFromUrl(url: string): PackLang | null {
 export function shouldPurgePackUrl(url: string, selected: PackLang): boolean {
   const lang = packLangFromUrl(url)
   return lang !== null && lang !== selected
+}
+
+/** Purge other langs only if the selected CEFR (or any pack, if omitted) loaded. */
+export function canPurgeOtherLanguages(
+  loaded: ReadonlySet<PackCefr>,
+  selectedCefr?: PackCefr,
+): boolean {
+  if (selectedCefr) return loaded.has(selectedCefr)
+  return loaded.size > 0
 }
 
 async function openPackCache(): Promise<Cache | null> {
@@ -64,24 +74,39 @@ export async function purgeOtherLanguagePacks(
 
 /**
  * Precache shipped CEFR packs for the selected language, then drop other langs
- * from SW cache + localStorage (ADR 0006).
+ * from SW cache + localStorage (ADR 0006). Returns false if the selected CEFR
+ * (or any pack, when `selectedCefr` is omitted) did not load — caller must not
+ * navigate as if Play is ready.
  */
 export async function precacheSelectedLanguage(
   lang: PackLang,
-): Promise<void> {
+  selectedCefr?: PackCefr,
+): Promise<boolean> {
+  const loaded = new Set<PackCefr>()
   await Promise.all(
-    PACK_CEFRS.map((cefr) => loadPack(lang, cefr).catch(() => null)),
+    PACK_CEFRS.map(async (cefr) => {
+      try {
+        await loadPack(lang, cefr)
+        loaded.add(cefr)
+      } catch {
+        /* missing or network */
+      }
+    }),
   )
+
+  if (!canPurgeOtherLanguages(loaded, selectedCefr)) {
+    return false
+  }
 
   const cache = await openPackCache()
   if (cache) {
     await Promise.all(
-      PACK_CEFRS.map(async (cefr) => {
+      [...loaded].map(async (cefr) => {
         const url = packUrl(lang, cefr)
         try {
           await cache.add(url)
         } catch {
-          // offline or missing — loadPack may still have filled localStorage
+          // offline — loadPack may still have filled localStorage
         }
       }),
     )
@@ -89,4 +114,5 @@ export async function precacheSelectedLanguage(
   }
 
   purgeLocalPacksExcept(lang)
+  return true
 }

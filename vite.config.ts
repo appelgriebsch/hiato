@@ -85,9 +85,16 @@ export default defineConfig({
                 maxEntries: 24,
                 maxAgeSeconds: 60 * 60 * 24 * 365,
               },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
+              plugins: [
+                {
+                  cacheWillUpdate: async ({ response }) => {
+                    if (!response || response.status !== 200) return null
+                    const ct = response.headers.get('content-type') ?? ''
+                    if (!ct.includes('application/json')) return null
+                    return response
+                  },
+                },
+              ],
             },
           },
         ],

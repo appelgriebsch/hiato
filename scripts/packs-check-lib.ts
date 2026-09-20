@@ -13,9 +13,9 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
-import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
-import { EXISTING_CEFRS, foldKey } from './pack-select'
+import { isDeniedLemma, loadDenylist } from './lemma-denylist'
+import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
+import { EXISTING_CEFRS, foldKey, hangmanOk } from './pack-select'
 
 export const PACK_MIN = 350
 export const C2_MIN = 200
@@ -243,16 +243,26 @@ export function validatePack(raw: unknown, file: string): WordPack {
     throw new Error(`${file}: lemmas must be a non-empty array`)
   }
 
+  const seenFold = new Set<string>()
   const lemmas = o.lemmas.map((entry, i) => {
     if (!entry || typeof entry !== 'object') {
       throw new Error(`${file}: lemmas[${i}] must be an object`)
     }
     const e = entry as Record<string, unknown>
     const word = assertString(e.word, `${file}: lemmas[${i}].word`).normalize('NFC')
-    const gloss =
-      e.gloss === undefined
-        ? undefined
-        : assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize('NFC')
+    if (!hangmanOk(o.lang as PackLang, word)) {
+      throw new Error(
+        `${file}: lemmas[${i}] hangman — "${word}" must be 3–10 letters of ${o.lang}`,
+      )
+    }
+    const fold = foldKey(o.lang as PackLang, word)
+    if (seenFold.has(fold)) {
+      throw new Error(`${file}: lemmas[${i}] duplicate fold-key "${word}"`)
+    }
+    seenFold.add(fold)
+    const gloss = assertString(e.gloss, `${file}: lemmas[${i}].gloss`).normalize(
+      'NFC',
+    )
     let synonyms: string[] | undefined
     if (e.synonyms !== undefined) {
       if (!Array.isArray(e.synonyms)) {
@@ -266,9 +276,14 @@ export function validatePack(raw: unknown, file: string): WordPack {
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
-    if (gloss && isTemplateGloss(gloss)) {
+    if (isTemplateGloss(gloss)) {
       throw new Error(
         `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
+      )
+    }
+    if (isWrongLanguageGloss(o.lang as string, gloss)) {
+      throw new Error(
+        `${file}: lemmas[${i}] gloss not in pack language ${o.lang} — "${word}" / "${gloss}"`,
       )
     }
     if (gloss && spoilerContains(gloss, word)) {

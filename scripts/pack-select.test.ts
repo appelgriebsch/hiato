@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import {
   CEFR_LEVEL_PARITY,
+  DE_ES_BANDS,
   EXISTING_CEFRS,
   NEW_CEFRS,
   PT_BANDS,
@@ -26,6 +27,10 @@ describe('pack-select CEFR split', () => {
     expect(PT_BANDS.c1).toEqual([7000, 11000])
     expect(PT_BANDS.c2).toEqual([11000, 16000])
     expect(PT_BANDS.c2[1]).toBeLessThan(50000)
+  })
+
+  test('DE/ES use the same frequency-rank windows as PT (not cefr_estimate)', () => {
+    expect(DE_ES_BANDS).toEqual(PT_BANDS)
   })
 })
 

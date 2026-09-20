@@ -11,7 +11,7 @@ Downloaded on demand by `bun run packs:expand` (not committed). New dest paths s
 
 Legacy `wordhoard-{en,de,es}.csv` and `cefrj-en.json` (A1–B1 only) must not be reused for B2–C2.
 
-Hiato pack **glosses and synonyms** are original learner copy. Lemma lists are curated selections, not verbatim proprietary dumps.
+Hiato pack **glosses and synonyms** are original learner copy **in the pack language** (ADR 0030). Lemma lists are curated selections, not verbatim proprietary dumps. English is not a fallback for DE/ES/PT glosses.
 
 Shipped pack license bands (pack JSON, ADR 0029):
 
