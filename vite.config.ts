@@ -18,6 +18,7 @@ export default defineConfig({
         'favicon.svg',
         'hiato.svg',
         'fonts/*.woff2',
+        'fonts/LICENSE.txt',
         'icons/*',
         // Packs are NOT precached at install (ADR 0006) — selected language
         // is cached at runtime; other langs fetch on demand.
@@ -61,7 +62,7 @@ export default defineConfig({
       },
       workbox: {
         // Include woff2 so offline shell does not depend on CDN fonts
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,txt}'],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [

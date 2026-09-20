@@ -28,6 +28,7 @@ import {
 } from '@/engine'
 import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
 import { getPrefs } from '@/lib/prefs'
+import { buildShareCardPayload } from '@/lib/share-card'
 import {
   ensureStreakPersisted,
   getStreakCount,
@@ -386,7 +387,32 @@ export function Play() {
             )}
           </Card>
           <div className="mt-2 flex w-full flex-col gap-2">
-            <Button fullWidth onClick={goPractice} disabled={!practiceOk}>
+            {rec ? (
+              <Button
+                fullWidth
+                onClick={() =>
+                  nav('/share', {
+                    state: buildShareCardPayload({
+                      lang,
+                      cefr,
+                      streak,
+                      dateKey,
+                      word: rec.word,
+                      won: rec.won,
+                      mode: 'daily',
+                    }),
+                  })
+                }
+              >
+                Share
+              </Button>
+            ) : null}
+            <Button
+              fullWidth
+              variant={rec ? 'secondary' : 'primary'}
+              onClick={goPractice}
+              disabled={!practiceOk}
+            >
               Practice (endless)
             </Button>
             {!practiceOk ? (
@@ -598,7 +624,30 @@ function EndCard({
       </Card>
 
       <div className="flex flex-col gap-2">
-        <Button fullWidth onClick={onPractice} disabled={!practiceOk}>
+        <Button
+          fullWidth
+          onClick={() =>
+            nav('/share', {
+              state: buildShareCardPayload({
+                lang,
+                cefr,
+                streak,
+                dateKey,
+                word,
+                won,
+                mode,
+              }),
+            })
+          }
+        >
+          Share
+        </Button>
+        <Button
+          fullWidth
+          variant="secondary"
+          onClick={onPractice}
+          disabled={!practiceOk}
+        >
           {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
         </Button>
         {!practiceOk ? (
@@ -609,7 +658,7 @@ function EndCard({
         {mode === 'practice' ? (
           <Button
             fullWidth
-            variant="secondary"
+            variant="outline"
             onClick={() => nav('/play?mode=daily')}
           >
             Back to daily
