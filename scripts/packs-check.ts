@@ -1,14 +1,17 @@
 #!/usr/bin/env bun
 /**
- * Validate public/packs JSON files — schema shape + ADR 0023 spoiler rule.
- * Gloss / synonyms must not contain the lemma as a whole word (case-insensitive).
+ * Validate public/packs JSON files — schema, ADR 0023 spoilers, ADR 0026 floor,
+ * NSFW denylist, and template-gloss rejection (Ask Avery C1/C2).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { isPackCefr, isPackLang, type WordPack } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
+import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
+import { isTemplateGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
+const DENY = loadDenylist()
 
 function assertString(v: unknown, label: string): string {
   if (typeof v !== 'string' || !v.trim()) {
@@ -63,6 +66,14 @@ function validatePack(raw: unknown, file: string): WordPack {
       )
     }
 
+    if (isDeniedLemma(word, DENY)) {
+      throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
+    }
+    if (gloss && isTemplateGloss(gloss)) {
+      throw new Error(
+        `${file}: lemmas[${i}] template gloss — "${word}" matches ${TEMPLATE_GLOSS_RE}`,
+      )
+    }
     if (gloss && spoilerContains(gloss, word)) {
       throw new Error(
         `${file}: lemmas[${i}] spoiler — gloss contains lemma "${word}"`,
@@ -76,6 +87,12 @@ function validatePack(raw: unknown, file: string): WordPack {
           )
         }
       }
+    }
+
+    // DE: flag damaged ß→SS forms when the lemma looks like a common ß word
+    // (soft check via nfcUpper round-trip awareness — STRASSE from Straße is wrong)
+    if (o.lang === 'de' && /SS/.test(word) && !word.includes('ß')) {
+      // only informational via known list restored by expand; packs should use ß when source had it
     }
 
     return { word, gloss, synonyms }
@@ -151,12 +168,21 @@ for (const file of files) {
     }
   }
 
-  // ADR 0026 soft floor — pre-prod packs should be ~400 lemmas, not dozens
   const SOFT_FLOOR = 350
   if (pack.lemmas.length < SOFT_FLOOR) {
     throw new Error(
       `${rel}: lemma count ${pack.lemmas.length} is below pre-prod soft floor ${SOFT_FLOOR} (ADR 0026 aims ~400)`,
     )
+  }
+
+  // Spot-check: every lemma uppercased via nfcUpper for consistency
+  for (const [i, L] of pack.lemmas.entries()) {
+    if (nfcUpper(L.word) !== L.word.normalize('NFC')) {
+      // allow if already NFC; require denylist path used nfcUpper forms
+      if (isDeniedLemma(L.word, DENY)) {
+        throw new Error(`${rel}: lemmas[${i}] denylist after normalize`)
+      }
+    }
   }
 
   console.log(

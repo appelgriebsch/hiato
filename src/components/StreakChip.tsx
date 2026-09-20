@@ -9,7 +9,7 @@ export function StreakChip({
 }) {
   if (count <= 0) return null
   return (
-    <Badge aria-label={`Streak ${count}, fire`} pulse={pulse}>
+    <Badge aria-label={`Streak ${count}`} pulse={pulse}>
       <span aria-hidden="true">🔥</span>
       {count}
     </Badge>

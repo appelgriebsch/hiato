@@ -9,3 +9,6 @@ Downloaded on demand by `bun run scripts/expand-packs.ts` (not always committed)
 | `pt.txt` | [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) PT 50k | MIT |
 
 Hiato pack **glosses and synonyms** are original learner copy. Lemma lists are curated selections, not verbatim proprietary dumps.
+
+| `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate |
+| `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand |

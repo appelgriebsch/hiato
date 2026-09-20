@@ -30,3 +30,8 @@ yarn.lock
 
 # Bun
 .bun
+
+# Pack expansion downloads (fetched by expand-packs.ts)
+scripts/data/wordhoard-*.csv
+scripts/data/pt.txt
+scripts/data/cefrj-en.json

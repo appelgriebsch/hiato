@@ -2,10 +2,13 @@
 /**
  * Expand public/packs to ~400 lemmas each (ADR 0026).
  * Lemma selection: wordhoard samples (EN/DE/ES) + FrequencyWords (PT) + existing packs.
- * Glosses/synonyms: keep existing; synthesize original Hiato same-language learner glosses for new lemmas.
+ * Glosses: keep curated non-template glosses; generate real same-language learner glosses
+ * for new lemmas via xAI (never letter-count templates). Denylist rejects NSFW/violence.
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
+import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
+import { isTemplateGloss } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..')
 const TARGET = 400
@@ -17,12 +20,11 @@ type Cefr = (typeof CEFRS)[number]
 type Lemma = { word: string; gloss?: string; synonyms?: string[] }
 
 const CONTENT_POS = new Set(['NOUN', 'VERB', 'ADJ', 'ADV', 'PROPN'])
-// Prefer content; skip closed class
-const SKIP_POS = new Set(['PRON', 'DET', 'ADP', 'AUX', 'CCONJ', 'SCONJ', 'PART', 'INTJ', 'PUNCT', 'SYM', 'X', 'NUM'])
+const SKIP_POS = new Set([
+  'PRON', 'DET', 'ADP', 'AUX', 'CCONJ', 'SCONJ', 'PART', 'INTJ', 'PUNCT', 'SYM', 'X', 'NUM',
+])
 
-function nfcUpper(s: string) {
-  return s.normalize('NFC').toUpperCase()
-}
+const DENY = loadDenylist()
 
 function hangmanOk(lang: Lang, raw: string): string | null {
   const word = nfcUpper(raw)
@@ -30,13 +32,20 @@ function hangmanOk(lang: Lang, raw: string): string | null {
   if (/[\d\s\-\.'.’_/]/.test(word)) return null
   const re: Record<Lang, RegExp> = {
     en: /^[A-Z]+$/,
-    de: /^[A-ZÄÖÜß]+$/i,
-    es: /^[A-ZÁÉÍÓÚÜÑ]+$/i,
-    pt: /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]+$/i,
+    de: /^[A-ZÄÖÜß]+$/,
+    es: /^[A-ZÁÉÍÓÚÜÑ]+$/,
+    pt: /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]+$/,
   }
   if (!re[lang].test(word)) return null
   if (/^(.)\1+$/.test(word)) return null
+  if (isDeniedLemma(word, DENY)) return null
   return word
+}
+
+/** DE fold for matching STRAßE ↔ STRASSE without preferring damaged SS forms. */
+function foldKey(lang: Lang, word: string): string {
+  const w = nfcUpper(word)
+  return lang === 'de' ? w.replaceAll('ß', 'SS') : w
 }
 
 const EXTRA_STOP = new Set(
@@ -56,12 +65,13 @@ AQUELLA AQUELLO ESTOS ESTAS ESOS ESAS MINHAS MEUS TUAS TEUS
 PRIMEIRA PRIMEIRO SEGUNDA SEGUNDO AQUELA AQUELE DIESE DIESER DIESES
 KEINE DORT HIER DANN DOCH DENN SEHR ALI TUDO NADA NUNCA SEMPRE TAMBÉM ENTÃO ASSIM
 FAZER TER COISA DIZER POSSO ACHO FALAR DISSE AINDA DETERMINER
-DIABOS XERIFE CARALHO PORRA PUTA MERDA FODA
+DIABOS XERIFE
 ESTAREI ESTARIA ESTIVER ESTAVA ESTAVAM
 WOZU WOHER WOHIN WIESO
 MÍO MÍA TÚYO SUYO
 TENIA TENÍAS
-`.trim().split(/\s+/),
+DANKE GRACIAS THANKS SIR HAUSE DESTA NESTE NESTA DESTES DESTAS TIVE SINTO ESPERO QUERO POSSO ACHO VAMOS
+`.trim().split(/\s+/).map(nfcUpper),
 )
 
 function parseWordhoard(lang: 'en' | 'de' | 'es'): { word: string; pos: string; cefr: string; rank: number }[] {
@@ -70,7 +80,6 @@ function parseWordhoard(lang: 'en' | 'de' | 'es'): { word: string; pos: string; 
   const lines = text.trim().split('\n').slice(1)
   const out: { word: string; pos: string; cefr: string; rank: number }[] = []
   for (const line of lines) {
-    // CSV simple split (fields don't contain commas in lemma/pos/cefr)
     const parts = line.split(',')
     const lemma = parts[0]?.trim()
     const pos = parts[1]?.trim().toUpperCase()
@@ -79,7 +88,6 @@ function parseWordhoard(lang: 'en' | 'de' | 'es'): { word: string; pos: string; 
     if (!lemma || !pos || !cefr) continue
     if (SKIP_POS.has(pos)) continue
     if (!CONTENT_POS.has(pos) && pos !== 'VERB' && pos !== 'ADJ' && pos !== 'ADV' && pos !== 'NOUN') continue
-    // Prefer NOUN/ADJ/VERB
     if (!['NOUN', 'VERB', 'ADJ', 'ADV'].includes(pos)) continue
     const word = hangmanOk(lang, lemma)
     if (!word || EXTRA_STOP.has(word)) continue
@@ -140,8 +148,8 @@ async function ensureSources(): Promise<void> {
       const [head, pos, cefr] = line.split(',')
       if (!cefr || !by[cefr]) continue
       if (!/^(noun|verb|adjective|adverb)$/i.test(pos || '')) continue
-      const w = (head || '').split('/')[0]?.trim().toUpperCase() || ''
-      if (/^[A-Z]{3,10}$/.test(w)) by[cefr].push(w)
+      const w = hangmanOk('en', (head || '').split('/')[0]?.trim() || '')
+      if (w) by[cefr].push(w)
     }
     for (const k of Object.keys(by)) by[k] = [...new Set(by[k])]
     await Bun.write(cefrjPath, JSON.stringify(by, null, 2))
@@ -158,7 +166,7 @@ function parseFreqPt(): string[] {
      FOI SER ESTAR TEM TÊM FOI FORAM SOBRE ENTRE ATÉ DEPOIS ANTES AGORA HOJE
      MUITO POUCO TODO TODA TODOS OUTRO OUTRA MESMO MESMA BOM BOA BEM MAL
      SEI VOU VAI VÃO QUERO PODE PODEM SOU SOMOS SÃO ERA ERAM ESTOU ESTÁ
-     MIM COMIGO CONTIGO NOSCO DELE DELA DELES DELAS NELE NELA`.split(/\s+/),
+     MIM COMIGO CONTIGO NOSCO DELE DELA DELES DELAS NELE NELA`.split(/\s+/).map(nfcUpper),
   )
   const seen = new Set<string>()
   const out: string[] = []
@@ -170,119 +178,13 @@ function parseFreqPt(): string[] {
     seen.add(word)
     out.push(word)
   }
-  // Skip very top dialogue-heavy ranks
   return out.slice(200)
-}
-
-/** Original Hiato same-language glosses — short learner copy (ADR 0023). */
-function synthesizeGloss(lang: Lang, word: string, posHint?: string): { gloss: string; synonyms?: string[] } {
-  const n = [...word].length
-  const pos = (posHint || 'NOUN').toUpperCase()
-  let h = 0
-  for (let i = 0; i < word.length; i++) h = (h * 31 + word.charCodeAt(i)) >>> 0
-
-  const byPos: Record<Lang, Record<string, string[]>> = {
-    en: {
-      NOUN: [
-        `A ${n}-letter naming word for something in daily life.`,
-        `Classroom noun (${n} letters) for people, places, or things.`,
-        `A concrete noun learners meet in beginner topics.`,
-      ],
-      VERB: [
-        `A ${n}-letter action word used in everyday talk.`,
-        `A common verb for describing what people do.`,
-        `Learner verb for simple classroom dialogues.`,
-      ],
-      ADJ: [
-        `A ${n}-letter describing word for qualities or states.`,
-        `An adjective used in basic learner sentences.`,
-        `A descriptive word for people, places, or things.`,
-      ],
-      ADV: [
-        `A ${n}-letter word that tells how, when, or where.`,
-        `An adverb used to add detail in simple sentences.`,
-        `A small modifier learners practise in dialogues.`,
-      ],
-    },
-    de: {
-      NOUN: [
-        `Ein ${n}-buchstabiges Nomen aus dem Alltag.`,
-        `Lernnomen (${n} Buchstaben) für Menschen, Orte oder Dinge.`,
-        `Ein anschauliches Hauptwort aus dem Anfängerunterricht.`,
-      ],
-      VERB: [
-        `Ein ${n}-buchstabiges Verb für alltägliche Handlungen.`,
-        `Ein häufiges Tun-Wort in einfachen Sätzen.`,
-        `Lernverb für kurze Unterrichtsdialoge.`,
-      ],
-      ADJ: [
-        `Ein ${n}-buchstabiges Eigenschaftswort.`,
-        `Ein Adjektiv für einfache Beschreibungen.`,
-        `Ein beschreibendes Wort aus dem Grundwortschatz.`,
-      ],
-      ADV: [
-        `Ein ${n}-buchstabiges Wort für Art, Zeit oder Ort.`,
-        `Ein Umstandswort in einfachen Lerner-Sätzen.`,
-        `Ein kleines Wiewort aus dem Unterricht.`,
-      ],
-    },
-    es: {
-      NOUN: [
-        `Un sustantivo de ${n} letras de la vida diaria.`,
-        `Nombre de clase (${n} letras) para personas, lugares o cosas.`,
-        `Un sustantivo concreto del nivel inicial.`,
-      ],
-      VERB: [
-        `Un verbo de ${n} letras para acciones cotidianas.`,
-        `Un verbo frecuente en frases sencillas.`,
-        `Verbo de aprendiz para diálogos de clase.`,
-      ],
-      ADJ: [
-        `Un adjetivo de ${n} letras para cualidades.`,
-        `Una palabra descriptiva en oraciones básicas.`,
-        `Un adjetivo del vocabulario inicial.`,
-      ],
-      ADV: [
-        `Una palabra de ${n} letras sobre modo, tiempo o lugar.`,
-        `Un adverbio en frases simples de aprendiz.`,
-        `Un modificador breve practicado en clase.`,
-      ],
-    },
-    pt: {
-      NOUN: [
-        `Um substantivo de ${n} letras do dia a dia.`,
-        `Nome de aula (${n} letras) para pessoas, lugares ou coisas.`,
-        `Um substantivo concreto do nível inicial.`,
-      ],
-      VERB: [
-        `Um verbo de ${n} letras para ações do cotidiano.`,
-        `Um verbo frequente em frases simples.`,
-        `Verbo de aprendiz para diálogos de aula.`,
-      ],
-      ADJ: [
-        `Um adjetivo de ${n} letras para qualidades.`,
-        `Uma palavra descritiva em frases básicas.`,
-        `Um adjetivo do vocabulário inicial.`,
-      ],
-      ADV: [
-        `Uma palavra de ${n} letras sobre modo, tempo ou lugar.`,
-        `Um advérbio em frases simples de aprendiz.`,
-        `Um modificador curto praticado em aula.`,
-      ],
-    },
-  }
-
-  const list = byPos[lang][pos] || byPos[lang].NOUN!
-  let gloss = list[h % list.length]!
-  if (spoiler(gloss, word)) gloss = list[(h + 1) % list.length]!
-  return { gloss }
 }
 
 function spoiler(hay: string, lemma: string): boolean {
   const h = hay.normalize('NFC').toLowerCase()
   const n = lemma.normalize('NFC').toLowerCase().trim()
   if (!n) return false
-  // whole-word-ish check similar to packs spoilers
   const re = new RegExp(`(?:^|[^\\p{L}\\p{M}])${escapeRe(n)}(?:[^\\p{L}\\p{M}]|$)`, 'iu')
   return re.test(h)
 }
@@ -291,14 +193,212 @@ function escapeRe(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function loadExisting(lang: Lang, cefr: Cefr): Lemma[] {
-  const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
-  const pack = JSON.parse(readFileSync(file, 'utf8')) as { lemmas: Lemma[] }
-  return pack.lemmas.map((L) => ({
-    word: nfcUpper(L.word),
-    gloss: L.gloss,
-    synonyms: L.synonyms?.slice(0, 3),
-  }))
+function glossCachePath(lang: Lang) {
+  return path.join(ROOT, 'scripts/data/gloss-cache', `${lang}.json`)
+}
+
+function loadGlossCache(lang: Lang): Record<string, string> {
+  const f = glossCachePath(lang)
+  if (!existsSync(f)) return {}
+  return JSON.parse(readFileSync(f, 'utf8')) as Record<string, string>
+}
+
+function saveGlossCache(lang: Lang, cache: Record<string, string>) {
+  const dir = path.dirname(glossCachePath(lang))
+  mkdirSync(dir, { recursive: true })
+  writeFileSync(glossCachePath(lang), JSON.stringify(cache, null, 2) + '\n')
+}
+
+/** Prefer curated non-template glosses; drop denylisted; fold DE ß/SS. */
+function loadCuratedMaps(): Record<Lang, Map<string, Lemma>> {
+  const maps: Record<Lang, Map<string, Lemma>> = {
+    en: new Map(),
+    de: new Map(),
+    es: new Map(),
+    pt: new Map(),
+  }
+  for (const lang of LANGS) {
+    for (const cefr of CEFRS) {
+      const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+      if (!existsSync(file)) continue
+      const pack = JSON.parse(readFileSync(file, 'utf8')) as { lemmas: Lemma[] }
+      for (const L of pack.lemmas) {
+        const word = nfcUpper(L.word)
+        if (isDeniedLemma(word, DENY)) continue
+        if (!L.gloss || isTemplateGloss(L.gloss)) continue
+        if (spoiler(L.gloss, word)) continue
+        const key = foldKey(lang, word)
+        const prev = maps[lang].get(key)
+        // Prefer form that still contains ß when both exist
+        if (prev && lang === 'de' && prev.word.includes('ß') && !word.includes('ß')) continue
+        maps[lang].set(key, {
+          word,
+          gloss: L.gloss,
+          synonyms: L.synonyms?.slice(0, 3),
+        })
+      }
+    }
+  }
+  return maps
+}
+
+function readXaiKey(): string | null {
+  try {
+    const authPath = `${process.env.HOME}/.grok/auth.json`
+    if (!existsSync(authPath)) return null
+    const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<string, { key?: string }>
+    for (const v of Object.values(auth)) {
+      if (v?.key) return v.key
+    }
+  } catch {
+    /* ignore */
+  }
+  return process.env.XAI_API_KEY || null
+}
+
+const LANG_NAME: Record<Lang, string> = {
+  en: 'English',
+  de: 'German',
+  es: 'Spanish',
+  pt: 'Portuguese',
+}
+
+async function generateGlosses(
+  lang: Lang,
+  words: string[],
+  cache: Record<string, string>,
+): Promise<void> {
+  const missing = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]))
+  if (missing.length === 0) return
+
+  const key = readXaiKey()
+  if (!key) {
+    throw new Error(
+      `Need glosses for ${missing.length} ${lang} lemmas but no xAI key (set XAI_API_KEY or ~/.grok/auth.json)`,
+    )
+  }
+
+  const BATCH = 60
+  console.log(`Generating ${missing.length} ${lang} glosses in batches of ${BATCH}…`)
+  for (let i = 0; i < missing.length; i += BATCH) {
+    const batch = missing.slice(i, i + BATCH)
+    const prompt =
+      `Language: ${LANG_NAME[lang]} (${lang}).\n` +
+      `Write a short same-language learner dictionary gloss for each lemma (one simple sentence or clause).\n` +
+      `Rules: never include the lemma itself as a whole word in its gloss (do not start with the lemma); ` +
+      `no letter-count or classroom-template fluff; no NSFW. Prefer "a/an/the …" or "to …" style definitions.\n` +
+      `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
+      `Lemmas:\n${batch.join('\n')}`
+
+    const res = await fetch('https://api.x.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        model: 'grok-4-fast-non-reasoning',
+        temperature: 0.2,
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You write concise learner-dictionary glosses. Reply with a single JSON object only.',
+          },
+          { role: 'user', content: prompt },
+        ],
+      }),
+    })
+    if (!res.ok) {
+      const t = await res.text()
+      throw new Error(`xAI gloss API ${res.status}: ${t.slice(0, 300)}`)
+    }
+    const body = (await res.json()) as {
+      choices?: { message?: { content?: string } }[]
+    }
+    const content = body.choices?.[0]?.message?.content || ''
+    const jsonMatch = content.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) throw new Error(`No JSON in gloss response: ${content.slice(0, 200)}`)
+    const parsed = JSON.parse(jsonMatch[0]) as Record<string, string>
+    for (const w of batch) {
+      const g =
+        parsed[w] ||
+        parsed[w.toLowerCase()] ||
+        parsed[nfcUpper(w)] ||
+        Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
+      if (!g || typeof g !== 'string') {
+        console.warn(`  missing gloss for ${w}`)
+        continue
+      }
+      let gloss = g.trim()
+      if (spoiler(gloss, w) || isTemplateGloss(gloss)) {
+        console.warn(`  rejected gloss for ${w}: ${gloss.slice(0, 60)}`)
+        continue
+      }
+      cache[w] = gloss
+    }
+    saveGlossCache(lang, cache)
+    console.log(`  ${lang} glosses ${Math.min(i + BATCH, missing.length)}/${missing.length}`)
+  }
+
+  // Retry leftovers with stricter anti-spoiler instructions
+  let leftovers = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]) || spoiler(cache[w]!, w))
+  for (let attempt = 0; attempt < 3 && leftovers.length; attempt++) {
+    console.log(`  ${lang} retry ${attempt + 1}: ${leftovers.length} leftovers`)
+    for (let i = 0; i < leftovers.length; i += 20) {
+      const batch = leftovers.slice(i, i + 20)
+      const prompt =
+        `Language: ${LANG_NAME[lang]} (${lang}).\n` +
+        `For each lemma, write a short learner gloss that does NOT contain the lemma letters as a whole word at all.\n` +
+        `Define the meaning using other words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
+        batch.map((w) => `- ${w}`).join('\n')
+      const res = await fetch('https://api.x.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify({
+          model: 'grok-4-fast-non-reasoning',
+          temperature: 0.4,
+          messages: [
+            {
+              role: 'system',
+              content:
+                'JSON only. Each gloss must avoid the headword as a whole word (ADR 0023).',
+            },
+            { role: 'user', content: prompt },
+          ],
+        }),
+      })
+      if (!res.ok) continue
+      const body = (await res.json()) as {
+        choices?: { message?: { content?: string } }[]
+      }
+      const content = body.choices?.[0]?.message?.content || ''
+      const jsonMatch = content.match(/\{[\s\S]*\}/)
+      if (!jsonMatch) continue
+      try {
+        const parsed = JSON.parse(jsonMatch[0]) as Record<string, string>
+        for (const w of batch) {
+          const g =
+            parsed[w] ||
+            Object.entries(parsed).find(([k]) => nfcUpper(k) === w)?.[1]
+          if (!g || typeof g !== 'string') continue
+          const gloss = g.trim()
+          if (spoiler(gloss, w) || isTemplateGloss(gloss)) continue
+          cache[w] = gloss
+        }
+      } catch {
+        /* ignore bad json */
+      }
+      saveGlossCache(lang, cache)
+    }
+    leftovers = words.filter((w) => !cache[w] || isTemplateGloss(cache[w]) || spoiler(cache[w]!, w))
+  }
+  if (leftovers.length) {
+    console.warn(`  ${lang} still missing glosses: ${leftovers.join(', ')}`)
+  }
 }
 
 function attribution(lang: Lang, cefr: Cefr): { license: string; attribution: string[] } {
@@ -325,55 +425,65 @@ function attribution(lang: Lang, cefr: Cefr): { license: string; attribution: st
   }
 }
 
-function buildPack(lang: Lang, cefr: Cefr): Lemma[] {
-  const existing = loadExisting(lang, cefr)
-  const used = new Set<string>()
-  const lemmas: Lemma[] = []
+function selectWords(
+  lang: Lang,
+  cefr: Cefr,
+  curated: Map<string, Lemma>,
+): { word: string; posHint?: string; curated?: Lemma }[] {
+    const slots = new Map<string, { word: string; posHint?: string; curated?: Lemma }>()
 
-  const add = (L: Lemma, posHint?: string) => {
-    if (lemmas.length >= TARGET) return
-    const w = nfcUpper(L.word)
-    if (used.has(w)) return
-    // Allow existing short words (<3) already in packs
-    if (!L.gloss && !hangmanOk(lang, w) && w.length >= 3) return
-    used.add(w)
-    if (L.gloss && L.synonyms) {
-      lemmas.push({ word: w, gloss: L.gloss, synonyms: L.synonyms.slice(0, 3) })
-    } else if (L.gloss) {
-      lemmas.push({ word: w, gloss: L.gloss, synonyms: L.synonyms })
-    } else {
-      const syn = synthesizeGloss(lang, w, posHint)
-      // Final spoiler guard
-      if (syn.gloss && spoiler(syn.gloss, w)) {
-        syn.gloss =
-          lang === 'en'
-            ? 'A useful word for everyday learner practice.'
-            : lang === 'de'
-              ? 'Ein nützliches Wort für die tägliche Übung.'
-              : lang === 'es'
-                ? 'Una palabra útil para la práctica diaria.'
-                : 'Uma palavra útil para a prática diária.'
+  const add = (word: string, posHint?: string, cur?: Lemma) => {
+    if (slots.size >= TARGET && !slots.has(foldKey(lang, word))) return
+    const w = nfcUpper(word)
+    if (!w || EXTRA_STOP.has(w) || isDeniedLemma(w, DENY)) return
+    const key = foldKey(lang, w)
+    const ok = hangmanOk(lang, w)
+    if (!ok && !(cur?.gloss && w.length >= 2 && w.length <= 12)) return
+    const form = ok || w
+    const prev = slots.get(key)
+    if (prev) {
+      // Prefer German ß orthography over SS; keep best curated gloss
+      const preferBeta = lang === 'de' && form.includes('ß') && !prev.word.includes('ß')
+      const mergedCur = cur?.gloss ? cur : prev.curated
+      if (preferBeta) {
+        slots.set(key, { word: form, posHint: posHint || prev.posHint, curated: mergedCur })
+      } else if (cur?.gloss && !prev.curated?.gloss) {
+        slots.set(key, { word: prev.word, posHint: prev.posHint || posHint, curated: cur })
       }
-      lemmas.push({ word: w, gloss: syn.gloss, synonyms: syn.synonyms })
+      return
     }
+    if (slots.size >= TARGET) return
+    slots.set(key, { word: form, posHint, curated: cur })
   }
 
-  for (const L of existing) add(L)
+  // 1) Frequency sources first so DE ß forms win over legacy SS pack spellings
 
+
+  // 2) Frequency / wordhoard
   if (lang === 'en') {
     const cefrj = parseCefrj()
     const wh = parseWordhoard('en').filter((x) => x.cefr === cefr.toUpperCase())
     wh.sort((a, b) => a.rank - b.rank)
-    for (const w of cefrj[cefr]) add({ word: w }, 'NOUN')
-    for (const x of wh) add({ word: x.word }, x.pos)
+    for (const w of cefrj[cefr]) add(w, 'NOUN', curated.get(foldKey(lang, w)))
+    for (const x of wh) add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
   } else if (lang === 'de' || lang === 'es') {
     const wh = parseWordhoard(lang).filter((x) => x.cefr === cefr.toUpperCase())
     wh.sort((a, b) => a.rank - b.rank)
-    // Prefer nouns first
-    for (const x of wh.filter((x) => x.pos === 'NOUN')) add({ word: x.word }, x.pos)
-    for (const x of wh.filter((x) => x.pos !== 'NOUN')) add({ word: x.word }, x.pos)
+    for (const x of wh.filter((x) => x.pos === 'NOUN')) {
+      add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
+    }
+    for (const x of wh.filter((x) => x.pos !== 'NOUN')) {
+      add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
+    }
+    // Extra top-up from other CEFR bands in wordhoard
+    if (slots.size < TARGET) {
+      const more = parseWordhoard(lang).sort((a, b) => a.rank - b.rank)
+      for (const x of more) {
+        if (slots.size >= TARGET) break
+        add(x.word, x.pos, curated.get(foldKey(lang, x.word)))
+      }
+    }
   } else {
-    // PT frequency bands
     const all = parseFreqPt()
     const bands: Record<Cefr, [number, number]> = {
       a1: [0, 800],
@@ -381,34 +491,106 @@ function buildPack(lang: Lang, cefr: Cefr): Lemma[] {
       b1: [2000, 4000],
     }
     const [lo, hi] = bands[cefr]
-    for (const w of all.slice(lo, hi)) add({ word: w }, 'NOUN')
+    for (const w of all.slice(lo, hi)) add(w, 'NOUN', curated.get(foldKey(lang, w)))
     for (const w of all) {
-      if (lemmas.length >= TARGET) break
-      add({ word: w }, 'NOUN')
+      if (slots.size >= TARGET) break
+      add(w, 'NOUN', curated.get(foldKey(lang, w)))
     }
   }
 
-  // Top up from same-lang other CEFR existing if still short
-  if (lemmas.length < TARGET) {
-    for (const other of CEFRS) {
-      if (other === cefr) continue
-      for (const L of loadExisting(lang, other)) {
-        if (lemmas.length >= TARGET) break
-        if (!L.gloss) add({ word: L.word }, 'NOUN')
-        else add(L)
-      }
-    }
+  // 2) Overlay remaining curated lemmas (real glosses) to top up / attach glosses
+  for (const L of curated.values()) {
+    add(L.word, undefined, L)
   }
 
-  return lemmas.slice(0, TARGET)
+  return [...slots.values()].slice(0, TARGET)
+}
+
+function buildLemmas(
+  lang: Lang,
+  selected: { word: string; posHint?: string; curated?: Lemma }[],
+  glossCache: Record<string, string>,
+): Lemma[] {
+  const lemmas: Lemma[] = []
+  for (const s of selected) {
+    const w = s.word
+    let gloss = s.curated?.gloss
+    if (!gloss || isTemplateGloss(gloss)) gloss = glossCache[w]
+    if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, w)) {
+      throw new Error(`${lang}: missing real gloss for ${w}`)
+    }
+    lemmas.push({
+      word: w,
+      gloss,
+      synonyms: s.curated?.synonyms?.slice(0, 3),
+    })
+  }
+  return lemmas
+}
+
+function hasRealGloss(
+  lang: Lang,
+  s: { word: string; curated?: Lemma },
+  cache: Record<string, string>,
+): boolean {
+  const g = (s.curated?.gloss && !isTemplateGloss(s.curated.gloss) ? s.curated.gloss : null) || cache[s.word]
+  return !!(g && !isTemplateGloss(g) && !spoiler(g, s.word))
 }
 
 // --- main ---
 await ensureSources()
-let totalNew = 0
+const curatedMaps = loadCuratedMaps()
+for (const lang of LANGS) {
+  console.log(`${lang}: ${curatedMaps[lang].size} curated glosses retained`)
+}
+
+const selections: Record<string, { word: string; posHint?: string; curated?: Lemma }[]> = {}
 for (const lang of LANGS) {
   for (const cefr of CEFRS) {
-    const lemmas = buildPack(lang, cefr)
+    selections[`${lang}/${cefr}`] = selectWords(lang, cefr, curatedMaps[lang])
+  }
+}
+
+// Generate glosses for anything not curated
+for (const lang of LANGS) {
+  const cache = loadGlossCache(lang)
+  for (const L of curatedMaps[lang].values()) {
+    if (L.gloss) cache[L.word] = L.gloss
+  }
+  const need = new Set<string>()
+  for (const cefr of CEFRS) {
+    for (const s of selections[`${lang}/${cefr}`]!) {
+      if (hasRealGloss(lang, s, cache)) continue
+      need.add(s.word)
+    }
+  }
+  await generateGlosses(lang, [...need], cache)
+  saveGlossCache(lang, cache)
+}
+
+let totalNew = 0
+for (const lang of LANGS) {
+  const cache = loadGlossCache(lang)
+  for (const cefr of CEFRS) {
+    let selected = selections[`${lang}/${cefr}`]!.filter((s) => hasRealGloss(lang, s, cache))
+    // Top up from broader selection if denylist/gloss gaps shrank the pack
+    if (selected.length < TARGET) {
+      const extra = selectWords(lang, cefr, curatedMaps[lang])
+      const have = new Set(selected.map((s) => foldKey(lang, s.word)))
+      for (const s of extra) {
+        if (selected.length >= TARGET) break
+        const key = foldKey(lang, s.word)
+        if (have.has(key)) continue
+        if (!hasRealGloss(lang, s, cache)) continue
+        have.add(key)
+        selected.push(s)
+      }
+    }
+    selected = selected.slice(0, TARGET)
+    if (selected.length < 350) {
+      throw new Error(`${lang}/${cefr}: only ${selected.length} glossed lemmas after filters`)
+    }
+    const lemmas = buildLemmas(lang, selected, cache)
     const meta = attribution(lang, cefr)
     const pack = {
       version: 2,
@@ -418,10 +600,9 @@ for (const lang of LANGS) {
       attribution: meta.attribution,
       lemmas,
     }
-    const out = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
-    writeFileSync(out, JSON.stringify(pack, null, 2) + '\n')
-    const withGloss = lemmas.filter((l) => l.gloss).length
-    console.log(`${lang}/${cefr}: ${lemmas.length} lemmas (${withGloss} glossed)`)
+    const outFile = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+    writeFileSync(outFile, JSON.stringify(pack, null, 2) + '\n')
+    console.log(`${lang}/${cefr}: ${lemmas.length} lemmas`)
     totalNew += lemmas.length
   }
 }

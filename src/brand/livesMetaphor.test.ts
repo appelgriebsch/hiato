@@ -86,8 +86,9 @@ describe('Uma polish assets', () => {
       path.join(REPO, 'src/components/StreakChip.tsx'),
     ).text()
     expect(src).toContain('🔥')
-    expect(src).toContain('Streak')
-    expect(src).toContain('aria-label')
+    expect(src).toContain('aria-hidden')
+    expect(src).toMatch(/aria-label=\{\`Streak \$\{count\}\`\}/)
+    expect(src).not.toMatch(/aria-label=\{[^}]*fire/)
   })
 
   test('Play spinner opts out of spin under reduced motion', async () => {
