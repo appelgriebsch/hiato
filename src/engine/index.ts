@@ -1,8 +1,13 @@
 export {
   hashString,
   localDateKey,
+  previousLocalDateKey,
+  nextLocalDateKey,
   dailySeedKey,
+  lemmaIdentity,
   pickDailyLemma,
+  lemmasExcludingDaily,
+  pickPracticeLemma,
 } from './daily'
 export {
   TOTAL_LIVES,
@@ -11,6 +16,7 @@ export {
   revealOneDiacritic,
   hasUnrevealedDiacritic,
   isDiacriticHintMiss,
+  isDiacriticHintReady,
   isWon,
   correctKeysFromCells,
   letterCountLabel,

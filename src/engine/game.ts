@@ -102,6 +102,17 @@ export function isDiacriticHintMiss(
   return hidden.some((ch) => asciiBaseKey(ch) === base)
 }
 
+/** ADR 0015: hint button after 2 diacritic-cell misses, player-triggered. */
+export function isDiacriticHintReady(
+  cells: CellState[],
+  word: string,
+  diacriticMisses: number,
+  opts: { hintUsed?: boolean; finished?: boolean } = {},
+): boolean {
+  if (opts.hintUsed || opts.finished) return false
+  return diacriticMisses >= 2 && hasUnrevealedDiacritic(cells, word)
+}
+
 export function isWon(cells: CellState[]): boolean {
   return cells.length > 0 && cells.every((c) => c.revealed)
 }

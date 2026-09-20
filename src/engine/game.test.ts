@@ -9,12 +9,18 @@ import {
   hasDiacritic,
   hasUnrevealedDiacritic,
   isDiacriticHintMiss,
+  isDiacriticHintReady,
   hashString,
   isBaseAsciiVowel,
   isWon,
+  lemmaIdentity,
+  lemmasExcludingDaily,
   localDateKey,
+  nextLocalDateKey,
   normalizeNfc,
   pickDailyLemma,
+  pickPracticeLemma,
+  previousLocalDateKey,
   revealOneDiacritic,
   TOTAL_LIVES,
 } from './index'
@@ -201,11 +207,52 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintMiss(cells, word, 'C')).toBe(true)
     expect(isDiacriticHintMiss(cells, word, 'Q')).toBe(false)
   })
+
+  test('hint enables after 2 diacritic-cell misses (not 2 any-misses)', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    let misses = 0
+    const miss = (letter: string) => {
+      const { hit } = applyGuess(cells, word, letter)
+      expect(hit).toBe(false)
+      if (isDiacriticHintMiss(cells, word, letter)) misses += 1
+    }
+
+    miss('X')
+    expect(misses).toBe(0)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
+
+    miss('E')
+    expect(misses).toBe(1)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
+
+    miss('Á')
+    expect(misses).toBe(2)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(true)
+    expect(isDiacriticHintReady(cells, word, misses, { hintUsed: true })).toBe(
+      false,
+    )
+    expect(isDiacriticHintReady(cells, word, misses, { finished: true })).toBe(
+      false,
+    )
+  })
+
+  test('hint stays off when no diacritic remains even after 2 misses', () => {
+    const word = 'APPLE'
+    const cells = buildInitialCells(word, 'b1')
+    expect(isDiacriticHintReady(cells, word, 2)).toBe(false)
+  })
 })
 
 describe('daily pick', () => {
   test('localDateKey format', () => {
     expect(localDateKey(new Date(2026, 8, 19))).toBe('2026-09-19')
+  })
+
+  test('previous/next local date keys cross month ends', () => {
+    expect(previousLocalDateKey('2026-09-19')).toBe('2026-09-18')
+    expect(nextLocalDateKey('2026-09-19')).toBe('2026-09-20')
+    expect(previousLocalDateKey('2026-01-01')).toBe('2025-12-31')
   })
 
   test('hash is stable', () => {
@@ -233,5 +280,52 @@ describe('daily pick', () => {
     expect(graphemeKey('é')).toBe('É')
     expect(graphemeKey('ß')).toBe('ß')
     expect(graphemeKey('ẞ')).toBe('ß')
+  })
+})
+
+describe('ADR 0018 endless excludes today’s daily', () => {
+  const lemmas = [
+    { word: 'APPLE' },
+    { word: 'HOUSE' },
+    { word: 'WATER' },
+    { word: 'BREAD' },
+  ]
+  const dateKey = '2026-09-19'
+
+  test('lemmasExcludingDaily drops the daily lemma only', () => {
+    const daily = pickDailyLemma(lemmas, dateKey, 'en', 'a1')
+    const rest = lemmasExcludingDaily(lemmas, dateKey, 'en', 'a1')
+    expect(rest).toHaveLength(lemmas.length - 1)
+    expect(rest.some((w) => w.word === daily.word)).toBe(false)
+  })
+
+  test('pickPracticeLemma never returns today’s daily across seeds', () => {
+    const daily = pickDailyLemma(lemmas, dateKey, 'en', 'a1')
+    for (let seed = -20; seed < 80; seed++) {
+      const p = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', seed)
+      expect(lemmaIdentity(p.word)).not.toBe(lemmaIdentity(daily.word))
+    }
+  })
+
+  test('practice pick is deterministic for a seed', () => {
+    const a = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', 7)
+    const b = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', 7)
+    expect(a.word).toBe(b.word)
+  })
+
+  test('single-lemma pack still returns that word (no empty pool)', () => {
+    const one = [{ word: 'APPLE' }]
+    const daily = pickDailyLemma(one, dateKey, 'en', 'a1')
+    const p = pickPracticeLemma(one, dateKey, 'en', 'a1', 3)
+    expect(p.word).toBe(daily.word)
+  })
+
+  test('exclusion is case/NFC insensitive', () => {
+    const mixed = [{ word: 'café' }, { word: 'mesa' }, { word: 'sol' }]
+    const daily = pickDailyLemma(mixed, dateKey, 'es', 'a1')
+    const rest = lemmasExcludingDaily(mixed, dateKey, 'es', 'a1')
+    expect(
+      rest.every((w) => lemmaIdentity(w.word) !== lemmaIdentity(daily.word)),
+    ).toBe(true)
   })
 })
