@@ -7,6 +7,7 @@
  * Person names drop only when the lemma is on the name list *and* the gloss is a
  * person-name gloss (keep WILL/MARK/ROSA with a common-noun reading).
  * Language membership: nspell/Hunspell (loanword allowlist; PT pt-PT|pt-BR; DE ß/SS).
+ * Synonyms: prefer curated chips, else synonym-cache (1–3; `[]` = unique referent).
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
@@ -15,9 +16,16 @@ import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
+import {
+  SYNONYM_COVERAGE_FLOOR,
+  filterSynonymChips,
+  synonymCoverageRatio,
+} from './synonym-chips'
+import { generateSynonyms } from './synonym-generate'
 
 const ROOT = path.join(import.meta.dir, '..')
 const TARGET = 400
+const PACK_VERSION = 5
 const LANGS = ['en', 'pt', 'de', 'es'] as const
 const CEFRS = ['a1', 'a2', 'b1'] as const
 type Lang = (typeof LANGS)[number]
@@ -219,6 +227,25 @@ function saveGlossCache(lang: Lang, cache: Record<string, string>) {
   const dir = path.dirname(glossCachePath(lang))
   mkdirSync(dir, { recursive: true })
   writeFileSync(glossCachePath(lang), JSON.stringify(cache, null, 2) + '\n')
+}
+
+function synonymCachePath(lang: Lang) {
+  return path.join(ROOT, 'scripts/data/synonym-cache', `${lang}.json`)
+}
+
+function loadSynonymCache(lang: Lang): Record<string, string[]> {
+  const f = synonymCachePath(lang)
+  if (!existsSync(f)) return {}
+  return JSON.parse(readFileSync(f, 'utf8')) as Record<string, string[]>
+}
+
+function saveSynonymCache(lang: Lang, cache: Record<string, string[]>) {
+  const dir = path.dirname(synonymCachePath(lang))
+  mkdirSync(dir, { recursive: true })
+  const ordered = Object.fromEntries(
+    Object.entries(cache).sort(([a], [b]) => a.localeCompare(b)),
+  )
+  writeFileSync(synonymCachePath(lang), JSON.stringify(ordered, null, 2) + '\n')
 }
 
 /** Prefer curated non-template glosses; drop denylisted; fold DE ß/SS. */
@@ -549,6 +576,7 @@ function buildLemmas(
   lang: Lang,
   selected: { word: string; posHint?: string; curated?: Lemma }[],
   glossCache: Record<string, string>,
+  synCache: Record<string, string[]>,
 ): Lemma[] {
   const lemmas: Lemma[] = []
   for (const s of selected) {
@@ -563,10 +591,13 @@ function buildLemmas(
     ) {
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
+    const fromCurated = filterSynonymChips(w, s.curated?.synonyms, DENY)
+    const fromCache = filterSynonymChips(w, synCache[w], DENY)
+    const synonyms = fromCurated.length ? fromCurated : fromCache
     lemmas.push({
       word: w,
       gloss,
-      synonyms: s.curated?.synonyms?.slice(0, 3),
+      ...(synonyms.length ? { synonyms } : {}),
     })
   }
   return lemmas
@@ -600,9 +631,18 @@ const caches: Record<Lang, Record<string, string>> = {
   es: loadGlossCache('es'),
   pt: loadGlossCache('pt'),
 }
+const synCaches: Record<Lang, Record<string, string[]>> = {
+  en: loadSynonymCache('en'),
+  de: loadSynonymCache('de'),
+  es: loadSynonymCache('es'),
+  pt: loadSynonymCache('pt'),
+}
 for (const lang of LANGS) {
   for (const L of curatedMaps[lang].values()) {
     if (L.gloss && !isNameGlossLemma(lang, L.word, L.gloss)) caches[lang][L.word] = L.gloss
+    if (Object.hasOwn(synCaches[lang], L.word)) continue
+    const chips = filterSynonymChips(L.word, L.synonyms, DENY)
+    if (chips.length) synCaches[lang][L.word] = chips
   }
 }
 
@@ -625,6 +665,23 @@ for (const lang of LANGS) {
   }
   await generateGlosses(lang, [...need], cache)
   saveGlossCache(lang, cache)
+}
+
+for (const lang of LANGS) {
+  const need = new Set<string>()
+  for (const cefr of CEFRS) {
+    for (const s of selections[`${lang}/${cefr}`]!) {
+      need.add(s.word)
+    }
+  }
+  await generateSynonyms(
+    lang,
+    [...need],
+    synCaches[lang],
+    DENY,
+    (c) => saveSynonymCache(lang, c),
+  )
+  saveSynonymCache(lang, synCaches[lang])
 }
 
 let totalNew = 0
@@ -656,10 +713,36 @@ for (const lang of LANGS) {
     if (selected.length < 350) {
       throw new Error(`${lang}/${cefr}: only ${selected.length} glossed lemmas after filters`)
     }
-    const lemmas = buildLemmas(lang, selected, cache)
+    await generateSynonyms(
+      lang,
+      selected.map((s) => s.word),
+      synCaches[lang],
+      DENY,
+      (c) => saveSynonymCache(lang, c),
+    )
+    saveSynonymCache(lang, synCaches[lang])
+    let lemmas = buildLemmas(lang, selected, cache, synCaches[lang])
+    let ratio = synonymCoverageRatio(lemmas, DENY)
+    if (ratio < SYNONYM_COVERAGE_FLOOR) {
+      await generateSynonyms(
+        lang,
+        selected.map((s) => s.word),
+        synCaches[lang],
+        DENY,
+        (c) => saveSynonymCache(lang, c),
+      )
+      saveSynonymCache(lang, synCaches[lang])
+      lemmas = buildLemmas(lang, selected, cache, synCaches[lang])
+      ratio = synonymCoverageRatio(lemmas, DENY)
+    }
+    if (ratio < SYNONYM_COVERAGE_FLOOR) {
+      throw new Error(
+        `${lang}/${cefr}: synonym coverage ${(ratio * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
+      )
+    }
     const meta = attribution(lang, cefr)
     const pack = {
-      version: 4,
+      version: PACK_VERSION,
       lang,
       cefr,
       license: meta.license,
@@ -668,7 +751,10 @@ for (const lang of LANGS) {
     }
     const outFile = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
     writeFileSync(outFile, JSON.stringify(pack, null, 2) + '\n')
-    console.log(`${lang}/${cefr}: ${lemmas.length} lemmas`)
+    const withChips = lemmas.filter((L) => (L.synonyms?.length ?? 0) > 0).length
+    console.log(
+      `${lang}/${cefr}: ${lemmas.length} lemmas, synonym chips ${withChips}/${lemmas.length} (${(ratio * 100).toFixed(1)}%)`,
+    )
     totalNew += lemmas.length
   }
 }
