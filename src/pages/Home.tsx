@@ -1,16 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { StreakChip } from '@/components/StreakChip'
 import { Card } from '@/components/ui/card'
+import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
 import { getPrefs } from '@/lib/prefs'
-import { getStreakCount } from '@/lib/streaks'
+import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
+import { loadPack } from '@/packs/load'
 import { useShellStore } from '@/store/shell'
 
 export function Home() {
@@ -19,11 +21,17 @@ export function Home() {
   const setHealthOk = useShellStore((s) => s.setHealthOk)
   const prefs = getPrefs()
   const selectedLang = prefs?.lang
+  const selectedCefr = prefs?.cefr
   const dateKey = useLocalDateKey()
-  const streak = prefs ? getStreakCount(prefs.lang, prefs.cefr, dateKey) : 0
-  const dailyDone = prefs
-    ? isDailyComplete(prefs.lang, prefs.cefr, dateKey)
-    : false
+  const streak =
+    selectedLang && selectedCefr
+      ? getStreakCount(selectedLang, selectedCefr, dateKey)
+      : 0
+  const dailyDone =
+    selectedLang && selectedCefr
+      ? isDailyComplete(selectedLang, selectedCefr, dateKey)
+      : false
+  const [practiceOk, setPracticeOk] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -44,6 +52,29 @@ export function Home() {
     if (!selectedLang) return
     void precacheSelectedLanguage(selectedLang).catch(() => {})
   }, [selectedLang])
+
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) return
+    ensureStreakPersisted(selectedLang, selectedCefr, dateKey)
+  }, [selectedLang, selectedCefr, dateKey])
+
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) return
+    let cancelled = false
+    void loadPack(selectedLang, selectedCefr)
+      .then((pack) => {
+        if (cancelled) return
+        setPracticeOk(
+          isPracticeAvailable(pack.lemmas, dateKey, selectedLang, selectedCefr),
+        )
+      })
+      .catch(() => {
+        if (!cancelled) setPracticeOk(true)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [selectedLang, selectedCefr, dateKey])
 
   const dailyLabel = prefs
     ? `Daily ${LANG_CODES[prefs.lang]} ${CEFR_CODES[prefs.cefr]}`
@@ -90,13 +121,21 @@ export function Home() {
           </Link>
         )}
         {prefs ? (
-          <button
-            type="button"
-            className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped active:scale-[0.98]"
-            onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
-          >
-            Practice (endless)
-          </button>
+          <>
+            <button
+              type="button"
+              disabled={!practiceOk}
+              className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped active:scale-[0.98] disabled:pointer-events-none disabled:opacity-45"
+              onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
+            >
+              Practice (endless)
+            </button>
+            {!practiceOk ? (
+              <p className="mt-2 text-center text-xs text-ink-faint">
+                Practice isn’t available — this pack only has today’s daily word.
+              </p>
+            ) : null}
+          </>
         ) : null}
       </Card>
 

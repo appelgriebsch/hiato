@@ -18,7 +18,9 @@ import {
   graphemeKey,
   isDiacriticHintMiss,
   isDiacriticHintReady,
+  isPracticeAvailable,
   isWon,
+  localDateKey,
   pickDailyLemma,
   pickPracticeLemma,
   revealOneDiacritic,
@@ -26,8 +28,11 @@ import {
 } from '@/engine'
 import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
 import { getPrefs } from '@/lib/prefs'
-import { getStreakCount, recordDailyWin } from '@/lib/streaks'
-import { useLocalDateKey } from '@/lib/use-local-date-key'
+import {
+  ensureStreakPersisted,
+  getStreakCount,
+  recordDailyWin,
+} from '@/lib/streaks'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
@@ -50,9 +55,17 @@ export function Play() {
   const mode = parseMode(params.get('mode'))
   const practiceSeed = parseSeed(params.get('seed'))
   const prefs = getPrefs()
-  const dateKey = useLocalDateKey()
   const lang = prefs?.lang
   const cefr = prefs?.cefr
+  // Freeze the local date when a round opens so a midnight tick cannot
+  // remount/reseed pickDaily, persist, or alreadyPlayed. Recapture only
+  // when the round identity (mode/seed/lang/cefr) changes.
+  const roundId = `${mode}|${practiceSeed}|${lang ?? ''}|${cefr ?? ''}`
+  const dateFreezeRef = useRef({ roundId, dateKey: localDateKey() })
+  if (dateFreezeRef.current.roundId !== roundId) {
+    dateFreezeRef.current = { roundId, dateKey: localDateKey() }
+  }
+  const dateKey = dateFreezeRef.current.dateKey
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -66,6 +79,7 @@ export function Play() {
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
   const [alreadyPlayed, setAlreadyPlayed] = useState(false)
   const [streak, setStreak] = useState(0)
+  const [practiceOk, setPracticeOk] = useState(true)
 
   const roundRef = useRef({
     cells,
@@ -100,6 +114,7 @@ export function Play() {
 
   useEffect(() => {
     if (!lang || !cefr) return
+    ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
   }, [lang, cefr, dateKey])
 
@@ -136,6 +151,8 @@ export function Play() {
     void loadPack(lang, cefr)
       .then((pack) => {
         if (cancelled) return
+
+        setPracticeOk(isPracticeAvailable(pack.lemmas, dateKey, lang, cefr))
 
         if (mode === 'daily') {
           const rec = getDailyRecord(lang, cefr)
@@ -176,6 +193,12 @@ export function Play() {
           cefr,
           practiceSeed,
         )
+        if (!entry) {
+          setWordEntry(null)
+          setError(null)
+          setLoading(false)
+          return
+        }
         const initial = buildInitialCells(entry.word, cefr)
         setWordEntry(entry)
         setCells(initial)
@@ -280,6 +303,7 @@ export function Play() {
   }
 
   function goPractice() {
+    if (!practiceOk) return
     nav(`/play?mode=practice&seed=${Date.now()}`)
   }
 
@@ -287,7 +311,34 @@ export function Play() {
 
   const vowelHelp = cefr === 'a1' || cefr === 'a2'
 
-  if (alreadyPlayed && !loading) {
+  if (!loading && !error && mode === 'practice' && !wordEntry) {
+    return (
+      <Layout>
+        <TopBar
+          left={<OfflineChip />}
+          center={<Badge>Practice</Badge>}
+          right={<StreakChip count={streak} />}
+        />
+        <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
+          <h1 className="text-xl font-semibold text-ink">Practice unavailable</h1>
+          <p className="max-w-xs text-sm text-ink-muted">
+            This pack only has today’s daily word, so endless practice would
+            spoil it.
+          </p>
+          <div className="mt-2 flex w-full flex-col gap-2">
+            <Button fullWidth onClick={() => nav('/play?mode=daily')}>
+              Back to daily
+            </Button>
+            <Button fullWidth variant="ghost" onClick={() => nav('/')}>
+              Back home
+            </Button>
+          </div>
+        </div>
+      </Layout>
+    )
+  }
+
+  if (alreadyPlayed && !loading && mode === 'daily') {
     const rec = getDailyRecord(lang, cefr)
     return (
       <Layout>
@@ -335,9 +386,14 @@ export function Play() {
             )}
           </Card>
           <div className="mt-2 flex w-full flex-col gap-2">
-            <Button fullWidth onClick={goPractice}>
+            <Button fullWidth onClick={goPractice} disabled={!practiceOk}>
               Practice (endless)
             </Button>
+            {!practiceOk ? (
+              <p className="text-xs text-ink-faint">
+                Practice isn’t available — this pack only has today’s daily word.
+              </p>
+            ) : null}
             <Button fullWidth variant="ghost" onClick={() => nav('/')}>
               Back home
             </Button>
@@ -426,6 +482,7 @@ export function Play() {
               cefr={cefr}
               dateKey={dateKey}
               streak={streak}
+              practiceOk={practiceOk}
               onPractice={goPractice}
             />
           ) : (
@@ -440,13 +497,19 @@ export function Play() {
 
           {!finished && mode === 'daily' && (
             <div className="mt-6 text-center">
-              <button
-                type="button"
-                onClick={goPractice}
-                className="text-sm font-medium text-accent underline-offset-2 hover:underline"
-              >
-                Practice (endless)
-              </button>
+              {practiceOk ? (
+                <button
+                  type="button"
+                  onClick={goPractice}
+                  className="text-sm font-medium text-accent underline-offset-2 hover:underline"
+                >
+                  Practice (endless)
+                </button>
+              ) : (
+                <p className="text-xs text-ink-faint">
+                  Practice isn’t available for this pack.
+                </p>
+              )}
             </div>
           )}
           {!finished && mode === 'practice' && (
@@ -457,13 +520,15 @@ export function Play() {
               >
                 ← Daily
               </Link>
-              <button
-                type="button"
-                onClick={goPractice}
-                className="font-medium text-accent hover:underline"
-              >
-                Next word
-              </button>
+              {practiceOk ? (
+                <button
+                  type="button"
+                  onClick={goPractice}
+                  className="font-medium text-accent hover:underline"
+                >
+                  Next word
+                </button>
+              ) : null}
             </div>
           )}
         </>
@@ -481,6 +546,7 @@ function EndCard({
   cefr,
   dateKey,
   streak,
+  practiceOk,
   onPractice,
 }: {
   won: boolean
@@ -491,6 +557,7 @@ function EndCard({
   cefr: PackCefr
   dateKey: string
   streak: number
+  practiceOk: boolean
   onPractice: () => void
 }) {
   const nav = useNavigate()
@@ -531,9 +598,14 @@ function EndCard({
       </Card>
 
       <div className="flex flex-col gap-2">
-        <Button fullWidth onClick={onPractice}>
+        <Button fullWidth onClick={onPractice} disabled={!practiceOk}>
           {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
         </Button>
+        {!practiceOk ? (
+          <p className="text-center text-xs text-ink-faint">
+            Practice isn’t available — this pack only has today’s daily word.
+          </p>
+        ) : null}
         {mode === 'practice' ? (
           <Button
             fullWidth

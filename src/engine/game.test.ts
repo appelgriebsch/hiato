@@ -15,6 +15,7 @@ import {
   isWon,
   lemmaIdentity,
   lemmasExcludingDaily,
+  isPracticeAvailable,
   localDateKey,
   nextLocalDateKey,
   normalizeNfc,
@@ -184,11 +185,28 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintMiss(cells, word, 'E')).toBe(true)
   })
 
-  test('guessing a wrong diacritic key counts as a diacritic-cell miss', () => {
+  test('a diacritic key that does not target a hidden cell does not count', () => {
     const word = 'CAFÉ'
     const cells = buildInitialCells(word, 'b1')
-    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(true)
-    expect(isDiacriticHintMiss(cells, word, 'ç')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'á')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'ç')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'ñ')).toBe(false)
+  })
+
+  test('a wrong accent of the same base as a hidden diacritic counts', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    expect(isDiacriticHintMiss(cells, word, 'è')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'ê')).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'Ë')).toBe(true)
+  })
+
+  test('an exact match on a hidden diacritic is a hit, not a hint miss', () => {
+    const word = 'CAFÉ'
+    const cells = buildInitialCells(word, 'b1')
+    expect(applyGuess(cells, word, 'é').hit).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'é')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'É')).toBe(false)
   })
 
   test('does not count once every diacritic cell is revealed', () => {
@@ -206,6 +224,14 @@ describe('ADR 0015 diacritic hint', () => {
     expect(hasUnrevealedDiacritic(cells, word)).toBe(true)
     expect(isDiacriticHintMiss(cells, word, 'C')).toBe(true)
     expect(isDiacriticHintMiss(cells, word, 'Q')).toBe(false)
+  })
+
+  test('an ASCII hit is not a hint miss even if a hidden diacritic shares that base', () => {
+    const word = 'AÇÃO'
+    const cells = buildInitialCells(word, 'b1')
+    expect(applyGuess(cells, word, 'A').hit).toBe(true)
+    expect(isDiacriticHintMiss(cells, word, 'A')).toBe(false)
+    expect(isDiacriticHintMiss(cells, word, 'C')).toBe(true)
   })
 
   test('hint enables after 2 diacritic-cell misses (not 2 any-misses)', () => {
@@ -227,6 +253,10 @@ describe('ADR 0015 diacritic hint', () => {
     expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
 
     miss('Á')
+    expect(misses).toBe(1)
+    expect(isDiacriticHintReady(cells, word, misses)).toBe(false)
+
+    miss('È')
     expect(misses).toBe(2)
     expect(isDiacriticHintReady(cells, word, misses)).toBe(true)
     expect(isDiacriticHintReady(cells, word, misses, { hintUsed: true })).toBe(
@@ -297,27 +327,41 @@ describe('ADR 0018 endless excludes today’s daily', () => {
     const rest = lemmasExcludingDaily(lemmas, dateKey, 'en', 'a1')
     expect(rest).toHaveLength(lemmas.length - 1)
     expect(rest.some((w) => w.word === daily.word)).toBe(false)
+    expect(isPracticeAvailable(lemmas, dateKey, 'en', 'a1')).toBe(true)
   })
 
   test('pickPracticeLemma never returns today’s daily across seeds', () => {
     const daily = pickDailyLemma(lemmas, dateKey, 'en', 'a1')
     for (let seed = -20; seed < 80; seed++) {
       const p = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', seed)
-      expect(lemmaIdentity(p.word)).not.toBe(lemmaIdentity(daily.word))
+      expect(p).not.toBeNull()
+      expect(lemmaIdentity(p!.word)).not.toBe(lemmaIdentity(daily.word))
     }
   })
 
   test('practice pick is deterministic for a seed', () => {
     const a = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', 7)
     const b = pickPracticeLemma(lemmas, dateKey, 'en', 'a1', 7)
-    expect(a.word).toBe(b.word)
+    expect(a).not.toBeNull()
+    expect(a!.word).toBe(b!.word)
   })
 
-  test('single-lemma pack still returns that word (no empty pool)', () => {
+  test('single-lemma pack does not fall back to the daily word', () => {
     const one = [{ word: 'APPLE' }]
-    const daily = pickDailyLemma(one, dateKey, 'en', 'a1')
-    const p = pickPracticeLemma(one, dateKey, 'en', 'a1', 3)
-    expect(p.word).toBe(daily.word)
+    expect(isPracticeAvailable(one, dateKey, 'en', 'a1')).toBe(false)
+    expect(pickPracticeLemma(one, dateKey, 'en', 'a1', 3)).toBeNull()
+  })
+
+  test('identity-duplicate pack is also unavailable for practice', () => {
+    const dupes = [{ word: 'café' }, { word: 'CAFÉ' }]
+    expect(isPracticeAvailable(dupes, dateKey, 'es', 'a1')).toBe(false)
+    expect(pickPracticeLemma(dupes, dateKey, 'es', 'a1', 1)).toBeNull()
+  })
+
+  test('empty pack throws rather than picking a daily fallback', () => {
+    expect(() => pickPracticeLemma([], dateKey, 'en', 'a1', 0)).toThrow(
+      'empty lemma pack',
+    )
   })
 
   test('exclusion is case/NFC insensitive', () => {

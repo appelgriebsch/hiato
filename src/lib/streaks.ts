@@ -119,16 +119,13 @@ export function nextStreakOnWin(
   }
 }
 
-/** Stored streak after applying a midnight break (persists the clear). */
+/** Stored streak after applying a midnight break in memory (no write). */
 export function getStreak(
   lang: PackLang,
   cefr: PackCefr,
   today: string = localDateKey(),
 ): StreakState {
-  const stored = readSlot(lang, cefr)
-  const next = applyMidnightBreak(stored, today)
-  if (next.count !== stored.count) writeSlot(lang, cefr, next)
-  return next
+  return applyMidnightBreak(readSlot(lang, cefr), today)
 }
 
 export function getStreakCount(
@@ -137,6 +134,21 @@ export function getStreakCount(
   today: string = localDateKey(),
 ): number {
   return visibleStreak(getStreak(lang, cefr, today), today)
+}
+
+/**
+ * Persist a midnight clear. Call from an effect, never from render.
+ * Getters ({@link getStreak}, {@link getStreakCount}) stay read-only.
+ */
+export function ensureStreakPersisted(
+  lang: PackLang,
+  cefr: PackCefr,
+  today: string = localDateKey(),
+): StreakState {
+  const stored = readSlot(lang, cefr)
+  const next = applyMidnightBreak(stored, today)
+  if (next.count !== stored.count) writeSlot(lang, cefr, next)
+  return next
 }
 
 /**

@@ -7,6 +7,7 @@ export {
   lemmaIdentity,
   pickDailyLemma,
   lemmasExcludingDaily,
+  isPracticeAvailable,
   pickPracticeLemma,
 } from './daily'
 export {

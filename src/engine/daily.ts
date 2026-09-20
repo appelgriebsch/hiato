@@ -67,8 +67,9 @@ export function pickDailyLemma(
 }
 
 /**
- * Pack minus today's daily lemma (ADR 0018). Empty only when the pack has
- * a single word — callers then fall back so practice still runs.
+ * Pack minus today's daily lemma (ADR 0018). Empty when the pack has only
+ * that one word (or only identity-duplicates of it) — practice is then
+ * unavailable; callers must not fall back to the daily lemma.
  */
 export function lemmasExcludingDaily(
   lemmas: PackLemma[],
@@ -82,10 +83,20 @@ export function lemmasExcludingDaily(
   return lemmas.filter((w) => lemmaIdentity(w.word) !== exclude)
 }
 
+export function isPracticeAvailable(
+  lemmas: PackLemma[],
+  dateKey: string,
+  lang: PackLang,
+  cefr: PackCefr,
+): boolean {
+  return lemmasExcludingDaily(lemmas, dateKey, lang, cefr).length > 0
+}
+
 /**
- * Endless practice pick (ADR 0018). Never returns today's daily lemma when
- * the pack has any other word. Does not use the daily seed; `seed` is a
- * caller-supplied index (G0 Date.now() / query param).
+ * Endless practice pick (ADR 0018). Never returns today's daily lemma.
+ * Returns null when the pack has no other word (single-lemma pack).
+ * Does not use the daily seed; `seed` is a caller-supplied index
+ * (G0 Date.now() / query param).
  */
 export function pickPracticeLemma(
   lemmas: PackLemma[],
@@ -93,12 +104,12 @@ export function pickPracticeLemma(
   lang: PackLang,
   cefr: PackCefr,
   seed: number,
-): PackLemma {
+): PackLemma | null {
   if (lemmas.length === 0) {
     throw new Error('empty lemma pack')
   }
   const candidates = lemmasExcludingDaily(lemmas, dateKey, lang, cefr)
-  const pool = candidates.length > 0 ? candidates : lemmas
-  const idx = ((seed % pool.length) + pool.length) % pool.length
-  return pool[idx]!
+  if (candidates.length === 0) return null
+  const idx = ((seed % candidates.length) + candidates.length) % candidates.length
+  return candidates[idx]!
 }

@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from 'bun:test'
+import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 import {
   DAILY_KEY,
   getDailyRecord,
@@ -6,25 +6,35 @@ import {
   setDailyRecord,
 } from './daily-record'
 
-const mem = new Map<string, string>()
-Object.defineProperty(globalThis, 'localStorage', {
-  configurable: true,
-  value: {
-    getItem: (k: string) => mem.get(k) ?? null,
-    setItem: (k: string, v: string) => {
-      mem.set(k, v)
+function installLocalStorageMock() {
+  const mem = new Map<string, string>()
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    writable: true,
+    value: {
+      getItem: (k: string) => mem.get(k) ?? null,
+      setItem: (k: string, v: string) => {
+        mem.set(k, v)
+      },
+      removeItem: (k: string) => {
+        mem.delete(k)
+      },
+      clear: () => {
+        mem.clear()
+      },
     },
-    removeItem: (k: string) => {
-      mem.delete(k)
-    },
-    clear: () => {
-      mem.clear()
-    },
-  },
-})
+  })
+  return mem
+}
 
 describe('daily record (per lang+CEFR)', () => {
+  let mem: Map<string, string>
+
   beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
     mem.clear()
   })
 

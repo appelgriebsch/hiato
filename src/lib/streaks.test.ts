@@ -1,6 +1,7 @@
-import { beforeEach, describe, expect, test } from 'bun:test'
+import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 import {
   applyMidnightBreak,
+  ensureStreakPersisted,
   getStreak,
   getStreakCount,
   nextStreakOnWin,
@@ -11,27 +12,37 @@ import {
 } from './streaks'
 import { nextLocalDateKey, previousLocalDateKey } from '../engine'
 
-const mem = new Map<string, string>()
-Object.defineProperty(globalThis, 'localStorage', {
-  configurable: true,
-  value: {
-    getItem: (k: string) => mem.get(k) ?? null,
-    setItem: (k: string, v: string) => {
-      mem.set(k, v)
+function installLocalStorageMock() {
+  const mem = new Map<string, string>()
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    writable: true,
+    value: {
+      getItem: (k: string) => mem.get(k) ?? null,
+      setItem: (k: string, v: string) => {
+        mem.set(k, v)
+      },
+      removeItem: (k: string) => {
+        mem.delete(k)
+      },
+      clear: () => {
+        mem.clear()
+      },
     },
-    removeItem: (k: string) => {
-      mem.delete(k)
-    },
-    clear: () => {
-      mem.clear()
-    },
-  },
-})
+  })
+  return mem
+}
 
 const EMPTY: StreakState = { count: 0, lastWinDate: null }
 
 describe('streak increment / break / midnight (ADR 0003/0004)', () => {
+  let mem: Map<string, string>
+
   beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
     mem.clear()
   })
 
@@ -107,10 +118,25 @@ describe('streak increment / break / midnight (ADR 0003/0004)', () => {
     expect(getStreakCount('en', 'b1', '2026-09-19')).toBe(0)
   })
 
-  test('getStreak persists a midnight break', () => {
+  test('getStreakCount applies a midnight break in memory without writing', () => {
     recordDailyWin('de', 'a2', '2026-09-19')
     expect(getStreakCount('de', 'a2', '2026-09-20')).toBe(1)
     expect(getStreakCount('de', 'a2', '2026-09-21')).toBe(0)
+    const stored = JSON.parse(mem.get(STREAKS_KEY) ?? '{}') as {
+      'de|a2': StreakState
+    }
+    expect(stored['de|a2']?.count).toBe(1)
+    expect(stored['de|a2']?.lastWinDate).toBe('2026-09-19')
+  })
+
+  test('ensureStreakPersisted writes a midnight break', () => {
+    recordDailyWin('de', 'a2', '2026-09-19')
+    expect(getStreakCount('de', 'a2', '2026-09-21')).toBe(0)
+    const before = JSON.parse(mem.get(STREAKS_KEY) ?? '{}') as {
+      'de|a2': StreakState
+    }
+    expect(before['de|a2']?.count).toBe(1)
+    ensureStreakPersisted('de', 'a2', '2026-09-21')
     const stored = JSON.parse(mem.get(STREAKS_KEY) ?? '{}') as {
       'de|a2': StreakState
     }
@@ -120,7 +146,7 @@ describe('streak increment / break / midnight (ADR 0003/0004)', () => {
 
   test('win after a broken streak starts at 1', () => {
     recordDailyWin('es', 'b1', '2026-09-19')
-    getStreak('es', 'b1', '2026-09-21') // midnight clear
+    ensureStreakPersisted('es', 'b1', '2026-09-21')
     const next = recordDailyWin('es', 'b1', '2026-09-21')
     expect(next.count).toBe(1)
     expect(next.lastWinDate).toBe('2026-09-21')
