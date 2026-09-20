@@ -10,6 +10,7 @@ export {
   applyGuess,
   revealOneDiacritic,
   hasUnrevealedDiacritic,
+  isDiacriticHintMiss,
   isWon,
   correctKeysFromCells,
   letterCountLabel,

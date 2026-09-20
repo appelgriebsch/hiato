@@ -127,9 +127,32 @@ for (const file of files) {
     console.error(`${file}: invalid JSON — ${e}`)
     process.exit(1)
   }
-  const pack = validatePack(raw, path.relative(ROOT, file))
+  const rel = path.relative(ROOT, file)
+  const pack = validatePack(raw, rel)
+
+  const relPosix = rel.split(path.sep).join('/')
+  const pathMatch = relPosix.match(/^(en|de|es|pt)\/(a1|a2|b1)\.json$/)
+  if (!pathMatch) {
+    throw new Error(`${rel}: expected packs/{lang}/{cefr}.json`)
+  }
+  const [, pathLang, pathCefr] = pathMatch
+  if (pack.lang !== pathLang || pack.cefr !== pathCefr) {
+    throw new Error(
+      `${rel}: path lang/cefr ${pathLang}/${pathCefr} does not match JSON ${pack.lang}/${pack.cefr}`,
+    )
+  }
+
+  if (pack.lang === 'pt') {
+    const blob = [pack.license, ...pack.attribution].join('\n')
+    if (!/cc-by-sa/i.test(blob)) {
+      throw new Error(
+        `${rel}: PT pack license/attribution must mention CC-BY-SA`,
+      )
+    }
+  }
+
   console.log(
-    `ok ${path.relative(ROOT, file)} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr})`,
+    `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr})`,
   )
   ok++
 }

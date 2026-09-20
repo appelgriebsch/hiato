@@ -4,12 +4,16 @@ import { getHealth } from '@/api'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { Card } from '@/components/ui/card'
+import { getPrefs } from '@/lib/prefs'
+import { precacheSelectedLanguage } from '@/packs/cache'
+import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 import { useShellStore } from '@/store/shell'
-import { T2_CEFR, T2_LANG, loadPack } from '@/packs/load'
 
 export function Home() {
   const healthOk = useShellStore((s) => s.healthOk)
   const setHealthOk = useShellStore((s) => s.setHealthOk)
+  const prefs = getPrefs()
+  const selectedLang = prefs?.lang
 
   useEffect(() => {
     let cancelled = false
@@ -25,10 +29,15 @@ export function Home() {
     }
   }, [setHealthOk])
 
-  // Warm EN A1 pack into localStorage cache on first visit
+  // Warm selected-language packs (all CEFR) into SW + localStorage (ADR 0006).
   useEffect(() => {
-    void loadPack(T2_LANG, T2_CEFR).catch(() => {})
-  }, [])
+    if (!selectedLang) return
+    void precacheSelectedLanguage(selectedLang).catch(() => {})
+  }, [selectedLang])
+
+  const dailyLabel = prefs
+    ? `Daily ${LANG_CODES[prefs.lang]} ${CEFR_CODES[prefs.cefr]}`
+    : 'Choose language & level'
 
   return (
     <Layout>
@@ -42,18 +51,38 @@ export function Home() {
       />
 
       <Card className="mb-4">
-        <h1 className="mb-2 text-xl font-semibold text-ink">Daily EN A1</h1>
+        <h1 className="mb-2 text-xl font-semibold text-ink">{dailyLabel}</h1>
         <p className="mb-4 text-[15px] leading-relaxed text-ink-muted">
-          Guess today’s word with soft vowel help, six lives, and learner hints.
-          Offline after the pack is cached.
+          {prefs
+            ? 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
+            : 'Pick a language and CEFR level, then play today’s word. Packs for your language stay cached for offline play.'}
         </p>
-        <Link
-          to="/play"
-          className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
-        >
-          Play today
-        </Link>
+        {prefs ? (
+          <Link
+            to="/play"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
+          >
+            Play today
+          </Link>
+        ) : (
+          <Link
+            to="/language"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid active:scale-[0.98]"
+          >
+            Choose language
+          </Link>
+        )}
       </Card>
+
+      <nav className="mb-6 flex items-center justify-center gap-4 text-sm">
+        <Link to="/language" className="text-accent hover:underline">
+          {prefs ? 'Change language' : 'Language'}
+        </Link>
+        <span className="text-ink-faint">·</span>
+        <Link to="/about" className="text-accent hover:underline">
+          About
+        </Link>
+      </nav>
 
       <p className="text-center text-xs text-ink-faint">
         API health:{' '}

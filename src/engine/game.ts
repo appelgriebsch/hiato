@@ -79,6 +79,29 @@ export function hasUnrevealedDiacritic(
   return gs.some((ch, i) => hasDiacritic(ch) && !cells[i]!.revealed)
 }
 
+/** ASCII/base letter after stripping combining marks (É → E, Ç → C; ß stays ß). */
+function asciiBaseKey(ch: string): string {
+  return graphemeKey(normalizeNfc(ch).normalize('NFD').replace(/\p{M}+/gu, ''))
+}
+
+/**
+ * Whether a *miss* should increment the ADR 0015 hint counter.
+ * Count only diacritic-cell misses (wrong accent key, or ASCII base of a hidden
+ * diacritic like E vs É) — not every wrong key (G0 still unlocks after 2 such misses).
+ */
+export function isDiacriticHintMiss(
+  cells: CellState[],
+  word: string,
+  letter: string,
+): boolean {
+  const gs = graphemes(word)
+  const hidden = gs.filter((ch, i) => hasDiacritic(ch) && !cells[i]!.revealed)
+  if (hidden.length === 0) return false
+  if (hasDiacritic(letter)) return true
+  const base = asciiBaseKey(letter)
+  return hidden.some((ch) => asciiBaseKey(ch) === base)
+}
+
 export function isWon(cells: CellState[]): boolean {
   return cells.length > 0 && cells.every((c) => c.revealed)
 }
