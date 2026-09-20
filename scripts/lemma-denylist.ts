@@ -1,8 +1,9 @@
 /** Shared NSFW / violence / slur denylist loader (exact uppercase NFC match). */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const FILE = path.join(import.meta.dir, 'data', 'lemma-denylist.txt')
+const FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data', 'lemma-denylist.txt')
 
 /** Preserve German ß under uppercasing (JS toUpperCase maps ß→SS). */
 export function nfcUpper(s: string): string {
