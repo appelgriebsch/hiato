@@ -6,7 +6,14 @@
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
-import { isPackCefr, isPackLang, type WordPack } from '../src/packs/schema'
+import {
+  PACK_CEFR_LEVELS,
+  PACK_CEFRS,
+  PACK_LANGS,
+  isPackCefr,
+  isPackLang,
+  type WordPack,
+} from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
@@ -48,7 +55,7 @@ function validatePack(raw: unknown, file: string): WordPack {
     throw new Error(`${file}: lang must be en|de|es|pt`)
   }
   if (!isPackCefr(o.cefr)) {
-    throw new Error(`${file}: cefr must be a1|a2|b1`)
+    throw new Error(`${file}: cefr must be ${PACK_CEFR_LEVELS.join('|')}`)
   }
   assertString(o.license, `${file}: license`)
   if (!Array.isArray(o.attribution) || o.attribution.length === 0) {
@@ -182,6 +189,12 @@ if (files.length === 0) {
   process.exit(1)
 }
 
+const PACK_PATH_RE = new RegExp(
+  `^(${PACK_LANGS.join('|')})/(${PACK_CEFR_LEVELS.join('|')})\\.json$`,
+)
+
+const seen = new Set<string>()
+
 let ok = 0
 for (const file of files) {
   const text = await readFile(file, 'utf8')
@@ -196,11 +209,12 @@ for (const file of files) {
   const pack = validatePack(raw, rel)
 
   const relPosix = rel.split(path.sep).join('/')
-  const pathMatch = relPosix.match(/^(en|de|es|pt)\/(a1|a2|b1)\.json$/)
+  const pathMatch = relPosix.match(PACK_PATH_RE)
   if (!pathMatch) {
     throw new Error(`${rel}: expected packs/{lang}/{cefr}.json`)
   }
   const [, pathLang, pathCefr] = pathMatch
+  seen.add(`${pathLang}/${pathCefr}`)
   if (pack.lang !== pathLang || pack.cefr !== pathCefr) {
     throw new Error(
       `${rel}: path lang/cefr ${pathLang}/${pathCefr} does not match JSON ${pack.lang}/${pack.cefr}`,
@@ -247,6 +261,14 @@ for (const file of files) {
     `ok ${rel} — ${pack.lemmas.length} lemmas, synonym chips ${withChips}/${pack.lemmas.length} (${(chipRatio * 100).toFixed(1)}%) (${pack.lang}/${pack.cefr})`,
   )
   ok++
+}
+
+for (const lang of PACK_LANGS) {
+  for (const cefr of PACK_CEFRS) {
+    if (!seen.has(`${lang}/${cefr}`)) {
+      throw new Error(`missing shipped pack public/packs/${lang}/${cefr}.json`)
+    }
+  }
 }
 
 console.log(`packs:check passed (${ok} file${ok === 1 ? '' : 's'})`)

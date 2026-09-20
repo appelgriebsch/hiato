@@ -1,6 +1,6 @@
 import type { PackCefr, PackLang, WordPack } from './schema'
 import {
-  PACK_CEFRS,
+  PACK_CEFR_LEVELS,
   PACK_LANGS,
   isPackCefr,
   isPackLang,
@@ -122,7 +122,7 @@ async function refreshPack(lang: PackLang, cefr: PackCefr): Promise<void> {
 export function purgeLocalPacksExcept(lang: PackLang): void {
   for (const other of PACK_LANGS) {
     if (other === lang) continue
-    for (const cefr of PACK_CEFRS) {
+    for (const cefr of PACK_CEFR_LEVELS) {
       memory.delete(`${other}/${cefr}`)
       try {
         localStorage.removeItem(localPackCacheKey(other, cefr))

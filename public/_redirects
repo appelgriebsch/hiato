@@ -1,2 +1,6 @@
+# Pack JSON must not SPA-fallback. Missing /packs/* would otherwise return
+# index.html 200 and poison the hiato-packs Workbox cache (cacheableResponse 200).
+# Existing /packs/{lang}/{cefr}.json files are still static assets.
+/packs/*    /404.html   404
 # SPA fallback for client routes (e.g. /play). /api/* is handled by Pages Functions first.
 /*    /index.html   200

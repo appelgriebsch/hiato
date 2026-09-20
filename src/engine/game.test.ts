@@ -83,6 +83,18 @@ describe('ADR 0024 A1 vowel prefill', () => {
     expect(cells.every((c) => !c.revealed)).toBe(true)
   })
 
+  test.each(['b2', 'c1', 'c2'] as const)(
+    '%s matches B1 (no ASCII vowel prefill)',
+    (cefr) => {
+      const cells = buildInitialCells('APPLE', cefr)
+      const b1 = buildInitialCells('APPLE', 'b1')
+      expect(cells).toEqual(b1)
+      expect(cells.every((c) => !c.revealed && !c.helped && c.char === null)).toBe(
+        true,
+      )
+    },
+  )
+
   test('EN café keeps é hidden for hint path', () => {
     const cells = buildInitialCells('CAFÉ', 'a1')
     expect(cells[0]!.revealed).toBe(false) // C
