@@ -5,7 +5,6 @@ import {
   installMembershipCacheForTests,
   isAllowlistedLemma,
   isWordOfLang,
-  MembershipDictsNeeded,
   membershipCacheKey,
   membershipProbes,
   resetDicts,
@@ -106,7 +105,7 @@ describe('membership verdict cache', () => {
     installMembershipCacheForTests(new Map())
     expect(isWordOfLang('de', 'DAD')).toBe(false)
     expect(isWordOfLang('de', 'EMAIL')).toBe(true)
-    expect(() => isWordOfLang('de', 'HAUS')).toThrow(MembershipDictsNeeded)
+    expect(() => isWordOfLang('de', 'HAUS')).toThrow(/membership cache miss/)
   })
 
   test('fixture spellers outrank a cached verdict', () => {

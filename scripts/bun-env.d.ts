@@ -54,4 +54,8 @@ declare const Bun: {
   ): {
     text(): Promise<string>
   }
+  /** bun.lock is JSONC (trailing commas). */
+  JSONC: {
+    parse(text: string): unknown
+  }
 }
