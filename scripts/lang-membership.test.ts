@@ -2,8 +2,11 @@ import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import {
   caseProbes,
   installFixtureSpellersFromDir,
+  installMembershipCacheForTests,
   isAllowlistedLemma,
   isWordOfLang,
+  MembershipDictsNeeded,
+  membershipCacheKey,
   membershipProbes,
   resetDicts,
 } from './lang-membership'
@@ -78,5 +81,40 @@ describe('lang membership (fixture dictionaries)', () => {
     expect(isWordOfLang('en', 'CONNOSCO')).toBe(false)
     expect(isAllowlistedLemma('es', 'ADN')).toBe(true)
     expect(isAllowlistedLemma('en', 'ADN')).toBe(false)
+  })
+})
+
+describe('membership verdict cache', () => {
+  afterAll(() => {
+    resetDicts()
+  })
+
+  test('answers from an installed cache without dictionaries', () => {
+    resetDicts()
+    installMembershipCacheForTests(
+      new Map([
+        [membershipCacheKey('en', 'HELLO'), true],
+        [membershipCacheKey('en', 'ZZZCACHEWORD'), false],
+      ]),
+    )
+    expect(isWordOfLang('en', 'HELLO')).toBe(true)
+    expect(isWordOfLang('en', 'ZZZCACHEWORD')).toBe(false)
+  })
+
+  test('a cache miss is not treated as a hit', () => {
+    resetDicts()
+    installMembershipCacheForTests(new Map())
+    expect(isWordOfLang('de', 'DAD')).toBe(false)
+    expect(isWordOfLang('de', 'EMAIL')).toBe(true)
+    expect(() => isWordOfLang('de', 'HAUS')).toThrow(MembershipDictsNeeded)
+  })
+
+  test('fixture spellers outrank a cached verdict', () => {
+    resetDicts()
+    installMembershipCacheForTests(
+      new Map([[membershipCacheKey('en', 'HELLO'), false]]),
+    )
+    installFixtureSpellersFromDir()
+    expect(isWordOfLang('en', 'HELLO')).toBe(true)
   })
 })

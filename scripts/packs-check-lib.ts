@@ -18,7 +18,7 @@ import { isDeniedLemma, loadDenylist } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
-import { dictsReady, isWordOfLang } from './lang-membership'
+import { dictsReady, isWordOfLang, membershipCacheArmed } from './lang-membership'
 import {
   SYNONYM_CHIP_CAP,
   SYNONYM_COVERAGE_FLOOR,
@@ -26,6 +26,11 @@ import {
   synonymCoverageRatio,
 } from './synonym-chips'
 import { EXISTING_CEFRS, foldKey, hangmanOk } from './pack-select'
+
+/** Hunspell, or a committed verdict cache that can answer without loading it. */
+function membershipActive(): boolean {
+  return dictsReady() || membershipCacheArmed()
+}
 
 export const PACK_MIN = 350
 export const C2_MIN = 200
@@ -309,7 +314,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
     if (isDeniedLemma(word, DENY)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
-    if (dictsReady() && !isWordOfLang(o.lang as PackLang, word)) {
+    if (membershipActive() && !isWordOfLang(o.lang as PackLang, word)) {
       throw new Error(
         `${file}: lemmas[${i}] not a word of ${o.lang} — "${word}"`,
       )
@@ -323,7 +328,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
       isWrongLanguageGloss(
         o.lang as string,
         gloss,
-        dictsReady() ? isWordOfLang : undefined,
+        membershipActive() ? isWordOfLang : undefined,
       )
     ) {
       throw new Error(

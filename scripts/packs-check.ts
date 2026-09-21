@@ -18,7 +18,12 @@ import {
   validatePack,
   type PackSnapshot,
 } from './packs-check-lib'
-import { ensureDicts } from './lang-membership'
+import {
+  ensureDicts,
+  loadMembershipCache,
+  MembershipDictsNeeded,
+  writeMembershipCache,
+} from './lang-membership'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -42,7 +47,62 @@ async function walkJson(dir: string): Promise<string[]> {
   return out
 }
 
-await ensureDicts()
+/** Returns true when the packs failed a gate. */
+async function checkAll(files: string[]): Promise<boolean> {
+  const snapshots: PackSnapshot[] = []
+  const rels: string[] = []
+  const errors: string[] = []
+
+  for (const file of files) {
+    const text = await readFile(file, 'utf8')
+    let raw: unknown
+    try {
+      raw = JSON.parse(text)
+    } catch (e) {
+      console.error(`${file}: invalid JSON — ${e}`)
+      process.exit(1)
+    }
+    const rel = path.relative(ROOT, file).split(path.sep).join('/')
+    rels.push(rel)
+    const pack = validatePack(raw, rel)
+
+    if (pack.lang !== rel.split('/')[0] || pack.cefr !== rel.split('/')[1]?.replace(/\.json$/, '')) {
+      errors.push(
+        `${rel}: path lang/cefr does not match JSON ${pack.lang}/${pack.cefr}`,
+      )
+    }
+
+    const licenseErr = checkPackLicense(rel, pack)
+    if (licenseErr) errors.push(licenseErr)
+
+    const floorErr = checkLemmaFloor(rel, pack)
+    if (floorErr) errors.push(floorErr)
+
+    const syn = checkSynonymCoverage(rel, pack)
+    if (syn.error) errors.push(syn.error)
+    if (syn.warn) console.warn(syn.warn)
+
+    snapshots.push({ rel, pack })
+    const floor = lemmaFloor(pack.cefr)
+    const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
+    console.log(
+      `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra})`,
+    )
+  }
+
+  errors.push(...checkCompleteness(rels))
+  errors.push(...exclusiveConflicts(snapshots))
+
+  if (errors.length) {
+    for (const e of errors) console.error(e)
+    return true
+  }
+
+  console.log(`packs:check passed (${snapshots.length} file${snapshots.length === 1 ? '' : 's'})`)
+  return false
+}
+
+loadMembershipCache()
 
 const files = await walkJson(ROOT)
 if (files.length === 0) {
@@ -50,53 +110,24 @@ if (files.length === 0) {
   process.exit(1)
 }
 
-const snapshots: PackSnapshot[] = []
-const rels: string[] = []
-const errors: string[] = []
-
-for (const file of files) {
-  const text = await readFile(file, 'utf8')
-  let raw: unknown
+let failed = false
+try {
   try {
-    raw = JSON.parse(text)
+    failed = await checkAll(files)
   } catch (e) {
-    console.error(`${file}: invalid JSON — ${e}`)
-    process.exit(1)
+    if (!(e instanceof MembershipDictsNeeded)) throw e
+    console.error(
+      'packs:check: Hunspell verdict cache miss — loading dictionaries',
+    )
+    await ensureDicts()
+    failed = await checkAll(files)
   }
-  const rel = path.relative(ROOT, file).split(path.sep).join('/')
-  rels.push(rel)
-  const pack = validatePack(raw, rel)
-
-  if (pack.lang !== rel.split('/')[0] || pack.cefr !== rel.split('/')[1]?.replace(/\.json$/, '')) {
-    errors.push(
-      `${rel}: path lang/cefr does not match JSON ${pack.lang}/${pack.cefr}`,
+} finally {
+  if (writeMembershipCache()) {
+    console.error(
+      '::warning::packs:check rewrote scripts/data/hunspell-verdicts.json — commit it so the next run skips Hunspell',
     )
   }
-
-  const licenseErr = checkPackLicense(rel, pack)
-  if (licenseErr) errors.push(licenseErr)
-
-  const floorErr = checkLemmaFloor(rel, pack)
-  if (floorErr) errors.push(floorErr)
-
-  const syn = checkSynonymCoverage(rel, pack)
-  if (syn.error) errors.push(syn.error)
-  if (syn.warn) console.warn(syn.warn)
-
-  snapshots.push({ rel, pack })
-  const floor = lemmaFloor(pack.cefr)
-  const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
-  console.log(
-    `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra})`,
-  )
 }
 
-errors.push(...checkCompleteness(rels))
-errors.push(...exclusiveConflicts(snapshots))
-
-if (errors.length) {
-  for (const e of errors) console.error(e)
-  process.exit(1)
-}
-
-console.log(`packs:check passed (${snapshots.length} file${snapshots.length === 1 ? '' : 's'})`)
+if (failed) process.exit(1)
