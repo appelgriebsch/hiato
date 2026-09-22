@@ -99,17 +99,22 @@ export type PagesDeployment = {
 
 /**
  * Rollback target for `hiato-production`: the newest successful production
- * deployment that is not the one currently serving. Preview deployments are
- * never targets.
+ * deployment older than the one currently serving. A newer production
+ * deployment is not a target, so a rollback cannot roll forward. Preview
+ * deployments are never targets. No current deployment means no target.
  */
 export function selectRollbackTarget(
   deployments: readonly PagesDeployment[],
 ): PagesDeployment | null {
+  const current = deployments.find(
+    (deployment) => deployment.isCurrent === true && deployment.environment === 'production',
+  )
+  if (!current) return null
   const candidates = deployments.filter(
     (deployment) =>
       deployment.environment === 'production' &&
       deployment.success &&
-      deployment.isCurrent !== true,
+      deployment.createdAt < current.createdAt,
   )
   candidates.sort((a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0))
   return candidates[0] ?? null

@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test'
+import { getHealth } from '../api/client'
 import { onRequestGet } from '../../functions/api/health'
 import {
   BUN_PIN,
@@ -75,6 +76,24 @@ describe('preview bindings differ from production', () => {
     expect(missing.status).toBe(503)
     expect(await missing.json()).toEqual({ ok: false })
   })
+
+  test('getHealth resolves only a 200 body that includes stage', async () => {
+    const original = globalThis.fetch
+    globalThis.fetch = (async () =>
+      Response.json({ ok: true, stage: 'preview' })) as typeof fetch
+    try {
+      expect(await getHealth()).toEqual({ ok: true, stage: 'preview' })
+    } finally {
+      globalThis.fetch = original
+    }
+
+    globalThis.fetch = (async () => Response.json({ ok: true })) as typeof fetch
+    try {
+      await expect(getHealth()).rejects.toThrow('Health response missing stage')
+    } finally {
+      globalThis.fetch = original
+    }
+  })
 })
 
 describe('Bun pin', () => {
@@ -105,9 +124,10 @@ describe('named rollback hiato-production', () => {
     expect(doc).toContain(PAGES_PROJECT)
     expect(doc).toContain(ROLLBACK_API_PATH)
     expect(doc).toContain('Preview deployments are not valid rollback targets')
+    expect(doc).toContain('older than the one currently serving')
   })
 
-  test('selects the newest successful production deployment that is not current', () => {
+  test('selects the newest successful production deployment older than current', () => {
     const deployments: PagesDeployment[] = [
       {
         id: 'preview-new',
@@ -152,6 +172,20 @@ describe('named rollback hiato-production', () => {
           isCurrent: true,
         },
       ]),
+    ).toBeNull()
+    expect(
+      selectRollbackTarget(
+        deployments.map((deployment) =>
+          deployment.id === 'prod-previous'
+            ? { ...deployment, isCurrent: true }
+            : { ...deployment, isCurrent: false },
+        ),
+      )?.id,
+    ).toBe('prod-older')
+    expect(
+      selectRollbackTarget(
+        deployments.map((deployment) => ({ ...deployment, isCurrent: false })),
+      ),
     ).toBeNull()
   })
 })

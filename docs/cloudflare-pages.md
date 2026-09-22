@@ -73,7 +73,7 @@ Those two values are not equal. Do not run `bunx wrangler` inside this checkout;
 
 Name: `hiato-production`. Project: `hiato`.
 
-Cloudflare Pages rolls production back only to an earlier successful production deployment. Preview deployments are not valid rollback targets. The target is the newest successful production deployment that is not the one currently serving (`selectRollbackTarget` in `src/deploy/harden.ts`).
+Cloudflare Pages rolls production back only to an earlier successful production deployment. Preview deployments are not valid rollback targets. The target is the newest successful production deployment older than the one currently serving (`selectRollbackTarget` in `src/deploy/harden.ts`). A newer production deployment is not a target. If no deployment is marked current, there is no target.
 
 Dashboard: Pages project `hiato` → Deployments → previous successful production deployment → **Rollback to this deployment**.
 
