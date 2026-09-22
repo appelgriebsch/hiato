@@ -11,7 +11,10 @@ import {
   headerRule,
   parseHeadersFile,
   readStageBindings,
+  PRODUCTION_ORIGIN,
   selectRollbackTarget,
+  SOCIAL_BANNER_PATH,
+  socialImageOrigin,
   type PagesDeployment,
 } from './harden'
 
@@ -93,6 +96,49 @@ describe('preview bindings differ from production', () => {
     } finally {
       globalThis.fetch = original
     }
+  })
+})
+
+describe('social banner', () => {
+  test('production links use the public alias; previews use the deployment', () => {
+    expect(socialImageOrigin({})).toBe(PRODUCTION_ORIGIN)
+    expect(socialImageOrigin({ branch: 'main', pagesUrl: 'https://abc123.hiato.pages.dev' })).toBe(
+      PRODUCTION_ORIGIN,
+    )
+    expect(
+      socialImageOrigin({
+        branch: 'staging',
+        pagesUrl: 'https://staging-deploy.hiato.pages.dev/ignored',
+      }),
+    ).toBe('https://staging-deploy.hiato.pages.dev')
+    expect(socialImageOrigin({ branch: 'staging' })).toBe(PRODUCTION_ORIGIN)
+    expect(socialImageOrigin({ branch: 'staging', pagesUrl: 'http://insecure.example' })).toBe(
+      PRODUCTION_ORIGIN,
+    )
+    expect(socialImageOrigin({ branch: 'staging', pagesUrl: 'not a url' })).toBe(PRODUCTION_ORIGIN)
+  })
+
+  test('index.html advertises a large summary card and a 1200×630 banner', async () => {
+    const html = await readRepo('index.html')
+    expect(html).toContain('name="twitter:card" content="summary_large_image"')
+    expect(html).toContain(`property="og:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}"`)
+    expect(html).toContain(`name="twitter:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}"`)
+    expect(html).toContain('property="og:image:width" content="1200"')
+    expect(html).toContain('property="og:image:height" content="630"')
+
+    const cfg = await readRepo('vite.config.ts')
+    expect(cfg).toContain('socialImageOrigin')
+    expect(cfg).toContain("'**/og-banner.png'")
+
+    const bytes = new Uint8Array(
+      await Bun.file(new URL(`../../public${SOCIAL_BANNER_PATH}`, import.meta.url)).arrayBuffer(),
+    )
+    expect(bytes[0]).toBe(0x89)
+    expect(bytes[1]).toBe(0x50)
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+    expect(view.getUint32(16)).toBe(1200)
+    expect(view.getUint32(20)).toBe(630)
+    expect(bytes.byteLength).toBeLessThan(300_000)
   })
 })
 

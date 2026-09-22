@@ -119,3 +119,31 @@ export function selectRollbackTarget(
   candidates.sort((a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0))
   return candidates[0] ?? null
 }
+
+/** Stable production origin. Preview builds use the deployment URL instead. */
+export const PRODUCTION_ORIGIN = 'https://hiato.pages.dev'
+
+export const SOCIAL_BANNER_PATH = '/og-banner.png'
+
+/**
+ * Absolute origin for `og:image` / `twitter:image`.
+ * Production (`main`, or a build with no Pages env) uses the public alias.
+ * Any other branch uses that deployment's `CF_PAGES_URL`, so a preview link
+ * unfurls the banner shipped with that build.
+ */
+export function socialImageOrigin(env: {
+  pagesUrl?: string
+  branch?: string
+}): string {
+  const branch = env.branch?.trim() ?? ''
+  const pagesUrl = env.pagesUrl?.trim() ?? ''
+  if (branch !== '' && branch !== 'main' && pagesUrl !== '') {
+    try {
+      const url = new URL(pagesUrl)
+      if (url.protocol === 'https:') return url.origin
+    } catch {
+      // Ignore a malformed Pages URL and use the production alias.
+    }
+  }
+  return PRODUCTION_ORIGIN
+}
