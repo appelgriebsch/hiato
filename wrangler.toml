@@ -1,5 +1,6 @@
 # Pages Functions bindings (ADR 0021).
-# Top-level [vars] apply to production. Preview must override them.
+# Top-level [vars] apply to production. Pages preview deployments use [env.preview]
+# (the only non-production Pages env) and set HIATO_STAGE to staging.
 # Do not run `bunx wrangler` inside this checkout — it rewrites package.json and bun.lock.
 name = "hiato"
 compatibility_date = "2026-09-19"
@@ -9,4 +10,4 @@ pages_build_output_dir = "./dist"
 HIATO_STAGE = "production"
 
 [env.preview.vars]
-HIATO_STAGE = "preview"
+HIATO_STAGE = "staging"

@@ -54,11 +54,11 @@ Security on `/*` (more specific cache rules still win for `Cache-Control`):
 
 ## Bindings
 
-`wrangler.toml` is the Pages Functions binding source (ADR 0021). Top-level `[vars]` are production. `[env.preview.vars]` must override them.
+`wrangler.toml` is the Pages Functions binding source (ADR 0021). Top-level `[vars]` are production. `[env.preview.vars]` must override them. Pages only has Production and Preview environments; the preview env's `HIATO_STAGE` value is `staging`.
 
 | Binding | Production | Preview |
 | --- | --- | --- |
-| `HIATO_STAGE` | `production` | `preview` |
+| `HIATO_STAGE` | `production` | `staging` |
 
 Those two values are not equal. Do not run `bunx wrangler` inside this checkout; it rewrites `package.json` and `bun.lock`.
 
@@ -66,7 +66,7 @@ Those two values are not equal. Do not run `bunx wrangler` inside this checkout;
 
 `functions/api/health.ts` → `GET /api/health`
 
-- `200 { "ok": true, "stage": "production" | "preview" }` when `HIATO_STAGE` is that environment's binding
+- `200 { "ok": true, "stage": "production" | "staging" }` when `HIATO_STAGE` is that environment's binding
 - `503 { "ok": false }` when the binding is missing or any other value
 
 ## Rollback (`hiato-production`)

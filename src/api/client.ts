@@ -24,7 +24,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T
 }
 
-export type HealthStage = 'production' | 'preview'
+export type HealthStage = 'production' | 'staging'
 
 export type HealthResponse = {
   ok: true
@@ -36,7 +36,7 @@ function isHealthResponse(value: unknown): value is HealthResponse {
   const body = value as { ok?: unknown; stage?: unknown }
   return (
     body.ok === true &&
-    (body.stage === 'production' || body.stage === 'preview')
+    (body.stage === 'production' || body.stage === 'staging')
   )
 }
 

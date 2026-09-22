@@ -9,12 +9,12 @@ export const ROLLBACK_API_PATH =
 
 export const STAGE_BINDING = 'HIATO_STAGE'
 export const PRODUCTION_STAGE = 'production'
-export const PREVIEW_STAGE = 'preview'
+export const STAGING_STAGE = 'staging'
 
-export type PagesStage = typeof PRODUCTION_STAGE | typeof PREVIEW_STAGE
+export type PagesStage = typeof PRODUCTION_STAGE | typeof STAGING_STAGE
 
 export function isPagesStage(value: string | undefined): value is PagesStage {
-  return value === PRODUCTION_STAGE || value === PREVIEW_STAGE
+  return value === PRODUCTION_STAGE || value === STAGING_STAGE
 }
 
 export type HeaderRule = {
@@ -56,17 +56,18 @@ export function headerRule(
 
 export type StageBindings = {
   production: string
-  preview: string
+  staging: string
 }
 
 /**
  * Read `HIATO_STAGE` from a Pages wrangler file.
- * Top-level `[vars]` is production. `[env.preview.vars]` must override it.
+ * Top-level `[vars]` is production. `[env.preview.vars]` must override it
+ * with the staging stage name (Pages only has production and preview envs).
  */
 export function readStageBindings(toml: string): StageBindings {
   let section = ''
   let production: string | undefined
-  let preview: string | undefined
+  let staging: string | undefined
   for (const raw of toml.split('\n')) {
     const line = raw.trim()
     if (!line || line.startsWith('#')) continue
@@ -80,12 +81,12 @@ export function readStageBindings(toml: string): StageBindings {
     const value = binding[1] ?? ''
     if (section === 'vars') production = value
     if (section === 'env.production.vars') production = value
-    if (section === 'env.preview.vars') preview = value
+    if (section === 'env.preview.vars') staging = value
   }
-  if (!production || !preview) {
-    throw new Error('wrangler.toml must set HIATO_STAGE for production and preview')
+  if (!production || !staging) {
+    throw new Error('wrangler.toml must set HIATO_STAGE for production and staging')
   }
-  return { production, preview }
+  return { production, staging }
 }
 
 export type PagesDeployment = {

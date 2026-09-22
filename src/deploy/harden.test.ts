@@ -4,7 +4,7 @@ import { onRequestGet } from '../../functions/api/health'
 import {
   BUN_PIN,
   PAGES_PROJECT,
-  PREVIEW_STAGE,
+  STAGING_STAGE,
   PRODUCTION_STAGE,
   ROLLBACK_API_PATH,
   ROLLBACK_NAME,
@@ -58,12 +58,12 @@ describe('cache and security headers', () => {
   })
 })
 
-describe('preview bindings differ from production', () => {
+describe('staging bindings differ from production', () => {
   test('wrangler.toml gives each environment its own HIATO_STAGE', async () => {
     const bindings = readStageBindings(await readRepo('wrangler.toml'))
     expect(bindings.production).toBe(PRODUCTION_STAGE)
-    expect(bindings.preview).toBe(PREVIEW_STAGE)
-    expect(bindings.preview).not.toBe(bindings.production)
+    expect(bindings.staging).toBe(STAGING_STAGE)
+    expect(bindings.staging).not.toBe(bindings.production)
   })
 
   test('health accepts only the two stage bindings', async () => {
@@ -71,21 +71,25 @@ describe('preview bindings differ from production', () => {
     expect(production.status).toBe(200)
     expect(await production.json()).toEqual({ ok: true, stage: PRODUCTION_STAGE })
 
-    const preview = await onRequestGet({ env: { HIATO_STAGE: PREVIEW_STAGE } })
-    expect(preview.status).toBe(200)
-    expect(await preview.json()).toEqual({ ok: true, stage: PREVIEW_STAGE })
+    const staging = await onRequestGet({ env: { HIATO_STAGE: STAGING_STAGE } })
+    expect(staging.status).toBe(200)
+    expect(await staging.json()).toEqual({ ok: true, stage: STAGING_STAGE })
 
     const missing = await onRequestGet({ env: {} })
     expect(missing.status).toBe(503)
     expect(await missing.json()).toEqual({ ok: false })
+
+    const legacyPreview = await onRequestGet({ env: { HIATO_STAGE: 'preview' } })
+    expect(legacyPreview.status).toBe(503)
+    expect(await legacyPreview.json()).toEqual({ ok: false })
   })
 
   test('getHealth resolves only a 200 body that includes stage', async () => {
     const original = globalThis.fetch
     globalThis.fetch = (async () =>
-      Response.json({ ok: true, stage: 'preview' })) as typeof fetch
+      Response.json({ ok: true, stage: 'staging' })) as typeof fetch
     try {
-      expect(await getHealth()).toEqual({ ok: true, stage: 'preview' })
+      expect(await getHealth()).toEqual({ ok: true, stage: 'staging' })
     } finally {
       globalThis.fetch = original
     }
