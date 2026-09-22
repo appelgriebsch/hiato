@@ -113,8 +113,21 @@ export function checkPackLicense(rel: string, pack: WordPack): string | null {
     return `${rel}: ${pack.lang.toUpperCase()} ${pack.cefr.toUpperCase()} must keep CC0-style labelling`
   }
 
-  // EN B2: citation path — do not require SA (CEFR-J / Tono Lab).
+  if (pack.lang === 'en' && pack.cefr === 'b2') {
+    if (sa) return `${rel}: EN B2 must not be labelled CC-BY-SA (ADR 0029)`
+    if (!cc0) return `${rel}: EN B2 must keep CC0-style labelling`
+    if (!/cefr-j|tono/i.test(blob)) {
+      return `${rel}: EN B2 must cite CEFR-J / Tono Lab`
+    }
+    return null
+  }
+
   return null
+}
+
+/** GitHub Actions and Cloudflare Pages set CI. A verdict-cache miss must fail there without loading Hunspell. */
+export function failClosedOnHunspellMiss(env: { CI?: string } = process.env): boolean {
+  return env.CI === 'true' || env.CI === '1'
 }
 
 export function checkLemmaFloor(rel: string, pack: WordPack): string | null {

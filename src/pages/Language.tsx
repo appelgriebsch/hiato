@@ -12,16 +12,15 @@ function moveRadio<T extends string>(
   items: readonly T[],
   selected: T,
   setSelected: (v: T) => void,
-  vertical: boolean,
 ): void {
   const idx = items.indexOf(selected)
   if (idx < 0) return
-  const prev = vertical ? 'ArrowUp' : 'ArrowLeft'
-  const next = vertical ? 'ArrowDown' : 'ArrowRight'
   let nextIdx = idx
-  if (e.key === prev) nextIdx = (idx - 1 + items.length) % items.length
-  else if (e.key === next) nextIdx = (idx + 1) % items.length
-  else if (e.key === 'Home') nextIdx = 0
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    nextIdx = (idx - 1 + items.length) % items.length
+  } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    nextIdx = (idx + 1) % items.length
+  } else if (e.key === 'Home') nextIdx = 0
   else if (e.key === 'End') nextIdx = items.length - 1
   else if (e.key === ' ' || e.key === 'Enter') {
     e.preventDefault()
@@ -55,7 +54,6 @@ export function Language() {
     if (preparing) return
     setPreparing(true)
     setError(null)
-    setPrefs({ lang, cefr })
     try {
       const ok = await precacheSelectedLanguage(lang, cefr)
       if (!alive.current) return
@@ -66,6 +64,7 @@ export function Language() {
         setPreparing(false)
         return
       }
+      setPrefs({ lang, cefr })
       nav('/play?mode=daily')
     } catch {
       if (!alive.current) return
@@ -120,6 +119,7 @@ export function Language() {
         role="radiogroup"
         data-radio-group
         aria-labelledby="language-heading"
+        aria-orientation="horizontal"
         className="mt-4 grid grid-cols-2 gap-2"
       >
         {PACK_LANGS.map((l) => (
@@ -130,10 +130,13 @@ export function Language() {
             data-radio={l}
             aria-checked={lang === l}
             tabIndex={lang === l ? 0 : -1}
-            onClick={() => setLang(l)}
-            onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang, false)}
+            disabled={preparing}
+            onClick={() => {
+              if (!preparing) setLang(l)
+            }}
+            onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang)}
             className={[
-              'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left',
+              'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
                 ? 'border-accent bg-accent-soft'
@@ -157,6 +160,7 @@ export function Language() {
         data-radio-group
         aria-labelledby="cefr-heading"
         aria-describedby="cefr-help"
+        aria-orientation="vertical"
         className="mt-4 flex flex-col gap-2"
       >
         {PACK_CEFRS.map((c) => (
@@ -167,10 +171,13 @@ export function Language() {
             data-radio={c}
             aria-checked={cefr === c}
             tabIndex={cefr === c ? 0 : -1}
-            onClick={() => setCefr(c)}
-            onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr, true)}
+            disabled={preparing}
+            onClick={() => {
+              if (!preparing) setCefr(c)
+            }}
+            onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr)}
             className={[
-              'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium',
+              'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
                 ? 'border-accent bg-accent-soft text-accent'

@@ -50,9 +50,9 @@ export function Home() {
 
   // Warm selected-language packs (all CEFR) into SW + localStorage (ADR 0006).
   useEffect(() => {
-    if (!selectedLang) return
-    void precacheSelectedLanguage(selectedLang).catch(() => {})
-  }, [selectedLang])
+    if (!selectedLang || !selectedCefr) return
+    void precacheSelectedLanguage(selectedLang, selectedCefr).catch(() => {})
+  }, [selectedLang, selectedCefr])
 
   useEffect(() => {
     if (!selectedLang || !selectedCefr) return

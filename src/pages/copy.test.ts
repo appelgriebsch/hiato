@@ -24,9 +24,16 @@ describe('Language picker (gh-30)', () => {
     expect(src).toContain('tabIndex={lang === l ? 0 : -1}')
     expect(src).toContain('tabIndex={cefr === c ? 0 : -1}')
     expect(src).toContain('aria-describedby="cefr-help"')
+    expect(src).toContain('aria-orientation="horizontal"')
+    expect(src).toContain('aria-orientation="vertical"')
+    expect(src).toContain("e.key === 'ArrowUp' || e.key === 'ArrowLeft'")
+    expect(src).toContain("e.key === 'ArrowDown' || e.key === 'ArrowRight'")
     expect(src).toContain('aria-busy={preparing}')
     expect(src).toContain('disabled={preparing}')
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
+    const prefsAt = src.indexOf('setPrefs({ lang, cefr })')
+    const failedAt = src.indexOf('if (!ok)')
+    expect(prefsAt).toBeGreaterThan(failedAt)
   })
 })
 
@@ -55,6 +62,7 @@ describe('Layout pinned Continue footer', () => {
 describe('Home daily copy', () => {
   test('soft vowel help only when prefs are A1/A2', async () => {
     const src = await pageSrc('Home.tsx')
+    expect(src).toContain('precacheSelectedLanguage(selectedLang, selectedCefr)')
     expect(src).toContain("selectedCefr === 'a1' || selectedCefr === 'a2'")
     expect(src).toContain('soft vowel help')
     expect(src).toContain(

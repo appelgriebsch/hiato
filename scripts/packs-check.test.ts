@@ -7,6 +7,7 @@ import {
   checkLemmaFloor,
   checkPackLicense,
   checkSynonymCoverage,
+  failClosedOnHunspellMiss,
   exclusiveConflicts,
   expectedPackCount,
   requiresCcBySa,
@@ -122,7 +123,7 @@ describe('packs:check exclusive bands', () => {
 })
 
 describe('packs:check license matrix (ADR 0029)', () => {
-  test('EN B2 is not required to be SA', () => {
+  test('EN B2 requires CC0 and a CEFR-J / Tono citation, and rejects SA', () => {
     expect(requiresCcBySa('en', 'b2')).toBe(false)
     const enB2 = pack({
       lang: 'en',
@@ -131,6 +132,27 @@ describe('packs:check license matrix (ADR 0029)', () => {
       attribution: ['Cite Tono Lab / CEFR-J'],
     })
     expect(checkPackLicense('en/b2.json', enB2)).toBeNull()
+    const sa = pack({
+      lang: 'en',
+      cefr: 'b2',
+      license: 'CC-BY-SA-4.0',
+      attribution: ['CEFR-J'],
+    })
+    expect(checkPackLicense('en/b2.json', sa)).toMatch(/CC-BY-SA/)
+    const noCite = pack({
+      lang: 'en',
+      cefr: 'b2',
+      license: 'CC0-1.0',
+      attribution: ['curated learner lemmas'],
+    })
+    expect(checkPackLicense('en/b2.json', noCite)).toMatch(/CEFR-J/)
+  })
+
+  test('a Hunspell cache miss fails closed when CI is set', () => {
+    expect(failClosedOnHunspellMiss({ CI: 'true' })).toBe(true)
+    expect(failClosedOnHunspellMiss({ CI: '1' })).toBe(true)
+    expect(failClosedOnHunspellMiss({})).toBe(false)
+    expect(failClosedOnHunspellMiss({ CI: 'false' })).toBe(false)
   })
 
   test('EN C1/C2 labelled CC0 fails; must mention CC-BY-SA', () => {

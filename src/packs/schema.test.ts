@@ -83,6 +83,33 @@ describe('pack hosting', () => {
     expect(html.headers.get('cache-control')).toBe('no-store')
   })
 
+  test('pack Pages Function passes 304 and JSON with charset', async () => {
+    const { onRequest } = await import('../../functions/packs/[[path]].ts')
+    const notModified = await onRequest({
+      next: async () => new Response(null, { status: 304 }),
+    })
+    expect(notModified.status).toBe(304)
+
+    const json = await onRequest({
+      next: async () =>
+        new Response('{}', {
+          status: 200,
+          headers: { 'content-type': 'application/json; charset=utf-8' },
+        }),
+    })
+    expect(json.status).toBe(200)
+
+    const plain = await onRequest({
+      next: async () =>
+        new Response('nope', {
+          status: 200,
+          headers: { 'content-type': 'text/plain' },
+        }),
+    })
+    expect(plain.status).toBe(404)
+    expect(plain.headers.get('cache-control')).toBe('no-store')
+  })
+
   test('Workbox runtime cache uses PACK_ASSET_PATH_RE and maxEntries 24', async () => {
     const src = await Bun.file(
       new URL('../../vite.config.ts', import.meta.url),

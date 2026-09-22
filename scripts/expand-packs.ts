@@ -16,6 +16,7 @@ import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
+import { generateSynonyms } from './synonym-generate'
 import {
   DE_ES_BANDS,
   EXISTING_CEFRS,
@@ -523,58 +524,6 @@ function cleanSynonyms(lemma: string, raw: unknown): string[] {
   return filterSynonymChips(lemma, list, DENY)
 }
 
-async function generateSynonyms(
-  lang: Lang,
-  words: string[],
-  cache: Record<string, string[]>,
-): Promise<void> {
-  const missing = words.filter((w) => cleanSynonyms(w, cache[w]).length === 0)
-  if (missing.length === 0) return
-
-  const key = readXaiKey()
-  if (!key) {
-    console.warn(
-      `  ${lang}: skip synonym generation for ${missing.length} lemmas (no xAI key)`,
-    )
-    return
-  }
-
-  const BATCH = 60
-  console.log(`Generating ${missing.length} ${lang} synonym lists in batches of ${BATCH}…`)
-  for (let i = 0; i < missing.length; i += BATCH) {
-    const batch = missing.slice(i, i + BATCH)
-    const prompt =
-      `Language: ${LANG_NAME[lang]} (${lang}).\n` +
-      `For each lemma, give 1–3 same-language synonyms or very short near-equivalents (UI cap 3).\n` +
-      `Rules: never include the lemma itself as a whole word in any synonym (ADR 0023); NFC text; no NSFW.\n` +
-      `Unique referents may use an empty array.\n` +
-      `Return JSON object mapping each UPPERCASE lemma to an array of synonym strings.\n` +
-      `Lemmas:\n${batch.join('\n')}`
-
-    try {
-      const content = await xaiChat(
-        key,
-        'You write concise learner synonyms. Reply with a single JSON object only.',
-        prompt,
-        0.2,
-      )
-      const parsed = parseJsonObject(content)
-      if (!parsed) {
-        console.warn(`  no JSON in synonym response: ${content.slice(0, 200)}`)
-        continue
-      }
-      for (const w of batch) {
-        const syns = cleanSynonyms(w, lookupParsed(parsed, w))
-        if (syns.length) cache[w] = syns
-      }
-    } catch (err) {
-      console.warn(`  synonym batch failed: ${err}`)
-    }
-    saveSynonymCache(lang, cache)
-    console.log(`  ${lang} synonyms ${Math.min(i + BATCH, missing.length)}/${missing.length}`)
-  }
-}
-
 function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution: string[] } {
   const level = cefr.toUpperCase()
   if (lang === 'en' && cefr === 'b2') {
@@ -801,7 +750,9 @@ async function main() {
     }
     await generateGlosses(lang, [...needGloss], glossCache)
     saveGlossCache(lang, glossCache)
-    await generateSynonyms(lang, [...needSyn], synCache)
+    await generateSynonyms(lang, [...needSyn], synCache, DENY, (cache) =>
+      saveSynonymCache(lang, cache),
+    )
     saveSynonymCache(lang, synCache)
 
     for (const cefr of levels) {

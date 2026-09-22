@@ -23,7 +23,6 @@ jobs:
           bun-version: '1.4.2'
       - run: bun install --frozen-lockfile
       - run: bun run packs:check
-      - run: bun run build
       - name: Hunspell verdict cache is committed
         run: |
           if ! git diff --exit-code -- scripts/data/hunspell-verdicts.json || [ -n "$(git status --porcelain -- scripts/data/hunspell-verdicts.json)" ]; then
@@ -31,4 +30,5 @@ jobs:
             git status --porcelain -- scripts/data/hunspell-verdicts.json
             exit 1
           fi
+      - run: bun run build
       - run: bun test

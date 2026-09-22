@@ -13,6 +13,7 @@ import {
   checkLemmaFloor,
   checkPackLicense,
   checkSynonymCoverage,
+  failClosedOnHunspellMiss,
   exclusiveConflicts,
   lemmaFloor,
   validatePack,
@@ -111,23 +112,33 @@ if (files.length === 0) {
 }
 
 let failed = false
+let cacheMissInCi = false
 try {
   try {
     failed = await checkAll(files)
   } catch (e) {
     if (!(e instanceof MembershipDictsNeeded)) throw e
-    console.error(
-      'packs:check: Hunspell verdict cache miss — loading dictionaries',
-    )
-    await ensureDicts()
-    failed = await checkAll(files)
+    if (failClosedOnHunspellMiss()) {
+      cacheMissInCi = true
+      console.error(
+        'packs:check: Hunspell verdict cache miss. Run bun run packs:check locally and commit scripts/data/hunspell-verdicts.json',
+      )
+    } else {
+      console.error(
+        'packs:check: Hunspell verdict cache miss — loading dictionaries',
+      )
+      await ensureDicts()
+      failed = await checkAll(files)
+    }
   }
 } finally {
-  if (writeMembershipCache()) {
+  if (!cacheMissInCi && writeMembershipCache()) {
     console.error(
       '::warning::packs:check rewrote scripts/data/hunspell-verdicts.json — commit it so the next run skips Hunspell',
     )
   }
 }
+
+if (cacheMissInCi) process.exit(1)
 
 if (failed) process.exit(1)

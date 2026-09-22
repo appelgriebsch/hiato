@@ -10,10 +10,9 @@ export async function onRequest({
   next: () => Promise<Response>
 }): Promise<Response> {
   const res = await next()
+  if (res.status === 304) return res
   const ct = res.headers.get('content-type') ?? ''
-  if (res.ok && !ct.includes('text/html')) {
-    return res
-  }
+  if (res.ok && ct.includes('application/json')) return res
   return new Response('Not Found', {
     status: 404,
     headers: {
