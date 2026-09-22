@@ -24,7 +24,10 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T
 }
 
-export type HealthResponse = { ok: boolean }
+export type HealthResponse = {
+  ok: boolean
+  stage?: 'production' | 'preview'
+}
 
 export function getHealth(): Promise<HealthResponse> {
   return request<HealthResponse>('/api/health')
