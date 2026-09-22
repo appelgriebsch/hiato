@@ -24,8 +24,26 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T
 }
 
-export type HealthResponse = { ok: boolean }
+export type HealthStage = 'production' | 'staging'
 
-export function getHealth(): Promise<HealthResponse> {
-  return request<HealthResponse>('/api/health')
+export type HealthResponse = {
+  ok: true
+  stage: HealthStage
+}
+
+function isHealthResponse(value: unknown): value is HealthResponse {
+  if (typeof value !== 'object' || value === null) return false
+  const body = value as { ok?: unknown; stage?: unknown }
+  return (
+    body.ok === true &&
+    (body.stage === 'production' || body.stage === 'staging')
+  )
+}
+
+export async function getHealth(): Promise<HealthResponse> {
+  const body: unknown = await request<unknown>('/api/health')
+  if (!isHealthResponse(body)) {
+    throw new ApiError('Health response missing stage', 200)
+  }
+  return body
 }

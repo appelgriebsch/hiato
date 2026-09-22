@@ -35,14 +35,49 @@ Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revali
 
 ## Headers
 
-`public/_headers` ships with the build:
+`public/_headers` ships with the build. Tests in `src/deploy/harden.test.ts` lock the rules.
+
+Cache:
 
 - no-cache for `/`, `/index.html`, `sw.js`, `workbox-*.js`, `manifest.webmanifest`
+- `public, max-age=0, must-revalidate` for `/packs/*`
 - immutable long-cache for `/assets/*`
+
+Security on `/*` (more specific cache rules still win for `Cache-Control`):
+
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `X-Frame-Options: DENY`
+- `Permissions-Policy` with camera, microphone, geolocation, and payment disabled
+- `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+- `Content-Security-Policy` locked to `'self'` (same-origin scripts, styles, fonts, workers; `frame-ancestors 'none'`; no `unsafe-inline` or `unsafe-eval`)
+
+## Bindings
+
+`wrangler.toml` is the Pages Functions binding source (ADR 0021). Top-level `[vars]` are production. `[env.preview.vars]` must override them. Pages only has Production and Preview environments; the preview env's `HIATO_STAGE` value is `staging`.
+
+| Binding | Production | Preview |
+| --- | --- | --- |
+| `HIATO_STAGE` | `production` | `staging` |
+
+Those two values are not equal. Do not run `bunx wrangler` inside this checkout; it rewrites `package.json` and `bun.lock`.
 
 ## Health stub
 
-`functions/api/health.ts` → `GET /api/health` → `200 { "ok": true }`
+`functions/api/health.ts` → `GET /api/health`
+
+- `200 { "ok": true, "stage": "production" | "staging" }` when `HIATO_STAGE` is that environment's binding
+- `503 { "ok": false }` when the binding is missing or any other value
+
+## Rollback (`hiato-production`)
+
+Name: `hiato-production`. Project: `hiato`.
+
+Cloudflare Pages rolls production back only to an earlier successful production deployment. Preview deployments are not valid rollback targets. The target is the newest successful production deployment older than the one currently serving (`selectRollbackTarget` in `src/deploy/harden.ts`). A newer production deployment is not a target. If no deployment is marked current, there is no target.
+
+Dashboard: Pages project `hiato` → Deployments → previous successful production deployment → **Rollback to this deployment**.
+
+API: `POST /accounts/{account_id}/pages/projects/hiato/deployments/{deployment_id}/rollback`
 
 ## Pack URLs
 

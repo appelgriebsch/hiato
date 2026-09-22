@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { socialImageOrigin } from './src/deploy/harden.js'
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 
@@ -11,6 +12,16 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    {
+      name: 'hiato-social-origin',
+      transformIndexHtml(html) {
+        const origin = socialImageOrigin({
+          pagesUrl: process.env.CF_PAGES_URL,
+          branch: process.env.CF_PAGES_BRANCH,
+        })
+        return html.replaceAll('%HIATO_ORIGIN%', origin)
+      },
+    },
     VitePWA({
       registerType: 'prompt',
       // Precache favicon, brand SVG, self-hosted fonts, and PNG icons
@@ -65,6 +76,8 @@ export default defineConfig({
         // Include woff2 so offline shell does not depend on CDN fonts
         // JSON packs are runtime-cached (ADR 0006), not precached.
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,txt}'],
+        // Crawlers fetch this; the installed PWA does not need it offline.
+        globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', '**/og-banner.png'],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/^\/api\//, /^\/packs\//],
         runtimeCaching: [

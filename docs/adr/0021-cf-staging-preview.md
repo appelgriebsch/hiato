@@ -8,8 +8,9 @@
 Need staging without heavy dual-project ops.
 
 ## Decision
-One Cloudflare Pages project. Branch preview deployments act as staging. Worker/Pages Functions preview bindings must not equal production bindings.
+One Cloudflare Pages project. Branch preview deployments act as staging. Worker/Pages Functions preview bindings must not equal production bindings. `HIATO_STAGE` on those deployments is `staging` (not the string `preview`) so health matches earlier Cloudflare deploys. Wrangler still uses `[env.preview]` because that is the only non-production Pages environment.
 
 ## Consequences
 - No separate `hiato-staging` project in v1.
 - Staging is done on branches (Andreas clarification).
+- `/api/health` reports `{ "ok": true, "stage": "staging" }` on preview deployments.

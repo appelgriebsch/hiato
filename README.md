@@ -42,7 +42,9 @@ See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 
 - **Build command:** `bun install --frozen-lockfile && bun run packs:check && bun run build`
 - **Output directory:** `dist`
-- **Env (Production + Preview):** `BUN_VERSION=1.4.2`, `SKIP_DEPENDENCY_INSTALL=true`
+- **Env (Production + Preview):** `BUN_VERSION=1.4.2`, `SKIP_DEPENDENCY_INSTALL=true` (same pin in both)
+- **Bindings:** `HIATO_STAGE=production` on production, `HIATO_STAGE=staging` on preview (`wrangler.toml`)
+- **Rollback:** `hiato-production` — previous successful production deployment only
 - Commit **`bun.lock`** only; no npm/pnpm lockfiles
 
 ## License notes
