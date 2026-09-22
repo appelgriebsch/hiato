@@ -8,11 +8,21 @@ export function Layout({
   footer?: ReactNode
 }) {
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-md flex-col bg-cream px-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
-      <div className="flex flex-1 flex-col py-4">
+    <div
+      className={[
+        'mx-auto flex h-dvh w-full max-w-md flex-col bg-cream px-4',
+        'pt-[env(safe-area-inset-top)]',
+        footer ? '' : 'pb-[env(safe-area-inset-bottom)]',
+      ].join(' ')}
+    >
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto py-4">
         {children}
       </div>
-      {footer}
+      {footer ? (
+        <div className="sticky bottom-0 z-10 shrink-0 border-t border-line bg-cream pb-[env(safe-area-inset-bottom)]">
+          {footer}
+        </div>
+      ) : null}
     </div>
   )
 }

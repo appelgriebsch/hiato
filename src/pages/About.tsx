@@ -4,6 +4,34 @@ import { Card } from '@/components/ui/card'
 import { PACK_LICENSES } from '@/packs/licenses'
 import { LANG_CODES } from '@/packs/labels'
 
+const CC0_DEED = 'https://creativecommons.org/publicdomain/zero/1.0/'
+const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
+
+function licenseDeedHref(license: string): string | null {
+  if (/CC-BY-SA/i.test(license)) return CC_BY_SA_DEED
+  if (/CC0/i.test(license)) return CC0_DEED
+  return null
+}
+
+function LicenseLine({ license }: { license: string }) {
+  const href = licenseDeedHref(license)
+  if (!href) {
+    return <p className="mt-1.5 text-xs font-medium text-accent">{license}</p>
+  }
+  return (
+    <p className="mt-1.5 text-xs font-medium text-accent">
+      <a
+        className="underline-offset-2 hover:underline"
+        href={href}
+        rel="noreferrer"
+        target="_blank"
+      >
+        {license}
+      </a>
+    </p>
+  )
+}
+
 export function About() {
   const nav = useNavigate()
 
@@ -24,12 +52,14 @@ export function About() {
 
       <h1 className="text-xl font-semibold text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
-        Word packs ship with per-source attribution. Portuguese lemmas are
-        curated from Wiktionary-derived / OpenSubtitles frequency lists
-        (CC-BY-SA). Lemma selection for EN/DE/ES/PT also draws on
-        hermitdave/FrequencyWords (MIT; OpenSubtitles-based) and, where used,
-        wordhoard POS/CEFR samples — curated learner lists, not verbatim dumps.
-        Gloss and synonym copy is original to Hiato.
+        Word packs ship with per-source attribution. English A1–B1 lemmas are
+        curated (CC0). B2 is selected from the CEFR-J Vocabulary Profile
+        (Tono Lab); C1–C2 from the Octanove Vocabulary Profile (CC-BY-SA).
+        Portuguese
+        is CC-BY-SA at every level. DE/ES/PT C-levels are frequency-rank bands,
+        not Goethe, Cervantes, or CAPLE lists. Lemma selection also draws on
+        hermitdave/FrequencyWords (MIT; OpenSubtitles-based). Gloss and synonym
+        copy is original to Hiato and is always in the pack language.
       </p>
 
       {PACK_LICENSES.map((info) => (
@@ -38,12 +68,17 @@ export function About() {
             {LANG_CODES[info.lang]}
           </div>
           <h2 className="text-[15px] font-semibold text-ink">{info.title}</h2>
-          <p className="mt-1.5 text-xs font-medium text-accent">{info.license}</p>
-          <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
-            {info.attribution.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
+          {info.bands.map((band) => (
+            <div key={band.levels} className="mt-3">
+              <p className="text-xs font-semibold text-ink">{band.levels}</p>
+              <LicenseLine license={band.license} />
+              <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
+                {band.notes.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </Card>
       ))}
 

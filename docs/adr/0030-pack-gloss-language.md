@@ -15,3 +15,4 @@ Learner packs are L2 hangman: the puzzle word is German in a DE pack, Portuguese
 
 - Play hints under the grid (ADR 0023) show L2 explanations because the JSON already is L2.
 - Gloss cache entries that are English for a non-EN lemma are treated as missing and regenerated.
+- B2–C2 DE/ES/PT glosses are regenerated in this change; A1–B1 English leaks are repaired in place without rewriting lemma lists.

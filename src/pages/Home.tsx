@@ -50,9 +50,9 @@ export function Home() {
 
   // Warm selected-language packs (all CEFR) into SW + localStorage (ADR 0006).
   useEffect(() => {
-    if (!selectedLang) return
-    void precacheSelectedLanguage(selectedLang).catch(() => {})
-  }, [selectedLang])
+    if (!selectedLang || !selectedCefr) return
+    void precacheSelectedLanguage(selectedLang, selectedCefr).catch(() => {})
+  }, [selectedLang, selectedCefr])
 
   useEffect(() => {
     if (!selectedLang || !selectedCefr) return
@@ -99,7 +99,9 @@ export function Home() {
           {prefs
             ? dailyDone
               ? 'Today’s daily is done. Come back after local midnight — or stretch with practice (practice does not affect your streak).'
-              : 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
+              : selectedCefr === 'a1' || selectedCefr === 'a2'
+                ? 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
+                : 'Guess today’s word with six lives and learner hints. Offline after the pack is cached.'
             : 'Pick a language and CEFR level, then play today’s word. Packs for your language stay cached for offline play.'}
         </p>
         {prefs ? (

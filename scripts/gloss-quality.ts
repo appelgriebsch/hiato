@@ -9,7 +9,7 @@ export function isTemplateGloss(gloss: string | undefined | null): boolean {
 
 export type GlossLang = 'en' | 'de' | 'es' | 'pt'
 
-/** English infinitive / article openers. */
+/** English infinitive / definite-article openers. */
 const EN_OPENER = /^(to|the)\s/i
 /** English frames that do not appear as these tokens in DE/ES/PT learner copy. */
 const EN_FRAMES =
@@ -22,10 +22,16 @@ const EN_ONLY =
  */
 const EN_A_FRAME =
   /^a\s+[\p{L}'-]+\s+(of|or|that|who|which|used|from|for|with|when|where)\b/iu
-/** Lowercase English "an …" — not German "An der/einem …". */
-const EN_AN_FRAME = /^an\s+(?!der\b|die\b|das\b|dem\b|den\b|einem\b|einer\b|ein\b)/i
+/**
+ * English article "an" before a vowel sound ("an apple").
+ * Not German "an diesen …" (consonant) or "An einem/einer …".
+ */
+const EN_AN_FRAME = /^an\s+(?!ein(?:em|er|en|es)?\b)[aeiou]/i
 
-/** True when a gloss is shaped like an English learner definition (ADR 0030). */
+/**
+ * True when a gloss is shaped like an English learner definition (ADR 0030).
+ * Pass `lang` so DE can treat a leading "a " as English (German does not).
+ */
 export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
   const g = gloss.normalize('NFC').trim()
   if (!g) return false
@@ -33,9 +39,8 @@ export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
   if (EN_FRAMES.test(g)) return true
   if (EN_ONLY.test(g)) return true
   if (EN_A_FRAME.test(g)) return true
-  // English "an …" — not German preposition "an …"
+  // Skip German preposition "an …"; English "an apple" still matches for other langs.
   if (lang !== 'de' && EN_AN_FRAME.test(g)) return true
-  // German has no article "a"; a leading "a " on a DE gloss is English.
   if (lang === 'de' && /^a\s/i.test(g)) return true
   return false
 }

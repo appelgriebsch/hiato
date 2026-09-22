@@ -63,13 +63,17 @@ export default defineConfig({
       },
       workbox: {
         // Include woff2 so offline shell does not depend on CDN fonts
+        // JSON packs are runtime-cached (ADR 0006), not precached.
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,txt}'],
         navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/^\/api\//],
+        navigateFallbackDenylist: [/^\/api\//, /^\/packs\//],
         runtimeCaching: [
           {
+            // Literal must match PACK_ASSET_PATH_RE / PACK_CEFR_LEVELS (Workbox serializes this fn).
             urlPattern: ({ url }) =>
-              /\/packs\/(en|de|es|pt)\/(a1|a2|b1)\.json$/.test(url.pathname),
+              /\/packs\/(en|de|es|pt)\/(a1|a2|b1|b2|c1|c2)\.json$/.test(
+                url.pathname,
+              ),
             // NetworkFirst so load.ts version checks see fresh packs under SW.
             // Cache fallback if offline or the network exceeds ~3s.
             handler: 'NetworkFirst',
@@ -77,12 +81,20 @@ export default defineConfig({
               cacheName: 'hiato-packs', // keep in sync with PACK_SW_CACHE
               networkTimeoutSeconds: 3,
               expiration: {
-                maxEntries: 12,
+                // 4 langs × 6 CEFR; LRU is best-effort (not a hard cap of 6).
+                maxEntries: 24,
                 maxAgeSeconds: 60 * 60 * 24 * 365,
               },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
+              plugins: [
+                {
+                  cacheWillUpdate: async ({ response }) => {
+                    if (!response || response.status !== 200) return null
+                    const ct = response.headers.get('content-type') ?? ''
+                    if (!ct.includes('application/json')) return null
+                    return response
+                  },
+                },
+              ],
             },
           },
         ],

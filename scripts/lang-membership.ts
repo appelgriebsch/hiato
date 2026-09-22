@@ -2,9 +2,19 @@
  * Build-time Hunspell-like language membership for pack lemmas.
  * Loads dictionary-* only from ensureDicts() — never at import time so bun:test
  * can use tiny fixtures without pulling GPL/LGPL dicts into the test graph.
+ *
+ * Packs check keeps a committed verdict cache (scripts/data/hunspell-verdicts.json)
+ * so CI does not construct nspell when every lookup is already known. The stamp
+ * covers the bun.lock integrity of nspell and the dictionary packages, the
+ * aff/dic bytes, this file, and lemma-denylist.ts (nfcUpper). Kinship and the
+ * loanword allowlist are applied before the cache and are not stored in it.
+ * Editing a stamped input invalidates the file; the next packs:check reloads
+ * Hunspell once and rewrites it.
  */
-import { readFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { readFileSync, renameSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import nspell from 'nspell'
 import { nfcUpper } from './lemma-denylist'
 
@@ -16,6 +26,24 @@ type SpellMap = Record<MembershipLang, SpellChecker[]>
 
 const ALLOW_FILE = path.join(import.meta.dir, 'data', 'loanword-allowlist.txt')
 const TESTDATA = path.join(import.meta.dir, 'testdata')
+const VERDICT_CACHE = path.join(import.meta.dir, 'data', 'hunspell-verdicts.json')
+const LOCKFILE = path.join(import.meta.dir, '..', 'bun.lock')
+const LFS_POINTER = 'version https://git-lfs.github.com/spec/v1'
+const LOCK_PACKAGES = [
+  'dictionary-de',
+  'dictionary-en',
+  'dictionary-es',
+  'dictionary-pt',
+  'dictionary-pt-pt',
+  'nspell',
+] as const
+const DICT_PACKAGES = [
+  'dictionary-de',
+  'dictionary-en',
+  'dictionary-es',
+  'dictionary-pt',
+  'dictionary-pt-pt',
+] as const
 
 /** English-only kinship tokens Hunspell still accepts in DE/ES/PT. Not FOR/COME/NO/ME/PARA. */
 const ENGLISH_KINSHIP = new Set(
@@ -30,6 +58,158 @@ type AllowLists = {
 let allowCache: AllowLists | null = null
 let production: SpellMap | null = null
 let fixtures: SpellMap | null = null
+let entries: Map<string, boolean> | null = null
+let activeStamp = ''
+let dirty = false
+let persistCache = false
+
+/** Thrown when a verdict is missing and the Hunspell dictionaries are not loaded. */
+export class MembershipDictsNeeded extends Error {
+  constructor() {
+    super('membership cache miss; Hunspell dictionaries are not loaded')
+    this.name = 'MembershipDictsNeeded'
+  }
+}
+
+export function membershipCacheKey(lang: MembershipLang, word: string): string {
+  return `${lang}\0${word.normalize('NFC')}`
+}
+
+function lockIntegrityLines(): string {
+  const text = readFileSync(LOCKFILE, 'utf8').replace(/\r\n/g, '\n')
+  const lock = Bun.JSONC.parse(text) as {
+    packages?: Record<string, unknown>
+  }
+  const packages = lock.packages ?? {}
+  return LOCK_PACKAGES.map((name) => {
+    const entry = packages[name]
+    if (!Array.isArray(entry)) {
+      throw new Error(`bun.lock has no package pin for ${name}`)
+    }
+    const spec = entry.find((part) => typeof part === 'string' && part.startsWith(`${name}@`))
+    const integrity = entry.find(
+      (part) => typeof part === 'string' && part.startsWith('sha512-'),
+    )
+    if (typeof spec !== 'string' || typeof integrity !== 'string') {
+      throw new Error(`bun.lock pin for ${name} has no version or sha512`)
+    }
+    return `${spec} ${integrity}`
+  }).join('\n')
+}
+
+function packageDir(pkg: string): string {
+  const resolved = import.meta.resolve(pkg)
+  const file = resolved.startsWith('file:') ? fileURLToPath(resolved) : resolved
+  return path.dirname(file)
+}
+
+function hashText(h: ReturnType<typeof createHash>, file: string): void {
+  h.update(readFileSync(file, 'utf8').replace(/\r\n/g, '\n'))
+  h.update('\0')
+}
+
+/** Inputs that can change an isWordOfLang boolean, aside from the word itself. */
+function membershipStamp(): string {
+  const h = createHash('sha256')
+  h.update('hunspell-verdicts-schema-1\n')
+  h.update(lockIntegrityLines())
+  h.update('\0')
+  for (const pkg of DICT_PACKAGES) {
+    const root = packageDir(pkg)
+    h.update(readFileSync(path.join(root, 'index.aff')))
+    h.update('\0')
+    h.update(readFileSync(path.join(root, 'index.dic')))
+    h.update('\0')
+  }
+  hashText(h, path.join(import.meta.dir, 'lang-membership.ts'))
+  hashText(h, path.join(import.meta.dir, 'lemma-denylist.ts'))
+  return h.digest('hex')
+}
+
+/** Load the committed verdict cache. A stamp mismatch discards every entry. */
+export function loadMembershipCache(): void {
+  persistCache = true
+  activeStamp = membershipStamp()
+  entries = new Map()
+  dirty = false
+  let text: string
+  try {
+    text = readFileSync(VERDICT_CACHE, 'utf8')
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return
+    throw e
+  }
+  if (text.startsWith(LFS_POINTER)) {
+    throw new Error(
+      `${VERDICT_CACHE} is a Git LFS pointer. Commit the verdict JSON as a normal blob.`,
+    )
+  }
+  let parsed: { schema?: unknown; stamp?: unknown; verdicts?: unknown }
+  try {
+    parsed = JSON.parse(text) as {
+      schema?: unknown
+      stamp?: unknown
+      verdicts?: unknown
+    }
+  } catch {
+    console.error(
+      '::warning::hunspell-verdicts.json is unreadable — ignoring it',
+    )
+    return
+  }
+  if (parsed.schema !== 1 || parsed.stamp !== activeStamp) {
+    console.error(
+      '::warning::hunspell verdict cache stamp mismatch — dictionaries will be loaded',
+    )
+    return
+  }
+  if (!parsed.verdicts || typeof parsed.verdicts !== 'object') {
+    throw new Error(`${VERDICT_CACHE}: verdicts must be an object`)
+  }
+  for (const [key, value] of Object.entries(
+    parsed.verdicts as Record<string, unknown>,
+  )) {
+    if (typeof value !== 'boolean') {
+      throw new Error(
+        `${VERDICT_CACHE}: verdict for ${JSON.stringify(key)} is not a boolean`,
+      )
+    }
+    entries.set(key, value)
+  }
+}
+
+/** Write newly learned verdicts. A full cache hit does not touch the file. */
+export function writeMembershipCache(): boolean {
+  if (!persistCache || !entries || !dirty) return false
+  const verdicts: Record<string, boolean> = {}
+  for (const key of [...entries.keys()].sort()) {
+    verdicts[key] = entries.get(key) as boolean
+  }
+  const body = `${JSON.stringify({ schema: 1, stamp: activeStamp, verdicts }, null, 2)}\n`
+  let prev = ''
+  try {
+    prev = readFileSync(VERDICT_CACHE, 'utf8')
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e
+  }
+  if (prev === body) {
+    dirty = false
+    return false
+  }
+  const tmp = `${VERDICT_CACHE}.${process.pid}.tmp`
+  writeFileSync(tmp, body)
+  renameSync(tmp, VERDICT_CACHE)
+  dirty = false
+  return true
+}
+
+/** In-memory verdicts for tests. Never persisted. */
+export function installMembershipCacheForTests(map: Map<string, boolean>): void {
+  entries = map
+  dirty = false
+  persistCache = false
+  activeStamp = 'test'
+}
 
 const LANG_TAG = new Set<MembershipLang>(['en', 'de', 'es', 'pt'])
 
@@ -125,6 +305,15 @@ function deCompoundOk(spell: SpellChecker, word: string): boolean {
   return false
 }
 
+export function dictsReady(): boolean {
+  return !!(fixtures || production)
+}
+
+/** True after loadMembershipCache(). A miss then asks the caller to load dictionaries. */
+export function membershipCacheArmed(): boolean {
+  return entries !== null
+}
+
 function spellers(): SpellMap {
   const map = fixtures ?? production
   if (!map) {
@@ -175,10 +364,22 @@ export async function ensureDicts(): Promise<void> {
   production = await loadProduction()
 }
 
+function spellLookup(lang: MembershipLang, word: string): boolean {
+  for (const spell of spellers()[lang]) {
+    if (anyCorrect(spell, word, lang)) return true
+    if (lang === 'de' && deCompoundOk(spell, word)) return true
+  }
+  return false
+}
+
 /** Clear process-global spellers so bun:test files cannot leak fixture dicts. */
 export function resetDicts(): void {
   fixtures = null
   production = null
+  entries = null
+  activeStamp = ''
+  dirty = false
+  persistCache = false
 }
 
 export function isWordOfLang(lang: MembershipLang, word: string): boolean {
@@ -186,9 +387,21 @@ export function isWordOfLang(lang: MembershipLang, word: string): boolean {
   if (!w) return false
   if (lang !== 'en' && ENGLISH_KINSHIP.has(w)) return false
   if (isAllowlistedLemma(lang, w)) return true
-  for (const spell of spellers()[lang]) {
-    if (anyCorrect(spell, word, lang)) return true
-    if (lang === 'de' && deCompoundOk(spell, word)) return true
+  // Fixture dicts are the test oracle. Never read or fill the production cache.
+  if (fixtures) return spellLookup(lang, word)
+
+  const key = membershipCacheKey(lang, word)
+  if (entries) {
+    const hit = entries.get(key)
+    if (hit !== undefined) return hit
+    // A miss is not a pass. The caller loads dictionaries and retries.
+    if (!production) throw new MembershipDictsNeeded()
   }
-  return false
+
+  const result = spellLookup(lang, word)
+  if (entries) {
+    entries.set(key, result)
+    dirty = true
+  }
+  return result
 }

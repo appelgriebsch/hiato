@@ -5,15 +5,21 @@ Word packs
 ----------
 Per-language licenses and attribution ship in each pack JSON
 (`public/packs/<lang>/<cefr>.json`) and on the in-app About page.
+License bands (ADR 0029):
 
-Portuguese lemmas are curated from Wiktionary-derived / OpenSubtitles
-frequency lists (CC-BY-SA-4.0 path, ADR 0009). Gloss and synonym copy is
-original to Hiato.
+  EN A1–B2 — CC0-1.0 / CEFR-J citation (Tono Lab). B2 lemmas are selected
+  from the CEFR-J Vocabulary Profile; not a verbatim dump.
+  EN C1–C2 — CC-BY-SA-4.0 Octanove Vocabulary Profile (olp-en-cefrj).
 
-Lemma selection for EN/DE/ES/PT also draws on openly licensed frequency
-resources: hermitdave/FrequencyWords (MIT; OpenSubtitles-based) and, where
-used, wordhoard POS/CEFR sample banding (dataset CC-BY-SA-4.0 — selection
-only; Hiato glosses remain original). Packs are curated learner lists, not
+  DE/ES A1–B1 — CC0-1.0 curated learner lemmas.
+  DE/ES B2–C2 — CC-BY-SA-4.0 wordhoard v0.1.0 full dataset; frequency-rank
+  bands, not Goethe or Instituto Cervantes lists.
+
+  PT A1–C2 — CC-BY-SA-4.0 (Wiktionary-derived / OpenSubtitles frequency,
+  ADR 0009). C-levels are frequency slices, not CAPLE.
+
+Gloss and synonym copy is original to Hiato. Frequency selection also draws
+on hermitdave/FrequencyWords (MIT). Packs are curated learner lists, not
 verbatim dumps of any proprietary wordlist (ADR 0026).
 
 Build-time spellcheck (not shipped)

@@ -31,7 +31,15 @@ yarn.lock
 # Bun
 .bun
 
+# Interrupted verdict-cache write (same directory as the JSON so rename stays atomic)
+scripts/data/*.tmp
+
 # Pack expansion downloads (fetched by expand-packs.ts)
 scripts/data/wordhoard-*.csv
 scripts/data/pt.txt
 scripts/data/cefrj-en.json
+scripts/data/cefrj-en-with-b2.json
+scripts/data/octanove*.csv
+scripts/data/wordhoard*.db
+scripts/data/wordhoard*.db.gz
+scripts/data/wordhoard*.zip

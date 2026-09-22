@@ -10,6 +10,8 @@ Do **not** rely on Cloudflare’s `bun.lock` autodetection. Pin Bun explicitly.
 | Build output directory | `dist` |
 | Root directory | `/` (repo root) |
 
+The build command lives in the Cloudflare Pages dashboard (it is not applied by merging this file). Edit **Production and Preview** on merge so both environments run `packs:check`. GitHub CI `build-test` also runs `packs:check`; a Pages-only rebuild would not. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
+
 ## Environment variables
 
 Set on **Production** and **Preview**:
@@ -41,3 +43,11 @@ Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revali
 ## Health stub
 
 `functions/api/health.ts` → `GET /api/health` → `200 { "ok": true }`
+
+## Pack URLs
+
+`functions/packs/[[path]].ts` is the **only** Pages guarantee that a missing `/packs/*` URL is **404** (not HTML). Cloudflare documents 404 rewrites in `_redirects` as unsupported; Functions skip `_redirects`, and the SPA rule `/* /index.html 200` would otherwise poison `hiato-packs`.
+
+Do not exclude `/packs/*` from Functions. Existing `/packs/{lang}/{cefr}.json` files are still static assets when present. The Workbox runtime cache also refuses non-JSON 200s (`cacheWillUpdate`).
+
+Assert on preview: `/packs/en/a1.json` → 200 JSON; a missing pack → 404 non-HTML.

@@ -138,7 +138,7 @@ async function completeJson(
 function batchPrompt(lang: SynLang, batch: string[]): string {
   return (
     `Language: ${LANG_NAME[lang]} (${lang}).\n` +
-    `For each lemma, give 1–3 close same-language learner synonyms (A1–B1).\n` +
+    `For each lemma, give 1–3 close same-language learner synonyms.\n` +
     `Rules: same language only (never a translation); never the lemma itself or a spelling of it; ` +
     `no NSFW; no letter-count fluff.\n` +
     `Use [] if there is no close synonym (unique referent: a specific fruit, weekday, number, ` +
@@ -180,7 +180,7 @@ export async function generateSynonyms(
     const parsed = await completeJson(
       key,
       0.2,
-      'You write A1–B1 same-language learner synonyms. Reply with a single JSON object only.',
+      'You write same-language learner synonyms. Reply with a single JSON object only.',
       batchPrompt(lang, batch),
     )
     if (parsed) applyParsed(lang, batch, parsed, cache, denylist)
@@ -197,7 +197,7 @@ export async function generateSynonyms(
       const batch = missing.slice(i, i + 20)
       const prompt =
         `Language: ${LANG_NAME[lang]} (${lang}).\n` +
-        `JSON object: UPPERCASE lemma → 1–3 close same-language A1–B1 synonyms, or [] if unique.\n` +
+        `JSON object: UPPERCASE lemma → 1–3 close same-language synonyms, or [] if unique.\n` +
         `Never the lemma; never a translation; no NSFW; no banana→fruit hypernyms.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       const parsed = await completeJson(

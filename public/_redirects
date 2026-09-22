@@ -1,2 +1,5 @@
-# SPA fallback for client routes (e.g. /play). /api/* is handled by Pages Functions first.
+# SPA fallback for client routes (e.g. /play). /api/* and /packs/* are handled
+# by Pages Functions first. Cloudflare does not support 404 *rewrites* here;
+# missing packs are 404 via functions/packs/[[path]].ts so Workbox cannot
+# cache index.html as pack JSON.
 /*    /index.html   200

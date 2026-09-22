@@ -5,17 +5,30 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: '1.4.2'
       - run: bun install --frozen-lockfile
+      - run: bun run packs:check
+      - name: Hunspell verdict cache is committed
+        run: |
+          if ! git diff --exit-code -- scripts/data/hunspell-verdicts.json || [ -n "$(git status --porcelain -- scripts/data/hunspell-verdicts.json)" ]; then
+            echo "hunspell-verdicts.json changed. Run bun run packs:check and commit scripts/data/hunspell-verdicts.json"
+            git status --porcelain -- scripts/data/hunspell-verdicts.json
+            exit 1
+          fi
       - run: bun run build
       - run: bun test
