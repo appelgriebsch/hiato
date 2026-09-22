@@ -79,7 +79,14 @@ export default defineConfig({
         // Crawlers fetch this; the installed PWA does not need it offline.
         globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', '**/og-banner.png'],
         navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/^\/api\//, /^\/packs\//],
+        // NavigationRoute would otherwise serve index.html for /og-banner.png
+        // (and other static files) when the tab is a document navigation.
+        navigateFallbackDenylist: [
+          /^\/api\//,
+          /^\/packs\//,
+          /^\/og-banner\.png/,
+          /\/[^/?]+\.[^/]+$/,
+        ],
         runtimeCaching: [
           {
             // Literal must match PACK_ASSET_PATH_RE / PACK_CEFR_LEVELS (Workbox serializes this fn).

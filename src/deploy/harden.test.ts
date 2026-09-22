@@ -37,6 +37,9 @@ describe('cache and security headers', () => {
     expect(headerRule(rules, '/assets/*').headers['cache-control']).toBe(
       'public, max-age=31536000, immutable',
     )
+    expect(headerRule(rules, '/og-banner.png').headers['cache-control']).toBe(
+      'public, max-age=86400',
+    )
 
     const security = headerRule(rules, '/*').headers
     expect(security['x-content-type-options']).toBe('nosniff')
@@ -125,14 +128,19 @@ describe('social banner', () => {
   test('index.html advertises a large summary card and a 1200×630 banner', async () => {
     const html = await readRepo('index.html')
     expect(html).toContain('name="twitter:card" content="summary_large_image"')
-    expect(html).toContain(`property="og:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}"`)
-    expect(html).toContain(`name="twitter:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}"`)
+    expect(html).toContain(
+      `property="og:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}?v=1"`,
+    )
+    expect(html).toContain(
+      `name="twitter:image" content="%HIATO_ORIGIN%${SOCIAL_BANNER_PATH}?v=1"`,
+    )
     expect(html).toContain('property="og:image:width" content="1200"')
     expect(html).toContain('property="og:image:height" content="630"')
 
     const cfg = await readRepo('vite.config.ts')
     expect(cfg).toContain('socialImageOrigin')
     expect(cfg).toContain("'**/og-banner.png'")
+    expect(cfg).toContain('/^\\/og-banner\\.png/')
 
     const bytes = new Uint8Array(
       await Bun.file(new URL(`../../public${SOCIAL_BANNER_PATH}`, import.meta.url)).arrayBuffer(),
