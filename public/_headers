@@ -28,6 +28,10 @@
 /packs/*
   Cache-Control: public, max-age=0, must-revalidate
 
+# Social banner: crawlers fetch this as a document navigation in some clients
+/og-banner.png
+  Cache-Control: public, max-age=86400
+
 # Hashed Vite assets: immutable long-cache
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
