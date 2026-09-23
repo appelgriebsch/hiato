@@ -92,7 +92,7 @@ export function Share() {
         center={<span className="text-sm font-semibold tracking-tight">Share card</span>}
       />
 
-      <p className="text-caption mb-4 text-center tracking-wide">
+      <p className="mb-4 text-center text-xs leading-[1.4] tracking-wide text-ink-muted">
         Answer never appears on the card. The saved image stays cream.
       </p>
 

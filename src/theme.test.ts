@@ -51,7 +51,7 @@ const LIGHT: Record<string, string> = {
   accent: '#3d6b55',
   'accent-fg': '#3d6b55',
   'accent-soft': '#eef5f0',
-  'accent-mid': '#5a8f72',
+  'accent-mid': '#4c7f64',
   danger: '#b54a3f',
   'danger-soft': '#f8ecea',
   helped: '#d4e5db',
@@ -98,6 +98,14 @@ const UI_CHROME: Array<[string, string]> = [
   ['accent-mid', 'raised'],
 ]
 
+/** Borders and seed ink. accent stays the sage fill; accent-fg is the stroke. */
+const UI_EDGES: Array<[string, string]> = [
+  ['accent-fg', 'cream'],
+  ['accent-fg', 'raised'],
+  ['accent-fg', 'accent-soft'],
+  ['accent-fg', 'helped'],
+]
+
 describe('OS appearance tokens', () => {
   test('contrast helper matches black on white', () => {
     expect(contrastRatio('#000000', '#ffffff')).toBeCloseTo(21, 5)
@@ -140,7 +148,11 @@ describe('OS appearance tokens', () => {
         )
       }
       expect(contrastRatio('#ffffff', palette.accent!)).toBeGreaterThanOrEqual(4.5)
+      expect(contrastRatio('#ffffff', palette['accent-mid']!)).toBeGreaterThanOrEqual(4.5)
       for (const [foreground, background] of UI_CHROME) {
+        expect(contrastRatio(palette[foreground]!, palette[background]!)).toBeGreaterThanOrEqual(3)
+      }
+      for (const [foreground, background] of UI_EDGES) {
         expect(contrastRatio(palette[foreground]!, palette[background]!)).toBeGreaterThanOrEqual(3)
       }
     }

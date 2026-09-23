@@ -40,7 +40,7 @@
   --color-accent: #3d6b55;
   --color-accent-fg: #3d6b55;
   --color-accent-soft: #eef5f0;
-  --color-accent-mid: #5a8f72;
+  --color-accent-mid: #4c7f64;
   --color-danger: #b54a3f;
   --color-danger-soft: #f8ecea;
   --color-helped: #d4e5db;
@@ -81,6 +81,11 @@ body {
 button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+/* Spent keys stay disabled, but the letter stays opaque. The fill is dimmed instead. */
+button.key-settled:disabled {
+  opacity: 1;
 }
 
 /* ─── Type scale (tighten hierarchy) ─── */

@@ -139,7 +139,7 @@ export function Language() {
               'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
-                ? 'border-accent bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg'
                 : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
@@ -186,7 +186,7 @@ export function Language() {
               'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
-                ? 'border-accent bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg'
                 : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >

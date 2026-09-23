@@ -36,8 +36,9 @@ export function Keyboard({
                 onClick={() => onKey(key)}
                 className={[
                   'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
+                  wrong || correct ? 'key-settled' : '',
                   wrong
-                    ? 'bg-wrong text-ink opacity-70'
+                    ? 'bg-wrong/70 text-ink'
                     : correct
                       ? 'bg-accent text-white'
                       : 'bg-raised border border-line text-ink hover:bg-cream-dark',
