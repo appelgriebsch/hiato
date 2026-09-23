@@ -175,6 +175,43 @@ describe('Bun pin', () => {
   })
 })
 
+describe('OS appearance chrome', () => {
+  test('dual theme-color, color-scheme, and no inline style or script', async () => {
+    const html = await readRepo('index.html')
+    const darkTheme = html.indexOf(
+      'name="theme-color" media="(prefers-color-scheme: dark)" content="#1c1b19"',
+    )
+    const creamTheme = html.indexOf('name="theme-color" content="#f7f6f3"')
+    expect(darkTheme).toBeGreaterThan(-1)
+    expect(creamTheme).toBeGreaterThan(darkTheme)
+    expect(html.match(/name="theme-color"/g)?.length).toBe(2)
+    expect(html).toContain('name="color-scheme" content="light dark"')
+    expect(html).toContain('name="apple-mobile-web-app-status-bar-style" content="default"')
+    expect(html).not.toMatch(/<style\b/i)
+
+    const scripts = [
+      ...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi),
+    ]
+    expect(scripts.length).toBeGreaterThan(0)
+    for (const [, attrs, body] of scripts) {
+      expect(attrs).toMatch(/\bsrc=/)
+      expect(body.trim()).toBe('')
+    }
+
+    const csp =
+      headerRule(parseHeadersFile(await readRepo('public/_headers')), '/*').headers[
+        'content-security-policy'
+      ] ?? ''
+    expect(csp).not.toContain('unsafe-inline')
+
+    const cfg = await readRepo('vite.config.ts')
+    expect(cfg).toContain("theme_color: '#f7f6f3'")
+    expect(cfg).toContain("background_color: '#f7f6f3'")
+    expect(cfg).not.toContain('color_scheme_dark')
+    expect(cfg).not.toContain('pwaAssets')
+  })
+})
+
 describe('named rollback hiato-production', () => {
   test('docs name the project path and exclude preview deployments', async () => {
     const doc = await readRepo('docs/cloudflare-pages.md')

@@ -61,4 +61,12 @@ describe('prefs (localStorage)', () => {
     localStorage.setItem('hiato.prefs', '{not json')
     expect(getPrefs()).toBeNull()
   })
+
+  test('ignores a theme key and returns only lang and cefr', () => {
+    localStorage.setItem(
+      'hiato.prefs',
+      JSON.stringify({ lang: 'de', cefr: 'b2', theme: 'dark' }),
+    )
+    expect(getPrefs()).toEqual({ lang: 'de', cefr: 'b2' })
+  })
 })
