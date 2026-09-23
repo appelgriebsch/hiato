@@ -156,7 +156,7 @@ export function LivesMetaphorIcon({
 export function livesAccentClass(metaphor: LivesMetaphor): string {
   switch (metaphor) {
     case 'seeds':
-      return 'text-accent'
+      return 'text-accent-fg'
     case 'stars':
       return 'text-accent-mid'
     case 'ink':
@@ -164,7 +164,7 @@ export function livesAccentClass(metaphor: LivesMetaphor): string {
     case 'chalk':
       return 'text-ink-muted'
     case 'tiles':
-      return 'text-accent'
+      return 'text-accent-fg'
     case 'hearts':
     default:
       return 'text-danger'

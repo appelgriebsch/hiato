@@ -53,7 +53,7 @@ Source: brainstorm grilling for OS-dependent light/dark appearance.
 
 ## Dark hex (warm inverse)
 
-From the UI consult. Light values stay as in `src/index.css` `@theme`.
+From the UI consult. Light values stay as in `src/index.css` `@theme`, except `--color-accent-mid`, which is `#4c7f64` so white primary-hover labels clear 4.5:1.
 
 | Role | Token | Dark |
 | --- | --- | --- |
@@ -67,7 +67,7 @@ From the UI consult. Light values stay as in `src/index.css` `@theme`.
 | accent fill | `--color-accent` | `#3d6b55` (unchanged) |
 | accent text | `--color-accent-fg` | `#8fbfa3` (light: `#3d6b55`) |
 | accent-soft | `--color-accent-soft` | `#24352c` |
-| accent-mid | `--color-accent-mid` | `#4e7d64` |
+| accent-mid | `--color-accent-mid` | `#4e7d64` (light: `#4c7f64`) |
 | helped | `--color-helped` | `#2f4538` |
 | danger | `--color-danger` | `#e09288` |
 | danger-soft | `--color-danger-soft` | `#3a2a28` |

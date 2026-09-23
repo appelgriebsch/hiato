@@ -36,11 +36,12 @@ export function Keyboard({
                 onClick={() => onKey(key)}
                 className={[
                   'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
+                  wrong || correct ? 'key-settled' : '',
                   wrong
-                    ? 'bg-wrong/90 text-white opacity-70'
+                    ? 'bg-wrong/70 text-ink'
                     : correct
                       ? 'bg-accent text-white'
-                      : 'bg-white border border-line text-ink hover:bg-cream-dark',
+                      : 'bg-raised border border-line text-ink hover:bg-cream-dark',
                   shaking ? 'motion-key-shake' : '',
                 ].join(' ')}
               >
