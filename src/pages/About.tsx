@@ -16,10 +16,10 @@ function licenseDeedHref(license: string): string | null {
 function LicenseLine({ license }: { license: string }) {
   const href = licenseDeedHref(license)
   if (!href) {
-    return <p className="mt-1.5 text-xs font-medium text-accent">{license}</p>
+    return <p className="mt-1.5 text-xs font-medium text-accent-fg">{license}</p>
   }
   return (
-    <p className="mt-1.5 text-xs font-medium text-accent">
+    <p className="mt-1.5 text-xs font-medium text-accent-fg">
       <a
         className="underline-offset-2 hover:underline"
         href={href}
@@ -85,14 +85,14 @@ export function About() {
       <Card className="mb-3">
         <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>
         <h2 className="text-[15px] font-semibold text-ink">Inter</h2>
-        <p className="mt-1.5 text-xs font-medium text-accent">
+        <p className="mt-1.5 text-xs font-medium text-accent-fg">
           SIL Open Font License 1.1
         </p>
         <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
           <li>
             Copyright (c) 2016 The Inter Project Authors (
             <a
-              className="text-accent underline-offset-2 hover:underline"
+              className="text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/rsms/inter"
             >
               github.com/rsms/inter
@@ -108,7 +108,7 @@ export function About() {
           <li>
             Full license:{' '}
             <a
-              className="text-accent underline-offset-2 hover:underline"
+              className="text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/LICENSE.txt"
             >
               /fonts/LICENSE.txt

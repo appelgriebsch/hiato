@@ -228,6 +228,26 @@ describe('share-card fonts (ADR 0020)', () => {
   })
 })
 
+describe('share PNG palette', () => {
+  test('share-render freezes cream, ink, sage, and line hex', async () => {
+    const src = await Bun.file(path.join(REPO, 'src/lib/share-render.ts')).text()
+    expect(src).toContain("const INK = '#1c1b19'")
+    expect(src).toContain("const INK_MUTED = '#6b6860'")
+    expect(src).toContain("const INK_FAINT = '#9a968c'")
+    expect(src).toContain("const ACCENT = '#3d6b55'")
+    expect(src).toContain("const ACCENT_SOFT = '#eef5f0'")
+    expect(src).toContain("const WHITE = '#ffffff'")
+    expect(src).toContain("const LINE = '#e4e1da'")
+    expect(src).not.toContain('prefers-color-scheme')
+    expect(src).not.toContain('matchMedia')
+  })
+
+  test('share page says the saved image stays cream', async () => {
+    const src = await Bun.file(path.join(REPO, 'src/pages/Share.tsx')).text()
+    expect(src).toContain('The saved image stays cream.')
+  })
+})
+
 describe('payload allowlist', () => {
   test('ShareCardPayload type keys stay no-spoiler', () => {
     const payload: ShareCardPayload = buildShareCardPayload(sampleRound())

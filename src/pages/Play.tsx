@@ -377,7 +377,7 @@ export function Play() {
           right={<StreakChip count={streak} pulse={streakPulse} />}
         />
         <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent-fg">
             ✓
           </div>
           <h1 className="text-title text-ink">Today’s daily is done</h1>
@@ -405,7 +405,7 @@ export function Play() {
               <StreakChip count={streak} />
             </div>
             {rec?.won ? (
-              <p className="mt-2 text-xs text-accent">
+              <p className="mt-2 text-xs text-accent-fg">
                 Streak updated for {dateKey}
               </p>
             ) : (
@@ -562,7 +562,7 @@ export function Play() {
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="text-sm font-medium text-accent underline-offset-2 hover:underline"
+                  className="text-sm font-medium text-accent-fg underline-offset-2 hover:underline"
                 >
                   Practice (endless)
                 </button>
@@ -585,7 +585,7 @@ export function Play() {
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="font-medium text-accent hover:underline"
+                  className="font-medium text-accent-fg hover:underline"
                 >
                   Next word
                 </button>
@@ -626,7 +626,7 @@ function EndCard({
   const nav = useNavigate()
   return (
     <div className="motion-result-enter mb-4 space-y-3">
-      <div className="rounded-xl border border-line bg-white/80 px-4 py-4 text-center">
+      <div className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center">
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
           {won ? 'You got it' : 'Out of lives'}
           {mode === 'daily' ? ' · Daily' : ' · Practice'}
@@ -646,7 +646,7 @@ function EndCard({
           <StreakChip count={streak} pulse={streakPulse} />
         </div>
         {mode === 'daily' && won && (
-          <p className="mt-2 text-xs text-accent">Streak updated for {dateKey}</p>
+          <p className="mt-2 text-xs text-accent-fg">Streak updated for {dateKey}</p>
         )}
         {mode === 'daily' && !won && (
           <p className="mt-2 text-xs text-ink-faint">

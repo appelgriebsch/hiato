@@ -29,7 +29,7 @@ export function PwaPrompt() {
       aria-live="polite"
       className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-md p-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
     >
-      <div className="rounded-2xl border border-line bg-white p-4 shadow-lg">
+      <div className="rounded-2xl border border-line bg-raised p-4 shadow-lg">
         <p className="mb-3 text-sm text-ink">A new version is ready.</p>
         <div className="flex gap-2">
           <Button

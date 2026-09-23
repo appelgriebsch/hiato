@@ -80,7 +80,7 @@ export function Language() {
       footer={
         <div className="pt-2 pb-4">
           {error ? (
-            <p role="alert" className="mb-2 text-sm text-accent">
+            <p role="alert" className="mb-2 text-sm text-accent-fg">
               {error}
             </p>
           ) : null}
@@ -139,12 +139,18 @@ export function Language() {
               'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
-                ? 'border-accent bg-accent-soft'
-                : 'border-line bg-white hover:bg-cream-dark',
+                ? 'border-accent bg-accent-soft text-accent-fg'
+                : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
             <div className="text-xs font-medium text-ink-faint">{LANG_CODES[l]}</div>
-            <div className="font-semibold text-ink">{LANG_LABELS[l]}</div>
+            <div
+              className={
+                lang === l ? 'font-semibold text-accent-fg' : 'font-semibold text-ink'
+              }
+            >
+              {LANG_LABELS[l]}
+            </div>
           </button>
         ))}
       </div>
@@ -180,8 +186,8 @@ export function Language() {
               'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
-                ? 'border-accent bg-accent-soft text-accent'
-                : 'border-line bg-white text-ink hover:bg-cream-dark',
+                ? 'border-accent bg-accent-soft text-accent-fg'
+                : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >
             {CEFR_LABELS[c]}

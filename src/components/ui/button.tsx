@@ -10,11 +10,11 @@ const buttonVariants = cva(
         primary:
           'bg-accent text-white hover:bg-accent-mid shadow-sm',
         secondary:
-          'bg-accent-soft text-accent hover:bg-helped',
+          'bg-accent-soft text-accent-fg hover:bg-helped',
         ghost:
           'bg-transparent text-ink-muted hover:bg-cream-dark',
         outline:
-          'bg-white border border-line text-ink hover:bg-cream-dark',
+          'bg-raised border border-line text-ink hover:bg-cream-dark',
       },
       fullWidth: {
         true: 'w-full',

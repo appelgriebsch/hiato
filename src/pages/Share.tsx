@@ -93,7 +93,7 @@ export function Share() {
       />
 
       <p className="text-caption mb-4 text-center tracking-wide">
-        Answer never appears on the card.
+        Answer never appears on the card. The saved image stays cream.
       </p>
 
       <ShareCard {...payload} />

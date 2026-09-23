@@ -37,10 +37,10 @@ export function Keyboard({
                 className={[
                   'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
                   wrong
-                    ? 'bg-wrong/90 text-white opacity-70'
+                    ? 'bg-wrong text-ink opacity-70'
                     : correct
                       ? 'bg-accent text-white'
-                      : 'bg-white border border-line text-ink hover:bg-cream-dark',
+                      : 'bg-raised border border-line text-ink hover:bg-cream-dark',
                   shaking ? 'motion-key-shake' : '',
                 ].join(' ')}
               >

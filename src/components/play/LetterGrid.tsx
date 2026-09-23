@@ -32,9 +32,9 @@ export function LetterGrid({ cells }: { cells: CellState[] }) {
             'transition-[border-color,background-color,color] duration-200',
             cell.revealed
               ? cell.helped
-                ? 'border-accent/40 bg-helped text-accent'
+                ? 'border-accent/40 bg-helped text-accent-fg'
                 : 'border-accent bg-accent-soft text-ink'
-              : 'border-line bg-white text-ink-faint',
+              : 'border-line bg-raised text-ink-faint',
             justRevealed.has(i) ? 'motion-letter-reveal' : '',
           ].join(' ')}
         >

@@ -124,7 +124,7 @@ export function Home() {
             <button
               type="button"
               disabled={!practiceOk}
-              className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
+              className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent-soft px-5 text-[15px] font-medium text-accent-fg hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
               onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
             >
               Practice (endless)
@@ -139,11 +139,11 @@ export function Home() {
       </Card>
 
       <nav className="mb-6 flex items-center justify-center gap-4 text-sm">
-        <Link to="/language" className="text-accent hover:underline">
+        <Link to="/language" className="text-accent-fg hover:underline">
           {prefs ? 'Change language' : 'Language'}
         </Link>
         <span className="text-ink-faint">·</span>
-        <Link to="/about" className="text-accent hover:underline">
+        <Link to="/about" className="text-accent-fg hover:underline">
           About
         </Link>
       </nav>

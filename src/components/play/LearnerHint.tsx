@@ -24,7 +24,7 @@ export function LearnerHint({
     const empty = NO_HINT_COPY[lang]
     return (
       <div
-        className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-white/50 px-3 py-2.5 text-center"
+        className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-raised/50 px-3 py-2.5 text-center"
         aria-label={empty}
       >
         <p className="text-[11px] text-ink-faint">{empty}</p>
@@ -33,7 +33,7 @@ export function LearnerHint({
   }
 
   return (
-    <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-white/80 px-3.5 py-3 text-center shadow-[0_1px_0_rgba(28,27,25,0.03)]">
+    <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center">
       {gloss ? (
         <p className="text-[13px] leading-snug text-ink-muted">{gloss}</p>
       ) : null}
