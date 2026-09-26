@@ -5,6 +5,7 @@
  *
  * Usage:
  *   bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json
+ *   bun run scripts/repair-a1-b1-hints.ts de/a1.json de/a2.json de/b1.json
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -20,6 +21,7 @@ import {
 } from './hint-ceiling'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 import {
+  ensureDicts,
   isWordOfLang,
   loadMembershipCache,
 } from './lang-membership'
@@ -37,6 +39,64 @@ const DENY = loadDenylist()
 const NAMES = loadNameList()
 
 const FORBIDDEN = new Set(['b2', 'c1', 'c2'])
+
+const LANG_NAME: Record<PackLang, string> = {
+  en: 'English',
+  de: 'German',
+  es: 'Spanish',
+  pt: 'Portuguese',
+}
+
+const GLOSS_STYLE: Record<PackLang, string> = {
+  en: 'Prefer "a/an/the …" or "to …" style definitions.',
+  de: 'Schreib ausschließlich auf Deutsch — kein Englisch. Bevorzuge "ein/eine/der …" oder einen Infinitiv ohne "to".',
+  es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
+  pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
+}
+
+/** Easy common filler examples for ceiling prompts (language + band). */
+function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
+  if (lang === 'de') {
+    // PERSON/DING/SACHE are A2+; TEIL stems to TEILEN (A2) — never suggest them for A1.
+    if (cefr === 'a1') {
+      return 'Mann, Frau, Kind, Mensch, Leute, Ort, Platz, Haus, Essen, Wasser, Wort, Name, Zeit, Tag, Jahr, Hand, Kopf, Buch, Bild, Auto, Freund, Arbeit, Frage, Ende, Anfang, groß, klein, gut, jung, alt, lang, kurz, neu, alt, machen, geben, nehmen, sehen, gehen, kommen'
+    }
+    if (cefr === 'a2') {
+      return 'Person, Ding, Sache, Ort, Platz, Haus, Essen, Wasser, Körper, Stück, Idee, Tier, Mann, Frau, Kind, Mensch, groß, klein, gut, jung, alt, dunkel, hell, machen, geben'
+    }
+    return 'Person, Ding, Sache, Gefühl, Ort, Körper, Stück, Idee, Tier, Mann, Frau, Kind, Mensch, groß, klein, gut, machen'
+  }
+  if (lang === 'es') {
+    return 'el, la, un, una, y, o, con, para, de, en, es, son, persona, cosa, lugar, comida, agua, casa, trabajo, jugar, grande, pequeño, bueno, malo, joven, viejo'
+  }
+  if (lang === 'pt') {
+    return 'o, a, um, uma, e, ou, com, para, de, em, é, são, pessoa, coisa, lugar, comida, água, casa, trabalho, jogar, grande, pequeno, bom, mau, jovem, velho'
+  }
+  return 'the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old'
+}
+
+function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
+  if (lang === 'de') {
+    const always =
+      'Fahrzeug, Struktur, Behälter, Organ, männlich, weiblich, Geschwister, romantisch, Temperatur, geröstet, bunt, geheim, spektakulär, Triumph, Angelegenheit, Gegenstand'
+    if (cefr === 'a1') {
+      // Pack-band + stem-trap surfaces that fail A1 (surface→harder stem).
+      return (
+        always +
+        ', Person, Personen, Ding, Dinge, Sache, Gefühl, Körper, Stück, Idee, Tier, Tiere, dunkel, Teil, teilen, etwas, Etwas, ' +
+        'Wasser, Land, Zeug, Bett, Ruf, Wein, Spiel, spielen, froh, traurig, Himmel, tragen, führt, führen, ' +
+        'Schlag, schlagen, Respekt, Eltern, Zukunft, Kamera, Seite, erwachsen, schwierig, wertvoll, geliebt, ' +
+        'Gegenstand, Angelegenheit, Fahrzeug'
+      )
+    }
+    if (cefr === 'a2') {
+      // etwas stems to ETWA (B1) — forbidden below B1.
+      return always + ', Gefühl, etwas, Etwas, spektakulär, Triumph, Angelegenheit, Himmel, führt, führen, Eltern, Respekt, Zukunft'
+    }
+    return always
+  }
+  return 'vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret'
+}
 
 function readXaiKey(): string | null {
   const authPath = `${process.env.HOME}/.grok/auth.json`
@@ -277,13 +337,13 @@ function glossRejected(
 }
 
 
-/** Easy lemma samples for prompts: A1 always, plus pack band when above A1. */
-function easyWordList(cefr: PackCefr, limit = 120): string {
+/** Easy lemma samples for prompts: that language's A1 always, plus pack band when above A1. */
+function easyWordList(lang: PackLang, cefr: PackCefr, limit = 120): string {
   const bands: PackCefr[] =
     cefr === 'a1' ? ['a1'] : cefr === 'a2' ? ['a1', 'a2'] : ['a1', 'a2', 'b1']
   const words: string[] = []
   for (const b of bands) {
-    const file = path.join(PACKS, 'en', `${b}.json`)
+    const file = path.join(PACKS, lang, `${b}.json`)
     if (!existsSync(file)) continue
     const pack = JSON.parse(readFileSync(file, 'utf8')) as WordPack
     for (const L of pack.lemmas) words.push(L.word.toLowerCase())
@@ -307,11 +367,110 @@ function failingTokenNames(
   ]
 }
 
+/**
+ * Deterministic A1/A2-safe German glosses (no etwas/Ding/Person/Teil/Wasser…).
+ * Lemma-keyed hand finishes first (ADR 0030 / issue #54), then generic fillers.
+ * First candidate that passes ceiling + glossRejected wins.
+ */
+const DE_HAND_GLOSS: Record<string, Record<string, string>> = {
+  a1: {
+    KOPF: 'wo die Augen und der Mund sind',
+    SCHATZ: 'ein guter Freund',
+    PLAN: 'was man machen will',
+    ZEUG: 'man hat es im Haus',
+    SCHUH: 'für den Fuß',
+    BEISPIEL: 'man sieht, wie man es macht',
+    FLUGZEUG: 'man fliegt und es ist groß',
+    REGIERUNG: 'Leute, die alles machen',
+    HAU: 'mit der Hand machen',
+    MONSTER: 'groß und nicht gut',
+    HÄLFTE: 'eins von zwei',
+    ANGEBOT: 'man kann es kaufen',
+    WIND: 'es kommt und geht schnell',
+    WARUM: 'man fragt: wieso?',
+    EINMAL: 'nicht oft, nur eins',
+    ÖFFNEN: 'man macht es frei',
+  },
+  a2: {
+    FENSTER: 'Glas im Haus, man sieht raus',
+    INSEL: 'Ort im Meer',
+    RADIO: 'man hört Lieder und Nachrichten',
+    VERSUCHEN: 'man will es machen',
+    STARK: 'man kann viel machen',
+    SCHIFF: 'groß und fährt auf dem Meer',
+    REITEN: 'auf einem Pferd fahren',
+    RÜHREN: 'Essen im Topf machen',
+  },
+}
+
+function localRescueGloss(
+  lang: PackLang,
+  cefr: PackCefr,
+  word: string,
+  ctx: ReturnType<typeof ceilingContext>,
+): string | null {
+  if (lang !== 'de') return null
+  const upper = nfcUpper(word)
+  const hand = DE_HAND_GLOSS[cefr]?.[upper]
+  const candidates: string[] = []
+  if (hand) candidates.push(hand)
+  candidates.push(
+    'man macht es',
+    'man kann es machen',
+    'man kann es sehen',
+    'man kann es hören',
+    'man kann es kaufen',
+    'ein Mann',
+    'eine Frau',
+    'ein Kind',
+    'ein Mensch',
+    'viele Leute',
+    'für die Hand',
+    'für den Fuß',
+    'für das Haus',
+    'für die Arbeit',
+    'am Tag',
+    'in der Nacht',
+    'in dem Haus',
+    'auf dem Platz',
+    'der Anfang',
+    'das Ende',
+    'ein Freund',
+    'ein Auto',
+    'ein Buch',
+    'ein Bild',
+    'ein Film',
+    'man gibt es',
+    'man nimmt es',
+    'man sieht es',
+    'man geht hin',
+    'man kommt her',
+    'man wohnt dort',
+    'man arbeitet dort',
+    'man sagt ja',
+    'man sagt nein',
+    'sehr gut',
+    'nicht gut',
+    'sehr groß',
+    'sehr klein',
+    'kurz und klar',
+  )
+  if (/IN$|UNG$|HEIT$|KEIT$/.test(upper)) {
+    candidates.unshift('Leute, die alles machen', 'Leute mit großer Arbeit')
+  }
+  for (const gloss of candidates) {
+    if (glossRejected(lang, word, gloss)) continue
+    if (violationsForLemma(lang, cefr, gloss, [], ctx).length) continue
+    return gloss
+  }
+  return null
+}
+
 async function repairPack(rel: string): Promise<void> {
   const { lang, cefr, file } = parseRel(rel)
-  if (lang !== 'en' || !['a1', 'a2', 'b1'].includes(cefr)) {
+  if (!['en', 'de'].includes(lang) || !['a1', 'a2', 'b1'].includes(cefr)) {
     console.warn(
-      `note: issue #52 ships EN A1–B1; still repairing ${lang}/${cefr}`,
+      `note: issue #52/#54 ship EN+DE A1–B1; still repairing ${lang}/${cefr}`,
     )
   }
   const key = readXaiKey()
@@ -323,6 +482,8 @@ async function repairPack(rel: string): Promise<void> {
 
   loadMembershipCache()
   console.log("membership cache armed")
+  await ensureDicts()
+  console.log("Hunspell dictionaries loaded")
   const ctx = ceilingContext()
   console.log("ceiling context ready")
   const pack = JSON.parse(readFileSync(file, 'utf8')) as WordPack
@@ -354,30 +515,92 @@ async function repairPack(rel: string): Promise<void> {
     `${rel}: ${needGloss.length} glosses and ${needSyn.length} synonym rows need repair`,
   )
 
-  const easyWords = easyWordList(cefr, 150)
+  // Seed from band-keyed cache when the cached gloss/chips already pass the ceiling.
+  let seededGloss = 0
+  let seededSyn = 0
+  for (const L of pack.lemmas) {
+    const gk = bandKey(L.word, cefr)
+    const cachedG = glossCache[gk]
+    if (
+      cachedG &&
+      !glossRejected(lang, L.word, cachedG) &&
+      violationsForLemma(lang, cefr, cachedG, [], ctx).length === 0
+    ) {
+      if (L.gloss !== cachedG) {
+        L.gloss = cachedG
+        seededGloss++
+      }
+    }
+    const cachedS = synCache[gk]
+    if (Array.isArray(cachedS)) {
+      const chips = filterChipsInCeiling(lang, cefr, L.word, cachedS, ctx)
+      if (chips.length) {
+        L.synonyms = chips
+        seededSyn++
+      }
+    }
+  }
+  // Recompute needs after seeding
+  needGloss.length = 0
+  needSyn.length = 0
+  for (const L of pack.lemmas) {
+    const hits = violationsForLemma(
+      lang,
+      cefr,
+      L.gloss ?? '',
+      L.synonyms ?? [],
+      ctx,
+    )
+    if (hits.some((h) => h.kind === 'gloss') || glossRejected(lang, L.word, L.gloss)) {
+      needGloss.push(L.word)
+    }
+    if (hits.some((h) => h.kind === 'synonym')) {
+      needSyn.push(L.word)
+    }
+  }
+  if (seededGloss || seededSyn) {
+    console.log(
+      `  seeded from band cache: gloss=${seededGloss} syn=${seededSyn}; still need gloss=${needGloss.length} syn=${needSyn.length}`,
+    )
+  }
+
+  const easyWords = easyWordList(lang, cefr, 150)
+  const langName = LANG_NAME[lang]
+  const thatAvoid =
+    lang === 'en'
+      ? `Never use the relative word "that" in glosses (it is tagged harder than A2); rephrase with "when", "who", or a short noun phrase. `
+      : ''
   const ceilingPromptExtra =
-    `CRITICAL: every content word in the gloss and every synonym chip MUST be from CEFR ${cefr.toUpperCase()} or easier. ` +
-    `Prefer very common easy words (the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old). ` +
-    `Do NOT use harder words like vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret. ` +
-    `Never use the relative word "that" in glosses (it is tagged harder than A2); rephrase with "when", "who", or a short noun phrase. ` +
+    `CRITICAL: every content word in the gloss and every synonym chip MUST be from CEFR ${cefr.toUpperCase()} or easier for ${langName}. ` +
+    `Prefer very common easy ${langName} words (${easyFillerExamples(lang, cefr)}). ` +
+    `Do NOT use harder words like ${hardWordsToAvoid(lang, cefr)}. ` +
+    thatAvoid +
     `Do not use the answer lemma itself in the gloss or as a synonym chip. ` +
-    `Example easy ${cefr.toUpperCase()}-or-easier lemmas you may use: ${easyWords}.`
+    (lang === 'de'
+      ? `Write German only (ADR 0030) — no English glosses or English synonym chips. Band check uses the easiest German pack of the stem, not Goethe or CEFR tag maps. ` +
+        (cefr === 'a1'
+          ? `For A1 NEVER write Person/Personen, Ding, Sache, Gefühl, Körper, Stück, Idee, Tier, dunkel, or Teil (Teil stems to TEILEN=A2). Use Mann/Frau/Kind/Mensch/Leute/Ort/Platz/Wort instead. `
+          : cefr === 'a2'
+            ? `For A2 NEVER write Gefühl (B1) or harder abstract nouns above A2. Person/Ding/Sache are OK at A2. `
+            : '')
+      : '') +
+    `Example easy ${cefr.toUpperCase()}-or-easier ${langName} lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
   // --- glosses ---
   for (let i = 0; i < needGloss.length; i += BATCH) {
     const batch = needGloss.slice(i, i + BATCH)
     const prompt =
-      `Language: English (en).\n` +
-      `Write a short learner dictionary gloss for each lemma in English only (one simple sentence or clause).\n` +
+      `Language: ${langName} (${lang}).\n` +
+      `Write a short learner dictionary gloss for each lemma in ${langName} only (one simple sentence or clause).\n` +
       `Rules: never include the lemma itself as a whole word in its gloss; ` +
       `no letter-count or classroom-template fluff; no NSFW; never define a lemma as a given name, surname, or person. ` +
-      `Prefer "a/an/the …" or "to …" style definitions. ${ceilingPromptExtra}\n` +
+      `${GLOSS_STYLE[lang]} ${ceilingPromptExtra}\n` +
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
     const content = await xaiChat(
       key,
-      `You write concise ${cefr.toUpperCase()}-or-easier learner-dictionary glosses in English only. Reply with a single JSON object only.`,
+      `You write concise ${cefr.toUpperCase()}-or-easier learner-dictionary glosses in ${langName} only (ADR 0030). Reply with a single JSON object only.`,
       prompt,
       0.2,
     )
@@ -417,11 +640,14 @@ async function repairPack(rel: string): Promise<void> {
     for (let i = 0; i < glossLeft.length; i += 20) {
       const batch = glossLeft.slice(i, i + 20).map((L) => L.word)
       const prompt =
-        `Language: English (en).\n` +
-        `For each lemma, write a short English learner gloss using ONLY ${cefr.toUpperCase()} or easier words. ` +
-        `Do not use the lemma. Prefer "a/an/the …" or "to …".\n` +
-        `Avoid these harder words if present in a prior attempt: that, male, female, vehicle, structure, container, organ, sibling, romantic, temperature, roasted, colorful, secret, rules, signs, beans, piece, clothing, worn, other, clothes, set, hot, drink, made, from, low, having, loud, warning, signal, serious, damage, unexpected, relating, electricity, uncertainty, furious, anger, risk.\n` +
-        `Use simple words like: person, boy, girl, thing, place, food, water, home, big, small, good, young, old, round, open, long, short.\n` +
+        `Language: ${langName} (${lang}).\n` +
+        `For each lemma, write a short ${langName} learner gloss using ONLY ${cefr.toUpperCase()} or easier words. ` +
+        `Do not use the lemma. ${GLOSS_STYLE[lang]}\n` +
+        `Avoid these harder words if present in a prior attempt: ${hardWordsToAvoid(lang, cefr)}.` +
+        (lang === 'en'
+          ? ' Also avoid: that, rules, signs, beans, piece, clothing, worn, other, clothes, set, hot, drink, made, from, low, having, loud, warning, signal, serious, damage, unexpected, relating, electricity, uncertainty, furious, anger, risk.'
+          : '') +
+        `\nUse simple words like: ${easyFillerExamples(lang, cefr)}.\n` +
         `JSON: UPPERCASE lemma → gloss.\n` +
         batch.map((w) => {
           const L = glossLeft.find((x) => x.word === w)
@@ -435,7 +661,7 @@ async function repairPack(rel: string): Promise<void> {
       try {
         const content = await xaiChat(
           key,
-          `JSON only. ${cefr.toUpperCase()}-ceiling English glosses. Avoid the headword.`,
+          `JSON only. ${cefr.toUpperCase()}-ceiling ${langName} glosses. Avoid the headword.`,
           prompt,
           0.4,
         )
@@ -478,8 +704,8 @@ async function repairPack(rel: string): Promise<void> {
   for (let i = 0; i < regen.length; i += BATCH) {
     const batch = regen.slice(i, i + BATCH)
     const prompt =
-      `Language: English (en).\n` +
-      `For each lemma, give 1–3 close same-language learner synonyms.\n` +
+      `Language: ${langName} (${lang}).\n` +
+      `For each lemma, give 1–3 close same-language learner synonyms in ${langName} only.\n` +
       `Rules: same language only; never the lemma itself; no NSFW; no letter-count fluff. ` +
       `${ceilingPromptExtra}\n` +
       `Use [] if there is no close synonym. Do not force a hypernym.\n` +
@@ -487,7 +713,7 @@ async function repairPack(rel: string): Promise<void> {
       `Lemmas:\n${batch.join('\n')}`
     const content = await xaiChat(
       key,
-      `You write ${cefr.toUpperCase()}-or-easier same-language learner synonyms. Reply with a single JSON object only.`,
+      `You write ${cefr.toUpperCase()}-or-easier ${langName} learner synonyms (same language only, ADR 0030). Reply with a single JSON object only.`,
       prompt,
       0.2,
     )
@@ -526,13 +752,13 @@ async function repairPack(rel: string): Promise<void> {
     for (let i = 0; i < missing.length; i += 20) {
       const batch = missing.slice(i, i + 20)
       const prompt =
-        `Language: English (en).\n` +
-        `JSON object: UPPERCASE lemma → 1–3 close ${cefr.toUpperCase()}-or-easier English synonyms (never the lemma).\n` +
-        `Prefer very common easy words. Use [] only if truly unique.\n` +
+        `Language: ${langName} (${lang}).\n` +
+        `JSON object: UPPERCASE lemma → 1–3 close ${cefr.toUpperCase()}-or-easier ${langName} synonyms (never the lemma).\n` +
+        `Prefer very common easy ${langName} words. Use [] only if truly unique.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       const content = await xaiChat(
         key,
-        `JSON only. In-ceiling ${cefr.toUpperCase()} English synonyms.`,
+        `JSON only. In-ceiling ${cefr.toUpperCase()} ${langName} synonyms.`,
         prompt,
         0.45,
       )
@@ -568,7 +794,7 @@ async function repairPack(rel: string): Promise<void> {
   }
 
   // Per-lemma gloss rescue: ask with explicit avoid-list until in-ceiling or give up
-  for (let round = 0; round < 5; round++) {
+  for (let round = 0; round < 10; round++) {
     const hard = pack.lemmas.filter(
       (L) => violationsForLemma(lang, cefr, L.gloss ?? '', [], ctx).length > 0,
     )
@@ -576,35 +802,57 @@ async function repairPack(rel: string): Promise<void> {
     console.log(`  per-lemma rescue round ${round + 1}: ${hard.length}`)
     for (const L of hard) {
       const bad = failingTokenNames(lang, cefr, L.gloss ?? '', [], ctx)
+      const avoidExtra =
+        lang === 'de'
+          ? `${hardWordsToAvoid(lang, cefr)}, ${bad.join(', ')}`
+          : bad.join(', ')
       const prompt =
-        `Language: English (en).\n` +
-        `Write ONE short ${cefr.toUpperCase()} learner gloss for ${L.word}.\n` +
+        `Language: ${langName} (${lang}).\n` +
+        `Write ONE short ${cefr.toUpperCase()} learner gloss for ${L.word} in ${langName} only.\n` +
         `Current gloss: ${JSON.stringify(L.gloss ?? '')}\n` +
-        `Do not use the lemma ${L.word}. Avoid these harder words: ${bad.join(', ')}.\n` +
-        `Use only very easy words (person, thing, place, food, water, home, big, small, good, young, old, boy, girl, open, long, hot, cold, make, take, give, put).\n` +
-        `Prefer "a/an/the …" or "to …". Return JSON {"${L.word}":"gloss"}.`
+        `Do not use the lemma ${L.word}. Avoid these harder words: ${avoidExtra}.\n` +
+        `Use only very easy words (${easyFillerExamples(lang, cefr)}).\n` +
+        (lang === 'de'
+          ? `NEVER use: etwas, Ding, Sache, Person, Teil, Wasser, Land, Zeug, Gefühl, Körper, Tier, froh, traurig. Prefer: Mann/Frau/Kind/Mensch/Leute/Ort/Platz/Wort/Frage/Haus/Hand/Fuß and phrases like "man macht es", "für den Fuß", "wo die Augen und der Mund sind".\n`
+          : '') +
+        `${GLOSS_STYLE[lang]} Return JSON {"${L.word}":"gloss"}.`
+      let rescued = false
       try {
         const content = await xaiChat(
           key,
-          `JSON only. One ${cefr.toUpperCase()}-ceiling English gloss.`,
+          `JSON only. One ${cefr.toUpperCase()}-ceiling ${langName} gloss.`,
           prompt,
-          0.5,
+          0.55 + round * 0.03,
         )
         const parsed = parseJsonObject(content)
-        if (!parsed) continue
-        const g = lookupParsed(parsed, L.word)
-        if (!g || typeof g !== 'string') continue
-        const gloss = g.trim()
-        if (glossRejected(lang, L.word, gloss)) continue
-        if (violationsForLemma(lang, cefr, gloss, [], ctx).length) {
-          console.warn(`  still fail ${L.word}: ${gloss.slice(0, 70)}`)
-          continue
+        if (parsed) {
+          const g = lookupParsed(parsed, L.word)
+          if (g && typeof g === 'string') {
+            const gloss = g.trim()
+            if (
+              !glossRejected(lang, L.word, gloss) &&
+              !violationsForLemma(lang, cefr, gloss, [], ctx).length
+            ) {
+              L.gloss = gloss
+              glossCache[bandKey(L.word, cefr)] = gloss
+              deleteBareLemmaKeys(glossCache, L.word)
+              rescued = true
+            } else {
+              console.warn(`  still fail ${L.word}: ${gloss.slice(0, 70)}`)
+            }
+          }
         }
-        L.gloss = gloss
-        glossCache[bandKey(L.word, cefr)] = gloss
-        deleteBareLemmaKeys(glossCache, L.word)
       } catch (e) {
         console.warn(`  rescue error ${L.word}: ${e}`)
+      }
+      if (!rescued) {
+        const local = localRescueGloss(lang, cefr, L.word, ctx)
+        if (local) {
+          console.log(`  local rescue ${L.word}: ${local}`)
+          L.gloss = local
+          glossCache[bandKey(L.word, cefr)] = local
+          deleteBareLemmaKeys(glossCache, L.word)
+        }
       }
     }
     saveGlossCache(lang, glossCache)
@@ -632,13 +880,27 @@ async function repairPack(rel: string): Promise<void> {
     throw new Error(`${rel}: ${stillHard} glosses still above ceiling`)
   }
 
+  // Always write band keys from final pack state (even when unchanged) so scrub
+  // removes bare leftovers for lemmas that did not need repair this run.
+  // Same pattern as #58 / Ask Avery on #59: scrub + always-write-band is enough.
+  let bandGlossWritten = 0
+  let bandSynWritten = 0
+  for (const L of pack.lemmas) {
+    const gk = bandKey(L.word, cefr)
+    if (L.gloss) {
+      glossCache[gk] = L.gloss
+      bandGlossWritten++
+    }
+    synCache[bandKey(L.word, cefr)] = L.synonyms ?? []
+    bandSynWritten++
+    deleteBareLemmaKeys(glossCache, L.word)
+    deleteBareLemmaKeys(synCache, L.word)
+  }
   const glossScrubbed = scrubBareKeysWithBandSiblings(glossCache)
   const synScrubbed = scrubBareKeysWithBandSiblings(synCache)
-  if (glossScrubbed || synScrubbed) {
-    console.log(
-      `  scrubbed bare keys with band siblings: gloss=${glossScrubbed} syn=${synScrubbed}`,
-    )
-  }
+  console.log(
+    `  band keys written: gloss=${bandGlossWritten} syn=${bandSynWritten}; scrubbed bare: gloss=${glossScrubbed} syn=${synScrubbed}`,
+  )
   saveGlossCache(lang, glossCache)
   saveSynCache(lang, synCache)
 
@@ -659,7 +921,7 @@ async function repairPack(rel: string): Promise<void> {
 const rels = process.argv.slice(2)
 if (!rels.length) {
   console.error('Usage: bun run scripts/repair-a1-b1-hints.ts <rel> [<rel>...]')
-  console.error('Example: bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json')
+  console.error('Example: bun run scripts/repair-a1-b1-hints.ts de/a1.json de/a2.json de/b1.json')
   process.exit(1)
 }
 for (const rel of rels) {

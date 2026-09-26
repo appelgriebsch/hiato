@@ -17,11 +17,14 @@ export const CEFR_RANK: Record<string, number> = {
 /** Packs that receive the ceiling failure (subject bands). B2–C2 never fail. */
 export const HINT_CEILING_SUBJECT_BANDS = new Set(['a1', 'a2', 'b1'])
 
-/** Rels where packs:check enforces the ceiling (issue #52: en/a1–b1). */
+/** Rels where packs:check enforces the ceiling (issue #52/#54: en+de a1–b1). */
 export const HINT_CEILING_ENFORCED_RELS = new Set([
   'en/a1.json',
   'en/a2.json',
   'en/b1.json',
+  'de/a1.json',
+  'de/a2.json',
+  'de/b1.json',
 ])
 
 const TOKEN_RE = /[\p{L}\p{M}]+/gu
