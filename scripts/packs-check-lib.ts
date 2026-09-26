@@ -27,9 +27,9 @@ import {
 } from './synonym-chips'
 import { EXISTING_CEFRS, foldKey, hangmanOk } from './pack-select'
 import {
-  HINT_CEILING_ENFORCED_RELS,
   buildLemmaEasiestByLang,
   hintCeilingViolations,
+  isHintCeilingEnforcedRel,
   type PackBandSnapshot,
 } from './hint-ceiling'
 
@@ -387,10 +387,10 @@ export function validatePack(raw: unknown, file: string): WordPack {
   }
 }
 
-export { buildLemmaEasiestByLang, HINT_CEILING_ENFORCED_RELS }
+export { buildLemmaEasiestByLang, isHintCeilingEnforcedRel }
 
 /**
- * Enforce hint ceiling for enforced rels only (issue #52/#54/#53/#51: en+de+pt+es a1–b1).
+ * Enforce hint ceiling for pack-lang A1–B1 rels (issue #50: all twelve).
  * lemmaEasiestByLang must be built from the full snapshot AFTER every pack is parsed.
  */
 export function checkHintCeiling(
@@ -400,7 +400,7 @@ export function checkHintCeiling(
   stemCache: Record<string, Map<string, string[]>>,
   enTags: Map<string, string> | null,
 ): string[] {
-  if (!HINT_CEILING_ENFORCED_RELS.has(rel)) return []
+  if (!isHintCeilingEnforcedRel(rel)) return []
   const easiest = lemmaEasiestByLang.get(pack.lang) ?? new Map()
   const stems = stemCache[pack.lang] ?? new Map()
   const errors: string[] = []

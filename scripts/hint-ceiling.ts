@@ -3,7 +3,7 @@
  * band (or, for English, a harder CEFR-J/Octanove tag). Pure — no I/O.
  */
 import { foldKey, type SelectLang } from './pack-select'
-import type { PackCefr, PackLang } from '../src/packs/schema'
+import { isPackLang, type PackCefr, type PackLang } from '../src/packs/schema'
 
 export const CEFR_RANK: Record<string, number> = {
   a1: 0,
@@ -17,21 +17,16 @@ export const CEFR_RANK: Record<string, number> = {
 /** Packs that receive the ceiling failure (subject bands). B2–C2 never fail. */
 export const HINT_CEILING_SUBJECT_BANDS = new Set(['a1', 'a2', 'b1'])
 
-/** Rels where packs:check enforces the ceiling (issue #52/#54/#53/#51: en+de+pt+es a1–b1). */
-export const HINT_CEILING_ENFORCED_RELS = new Set([
-  'en/a1.json',
-  'en/a2.json',
-  'en/b1.json',
-  'de/a1.json',
-  'de/a2.json',
-  'de/b1.json',
-  'pt/a1.json',
-  'pt/a2.json',
-  'pt/b1.json',
-  'es/a1.json',
-  'es/a2.json',
-  'es/b1.json',
-])
+/**
+ * Enforce the ceiling when `rel` is a pack language + A1–B1 subject band
+ * (issue #50: all twelve en/de/es/pt × a1/a2/b1). No per-rel allowlist.
+ */
+export function isHintCeilingEnforcedRel(rel: string): boolean {
+  const m = /^([a-z]{2})\/([a-z][0-9])\.json$/.exec(rel)
+  if (!m) return false
+  const [, lang, cefr] = m
+  return isPackLang(lang) && HINT_CEILING_SUBJECT_BANDS.has(cefr!)
+}
 
 const TOKEN_RE = /[\p{L}\p{M}]+/gu
 
