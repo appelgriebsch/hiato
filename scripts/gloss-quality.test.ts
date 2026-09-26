@@ -20,6 +20,16 @@ describe('isEnglishShapedGloss', () => {
     ).toBe(true)
   })
 
+  test('narrows short English frames without rejecting romance articles', () => {
+    expect(isEnglishShapedGloss('a mistake', 'pt')).toBe(true)
+    expect(isEnglishShapedGloss('a bullfighter', 'es')).toBe(false)
+    expect(isEnglishShapedGloss('a pequena distância.', 'pt')).toBe(false)
+    expect(isEnglishShapedGloss('ready for use', 'pt')).toBe(true)
+    expect(isEnglishShapedGloss('official in charge', 'pt')).toBe(true)
+    expect(isEnglishShapedGloss('father', 'pt')).toBe(true)
+    expect(isEnglishShapedGloss('usual or regular', 'pt')).toBe(true)
+  })
+
   test('keeps PT/DE article-a glosses that are not English frames', () => {
     expect(isEnglishShapedGloss('a pequena distância.')).toBe(false)
     expect(isEnglishShapedGloss('a mais recente ou final.')).toBe(false)

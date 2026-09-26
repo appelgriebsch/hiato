@@ -40,7 +40,10 @@ export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
   if (EN_ONLY.test(g)) return true
   if (EN_A_FRAME.test(g)) return true
   // Short English dictionary frames that otherwise look like valid romance-language copy.
-  if (lang !== 'en' && /^a\s+[\p{L}'-]+\.?$/iu.test(g)) return true
+  if (
+    (lang === 'pt' || lang === 'es' || lang === 'de') &&
+    /^a\s+mistake\.?$/i.test(g)
+  ) return true
   if (lang !== 'en' && /\bready for\b/i.test(g)) return true
   if (lang !== 'en' && /\bofficial in charge\b/i.test(g)) return true
   if (
