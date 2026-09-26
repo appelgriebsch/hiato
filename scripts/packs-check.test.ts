@@ -326,7 +326,7 @@ describe('packs:check C1/C2 synonyms', () => {
 })
 
 
-describe('packs:check hint ceiling enforcement (#52/#54/#53/#51)', () => {
+describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
   test('enforces en/a1–b1; en/b2 with a hard gloss does not error', () => {
     const snapshots = [
       {
@@ -667,6 +667,63 @@ describe('packs:check hint ceiling enforcement (#52/#54/#53/#51)', () => {
       null,
     )
     expect(b2).toEqual([])
+  })
+
+  test('de/b2 gloss with de/c1 lemma does not fail; same gloss fails on a2 (#50)', () => {
+    const hardGloss = 'Ein Triumph nach Anstrengung.'
+    const snapshots = [
+      {
+        rel: 'de/a2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'a2',
+          lemmas: [{ word: 'SACHE', gloss: hardGloss }],
+        }),
+      },
+      {
+        rel: 'de/b2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'b2',
+          lemmas: [{ word: 'ERFOLG', gloss: hardGloss }],
+        }),
+      },
+      {
+        rel: 'de/c1.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'c1',
+          lemmas: [
+            { word: 'TRIUMPH', gloss: 'x' },
+            { word: 'ANSTRENGUNG', gloss: 'x' },
+          ],
+        }),
+      },
+    ]
+    const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
+    const stemCache = {
+      en: new Map(),
+      de: new Map(),
+      es: new Map(),
+      pt: new Map(),
+    }
+    const b2 = checkHintCeiling(
+      'de/b2.json',
+      snapshots[1]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(b2).toEqual([])
+    const a2 = checkHintCeiling(
+      'de/a2.json',
+      snapshots[0]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(a2.length).toBeGreaterThan(0)
+    expect(a2[0]).toMatch(/hint ceiling/)
   })
 
   test('missing cache path is fail-closed at loader', async () => {
