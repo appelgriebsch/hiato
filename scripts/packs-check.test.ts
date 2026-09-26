@@ -326,8 +326,8 @@ describe('packs:check C1/C2 synonyms', () => {
 })
 
 
-describe('packs:check hint ceiling enforcement (#55)', () => {
-  test('enforces only en/a1.json; en/a2 with a hard gloss does not error', () => {
+describe('packs:check hint ceiling enforcement (#52)', () => {
+  test('enforces en/a1–b1; en/b2 with a hard gloss does not error', () => {
     const snapshots = [
       {
         rel: 'en/a1.json',
@@ -345,6 +345,22 @@ describe('packs:check hint ceiling enforcement (#55)', () => {
           lemmas: [{ word: 'SCARE', gloss: 'to frighten' }],
         }),
       },
+      {
+        rel: 'en/b1.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'b1',
+          lemmas: [{ word: 'ALARM', gloss: 'a sudden serious warning signal' }],
+        }),
+      },
+      {
+        rel: 'en/b2.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'b2',
+          lemmas: [{ word: 'FRIGHTEN', gloss: 'to terrify' }],
+        }),
+      },
     ]
     const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
     const stemCache = {
@@ -353,7 +369,14 @@ describe('packs:check hint ceiling enforcement (#55)', () => {
       es: new Map(),
       pt: new Map(),
     }
-    const enTags = new Map<string, string>()
+    const enTags = new Map<string, string>([
+      ['FRIGHTEN', 'c1'],
+      ['TERRIFY', 'c1'],
+      ['SUDDEN', 'b2'],
+      ['SERIOUS', 'b2'],
+      ['WARNING', 'b2'],
+      ['SIGNAL', 'b2'],
+    ])
     const a1 = checkHintCeiling(
       'en/a1.json',
       snapshots[0]!.pack,
@@ -370,7 +393,25 @@ describe('packs:check hint ceiling enforcement (#55)', () => {
       stemCache,
       enTags,
     )
-    expect(a2).toEqual([])
+    expect(a2.length).toBeGreaterThan(0)
+    expect(a2[0]).toMatch(/hint ceiling/)
+    const b1 = checkHintCeiling(
+      'en/b1.json',
+      snapshots[2]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(b1.length).toBeGreaterThan(0)
+    expect(b1[0]).toMatch(/hint ceiling/)
+    const b2 = checkHintCeiling(
+      'en/b2.json',
+      snapshots[3]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(b2).toEqual([])
   })
 
   test('missing cache path is fail-closed at loader', async () => {
