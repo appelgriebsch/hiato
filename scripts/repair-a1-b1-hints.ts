@@ -22,7 +22,6 @@ import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 import {
   isWordOfLang,
   loadMembershipCache,
-  MembershipDictsNeeded,
 } from './lang-membership'
 import {
   filterSynonymChips,
@@ -30,7 +29,6 @@ import {
   SYNONYM_COVERAGE_FLOOR,
   synonymCoverageRatio,
 } from './synonym-chips'
-import { foldKey } from './pack-select'
 
 const ROOT = path.join(import.meta.dir, '..')
 const PACKS = path.join(ROOT, 'public', 'packs')
