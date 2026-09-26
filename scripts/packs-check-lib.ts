@@ -26,6 +26,12 @@ import {
   synonymCoverageRatio,
 } from './synonym-chips'
 import { EXISTING_CEFRS, foldKey, hangmanOk } from './pack-select'
+import {
+  HINT_CEILING_ENFORCED_RELS,
+  buildLemmaEasiestByLang,
+  hintCeilingViolations,
+  type PackBandSnapshot,
+} from './hint-ceiling'
 
 /** Hunspell, or a committed verdict cache that can answer without loading it. */
 function membershipActive(): boolean {
@@ -380,3 +386,44 @@ export function validatePack(raw: unknown, file: string): WordPack {
     lemmas,
   }
 }
+
+export { buildLemmaEasiestByLang, HINT_CEILING_ENFORCED_RELS }
+
+/**
+ * Enforce hint ceiling for enforced rels only (issue #55: en/a1.json).
+ * lemmaEasiestByLang must be built from the full snapshot AFTER every pack is parsed.
+ */
+export function checkHintCeiling(
+  rel: string,
+  pack: WordPack,
+  lemmaEasiestByLang: Map<string, Map<string, string>>,
+  stemCache: Record<string, Map<string, string[]>>,
+  enTags: Map<string, string> | null,
+): string[] {
+  if (!HINT_CEILING_ENFORCED_RELS.has(rel)) return []
+  const easiest = lemmaEasiestByLang.get(pack.lang) ?? new Map()
+  const stems = stemCache[pack.lang] ?? new Map()
+  const errors: string[] = []
+  for (const L of pack.lemmas) {
+    const hits = hintCeilingViolations({
+      lang: pack.lang,
+      packBand: pack.cefr,
+      gloss: L.gloss ?? '',
+      synonyms: L.synonyms ?? [],
+      lemmaEasiestBand: easiest,
+      stemCache: stems,
+      enEasiestTag: pack.lang === 'en' ? enTags : null,
+    })
+    for (const h of hits) {
+      const where = h.kind === 'gloss' ? 'gloss' : 'synonym'
+      const via = h.via === 'cefr-tag' ? 'CEFR tag' : h.via === 'stem' ? 'stem' : 'pack lemma'
+      errors.push(
+        `${rel}: hint ceiling — lemma "${L.word}" ${where} token "${h.token}" is ${h.band.toUpperCase()} (${via}${h.lemma ? `→${h.lemma}` : ''}); pack is ${pack.cefr.toUpperCase()}`,
+      )
+    }
+  }
+  return errors
+}
+
+export type { PackBandSnapshot }
+

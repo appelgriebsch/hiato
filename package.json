@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "bun test",
     "packs:check": "bun run scripts/packs-check.ts",
-    "packs:expand": "bun run scripts/expand-packs.ts --levels=b2,c1,c2"
+    "packs:expand": "bun run scripts/expand-packs.ts --levels=b2,c1,c2",
+    "packs:hint-ceiling-data": "bun run scripts/build-hint-ceiling-data.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
