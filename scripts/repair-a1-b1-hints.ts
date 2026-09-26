@@ -324,6 +324,7 @@ async function repairPack(rel: string): Promise<void> {
     `CRITICAL: every content word in the gloss and every synonym chip MUST be from CEFR ${cefr.toUpperCase()} or easier. ` +
     `Prefer very common easy words (the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old). ` +
     `Do NOT use harder words like vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret. ` +
+    `Never use the relative word "that" in glosses (it is tagged harder than A2); rephrase with "when", "who", or a short noun phrase. ` +
     `Do not use the answer lemma itself in the gloss or as a synonym chip. ` +
     `Example easy ${cefr.toUpperCase()}-or-easier lemmas you may use: ${easyWords}.`
 
@@ -384,7 +385,7 @@ async function repairPack(rel: string): Promise<void> {
         `Language: English (en).\n` +
         `For each lemma, write a short English learner gloss using ONLY ${cefr.toUpperCase()} or easier words. ` +
         `Do not use the lemma. Prefer "a/an/the …" or "to …".\n` +
-        `Avoid these harder words if present in a prior attempt: male, female, vehicle, structure, container, organ, sibling, romantic, temperature, roasted, colorful, secret, rules, signs, beans, piece, clothing, worn, other, clothes, set, hot, drink, made, from, low, having.\n` +
+        `Avoid these harder words if present in a prior attempt: that, male, female, vehicle, structure, container, organ, sibling, romantic, temperature, roasted, colorful, secret, rules, signs, beans, piece, clothing, worn, other, clothes, set, hot, drink, made, from, low, having, loud, warning, signal, serious, damage, unexpected, relating, electricity, uncertainty, furious, anger, risk.\n` +
         `Use simple words like: person, boy, girl, thing, place, food, water, home, big, small, good, young, old, round, open, long, short.\n` +
         `JSON: UPPERCASE lemma → gloss.\n` +
         batch.map((w) => {
