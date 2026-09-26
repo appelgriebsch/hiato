@@ -326,7 +326,7 @@ describe('packs:check C1/C2 synonyms', () => {
 })
 
 
-describe('packs:check hint ceiling enforcement (#52)', () => {
+describe('packs:check hint ceiling enforcement (#52/#54)', () => {
   test('enforces en/a1–b1; en/b2 with a hard gloss does not error', () => {
     const snapshots = [
       {
@@ -414,7 +414,92 @@ describe('packs:check hint ceiling enforcement (#52)', () => {
     expect(b2).toEqual([])
   })
 
-  test('missing cache path is fail-closed at loader', async () => {
+  test('enforces de/a1–b1; de/b2 with a hard gloss does not error', () => {
+    const snapshots = [
+      {
+        rel: 'de/a1.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'a1',
+          lemmas: [{ word: 'TISCH', gloss: 'Ein Möbel zum Essen.', synonyms: ['Möbel'] }],
+        }),
+      },
+      {
+        rel: 'de/a2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'a2',
+          lemmas: [{ word: 'SACHE', gloss: 'Ein Gegenstand oder eine Angelegenheit.' }],
+        }),
+      },
+      {
+        rel: 'de/b1.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'b1',
+          lemmas: [{ word: 'ERFOLG', gloss: 'Ein Triumph nach Anstrengung.' }],
+        }),
+      },
+      {
+        rel: 'de/b2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'b2',
+          lemmas: [
+            { word: 'MÖBEL', gloss: 'x' },
+            { word: 'GEGENSTAND', gloss: 'x' },
+            { word: 'ANGELEGENHEIT', gloss: 'x' },
+            { word: 'TRIUMPH', gloss: 'x' },
+            { word: 'ANSTRENGUNG', gloss: 'x' },
+          ],
+        }),
+      },
+    ]
+    const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
+    const stemCache = {
+      en: new Map(),
+      de: new Map(),
+      es: new Map(),
+      pt: new Map(),
+    }
+    const a1 = checkHintCeiling(
+      'de/a1.json',
+      snapshots[0]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(a1.length).toBeGreaterThan(0)
+    expect(a1[0]).toMatch(/hint ceiling/)
+    const a2 = checkHintCeiling(
+      'de/a2.json',
+      snapshots[1]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(a2.length).toBeGreaterThan(0)
+    expect(a2[0]).toMatch(/hint ceiling/)
+    const b1 = checkHintCeiling(
+      'de/b1.json',
+      snapshots[2]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(b1.length).toBeGreaterThan(0)
+    expect(b1[0]).toMatch(/hint ceiling/)
+    const b2 = checkHintCeiling(
+      'de/b2.json',
+      snapshots[3]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(b2).toEqual([])
+  })
+
+    test('missing cache path is fail-closed at loader', async () => {
     const { loadEnEasiestCefr } = await import('./hint-ceiling-data')
     const missingPath = path.join(
       tmpdir(),
