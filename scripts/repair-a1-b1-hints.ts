@@ -6,6 +6,7 @@
  * Usage:
  *   bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json
  *   bun run scripts/repair-a1-b1-hints.ts de/a1.json de/a2.json de/b1.json
+ *   bun run scripts/repair-a1-b1-hints.ts pt/a1.json pt/a2.json pt/b1.json
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -70,7 +71,14 @@ function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
     return 'el, la, un, una, y, o, con, para, de, en, es, son, persona, cosa, lugar, comida, agua, casa, trabajo, jugar, grande, pequeño, bueno, malo, joven, viejo'
   }
   if (lang === 'pt') {
-    return 'o, a, um, uma, e, ou, com, para, de, em, é, são, pessoa, coisa, lugar, comida, água, casa, trabalho, jogar, grande, pequeno, bom, mau, jovem, velho'
+    // Avoid A2+ pack lemmas (som, igual, valor, movimento, tamanho, ...) as A1 fillers.
+    if (cefr === 'a1') {
+      return 'o, a, um, uma, e, ou, com, para, de, em, é, são, homem, mulher, criança, gente, lugar, casa, comida, água, ano, dia, tempo, mão, livro, amigo, trabalho, pergunta, corpo, cabelo, boca, café, cama, campo, grande, pequeno, bom, mau, novo, velho, alto, baixo, bonito, fazer, dar, ver, ir, vir, comer, beber, falar, ouvir, chamar, chegar, começar, comprar, correr, brincar'
+    }
+    if (cefr === 'a2') {
+      return 'o, a, um, uma, e, ou, com, para, de, em, é, são, pessoa, coisa, lugar, casa, comida, água, corpo, homem, mulher, criança, gente, grande, pequeno, bom, mau, novo, velho, fazer, dar, ver, ir, vir, comer, beber, falar, ouvir, som, igual, valor, movimento, tamanho'
+    }
+    return 'o, a, um, uma, e, ou, com, para, de, em, é, são, pessoa, coisa, lugar, casa, comida, água, corpo, homem, mulher, criança, gente, grande, pequeno, bom, mau, fazer, dar, ver, ir, vir, conjunto, quantidade, qualidade, veículo, tarefa'
   }
   return 'the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old'
 }
@@ -94,6 +102,28 @@ function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
       return always + ', Gefühl, etwas, Etwas, spektakulär, Triumph, Angelegenheit, Himmel, führt, führen, Eltern, Respekt, Zukunft'
     }
     return always
+  }
+  if (lang === 'pt') {
+    const always =
+      'veículo, estrutura, recipiente, órgão, masculino, feminino, irmão, irmã, romântico, temperatura, assado, colorido, secreto, atividade, relativo, possuir, obrigação, obrigar'
+    if (cefr === 'a1') {
+      // Pack-band + stem-trap surfaces that fail A1 (surface->harder stem).
+      return (
+        always +
+        ', conjunto, quantidade, qualidade, unidade, valor, movimento, tamanho, distância, necessário, ' +
+        'som, sons, igual, ouvido, ouvidos, visão, desejo, anterior, junto, veículo, transporte, superfície, ' +
+        'tarefa, ensino, autoridade, alimento, alimentar, tema, temer, filme, filmar, sentimento, ' +
+        'capacidade, realizar, ação, ações, sexo'
+      )
+    }
+    if (cefr === 'a2') {
+      return (
+        always +
+        ', conjunto, quantidade, qualidade, veículo, transporte, superfície, tarefa, ensino, autoridade, ' +
+        'alimento, alimentar, sentimento, tema, temer, filme, filmar, anterior'
+      )
+    }
+    return always + ', atividade, relativo, possuir, obrigação, obrigar, ensino, ações'
   }
   return 'vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret'
 }
@@ -403,60 +433,122 @@ const DE_HAND_GLOSS: Record<string, Record<string, string>> = {
   },
 }
 
+const PT_HAND_GLOSS: Record<string, Record<string, string>> = {
+  a1: {
+    MÃO: 'a gente escreve com ela',
+    MULHERES: 'pessoas como a mãe',
+    MÚSICA: 'o que a gente ouve e gosta',
+    RUA: 'onde a gente anda na cidade',
+    CÃO: 'bicho de casa que late',
+    GRUPO: 'muita gente no mesmo lugar',
+  },
+  a2: {
+    LIMPO: 'sem terra ou pó',
+  },
+  b1: {},
+}
+
 function localRescueGloss(
   lang: PackLang,
   cefr: PackCefr,
   word: string,
   ctx: ReturnType<typeof ceilingContext>,
 ): string | null {
-  if (lang !== 'de') return null
+  if (lang !== 'de' && lang !== 'pt') return null
   const upper = nfcUpper(word)
-  const hand = DE_HAND_GLOSS[cefr]?.[upper]
   const candidates: string[] = []
-  if (hand) candidates.push(hand)
-  candidates.push(
-    'man macht es',
-    'man kann es machen',
-    'man kann es sehen',
-    'man kann es hören',
-    'man kann es kaufen',
-    'ein Mann',
-    'eine Frau',
-    'ein Kind',
-    'ein Mensch',
-    'viele Leute',
-    'für die Hand',
-    'für den Fuß',
-    'für das Haus',
-    'für die Arbeit',
-    'am Tag',
-    'in der Nacht',
-    'in dem Haus',
-    'auf dem Platz',
-    'der Anfang',
-    'das Ende',
-    'ein Freund',
-    'ein Auto',
-    'ein Buch',
-    'ein Bild',
-    'ein Film',
-    'man gibt es',
-    'man nimmt es',
-    'man sieht es',
-    'man geht hin',
-    'man kommt her',
-    'man wohnt dort',
-    'man arbeitet dort',
-    'man sagt ja',
-    'man sagt nein',
-    'sehr gut',
-    'nicht gut',
-    'sehr groß',
-    'sehr klein',
-    'kurz und klar',
-  )
-  if (/IN$|UNG$|HEIT$|KEIT$/.test(upper)) {
-    candidates.unshift('Leute, die alles machen', 'Leute mit großer Arbeit')
+  if (lang === 'de') {
+    const hand = DE_HAND_GLOSS[cefr]?.[upper]
+    if (hand) candidates.push(hand)
+    candidates.push(
+      'man macht es',
+      'man kann es machen',
+      'man kann es sehen',
+      'man kann es hören',
+      'man kann es kaufen',
+      'ein Mann',
+      'eine Frau',
+      'ein Kind',
+      'ein Mensch',
+      'viele Leute',
+      'für die Hand',
+      'für den Fuß',
+      'für das Haus',
+      'für die Arbeit',
+      'am Tag',
+      'in der Nacht',
+      'in dem Haus',
+      'auf dem Platz',
+      'der Anfang',
+      'das Ende',
+      'ein Freund',
+      'ein Auto',
+      'ein Buch',
+      'ein Bild',
+      'ein Film',
+      'man gibt es',
+      'man nimmt es',
+      'man sieht es',
+      'man geht hin',
+      'man kommt her',
+      'man wohnt dort',
+      'man arbeitet dort',
+      'man sagt ja',
+      'man sagt nein',
+      'sehr gut',
+      'nicht gut',
+      'sehr groß',
+      'sehr klein',
+      'kurz und klar',
+    )
+    if (/IN$|UNG$|HEIT$|KEIT$/.test(upper)) {
+      candidates.unshift('Leute, die alles machen', 'Leute mit großer Arbeit')
+    }
+  } else {
+    const hand = PT_HAND_GLOSS[cefr]?.[upper]
+    if (hand) candidates.push(hand)
+    candidates.push(
+      'a gente faz isso',
+      'a gente pode fazer',
+      'a gente pode ver',
+      'a gente pode ouvir',
+      'a gente pode comprar',
+      'um homem',
+      'uma mulher',
+      'uma criança',
+      'muita gente',
+      'para a mão',
+      'para o pé',
+      'para a casa',
+      'para o trabalho',
+      'no dia',
+      'na noite',
+      'na casa',
+      'no lugar',
+      'o começo',
+      'o fim',
+      'um amigo',
+      'um livro',
+      'um café',
+      'a gente dá',
+      'a gente vê',
+      'a gente vai',
+      'a gente vem',
+      'a gente mora lá',
+      'a gente trabalha lá',
+      'a gente diz sim',
+      'a gente diz não',
+      'muito bom',
+      'não é bom',
+      'muito grande',
+      'muito pequeno',
+      'curto e claro',
+      'algo que a gente faz',
+      'algo que a gente tem',
+      'algo que a gente vê',
+      'algo na casa',
+      'algo no corpo',
+    )
   }
   for (const gloss of candidates) {
     if (glossRejected(lang, word, gloss)) continue
@@ -468,9 +560,9 @@ function localRescueGloss(
 
 async function repairPack(rel: string): Promise<void> {
   const { lang, cefr, file } = parseRel(rel)
-  if (!['en', 'de'].includes(lang) || !['a1', 'a2', 'b1'].includes(cefr)) {
+  if (!['en', 'de', 'pt'].includes(lang) || !['a1', 'a2', 'b1'].includes(cefr)) {
     console.warn(
-      `note: issue #52/#54 ship EN+DE A1–B1; still repairing ${lang}/${cefr}`,
+      `note: issue #52/#54/#53 ship EN+DE+PT A1–B1; still repairing ${lang}/${cefr}`,
     )
   }
   const key = readXaiKey()
@@ -583,7 +675,9 @@ async function repairPack(rel: string): Promise<void> {
           : cefr === 'a2'
             ? `For A2 NEVER write Gefühl (B1) or harder abstract nouns above A2. Person/Ding/Sache are OK at A2. `
             : '')
-      : '') +
+      : lang === 'pt'
+        ? `Write Portuguese only (ADR 0030) — no English glosses or English synonym chips. `
+        : '') +
     `Example easy ${cefr.toUpperCase()}-or-easier ${langName} lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
@@ -921,7 +1015,7 @@ async function repairPack(rel: string): Promise<void> {
 const rels = process.argv.slice(2)
 if (!rels.length) {
   console.error('Usage: bun run scripts/repair-a1-b1-hints.ts <rel> [<rel>...]')
-  console.error('Example: bun run scripts/repair-a1-b1-hints.ts de/a1.json de/a2.json de/b1.json')
+  console.error('Example: bun run scripts/repair-a1-b1-hints.ts pt/a1.json pt/a2.json pt/b1.json')
   process.exit(1)
 }
 for (const rel of rels) {
