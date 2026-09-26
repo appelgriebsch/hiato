@@ -7,6 +7,7 @@
  *   bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json
  *   bun run scripts/repair-a1-b1-hints.ts de/a1.json de/a2.json de/b1.json
  *   bun run scripts/repair-a1-b1-hints.ts pt/a1.json pt/a2.json pt/b1.json
+ *   bun run scripts/repair-a1-b1-hints.ts es/a1.json es/a2.json es/b1.json
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -68,7 +69,15 @@ function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
     return 'Person, Ding, Sache, Gefühl, Ort, Körper, Stück, Idee, Tier, Mann, Frau, Kind, Mensch, groß, klein, gut, machen'
   }
   if (lang === 'es') {
-    return 'el, la, un, una, y, o, con, para, de, en, es, son, persona, cosa, lugar, comida, agua, casa, trabajo, jugar, grande, pequeño, bueno, malo, joven, viejo'
+    // Stem traps: una/unas→UNIR(A2), para→PARIR(B1), esta/este/esto→ESTE(B2).
+    // Prefer un/el/la; never suggest una/para/esta on A1; never para/esta below B1/B2.
+    if (cefr === 'a1') {
+      return 'el, la, un, y, o, con, de, en, por, es, son, hombre, mujer, niño, gente, persona, cosa, lugar, casa, comida, agua, año, día, tiempo, mano, libro, amigo, trabajo, pregunta, cuerpo, boca, café, cama, grande, pequeño, bueno, malo, nuevo, viejo, alto, bajo, bonito, hacer, dar, ver, ir, venir, comer, beber, hablar, oír, llamar, llegar, empezar, comprar, correr, jugar'
+    }
+    if (cefr === 'a2') {
+      return 'el, la, un, una, y, o, con, de, en, por, es, son, persona, cosa, lugar, casa, comida, agua, cuerpo, hombre, mujer, niño, gente, grande, pequeño, bueno, malo, nuevo, viejo, hacer, dar, ver, ir, venir, comer, beber, hablar, oír, sonido, valor, movimiento, cantidad, acción, edificio, espacio'
+    }
+    return 'el, la, un, una, y, o, con, de, en, por, para, es, son, persona, cosa, lugar, casa, comida, agua, cuerpo, hombre, mujer, niño, gente, grande, pequeño, bueno, malo, hacer, dar, ver, ir, venir, objeto, actividad, vehículo, tamaño, documento'
   }
   if (lang === 'pt') {
     // Avoid A2+ pack lemmas (som, igual, valor, movimento, tamanho, ...) as A1 fillers.
@@ -124,6 +133,40 @@ function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
       )
     }
     return always + ', atividade, relativo, possuir, obrigação, obrigar, ensino, ações'
+  }
+  if (lang === 'es') {
+    const always =
+      'vehículo, estructura, recipiente, órgano, masculino, femenino, romántico, temperatura, asado, colorido, secreto, actividad, objeto, sensación, autoridad, documento, militar, legal, esfuerzo, tamaño, prenda, respeto, figura'
+    // Stem traps (wordhoard): una/unas→UNIR(A2), para→PARIR(B1), esta/este/esto/estos/estas→ESTE(B2).
+    const stemTrapsAlways = 'esta, estas, este, esto, estos'
+    if (cefr === 'a1') {
+      return (
+        always +
+        ', ' +
+        stemTrapsAlways +
+        ', una, unas, para, ' +
+        'acción, acciones, cantidad, humano, unidad, edificio, espacio, estado, valor, planeta, hogar, ' +
+        'pareja, entrada, empresa, tema, encuentro, movimiento, distancia, sonido, sonidos, ' +
+        'peligro, imagen, posición, aspecto, detalle, enfermo, enfermos, compartir, comparte, ' +
+        'causa, solución, empleo, moneda, monedas, billete, billetes, letra, letras, ' +
+        'sencillo, sencilla, sencillas, simple, simples, objeto, actividad, vehículo, ' +
+        'sensación, autoridad, tamaño, respeto, calle, calles, callar, rueda, ruedas, rodar, ' +
+        'máquina, máquinas, animal, animales, libro, librar, acuerdo, acordar, cena, cenar, ' +
+        'esposa, esposo, medio, mediar, parte, partir, pelo, pelar, viaje, viajar, comienzo'
+      )
+    }
+    if (cefr === 'a2') {
+      return (
+        always +
+        ', ' +
+        stemTrapsAlways +
+        ', para, ' +
+        'objeto, actividad, vehículo, sensación, autoridad, documento, militar, legal, esfuerzo, ' +
+        'tamaño, prenda, respeto, conexión, escenario, impresión, tribunal, promesa, encargo, ' +
+        'fresco, acceso, paciente, medida, alegría, corriente, anterior'
+      )
+    }
+    return always + ', ' + stemTrapsAlways + ', prenda, figura, rapidez, simpatía, actualidad, lujoso, sinceridad, contexto, empeño, suciedad'
   }
   return 'vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret'
 }
@@ -448,13 +491,69 @@ const PT_HAND_GLOSS: Record<string, Record<string, string>> = {
   b1: {},
 }
 
+/**
+ * Deterministic A1/A2-safe Spanish glosses.
+ * Avoid stem traps: una/unas→UNIR, para→PARIR, esta/este→ESTE.
+ * Prefer un/el/la and phrases with gente/hombre/mujer/niño/casa.
+ */
+const ES_HAND_GLOSS: Record<string, Record<string, string>> = {
+  a1: {
+    CASA: 'el lugar donde vive la gente',
+    DINERO: 'con él la gente compra cosas',
+    HOMBRE: 'un adulto como el padre',
+    MUJER: 'un adulto como la madre',
+    NIÑO: 'un hijo joven',
+    NIÑA: 'la hija joven',
+    TRABAJO: 'lo que la gente hace cada día',
+    AGUA: 'lo que la gente bebe',
+    COMIDA: 'lo que la gente come',
+    TIEMPO: 'los días y los años',
+    DÍA: 'cuando hay sol o luz',
+    AÑO: 'muchos días juntos',
+    MANO: 'con ella la gente escribe',
+    CABEZA: 'donde están los ojos y la boca',
+    CUERPO: 'todo el hombre o la mujer',
+    AMIGO: 'gente que se quiere bien',
+    AMIGA: 'gente que se quiere bien',
+    LIBRO: 'con él la gente lee',
+    COCHE: 'va por la ciudad y lleva gente',
+    AUTO: 'va por la ciudad y lleva gente',
+    AVIÓN: 'vuela alto en el cielo',
+    BARCO: 'va por el agua',
+    PUERTA: 'se abre y se cierra en la casa',
+    MESA: 'en ella se come en la casa',
+    CAMA: 'en ella se duerme',
+    ESCUELA: 'donde los niños aprenden',
+    HOSPITAL: 'donde cuidan a la gente',
+    DOCTOR: 'cuida a la gente enferma',
+    POLICÍA: 'cuida la ciudad y la gente',
+    CIUDAD: 'muchas casas y calles',
+    PUEBLO: 'casas y gente en el campo',
+    PAÍS: 'la tierra de la gente',
+    MUNDO: 'toda la tierra',
+    TIERRA: 'donde camina la gente',
+    CIELO: 'arriba, donde vuela el avión',
+    SOL: 'da luz de día',
+    PERRO: 'bicho de casa que ladra',
+    PROBLEMA: 'algo que no va bien',
+    PREGUNTA: 'lo que se pregunta a alguien',
+    RESPUESTA: 'lo que se dice a la pregunta',
+    HISTORIA: 'lo que se cuenta a la gente',
+    MÚSICA: 'lo que la gente oye y gusta',
+    FOTO: 'lo que se mira de un momento',
+    TELÉFONO: 'con él se habla lejos',
+  },
+  a2: {},
+  b1: {},
+}
+
 function localRescueGloss(
   lang: PackLang,
   cefr: PackCefr,
   word: string,
   ctx: ReturnType<typeof ceilingContext>,
 ): string | null {
-  if (lang !== 'de' && lang !== 'pt') return null
+  if (lang !== 'de' && lang !== 'pt' && lang !== 'es') return null
   const upper = nfcUpper(word)
   const candidates: string[] = []
   if (lang === 'de') {
@@ -504,7 +603,7 @@ function localRescueGloss(
     if (/IN$|UNG$|HEIT$|KEIT$/.test(upper)) {
       candidates.unshift('Leute, die alles machen', 'Leute mit großer Arbeit')
     }
-  } else {
+  } else if (lang === 'pt') {
     const hand = PT_HAND_GLOSS[cefr]?.[upper]
     if (hand) candidates.push(hand)
     candidates.push(
@@ -549,6 +648,53 @@ function localRescueGloss(
       'algo na casa',
       'algo no corpo',
     )
+  } else {
+    const hand = ES_HAND_GLOSS[cefr]?.[upper]
+    if (hand) candidates.push(hand)
+    // Avoid una/para/esta (stem traps). Prefer un/el/la and está (accented).
+    candidates.push(
+      'la gente lo hace',
+      'la gente puede hacerlo',
+      'la gente puede verlo',
+      'la gente puede oírlo',
+      'la gente puede comprarlo',
+      'un hombre',
+      'la mujer',
+      'el niño',
+      'la niña',
+      'mucha gente',
+      'por la mano',
+      'por el pie',
+      'en la casa',
+      'en el trabajo',
+      'en el día',
+      'en la noche',
+      'en el lugar',
+      'el fin',
+      'un amigo',
+      'un café',
+      'la gente da',
+      'la gente ve',
+      'la gente va',
+      'la gente viene',
+      'la gente vive allí',
+      'la gente trabaja allí',
+      'la gente dice sí',
+      'la gente dice no',
+      'muy bueno',
+      'no es bueno',
+      'muy grande',
+      'muy pequeño',
+      'algo que la gente hace',
+      'algo que la gente tiene',
+      'algo que la gente ve',
+      'algo en la casa',
+      'algo en el cuerpo',
+      'donde vive la gente',
+      'con lo que se come',
+      'con lo que se bebe',
+      'con lo que se escribe',
+    )
   }
   for (const gloss of candidates) {
     if (glossRejected(lang, word, gloss)) continue
@@ -560,9 +706,9 @@ function localRescueGloss(
 
 async function repairPack(rel: string): Promise<void> {
   const { lang, cefr, file } = parseRel(rel)
-  if (!['en', 'de', 'pt'].includes(lang) || !['a1', 'a2', 'b1'].includes(cefr)) {
+  if (!['en', 'de', 'pt', 'es'].includes(lang) || !['a1', 'a2', 'b1'].includes(cefr)) {
     console.warn(
-      `note: issue #52/#54/#53 ship EN+DE+PT A1–B1; still repairing ${lang}/${cefr}`,
+      `note: issue #52/#54/#53/#51 ship EN+DE+PT+ES A1–B1; still repairing ${lang}/${cefr}`,
     )
   }
   const key = readXaiKey()
@@ -677,7 +823,14 @@ async function repairPack(rel: string): Promise<void> {
             : '')
       : lang === 'pt'
         ? `Write Portuguese only (ADR 0030) — no English glosses or English synonym chips. `
-        : '') +
+        : lang === 'es'
+          ? `Write Spanish only (ADR 0030) — no English glosses or English synonym chips. Band check uses the easiest Spanish pack of the stem, not PCIC. ` +
+            (cefr === 'a1'
+              ? `For A1 NEVER write una/unas (stems to UNIR=A2), para (stems to PARIR=B1), or esta/este/esto/estos/estas (stems to ESTE=B2). Use un/el/la and está (with accent). Also never acción, cantidad, humano, edificio, hogar, vehículo, objeto, actividad, letra(s), sencillo/a. Prefer hombre/mujer/niño/gente/persona/cosa/lugar/casa. `
+              : cefr === 'a2'
+                ? `For A2 NEVER write para (stems to PARIR=B1) or esta/este/esto (ESTE=B2). una is OK at A2. Never vehículo, objeto, actividad, sensación, or harder B1+ nouns. `
+                : `For B1 NEVER write esta/este/esto/estos/estas (stems to ESTE=B2). para is OK at B1. `)
+          : '') +
     `Example easy ${cefr.toUpperCase()}-or-easier ${langName} lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
@@ -897,7 +1050,7 @@ async function repairPack(rel: string): Promise<void> {
     for (const L of hard) {
       const bad = failingTokenNames(lang, cefr, L.gloss ?? '', [], ctx)
       const avoidExtra =
-        lang === 'de'
+        lang === 'de' || lang === 'es'
           ? `${hardWordsToAvoid(lang, cefr)}, ${bad.join(', ')}`
           : bad.join(', ')
       const prompt =
@@ -908,7 +1061,9 @@ async function repairPack(rel: string): Promise<void> {
         `Use only very easy words (${easyFillerExamples(lang, cefr)}).\n` +
         (lang === 'de'
           ? `NEVER use: etwas, Ding, Sache, Person, Teil, Wasser, Land, Zeug, Gefühl, Körper, Tier, froh, traurig. Prefer: Mann/Frau/Kind/Mensch/Leute/Ort/Platz/Wort/Frage/Haus/Hand/Fuß and phrases like "man macht es", "für den Fuß", "wo die Augen und der Mund sind".\n`
-          : '') +
+          : lang === 'es'
+            ? `NEVER use: una, unas, para, esta, este, esto, estos, estas, acción, cantidad, hogar, edificio, vehículo, objeto, actividad, letra, sencillo. Prefer: un/el/la, está (accented), hombre/mujer/niño/gente/persona/cosa/lugar/casa and phrases like "la gente lo hace", "en la casa", "donde vive la gente".\n`
+            : '') +
         `${GLOSS_STYLE[lang]} Return JSON {"${L.word}":"gloss"}.`
       let rescued = false
       try {
@@ -1015,7 +1170,7 @@ async function repairPack(rel: string): Promise<void> {
 const rels = process.argv.slice(2)
 if (!rels.length) {
   console.error('Usage: bun run scripts/repair-a1-b1-hints.ts <rel> [<rel>...]')
-  console.error('Example: bun run scripts/repair-a1-b1-hints.ts pt/a1.json pt/a2.json pt/b1.json')
+  console.error('Example: bun run scripts/repair-a1-b1-hints.ts es/a1.json es/a2.json es/b1.json')
   process.exit(1)
 }
 for (const rel of rels) {

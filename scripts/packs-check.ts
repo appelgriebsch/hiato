@@ -3,7 +3,7 @@
  * Validate public/packs JSON files — schema, exclusive bands, license matrix,
  * ADR 0023 spoilers, ADR 0026/0028 floors, NSFW denylist, template-gloss,
  * pack-language gloss (ADR 0030), hangman length 3–10, Hunspell membership,
- * person-name gloss gate (#24), hint ceiling (#52/#54/#53 / EN+DE+PT a1–b1).
+ * person-name gloss gate (#24), hint ceiling (#52/#54/#53/#51 / EN+DE+PT+ES a1–b1).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
