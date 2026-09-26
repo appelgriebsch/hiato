@@ -4,7 +4,7 @@
  * Accepts an explicit rel list. Refuses b2/c1/c2 paths and any change to `word`.
  *
  * Usage:
- *   bun run scripts/repair-a1-b1-hints.ts en/a1.json
+ *   bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -242,14 +242,18 @@ function glossRejected(
 }
 
 
-function a1WordList(limit = 120): string {
-  const file = path.join(PACKS, 'en', 'a1.json')
-  const pack = JSON.parse(readFileSync(file, 'utf8')) as WordPack
-  return pack.lemmas
-    .map((L) => L.word.toLowerCase())
-    .sort()
-    .slice(0, limit)
-    .join(', ')
+/** Easy lemma samples for prompts: A1 always, plus pack band when above A1. */
+function easyWordList(cefr: PackCefr, limit = 120): string {
+  const bands: PackCefr[] =
+    cefr === 'a1' ? ['a1'] : cefr === 'a2' ? ['a1', 'a2'] : ['a1', 'a2', 'b1']
+  const words: string[] = []
+  for (const b of bands) {
+    const file = path.join(PACKS, 'en', `${b}.json`)
+    if (!existsSync(file)) continue
+    const pack = JSON.parse(readFileSync(file, 'utf8')) as WordPack
+    for (const L of pack.lemmas) words.push(L.word.toLowerCase())
+  }
+  return [...new Set(words)].sort().slice(0, limit).join(', ')
 }
 
 function failingTokenNames(
@@ -270,8 +274,10 @@ function failingTokenNames(
 
 async function repairPack(rel: string): Promise<void> {
   const { lang, cefr, file } = parseRel(rel)
-  if (lang !== 'en' || cefr !== 'a1') {
-    console.warn(`note: issue #55 ships en/a1 only; still repairing ${lang}/${cefr}`)
+  if (lang !== 'en' || !['a1', 'a2', 'b1'].includes(cefr)) {
+    console.warn(
+      `note: issue #52 ships EN A1–B1; still repairing ${lang}/${cefr}`,
+    )
   }
   const key = readXaiKey()
   if (!key) {
@@ -313,13 +319,13 @@ async function repairPack(rel: string): Promise<void> {
     `${rel}: ${needGloss.length} glosses and ${needSyn.length} synonym rows need repair`,
   )
 
-  const easyWords = a1WordList(150)
+  const easyWords = easyWordList(cefr, 150)
   const ceilingPromptExtra =
     `CRITICAL: every content word in the gloss and every synonym chip MUST be from CEFR ${cefr.toUpperCase()} or easier. ` +
     `Prefer very common easy words (the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old). ` +
     `Do NOT use harder words like vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret. ` +
     `Do not use the answer lemma itself in the gloss or as a synonym chip. ` +
-    `Example easy A1 lemmas you may use: ${easyWords}.`
+    `Example easy ${cefr.toUpperCase()}-or-easier lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
   // --- glosses ---
@@ -335,7 +341,7 @@ async function repairPack(rel: string): Promise<void> {
       `Lemmas:\n${batch.join('\n')}`
     const content = await xaiChat(
       key,
-      'You write concise A1-friendly learner-dictionary glosses in English only. Reply with a single JSON object only.',
+      `You write concise ${cefr.toUpperCase()}-or-easier learner-dictionary glosses in English only. Reply with a single JSON object only.`,
       prompt,
       0.2,
     )
@@ -376,7 +382,7 @@ async function repairPack(rel: string): Promise<void> {
       const batch = glossLeft.slice(i, i + 20).map((L) => L.word)
       const prompt =
         `Language: English (en).\n` +
-        `For each lemma, write a short English learner gloss using ONLY A1 or easier words. ` +
+        `For each lemma, write a short English learner gloss using ONLY ${cefr.toUpperCase()} or easier words. ` +
         `Do not use the lemma. Prefer "a/an/the …" or "to …".\n` +
         `Avoid these harder words if present in a prior attempt: male, female, vehicle, structure, container, organ, sibling, romantic, temperature, roasted, colorful, secret, rules, signs, beans, piece, clothing, worn, other, clothes, set, hot, drink, made, from, low, having.\n` +
         `Use simple words like: person, boy, girl, thing, place, food, water, home, big, small, good, young, old, round, open, long, short.\n` +
@@ -393,7 +399,7 @@ async function repairPack(rel: string): Promise<void> {
       try {
         const content = await xaiChat(
           key,
-          'JSON only. A1-ceiling English glosses. Avoid the headword.',
+          `JSON only. ${cefr.toUpperCase()}-ceiling English glosses. Avoid the headword.`,
           prompt,
           0.4,
         )
@@ -445,7 +451,7 @@ async function repairPack(rel: string): Promise<void> {
       `Lemmas:\n${batch.join('\n')}`
     const content = await xaiChat(
       key,
-      'You write A1-friendly same-language learner synonyms. Reply with a single JSON object only.',
+      `You write ${cefr.toUpperCase()}-or-easier same-language learner synonyms. Reply with a single JSON object only.`,
       prompt,
       0.2,
     )
@@ -485,12 +491,12 @@ async function repairPack(rel: string): Promise<void> {
       const batch = missing.slice(i, i + 20)
       const prompt =
         `Language: English (en).\n` +
-        `JSON object: UPPERCASE lemma → 1–3 close A1-or-easier English synonyms (never the lemma).\n` +
+        `JSON object: UPPERCASE lemma → 1–3 close ${cefr.toUpperCase()}-or-easier English synonyms (never the lemma).\n` +
         `Prefer very common easy words. Use [] only if truly unique.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       const content = await xaiChat(
         key,
-        'JSON only. In-ceiling A1 English synonyms.',
+        `JSON only. In-ceiling ${cefr.toUpperCase()} English synonyms.`,
         prompt,
         0.45,
       )
@@ -536,7 +542,7 @@ async function repairPack(rel: string): Promise<void> {
       const bad = failingTokenNames(lang, cefr, L.gloss ?? '', [], ctx)
       const prompt =
         `Language: English (en).\n` +
-        `Write ONE short A1 learner gloss for ${L.word}.\n` +
+        `Write ONE short ${cefr.toUpperCase()} learner gloss for ${L.word}.\n` +
         `Current gloss: ${JSON.stringify(L.gloss ?? '')}\n` +
         `Do not use the lemma ${L.word}. Avoid these harder words: ${bad.join(', ')}.\n` +
         `Use only very easy words (person, thing, place, food, water, home, big, small, good, young, old, boy, girl, open, long, hot, cold, make, take, give, put).\n` +
@@ -544,7 +550,7 @@ async function repairPack(rel: string): Promise<void> {
       try {
         const content = await xaiChat(
           key,
-          'JSON only. One A1-ceiling English gloss.',
+          `JSON only. One ${cefr.toUpperCase()}-ceiling English gloss.`,
           prompt,
           0.5,
         )
@@ -607,7 +613,7 @@ async function repairPack(rel: string): Promise<void> {
 const rels = process.argv.slice(2)
 if (!rels.length) {
   console.error('Usage: bun run scripts/repair-a1-b1-hints.ts <rel> [<rel>...]')
-  console.error('Example: bun run scripts/repair-a1-b1-hints.ts en/a1.json')
+  console.error('Example: bun run scripts/repair-a1-b1-hints.ts en/a2.json en/b1.json')
   process.exit(1)
 }
 for (const rel of rels) {
