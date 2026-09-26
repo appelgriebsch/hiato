@@ -346,6 +346,14 @@ describe('packs:check hint ceiling enforcement (#52)', () => {
         }),
       },
       {
+        rel: 'en/b1.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'b1',
+          lemmas: [{ word: 'ALARM', gloss: 'a sudden serious warning signal' }],
+        }),
+      },
+      {
         rel: 'en/b2.json',
         pack: pack({
           lang: 'en',
@@ -361,7 +369,14 @@ describe('packs:check hint ceiling enforcement (#52)', () => {
       es: new Map(),
       pt: new Map(),
     }
-    const enTags = new Map<string, string>([['FRIGHTEN', 'c1'], ['TERRIFY', 'c1']])
+    const enTags = new Map<string, string>([
+      ['FRIGHTEN', 'c1'],
+      ['TERRIFY', 'c1'],
+      ['SUDDEN', 'b2'],
+      ['SERIOUS', 'b2'],
+      ['WARNING', 'b2'],
+      ['SIGNAL', 'b2'],
+    ])
     const a1 = checkHintCeiling(
       'en/a1.json',
       snapshots[0]!.pack,
@@ -380,9 +395,18 @@ describe('packs:check hint ceiling enforcement (#52)', () => {
     )
     expect(a2.length).toBeGreaterThan(0)
     expect(a2[0]).toMatch(/hint ceiling/)
+    const b1 = checkHintCeiling(
+      'en/b1.json',
+      snapshots[2]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(b1.length).toBeGreaterThan(0)
+    expect(b1[0]).toMatch(/hint ceiling/)
     const b2 = checkHintCeiling(
       'en/b2.json',
-      snapshots[2]!.pack,
+      snapshots[3]!.pack,
       lemmaEasiestByLang,
       stemCache,
       enTags,

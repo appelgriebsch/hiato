@@ -127,6 +127,41 @@ function bandKey(lemma: string, cefr: string): string {
   return `${nfcUpper(lemma)}::${cefr.toLowerCase()}`
 }
 
+
+/** Delete bare lemma keys (exact + NFC-upper / casefold variants) so expand cannot revive hard leftovers. */
+function deleteBareLemmaKeys(
+  cache: Record<string, unknown>,
+  lemma: string,
+): void {
+  const want = nfcUpper(lemma)
+  for (const key of Object.keys(cache)) {
+    if (key.includes('::')) continue
+    if (nfcUpper(key) === want) delete cache[key]
+  }
+}
+
+/**
+ * After writing band keys, scrub any remaining bare `$1` for keys matching
+ * `^(.+)::(a1|a2|b1)$` (including casing variants of `$1`).
+ */
+function scrubBareKeysWithBandSiblings(
+  cache: Record<string, unknown>,
+): number {
+  const bandRe = /^(.+)::(a1|a2|b1)$/i
+  const toDelete = new Set<string>()
+  for (const k of Object.keys(cache)) {
+    const m = k.match(bandRe)
+    if (!m) continue
+    const want = nfcUpper(m[1]!)
+    for (const key of Object.keys(cache)) {
+      if (key.includes('::')) continue
+      if (nfcUpper(key) === want) toDelete.add(key)
+    }
+  }
+  for (const k of toDelete) delete cache[k]
+  return toDelete.size
+}
+
 type GlossCache = Record<string, string>
 type SynCache = Record<string, string[]>
 
@@ -365,7 +400,7 @@ async function repairPack(rel: string): Promise<void> {
       }
       // store under band key; delete bare lemma key so B2 expand does not reuse A1 gloss
       glossCache[bandKey(w, cefr)] = gloss
-      if (Object.hasOwn(glossCache, w)) delete glossCache[w]
+      deleteBareLemmaKeys(glossCache, w)
       const lemma = pack.lemmas.find((L) => L.word === w)
       if (lemma) lemma.gloss = gloss
     }
@@ -413,7 +448,7 @@ async function repairPack(rel: string): Promise<void> {
           if (glossRejected(lang, w, gloss)) continue
           if (dropFailingTokensFromGloss(lang, cefr, gloss, ctx) === null) continue
           glossCache[bandKey(w, cefr)] = gloss
-          if (Object.hasOwn(glossCache, w)) delete glossCache[w]
+          deleteBareLemmaKeys(glossCache, w)
           const lemma = pack.lemmas.find((L) => L.word === w)
           if (lemma) lemma.gloss = gloss
         }
@@ -469,7 +504,7 @@ async function repairPack(rel: string): Promise<void> {
       if (arr === null) continue
       const chips = filterChipsInCeiling(lang, cefr, w, arr, ctx)
       synCache[bandKey(w, cefr)] = chips
-      if (Object.hasOwn(synCache, w)) delete synCache[w]
+      deleteBareLemmaKeys(synCache, w)
       const lemma = pack.lemmas.find((L) => L.word === w)
       if (lemma) lemma.synonyms = chips.length ? chips : undefined
     }
@@ -511,7 +546,7 @@ async function repairPack(rel: string): Promise<void> {
         const chips = filterChipsInCeiling(lang, cefr, w, arr, ctx)
         if (!chips.length) continue
         synCache[bandKey(w, cefr)] = chips
-        if (Object.hasOwn(synCache, w)) delete synCache[w]
+        deleteBareLemmaKeys(synCache, w)
         const lemma = pack.lemmas.find((L) => L.word === w)
         if (lemma) lemma.synonyms = chips
       }
@@ -567,7 +602,7 @@ async function repairPack(rel: string): Promise<void> {
         }
         L.gloss = gloss
         glossCache[bandKey(L.word, cefr)] = gloss
-        if (Object.hasOwn(glossCache, L.word)) delete glossCache[L.word]
+        deleteBareLemmaKeys(glossCache, L.word)
       } catch (e) {
         console.warn(`  rescue error ${L.word}: ${e}`)
       }
@@ -596,6 +631,16 @@ async function repairPack(rel: string): Promise<void> {
   if (stillHard) {
     throw new Error(`${rel}: ${stillHard} glosses still above ceiling`)
   }
+
+  const glossScrubbed = scrubBareKeysWithBandSiblings(glossCache)
+  const synScrubbed = scrubBareKeysWithBandSiblings(synCache)
+  if (glossScrubbed || synScrubbed) {
+    console.log(
+      `  scrubbed bare keys with band siblings: gloss=${glossScrubbed} syn=${synScrubbed}`,
+    )
+  }
+  saveGlossCache(lang, glossCache)
+  saveSynCache(lang, synCache)
 
   pack.version = (typeof pack.version === 'number' ? pack.version : 0) + 1
   // Cap synonym arrays
