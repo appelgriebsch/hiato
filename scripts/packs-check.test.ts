@@ -1,9 +1,12 @@
 import { describe, expect, test } from 'bun:test'
+import path from 'node:path'
+import { tmpdir } from 'node:os'
 import type { WordPack } from '../src/packs/schema'
 import {
   C2_MIN,
   PACK_MIN,
   checkCompleteness,
+  checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
   checkSynonymCoverage,
@@ -12,6 +15,7 @@ import {
   expectedPackCount,
   requiresCcBySa,
   validatePack,
+  buildLemmaEasiestByLang,
 } from './packs-check-lib'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
@@ -318,5 +322,63 @@ describe('packs:check C1/C2 synonyms', () => {
       }),
     )
     expect(broken.error).toMatch(/broken/)
+  })
+})
+
+
+describe('packs:check hint ceiling enforcement (#55)', () => {
+  test('enforces only en/a1.json; en/a2 with a hard gloss does not error', () => {
+    const snapshots = [
+      {
+        rel: 'en/a1.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [{ word: 'AFRAID', gloss: 'Feeling scared.', synonyms: ['scared'] }],
+        }),
+      },
+      {
+        rel: 'en/a2.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'a2',
+          lemmas: [{ word: 'SCARE', gloss: 'to frighten' }],
+        }),
+      },
+    ]
+    const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
+    const stemCache = {
+      en: new Map([['SCARED', ['SCARE']]]),
+      de: new Map(),
+      es: new Map(),
+      pt: new Map(),
+    }
+    const enTags = new Map<string, string>()
+    const a1 = checkHintCeiling(
+      'en/a1.json',
+      snapshots[0]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(a1.length).toBeGreaterThan(0)
+    expect(a1[0]).toMatch(/hint ceiling/)
+    const a2 = checkHintCeiling(
+      'en/a2.json',
+      snapshots[1]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(a2).toEqual([])
+  })
+
+  test('missing cache path is fail-closed at loader', async () => {
+    const { loadEnEasiestCefr } = await import('./hint-ceiling-data')
+    const missingPath = path.join(
+      tmpdir(),
+      `missing-en-easiest-${process.pid}-${Date.now()}.json`,
+    )
+    expect(() => loadEnEasiestCefr(missingPath)).toThrow(/missing/)
   })
 })

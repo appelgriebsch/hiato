@@ -31,3 +31,14 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
 Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL, MIT AND BSD), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
+
+## Hint ceiling caches (issue #55 / epic #49)
+
+Committed outputs of `bun run scripts/build-hint-ceiling-data.ts` (person-run only — not called from `packs:check`, `bun run build`, or CI). `packs:check` **reads** them and fails closed on a missing file or stamp mismatch; it never rewrites them and never calls `ensureDicts` for this path.
+
+| File | Contents | Provenance |
+|------|----------|------------|
+| `en-easiest-cefr.json` | English headword → easiest CEFR band (minimum of CEFR-J A1–B2 and Octanove C1–C2 per headword) | Adapted from [olp-en-cefrj](https://github.com/openlanguageprofiles/olp-en-cefrj) **CEFR-J Vocabulary Profile** (cite CEFR-J / Tono Lab) and **Octanove Vocabulary Profile** (CC-BY-SA-4.0). Not a verbatim dump; easiest-tag merge only. |
+| `hint-stem-cache.json` | Surface → lemma stems for `en`/`de`/`es`/`pt` | [wordhoard](https://github.com/natema/wordhoard) v0.1.0 `word_form`→`lemma` (CC-BY-SA-4.0) for en/de/es, plus regular affix replay from the build-time Hunspell dictionaries. Does **not** store `cefr_estimate`. Stamp records dictionary package bytes and a wordhoard size/hash fingerprint. |
+
+Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octanove-vocabulary-profile-c1c2-1.0.csv`, `wordhoard-v0.1.0.db`.

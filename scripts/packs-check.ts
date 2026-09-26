@@ -3,13 +3,15 @@
  * Validate public/packs JSON files — schema, exclusive bands, license matrix,
  * ADR 0023 spoilers, ADR 0026/0028 floors, NSFW denylist, template-gloss,
  * pack-language gloss (ADR 0030), hangman length 3–10, Hunspell membership,
- * person-name gloss gate (#24).
+ * person-name gloss gate (#24), hint ceiling (#55).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import {
   C2_MIN,
+  buildLemmaEasiestByLang,
   checkCompleteness,
+  checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
   checkSynonymCoverage,
@@ -25,6 +27,7 @@ import {
   MembershipDictsNeeded,
   writeMembershipCache,
 } from './lang-membership'
+import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -93,6 +96,23 @@ async function checkAll(files: string[]): Promise<boolean> {
 
   errors.push(...checkCompleteness(rels))
   errors.push(...exclusiveConflicts(snapshots))
+
+  // Hint ceiling: read committed caches only (fail closed). Build lemma maps after every pack parsed.
+  let enTags: Map<string, string>
+  let stemCache: ReturnType<typeof loadHintStemCache>
+  try {
+    enTags = loadEnEasiestCefr()
+    stemCache = loadHintStemCache()
+  } catch (e) {
+    console.error(e instanceof Error ? e.message : e)
+    return true
+  }
+  const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
+  for (const { rel, pack } of snapshots) {
+    errors.push(
+      ...checkHintCeiling(rel, pack, lemmaEasiestByLang, stemCache, enTags),
+    )
+  }
 
   if (errors.length) {
     for (const e of errors) console.error(e)
