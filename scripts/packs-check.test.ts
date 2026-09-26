@@ -499,7 +499,7 @@ describe('packs:check hint ceiling enforcement (#52/#54)', () => {
     expect(b2).toEqual([])
   })
 
-    test('missing cache path is fail-closed at loader', async () => {
+  test('missing cache path is fail-closed at loader', async () => {
     const { loadEnEasiestCefr } = await import('./hint-ceiling-data')
     const missingPath = path.join(
       tmpdir(),

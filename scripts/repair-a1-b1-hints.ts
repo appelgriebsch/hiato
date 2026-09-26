@@ -880,13 +880,27 @@ async function repairPack(rel: string): Promise<void> {
     throw new Error(`${rel}: ${stillHard} glosses still above ceiling`)
   }
 
+  // Always write band keys from final pack state (even when unchanged) so scrub
+  // removes bare leftovers for lemmas that did not need repair this run.
+  // Same pattern as #58 / Ask Avery on #59: scrub + always-write-band is enough.
+  let bandGlossWritten = 0
+  let bandSynWritten = 0
+  for (const L of pack.lemmas) {
+    const gk = bandKey(L.word, cefr)
+    if (L.gloss) {
+      glossCache[gk] = L.gloss
+      bandGlossWritten++
+    }
+    synCache[bandKey(L.word, cefr)] = L.synonyms ?? []
+    bandSynWritten++
+    deleteBareLemmaKeys(glossCache, L.word)
+    deleteBareLemmaKeys(synCache, L.word)
+  }
   const glossScrubbed = scrubBareKeysWithBandSiblings(glossCache)
   const synScrubbed = scrubBareKeysWithBandSiblings(synCache)
-  if (glossScrubbed || synScrubbed) {
-    console.log(
-      `  scrubbed bare keys with band siblings: gloss=${glossScrubbed} syn=${synScrubbed}`,
-    )
-  }
+  console.log(
+    `  band keys written: gloss=${bandGlossWritten} syn=${bandSynWritten}; scrubbed bare: gloss=${glossScrubbed} syn=${synScrubbed}`,
+  )
   saveGlossCache(lang, glossCache)
   saveSynCache(lang, synCache)
 
