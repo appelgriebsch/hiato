@@ -4,9 +4,9 @@ import {
   cefrAbove,
   hintCeilingViolations,
 } from './hint-ceiling'
-import { existsSync, renameSync } from 'node:fs'
+import path from 'node:path'
+import { tmpdir } from 'node:os'
 import {
-  EN_EASIEST_CEFR_PATH,
   HINT_CEILING_SCHEMA,
   computeHintCeilingStamp,
   loadEnEasiestCefr,
@@ -14,17 +14,11 @@ import {
 
 describe('hint ceiling helper', () => {
   test('missing cache fails closed', () => {
-    if (!existsSync(EN_EASIEST_CEFR_PATH)) {
-      expect(() => loadEnEasiestCefr()).toThrow(/missing/)
-      return
-    }
-    const tmp = `${EN_EASIEST_CEFR_PATH}.bak-test`
-    renameSync(EN_EASIEST_CEFR_PATH, tmp)
-    try {
-      expect(() => loadEnEasiestCefr()).toThrow(/missing/)
-    } finally {
-      renameSync(tmp, EN_EASIEST_CEFR_PATH)
-    }
+    const missingPath = path.join(
+      tmpdir(),
+      `missing-en-easiest-${process.pid}-${Date.now()}.json`,
+    )
+    expect(() => loadEnEasiestCefr(missingPath)).toThrow(/missing/)
   })
   test('higher stem fails A1', () => {
     const lemmaEasiestBand = new Map([

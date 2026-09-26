@@ -1,4 +1,6 @@
 import { describe, expect, test } from 'bun:test'
+import path from 'node:path'
+import { tmpdir } from 'node:os'
 import type { WordPack } from '../src/packs/schema'
 import {
   C2_MIN,
@@ -371,8 +373,12 @@ describe('packs:check hint ceiling enforcement (#55)', () => {
     expect(a2).toEqual([])
   })
 
-  test('missing cache path is fail-closed at loader (unit)', async () => {
-    const { EN_EASIEST_CEFR_PATH } = await import('./hint-ceiling-data')
-    expect(EN_EASIEST_CEFR_PATH.endsWith('en-easiest-cefr.json')).toBe(true)
+  test('missing cache path is fail-closed at loader', async () => {
+    const { loadEnEasiestCefr } = await import('./hint-ceiling-data')
+    const missingPath = path.join(
+      tmpdir(),
+      `missing-en-easiest-${process.pid}-${Date.now()}.json`,
+    )
+    expect(() => loadEnEasiestCefr(missingPath)).toThrow(/missing/)
   })
 })

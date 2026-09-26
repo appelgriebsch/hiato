@@ -165,22 +165,24 @@ function assertStamp(
 }
 
 /** Fail closed if missing or stamp mismatch. */
-export function loadEnEasiestCefr(): Map<string, string> {
-  if (!existsSync(EN_EASIEST_CEFR_PATH)) {
+export function loadEnEasiestCefr(
+  file = EN_EASIEST_CEFR_PATH,
+): Map<string, string> {
+  if (!existsSync(file)) {
     throw new Error(
-      `missing ${EN_EASIEST_CEFR_PATH} — run bun run scripts/build-hint-ceiling-data.ts`,
+      `missing ${file} — run bun run scripts/build-hint-ceiling-data.ts`,
     )
   }
-  const parsed = JSON.parse(readFileSync(EN_EASIEST_CEFR_PATH, 'utf8')) as EnFile
+  const parsed = JSON.parse(readFileSync(file, 'utf8')) as EnFile
   const wh = readWordhoardMeta(parsed)
-  assertStamp(EN_EASIEST_CEFR_PATH, parsed.schema, parsed.stamp, wh)
+  assertStamp(file, parsed.schema, parsed.stamp, wh)
   if (!parsed.tags || typeof parsed.tags !== 'object') {
-    throw new Error(`${EN_EASIEST_CEFR_PATH}: tags must be an object`)
+    throw new Error(`${file}: tags must be an object`)
   }
   const out = new Map<string, string>()
   for (const [k, v] of Object.entries(parsed.tags as Record<string, unknown>)) {
     if (typeof v !== 'string') {
-      throw new Error(`${EN_EASIEST_CEFR_PATH}: tag for ${k} is not a string`)
+      throw new Error(`${file}: tag for ${k} is not a string`)
     }
     out.set(k, v.toLowerCase())
   }
