@@ -326,7 +326,7 @@ describe('packs:check C1/C2 synonyms', () => {
 })
 
 
-describe('packs:check hint ceiling enforcement (#52/#54/#53)', () => {
+describe('packs:check hint ceiling enforcement (#52/#54/#53/#51)', () => {
   test('enforces en/a1–b1; en/b2 with a hard gloss does not error', () => {
     const snapshots = [
       {
@@ -576,6 +576,91 @@ describe('packs:check hint ceiling enforcement (#52/#54/#53)', () => {
     expect(b1[0]).toMatch(/hint ceiling/)
     const b2 = checkHintCeiling(
       'pt/b2.json',
+      snapshots[3]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(b2).toEqual([])
+  })
+
+
+  test('enforces es/a1–b1; es/b2 with a hard gloss does not error', () => {
+    const snapshots = [
+      {
+        rel: 'es/a1.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'a1',
+          lemmas: [{ word: 'CASA', gloss: 'Un edificio donde vive la gente.', synonyms: ['hogar'] }],
+        }),
+      },
+      {
+        rel: 'es/a2.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'a2',
+          lemmas: [{ word: 'HOGAR', gloss: 'Un vehículo de la familia.' }],
+        }),
+      },
+      {
+        rel: 'es/b1.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'b1',
+          lemmas: [{ word: 'VEHÍCULO', gloss: 'Una prenda para viajar.' }],
+        }),
+      },
+      {
+        rel: 'es/b2.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'b2',
+          lemmas: [
+            { word: 'EDIFICIO', gloss: 'x' },
+            { word: 'VEHÍCULO', gloss: 'x' },
+            { word: 'PRENDA', gloss: 'x' },
+            { word: 'FAMILIA', gloss: 'x' },
+          ],
+        }),
+      },
+    ]
+    const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
+    const stemCache = {
+      en: new Map(),
+      de: new Map(),
+      es: new Map(),
+      pt: new Map(),
+    }
+    const a1 = checkHintCeiling(
+      'es/a1.json',
+      snapshots[0]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(a1.length).toBeGreaterThan(0)
+    expect(a1[0]).toMatch(/hint ceiling/)
+    const a2 = checkHintCeiling(
+      'es/a2.json',
+      snapshots[1]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(a2.length).toBeGreaterThan(0)
+    expect(a2[0]).toMatch(/hint ceiling/)
+    const b1 = checkHintCeiling(
+      'es/b1.json',
+      snapshots[2]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(b1.length).toBeGreaterThan(0)
+    expect(b1[0]).toMatch(/hint ceiling/)
+    const b2 = checkHintCeiling(
+      'es/b2.json',
       snapshots[3]!.pack,
       lemmaEasiestByLang,
       stemCache,
