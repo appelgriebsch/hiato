@@ -39,6 +39,15 @@ export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
   if (EN_FRAMES.test(g)) return true
   if (EN_ONLY.test(g)) return true
   if (EN_A_FRAME.test(g)) return true
+  // Short English dictionary frames that otherwise look like valid romance-language copy.
+  if (lang !== 'en' && /^a\s+[\p{L}'-]+\.?$/iu.test(g)) return true
+  if (lang !== 'en' && /\bready for\b/i.test(g)) return true
+  if (lang !== 'en' && /\bofficial in charge\b/i.test(g)) return true
+  if (
+    (lang === 'pt' || lang === 'es' || lang === 'de') &&
+    /^[A-Za-z ]+$/.test(g) &&
+    /^(father|mother|ready for use|usual or regular)$/i.test(g)
+  ) return true
   // Skip German preposition "an …"; English "an apple" still matches for other langs.
   if (lang !== 'de' && EN_AN_FRAME.test(g)) return true
   if (lang === 'de' && /^a\s/i.test(g)) return true

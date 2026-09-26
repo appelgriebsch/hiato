@@ -675,7 +675,9 @@ async function repairPack(rel: string): Promise<void> {
           : cefr === 'a2'
             ? `For A2 NEVER write Gefühl (B1) or harder abstract nouns above A2. Person/Ding/Sache are OK at A2. `
             : '')
-      : '') +
+      : lang === 'pt'
+        ? `Write Portuguese only (ADR 0030) — no English glosses or English synonym chips. `
+        : '') +
     `Example easy ${cefr.toUpperCase()}-or-easier ${langName} lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
