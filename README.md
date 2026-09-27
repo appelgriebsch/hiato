@@ -47,7 +47,9 @@ See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 - **Rollback:** `hiato-production` — previous successful production deployment only
 - Commit **`bun.lock`** only; no npm/pnpm lockfiles
 
-## License notes
+## License
+
+Original application source, documentation, and brand assets are [MIT](LICENSE) (Copyright (c) 2026 Andreas Gerlach). See `NOTICE` for what that grant does not cover.
 
 Word packs ship with per-source attribution (license bands in `src/packs/licenses.ts` / `NOTICE`). Portuguese packs are CC-BY-SA at all levels; EN C1/C2 and DE/ES B2–C2 are CC-BY-SA; EN B2 is CEFR-J citation / CC0 (not share-alike).
 

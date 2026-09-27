@@ -1,6 +1,15 @@
 Hiato — third-party notices
 ===========================
 
+Application source
+------------------
+Original application source, documentation, and brand assets in this
+repository are under the MIT License (see LICENSE). Copyright (c) 2026
+Andreas Gerlach.
+
+That grant does not relicense the materials below. Each keeps the license
+named here and in the file that ships it.
+
 Word packs
 ----------
 Per-language licenses and attribution ship in each pack JSON
@@ -20,7 +29,21 @@ License bands (ADR 0029):
 
 Gloss and synonym copy is original to Hiato. Frequency selection also draws
 on hermitdave/FrequencyWords (MIT). Packs are curated learner lists, not
-verbatim dumps of any proprietary wordlist (ADR 0026).
+verbatim dumps of any proprietary wordlist (ADR 0026). Pack JSON stays under
+the `license` field inside each file (CC0-1.0 or CC-BY-SA-4.0). Share-alike
+applies to the redistributed CC-BY-SA lemma lists.
+
+Derived source caches (not the PWA bundle)
+------------------------------------------
+These committed files adapt third-party datasets and stay under those terms
+(ADR 0029, scripts/data/README.md):
+
+  scripts/data/en-easiest-cefr.json — easiest-tag merge of the CEFR-J
+  Vocabulary Profile (cite Tono Lab) and the Octanove Vocabulary Profile
+  (CC-BY-SA-4.0).
+  scripts/data/hint-stem-cache.json — surface-to-lemma stems from wordhoard
+  v0.1.0 (CC-BY-SA-4.0) plus regular affix replay. Not a copy of the
+  Hunspell dictionaries.
 
 Build-time spellcheck (not shipped)
 -----------------------------------
