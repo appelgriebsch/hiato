@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
 import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
+import { PocketSheet } from '@/components/PocketSheet'
 import { StreakChip } from '@/components/StreakChip'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
+import { listPocketStored } from '@/lib/pocket'
+import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
@@ -33,6 +37,17 @@ export function Home() {
       ? isDailyComplete(selectedLang, selectedCefr, dateKey)
       : false
   const [practiceOk, setPracticeOk] = useState(true)
+  const [pocketCount, setPocketCount] = useState(() =>
+    prefs ? listPocketStored(prefs.lang, prefs.cefr).length : 0,
+  )
+  const [pocketOpen, setPocketOpen] = useState(false)
+  const [pocketCleared, setPocketCleared] = useState(false)
+  const clearedRef = useRef<HTMLParagraphElement>(null)
+
+  useLayoutEffect(() => {
+    if (!pocketCleared) return
+    clearedRef.current?.focus()
+  }, [pocketCleared])
 
   useEffect(() => {
     let cancelled = false
@@ -134,6 +149,36 @@ export function Home() {
                 Practice isn’t available — this pack only has today’s daily word.
               </p>
             ) : null}
+            {pocketCount > 0 ? (
+              <Button
+                variant="outline"
+                fullWidth
+                className="mt-2"
+                onClick={() => setPocketOpen(true)}
+              >
+                Pocket ({pocketCount})
+              </Button>
+            ) : pocketCleared ? (
+              <p
+                ref={clearedRef}
+                tabIndex={-1}
+                role="status"
+                className="mt-2 text-center text-sm text-accent-fg"
+              >
+                Pocket cleared
+              </p>
+            ) : null}
+            <PocketSheet
+              lang={prefs.lang}
+              cefr={prefs.cefr}
+              open={pocketOpen}
+              onClose={() => setPocketOpen(false)}
+              onCount={(n) => {
+                setPocketCount(n)
+                if (n === 0) setPocketCleared(true)
+              }}
+              onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
+            />
           </>
         ) : null}
       </Card>

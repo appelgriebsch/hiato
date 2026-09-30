@@ -32,6 +32,25 @@ export function pocketConfirmLabel(oldest: { gloss?: string }): string {
     : 'your oldest pocket entry'
 }
 
+/**
+ * Gloss-only row label for the pocket sheet (#85).
+ * No lemma field — an empty gloss must not fall back to the spelling.
+ */
+export function pocketListLabel(entry: { gloss?: string }): string {
+  return typeof entry.gloss === 'string' && entry.gloss.trim().length > 0
+    ? entry.gloss
+    : 'Meaning not saved'
+}
+
+/**
+ * Pocket retry route (#84 load effect keys off `seed`).
+ * One `encodeURIComponent` on the raw id — do not also run URLSearchParams,
+ * which would double-encode `|`.
+ */
+export function pocketRetryHref(id: string, seed: number): string {
+  return `/play?mode=pocket&id=${encodeURIComponent(id)}&seed=${seed}`
+}
+
 export type ConfirmReCheckDecision = 'commit' | 'duplicate' | 'refresh'
 
 /**
