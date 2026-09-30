@@ -104,7 +104,6 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     expect(src).toContain('role="dialog"')
     expect(src).toContain('aria-modal="true"')
     expect(src).toContain('Pocket is full ({POCKET_CAP}).')
-    // Save path must not call recordDailyWin
     const commitAt = src.indexOf('const commitSave = useCallback')
     const commitEnd = src.indexOf('}, [lang, cefr, word, gloss])', commitAt)
     expect(commitAt).toBeGreaterThan(0)
@@ -113,5 +112,36 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     expect(commitBody).toContain('addToPocket')
     expect(commitBody).not.toMatch(/recordDailyWin\s*\(/)
     expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
+  })
+})
+
+describe('Play pocket mode (gh-84 / ADR 0034)', () => {
+  test('mode=pocket wires canPlay gate, win remove, manual Remove; no recordDailyWin', async () => {
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain("from '@/lib/pocket-play'")
+    expect(src).toContain("raw === 'pocket'")
+    expect(src).toContain('canPlayPocketEntry')
+    expect(src).toContain('findPocketEntryById')
+    expect(src).toContain('parsePocketEntryId')
+    expect(src).toContain('pocketOutcomeOnFinish')
+    expect(src).toContain('removeFromPocket')
+    expect(src).toContain('Remove from pocket')
+    expect(src).toContain(
+      '/play?mode=pocket&id=${encodeURIComponent(pocketId)}&seed=${Date.now()}',
+    )
+    expect(src).toContain('This pocket link isn’t valid.')
+    expect(src).toContain(
+      'Today’s daily is already won — pocket retry waits until tomorrow.',
+    )
+    expect(src).toContain("Pocket doesn’t affect your streak")
+    expect(src).toContain('setActivePocketId(null)')
+    const endAt = src.indexOf('const endGame = useCallback')
+    const endDeps = src.indexOf('[mode, persistDaily, activePocketId]', endAt)
+    expect(endAt).toBeGreaterThan(0)
+    expect(endDeps).toBeGreaterThan(endAt)
+    const endBody = src.slice(endAt, endDeps)
+    expect(endBody).toContain("mode === 'pocket'")
+    expect(endBody).toContain('removeFromPocket')
+    expect(endBody).not.toMatch(/recordDailyWin\s*\(/)
   })
 })

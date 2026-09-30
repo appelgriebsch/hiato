@@ -21,6 +21,7 @@ import {
   isDiacriticHintReady,
   isPracticeAvailable,
   isWon,
+  lemmaIdentity,
   localDateKey,
   pickDailyLemma,
   pickPracticeLemma,
@@ -32,8 +33,15 @@ import {
   addToPocket,
   listPocketStored,
   pocketEntryId,
+  removeFromPocket,
   POCKET_CAP,
 } from '@/lib/pocket'
+import {
+  canPlayPocketEntry,
+  findPocketEntryById,
+  parsePocketEntryId,
+  pocketOutcomeOnFinish,
+} from '@/lib/pocket-play'
 import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
@@ -51,10 +59,12 @@ import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
-type PlayMode = 'daily' | 'practice'
+type PlayMode = 'daily' | 'practice' | 'pocket'
 
 function parseMode(raw: string | null): PlayMode {
-  return raw === 'practice' ? 'practice' : 'daily'
+  if (raw === 'practice') return 'practice'
+  if (raw === 'pocket') return 'pocket'
+  return 'daily'
 }
 
 function parseSeed(raw: string | null): number {
@@ -63,18 +73,25 @@ function parseSeed(raw: string | null): number {
   return Number.isFinite(n) ? n : 0
 }
 
+function modeBadgeLabel(mode: PlayMode): string {
+  if (mode === 'daily') return 'Daily'
+  if (mode === 'pocket') return 'Pocket'
+  return 'Practice'
+}
+
 export function Play() {
   const nav = useNavigate()
   const [params] = useSearchParams()
   const mode = parseMode(params.get('mode'))
   const practiceSeed = parseSeed(params.get('seed'))
+  const pocketParamId = parsePocketEntryId(params.get('id'))
   const prefs = getPrefs()
   const lang = prefs?.lang
   const cefr = prefs?.cefr
   // Freeze the local date when a round opens so a midnight tick cannot
   // remount/reseed pickDaily, persist, or alreadyPlayed. Recapture only
-  // when the round identity (mode/seed/lang/cefr) changes.
-  const roundId = `${mode}|${practiceSeed}|${lang ?? ''}|${cefr ?? ''}`
+  // when the round identity (mode/seed/pocket id/lang/cefr) changes.
+  const roundId = `${mode}|${practiceSeed}|${pocketParamId ?? ''}|${lang ?? ''}|${cefr ?? ''}`
   const dateFreezeRef = useRef({ roundId, dateKey: localDateKey() })
   if (dateFreezeRef.current.roundId !== roundId) {
     dateFreezeRef.current = { roundId, dateKey: localDateKey() }
@@ -96,6 +113,7 @@ export function Play() {
   const [practiceOk, setPracticeOk] = useState(true)
   const [shakeKey, setShakeKey] = useState<string | null>(null)
   const [streakPulse, setStreakPulse] = useState(false)
+  const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
 
@@ -175,6 +193,7 @@ export function Play() {
     setError(null)
     setFinished(null)
     setAlreadyPlayed(false)
+    setActivePocketId(null)
 
     void loadPack(lang, cefr)
       .then((pack) => {
@@ -207,6 +226,72 @@ export function Play() {
           if (isWon(initial)) {
             setFinished('win')
             persistDaily('win', entry)
+          } else {
+            setFinished(null)
+          }
+          setLoading(false)
+          return
+        }
+
+        if (mode === 'pocket') {
+          if (!pocketParamId) {
+            setWordEntry(null)
+            setError('This pocket link isn’t valid.')
+            setLoading(false)
+            return
+          }
+          const slot = listPocketStored(lang, cefr)
+          const pocketEntry = findPocketEntryById(slot, pocketParamId)
+          if (!pocketEntry) {
+            setWordEntry(null)
+            setError('That pocket word is gone.')
+            setLoading(false)
+            return
+          }
+          const daily = pickDailyLemma(pack.lemmas, dateKey, lang, cefr)
+          const rec = getDailyRecord(lang, cefr)
+          const dailyCompleted =
+            rec && rec.dateKey === dateKey && rec.completed
+              ? { won: rec.won, word: rec.word }
+              : null
+          if (
+            !canPlayPocketEntry(pocketEntry.word, {
+              dateKey,
+              dailyWord: daily.word,
+              dailyCompleted,
+            })
+          ) {
+            setWordEntry(null)
+            const wonTodayDaily =
+              Boolean(dailyCompleted?.won) &&
+              lemmaIdentity(pocketEntry.word) === lemmaIdentity(daily.word)
+            setError(
+              wonTodayDaily
+                ? 'Today’s daily is already won — pocket retry waits until tomorrow.'
+                : 'Today’s daily isn’t ready for pocket retry — finish or miss it first.',
+            )
+            setLoading(false)
+            return
+          }
+          const entry: PackLemma = {
+            word: pocketEntry.word,
+            gloss: pocketEntry.gloss,
+          }
+          const initial = buildInitialCells(entry.word, cefr)
+          setActivePocketId(pocketEntry.id)
+          setWordEntry(entry)
+          setCells(initial)
+          setUsedCorrect(correctKeysFromCells(initial))
+          setUsedWrong(new Set())
+          setLives(TOTAL_LIVES)
+          setMisses(0)
+          setHintUsed(false)
+          // Prefill win still clears pocket — never recordDailyWin.
+          if (isWon(initial)) {
+            setFinished('win')
+            if (pocketOutcomeOnFinish(true) === 'remove') {
+              removeFromPocket(pocketEntry.id)
+            }
           } else {
             setFinished(null)
           }
@@ -247,7 +332,7 @@ export function Play() {
     return () => {
       cancelled = true
     }
-  }, [dateKey, lang, cefr, mode, practiceSeed, persistDaily])
+  }, [dateKey, lang, cefr, mode, practiceSeed, pocketParamId, persistDaily])
 
   const showHint = useMemo(() => {
     if (!wordEntry) return false
@@ -261,8 +346,17 @@ export function Play() {
     (result: 'win' | 'lose', entry: PackLemma) => {
       setFinished(result)
       if (mode === 'daily') persistDaily(result, entry)
+      // Pocket: win removes; lose keeps. Never streaks / Clerk / D1.
+      if (
+        mode === 'pocket' &&
+        activePocketId &&
+        pocketOutcomeOnFinish(result === 'win') === 'remove'
+      ) {
+        removeFromPocket(activePocketId)
+        setActivePocketId(null)
+      }
     },
-    [mode, persistDaily],
+    [mode, persistDaily, activePocketId],
   )
 
   function onKey(letter: string) {
@@ -286,7 +380,9 @@ export function Play() {
       if (won) endGame('win', r.wordEntry)
     } else {
       const usedWrong = new Set(r.usedWrong).add(k)
-      const misses = r.misses + (isDiacriticHintMiss(r.cells, r.wordEntry.word, letter) ? 1 : 0)
+      const misses =
+        r.misses +
+        (isDiacriticHintMiss(r.cells, r.wordEntry.word, letter) ? 1 : 0)
       const lives = r.lives - 1
       const lost = lives <= 0
       roundRef.current = {
@@ -489,7 +585,7 @@ export function Play() {
           mode === 'daily' ? (
             <Badge tone="accent">Daily</Badge>
           ) : (
-            <Badge>Practice</Badge>
+            <Badge>{modeBadgeLabel(mode)}</Badge>
           )
         }
         right={<StreakChip count={streak} pulse={streakPulse} />}
@@ -506,7 +602,11 @@ export function Play() {
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-16">
           <div className="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-2 border-line border-t-accent" />
           <p className="text-sm text-ink-muted">
-            {mode === 'daily' ? 'Loading today’s word…' : 'Loading a practice word…'}
+            {mode === 'daily'
+              ? 'Loading today’s word…'
+              : mode === 'pocket'
+                ? 'Loading pocket word…'
+                : 'Loading a practice word…'}
           </p>
         </div>
       )}
@@ -514,9 +614,18 @@ export function Play() {
       {error && !loading && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-12 text-center">
           <p className="text-sm text-danger">{error}</p>
-          <Button variant="secondary" onClick={() => window.location.reload()}>
-            Retry
+          <Button
+            fullWidth
+            variant={mode === 'pocket' ? undefined : 'secondary'}
+            onClick={() => nav('/')}
+          >
+            Back home
           </Button>
+          {mode !== 'pocket' ? (
+            <Button variant="ghost" onClick={() => window.location.reload()}>
+              Retry
+            </Button>
+          ) : null}
         </div>
       )}
 
@@ -556,6 +665,8 @@ export function Play() {
               streakPulse={streakPulse}
               practiceOk={practiceOk}
               onPractice={goPractice}
+              pocketId={activePocketId}
+              onPocketCleared={() => setActivePocketId(null)}
             />
           ) : (
             <Keyboard
@@ -604,6 +715,16 @@ export function Play() {
               ) : null}
             </div>
           )}
+          {!finished && mode === 'pocket' && (
+            <div className="mt-6 text-center">
+              <Link
+                to="/"
+                className="text-sm font-medium text-ink-muted hover:text-ink"
+              >
+                ← Home
+              </Link>
+            </div>
+          )}
         </>
       )}
     </Layout>
@@ -622,6 +743,8 @@ function EndCard({
   streakPulse,
   practiceOk,
   onPractice,
+  pocketId,
+  onPocketCleared,
 }: {
   won: boolean
   mode: PlayMode
@@ -634,6 +757,8 @@ function EndCard({
   streakPulse: boolean
   practiceOk: boolean
   onPractice: () => void
+  pocketId: string | null
+  onPocketCleared: () => void
 }) {
   const nav = useNavigate()
   const showSave = shouldShowPocketSave(mode, won)
@@ -642,6 +767,7 @@ function EndCard({
   >('idle')
   const [oldestLabel, setOldestLabel] = useState('')
   const [snapshotOldestId, setSnapshotOldestId] = useState('')
+  const [pocketRemoved, setPocketRemoved] = useState(false)
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
@@ -695,6 +821,13 @@ function EndCard({
     setSnapshotOldestId('')
   }, [lang, cefr, word, snapshotOldestId, commitSave])
 
+  const onManualRemove = useCallback(() => {
+    if (!pocketId) return
+    removeFromPocket(pocketId)
+    setPocketRemoved(true)
+    onPocketCleared()
+  }, [pocketId, onPocketCleared])
+
   const prevSavePhase = useRef(savePhase)
 
   // W2: focus Confirm on enter; restore Save (or blur) on leave
@@ -728,13 +861,16 @@ function EndCard({
   }, [savePhase, cancelConfirm])
 
   const confirming = showSave && savePhase === 'confirm'
+  const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
+  const endBadge =
+    mode === 'daily' ? ' · Daily' : mode === 'pocket' ? ' · Pocket' : ' · Practice'
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
       <div className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center">
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
           {won ? 'You got it' : 'Out of lives'}
-          {mode === 'daily' ? ' · Daily' : ' · Practice'}
+          {endBadge}
         </Badge>
         <p className="mt-3 text-sm text-ink-muted">The word was</p>
         <p className="mt-1 text-lg font-semibold tracking-wide text-ink">{word}</p>
@@ -761,6 +897,12 @@ function EndCard({
         {mode === 'practice' && (
           <p className="mt-2 text-xs text-ink-faint">
             Practice doesn’t affect your streak
+          </p>
+        )}
+        {mode === 'pocket' && (
+          <p className="mt-2 text-xs text-ink-faint">
+            Pocket doesn’t affect your streak
+            {won || pocketRemoved ? ' · cleared from pocket' : ''}
           </p>
         )}
       </Card>
@@ -809,8 +951,21 @@ function EndCard({
               </Button>
             )
           ) : null}
+          {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
+            <Button
+              fullWidth
+              onClick={() =>
+                nav(
+                  `/play?mode=pocket&id=${encodeURIComponent(pocketId)}&seed=${Date.now()}`,
+                )
+              }
+            >
+              Retry
+            </Button>
+          ) : null}
           <Button
             fullWidth
+            variant={mode === 'pocket' && !won ? 'secondary' : undefined}
             onClick={() =>
               nav('/share', {
                 state: buildShareCardPayload({
@@ -820,22 +975,34 @@ function EndCard({
                   dateKey,
                   word,
                   won,
-                  mode,
+                  mode: shareMode,
                 }),
               })
             }
           >
             Share
           </Button>
-          <Button
-            fullWidth
-            variant="secondary"
-            onClick={onPractice}
-            disabled={!practiceOk}
-          >
-            {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
-          </Button>
-          {!practiceOk ? (
+          {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
+            <Button fullWidth variant="outline" onClick={onManualRemove}>
+              Remove from pocket
+            </Button>
+          ) : null}
+          {mode === 'pocket' && pocketRemoved ? (
+            <p className="text-center text-sm text-accent-fg" role="status">
+              Removed from pocket
+            </p>
+          ) : null}
+          {mode !== 'pocket' ? (
+            <Button
+              fullWidth
+              variant="secondary"
+              onClick={onPractice}
+              disabled={!practiceOk}
+            >
+              {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
+            </Button>
+          ) : null}
+          {mode !== 'pocket' && !practiceOk ? (
             <p className="text-center text-xs text-ink-faint">
               Practice isn’t available — this pack only has today’s daily word.
             </p>
