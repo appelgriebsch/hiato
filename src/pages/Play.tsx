@@ -42,6 +42,7 @@ import {
   listPocketStored,
   pocketEntryId,
   removeFromPocket,
+  repairPocket,
   POCKET_CAP,
 } from '@/lib/pocket'
 import {
@@ -243,6 +244,7 @@ export function Play() {
         }
 
         if (mode === 'pocket') {
+          repairPocket()
           if (!pocketParamId) {
             setWordEntry(null)
             setError('This pocket link isn’t valid.')
@@ -789,6 +791,8 @@ function EndCard({
     // Pocket only — never touches streaks, Clerk, or D1.
     const result = addToPocket({ lang, cefr, word, gloss })
     setPocketCount(listPocketStored(lang, cefr).length)
+    // Quota / private mode: the word was not stored, so this stays on Save.
+    if (!result.added && !result.duplicate) return
     setSavePhase(result.duplicate ? 'duplicate' : 'saved')
   }, [lang, cefr, word, gloss])
 
