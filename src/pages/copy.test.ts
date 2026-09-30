@@ -127,9 +127,14 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(src).toContain('removeFromPocket')
     expect(src).toContain('Remove from pocket')
     expect(src).toContain(
-      '/play?mode=pocket&id=${encodeURIComponent(pocketId)}',
+      '/play?mode=pocket&id=${encodeURIComponent(pocketId)}&seed=${Date.now()}',
+    )
+    expect(src).toContain('This pocket link isn’t valid.')
+    expect(src).toContain(
+      'Today’s daily is already won — pocket retry waits until tomorrow.',
     )
     expect(src).toContain("Pocket doesn’t affect your streak")
+    expect(src).toContain('setActivePocketId(null)')
     const endAt = src.indexOf('const endGame = useCallback')
     const endDeps = src.indexOf('[mode, persistDaily, activePocketId]', endAt)
     expect(endAt).toBeGreaterThan(0)

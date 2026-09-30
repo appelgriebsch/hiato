@@ -7,6 +7,7 @@ import type { PocketEntry } from './pocket'
  */
 
 export type DailyGateSnapshot = {
+  /** Caller-owned local day; not read by canPlayPocketEntry (identity + completion only). */
   dateKey: string
   /** Today's daily lemma for the active lang×CEFR. */
   dailyWord: string

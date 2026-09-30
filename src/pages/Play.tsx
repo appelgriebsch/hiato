@@ -21,6 +21,7 @@ import {
   isDiacriticHintReady,
   isPracticeAvailable,
   isWon,
+  lemmaIdentity,
   localDateKey,
   pickDailyLemma,
   pickPracticeLemma,
@@ -235,7 +236,7 @@ export function Play() {
         if (mode === 'pocket') {
           if (!pocketParamId) {
             setWordEntry(null)
-            setError('Missing pocket entry — open Retry from your pocket list.')
+            setError('This pocket link isn’t valid.')
             setLoading(false)
             return
           }
@@ -261,8 +262,13 @@ export function Play() {
             })
           ) {
             setWordEntry(null)
+            const wonTodayDaily =
+              Boolean(dailyCompleted?.won) &&
+              lemmaIdentity(pocketEntry.word) === lemmaIdentity(daily.word)
             setError(
-              'Today’s daily isn’t ready for pocket retry — finish (or miss) it first.',
+              wonTodayDaily
+                ? 'Today’s daily is already won — pocket retry waits until tomorrow.'
+                : 'Today’s daily isn’t ready for pocket retry — finish or miss it first.',
             )
             setLoading(false)
             return
@@ -347,6 +353,7 @@ export function Play() {
         pocketOutcomeOnFinish(result === 'win') === 'remove'
       ) {
         removeFromPocket(activePocketId)
+        setActivePocketId(null)
       }
     },
     [mode, persistDaily, activePocketId],
@@ -607,7 +614,11 @@ export function Play() {
       {error && !loading && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-12 text-center">
           <p className="text-sm text-danger">{error}</p>
-          <Button fullWidth variant="secondary" onClick={() => nav('/')}>
+          <Button
+            fullWidth
+            variant={mode === 'pocket' ? undefined : 'secondary'}
+            onClick={() => nav('/')}
+          >
             Back home
           </Button>
           {mode !== 'pocket' ? (
@@ -655,6 +666,7 @@ export function Play() {
               practiceOk={practiceOk}
               onPractice={goPractice}
               pocketId={activePocketId}
+              onPocketCleared={() => setActivePocketId(null)}
             />
           ) : (
             <Keyboard
@@ -732,6 +744,7 @@ function EndCard({
   practiceOk,
   onPractice,
   pocketId,
+  onPocketCleared,
 }: {
   won: boolean
   mode: PlayMode
@@ -745,6 +758,7 @@ function EndCard({
   practiceOk: boolean
   onPractice: () => void
   pocketId: string | null
+  onPocketCleared: () => void
 }) {
   const nav = useNavigate()
   const showSave = shouldShowPocketSave(mode, won)
@@ -811,7 +825,8 @@ function EndCard({
     if (!pocketId) return
     removeFromPocket(pocketId)
     setPocketRemoved(true)
-  }, [pocketId])
+    onPocketCleared()
+  }, [pocketId, onPocketCleared])
 
   const prevSavePhase = useRef(savePhase)
 
@@ -937,21 +952,11 @@ function EndCard({
             )
           ) : null}
           {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
-            <Button fullWidth variant="secondary" onClick={onManualRemove}>
-              Remove from pocket
-            </Button>
-          ) : null}
-          {mode === 'pocket' && pocketRemoved ? (
-            <p className="text-center text-sm text-accent-fg" role="status">
-              Removed from pocket
-            </p>
-          ) : null}
-          {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
             <Button
               fullWidth
               onClick={() =>
                 nav(
-                  `/play?mode=pocket&id=${encodeURIComponent(pocketId)}`,
+                  `/play?mode=pocket&id=${encodeURIComponent(pocketId)}&seed=${Date.now()}`,
                 )
               }
             >
@@ -960,6 +965,7 @@ function EndCard({
           ) : null}
           <Button
             fullWidth
+            variant={mode === 'pocket' && !won ? 'secondary' : undefined}
             onClick={() =>
               nav('/share', {
                 state: buildShareCardPayload({
@@ -976,6 +982,16 @@ function EndCard({
           >
             Share
           </Button>
+          {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
+            <Button fullWidth variant="outline" onClick={onManualRemove}>
+              Remove from pocket
+            </Button>
+          ) : null}
+          {mode === 'pocket' && pocketRemoved ? (
+            <p className="text-center text-sm text-accent-fg" role="status">
+              Removed from pocket
+            </p>
+          ) : null}
           {mode !== 'pocket' ? (
             <Button
               fullWidth

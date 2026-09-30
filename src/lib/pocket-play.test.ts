@@ -85,15 +85,35 @@ describe('canPlayPocketEntry (ADR 0018 / #84)', () => {
     ).toBe(true)
   })
 
-  test('lemma identity — case/accent folded via lemmaIdentity', () => {
-    // pickDaily and pocket both store display forms; identity must match
+  test('lemma identity — ASCII case folded via lemmaIdentity', () => {
+    // Accents are NOT folded (Café ≠ cafe); case is.
     expect(
-      canPlayPocketEntry('Café', {
+      canPlayPocketEntry('Daily', {
         dateKey,
-        dailyWord: 'cafe',
-        dailyCompleted: { won: false, word: 'Café' },
+        dailyWord: 'daily',
+        dailyCompleted: { won: false, word: 'DAILY' },
       }),
     ).toBe(true)
+  })
+
+  test('won daily same identity → false', () => {
+    expect(
+      canPlayPocketEntry('daily', {
+        dateKey,
+        dailyWord: 'daily',
+        dailyCompleted: { won: true, word: 'Daily' },
+      }),
+    ).toBe(false)
+  })
+
+  test('stale rec.word ≠ entry identity → false even when dailyWord matches', () => {
+    expect(
+      canPlayPocketEntry('daily', {
+        dateKey,
+        dailyWord: 'daily',
+        dailyCompleted: { won: false, word: 'other' },
+      }),
+    ).toBe(false)
   })
 })
 
