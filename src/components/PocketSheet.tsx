@@ -27,6 +27,8 @@ export function PocketSheet({
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
   const focusRetryAt = useRef<number | null>(null)
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
   const slotKey = `${lang}\0${cefr}`
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [entries, setEntries] = useState<PocketEntry[]>([])
@@ -40,9 +42,19 @@ export function PocketSheet({
   }
 
   useLayoutEffect(() => {
-    if (!open) return
     const dialog = dialogRef.current
+    if (!open) {
+      if (dialog?.open) dialog.close()
+      return
+    }
     if (!dialog) return
+    if (entries.length === 0) {
+      // Only after this open has snapshotted storage. Empty is not a clear.
+      if (loadedFor !== slotKey) return
+      if (dialog.open) dialog.close()
+      onCloseRef.current()
+      return
+    }
     const retryAt = focusRetryAt.current
     if (retryAt !== null) {
       focusRetryAt.current = null
@@ -55,7 +67,7 @@ export function PocketSheet({
     openerRef.current = active instanceof HTMLElement ? active : null
     restoreFocusRef.current = true
     if (!dialog.open) dialog.showModal()
-  }, [open, entries])
+  }, [open, entries, loadedFor, slotKey])
 
   useEffect(() => {
     const dialog = dialogRef.current

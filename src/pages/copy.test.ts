@@ -103,6 +103,25 @@ describe('Home pocket control (gh-85)', () => {
     expect(src).not.toContain('to="/pocket"')
     expect(src).not.toContain('Pocket (0)')
   })
+
+  test('count is read beside getStreakCount during render, not a useState cache', async () => {
+    const src = await pageSrc('Home.tsx')
+    const streakAt = src.indexOf(
+      'getStreakCount(selectedLang, selectedCefr, dateKey)',
+    )
+    const countAt = src.indexOf(
+      'listPocketStored(selectedLang, selectedCefr)',
+      streakAt,
+    )
+    const returnAt = src.indexOf('return (', streakAt)
+    expect(streakAt).toBeGreaterThan(0)
+    expect(countAt).toBeGreaterThan(streakAt)
+    expect(returnAt).toBeGreaterThan(countAt)
+    expect(src).not.toMatch(/useState\(\(\)\s*=>[\s\S]{0,240}listPocketStored/)
+    expect(src).toMatch(
+      /useEffect\(\(\) => \{[\s\S]*repairPocket\(\)[\s\S]*\}, \[selectedLang, selectedCefr\]\)/,
+    )
+  })
 })
 
 describe('Pocket sheet (gh-85)', () => {
@@ -152,8 +171,23 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     expect(commitEnd).toBeGreaterThan(commitAt)
     const commitBody = src.slice(commitAt, commitEnd)
     expect(commitBody).toContain('addToPocket')
+    expect(commitBody).toContain('if (!result.added && !result.duplicate) return false')
     expect(commitBody).not.toMatch(/recordDailyWin\s*\(/)
     expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
+    const confirmAt = src.indexOf('const onConfirmReplace = useCallback')
+    const confirmEnd = src.indexOf(
+      '}, [lang, cefr, word, snapshotOldestId, commitSave])',
+      confirmAt,
+    )
+    expect(confirmAt).toBeGreaterThan(0)
+    expect(confirmEnd).toBeGreaterThan(confirmAt)
+    const confirmBody = src.slice(confirmAt, confirmEnd)
+    const storedAt = confirmBody.indexOf('const stored = commitSave()')
+    const bailAt = confirmBody.indexOf('if (!stored) return', storedAt)
+    const clearAt = confirmBody.indexOf("setOldestLabel('')", bailAt)
+    expect(storedAt).toBeGreaterThan(0)
+    expect(bailAt).toBeGreaterThan(storedAt)
+    expect(clearAt).toBeGreaterThan(bailAt)
   })
 })
 
@@ -177,6 +211,12 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     )
     expect(src).toContain("Pocket doesn’t affect your streak")
     expect(src).toContain('setActivePocketId(null)')
+    const pocketBranch = src.indexOf("if (mode === 'pocket') {")
+    const repairAt = src.indexOf('repairPocket()', pocketBranch)
+    const listAt = src.indexOf('listPocketStored(lang, cefr)', pocketBranch)
+    expect(pocketBranch).toBeGreaterThan(0)
+    expect(repairAt).toBeGreaterThan(pocketBranch)
+    expect(listAt).toBeGreaterThan(repairAt)
     const endAt = src.indexOf('const endGame = useCallback')
     const endDeps = src.indexOf('[mode, persistDaily, activePocketId]', endAt)
     expect(endAt).toBeGreaterThan(0)

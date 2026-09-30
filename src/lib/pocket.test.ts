@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 import { lemmaIdentity } from '../engine'
+import { DAILY_KEY } from './daily-record'
 import {
   POCKET_CAP,
   POCKET_KEY,
@@ -13,6 +14,7 @@ import {
   pocketSlot,
   removeFromPocket,
   removePocketEntry,
+  repairPocket,
   type PocketEntry,
 } from './pocket'
 import { STREAKS_KEY } from './streaks'
@@ -306,5 +308,352 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     const next = removeFromPocket('missing-id')
     expect(next).toHaveLength(1)
     expect(mem.get(POCKET_KEY)).toBe(before)
+  })
+})
+
+function storedRow(
+  lang: PocketEntry['lang'],
+  cefr: PocketEntry['cefr'],
+  word: string,
+  addedAt: number,
+) {
+  return {
+    id: pocketEntryId(lang, cefr, word),
+    lang,
+    cefr,
+    word,
+    addedAt,
+  }
+}
+
+function countWrites(): { sets: number } {
+  const seen = { sets: 0 }
+  const orig = localStorage.setItem.bind(localStorage)
+  localStorage.setItem = (key: string, value: string) => {
+    seen.sets += 1
+    orig(key, value)
+  }
+  return seen
+}
+
+describe('pocket repair (#86)', () => {
+  let mem: Map<string, string>
+
+  beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
+    mem.clear()
+  })
+
+  test('unreadable values repair to an empty v1 envelope after a pure read', () => {
+    const samples = [
+      '{not json',
+      '',
+      'null',
+      '[]',
+      JSON.stringify({ v: '1', entries: [] }),
+    ]
+    for (const raw of samples) {
+      mem.set(POCKET_KEY, raw)
+      const writes = countWrites()
+      expect(loadPocket()).toEqual([])
+      expect(listPocketStored('en', 'a1')).toEqual([])
+      expect(mem.get(POCKET_KEY)).toBe(raw)
+      expect(writes.sets).toBe(0)
+      expect(repairPocket()).toEqual([])
+      expect(mem.get(POCKET_KEY)).toBe('{"v":1,"entries":[]}')
+    }
+  })
+
+  test('a missing key stays absent and does not call setItem', () => {
+    const writes = countWrites()
+    expect(mem.has(POCKET_KEY)).toBe(false)
+    expect(loadPocket()).toEqual([])
+    expect(listPocketStored('de', 'b1')).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(mem.has(POCKET_KEY)).toBe(false)
+    expect(writes.sets).toBe(0)
+  })
+
+  test('getItem throwing does not create the key', () => {
+    let sets = 0
+    let removes = 0
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      writable: true,
+      value: {
+        getItem: () => {
+          throw new Error('disabled')
+        },
+        setItem: () => {
+          sets += 1
+        },
+        removeItem: () => {
+          removes += 1
+        },
+      },
+    })
+    expect(loadPocket()).toEqual([])
+    expect(listPocketStored('en', 'a1')).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(addToPocket({ lang: 'en', cefr: 'a1', word: 'tree', addedAt: 1 }).added).toBe(
+      false,
+    )
+    expect(removeFromPocket('any')).toEqual([])
+    expect(sets).toBe(0)
+    expect(removes).toBe(0)
+  })
+
+  test('v greater than 1 reads empty and does not change the stored string', () => {
+    const raw = JSON.stringify({
+      v: 2,
+      entries: [{ word: 'x', lang: 'en', cefr: 'a1', addedAt: 1 }],
+    })
+    mem.set(POCKET_KEY, raw)
+    const writes = countWrites()
+    expect(loadPocket()).toEqual([])
+    expect(listPocketStored('en', 'a1')).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(addToPocket({ lang: 'en', cefr: 'a1', word: 'tree', addedAt: 3 }).added).toBe(
+      false,
+    )
+    expect(removeFromPocket(pocketEntryId('en', 'a1', 'x'))).toEqual([])
+    expect(mem.get(POCKET_KEY)).toBe(raw)
+    expect(writes.sets).toBe(0)
+  })
+
+  test('one bad row beside one good row keeps the good row and rewrites v1', () => {
+    const good = storedRow('en', 'a1', 'ok', 1)
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: [good, { lang: 'en' }],
+      }),
+    )
+    const before = mem.get(POCKET_KEY)
+    expect(loadPocket().map((e) => e.word)).toEqual(['ok'])
+    expect(mem.get(POCKET_KEY)).toBe(before)
+    expect(repairPocket()).toHaveLength(1)
+    const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+      v: number
+      entries: PocketEntry[]
+    }
+    expect(stored.v).toBe(POCKET_VERSION)
+    expect(stored.entries).toHaveLength(1)
+    expect(stored.entries[0]!.word).toBe('ok')
+    expect(stored.entries[0]!.id).toBe(good.id)
+  })
+
+  test('over-cap slot persists the five newest and leaves the other slot', () => {
+    const other = storedRow('de', 'a1', 'Hund', 50)
+    const words = ['a', 'b', 'c', 'd', 'e', 'f']
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: [
+          storedRow('en', 'a1', 'a', 1),
+          other,
+          ...words.slice(1).map((word, index) =>
+            storedRow('en', 'a1', word, index + 2),
+          ),
+        ],
+      }),
+    )
+    const repaired = repairPocket()
+    expect(repaired.map((e) => `${e.lang}:${e.word}`)).toEqual([
+      'de:Hund',
+      'en:b',
+      'en:c',
+      'en:d',
+      'en:e',
+      'en:f',
+    ])
+    const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+      entries: PocketEntry[]
+    }
+    expect(stored.entries.map((e) => `${e.lang}:${e.word}`)).toEqual([
+      'de:Hund',
+      'en:b',
+      'en:c',
+      'en:d',
+      'en:e',
+      'en:f',
+    ])
+    expect(stored.entries[0]).toMatchObject(other)
+    expect(listPocket(stored.entries, 'en', 'a1')).toHaveLength(POCKET_CAP)
+    expect(listPocket(stored.entries, 'de', 'a1')).toEqual([
+      expect.objectContaining(other),
+    ])
+  })
+
+  test('equal addedAt keeps the five newest by id, not the earliest rows', () => {
+    const words = ['fig', 'elder', 'date', 'cherry', 'banana', 'apple']
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: words.map((word) => storedRow('en', 'a1', word, 10)),
+      }),
+    )
+    expect(repairPocket().map((e) => e.word)).toEqual([
+      'fig',
+      'elder',
+      'date',
+      'cherry',
+      'banana',
+    ])
+  })
+
+  test('a second read of a clean envelope does not call setItem', () => {
+    const pretty = '{ "v": 1, "extra": true, "entries": [] }'
+    mem.set(POCKET_KEY, pretty)
+    const writes = countWrites()
+    expect(loadPocket()).toEqual([])
+    expect(listPocketStored('en', 'a1')).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(writes.sets).toBe(0)
+    expect(mem.get(POCKET_KEY)).toBe(pretty)
+
+    addToPocket({ lang: 'en', cefr: 'a1', word: 'tree', addedAt: 1 })
+    const clean = mem.get(POCKET_KEY)
+    const after = countWrites()
+    loadPocket()
+    listPocketStored('en', 'a1')
+    repairPocket()
+    repairPocket()
+    expect(after.sets).toBe(0)
+    expect(mem.get(POCKET_KEY)).toBe(clean)
+  })
+
+  test('setItem throwing on an unusable envelope returns [] and removes it', () => {
+    mem.set(POCKET_KEY, '{not json')
+    localStorage.setItem = () => {
+      throw new Error('quota')
+    }
+    expect(() => repairPocket()).not.toThrow()
+    expect(repairPocket()).toEqual([])
+    expect(mem.has(POCKET_KEY)).toBe(false)
+  })
+
+  test('addToPocket does not report added when setItem throws', () => {
+    localStorage.setItem = () => {
+      throw new Error('quota')
+    }
+    const result = addToPocket({
+      lang: 'en',
+      cefr: 'a1',
+      word: 'tree',
+      addedAt: 1,
+    })
+    expect(result.added).toBe(false)
+    expect(result.duplicate).toBe(false)
+    expect(result.entries.map((e) => e.word)).toEqual(['tree'])
+    expect(mem.has(POCKET_KEY)).toBe(false)
+  })
+
+  test('setItem throwing on a salvage of good rows returns the clamped list', () => {
+    const entries = ['a', 'b', 'c', 'd', 'e', 'f'].map((word, index) =>
+      storedRow('en', 'a1', word, index + 1),
+    )
+    const raw = JSON.stringify({ v: 1, entries })
+    mem.set(POCKET_KEY, raw)
+    localStorage.setItem = () => {
+      throw new Error('quota')
+    }
+    const repaired = repairPocket()
+    expect(repaired.map((e) => e.word)).toEqual(['b', 'c', 'd', 'e', 'f'])
+    expect(mem.get(POCKET_KEY)).toBe(raw)
+  })
+
+  test('corrupt key is repaired by addToPocket and by removeFromPocket', () => {
+    mem.set(POCKET_KEY, '{not json')
+    const added = addToPocket({
+      lang: 'en',
+      cefr: 'a1',
+      word: 'tree',
+      addedAt: 4,
+    })
+    expect(added.added).toBe(true)
+    expect(added.entries.map((e) => e.word)).toEqual(['tree'])
+    expect(JSON.parse(mem.get(POCKET_KEY)!).entries[0].word).toBe('tree')
+
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: [{ ...storedRow('en', 'a1', 'ok', 1), id: 'forged' }],
+      }),
+    )
+    const duplicate = addToPocket({
+      lang: 'en',
+      cefr: 'a1',
+      word: 'ok',
+      addedAt: 99,
+    })
+    expect(duplicate.duplicate).toBe(true)
+    expect(duplicate.added).toBe(false)
+    expect(JSON.parse(mem.get(POCKET_KEY)!).entries[0].id).toBe(
+      pocketEntryId('en', 'a1', 'ok'),
+    )
+    expect(JSON.parse(mem.get(POCKET_KEY)!).entries[0].addedAt).toBe(1)
+
+    mem.set(POCKET_KEY, '[]')
+    expect(removeFromPocket('missing-id')).toEqual([])
+    expect(mem.get(POCKET_KEY)).toBe('{"v":1,"entries":[]}')
+  })
+
+  test('repair rewrites only hiato.pocket and drops ttl fields', () => {
+    const streaks = '{"en|a1":{"count":4,"lastWinDate":"2026-09-01"}}'
+    const daily = '{"en|a1":{"dateKey":"2026-09-01","won":true}}'
+    const prefs = '{"lang":"en","cefr":"a1"}'
+    mem.set(STREAKS_KEY, streaks)
+    mem.set(DAILY_KEY, daily)
+    mem.set('hiato.prefs', prefs)
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        ttl: 30,
+        expiresAt: 123,
+        entries: [storedRow('en', 'a1', 'ok', 1), { broken: true }],
+      }),
+    )
+    repairPocket()
+    expect(mem.get(STREAKS_KEY)).toBe(streaks)
+    expect(mem.get(DAILY_KEY)).toBe(daily)
+    expect(mem.get('hiato.prefs')).toBe(prefs)
+    expect([...mem.keys()].sort()).toEqual(
+      [DAILY_KEY, POCKET_KEY, STREAKS_KEY, 'hiato.prefs'].sort(),
+    )
+    const pocket = JSON.parse(mem.get(POCKET_KEY)!) as Record<string, unknown>
+    expect(pocket.expiresAt).toBeUndefined()
+    expect(pocket.ttl).toBeUndefined()
+    expect(pocket.v).toBe(1)
+    expect(pocket.entries).toHaveLength(1)
+  })
+
+  test('repair skips the write when the raw string changes before setItem', () => {
+    mem.set(POCKET_KEY, '{not json')
+    const orig = localStorage.getItem.bind(localStorage)
+    let reads = 0
+    localStorage.getItem = (key: string) => {
+      if (key === POCKET_KEY) {
+        reads += 1
+        if (reads >= 2) {
+          const next = '{"v":2,"entries":[]}'
+          mem.set(POCKET_KEY, next)
+          return next
+        }
+      }
+      return orig(key)
+    }
+    expect(repairPocket()).toEqual([])
+    expect(mem.get(POCKET_KEY)).toBe('{"v":2,"entries":[]}')
+    expect(reads).toBeGreaterThanOrEqual(2)
   })
 })

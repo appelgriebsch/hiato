@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
-import { listPocketStored } from '@/lib/pocket'
+import { listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
 import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
@@ -32,22 +32,36 @@ export function Home() {
     selectedLang && selectedCefr
       ? getStreakCount(selectedLang, selectedCefr, dateKey)
       : 0
+  const pocketCount =
+    selectedLang && selectedCefr
+      ? listPocketStored(selectedLang, selectedCefr).length
+      : 0
+  const slotKey =
+    selectedLang && selectedCefr ? pocketSlot(selectedLang, selectedCefr) : null
   const dailyDone =
     selectedLang && selectedCefr
       ? isDailyComplete(selectedLang, selectedCefr, dateKey)
       : false
   const [practiceOk, setPracticeOk] = useState(true)
-  const [pocketCount, setPocketCount] = useState(() =>
-    prefs ? listPocketStored(prefs.lang, prefs.cefr).length : 0,
-  )
+  const [, bumpPocket] = useState(0)
   const [pocketOpen, setPocketOpen] = useState(false)
-  const [pocketCleared, setPocketCleared] = useState(false)
+  const [clearedSlot, setClearedSlot] = useState<string | null>(null)
+  // A slot change must not paint the previous slot's "Pocket cleared".
+  if (clearedSlot !== null && clearedSlot !== slotKey) {
+    setClearedSlot(null)
+  }
+  const pocketCleared = clearedSlot !== null && clearedSlot === slotKey
   const clearedRef = useRef<HTMLParagraphElement>(null)
 
   useLayoutEffect(() => {
     if (!pocketCleared) return
     clearedRef.current?.focus()
   }, [pocketCleared])
+
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) return
+    repairPocket()
+  }, [selectedLang, selectedCefr])
 
   useEffect(() => {
     let cancelled = false
@@ -174,8 +188,15 @@ export function Home() {
               open={pocketOpen}
               onClose={() => setPocketOpen(false)}
               onCount={(n) => {
-                setPocketCount(n)
-                if (n === 0) setPocketCleared(true)
+                bumpPocket((tick) => tick + 1)
+                if (
+                  n === 0 &&
+                  selectedLang &&
+                  selectedCefr &&
+                  listPocketStored(selectedLang, selectedCefr).length === 0
+                ) {
+                  setClearedSlot(pocketSlot(selectedLang, selectedCefr))
+                }
               }}
               onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
             />

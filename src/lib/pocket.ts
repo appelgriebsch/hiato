@@ -122,50 +122,132 @@ export function removePocketEntry(
 }
 
 function parseEntry(raw: unknown): PocketEntry | null {
-  if (!raw || typeof raw !== 'object') return null
-  const o = raw as Record<string, unknown>
-  if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return null
-  if (typeof o.word !== 'string' || o.word.length === 0) return null
-  if (typeof o.addedAt !== 'number' || !Number.isFinite(o.addedAt)) return null
-  // Never trust stored id — corrupt localStorage could fork duplicates.
-  const id = pocketEntryId(o.lang, o.cefr, o.word)
-  const entry: PocketEntry = {
-    id,
-    lang: o.lang,
-    cefr: o.cefr,
-    word: o.word,
-    addedAt: o.addedAt,
+  try {
+    if (!raw || typeof raw !== 'object') return null
+    const o = raw as Record<string, unknown>
+    if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return null
+    if (typeof o.word !== 'string' || o.word.length === 0) return null
+    if (typeof o.addedAt !== 'number' || !Number.isFinite(o.addedAt)) return null
+    // Never trust stored id — corrupt localStorage could fork duplicates.
+    // A throw from lemmaIdentity drops this row only.
+    const id = pocketEntryId(o.lang, o.cefr, o.word)
+    const entry: PocketEntry = {
+      id,
+      lang: o.lang,
+      cefr: o.cefr,
+      word: o.word,
+      addedAt: o.addedAt,
+    }
+    if (typeof o.gloss === 'string' && o.gloss.length > 0) entry.gloss = o.gloss
+    return entry
+  } catch {
+    return null
   }
-  if (typeof o.gloss === 'string' && o.gloss.length > 0) entry.gloss = o.gloss
-  return entry
 }
 
-function parseEnvelope(raw: unknown): PocketEnvelope {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-    return { v: POCKET_VERSION, entries: [] }
+function storedIdMatches(raw: unknown, id: string): boolean {
+  if (!raw || typeof raw !== 'object') return false
+  return (raw as Record<string, unknown>).id === id
+}
+
+/** Drop oldest ids past cap. Survivors keep their envelope order. */
+function clampSlots(entries: PocketEntry[]): {
+  entries: PocketEntry[]
+  dropped: boolean
+} {
+  const drop = new Set<string>()
+  const bySlot = new Map<string, PocketEntry[]>()
+  for (const entry of entries) {
+    const key = pocketSlot(entry.lang, entry.cefr)
+    const group = bySlot.get(key)
+    if (group) group.push(entry)
+    else bySlot.set(key, [entry])
   }
-  const o = raw as Record<string, unknown>
-  if (o.v !== POCKET_VERSION) return { v: POCKET_VERSION, entries: [] }
-  if (!Array.isArray(o.entries)) return { v: POCKET_VERSION, entries: [] }
+  for (const group of bySlot.values()) {
+    if (group.length <= POCKET_CAP) continue
+    const oldestFirst = group
+      .slice()
+      .sort((a, b) => a.addedAt - b.addedAt || a.id.localeCompare(b.id))
+    for (const entry of oldestFirst.slice(0, group.length - POCKET_CAP)) {
+      drop.add(entry.id)
+    }
+  }
+  if (drop.size === 0) return { entries, dropped: false }
+  return {
+    entries: entries.filter((entry) => !drop.has(entry.id)),
+    dropped: true,
+  }
+}
+
+type PocketReadKind = 'missing' | 'blocked' | 'future' | 'clean' | 'dirty'
+
+type PocketRead = {
+  kind: PocketReadKind
+  /** Present key's raw string. Null when missing or getItem threw. */
+  raw: string | null
+  entries: PocketEntry[]
+  /** Shape is unusable (not a row salvage). v > 1 is not unusable. */
+  unusable: boolean
+}
+
+/**
+ * Normalize hiato.pocket. Does not write.
+ * Empty string is unreadable, not missing. v > 1 stays on disk and
+ * reads as an empty list so a newer schema is neither shown nor crashed on.
+ */
+function readPocket(): PocketRead {
+  let raw: string | null
+  try {
+    raw = localStorage.getItem(POCKET_KEY)
+  } catch {
+    return { kind: 'blocked', raw: null, entries: [], unusable: false }
+  }
+  if (raw === null) {
+    return { kind: 'missing', raw: null, entries: [], unusable: false }
+  }
+
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(raw) as unknown
+  } catch {
+    return { kind: 'dirty', raw, entries: [], unusable: true }
+  }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    return { kind: 'dirty', raw, entries: [], unusable: true }
+  }
+
+  const record = parsed as Record<string, unknown>
+  const version = record.v
+  if (typeof version !== 'number' || !Number.isFinite(version)) {
+    return { kind: 'dirty', raw, entries: [], unusable: true }
+  }
+  if (version > POCKET_VERSION) {
+    return { kind: 'future', raw, entries: [], unusable: false }
+  }
+  if (version !== POCKET_VERSION || !Array.isArray(record.entries)) {
+    return { kind: 'dirty', raw, entries: [], unusable: true }
+  }
+
+  let dirty = false
   const entries: PocketEntry[] = []
   const seen = new Set<string>()
-  for (const item of o.entries) {
-    const e = parseEntry(item)
-    if (!e || seen.has(e.id)) continue
-    seen.add(e.id)
-    entries.push(e)
+  for (const item of record.entries) {
+    const entry = parseEntry(item)
+    if (!entry || seen.has(entry.id)) {
+      dirty = true
+      continue
+    }
+    seen.add(entry.id)
+    if (!storedIdMatches(item, entry.id)) dirty = true
+    entries.push(entry)
   }
-  return { v: POCKET_VERSION, entries }
-}
-
-/** Read current envelope; callers that RMW must accept last-write-wins. */
-function readEnvelope(): PocketEnvelope {
-  try {
-    const raw = localStorage.getItem(POCKET_KEY)
-    if (!raw) return { v: POCKET_VERSION, entries: [] }
-    return parseEnvelope(JSON.parse(raw) as unknown)
-  } catch {
-    return { v: POCKET_VERSION, entries: [] }
+  const clamped = clampSlots(entries)
+  if (clamped.dropped) dirty = true
+  return {
+    kind: dirty ? 'dirty' : 'clean',
+    raw,
+    entries: clamped.entries,
+    unusable: false,
   }
 }
 
@@ -173,17 +255,57 @@ function readEnvelope(): PocketEnvelope {
  * Persist envelope. Concurrent tabs are last-write-wins (no merge) —
  * same guest baseline as streaks/daily localStorage RMW.
  */
-function writeEnvelope(env: PocketEnvelope): void {
+function writeEnvelope(env: PocketEnvelope): boolean {
   try {
     localStorage.setItem(POCKET_KEY, JSON.stringify(env))
+    return true
   } catch {
     /* quota / private mode */
+    return false
   }
 }
 
-/** All stored entries (any slot). */
+/**
+ * Write a normalized envelope only when the key is present and dirty
+ * (unusable shape other than v > 1, a dropped row, a non-canonical id,
+ * or a slot over cap). Key order, whitespace, and unknown fields are not
+ * dirt. Re-reads immediately before setItem and skips if the bytes moved.
+ */
+function repairFromRead(read: PocketRead): PocketEntry[] {
+  if (read.kind !== 'dirty' || read.raw === null) return read.entries
+  let current: string | null
+  try {
+    current = localStorage.getItem(POCKET_KEY)
+  } catch {
+    return read.entries
+  }
+  if (current !== read.raw) return read.entries
+  try {
+    localStorage.setItem(
+      POCKET_KEY,
+      JSON.stringify({ v: POCKET_VERSION, entries: read.entries }),
+    )
+  } catch {
+    // Poison shape must not stick. A salvage of real rows keeps the old bytes.
+    if (read.unusable) {
+      try {
+        localStorage.removeItem(POCKET_KEY)
+      } catch {
+        /* private mode */
+      }
+    }
+  }
+  return read.entries
+}
+
+/** Repair hiato.pocket outside render. Reads stay read-only. */
+export function repairPocket(): PocketEntry[] {
+  return repairFromRead(readPocket())
+}
+
+/** All stored entries (any slot). Does not write. */
 export function loadPocket(): PocketEntry[] {
-  return readEnvelope().entries
+  return readPocket().entries
 }
 
 export function listPocketStored(
@@ -200,18 +322,27 @@ export function addToPocket(input: {
   gloss?: string
   addedAt?: number
 }): AddPocketResult {
-  const result = addPocketEntry(loadPocket(), input)
+  const read = readPocket()
+  // Newer schema and unreadable storage are left untouched (no key create).
+  if (read.kind === 'future' || read.kind === 'blocked') {
+    return { entries: [], added: false, replaced: null, duplicate: false }
+  }
+  repairFromRead(read)
+  const result = addPocketEntry(read.entries, input)
   if (result.added) {
-    writeEnvelope({ v: POCKET_VERSION, entries: result.entries })
+    const stored = writeEnvelope({ v: POCKET_VERSION, entries: result.entries })
+    if (!stored) return { ...result, added: false }
   }
   return result
 }
 
 /** Persist remove by id; returns the full remaining entry list. */
 export function removeFromPocket(id: string): PocketEntry[] {
-  const prev = loadPocket()
-  const next = removePocketEntry(prev, id)
-  if (next.length !== prev.length) {
+  const read = readPocket()
+  if (read.kind === 'future' || read.kind === 'blocked') return []
+  repairFromRead(read)
+  const next = removePocketEntry(read.entries, id)
+  if (next.length !== read.entries.length) {
     writeEnvelope({ v: POCKET_VERSION, entries: next })
   }
   return next
