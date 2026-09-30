@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { BrandMark } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
@@ -772,8 +779,10 @@ function EndCard({
   const [pocketRemoved, setPocketRemoved] = useState(false)
   const [pocketCount, setPocketCount] = useState(0)
   const [pocketOpen, setPocketOpen] = useState(false)
+  const [pocketCleared, setPocketCleared] = useState(false)
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
+  const clearedStatusRef = useRef<HTMLParagraphElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
@@ -866,6 +875,11 @@ function EndCard({
     return () => window.removeEventListener('keydown', onKey)
   }, [savePhase, cancelConfirm])
 
+  useLayoutEffect(() => {
+    if (!pocketCleared) return
+    clearedStatusRef.current?.focus()
+  }, [pocketCleared])
+
   const confirming = showSave && savePhase === 'confirm'
   const showViewPocket =
     mode !== 'pocket' &&
@@ -949,8 +963,17 @@ function EndCard({
           {showSave ? (
             savePhase === 'saved' || savePhase === 'duplicate' ? (
               <>
-                <p className="text-center text-sm text-accent-fg" role="status">
-                  {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
+                <p
+                  ref={clearedStatusRef}
+                  tabIndex={pocketCleared ? -1 : undefined}
+                  className="text-center text-sm text-accent-fg"
+                  role="status"
+                >
+                  {pocketCleared
+                    ? 'Pocket cleared'
+                    : savePhase === 'duplicate'
+                      ? 'Already in pocket'
+                      : 'Saved to pocket'}
                 </p>
                 {showViewPocket ? (
                   <Button
@@ -1051,7 +1074,10 @@ function EndCard({
           cefr={cefr}
           open={pocketOpen}
           onClose={() => setPocketOpen(false)}
-          onCount={setPocketCount}
+          onCount={(n) => {
+            setPocketCount(n)
+            if (n === 0) setPocketCleared(true)
+          }}
           onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
         />
       ) : null}

@@ -26,15 +26,15 @@ export function PocketSheet({
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
+  const focusRetryAt = useRef<number | null>(null)
   const slotKey = `${lang}\0${cefr}`
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [entries, setEntries] = useState<PocketEntry[]>([])
-  const [cleared, setCleared] = useState(false)
 
   if (open && loadedFor !== slotKey) {
     setLoadedFor(slotKey)
     setEntries(listPocketStored(lang, cefr))
-    setCleared(false)
+    focusRetryAt.current = null
   } else if (!open && loadedFor !== null) {
     setLoadedFor(null)
   }
@@ -43,11 +43,19 @@ export function PocketSheet({
     if (!open) return
     const dialog = dialogRef.current
     if (!dialog) return
+    const retryAt = focusRetryAt.current
+    if (retryAt !== null) {
+      focusRetryAt.current = null
+      dialog
+        .querySelector<HTMLButtonElement>(`[data-pocket-retry="${retryAt}"]`)
+        ?.focus()
+      return
+    }
     const active = document.activeElement
     openerRef.current = active instanceof HTMLElement ? active : null
     restoreFocusRef.current = true
     if (!dialog.open) dialog.showModal()
-  }, [open])
+  }, [open, entries])
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -75,15 +83,22 @@ export function PocketSheet({
   }
 
   function handleRemove(id: string) {
+    const removedAt = entries.findIndex((entry) => entry.id === id)
     removeFromPocket(id)
     const next = listPocketStored(lang, cefr)
     onCount(next.length)
     if (next.length === 0) {
+      // Status stays on the opener. Restoring focus would land on a control
+      // this remove is about to unmount.
       setEntries([])
-      setCleared(true)
+      restoreFocusRef.current = false
       onClose()
       return
     }
+    focusRetryAt.current = Math.min(
+      Math.max(removedAt, 0),
+      next.length - 1,
+    )
     setEntries(next)
   }
 
@@ -106,15 +121,10 @@ export function PocketSheet({
         <h2 id="pocket-sheet-heading" className="text-title text-ink">
           Pocket
         </h2>
-        <p className="text-caption mt-1 mb-3">
+        <p className="mt-1 mb-3 text-sm text-ink-muted">
           Meanings to retry, oldest first. Spelling stays hidden.
         </p>
-        {cleared ? (
-          <p className="text-sm text-accent-fg" role="status">
-            Pocket cleared
-          </p>
-        ) : (
-          <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-3">
             {entries.map((entry, index) => {
               const glossId = `pocket-sheet-gloss-${index}`
               return (
@@ -127,6 +137,7 @@ export function PocketSheet({
                       type="button"
                       variant="secondary"
                       className="min-h-11 flex-1"
+                      data-pocket-retry={index}
                       aria-labelledby={`${glossId} pocket-sheet-retry-name`}
                       onClick={() => handleRetry(entry.id)}
                     >
@@ -145,8 +156,7 @@ export function PocketSheet({
                 </li>
               )
             })}
-          </ul>
-        )}
+        </ul>
         <span id="pocket-sheet-retry-name" className="sr-only">
           Retry
         </span>

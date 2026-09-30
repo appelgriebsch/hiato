@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
 import { BrandLockup } from '@/components/brand/BrandMark'
@@ -41,15 +41,13 @@ export function Home() {
     prefs ? listPocketStored(prefs.lang, prefs.cefr).length : 0,
   )
   const [pocketOpen, setPocketOpen] = useState(false)
-  const practiceRef = useRef<HTMLButtonElement>(null)
-  const pocketCountWas = useRef(pocketCount)
+  const [pocketCleared, setPocketCleared] = useState(false)
+  const clearedRef = useRef<HTMLParagraphElement>(null)
 
-  useEffect(() => {
-    if (pocketCountWas.current > 0 && pocketCount === 0) {
-      practiceRef.current?.focus()
-    }
-    pocketCountWas.current = pocketCount
-  }, [pocketCount])
+  useLayoutEffect(() => {
+    if (!pocketCleared) return
+    clearedRef.current?.focus()
+  }, [pocketCleared])
 
   useEffect(() => {
     let cancelled = false
@@ -139,7 +137,6 @@ export function Home() {
         {prefs ? (
           <>
             <button
-              ref={practiceRef}
               type="button"
               disabled={!practiceOk}
               className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-accent-fg bg-accent-soft px-5 text-[15px] font-medium text-accent-fg hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
@@ -161,13 +158,25 @@ export function Home() {
               >
                 Pocket ({pocketCount})
               </Button>
+            ) : pocketCleared ? (
+              <p
+                ref={clearedRef}
+                tabIndex={-1}
+                role="status"
+                className="mt-2 text-center text-sm text-accent-fg"
+              >
+                Pocket cleared
+              </p>
             ) : null}
             <PocketSheet
               lang={prefs.lang}
               cefr={prefs.cefr}
               open={pocketOpen}
               onClose={() => setPocketOpen(false)}
-              onCount={setPocketCount}
+              onCount={(n) => {
+                setPocketCount(n)
+                if (n === 0) setPocketCleared(true)
+              }}
               onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
             />
           </>

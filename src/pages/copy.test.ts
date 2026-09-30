@@ -94,6 +94,8 @@ describe('Home pocket control (gh-85)', () => {
     expect(src).toContain('Pocket (')
     expect(src).toContain('variant="outline"')
     expect(src).toContain('pocketCount > 0')
+    expect(src).toContain('Pocket cleared')
+    expect(src).toContain('tabIndex={-1}')
     const pocketAt = src.indexOf('Pocket (')
     const navAt = src.indexOf('<nav')
     expect(pocketAt).toBeGreaterThan(src.indexOf('listPocketStored'))
@@ -116,6 +118,9 @@ describe('Pocket sheet (gh-85)', () => {
     expect(src).toContain('listPocketStored')
     expect(src).toContain('removeFromPocket')
     expect(src).toContain('pocketRetryHref')
+    expect(src).toContain('text-ink-muted')
+    expect(src).toContain('data-pocket-retry')
+    expect(src).not.toContain('Pocket cleared')
     expect(src).not.toContain('entry.word')
     expect(src).not.toContain('dangerouslySetInnerHTML')
     expect(src).not.toContain('data-word')
@@ -198,5 +203,12 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(src).toContain("mode !== 'pocket'")
     expect(src).toContain('pocketRetryHref(id, Date.now())')
     expect(src).toContain('listPocketStored(lang, cefr).length')
+    expect(src).toContain('Pocket cleared')
+    const savedAt = src.indexOf(
+      "savePhase === 'saved' || savePhase === 'duplicate'",
+      end,
+    )
+    expect(savedAt).toBeGreaterThan(end)
+    expect(src.indexOf('Pocket cleared', savedAt)).toBeGreaterThan(savedAt)
   })
 })

@@ -345,13 +345,19 @@ button.key-settled:disabled {
   border-radius: 1rem 1rem 0 0;
   background: var(--color-raised);
   color: var(--color-ink);
-  box-shadow: 0 -8px 24px rgb(28 27 25 / 0.12);
+  box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
 .pocket-sheet::backdrop {
-  background: rgb(28 27 25 / 0.45);
+  background: rgb(0 0 0 / 0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  .pocket-sheet {
+    box-shadow: 0 -12px 32px rgb(0 0 0 / 0.65);
+  }
 }
 
 .pocket-sheet-panel {
