@@ -35,6 +35,7 @@ import {
   POCKET_CAP,
 } from '@/lib/pocket'
 import {
+  decideConfirmReCheck,
   needsReplaceOldestConfirm,
   pocketConfirmLabel,
   shouldShowPocketSave,
@@ -640,12 +641,22 @@ function EndCard({
     'idle' | 'confirm' | 'saved' | 'duplicate'
   >('idle')
   const [oldestLabel, setOldestLabel] = useState('')
+  const [snapshotOldestId, setSnapshotOldestId] = useState('')
+  const confirmBtnRef = useRef<HTMLButtonElement>(null)
+  const saveBtnRef = useRef<HTMLButtonElement>(null)
+  const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
     // Pocket only — never touches streaks, Clerk, or D1.
     const result = addToPocket({ lang, cefr, word, gloss })
     setSavePhase(result.duplicate ? 'duplicate' : 'saved')
   }, [lang, cefr, word, gloss])
+
+  const cancelConfirm = useCallback(() => {
+    setSavePhase('idle')
+    setOldestLabel('')
+    setSnapshotOldestId('')
+  }, [])
 
   const onSavePress = useCallback(() => {
     const slot = listPocketStored(lang, cefr)
@@ -654,11 +665,69 @@ function EndCard({
     if (needsReplaceOldestConfirm(slot.length, already)) {
       const oldest = slot[0]!
       setOldestLabel(pocketConfirmLabel(oldest))
+      setSnapshotOldestId(oldest.id)
       setSavePhase('confirm')
       return
     }
     commitSave()
   }, [lang, cefr, word, commitSave])
+
+  const onConfirmReplace = useCallback(() => {
+    const slot = listPocketStored(lang, cefr)
+    const id = pocketEntryId(lang, cefr, word)
+    const decision = decideConfirmReCheck(snapshotOldestId, slot, id)
+    if (decision === 'duplicate') {
+      setSavePhase('duplicate')
+      setOldestLabel('')
+      setSnapshotOldestId('')
+      return
+    }
+    if (decision === 'refresh') {
+      const oldest = slot[0]!
+      setOldestLabel(pocketConfirmLabel(oldest))
+      setSnapshotOldestId(oldest.id)
+      // stay in confirm so the user sees the refreshed gloss-only label
+      return
+    }
+    // commit — either still replace-oldest or slot no longer full
+    commitSave()
+    setOldestLabel('')
+    setSnapshotOldestId('')
+  }, [lang, cefr, word, snapshotOldestId, commitSave])
+
+  const prevSavePhase = useRef(savePhase)
+
+  // W2: focus Confirm on enter; restore Save (or blur) on leave
+  useEffect(() => {
+    const prev = prevSavePhase.current
+    prevSavePhase.current = savePhase
+    if (savePhase === 'confirm') {
+      confirmBtnRef.current?.focus()
+      return
+    }
+    if (prev !== 'confirm') return
+    // Left confirm via Cancel → Save remounts; via commit → status replaces Save
+    if (savePhase === 'idle' && saveBtnRef.current) {
+      saveBtnRef.current.focus()
+    } else {
+      ;(document.activeElement as HTMLElement | null)?.blur?.()
+    }
+  }, [savePhase])
+
+  // W2: Escape cancels confirm (same as Cancel)
+  useEffect(() => {
+    if (savePhase !== 'confirm') return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        cancelConfirm()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [savePhase, cancelConfirm])
+
+  const confirming = showSave && savePhase === 'confirm'
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
@@ -696,87 +765,95 @@ function EndCard({
         )}
       </Card>
 
-      {showSave && savePhase === 'confirm' ? (
-        <Card className="w-full text-left">
-          <p className="text-sm font-medium text-ink">Replace oldest word?</p>
+      {confirming ? (
+        <Card
+          className="w-full text-left"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={confirmHeadingId}
+        >
+          <p
+            id={confirmHeadingId}
+            className="text-sm font-medium text-ink"
+          >
+            Replace oldest word?
+          </p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">
             Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can save
             this one.
           </p>
           <div className="mt-3 flex flex-col gap-2">
-            <Button fullWidth onClick={commitSave}>
+            <Button ref={confirmBtnRef} fullWidth onClick={onConfirmReplace}>
               Confirm replace
             </Button>
-            <Button
-              fullWidth
-              variant="ghost"
-              onClick={() => {
-                setSavePhase('idle')
-                setOldestLabel('')
-              }}
-            >
+            <Button fullWidth variant="ghost" onClick={cancelConfirm}>
               Cancel
             </Button>
           </div>
         </Card>
-      ) : null}
-
-      <div className="flex flex-col gap-2">
-        {showSave && savePhase !== 'confirm' ? (
-          savePhase === 'saved' || savePhase === 'duplicate' ? (
-            <p className="text-center text-sm text-accent-fg" role="status">
-              {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
-            </p>
-          ) : (
-            <Button fullWidth variant="secondary" onClick={onSavePress}>
-              Save to pocket
-            </Button>
-          )
-        ) : null}
-        <Button
-          fullWidth
-          onClick={() =>
-            nav('/share', {
-              state: buildShareCardPayload({
-                lang,
-                cefr,
-                streak,
-                dateKey,
-                word,
-                won,
-                mode,
-              }),
-            })
-          }
-        >
-          Share
-        </Button>
-        <Button
-          fullWidth
-          variant="secondary"
-          onClick={onPractice}
-          disabled={!practiceOk}
-        >
-          {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
-        </Button>
-        {!practiceOk ? (
-          <p className="text-center text-xs text-ink-faint">
-            Practice isn’t available — this pack only has today’s daily word.
-          </p>
-        ) : null}
-        {mode === 'practice' ? (
+      ) : (
+        <div className="flex flex-col gap-2">
+          {showSave ? (
+            savePhase === 'saved' || savePhase === 'duplicate' ? (
+              <p className="text-center text-sm text-accent-fg" role="status">
+                {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
+              </p>
+            ) : (
+              <Button
+                ref={saveBtnRef}
+                fullWidth
+                variant="secondary"
+                onClick={onSavePress}
+              >
+                Save to pocket
+              </Button>
+            )
+          ) : null}
           <Button
             fullWidth
-            variant="outline"
-            onClick={() => nav('/play?mode=daily')}
+            onClick={() =>
+              nav('/share', {
+                state: buildShareCardPayload({
+                  lang,
+                  cefr,
+                  streak,
+                  dateKey,
+                  word,
+                  won,
+                  mode,
+                }),
+              })
+            }
           >
-            Back to daily
+            Share
           </Button>
-        ) : null}
-        <Button fullWidth variant="ghost" onClick={() => nav('/')}>
-          Back home
-        </Button>
-      </div>
+          <Button
+            fullWidth
+            variant="secondary"
+            onClick={onPractice}
+            disabled={!practiceOk}
+          >
+            {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
+          </Button>
+          {!practiceOk ? (
+            <p className="text-center text-xs text-ink-faint">
+              Practice isn’t available — this pack only has today’s daily word.
+            </p>
+          ) : null}
+          {mode === 'practice' ? (
+            <Button
+              fullWidth
+              variant="outline"
+              onClick={() => nav('/play?mode=daily')}
+            >
+              Back to daily
+            </Button>
+          ) : null}
+          <Button fullWidth variant="ghost" onClick={() => nav('/')}>
+            Back home
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

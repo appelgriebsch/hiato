@@ -31,3 +31,23 @@ export function pocketConfirmLabel(oldest: { gloss?: string }): string {
     ? oldest.gloss
     : 'your oldest pocket entry'
 }
+
+export type ConfirmReCheckDecision = 'commit' | 'duplicate' | 'refresh'
+
+/**
+ * Re-check pocket slot on Confirm before commit (Avery W3 / multi-tab TOCTOU).
+ * Snapshot was taken when entering confirm; freshSlot is a live re-read.
+ * Oldest is slot[0] (oldest-first from listPocketStored).
+ */
+export function decideConfirmReCheck(
+  snapshotOldestId: string,
+  freshSlot: ReadonlyArray<{ id: string }>,
+  currentWordId: string,
+  cap: number = POCKET_CAP,
+): ConfirmReCheckDecision {
+  if (freshSlot.some((e) => e.id === currentWordId)) return 'duplicate'
+  if (freshSlot.length < cap) return 'commit'
+  const oldestId = freshSlot[0]?.id
+  if (oldestId !== snapshotOldestId) return 'refresh'
+  return 'commit'
+}
