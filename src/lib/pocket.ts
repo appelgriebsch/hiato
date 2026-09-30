@@ -11,6 +11,9 @@ import {
  * Guest-local retry queue in localStorage — never touches streaks, Clerk, or D1.
  * Cap is 5 per lang×CEFR; full-slot Save replaces the oldest entry
  * (UI confirm for replace-oldest is #83/#85; this helper just replaces).
+ *
+ * Multi-tab / concurrent RMW on localStorage is last-write-wins (same as
+ * streaks and daily). Do not assume stronger consistency in #83–#85.
  */
 
 export const POCKET_KEY = 'hiato.pocket'
@@ -53,7 +56,7 @@ export function listPocket(
   return entries
     .filter((e) => e.lang === lang && e.cefr === cefr)
     .slice()
-    .sort((a, b) => a.addedAt - b.addedAt)
+    .sort((a, b) => a.addedAt - b.addedAt || a.id.localeCompare(b.id))
 }
 
 export type AddPocketResult = {
@@ -124,10 +127,8 @@ function parseEntry(raw: unknown): PocketEntry | null {
   if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return null
   if (typeof o.word !== 'string' || o.word.length === 0) return null
   if (typeof o.addedAt !== 'number' || !Number.isFinite(o.addedAt)) return null
-  const id =
-    typeof o.id === 'string' && o.id.length > 0
-      ? o.id
-      : pocketEntryId(o.lang, o.cefr, o.word)
+  // Never trust stored id — corrupt localStorage could fork duplicates.
+  const id = pocketEntryId(o.lang, o.cefr, o.word)
   const entry: PocketEntry = {
     id,
     lang: o.lang,
@@ -157,6 +158,7 @@ function parseEnvelope(raw: unknown): PocketEnvelope {
   return { v: POCKET_VERSION, entries }
 }
 
+/** Read current envelope; callers that RMW must accept last-write-wins. */
 function readEnvelope(): PocketEnvelope {
   try {
     const raw = localStorage.getItem(POCKET_KEY)
@@ -167,6 +169,10 @@ function readEnvelope(): PocketEnvelope {
   }
 }
 
+/**
+ * Persist envelope. Concurrent tabs are last-write-wins (no merge) —
+ * same guest baseline as streaks/daily localStorage RMW.
+ */
 function writeEnvelope(env: PocketEnvelope): void {
   try {
     localStorage.setItem(POCKET_KEY, JSON.stringify(env))
@@ -203,7 +209,10 @@ export function addToPocket(input: {
 
 /** Persist remove by id; returns the full remaining entry list. */
 export function removeFromPocket(id: string): PocketEntry[] {
-  const next = removePocketEntry(loadPocket(), id)
-  writeEnvelope({ v: POCKET_VERSION, entries: next })
+  const prev = loadPocket()
+  const next = removePocketEntry(prev, id)
+  if (next.length !== prev.length) {
+    writeEnvelope({ v: POCKET_VERSION, entries: next })
+  }
   return next
 }

@@ -96,6 +96,23 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     expect(listPocket(entries, 'en', 'a2')).toHaveLength(0)
   })
 
+  test('listPocket equal-addedAt ties break by id lexicographic', () => {
+    const t = 1000
+    // Insert zebra before apple so insertion order ≠ id order
+    const entries = [
+      entry('en', 'a1', 'zebra', t),
+      entry('en', 'a1', 'apple', t),
+      entry('en', 'a1', 'mango', t),
+    ]
+    const ids = entries.map((e) => e.id).sort()
+    expect(listPocket(entries, 'en', 'a1').map((e) => e.id)).toEqual(ids)
+    expect(listPocket(entries, 'en', 'a1').map((e) => e.word)).toEqual([
+      'apple',
+      'mango',
+      'zebra',
+    ])
+  })
+
   test('duplicate add is idempotent (keep-first, no addedAt bump)', () => {
     const first = entry('en', 'a1', 'apple', 1000, 'fruit')
     const once = addPocketEntry([], {
@@ -246,6 +263,29 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     expect(loadPocket()).toHaveLength(1)
   })
 
+  test('parse ignores stored id and always uses pocketEntryId', () => {
+    const canonical = pocketEntryId('en', 'a1', 'ok')
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: [
+          {
+            id: 'forged|id',
+            lang: 'en',
+            cefr: 'a1',
+            word: 'ok',
+            addedAt: 1,
+          },
+        ],
+      }),
+    )
+    const loaded = loadPocket()
+    expect(loaded).toHaveLength(1)
+    expect(loaded[0]!.id).toBe(canonical)
+    expect(loaded[0]!.id).not.toBe('forged|id')
+  })
+
   test('persisted duplicate add is a no-op write', () => {
     addToPocket({ lang: 'pt', cefr: 'a1', word: 'casa', addedAt: 10 })
     const before = mem.get(POCKET_KEY)
@@ -257,6 +297,14 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     })
     expect(again.duplicate).toBe(true)
     expect(again.added).toBe(false)
+    expect(mem.get(POCKET_KEY)).toBe(before)
+  })
+
+  test('removeFromPocket skips write when id missing', () => {
+    addToPocket({ lang: 'en', cefr: 'a1', word: 'keep', addedAt: 1 })
+    const before = mem.get(POCKET_KEY)
+    const next = removeFromPocket('missing-id')
+    expect(next).toHaveLength(1)
     expect(mem.get(POCKET_KEY)).toBe(before)
   })
 })
