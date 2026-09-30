@@ -171,8 +171,23 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     expect(commitEnd).toBeGreaterThan(commitAt)
     const commitBody = src.slice(commitAt, commitEnd)
     expect(commitBody).toContain('addToPocket')
+    expect(commitBody).toContain('if (!result.added && !result.duplicate) return false')
     expect(commitBody).not.toMatch(/recordDailyWin\s*\(/)
     expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
+    const confirmAt = src.indexOf('const onConfirmReplace = useCallback')
+    const confirmEnd = src.indexOf(
+      '}, [lang, cefr, word, snapshotOldestId, commitSave])',
+      confirmAt,
+    )
+    expect(confirmAt).toBeGreaterThan(0)
+    expect(confirmEnd).toBeGreaterThan(confirmAt)
+    const confirmBody = src.slice(confirmAt, confirmEnd)
+    const storedAt = confirmBody.indexOf('const stored = commitSave()')
+    const bailAt = confirmBody.indexOf('if (!stored) return', storedAt)
+    const clearAt = confirmBody.indexOf("setOldestLabel('')", bailAt)
+    expect(storedAt).toBeGreaterThan(0)
+    expect(bailAt).toBeGreaterThan(storedAt)
+    expect(clearAt).toBeGreaterThan(bailAt)
   })
 })
 

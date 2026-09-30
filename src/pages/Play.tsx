@@ -791,9 +791,11 @@ function EndCard({
     // Pocket only — never touches streaks, Clerk, or D1.
     const result = addToPocket({ lang, cefr, word, gloss })
     setPocketCount(listPocketStored(lang, cefr).length)
-    // Quota / private mode: the word was not stored, so this stays on Save.
-    if (!result.added && !result.duplicate) return
+    // Quota / private mode: nothing was stored. Stay on the current phase
+    // so a replace confirm keeps its gloss and Confirm can retry.
+    if (!result.added && !result.duplicate) return false
     setSavePhase(result.duplicate ? 'duplicate' : 'saved')
+    return true
   }, [lang, cefr, word, gloss])
 
   const cancelConfirm = useCallback(() => {
@@ -834,8 +836,10 @@ function EndCard({
       // stay in confirm so the user sees the refreshed gloss-only label
       return
     }
-    // commit — either still replace-oldest or slot no longer full
-    commitSave()
+    // commit — either still replace-oldest or slot no longer full.
+    // A failed write stays on confirm with the same gloss so Confirm retries it.
+    const stored = commitSave()
+    if (!stored) return
     setOldestLabel('')
     setSnapshotOldestId('')
   }, [lang, cefr, word, snapshotOldestId, commitSave])
