@@ -86,3 +86,27 @@ describe('About license bands', () => {
     expect(src).not.toContain('A1–B1 only')
   })
 })
+
+describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
+  test('Save gated on shouldShowPocketSave; uses addToPocket; no Save auto-add', async () => {
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain("from '@/lib/pocket-save'")
+    expect(src).toContain('shouldShowPocketSave(mode, won)')
+    expect(src).toContain('needsReplaceOldestConfirm')
+    expect(src).toContain('addToPocket({ lang, cefr, word, gloss })')
+    expect(src).toContain('listPocketStored(lang, cefr)')
+    expect(src).toContain('Replace oldest word?')
+    expect(src).toContain('Confirm replace')
+    expect(src).toContain('onClick={onSavePress}')
+    expect(src).toMatch(/onClick=\{onSavePress\}>\s*Save\s*<\/Button>/)
+    // Save path must not call recordDailyWin
+    const commitAt = src.indexOf('const commitSave = useCallback')
+    const commitEnd = src.indexOf('}, [lang, cefr, word, gloss])', commitAt)
+    expect(commitAt).toBeGreaterThan(0)
+    expect(commitEnd).toBeGreaterThan(commitAt)
+    const commitBody = src.slice(commitAt, commitEnd)
+    expect(commitBody).toContain('addToPocket')
+    expect(commitBody).not.toMatch(/recordDailyWin\s*\(/)
+    expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
+  })
+})

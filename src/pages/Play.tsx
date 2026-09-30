@@ -28,6 +28,15 @@ import {
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
+import {
+  addToPocket,
+  listPocketStored,
+  pocketEntryId,
+} from '@/lib/pocket'
+import {
+  needsReplaceOldestConfirm,
+  shouldShowPocketSave,
+} from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
 import {
@@ -624,6 +633,35 @@ function EndCard({
   onPractice: () => void
 }) {
   const nav = useNavigate()
+  const showSave = shouldShowPocketSave(mode, won)
+  const [savePhase, setSavePhase] = useState<
+    'idle' | 'confirm' | 'saved' | 'duplicate'
+  >('idle')
+  const [oldestLabel, setOldestLabel] = useState('')
+
+  const commitSave = useCallback(() => {
+    // Pocket only — never touches streaks, Clerk, or D1.
+    const result = addToPocket({ lang, cefr, word, gloss })
+    setSavePhase(result.duplicate ? 'duplicate' : 'saved')
+  }, [lang, cefr, word, gloss])
+
+  const onSavePress = useCallback(() => {
+    const slot = listPocketStored(lang, cefr)
+    const id = pocketEntryId(lang, cefr, word)
+    const already = slot.some((e) => e.id === id)
+    if (needsReplaceOldestConfirm(slot.length, already)) {
+      const oldest = slot[0]!
+      const label =
+        typeof oldest.gloss === 'string' && oldest.gloss.length > 0
+          ? oldest.gloss
+          : oldest.word
+      setOldestLabel(label)
+      setSavePhase('confirm')
+      return
+    }
+    commitSave()
+  }, [lang, cefr, word, commitSave])
+
   return (
     <div className="motion-result-enter mb-4 space-y-3">
       <div className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center">
@@ -660,7 +698,43 @@ function EndCard({
         )}
       </Card>
 
+      {showSave && savePhase === 'confirm' ? (
+        <Card className="w-full text-left">
+          <p className="text-sm font-medium text-ink">Replace oldest word?</p>
+          <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+            Pocket is full (5). “{oldestLabel}” will be removed so you can save
+            this one.
+          </p>
+          <div className="mt-3 flex flex-col gap-2">
+            <Button fullWidth onClick={commitSave}>
+              Confirm replace
+            </Button>
+            <Button
+              fullWidth
+              variant="ghost"
+              onClick={() => {
+                setSavePhase('idle')
+                setOldestLabel('')
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Card>
+      ) : null}
+
       <div className="flex flex-col gap-2">
+        {showSave && savePhase !== 'confirm' ? (
+          savePhase === 'saved' || savePhase === 'duplicate' ? (
+            <p className="text-center text-sm text-accent-fg" role="status">
+              {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
+            </p>
+          ) : (
+            <Button fullWidth variant="secondary" onClick={onSavePress}>
+              Save
+            </Button>
+          )
+        ) : null}
         <Button
           fullWidth
           onClick={() =>
