@@ -8,6 +8,7 @@ import { Keyboard } from '@/components/play/Keyboard'
 import { LearnerHint } from '@/components/play/LearnerHint'
 import { LetterGrid } from '@/components/play/LetterGrid'
 import { Lives } from '@/components/play/Lives'
+import { PocketSheet } from '@/components/PocketSheet'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -46,6 +47,7 @@ import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
   pocketConfirmLabel,
+  pocketRetryHref,
   shouldShowPocketSave,
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
@@ -768,6 +770,8 @@ function EndCard({
   const [oldestLabel, setOldestLabel] = useState('')
   const [snapshotOldestId, setSnapshotOldestId] = useState('')
   const [pocketRemoved, setPocketRemoved] = useState(false)
+  const [pocketCount, setPocketCount] = useState(0)
+  const [pocketOpen, setPocketOpen] = useState(false)
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
@@ -775,6 +779,7 @@ function EndCard({
   const commitSave = useCallback(() => {
     // Pocket only — never touches streaks, Clerk, or D1.
     const result = addToPocket({ lang, cefr, word, gloss })
+    setPocketCount(listPocketStored(lang, cefr).length)
     setSavePhase(result.duplicate ? 'duplicate' : 'saved')
   }, [lang, cefr, word, gloss])
 
@@ -803,6 +808,7 @@ function EndCard({
     const id = pocketEntryId(lang, cefr, word)
     const decision = decideConfirmReCheck(snapshotOldestId, slot, id)
     if (decision === 'duplicate') {
+      setPocketCount(listPocketStored(lang, cefr).length)
       setSavePhase('duplicate')
       setOldestLabel('')
       setSnapshotOldestId('')
@@ -861,6 +867,11 @@ function EndCard({
   }, [savePhase, cancelConfirm])
 
   const confirming = showSave && savePhase === 'confirm'
+  const showViewPocket =
+    mode !== 'pocket' &&
+    showSave &&
+    (savePhase === 'saved' || savePhase === 'duplicate') &&
+    pocketCount > 0
   const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
   const endBadge =
     mode === 'daily' ? ' · Daily' : mode === 'pocket' ? ' · Pocket' : ' · Practice'
@@ -937,9 +948,20 @@ function EndCard({
         <div className="flex flex-col gap-2">
           {showSave ? (
             savePhase === 'saved' || savePhase === 'duplicate' ? (
-              <p className="text-center text-sm text-accent-fg" role="status">
-                {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
-              </p>
+              <>
+                <p className="text-center text-sm text-accent-fg" role="status">
+                  {savePhase === 'duplicate' ? 'Already in pocket' : 'Saved to pocket'}
+                </p>
+                {showViewPocket ? (
+                  <Button
+                    fullWidth
+                    variant="ghost"
+                    onClick={() => setPocketOpen(true)}
+                  >
+                    View pocket
+                  </Button>
+                ) : null}
+              </>
             ) : (
               <Button
                 ref={saveBtnRef}
@@ -1021,6 +1043,18 @@ function EndCard({
           </Button>
         </div>
       )}
+      {mode !== 'pocket' &&
+      showSave &&
+      (savePhase === 'saved' || savePhase === 'duplicate') ? (
+        <PocketSheet
+          lang={lang}
+          cefr={cefr}
+          open={pocketOpen}
+          onClose={() => setPocketOpen(false)}
+          onCount={setPocketCount}
+          onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
+        />
+      ) : null}
     </div>
   )
 }

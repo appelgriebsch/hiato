@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getHealth } from '@/api'
 import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
+import { PocketSheet } from '@/components/PocketSheet'
 import { StreakChip } from '@/components/StreakChip'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
+import { listPocketStored } from '@/lib/pocket'
+import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
@@ -33,6 +37,19 @@ export function Home() {
       ? isDailyComplete(selectedLang, selectedCefr, dateKey)
       : false
   const [practiceOk, setPracticeOk] = useState(true)
+  const [pocketCount, setPocketCount] = useState(() =>
+    prefs ? listPocketStored(prefs.lang, prefs.cefr).length : 0,
+  )
+  const [pocketOpen, setPocketOpen] = useState(false)
+  const practiceRef = useRef<HTMLButtonElement>(null)
+  const pocketCountWas = useRef(pocketCount)
+
+  useEffect(() => {
+    if (pocketCountWas.current > 0 && pocketCount === 0) {
+      practiceRef.current?.focus()
+    }
+    pocketCountWas.current = pocketCount
+  }, [pocketCount])
 
   useEffect(() => {
     let cancelled = false
@@ -122,6 +139,7 @@ export function Home() {
         {prefs ? (
           <>
             <button
+              ref={practiceRef}
               type="button"
               disabled={!practiceOk}
               className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-accent-fg bg-accent-soft px-5 text-[15px] font-medium text-accent-fg hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
@@ -134,6 +152,24 @@ export function Home() {
                 Practice isn’t available — this pack only has today’s daily word.
               </p>
             ) : null}
+            {pocketCount > 0 ? (
+              <Button
+                variant="outline"
+                fullWidth
+                className="mt-2"
+                onClick={() => setPocketOpen(true)}
+              >
+                Pocket ({pocketCount})
+              </Button>
+            ) : null}
+            <PocketSheet
+              lang={prefs.lang}
+              cefr={prefs.cefr}
+              open={pocketOpen}
+              onClose={() => setPocketOpen(false)}
+              onCount={setPocketCount}
+              onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
+            />
           </>
         ) : null}
       </Card>

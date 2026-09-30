@@ -87,6 +87,43 @@ describe('About license bands', () => {
   })
 })
 
+describe('Home pocket control (gh-85)', () => {
+  test('Pocket (n) uses the stored slot, outline, and sits before nav', async () => {
+    const src = await pageSrc('Home.tsx')
+    expect(src).toContain('listPocketStored')
+    expect(src).toContain('Pocket (')
+    expect(src).toContain('variant="outline"')
+    expect(src).toContain('pocketCount > 0')
+    const pocketAt = src.indexOf('Pocket (')
+    const navAt = src.indexOf('<nav')
+    expect(pocketAt).toBeGreaterThan(src.indexOf('listPocketStored'))
+    expect(navAt).toBeGreaterThan(pocketAt)
+    expect(src).not.toContain('to="/pocket"')
+    expect(src).not.toContain('Pocket (0)')
+  })
+})
+
+describe('Pocket sheet (gh-85)', () => {
+  test('gloss-only dialog; no lemma in the row', async () => {
+    const src = await Bun.file(
+      new URL('../components/PocketSheet.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('pocketListLabel')
+    expect(src).toContain('showModal')
+    expect(src).toContain('role="dialog"')
+    expect(src).toContain('aria-modal="true"')
+    expect(src).toContain('aria-labelledby="pocket-sheet-heading"')
+    expect(src).toContain('listPocketStored')
+    expect(src).toContain('removeFromPocket')
+    expect(src).toContain('pocketRetryHref')
+    expect(src).not.toContain('entry.word')
+    expect(src).not.toContain('dangerouslySetInnerHTML')
+    expect(src).not.toContain('data-word')
+    expect(src).not.toContain('title={')
+    expect(src).not.toMatch(/streak|sign-in|account|Clerk|D1|cloud/i)
+  })
+})
+
 describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
   test('Save gated on shouldShowPocketSave; uses addToPocket; no Save auto-add', async () => {
     const src = await pageSrc('Play.tsx')
@@ -143,5 +180,23 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(endBody).toContain("mode === 'pocket'")
     expect(endBody).toContain('removeFromPocket')
     expect(endBody).not.toMatch(/recordDailyWin\s*\(/)
+  })
+
+  test('View pocket is daily-lose saved only, not the replace confirm', async () => {
+    const src = await pageSrc('Play.tsx')
+    const start = src.indexOf('confirming ? (')
+    const end = src.indexOf(') : (', start)
+    expect(start).toBeGreaterThan(0)
+    expect(end).toBeGreaterThan(start)
+    const confirmingSlice = src.slice(start, end)
+    expect(confirmingSlice).not.toContain('View pocket')
+    expect(confirmingSlice).not.toContain('PocketSheet')
+    const viewAt = src.indexOf('View pocket')
+    const shareAt = src.indexOf('\n            Share\n')
+    expect(viewAt).toBeGreaterThan(end)
+    expect(shareAt).toBeGreaterThan(viewAt)
+    expect(src).toContain("mode !== 'pocket'")
+    expect(src).toContain('pocketRetryHref(id, Date.now())')
+    expect(src).toContain('listPocketStored(lang, cefr).length')
   })
 })

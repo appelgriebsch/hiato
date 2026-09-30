@@ -4,6 +4,8 @@ import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
   pocketConfirmLabel,
+  pocketListLabel,
+  pocketRetryHref,
   shouldShowPocketSave,
 } from './pocket-save'
 
@@ -58,6 +60,33 @@ describe('pocketConfirmLabel (Avery Critical)', () => {
     expect(pocketConfirmLabel({})).toBe('your oldest pocket entry')
     expect(pocketConfirmLabel({ gloss: '' })).toBe('your oldest pocket entry')
     expect(pocketConfirmLabel({ gloss: '   ' })).toBe('your oldest pocket entry')
+  })
+})
+
+describe('pocketListLabel (#85)', () => {
+  test('uses a non-empty gloss', () => {
+    expect(pocketListLabel({ gloss: 'a house' })).toBe('a house')
+  })
+
+  test('blank or whitespace gloss hides the spelling', () => {
+    expect(pocketListLabel({})).toBe('Meaning not saved')
+    expect(pocketListLabel({ gloss: '' })).toBe('Meaning not saved')
+    expect(pocketListLabel({ gloss: '   ' })).toBe('Meaning not saved')
+  })
+})
+
+describe('pocketRetryHref (#85)', () => {
+  test('encodes the id once and keeps the seed', () => {
+    const id = 'es|a1|café'
+    const href = pocketRetryHref(id, 1700000000000)
+    expect(href).toBe(
+      `/play?mode=pocket&id=${encodeURIComponent(id)}&seed=1700000000000`,
+    )
+    expect(href).not.toContain('%257C')
+    const url = new URL(href, 'http://local')
+    expect(url.searchParams.get('id')).toBe(id)
+    expect(url.searchParams.get('seed')).toBe('1700000000000')
+    expect(url.searchParams.get('mode')).toBe('pocket')
   })
 })
 
