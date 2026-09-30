@@ -126,7 +126,10 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(src).toContain('pocketOutcomeOnFinish')
     expect(src).toContain('removeFromPocket')
     expect(src).toContain('Remove from pocket')
-    expect(src).toContain("`/play?mode=pocket&id=${encodeURIComponent(pocketId)}`")
+    // Literal source fragment (do not interpolate in this expect)
+    expect(src).toContain(
+      '/play?mode=pocket&id=${encodeURIComponent(pocketId)}',
+    )
     expect(src).toContain("Pocket doesn’t affect your streak")
     const endAt = src.indexOf('const endGame = useCallback')
     const endEnd = src.indexOf('}, [mode, persistDaily, activePocketId])', endAt)
