@@ -2,6 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import { POCKET_CAP } from './pocket'
 import {
   needsReplaceOldestConfirm,
+  pocketConfirmLabel,
   shouldShowPocketSave,
 } from './pocket-save'
 
@@ -44,5 +45,17 @@ describe('needsReplaceOldestConfirm (ADR 0034 / #83)', () => {
   test('respects custom cap', () => {
     expect(needsReplaceOldestConfirm(3, false, 3)).toBe(true)
     expect(needsReplaceOldestConfirm(2, false, 3)).toBe(false)
+  })
+})
+
+describe('pocketConfirmLabel (Avery Critical)', () => {
+  test('uses a non-empty gloss', () => {
+    expect(pocketConfirmLabel({ gloss: 'oldest meaning' })).toBe('oldest meaning')
+  })
+
+  test('never falls back to the lemma', () => {
+    expect(pocketConfirmLabel({})).toBe('your oldest pocket entry')
+    expect(pocketConfirmLabel({ gloss: '' })).toBe('your oldest pocket entry')
+    expect(pocketConfirmLabel({ gloss: '   ' })).toBe('your oldest pocket entry')
   })
 })

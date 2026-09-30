@@ -98,7 +98,9 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     expect(src).toContain('Replace oldest word?')
     expect(src).toContain('Confirm replace')
     expect(src).toContain('onClick={onSavePress}')
-    expect(src).toMatch(/onClick=\{onSavePress\}>\s*Save\s*<\/Button>/)
+    expect(src).toMatch(/onClick=\{onSavePress\}>\s*Save to pocket\s*<\/Button>/)
+    expect(src).toContain('pocketConfirmLabel(oldest)')
+    expect(src).toContain('Pocket is full ({POCKET_CAP}).')
     // Save path must not call recordDailyWin
     const commitAt = src.indexOf('const commitSave = useCallback')
     const commitEnd = src.indexOf('}, [lang, cefr, word, gloss])', commitAt)

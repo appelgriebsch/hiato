@@ -32,9 +32,11 @@ import {
   addToPocket,
   listPocketStored,
   pocketEntryId,
+  POCKET_CAP,
 } from '@/lib/pocket'
 import {
   needsReplaceOldestConfirm,
+  pocketConfirmLabel,
   shouldShowPocketSave,
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
@@ -651,11 +653,7 @@ function EndCard({
     const already = slot.some((e) => e.id === id)
     if (needsReplaceOldestConfirm(slot.length, already)) {
       const oldest = slot[0]!
-      const label =
-        typeof oldest.gloss === 'string' && oldest.gloss.length > 0
-          ? oldest.gloss
-          : oldest.word
-      setOldestLabel(label)
+      setOldestLabel(pocketConfirmLabel(oldest))
       setSavePhase('confirm')
       return
     }
@@ -702,7 +700,7 @@ function EndCard({
         <Card className="w-full text-left">
           <p className="text-sm font-medium text-ink">Replace oldest word?</p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-            Pocket is full (5). “{oldestLabel}” will be removed so you can save
+            Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can save
             this one.
           </p>
           <div className="mt-3 flex flex-col gap-2">
@@ -731,7 +729,7 @@ function EndCard({
             </p>
           ) : (
             <Button fullWidth variant="secondary" onClick={onSavePress}>
-              Save
+              Save to pocket
             </Button>
           )
         ) : null}

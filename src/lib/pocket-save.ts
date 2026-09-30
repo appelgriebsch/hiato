@@ -20,3 +20,14 @@ export function needsReplaceOldestConfirm(
 ): boolean {
   return !wordAlreadyInPocket && slotCount >= cap
 }
+
+/**
+ * Safe, non-lemma label for the entry shown in the replace-oldest confirm.
+ * Stored pocket entries may not have a gloss, and their word must not be
+ * exposed as confirmation copy without an explicit lemma decision.
+ */
+export function pocketConfirmLabel(oldest: { gloss?: string }): string {
+  return typeof oldest.gloss === 'string' && oldest.gloss.trim().length > 0
+    ? oldest.gloss
+    : 'your oldest pocket entry'
+}
