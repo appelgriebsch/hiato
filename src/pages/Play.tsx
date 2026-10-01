@@ -669,6 +669,7 @@ export function Play() {
               mode={mode}
               word={wordEntry.word}
               gloss={wordEntry.gloss}
+              synonyms={wordEntry.synonyms}
               lang={lang}
               cefr={cefr}
               dateKey={dateKey}
@@ -747,6 +748,7 @@ function EndCard({
   mode,
   word,
   gloss,
+  synonyms,
   lang,
   cefr,
   dateKey,
@@ -761,6 +763,7 @@ function EndCard({
   mode: PlayMode
   word: string
   gloss?: string
+  synonyms?: string[]
   lang: PackLang
   cefr: PackCefr
   dateKey: string
@@ -897,6 +900,11 @@ function EndCard({
   const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
   const endBadge =
     mode === 'daily' ? ' · Daily' : mode === 'pocket' ? ' · Pocket' : ' · Practice'
+  // ADR 0035 / #94: gloss is teach headline; lemma secondary; silent omit when empty
+  const teachGloss = gloss?.trim() ?? ''
+  const teachSynonyms = (synonyms ?? [])
+    .filter((s) => s.trim().length > 0)
+    .slice(0, 3)
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
@@ -905,10 +913,40 @@ function EndCard({
           {won ? 'You got it' : 'Out of lives'}
           {endBadge}
         </Badge>
-        <p className="mt-3 text-sm text-ink-muted">The word was</p>
-        <p className="mt-1 text-lg font-semibold tracking-wide text-ink">{word}</p>
-        {gloss ? (
-          <p className="mt-2 text-[13px] leading-relaxed text-ink-muted">{gloss}</p>
+        {teachGloss ? (
+          <p className="mt-3 text-lg font-semibold leading-snug text-ink">
+            {teachGloss}
+          </p>
+        ) : null}
+        <p
+          className={[
+            'text-sm text-ink-muted',
+            teachGloss ? 'mt-2' : 'mt-3',
+          ].join(' ')}
+        >
+          The word was
+        </p>
+        <p
+          className={[
+            'tracking-wide text-ink',
+            teachGloss
+              ? 'mt-0.5 text-base font-medium'
+              : 'mt-1 text-lg font-semibold',
+          ].join(' ')}
+        >
+          {word}
+        </p>
+        {teachSynonyms.length > 0 ? (
+          <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
+            {teachSynonyms.map((s) => (
+              <span
+                key={s}
+                className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
         ) : null}
       </div>
 
