@@ -191,6 +191,38 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
   })
 })
 
+describe('Play LearnerHint after finish (gh-95 / ADR 0035)', () => {
+  test('LearnerHint gated on !finished; not shown alongside EndCard', async () => {
+    const src = await pageSrc('Play.tsx')
+
+    // Parent Play: strip only while in-progress (!finished) — ADR 0035 Decision 4
+    // Addresses Avery blind spot: EndCard-only slices miss this parent coupling.
+    expect(src).toContain('{!finished && (')
+    expect(src).toContain('<LearnerHint entry={wordEntry} lang={lang} />')
+    const gateAt = src.indexOf('{!finished && (')
+    const hintAt = src.indexOf('<LearnerHint entry={wordEntry} lang={lang} />', gateAt)
+    const gateClose = src.indexOf(')}', hintAt)
+    expect(gateAt).toBeGreaterThan(0)
+    expect(hintAt).toBeGreaterThan(gateAt)
+    expect(gateClose).toBeGreaterThan(hintAt)
+    // Gate wraps LearnerHint tightly (no hybrid keep-after-finish)
+    expect(src.slice(gateAt, gateClose)).toContain('<LearnerHint')
+    expect(src.slice(gateAt, gateClose)).not.toContain('EndCard')
+
+    // EndCard still mounts when finished is truthy (sibling branch under playing UI)
+    const finishedAt = src.indexOf('{finished ? (')
+    expect(finishedAt).toBeGreaterThan(hintAt)
+    const endCardCall = src.indexOf('<EndCard', finishedAt)
+    expect(endCardCall).toBeGreaterThan(finishedAt)
+    expect(endCardCall).toBeLessThan(src.indexOf(') : (', finishedAt))
+
+    // EndCard itself never mounts LearnerHint (empty gloss still hides strip via parent gate)
+    const endFn = src.indexOf('function EndCard(')
+    expect(endFn).toBeGreaterThan(0)
+    expect(src.slice(endFn)).not.toContain('<LearnerHint')
+  })
+})
+
 describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
   test('gloss elevated as teach headline; lemma demoted; synonyms wired; silent omit', async () => {
     const src = await pageSrc('Play.tsx')
