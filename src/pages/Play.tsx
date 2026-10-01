@@ -943,7 +943,7 @@ function EndCard({
             {teachSynonyms.map((s) => (
               <span
                 key={s}
-                className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted"
+                className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
               >
                 {s}
               </span>

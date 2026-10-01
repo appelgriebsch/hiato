@@ -223,6 +223,44 @@ describe('Play LearnerHint after finish (gh-95 / ADR 0035)', () => {
   })
 })
 
+describe('Play LearnerHint in-progress teach cue (gh-93 / ADR 0035)', () => {
+  test('gloss elevated as mid-round teach cue; no lemma; empty keeps NO_HINT_COPY', async () => {
+    const src = await Bun.file(
+      new URL('../components/play/LearnerHint.tsx', import.meta.url),
+    ).text()
+
+    // Teach hierarchy: exactly one mid-round gloss class (ink + medium; leaner than EndCard)
+    const teachGlossClass = 'text-sm font-medium leading-snug text-ink'
+    expect(src.split(teachGlossClass).length - 1).toBe(1)
+    expect(src).toContain('{gloss}')
+    // Old muted buried gloss must not remain
+    expect(src).not.toContain('text-[13px] leading-snug text-ink-muted')
+    // Stay leaner than EndCard post-finish climax
+    expect(src).not.toContain('text-lg font-semibold')
+
+    // Synonym chips: exactly one cream-pill ink class (cross-surface match with EndCard)
+    const chipClass =
+      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink'
+    expect(src.split(chipClass).length - 1).toBe(1)
+    expect(src).toContain('.slice(0, 3)')
+
+    // ADR 0023: never show the answer word
+    expect(src).not.toContain('entry.word')
+    expect(src).not.toContain('{entry.word}')
+    expect(src).not.toMatch(/\{[^}]*\.word[^}]*\}/)
+
+    // Graceful empty state still uses NO_HINT_COPY (ADR 0023); not silent omit
+    expect(src).toContain('NO_HINT_COPY')
+    expect(src).toContain('NO_HINT_COPY[lang]')
+    expect(src).toContain('text-ink-faint')
+    expect(src).toContain('border-dashed')
+
+    // No translation-first / L1 schooling copy
+    expect(src).not.toMatch(/translation|translate|L1|English meaning|means in/i)
+    expect(src).not.toMatch(/Add a gloss|no hint available/i)
+  })
+})
+
 describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
   test('gloss elevated as teach headline; lemma demoted; synonyms wired; silent omit', async () => {
     const src = await pageSrc('Play.tsx')
@@ -252,8 +290,11 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(endCard).toContain('The word was')
     expect(endCard).toContain('{word}')
 
-    // Synonym chips lean layout (same spirit as LearnerHint)
+    // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
     expect(endCard).toContain(
+      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink',
+    )
+    expect(endCard).not.toContain(
       'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted',
     )
     expect(endCard).toContain('teachSynonyms.map')
