@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_LABELS, LANG_CODES, LANG_LABELS } from '@/packs/labels'
+import { packInfoLabel, provenanceCaption } from '@/packs/provenance'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from '@/packs/schema'
 
 function moveRadio<T extends string>(
@@ -74,6 +75,9 @@ export function Language() {
       setPreparing(false)
     }
   }
+
+  const caption = provenanceCaption(lang, cefr)
+  const infoLabel = packInfoLabel(lang)
 
   return (
     <Layout
@@ -193,6 +197,26 @@ export function Language() {
             {CEFR_LABELS[c]}
           </button>
         ))}
+      </div>
+
+      {/* Selected-only provenance (#80 / #99): one muted caption for active lang×CEFR */}
+      <div
+        className="mt-3 flex items-center gap-2"
+        data-provenance-caption
+      >
+        <Link
+          to="/about"
+          className="min-w-0 flex-1 truncate text-xs text-ink-faint hover:text-ink-muted"
+          title={caption}
+        >
+          {caption}
+        </Link>
+        <Link
+          to="/about"
+          className="motion-press shrink-0 text-xs text-ink-muted hover:underline"
+        >
+          {infoLabel}
+        </Link>
       </div>
     </Layout>
   )
