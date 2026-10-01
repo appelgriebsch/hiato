@@ -7,7 +7,12 @@ function hasLearnerContent(entry: PackLemma): boolean {
   return gloss.length > 0 || syns.length > 0
 }
 
-/** Compact dictionary + synonym chips under the gap word. Never shows the lemma. */
+/**
+ * Compact dictionary + synonym chips under the gap word during play.
+ * Never renders the answer word. Gloss is the mid-round Think-in-L2 teach cue
+ * (ADR 0035); leaner than EndCard's post-finish climax. Empty state keeps
+ * NO_HINT_COPY (ADR 0023).
+ */
 export function LearnerHint({
   entry,
   lang = 'en',
@@ -24,10 +29,10 @@ export function LearnerHint({
     const empty = NO_HINT_COPY[lang]
     return (
       <div
-        className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-raised/50 px-3 py-2.5 text-center"
+        className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-raised/40 px-3 py-2.5 text-center"
         aria-label={empty}
       >
-        <p className="text-[11px] text-ink-faint">{empty}</p>
+        <p className="text-[11px] leading-snug text-ink-faint">{empty}</p>
       </div>
     )
   }
@@ -35,7 +40,7 @@ export function LearnerHint({
   return (
     <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center">
       {gloss ? (
-        <p className="text-[13px] leading-snug text-ink-muted">{gloss}</p>
+        <p className="text-sm font-medium leading-snug text-ink">{gloss}</p>
       ) : null}
       {synonyms.length > 0 && (
         <div
@@ -46,7 +51,7 @@ export function LearnerHint({
           {synonyms.map((s) => (
             <span
               key={s}
-              className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted"
+              className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
             >
               {s}
             </span>
