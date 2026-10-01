@@ -28,7 +28,7 @@ describe('Language picker (gh-30)', () => {
     expect(src).toContain('aria-orientation="vertical"')
     expect(src).toContain("e.key === 'ArrowUp' || e.key === 'ArrowLeft'")
     expect(src).toContain("e.key === 'ArrowDown' || e.key === 'ArrowRight'")
-    expect(src).toContain('aria-busy={preparing}')
+    expect(src).toContain("aria-busy={preparing || cachePhase === 'caching'}")
     expect(src).toContain('disabled={preparing}')
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
     const prefsAt = src.indexOf('setPrefs({ lang, cefr })')
@@ -431,6 +431,15 @@ describe('Home offline-ready signal (gh-103)', () => {
     expect(src).toContain('isPackCachedLocally')
     expect(src).not.toMatch(/Install app|Add to Home Screen/i)
   })
+
+  test('precache race uses cacheGen/alive cancel (Critical #2)', async () => {
+    const src = await pageSrc('Home.tsx')
+    expect(src).toContain('cacheGen')
+    expect(src).toContain('cacheAlive')
+    expect(src).toContain('gen !== cacheGen.current')
+    expect(src).toContain('!cacheAlive.current')
+    expect(src).toContain('precacheSelectedLanguage(selectedLang, selectedCefr)')
+  })
 })
 
 describe('Language pack cache + quiet Install (gh-103)', () => {
@@ -440,7 +449,9 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     expect(src).toContain('data-pack-cache-status')
     expect(src).toContain('InstallHelpLink')
     expect(src).toContain('Offline ready for')
-    expect(src).toContain("cachePhase === 'ready' || cachePhase === 'caching'")
+    expect(src).toContain('const showInstall = cachePhase === \'ready\'')
+    expect(src).toContain("cachePhase === 'caching'")
+    expect(src).toContain("'Caching…'")
     // Provenance preserved
     expect(src).toContain('data-provenance-caption')
     expect(src).toContain('provenanceCaption(lang, cefr)')
@@ -455,7 +466,10 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     expect(src).toContain('Optional: install Hiato')
     expect(src).toContain('No store')
     expect(src).toContain('no account')
-    expect(src).toContain("e.key === 'Escape'")
+    expect(src).toContain('showModal')
+    expect(src).toContain('min-h-11')
+    expect(src).toContain('openerRef')
+    expect(src).toContain('restoreFocusRef')
     expect(src).not.toMatch(/sign[- ]?in|account required|app store/i)
   })
 })
@@ -485,12 +499,16 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     expect(src).toContain("const vowelHelp = cefr === 'a1' || cefr === 'a2'")
     expect(src).toContain('vowelHelp && cells.some')
     expect(src).toContain('Soft green = vowel help (A1–A2)')
+    expect(src).toContain('text-ink-muted')
+    expect(src).toContain('aria-label="Reveal word and end this practice round"')
   })
 
-  test('EndCard teach hierarchy + no LearnerHint double gloss; SPA identity reset', async () => {
+  test('EndCard teach hierarchy + keyed PlayRound identity; Reveal badge copy', async () => {
     const src = await pageSrc('Play.tsx')
-    expect(src).toContain('playIdentityRef')
-    expect(src).toContain('key={`end-${roundId}`}')
+    // Critical #1: remount round subtree — no ref+setState-during-render
+    expect(src).not.toContain('playIdentityRef')
+    expect(src).toContain('function PlayRound(')
+    expect(src).toContain('key={roundId}')
     expect(src).toContain('data-endcard-teach')
     expect(src).toContain('{!finished && (')
     expect(src).toContain('<LearnerHint entry={wordEntry} lang={lang} />')
@@ -500,6 +518,9 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     expect(endCard).toContain('{teachGloss}')
     expect(endCard).toContain('The word was')
     expect(endCard).not.toContain('<LearnerHint')
+    // Warning #1: Reveal → "Word revealed"; lives → "Out of lives"
+    expect(endCard).toContain("revealed ? 'Word revealed' : 'Out of lives'")
+    expect(src).toContain('setRevealedWord(true)')
     expect(src).not.toMatch(/Win\/Lose|prototype.*toggle/i)
   })
 })
@@ -512,5 +533,16 @@ describe('Layout sticky Continue scroll padding (gh-103 / #80)', () => {
     expect(src).toContain('scroll-pb-6')
     expect(src).toContain("footer ? 'scroll-pb-6 pb-2' : ''")
     expect(src).toContain('sticky bottom-0 z-10')
+  })
+})
+
+describe('OfflineChip packReady vs network (#103 Avery W3)', () => {
+  test('packReady path returns null while offline (no duplicate Offline chrome)', async () => {
+    const src = await Bun.file(
+      new URL('../components/OfflineChip.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('if (packReady) return null')
+    expect(src).toContain('data-offline-ready')
+    expect(src).toContain('Offline ready')
   })
 })

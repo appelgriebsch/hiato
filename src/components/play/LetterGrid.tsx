@@ -9,6 +9,9 @@ import type { CellState } from '@/engine'
 export function letterGridRowLengths(n: number): number[] {
   if (n <= 0) return []
   if (n <= 7) return [n]
+  // Explicit balanced splits (no orphan): 13→[7,6], 17→[6,6,5]
+  if (n === 13) return [7, 6]
+  if (n === 17) return [6, 6, 5]
   if (n <= 14) {
     const top = Math.ceil(n / 2)
     return [top, n - top]
@@ -66,10 +69,21 @@ export function LetterGrid({ cells }: { cells: CellState[] }) {
       {rows.map((row, ri) => (
         <div
           key={ri}
-          className="grid w-full justify-items-center gap-2 sm:gap-2.5"
+          className={[
+            'grid w-full justify-items-center',
+            // ~320px: tighten gap for 6–7 cols so tiles stay readable (#103 Avery W5)
+            row.length >= 6 ? 'gap-1.5 sm:gap-2' : 'gap-2 sm:gap-2.5',
+          ].join(' ')}
           style={{
             gridTemplateColumns: `repeat(${row.length}, minmax(0, 1fr))`,
-            maxWidth: row.length <= 4 ? '14rem' : row.length <= 6 ? '20rem' : '100%',
+            maxWidth:
+              row.length <= 4
+                ? '14rem'
+                : row.length <= 5
+                  ? '18rem'
+                  : row.length <= 6
+                    ? '20rem'
+                    : '100%',
           }}
           data-letter-row={ri}
           data-row-len={row.length}

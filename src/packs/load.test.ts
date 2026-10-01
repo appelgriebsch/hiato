@@ -71,6 +71,8 @@ describe('isPackCachedLocally (#103)', () => {
     expect(isPackCachedLocally('en', 'a1')).toBe(false)
     localStorage.setItem(localPackCacheKey('en', 'a1'), '{not-json')
     expect(isPackCachedLocally('en', 'a1')).toBe(false)
+    // Poison key discarded on corrupt JSON (#103 Avery W8)
+    expect(localStorage.getItem(localPackCacheKey('en', 'a1'))).toBeNull()
     const pack = {
       version: 1,
       lang: 'en',

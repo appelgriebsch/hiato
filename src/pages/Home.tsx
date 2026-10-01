@@ -66,19 +66,31 @@ export function Home() {
 
 
   // Warm selected-language packs (all CEFR) into SW + localStorage (ADR 0006).
+  // cacheGen + alive cancel stale lang×CEFR .then so Offline ready cannot flash wrong (#103).
+  const cacheAlive = useRef(true)
+  const cacheGen = useRef(0)
+  useEffect(() => {
+    return () => {
+      cacheAlive.current = false
+    }
+  }, [])
+
   useEffect(() => {
     if (!selectedLang || !selectedCefr) {
       setPackCached(false)
       return
     }
+    const gen = ++cacheGen.current
     setPackCached(isPackCachedLocally(selectedLang, selectedCefr))
     void precacheSelectedLanguage(selectedLang, selectedCefr)
       .then((ok) => {
+        if (!cacheAlive.current || gen !== cacheGen.current) return
         setPackCached(
           ok || isPackCachedLocally(selectedLang, selectedCefr),
         )
       })
       .catch(() => {
+        if (!cacheAlive.current || gen !== cacheGen.current) return
         setPackCached(isPackCachedLocally(selectedLang, selectedCefr))
       })
   }, [selectedLang, selectedCefr])

@@ -141,6 +141,12 @@ export function isPackCachedLocally(lang: PackLang, cefr: PackCefr): boolean {
     assertPack(JSON.parse(raw))
     return true
   } catch {
+    // Corrupt / unversioned JSON — discard poison key (mirror readLocal).
+    try {
+      localStorage.removeItem(localPackCacheKey(lang, cefr))
+    } catch {
+      /* ignore */
+    }
     return false
   }
 }

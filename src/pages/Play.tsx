@@ -99,15 +99,46 @@ export function Play() {
   const prefs = getPrefs()
   const lang = prefs?.lang
   const cefr = prefs?.cefr
-  // Freeze the local date when a round opens so a midnight tick cannot
-  // remount/reseed pickDaily, persist, or alreadyPlayed. Recapture only
-  // when the round identity (mode/seed/pocket id/lang/cefr) changes.
-  const roundId = `${mode}|${practiceSeed}|${pocketParamId ?? ''}|${lang ?? ''}|${cefr ?? ''}`
-  const dateFreezeRef = useRef({ roundId, dateKey: localDateKey() })
-  if (dateFreezeRef.current.roundId !== roundId) {
-    dateFreezeRef.current = { roundId, dateKey: localDateKey() }
-  }
-  const dateKey = dateFreezeRef.current.dateKey
+
+  useEffect(() => {
+    if (!lang || !cefr) {
+      nav('/language', { replace: true })
+    }
+  }, [lang, cefr, nav])
+
+  if (!lang || !cefr) return null
+
+  // Remount the round subtree on identity change — StrictMode-safe, no
+  // setState-during-render, no stale EndCard flash (#103 / Avery).
+  const roundId = `${mode}|${practiceSeed}|${pocketParamId ?? ''}|${lang}|${cefr}`
+  return (
+    <PlayRound
+      key={roundId}
+      mode={mode}
+      practiceSeed={practiceSeed}
+      pocketParamId={pocketParamId}
+      lang={lang}
+      cefr={cefr}
+    />
+  )
+}
+
+function PlayRound({
+  mode,
+  practiceSeed,
+  pocketParamId,
+  lang,
+  cefr,
+}: {
+  mode: PlayMode
+  practiceSeed: number
+  pocketParamId: string | null
+  lang: PackLang
+  cefr: PackCefr
+}) {
+  const nav = useNavigate()
+  // Freeze local date for this remounted round (midnight cannot reseed).
+  const [dateKey] = useState(() => localDateKey())
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -119,6 +150,8 @@ export function Play() {
   const [usedCorrect, setUsedCorrect] = useState<Set<string>>(() => new Set())
   const [hintUsed, setHintUsed] = useState(false)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
+  /** Practice Reveal lose — EndCard says "Word revealed", not "Out of lives". */
+  const [revealedWord, setRevealedWord] = useState(false)
   const [alreadyPlayed, setAlreadyPlayed] = useState(false)
   const [streak, setStreak] = useState(0)
   const [practiceOk, setPracticeOk] = useState(true)
@@ -127,24 +160,6 @@ export function Play() {
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
-
-  // Clear finished/word when round identity changes so EndCard cannot flash stale (#103).
-  const playIdentityRef = useRef(roundId)
-  if (playIdentityRef.current !== roundId) {
-    playIdentityRef.current = roundId
-    setLoading(true)
-    setError(null)
-    setFinished(null)
-    setWordEntry(null)
-    setAlreadyPlayed(false)
-    setActivePocketId(null)
-    setCells([])
-    setLives(TOTAL_LIVES)
-    setMisses(0)
-    setUsedWrong(new Set())
-    setUsedCorrect(new Set())
-    setHintUsed(false)
-  }
 
   const roundRef = useRef({
     cells,
@@ -172,13 +187,6 @@ export function Play() {
   }
 
   useEffect(() => {
-    if (!lang || !cefr) {
-      nav('/language', { replace: true })
-    }
-  }, [lang, cefr, nav])
-
-  useEffect(() => {
-    if (!lang || !cefr) return
     ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
   }, [lang, cefr, dateKey])
@@ -216,7 +224,6 @@ export function Play() {
   )
 
   useEffect(() => {
-    if (!lang || !cefr) return
     let cancelled = false
     setLoading(true)
     setError(null)
@@ -473,6 +480,7 @@ export function Play() {
     }
     setCells(next)
     setUsedCorrect(usedCorrect)
+    setRevealedWord(true)
     endGame('lose', r.wordEntry)
   }
 
@@ -480,8 +488,6 @@ export function Play() {
     if (!practiceOk) return
     nav(`/play?mode=practice&seed=${Date.now()}`)
   }
-
-  if (!lang || !cefr) return null
 
   const vowelHelp = cefr === 'a1' || cefr === 'a2'
 
@@ -681,7 +687,7 @@ export function Play() {
           <div className="my-5">
             <LetterGrid cells={cells} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
-              <p className="mt-3 text-center text-[11px] text-ink-faint">
+              <p className="mt-3 text-center text-[11px] text-ink-muted">
                 Soft green = vowel help (A1–A2)
               </p>
             )}
@@ -703,8 +709,8 @@ export function Play() {
 
           {finished ? (
             <EndCard
-              key={`end-${roundId}`}
               won={finished === 'win'}
+              revealed={revealedWord}
               mode={mode}
               word={wordEntry.word}
               gloss={wordEntry.gloss}
@@ -726,6 +732,7 @@ export function Play() {
                   <button
                     type="button"
                     data-reveal-word
+                    aria-label="Reveal word and end this practice round"
                     onClick={onReveal}
                     className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
                   >
@@ -798,6 +805,7 @@ export function Play() {
 
 function EndCard({
   won,
+  revealed = false,
   mode,
   word,
   gloss,
@@ -813,6 +821,8 @@ function EndCard({
   onPocketCleared,
 }: {
   won: boolean
+  /** Practice Reveal — badge "Word revealed" instead of "Out of lives". */
+  revealed?: boolean
   mode: PlayMode
   word: string
   gloss?: string
@@ -966,7 +976,7 @@ function EndCard({
         data-endcard-teach
       >
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
-          {won ? 'You got it' : 'Out of lives'}
+          {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
         {teachGloss ? (

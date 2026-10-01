@@ -102,8 +102,8 @@ export function Language() {
 
   const caption = provenanceCaption(lang, cefr)
   const infoLabel = packInfoLabel(lang)
-  const showInstall =
-    cachePhase === 'ready' || cachePhase === 'caching'
+  // A2HS only after cache ready — not during caching (#103 Avery W2)
+  const showInstall = cachePhase === 'ready'
 
   return (
     <Layout
@@ -116,11 +116,15 @@ export function Language() {
           ) : null}
           <Button
             fullWidth
-            disabled={preparing}
-            aria-busy={preparing}
+            disabled={preparing || cachePhase === 'caching'}
+            aria-busy={preparing || cachePhase === 'caching'}
             onClick={() => void continuePlay()}
           >
-            {preparing ? 'Preparing packs…' : 'Continue to daily'}
+            {preparing
+              ? 'Preparing packs…'
+              : cachePhase === 'caching'
+                ? 'Caching…'
+                : 'Continue to daily'}
           </Button>
         </div>
       }

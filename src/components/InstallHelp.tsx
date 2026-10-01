@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Button } from '@/components/ui/button'
 
 type BeforeInstallPromptEvent = Event & {
@@ -17,17 +18,21 @@ function isStandaloneDisplay(): boolean {
 
 /**
  * Quiet muted "Add to Home Screen" + optional dismissible A2HS help sheet.
- * Shown only when a pack is cached (or caching) — not a sales wall (#103).
+ * Shown only when a pack is cache-ready — not a sales wall (#103).
+ * Native dialog showModal: focus trap, restore focus, inert backdrop (PocketSheet).
  */
 export function InstallHelpLink({
   visible,
 }: {
-  /** True while/after selected pack cache succeeds. */
+  /** True after selected pack cache succeeds. */
   visible: boolean
 }) {
   const [open, setOpen] = useState(false)
   const [standalone, setStandalone] = useState(isStandaloneDisplay)
   const deferred = useRef<BeforeInstallPromptEvent | null>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const openerRef = useRef<HTMLElement | null>(null)
+  const restoreFocusRef = useRef(false)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -40,17 +45,33 @@ export function InstallHelpLink({
     return () => window.removeEventListener('beforeinstallprompt', onBip)
   }, [])
 
-  useEffect(() => {
-    if (!open) return
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current
+    if (!open) {
+      if (dialog?.open) dialog.close()
+      return
+    }
+    if (!dialog) return
+    const active = document.activeElement
+    openerRef.current = active instanceof HTMLElement ? active : null
+    restoreFocusRef.current = true
+    if (!dialog.open) dialog.showModal()
     closeBtnRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        setOpen(false)
+  }, [open])
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+    if (open) {
+      return () => {
+        if (dialog.open) dialog.close()
       }
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    if (dialog.open) dialog.close()
+    if (!restoreFocusRef.current) return
+    restoreFocusRef.current = false
+    const opener = openerRef.current
+    if (opener && opener.isConnected) opener.focus()
   }, [open])
 
   if (!visible || standalone) return null
@@ -71,32 +92,38 @@ export function InstallHelpLink({
     setOpen(true)
   }
 
+  function closeSheet() {
+    setOpen(false)
+  }
+
   return (
     <>
       <button
         type="button"
         data-install-link
-        className="motion-press text-xs text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm py-1"
+        className="motion-press inline-flex min-h-11 items-center text-xs text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm py-1"
         onClick={() => void onInstallClick()}
       >
         Add to Home Screen
       </button>
 
-      {open ? (
-        <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-ink/30 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:items-center"
-          role="presentation"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setOpen(false)
+      {createPortal(
+        <dialog
+          ref={dialogRef}
+          className="install-help-sheet"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="install-help-title"
+          data-install-sheet
+          onCancel={(event) => {
+            event.preventDefault()
+            closeSheet()
+          }}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) closeSheet()
           }}
         >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="install-help-title"
-            className="w-full max-w-md rounded-2xl border border-line bg-raised p-5 shadow-lg"
-            data-install-sheet
-          >
+          <div className="install-help-sheet-panel">
             <h2
               id="install-help-title"
               className="text-base font-semibold text-ink"
@@ -130,13 +157,14 @@ export function InstallHelpLink({
               fullWidth
               variant="ghost"
               className="mt-4"
-              onClick={() => setOpen(false)}
+              onClick={closeSheet}
             >
               Close
             </Button>
           </div>
-        </div>
-      ) : null}
+        </dialog>,
+        document.body,
+      )}
     </>
   )
 }

@@ -23,6 +23,9 @@ export function OfflineChip({ packReady = false }: { packReady?: boolean } = {})
   }, [])
 
   if (!online) {
+    // packReady chip is the landing trust signal — stay quiet while offline so
+    // TopBar OfflineChip is the sole network chrome (#103 Avery W3).
+    if (packReady) return null
     return (
       <span className="rounded-full bg-cream-dark px-2.5 py-1 text-xs font-medium text-ink-muted">
         Offline

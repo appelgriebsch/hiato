@@ -27,6 +27,11 @@ describe('letterGridRowLengths (#103)', () => {
     }
   })
 
+  test('explicit balanced splits for 13 and 17', () => {
+    expect(letterGridRowLengths(13)).toEqual([7, 6])
+    expect(letterGridRowLengths(17)).toEqual([6, 6, 5])
+  })
+
   test('very long words use three balanced rows', () => {
     expect(letterGridRowLengths(15)).toEqual([5, 5, 5])
     expect(letterGridRowLengths(16)).toEqual([6, 5, 5])
