@@ -191,6 +191,61 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
   })
 })
 
+describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
+  test('gloss elevated as teach headline; lemma demoted; synonyms wired; silent omit', async () => {
+    const src = await pageSrc('Play.tsx')
+    const endAt = src.indexOf('function EndCard(')
+    expect(endAt).toBeGreaterThan(0)
+    const endCard = src.slice(endAt)
+
+    // Synonyms passed from pack lemma; EndCard accepts synonyms prop
+    expect(src).toContain('synonyms={wordEntry.synonyms}')
+    expect(endCard).toContain('synonyms?: string[]')
+    expect(endCard).toContain("const teachGloss = gloss?.trim() ?? ''")
+    expect(endCard).toContain('(synonyms ?? [])')
+    expect(endCard).toContain('.slice(0, 3)')
+
+    // Gloss is teach headline (larger / ink) — not muted buried chip
+    expect(endCard).toContain(
+      'className="mt-3 text-lg font-semibold leading-snug text-ink"',
+    )
+    expect(endCard).toContain('{teachGloss}')
+    // Old buried gloss chip must not remain
+    expect(endCard).not.toContain(
+      'mt-2 text-[13px] leading-relaxed text-ink-muted">{gloss}',
+    )
+
+    // Lemma revealed but not sole hero when gloss present (demoted vs text-lg font-semibold)
+    expect(endCard).toContain("'mt-0.5 text-base font-medium'")
+    expect(endCard).toContain('The word was')
+    expect(endCard).toContain('{word}')
+
+    // Synonym chips lean layout (same spirit as LearnerHint)
+    expect(endCard).toContain(
+      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted',
+    )
+    expect(endCard).toContain('teachSynonyms.map')
+
+    // Silent omit: trim empty gloss; no NO_HINT_COPY / faint placeholder in teach panel
+    expect(endCard).toContain('{teachGloss ? (')
+    expect(endCard).not.toContain('NO_HINT_COPY')
+    expect(endCard).not.toMatch(/No hint|no hint available|Add a gloss/i)
+    const panelStart = endCard.indexOf('rounded-xl border border-line bg-raised/80')
+    const panelEnd = endCard.indexOf('<Card className="w-full text-left">', panelStart)
+    expect(panelStart).toBeGreaterThan(0)
+    expect(panelEnd).toBeGreaterThan(panelStart)
+    const teachPanel = endCard.slice(panelStart, panelEnd)
+    expect(teachPanel).not.toContain('text-ink-faint')
+    expect(teachPanel).not.toContain('NO_HINT_COPY')
+    expect(teachPanel).toContain('{teachGloss}')
+    expect(teachPanel).toContain('teachSynonyms')
+
+    // Do not couple LearnerHint empty-state into EndCard
+    expect(endCard).not.toContain('LearnerHint')
+    expect(endCard).not.toContain("from '@/components/play/LearnerHint'")
+  })
+})
+
 describe('Play pocket mode (gh-84 / ADR 0034)', () => {
   test('mode=pocket wires canPlay gate, win remove, manual Remove; no recordDailyWin', async () => {
     const src = await pageSrc('Play.tsx')
