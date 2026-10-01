@@ -199,21 +199,20 @@ export function Language() {
         ))}
       </div>
 
-      {/* Selected-only provenance (#80 / #99): one muted caption for active lang×CEFR */}
+      {/* Selected-only provenance (#80 / #99): muted non-link caption; Pack info → About */}
       <div
         className="mt-3 flex items-center gap-2"
         data-provenance-caption
       >
-        <Link
-          to="/about"
-          className="min-w-0 flex-1 truncate text-xs text-ink-faint hover:text-ink-muted"
+        <span
+          className="min-w-0 flex-1 truncate text-xs text-ink-muted"
           title={caption}
         >
           {caption}
-        </Link>
+        </span>
         <Link
           to="/about"
-          className="motion-press shrink-0 text-xs text-ink-muted hover:underline"
+          className="motion-press inline-flex min-h-8 shrink-0 items-center py-2 text-xs text-ink-muted hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
         >
           {infoLabel}
         </Link>

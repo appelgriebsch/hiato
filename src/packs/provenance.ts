@@ -120,9 +120,11 @@ function cefrIndex(cefr: PackCefr): number {
   return PACK_CEFR_LEVELS.indexOf(cefr)
 }
 
-/** Whether `cefr` falls in a PACK_LICENSES `levels` range like `A1–B2`. */
+/** Whether `cefr` falls in a PACK_LICENSES `levels` range like `A1–B2` or `A1-B2`. */
 export function cefrInBandLevels(cefr: PackCefr, levels: string): boolean {
-  const m = levels.match(/^([A-Ca-c][12])–([A-Ca-c][12])$/)
+  // Accept en-dash (PACK_LICENSES) and ASCII hyphen (callers / typos).
+  const normalized = levels.replace(/[\u2013\u2014]/g, '-')
+  const m = normalized.match(/^([A-Ca-c][12])-([A-Ca-c][12])$/)
   if (!m) return false
   const lo = m[1]!.toLowerCase() as PackCefr
   const hi = m[2]!.toLowerCase() as PackCefr
@@ -155,12 +157,16 @@ function provenanceSlot(lang: PackLang, cefr: PackCefr): ProvenanceSlot {
   return cefr === 'b2' || cefr === 'c1' || cefr === 'c2' ? 'es-high' : 'es-low'
 }
 
-/** Short license label derived from the PACK_LICENSES band text. */
+/** Short license label derived from the PACK_LICENSES band text.
+ * Only known CC0 / CC-BY-SA bands — never default unknown to CC0. */
 export function shortLicenseFromBand(band: PackLicenseBand): LicenseKey {
-  if (/CC-BY-SA/i.test(band.license)) return 'CC-BY-SA'
+  if (/CC-BY-SA/i.test(band.license) || /BY-SA/i.test(band.license)) {
+    return 'CC-BY-SA'
+  }
   if (/CC0/i.test(band.license)) return 'CC0'
-  // Fallback keeps caption usable if a future band uses another SPDX id.
-  return /BY-SA/i.test(band.license) ? 'CC-BY-SA' : 'CC0'
+  throw new Error(
+    `Unknown license in PACK_LICENSES band ${band.levels}: ${band.license}`,
+  )
 }
 
 /**

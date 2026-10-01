@@ -104,6 +104,20 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
     expect(cefrInBandLevels('b2', 'B2–C2')).toBe(true)
     expect(cefrInBandLevels('a1', 'B2–C2')).toBe(false)
     expect(cefrInBandLevels('c2', 'A1–C2')).toBe(true)
+    // ASCII hyphen accepted (same as en-dash)
+    expect(cefrInBandLevels('b2', 'A1-B2')).toBe(true)
+    expect(cefrInBandLevels('c1', 'A1-B2')).toBe(false)
+    expect(cefrInBandLevels('b2', 'B2-C2')).toBe(true)
+  })
+
+  test('shortLicenseFromBand throws on unknown license (no CC0 default)', () => {
+    expect(() =>
+      shortLicenseFromBand({
+        levels: 'A1–B2',
+        license: 'MIT',
+        notes: [],
+      }),
+    ).toThrow(/Unknown license/)
   })
 
   test('default uiLang is the pack language', () => {
