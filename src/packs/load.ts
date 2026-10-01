@@ -132,3 +132,15 @@ export function purgeLocalPacksExcept(lang: PackLang): void {
     }
   }
 }
+
+/** True when a validated pack JSON is already in localStorage (offline-ready signal). */
+export function isPackCachedLocally(lang: PackLang, cefr: PackCefr): boolean {
+  try {
+    const raw = localStorage.getItem(localPackCacheKey(lang, cefr))
+    if (!raw) return false
+    assertPack(JSON.parse(raw))
+    return true
+  } catch {
+    return false
+  }
+}

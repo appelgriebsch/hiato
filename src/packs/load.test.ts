@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
-import { localPackCacheKey, purgeLocalPacksExcept } from './load'
+import {
+  isPackCachedLocally,
+  localPackCacheKey,
+  purgeLocalPacksExcept,
+} from './load'
 
 function installLocalStorageMock() {
   const mem = new Map<string, string>()
@@ -49,5 +53,33 @@ describe('purgeLocalPacksExcept (ADR 0006)', () => {
     expect(localStorage.getItem(localPackCacheKey('de', 'a1'))).toBeNull()
     expect(localStorage.getItem(localPackCacheKey('pt', 'a2'))).toBeNull()
     expect(localStorage.getItem(localPackCacheKey('pt', 'c2'))).toBeNull()
+  })
+})
+
+describe('isPackCachedLocally (#103)', () => {
+  let mem: Map<string, string>
+
+  beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
+    mem.clear()
+  })
+
+  test('false when missing or corrupt; true for a valid pack JSON', () => {
+    expect(isPackCachedLocally('en', 'a1')).toBe(false)
+    localStorage.setItem(localPackCacheKey('en', 'a1'), '{not-json')
+    expect(isPackCachedLocally('en', 'a1')).toBe(false)
+    const pack = {
+      version: 1,
+      lang: 'en',
+      cefr: 'a1',
+      license: 'CC0',
+      attribution: [],
+      lemmas: [{ word: 'CAT', gloss: 'a small pet' }],
+    }
+    localStorage.setItem(localPackCacheKey('en', 'a1'), JSON.stringify(pack))
+    expect(isPackCachedLocally('en', 'a1')).toBe(true)
   })
 })

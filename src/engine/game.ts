@@ -120,6 +120,15 @@ export function isDiacriticHintReady(
   return diacriticMisses >= 2 && hasUnrevealedDiacritic(cells, word)
 }
 
+/** Reveal every grapheme (practice give-up / Reveal word). */
+export function revealAllCells(word: string): CellState[] {
+  return graphemes(word).map((ch) => ({
+    char: ch,
+    helped: false,
+    revealed: true,
+  }))
+}
+
 export function isWon(cells: CellState[]): boolean {
   return cells.length > 0 && cells.every((c) => c.revealed)
 }

@@ -34,6 +34,7 @@ import {
   pickDailyLemma,
   pickPracticeLemma,
   revealOneDiacritic,
+  revealAllCells,
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
@@ -126,6 +127,24 @@ export function Play() {
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
+
+  // Clear finished/word when round identity changes so EndCard cannot flash stale (#103).
+  const playIdentityRef = useRef(roundId)
+  if (playIdentityRef.current !== roundId) {
+    playIdentityRef.current = roundId
+    setLoading(true)
+    setError(null)
+    setFinished(null)
+    setWordEntry(null)
+    setAlreadyPlayed(false)
+    setActivePocketId(null)
+    setCells([])
+    setLives(TOTAL_LIVES)
+    setMisses(0)
+    setUsedWrong(new Set())
+    setUsedCorrect(new Set())
+    setHintUsed(false)
+  }
 
   const roundRef = useRef({
     cells,
@@ -440,6 +459,23 @@ export function Play() {
     if (won) endGame('win', r.wordEntry)
   }
 
+  /** Practice give-up: shame-free tertiary Reveal (#103). */
+  function onReveal() {
+    const r = roundRef.current
+    if (!r.wordEntry || r.finished || r.loading || mode !== 'practice') return
+    const next = revealAllCells(r.wordEntry.word)
+    const usedCorrect = correctKeysFromCells(next)
+    roundRef.current = {
+      ...r,
+      cells: next,
+      usedCorrect,
+      finished: 'lose',
+    }
+    setCells(next)
+    setUsedCorrect(usedCorrect)
+    endGame('lose', r.wordEntry)
+  }
+
   function goPractice() {
     if (!practiceOk) return
     nav(`/play?mode=practice&seed=${Date.now()}`)
@@ -667,6 +703,7 @@ export function Play() {
 
           {finished ? (
             <EndCard
+              key={`end-${roundId}`}
               won={finished === 'win'}
               mode={mode}
               word={wordEntry.word}
@@ -683,14 +720,28 @@ export function Play() {
               onPocketCleared={() => setActivePocketId(null)}
             />
           ) : (
-            <Keyboard
-              lang={lang}
-              usedWrong={usedWrong}
-              usedCorrect={usedCorrect}
-              disabled={false}
-              onKey={onKey}
-              shakeKey={shakeKey}
-            />
+            <>
+              {mode === 'practice' ? (
+                <div className="mb-3 flex justify-center">
+                  <button
+                    type="button"
+                    data-reveal-word
+                    onClick={onReveal}
+                    className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                  >
+                    Reveal word
+                  </button>
+                </div>
+              ) : null}
+              <Keyboard
+                lang={lang}
+                usedWrong={usedWrong}
+                usedCorrect={usedCorrect}
+                disabled={false}
+                onKey={onKey}
+                shakeKey={shakeKey}
+              />
+            </>
           )}
 
           {!finished && mode === 'daily' && (
@@ -910,7 +961,10 @@ function EndCard({
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
-      <div className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center">
+      <div
+        className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
+        data-endcard-teach
+      >
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
           {won ? 'You got it' : 'Out of lives'}
           {endBadge}

@@ -23,6 +23,7 @@ import {
   pickPracticeLemma,
   previousLocalDateKey,
   revealOneDiacritic,
+  revealAllCells,
   TOTAL_LIVES,
 } from './index'
 
@@ -439,5 +440,15 @@ describe('ADR 0018 endless excludes today’s daily', () => {
     expect(
       rest.every((w) => lemmaIdentity(w.word) !== lemmaIdentity(daily.word)),
     ).toBe(true)
+  })
+})
+
+describe('revealAllCells (practice Reveal / #103)', () => {
+  test('reveals every grapheme without helped flag', () => {
+    const cells = revealAllCells('CAFÉ')
+    expect(cells).toHaveLength(4)
+    expect(cells.every((c) => c.revealed && c.char !== null)).toBe(true)
+    expect(cells.map((c) => c.char)).toEqual(['C', 'A', 'F', 'É'])
+    expect(cells.every((c) => c.helped === false)).toBe(true)
   })
 })

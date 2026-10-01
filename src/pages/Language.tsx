@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { InstallHelpLink } from '@/components/InstallHelp'
 import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
@@ -36,20 +37,40 @@ function moveRadio<T extends string>(
   if (btn instanceof HTMLElement) btn.focus()
 }
 
+type CachePhase = 'idle' | 'caching' | 'ready' | 'error'
+
 export function Language() {
   const saved = getPrefs()
   const [lang, setLang] = useState<PackLang>(saved?.lang ?? 'en')
   const [cefr, setCefr] = useState<PackCefr>(saved?.cefr ?? 'a1')
   const [preparing, setPreparing] = useState(false)
+  const [cachePhase, setCachePhase] = useState<CachePhase>('idle')
   const [error, setError] = useState<string | null>(null)
   const nav = useNavigate()
   const alive = useRef(true)
+  const cacheGen = useRef(0)
 
   useEffect(() => {
     return () => {
       alive.current = false
     }
   }, [])
+
+  // Choosing lang×CEFR triggers pack download/cache for that selection (#103).
+  useEffect(() => {
+    const gen = ++cacheGen.current
+    setCachePhase('caching')
+    setError(null)
+    void precacheSelectedLanguage(lang, cefr)
+      .then((ok) => {
+        if (!alive.current || gen !== cacheGen.current) return
+        setCachePhase(ok ? 'ready' : 'error')
+      })
+      .catch(() => {
+        if (!alive.current || gen !== cacheGen.current) return
+        setCachePhase('error')
+      })
+  }, [lang, cefr])
 
   async function continuePlay() {
     if (preparing) return
@@ -62,9 +83,11 @@ export function Language() {
         setError(
           'Could not load the selected pack. Check your connection and try again.',
         )
+        setCachePhase('error')
         setPreparing(false)
         return
       }
+      setCachePhase('ready')
       setPrefs({ lang, cefr })
       nav('/play?mode=daily')
     } catch {
@@ -72,12 +95,15 @@ export function Language() {
       setError(
         'Could not load the selected pack. Check your connection and try again.',
       )
+      setCachePhase('error')
       setPreparing(false)
     }
   }
 
   const caption = provenanceCaption(lang, cefr)
   const infoLabel = packInfoLabel(lang)
+  const showInstall =
+    cachePhase === 'ready' || cachePhase === 'caching'
 
   return (
     <Layout
@@ -216,6 +242,23 @@ export function Language() {
         >
           {infoLabel}
         </Link>
+      </div>
+
+      {/* Quiet pack status + optional A2HS after/with cache (#103) */}
+      <div
+        className="mt-4 mb-2 flex flex-col items-start gap-1.5"
+        data-pack-cache-status
+      >
+        <p className="text-xs text-ink-muted" aria-live="polite">
+          {cachePhase === 'caching'
+            ? `Caching ${LANG_CODES[lang]} · ${cefr.toUpperCase()}…`
+            : cachePhase === 'ready'
+              ? `Offline ready for ${LANG_CODES[lang]} · ${cefr.toUpperCase()}`
+              : cachePhase === 'error'
+                ? 'Pack not cached yet — connect and try again.'
+                : null}
+        </p>
+        <InstallHelpLink visible={showInstall} />
       </div>
     </Layout>
   )

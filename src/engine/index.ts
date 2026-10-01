@@ -15,6 +15,7 @@ export {
   buildInitialCells,
   applyGuess,
   revealOneDiacritic,
+  revealAllCells,
   hasUnrevealedDiacritic,
   isDiacriticHintMiss,
   isDiacriticHintReady,
