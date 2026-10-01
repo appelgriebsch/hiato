@@ -649,7 +649,9 @@ export function Play() {
                 Soft green = vowel help (A1–A2)
               </p>
             )}
-            <LearnerHint entry={wordEntry} lang={lang} />
+            {!finished && (
+              <LearnerHint entry={wordEntry} lang={lang} />
+            )}
           </div>
 
           {showHint && (
