@@ -15,7 +15,12 @@ export function Layout({
         footer ? '' : 'pb-[env(safe-area-inset-bottom)]',
       ].join(' ')}
     >
-      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto py-4">
+      <div
+        className={[
+          'flex min-h-0 flex-1 flex-col overflow-y-auto py-4',
+          footer ? 'scroll-pb-6 pb-2' : '',
+        ].join(' ')}
+      >
         {children}
       </div>
       {footer ? (

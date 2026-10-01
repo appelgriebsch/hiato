@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { getHealth } from '@/api'
 import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
@@ -17,13 +16,10 @@ import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
-import { loadPack } from '@/packs/load'
-import { useShellStore } from '@/store/shell'
+import { isPackCachedLocally, loadPack } from '@/packs/load'
 
 export function Home() {
   const nav = useNavigate()
-  const healthOk = useShellStore((s) => s.healthOk)
-  const setHealthOk = useShellStore((s) => s.setHealthOk)
   const prefs = getPrefs()
   const selectedLang = prefs?.lang
   const selectedCefr = prefs?.cefr
@@ -43,6 +39,11 @@ export function Home() {
       ? isDailyComplete(selectedLang, selectedCefr, dateKey)
       : false
   const [practiceOk, setPracticeOk] = useState(true)
+  const [packCached, setPackCached] = useState(() =>
+    selectedLang && selectedCefr
+      ? isPackCachedLocally(selectedLang, selectedCefr)
+      : false,
+  )
   const [, bumpPocket] = useState(0)
   const [pocketOpen, setPocketOpen] = useState(false)
   const [clearedSlot, setClearedSlot] = useState<string | null>(null)
@@ -63,24 +64,35 @@ export function Home() {
     repairPocket()
   }, [selectedLang, selectedCefr])
 
-  useEffect(() => {
-    let cancelled = false
-    void getHealth()
-      .then((r) => {
-        if (!cancelled) setHealthOk(r.ok === true)
-      })
-      .catch(() => {
-        if (!cancelled) setHealthOk(false)
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [setHealthOk])
 
   // Warm selected-language packs (all CEFR) into SW + localStorage (ADR 0006).
+  // cacheGen + alive cancel stale lang×CEFR .then so Offline ready cannot flash wrong (#103).
+  const cacheAlive = useRef(true)
+  const cacheGen = useRef(0)
   useEffect(() => {
-    if (!selectedLang || !selectedCefr) return
-    void precacheSelectedLanguage(selectedLang, selectedCefr).catch(() => {})
+    return () => {
+      cacheAlive.current = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!selectedLang || !selectedCefr) {
+      setPackCached(false)
+      return
+    }
+    const gen = ++cacheGen.current
+    setPackCached(isPackCachedLocally(selectedLang, selectedCefr))
+    void precacheSelectedLanguage(selectedLang, selectedCefr)
+      .then((ok) => {
+        if (!cacheAlive.current || gen !== cacheGen.current) return
+        setPackCached(
+          ok || isPackCachedLocally(selectedLang, selectedCefr),
+        )
+      })
+      .catch(() => {
+        if (!cacheAlive.current || gen !== cacheGen.current) return
+        setPackCached(isPackCachedLocally(selectedLang, selectedCefr))
+      })
   }, [selectedLang, selectedCefr])
 
   useEffect(() => {
@@ -214,14 +226,10 @@ export function Home() {
         </Link>
       </nav>
 
-      <p className="text-center text-xs text-ink-faint">
-        API health:{' '}
-        {healthOk === null
-          ? '…'
-          : healthOk
-            ? 'ok'
-            : 'unreachable (expected in local vite)'}
-      </p>
+      {/* Quiet offline-ready trust signal — not loud Install (#103) */}
+      <div className="flex justify-center" data-home-offline-signal>
+        <OfflineChip packReady={Boolean(prefs) && packCached} />
+      </div>
     </Layout>
   )
 }

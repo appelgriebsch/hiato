@@ -34,6 +34,7 @@ import {
   pickDailyLemma,
   pickPracticeLemma,
   revealOneDiacritic,
+  revealAllCells,
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
@@ -98,15 +99,46 @@ export function Play() {
   const prefs = getPrefs()
   const lang = prefs?.lang
   const cefr = prefs?.cefr
-  // Freeze the local date when a round opens so a midnight tick cannot
-  // remount/reseed pickDaily, persist, or alreadyPlayed. Recapture only
-  // when the round identity (mode/seed/pocket id/lang/cefr) changes.
-  const roundId = `${mode}|${practiceSeed}|${pocketParamId ?? ''}|${lang ?? ''}|${cefr ?? ''}`
-  const dateFreezeRef = useRef({ roundId, dateKey: localDateKey() })
-  if (dateFreezeRef.current.roundId !== roundId) {
-    dateFreezeRef.current = { roundId, dateKey: localDateKey() }
-  }
-  const dateKey = dateFreezeRef.current.dateKey
+
+  useEffect(() => {
+    if (!lang || !cefr) {
+      nav('/language', { replace: true })
+    }
+  }, [lang, cefr, nav])
+
+  if (!lang || !cefr) return null
+
+  // Remount the round subtree on identity change — StrictMode-safe, no
+  // setState-during-render, no stale EndCard flash (#103 / Avery).
+  const roundId = `${mode}|${practiceSeed}|${pocketParamId ?? ''}|${lang}|${cefr}`
+  return (
+    <PlayRound
+      key={roundId}
+      mode={mode}
+      practiceSeed={practiceSeed}
+      pocketParamId={pocketParamId}
+      lang={lang}
+      cefr={cefr}
+    />
+  )
+}
+
+function PlayRound({
+  mode,
+  practiceSeed,
+  pocketParamId,
+  lang,
+  cefr,
+}: {
+  mode: PlayMode
+  practiceSeed: number
+  pocketParamId: string | null
+  lang: PackLang
+  cefr: PackCefr
+}) {
+  const nav = useNavigate()
+  // Freeze local date for this remounted round (midnight cannot reseed).
+  const [dateKey] = useState(() => localDateKey())
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -118,6 +150,8 @@ export function Play() {
   const [usedCorrect, setUsedCorrect] = useState<Set<string>>(() => new Set())
   const [hintUsed, setHintUsed] = useState(false)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
+  /** Practice Reveal lose — EndCard says "Word revealed", not "Out of lives". */
+  const [revealedWord, setRevealedWord] = useState(false)
   const [alreadyPlayed, setAlreadyPlayed] = useState(false)
   const [streak, setStreak] = useState(0)
   const [practiceOk, setPracticeOk] = useState(true)
@@ -153,13 +187,6 @@ export function Play() {
   }
 
   useEffect(() => {
-    if (!lang || !cefr) {
-      nav('/language', { replace: true })
-    }
-  }, [lang, cefr, nav])
-
-  useEffect(() => {
-    if (!lang || !cefr) return
     ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
   }, [lang, cefr, dateKey])
@@ -197,7 +224,6 @@ export function Play() {
   )
 
   useEffect(() => {
-    if (!lang || !cefr) return
     let cancelled = false
     setLoading(true)
     setError(null)
@@ -440,12 +466,28 @@ export function Play() {
     if (won) endGame('win', r.wordEntry)
   }
 
+  /** Practice give-up: shame-free tertiary Reveal (#103). */
+  function onReveal() {
+    const r = roundRef.current
+    if (!r.wordEntry || r.finished || r.loading || mode !== 'practice') return
+    const next = revealAllCells(r.wordEntry.word)
+    const usedCorrect = correctKeysFromCells(next)
+    roundRef.current = {
+      ...r,
+      cells: next,
+      usedCorrect,
+      finished: 'lose',
+    }
+    setCells(next)
+    setUsedCorrect(usedCorrect)
+    setRevealedWord(true)
+    endGame('lose', r.wordEntry)
+  }
+
   function goPractice() {
     if (!practiceOk) return
     nav(`/play?mode=practice&seed=${Date.now()}`)
   }
-
-  if (!lang || !cefr) return null
 
   const vowelHelp = cefr === 'a1' || cefr === 'a2'
 
@@ -645,7 +687,7 @@ export function Play() {
           <div className="my-5">
             <LetterGrid cells={cells} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
-              <p className="mt-3 text-center text-[11px] text-ink-faint">
+              <p className="mt-3 text-center text-[11px] text-ink-muted">
                 Soft green = vowel help (A1–A2)
               </p>
             )}
@@ -668,6 +710,7 @@ export function Play() {
           {finished ? (
             <EndCard
               won={finished === 'win'}
+              revealed={revealedWord}
               mode={mode}
               word={wordEntry.word}
               gloss={wordEntry.gloss}
@@ -683,14 +726,29 @@ export function Play() {
               onPocketCleared={() => setActivePocketId(null)}
             />
           ) : (
-            <Keyboard
-              lang={lang}
-              usedWrong={usedWrong}
-              usedCorrect={usedCorrect}
-              disabled={false}
-              onKey={onKey}
-              shakeKey={shakeKey}
-            />
+            <>
+              {mode === 'practice' ? (
+                <div className="mb-3 flex justify-center">
+                  <button
+                    type="button"
+                    data-reveal-word
+                    aria-label="Reveal word and end this practice round"
+                    onClick={onReveal}
+                    className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                  >
+                    Reveal word
+                  </button>
+                </div>
+              ) : null}
+              <Keyboard
+                lang={lang}
+                usedWrong={usedWrong}
+                usedCorrect={usedCorrect}
+                disabled={false}
+                onKey={onKey}
+                shakeKey={shakeKey}
+              />
+            </>
           )}
 
           {!finished && mode === 'daily' && (
@@ -747,6 +805,7 @@ export function Play() {
 
 function EndCard({
   won,
+  revealed = false,
   mode,
   word,
   gloss,
@@ -762,6 +821,8 @@ function EndCard({
   onPocketCleared,
 }: {
   won: boolean
+  /** Practice Reveal — badge "Word revealed" instead of "Out of lives". */
+  revealed?: boolean
   mode: PlayMode
   word: string
   gloss?: string
@@ -910,9 +971,12 @@ function EndCard({
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
-      <div className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center">
+      <div
+        className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
+        data-endcard-teach
+      >
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
-          {won ? 'You got it' : 'Out of lives'}
+          {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
         {teachGloss ? (

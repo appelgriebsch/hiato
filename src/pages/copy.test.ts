@@ -28,7 +28,7 @@ describe('Language picker (gh-30)', () => {
     expect(src).toContain('aria-orientation="vertical"')
     expect(src).toContain("e.key === 'ArrowUp' || e.key === 'ArrowLeft'")
     expect(src).toContain("e.key === 'ArrowDown' || e.key === 'ArrowRight'")
-    expect(src).toContain('aria-busy={preparing}')
+    expect(src).toContain("aria-busy={preparing || cachePhase === 'caching'}")
     expect(src).toContain('disabled={preparing}')
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
     const prefsAt = src.indexOf('setPrefs({ lang, cefr })')
@@ -417,5 +417,132 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     )
     expect(savedAt).toBeGreaterThan(end)
     expect(src.indexOf('Pocket cleared', savedAt)).toBeGreaterThan(savedAt)
+  })
+})
+
+describe('Home offline-ready signal (gh-103)', () => {
+  test('landing drops API health; shows OfflineChip packReady instead', async () => {
+    const src = await pageSrc('Home.tsx')
+    expect(src).not.toMatch(/API health:/)
+    expect(src).not.toContain('getHealth')
+    expect(src).not.toContain('useShellStore')
+    expect(src).toContain('data-home-offline-signal')
+    expect(src).toContain('packReady={Boolean(prefs) && packCached}')
+    expect(src).toContain('isPackCachedLocally')
+    expect(src).not.toMatch(/Install app|Add to Home Screen/i)
+  })
+
+  test('precache race uses cacheGen/alive cancel (Critical #2)', async () => {
+    const src = await pageSrc('Home.tsx')
+    expect(src).toContain('cacheGen')
+    expect(src).toContain('cacheAlive')
+    expect(src).toContain('gen !== cacheGen.current')
+    expect(src).toContain('!cacheAlive.current')
+    expect(src).toContain('precacheSelectedLanguage(selectedLang, selectedCefr)')
+  })
+})
+
+describe('Language pack cache + quiet Install (gh-103)', () => {
+  test('selection triggers precache; quiet A2HS after/with cache; sticky CTA scroll pad', async () => {
+    const src = await pageSrc('Language.tsx')
+    expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
+    expect(src).toContain('data-pack-cache-status')
+    expect(src).toContain('InstallHelpLink')
+    expect(src).toContain('Offline ready for')
+    expect(src).toContain('const showInstall = cachePhase === \'ready\'')
+    expect(src).toContain("cachePhase === 'caching'")
+    expect(src).toContain("'Caching…'")
+    // Provenance preserved
+    expect(src).toContain('data-provenance-caption')
+    expect(src).toContain('provenanceCaption(lang, cefr)')
+  })
+
+  test('InstallHelp is optional dismissible sheet, not a sales wall', async () => {
+    const src = await Bun.file(
+      new URL('../components/InstallHelp.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('data-install-link')
+    expect(src).toContain('data-install-sheet')
+    expect(src).toContain('Optional: install Hiato')
+    expect(src).toContain('No store')
+    expect(src).toContain('no account')
+    expect(src).toContain('showModal')
+    expect(src).toContain('min-h-11')
+    expect(src).toContain('openerRef')
+    expect(src).toContain('restoreFocusRef')
+    expect(src).not.toMatch(/sign[- ]?in|account required|app store/i)
+  })
+})
+
+describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
+  test('LetterGrid uses equal row helper; Keyboard ≥44px; Practice Reveal; B1–C2 no vowel caption', async () => {
+    const grid = await Bun.file(
+      new URL('../components/play/LetterGrid.tsx', import.meta.url),
+    ).text()
+    expect(grid).toContain('letterGridRowLengths')
+    expect(grid).toContain('data-letter-grid')
+    expect(grid).toContain('data-letter-row')
+
+    const kb = await Bun.file(
+      new URL('../components/play/Keyboard.tsx', import.meta.url),
+    ).text()
+    expect(kb).toContain('min-h-[44px]')
+    expect(kb).toContain('data-tap-min="44"')
+
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain('data-reveal-word')
+    expect(src).toContain('Reveal word')
+    expect(src).toContain('function onReveal()')
+    expect(src).toContain("mode !== 'practice'")
+    expect(src).toContain('revealAllCells')
+    // Vowel caption only when vowelHelp (A1/A2)
+    expect(src).toContain("const vowelHelp = cefr === 'a1' || cefr === 'a2'")
+    expect(src).toContain('vowelHelp && cells.some')
+    expect(src).toContain('Soft green = vowel help (A1–A2)')
+    expect(src).toContain('text-ink-muted')
+    expect(src).toContain('aria-label="Reveal word and end this practice round"')
+  })
+
+  test('EndCard teach hierarchy + keyed PlayRound identity; Reveal badge copy', async () => {
+    const src = await pageSrc('Play.tsx')
+    // Critical #1: remount round subtree — no ref+setState-during-render
+    expect(src).not.toContain('playIdentityRef')
+    expect(src).toContain('function PlayRound(')
+    expect(src).toContain('key={roundId}')
+    expect(src).toContain('data-endcard-teach')
+    expect(src).toContain('{!finished && (')
+    expect(src).toContain('<LearnerHint entry={wordEntry} lang={lang} />')
+    const endAt = src.indexOf('function EndCard(')
+    const endCard = src.slice(endAt)
+    expect(endCard).toContain('text-lg font-semibold leading-snug text-ink')
+    expect(endCard).toContain('{teachGloss}')
+    expect(endCard).toContain('The word was')
+    expect(endCard).not.toContain('<LearnerHint')
+    // Warning #1: Reveal → "Word revealed"; lives → "Out of lives"
+    expect(endCard).toContain("revealed ? 'Word revealed' : 'Out of lives'")
+    expect(src).toContain('setRevealedWord(true)')
+    expect(src).not.toMatch(/Win\/Lose|prototype.*toggle/i)
+  })
+})
+
+describe('Layout sticky Continue scroll padding (gh-103 / #80)', () => {
+  test('footer content area gets scroll-pb when footer present', async () => {
+    const src = await Bun.file(
+      new URL('../components/Layout.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('scroll-pb-6')
+    expect(src).toContain("footer ? 'scroll-pb-6 pb-2' : ''")
+    expect(src).toContain('sticky bottom-0 z-10')
+  })
+})
+
+describe('OfflineChip packReady vs network (#103 Avery W3)', () => {
+  test('packReady path returns null while offline (no duplicate Offline chrome)', async () => {
+    const src = await Bun.file(
+      new URL('../components/OfflineChip.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('if (packReady) return null')
+    expect(src).toContain('data-offline-ready')
+    expect(src).toContain('Offline ready')
   })
 })

@@ -1,5 +1,27 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CellState } from '@/engine'
+
+/**
+ * Intentional equal-ish row lengths for letter tiles.
+ * Words longer than 7 never leave a single orphan on the last row
+ * (e.g. 8 → 4+4, 9 → 5+4).
+ */
+export function letterGridRowLengths(n: number): number[] {
+  if (n <= 0) return []
+  if (n <= 7) return [n]
+  // Explicit balanced splits (no orphan): 13→[7,6], 17→[6,6,5]
+  if (n === 13) return [7, 6]
+  if (n === 17) return [6, 6, 5]
+  if (n <= 14) {
+    const top = Math.ceil(n / 2)
+    return [top, n - top]
+  }
+  // Three balanced rows for very long words
+  const base = Math.floor(n / 3)
+  const rem = n % 3
+  const rows = [base + (rem > 0 ? 1 : 0), base + (rem > 1 ? 1 : 0), base]
+  return rows.filter((r) => r > 0)
+}
 
 export function LetterGrid({ cells }: { cells: CellState[] }) {
   const prevRevealed = useRef<boolean[]>([])
@@ -18,27 +40,71 @@ export function LetterGrid({ cells }: { cells: CellState[] }) {
     return () => clearTimeout(t)
   }, [cells])
 
+  const rows = useMemo(() => {
+    const lengths = letterGridRowLengths(cells.length)
+    const out: { cell: CellState; index: number }[][] = []
+    let offset = 0
+    for (const len of lengths) {
+      out.push(
+        cells.slice(offset, offset + len).map((cell, j) => ({
+          cell,
+          index: offset + j,
+        })),
+      )
+      offset += len
+    }
+    return out
+  }, [cells])
+
+  const maxCols = Math.max(1, ...rows.map((r) => r.length))
+
   return (
     <div
-      className="flex flex-wrap justify-center gap-2 sm:gap-2.5"
+      className="mx-auto flex w-full max-w-sm flex-col items-center gap-2"
       role="group"
       aria-label="Word letters"
+      data-letter-grid
+      data-cols={maxCols}
     >
-      {cells.map((cell, i) => (
+      {rows.map((row, ri) => (
         <div
-          key={i}
+          key={ri}
           className={[
-            'flex h-12 w-10 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:h-14 sm:w-11',
-            'transition-[border-color,background-color,color] duration-200',
-            cell.revealed
-              ? cell.helped
-                ? 'border-accent-fg bg-helped text-accent-fg'
-                : 'border-accent-fg bg-accent-soft text-ink'
-              : 'border-line bg-raised text-ink-faint',
-            justRevealed.has(i) ? 'motion-letter-reveal' : '',
+            'grid w-full justify-items-center',
+            // ~320px: tighten gap for 6–7 cols so tiles stay readable (#103 Avery W5)
+            row.length >= 6 ? 'gap-1.5 sm:gap-2' : 'gap-2 sm:gap-2.5',
           ].join(' ')}
+          style={{
+            gridTemplateColumns: `repeat(${row.length}, minmax(0, 1fr))`,
+            maxWidth:
+              row.length <= 4
+                ? '14rem'
+                : row.length <= 5
+                  ? '18rem'
+                  : row.length <= 6
+                    ? '20rem'
+                    : '100%',
+          }}
+          data-letter-row={ri}
+          data-row-len={row.length}
         >
-          {cell.revealed ? cell.char : '·'}
+          {row.map(({ cell, index: i }) => (
+            <div
+              key={i}
+              className={[
+                'flex aspect-square w-full max-w-11 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:max-w-12',
+                'transition-[border-color,background-color,color] duration-200',
+                cell.revealed
+                  ? cell.helped
+                    ? 'border-accent-fg bg-helped text-accent-fg'
+                    : 'border-accent-fg bg-accent-soft text-ink'
+                  : 'border-line bg-raised text-ink-faint',
+                justRevealed.has(i) ? 'motion-letter-reveal' : '',
+              ].join(' ')}
+            >
+              {cell.revealed ? cell.char : '·'}
+            </div>
+          ))}
         </div>
       ))}
     </div>

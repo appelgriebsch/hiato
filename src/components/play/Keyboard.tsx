@@ -20,7 +20,7 @@ export function Keyboard({
 }) {
   const rows = KEYBOARDS[lang]
   return (
-    <div className="flex w-full flex-col gap-1.5" role="group" aria-label="Letter pad">
+    <div className="flex w-full flex-col gap-1.5" role="group" aria-label="Letter pad" data-tap-min="44">
       {rows.map((row, ri) => (
         <div key={ri} className="flex justify-center gap-1">
           {row.map((key) => {
@@ -35,7 +35,7 @@ export function Keyboard({
                 disabled={disabled || wrong || correct}
                 onClick={() => onKey(key)}
                 className={[
-                  'min-h-11 min-w-[1.7rem] flex-1 rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
+                  'min-h-[44px] min-w-[1.7rem] flex-1 touch-manipulation rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
                   wrong || correct ? 'key-settled' : '',
                   wrong
                     ? 'bg-wrong/70 text-ink'
