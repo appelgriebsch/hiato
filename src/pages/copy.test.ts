@@ -229,18 +229,19 @@ describe('Play LearnerHint in-progress teach cue (gh-93 / ADR 0035)', () => {
       new URL('../components/play/LearnerHint.tsx', import.meta.url),
     ).text()
 
-    // Teach hierarchy: gloss is ink + medium weight, leaner than EndCard climax
-    expect(src).toContain('text-sm font-medium leading-snug text-ink')
+    // Teach hierarchy: exactly one mid-round gloss class (ink + medium; leaner than EndCard)
+    const teachGlossClass = 'text-sm font-medium leading-snug text-ink'
+    expect(src.split(teachGlossClass).length - 1).toBe(1)
     expect(src).toContain('{gloss}')
     // Old muted buried gloss must not remain
     expect(src).not.toContain('text-[13px] leading-snug text-ink-muted')
     // Stay leaner than EndCard post-finish climax
     expect(src).not.toContain('text-lg font-semibold')
 
-    // Synonym chips: lean cream pills with readable ink (not chrome-only muted)
-    expect(src).toContain(
-      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink',
-    )
+    // Synonym chips: exactly one cream-pill ink class (cross-surface match with EndCard)
+    const chipClass =
+      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink'
+    expect(src.split(chipClass).length - 1).toBe(1)
     expect(src).toContain('.slice(0, 3)')
 
     // ADR 0023: never show the answer word
@@ -289,8 +290,11 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(endCard).toContain('The word was')
     expect(endCard).toContain('{word}')
 
-    // Synonym chips lean layout (same spirit as LearnerHint)
+    // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
     expect(endCard).toContain(
+      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink',
+    )
+    expect(endCard).not.toContain(
       'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted',
     )
     expect(endCard).toContain('teachSynonyms.map')
