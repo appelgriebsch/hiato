@@ -37,6 +37,45 @@ describe('Language picker (gh-30)', () => {
   })
 })
 
+describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
+  test('selected-only muted caption under CEFR; Pack info sole About link; ellipsis', async () => {
+    const src = await pageSrc('Language.tsx')
+    expect(src).toContain("from '@/packs/provenance'")
+    expect(src).toContain('provenanceCaption(lang, cefr)')
+    expect(src).toContain('packInfoLabel(lang)')
+    expect(src).toContain('data-provenance-caption')
+    expect(src).toContain('truncate')
+    // One caption block — not mapped onto every lang/CEFR row
+    expect(src.match(/data-provenance-caption/g)?.length).toBe(1)
+    expect(src.match(/provenanceCaption\(/g)?.length).toBe(1)
+    const cefrGroupAt = src.indexOf('aria-labelledby="cefr-heading"')
+    const captionAt = src.indexOf('data-provenance-caption')
+    expect(captionAt).toBeGreaterThan(cefrGroupAt)
+    // Caption sits outside radio buttons (title-only rows)
+    const radioMap = src.indexOf('{PACK_CEFRS.map((c) => (')
+    const radioEnd = src.indexOf('</div>', src.indexOf('{CEFR_LABELS[c]}', radioMap))
+    expect(src.slice(radioMap, radioEnd)).not.toContain('provenanceCaption')
+    expect(src.slice(radioMap, radioEnd)).not.toContain('data-provenance-caption')
+    // Provenance block: caption is muted non-link; Pack info is sole /about Link
+    const block = src.slice(captionAt, src.indexOf('</Layout>', captionAt))
+    expect(block.match(/to="\/about"/g)?.length).toBe(1)
+    expect(block).toContain('text-ink-muted')
+    expect(block).toMatch(/<span[\s\S]*truncate[\s\S]*\{caption\}/)
+    expect(block).not.toMatch(/<Link[\s\S]*\{caption\}/)
+    expect(block).toContain('min-h-8')
+    expect(block).toContain('focus-visible:underline')
+  })
+
+  test('omit provenance from Play / EndCard / Share / Home chrome', async () => {
+    for (const name of ['Play.tsx', 'Share.tsx', 'Home.tsx', 'About.tsx'] as const) {
+      const src = await pageSrc(name)
+      expect(src).not.toContain('provenanceCaption')
+      expect(src).not.toContain('data-provenance-caption')
+      expect(src).not.toContain("from '@/packs/provenance'")
+    }
+  })
+})
+
 describe('Layout pinned Continue footer', () => {
   test('footer is sticky on cream with safe-area; content scrolls above', async () => {
     const src = await Bun.file(

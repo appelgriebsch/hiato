@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_LABELS, LANG_CODES, LANG_LABELS } from '@/packs/labels'
+import { packInfoLabel, provenanceCaption } from '@/packs/provenance'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from '@/packs/schema'
 
 function moveRadio<T extends string>(
@@ -74,6 +75,9 @@ export function Language() {
       setPreparing(false)
     }
   }
+
+  const caption = provenanceCaption(lang, cefr)
+  const infoLabel = packInfoLabel(lang)
 
   return (
     <Layout
@@ -193,6 +197,25 @@ export function Language() {
             {CEFR_LABELS[c]}
           </button>
         ))}
+      </div>
+
+      {/* Selected-only provenance (#80 / #99): muted non-link caption; Pack info → About */}
+      <div
+        className="mt-3 flex items-center gap-2"
+        data-provenance-caption
+      >
+        <span
+          className="min-w-0 flex-1 truncate text-xs text-ink-muted"
+          title={caption}
+        >
+          {caption}
+        </span>
+        <Link
+          to="/about"
+          className="motion-press inline-flex min-h-8 shrink-0 items-center py-2 text-xs text-ink-muted hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+        >
+          {infoLabel}
+        </Link>
       </div>
     </Layout>
   )
