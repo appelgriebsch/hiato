@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { ShareCard } from '@/components/ShareCard'
 import { Button } from '@/components/ui/button'
@@ -10,11 +10,31 @@ import {
   shareResult,
 } from '@/lib/share-actions'
 import { pickShareCardPayload } from '@/lib/share-card'
+import { decodeShareUrlToken } from '@/lib/share-url'
+
+/**
+ * Resolve share payload (ADR 0036 / #107).
+ * Precedence: when `p=` is present, hydrate from the token (cold open /
+ * refresh / shared link). Corrupt or empty `p=` soft-fails to the empty
+ * Share UX — does not fall through to location.state. When `p=` is absent,
+ * use location.state (in-app Play → Share without a query). Share is not
+ * gated by the Language wall (unlike /play).
+ */
+function resolveSharePayload(
+  searchParams: URLSearchParams,
+  state: unknown,
+) {
+  if (searchParams.has('p')) {
+    return decodeShareUrlToken(searchParams.get('p'))
+  }
+  return pickShareCardPayload(state)
+}
 
 export function Share() {
   const nav = useNavigate()
   const loc = useLocation()
-  const payload = pickShareCardPayload(loc.state)
+  const [searchParams] = useSearchParams()
+  const payload = resolveSharePayload(searchParams, loc.state)
   const [toast, setToast] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 

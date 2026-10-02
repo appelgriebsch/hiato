@@ -141,9 +141,13 @@ export function shareCardFilename(payload: ShareCardPayload): string {
   return payload.mode === 'practice' ? `${base}-practice.png` : `${base}.png`
 }
 
+/**
+ * Clipboard / Web Share body. Pass the absolute `/share?p=…` URL
+ * (from `buildSharePageUrl`) as `shareUrl` so the deep link travels with the text.
+ */
 export function formatShareText(
   payload: ShareCardPayload,
-  origin?: string,
+  shareUrl?: string,
 ): string {
   const mode = payload.mode === 'practice' ? 'Practice' : 'Daily'
   const lines = [
@@ -152,7 +156,7 @@ export function formatShareText(
     `Streak ${payload.streak} · ${payload.dateKey}`,
     'Answer hidden — come play yours',
   ]
-  if (origin) lines.push(origin)
+  if (shareUrl) lines.push(shareUrl)
   return lines.join('\n')
 }
 

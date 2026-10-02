@@ -11,6 +11,7 @@ import {
   shareCardFontUrls,
   type ShareCardPayload,
 } from './share-card'
+import { buildSharePageUrl } from './share-url'
 
 const REPO = path.join(import.meta.dir, '../..')
 
@@ -124,9 +125,10 @@ describe('pickShareCardPayload', () => {
 })
 
 describe('formatShareText / filename', () => {
-  test('clipboard text has stats and no lemma', () => {
+  test('clipboard text has stats, stable /share?p= URL, and no lemma', () => {
     const payload = buildShareCardPayload(sampleRound())
-    const text = formatShareText(payload, 'https://example.test')
+    const url = buildSharePageUrl(payload, 'https://example.test')
+    const text = formatShareText(payload, url)
     expect(text).toContain('Hiato')
     expect(text).toContain('EN')
     expect(text).toContain('A1')
@@ -134,6 +136,8 @@ describe('formatShareText / filename', () => {
     expect(text).toContain('6 letters')
     expect(text).toContain('Streak 4')
     expect(text).toContain('2026-09-20')
+    expect(text).toContain('/share?p=')
+    expect(text).toContain(url)
     expect(text.toLowerCase()).not.toContain('banana')
     expect(shareCardFilename(payload)).toBe('hiato-2026-09-20-en-a1.png')
     expect(shareCardFilename(payload).toLowerCase()).not.toContain('banana')

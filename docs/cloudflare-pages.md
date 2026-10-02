@@ -86,3 +86,16 @@ API: `POST /accounts/{account_id}/pages/projects/hiato/deployments/{deployment_i
 Do not exclude `/packs/*` from Functions. Existing `/packs/{lang}/{cefr}.json` files are still static assets when present. The Workbox runtime cache also refuses non-JSON 200s (`cacheWillUpdate`).
 
 Assert on preview: `/packs/en/a1.json` → 200 JSON; a missing pack → 404 non-HTML.
+
+## Stable share URLs (`/share?p=…`) — offline smoke (ADR 0036 / #110)
+
+Client-only share deep links use the existing SPA shell. **No CSP change** and **no SW rewrite** beyond confirming the denylist does not block `/share`.
+
+Smoke checklist (preview or local `vite preview` + installed PWA):
+
+1. `public/_redirects` has `/* /index.html 200` — cold `/share?p=…` returns the app shell (200 HTML), not a Pages 404.
+2. VitePWA `workbox.navigateFallback` is `index.html`; `navigateFallbackDenylist` lists `/api/`, `/packs/`, `og-banner.png`, and extensioned static files only. **Do not denylist `/share`.**
+3. Installed PWA: open `/share?p=<valid-token>` offline after a prior visit — Share card hydrates; corrupt `p=` soft-fails to “Nothing to share yet.”
+4. Confirm `/share` is **not** treated as invite-to-play and does **not** force the Language wall.
+
+Unit coverage: `src/lib/share-url.test.ts` (“SUR-sw-pages”).

@@ -61,6 +61,7 @@ import {
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
+import { encodeShareUrlToken } from '@/lib/share-url'
 import {
   ensureStreakPersisted,
   getStreakCount,
@@ -579,19 +580,20 @@ function PlayRound({
             {rec ? (
               <Button
                 fullWidth
-                onClick={() =>
-                  nav('/share', {
-                    state: buildShareCardPayload({
-                      lang,
-                      cefr,
-                      streak,
-                      dateKey,
-                      word: rec.word,
-                      won: rec.won,
-                      mode: 'daily',
-                    }),
+                onClick={() => {
+                  const sharePayload = buildShareCardPayload({
+                    lang,
+                    cefr,
+                    streak,
+                    dateKey,
+                    word: rec.word,
+                    won: rec.won,
+                    mode: 'daily',
                   })
-                }
+                  nav(`/share?p=${encodeShareUrlToken(sharePayload)}`, {
+                    state: sharePayload,
+                  })
+                }}
               >
                 Share
               </Button>
@@ -1123,19 +1125,20 @@ function EndCard({
           <Button
             fullWidth
             variant={mode === 'pocket' && !won ? 'secondary' : undefined}
-            onClick={() =>
-              nav('/share', {
-                state: buildShareCardPayload({
-                  lang,
-                  cefr,
-                  streak,
-                  dateKey,
-                  word,
-                  won,
-                  mode: shareMode,
-                }),
+            onClick={() => {
+              const sharePayload = buildShareCardPayload({
+                lang,
+                cefr,
+                streak,
+                dateKey,
+                word,
+                won,
+                mode: shareMode,
               })
-            }
+              nav(`/share?p=${encodeShareUrlToken(sharePayload)}`, {
+                state: sharePayload,
+              })
+            }}
           >
             Share
           </Button>
