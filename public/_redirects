@@ -4,5 +4,7 @@
 # cache index.html as pack JSON.
 #
 # Pages Functions skip _redirects. Keep public/_routes.json include limited to
-# /api/* and /packs/* so client routes hit this SPA rewrite (not 404.html).
+# /api/* and /packs/* so client routes hit this SPA rewrite.
+# Do NOT ship a top-level 404.html — Pages then serves that file with 404 and
+# disables this SPA fallback (Serving Pages).
 /*    /index.html   200

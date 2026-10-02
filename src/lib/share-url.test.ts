@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test'
+import { existsSync } from 'node:fs'
 import path from 'node:path'
 import {
   SHARE_CARD_KEYS,
@@ -312,6 +313,12 @@ describe('SUR-sw-pages (#110) — navigateFallback / _redirects smoke', () => {
     expect(routes.exclude).toEqual([])
   })
 
+  test('no top-level 404.html (Pages would disable SPA fallback)', async () => {
+    expect(existsSync(path.join(REPO, 'public/404.html'))).toBe(false)
+    // Build output must not reintroduce it either (Vite copies public/).
+    expect(existsSync(path.join(REPO, 'dist/404.html'))).toBe(false)
+  })
+
   test('docs note the share URL smoke checklist', async () => {
     const doc = await Bun.file(
       path.join(REPO, 'docs/cloudflare-pages.md'),
@@ -322,5 +329,7 @@ describe('SUR-sw-pages (#110) — navigateFallback / _redirects smoke', () => {
     expect(doc).toContain('_routes.json')
     expect(doc).toContain('/api/*')
     expect(doc).toContain('/packs/*')
+    expect(doc).toContain('**Do not** ship `public/404.html`')
+    expect(doc).toContain('Function-only')
   })
 })

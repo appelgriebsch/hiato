@@ -87,11 +87,11 @@ Do not exclude `/packs/*` from Functions. Existing `/packs/{lang}/{cefr}.json` f
 
 Assert on preview: `/packs/en/a1.json` → 200 JSON; a missing pack → 404 non-HTML.
 
-## Functions vs SPA (`public/_routes.json`)
+## Functions vs SPA (`public/_routes.json` + no `404.html`)
 
-Pages Functions **skip** `_redirects`. With a `functions/` directory, the platform defaults to invoking Functions for unmatched paths; those requests then miss the SPA `/* /index.html 200` rewrite and serve `404.html` (“Not Found”) on cold open.
+Two layers must both be correct for cold client-route opens (`/share`, `/play`, …):
 
-`public/_routes.json` must **only** include Function routes:
+1. **`public/_routes.json`** — Pages Functions **skip** `_redirects`. With a `functions/` directory, the platform defaults to invoking Functions for unmatched paths; those requests then miss the SPA `/* /index.html 200` rewrite. Limit include to Function routes only:
 
 ```json
 {
@@ -103,6 +103,8 @@ Pages Functions **skip** `_redirects`. With a `functions/` directory, the platfo
 
 Do **not** use `"include": ["/*"]`. Client routes (`/`, `/play`, `/share`, `/language`, `/about`) must stay on the static asset path so `_redirects` can serve the SPA shell.
 
+2. **No top-level `404.html`** — Cloudflare Pages Serving Pages: if a top-level `404.html` exists in the build output, Pages serves that file with **404** for unmatched paths and does **not** apply the SPA `_redirects` rewrite. **Do not** ship `public/404.html` (and the build must not emit `dist/404.html`). Pack missing-URL **404** responses are **Function-only** via `functions/packs/[[path]].ts` (plain text / non-HTML) — never a static HTML 404 page.
+
 ## Stable share URLs (`/share?p=…`) — offline smoke (ADR 0036 / #110)
 
 Client-only share deep links use the existing SPA shell. **No CSP change** and **no SW rewrite** beyond confirming the denylist does not block `/share`.
@@ -110,9 +112,10 @@ Client-only share deep links use the existing SPA shell. **No CSP change** and *
 Smoke checklist (preview or local `vite preview` + installed PWA):
 
 1. `public/_routes.json` includes **only** `/api/*` and `/packs/*` (so `/share` is not a Functions request).
-2. `public/_redirects` has `/* /index.html 200` — cold `/share?p=…` returns the app shell (**200** HTML), not Pages `404.html` (“Not Found”).
-3. VitePWA `workbox.navigateFallback` is `index.html`; `navigateFallbackDenylist` lists `/api/`, `/packs/`, `og-banner.png`, and extensioned static files only. **Do not denylist `/share`.**
-4. Installed PWA: open `/share?p=<valid-token>` offline after a prior visit — Share card hydrates; corrupt `p=` soft-fails to “This share link can’t be opened.” (bare `/share` still says “Nothing to share yet.”)
-5. Confirm `/share` is **not** treated as invite-to-play and does **not** force the Language wall.
+2. **No** `public/404.html` (and no `dist/404.html` after build) — a top-level `404.html` disables SPA fallback.
+3. `public/_redirects` has `/* /index.html 200` — cold `/share?p=…` returns the app shell (**200** HTML), not a Pages “Not Found” HTML body.
+4. VitePWA `workbox.navigateFallback` is `index.html`; `navigateFallbackDenylist` lists `/api/`, `/packs/`, `og-banner.png`, and extensioned static files only. **Do not denylist `/share`.**
+5. Installed PWA: open `/share?p=<valid-token>` offline after a prior visit — Share card hydrates; corrupt `p=` soft-fails to “This share link can’t be opened.” (bare `/share` still says “Nothing to share yet.”)
+6. Confirm `/share` is **not** treated as invite-to-play and does **not** force the Language wall.
 
 Unit coverage: `src/lib/share-url.test.ts` (“SUR-sw-pages”).

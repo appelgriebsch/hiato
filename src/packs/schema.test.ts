@@ -64,6 +64,13 @@ describe('pack hosting', () => {
     expect(routes.exclude).toEqual([])
   })
 
+  test('no public/404.html — pack 404s are Function-only', async () => {
+    const { existsSync } = await import('node:fs')
+    expect(
+      existsSync(new URL('../../public/404.html', import.meta.url)),
+    ).toBe(false)
+  })
+
   test('Workbox pack cache refuses non-JSON 200s', async () => {
     const vite = await Bun.file(
       new URL('../../vite.config.ts', import.meta.url),
