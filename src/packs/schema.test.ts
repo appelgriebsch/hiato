@@ -52,6 +52,25 @@ describe('pack hosting', () => {
     expect(text).toContain('functions/packs/[[path]].ts')
   })
 
+  test('_routes.json invokes Functions only for /api/* and /packs/*', async () => {
+    const routes = JSON.parse(
+      await Bun.file(
+        new URL('../../public/_routes.json', import.meta.url),
+      ).text(),
+    ) as { version: number; include: string[]; exclude: string[] }
+    expect(routes.version).toBe(1)
+    expect(routes.include).toEqual(['/api/*', '/packs/*'])
+    expect(routes.include).not.toContain('/*')
+    expect(routes.exclude).toEqual([])
+  })
+
+  test('no public/404.html — pack 404s are Function-only', async () => {
+    const { existsSync } = await import('node:fs')
+    expect(
+      existsSync(new URL('../../public/404.html', import.meta.url)),
+    ).toBe(false)
+  })
+
   test('Workbox pack cache refuses non-JSON 200s', async () => {
     const vite = await Bun.file(
       new URL('../../vite.config.ts', import.meta.url),
