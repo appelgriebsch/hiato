@@ -17,6 +17,12 @@ const FORBIDDEN_TOKEN_KEYS = [
   'synonyms',
 ] as const
 
+/**
+ * Reject oversized `p=` before atob + JSON.parse.
+ * Allowlisted JSON is ~100B; a few KB leaves headroom without inviting abuse.
+ */
+export const SHARE_URL_TOKEN_MAX_CHARS = 4096
+
 function bytesToBase64Url(bytes: Uint8Array): string {
   let binary = ''
   for (let i = 0; i < bytes.length; i++) {
@@ -65,13 +71,14 @@ export function encodeShareUrlToken(payload: ShareCardPayload): string {
 }
 
 /**
- * Decode `p=` token → ShareCardPayload, or null if missing/corrupt.
- * Forbidden fields (lemma, gloss, word, answer) are stripped via pickShareCardPayload.
+ * Decode `p=` token → ShareCardPayload, or null if missing/corrupt/oversized.
+ * Forbidden fields (lemma, gloss, word, answer, synonyms) are stripped via pick.
  */
 export function decodeShareUrlToken(
   token: string | null | undefined,
 ): ShareCardPayload | null {
   if (typeof token !== 'string' || token.length === 0) return null
+  if (token.length > SHARE_URL_TOKEN_MAX_CHARS) return null
   const bytes = base64UrlToBytes(token)
   if (!bytes || bytes.length === 0) return null
   try {
@@ -87,13 +94,34 @@ export function decodeShareUrlToken(
   }
 }
 
+/**
+ * Resolve share payload (ADR 0036 / #107).
+ * Precedence: when `p=` is present, hydrate from the token only (cold open /
+ * refresh / shared link). Corrupt or empty `p=` soft-fails to null — does not
+ * fall through to location.state. When `p=` is absent, use location.state.
+ */
+export function resolveSharePayload(
+  searchParams: Pick<URLSearchParams, 'has' | 'get'>,
+  state: unknown,
+): ShareCardPayload | null {
+  if (searchParams.has('p')) {
+    return decodeShareUrlToken(searchParams.get('p'))
+  }
+  return pickShareCardPayload(state)
+}
+
+/** In-app path `/share?p=…` with percent-encoded token. */
+export function sharePathWithToken(payload: ShareCardPayload): string {
+  return `/share?p=${encodeURIComponent(encodeShareUrlToken(payload))}`
+}
+
 /** Absolute `/share?p=…` URL for clipboard / Web Share text. */
 export function buildSharePageUrl(
   payload: ShareCardPayload,
   origin: string,
 ): string {
   const base = origin.replace(/\/$/, '')
-  return `${base}/share?p=${encodeShareUrlToken(payload)}`
+  return `${base}${sharePathWithToken(payload)}`
 }
 
 /** True when a navigateFallbackDenylist regex would block `/share` navigations. */

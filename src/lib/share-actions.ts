@@ -35,7 +35,12 @@ function pageOrigin(): string | undefined {
 function shareTextUrl(payload: ShareCardPayload): string | undefined {
   const origin = pageOrigin()
   if (!origin) return undefined
-  return buildSharePageUrl(payload, origin)
+  try {
+    return buildSharePageUrl(payload, origin)
+  } catch {
+    // Encode validates via pick; soft-fail like decode rather than blow share.
+    return undefined
+  }
 }
 
 function canShareFiles(nav: Navigator, file: File, text: string): boolean {

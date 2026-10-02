@@ -95,7 +95,7 @@ Smoke checklist (preview or local `vite preview` + installed PWA):
 
 1. `public/_redirects` has `/* /index.html 200` — cold `/share?p=…` returns the app shell (200 HTML), not a Pages 404.
 2. VitePWA `workbox.navigateFallback` is `index.html`; `navigateFallbackDenylist` lists `/api/`, `/packs/`, `og-banner.png`, and extensioned static files only. **Do not denylist `/share`.**
-3. Installed PWA: open `/share?p=<valid-token>` offline after a prior visit — Share card hydrates; corrupt `p=` soft-fails to “Nothing to share yet.”
+3. Installed PWA: open `/share?p=<valid-token>` offline after a prior visit — Share card hydrates; corrupt `p=` soft-fails to “This share link can’t be opened.” (bare `/share` still says “Nothing to share yet.”)
 4. Confirm `/share` is **not** treated as invite-to-play and does **not** force the Language wall.
 
 Unit coverage: `src/lib/share-url.test.ts` (“SUR-sw-pages”).

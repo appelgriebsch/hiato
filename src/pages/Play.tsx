@@ -61,7 +61,7 @@ import {
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
-import { encodeShareUrlToken } from '@/lib/share-url'
+import { sharePathWithToken } from '@/lib/share-url'
 import {
   ensureStreakPersisted,
   getStreakCount,
@@ -581,18 +581,22 @@ function PlayRound({
               <Button
                 fullWidth
                 onClick={() => {
-                  const sharePayload = buildShareCardPayload({
-                    lang,
-                    cefr,
-                    streak,
-                    dateKey,
-                    word: rec.word,
-                    won: rec.won,
-                    mode: 'daily',
-                  })
-                  nav(`/share?p=${encodeShareUrlToken(sharePayload)}`, {
-                    state: sharePayload,
-                  })
+                  try {
+                    const sharePayload = buildShareCardPayload({
+                      lang,
+                      cefr,
+                      streak,
+                      dateKey,
+                      word: rec.word,
+                      won: rec.won,
+                      mode: 'daily',
+                    })
+                    nav(sharePathWithToken(sharePayload), {
+                      state: sharePayload,
+                    })
+                  } catch {
+                    /* invalid payload — soft-fail; don’t blow onClick */
+                  }
                 }}
               >
                 Share
@@ -1126,18 +1130,22 @@ function EndCard({
             fullWidth
             variant={mode === 'pocket' && !won ? 'secondary' : undefined}
             onClick={() => {
-              const sharePayload = buildShareCardPayload({
-                lang,
-                cefr,
-                streak,
-                dateKey,
-                word,
-                won,
-                mode: shareMode,
-              })
-              nav(`/share?p=${encodeShareUrlToken(sharePayload)}`, {
-                state: sharePayload,
-              })
+              try {
+                const sharePayload = buildShareCardPayload({
+                  lang,
+                  cefr,
+                  streak,
+                  dateKey,
+                  word,
+                  won,
+                  mode: shareMode,
+                })
+                nav(sharePathWithToken(sharePayload), {
+                  state: sharePayload,
+                })
+              } catch {
+                /* invalid payload — soft-fail; don’t blow onClick */
+              }
             }}
           >
             Share

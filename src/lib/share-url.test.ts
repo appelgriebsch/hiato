@@ -9,10 +9,13 @@ import {
   type ShareCardPayload,
 } from './share-card'
 import {
+  SHARE_URL_TOKEN_MAX_CHARS,
   buildSharePageUrl,
   decodeShareUrlToken,
   denylistBlocksSharePath,
   encodeShareUrlToken,
+  resolveSharePayload,
+  sharePathWithToken,
   shareUrlPayloadJson,
 } from './share-url'
 
@@ -62,14 +65,15 @@ describe('SUR-encode (#106) — encode/decode SHARE_CARD_KEYS', () => {
     expect(keys).toEqual([...SHARE_CARD_KEYS].sort())
   })
 
-  test('strips lemma, gloss, word, answer from polluted encode input', () => {
+  test('strips lemma, gloss, word, answer, synonyms from polluted encode input', () => {
     const polluted = {
       ...sampleDaily(),
       word: SAMPLE_LEMMA,
       lemma: SAMPLE_LEMMA,
       gloss: 'a yellow fruit',
       answer: SAMPLE_LEMMA,
-    } as ShareCardPayload & Record<string, string>
+      synonyms: ['plantain'],
+    } as ShareCardPayload & Record<string, unknown>
     const token = encodeShareUrlToken(polluted)
     const decoded = decodeShareUrlToken(token)
     expect(decoded).not.toBeNull()
@@ -77,9 +81,11 @@ describe('SUR-encode (#106) — encode/decode SHARE_CARD_KEYS', () => {
     expect(decoded).not.toHaveProperty('lemma')
     expect(decoded).not.toHaveProperty('gloss')
     expect(decoded).not.toHaveProperty('answer')
+    expect(decoded).not.toHaveProperty('synonyms')
     const lower = JSON.stringify(decoded).toLowerCase()
     expect(lower).not.toContain('banana')
     expect(lower).not.toContain('fruit')
+    expect(lower).not.toContain('plantain')
     expect(token.toLowerCase()).not.toContain('banana')
   })
 
@@ -90,6 +96,7 @@ describe('SUR-encode (#106) — encode/decode SHARE_CARD_KEYS', () => {
       gloss: 'fruit',
       word: SAMPLE_LEMMA,
       answer: SAMPLE_LEMMA,
+      synonyms: ['plantain'],
     })
     const token = btoa(spoilerJson)
       .replace(/\+/g, '-')
@@ -114,13 +121,24 @@ describe('SUR-encode (#106) — encode/decode SHARE_CARD_KEYS', () => {
       ),
     ).toBeNull()
   })
+
+  test('rejects oversized p= tokens before atob+JSON.parse', () => {
+    const oversized = 'A'.repeat(SHARE_URL_TOKEN_MAX_CHARS + 1)
+    expect(oversized.length).toBeGreaterThan(SHARE_URL_TOKEN_MAX_CHARS)
+    expect(decodeShareUrlToken(oversized)).toBeNull()
+  })
 })
 
 describe('SUR-text-wire (#108) — absolute /share?p= in share text', () => {
-  test('buildSharePageUrl is absolute /share?p= and round-trips', () => {
+  test('buildSharePageUrl is absolute /share?p= (percent-encoded) and round-trips', () => {
     const payload = sampleDaily()
     const url = buildSharePageUrl(payload, ORIGIN)
     expect(url.startsWith(`${ORIGIN}/share?p=`)).toBe(true)
+    const rawQuery = url.slice(url.indexOf('?p=') + 3)
+    expect(rawQuery).toBe(encodeURIComponent(decodeURIComponent(rawQuery)))
+    expect(sharePathWithToken(payload)).toBe(
+      `/share?p=${encodeURIComponent(encodeShareUrlToken(payload))}`,
+    )
     const token = new URL(url).searchParams.get('p')
     expect(decodeShareUrlToken(token)).toEqual(payload)
   })
@@ -221,6 +239,41 @@ describe('SUR-spoiler-matrix (#109) — daily vs practice (ADR 0018)', () => {
     expect(dailyText).toContain('Daily')
     expect(practiceText).toContain('Practice')
     expect(practiceText).not.toContain('Daily')
+  })
+})
+
+
+describe('SUR-hydrate (#107) — resolveSharePayload precedence', () => {
+  test('valid p= ignores polluted location.state', () => {
+    const tokenPayload = sampleDaily()
+    const token = encodeShareUrlToken(tokenPayload)
+    const pollutedState = {
+      ...samplePractice(),
+      lemma: SAMPLE_LEMMA,
+      gloss: 'spoiler',
+    }
+    const params = new URLSearchParams({ p: token })
+    expect(resolveSharePayload(params, pollutedState)).toEqual(tokenPayload)
+  })
+
+  test('empty or corrupt p= soft-fails to null (no state fallthrough)', () => {
+    const state = sampleDaily()
+    expect(resolveSharePayload(new URLSearchParams({ p: '' }), state)).toBeNull()
+    expect(
+      resolveSharePayload(new URLSearchParams({ p: '!!!bad!!!' }), state),
+    ).toBeNull()
+    expect(
+      resolveSharePayload(
+        new URLSearchParams({ p: 'A'.repeat(SHARE_URL_TOKEN_MAX_CHARS + 1) }),
+        state,
+      ),
+    ).toBeNull()
+  })
+
+  test('absent p= uses location.state', () => {
+    const state = samplePractice()
+    expect(resolveSharePayload(new URLSearchParams(), state)).toEqual(state)
+    expect(resolveSharePayload(new URLSearchParams(), null)).toBeNull()
   })
 })
 

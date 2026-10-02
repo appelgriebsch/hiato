@@ -3,6 +3,7 @@ import path from 'node:path'
 import {
   SHARE_CARD_FONT_URLS,
   SHARE_CARD_KEYS,
+  SHARE_WORD_LENGTH_MAX,
   buildShareCardPayload,
   formatShareText,
   isSameOriginFontUrl,
@@ -74,6 +75,27 @@ describe('buildShareCardPayload', () => {
     expect(JSON.stringify(payload)).not.toContain('AÇÃO')
     expect(JSON.stringify(payload)).not.toContain('ACAO')
   })
+
+  test('rejects dateKey that would fail pick regex (encode/decode align)', () => {
+    expect(() =>
+      buildShareCardPayload({ ...sampleRound(), dateKey: '20-09-2026' }),
+    ).toThrow(/invalid dateKey/)
+    expect(() =>
+      buildShareCardPayload({ ...sampleRound(), dateKey: 'not-a-date' }),
+    ).toThrow(/invalid dateKey/)
+  })
+
+  test('rejects empty word / oversized wordLength', () => {
+    expect(() =>
+      buildShareCardPayload({ ...sampleRound(), word: '' }),
+    ).toThrow(/invalid wordLength/)
+    expect(() =>
+      buildShareCardPayload({
+        ...sampleRound(),
+        word: 'x'.repeat(SHARE_WORD_LENGTH_MAX + 1),
+      }),
+    ).toThrow(/invalid wordLength/)
+  })
 })
 
 describe('pickShareCardPayload', () => {
@@ -103,6 +125,26 @@ describe('pickShareCardPayload', () => {
         streak: 1,
         dateKey: '2026-09-20',
         wordLength: 0,
+        won: true,
+      }),
+    ).toBeNull()
+    expect(
+      pickShareCardPayload({
+        lang: 'en',
+        cefr: 'a1',
+        streak: 1,
+        dateKey: '2026-09-20',
+        wordLength: SHARE_WORD_LENGTH_MAX + 1,
+        won: true,
+      }),
+    ).toBeNull()
+    expect(
+      pickShareCardPayload({
+        lang: 'en',
+        cefr: 'a1',
+        streak: 1,
+        dateKey: '20/09/2026',
+        wordLength: 5,
         won: true,
       }),
     ).toBeNull()
