@@ -3,6 +3,7 @@
  * Cloudflare Pages `_redirects` does not support 404 rewrites; Functions skip
  * `_redirects`, so this prevents the SPA `/* /index.html 200` fallback from
  * poisoning the hiato-packs runtime cache.
+ * Keep `/packs/*` in `public/_routes.json` include (with `/api/*` only).
  */
 export async function onRequest({
   next,

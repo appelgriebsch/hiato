@@ -302,6 +302,16 @@ describe('SUR-sw-pages (#110) — navigateFallback / _redirects smoke', () => {
     expect(redirects).toMatch(/\/\*+\s+\/index\.html\s+200/)
   })
 
+  test('_routes.json limits Functions so /share hits SPA _redirects', async () => {
+    const routes = JSON.parse(
+      await Bun.file(path.join(REPO, 'public/_routes.json')).text(),
+    ) as { version: number; include: string[]; exclude: string[] }
+    expect(routes.version).toBe(1)
+    expect(routes.include).toEqual(['/api/*', '/packs/*'])
+    expect(routes.include).not.toContain('/*')
+    expect(routes.exclude).toEqual([])
+  })
+
   test('docs note the share URL smoke checklist', async () => {
     const doc = await Bun.file(
       path.join(REPO, 'docs/cloudflare-pages.md'),
@@ -309,5 +319,8 @@ describe('SUR-sw-pages (#110) — navigateFallback / _redirects smoke', () => {
     expect(doc).toContain('/share?p=')
     expect(doc).toContain('navigateFallback')
     expect(doc).toContain('Do not denylist `/share`')
+    expect(doc).toContain('_routes.json')
+    expect(doc).toContain('/api/*')
+    expect(doc).toContain('/packs/*')
   })
 })
