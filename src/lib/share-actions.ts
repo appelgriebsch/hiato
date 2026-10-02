@@ -4,6 +4,7 @@ import {
   type ShareCardPayload,
 } from './share-card'
 import { renderShareCardPng } from './share-render'
+import { buildSharePageUrl } from './share-url'
 
 export type ShareMethod =
   | 'web-share'
@@ -28,6 +29,18 @@ function isAbort(err: unknown): boolean {
 function pageOrigin(): string | undefined {
   if (typeof location === 'undefined') return undefined
   return location.origin
+}
+
+/** Absolute `/share?p=…` for clipboard / Web Share text (ADR 0036). */
+function shareTextUrl(payload: ShareCardPayload): string | undefined {
+  const origin = pageOrigin()
+  if (!origin) return undefined
+  try {
+    return buildSharePageUrl(payload, origin)
+  } catch {
+    // Encode validates via pick; soft-fail like decode rather than blow share.
+    return undefined
+  }
 }
 
 function canShareFiles(nav: Navigator, file: File, text: string): boolean {
@@ -81,7 +94,7 @@ const UNSUPPORTED: ShareOutcome = {
 export async function shareResult(
   payload: ShareCardPayload,
 ): Promise<ShareOutcome> {
-  const text = formatShareText(payload, pageOrigin())
+  const text = formatShareText(payload, shareTextUrl(payload))
   const nav = typeof navigator !== 'undefined' ? navigator : undefined
 
   if (nav && typeof nav.share === 'function') {
@@ -131,7 +144,7 @@ export async function downloadShareCard(
 export async function copyShareText(
   payload: ShareCardPayload,
 ): Promise<ShareOutcome> {
-  const text = formatShareText(payload, pageOrigin())
+  const text = formatShareText(payload, shareTextUrl(payload))
   const copied = await writeClipboardText(text)
   if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
   return { ok: false, message: 'Couldn’t copy' }

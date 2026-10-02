@@ -25,6 +25,12 @@ export type ShareCardPayload = {
   mode: ShareMode
 }
 
+/** YYYY-MM-DD — shared by build + pick so encode/decode stay aligned. */
+export const SHARE_DATE_KEY_RE = /^\d{4}-\d{2}-\d{2}$/
+
+/** Sane upper bound for puzzle grapheme length (pick + build). */
+export const SHARE_WORD_LENGTH_MAX = 64
+
 /** Same-origin Inter woff2 used to paint the PNG (ADR 0020). */
 export const SHARE_CARD_FONT_FAMILY = 'HiatoShareInter'
 
@@ -83,6 +89,17 @@ export function buildShareCardPayload(input: {
   won: boolean
   mode: ShareMode
 }): ShareCardPayload {
+  if (!SHARE_DATE_KEY_RE.test(input.dateKey)) {
+    throw new Error(`invalid dateKey for ShareCardPayload: ${input.dateKey}`)
+  }
+  const wordLength = graphemes(input.word).length
+  if (
+    !Number.isInteger(wordLength) ||
+    wordLength < 1 ||
+    wordLength > SHARE_WORD_LENGTH_MAX
+  ) {
+    throw new Error(`invalid wordLength for ShareCardPayload: ${wordLength}`)
+  }
   const streak = Number.isFinite(input.streak)
     ? Math.max(0, Math.floor(input.streak))
     : 0
@@ -91,7 +108,7 @@ export function buildShareCardPayload(input: {
     cefr: input.cefr,
     streak,
     dateKey: input.dateKey,
-    wordLength: graphemes(input.word).length,
+    wordLength,
     won: input.won,
     mode: input.mode === 'practice' ? 'practice' : 'daily',
   }
@@ -102,7 +119,7 @@ export function pickShareCardPayload(raw: unknown): ShareCardPayload | null {
   if (!raw || typeof raw !== 'object') return null
   const o = raw as Record<string, unknown>
   if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return null
-  if (typeof o.dateKey !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(o.dateKey)) {
+  if (typeof o.dateKey !== 'string' || !SHARE_DATE_KEY_RE.test(o.dateKey)) {
     return null
   }
   if (typeof o.streak !== 'number' || !Number.isFinite(o.streak) || o.streak < 0) {
@@ -111,7 +128,8 @@ export function pickShareCardPayload(raw: unknown): ShareCardPayload | null {
   if (
     typeof o.wordLength !== 'number' ||
     !Number.isInteger(o.wordLength) ||
-    o.wordLength < 1
+    o.wordLength < 1 ||
+    o.wordLength > SHARE_WORD_LENGTH_MAX
   ) {
     return null
   }
@@ -141,9 +159,13 @@ export function shareCardFilename(payload: ShareCardPayload): string {
   return payload.mode === 'practice' ? `${base}-practice.png` : `${base}.png`
 }
 
+/**
+ * Clipboard / Web Share body. Pass the absolute `/share?p=…` URL
+ * (from `buildSharePageUrl`) as `shareUrl` so the deep link travels with the text.
+ */
 export function formatShareText(
   payload: ShareCardPayload,
-  origin?: string,
+  shareUrl?: string,
 ): string {
   const mode = payload.mode === 'practice' ? 'Practice' : 'Daily'
   const lines = [
@@ -152,7 +174,7 @@ export function formatShareText(
     `Streak ${payload.streak} · ${payload.dateKey}`,
     'Answer hidden — come play yours',
   ]
-  if (origin) lines.push(origin)
+  if (shareUrl) lines.push(shareUrl)
   return lines.join('\n')
 }
 

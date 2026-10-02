@@ -61,6 +61,7 @@ import {
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
+import { sharePathWithToken } from '@/lib/share-url'
 import {
   ensureStreakPersisted,
   getStreakCount,
@@ -579,9 +580,9 @@ function PlayRound({
             {rec ? (
               <Button
                 fullWidth
-                onClick={() =>
-                  nav('/share', {
-                    state: buildShareCardPayload({
+                onClick={() => {
+                  try {
+                    const sharePayload = buildShareCardPayload({
                       lang,
                       cefr,
                       streak,
@@ -589,9 +590,14 @@ function PlayRound({
                       word: rec.word,
                       won: rec.won,
                       mode: 'daily',
-                    }),
-                  })
-                }
+                    })
+                    nav(sharePathWithToken(sharePayload), {
+                      state: sharePayload,
+                    })
+                  } catch {
+                    /* invalid payload — soft-fail; don’t blow onClick */
+                  }
+                }}
               >
                 Share
               </Button>
@@ -1123,9 +1129,9 @@ function EndCard({
           <Button
             fullWidth
             variant={mode === 'pocket' && !won ? 'secondary' : undefined}
-            onClick={() =>
-              nav('/share', {
-                state: buildShareCardPayload({
+            onClick={() => {
+              try {
+                const sharePayload = buildShareCardPayload({
                   lang,
                   cefr,
                   streak,
@@ -1133,9 +1139,14 @@ function EndCard({
                   word,
                   won,
                   mode: shareMode,
-                }),
-              })
-            }
+                })
+                nav(sharePathWithToken(sharePayload), {
+                  state: sharePayload,
+                })
+              } catch {
+                /* invalid payload — soft-fail; don’t blow onClick */
+              }
+            }}
           >
             Share
           </Button>

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { ShareCard } from '@/components/ShareCard'
 import { Button } from '@/components/ui/button'
@@ -9,18 +9,33 @@ import {
   downloadShareCard,
   shareResult,
 } from '@/lib/share-actions'
-import { pickShareCardPayload } from '@/lib/share-card'
+import { resolveSharePayload } from '@/lib/share-url'
 
 export function Share() {
   const nav = useNavigate()
   const loc = useLocation()
-  const payload = pickShareCardPayload(loc.state)
+  const [searchParams] = useSearchParams()
+  const fromToken = searchParams.has('p')
+  const payload = resolveSharePayload(searchParams, loc.state)
   const [toast, setToast] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
   const show = useCallback((message: string) => {
     setToast(message)
   }, [])
+
+  /** Cold-open `/share?p=` has no useful history — prefer absolute Home. */
+  const goBack = useCallback(() => {
+    if (fromToken) {
+      if (typeof window !== 'undefined' && window.history.length > 1) {
+        nav(-1)
+      } else {
+        nav('/')
+      }
+      return
+    }
+    nav(-1)
+  }, [fromToken, nav])
 
   async function run(
     action: () => ReturnType<typeof shareResult>,
@@ -39,11 +54,18 @@ export function Share() {
   }
 
   if (!payload) {
+    const emptyCopy = fromToken
+      ? 'This share link can’t be opened.'
+      : 'Nothing to share yet.'
     return (
       <Layout>
         <div className="flex flex-1 flex-col items-center justify-center gap-4">
-          <p className="text-ink-muted">Nothing to share yet.</p>
-          <Button onClick={() => nav('/play?mode=daily')}>Back to play</Button>
+          <p className="text-ink-muted" role="status">
+            {emptyCopy}
+          </p>
+          <Button fullWidth onClick={() => nav('/play?mode=daily')}>
+            Back to play
+          </Button>
         </div>
       </Layout>
     )
@@ -76,6 +98,11 @@ export function Share() {
           >
             Copy text
           </Button>
+          {fromToken ? (
+            <Button fullWidth variant="outline" onClick={() => nav('/')}>
+              Home
+            </Button>
+          ) : null}
         </div>
       }
     >
@@ -83,8 +110,8 @@ export function Share() {
         left={
           <button
             type="button"
-            className="motion-press text-sm text-ink-muted"
-            onClick={() => nav(-1)}
+            className="motion-press inline-flex min-h-11 min-w-11 items-center text-sm text-ink-muted"
+            onClick={goBack}
           >
             ← Back
           </button>
