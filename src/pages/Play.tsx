@@ -68,7 +68,7 @@ import {
   recordDailyWin,
 } from '@/lib/streaks'
 import { CEFR_CODES, LANG_CODES, speakLemmaAriaLabel } from '@/packs/labels'
-import { speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability } from '@/lib/speech'
+import { primeSpeechVoices, speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -162,6 +162,44 @@ function PlayRound({
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
+  /** Latched after unlockSpeechGesture returns true (prime succeeded). */
+  const speechGestureRef = useRef(false)
+
+  // Daily + practice only. Prime on mount (getVoices + voiceschanged) and
+  // again on an earlier play gesture (card/reveal taps) — never unlock
+  // speak on the EndCard speak control. Unlock is prime-only (no platform
+  // speak). That button's own click is speakLemma only. Pocket never
+  // speaks. No timer and no promise before speak().
+  useEffect(() => {
+    if (mode === 'pocket') return
+    primeSpeechVoices()
+    const onPointerDown = (event: PointerEvent) => {
+      if (speechGestureRef.current) return
+      const raw = event.target
+      const el =
+        raw instanceof Element
+          ? raw
+          : raw instanceof Node
+            ? raw.parentElement
+            : null
+      // First tap on daily already-played is often the speak button itself.
+      // Skip unlock/latch there — EndCard click is speakLemma only.
+      if (el?.closest('[data-endcard-speak]')) {
+        primeSpeechVoices()
+        return
+      }
+      // Latch only when prime unlock succeeds (synth present). Failed
+      // unlock leaves the ref false so a later tap retries.
+      if (unlockSpeechGesture()) {
+        speechGestureRef.current = true
+      }
+      primeSpeechVoices()
+    }
+    document.addEventListener('pointerdown', onPointerDown, true)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown, true)
+    }
+  }, [mode])
 
   const roundRef = useRef({
     cells,
@@ -986,6 +1024,9 @@ function EndCard({
       setSpeechOk(false)
       return
     }
+    // Mount prime only. voiceschanged / the poll may show the control later.
+    // Do not speak here — iOS drops speak() outside a user gesture.
+    primeSpeechVoices()
     return subscribeSpeechAvailability(lang, setSpeechOk)
   }, [speakSurface, lang])
   useEffect(() => subscribeSpeakActivity(setSpeaking), [])
