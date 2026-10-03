@@ -43,6 +43,8 @@ function mockSynth(
     cancel: () => {
       cancels += 1
       order.push('cancel')
+      // Do not set paused. Chrome often leaves the flag false until after
+      // cancel() returns; flipping it here would hide the repeat-tap bug.
     },
     resume: () => {
       resumes += 1
@@ -174,9 +176,14 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
       createUtterance: utter,
     })
     expect(mock.cancels).toBe(1)
-    expect(mock.order.slice(afterFirst)).toEqual(['cancel', 'speak'])
+    // First tap was idle and unpaused: speak only. Repeat tap interrupts
+    // our utterance: cancel, speak, then resume even though paused is
+    // still false (the double must not flip it).
     expect(mock.order[0]).toBe('speak')
-    expect(mock.resumes).toBe(0)
+    expect(mock.order.slice(0, afterFirst)).toEqual(['speak'])
+    expect(mock.synth.paused).not.toBe(true)
+    expect(mock.order.slice(afterFirst)).toEqual(['cancel', 'speak', 'resume'])
+    expect(mock.resumes).toBe(1)
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
   })
 

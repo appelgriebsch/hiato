@@ -24,8 +24,9 @@ export type SpeechSynthLike = {
    * Engine flags. They are not a queue signal: Chrome/WebKit may leave both
    * false in the same turn as a speak() that did queue. Stuck true is also
    * not our utterance — cancel only activeSpeech.
-   * `paused` is the only signal for resume(): call it after speak(), and
-   * only when this is already true.
+   * On an idle synth, `paused` is the only resume signal, and only after
+   * speak(). After our own cancel(), the flag often stays false even though
+   * Chrome is paused — do not use it to skip resume on that path.
    */
   speaking?: boolean
   pending?: boolean
@@ -204,10 +205,16 @@ function resumeSynth(synth: SpeechSynthLike) {
  * a timer would miss the user-gesture turn, so we still speak synchronously
  * when we interrupt our own utterance.
  *
- * resume() runs only when synth.paused is already true, and only after
- * speak(). resume() on a synth that is not paused swallows the utterance on
- * real Chrome and Safari (no onstart). Do not resume before speak, and do
- * not resume an idle synth.
+ * Idle (this turn did not cancel): speak() first, then resume() only when
+ * synth.paused is already true. resume() before speak, or resume() on an
+ * idle unpaused synth, swallows the utterance on real Chrome and Safari
+ * (no onstart).
+ *
+ * If this turn called cancel() because activeSpeech was set: speak() in
+ * the same turn, then resume() even when paused is still false. Cancel
+ * leaves Chrome paused, but the flag often has not flipped by the time
+ * cancel() returns, so reading paused would skip resume and drop the
+ * second tap. Do not decide that resume from paused. No timer.
  *
  * The utterance stays referenced until onend/onerror. speaking/pending still
  * false in this turn is not a failed queue — those flags are not specified to
@@ -287,26 +294,30 @@ export function speakLemma(
       // Interrupt only an utterance we queued and have not finished.
       // synth.speaking / pending stuck true must not cancel: that pauses
       // Chrome and the following speak() in this turn is dropped.
-      if (activeSpeech !== null) {
+      // Remember the cancel itself. paused often stays false until after
+      // cancel() returns, so it cannot decide the following resume.
+      const cancelledOwn = activeSpeech !== null
+      if (cancelledOwn) {
         const previous = activeSpeech
         try {
           synth.cancel()
         } catch {
           /* still attempt the new utterance */
         }
-        if (!previous.ended) previous.finish()
+        if (previous !== null && !previous.ended) previous.finish()
       }
 
       activeSpeech = record
       emitActivity(true)
 
       try {
-        // speak() first, in this gesture turn. resume() before speak, or
-        // resume() when the synth is not paused, swallows the utterance on
-        // Chrome and Safari. Resume only a synth that is already paused,
-        // and only after speak() has been called. No timer.
+        // speak() first, in this gesture turn. Never resume before speak.
+        // Idle and unpaused: do not resume (that swallows the utterance).
+        // Idle and already paused: resume only after speak().
+        // Cancel path: resume after speak even if paused is still false.
+        // No timer.
         synth.speak(utterance)
-        if (synth.paused === true) resumeSynth(synth)
+        if (cancelledOwn || synth.paused === true) resumeSynth(synth)
       } catch {
         // speak() threw — nothing queued. Sync onerror already finished.
         if (!record.ended) {
