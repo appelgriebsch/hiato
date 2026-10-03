@@ -23,7 +23,10 @@ beforeEach(() => {
   }
 })
 
-function mockSynth(voices: SpeechVoiceLike[]): {
+function mockSynth(
+  voices: SpeechVoiceLike[],
+  init: { paused?: boolean } = {},
+): {
   synth: SpeechSynthLike
   cancels: number
   resumes: number
@@ -36,9 +39,12 @@ function mockSynth(voices: SpeechVoiceLike[]): {
   let resumes = 0
   const synth: SpeechSynthLike = {
     getVoices: () => voices,
+    paused: init.paused,
     cancel: () => {
       cancels += 1
       order.push('cancel')
+      // Do not set paused. Chrome often leaves the flag false until after
+      // cancel() returns; flipping it here would hide the repeat-tap bug.
     },
     resume: () => {
       resumes += 1
@@ -154,7 +160,8 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(mock.cancels).toBe(0)
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa'])
-    expect(mock.order).toEqual(['resume', 'speak', 'resume'])
+    expect(mock.order).toEqual(['speak'])
+    expect(mock.resumes).toBe(0)
   })
 
   test('repeat tap cancels the in-flight utterance then speaks the new lemma', async () => {
@@ -169,12 +176,14 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
       createUtterance: utter,
     })
     expect(mock.cancels).toBe(1)
-    expect(mock.order.slice(afterFirst)).toEqual([
-      'cancel',
-      'resume',
-      'speak',
-      'resume',
-    ])
+    // First tap was idle and unpaused: speak only. Repeat tap interrupts
+    // our utterance: cancel, speak, then resume even though paused is
+    // still false (the double must not flip it).
+    expect(mock.order[0]).toBe('speak')
+    expect(mock.order.slice(0, afterFirst)).toEqual(['speak'])
+    expect(mock.synth.paused).not.toBe(true)
+    expect(mock.order.slice(afterFirst)).toEqual(['cancel', 'speak', 'resume'])
+    expect(mock.resumes).toBe(1)
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
   })
 
@@ -202,10 +211,11 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
       expect(trace).toEqual(['speak', 'returned'])
       expect(armed).toBe(0)
       expect(mock.cancels).toBe(0)
-      const resumeAt = mock.order.indexOf('resume')
-      const speakAt = mock.order.indexOf('speak')
-      expect(resumeAt).toBeGreaterThanOrEqual(0)
-      expect(resumeAt).toBeLessThan(speakAt)
+      // Idle synth: speak is the first (and only) synth event. resume()
+      // before speak, or resume when not paused, is what staging swallowed.
+      expect(mock.order[0]).toBe('speak')
+      expect(mock.order).not.toContain('resume')
+      expect(mock.resumes).toBe(0)
       expect(await pending).toBe(true)
       expect(armed).toBe(0)
       expect(mock.spoken.map((u) => u.text)).toEqual(['hello'])
@@ -334,7 +344,59 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(ok).toBe(true)
     expect(mock.cancels).toBe(0)
-    expect(mock.order).toEqual(['resume', 'speak', 'resume'])
+    expect(mock.order).toEqual(['speak'])
+    expect(mock.resumes).toBe(0)
+  })
+
+  test('resume runs only after speak, and only when the synth starts paused', async () => {
+    const idle = mockSynth([{ lang: 'de-DE', localService: true }])
+    await speakLemma('Haus', 'de', {
+      getSynth: () => idle.synth,
+      createUtterance: utter,
+    })
+    expect(idle.order).toEqual(['speak'])
+    expect(idle.resumes).toBe(0)
+    idle.spoken[0]!.onend?.()
+
+    const paused = mockSynth([{ lang: 'de-DE', localService: true }], {
+      paused: true,
+    })
+    await speakLemma('Haus', 'de', {
+      getSynth: () => paused.synth,
+      createUtterance: utter,
+    })
+    expect(paused.order[0]).toBe('speak')
+    expect(paused.order).toEqual(['speak', 'resume'])
+    expect(paused.resumes).toBe(1)
+
+    // Repeat tap of our own utterance still cancels, then speak, then resume.
+    await speakLemma('Auto', 'de', {
+      getSynth: () => paused.synth,
+      createUtterance: utter,
+    })
+    expect(paused.order.slice(2)).toEqual(['cancel', 'speak', 'resume'])
+    expect(paused.cancels).toBe(1)
+  })
+
+  test('copies voice.lang as BCP-47 and sets volume only when the utterance has it', async () => {
+    const voice = { lang: 'de_DE', localService: true }
+    const plain = mockSynth([voice])
+    await speakLemma('Haus', 'de', {
+      getSynth: () => plain.synth,
+      createUtterance: utter,
+    })
+    expect(plain.spoken[0]!.lang).toBe('de-DE')
+    expect('volume' in plain.spoken[0]!).toBe(false)
+
+    const withVolume = utter('Haus')
+    withVolume.volume = 0
+    const volMock = mockSynth([voice])
+    await speakLemma('Haus', 'de', {
+      getSynth: () => volMock.synth,
+      createUtterance: () => withVolume,
+    })
+    expect(withVolume.lang).toBe('de-DE')
+    expect(withVolume.volume).toBe(1)
   })
 
   test('soft-fails when speechSynthesis missing', async () => {
