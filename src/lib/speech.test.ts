@@ -497,7 +497,7 @@ describe('HTW-speak-helper — iOS empty voice list at tap', () => {
     expect(mock.cancels).toBe(0)
   })
 
-  test('empty getVoices at speak time still calls speak with cached hyphenated lang and voice null', async () => {
+  test('empty getVoices at speak time still calls speak with the cached voice and hyphenated lang', async () => {
     const stale = { lang: 'pt_BR', localService: true }
     let voices: SpeechVoiceLike[] = [stale]
     let calls = 0
@@ -550,8 +550,8 @@ describe('HTW-speak-helper — iOS empty voice list at tap', () => {
       expect(calls - callsBefore).toBe(2)
       expect(spoken[0]!.text).toBe('casa')
       expect(spoken[0]!.lang).toBe('pt-BR')
-      expect(spoken[0]!.voice).toBeNull()
-      expect(spoken[0]!.voice).not.toBe(stale)
+      expect(spoken[0]!.voice).toBe(stale)
+      expect(spoken[0]!.voice).not.toBeNull()
       expect(await pending).toBe(true)
       expect(queued).toBe(0)
       expect(armed).toBe(0)
@@ -561,8 +561,9 @@ describe('HTW-speak-helper — iOS empty voice list at tap', () => {
     }
   })
 
-  test('bare cached tag uses the pack default hyphenated lang', async () => {
-    let voices: SpeechVoiceLike[] = [{ lang: 'en', localService: true }]
+  test('bare cached tag uses the pack default hyphenated lang and the cached voice', async () => {
+    const voice = { lang: 'en', localService: true }
+    let voices: SpeechVoiceLike[] = [voice]
     const spoken: SpeechUtteranceLike[] = []
     const synth: SpeechSynthLike = {
       getVoices: () => voices,
@@ -581,7 +582,47 @@ describe('HTW-speak-helper — iOS empty voice list at tap', () => {
     })
     expect(ok).toBe(true)
     expect(spoken[0]!.lang).toBe('en-US')
-    expect(spoken[0]!.voice).toBeNull()
+    expect(spoken[0]!.voice).toBe(voice)
+  })
+
+  test('in-place empty list still speaks the cached local de voice', async () => {
+    const remote = { lang: 'de-DE', localService: false }
+    const local = { lang: 'de_DE', localService: true }
+    const voices: SpeechVoiceLike[] = [remote, local]
+    const spoken: SpeechUtteranceLike[] = []
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => voices,
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        spoken.push(u)
+        order.push('speak')
+        u.onstart?.()
+      },
+    }
+    expect(canSpeakLemma('de', { getSynth: () => synth })).toBe(true)
+    // Same array the cache snapshotted. Clearing it in place must not
+    // drop the remembered voices.
+    voices.length = 0
+    const pending = speakLemma('Haus', 'de', {
+      getSynth: () => synth,
+      createUtterance: utter,
+    })
+    expect(spoken).toHaveLength(1)
+    expect(order).toEqual(['speak'])
+    expect(order).not.toContain('resume')
+    expect(spoken[0]!.text).toBe('Haus')
+    expect(spoken[0]!.voice).toBe(local)
+    expect(spoken[0]!.voice).not.toBeNull()
+    expect(spoken[0]!.lang).toBe('de-DE')
+    expect(await pending).toBe(true)
+    expect(order).toEqual(['speak'])
   })
 
   test('a second getVoices() that is non-empty assigns the fresh local voice', async () => {
@@ -687,6 +728,39 @@ describe('HTW-speak-helper — voiceschanged', () => {
     for (const listener of listeners) listener()
     expect(seen.at(-1)).toBe(false)
     unsub()
+  })
+
+  test('a new subscription is available when the cache matches and getVoices is empty', () => {
+    const voice = { lang: 'de-DE', localService: true }
+    expect(
+      canSpeakLemma('de', { getSynth: () => mockSynth([voice]).synth }),
+    ).toBe(true)
+
+    const seen: boolean[] = []
+    const unsub = subscribeSpeechAvailability('de', (ok) => seen.push(ok), {
+      getSynth: () => mockSynth([]).synth,
+    })
+    expect(seen[0]).toBe(true)
+    unsub()
+
+    // Play changes lang and subscribes again. Empty live list, cache still speaks de.
+    const again: boolean[] = []
+    const unsubAgain = subscribeSpeechAvailability(
+      'de',
+      (ok) => again.push(ok),
+      { getSynth: () => mockSynth([]).synth },
+    )
+    expect(again[0]).toBe(true)
+    unsubAgain()
+
+    const other: boolean[] = []
+    const unsubOther = subscribeSpeechAvailability(
+      'en',
+      (ok) => other.push(ok),
+      { getSynth: () => mockSynth([]).synth },
+    )
+    expect(other).toEqual([false])
+    unsubOther()
   })
 })
 
