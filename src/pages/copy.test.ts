@@ -757,6 +757,32 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     }
   })
 
+  test('HTW-prime-ios (#124): unlock skips EndCard speak; latch only on success', async () => {
+    const src = await pageSrc('Play.tsx')
+    // Capture pointerdown unlocks earlier gestures only — never the speak button.
+    expect(src).toContain("addEventListener('pointerdown', onPointerDown, true)")
+    expect(src).toContain("closest('[data-endcard-speak]')")
+    expect(src).toContain('unlockSpeechGesture()')
+    // Prefer: skip unlock when target is the speak control; prime is OK.
+    const skipAt = src.indexOf("closest('[data-endcard-speak]')")
+    expect(skipAt).toBeGreaterThan(0)
+    const skipArm = src.slice(skipAt, skipAt + 220)
+    expect(skipArm).toContain('primeSpeechVoices()')
+    expect(skipArm).not.toContain('unlockSpeechGesture()')
+    // Latch Play ref only after unlock returns true (retry on failure).
+    expect(src).toContain('if (unlockSpeechGesture())')
+    expect(src).toContain('speechGestureRef.current = true')
+    const latchAt = src.indexOf('if (unlockSpeechGesture())')
+    const earlyLatch = src.indexOf('speechGestureRef.current = true')
+    // Must not latch before the unlock call.
+    expect(earlyLatch).toBeGreaterThan(latchAt)
+    // EndCard click path remains speakLemma only — no unlock/cancel there.
+    const endCard = src.slice(src.indexOf('function EndCard('))
+    expect(endCard).toContain('speakLemma(word, lang)')
+    expect(endCard).not.toContain('unlockSpeechGesture')
+    expect(endCard.split('speakLemma(').length - 1).toBe(1)
+  })
+
   test('HTW-tests (#118): hide when unsupported; utterance is lemma; win and lose share control', async () => {
     const src = await pageSrc('Play.tsx')
     const endCard = src.slice(src.indexOf('function EndCard('))

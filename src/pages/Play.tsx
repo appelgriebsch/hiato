@@ -162,20 +162,36 @@ function PlayRound({
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
-  /** First play-page pointerdown unlocks speech once. Not the EndCard click. */
+  /** Latched after unlockSpeechGesture returns true (speak started). */
   const speechGestureRef = useRef(false)
 
   // Daily + practice only. Prime on mount (getVoices + voiceschanged) and
-  // unlock on the first pointerdown anywhere on this page, before EndCard.
-  // The EndCard button still calls speakLemma synchronously on its own click.
+  // unlock on an earlier play gesture (card/reveal taps) — never on the
+  // EndCard speak control. That button's own click is speakLemma only.
   // Pocket never speaks. No timer and no promise before speak().
   useEffect(() => {
     if (mode === 'pocket') return
     primeSpeechVoices()
-    const onPointerDown = () => {
+    const onPointerDown = (event: PointerEvent) => {
       if (speechGestureRef.current) return
-      speechGestureRef.current = true
-      unlockSpeechGesture()
+      const raw = event.target
+      const el =
+        raw instanceof Element
+          ? raw
+          : raw instanceof Node
+            ? raw.parentElement
+            : null
+      // First tap on daily already-played is often the speak button itself.
+      // Never unlock there — empty/silent unlock would queue ahead of lemma.
+      if (el?.closest('[data-endcard-speak]')) {
+        primeSpeechVoices()
+        return
+      }
+      // Latch only when unlock actually started (or was already unlocked).
+      // Failed / skipped unlock leaves the ref false so a later tap retries.
+      if (unlockSpeechGesture()) {
+        speechGestureRef.current = true
+      }
       primeSpeechVoices()
     }
     document.addEventListener('pointerdown', onPointerDown, true)

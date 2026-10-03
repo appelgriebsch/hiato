@@ -7,6 +7,7 @@ import {
   pickVoiceForLang,
   primeSpeechVoices,
   retainedSpeechUtterances,
+  SPEECH_UNLOCK_TEXT,
   speakLemma,
   subscribeSpeakActivity,
   subscribeSpeechAvailability,
@@ -859,7 +860,7 @@ describe('HTW-speak-helper — iOS prime and gesture unlock', () => {
     expect(spoken[0]!.lang).toBe('pt-BR')
   })
 
-  test('unlockSpeechGesture speaks once with empty text and volume 0', () => {
+  test('unlockSpeechGesture speaks once with non-empty silent text and volume 0', () => {
     const mock = mockSynth([{ lang: 'en-US', localService: true }])
     const opts = {
       getSynth: () => mock.synth,
@@ -870,30 +871,36 @@ describe('HTW-speak-helper — iOS prime and gesture unlock', () => {
         volume: 1,
       }),
     }
-    unlockSpeechGesture(opts)
+    expect(SPEECH_UNLOCK_TEXT.length).toBeGreaterThan(0)
+    expect(unlockSpeechGesture(opts)).toBe(true)
     expect(mock.spoken).toHaveLength(1)
-    expect(mock.spoken[0]!.text).toBe('')
+    expect(mock.spoken[0]!.text).toBe(SPEECH_UNLOCK_TEXT)
+    expect(mock.spoken[0]!.text).not.toBe('')
     expect(mock.spoken[0]!.volume).toBe(0)
     expect(mock.cancels).toBe(0)
     expect(mock.order).toEqual(['speak'])
     expect(mock.resumes).toBe(0)
-    unlockSpeechGesture(opts)
+    expect(unlockSpeechGesture(opts)).toBe(true)
     expect(mock.spoken).toHaveLength(1)
     expect(mock.cancels).toBe(0)
     expect(mock.order).toEqual(['speak'])
   })
 
-  test('unlock does not set activeSpeech; following speakLemma still speaks', async () => {
+  test('earlier-gesture unlock then speakLemma: lemma speaks without cancel', async () => {
+    // Models unlock on a non-speak Play tap, then EndCard speakLemma later.
+    // Speak-button path never calls unlock (Play skips data-endcard-speak).
     const mock = mockSynth([{ lang: 'en-US', localService: true }])
-    unlockSpeechGesture({
-      getSynth: () => mock.synth,
-      createUtterance: (text) => ({
-        text,
-        lang: '',
-        voice: null,
-        volume: 1,
+    expect(
+      unlockSpeechGesture({
+        getSynth: () => mock.synth,
+        createUtterance: (text) => ({
+          text,
+          lang: '',
+          voice: null,
+          volume: 1,
+        }),
       }),
-    })
+    ).toBe(true)
     const ok = await speakLemma('BANANA', 'en', {
       getSynth: () => mock.synth,
       createUtterance: utter,
@@ -902,8 +909,73 @@ describe('HTW-speak-helper — iOS prime and gesture unlock', () => {
     expect(mock.cancels).toBe(0)
     expect(mock.resumes).toBe(0)
     expect(mock.order).toEqual(['speak', 'speak'])
-    expect(mock.spoken.map((u) => u.text)).toEqual(['', 'BANANA'])
+    expect(mock.spoken.map((u) => u.text)).toEqual([
+      SPEECH_UNLOCK_TEXT,
+      'BANANA',
+    ])
     expect(mock.spoken[1]!.voice).toEqual({ lang: 'en-US', localService: true })
+  })
+
+  test('failed unlock can retry on a later call', () => {
+    expect(unlockSpeechGesture({ getSynth: () => null })).toBe(false)
+    const boom: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'en-US', localService: true }],
+      cancel: () => {},
+      speak: () => {
+        throw new Error('speak')
+      },
+    }
+    expect(
+      unlockSpeechGesture({
+        getSynth: () => boom,
+        createUtterance: utter,
+      }),
+    ).toBe(false)
+
+    const mock = mockSynth([{ lang: 'en-US', localService: true }])
+    expect(
+      unlockSpeechGesture({
+        getSynth: () => mock.synth,
+        createUtterance: (text) => ({
+          text,
+          lang: '',
+          voice: null,
+          volume: 1,
+        }),
+      }),
+    ).toBe(true)
+    expect(mock.spoken).toHaveLength(1)
+    expect(mock.spoken[0]!.text).toBe(SPEECH_UNLOCK_TEXT)
+  })
+
+  test('unlock without onstart does not latch; later onstart then succeeds', () => {
+    const spoken: SpeechUtteranceLike[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'en-US', localService: true }],
+      cancel: () => {},
+      speak: (u) => {
+        spoken.push(u)
+        // No onstart — engine queued but did not start (iOS no-op shape).
+      },
+    }
+    const opts = {
+      getSynth: () => synth,
+      createUtterance: (text: string): SpeechUtteranceLike => ({
+        text,
+        lang: '',
+        voice: null,
+        volume: 1,
+      }),
+    }
+    expect(unlockSpeechGesture(opts)).toBe(false)
+    expect(spoken).toHaveLength(1)
+    // In-flight: do not queue a second silent utterance.
+    expect(unlockSpeechGesture(opts)).toBe(false)
+    expect(spoken).toHaveLength(1)
+    // Engine eventually starts → latch; next call reports success.
+    spoken[0]!.onstart?.()
+    expect(unlockSpeechGesture(opts)).toBe(true)
+    expect(spoken).toHaveLength(1)
   })
 
   test('prime and unlock never throw', () => {
@@ -915,6 +987,7 @@ describe('HTW-speak-helper — iOS prime and gesture unlock', () => {
       }),
     ).not.toThrow()
     expect(() => unlockSpeechGesture({ getSynth: () => null })).not.toThrow()
+    expect(unlockSpeechGesture({ getSynth: () => null })).toBe(false)
     const boom: SpeechSynthLike = {
       getVoices: () => {
         throw new Error('voices')
@@ -930,6 +1003,12 @@ describe('HTW-speak-helper — iOS prime and gesture unlock', () => {
         createUtterance: utter,
       }),
     ).not.toThrow()
+    expect(
+      unlockSpeechGesture({
+        getSynth: () => boom,
+        createUtterance: utter,
+      }),
+    ).toBe(false)
     expect(() => primeSpeechVoices({ getSynth: () => boom })).not.toThrow()
   })
 })

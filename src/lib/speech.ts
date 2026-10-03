@@ -101,6 +101,7 @@ let cachedVoices: readonly SpeechVoiceLike[] = []
 export function clearCachedSpeechVoices(): void {
   cachedVoices = []
   speechGestureUnlocked = false
+  speechGestureUnlockInFlight = false
   if (voicesChangedUnsub) {
     const unsub = voicesChangedUnsub
     voicesChangedUnsub = null
@@ -132,10 +133,20 @@ function readVoices(synth: SpeechSynthLike): VoiceRead {
 }
 
 /**
- * Once-per-page silent unlock. The empty utterance is not activeSpeech:
- * EndCard speakLemma must not cancel it.
+ * Once-per-page silent unlock. The silent utterance is not activeSpeech:
+ * EndCard speakLemma must not cancel it. Latch only after onstart so a
+ * skipped or no-op unlock can retry on a later gesture.
  */
 let speechGestureUnlocked = false
+/** True while a silent unlock utterance is queued and awaiting onstart. */
+let speechGestureUnlockInFlight = false
+
+/**
+ * Silent unlock text. Must be non-empty: some engines drop `speak('')`
+ * entirely or leave a stuck queue entry. A single space with volume 0
+ * is inaudible but still a real utterance the platform will accept.
+ */
+export const SPEECH_UNLOCK_TEXT = ' '
 
 /** Detach the module voiceschanged listener. Null until prime binds one. */
 let voicesChangedUnsub: (() => void) | null = null
@@ -190,38 +201,63 @@ export function primeSpeechVoices(opts: SpeakLemmaOptions = {}): void {
 
 /**
  * iOS Safari drops speak() that is not inside a user gesture. Call this
- * from an earlier Play pointerdown (not the EndCard click). Speaks one
- * empty utterance at volume 0, once per page session, without cancel()
- * and without touching activeSpeech / speakLemma. A later call still
- * primes getVoices but does not speak again. Soft-fail.
+ * from an earlier Play pointerdown (card/reveal taps — never the EndCard
+ * speak control). Speaks one non-empty silent utterance at volume 0,
+ * once per page session, without cancel() and without touching
+ * activeSpeech / speakLemma. Soft-fail.
+ *
+ * Returns true only when unlock has actually started (onstart) or was
+ * already unlocked. Returns false when synth is missing, create/speak
+ * fails, or speak was queued but onstart has not fired yet — so Play
+ * can retry on a later gesture. Does not latch success before speak
+ * returns if the engine can no-op without throwing.
  */
-export function unlockSpeechGesture(opts: SpeakLemmaOptions = {}): void {
+export function unlockSpeechGesture(opts: SpeakLemmaOptions = {}): boolean {
   try {
     primeSpeechVoices(opts)
-    if (speechGestureUnlocked) return
+    if (speechGestureUnlocked) return true
+    if (speechGestureUnlockInFlight) return false
     const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
-    if (!synth) return
+    if (!synth) return false
     const create = opts.createUtterance ?? defaultCreateUtterance
-    const utterance = create('')
-    utterance.text = ''
+    let utterance: SpeechUtteranceLike
+    try {
+      utterance = create(SPEECH_UNLOCK_TEXT)
+    } catch {
+      return false
+    }
+    // Non-empty: empty string is dropped or stuck on some engines (Avery).
+    utterance.text = SPEECH_UNLOCK_TEXT
     if ('volume' in utterance) utterance.volume = 0
     retainedUtterances.add(utterance)
+    speechGestureUnlockInFlight = true
     const release = () => {
+      speechGestureUnlockInFlight = false
       retainedUtterances.delete(utterance)
+      utterance.onstart = null
       utterance.onend = null
       utterance.onerror = null
+    }
+    utterance.onstart = () => {
+      // Latch only after the engine accepted the utterance.
+      speechGestureUnlocked = true
+      speechGestureUnlockInFlight = false
     }
     utterance.onend = release
     utterance.onerror = release
     try {
       // No cancel(). No activeSpeech. Queue only; let onend release it.
       synth.speak(utterance)
-      speechGestureUnlocked = true
     } catch {
       release()
+      return false
     }
+    // Sync engines (and test doubles) fire onstart inside speak().
+    // Async / no-op engines leave this false so a later gesture can retry.
+    return speechGestureUnlocked
   } catch {
     /* soft — unlock must never throw */
+    return false
   }
 }
 
