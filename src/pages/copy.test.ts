@@ -633,21 +633,38 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(endCard).toContain('showSpeakControl = speakSurface && speechOk')
     expect(endCard).toContain('subscribeSpeechAvailability(lang, setSpeechOk)')
 
-    // No auto-play on mount — speak only from tap / onClick (not an effect)
-    expect(endCard).toContain('onClick={() => {')
+    // No auto-play. The only speakLemma call is inside the button's own
+    // native click listener (iOS user-activation). React onClick on this
+    // button would double-fire, so the control must not set onClick.
     expect(endCard).toContain('speakLemma(word, lang)')
     expect(endCard.split('speakLemma(').length - 1).toBe(1)
+    expect(endCard).toContain("addEventListener('click', onClick)")
+    expect(endCard).toContain("removeEventListener('click', onClick)")
+    expect(endCard).toContain('ref={speakBtnRef}')
     // Lemma only — not gloss. Options must not replace (word, lang).
     expect(endCard).toMatch(/speakLemma\(\s*word\s*,\s*lang\s*\)/)
     expect(endCard).not.toMatch(/speakLemma\(\s*gloss/)
     expect(endCard).not.toMatch(/speakLemma\(\s*teachGloss/)
+    const speakEffects: string[] = []
     for (const hook of ['useEffect', 'useLayoutEffect'] as const) {
       const bodies = effectCallbackBodies(endCard, hook)
       expect(bodies.length).toBeGreaterThan(0)
       for (const body of bodies) {
-        expect(body).not.toContain('speakLemma(')
+        if (!body.includes('speakLemma(')) continue
+        expect(hook).toBe('useEffect')
+        speakEffects.push(body)
       }
     }
+    expect(speakEffects).toHaveLength(1)
+    const speakEffect = speakEffects[0]!
+    const fnAt = speakEffect.indexOf('const onClick = () => {')
+    const lemmaCallAt = speakEffect.indexOf('speakLemma(')
+    const addAt = speakEffect.indexOf("addEventListener('click'")
+    expect(fnAt).toBeGreaterThan(-1)
+    expect(fnAt).toBeLessThan(lemmaCallAt)
+    expect(lemmaCallAt).toBeLessThan(addAt)
+    // Registered, not invoked, when the effect runs.
+    expect(speakEffect).not.toContain('onClick()')
 
     // ≥44px icon-only target; focus ring nearer 3:1 (not accent-fg/40 ~1.8:1)
     const btnAt = endCard.indexOf('data-endcard-speak')
@@ -660,6 +677,7 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(btn).toContain('focus-visible:bg-accent-soft')
     expect(btn).toContain('active:bg-cream-dark')
     expect(btn).toContain('data-speaking=')
+    expect(btn).not.toContain('onClick')
     expect(btn).not.toMatch(/>\s*[A-Za-zÀ-ÿ]{2,}/)
     expect(btn).not.toMatch(/Stop|voice picker|autoplay/i)
 

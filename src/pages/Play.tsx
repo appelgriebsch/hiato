@@ -858,6 +858,7 @@ function EndCard({
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
   const clearedStatusRef = useRef<HTMLParagraphElement>(null)
+  const speakBtnRef = useRef<HTMLButtonElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
@@ -989,6 +990,20 @@ function EndCard({
   }, [speakSurface, lang])
   useEffect(() => subscribeSpeakActivity(setSpeaking), [])
   const showSpeakControl = speakSurface && speechOk
+  // iOS Safari only treats speak() as user-activated inside the button's
+  // own listener. React onClick is delegated at the root, so this tap
+  // stays silent there. One listener — do not also set onClick.
+  useEffect(() => {
+    const btn = speakBtnRef.current
+    if (!btn) return
+    const onClick = () => {
+      void speakLemma(word, lang)
+    }
+    btn.addEventListener('click', onClick)
+    return () => {
+      btn.removeEventListener('click', onClick)
+    }
+  }, [showSpeakControl, word, lang])
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
@@ -1026,14 +1041,12 @@ function EndCard({
           </p>
           {showSpeakControl ? (
             <button
+              ref={speakBtnRef}
               type="button"
               data-endcard-speak
               data-speaking={speaking ? 'true' : 'false'}
               aria-label={speakLemmaAriaLabel(lang)}
               aria-busy={speaking}
-              onClick={() => {
-                void speakLemma(word, lang)
-              }}
               className={[
                 'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl hover:bg-cream-dark active:bg-cream-dark focus-visible:outline-none focus-visible:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent-fg',
                 speaking ? 'text-accent-fg' : 'text-ink-muted',
