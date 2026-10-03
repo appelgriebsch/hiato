@@ -47,6 +47,8 @@ function mockSynth(voices: SpeechVoiceLike[]): {
     speak: (u) => {
       spoken.push(u)
       order.push('speak')
+      // Happy path: the engine accepts the utterance in this turn.
+      u.onstart?.()
     },
   }
   return {
@@ -125,14 +127,20 @@ describe('HTW-speak-helper (#115) — utterance text is lemma only', () => {
   test('speakLemma utters lemma only — not gloss or a sentence', async () => {
     const mock = mockSynth([{ lang: 'en-US', localService: true }])
     const lemma = 'BANANA'
-    const gloss = 'a yellow fruit'
+    // Gloss is not an argument of speakLemma. A not.toContain(gloss) check
+    // on text that was only ever given `lemma` cannot fail. Record every
+    // string passed into the utterance and require it to be exactly the lemma
+    // — a gloss, a translation, or "The word was …" fails this.
+    const created: string[] = []
     await speakLemma(lemma, 'en', {
       getSynth: () => mock.synth,
-      createUtterance: utter,
+      createUtterance: (text) => {
+        created.push(text)
+        return utter(text)
+      },
     })
-    expect(mock.spoken).toHaveLength(1)
-    expect(mock.spoken[0]!.text).toBe(lemma)
-    expect(mock.spoken[0]!.text).not.toContain(gloss)
+    expect(created).toEqual([lemma])
+    expect(mock.spoken.map((u) => u.text)).toEqual([lemma])
     expect(mock.spoken[0]!.text).not.toMatch(/The word was|Hear|Listen/i)
   })
 })
@@ -146,8 +154,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(mock.cancels).toBe(0)
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa'])
-    expect(mock.order[0]).toBe('resume')
-    expect(mock.order).toContain('speak')
+    expect(mock.order).toEqual(['resume', 'speak', 'resume'])
   })
 
   test('repeat tap cancels the in-flight utterance then speaks the new lemma', async () => {
@@ -246,30 +253,88 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     expect(retainedSpeechUtterances()).not.toContain(utterance)
   })
 
-  test('does not claim success when speak() never queues', async () => {
-    let pendingFlag = false
-    let speakingFlag = false
+  test('same-turn false speaking and pending flags do not drop the utterance', async () => {
+    const utterance = utter('hi')
     const synth: SpeechSynthLike = {
       getVoices: () => [{ lang: 'en-US', localService: true }],
       cancel: () => {},
       resume: () => {},
-      get pending() {
-        return pendingFlag
-      },
-      get speaking() {
-        return speakingFlag
-      },
+      pending: false,
+      speaking: false,
       speak: () => {
-        /* Chrome dropped it: flags stay false */
+        /* Flags stay false in this turn. That is not a failed queue. */
       },
     }
+    let settled: boolean | undefined
+    const pending = speakLemma('hi', 'en', {
+      getSynth: () => synth,
+      createUtterance: () => utterance,
+    }).then((ok) => {
+      settled = ok
+    })
+    await Promise.resolve()
+    expect(settled).toBeUndefined()
+    expect(retainedSpeechUtterances()).toContain(utterance)
+    utterance.onstart?.()
+    await pending
+    expect(settled).toBe(true)
+    utterance.onend?.()
+    expect(retainedSpeechUtterances()).not.toContain(utterance)
+  })
+
+  test('synchronous onerror resolves false and clears the utterance', async () => {
     const utterance = utter('hi')
+    const seen: boolean[] = []
+    const unsub = subscribeSpeakActivity((speaking) => {
+      seen.push(speaking)
+    })
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'en-US', localService: true }],
+      cancel: () => {},
+      resume: () => {},
+      speak: (u) => {
+        u.onerror?.()
+      },
+    }
     const ok = await speakLemma('hi', 'en', {
       getSynth: () => synth,
       createUtterance: () => utterance,
     })
     expect(ok).toBe(false)
     expect(retainedSpeechUtterances()).not.toContain(utterance)
+    expect(seen).toEqual([true, false])
+    unsub()
+  })
+
+  test('speak() throwing resolves false and releases the utterance', async () => {
+    const utterance = utter('hi')
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'en-US', localService: true }],
+      cancel: () => {},
+      resume: () => {},
+      speak: () => {
+        throw new Error('blocked')
+      },
+    }
+    const ok = await speakLemma('hi', 'en', {
+      getSynth: () => synth,
+      createUtterance: () => utterance,
+    })
+    expect(ok).toBe(false)
+    expect(retainedSpeechUtterances()).not.toContain(utterance)
+  })
+
+  test('stuck speaking or pending does not cancel when we hold no utterance', async () => {
+    const mock = mockSynth([{ lang: 'pt-BR', localService: true }])
+    mock.synth.speaking = true
+    mock.synth.pending = true
+    const ok = await speakLemma('casa', 'pt', {
+      getSynth: () => mock.synth,
+      createUtterance: utter,
+    })
+    expect(ok).toBe(true)
+    expect(mock.cancels).toBe(0)
+    expect(mock.order).toEqual(['resume', 'speak', 'resume'])
   })
 
   test('soft-fails when speechSynthesis missing', async () => {
@@ -334,19 +399,23 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     utterance.onend!()
     expect(seen).toEqual([true, false])
 
+    const droppedUtterance = utter('dropped')
     const dropped: SpeechSynthLike = {
       getVoices: () => [{ lang: 'en-US', localService: true }],
       cancel: () => {},
       pending: false,
       speaking: false,
-      speak: () => {},
+      speak: (u) => {
+        u.onerror?.()
+      },
     }
     const droppedOk = await speakLemma('word', 'en', {
       getSynth: () => dropped,
-      createUtterance: utter,
+      createUtterance: () => droppedUtterance,
     })
     expect(droppedOk).toBe(false)
-    expect(seen.at(-1)).toBe(false)
+    expect(retainedSpeechUtterances()).not.toContain(droppedUtterance)
+    expect(seen).toEqual([true, false, true, false])
     unsub()
   })
 })

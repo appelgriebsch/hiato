@@ -18,8 +18,9 @@ export type SpeechSynthLike = {
   /** Chrome pauses the synth; resume in the same turn as speak. */
   resume?: () => void
   /**
-   * When either flag is present, a speak() that leaves both false did not
-   * queue (engine refused the utterance).
+   * Engine flags. They are not a queue signal: Chrome/WebKit may leave both
+   * false in the same turn as a speak() that did queue. Stuck true is also
+   * not our utterance — cancel only activeSpeech.
    */
   speaking?: boolean
   pending?: boolean
@@ -32,6 +33,7 @@ export type SpeechUtteranceLike = {
   text: string
   lang: string
   voice: SpeechVoiceLike | null
+  onstart?: (() => void) | null
   onend?: (() => void) | null
   onerror?: (() => void) | null
 }
@@ -164,23 +166,11 @@ type ActiveSpeech = {
   finish: () => void
 }
 
-/** Lemma we queued and have not yet ended. Idle synth must not be cancel()'d. */
+/**
+ * Lemma we passed to speak() and have not yet ended.
+ * Cancel only this — never because synth.speaking/pending looks stuck.
+ */
 let activeSpeech: ActiveSpeech | null = null
-
-function engineBusy(synth: SpeechSynthLike): boolean {
-  return (
-    activeSpeech !== null ||
-    synth.speaking === true ||
-    synth.pending === true
-  )
-}
-
-function utteranceQueued(synth: SpeechSynthLike): boolean {
-  const hasPending = typeof synth.pending === 'boolean'
-  const hasSpeaking = typeof synth.speaking === 'boolean'
-  if (!hasPending && !hasSpeaking) return true
-  return synth.pending === true || synth.speaking === true
-}
 
 function resumeSynth(synth: SpeechSynthLike) {
   try {
@@ -198,12 +188,19 @@ function resumeSynth(synth: SpeechSynthLike) {
  * (the old 50ms post-cancel timer) drops iOS/Safari and often Chrome: the
  * control stays visible, the tap is silent.
  *
- * `cancel()` runs only when a prior utterance is still active. Cancelling an
- * idle synth pauses Chrome and swallows the next speak. After a cancel, resume
- * and speak still happen in this same turn — never behind a timer.
+ * `cancel()` runs only when activeSpeech is set (an utterance we started and
+ * have not finished). Cancelling an idle synth pauses Chrome and swallows the
+ * next speak. Stuck synth.speaking / pending is not our utterance, so it must
+ * not cancel. After a cancel, resume and speak still happen in this same turn
+ * — never behind a timer. Same-turn cancel()+speak() can be dropped by
+ * Chrome/WebKit; a timer would miss the user-gesture turn, so we still speak
+ * synchronously when we interrupt our own utterance.
  *
- * Resolves true only if speak() actually queued. Soft-fails (false, no throw)
- * when speechSynthesis is missing, no usable voice, or the engine drops it.
+ * The utterance stays referenced until onend/onerror. speaking/pending still
+ * false in this turn is not a failed queue — those flags are not specified to
+ * flip before we return. Resolves true only once this utterance fires onstart.
+ * A synchronous onerror, or speak() throwing, resolves false. Soft-fails
+ * (false, no throw) when speechSynthesis is missing or no usable voice.
  */
 export function speakLemma(
   lemma: string,
@@ -244,69 +241,70 @@ export function speakLemma(
         ended: false,
         finish: () => {},
       }
+      let started = false
       const finish = () => {
         if (record.ended) return
         record.ended = true
         retainedUtterances.delete(utterance)
-        if (activeSpeech === record) activeSpeech = null
-        if (generation !== speakGeneration) return
-        emitActivity(false)
-        opts.onDone?.()
-      }
-      record.finish = finish
-      utterance.onend = finish
-      utterance.onerror = finish
-
-      const releaseQuiet = () => {
-        record.ended = true
-        retainedUtterances.delete(utterance)
+        utterance.onstart = null
         utterance.onend = null
         utterance.onerror = null
         if (activeSpeech === record) activeSpeech = null
-      }
-
-      const failQueued = () => {
-        releaseQuiet()
         if (generation === speakGeneration) {
           emitActivity(false)
           opts.onDone?.()
         }
-        settle(false)
+        // onend/onerror without onstart is not success (and must not hang).
+        if (!started) settle(false)
+      }
+      record.finish = finish
+      utterance.onend = finish
+      utterance.onerror = finish
+      utterance.onstart = () => {
+        if (record.ended || settled) return
+        if (generation !== speakGeneration) return
+        started = true
+        settle(true)
       }
 
-      // Replace an in-flight lemma before starting the new one. Do this only
-      // when something is actually speaking — cancel() on an idle synth is
-      // what makes the first tap silent on Chrome.
-      const previous = activeSpeech
-      if (engineBusy(synth)) {
+      // Interrupt only an utterance we queued and have not finished.
+      // synth.speaking / pending stuck true must not cancel: that pauses
+      // Chrome and the following speak() in this turn is dropped.
+      if (activeSpeech !== null) {
+        const previous = activeSpeech
         try {
           synth.cancel()
         } catch {
           /* still attempt the new utterance */
         }
-        if (previous && !previous.ended) previous.finish()
+        if (!previous.ended) previous.finish()
       }
 
+      activeSpeech = record
       emitActivity(true)
 
       try {
         // Chrome leaves the synth paused; resume must happen in this same
         // gesture turn, immediately around speak(), not in a later task.
+        // First tap: resume, speak, resume. No timer.
         resumeSynth(synth)
         synth.speak(utterance)
         resumeSynth(synth)
-        if (record.ended) {
-          settle(true)
-          return
-        }
-        if (!utteranceQueued(synth)) {
-          failQueued()
-          return
-        }
-        activeSpeech = record
-        settle(true)
       } catch {
-        failQueued()
+        // speak() threw — nothing queued. Sync onerror already finished.
+        if (!record.ended) {
+          record.ended = true
+          retainedUtterances.delete(utterance)
+          utterance.onstart = null
+          utterance.onend = null
+          utterance.onerror = null
+          if (activeSpeech === record) activeSpeech = null
+          if (generation === speakGeneration) {
+            emitActivity(false)
+            opts.onDone?.()
+          }
+        }
+        settle(false)
       }
     } catch {
       settle(false)
