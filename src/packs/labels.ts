@@ -39,3 +39,16 @@ export const NO_HINT_COPY: Record<PackLang, string> = {
   de: 'Kein Hinweis für dieses Wort',
   es: 'Sin pista para esta palabra',
 }
+
+/** Localized aria-label for EndCard tap-to-speak (ADR 0037 / #117). */
+export const SPEAK_LEMMA_ARIA: Record<PackLang, string> = {
+  en: 'Hear the word',
+  pt: 'Ouvir a palavra',
+  de: 'Wort anhören',
+  es: 'Escuchar la palabra',
+}
+
+/** Aria-label for the speak control; missing keys fall back to EN. */
+export function speakLemmaAriaLabel(lang: PackLang): string {
+  return SPEAK_LEMMA_ARIA[lang] ?? SPEAK_LEMMA_ARIA.en
+}
