@@ -94,9 +94,22 @@ const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
  */
 let cachedVoices: readonly SpeechVoiceLike[] = []
 
-/** Drop the voice-list cache. Tests only — production never clears it. */
+/**
+ * Drop the voice-list cache and the page-session prime/unlock hooks.
+ * Tests only — production never clears it.
+ */
 export function clearCachedSpeechVoices(): void {
   cachedVoices = []
+  speechGestureUnlocked = false
+  if (voicesChangedUnsub) {
+    const unsub = voicesChangedUnsub
+    voicesChangedUnsub = null
+    try {
+      unsub()
+    } catch {
+      /* test cleanup must not throw */
+    }
+  }
 }
 
 function rememberVoices(voices: readonly SpeechVoiceLike[]) {
@@ -115,6 +128,100 @@ function readVoices(synth: SpeechSynthLike): VoiceRead {
     return { voices: list, threw: false }
   } catch {
     return { voices: [], threw: true }
+  }
+}
+
+/**
+ * Once-per-page silent unlock. The empty utterance is not activeSpeech:
+ * EndCard speakLemma must not cancel it.
+ */
+let speechGestureUnlocked = false
+
+/** Detach the module voiceschanged listener. Null until prime binds one. */
+let voicesChangedUnsub: (() => void) | null = null
+
+/**
+ * One voiceschanged listener for the page. iOS often leaves getVoices()
+ * empty until this fires. rememberVoices runs here, before any EndCard
+ * tap, so the click path never waits on the event.
+ */
+function bindVoicesChanged(synth: SpeechSynthLike): void {
+  if (voicesChangedUnsub) return
+  if (typeof synth.addEventListener !== 'function') return
+  const onVoices = () => {
+    try {
+      const read = readVoices(synth)
+      if (!read.threw && read.voices.length === 0) readVoices(synth)
+    } catch {
+      /* voiceschanged must not throw into the engine */
+    }
+  }
+  try {
+    synth.addEventListener('voiceschanged', onVoices)
+    voicesChangedUnsub = () => {
+      try {
+        synth.removeEventListener?.('voiceschanged', onVoices)
+      } catch {
+        /* already gone */
+      }
+    }
+  } catch {
+    /* soft */
+  }
+}
+
+/**
+ * Sync voice prime. getVoices() (and a second read when the first list is
+ * empty) plus a one-time voiceschanged listener. Never speaks, never
+ * awaits, never throws. Play calls this on mount and again inside an
+ * earlier user gesture so the EndCard click finds a cached voice.
+ */
+export function primeSpeechVoices(opts: SpeakLemmaOptions = {}): void {
+  try {
+    const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
+    if (!synth) return
+    bindVoicesChanged(synth)
+    const first = readVoices(synth)
+    if (!first.threw && first.voices.length === 0) readVoices(synth)
+  } catch {
+    /* soft — prime must never throw */
+  }
+}
+
+/**
+ * iOS Safari drops speak() that is not inside a user gesture. Call this
+ * from an earlier Play pointerdown (not the EndCard click). Speaks one
+ * empty utterance at volume 0, once per page session, without cancel()
+ * and without touching activeSpeech / speakLemma. A later call still
+ * primes getVoices but does not speak again. Soft-fail.
+ */
+export function unlockSpeechGesture(opts: SpeakLemmaOptions = {}): void {
+  try {
+    primeSpeechVoices(opts)
+    if (speechGestureUnlocked) return
+    const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
+    if (!synth) return
+    const create = opts.createUtterance ?? defaultCreateUtterance
+    const utterance = create('')
+    utterance.text = ''
+    if ('volume' in utterance) utterance.volume = 0
+    retainedUtterances.add(utterance)
+    const release = () => {
+      retainedUtterances.delete(utterance)
+      utterance.onend = null
+      utterance.onerror = null
+    }
+    utterance.onend = release
+    utterance.onerror = release
+    try {
+      // No cancel(). No activeSpeech. Queue only; let onend release it.
+      synth.speak(utterance)
+      speechGestureUnlocked = true
+    } catch {
+      release()
+    }
+  } catch {
+    /* soft — unlock must never throw */
   }
 }
 
@@ -445,6 +552,34 @@ export function speakLemma(
  * on a brand-new subscription (Play changes lang and resubscribes). The
  * tap assigns the cached voice. A non-empty list with no match still hides.
  */
+
+/**
+ * Discover voices for the EndCard control. Capped, off the speak path.
+ * speak() from a timer is dropped on iOS, so this must never speak.
+ */
+const VOICE_POLL_MS = 100
+const VOICE_POLL_TRIES = 8
+
+function pollVoicesForVisibility(notify: () => void): () => void {
+  let tries = 0
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const tick = () => {
+    timer = setTimeout(() => {
+      tries += 1
+      try {
+        notify()
+      } catch {
+        /* visibility must not throw */
+      }
+      if (tries < VOICE_POLL_TRIES) tick()
+    }, VOICE_POLL_MS)
+  }
+  tick()
+  return () => {
+    if (timer !== undefined) clearTimeout(timer)
+  }
+}
+
 export function subscribeSpeechAvailability(
   packLang: PackLang,
   onChange: (ok: boolean) => void,
@@ -488,13 +623,18 @@ export function subscribeSpeechAvailability(
 
     notify()
 
+    // Visibility only. iOS may fill getVoices() without a reliable
+    // voiceschanged. Never delays speakLemma — that path does not poll.
+    const stopPoll = pollVoicesForVisibility(notify)
+
     if (typeof synth.addEventListener === 'function') {
       synth.addEventListener('voiceschanged', notify)
       return () => {
+        stopPoll()
         synth.removeEventListener?.('voiceschanged', notify)
       }
     }
-    return () => {}
+    return stopPoll
   } catch {
     onChange(false)
     return () => {}

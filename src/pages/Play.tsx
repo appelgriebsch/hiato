@@ -68,7 +68,7 @@ import {
   recordDailyWin,
 } from '@/lib/streaks'
 import { CEFR_CODES, LANG_CODES, speakLemmaAriaLabel } from '@/packs/labels'
-import { speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability } from '@/lib/speech'
+import { primeSpeechVoices, speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -162,6 +162,27 @@ function PlayRound({
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
+  /** First play-page pointerdown unlocks speech once. Not the EndCard click. */
+  const speechGestureRef = useRef(false)
+
+  // Daily + practice only. Prime on mount (getVoices + voiceschanged) and
+  // unlock on the first pointerdown anywhere on this page, before EndCard.
+  // The EndCard button still calls speakLemma synchronously on its own click.
+  // Pocket never speaks. No timer and no promise before speak().
+  useEffect(() => {
+    if (mode === 'pocket') return
+    primeSpeechVoices()
+    const onPointerDown = () => {
+      if (speechGestureRef.current) return
+      speechGestureRef.current = true
+      unlockSpeechGesture()
+      primeSpeechVoices()
+    }
+    document.addEventListener('pointerdown', onPointerDown, true)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown, true)
+    }
+  }, [mode])
 
   const roundRef = useRef({
     cells,
@@ -986,6 +1007,9 @@ function EndCard({
       setSpeechOk(false)
       return
     }
+    // Mount prime only. voiceschanged / the poll may show the control later.
+    // Do not speak here — iOS drops speak() outside a user gesture.
+    primeSpeechVoices()
     return subscribeSpeechAvailability(lang, setSpeechOk)
   }, [speakSurface, lang])
   useEffect(() => subscribeSpeakActivity(setSpeaking), [])
