@@ -67,7 +67,8 @@ import {
   getStreakCount,
   recordDailyWin,
 } from '@/lib/streaks'
-import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
+import { CEFR_CODES, LANG_CODES, speakLemmaAriaLabel } from '@/packs/labels'
+import { speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability } from '@/lib/speech'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -975,6 +976,20 @@ function EndCard({
     .filter((s) => s.trim().length > 0)
     .slice(0, 3)
 
+  // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
+  const speakSurface = mode === 'daily' || mode === 'practice'
+  const [speechOk, setSpeechOk] = useState(false)
+  const [speaking, setSpeaking] = useState(false)
+  useEffect(() => {
+    if (!speakSurface) {
+      setSpeechOk(false)
+      return
+    }
+    return subscribeSpeechAvailability(lang, setSpeechOk)
+  }, [speakSurface, lang])
+  useEffect(() => subscribeSpeakActivity(setSpeaking), [])
+  const showSpeakControl = speakSurface && speechOk
+
   return (
     <div className="motion-result-enter mb-4 space-y-3">
       <div
@@ -998,16 +1013,51 @@ function EndCard({
         >
           The word was
         </p>
-        <p
-          className={[
-            'tracking-wide text-ink',
-            teachGloss
-              ? 'mt-0.5 text-base font-medium'
-              : 'mt-1 text-lg font-semibold',
-          ].join(' ')}
-        >
-          {word}
-        </p>
+        <div className="flex items-center justify-center gap-1">
+          <p
+            className={[
+              'tracking-wide text-ink',
+              teachGloss
+                ? 'mt-0.5 text-base font-medium'
+                : 'mt-1 text-lg font-semibold',
+            ].join(' ')}
+          >
+            {word}
+          </p>
+          {showSpeakControl ? (
+            <button
+              type="button"
+              data-endcard-speak
+              data-speaking={speaking ? 'true' : 'false'}
+              aria-label={speakLemmaAriaLabel(lang)}
+              aria-busy={speaking}
+              onClick={() => {
+                void speakLemma(word, lang)
+              }}
+              className={[
+                'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl hover:bg-cream-dark active:bg-cream-dark focus-visible:outline-none focus-visible:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent-fg',
+                speaking ? 'text-accent-fg' : 'text-ink-muted',
+                teachGloss ? 'mt-0.5' : 'mt-1',
+              ].join(' ')}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+            </button>
+          ) : null}
+        </div>
         {teachSynonyms.length > 0 ? (
           <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
             {teachSynonyms.map((s) => (

@@ -546,3 +546,216 @@ describe('OfflineChip packReady vs network (#103 Avery W3)', () => {
     expect(src).toContain('Offline ready')
   })
 })
+
+/** Bodies of useEffect / useLayoutEffect calls. Skips the other hook. */
+function effectCallbackBodies(
+  src: string,
+  hook: 'useEffect' | 'useLayoutEffect',
+): string[] {
+  const bodies: string[] = []
+  const needle = `${hook}(`
+  let from = 0
+  while (from < src.length) {
+    const at = src.indexOf(needle, from)
+    if (at < 0) break
+    // `useLayoutEffect(` contains the substring `useEffect(`.
+    if (hook === 'useEffect' && src.slice(at - 6, at) === 'Layout') {
+      from = at + needle.length
+      continue
+    }
+    const open = at + hook.length
+    let depth = 0
+    let end = -1
+    for (let i = open; i < src.length; i++) {
+      const c = src[i]
+      if (c === '(') depth++
+      else if (c === ')') {
+        depth--
+        if (depth === 0) {
+          end = i
+          break
+        }
+      }
+    }
+    if (end < 0) break
+    bodies.push(src.slice(open + 1, end))
+    from = end + 1
+  }
+  return bodies
+}
+
+describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
+  test('autoplay scan covers useLayoutEffect, not only useEffect split on `}, [`', () => {
+    // A decoy `}, [` sits before speakLemma. Slicing each useEffect( chunk at the
+    // first `}, [` drops the call; useLayoutEffect( also contains the substring
+    // useEffect(, so that split never names the hook that actually speaks.
+    const sample = `
+      useLayoutEffect(() => {
+        const decoy = '}, ['
+        speakLemma(word, lang)
+      })
+      useEffect(() => {
+        return subscribeSpeechAvailability(lang, setSpeechOk)
+      }, [speakSurface, lang])
+    `
+    const layout = effectCallbackBodies(sample, 'useLayoutEffect')
+    expect(layout).toHaveLength(1)
+    expect(layout[0]).toContain('speakLemma(')
+    const effects = effectCallbackBodies(sample, 'useEffect')
+    expect(effects).toHaveLength(1)
+    expect(effects[0]).not.toContain('speakLemma(')
+    expect(effects[0]).toContain('subscribeSpeechAvailability')
+    const oldChunks = sample.split('useEffect(').slice(1)
+    const oldMisses = oldChunks.some((block) => {
+      const body = block.slice(0, block.indexOf('}, ['))
+      return !body.includes('speakLemma(')
+    })
+    expect(oldMisses).toBe(true)
+  })
+
+  test('HTW-endcard-button (#116): speak control next to lemma; daily+practice; no autoplay', async () => {
+    const src = await pageSrc('Play.tsx')
+    const endAt = src.indexOf('function EndCard(')
+    expect(endAt).toBeGreaterThan(0)
+    const endCard = src.slice(endAt)
+
+    expect(src).toContain("from '@/lib/speech'")
+    expect(endCard).toContain('data-endcard-speak')
+    expect(endCard).toContain('speakLemma(word, lang)')
+    expect(endCard).toContain('speakLemmaAriaLabel(lang)')
+    expect(endCard).toContain('min-h-11')
+    expect(endCard).toContain('min-w-11')
+
+    // Daily + practice only — not pocket
+    expect(endCard).toContain(
+      "const speakSurface = mode === 'daily' || mode === 'practice'",
+    )
+    expect(endCard).toContain('showSpeakControl = speakSurface && speechOk')
+    expect(endCard).toContain('subscribeSpeechAvailability(lang, setSpeechOk)')
+
+    // No auto-play on mount — speak only from tap / onClick (not an effect)
+    expect(endCard).toContain('onClick={() => {')
+    expect(endCard).toContain('speakLemma(word, lang)')
+    expect(endCard.split('speakLemma(').length - 1).toBe(1)
+    // Lemma only — not gloss. Options must not replace (word, lang).
+    expect(endCard).toMatch(/speakLemma\(\s*word\s*,\s*lang\s*\)/)
+    expect(endCard).not.toMatch(/speakLemma\(\s*gloss/)
+    expect(endCard).not.toMatch(/speakLemma\(\s*teachGloss/)
+    for (const hook of ['useEffect', 'useLayoutEffect'] as const) {
+      const bodies = effectCallbackBodies(endCard, hook)
+      expect(bodies.length).toBeGreaterThan(0)
+      for (const body of bodies) {
+        expect(body).not.toContain('speakLemma(')
+      }
+    }
+
+    // ≥44px icon-only target; focus ring nearer 3:1 (not accent-fg/40 ~1.8:1)
+    const btnAt = endCard.indexOf('data-endcard-speak')
+    const btn = endCard.slice(btnAt, endCard.indexOf('</button>', btnAt))
+    expect(btn).toContain('min-h-11')
+    expect(btn).toContain('min-w-11')
+    expect(btn).toContain('focus-visible:ring-2')
+    expect(btn).toContain('focus-visible:ring-accent-fg')
+    expect(btn).not.toContain('focus-visible:ring-accent-fg/')
+    expect(btn).toContain('focus-visible:bg-accent-soft')
+    expect(btn).toContain('active:bg-cream-dark')
+    expect(btn).toContain('data-speaking=')
+    expect(btn).not.toMatch(/>\s*[A-Za-zÀ-ÿ]{2,}/)
+    expect(btn).not.toMatch(/Stop|voice picker|autoplay/i)
+
+    // Control sits next to the revealed lemma
+    const wordAt = endCard.indexOf('{word}')
+    const speakAt = endCard.indexOf('data-endcard-speak')
+    expect(wordAt).toBeGreaterThan(0)
+    expect(speakAt).toBeGreaterThan(wordAt)
+    expect(speakAt - wordAt).toBeLessThan(400)
+  })
+
+  test('HTW-i18n-a11y (#117): aria-label via speakLemmaAriaLabel / SPEAK_LEMMA_ARIA', async () => {
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain('speakLemmaAriaLabel')
+    expect(src).toContain("from '@/packs/labels'")
+
+    const labels = await Bun.file(
+      new URL('../packs/labels.ts', import.meta.url),
+    ).text()
+    expect(labels).toContain('SPEAK_LEMMA_ARIA')
+    expect(labels).toContain("en: 'Hear the word'")
+    expect(labels).toContain("pt: 'Ouvir a palavra'")
+    expect(labels).toContain("de: 'Wort anhören'")
+    expect(labels).toContain("es: 'Escuchar la palabra'")
+    expect(labels).toContain('speakLemmaAriaLabel')
+    expect(labels).toContain('SPEAK_LEMMA_ARIA.en')
+    // No Settings voice picker / accent teaching copy
+    expect(labels).not.toMatch(/voice picker|Settings|accent score|pronunciation drill/i)
+  })
+
+  test('HTW-tests (#118): no mid-round speak; PocketSheet gloss-only does not speak', async () => {
+    const hint = await Bun.file(
+      new URL('../components/play/LearnerHint.tsx', import.meta.url),
+    ).text()
+    expect(hint).not.toContain('speech')
+    expect(hint).not.toContain('speakLemma')
+    expect(hint).not.toContain('speechSynthesis')
+    expect(hint).not.toContain("from '@/lib/speech'")
+
+    const pocket = await Bun.file(
+      new URL('../components/PocketSheet.tsx', import.meta.url),
+    ).text()
+    expect(pocket).not.toContain('speech')
+    expect(pocket).not.toContain('speakLemma')
+    expect(pocket).not.toContain('speechSynthesis')
+    expect(pocket).not.toContain("from '@/lib/speech'")
+    expect(pocket).not.toContain('data-endcard-speak')
+
+    const play = await pageSrc('Play.tsx')
+    // In-round branch (Keyboard / Reveal) must not call speak
+    const finishedGate = play.indexOf('{finished ? (')
+    expect(finishedGate).toBeGreaterThan(0)
+    const inRound = play.slice(
+      finishedGate,
+      play.indexOf('function EndCard('),
+    )
+    // The EndCard call is inside finished ? — exclude that; look at the else arm
+    const elseArmStart = inRound.indexOf(') : (')
+    expect(elseArmStart).toBeGreaterThan(0)
+    const elseArm = inRound.slice(elseArmStart)
+    expect(elseArm).not.toContain('speakLemma')
+    expect(elseArm).not.toContain('data-endcard-speak')
+    expect(elseArm).not.toContain('speechSynthesis')
+
+    // Keyboard / Lives / LetterGrid never import speech
+    for (const name of [
+      'Keyboard.tsx',
+      'Lives.tsx',
+      'LetterGrid.tsx',
+    ] as const) {
+      const comp = await Bun.file(
+        new URL(`../components/play/${name}`, import.meta.url),
+      ).text()
+      expect(comp).not.toContain("from '@/lib/speech'")
+      expect(comp).not.toContain('speakLemma')
+      expect(comp).not.toContain('speechSynthesis')
+    }
+  })
+
+  test('HTW-tests (#118): hide when unsupported; utterance is lemma; win and lose share control', async () => {
+    const src = await pageSrc('Play.tsx')
+    const endCard = src.slice(src.indexOf('function EndCard('))
+
+    // Hidden when speech unsupported / no usable voice
+    expect(endCard).toContain('showSpeakControl')
+    expect(endCard).toContain('{showSpeakControl ? (')
+    expect(endCard).toContain('subscribeSpeechAvailability')
+
+    // Speaks lemma (`word`) only — not gloss
+    expect(endCard).toContain('speakLemma(word, lang)')
+    expect(endCard).not.toMatch(/speakLemma\(\s*gloss/)
+    expect(endCard).not.toMatch(/speakLemma\(\s*teachGloss/)
+
+    // Same EndCard for win and lose — speak gate is mode-based, not won-based
+    expect(endCard).toContain("mode === 'daily' || mode === 'practice'")
+    expect(endCard).not.toMatch(/showSpeakControl.*won/)
+    expect(endCard).not.toMatch(/speakSurface.*won/)
+  })
+})
