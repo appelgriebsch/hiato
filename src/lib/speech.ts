@@ -15,11 +15,11 @@ export type SpeechSynthLike = {
   getVoices: () => SpeechVoiceLike[]
   cancel: () => void
   speak: (utterance: SpeechUtteranceLike) => void
-  /** Chrome pauses the synth; resume before the delayed speak. */
+  /** Chrome pauses the synth; resume in the same turn as speak. */
   resume?: () => void
   /**
    * When either flag is present, a speak() that leaves both false did not
-   * queue (Chrome/Safari drop cancel+speak in the same turn).
+   * queue (engine refused the utterance).
    */
   speaking?: boolean
   pending?: boolean
@@ -41,21 +41,9 @@ export type SpeakLemmaOptions = {
   getSynth?: () => SpeechSynthLike | null | undefined
   /** Override utterance factory (defaults to SpeechSynthesisUtterance when available). */
   createUtterance?: (text: string) => SpeechUtteranceLike
-  /**
-   * Schedules the post-cancel speak.
-   * Default: `setTimeout(fn, SPEAK_AFTER_CANCEL_MS)`.
-   * Chrome/Safari drop `speak()` in the same turn as `cancel()`.
-   */
-  schedule?: (fn: () => void, delayMs: number) => void
   /** Fires when the active utterance ends or errors, or when speak never queues. */
   onDone?: () => void
 }
-
-/**
- * Gap between `cancel()` and `speak()` so a repeat tap is not dropped.
- * Resume runs inside this turn, immediately before speak.
- */
-export const SPEAK_AFTER_CANCEL_MS = 50
 
 /**
  * BCP-47 prefix for each pack language. Voice match is prefix-based
@@ -170,28 +158,21 @@ function emitActivity(speaking: boolean) {
 
 let speakGeneration = 0
 
-type Inflight = {
+type ActiveSpeech = {
   generation: number
-  timer: ReturnType<typeof setTimeout> | null
-  abandon: () => void
+  ended: boolean
+  finish: () => void
 }
 
-let inflight: Inflight | null = null
+/** Lemma we queued and have not yet ended. Idle synth must not be cancel()'d. */
+let activeSpeech: ActiveSpeech | null = null
 
-function abandonInflight() {
-  const prev = inflight
-  inflight = null
-  if (!prev) return
-  if (prev.timer !== null) clearTimeout(prev.timer)
-  prev.abandon()
-}
-
-function defaultSchedule(fn: () => void, delayMs: number) {
-  const timer = setTimeout(() => {
-    if (inflight?.timer === timer) inflight.timer = null
-    fn()
-  }, delayMs)
-  if (inflight) inflight.timer = timer
+function engineBusy(synth: SpeechSynthLike): boolean {
+  return (
+    activeSpeech !== null ||
+    synth.speaking === true ||
+    synth.pending === true
+  )
 }
 
 function utteranceQueued(synth: SpeechSynthLike): boolean {
@@ -201,9 +182,26 @@ function utteranceQueued(synth: SpeechSynthLike): boolean {
   return synth.pending === true || synth.speaking === true
 }
 
+function resumeSynth(synth: SpeechSynthLike) {
+  try {
+    synth.resume?.()
+  } catch {
+    /* resume is a hint; speak is what must queue */
+  }
+}
+
 /**
  * Speak the lemma with a voice matching pack lang (local preferred).
- * Cancels any prior utterance, then resumes and speaks after a short delay.
+ *
+ * `speak()` runs synchronously in the caller's turn. EndCard calls this from
+ * the button click, so the utterance stays inside the user gesture. A delay
+ * (the old 50ms post-cancel timer) drops iOS/Safari and often Chrome: the
+ * control stays visible, the tap is silent.
+ *
+ * `cancel()` runs only when a prior utterance is still active. Cancelling an
+ * idle synth pauses Chrome and swallows the next speak. After a cancel, resume
+ * and speak still happen in this same turn — never behind a timer.
+ *
  * Resolves true only if speak() actually queued. Soft-fails (false, no throw)
  * when speechSynthesis is missing, no usable voice, or the engine drops it.
  */
@@ -241,32 +239,30 @@ export function speakLemma(
 
       const generation = ++speakGeneration
       retainedUtterances.add(utterance)
-      let ended = false
+      const record: ActiveSpeech = {
+        generation,
+        ended: false,
+        finish: () => {},
+      }
       const finish = () => {
-        ended = true
+        if (record.ended) return
+        record.ended = true
         retainedUtterances.delete(utterance)
+        if (activeSpeech === record) activeSpeech = null
         if (generation !== speakGeneration) return
         emitActivity(false)
         opts.onDone?.()
       }
+      record.finish = finish
       utterance.onend = finish
       utterance.onerror = finish
 
-      // Drop a speak that has not queued yet. Do not emit "idle" — the new
-      // attempt below is the active one. Already-queued audio ends via onerror.
-      abandonInflight()
-      emitActivity(true)
-
-      try {
-        synth.cancel()
-      } catch {
-        /* still attempt the new utterance */
-      }
-
       const releaseQuiet = () => {
+        record.ended = true
         retainedUtterances.delete(utterance)
         utterance.onend = null
         utterance.onerror = null
+        if (activeSpeech === record) activeSpeech = null
       }
 
       const failQueued = () => {
@@ -278,43 +274,37 @@ export function speakLemma(
         settle(false)
       }
 
-      const kick = () => {
-        if (generation !== speakGeneration) {
-          releaseQuiet()
-          settle(false)
+      // Replace an in-flight lemma before starting the new one. Do this only
+      // when something is actually speaking — cancel() on an idle synth is
+      // what makes the first tap silent on Chrome.
+      const previous = activeSpeech
+      if (engineBusy(synth)) {
+        try {
+          synth.cancel()
+        } catch {
+          /* still attempt the new utterance */
+        }
+        if (previous && !previous.ended) previous.finish()
+      }
+
+      emitActivity(true)
+
+      try {
+        // Chrome leaves the synth paused; resume must happen in this same
+        // gesture turn, immediately around speak(), not in a later task.
+        resumeSynth(synth)
+        synth.speak(utterance)
+        resumeSynth(synth)
+        if (record.ended) {
+          settle(true)
           return
         }
-        try {
-          try {
-            synth.resume?.()
-          } catch {
-            /* resume is a hint; speak is what must queue */
-          }
-          synth.speak(utterance)
-          if (ended) {
-            settle(true)
-            return
-          }
-          if (!utteranceQueued(synth)) {
-            failQueued()
-            return
-          }
-          settle(true)
-        } catch {
+        if (!utteranceQueued(synth)) {
           failQueued()
+          return
         }
-      }
-
-      const abandon = () => {
-        if (settled) return
-        releaseQuiet()
-        settle(false)
-      }
-
-      inflight = { generation, timer: null, abandon }
-      const schedule = opts.schedule ?? defaultSchedule
-      try {
-        schedule(kick, SPEAK_AFTER_CANCEL_MS)
+        activeSpeech = record
+        settle(true)
       } catch {
         failQueued()
       }

@@ -1,8 +1,7 @@
-import { describe, expect, test } from 'bun:test'
+import { beforeEach, describe, expect, test } from 'bun:test'
 import { PACK_LANGS, type PackLang } from '../packs/schema'
 import { SPEAK_LEMMA_ARIA, speakLemmaAriaLabel } from '../packs/labels'
 import {
-  SPEAK_AFTER_CANCEL_MS,
   canSpeakLemma,
   pickVoiceForLang,
   retainedSpeechUtterances,
@@ -11,15 +10,18 @@ import {
   subscribeSpeechAvailability,
   utteranceTextForLemma,
   voiceMatchesPackLang,
-  type SpeakLemmaOptions,
   type SpeechSynthLike,
   type SpeechUtteranceLike,
   type SpeechVoiceLike,
 } from './speech'
 
-const immediate: SpeakLemmaOptions['schedule'] = (fn) => {
-  fn()
-}
+beforeEach(() => {
+  // speakLemma keeps module state (active utterance). End it so later tests
+  // see an idle synth and do not cancel on their first tap.
+  for (const utterance of retainedSpeechUtterances()) {
+    utterance.onend?.()
+  }
+})
 
 function mockSynth(voices: SpeechVoiceLike[]): {
   synth: SpeechSynthLike
@@ -127,7 +129,6 @@ describe('HTW-speak-helper (#115) — utterance text is lemma only', () => {
     await speakLemma(lemma, 'en', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: immediate,
     })
     expect(mock.spoken).toHaveLength(1)
     expect(mock.spoken[0]!.text).toBe(lemma)
@@ -136,70 +137,98 @@ describe('HTW-speak-helper (#115) — utterance text is lemma only', () => {
   })
 })
 
-describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
-  test('cancels any prior utterance before speaking again', async () => {
+describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-fail', () => {
+  test('first tap does not cancel an idle synth', async () => {
     const mock = mockSynth([{ lang: 'pt-BR', localService: true }])
     await speakLemma('casa', 'pt', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: immediate,
     })
+    expect(mock.cancels).toBe(0)
+    expect(mock.spoken.map((u) => u.text)).toEqual(['casa'])
+    expect(mock.order[0]).toBe('resume')
+    expect(mock.order).toContain('speak')
+  })
+
+  test('repeat tap cancels the in-flight utterance then speaks the new lemma', async () => {
+    const mock = mockSynth([{ lang: 'pt-BR', localService: true }])
+    await speakLemma('casa', 'pt', {
+      getSynth: () => mock.synth,
+      createUtterance: utter,
+    })
+    const afterFirst = mock.order.length
     await speakLemma('mesa', 'pt', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: immediate,
     })
-    expect(mock.cancels).toBe(2)
+    expect(mock.cancels).toBe(1)
+    expect(mock.order.slice(afterFirst)).toEqual([
+      'cancel',
+      'resume',
+      'speak',
+      'resume',
+    ])
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
   })
 
-  test('delays speak until after cancel and resumes first', async () => {
+  test('speaks synchronously in the click turn — no timer before speak', async () => {
     const mock = mockSynth([{ lang: 'en-US', localService: true }])
-    let scheduledMs = -1
-    let run: (() => void) | undefined
-    const pending = speakLemma('hello', 'en', {
-      getSynth: () => mock.synth,
-      createUtterance: utter,
-      schedule: (fn, ms) => {
-        scheduledMs = ms
-        run = fn
-      },
-    })
-    expect(mock.cancels).toBe(1)
-    expect(mock.spoken).toHaveLength(0)
-    expect(mock.resumes).toBe(0)
-    expect(scheduledMs).toBe(SPEAK_AFTER_CANCEL_MS)
-    expect(SPEAK_AFTER_CANCEL_MS).toBeGreaterThan(0)
-    run!()
-    expect(await pending).toBe(true)
-    expect(mock.order).toEqual(['cancel', 'resume', 'speak'])
-    expect(mock.spoken.map((u) => u.text)).toEqual(['hello'])
+    const realSetTimeout = globalThis.setTimeout
+    let armed = 0
+    globalThis.setTimeout = ((...args: Parameters<typeof setTimeout>) => {
+      armed += 1
+      return realSetTimeout(...args)
+    }) as typeof setTimeout
+    try {
+      const trace: string[] = []
+      const speak = mock.synth.speak.bind(mock.synth)
+      mock.synth.speak = (u) => {
+        trace.push('speak')
+        speak(u)
+      }
+      const pending = speakLemma('hello', 'en', {
+        getSynth: () => mock.synth,
+        createUtterance: utter,
+      })
+      // speak() must already have run before the caller awaits the promise.
+      trace.push('returned')
+      expect(trace).toEqual(['speak', 'returned'])
+      expect(armed).toBe(0)
+      expect(mock.cancels).toBe(0)
+      const resumeAt = mock.order.indexOf('resume')
+      const speakAt = mock.order.indexOf('speak')
+      expect(resumeAt).toBeGreaterThanOrEqual(0)
+      expect(resumeAt).toBeLessThan(speakAt)
+      expect(await pending).toBe(true)
+      expect(armed).toBe(0)
+      expect(mock.spoken.map((u) => u.text)).toEqual(['hello'])
+    } finally {
+      globalThis.setTimeout = realSetTimeout
+    }
   })
 
-  test('a repeat tap does not speak the superseded utterance', async () => {
+  test('a repeat tap speaks the new lemma in the same turn, not a deferred replay', async () => {
     const mock = mockSynth([{ lang: 'es-ES', localService: true }])
-    const queued: Array<() => void> = []
+    const trace: string[] = []
+    const speak = mock.synth.speak.bind(mock.synth)
+    mock.synth.speak = (u) => {
+      trace.push(u.text)
+      speak(u)
+    }
     const first = speakLemma('casa', 'es', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: (fn) => {
-        queued.push(fn)
-      },
     })
+    expect(trace).toEqual(['casa'])
     const second = speakLemma('mesa', 'es', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: (fn) => {
-        queued.push(fn)
-      },
     })
-    // Stale kick from the first tap must not queue.
-    queued[0]!()
-    expect(await first).toBe(false)
-    expect(mock.spoken).toHaveLength(0)
-    queued[1]!()
+    expect(trace).toEqual(['casa', 'mesa'])
+    expect(await first).toBe(true)
     expect(await second).toBe(true)
-    expect(mock.spoken.map((u) => u.text)).toEqual(['mesa'])
+    expect(mock.cancels).toBe(1)
+    expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
   })
 
   test('holds the utterance until onend so it cannot be collected early', async () => {
@@ -208,7 +237,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     const ok = await speakLemma('Haus', 'de', {
       getSynth: () => mock.synth,
       createUtterance: () => utterance,
-      schedule: immediate,
     })
     expect(ok).toBe(true)
     expect(retainedSpeechUtterances()).toContain(utterance)
@@ -239,7 +267,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     const ok = await speakLemma('hi', 'en', {
       getSynth: () => synth,
       createUtterance: () => utterance,
-      schedule: immediate,
     })
     expect(ok).toBe(false)
     expect(retainedSpeechUtterances()).not.toContain(utterance)
@@ -258,7 +285,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     expect(
       await speakLemma('Haus', 'de', {
         getSynth: () => mock.synth,
-        schedule: immediate,
       }),
     ).toBe(false)
     expect(mock.cancels).toBe(0)
@@ -286,7 +312,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     const ok = await speakLemma('casa', 'es', {
       getSynth: () => mock.synth,
       createUtterance: utter,
-      schedule: immediate,
     })
     expect(ok).toBe(true)
     expect(mock.spoken[0]!.voice).toBe(voice)
@@ -303,7 +328,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     const ok = await speakLemma('word', 'en', {
       getSynth: () => mock.synth,
       createUtterance: () => utterance,
-      schedule: immediate,
     })
     expect(ok).toBe(true)
     expect(seen).toEqual([true])
@@ -320,7 +344,6 @@ describe('HTW-speak-helper (#115) — cancel, delay, resume, soft-fail', () => {
     const droppedOk = await speakLemma('word', 'en', {
       getSynth: () => dropped,
       createUtterance: utter,
-      schedule: immediate,
     })
     expect(droppedOk).toBe(false)
     expect(seen.at(-1)).toBe(false)
