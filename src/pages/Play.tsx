@@ -68,7 +68,7 @@ import {
   recordDailyWin,
 } from '@/lib/streaks'
 import { CEFR_CODES, LANG_CODES, speakLemmaAriaLabel } from '@/packs/labels'
-import { speakLemma, subscribeSpeechAvailability } from '@/lib/speech'
+import { speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability } from '@/lib/speech'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -979,6 +979,7 @@ function EndCard({
   // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
   const speakSurface = mode === 'daily' || mode === 'practice'
   const [speechOk, setSpeechOk] = useState(false)
+  const [speaking, setSpeaking] = useState(false)
   useEffect(() => {
     if (!speakSurface) {
       setSpeechOk(false)
@@ -986,6 +987,7 @@ function EndCard({
     }
     return subscribeSpeechAvailability(lang, setSpeechOk)
   }, [speakSurface, lang])
+  useEffect(() => subscribeSpeakActivity(setSpeaking), [])
   const showSpeakControl = speakSurface && speechOk
 
   return (
@@ -1026,12 +1028,15 @@ function EndCard({
             <button
               type="button"
               data-endcard-speak
+              data-speaking={speaking ? 'true' : 'false'}
               aria-label={speakLemmaAriaLabel(lang)}
+              aria-busy={speaking}
               onClick={() => {
-                speakLemma(word, lang)
+                void speakLemma(word, lang)
               }}
               className={[
-                'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl text-ink-muted hover:bg-cream-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40',
+                'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl hover:bg-cream-dark active:bg-cream-dark focus-visible:outline-none focus-visible:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent-fg',
+                speaking ? 'text-accent-fg' : 'text-ink-muted',
                 teachGloss ? 'mt-0.5' : 'mt-1',
               ].join(' ')}
             >
