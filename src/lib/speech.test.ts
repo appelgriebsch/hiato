@@ -3,6 +3,7 @@ import { PACK_LANGS, type PackLang } from '../packs/schema'
 import { SPEAK_LEMMA_ARIA, speakLemmaAriaLabel } from '../packs/labels'
 import {
   canSpeakLemma,
+  clearCachedSpeechVoices,
   pickVoiceForLang,
   retainedSpeechUtterances,
   speakLemma,
@@ -21,6 +22,7 @@ beforeEach(() => {
   for (const utterance of retainedSpeechUtterances()) {
     utterance.onend?.()
   }
+  clearCachedSpeechVoices()
 })
 
 function mockSynth(
@@ -482,6 +484,143 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
   })
 })
 
+describe('HTW-speak-helper — iOS empty voice list at tap', () => {
+  test('empty getVoices with no cache does not speak', async () => {
+    const mock = mockSynth([])
+    expect(await speakLemma('casa', 'pt', {
+      getSynth: () => mock.synth,
+      createUtterance: utter,
+    })).toBe(false)
+    expect(mock.spoken).toHaveLength(0)
+    expect(mock.order).not.toContain('speak')
+    expect(mock.order).not.toContain('resume')
+    expect(mock.cancels).toBe(0)
+  })
+
+  test('empty getVoices at speak time still calls speak with cached hyphenated lang and voice null', async () => {
+    const stale = { lang: 'pt_BR', localService: true }
+    let voices: SpeechVoiceLike[] = [stale]
+    let calls = 0
+    const spoken: SpeechUtteranceLike[] = []
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => {
+        calls += 1
+        return voices
+      },
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        spoken.push(u)
+        order.push('speak')
+        u.onstart?.()
+      },
+    }
+    expect(canSpeakLemma('pt', { getSynth: () => synth })).toBe(true)
+    voices = []
+    const callsBefore = calls
+    const realQueue = globalThis.queueMicrotask
+    const realSetTimeout = globalThis.setTimeout
+    let queued = 0
+    let armed = 0
+    globalThis.queueMicrotask = ((cb: () => void) => {
+      queued += 1
+      return realQueue(cb)
+    }) as typeof queueMicrotask
+    globalThis.setTimeout = ((...args: Parameters<typeof setTimeout>) => {
+      armed += 1
+      return realSetTimeout(...args)
+    }) as typeof setTimeout
+    try {
+      const pending = speakLemma('casa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: utter,
+      })
+      // speak() already ran, before the caller waits. No resume first.
+      expect(spoken).toHaveLength(1)
+      expect(order).toEqual(['speak'])
+      expect(order).not.toContain('resume')
+      expect(queued).toBe(0)
+      expect(armed).toBe(0)
+      expect(calls - callsBefore).toBe(2)
+      expect(spoken[0]!.text).toBe('casa')
+      expect(spoken[0]!.lang).toBe('pt-BR')
+      expect(spoken[0]!.voice).toBeNull()
+      expect(spoken[0]!.voice).not.toBe(stale)
+      expect(await pending).toBe(true)
+      expect(queued).toBe(0)
+      expect(armed).toBe(0)
+    } finally {
+      globalThis.queueMicrotask = realQueue
+      globalThis.setTimeout = realSetTimeout
+    }
+  })
+
+  test('bare cached tag uses the pack default hyphenated lang', async () => {
+    let voices: SpeechVoiceLike[] = [{ lang: 'en', localService: true }]
+    const spoken: SpeechUtteranceLike[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => voices,
+      cancel: () => {},
+      resume: () => {},
+      speak: (u) => {
+        spoken.push(u)
+        u.onstart?.()
+      },
+    }
+    expect(canSpeakLemma('en', { getSynth: () => synth })).toBe(true)
+    voices = []
+    const ok = await speakLemma('BANANA', 'en', {
+      getSynth: () => synth,
+      createUtterance: utter,
+    })
+    expect(ok).toBe(true)
+    expect(spoken[0]!.lang).toBe('en-US')
+    expect(spoken[0]!.voice).toBeNull()
+  })
+
+  test('a second getVoices() that is non-empty assigns the fresh local voice', async () => {
+    const remote = { lang: 'de-DE', localService: false }
+    const local = { lang: 'de-AT', localService: true }
+    let calls = 0
+    const spoken: SpeechUtteranceLike[] = []
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => {
+        calls += 1
+        return calls === 1 ? [] : [remote, local]
+      },
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        spoken.push(u)
+        order.push('speak')
+        u.onstart?.()
+      },
+    }
+    const pending = speakLemma('Haus', 'de', {
+      getSynth: () => synth,
+      createUtterance: utter,
+    })
+    expect(order).toEqual(['speak'])
+    expect(calls).toBe(2)
+    expect(spoken[0]!.voice).toBe(local)
+    expect(spoken[0]!.lang).toBe('de-AT')
+    expect(await pending).toBe(true)
+    expect(order).not.toContain('resume')
+  })
+})
+
 describe('HTW-speak-helper — voiceschanged', () => {
   test('empty getVoices stays hidden, then a loaded voice shows the control', () => {
     let voices: SpeechVoiceLike[] = []
@@ -516,6 +655,38 @@ describe('HTW-speak-helper — voiceschanged', () => {
     expect(listeners.size).toBe(0)
     voices = []
     expect(seen.at(-1)).toBe(true)
+  })
+
+  test('once a match was seen, a later empty getVoices does not hide', () => {
+    let voices: SpeechVoiceLike[] = []
+    const listeners = new Set<() => void>()
+    const synth: SpeechSynthLike = {
+      getVoices: () => voices,
+      cancel: () => {},
+      speak: () => {},
+      addEventListener: (_type, listener) => {
+        listeners.add(listener)
+      },
+      removeEventListener: (_type, listener) => {
+        listeners.delete(listener)
+      },
+    }
+    const seen: boolean[] = []
+    const unsub = subscribeSpeechAvailability('de', (ok) => seen.push(ok), {
+      getSynth: () => synth,
+    })
+    expect(seen).toEqual([false])
+    voices = [{ lang: 'de-DE', localService: true }]
+    for (const listener of listeners) listener()
+    expect(seen.at(-1)).toBe(true)
+    voices = []
+    for (const listener of listeners) listener()
+    expect(seen.at(-1)).toBe(true)
+    // A real list with no pack match still hides.
+    voices = [{ lang: 'ja-JP', localService: true }]
+    for (const listener of listeners) listener()
+    expect(seen.at(-1)).toBe(false)
+    unsub()
   })
 })
 

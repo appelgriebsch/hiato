@@ -72,6 +72,65 @@ export function normalizeVoiceLang(voiceLang: string): string {
   return voiceLang.trim().toLowerCase().replace(/_/g, '-')
 }
 
+/**
+ * Hyphenated BCP-47 defaults when a cached voice tag has no region
+ * (`en` → `en-US`). iOS often hands back an empty list at tap time, so
+ * the utterance still needs a real lang.
+ */
+const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+  es: 'es-ES',
+  pt: 'pt-BR',
+}
+
+/**
+ * Last non-empty `getVoices()` snapshot. Updated from canSpeak checks,
+ * subscribeSpeechAvailability, and voiceschanged. Speak must not assign
+ * these objects — iOS rejects a stale SpeechSynthesisVoice.
+ */
+let cachedVoices: readonly SpeechVoiceLike[] = []
+
+/** Drop the voice-list cache. Tests only — production never clears it. */
+export function clearCachedSpeechVoices(): void {
+  cachedVoices = []
+}
+
+function rememberVoices(voices: readonly SpeechVoiceLike[]) {
+  if (voices.length > 0) cachedVoices = voices
+}
+
+type VoiceRead = { voices: SpeechVoiceLike[]; threw: boolean }
+
+function readVoices(synth: SpeechSynthLike): VoiceRead {
+  try {
+    const voices = synth.getVoices()
+    const list = Array.isArray(voices) ? voices : []
+    if (list.length > 0) rememberVoices(list)
+    return { voices: list, threw: false }
+  } catch {
+    return { voices: [], threw: true }
+  }
+}
+
+/**
+ * Utterance lang: the voice tag with underscores turned into hyphens.
+ * A bare language (`en`, `de`) is not hyphenated BCP-47, so use the pack
+ * default (`en-US`, `de-DE`, `es-ES`, `pt-BR`).
+ */
+function utteranceLangFromVoice(voiceLang: string, packLang: PackLang): string {
+  const hyphenated = voiceLang.trim().replace(/_/g, '-')
+  if (hyphenated.includes('-')) return hyphenated
+  return PACK_DEFAULT_UTTERANCE_LANG[packLang]
+}
+
+/** Lang from the cached list for this pack, or null if we never saw a match. */
+function cachedUtteranceLang(packLang: PackLang): string | null {
+  const voice = pickVoiceForLang(cachedVoices, packLang)
+  if (!voice) return null
+  return utteranceLangFromVoice(voice.lang, packLang)
+}
+
 /** True when `voiceLang` matches the pack language via BCP-47 prefix. */
 export function voiceMatchesPackLang(
   voiceLang: string,
@@ -129,8 +188,9 @@ export function canSpeakLemma(
   try {
     const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
     if (!synth) return false
-    const voices = synth.getVoices()
-    return pickVoiceForLang(voices, packLang) !== null
+    const read = readVoices(synth)
+    if (read.threw) return false
+    return pickVoiceForLang(read.voices, packLang) !== null
   } catch {
     return false
   }
@@ -220,7 +280,16 @@ function resumeSynth(synth: SpeechSynthLike) {
  * false in this turn is not a failed queue — those flags are not specified to
  * flip before we return. Resolves true only once this utterance fires onstart.
  * A synchronous onerror, or speak() throwing, resolves false. Soft-fails
- * (false, no throw) when speechSynthesis is missing or no usable voice.
+ * (false, no throw) when speechSynthesis is missing, getVoices throws, or a
+ * non-empty list has no pack match.
+ *
+ * iOS Safari often returns [] from getVoices() except around voiceschanged.
+ * At speak time, read the list and, if it is empty, read once more in this
+ * same turn. If both are empty, still call speak() when a previous non-empty
+ * list had a match: set utterance.lang from that cached tag (hyphenated, or
+ * the pack default) and leave voice null. Do not assign the stale voice
+ * object. A visible control must not no-op. No await, timer, or microtask
+ * before speak(). Never resume() before speak().
  */
 export function speakLemma(
   lemma: string,
@@ -241,10 +310,38 @@ export function speakLemma(
         settle(false)
         return
       }
-      const voice = pickVoiceForLang(synth.getVoices(), packLang)
-      if (!voice) {
+      // Sync reads only. iOS may return [] on the first click-time call
+      // and a real list on the second. A throw is not an empty list.
+      const first = readVoices(synth)
+      if (first.threw) {
         settle(false)
         return
+      }
+      let voices = first.voices
+      if (voices.length === 0) {
+        const second = readVoices(synth)
+        if (!second.threw) voices = second.voices
+      }
+
+      // Fresh list: prefer localService, then any match, and assign that
+      // object. Empty list: cached lang only — never a stale voice object.
+      let voice: SpeechVoiceLike | null = null
+      let utteranceLang: string
+      if (voices.length > 0) {
+        voice = pickVoiceForLang(voices, packLang)
+        if (!voice) {
+          settle(false)
+          return
+        }
+        utteranceLang = utteranceLangFromVoice(voice.lang, packLang)
+      } else {
+        const cachedLang = cachedUtteranceLang(packLang)
+        if (!cachedLang) {
+          settle(false)
+          return
+        }
+        voice = null
+        utteranceLang = cachedLang
       }
 
       const text = utteranceTextForLemma(lemma)
@@ -252,8 +349,7 @@ export function speakLemma(
       const utterance = create(text)
       utterance.text = text
       utterance.voice = voice
-      // voice.lang may use underscores (de_DE). Utterance lang is BCP-47.
-      utterance.lang = voice.lang.replace(/_/g, '-')
+      utterance.lang = utteranceLang
       // Real SpeechSynthesisUtterance has volume. The test double does not;
       // assigning anyway would add a field the double never declared.
       if ('volume' in utterance) utterance.volume = 1
@@ -343,15 +439,41 @@ export function speakLemma(
 /**
  * Subscribe to speech availability for a pack language.
  * Handles the async `voiceschanged` load path (including an injected synth);
- * soft-fails when unsupported. Still-empty voice lists stay unavailable.
+ * soft-fails when unsupported. An empty list stays unavailable until a
+ * matching voice has been seen. After that, empty getVoices() keeps the
+ * control — the tap speaks from the cached lang.
  */
 export function subscribeSpeechAvailability(
   packLang: PackLang,
   onChange: (ok: boolean) => void,
   opts: SpeakLemmaOptions = {},
 ): () => void {
+  // Once this subscription has seen a matching voice, an empty getVoices()
+  // (iOS between voiceschanged events) must not hide the control. A
+  // non-empty list with no match still hides. speechSynthesis missing hides.
+  let everMatched = false
   const notify = () => {
-    onChange(canSpeakLemma(packLang, opts))
+    try {
+      const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
+      if (!synth) {
+        onChange(false)
+        return
+      }
+      const read = readVoices(synth)
+      if (read.threw) {
+        onChange(false)
+        return
+      }
+      const matched = pickVoiceForLang(read.voices, packLang) !== null
+      if (matched) everMatched = true
+      if (!matched && everMatched && read.voices.length === 0) {
+        onChange(true)
+        return
+      }
+      onChange(matched)
+    } catch {
+      onChange(false)
+    }
   }
 
   try {
