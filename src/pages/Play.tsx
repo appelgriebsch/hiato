@@ -162,13 +162,14 @@ function PlayRound({
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
-  /** Latched after unlockSpeechGesture returns true (speak started). */
+  /** Latched after unlockSpeechGesture returns true (prime succeeded). */
   const speechGestureRef = useRef(false)
 
   // Daily + practice only. Prime on mount (getVoices + voiceschanged) and
-  // unlock on an earlier play gesture (card/reveal taps) — never on the
-  // EndCard speak control. That button's own click is speakLemma only.
-  // Pocket never speaks. No timer and no promise before speak().
+  // again on an earlier play gesture (card/reveal taps) — never unlock
+  // speak on the EndCard speak control. Unlock is prime-only (no platform
+  // speak). That button's own click is speakLemma only. Pocket never
+  // speaks. No timer and no promise before speak().
   useEffect(() => {
     if (mode === 'pocket') return
     primeSpeechVoices()
@@ -182,13 +183,13 @@ function PlayRound({
             ? raw.parentElement
             : null
       // First tap on daily already-played is often the speak button itself.
-      // Never unlock there — empty/silent unlock would queue ahead of lemma.
+      // Skip unlock/latch there — EndCard click is speakLemma only.
       if (el?.closest('[data-endcard-speak]')) {
         primeSpeechVoices()
         return
       }
-      // Latch only when unlock actually started (or was already unlocked).
-      // Failed / skipped unlock leaves the ref false so a later tap retries.
+      // Latch only when prime unlock succeeds (synth present). Failed
+      // unlock leaves the ref false so a later tap retries.
       if (unlockSpeechGesture()) {
         speechGestureRef.current = true
       }

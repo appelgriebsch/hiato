@@ -101,7 +101,6 @@ let cachedVoices: readonly SpeechVoiceLike[] = []
 export function clearCachedSpeechVoices(): void {
   cachedVoices = []
   speechGestureUnlocked = false
-  speechGestureUnlockInFlight = false
   if (voicesChangedUnsub) {
     const unsub = voicesChangedUnsub
     voicesChangedUnsub = null
@@ -133,20 +132,12 @@ function readVoices(synth: SpeechSynthLike): VoiceRead {
 }
 
 /**
- * Once-per-page silent unlock. The silent utterance is not activeSpeech:
- * EndCard speakLemma must not cancel it. Latch only after onstart so a
- * skipped or no-op unlock can retry on a later gesture.
+ * Once-per-page earlier-gesture latch. Unlock is prime-only: no platform
+ * speak. A silent unlock utterance is not activeSpeech and would sit ahead
+ * of the EndCard lemma (Avery #124). Latch when synth is available so Play
+ * can stop retrying after a successful earlier gesture.
  */
 let speechGestureUnlocked = false
-/** True while a silent unlock utterance is queued and awaiting onstart. */
-let speechGestureUnlockInFlight = false
-
-/**
- * Silent unlock text. Must be non-empty: some engines drop `speak('')`
- * entirely or leave a stuck queue entry. A single space with volume 0
- * is inaudible but still a real utterance the platform will accept.
- */
-export const SPEECH_UNLOCK_TEXT = ' '
 
 /** Detach the module voiceschanged listener. Null until prime binds one. */
 let voicesChangedUnsub: (() => void) | null = null
@@ -200,61 +191,25 @@ export function primeSpeechVoices(opts: SpeakLemmaOptions = {}): void {
 }
 
 /**
- * iOS Safari drops speak() that is not inside a user gesture. Call this
- * from an earlier Play pointerdown (card/reveal taps — never the EndCard
- * speak control). Speaks one non-empty silent utterance at volume 0,
- * once per page session, without cancel() and without touching
- * activeSpeech / speakLemma. Soft-fail.
+ * Earlier-gesture prime latch for iOS. Call from a Play pointerdown on
+ * card/reveal taps — never the EndCard speak control. Primes getVoices /
+ * voiceschanged only; does not call synth.speak(). A silent unlock
+ * utterance is not activeSpeech and would queue ahead of the lemma
+ * (Avery #124 Warning 1). The EndCard click runs speakLemma inside its
+ * own user gesture. Soft-fail.
  *
- * Returns true only when unlock has actually started (onstart) or was
- * already unlocked. Returns false when synth is missing, create/speak
- * fails, or speak was queued but onstart has not fired yet — so Play
- * can retry on a later gesture. Does not latch success before speak
- * returns if the engine can no-op without throwing.
+ * Returns true when synth is available (or already latched). Returns false
+ * when synth is missing so Play can retry on a later gesture.
  */
 export function unlockSpeechGesture(opts: SpeakLemmaOptions = {}): boolean {
   try {
     primeSpeechVoices(opts)
     if (speechGestureUnlocked) return true
-    if (speechGestureUnlockInFlight) return false
     const synth = opts.getSynth ? opts.getSynth() : defaultSynth()
     if (!synth) return false
-    const create = opts.createUtterance ?? defaultCreateUtterance
-    let utterance: SpeechUtteranceLike
-    try {
-      utterance = create(SPEECH_UNLOCK_TEXT)
-    } catch {
-      return false
-    }
-    // Non-empty: empty string is dropped or stuck on some engines (Avery).
-    utterance.text = SPEECH_UNLOCK_TEXT
-    if ('volume' in utterance) utterance.volume = 0
-    retainedUtterances.add(utterance)
-    speechGestureUnlockInFlight = true
-    const release = () => {
-      speechGestureUnlockInFlight = false
-      retainedUtterances.delete(utterance)
-      utterance.onstart = null
-      utterance.onend = null
-      utterance.onerror = null
-    }
-    utterance.onstart = () => {
-      // Latch only after the engine accepted the utterance.
-      speechGestureUnlocked = true
-      speechGestureUnlockInFlight = false
-    }
-    utterance.onend = release
-    utterance.onerror = release
-    try {
-      // No cancel(). No activeSpeech. Queue only; let onend release it.
-      synth.speak(utterance)
-    } catch {
-      release()
-      return false
-    }
-    // Sync engines (and test doubles) fire onstart inside speak().
-    // Async / no-op engines leave this false so a later gesture can retry.
-    return speechGestureUnlocked
+    // Prime-only: no platform speak. Silent unlock removed (ADR 0037).
+    speechGestureUnlocked = true
+    return true
   } catch {
     /* soft — unlock must never throw */
     return false

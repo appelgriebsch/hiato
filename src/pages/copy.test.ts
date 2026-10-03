@@ -763,16 +763,19 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(src).toContain("addEventListener('pointerdown', onPointerDown, true)")
     expect(src).toContain("closest('[data-endcard-speak]')")
     expect(src).toContain('unlockSpeechGesture()')
-    // Prefer: skip unlock when target is the speak control; prime is OK.
+    // Order lock: closest check BEFORE unlockSpeechGesture (Avery Warning 2).
     const skipAt = src.indexOf("closest('[data-endcard-speak]')")
     expect(skipAt).toBeGreaterThan(0)
-    const skipArm = src.slice(skipAt, skipAt + 220)
+    const latchAt = src.indexOf('if (unlockSpeechGesture())')
+    expect(latchAt).toBeGreaterThan(skipAt)
+    const skipArm = src.slice(skipAt, latchAt)
     expect(skipArm).toContain('primeSpeechVoices()')
     expect(skipArm).not.toContain('unlockSpeechGesture()')
+    // Speak-button / child path: return after prime — no unlock call.
+    expect(skipArm).toContain('return')
     // Latch Play ref only after unlock returns true (retry on failure).
     expect(src).toContain('if (unlockSpeechGesture())')
     expect(src).toContain('speechGestureRef.current = true')
-    const latchAt = src.indexOf('if (unlockSpeechGesture())')
     const earlyLatch = src.indexOf('speechGestureRef.current = true')
     // Must not latch before the unlock call.
     expect(earlyLatch).toBeGreaterThan(latchAt)
