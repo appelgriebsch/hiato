@@ -722,6 +722,17 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(wordAt).toBeGreaterThan(0)
     expect(speakAt).toBeGreaterThan(wordAt)
     expect(speakAt - wordAt).toBeLessThan(400)
+
+    // iOS routes Web Speech through the Silent switch, and the page cannot
+    // read that switch. The hint sits with the speaker, not on unsupported
+    // browsers where the control is hidden.
+    expect(teach).toContain(
+      'If you hear nothing, the Silent switch mutes spoken words.',
+    )
+    const hintAt = teach.indexOf('the Silent switch mutes spoken words.')
+    const showSpeakAt = teach.lastIndexOf('showSpeak ? (', hintAt)
+    expect(showSpeakAt).toBeGreaterThan(speakAt)
+    expect(hintAt - showSpeakAt).toBeLessThan(250)
   })
 
   test('HTW-i18n-a11y (#117): aria-label via speakLemmaAriaLabel / SPEAK_LEMMA_ARIA', async () => {

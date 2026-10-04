@@ -130,6 +130,11 @@ export function LemmaTeach({
           Could not play the word.
         </p>
       ) : null}
+      {showSpeak ? (
+        <p lang="en" className="mt-2 text-xs text-ink-muted">
+          If you hear nothing, the Silent switch mutes spoken words.
+        </p>
+      ) : null}
       {synonyms.length > 0 ? (
         <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
           {synonyms.map((s) => (
