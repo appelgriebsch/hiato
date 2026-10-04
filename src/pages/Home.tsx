@@ -217,11 +217,17 @@ export function Home() {
       </Card>
 
       <nav className="mb-6 flex items-center justify-center gap-4 text-sm">
-        <Link to="/language" className="text-accent-fg hover:underline">
+        <Link
+          to="/language"
+          className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+        >
           {prefs ? 'Change language' : 'Language'}
         </Link>
         <span className="text-ink-faint">·</span>
-        <Link to="/about" className="text-accent-fg hover:underline">
+        <Link
+          to="/about"
+          className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+        >
           About
         </Link>
       </nav>

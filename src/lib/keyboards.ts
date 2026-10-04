@@ -25,3 +25,8 @@ export const KEYBOARDS: Record<PackLang, string[][]> = {
     ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ü'],
   ],
 }
+
+/** False for ß — CSS `uppercase` paints SS in Chrome; click still sends ß (ADR 0005). */
+export function keyUsesUppercaseFace(key: string): boolean {
+  return key !== 'ß'
+}

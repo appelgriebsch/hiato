@@ -132,7 +132,7 @@ export function LemmaTeach({
       ) : null}
       {showSpeak ? (
         <p lang="en" className="mt-2 text-xs text-ink-muted">
-          If you hear nothing, the Silent switch mutes spoken words.
+          If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.
         </p>
       ) : null}
       {synonyms.length > 0 ? (

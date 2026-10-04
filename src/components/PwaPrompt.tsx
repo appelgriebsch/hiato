@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { Button } from '@/components/ui/button'
 
 export function PwaPrompt() {
+  const { pathname } = useLocation()
+  const onPlay = pathname === '/play' || pathname.startsWith('/play/')
   const {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
@@ -16,12 +19,14 @@ export function PwaPrompt() {
   }, [needRefresh])
 
   useEffect(() => {
-    if (needRefresh && !dismissed) {
-      updateBtnRef.current?.focus()
-    }
-  }, [needRefresh, dismissed])
+    // Play (in progress or finish actions) must not take focus for Update.
+    if (onPlay || !needRefresh || dismissed) return
+    updateBtnRef.current?.focus()
+  }, [onPlay, needRefresh, dismissed])
 
-  if (!needRefresh || dismissed) return null
+  // Home and other non-play routes still show the prompt. Later stays
+  // session-scoped because this component stays mounted across routes.
+  if (onPlay || !needRefresh || dismissed) return null
 
   return (
     <div

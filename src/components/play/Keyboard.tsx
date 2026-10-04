@@ -1,5 +1,5 @@
 import { graphemeKey } from '@/engine'
-import { KEYBOARDS } from '@/lib/keyboards'
+import { KEYBOARDS, keyUsesUppercaseFace } from '@/lib/keyboards'
 import type { PackLang } from '@/packs/schema'
 
 export function Keyboard({
@@ -20,9 +20,14 @@ export function Keyboard({
 }) {
   const rows = KEYBOARDS[lang]
   return (
-    <div className="flex w-full flex-col gap-1.5" role="group" aria-label="Letter pad" data-tap-min="44">
+    <div
+      className="flex w-full min-w-0 flex-col gap-1.5"
+      role="group"
+      aria-label="Letter pad"
+      data-tap-min="44"
+    >
       {rows.map((row, ri) => (
-        <div key={ri} className="flex justify-center gap-1">
+        <div key={ri} className="flex w-full min-w-0 flex-wrap justify-center gap-1">
           {row.map((key) => {
             const k = graphemeKey(key)
             const wrong = usedWrong.has(k)
@@ -35,7 +40,8 @@ export function Keyboard({
                 disabled={disabled || wrong || correct}
                 onClick={() => onKey(key)}
                 className={[
-                  'min-h-[44px] min-w-0 flex-1 touch-manipulation rounded-lg px-0.5 text-sm font-semibold uppercase motion-key-wrong-dim motion-press',
+                  'min-h-[44px] min-w-[44px] shrink-0 touch-manipulation rounded-lg px-0.5 text-sm font-semibold motion-key-wrong-dim motion-press',
+                  keyUsesUppercaseFace(key) ? 'uppercase' : 'normal-case',
                   wrong || correct ? 'key-settled' : '',
                   wrong
                     ? 'bg-wrong/70 text-ink'
