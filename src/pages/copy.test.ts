@@ -681,6 +681,10 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(fnAt).toBeGreaterThan(-1)
     expect(fnAt).toBeLessThan(lemmaCallAt)
     expect(lemmaCallAt).toBeLessThan(addAt)
+    // A timer false must not paint the failure line. Only a same-turn false does.
+    expect(speakEffect).toContain('let sameTurn = true')
+    expect(speakEffect).toContain('if (ok || !sameTurn) return')
+    expect(speakEffect).toContain('queueMicrotask(')
     // Registered, not invoked, when the effect runs.
     expect(speakEffect).not.toContain('onClick()')
 

@@ -43,9 +43,16 @@ export function LemmaTeach({
     const btn = speakBtnRef.current
     if (!btn) return
     const onClick = () => {
+      // Same-turn false (no synth, speak() threw) still shows the failure
+      // line. The watchdog false arrives on a timer, after this microtask,
+      // and must leave the note idle so the learner tries the next tap.
+      let sameTurn = true
       void speakLemma(word, lang).then((ok) => {
-        if (ok) return
+        if (ok || !sameTurn) return
         setSpeakNote((note) => (note === 'playing' ? note : 'failed'))
+      })
+      queueMicrotask(() => {
+        sameTurn = false
       })
     }
     btn.addEventListener('click', onClick)
