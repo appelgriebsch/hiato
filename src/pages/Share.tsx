@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { ShareCard } from '@/components/ShareCard'
@@ -19,6 +19,10 @@ export function Share() {
   const payload = resolveSharePayload(searchParams, loc.state)
   const [toast, setToast] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [copyLabel, setCopyLabel] = useState('Copy text')
+  const copyReset = useRef(0)
+
+  useEffect(() => () => window.clearTimeout(copyReset.current), [])
 
   const show = useCallback((message: string) => {
     setToast(message)
@@ -40,6 +44,25 @@ export function Share() {
     setBusy(true)
     try {
       const result = await action()
+      if (result.method === 'cancelled') return
+      show(result.message)
+    } catch {
+      show('Couldn’t share')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function onCopyText(): Promise<void> {
+    if (!payload || busy) return
+    setBusy(true)
+    try {
+      const result = await copyShareText(payload)
+      if (result.ok && result.message === 'Copied') {
+        setCopyLabel('Copied')
+        window.clearTimeout(copyReset.current)
+        copyReset.current = window.setTimeout(() => setCopyLabel('Copy text'), 3000)
+      }
       if (result.method === 'cancelled') return
       show(result.message)
     } catch {
@@ -90,9 +113,10 @@ export function Share() {
             fullWidth
             variant="outline"
             disabled={busy}
-            onClick={() => run(() => copyShareText(payload))}
+            aria-live="polite"
+            onClick={() => void onCopyText()}
           >
-            Copy text
+            {copyLabel}
           </Button>
           {fromToken ? (
             <Button fullWidth variant="outline" onClick={() => nav('/')}>

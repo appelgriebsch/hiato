@@ -498,7 +498,18 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
       new URL('../components/play/Keyboard.tsx', import.meta.url),
     ).text()
     expect(kb).toContain('min-h-[44px]')
+    expect(kb).toContain('min-w-[44px]')
+    expect(kb).toContain('flex-wrap')
+    expect(kb).toContain('shrink-0')
+    expect(kb).not.toContain('min-w-0 flex-1')
     expect(kb).toContain('data-tap-min="44"')
+    expect(kb).toContain('KEYBOARDS[lang]')
+    const pads = await Bun.file(
+      new URL('../lib/keyboards.ts', import.meta.url),
+    ).text()
+    for (const letter of ['ß', 'Ä', 'Ö', 'Ü'] as const) {
+      expect(pads).toContain(`'${letter}'`)
+    }
 
     const src = await pageSrc('Play.tsx')
     expect(src).toContain('data-reveal-word')
@@ -727,9 +738,15 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     // read that switch. The hint sits with the speaker, not on unsupported
     // browsers where the control is hidden.
     expect(teach).toContain(
+      'If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.',
+    )
+    expect(teach).not.toContain(
       'If you hear nothing, the Silent switch mutes spoken words.',
     )
-    const hintAt = teach.indexOf('the Silent switch mutes spoken words.')
+    expect(teach).not.toContain('the Silent switch')
+    const hintAt = teach.indexOf(
+      'the phone’s mute switch (Ring/Silent) mutes spoken words.',
+    )
     const showSpeakAt = teach.lastIndexOf('showSpeak ? (', hintAt)
     expect(showSpeakAt).toBeGreaterThan(speakAt)
     expect(hintAt - showSpeakAt).toBeLessThan(250)
@@ -863,5 +880,121 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(endCard).toContain("mode === 'daily' || mode === 'practice'")
     expect(endCard).not.toMatch(/showSpeakControl.*won/)
     expect(endCard).not.toMatch(/speakSurface.*won/)
+  })
+})
+
+describe('PwaPrompt stays off play (#132)', () => {
+  test('play routes do not paint or focus Update; Later and Update stay', async () => {
+    const prompt = await Bun.file(
+      new URL('../components/PwaPrompt.tsx', import.meta.url),
+    ).text()
+    expect(prompt).toContain("pathname === '/play'")
+    expect(prompt).toContain("pathname.startsWith('/play/')")
+    expect(prompt).toContain('if (onPlay || !needRefresh || dismissed) return null')
+    expect(prompt).toContain('if (onPlay || !needRefresh || dismissed) return')
+    const focusAt = prompt.indexOf('updateBtnRef.current?.focus()')
+    expect(focusAt).toBeGreaterThan(0)
+    const focusGuard = prompt.slice(focusAt - 180, focusAt)
+    expect(focusGuard).toContain('onPlay')
+    expect(focusGuard).toContain('return')
+    expect(prompt).toContain('updateServiceWorker(true)')
+    expect(prompt).toContain('setDismissed(true)')
+    expect(prompt).toContain('A new version is ready.')
+    expect(prompt).toContain('Later')
+
+    const app = await Bun.file(new URL('../App.tsx', import.meta.url)).text()
+    expect(app).toContain('<PwaPrompt />')
+    expect(app).toContain('<Route path="/play" element={<Play />} />')
+    // Prompt stays mounted (SW registration unchanged) and gates itself.
+    expect(app).not.toContain('pathname')
+  })
+})
+
+describe('Unfinished daily Home exit (#133)', () => {
+  test('quiet Home link does not finish or abandon the daily', async () => {
+    const src = await pageSrc('Play.tsx')
+    const start = src.indexOf("{!finished && mode === 'daily' && (")
+    const end = src.indexOf("{!finished && mode === 'practice' && (", start)
+    expect(start).toBeGreaterThan(0)
+    expect(end).toBeGreaterThan(start)
+    const daily = src.slice(start, end)
+    expect(daily).toContain('← Home')
+    expect(daily).toContain('to="/"')
+    expect(daily).toContain('Practice (endless)')
+    expect(daily).toContain('min-h-11')
+    expect(daily).not.toContain('endGame')
+    expect(daily).not.toContain('persistDaily')
+    expect(daily).not.toContain('setDailyRecord')
+    expect(daily).not.toContain('recordDailyWin')
+    expect(daily).not.toContain('abandon')
+    const homeLink = daily.slice(daily.indexOf('<Link'), daily.indexOf('← Home'))
+    expect(homeLink).toContain('to="/"')
+    expect(homeLink).not.toContain('onClick')
+    expect(homeLink).not.toContain('endGame')
+    // Practice and pocket exits stay
+    expect(src).toContain('← Daily')
+    expect(src).toContain('to="/play?mode=daily"')
+    const pocket = src.indexOf("{!finished && mode === 'pocket' && (")
+    expect(src.slice(pocket, pocket + 400)).toContain('← Home')
+  })
+})
+
+describe('Share copy confirmation (#135)', () => {
+  test('successful copyShareText sets the Copy text button to Copied', async () => {
+    const src = await pageSrc('Share.tsx')
+    expect(src).toContain("useState('Copy text')")
+    expect(src).toContain('{copyLabel}')
+    const fnAt = src.indexOf('async function onCopyText')
+    expect(fnAt).toBeGreaterThan(0)
+    const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
+    expect(fn).toContain('copyShareText(payload)')
+    expect(fn).toContain("result.message === 'Copied'")
+    expect(fn).toContain("setCopyLabel('Copied')")
+    expect(fn).toContain("setCopyLabel('Copy text')")
+    expect(fn).toContain("result.method === 'cancelled'")
+    expect(fn).toContain('show(result.message)')
+    expect(src).toContain('shareResult(payload)')
+    expect(src).not.toContain('formatShareText')
+    const actions = await Bun.file(
+      new URL('../lib/share-actions.ts', import.meta.url),
+    ).text()
+    expect(actions).toContain("message: 'Copied'")
+    expect(actions).toContain("message: 'Couldn’t copy'")
+  })
+})
+
+describe('Pocket sheet Close (#136)', () => {
+  test('visible Close calls onClose and does not remove pocket entries', async () => {
+    const src = await Bun.file(
+      new URL('../components/PocketSheet.tsx', import.meta.url),
+    ).text()
+    const closeAt = src.indexOf('>\n            Close\n          </Button>')
+    expect(closeAt).toBeGreaterThan(0)
+    const control = src.slice(closeAt - 280, closeAt)
+    expect(control).toContain('onClick={onClose}')
+    expect(control).toContain('min-h-11')
+    expect(control).toContain('min-w-11')
+    expect(control).not.toContain('removeFromPocket')
+    expect(src).toContain('onCancel')
+    expect(src).toContain('event.target === event.currentTarget')
+  })
+})
+
+describe('Home and in-round 44px text links (#136)', () => {
+  test('Change language, About, and in-round links use min-h-11', async () => {
+    const home = await pageSrc('Home.tsx')
+    const navAt = home.indexOf('<nav')
+    const nav = home.slice(navAt, home.indexOf('</nav>', navAt))
+    expect(nav).toContain('Change language')
+    expect(nav).toContain('About')
+    expect(nav.match(/min-h-11/g)?.length).toBe(2)
+
+    const play = await pageSrc('Play.tsx')
+    for (const label of ['← Home', 'Practice (endless)', '← Daily', 'Next word'] as const) {
+      const at = play.indexOf(label)
+      expect(at).toBeGreaterThan(0)
+      const around = play.slice(Math.max(0, at - 280), at)
+      expect(around).toContain('min-h-11')
+    }
   })
 })

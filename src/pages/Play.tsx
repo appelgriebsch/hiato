@@ -703,12 +703,18 @@ function PlayRound({
           )}
 
           {!finished && mode === 'daily' && (
-            <div className="mt-6 text-center">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
+              <Link
+                to="/"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
+              >
+                ← Home
+              </Link>
               {practiceOk ? (
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="text-sm font-medium text-accent-fg underline-offset-2 hover:underline"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline-offset-2 hover:underline"
                 >
                   Practice (endless)
                 </button>
@@ -720,10 +726,10 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'practice' && (
-            <div className="mt-6 flex justify-center gap-4 text-sm">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
               <Link
                 to="/play?mode=daily"
-                className="font-medium text-ink-muted hover:text-ink"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
               >
                 ← Daily
               </Link>
@@ -731,7 +737,7 @@ function PlayRound({
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="font-medium text-accent-fg hover:underline"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg hover:underline"
                 >
                   Next word
                 </button>
@@ -742,7 +748,7 @@ function PlayRound({
             <div className="mt-6 text-center">
               <Link
                 to="/"
-                className="text-sm font-medium text-ink-muted hover:text-ink"
+                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink"
               >
                 ← Home
               </Link>

@@ -130,9 +130,19 @@ export function PocketSheet({
       }}
     >
       <div className="pocket-sheet-panel">
-        <h2 id="pocket-sheet-heading" className="text-title text-ink">
-          Pocket
-        </h2>
+        <div className="flex items-center justify-between gap-2">
+          <h2 id="pocket-sheet-heading" className="text-title text-ink">
+            Pocket
+          </h2>
+          <Button
+            type="button"
+            variant="ghost"
+            className="min-h-11 min-w-11 shrink-0 px-3"
+            onClick={onClose}
+          >
+            Close
+          </Button>
+        </div>
         <p className="mt-1 mb-3 text-sm text-ink-muted">
           Meanings to retry, oldest first. Spelling stays hidden.
         </p>
