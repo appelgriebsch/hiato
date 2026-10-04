@@ -835,6 +835,71 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       unsub()
     }
   })
+
+  test('stale onstart after a later speak ends does not reclaim the slot', async () => {
+    const first = utter('casa')
+    const order: string[] = []
+    const spoken: SpeechUtteranceLike[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'pt-BR', localService: true }],
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        spoken.push(u)
+        order.push('speak')
+        // The first speak waits. Later speaks start inside speak().
+        if (spoken.length > 1) u.onstart?.()
+      },
+    }
+    const seen: boolean[] = []
+    const unsub = subscribeSpeakActivity((speaking) => {
+      seen.push(speaking)
+    })
+    const realSetTimeout = globalThis.setTimeout
+    let startTimer: (() => void) | undefined
+    globalThis.setTimeout = ((fn) => {
+      startTimer = fn as () => void
+      return 0 as unknown as ReturnType<typeof setTimeout>
+    }) as typeof setTimeout
+    try {
+      const firstPending = speakLemma('casa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: () => first,
+      })
+      startTimer?.()
+      expect(await firstPending).toBe(false)
+      expect(seen).toEqual([])
+
+      const secondPending = speakLemma('mesa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: utter,
+      })
+      expect(await secondPending).toBe(true)
+      expect(seen).toEqual([true])
+      spoken[1]!.onend?.()
+      expect(seen).toEqual([true, false])
+
+      first.onstart?.()
+      expect(seen).toEqual([true, false])
+
+      const thirdPending = speakLemma('livro', 'pt', {
+        getSynth: () => synth,
+        createUtterance: utter,
+      })
+      expect(await thirdPending).toBe(true)
+      expect(order).toEqual(['speak', 'speak', 'speak'])
+      expect(order).not.toContain('cancel')
+      expect(seen).toEqual([true, false, true])
+    } finally {
+      globalThis.setTimeout = realSetTimeout
+      unsub()
+    }
+  })
 })
 
 describe('HTW-speak-helper — iOS empty voice list at tap', () => {

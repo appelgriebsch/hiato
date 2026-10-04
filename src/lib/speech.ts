@@ -387,10 +387,11 @@ function setPlaybackAudioSession(): void {
  * speakLemma resolves true and does not speak. If onstart has not fired
  * after three seconds, clear the slot and resolve false. That timer does
  * not call cancel() or speak(). The utterance stays referenced until
- * onend or onerror. A late onstart still emits speaking and does not flip
- * a promise that already resolved false. speaking or pending true is not
- * a reason to cancel. Soft-fails when speechSynthesis is missing, getVoices
- * throws, or a non-empty list has no pack match.
+ * onend or onerror. A late onstart emits speaking only while this attempt
+ * is still the latest one, and does not flip a promise that already
+ * resolved false. An older attempt does not reclaim the slot. speaking or
+ * pending true is not a reason to cancel. Soft-fails when speechSynthesis
+ * is missing, getVoices throws, or a non-empty list has no pack match.
  */
 export function speakLemma(
   lemma: string,
@@ -491,9 +492,10 @@ export function speakLemma(
         if (record.ended) return
         record.started = true
         clearWatchdog()
-        // A newer attempt may already own the slot. Do not steal it.
-        // After the timer cleared this slot, a late onstart takes it
-        // back so the speaking flag can clear the failure line.
+        // Only the latest attempt may reclaim an empty slot. A late
+        // onstart from this attempt still turns speaking on. An older
+        // attempt must not show Playing or block the next tap.
+        if (generation !== speakGeneration) return
         if (activeSpeech !== null && activeSpeech !== record) return
         activeSpeech = record
         emitActivity(true)
