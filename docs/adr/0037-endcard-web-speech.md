@@ -23,5 +23,5 @@ After the lemma is revealed, the learner needs a pronunciation teach beat. Hiato
 
 - Voice quality is OS-dependent; we do not ship or pin a voice.
 - The tap satisfies the iOS user-gesture requirement for `speechSynthesis`.
-- iOS Safari drops `speak()` from load, timers, or promises. Prime with `getVoices()` and `voiceschanged` on Play mount (and the first earlier pointerdown). Earlier-gesture unlock is prime-only — no silent platform speak (a non-empty `' '` unlock would sit ahead of the lemma; empty string is dropped). The EndCard click still calls `speak()` synchronously in its own listener — no await, no cancel-then-lemma in that turn.
+- iOS Safari drops `speak()` from load, timers, or promises. Prime with `getVoices()` and `voiceschanged` on Play mount (and the first earlier pointerdown). Earlier-gesture unlock is prime-only — no silent platform speak (a non-empty `' '` unlock would sit ahead of the lemma; empty string is dropped). The EndCard click still calls `speak()` synchronously in its own listener — no await. The speaking flag follows `onstart`. A tap that has not started does not `cancel`. A tap while the word is playing does not cancel-then-speak.
 - The control stays hidden until a usable voice has been seen (live list or cache). Unsupported browsers degrade silently: the control is hidden, the EndCard otherwise unchanged.
