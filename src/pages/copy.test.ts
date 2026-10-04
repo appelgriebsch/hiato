@@ -651,12 +651,14 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(endCard).toContain('subscribeSpeechAvailability(lang, setSpeechOk)')
 
     // No auto-play. The only speakLemma call is inside the button's own
-    // native click listener (iOS user-activation). React onClick on this
-    // button would double-fire, so the control must not set onClick.
+    // native pointerup/click listener (iOS user-activation). React onClick
+    // on this button would double-fire, so the control must not set onClick.
     expect(teach).toContain('speakLemma(word, lang)')
     expect(teach.split('speakLemma(').length - 1).toBe(1)
     expect(endCard).not.toContain('speakLemma(')
+    expect(teach).toContain("addEventListener('pointerup', onPointerUp)")
     expect(teach).toContain("addEventListener('click', onClick)")
+    expect(teach).toContain("removeEventListener('pointerup', onPointerUp)")
     expect(teach).toContain("removeEventListener('click', onClick)")
     expect(teach).toContain('ref={speakBtnRef}')
     // Lemma only — not gloss. Options must not replace (word, lang).
@@ -675,18 +677,35 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     }
     expect(speakEffects).toHaveLength(1)
     const speakEffect = speakEffects[0]!
-    const fnAt = speakEffect.indexOf('const onClick = () => {')
     const lemmaCallAt = speakEffect.indexOf('speakLemma(')
-    const addAt = speakEffect.indexOf("addEventListener('click'")
-    expect(fnAt).toBeGreaterThan(-1)
-    expect(fnAt).toBeLessThan(lemmaCallAt)
-    expect(lemmaCallAt).toBeLessThan(addAt)
-    // A timer false must not paint the failure line. Only a same-turn false does.
-    expect(speakEffect).toContain('let sameTurn = true')
-    expect(speakEffect).toContain('if (ok || !sameTurn) return')
-    expect(speakEffect).toContain('queueMicrotask(')
+    const pointerUpFn = speakEffect.indexOf('const onPointerUp')
+    const clickFn = speakEffect.indexOf('const onClick')
+    const addPointer = speakEffect.indexOf("addEventListener('pointerup'")
+    const addClick = speakEffect.indexOf("addEventListener('click'")
+    expect(lemmaCallAt).toBeGreaterThan(-1)
+    expect(pointerUpFn).toBeGreaterThan(lemmaCallAt)
+    expect(clickFn).toBeGreaterThan(pointerUpFn)
+    expect(addPointer).toBeGreaterThan(clickFn)
+    expect(addClick).toBeGreaterThan(addPointer)
+    // speak() is synchronous in the handler. Nothing yields before it.
+    const beforeSpeak = speakEffect.slice(0, lemmaCallAt)
+    expect(beforeSpeak).not.toContain('await ')
+    expect(beforeSpeak).not.toContain('setTimeout')
+    expect(beforeSpeak).not.toContain('queueMicrotask')
+    // One tap: pointerup speaks; the following click does not.
+    expect(speakEffect).toContain('spokeOnPointerUp = true')
+    expect(speakEffect).toContain('if (spokeOnPointerUp)')
+    expect(speakEffect.split('speakFromGesture()').length - 1).toBe(2)
+    expect(speakEffect.split('speakLemma(').length - 1).toBe(1)
+    // Timer false is allowed to paint the failure line, not only a same-turn false.
+    expect(speakEffect).not.toContain('sameTurn')
+    expect(speakEffect).not.toContain('queueMicrotask')
+    expect(speakEffect).toContain('if (ok) return')
+    expect(speakEffect).toContain("'failed'")
+    expect(teach).toContain('Could not play the word.')
     // Registered, not invoked, when the effect runs.
     expect(speakEffect).not.toContain('onClick()')
+    expect(speakEffect).not.toContain('onPointerUp()')
 
     // ≥44px icon-only target; focus ring nearer 3:1 (not accent-fg/40 ~1.8:1)
     const btnAt = teach.indexOf('data-endcard-speak')
@@ -793,10 +812,13 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     const latchAt = src.indexOf('if (unlockSpeechGesture())')
     expect(latchAt).toBeGreaterThan(skipAt)
     const skipArm = src.slice(skipAt, latchAt)
-    expect(skipArm).toContain('primeSpeechVoices()')
+    // Speak tap must not touch speechSynthesis before speak().
+    expect(skipArm).not.toContain('primeSpeechVoices()')
+    expect(skipArm).not.toContain('speechSynthesis')
     expect(skipArm).not.toContain('unlockSpeechGesture()')
-    // Speak-button / child path: return after prime — no unlock call.
+    // Speak-button path returns before unlock. Earlier taps still prime.
     expect(skipArm).toContain('return')
+    expect(src.slice(latchAt)).toContain('primeSpeechVoices()')
     // Latch Play ref only after unlock returns true (retry on failure).
     expect(src).toContain('if (unlockSpeechGesture())')
     expect(src).toContain('speechGestureRef.current = true')

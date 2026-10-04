@@ -13,11 +13,8 @@ export type SpeechVoiceLike = {
 /** Injectable synth surface so tests never need a real speech engine. */
 export type SpeechSynthLike = {
   getVoices: () => SpeechVoiceLike[]
-  /**
-   * Drops the queue. The optional marker is ignored by the platform.
-   * The watchdog passes it so the built script can prove this call remains.
-   */
-  cancel: (marker?: string) => void
+  /** Drops the queue. The speak path does not call this. */
+  cancel: () => void
   speak: (utterance: SpeechUtteranceLike) => void
   /**
    * Un-pause only. Call it only after speak(), and only when paused is
@@ -26,13 +23,10 @@ export type SpeechSynthLike = {
    */
   resume?: () => void
   /**
-   * Engine flags. In the speak() turn both may stay false even when the
-   * utterance queued. One second later, speaking or pending true means the
-   * engine accepted it and onstart may still be coming. The first watchdog
-   * does not cancel in that case. A tap while a speak has not ended does
-   * not speak again.
-   * On an idle synth, `paused` is the only resume signal, and only after
-   * speak().
+   * Engine flags. WebKit can set `speaking` before the platform speaks.
+   * That is not a reason to cancel. A tap while a speak has not ended
+   * does not speak again. On an idle synth, `paused` is the only resume
+   * signal, and only after speak().
    */
   speaking?: boolean
   pending?: boolean
@@ -79,9 +73,8 @@ export function normalizeVoiceLang(voiceLang: string): string {
 }
 
 /**
- * Hyphenated BCP-47 defaults when a cached voice tag has no region
- * (`en` → `en-US`). iOS often hands back an empty list at tap time, so
- * the utterance still needs a real lang.
+ * Hyphenated BCP-47 defaults. Used when a live voice tag has no region
+ * (`en` → `en-US`) and when getVoices() is empty at speak time.
  */
 const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
   en: 'en-US',
@@ -94,10 +87,11 @@ const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
  * Last non-empty `getVoices()` snapshot. Updated from canSpeak checks,
  * subscribeSpeechAvailability, and voiceschanged. A shallow copy: iOS
  * clears the live array in place (`voices.length = 0`), and that must
- * not wipe the cache. When getVoices() is empty at speak time, assign
- * the cached voice (localService first). A second getVoices() in the
- * same turn does not refill a WebKit list that is already an empty
- * cache. WebKit does not ignore utterance.lang when voice is null.
+ * not wipe the cache. The cache only decides whether the control is
+ * shown. An empty list at speak time does not assign these objects;
+ * utterance.voice stays null and utterance.lang is the pack default.
+ * A second getVoices() in the same turn does not refill a WebKit list
+ * that is already an empty cache.
  */
 let cachedVoices: readonly SpeechVoiceLike[] = []
 
@@ -182,8 +176,9 @@ function bindVoicesChanged(synth: SpeechSynthLike): void {
 /**
  * Sync voice prime. getVoices() (and a second read when the first list is
  * empty) plus a one-time voiceschanged listener. Never speaks, never
- * awaits, never throws. Play calls this on mount and again inside an
- * earlier user gesture so the EndCard click finds a cached voice.
+ * awaits, never throws. Play calls this on mount and on earlier
+ * card/reveal taps so the control can appear once a voice has been
+ * seen. The speak button does not prime.
  */
 export function primeSpeechVoices(opts: SpeakLemmaOptions = {}): void {
   try {
@@ -333,37 +328,22 @@ function emitActivity(speaking: boolean) {
 let speakGeneration = 0
 
 /**
- * Bound for a speak() that returns with no onstart and no onerror.
- * Not a measured start latency. The timer is armed only after speak()
- * returns. Tests wait this plus a small slack on the real timer — Bun's
- * fake clock does not fire timers. Stays under the default test timeout.
+ * If onstart has not fired, clear the slot and resolve false.
+ * Armed only after speak() returns. Does not call cancel() or speak().
+ * Tests wait this plus a small slack — Bun's fake clock does not fire timers.
  */
-export const SPEECH_START_WATCHDOG_MS = 1000
-
-/**
- * Extra wait after the first check when speaking or pending is already
- * true. The second check is about three seconds after speak().
- */
-export const SPEECH_START_EXTEND_MS = 2000
-
-/** Passed to cancel() from the watchdog. The platform ignores it. */
-export const SPEECH_WATCHDOG_CANCEL_MARKER = 'hiato:release-stuck-speak'
+export const SPEECH_START_WATCHDOG_MS = 3000
 
 type ActiveSpeech = {
   /** True only after this attempt's onstart. */
   started: boolean
   ended: boolean
-  /**
-   * Watchdog cancelled this attempt and the engine did not finish it.
-   * A late onstart must not take the slot back.
-   */
-  dropped: boolean
 }
 
 /**
  * Attempt passed to speak() and not yet ended, including before onstart.
- * A tap in that window does not speak again. The watchdog cancels an
- * unstarted attempt and does not speak. The next tap speaks once.
+ * A tap in that window does not speak again. The start timer clears an
+ * unstarted attempt without cancel(). The next tap speaks once.
  */
 let activeSpeech: ActiveSpeech | null = null
 
@@ -375,55 +355,42 @@ function resumeSynth(synth: SpeechSynthLike) {
   }
 }
 
+/** iOS Ring/Silent mutes ambient audio. A pronunciation tap is playback. */
+function setPlaybackAudioSession(): void {
+  try {
+    const nav = globalThis.navigator as
+      | { audioSession?: { type?: string } }
+      | null
+      | undefined
+    const session = nav?.audioSession
+    if (!session) return
+    session.type = 'playback'
+  } catch {
+    /* missing or read-only — speak() still runs */
+  }
+}
+
 /**
- * Speak the lemma with a voice matching pack lang (local preferred).
+ * Speak the lemma with a live pack voice, or with language only.
  *
- * `speak()` runs synchronously in the caller's turn. EndCard calls this from
- * the button click, so the utterance stays inside the user gesture. A delay
- * (the old 50ms post-cancel timer) drops iOS/Safari and often Chrome: the
- * control stays visible, the tap is silent. No timer is armed before
- * speak() returns. A one-second watchdog is armed only if that speak()
- * returned with neither onstart nor onerror. If the attempt has still
- * not started, and speaking and pending are not true, the timer calls
- * cancel() once, settles false, and clears the slot. If either flag is
- * true, it waits once more and cancels only if onstart is still missing.
- * It does not speak or resume. cancel() may fire onerror;
- * finish() is idempotent. If onerror does not run, the slot is still
- * cleared. The next tap is one speak() and no cancel() in that turn.
+ * `speak()` runs synchronously in the caller's turn. No await, timer, or
+ * microtask before it. Do not call cancel() or resume() before speak().
+ * resume() runs only after speak(), and only when paused is already true.
+ * When audioSession exists, set its type to playback in this same turn,
+ * immediately before speak(). Do not set it on load.
  *
- * While an attempt passed to speak() has not ended, including before
- * onstart, a later speakLemma resolves true and does not call cancel,
- * speak, or resume. Same-turn cancel()+speak() is the WebKit 191745
- * drop. Stuck synth.speaking / pending is not our utterance and must
- * not cancel.
+ * A non-empty getVoices() uses the pack match (on-device first). An empty
+ * list leaves voice null and sets lang to the pack default. A cached voice
+ * object is never assigned. A non-empty list with no match does not speak.
  *
- * resume() only after speak(), and only when synth.paused is already true.
- * resume() before speak is not used. resume() while paused is false does
- * not swallow the utterance on current WebKit or Chromium. There is no
- * post-cancel resume: a playing tap does not cancel.
- *
- * The speaking flag follows onstart only. It is not emitted before speak().
- * The utterance stays referenced until onend/onerror. If the watchdog
- * cancels and onerror does not run, the utterance stays referenced and
- * a late onstart does not emit speaking or take the slot. The promise
- * stays false once the watchdog settled it. speaking/pending still false
- * in this turn is not a failed queue — those flags are not specified to
- * flip before we return. Resolves true only once this utterance fires
- * onstart before the watchdog. A synchronous onerror, or speak() throwing,
- * resolves false and does not emit speaking. Soft-fails (false, no throw)
- * when speechSynthesis is missing, getVoices throws, or a non-empty list
- * has no pack match.
- *
- * iOS Safari often returns [] from getVoices() except around voiceschanged.
- * At speak time, read the list and, if it is empty, read once more in this
- * same turn. That second read does not refill a WebKit cache that is
- * already empty. If both are empty, still call speak() when a previous
- * non-empty list had a match: assign that cached voice (localService
- * first) and set utterance.lang from its tag (hyphenated, or the pack
- * default). WebKit still applies utterance.lang when voice is null.
- * Voice choice stays live match, else cache, else do not speak. If there
- * is truly no cache, return false and do not speak. No await, timer, or
- * microtask before speak(). Never resume() before speak().
+ * While this attempt has not ended, including before onstart, a later
+ * speakLemma resolves true and does not speak. If onstart has not fired
+ * after three seconds, clear the slot and resolve false. That timer does
+ * not call cancel() or speak(). The utterance stays referenced until
+ * onend or onerror. A late onstart still emits speaking and does not flip
+ * a promise that already resolved false. speaking or pending true is not
+ * a reason to cancel. Soft-fails when speechSynthesis is missing, getVoices
+ * throws, or a non-empty list has no pack match.
  */
 export function speakLemma(
   lemma: string,
@@ -464,9 +431,8 @@ export function speakLemma(
         if (!second.threw) voices = second.voices
       }
 
-      // Fresh list: prefer localService, then any match, and assign that
-      // object. Empty list: the same pick on the cached snapshot. voice
-      // stays null only when there is no cached match — then we do not speak.
+      // Live list: on-device match first, else any match. Empty list:
+      // do not assign a cached voice. Lang only, voice null.
       let voice: SpeechVoiceLike | null = null
       let utteranceLang: string
       if (voices.length > 0) {
@@ -477,12 +443,8 @@ export function speakLemma(
         }
         utteranceLang = utteranceLangFromVoice(voice.lang, packLang)
       } else {
-        voice = pickVoiceForLang(cachedVoices, packLang)
-        if (!voice) {
-          settle(false)
-          return
-        }
-        utteranceLang = utteranceLangFromVoice(voice.lang, packLang)
+        voice = null
+        utteranceLang = PACK_DEFAULT_UTTERANCE_LANG[packLang]
       }
 
       const text = utteranceTextForLemma(lemma)
@@ -500,7 +462,6 @@ export function speakLemma(
       const record: ActiveSpeech = {
         started: false,
         ended: false,
-        dropped: false,
       }
       let watchdog: ReturnType<typeof setTimeout> | undefined
       const clearWatchdog = () => {
@@ -527,15 +488,16 @@ export function speakLemma(
       utterance.onend = finish
       utterance.onerror = finish
       utterance.onstart = () => {
-        if (record.ended || record.dropped) return
+        if (record.ended) return
         record.started = true
         clearWatchdog()
         // A newer attempt may already own the slot. Do not steal it.
-        if (activeSpeech === null || activeSpeech === record) {
-          activeSpeech = record
-        }
+        // After the timer cleared this slot, a late onstart takes it
+        // back so the speaking flag can clear the failure line.
+        if (activeSpeech !== null && activeSpeech !== record) return
+        activeSpeech = record
         emitActivity(true)
-        // Watchdog already settled false. Do not flip the promise.
+        // Timer already settled false. Do not flip the promise.
         if (!settled) settle(true)
       }
 
@@ -547,8 +509,9 @@ export function speakLemma(
       activeSpeech = record
 
       try {
-        // speak() first, in this gesture turn. Never resume before speak.
-        // Already paused: resume only after speak(). No cancel on this path.
+        // speak() is the first speechSynthesis mutation in this turn.
+        // Playback session, when the API exists, sits immediately before it.
+        setPlaybackAudioSession()
         synth.speak(utterance)
         if (synth.paused === true) resumeSynth(synth)
       } catch {
@@ -569,41 +532,17 @@ export function speakLemma(
         settle(false)
       }
 
-      // Happy path fires onstart or onerror inside speak(). Scheduling
-      // and then clearing would still count as armed — do not setTimeout
-      // unless neither event has run. The timer does not speak or resume,
-      // and it does not finish() itself: cancel() may fire onerror, and
-      // finish() is idempotent. If onerror does not run, still drop the
-      // slot so a late onstart cannot block the next tap.
-      const dropUnstarted = () => {
-        try {
-          synth.cancel(SPEECH_WATCHDOG_CANCEL_MARKER)
-        } catch {
-          /* still drop the slot below */
-        }
-        if (record.ended) return
-        record.dropped = true
-        if (activeSpeech === record) activeSpeech = null
-        settle(false)
-      }
-      const armWatchdog = (delay: number, mayExtend: boolean) => {
+      // Happy path fires onstart or onerror inside speak(). Do not arm
+      // a timer unless neither has run. The timer does not cancel, speak,
+      // or resume. It clears the slot so the next tap can try, and leaves
+      // the utterance referenced for a late onstart or onend.
+      if (!record.started && !record.ended) {
         watchdog = setTimeout(() => {
           watchdog = undefined
           if (record.started || record.ended) return
-          // A second later these flags mean the engine accepted the
-          // utterance. onstart can still be pending. Do not cut it off.
-          if (
-            mayExtend &&
-            (synth.speaking === true || synth.pending === true)
-          ) {
-            armWatchdog(SPEECH_START_EXTEND_MS, false)
-            return
-          }
-          dropUnstarted()
-        }, delay)
-      }
-      if (!record.started && !record.ended) {
-        armWatchdog(SPEECH_START_WATCHDOG_MS, true)
+          if (activeSpeech === record) activeSpeech = null
+          settle(false)
+        }, SPEECH_START_WATCHDOG_MS)
       }
     } catch {
       settle(false)
@@ -618,7 +557,8 @@ export function speakLemma(
  * matching voice has been seen — by this subscription or already in the
  * module cache. After that, empty getVoices() keeps the control, including
  * on a brand-new subscription (Play changes lang and resubscribes). The
- * tap assigns the cached voice. A non-empty list with no match still hides.
+ * tap does not assign that cached voice. A non-empty list with no match
+ * still hides.
  */
 
 /**
@@ -655,8 +595,8 @@ export function subscribeSpeechAvailability(
 ): () => void {
   // Seed from the module cache, not only voices this subscription has seen.
   // A resubscribe starts with getVoices() === [] on iOS; hiding then would
-  // drop the control even though speak can still use the cached voice.
-  // A non-empty list with no match still hides. speechSynthesis missing hides.
+  // drop the control. Speak with an empty list uses lang only, not this
+  // cache. A non-empty list with no match still hides. Missing synth hides.
   let everMatched = pickVoiceForLang(cachedVoices, packLang) !== null
   const notify = () => {
     try {
