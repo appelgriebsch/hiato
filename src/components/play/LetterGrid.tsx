@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CellState } from '@/engine'
+import type { PackLang } from '@/packs/schema'
 
 /**
  * Intentional equal-ish row lengths for letter tiles.
@@ -23,7 +24,14 @@ export function letterGridRowLengths(n: number): number[] {
   return rows.filter((r) => r > 0)
 }
 
-export function LetterGrid({ cells }: { cells: CellState[] }) {
+export function LetterGrid({
+  cells,
+  lang,
+}: {
+  cells: CellState[]
+  /** BCP-47 language of the answer. Set on revealed letters only. */
+  lang?: PackLang
+}) {
   const prevRevealed = useRef<boolean[]>([])
   const [justRevealed, setJustRevealed] = useState<Set<number>>(new Set())
 
@@ -91,6 +99,7 @@ export function LetterGrid({ cells }: { cells: CellState[] }) {
           {row.map(({ cell, index: i }) => (
             <div
               key={i}
+              lang={cell.revealed && lang ? lang : undefined}
               className={[
                 'flex aspect-square w-full max-w-11 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:max-w-12',
                 'transition-[border-color,background-color,color] duration-200',

@@ -54,6 +54,46 @@ export function headerRule(
   return rule
 }
 
+/**
+ * Security headers from `public/_headers` `/*`.
+ * Pages Functions do not receive `_headers`, so function responses set these.
+ */
+export const PAGES_SECURITY_HEADERS: Readonly<Record<string, string>> = {
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'x-frame-options': 'DENY',
+  'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'content-security-policy':
+    "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
+}
+
+/** Copy a response and set the `/*` security headers. Optional extras override. */
+export function withSecurityHeaders(
+  response: Response,
+  extra?: Record<string, string>,
+): Response {
+  const headers = new Headers(response.headers)
+  for (const [name, value] of Object.entries(PAGES_SECURITY_HEADERS)) {
+    headers.set(name, value)
+  }
+  if (extra) {
+    for (const [name, value] of Object.entries(extra)) headers.set(name, value)
+  }
+  if (response.status === 304 || response.status === 204) {
+    return new Response(null, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    })
+  }
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
 export type StageBindings = {
   production: string
   staging: string

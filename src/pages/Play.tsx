@@ -13,6 +13,7 @@ import { OfflineChip } from '@/components/OfflineChip'
 import { StreakChip } from '@/components/StreakChip'
 import { Keyboard } from '@/components/play/Keyboard'
 import { LearnerHint } from '@/components/play/LearnerHint'
+import { LemmaTeach } from '@/components/play/LemmaTeach'
 import { LetterGrid } from '@/components/play/LetterGrid'
 import { Lives } from '@/components/play/Lives'
 import { PocketSheet } from '@/components/PocketSheet'
@@ -37,7 +38,7 @@ import {
   revealAllCells,
   type CellState,
 } from '@/engine'
-import { getDailyRecord, setDailyRecord } from '@/lib/daily-record'
+import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
 import {
   addToPocket,
   listPocketStored,
@@ -67,8 +68,8 @@ import {
   getStreakCount,
   recordDailyWin,
 } from '@/lib/streaks'
-import { CEFR_CODES, LANG_CODES, speakLemmaAriaLabel } from '@/packs/labels'
-import { primeSpeechVoices, speakLemma, subscribeSpeakActivity, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
+import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
+import { primeSpeechVoices, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -256,6 +257,7 @@ function PlayRound({
         cefr,
         word: entry.word,
         gloss: entry.gloss,
+        synonyms: entry.synonyms,
         won: result === 'win',
         completed: true,
       })
@@ -564,109 +566,17 @@ function PlayRound({
   }
 
   if (alreadyPlayed && !loading && mode === 'daily') {
-    const rec = getDailyRecord(lang, cefr)
     return (
-      <Layout>
-        <TopBar
-          left={
-            <div className="flex items-center gap-2">
-              <BrandMark size="sm" className="opacity-90" />
-              <OfflineChip />
-            </div>
-          }
-          center={<Badge tone="accent">Daily</Badge>}
-          right={<StreakChip count={streak} pulse={streakPulse} />}
-        />
-        <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent-fg">
-            ✓
-          </div>
-          <h1 className="text-title text-ink">Today’s daily is done</h1>
-          <p className="text-body max-w-xs text-ink-muted">
-            Come back tomorrow for a new word — or stretch with practice.
-            Practice does not affect your streak.
-          </p>
-          {rec && (
-            <p className="text-sm text-ink">
-              You {rec.won ? 'solved' : 'missed'} today’s puzzle
-              {rec.word ? (
-                <>
-                  :{' '}
-                  <span className="font-semibold tracking-wide">{rec.word}</span>
-                </>
-              ) : null}
-              .
-            </p>
-          )}
-          <Card className="w-full text-left">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-ink-muted">
-                {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
-              </span>
-              <StreakChip count={streak} />
-            </div>
-            {rec?.won ? (
-              <p className="mt-2 text-xs text-accent-fg">
-                Streak updated for {dateKey}
-              </p>
-            ) : (
-              <p className="mt-2 text-xs text-ink-faint">
-                Streak pauses — try again tomorrow
-              </p>
-            )}
-          </Card>
-          <div className="mt-2 flex w-full flex-col gap-2">
-            {rec ? (
-              <Button
-                fullWidth
-                onClick={() => {
-                  try {
-                    const sharePayload = buildShareCardPayload({
-                      lang,
-                      cefr,
-                      streak,
-                      dateKey,
-                      word: rec.word,
-                      won: rec.won,
-                      mode: 'daily',
-                    })
-                    nav(sharePathWithToken(sharePayload), {
-                      state: sharePayload,
-                    })
-                  } catch {
-                    /* invalid payload — soft-fail; don’t blow onClick */
-                  }
-                }}
-              >
-                Share
-              </Button>
-            ) : null}
-            <Button
-              fullWidth
-              variant={rec ? 'secondary' : 'primary'}
-              onClick={goPractice}
-              disabled={!practiceOk}
-            >
-              Practice (endless)
-            </Button>
-            {!practiceOk ? (
-              <p className="text-xs text-ink-faint">
-                Practice isn’t available — this pack only has today’s daily word.
-              </p>
-            ) : null}
-            <Button fullWidth variant="ghost" onClick={() => nav('/')}>
-              Back home
-            </Button>
-            <Button
-              fullWidth
-              variant="ghost"
-              onClick={() => nav('/language')}
-            >
-              Change level
-            </Button>
-          </div>
-        </div>
-      </Layout>
+      <DoneDaily
+        lang={lang}
+        cefr={cefr}
+        dateKey={dateKey}
+        streak={streak}
+        streakPulse={streakPulse}
+        practiceOk={practiceOk}
+        onPractice={goPractice}
+        rec={getDailyRecord(lang, cefr)}
+      />
     )
   }
 
@@ -730,7 +640,7 @@ function PlayRound({
       {!loading && !error && wordEntry && (
         <>
           <div className="my-5">
-            <LetterGrid cells={cells} />
+            <LetterGrid cells={cells} lang={lang} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
               <p className="mt-3 text-center text-[11px] text-ink-muted">
                 Soft green = vowel help (A1–A2)
@@ -848,6 +758,155 @@ function PlayRound({
   )
 }
 
+function DoneDaily({
+  lang,
+  cefr,
+  dateKey,
+  streak,
+  streakPulse,
+  practiceOk,
+  onPractice,
+  rec,
+}: {
+  lang: PackLang
+  cefr: PackCefr
+  dateKey: string
+  streak: number
+  streakPulse: boolean
+  practiceOk: boolean
+  onPractice: () => void
+  rec: DailyRecord | null
+}) {
+  const nav = useNavigate()
+  const [speechOk, setSpeechOk] = useState(false)
+  const [shareError, setShareError] = useState<string | null>(null)
+  const won = rec?.won === true
+  const teachGloss = rec?.gloss?.trim() ?? ''
+  const teachSynonyms = (rec?.synonyms ?? [])
+    .filter((s) => s.trim().length > 0)
+    .slice(0, 3)
+
+  useEffect(() => {
+    primeSpeechVoices()
+    return subscribeSpeechAvailability(lang, setSpeechOk)
+  }, [lang])
+
+  return (
+    <Layout>
+      <TopBar
+        left={
+          <div className="flex items-center gap-2">
+            <BrandMark size="sm" className="opacity-90" />
+            <OfflineChip />
+          </div>
+        }
+        center={<Badge tone="accent">Daily</Badge>}
+        right={<StreakChip count={streak} pulse={streakPulse} />}
+      />
+      <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
+        <div
+          className={
+            won
+              ? 'flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent-fg'
+              : 'flex h-16 w-16 items-center justify-center rounded-full bg-cream-dark text-2xl text-ink-muted'
+          }
+          aria-hidden="true"
+        >
+          {won ? '✓' : '✕'}
+        </div>
+        <h1 className="text-title text-ink">
+          {won ? 'Today’s daily is done' : 'Today’s daily was missed'}
+        </h1>
+        <p className="text-body max-w-xs text-ink-muted">
+          Come back tomorrow for a new word — or stretch with practice.
+          Practice does not affect your streak.
+        </p>
+        {rec ? (
+          <div
+            className="w-full rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
+            data-endcard-teach
+          >
+            <LemmaTeach
+              lang={lang}
+              word={rec.word}
+              gloss={teachGloss}
+              synonyms={teachSynonyms}
+              showSpeak={speechOk}
+            />
+          </div>
+        ) : null}
+        <Card className="w-full text-left">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-ink-muted">
+              {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
+            </span>
+            <StreakChip count={streak} />
+          </div>
+          {won ? (
+            <p className="mt-2 text-xs text-accent-fg">
+              Streak updated for {dateKey}
+            </p>
+          ) : (
+            <p className="mt-2 text-xs text-ink-faint">
+              Streak pauses — try again tomorrow
+            </p>
+          )}
+        </Card>
+        <div className="mt-2 flex w-full flex-col gap-2">
+          {rec ? (
+            <Button
+              fullWidth
+              onClick={() => {
+                try {
+                  const sharePayload = buildShareCardPayload({
+                    lang,
+                    cefr,
+                    streak,
+                    dateKey,
+                    word: rec.word,
+                    won: rec.won,
+                    mode: 'daily',
+                  })
+                  setShareError(null)
+                  nav(sharePathWithToken(sharePayload), { state: sharePayload })
+                } catch {
+                  setShareError('Could not open share')
+                }
+              }}
+            >
+              Share
+            </Button>
+          ) : null}
+          {shareError ? (
+            <p role="status" className="text-center text-sm text-danger">
+              {shareError}
+            </p>
+          ) : null}
+          <Button
+            fullWidth
+            variant={rec ? 'secondary' : 'primary'}
+            onClick={onPractice}
+            disabled={!practiceOk}
+          >
+            Practice (endless)
+          </Button>
+          {!practiceOk ? (
+            <p className="text-xs text-ink-faint">
+              Practice isn’t available — this pack only has today’s daily word.
+            </p>
+          ) : null}
+          <Button fullWidth variant="ghost" onClick={() => nav('/')}>
+            Back home
+          </Button>
+          <Button fullWidth variant="ghost" onClick={() => nav('/language')}>
+            Change level
+          </Button>
+        </div>
+      </div>
+    </Layout>
+  )
+}
+
 function EndCard({
   won,
   revealed = false,
@@ -893,10 +952,12 @@ function EndCard({
   const [pocketCount, setPocketCount] = useState(0)
   const [pocketOpen, setPocketOpen] = useState(false)
   const [pocketCleared, setPocketCleared] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
+  const [shareError, setShareError] = useState<string | null>(null)
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
   const clearedStatusRef = useRef<HTMLParagraphElement>(null)
-  const speakBtnRef = useRef<HTMLButtonElement>(null)
+  const confirmPanelRef = useRef<HTMLDivElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
@@ -906,6 +967,7 @@ function EndCard({
     // Quota / private mode: nothing was stored. Stay on the current phase
     // so a replace confirm keeps its gloss and Confirm can retry.
     if (!result.added && !result.duplicate) return false
+    setSaveError(null)
     setSavePhase(result.duplicate ? 'duplicate' : 'saved')
     return true
   }, [lang, cefr, word, gloss])
@@ -924,10 +986,11 @@ function EndCard({
       const oldest = slot[0]!
       setOldestLabel(pocketConfirmLabel(oldest))
       setSnapshotOldestId(oldest.id)
+      setSaveError(null)
       setSavePhase('confirm')
       return
     }
-    commitSave()
+    if (!commitSave()) setSaveError('Could not save to pocket')
   }, [lang, cefr, word, commitSave])
 
   const onConfirmReplace = useCallback(() => {
@@ -951,7 +1014,7 @@ function EndCard({
     // commit — either still replace-oldest or slot no longer full.
     // A failed write stays on confirm with the same gloss so Confirm retries it.
     const stored = commitSave()
-    if (!stored) return
+    if (!stored) return setSaveError('Could not save to pocket')
     setOldestLabel('')
     setSnapshotOldestId('')
   }, [lang, cefr, word, snapshotOldestId, commitSave])
@@ -989,6 +1052,25 @@ function EndCard({
       if (e.key === 'Escape') {
         e.preventDefault()
         cancelConfirm()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const root = confirmPanelRef.current
+      if (!root) return
+      const items = [
+        ...root.querySelectorAll<HTMLElement>('button:not([disabled])'),
+      ]
+      if (items.length === 0) return
+      const first = items[0]!
+      const last = items[items.length - 1]!
+      const active = document.activeElement
+      const outside = !root.contains(active)
+      if (e.shiftKey && (active === first || outside)) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && (active === last || outside)) {
+        e.preventDefault()
+        first.focus()
       }
     }
     window.addEventListener('keydown', onKey)
@@ -1018,7 +1100,6 @@ function EndCard({
   // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
   const speakSurface = mode === 'daily' || mode === 'practice'
   const [speechOk, setSpeechOk] = useState(false)
-  const [speaking, setSpeaking] = useState(false)
   useEffect(() => {
     if (!speakSurface) {
       setSpeechOk(false)
@@ -1029,103 +1110,29 @@ function EndCard({
     primeSpeechVoices()
     return subscribeSpeechAvailability(lang, setSpeechOk)
   }, [speakSurface, lang])
-  useEffect(() => subscribeSpeakActivity(setSpeaking), [])
   const showSpeakControl = speakSurface && speechOk
-  // iOS Safari only treats speak() as user-activated inside the button's
-  // own listener. React onClick is delegated at the root, so this tap
-  // stays silent there. One listener — do not also set onClick.
-  useEffect(() => {
-    const btn = speakBtnRef.current
-    if (!btn) return
-    const onClick = () => {
-      void speakLemma(word, lang)
-    }
-    btn.addEventListener('click', onClick)
-    return () => {
-      btn.removeEventListener('click', onClick)
-    }
-  }, [showSpeakControl, word, lang])
 
   return (
     <div className="motion-result-enter mb-4 space-y-3">
       <div
         className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
         data-endcard-teach
+        inert={confirming ? true : undefined}
       >
         <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
           {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
-        {teachGloss ? (
-          <p className="mt-3 text-lg font-semibold leading-snug text-ink">
-            {teachGloss}
-          </p>
-        ) : null}
-        <p
-          className={[
-            'text-sm text-ink-muted',
-            teachGloss ? 'mt-2' : 'mt-3',
-          ].join(' ')}
-        >
-          The word was
-        </p>
-        <div className="flex items-center justify-center gap-1">
-          <p
-            className={[
-              'tracking-wide text-ink',
-              teachGloss
-                ? 'mt-0.5 text-base font-medium'
-                : 'mt-1 text-lg font-semibold',
-            ].join(' ')}
-          >
-            {word}
-          </p>
-          {showSpeakControl ? (
-            <button
-              ref={speakBtnRef}
-              type="button"
-              data-endcard-speak
-              data-speaking={speaking ? 'true' : 'false'}
-              aria-label={speakLemmaAriaLabel(lang)}
-              aria-busy={speaking}
-              className={[
-                'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl hover:bg-cream-dark active:bg-cream-dark focus-visible:outline-none focus-visible:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent-fg',
-                speaking ? 'text-accent-fg' : 'text-ink-muted',
-                teachGloss ? 'mt-0.5' : 'mt-1',
-              ].join(' ')}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-              </svg>
-            </button>
-          ) : null}
-        </div>
-        {teachSynonyms.length > 0 ? (
-          <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
-            {teachSynonyms.map((s) => (
-              <span
-                key={s}
-                className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
-        ) : null}
+        <LemmaTeach
+          lang={lang}
+          word={word}
+          gloss={teachGloss}
+          synonyms={teachSynonyms}
+          showSpeak={showSpeakControl}
+        />
       </div>
 
+      <div inert={confirming ? true : undefined}>
       <Card className="w-full text-left">
         <div className="flex items-center justify-between text-sm">
           <span className="text-ink-muted">
@@ -1153,8 +1160,10 @@ function EndCard({
           </p>
         )}
       </Card>
+      </div>
 
       {confirming ? (
+        <div ref={confirmPanelRef}>
         <Card
           className="w-full text-left"
           role="dialog"
@@ -1179,7 +1188,13 @@ function EndCard({
               Cancel
             </Button>
           </div>
+          {saveError ? (
+            <p role="status" className="mt-2 text-sm text-danger">
+              {saveError}
+            </p>
+          ) : null}
         </Card>
+        </div>
       ) : (
         <div className="flex flex-col gap-2">
           {showSave ? (
@@ -1244,16 +1259,27 @@ function EndCard({
                   won,
                   mode: shareMode,
                 })
+                setShareError(null)
                 nav(sharePathWithToken(sharePayload), {
                   state: sharePayload,
                 })
               } catch {
-                /* invalid payload — soft-fail; don’t blow onClick */
+                setShareError('Could not open share')
               }
             }}
           >
             Share
           </Button>
+          {shareError ? (
+            <p role="status" className="text-center text-sm text-danger">
+              {shareError}
+            </p>
+          ) : null}
+          {saveError && !confirming ? (
+            <p role="status" className="text-center text-sm text-danger">
+              {saveError}
+            </p>
+          ) : null}
           {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
             <Button fullWidth variant="outline" onClick={onManualRemove}>
               Remove from pocket

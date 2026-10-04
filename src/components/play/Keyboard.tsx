@@ -35,7 +35,7 @@ export function Keyboard({
                 disabled={disabled || wrong || correct}
                 onClick={() => onKey(key)}
                 className={[
-                  'min-h-[44px] min-w-[1.7rem] flex-1 touch-manipulation rounded-lg text-sm font-semibold uppercase motion-key-wrong-dim motion-press sm:min-w-8',
+                  'min-h-[44px] min-w-0 flex-1 touch-manipulation rounded-lg px-0.5 text-sm font-semibold uppercase motion-key-wrong-dim motion-press',
                   wrong || correct ? 'key-settled' : '',
                   wrong
                     ? 'bg-wrong/70 text-ink'

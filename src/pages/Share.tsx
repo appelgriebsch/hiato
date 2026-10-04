@@ -24,14 +24,10 @@ export function Share() {
     setToast(message)
   }, [])
 
-  /** Cold-open `/share?p=` has no useful history — prefer absolute Home. */
+  /** A shared link (`?p=`) opens Home. In-app share uses browser history. */
   const goBack = useCallback(() => {
     if (fromToken) {
-      if (typeof window !== 'undefined' && window.history.length > 1) {
-        nav(-1)
-      } else {
-        nav('/')
-      }
+      nav('/')
       return
     }
     nav(-1)

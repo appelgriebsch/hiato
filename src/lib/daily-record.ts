@@ -10,6 +10,7 @@ export type DailyRecord = {
   cefr: PackCefr
   word: string
   gloss?: string
+  synonyms?: string[]
   won: boolean
   completed: boolean
 }
@@ -38,6 +39,12 @@ function parseRecord(raw: unknown): DailyRecord | null {
     completed: o.completed,
   }
   if (typeof o.gloss === 'string' && o.gloss.length > 0) rec.gloss = o.gloss
+  if (Array.isArray(o.synonyms)) {
+    const synonyms = o.synonyms
+      .filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+      .slice(0, 3)
+    if (synonyms.length > 0) rec.synonyms = synonyms
+  }
   return rec
 }
 

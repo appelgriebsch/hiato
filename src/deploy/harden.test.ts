@@ -4,6 +4,7 @@ import { onRequestGet } from '../../functions/api/health'
 import {
   BUN_PIN,
   PAGES_PROJECT,
+  PAGES_SECURITY_HEADERS,
   STAGING_STAGE,
   PRODUCTION_STAGE,
   ROLLBACK_API_PATH,
@@ -58,6 +59,7 @@ describe('cache and security headers', () => {
     expect(csp).toContain("object-src 'none'")
     expect(csp).not.toContain('unsafe-eval')
     expect(csp).not.toContain('unsafe-inline')
+    expect(security).toEqual(PAGES_SECURITY_HEADERS)
   })
 })
 
@@ -73,6 +75,11 @@ describe('staging bindings differ from production', () => {
     const production = await onRequestGet({ env: { HIATO_STAGE: PRODUCTION_STAGE } })
     expect(production.status).toBe(200)
     expect(await production.json()).toEqual({ ok: true, stage: PRODUCTION_STAGE })
+    expect(production.headers.get('cache-control')).toBe('no-store')
+    expect(production.headers.get('x-content-type-options')).toBe('nosniff')
+    expect(production.headers.get('content-security-policy')).toBe(
+      PAGES_SECURITY_HEADERS['content-security-policy'],
+    )
 
     const staging = await onRequestGet({ env: { HIATO_STAGE: STAGING_STAGE } })
     expect(staging.status).toBe(200)
@@ -81,6 +88,7 @@ describe('staging bindings differ from production', () => {
     const missing = await onRequestGet({ env: {} })
     expect(missing.status).toBe(503)
     expect(await missing.json()).toEqual({ ok: false })
+    expect(missing.headers.get('cache-control')).toBe('no-store')
 
     const legacyPreview = await onRequestGet({ env: { HIATO_STAGE: 'preview' } })
     expect(legacyPreview.status).toBe(503)

@@ -1,4 +1,4 @@
-import { isPagesStage } from '../../src/deploy/harden'
+import { isPagesStage, withSecurityHeaders } from '../../src/deploy/harden'
 
 type HealthEnv = {
   HIATO_STAGE?: string
@@ -10,7 +10,12 @@ export async function onRequestGet(context: {
 }): Promise<Response> {
   const stage = context.env?.HIATO_STAGE
   if (!isPagesStage(stage)) {
-    return Response.json({ ok: false }, { status: 503 })
+    return withSecurityHeaders(Response.json({ ok: false }, { status: 503 }), {
+      'cache-control': 'no-store',
+    })
   }
-  return Response.json({ ok: true, stage }, { status: 200 })
+  return withSecurityHeaders(
+    Response.json({ ok: true, stage }, { status: 200 }),
+    { 'cache-control': 'no-store' },
+  )
 }

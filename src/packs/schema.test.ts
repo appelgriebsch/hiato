@@ -81,7 +81,9 @@ describe('pack hosting', () => {
 
   test('pack Pages Function 404s HTML fallback and passes JSON', async () => {
     const { onRequest } = await import('../../functions/packs/[[path]].ts')
+    const pack = 'https://hiato.example/packs/en/a1.json'
     const json = await onRequest({
+      request: new Request(pack),
       next: async () =>
         new Response('{"lang":"en"}', {
           status: 200,
@@ -90,8 +92,10 @@ describe('pack hosting', () => {
     })
     expect(json.status).toBe(200)
     expect(await json.text()).toBe('{"lang":"en"}')
+    expect(json.headers.get('x-content-type-options')).toBe('nosniff')
 
     const html = await onRequest({
+      request: new Request(pack),
       next: async () =>
         new Response('<html>spa</html>', {
           status: 200,
@@ -100,16 +104,45 @@ describe('pack hosting', () => {
     })
     expect(html.status).toBe(404)
     expect(html.headers.get('cache-control')).toBe('no-store')
+    expect(html.headers.get('x-content-type-options')).toBe('nosniff')
   })
 
-  test('pack Pages Function passes 304 and JSON with charset', async () => {
-    const { onRequest } = await import('../../functions/packs/[[path]].ts')
+  test('pack Pages Function passes 304 only for a pack file', async () => {
+    const { onRequest, isPackJsonPath } = await import(
+      '../../functions/packs/[[path]].ts'
+    )
+    expect(isPackJsonPath('/packs/en/a1.json')).toBe(true)
+    expect(isPackJsonPath('/packs/en/nope.json')).toBe(false)
+    expect(isPackJsonPath('/index.html')).toBe(false)
+
+    const pack = 'https://hiato.example/packs/de/b2.json'
     const notModified = await onRequest({
+      request: new Request(pack),
       next: async () => new Response(null, { status: 304 }),
     })
     expect(notModified.status).toBe(304)
+    expect(notModified.headers.get('x-content-type-options')).toBe('nosniff')
+
+    const htmlNotModified = await onRequest({
+      request: new Request('https://hiato.example/packs/en/nope.json'),
+      next: async () => new Response(null, { status: 304 }),
+    })
+    expect(htmlNotModified.status).toBe(404)
+    expect(htmlNotModified.headers.get('cache-control')).toBe('no-store')
+
+    const failure = await onRequest({
+      request: new Request(pack),
+      next: async () =>
+        new Response('boom', {
+          status: 502,
+          headers: { 'content-type': 'text/plain' },
+        }),
+    })
+    expect(failure.status).toBe(502)
+    expect(await failure.text()).toBe('boom')
 
     const json = await onRequest({
+      request: new Request(pack),
       next: async () =>
         new Response('{}', {
           status: 200,
@@ -119,6 +152,7 @@ describe('pack hosting', () => {
     expect(json.status).toBe(200)
 
     const plain = await onRequest({
+      request: new Request(pack),
       next: async () =>
         new Response('nope', {
           status: 200,

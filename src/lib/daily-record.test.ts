@@ -79,4 +79,22 @@ describe('daily record (per lang+CEFR)', () => {
     expect(getDailyRecord('pt', 'a1')?.won).toBe(false)
     expect(mem.get(DAILY_KEY)).toContain('APPLE')
   })
+
+  test('keeps up to three synonym strings', () => {
+    setDailyRecord({
+      dateKey: '2026-09-19',
+      lang: 'de',
+      cefr: 'a2',
+      word: 'HAUS',
+      gloss: 'a building',
+      synonyms: ['home', '', 'house', 'dwelling', 'extra'],
+      won: false,
+      completed: true,
+    })
+    expect(getDailyRecord('de', 'a2')?.synonyms).toEqual([
+      'home',
+      'house',
+      'dwelling',
+    ])
+  })
 })
