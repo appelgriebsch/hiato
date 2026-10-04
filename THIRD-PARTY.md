@@ -1,6 +1,6 @@
 # Third-party bill of materials
 
-Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`.
+Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). Other rows were not re-checked.
 
 | Name | Version | License | Critical update | CVEs |
 | --- | --- | --- | --- | --- |

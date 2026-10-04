@@ -13,7 +13,11 @@ export type SpeechVoiceLike = {
 /** Injectable synth surface so tests never need a real speech engine. */
 export type SpeechSynthLike = {
   getVoices: () => SpeechVoiceLike[]
-  cancel: () => void
+  /**
+   * Drops the queue. The optional marker is ignored by the platform.
+   * The watchdog passes it so the built script can prove this call remains.
+   */
+  cancel: (marker?: string) => void
   speak: (utterance: SpeechUtteranceLike) => void
   /**
    * Un-pause only. Call it only after speak(), and only when paused is
@@ -22,11 +26,11 @@ export type SpeechSynthLike = {
    */
   resume?: () => void
   /**
-   * Engine flags. They are not a queue signal: Chrome/WebKit may leave both
-   * false in the same turn as a speak() that did queue. Stuck true is also
-   * not our utterance. Do not cancel from these flags. A tap while a speak
-   * has not ended does not speak again. The one-second watchdog is what
-   * cancels an unstarted speak. It does not speak.
+   * Engine flags. In the speak() turn both may stay false even when the
+   * utterance queued. One second later, speaking or pending true means the
+   * engine accepted it and onstart may still be coming. The first watchdog
+   * does not cancel in that case. A tap while a speak has not ended does
+   * not speak again.
    * On an idle synth, `paused` is the only resume signal, and only after
    * speak().
    */
@@ -336,6 +340,15 @@ let speakGeneration = 0
  */
 export const SPEECH_START_WATCHDOG_MS = 1000
 
+/**
+ * Extra wait after the first check when speaking or pending is already
+ * true. The second check is about three seconds after speak().
+ */
+export const SPEECH_START_EXTEND_MS = 2000
+
+/** Passed to cancel() from the watchdog. The platform ignores it. */
+export const SPEECH_WATCHDOG_CANCEL_MARKER = 'hiato:release-stuck-speak'
+
 type ActiveSpeech = {
   /** True only after this attempt's onstart. */
   started: boolean
@@ -371,8 +384,10 @@ function resumeSynth(synth: SpeechSynthLike) {
  * control stays visible, the tap is silent. No timer is armed before
  * speak() returns. A one-second watchdog is armed only if that speak()
  * returned with neither onstart nor onerror. If the attempt has still
- * not started, the timer calls cancel() once, settles false, and clears
- * the slot. It does not speak or resume. cancel() may fire onerror;
+ * not started, and speaking and pending are not true, the timer calls
+ * cancel() once, settles false, and clears the slot. If either flag is
+ * true, it waits once more and cancels only if onstart is still missing.
+ * It does not speak or resume. cancel() may fire onerror;
  * finish() is idempotent. If onerror does not run, the slot is still
  * cleared. The next tap is one speak() and no cancel() in that turn.
  *
@@ -556,24 +571,39 @@ export function speakLemma(
 
       // Happy path fires onstart or onerror inside speak(). Scheduling
       // and then clearing would still count as armed — do not setTimeout
-      // unless neither event has run. The timer cancels once. It does not
-      // speak or resume, and it does not finish() itself: cancel() may
-      // fire onerror, and finish() is idempotent. If onerror does not
-      // run, still drop the slot so a late onstart cannot block the next tap.
-      if (!record.started && !record.ended) {
+      // unless neither event has run. The timer does not speak or resume,
+      // and it does not finish() itself: cancel() may fire onerror, and
+      // finish() is idempotent. If onerror does not run, still drop the
+      // slot so a late onstart cannot block the next tap.
+      const dropUnstarted = () => {
+        try {
+          synth.cancel(SPEECH_WATCHDOG_CANCEL_MARKER)
+        } catch {
+          /* still drop the slot below */
+        }
+        if (record.ended) return
+        record.dropped = true
+        if (activeSpeech === record) activeSpeech = null
+        settle(false)
+      }
+      const armWatchdog = (delay: number, mayExtend: boolean) => {
         watchdog = setTimeout(() => {
           watchdog = undefined
           if (record.started || record.ended) return
-          try {
-            synth.cancel()
-          } catch {
-            /* still drop the slot below */
+          // A second later these flags mean the engine accepted the
+          // utterance. onstart can still be pending. Do not cut it off.
+          if (
+            mayExtend &&
+            (synth.speaking === true || synth.pending === true)
+          ) {
+            armWatchdog(SPEECH_START_EXTEND_MS, false)
+            return
           }
-          if (record.ended) return
-          record.dropped = true
-          if (activeSpeech === record) activeSpeech = null
-          settle(false)
-        }, SPEECH_START_WATCHDOG_MS)
+          dropUnstarted()
+        }, delay)
+      }
+      if (!record.started && !record.ended) {
+        armWatchdog(SPEECH_START_WATCHDOG_MS, true)
       }
     } catch {
       settle(false)

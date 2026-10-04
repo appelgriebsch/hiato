@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'bun:test'
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { PACK_LANGS, type PackLang } from '../packs/schema'
 import { SPEAK_LEMMA_ARIA, speakLemmaAriaLabel } from '../packs/labels'
@@ -9,7 +9,9 @@ import {
   pickVoiceForLang,
   primeSpeechVoices,
   retainedSpeechUtterances,
+  SPEECH_START_EXTEND_MS,
   SPEECH_START_WATCHDOG_MS,
+  SPEECH_WATCHDOG_CANCEL_MARKER,
   speakLemma,
   subscribeSpeakActivity,
   subscribeSpeechAvailability,
@@ -699,6 +701,56 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
     second.onend?.()
   })
 
+  async function expectLateAcceptThenCancel(flag: 'speaking' | 'pending') {
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'pt-BR', localService: true }],
+      paused: false,
+      speaking: false,
+      pending: false,
+      cancel: (marker) => {
+        order.push('cancel')
+        expect(marker).toBe(SPEECH_WATCHDOG_CANCEL_MARKER)
+        synth.speaking = false
+        synth.pending = false
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: () => {
+        order.push('speak')
+        synth[flag] = true
+      },
+    }
+    let settled: boolean | undefined
+    const pending = speakLemma('casa', 'pt', {
+      getSynth: () => synth,
+      createUtterance: utter,
+    }).then((ok) => {
+      settled = ok
+      return ok
+    })
+    await new Promise((resolve) => {
+      setTimeout(resolve, SPEECH_START_WATCHDOG_MS + 50)
+    })
+    expect(order).toEqual(['speak'])
+    expect(settled).toBeUndefined()
+    await new Promise((resolve) => {
+      setTimeout(resolve, SPEECH_START_EXTEND_MS + 50)
+    })
+    expect(order).toEqual(['speak', 'cancel'])
+    expect(order).not.toContain('resume')
+    expect(await pending).toBe(false)
+  }
+
+  test('speaking without onstart waits past 1000ms then cancels once', async () => {
+    await expectLateAcceptThenCancel('speaking')
+  })
+
+  test('pending without onstart waits past 1000ms then cancels once', async () => {
+    await expectLateAcceptThenCancel('pending')
+  })
+
   test('late onstart after the watchdog does not take the slot back', async () => {
     const utterance = utter('casa')
     const order: string[] = []
@@ -1297,18 +1349,27 @@ describe('HTW-i18n-a11y (#117) — speak aria-label catalog', () => {
   })
 })
 
-describe('shipped bundle still contains speechSynthesis', () => {
-  test('dist script includes speechSynthesis when a build exists', () => {
+describe('shipped bundle still contains the watchdog cancel', () => {
+  test('the index script passes the watchdog marker to cancel when a build exists', () => {
     const dist = path.join(import.meta.dir, '../..', 'dist')
     if (!existsSync(dist)) return
-    const assetsDir = path.join(dist, 'assets')
-    expect(existsSync(assetsDir)).toBe(true)
     const html = readFileSync(path.join(dist, 'index.html'), 'utf8')
-    const hit = readdirSync(assetsDir).find((name: string) => {
-      if (!name.endsWith('.js')) return false
-      const body = readFileSync(path.join(assetsDir, name), 'utf8')
-      return body.includes('speechSynthesis') && html.includes(name)
-    })
-    expect(hit).toBeTruthy()
+    const cited = html.match(/\/assets\/[^"']+\.js/)
+    expect(cited).toBeTruthy()
+    const file = path.join(dist, cited![0].replace(/^\//, ''))
+    expect(existsSync(file)).toBe(true)
+    const body = readFileSync(file, 'utf8')
+    const marker = SPEECH_WATCHDOG_CANCEL_MARKER.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      '\\$&',
+    )
+    const inlined = new RegExp(`\\.cancel\\([\`"']${marker}[\`"']\\)`)
+    const named = body.match(
+      new RegExp(`([A-Za-z_$][\\w$]*)=[\`"']${marker}[\`"']`),
+    )
+    const passedToCancel =
+      inlined.test(body) ||
+      (named !== null && body.includes(`.cancel(${named[1]})`))
+    expect(passedToCancel).toBe(true)
   })
 })
