@@ -7,6 +7,7 @@ import {
   pickVoiceForLang,
   primeSpeechVoices,
   retainedSpeechUtterances,
+  SPEECH_START_WATCHDOG_MS,
   speakLemma,
   subscribeSpeakActivity,
   subscribeSpeechAvailability,
@@ -155,7 +156,7 @@ describe('HTW-speak-helper (#115) — utterance text is lemma only', () => {
   })
 })
 
-describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-fail', () => {
+describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, soft-fail', () => {
   test('first tap does not cancel an idle synth', async () => {
     const mock = mockSynth([{ lang: 'pt-BR', localService: true }])
     await speakLemma('casa', 'pt', {
@@ -168,26 +169,36 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     expect(mock.resumes).toBe(0)
   })
 
-  test('repeat tap cancels the in-flight utterance then speaks the new lemma', async () => {
+  test('repeat tap while the word is playing does not cancel or speak', async () => {
     const mock = mockSynth([{ lang: 'pt-BR', localService: true }])
     await speakLemma('casa', 'pt', {
       getSynth: () => mock.synth,
       createUtterance: utter,
     })
     const afterFirst = mock.order.length
+    const again = await speakLemma('mesa', 'pt', {
+      getSynth: () => mock.synth,
+      createUtterance: utter,
+    })
+    // Mock fires onstart inside speak, so the second call is already in
+    // the playing window. One speak. No cancel, no resume.
+    expect(again).toBe(true)
+    expect(mock.cancels).toBe(0)
+    expect(mock.resumes).toBe(0)
+    expect(mock.order[0]).toBe('speak')
+    expect(mock.order.slice(0, afterFirst)).toEqual(['speak'])
+    expect(mock.synth.paused).not.toBe(true)
+    expect(mock.order.slice(afterFirst)).toEqual([])
+    expect(mock.spoken.map((u) => u.text)).toEqual(['casa'])
+
+    mock.spoken[0]!.onend?.()
     await speakLemma('mesa', 'pt', {
       getSynth: () => mock.synth,
       createUtterance: utter,
     })
-    expect(mock.cancels).toBe(1)
-    // First tap was idle and unpaused: speak only. Repeat tap interrupts
-    // our utterance: cancel, speak, then resume even though paused is
-    // still false (the double must not flip it).
-    expect(mock.order[0]).toBe('speak')
-    expect(mock.order.slice(0, afterFirst)).toEqual(['speak'])
-    expect(mock.synth.paused).not.toBe(true)
-    expect(mock.order.slice(afterFirst)).toEqual(['cancel', 'speak', 'resume'])
-    expect(mock.resumes).toBe(1)
+    expect(mock.cancels).toBe(0)
+    expect(mock.resumes).toBe(0)
+    expect(mock.order).toEqual(['speak', 'speak'])
     expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
   })
 
@@ -228,7 +239,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     }
   })
 
-  test('a repeat tap speaks the new lemma in the same turn, not a deferred replay', async () => {
+  test('a repeat tap during playback does not speak again in that turn', async () => {
     const mock = mockSynth([{ lang: 'es-ES', localService: true }])
     const trace: string[] = []
     const speak = mock.synth.speak.bind(mock.synth)
@@ -245,11 +256,12 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
       getSynth: () => mock.synth,
       createUtterance: utter,
     })
-    expect(trace).toEqual(['casa', 'mesa'])
+    expect(trace).toEqual(['casa'])
     expect(await first).toBe(true)
     expect(await second).toBe(true)
-    expect(mock.cancels).toBe(1)
-    expect(mock.spoken.map((u) => u.text)).toEqual(['casa', 'mesa'])
+    expect(mock.cancels).toBe(0)
+    expect(mock.resumes).toBe(0)
+    expect(mock.spoken.map((u) => u.text)).toEqual(['casa'])
   })
 
   test('holds the utterance until onend so it cannot be collected early', async () => {
@@ -316,7 +328,8 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(ok).toBe(false)
     expect(retainedSpeechUtterances()).not.toContain(utterance)
-    expect(seen).toEqual([true, false])
+    // onerror before start does not flash the speaking flag on.
+    expect(seen).toEqual([false])
     unsub()
   })
 
@@ -373,13 +386,22 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     expect(paused.order).toEqual(['speak', 'resume'])
     expect(paused.resumes).toBe(1)
 
-    // Repeat tap of our own utterance still cancels, then speak, then resume.
+    // Playing: a second tap does not cancel, speak, or resume.
     await speakLemma('Auto', 'de', {
       getSynth: () => paused.synth,
       createUtterance: utter,
     })
-    expect(paused.order.slice(2)).toEqual(['cancel', 'speak', 'resume'])
-    expect(paused.cancels).toBe(1)
+    expect(paused.order).toEqual(['speak', 'resume'])
+    expect(paused.cancels).toBe(0)
+
+    paused.spoken[0]!.onend?.()
+    await speakLemma('Auto', 'de', {
+      getSynth: () => paused.synth,
+      createUtterance: utter,
+    })
+    expect(paused.order.slice(2)).toEqual(['speak', 'resume'])
+    expect(paused.cancels).toBe(0)
+    expect(paused.resumes).toBe(2)
   })
 
   test('copies voice.lang as BCP-47 and sets volume only when the utterance has it', async () => {
@@ -391,6 +413,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(plain.spoken[0]!.lang).toBe('de-DE')
     expect('volume' in plain.spoken[0]!).toBe(false)
+    plain.spoken[0]!.onend?.()
 
     const withVolume = utter('Haus')
     withVolume.volume = 0
@@ -449,7 +472,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     expect(mock.spoken[0]!.lang).toBe('es-ES')
   })
 
-  test('speaking activity is true while queued and false on end or drop', async () => {
+  test('speaking activity is true on start and false on end or drop', async () => {
     const seen: boolean[] = []
     const unsub = subscribeSpeakActivity((speaking) => {
       seen.push(speaking)
@@ -481,8 +504,154 @@ describe('HTW-speak-helper (#115) — in-gesture speak, cancel when busy, soft-f
     })
     expect(droppedOk).toBe(false)
     expect(retainedSpeechUtterances()).not.toContain(droppedUtterance)
-    expect(seen).toEqual([true, false, true, false])
+    // Sync onerror never started, so it does not emit true before false.
+    expect(seen).toEqual([true, false, false])
     unsub()
+  })
+
+  test('silent speak settles false after the watchdog and the next tap does not cancel', async () => {
+    const first = utter('casa')
+    const second = utter('mesa')
+    const created = [first, second]
+    let createdIndex = 0
+    const order: string[] = []
+    let cancels = 0
+    let speakCount = 0
+    let armedAtSpeak = -1
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'pt-BR', localService: true }],
+      paused: false,
+      cancel: () => {
+        cancels += 1
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        speakCount += 1
+        if (speakCount === 1) armedAtSpeak = armed
+        order.push('speak')
+        // Neither onstart nor onerror. The second tap is a fresh speak
+        // after the watchdog, and that one does start.
+        if (speakCount > 1) u.onstart?.()
+      },
+    }
+    const seen: boolean[] = []
+    const unsub = subscribeSpeakActivity((speaking) => {
+      seen.push(speaking)
+    })
+    const realSetTimeout = globalThis.setTimeout
+    let armed = 0
+    let speakReturned = false
+    globalThis.setTimeout = ((...args: Parameters<typeof setTimeout>) => {
+      if (!speakReturned) armed += 1
+      return realSetTimeout(...args)
+    }) as typeof setTimeout
+    let settled: boolean | undefined
+    try {
+      const pending = speakLemma('casa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: () => {
+          const utterance = created[createdIndex] ?? utter('extra')
+          createdIndex += 1
+          return utterance
+        },
+      }).then((ok) => {
+        settled = ok
+        return ok
+      })
+      speakReturned = true
+      // No timer before speak() returns. One watchdog after it returns.
+      expect(armedAtSpeak).toBe(0)
+      expect(armed).toBe(1)
+      expect(order).toEqual(['speak'])
+      await Promise.resolve()
+      expect(settled).toBeUndefined()
+      expect(retainedSpeechUtterances()).toContain(first)
+      expect(seen).toEqual([])
+      globalThis.setTimeout = realSetTimeout
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, SPEECH_START_WATCHDOG_MS + 50)
+      })
+      expect(settled).toBe(false)
+      expect(await pending).toBe(false)
+      expect(retainedSpeechUtterances()).toContain(first)
+      expect(seen).toEqual([])
+      expect(order).toEqual(['speak'])
+      expect(cancels).toBe(0)
+
+      const again = await speakLemma('mesa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: () => {
+          const utterance = created[createdIndex] ?? utter('extra')
+          createdIndex += 1
+          return utterance
+        },
+      })
+      expect(again).toBe(true)
+      expect(cancels).toBe(0)
+      expect(order).toEqual(['speak', 'speak'])
+      expect(order).not.toContain('cancel')
+      expect(order).not.toContain('resume')
+      // The silent utterance stays retained until its own onend.
+      expect(retainedSpeechUtterances()).toContain(first)
+      first.onend?.()
+      expect(retainedSpeechUtterances()).not.toContain(first)
+      second.onend?.()
+    } finally {
+      globalThis.setTimeout = realSetTimeout
+      unsub()
+    }
+  })
+
+  test('late onstart after the watchdog shows speaking and leaves the promise false', async () => {
+    const utterance = utter('casa')
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'pt-BR', localService: true }],
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: () => {
+        order.push('speak')
+      },
+    }
+    const seen: boolean[] = []
+    const unsub = subscribeSpeakActivity((speaking) => {
+      seen.push(speaking)
+    })
+    try {
+      const pending = speakLemma('casa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: () => utterance,
+      })
+      await new Promise((resolve) => {
+        setTimeout(resolve, SPEECH_START_WATCHDOG_MS + 50)
+      })
+      expect(await pending).toBe(false)
+      expect(seen).toEqual([])
+      expect(retainedSpeechUtterances()).toContain(utterance)
+      expect(typeof utterance.onstart).toBe('function')
+      expect(typeof utterance.onend).toBe('function')
+
+      utterance.onstart?.()
+      expect(seen).toEqual([true])
+      expect(retainedSpeechUtterances()).toContain(utterance)
+      utterance.onend?.()
+      expect(seen).toEqual([true, false])
+      expect(retainedSpeechUtterances()).not.toContain(utterance)
+      expect(order).toEqual(['speak'])
+      // Already settled false. A late start must not flip it.
+      expect(await pending).toBe(false)
+    } finally {
+      unsub()
+    }
   })
 })
 
