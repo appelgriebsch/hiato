@@ -314,33 +314,44 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(endCard).toContain('(synonyms ?? [])')
     expect(endCard).toContain('.slice(0, 3)')
 
+    const teach = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
+    expect(endCard).toContain('<LemmaTeach')
+    expect(endCard).toContain('gloss={teachGloss}')
+    expect(endCard).toContain('synonyms={teachSynonyms}')
+
     // Gloss is teach headline (larger / ink) — not muted buried chip
-    expect(endCard).toContain(
+    expect(teach).toContain(
       'className="mt-3 text-lg font-semibold leading-snug text-ink"',
     )
-    expect(endCard).toContain('{teachGloss}')
+    expect(teach).toContain('{gloss}')
     // Old buried gloss chip must not remain
     expect(endCard).not.toContain(
       'mt-2 text-[13px] leading-relaxed text-ink-muted">{gloss}',
     )
+    expect(teach).not.toContain(
+      'mt-2 text-[13px] leading-relaxed text-ink-muted">{gloss}',
+    )
 
     // Lemma revealed but not sole hero when gloss present (demoted vs text-lg font-semibold)
-    expect(endCard).toContain("'mt-0.5 text-base font-medium'")
-    expect(endCard).toContain('The word was')
-    expect(endCard).toContain('{word}')
+    expect(teach).toContain("'mt-0.5 text-base font-medium'")
+    expect(teach).toContain('The word was')
+    expect(teach).toContain('{word}')
 
     // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
-    expect(endCard).toContain(
+    expect(teach).toContain(
       'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink',
     )
-    expect(endCard).not.toContain(
+    expect(teach).not.toContain(
       'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted',
     )
-    expect(endCard).toContain('teachSynonyms.map')
+    expect(teach).toContain('synonyms.map')
 
     // Silent omit: trim empty gloss; no NO_HINT_COPY / faint placeholder in teach panel
-    expect(endCard).toContain('{teachGloss ? (')
+    expect(teach).toContain('{gloss ? (')
     expect(endCard).not.toContain('NO_HINT_COPY')
+    expect(teach).not.toContain('NO_HINT_COPY')
     expect(endCard).not.toMatch(/No hint|no hint available|Add a gloss/i)
     const panelStart = endCard.indexOf('rounded-xl border border-line bg-raised/80')
     const panelEnd = endCard.indexOf('<Card className="w-full text-left">', panelStart)
@@ -514,9 +525,12 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     expect(src).toContain('<LearnerHint entry={wordEntry} lang={lang} />')
     const endAt = src.indexOf('function EndCard(')
     const endCard = src.slice(endAt)
-    expect(endCard).toContain('text-lg font-semibold leading-snug text-ink')
+    const teach = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
+    expect(teach).toContain('text-lg font-semibold leading-snug text-ink')
     expect(endCard).toContain('{teachGloss}')
-    expect(endCard).toContain('The word was')
+    expect(teach).toContain('The word was')
     expect(endCard).not.toContain('<LearnerHint')
     // Warning #1: Reveal → "Word revealed"; lives → "Out of lives"
     expect(endCard).toContain("revealed ? 'Word revealed' : 'Out of lives'")
@@ -619,12 +633,15 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(endAt).toBeGreaterThan(0)
     const endCard = src.slice(endAt)
 
+    const teach = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
     expect(src).toContain("from '@/lib/speech'")
-    expect(endCard).toContain('data-endcard-speak')
-    expect(endCard).toContain('speakLemma(word, lang)')
-    expect(endCard).toContain('speakLemmaAriaLabel(lang)')
-    expect(endCard).toContain('min-h-11')
-    expect(endCard).toContain('min-w-11')
+    expect(teach).toContain('data-endcard-speak')
+    expect(teach).toContain('speakLemma(word, lang)')
+    expect(teach).toContain('speakLemmaAriaLabel(lang)')
+    expect(teach).toContain('min-h-11')
+    expect(teach).toContain('min-w-11')
 
     // Daily + practice only — not pocket
     expect(endCard).toContain(
@@ -636,24 +653,25 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     // No auto-play. The only speakLemma call is inside the button's own
     // native click listener (iOS user-activation). React onClick on this
     // button would double-fire, so the control must not set onClick.
-    expect(endCard).toContain('speakLemma(word, lang)')
-    expect(endCard.split('speakLemma(').length - 1).toBe(1)
-    expect(endCard).toContain("addEventListener('click', onClick)")
-    expect(endCard).toContain("removeEventListener('click', onClick)")
-    expect(endCard).toContain('ref={speakBtnRef}')
+    expect(teach).toContain('speakLemma(word, lang)')
+    expect(teach.split('speakLemma(').length - 1).toBe(1)
+    expect(endCard).not.toContain('speakLemma(')
+    expect(teach).toContain("addEventListener('click', onClick)")
+    expect(teach).toContain("removeEventListener('click', onClick)")
+    expect(teach).toContain('ref={speakBtnRef}')
     // Lemma only — not gloss. Options must not replace (word, lang).
-    expect(endCard).toMatch(/speakLemma\(\s*word\s*,\s*lang\s*\)/)
-    expect(endCard).not.toMatch(/speakLemma\(\s*gloss/)
-    expect(endCard).not.toMatch(/speakLemma\(\s*teachGloss/)
+    expect(teach).toMatch(/speakLemma\(\s*word\s*,\s*lang\s*\)/)
+    expect(teach).not.toMatch(/speakLemma\(\s*gloss/)
+    expect(teach).not.toMatch(/speakLemma\(\s*teachGloss/)
     const speakEffects: string[] = []
-    for (const hook of ['useEffect', 'useLayoutEffect'] as const) {
-      const bodies = effectCallbackBodies(endCard, hook)
-      expect(bodies.length).toBeGreaterThan(0)
-      for (const body of bodies) {
-        if (!body.includes('speakLemma(')) continue
-        expect(hook).toBe('useEffect')
-        speakEffects.push(body)
-      }
+    const effectBodies = effectCallbackBodies(teach, 'useEffect')
+    expect(effectBodies.length).toBeGreaterThan(0)
+    for (const body of effectCallbackBodies(teach, 'useLayoutEffect')) {
+      expect(body).not.toContain('speakLemma(')
+    }
+    for (const body of effectBodies) {
+      if (!body.includes('speakLemma(')) continue
+      speakEffects.push(body)
     }
     expect(speakEffects).toHaveLength(1)
     const speakEffect = speakEffects[0]!
@@ -667,8 +685,8 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(speakEffect).not.toContain('onClick()')
 
     // ≥44px icon-only target; focus ring nearer 3:1 (not accent-fg/40 ~1.8:1)
-    const btnAt = endCard.indexOf('data-endcard-speak')
-    const btn = endCard.slice(btnAt, endCard.indexOf('</button>', btnAt))
+    const btnAt = teach.indexOf('data-endcard-speak')
+    const btn = teach.slice(btnAt, teach.indexOf('</button>', btnAt))
     expect(btn).toContain('min-h-11')
     expect(btn).toContain('min-w-11')
     expect(btn).toContain('focus-visible:ring-2')
@@ -682,15 +700,17 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(btn).not.toMatch(/Stop|voice picker|autoplay/i)
 
     // Control sits next to the revealed lemma
-    const wordAt = endCard.indexOf('{word}')
-    const speakAt = endCard.indexOf('data-endcard-speak')
+    const wordAt = teach.indexOf('{word}')
+    const speakAt = teach.indexOf('data-endcard-speak')
     expect(wordAt).toBeGreaterThan(0)
     expect(speakAt).toBeGreaterThan(wordAt)
     expect(speakAt - wordAt).toBeLessThan(400)
   })
 
   test('HTW-i18n-a11y (#117): aria-label via speakLemmaAriaLabel / SPEAK_LEMMA_ARIA', async () => {
-    const src = await pageSrc('Play.tsx')
+    const src = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
     expect(src).toContain('speakLemmaAriaLabel')
     expect(src).toContain("from '@/packs/labels'")
 
@@ -781,24 +801,32 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(earlyLatch).toBeGreaterThan(latchAt)
     // EndCard click path remains speakLemma only — no unlock/cancel there.
     const endCard = src.slice(src.indexOf('function EndCard('))
-    expect(endCard).toContain('speakLemma(word, lang)')
+    const teach = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
+    expect(teach).toContain('speakLemma(word, lang)')
+    expect(teach).not.toContain('unlockSpeechGesture')
+    expect(teach.split('speakLemma(').length - 1).toBe(1)
+    expect(endCard).not.toContain('speakLemma(')
     expect(endCard).not.toContain('unlockSpeechGesture')
-    expect(endCard.split('speakLemma(').length - 1).toBe(1)
   })
 
   test('HTW-tests (#118): hide when unsupported; utterance is lemma; win and lose share control', async () => {
     const src = await pageSrc('Play.tsx')
     const endCard = src.slice(src.indexOf('function EndCard('))
+    const teach = await Bun.file(
+      new URL('../components/play/LemmaTeach.tsx', import.meta.url),
+    ).text()
 
     // Hidden when speech unsupported / no usable voice
     expect(endCard).toContain('showSpeakControl')
-    expect(endCard).toContain('{showSpeakControl ? (')
+    expect(endCard).toContain('showSpeak={showSpeakControl}')
     expect(endCard).toContain('subscribeSpeechAvailability')
 
     // Speaks lemma (`word`) only — not gloss
-    expect(endCard).toContain('speakLemma(word, lang)')
-    expect(endCard).not.toMatch(/speakLemma\(\s*gloss/)
-    expect(endCard).not.toMatch(/speakLemma\(\s*teachGloss/)
+    expect(teach).toContain('speakLemma(word, lang)')
+    expect(teach).not.toMatch(/speakLemma\(\s*gloss/)
+    expect(teach).not.toMatch(/speakLemma\(\s*teachGloss/)
 
     // Same EndCard for win and lose — speak gate is mode-based, not won-based
     expect(endCard).toContain("mode === 'daily' || mode === 'practice'")

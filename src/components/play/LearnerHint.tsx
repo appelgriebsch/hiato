@@ -32,7 +32,9 @@ export function LearnerHint({
         className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-raised/40 px-3 py-2.5 text-center"
         aria-label={empty}
       >
-        <p className="text-[11px] leading-snug text-ink-faint">{empty}</p>
+        <p lang={lang} className="text-[11px] leading-snug text-ink-faint">
+          {empty}
+        </p>
       </div>
     )
   }
@@ -40,7 +42,9 @@ export function LearnerHint({
   return (
     <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center">
       {gloss ? (
-        <p className="text-sm font-medium leading-snug text-ink">{gloss}</p>
+        <p lang={lang} className="text-sm font-medium leading-snug text-ink">
+          {gloss}
+        </p>
       ) : null}
       {synonyms.length > 0 && (
         <div
@@ -51,6 +55,7 @@ export function LearnerHint({
           {synonyms.map((s) => (
             <span
               key={s}
+              lang={lang}
               className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
             >
               {s}
