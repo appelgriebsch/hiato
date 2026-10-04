@@ -5,7 +5,7 @@ import type { PackLang } from '@/packs/schema'
 
 /**
  * Post-round gloss, lemma, and tap-to-speak.
- * pointerup and click are native so iOS keeps the user gesture (ADR 0037).
+ * click is native so iOS keeps the user gesture (ADR 0037).
  */
 export function LemmaTeach({
   lang,
@@ -42,40 +42,20 @@ export function LemmaTeach({
   useEffect(() => {
     const btn = speakBtnRef.current
     if (!btn) return
-    // One speak per tap. pointerup covers the touch gesture; a keyboard
-    // click has no pointerup and still speaks. The following click must
-    // not speak again. A false from speakLemma, including the three-second
-    // timer, shows the failure line. A late onstart sets playing.
-    let spokeOnPointerUp = false
-    const speakFromGesture = () => {
+    // WebKit on iOS drops speechSynthesis.speak() unless the call is
+    // inside the synthetic click. A touch-end listener is not that
+    // gesture, and speaking there then ignoring click leaves the phone silent.
+    // A keyboard activation is also a click. A false from speakLemma,
+    // including the three-second timer, shows the failure line.
+    const onClick = () => {
       void speakLemma(word, lang).then((ok) => {
         if (ok) return
         setSpeakNote((note) => (note === 'playing' ? note : 'failed'))
       })
     }
-    const onPointerUp = (event: PointerEvent) => {
-      if (event.button !== 0) return
-      spokeOnPointerUp = true
-      speakFromGesture()
-    }
-    const onClick = () => {
-      if (spokeOnPointerUp) {
-        spokeOnPointerUp = false
-        return
-      }
-      speakFromGesture()
-    }
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Enter' && event.key !== ' ') return
-      spokeOnPointerUp = false
-    }
-    btn.addEventListener('pointerup', onPointerUp)
     btn.addEventListener('click', onClick)
-    btn.addEventListener('keydown', onKeyDown)
     return () => {
-      btn.removeEventListener('pointerup', onPointerUp)
       btn.removeEventListener('click', onClick)
-      btn.removeEventListener('keydown', onKeyDown)
     }
   }, [showSpeak, word, lang])
 
