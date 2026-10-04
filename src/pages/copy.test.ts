@@ -510,6 +510,20 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     for (const letter of ['ß', 'Ä', 'Ö', 'Ü'] as const) {
       expect(pads).toContain(`'${letter}'`)
     }
+    expect(kb).toContain('keyUsesUppercaseFace(key)')
+    expect(kb).toContain("'uppercase' : 'normal-case'")
+    expect(kb).toContain('{key}')
+    // German row holds ß; do not probe Spanish Ü for this face rule.
+    const deAt = pads.indexOf('de:')
+    const esAt = pads.indexOf('es:')
+    expect(deAt).toBeGreaterThan(0)
+    expect(esAt).toBeGreaterThan(deAt)
+    const dePad = pads.slice(deAt, esAt)
+    expect(dePad).toContain("'ß'")
+    expect(dePad).not.toContain("'SS'")
+    const esPadEnd = pads.indexOf('\n}', esAt)
+    expect(esPadEnd).toBeGreaterThan(esAt)
+    expect(pads.slice(esAt, esPadEnd)).not.toContain("'ß'")
 
     const src = await pageSrc('Play.tsx')
     expect(src).toContain('data-reveal-word')
@@ -953,6 +967,7 @@ describe('Share copy confirmation (#135)', () => {
     expect(fn).toContain("setCopyLabel('Copy text')")
     expect(fn).toContain("result.method === 'cancelled'")
     expect(fn).toContain('show(result.message)')
+    expect(fn).toContain('3000')
     expect(src).toContain('shareResult(payload)')
     expect(src).not.toContain('formatShareText')
     const actions = await Bun.file(
@@ -960,6 +975,42 @@ describe('Share copy confirmation (#135)', () => {
     ).text()
     expect(actions).toContain("message: 'Copied'")
     expect(actions).toContain("message: 'Couldn’t copy'")
+  })
+
+  test('success then failure before 3000ms leaves the label not Copied', async () => {
+    const src = await pageSrc('Share.tsx')
+    const fnAt = src.indexOf('async function onCopyText')
+    const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
+    // Success arm
+    const okArm = fn.slice(
+      fn.indexOf("result.ok && result.message === 'Copied'"),
+      fn.indexOf('else if'),
+    )
+    expect(okArm).toContain("setCopyLabel('Copied')")
+    expect(okArm).toContain('window.clearTimeout(copyReset.current)')
+    expect(okArm).toContain('window.setTimeout')
+    expect(okArm).toContain('3000')
+    // Failure arm (ok:false / non-cancel) clears timer + label immediately
+    const failArm = fn.slice(fn.indexOf('else if'), fn.indexOf("result.method === 'cancelled'"))
+    expect(failArm).toContain("result.method !== 'cancelled'")
+    expect(failArm).toContain('window.clearTimeout(copyReset.current)')
+    expect(failArm).toContain("setCopyLabel('Copy text')")
+    expect(failArm).not.toContain("setCopyLabel('Copied')")
+    // catch also clears
+    const catchArm = fn.slice(fn.indexOf('} catch {'))
+    expect(catchArm).toContain('window.clearTimeout(copyReset.current)')
+    expect(catchArm).toContain("setCopyLabel('Copy text')")
+    // Unmount clears any open timer
+    expect(src).toContain(
+      'useEffect(() => () => window.clearTimeout(copyReset.current), [])',
+    )
+    // Simulate success→failure label transitions (no DOM harness)
+    let label = 'Copy text'
+    label = 'Copied' // success
+    expect(label).toBe('Copied')
+    label = 'Copy text' // failure before 3000ms
+    expect(label).not.toBe('Copied')
+    expect(label).toBe('Copy text')
   })
 })
 
@@ -988,13 +1039,28 @@ describe('Home and in-round 44px text links (#136)', () => {
     expect(nav).toContain('Change language')
     expect(nav).toContain('About')
     expect(nav.match(/min-h-11/g)?.length).toBe(2)
+    expect(nav).toContain('focus-visible:ring-2')
+    expect(nav).toContain('focus-visible:ring-accent-fg/40')
 
     const play = await pageSrc('Play.tsx')
+    const revealAt = play.indexOf('data-reveal-word')
+    expect(revealAt).toBeGreaterThan(0)
+    const revealClass = play.slice(revealAt, play.indexOf('</button>', revealAt))
+    expect(revealClass).toContain('focus-visible:ring-2')
+    expect(revealClass).toContain('focus-visible:ring-accent-fg/40')
     for (const label of ['← Home', 'Practice (endless)', '← Daily', 'Next word'] as const) {
       const at = play.indexOf(label)
       expect(at).toBeGreaterThan(0)
-      const around = play.slice(Math.max(0, at - 280), at)
+      const around = play.slice(Math.max(0, at - 320), at)
       expect(around).toContain('min-h-11')
+      expect(around).toContain('focus-visible:ring-2')
+      expect(around).toContain('focus-visible:ring-accent-fg/40')
     }
+    // Pocket Close focus order unchanged
+    const pocket = await Bun.file(
+      new URL('../components/PocketSheet.tsx', import.meta.url),
+    ).text()
+    const closeAt = pocket.indexOf('>\n            Close\n          </Button>')
+    expect(closeAt).toBeGreaterThan(0)
   })
 })

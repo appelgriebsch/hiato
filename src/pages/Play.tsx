@@ -706,7 +706,7 @@ function PlayRound({
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
               <Link
                 to="/"
-                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
               >
                 ← Home
               </Link>
@@ -714,7 +714,7 @@ function PlayRound({
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline-offset-2 hover:underline"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
                 >
                   Practice (endless)
                 </button>
@@ -729,7 +729,7 @@ function PlayRound({
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
               <Link
                 to="/play?mode=daily"
-                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
               >
                 ← Daily
               </Link>
@@ -737,7 +737,7 @@ function PlayRound({
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg hover:underline"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
                 >
                   Next word
                 </button>
@@ -748,7 +748,7 @@ function PlayRound({
             <div className="mt-6 text-center">
               <Link
                 to="/"
-                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink"
+                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
               >
                 ← Home
               </Link>

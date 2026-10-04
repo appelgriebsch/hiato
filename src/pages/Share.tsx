@@ -62,10 +62,18 @@ export function Share() {
         setCopyLabel('Copied')
         window.clearTimeout(copyReset.current)
         copyReset.current = window.setTimeout(() => setCopyLabel('Copy text'), 3000)
+      } else if (result.method !== 'cancelled') {
+        // Failed retry while the Copied timer is open: drop the label now.
+        window.clearTimeout(copyReset.current)
+        copyReset.current = 0
+        setCopyLabel('Copy text')
       }
       if (result.method === 'cancelled') return
       show(result.message)
     } catch {
+      window.clearTimeout(copyReset.current)
+      copyReset.current = 0
+      setCopyLabel('Copy text')
       show('Couldn’t share')
     } finally {
       setBusy(false)
