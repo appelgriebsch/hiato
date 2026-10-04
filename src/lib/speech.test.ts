@@ -1,4 +1,6 @@
 import { beforeEach, describe, expect, test } from 'bun:test'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import path from 'node:path'
 import { PACK_LANGS, type PackLang } from '../packs/schema'
 import { SPEAK_LEMMA_ARIA, speakLemmaAriaLabel } from '../packs/labels'
 import {
@@ -40,8 +42,18 @@ function mockSynth(
 } {
   const spoken: SpeechUtteranceLike[] = []
   const order: string[] = []
+  // WebKit: speak appends. A later speak does not start until cancel
+  // or the head's onend/onerror. The first head starts immediately.
+  const queue: SpeechUtteranceLike[] = []
+  const started = new WeakSet<SpeechUtteranceLike>()
   let cancels = 0
   let resumes = 0
+  const startHead = () => {
+    const head = queue[0]
+    if (!head || started.has(head)) return
+    started.add(head)
+    head.onstart?.()
+  }
   const synth: SpeechSynthLike = {
     getVoices: () => voices,
     paused: init.paused,
@@ -50,6 +62,8 @@ function mockSynth(
       order.push('cancel')
       // Do not set paused. Chrome often leaves the flag false until after
       // cancel() returns; flipping it here would hide the repeat-tap bug.
+      const dropped = queue.splice(0)
+      for (const utterance of dropped) utterance.onerror?.()
     },
     resume: () => {
       resumes += 1
@@ -58,8 +72,22 @@ function mockSynth(
     speak: (u) => {
       spoken.push(u)
       order.push('speak')
-      // Happy path: the engine accepts the utterance in this turn.
-      u.onstart?.()
+      queue.push(u)
+      const prevEnd = u.onend
+      const prevErr = u.onerror
+      u.onend = () => {
+        const index = queue.indexOf(u)
+        if (index >= 0) queue.splice(index, 1)
+        prevEnd?.()
+        startHead()
+      }
+      u.onerror = () => {
+        const index = queue.indexOf(u)
+        if (index >= 0) queue.splice(index, 1)
+        prevErr?.()
+        startHead()
+      }
+      if (queue.length === 1) startHead()
     },
   }
   return {
@@ -226,8 +254,8 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       expect(trace).toEqual(['speak', 'returned'])
       expect(armed).toBe(0)
       expect(mock.cancels).toBe(0)
-      // Idle synth: speak is the first (and only) synth event. resume()
-      // before speak, or resume when not paused, is what staging swallowed.
+      // Idle synth: speak is the first (and only) synth event.
+      // resume() runs only when paused is already true.
       expect(mock.order[0]).toBe('speak')
       expect(mock.order).not.toContain('resume')
       expect(mock.resumes).toBe(0)
@@ -509,7 +537,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
     unsub()
   })
 
-  test('silent speak settles false after the watchdog and the next tap does not cancel', async () => {
+  test('unstarted speak is cancelled by the watchdog and the next tap speaks once', async () => {
     const first = utter('casa')
     const second = utter('mesa')
     const created = [first, second]
@@ -524,6 +552,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       cancel: () => {
         cancels += 1
         order.push('cancel')
+        // No onerror. The slot must still clear.
       },
       resume: () => {
         order.push('resume')
@@ -532,8 +561,7 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
         speakCount += 1
         if (speakCount === 1) armedAtSpeak = armed
         order.push('speak')
-        // Neither onstart nor onerror. The second tap is a fresh speak
-        // after the watchdog, and that one does start.
+        // First speak never starts. The speak after cancel does.
         if (speakCount > 1) u.onstart?.()
       },
     }
@@ -570,6 +598,20 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       expect(settled).toBeUndefined()
       expect(retainedSpeechUtterances()).toContain(first)
       expect(seen).toEqual([])
+
+      const during = await speakLemma('mesa', 'pt', {
+        getSynth: () => synth,
+        createUtterance: () => {
+          const utterance = created[createdIndex] ?? utter('extra')
+          createdIndex += 1
+          return utterance
+        },
+      })
+      // Before 1000ms the unstarted attempt is busy. No second speak.
+      expect(during).toBe(true)
+      expect(speakCount).toBe(1)
+      expect(cancels).toBe(0)
+      expect(order).toEqual(['speak'])
       globalThis.setTimeout = realSetTimeout
 
       await new Promise((resolve) => {
@@ -579,8 +621,9 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       expect(await pending).toBe(false)
       expect(retainedSpeechUtterances()).toContain(first)
       expect(seen).toEqual([])
-      expect(order).toEqual(['speak'])
-      expect(cancels).toBe(0)
+      expect(order).toEqual(['speak', 'cancel'])
+      expect(cancels).toBe(1)
+      expect(order).not.toContain('resume')
 
       const again = await speakLemma('mesa', 'pt', {
         getSynth: () => synth,
@@ -591,11 +634,11 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
         },
       })
       expect(again).toBe(true)
-      expect(cancels).toBe(0)
-      expect(order).toEqual(['speak', 'speak'])
-      expect(order).not.toContain('cancel')
+      expect(cancels).toBe(1)
+      expect(order).toEqual(['speak', 'cancel', 'speak'])
       expect(order).not.toContain('resume')
-      // The silent utterance stays retained until its own onend.
+      // cancel() did not fire onerror, so the silent utterance stays
+      // retained until its own onend.
       expect(retainedSpeechUtterances()).toContain(first)
       first.onend?.()
       expect(retainedSpeechUtterances()).not.toContain(first)
@@ -606,7 +649,57 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
     }
   })
 
-  test('late onstart after the watchdog shows speaking and leaves the promise false', async () => {
+  test('watchdog cancel that fires onerror still lets the next tap speak once', async () => {
+    const first = utter('casa')
+    const second = utter('mesa')
+    const created = [first, second]
+    let createdIndex = 0
+    const order: string[] = []
+    const synth: SpeechSynthLike = {
+      getVoices: () => [{ lang: 'pt-BR', localService: true }],
+      paused: false,
+      cancel: () => {
+        order.push('cancel')
+        first.onerror?.()
+      },
+      resume: () => {
+        order.push('resume')
+      },
+      speak: (u) => {
+        order.push('speak')
+        if (u === second) u.onstart?.()
+      },
+    }
+    const pending = speakLemma('casa', 'pt', {
+      getSynth: () => synth,
+      createUtterance: () => {
+        const utterance = created[createdIndex] ?? utter('extra')
+        createdIndex += 1
+        return utterance
+      },
+    })
+    await new Promise((resolve) => {
+      setTimeout(resolve, SPEECH_START_WATCHDOG_MS + 50)
+    })
+    expect(await pending).toBe(false)
+    expect(retainedSpeechUtterances()).not.toContain(first)
+    expect(order).toEqual(['speak', 'cancel'])
+
+    const again = await speakLemma('mesa', 'pt', {
+      getSynth: () => synth,
+      createUtterance: () => {
+        const utterance = created[createdIndex] ?? utter('extra')
+        createdIndex += 1
+        return utterance
+      },
+    })
+    expect(again).toBe(true)
+    expect(order).toEqual(['speak', 'cancel', 'speak'])
+    expect(order).not.toContain('resume')
+    second.onend?.()
+  })
+
+  test('late onstart after the watchdog does not take the slot back', async () => {
     const utterance = utter('casa')
     const order: string[] = []
     const synth: SpeechSynthLike = {
@@ -639,14 +732,15 @@ describe('HTW-speak-helper (#115) — in-gesture speak, ignore while playing, so
       expect(retainedSpeechUtterances()).toContain(utterance)
       expect(typeof utterance.onstart).toBe('function')
       expect(typeof utterance.onend).toBe('function')
+      expect(order).toEqual(['speak', 'cancel'])
+      expect(order).not.toContain('resume')
 
       utterance.onstart?.()
-      expect(seen).toEqual([true])
+      expect(seen).toEqual([])
       expect(retainedSpeechUtterances()).toContain(utterance)
       utterance.onend?.()
-      expect(seen).toEqual([true, false])
+      expect(seen).toEqual([false])
       expect(retainedSpeechUtterances()).not.toContain(utterance)
-      expect(order).toEqual(['speak'])
       // Already settled false. A late start must not flip it.
       expect(await pending).toBe(false)
     } finally {
@@ -1200,5 +1294,21 @@ describe('HTW-i18n-a11y (#117) — speak aria-label catalog', () => {
       const label = SPEAK_LEMMA_ARIA[lang]
       expect(label).not.toMatch(/settings|voice picker|accent|pronunciation score/i)
     }
+  })
+})
+
+describe('shipped bundle still contains speechSynthesis', () => {
+  test('dist script includes speechSynthesis when a build exists', () => {
+    const dist = path.join(import.meta.dir, '../..', 'dist')
+    if (!existsSync(dist)) return
+    const assetsDir = path.join(dist, 'assets')
+    expect(existsSync(assetsDir)).toBe(true)
+    const html = readFileSync(path.join(dist, 'index.html'), 'utf8')
+    const hit = readdirSync(assetsDir).find((name: string) => {
+      if (!name.endsWith('.js')) return false
+      const body = readFileSync(path.join(assetsDir, name), 'utf8')
+      return body.includes('speechSynthesis') && html.includes(name)
+    })
+    expect(hit).toBeTruthy()
   })
 })
