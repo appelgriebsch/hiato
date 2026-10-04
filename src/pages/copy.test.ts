@@ -651,14 +651,14 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(endCard).toContain('subscribeSpeechAvailability(lang, setSpeechOk)')
 
     // No auto-play. The only speakLemma call is inside the button's own
-    // native pointerup/click listener (iOS user-activation). React onClick
+    // native click listener. iOS drops speak() from pointerup, so that
+    // event must not speak and must not swallow the click. React onClick
     // on this button would double-fire, so the control must not set onClick.
     expect(teach).toContain('speakLemma(word, lang)')
     expect(teach.split('speakLemma(').length - 1).toBe(1)
     expect(endCard).not.toContain('speakLemma(')
-    expect(teach).toContain("addEventListener('pointerup', onPointerUp)")
+    expect(teach).not.toContain("addEventListener('pointerup'")
     expect(teach).toContain("addEventListener('click', onClick)")
-    expect(teach).toContain("removeEventListener('pointerup', onPointerUp)")
     expect(teach).toContain("removeEventListener('click', onClick)")
     expect(teach).toContain('ref={speakBtnRef}')
     // Lemma only — not gloss. Options must not replace (word, lang).
@@ -678,24 +678,19 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(speakEffects).toHaveLength(1)
     const speakEffect = speakEffects[0]!
     const lemmaCallAt = speakEffect.indexOf('speakLemma(')
-    const pointerUpFn = speakEffect.indexOf('const onPointerUp')
     const clickFn = speakEffect.indexOf('const onClick')
-    const addPointer = speakEffect.indexOf("addEventListener('pointerup'")
     const addClick = speakEffect.indexOf("addEventListener('click'")
     expect(lemmaCallAt).toBeGreaterThan(-1)
-    expect(pointerUpFn).toBeGreaterThan(lemmaCallAt)
-    expect(clickFn).toBeGreaterThan(pointerUpFn)
-    expect(addPointer).toBeGreaterThan(clickFn)
-    expect(addClick).toBeGreaterThan(addPointer)
+    expect(clickFn).toBeGreaterThan(-1)
+    expect(lemmaCallAt).toBeGreaterThan(clickFn)
+    expect(addClick).toBeGreaterThan(lemmaCallAt)
+    expect(speakEffect).not.toContain('pointerup')
+    expect(speakEffect).not.toContain('spokeOnPointerUp')
     // speak() is synchronous in the handler. Nothing yields before it.
     const beforeSpeak = speakEffect.slice(0, lemmaCallAt)
     expect(beforeSpeak).not.toContain('await ')
     expect(beforeSpeak).not.toContain('setTimeout')
     expect(beforeSpeak).not.toContain('queueMicrotask')
-    // One tap: pointerup speaks; the following click does not.
-    expect(speakEffect).toContain('spokeOnPointerUp = true')
-    expect(speakEffect).toContain('if (spokeOnPointerUp)')
-    expect(speakEffect.split('speakFromGesture()').length - 1).toBe(2)
     expect(speakEffect.split('speakLemma(').length - 1).toBe(1)
     // Timer false is allowed to paint the failure line, not only a same-turn false.
     expect(speakEffect).not.toContain('sameTurn')
@@ -705,7 +700,6 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(teach).toContain('Could not play the word.')
     // Registered, not invoked, when the effect runs.
     expect(speakEffect).not.toContain('onClick()')
-    expect(speakEffect).not.toContain('onPointerUp()')
 
     // ≥44px icon-only target; focus ring nearer 3:1 (not accent-fg/40 ~1.8:1)
     const btnAt = teach.indexOf('data-endcard-speak')
