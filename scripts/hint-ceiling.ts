@@ -1,6 +1,7 @@
 /**
- * Hint ceiling: A1–B1 gloss/synonym tokens must not sit in a strictly harder pack
- * band (or, for English, a harder CEFR-J/Octanove tag). Pure — no I/O.
+ * Hint ceiling: a gloss/synonym token fails when its easiest candidate band
+ * is strictly above the pack (pack lemma, stem, or English CEFR-J/Octanove tag).
+ * The scorer runs on every band. packs:check still fails only A1–B1. Pure — no I/O.
  */
 import { foldKey, type SelectLang } from './pack-select'
 import { isPackLang, type PackCefr, type PackLang } from '../src/packs/schema'
@@ -14,7 +15,7 @@ export const CEFR_RANK: Record<string, number> = {
   c2: 5,
 }
 
-/** Packs that receive the ceiling failure (subject bands). B2–C2 never fail. */
+/** Bands packs:check fails. The scorer itself runs on B2–C2 too. */
 export const HINT_CEILING_SUBJECT_BANDS = new Set(['a1', 'a2', 'b1'])
 
 /**
@@ -93,20 +94,22 @@ function candidatesFor(
   stemCache: HintCeilingInputs['stemCache'],
 ): { folded: string; viaStem: boolean }[] {
   const folded = foldKey(lang, surface)
-  const stems = stemLookup(stemCache, folded)
-  if (stems && stems.length > 0) {
-    return stems.map((s) => ({ folded: foldKey(lang, s), viaStem: true }))
+  const stems = stemLookup(stemCache, folded) ?? []
+  // Keep the surface even when stems exist, then take the easiest band.
+  // WASSER stems only to C2 WASSERN; the A1 surface must still be a candidate.
+  const out: { folded: string; viaStem: boolean }[] = [{ folded, viaStem: false }]
+  for (const s of stems) {
+    out.push({ folded: foldKey(lang, s), viaStem: true })
   }
-  return [{ folded, viaStem: false }]
+  return out
 }
 
 /**
  * Fail a token only when the easiest candidate band is strictly above the pack.
- * No pack/tag hit → pass. Subject packs b2/c1/c2 never fail.
+ * No pack/tag hit → pass. Scores every band; packs:check gates on A1–B1.
  */
 export function hintCeilingViolations(input: HintCeilingInputs): HintCeilingHit[] {
   const { lang, packBand, gloss, synonyms } = input
-  if (!isHintCeilingSubjectBand(packBand)) return []
 
   const hits: HintCeilingHit[] = []
   const seen = new Set<string>()
