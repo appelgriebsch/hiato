@@ -40,8 +40,9 @@ function membershipActive(): boolean {
 
 export const PACK_MIN = 350
 export const C2_MIN = 200
-export const SYNONYM_WARN = 0.8
-/** Fail C1/C2 only if synonym coverage is ~0 (pipeline broken). */
+/** Warn (do not fail) when B2, C1, or C2 synonym coverage is under 70%. */
+export const SYNONYM_WARN = 0.7
+/** Fail C1/C2 only if synonym coverage is ~0 (pipeline broken). Not applied to B2. */
 export const SYNONYM_BROKEN = 0.05
 
 const DENY = loadDenylist()
@@ -166,11 +167,10 @@ export function checkSynonymCoverage(
     }
     return { error: null, warn: null }
   }
-  if (pack.cefr !== 'c1' && pack.cefr !== 'c2') {
-    return { error: null, warn: null }
-  }
+  const scored = pack.cefr === 'b2' || pack.cefr === 'c1' || pack.cefr === 'c2'
+  if (!scored) return { error: null, warn: null }
   const pct = synonymCoverage(pack)
-  if (pct < SYNONYM_BROKEN) {
+  if ((pack.cefr === 'c1' || pack.cefr === 'c2') && pct < SYNONYM_BROKEN) {
     return {
       error: `${rel}: C1/C2 synonym coverage ${(pct * 100).toFixed(0)}% looks broken (pipeline ~0)`,
       warn: null,
@@ -179,7 +179,7 @@ export function checkSynonymCoverage(
   if (pct < SYNONYM_WARN) {
     return {
       error: null,
-      warn: `${rel}: synonym coverage ${(pct * 100).toFixed(0)}% < 80% (unique referents allowed; not failing)`,
+      warn: `${rel}: synonym coverage ${(pct * 100).toFixed(0)}% < ${(SYNONYM_WARN * 100).toFixed(0)}% (unique referents allowed; not failing)`,
     }
   }
   return { error: null, warn: null }

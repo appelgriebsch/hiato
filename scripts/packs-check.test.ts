@@ -16,6 +16,7 @@ import {
   requiresCcBySa,
   validatePack,
   buildLemmaEasiestByLang,
+  isHintCeilingEnforcedRel,
 } from './packs-check-lib'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
@@ -300,7 +301,7 @@ describe('packs:check A1–B1 synonym floor (#24)', () => {
 })
 
 describe('packs:check C1/C2 synonyms', () => {
-  test('warns below 80% but fails only near 0', () => {
+  test('warns below 70% but fails only near 0', () => {
     const lemmas = Array.from({ length: 10 }, (_, i) => ({
       word: `W${i}`,
       gloss: 'x',
@@ -311,17 +312,57 @@ describe('packs:check C1/C2 synonyms', () => {
       pack({ lang: 'en', cefr: 'c1', lemmas }),
     )
     expect(warn.error).toBeNull()
-    expect(warn.warn).toMatch(/< 80%/)
+    expect(warn.warn).toMatch(/< 70%/)
 
     const broken = checkSynonymCoverage(
-      'en/c2.json',
+      'en/c1.json',
       pack({
         lang: 'en',
-        cefr: 'c2',
-        lemmas: Array.from({ length: 10 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
+        cefr: 'c1',
+        lemmas: Array.from({ length: 20 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
       }),
     )
     expect(broken.error).toMatch(/broken/)
+    expect(broken.warn).toBeNull()
+  })
+})
+
+describe('packs:check B2 synonym warn (#140)', () => {
+  test('warns at 69%, does not error at 0%, and is quiet at 70%', () => {
+    const at69 = Array.from({ length: 100 }, (_, i) => ({
+      word: `W${i}`,
+      gloss: 'x',
+      ...(i < 69 ? { synonyms: ['alt'] } : {}),
+    }))
+    const warn = checkSynonymCoverage(
+      'en/b2.json',
+      pack({ lang: 'en', cefr: 'b2', lemmas: at69 }),
+    )
+    expect(warn.error).toBeNull()
+    expect(warn.warn).toMatch(/69% < 70%/)
+
+    const at0 = checkSynonymCoverage(
+      'en/b2.json',
+      pack({
+        lang: 'en',
+        cefr: 'b2',
+        lemmas: Array.from({ length: 10 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
+      }),
+    )
+    expect(at0.error).toBeNull()
+    expect(at0.warn).toMatch(/< 70%/)
+
+    const at70 = Array.from({ length: 10 }, (_, i) => ({
+      word: `W${i}`,
+      gloss: 'x',
+      ...(i < 7 ? { synonyms: ['alt'] } : {}),
+    }))
+    const ok = checkSynonymCoverage(
+      'en/b2.json',
+      pack({ lang: 'en', cefr: 'b2', lemmas: at70 }),
+    )
+    expect(ok.error).toBeNull()
+    expect(ok.warn).toBeNull()
   })
 })
 
@@ -412,6 +453,8 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       enTags,
     )
     expect(b2).toEqual([])
+    expect(isHintCeilingEnforcedRel('en/b2.json')).toBe(false)
+    expect(isHintCeilingEnforcedRel('en/a1.json')).toBe(true)
   })
 
   test('enforces de/a1–b1; de/b2 with a hard gloss does not error', () => {
