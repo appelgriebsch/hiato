@@ -7,6 +7,7 @@
  * Usage:
  *   bun run scripts/repair-b2-c2-hints.ts en/b2.json
  *   bun run scripts/repair-b2-c2-hints.ts --replace-only pt/c1.json
+ *   bun run scripts/repair-b2-c2-hints.ts --replace-only es/c1.json
  *
  * Writes shipped glosses and chips under the bare lemma key
  * (expand-packs.ts reads that key). Does not run packs:expand.
@@ -84,6 +85,23 @@ const EN_B2_HAND_GLOSS: Record<string, string> = {
   COARSE: 'rough to the touch or not polite',
   DEFY: 'to go against what someone says',
   DETERMINED: 'set on a choice and not giving up',
+}
+
+
+/**
+ * Last-resort Spanish B2 glosses. "uvas" stems only to C2 UVE, so VINO
+ * cannot mention the fruit. Checked with hintCeilingViolations.
+ */
+const ES_B2_HAND_GLOSS: Record<string, string> = {
+  VINO: 'una bebida alcohólica que se toma en una copa',
+}
+
+
+/** C1 glosses whose offending token has no in-ceiling paraphrase the model kept. */
+const ES_C1_HAND_GLOSS: Record<string, string> = {
+  ENLATADO: 'guardado dentro de una lata metálica',
+  USB: 'una toma pequeña para pasar datos',
+  MACABRO: 'que causa horror o miedo',
 }
 
 type GlossCache = Record<string, string>
@@ -350,7 +368,10 @@ function asStringArray(raw: unknown): string[] | null {
 }
 
 function handGloss(lang: PackLang, cefr: PackCefr, word: string): string | null {
-  if (lang === 'en' && cefr === 'b2') return EN_B2_HAND_GLOSS[nfcUpper(word)] ?? null
+  const key = nfcUpper(word)
+  if (lang === 'en' && cefr === 'b2') return EN_B2_HAND_GLOSS[key] ?? null
+  if (lang === 'es' && cefr === 'b2') return ES_B2_HAND_GLOSS[key] ?? null
+  if (lang === 'es' && cefr === 'c1') return ES_C1_HAND_GLOSS[key] ?? null
   return null
 }
 
@@ -428,10 +449,88 @@ const EN_B2_CHIP_OVERRIDE: Record<string, string[]> = {
   DESKTOP: ['screen', 'computer screen'],
 }
 
+
+/**
+ * ES B2 chips the model got wrong: English copy, the wrong sense, or a
+ * hypernym for a unique referent (fruit, creature, name, body part, device).
+ * Empty means gloss-only. Each non-empty list was ceiling-checked.
+ */
+const ES_B2_CHIP_OVERRIDE: Record<string, string[]> = {
+  ADÁN: [],
+  ADEMA: [],
+  ADUANA: ['paso fronterizo'],
+  ALUCINAR: ['imaginar'],
+  ALTAVOZ: ['parlante'],
+  ATÚN: [],
+  BREAR: ['sofreír'],
+  BUITRE: [],
+  CARTUCHO: [],
+  CASILLERO: ['taquilla'],
+  CASUAL: ['al azar'],
+  CHULO: ['presumido'],
+  COLADO: ['filtrado'],
+  CONGELADOR: [],
+  CONSPIRAR: ['tramar'],
+  CREAMOS: ['inventamos'],
+  CUÁNTICO: [],
+  EDITORIAL: ['texto de opinión'],
+  ENTRANTE: ['nuevo'],
+  EPIDEMIA: ['brote'],
+  ESCOTILLA: [],
+  ESTE: ['levante'],
+  FIGURA: ['forma', 'dibujo'],
+  FINCA: ['granja'],
+  GUARIDO: ['refugio', 'cueva'],
+  HUMEDAD: [],
+  ÍNDICE: ['lista'],
+  INFANTERÍA: [],
+  INGLE: [],
+  INUNDACIÓN: ['crecida'],
+  ISRAELÍ: ['de Israel'],
+  LABERINTO: [],
+  LORO: [],
+  MANÍ: ['cacahuete', 'cacahuate'],
+  MÁRTIR: [],
+  MÉDULA: [],
+  MICRO: [],
+  MOSTAZA: [],
+  NATAL: ['de nacimiento'],
+  NEGADO: ['torpe'],
+  NOVENO: [],
+  NUCA: [],
+  OBSTANTE: ['opuesto'],
+  PABELLÓN: [],
+  PARACAÍDAS: [],
+  PERCEPCIÓN: ['sensación'],
+  PLASMA: [],
+  POSADO: [],
+  POSEÍDO: ['dominado'],
+  PREDICADOR: [],
+  RAMÓN: [],
+  REBAÑO: ['manada'],
+  RECEPTOR: ['radio'],
+  SIMÓN: ['sí', 'de acuerdo'],
+  SUCIEDAD: ['mugre'],
+  TESTÍCULO: [],
+  TIBIO: ['templado'],
+  TIMÓN: ['caña'],
+  TÍA: ['tita'],
+  TOPO: [],
+  TRUENO: ['estruendo'],
+  VINO: [],
+  VIRGINIDAD: [],
+  VÍSPERA: ['día anterior'],
+}
+
 function curatedChips(lang: PackLang, cefr: PackCefr, word: string): string[] | null {
+  const key = nfcUpper(word)
   if (lang === 'en' && cefr === 'b2') {
-    const hit = EN_B2_CHIP_OVERRIDE[nfcUpper(word)]
-    return hit ? [...hit] : null
+    const hit = EN_B2_CHIP_OVERRIDE[key]
+    return hit === undefined ? null : [...hit]
+  }
+  if (lang === 'es' && cefr === 'b2') {
+    const hit = ES_B2_CHIP_OVERRIDE[key]
+    return hit === undefined ? null : [...hit]
   }
   return null
 }
