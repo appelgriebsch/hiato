@@ -1,7 +1,7 @@
 /**
  * Hint ceiling: a gloss/synonym token fails when its easiest candidate band
  * is strictly above the pack (pack lemma, stem, or English CEFR-J/Octanove tag).
- * The scorer runs on every band. packs:check still fails only A1–B1. Pure — no I/O.
+ * The scorer runs on every band. packs:check fails A1–C2 (all 24 packs). Pure — no I/O.
  */
 import { foldKey, type SelectLang } from './pack-select'
 import { isPackLang, type PackCefr, type PackLang } from '../src/packs/schema'
@@ -15,12 +15,19 @@ export const CEFR_RANK: Record<string, number> = {
   c2: 5,
 }
 
-/** Bands packs:check fails. The scorer itself runs on B2–C2 too. */
-export const HINT_CEILING_SUBJECT_BANDS = new Set(['a1', 'a2', 'b1'])
+/** Bands packs:check fails. Nothing in the maps sits above C2. */
+export const HINT_CEILING_SUBJECT_BANDS = new Set([
+  'a1',
+  'a2',
+  'b1',
+  'b2',
+  'c1',
+  'c2',
+])
 
 /**
- * Enforce the ceiling when `rel` is a pack language + A1–B1 subject band
- * (issue #50: all twelve en/de/es/pt × a1/a2/b1). No per-rel allowlist.
+ * Enforce the ceiling when `rel` is a pack language + A1–C2 subject band
+ * (all twenty-four en/de/es/pt × a1–c2). No per-rel allowlist.
  */
 export function isHintCeilingEnforcedRel(rel: string): boolean {
   const m = /^([a-z]{2})\/([a-z][0-9])\.json$/.exec(rel)
@@ -106,7 +113,7 @@ function candidatesFor(
 
 /**
  * Fail a token only when the easiest candidate band is strictly above the pack.
- * No pack/tag hit → pass. Scores every band; packs:check gates on A1–B1.
+ * No pack/tag hit → pass. Scores every band; packs:check gates on A1–C2.
  */
 export function hintCeilingViolations(input: HintCeilingInputs): HintCeilingHit[] {
   const { lang, packBand, gloss, synonyms } = input

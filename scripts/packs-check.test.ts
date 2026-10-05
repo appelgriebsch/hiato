@@ -367,8 +367,8 @@ describe('packs:check B2 synonym warn (#140)', () => {
 })
 
 
-describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
-  test('enforces en/a1–b1; en/b2 with a hard gloss does not error', () => {
+describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51/#146)', () => {
+  test('enforces en/a1–c2; a harder token fails en/b2; a C2 token does not fail en/c2', () => {
     const snapshots = [
       {
         rel: 'en/a1.json',
@@ -400,6 +400,14 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
           lang: 'en',
           cefr: 'b2',
           lemmas: [{ word: 'FRIGHTEN', gloss: 'to terrify' }],
+        }),
+      },
+      {
+        rel: 'en/c2.json',
+        pack: pack({
+          lang: 'en',
+          cefr: 'c2',
+          lemmas: [{ word: 'TERRIFY', gloss: 'to terrify' }],
         }),
       },
     ]
@@ -452,12 +460,22 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       stemCache,
       enTags,
     )
-    expect(b2).toEqual([])
-    expect(isHintCeilingEnforcedRel('en/b2.json')).toBe(false)
+    expect(b2.length).toBeGreaterThan(0)
+    expect(b2[0]).toMatch(/hint ceiling/)
+    const c2 = checkHintCeiling(
+      'en/c2.json',
+      snapshots[4]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      enTags,
+    )
+    expect(c2).toEqual([])
+    expect(isHintCeilingEnforcedRel('en/b2.json')).toBe(true)
+    expect(isHintCeilingEnforcedRel('en/c2.json')).toBe(true)
     expect(isHintCeilingEnforcedRel('en/a1.json')).toBe(true)
   })
 
-  test('enforces de/a1–b1; de/b2 with a hard gloss does not error', () => {
+  test('enforces de/a1–c2; a harder token fails de/b2; a C2 token does not fail de/c2', () => {
     const snapshots = [
       {
         rel: 'de/a1.json',
@@ -489,12 +507,28 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
           lang: 'de',
           cefr: 'b2',
           lemmas: [
-            { word: 'MÖBEL', gloss: 'x' },
+            { word: 'MÖBEL', gloss: 'Eine Nuance' },
             { word: 'GEGENSTAND', gloss: 'x' },
             { word: 'ANGELEGENHEIT', gloss: 'x' },
             { word: 'TRIUMPH', gloss: 'x' },
             { word: 'ANSTRENGUNG', gloss: 'x' },
           ],
+        }),
+      },
+      {
+        rel: 'de/c1.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'c1',
+          lemmas: [{ word: 'NUANCE', gloss: 'x' }],
+        }),
+      },
+      {
+        rel: 'de/c2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'c2',
+          lemmas: [{ word: 'HÖHEPUNKT', gloss: 'ein Höhepunkt' }],
         }),
       },
     ]
@@ -539,10 +573,19 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       stemCache,
       null,
     )
-    expect(b2).toEqual([])
+    expect(b2.length).toBeGreaterThan(0)
+    expect(b2[0]).toMatch(/hint ceiling/)
+    const c2 = checkHintCeiling(
+      'de/c2.json',
+      snapshots[5]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(c2).toEqual([])
   })
 
-  test('enforces pt/a1–b1; pt/b2 with a hard gloss does not error', () => {
+  test('enforces pt/a1–c2; a harder token fails pt/b2; a C2 token does not fail pt/c2', () => {
     const snapshots = [
       {
         rel: 'pt/a1.json',
@@ -574,12 +617,28 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
           lang: 'pt',
           cefr: 'b2',
           lemmas: [
-            { word: 'CONJUNTO', gloss: 'x' },
+            { word: 'CONJUNTO', gloss: 'Uma nuance' },
             { word: 'QUALIDADE', gloss: 'x' },
             { word: 'ATIVIDADE', gloss: 'x' },
             { word: 'RELATIVO', gloss: 'x' },
             { word: 'PAREDES', gloss: 'x' },
           ],
+        }),
+      },
+      {
+        rel: 'pt/c1.json',
+        pack: pack({
+          lang: 'pt',
+          cefr: 'c1',
+          lemmas: [{ word: 'NUANCE', gloss: 'x' }],
+        }),
+      },
+      {
+        rel: 'pt/c2.json',
+        pack: pack({
+          lang: 'pt',
+          cefr: 'c2',
+          lemmas: [{ word: 'APOGEU', gloss: 'um apogeu' }],
         }),
       },
     ]
@@ -624,11 +683,20 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       stemCache,
       null,
     )
-    expect(b2).toEqual([])
+    expect(b2.length).toBeGreaterThan(0)
+    expect(b2[0]).toMatch(/hint ceiling/)
+    const c2 = checkHintCeiling(
+      'pt/c2.json',
+      snapshots[5]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(c2).toEqual([])
   })
 
 
-  test('enforces es/a1–b1; es/b2 with a hard gloss does not error', () => {
+  test('enforces es/a1–c2; a harder token fails es/b2; a C2 token does not fail es/c2', () => {
     const snapshots = [
       {
         rel: 'es/a1.json',
@@ -660,11 +728,27 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
           lang: 'es',
           cefr: 'b2',
           lemmas: [
-            { word: 'EDIFICIO', gloss: 'x' },
+            { word: 'EDIFICIO', gloss: 'Una sutileza' },
             { word: 'VEHÍCULO', gloss: 'x' },
             { word: 'PRENDA', gloss: 'x' },
             { word: 'FAMILIA', gloss: 'x' },
           ],
+        }),
+      },
+      {
+        rel: 'es/c1.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'c1',
+          lemmas: [{ word: 'SUTILEZA', gloss: 'x' }],
+        }),
+      },
+      {
+        rel: 'es/c2.json',
+        pack: pack({
+          lang: 'es',
+          cefr: 'c2',
+          lemmas: [{ word: 'MATIZ', gloss: 'un matiz' }],
         }),
       },
     ]
@@ -709,10 +793,19 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       stemCache,
       null,
     )
-    expect(b2).toEqual([])
+    expect(b2.length).toBeGreaterThan(0)
+    expect(b2[0]).toMatch(/hint ceiling/)
+    const c2 = checkHintCeiling(
+      'es/c2.json',
+      snapshots[5]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(c2).toEqual([])
   })
 
-  test('de/b2 gloss with de/c1 lemma does not fail; same gloss fails on a2 (#50)', () => {
+  test('de/b2 gloss with a de/c1 lemma fails; a C2 token does not fail de/c2; same gloss fails on a2 (#146)', () => {
     const hardGloss = 'Ein Triumph nach Anstrengung.'
     const snapshots = [
       {
@@ -742,6 +835,14 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
           ],
         }),
       },
+      {
+        rel: 'de/c2.json',
+        pack: pack({
+          lang: 'de',
+          cefr: 'c2',
+          lemmas: [{ word: 'HÖHEPUNKT', gloss: 'ein Höhepunkt' }],
+        }),
+      },
     ]
     const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
     const stemCache = {
@@ -757,7 +858,16 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51)', () => {
       stemCache,
       null,
     )
-    expect(b2).toEqual([])
+    expect(b2.length).toBeGreaterThan(0)
+    expect(b2[0]).toMatch(/hint ceiling/)
+    const c2 = checkHintCeiling(
+      'de/c2.json',
+      snapshots[3]!.pack,
+      lemmaEasiestByLang,
+      stemCache,
+      null,
+    )
+    expect(c2).toEqual([])
     const a2 = checkHintCeiling(
       'de/a2.json',
       snapshots[0]!.pack,

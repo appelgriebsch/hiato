@@ -98,12 +98,31 @@ describe('hint ceiling helper', () => {
     expect(hits.some((h) => h.token.toLowerCase() === 'feeling')).toBe(false)
   })
 
-  test('subject bands stay A1–B1 so a B2 rel is not enforced', () => {
-    expect([...HINT_CEILING_SUBJECT_BANDS].sort()).toEqual(['a1', 'a2', 'b1'])
-    expect(isHintCeilingEnforcedRel('de/b2.json')).toBe(false)
-    expect(isHintCeilingEnforcedRel('en/c1.json')).toBe(false)
-    expect(isHintCeilingEnforcedRel('en/c2.json')).toBe(false)
+  test('subject bands are A1–C2 so every pack rel is enforced', () => {
+    expect([...HINT_CEILING_SUBJECT_BANDS].sort()).toEqual([
+      'a1',
+      'a2',
+      'b1',
+      'b2',
+      'c1',
+      'c2',
+    ])
+    expect(isHintCeilingEnforcedRel('de/b2.json')).toBe(true)
+    expect(isHintCeilingEnforcedRel('en/c1.json')).toBe(true)
+    expect(isHintCeilingEnforcedRel('en/c2.json')).toBe(true)
     expect(isHintCeilingEnforcedRel('en/b1.json')).toBe(true)
+  })
+
+  test('a C2 token does not fail a C2 pack', () => {
+    const hits = hintCeilingViolations({
+      lang: 'de',
+      packBand: 'c2',
+      gloss: 'ein Höhepunkt',
+      synonyms: [],
+      lemmaEasiestBand: new Map([['HÖHEPUNKT', 'c2']]),
+      stemCache: new Map(),
+    })
+    expect(hits).toEqual([])
   })
 
   test('unlisted token passes', () => {
