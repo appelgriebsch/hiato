@@ -24,12 +24,12 @@ type KeyState = {
  * and never wrap into mid-row orphans. Render it full-bleed in the Layout
  * footer (`footerBleed`) so it sits in the bottom safe-area thumb zone.
  *
- * Hit-slop: the `<button>` is an invisible tap box — 48px tall, edge-to-edge
- * with its neighbours (no dead gap) — and the painted face is an inset
- * `<span>`. The face may paint slightly under 44px; the tap box stays ≥44px
- * tall and covers the whole column pitch. The visual gap is the inset
- * (`--pad-half-gap`: ≤4px gap until rows fit, 6–8px only when width allows —
- * see `[data-letter-pad]` in index.css).
+ * Hit-slop: the `<button>` is an invisible tap box — 48px tall (height floor
+ * ≥44 via `data-tap-min-h`), edge-to-edge with its neighbours (no dead gap) —
+ * and the painted face is an inset `<span>`. Width is the row’s column share
+ * (not a 44×44 square — phone columns are narrower). The visual gap is the
+ * inset (`--pad-half-gap`: ≤4px gap until rows fit; 6–8px rules exist but do
+ * not fire under `max-w-md` — see `[data-letter-pad]` in index.css).
  */
 export function Keyboard({
   lang,
@@ -54,7 +54,7 @@ export function Keyboard({
         aria-label="Letter pad"
         data-letter-pad
         data-pad-cols={cols}
-        data-tap-min="44"
+        data-tap-min-h="44"
         style={{ '--pad-cols': cols } as CSSProperties}
       >
         {pad.rows.map((row, ri) => (
@@ -114,7 +114,7 @@ function KeyRow({
           >
             <span
               className={[
-                'flex min-w-0 flex-1 items-center justify-center rounded-lg text-base font-semibold motion-key-wrong-dim group-focus-visible:ring-2 group-focus-visible:ring-accent-fg/60',
+                'flex min-w-0 flex-1 items-center justify-center rounded-lg text-base font-semibold motion-key-wrong-dim group-focus-visible:ring-2 group-focus-visible:ring-accent-fg',
                 keyUsesUppercaseFace(key) ? 'uppercase' : 'normal-case',
                 wrong
                   ? 'bg-wrong/70 text-ink'

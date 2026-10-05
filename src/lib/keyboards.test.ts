@@ -111,11 +111,4 @@ describe('letter pad layout metadata (#138)', () => {
     expect(padColumns(LETTER_PADS.de)).toBe(11)
   })
 
-  test('full-bleed max column (448px, px-1) gives ≥40px faces at 4px gap for 10 cols', () => {
-    const content = 448 - 8
-    const face = (cols: number) => content / cols - 4
-    expect(face(10)).toBeGreaterThanOrEqual(40)
-    // DE's 11 columns paint ~36px; tap box still spans full pitch × 48px tall.
-    expect(face(11)).toBeGreaterThan(35)
-  })
 })

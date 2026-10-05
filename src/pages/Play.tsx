@@ -707,7 +707,7 @@ function PlayRound({
           ) : null}
 
           {!finished && mode === 'daily' && (
-            <div className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -730,7 +730,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'practice' && (
-            <div className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
               <Link
                 to="/play?mode=daily"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -749,7 +749,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'pocket' && (
-            <div className="mt-auto pt-6 text-center">
+            <div className="pt-6 text-center">
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"

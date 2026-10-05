@@ -486,7 +486,7 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
 })
 
 describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
-  test('LetterGrid uses equal row helper; Keyboard ≥44px tap via hit-slop; Practice Reveal; B1–C2 no vowel caption', async () => {
+  test('LetterGrid uses equal row helper; Keyboard tap height ≥44 via hit-slop; Practice Reveal; B1–C2 no vowel caption', async () => {
     const grid = await Bun.file(
       new URL('../components/play/LetterGrid.tsx', import.meta.url),
     ).text()
@@ -497,7 +497,7 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     const kb = await Bun.file(
       new URL('../components/play/Keyboard.tsx', import.meta.url),
     ).text()
-    // #138 supersedes #137's wrap-to-44: nowrap rows, flex-1 faces, ≥44 tap box via hit-slop.
+    // #138 supersedes #137's wrap-to-44: nowrap rows, flex-1 faces, ≥44 tap height via hit-slop (width = row share).
     expect(kb).not.toContain('flex-wrap')
     expect(kb).not.toContain('min-w-[44px]')
     expect(kb).toContain('flex-nowrap')
@@ -505,7 +505,7 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     expect(kb).toContain('flex-1')
     expect(kb).toContain('h-12 min-h-11')
     expect(kb).toContain('data-hit-slop')
-    expect(kb).toContain('data-tap-min="44"')
+    expect(kb).toContain('data-tap-min-h="44"')
     expect(kb).toContain('LETTER_PADS[lang]')
     const pads = await Bun.file(
       new URL('../lib/keyboards.ts', import.meta.url),
@@ -1083,12 +1083,16 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     expect(kb).not.toContain('shrink-0')
   })
 
-  test('tap box ≥44 via hit-slop: invisible button cell, inset painted face', async () => {
+  test('tap height ≥44 via hit-slop: invisible button cell, inset painted face', async () => {
     const kb = await kbSrc()
-    // Button is the tap box: 48px tall (≥44), edge-to-edge (no dead gap).
+    // Button is the tap box: 48px tall (height floor ≥44; width = column share), edge-to-edge.
     expect(kb).toContain('data-hit-slop')
+    expect(kb).toContain('data-tap-min-h="44"')
     expect(kb).toContain('h-12 min-h-11')
     expect(kb).toContain('px-[var(--pad-half-gap)] py-[3px]')
+    // W3: solid accent-fg focus ring (≥3:1), not /60
+    expect(kb).toContain('group-focus-visible:ring-accent-fg')
+    expect(kb).not.toContain('group-focus-visible:ring-accent-fg/')
     // Painted face is the inner span; colors live there, not on the button.
     const faceAt = kb.indexOf('<span')
     expect(faceAt).toBeGreaterThan(kb.indexOf('<button'))
@@ -1146,11 +1150,16 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     const layoutAt = src.indexOf('<Layout footer={letterPad} footerBleed>')
     expect(layoutAt).toBeGreaterThan(0)
     expect(revealAt).toBeGreaterThan(layoutAt)
-    // In-round nav links sink to the content bottom; Reveal stays by the grid.
+    // Links sit under Reveal (no mt-auto); empty space below them buffers the pad.
+    expect(src).not.toContain('mt-auto flex flex-wrap')
+    expect(src).not.toContain('mt-auto pt-6')
+    const revealBlock = src.slice(revealAt, src.indexOf("{!finished && mode === 'daily'"))
+    expect(revealBlock).toContain('Reveal word')
+    // Daily / practice / pocket in-round stacks keep pt-6, not mt-auto.
     expect(src).toContain(
-      'mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm',
+      'flex flex-wrap items-center justify-center gap-4 pt-6 text-sm',
     )
-    expect(src).toContain('mt-auto pt-6 text-center')
+    expect(src).toContain('pt-6 text-center')
   })
 
   test('no OSK / device-keyboard toggle: custom pad is the only mobile input', async () => {
