@@ -88,6 +88,41 @@ button.key-settled:disabled {
   opacity: 1;
 }
 
+/* ─── Letter pad gap (#138) ───
+ * Keys are flex-1 cells in one nowrap row; the visual gap is each cell's
+ * inset (2 × --pad-half-gap). Gap stays 4px until a row fits with ≥40px
+ * faces; widen to 6px / 8px only when the pad's content box allows
+ * cols × (40px + gap) + 8px pad inset. Thresholds key off the widest row
+ * (data-pad-cols).
+ * Size container is [data-letter-pad-cq]; styles land on [data-letter-pad].
+ */
+[data-letter-pad-cq] {
+  container-type: inline-size;
+  container-name: letter-pad;
+}
+[data-letter-pad] {
+  --pad-half-gap: 2px;
+}
+
+@container letter-pad (min-width: 422px) {
+  [data-letter-pad][data-pad-cols="9"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 440px) {
+  [data-letter-pad][data-pad-cols="9"] { --pad-half-gap: 4px; }
+}
+@container letter-pad (min-width: 468px) {
+  [data-letter-pad][data-pad-cols="10"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 488px) {
+  [data-letter-pad][data-pad-cols="10"] { --pad-half-gap: 4px; }
+}
+@container letter-pad (min-width: 514px) {
+  [data-letter-pad][data-pad-cols="11"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 536px) {
+  [data-letter-pad][data-pad-cols="11"] { --pad-half-gap: 4px; }
+}
+
 /* ─── Type scale (tighten hierarchy) ─── */
 .text-display {
   font-size: 1.75rem;

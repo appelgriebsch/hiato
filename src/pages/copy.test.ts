@@ -486,7 +486,7 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
 })
 
 describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
-  test('LetterGrid uses equal row helper; Keyboard ≥44px; Practice Reveal; B1–C2 no vowel caption', async () => {
+  test('LetterGrid uses equal row helper; Keyboard ≥44px tap via hit-slop; Practice Reveal; B1–C2 no vowel caption', async () => {
     const grid = await Bun.file(
       new URL('../components/play/LetterGrid.tsx', import.meta.url),
     ).text()
@@ -497,13 +497,16 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     const kb = await Bun.file(
       new URL('../components/play/Keyboard.tsx', import.meta.url),
     ).text()
-    expect(kb).toContain('min-h-[44px]')
-    expect(kb).toContain('min-w-[44px]')
-    expect(kb).toContain('flex-wrap')
-    expect(kb).toContain('shrink-0')
-    expect(kb).not.toContain('min-w-0 flex-1')
+    // #138 supersedes #137's wrap-to-44: nowrap rows, flex-1 faces, ≥44 tap box via hit-slop.
+    expect(kb).not.toContain('flex-wrap')
+    expect(kb).not.toContain('min-w-[44px]')
+    expect(kb).toContain('flex-nowrap')
+    expect(kb).toContain('min-w-0')
+    expect(kb).toContain('flex-1')
+    expect(kb).toContain('h-12 min-h-11')
+    expect(kb).toContain('data-hit-slop')
     expect(kb).toContain('data-tap-min="44"')
-    expect(kb).toContain('KEYBOARDS[lang]')
+    expect(kb).toContain('LETTER_PADS[lang]')
     const pads = await Bun.file(
       new URL('../lib/keyboards.ts', import.meta.url),
     ).text()
@@ -1062,5 +1065,102 @@ describe('Home and in-round 44px text links (#136)', () => {
     ).text()
     const closeAt = pocket.indexOf('>\n            Close\n          </Button>')
     expect(closeAt).toBeGreaterThan(0)
+  })
+})
+
+describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
+  const kbSrc = () =>
+    Bun.file(new URL('../components/play/Keyboard.tsx', import.meta.url)).text()
+
+  test('letter rows are nowrap flex-1 cells; no wrap, no horizontal scroll', async () => {
+    const kb = await kbSrc()
+    expect(kb).not.toContain('flex-wrap')
+    expect(kb).not.toContain('overflow-x-auto')
+    expect(kb).not.toContain('overflow-x-scroll')
+    expect(kb).toContain('overflow-hidden')
+    expect(kb).toContain('flex w-full min-w-0 flex-nowrap justify-center')
+    expect(kb).toContain('min-w-0 max-w-[calc(100%/var(--pad-cols))] flex-1 basis-0')
+    expect(kb).not.toContain('shrink-0')
+  })
+
+  test('tap box ≥44 via hit-slop: invisible button cell, inset painted face', async () => {
+    const kb = await kbSrc()
+    // Button is the tap box: 48px tall (≥44), edge-to-edge (no dead gap).
+    expect(kb).toContain('data-hit-slop')
+    expect(kb).toContain('h-12 min-h-11')
+    expect(kb).toContain('px-[var(--pad-half-gap)] py-[3px]')
+    // Painted face is the inner span; colors live there, not on the button.
+    const faceAt = kb.indexOf('<span')
+    expect(faceAt).toBeGreaterThan(kb.indexOf('<button'))
+    const face = kb.slice(faceAt, kb.indexOf('</span>', faceAt))
+    expect(face).toContain('rounded-lg')
+    expect(face).toContain('bg-raised border border-line')
+    expect(face).toContain('{key}')
+  })
+
+  test('gap ≤4px until rows fit; 6–8px only when width allows ≥40px faces', async () => {
+    const css = await Bun.file(new URL('../index.css', import.meta.url)).text()
+    expect(css).toContain('[data-letter-pad-cq] {')
+    expect(css).toContain('container-type: inline-size;')
+    expect(css).toContain('container-name: letter-pad;')
+    expect(css).toContain('--pad-half-gap: 2px;')
+    // cols × (40 + gap) + 8 inset: 10 cols → 468 / 488; 11 cols (DE) → 514 / 536.
+    expect(css).toContain('@container letter-pad (min-width: 468px)')
+    expect(css).toContain('@container letter-pad (min-width: 488px)')
+    expect(css).toContain('@container letter-pad (min-width: 514px)')
+    expect(css).toContain('@container letter-pad (min-width: 536px)')
+    expect(css).not.toMatch(/--pad-half-gap: [5-9]px/)
+  })
+
+  test('PT/ES accent strip is labeled + contained; DE has none', async () => {
+    const kb = await kbSrc()
+    expect(kb).toContain('data-accent-strip')
+    expect(kb).toContain('aria-label="Accent keys"')
+    expect(kb).toContain('{ACCENT_STRIP_LABEL}')
+    expect(kb).toContain('rounded-xl border border-line')
+    expect(kb).toContain('pad.accentStrip ?')
+  })
+
+  test('pad is pinned full-bleed in the Layout footer (bottom safe-area)', async () => {
+    const layout = await Bun.file(
+      new URL('../components/Layout.tsx', import.meta.url),
+    ).text()
+    expect(layout).toContain('footerBleed?: boolean')
+    expect(layout).toContain('-mx-4')
+    expect(layout).toContain('sticky bottom-0 z-10')
+    expect(layout).toContain('pb-[env(safe-area-inset-bottom)]')
+
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain('<Layout footer={letterPad} footerBleed>')
+    expect(src).toContain(
+      'const inRound = !loading && !error && !!wordEntry && !finished',
+    )
+    expect(src).toContain('const letterPad = inRound ? (')
+    // Exactly one Keyboard render — in the footer, not in the scroll content.
+    expect(src.match(/<Keyboard\b/g)?.length).toBe(1)
+  })
+
+  test('Reveal stays in the content above the pad, not adjacent to row 1', async () => {
+    const src = await pageSrc('Play.tsx')
+    const revealAt = src.indexOf('data-reveal-word')
+    const layoutAt = src.indexOf('<Layout footer={letterPad} footerBleed>')
+    expect(layoutAt).toBeGreaterThan(0)
+    expect(revealAt).toBeGreaterThan(layoutAt)
+    // In-round nav links sink to the content bottom; Reveal stays by the grid.
+    expect(src).toContain(
+      'mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm',
+    )
+    expect(src).toContain('mt-auto pt-6 text-center')
+  })
+
+  test('no OSK / device-keyboard toggle: custom pad is the only mobile input', async () => {
+    const kb = await kbSrc()
+    const src = await pageSrc('Play.tsx')
+    for (const text of [kb, src]) {
+      expect(text).not.toContain('inputMode')
+      expect(text).not.toContain('<input')
+      expect(text).not.toMatch(/\bOSK\b/)
+      expect(text).not.toMatch(/device keyboard/i)
+    }
   })
 })

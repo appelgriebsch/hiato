@@ -576,8 +576,22 @@ function PlayRound({
     )
   }
 
+  // #138: in-round, the letter pad is pinned full-bleed in the Layout footer
+  // (bottom safe-area thumb zone). Reveal + nav stay in the content above it.
+  const inRound = !loading && !error && !!wordEntry && !finished
+  const letterPad = inRound ? (
+    <Keyboard
+      lang={lang}
+      usedWrong={usedWrong}
+      usedCorrect={usedCorrect}
+      disabled={false}
+      onKey={onKey}
+      shakeKey={shakeKey}
+    />
+  ) : undefined
+
   return (
-    <Layout>
+    <Layout footer={letterPad} footerBleed>
       <TopBar
         left={
           <div className="flex items-center gap-2">
@@ -676,34 +690,24 @@ function PlayRound({
               pocketId={activePocketId}
               onPocketCleared={() => setActivePocketId(null)}
             />
-          ) : (
-            <>
-              {mode === 'practice' ? (
-                <div className="mb-3 flex justify-center">
-                  <button
-                    type="button"
-                    data-reveal-word
-                    aria-label="Reveal word and end this practice round"
-                    onClick={onReveal}
-                    className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
-                  >
-                    Reveal word
-                  </button>
-                </div>
-              ) : null}
-              <Keyboard
-                lang={lang}
-                usedWrong={usedWrong}
-                usedCorrect={usedCorrect}
-                disabled={false}
-                onKey={onKey}
-                shakeKey={shakeKey}
-              />
-            </>
-          )}
+          ) : mode === 'practice' ? (
+            // Reveal sits under the grid, in the scroll content — never
+            // adjacent to pad row 1 (pad is pinned in the footer, #138).
+            <div className="mb-3 flex justify-center">
+              <button
+                type="button"
+                data-reveal-word
+                aria-label="Reveal word and end this practice round"
+                onClick={onReveal}
+                className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+              >
+                Reveal word
+              </button>
+            </div>
+          ) : null}
 
           {!finished && mode === 'daily' && (
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
+            <div className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -726,7 +730,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'practice' && (
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm">
+            <div className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
               <Link
                 to="/play?mode=daily"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -745,7 +749,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'pocket' && (
-            <div className="mt-6 text-center">
+            <div className="mt-auto pt-6 text-center">
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"

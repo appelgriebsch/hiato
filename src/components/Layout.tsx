@@ -3,9 +3,15 @@ import type { ReactNode } from 'react'
 export function Layout({
   children,
   footer,
+  footerBleed = false,
 }: {
   children: ReactNode
   footer?: ReactNode
+  /**
+   * Footer spans the full column edge-to-edge (breaks out of `px-4`), e.g.
+   * the pinned Play letter pad in the bottom thumb zone (#138).
+   */
+  footerBleed?: boolean
 }) {
   return (
     <div
@@ -24,7 +30,15 @@ export function Layout({
         {children}
       </div>
       {footer ? (
-        <div className="sticky bottom-0 z-10 shrink-0 border-t border-line bg-cream pb-[env(safe-area-inset-bottom)]">
+        <div
+          data-layout-footer
+          className={[
+            'sticky bottom-0 z-10 shrink-0 border-t border-line bg-cream pb-[env(safe-area-inset-bottom)]',
+            footerBleed
+              ? '-mx-4 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]'
+              : '',
+          ].join(' ')}
+        >
           {footer}
         </div>
       ) : null}
