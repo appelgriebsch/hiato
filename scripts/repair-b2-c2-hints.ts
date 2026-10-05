@@ -8,6 +8,7 @@
  *   bun run scripts/repair-b2-c2-hints.ts en/b2.json
  *   bun run scripts/repair-b2-c2-hints.ts --replace-only pt/c1.json
  *   bun run scripts/repair-b2-c2-hints.ts --replace-only es/c1.json
+ *   bun run scripts/repair-b2-c2-hints.ts --replace-only de/c1.json
  *
  * Writes shipped glosses and chips under the bare lemma key
  * (expand-packs.ts reads that key). Does not run packs:expand.
@@ -102,6 +103,32 @@ const ES_C1_HAND_GLOSS: Record<string, string> = {
   ENLATADO: 'guardado dentro de una lata metálica',
   USB: 'una toma pequeña para pasar datos',
   MACABRO: 'que causa horror o miedo',
+}
+
+/**
+ * Last-resort German glosses for lemmas the model could not land under the band.
+ * Each line was checked with hintCeilingViolations before it was added.
+ * Wasser stays a valid easy noun via the surface candidate in candidatesFor.
+ */
+const DE_B2_HAND_GLOSS: Record<string, string> = {
+  AUSKUNFT: 'eine Antwort auf eine Frage',
+  BEFESTIGEN: 'etwas fest anbringen oder sichern',
+  DURCHATMEN: 'tief Luft holen und wieder lassen',
+  FLUCHEN: 'derbe, ärgerliche Worte sagen',
+  KROKODIL: 'ein großes Tier mit langem Maul und hartem Rücken',
+  LÄNGE: 'wie lang etwas von einem Ende zum anderen ist',
+  LISTEN: 'aufmerksam zuhören oder wahrnehmen',
+  PULLI: 'ein warmer Pullover',
+  UFO: 'ein unbekanntes Ding am Himmel',
+}
+
+const DE_C1_HAND_GLOSS: Record<string, string> = {
+  ABSTAMMUNG: 'die Herkunft einer Person aus ihrer Familie',
+  BOSHEIT: 'böses Verhalten, das anderen schadet',
+  NEUROTISCH: 'sehr ängstlich und innerlich unruhig',
+  VEILCHEN: 'kleine Frühlingsblume mit violetten Blüten',
+  VIBRATION: 'eine schnelle Bewegung hin und her',
+  ZAHM: 'nicht wild, ruhig und fügsam',
 }
 
 type GlossCache = Record<string, string>
@@ -372,6 +399,8 @@ function handGloss(lang: PackLang, cefr: PackCefr, word: string): string | null 
   if (lang === 'en' && cefr === 'b2') return EN_B2_HAND_GLOSS[key] ?? null
   if (lang === 'es' && cefr === 'b2') return ES_B2_HAND_GLOSS[key] ?? null
   if (lang === 'es' && cefr === 'c1') return ES_C1_HAND_GLOSS[key] ?? null
+  if (lang === 'de' && cefr === 'b2') return DE_B2_HAND_GLOSS[key] ?? null
+  if (lang === 'de' && cefr === 'c1') return DE_C1_HAND_GLOSS[key] ?? null
   return null
 }
 
