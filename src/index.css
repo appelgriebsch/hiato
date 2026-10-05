@@ -88,6 +88,43 @@ button.key-settled:disabled {
   opacity: 1;
 }
 
+/* ─── Letter pad gap (#138) ───
+ * Keys are flex-1 cells in one nowrap row; the visual gap is each cell's
+ * inset (2 × --pad-half-gap). Default half-gap 2px → 4px visual gap.
+ * Size container is [data-letter-pad-cq]; styles land on [data-letter-pad].
+ *
+ * The @container rules below widen to half-gap 3px/4px (6px/8px visual) when
+ * cols × (40px + gap) + 8px inset fits. Under Layout `max-w-md` (448px) those
+ * thresholds (468+) never fire — kept for wider shells / future layouts.
+ */
+[data-letter-pad-cq] {
+  container-type: inline-size;
+  container-name: letter-pad;
+}
+[data-letter-pad] {
+  --pad-half-gap: 2px;
+}
+
+/* Dead under max-w-md (448px): 6–8px visual gap only ≥468px container. */
+@container letter-pad (min-width: 422px) {
+  [data-letter-pad][data-pad-cols="9"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 440px) {
+  [data-letter-pad][data-pad-cols="9"] { --pad-half-gap: 4px; }
+}
+@container letter-pad (min-width: 468px) {
+  [data-letter-pad][data-pad-cols="10"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 488px) {
+  [data-letter-pad][data-pad-cols="10"] { --pad-half-gap: 4px; }
+}
+@container letter-pad (min-width: 514px) {
+  [data-letter-pad][data-pad-cols="11"] { --pad-half-gap: 3px; }
+}
+@container letter-pad (min-width: 536px) {
+  [data-letter-pad][data-pad-cols="11"] { --pad-half-gap: 4px; }
+}
+
 /* ─── Type scale (tighten hierarchy) ─── */
 .text-display {
   font-size: 1.75rem;
