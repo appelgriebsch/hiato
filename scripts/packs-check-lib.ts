@@ -390,7 +390,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
 export { buildLemmaEasiestByLang, isHintCeilingEnforcedRel }
 
 /**
- * Enforce hint ceiling for pack-lang A1–B1 rels (issue #50: all twelve).
+ * Enforce hint ceiling for pack-lang A1–C2 rels (all twenty-four).
  * lemmaEasiestByLang must be built from the full snapshot AFTER every pack is parsed.
  */
 export function checkHintCeiling(
