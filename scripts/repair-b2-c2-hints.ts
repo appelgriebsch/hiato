@@ -6,11 +6,16 @@
  *
  * Usage:
  *   bun run scripts/repair-b2-c2-hints.ts en/b2.json
+ *   bun run scripts/repair-b2-c2-hints.ts --replace-only pt/c1.json
  *
  * Writes shipped glosses and chips under the bare lemma key
  * (expand-packs.ts reads that key). Does not run packs:expand.
  * Coverage target is 70% (packs:check warning line). Unique referents stay
  * gloss-only; a shortfall is reported, not thrown.
+ *
+ * --replace-only repairs failing glosses, drops chips above the ceiling, and
+ * asks the model only to replace a removed chip. It does not run the
+ * coverage-fill rounds. Without the flag, fill-to-70% behavior is unchanged.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -534,16 +539,41 @@ async function repairSynonyms(
   synCache: SynCache,
   ctx: CeilingCtx,
   key: string,
+  replaceOnly = false,
 ): Promise<{ coverage: number; unique: string[]; unresolved: string[] }> {
   const unique = new Set<string>()
   const rejected = new Map<string, string[]>()
+  const originalCount = new Map(
+    pack.lemmas.map((L) => [L.word, (L.synonyms ?? []).length]),
+  )
 
   for (const L of pack.lemmas) {
-    const fromPack = filterChipsInCeiling(lang, cefr, L.word, L.synonyms ?? [], ctx)
+    const original = L.synonyms ?? []
+    const fromPack = filterChipsInCeiling(lang, cefr, L.word, original, ctx)
     const cached = synCache[lemmaKey(L.word)]
     const fromCache = Array.isArray(cached)
       ? filterChipsInCeiling(lang, cefr, L.word, cached, ctx)
       : []
+    if (replaceOnly) {
+      const removed = original.filter(
+        (chip) => !fromPack.some((kept) => nfcUpper(kept) === nfcUpper(chip)),
+      )
+      const chips = [...fromPack]
+      if (removed.length) {
+        for (const chip of fromCache) {
+          if (chips.length >= SYNONYM_CHIP_CAP) break
+          if (chips.some((kept) => nfcUpper(kept) === nfcUpper(chip))) continue
+          chips.push(chip)
+        }
+        const prev = rejected.get(L.word) ?? []
+        rejected.set(L.word, [
+          ...new Set([...prev, ...removed.map((chip) => chip.toLowerCase())]),
+        ])
+      }
+      if (chips.length) L.synonyms = chips
+      else L.synonyms = undefined
+      continue
+    }
     const chips = fromPack.length ? fromPack : fromCache
     if (chips.length) {
       L.synonyms = chips
@@ -555,7 +585,12 @@ async function repairSynonyms(
 
   const rules = ceilingRules(lang, cefr)
 
-  async function ask(words: string[], temperature: number, reconsider: boolean) {
+  async function ask(
+    words: string[],
+    temperature: number,
+    reconsider: boolean,
+    mergeExisting = false,
+  ) {
     for (let i = 0; i < words.length; i += 25) {
       const batch = words.slice(i, i + 25)
       const prompt =
@@ -594,20 +629,28 @@ async function repairSynonyms(
       for (const w of batch) {
         const arr = asStringArray(lookupParsed(parsed, w))
         if (arr === null) continue
+        const lemma = pack.lemmas.find((L) => L.word === w)
+        const kept = lemma?.synonyms ?? []
         if (arr.length === 0) {
+          if (mergeExisting && kept.length) continue
           unique.add(w)
           synCache[lemmaKey(w)] = []
           continue
         }
-        const chips = filterChipsInCeiling(lang, cefr, w, arr, ctx)
-        if (!chips.length) {
+        const chips = filterChipsInCeiling(
+          lang,
+          cefr,
+          w,
+          mergeExisting ? [...kept, ...arr] : arr,
+          ctx,
+        )
+        if (!chips.length || (mergeExisting && chips.length <= kept.length)) {
           const prev = rejected.get(w) ?? []
           rejected.set(w, [...new Set([...prev, ...arr.map((c) => c.toLowerCase())])])
           console.warn(`  dropped chips for ${w}: ${arr.join(', ')}`)
           continue
         }
         unique.delete(w)
-        const lemma = pack.lemmas.find((L) => L.word === w)
         if (lemma) lemma.synonyms = chips
         synCache[lemmaKey(w)] = chips
       }
@@ -619,24 +662,41 @@ async function repairSynonyms(
     }
   }
 
-  for (let round = 0; round < 4; round++) {
-    const coverage = synonymCoverage(pack)
-    if (coverage >= COVERAGE_TARGET) break
-    const missing = pack.lemmas
-      .filter((L) => chipsOf(L).length === 0 && !unique.has(L.word))
-      .map((L) => L.word)
-    if (!missing.length) break
-    console.log(
-      `  coverage ${(coverage * 100).toFixed(1)}% < 70% — round ${round + 1}, ${missing.length} lemmas`,
-    )
-    await ask(missing, 0.25 + round * 0.08, false)
-  }
+  if (replaceOnly) {
+    for (let round = 0; round < 4; round++) {
+      const missing = pack.lemmas
+        .filter((L) => {
+          const orig = originalCount.get(L.word) ?? 0
+          if (orig === 0 || unique.has(L.word)) return false
+          return chipsOf(L).length < Math.min(SYNONYM_CHIP_CAP, orig)
+        })
+        .map((L) => L.word)
+      if (!missing.length) break
+      console.log(
+        `  replace-only round ${round + 1}: ${missing.length} lemmas lost a chip to the ceiling`,
+      )
+      await ask(missing, 0.25 + round * 0.08, false, true)
+    }
+  } else {
+    for (let round = 0; round < 4; round++) {
+      const coverage = synonymCoverage(pack)
+      if (coverage >= COVERAGE_TARGET) break
+      const missing = pack.lemmas
+        .filter((L) => chipsOf(L).length === 0 && !unique.has(L.word))
+        .map((L) => L.word)
+      if (!missing.length) break
+      console.log(
+        `  coverage ${(coverage * 100).toFixed(1)}% < 70% — round ${round + 1}, ${missing.length} lemmas`,
+      )
+      await ask(missing, 0.25 + round * 0.08, false)
+    }
 
-  if (synonymCoverage(pack) < COVERAGE_TARGET && unique.size) {
-    const again = [...unique]
-    console.log(`  reconsidering ${again.length} empty chip lists once`)
-    for (const w of again) unique.delete(w)
-    await ask(again, 0.45, true)
+    if (synonymCoverage(pack) < COVERAGE_TARGET && unique.size) {
+      const again = [...unique]
+      console.log(`  reconsidering ${again.length} empty chip lists once`)
+      for (const w of again) unique.delete(w)
+      await ask(again, 0.45, true)
+    }
   }
 
   for (const L of pack.lemmas) {
@@ -656,6 +716,13 @@ async function repairSynonyms(
     } else {
       L.synonyms = undefined
       if (unique.has(L.word) || curated) synCache[lemmaKey(L.word)] = []
+      if (
+        replaceOnly &&
+        (originalCount.get(L.word) ?? 0) > 0 &&
+        !curated
+      ) {
+        synCache[lemmaKey(L.word)] = []
+      }
       if (curated) unique.add(L.word)
     }
   }
@@ -671,7 +738,7 @@ async function repairSynonyms(
   }
 }
 
-async function repairPack(rel: string): Promise<void> {
+async function repairPack(rel: string, replaceOnly = false): Promise<void> {
   const { lang, cefr, file } = parseRel(rel)
   const key = readXaiKey()
   if (!key) {
@@ -707,7 +774,15 @@ async function repairPack(rel: string): Promise<void> {
   }
 
   await repairGlosses(lang, cefr, pack, glossCache, ctx, key)
-  const syn = await repairSynonyms(lang, cefr, pack, synCache, ctx, key)
+  const syn = await repairSynonyms(
+    lang,
+    cefr,
+    pack,
+    synCache,
+    ctx,
+    key,
+    replaceOnly,
+  )
 
   const newWords = pack.lemmas.map((L) => L.word)
   if (JSON.stringify(newWords) !== JSON.stringify(originalWords)) {
@@ -792,13 +867,22 @@ async function applyCuratedOnly(rel: string): Promise<void> {
 }
 
 const overridesOnly = process.argv.includes('--overrides-only')
-const rels = process.argv.slice(2).filter((a) => a !== '--overrides-only')
+const replaceOnly = process.argv.includes('--replace-only')
+const rels = process.argv.slice(2).filter(
+  (a) => a !== '--overrides-only' && a !== '--replace-only',
+)
 if (!rels.length) {
-  console.error('Usage: bun run scripts/repair-b2-c2-hints.ts <rel> [<rel>...]')
+  console.error(
+    'Usage: bun run scripts/repair-b2-c2-hints.ts [--replace-only] <rel> [<rel>...]',
+  )
   console.error('Example: bun run scripts/repair-b2-c2-hints.ts en/b2.json')
+  process.exit(1)
+}
+if (overridesOnly && replaceOnly) {
+  console.error('Use only one of --overrides-only and --replace-only')
   process.exit(1)
 }
 for (const rel of rels) {
   if (overridesOnly) await applyCuratedOnly(rel)
-  else await repairPack(rel)
+  else await repairPack(rel, replaceOnly)
 }
