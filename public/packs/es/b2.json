@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lang": "es",
   "cefr": "b2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
@@ -23,15 +23,30 @@
     },
     {
       "word": "QUEBRADO",
-      "gloss": "que presenta una rotura o fractura"
+      "gloss": "que presenta una rotura o fractura",
+      "synonyms": [
+        "roto",
+        "partido",
+        "fracturado"
+      ]
     },
     {
       "word": "PERVERSO",
-      "gloss": "que actúa con maldad o crueldad"
+      "gloss": "que actúa con maldad o crueldad",
+      "synonyms": [
+        "malo",
+        "cruel",
+        "malvado"
+      ]
     },
     {
       "word": "PELAR",
-      "gloss": "quitar la piel o cáscara de algo"
+      "gloss": "quitar la piel o cáscara de algo",
+      "synonyms": [
+        "quitar",
+        "descascarar",
+        "mondar"
+      ]
     },
     {
       "word": "FILME",
@@ -43,23 +58,36 @@
     },
     {
       "word": "GUARDERÍA",
-      "gloss": "lugar donde se cuidan niños pequeños"
+      "gloss": "lugar donde se cuidan niños pequeños",
+      "synonyms": [
+        "cuidado",
+        "niñera"
+      ]
     },
     {
       "word": "CORREGIDO",
-      "gloss": "que ha sido enmendado o rectificado"
+      "gloss": "que ha sido enmendado o rectificado",
+      "synonyms": [
+        "arreglado",
+        "revisado",
+        "mejorado"
+      ]
     },
     {
       "word": "BACTERIA",
       "gloss": "microorganismo unicelular que puede causar enfermedades",
       "synonyms": [
-        "microbio",
         "germen"
       ]
     },
     {
       "word": "HUMILLANTE",
-      "gloss": "que causa vergüenza o desprecio hacia alguien"
+      "gloss": "que causa vergüenza o desprecio hacia alguien",
+      "synonyms": [
+        "vergonzoso",
+        "ofensivo",
+        "molesto"
+      ]
     },
     {
       "word": "PIMIENTA",
@@ -102,19 +130,37 @@
     },
     {
       "word": "OPONENTE",
-      "gloss": "persona que compite o lucha contra otra"
+      "gloss": "persona que compite o lucha contra otra",
+      "synonyms": [
+        "rival",
+        "contrario",
+        "enemigo"
+      ]
     },
     {
       "word": "NATAL",
-      "gloss": "relativo al lugar donde alguien nace"
+      "gloss": "relativo al lugar donde alguien nace",
+      "synonyms": [
+        "de nacimiento"
+      ]
     },
     {
       "word": "NUMEROSO",
-      "gloss": "que existe en gran cantidad"
+      "gloss": "que existe en gran cantidad",
+      "synonyms": [
+        "mucho",
+        "abundante",
+        "varios"
+      ]
     },
     {
       "word": "ESPARCIR",
-      "gloss": "extender algo en distintas direcciones"
+      "gloss": "extender algo en distintas direcciones",
+      "synonyms": [
+        "repartir",
+        "dispersar",
+        "extender"
+      ]
     },
     {
       "word": "ACERA",
@@ -137,7 +183,12 @@
     },
     {
       "word": "ALUCINANTE",
-      "gloss": "que produce una impresión extraordinaria"
+      "gloss": "que produce una impresión extraordinaria",
+      "synonyms": [
+        "increíble",
+        "sorprendente",
+        "asombroso"
+      ]
     },
     {
       "word": "FABRICANTE",
@@ -153,7 +204,10 @@
     },
     {
       "word": "CREAMOS",
-      "gloss": "formar algo en la mente o inventarlo"
+      "gloss": "formar algo en la mente o inventarlo",
+      "synonyms": [
+        "inventamos"
+      ]
     },
     {
       "word": "DIÁLOGO",
@@ -164,11 +218,21 @@
     },
     {
       "word": "PROMETEDOR",
-      "gloss": "que ofrece buenas expectativas de éxito"
+      "gloss": "que ofrece buenas expectativas de éxito",
+      "synonyms": [
+        "esperanzador",
+        "bueno",
+        "positivo"
+      ]
     },
     {
       "word": "INSENSIBLE",
-      "gloss": "que no siente dolor ni emociones"
+      "gloss": "que no siente dolor ni emociones",
+      "synonyms": [
+        "duro",
+        "frío",
+        "indiferente"
+      ]
     },
     {
       "word": "VÍBORA",
@@ -180,11 +244,21 @@
     },
     {
       "word": "ALTERADO",
-      "gloss": "que ha cambiado de su estado normal"
+      "gloss": "que ha cambiado de su estado normal",
+      "synonyms": [
+        "nervioso",
+        "agitado",
+        "molesto"
+      ]
     },
     {
       "word": "APURADO",
-      "gloss": "que tiene prisa o está con urgencia"
+      "gloss": "que tiene prisa o está con urgencia",
+      "synonyms": [
+        "apresurado",
+        "rápido",
+        "urgente"
+      ]
     },
     {
       "word": "REMOLQUE",
@@ -205,16 +279,14 @@
       "word": "AMULETO",
       "gloss": "objeto que se lleva para atraer buena suerte",
       "synonyms": [
-        "talismán",
-        "fetiche"
+        "talismán"
       ]
     },
     {
       "word": "REFUGIADO",
       "gloss": "persona que huye de su país por peligro",
       "synonyms": [
-        "asilo",
-        "desplazado"
+        "asilo"
       ]
     },
     {
@@ -227,15 +299,28 @@
     },
     {
       "word": "EXQUISITO",
-      "gloss": "que tiene un sabor o aroma muy agradable"
+      "gloss": "que tiene un sabor o aroma muy agradable",
+      "synonyms": [
+        "delicioso",
+        "rico",
+        "sabroso"
+      ]
     },
     {
       "word": "TOSER",
-      "gloss": "expulsar aire de los pulmones de forma brusca"
+      "gloss": "expulsar aire de los pulmones de forma brusca",
+      "synonyms": [
+        "carraspear",
+        "tos"
+      ]
     },
     {
       "word": "AJENO",
-      "gloss": "que pertenece a otra persona"
+      "gloss": "que pertenece a otra persona",
+      "synonyms": [
+        "extraño",
+        "distinto"
+      ]
     },
     {
       "word": "MARIONETA",
@@ -247,7 +332,12 @@
     },
     {
       "word": "DESCARADO",
-      "gloss": "que actúa sin vergüenza ni respeto"
+      "gloss": "que actúa sin vergüenza ni respeto",
+      "synonyms": [
+        "atrevido",
+        "fresco",
+        "audaz"
+      ]
     },
     {
       "word": "OPOSICIÓN",
@@ -261,7 +351,6 @@
       "word": "INSIGNIA",
       "gloss": "símbolo que identifica un cargo o grupo",
       "synonyms": [
-        "emblema",
         "distintivo"
       ]
     },
@@ -303,7 +392,12 @@
     },
     {
       "word": "PERSUADIR",
-      "gloss": "convencer a alguien con razones"
+      "gloss": "convencer a alguien con razones",
+      "synonyms": [
+        "convencer",
+        "influir",
+        "lograr"
+      ]
     },
     {
       "word": "LODO",
@@ -337,13 +431,15 @@
       "word": "ESTE",
       "gloss": "punto cardinal opuesto al oeste",
       "synonyms": [
-        "aquel",
-        "tal"
+        "levante"
       ]
     },
     {
       "word": "LIBREMENTE",
-      "gloss": "de manera sin restricciones ni obstáculos"
+      "gloss": "de manera sin restricciones ni obstáculos",
+      "synonyms": [
+        "sin restricciones"
+      ]
     },
     {
       "word": "TRÁNSITO",
@@ -355,11 +451,17 @@
     },
     {
       "word": "VIVIENTE",
-      "gloss": "que tiene vida o está vivo"
+      "gloss": "que tiene vida o está vivo",
+      "synonyms": [
+        "vivo"
+      ]
     },
     {
       "word": "EMPAPADO",
-      "gloss": "que está completamente mojado"
+      "gloss": "que está completamente mojado",
+      "synonyms": [
+        "mojado"
+      ]
     },
     {
       "word": "DIPUTADO",
@@ -371,15 +473,24 @@
     },
     {
       "word": "TENDIDO",
-      "gloss": "que está extendido horizontalmente"
+      "gloss": "que está extendido horizontalmente",
+      "synonyms": [
+        "extendido"
+      ]
     },
     {
       "word": "AISLAR",
-      "gloss": "separar algo o a alguien del resto para que quede solo"
+      "gloss": "separar algo o a alguien del resto para que quede solo",
+      "synonyms": [
+        "separar"
+      ]
     },
     {
       "word": "ESCASO",
-      "gloss": "que existe en cantidad insuficiente o limitada"
+      "gloss": "que existe en cantidad insuficiente o limitada",
+      "synonyms": [
+        "poco"
+      ]
     },
     {
       "word": "GOLFO",
@@ -403,7 +514,7 @@
     },
     {
       "word": "COÑAC",
-      "gloss": "bebida alcohólica destilada del vino",
+      "gloss": "un licor fuerte de color oscuro",
       "synonyms": [
         "brandy",
         "aguardiente"
@@ -411,7 +522,10 @@
     },
     {
       "word": "REPRODUCIR",
-      "gloss": "volver a hacer o presentar algo ya existente"
+      "gloss": "volver a hacer o presentar algo ya existente",
+      "synonyms": [
+        "copiar"
+      ]
     },
     {
       "word": "SERVILLETA",
@@ -423,7 +537,10 @@
     },
     {
       "word": "APARENTAR",
-      "gloss": "mostrar una apariencia que no corresponde a la realidad"
+      "gloss": "mostrar una apariencia que no corresponde a la realidad",
+      "synonyms": [
+        "parecer"
+      ]
     },
     {
       "word": "TOPO",
@@ -431,7 +548,10 @@
     },
     {
       "word": "RESTAURAR",
-      "gloss": "volver a poner algo en buen estado"
+      "gloss": "volver a poner algo en buen estado",
+      "synonyms": [
+        "reparar"
+      ]
     },
     {
       "word": "NOTO",
@@ -451,15 +571,25 @@
     },
     {
       "word": "YERNO",
-      "gloss": "esposo de la hija de alguien"
+      "gloss": "esposo de la hija de alguien",
+      "synonyms": [
+        "esposo de la hija"
+      ]
     },
     {
       "word": "ACOGER",
-      "gloss": "recibir a alguien en un lugar o grupo"
+      "gloss": "recibir a alguien en un lugar o grupo",
+      "synonyms": [
+        "recibir"
+      ]
     },
     {
       "word": "SIMÓN",
-      "gloss": "que está de acuerdo o responde afirmativamente"
+      "gloss": "que está de acuerdo o responde afirmativamente",
+      "synonyms": [
+        "sí",
+        "de acuerdo"
+      ]
     },
     {
       "word": "PISTOLERO",
@@ -470,11 +600,17 @@
     },
     {
       "word": "RACIONAL",
-      "gloss": "que actúa según la razón y no por impulsos"
+      "gloss": "que actúa según la razón y no por impulsos",
+      "synonyms": [
+        "lógico"
+      ]
     },
     {
       "word": "CHULO",
-      "gloss": "que presume de sí mismo de forma exagerada"
+      "gloss": "que presume de sí mismo de forma exagerada",
+      "synonyms": [
+        "presumido"
+      ]
     },
     {
       "word": "GRANDEZA",
@@ -494,7 +630,10 @@
     },
     {
       "word": "EXCESIVO",
-      "gloss": "que supera lo que se considera normal o necesario"
+      "gloss": "que supera lo que se considera normal o necesario",
+      "synonyms": [
+        "demasiado"
+      ]
     },
     {
       "word": "PROPAGANDA",
@@ -532,20 +671,21 @@
       "word": "TÍA",
       "gloss": "hermana del padre o de la madre",
       "synonyms": [
-        "parienta",
-        "tia"
+        "tita"
       ]
     },
     {
       "word": "DESMORONAR",
-      "gloss": "hacer que algo sólido se derrumbe poco a poco"
+      "gloss": "hacer que algo sólido caiga poco a poco",
+      "synonyms": [
+        "caer"
+      ]
     },
     {
       "word": "NÁUSEA",
       "gloss": "sensación de malestar que precede al vómito",
       "synonyms": [
-        "asco",
-        "repulsión"
+        "asco"
       ]
     },
     {
@@ -598,7 +738,10 @@
     },
     {
       "word": "REVELADO",
-      "gloss": "que se ha dado a conocer o descubierto"
+      "gloss": "que se ha dado a conocer o descubierto",
+      "synonyms": [
+        "mostrado"
+      ]
     },
     {
       "word": "TRÍO",
@@ -610,7 +753,10 @@
     },
     {
       "word": "DISTRIBUIR",
-      "gloss": "repartir algo entre varias personas o lugares"
+      "gloss": "repartir algo entre varias personas o lugares",
+      "synonyms": [
+        "repartir"
+      ]
     },
     {
       "word": "RODAJE",
@@ -630,7 +776,10 @@
     },
     {
       "word": "PULSAR",
-      "gloss": "presionar un botón o tecla para activar algo"
+      "gloss": "presionar un botón o tecla para activar algo",
+      "synonyms": [
+        "presionar"
+      ]
     },
     {
       "word": "ANTÍDOTO",
@@ -642,7 +791,10 @@
     },
     {
       "word": "LECHO",
-      "gloss": "cama o lugar donde se duerme"
+      "gloss": "cama o lugar donde se duerme",
+      "synonyms": [
+        "cama"
+      ]
     },
     {
       "word": "LEGIÓN",
@@ -662,11 +814,17 @@
     },
     {
       "word": "TRASLADO",
-      "gloss": "acción de mover algo o a alguien de un lugar a otro"
+      "gloss": "acción de mover algo o a alguien de un lugar a otro",
+      "synonyms": [
+        "cambio de lugar"
+      ]
     },
     {
       "word": "ACEPTADO",
-      "gloss": "que ha sido recibido o aprobado por otros"
+      "gloss": "que ha sido recibido o aprobado por otros",
+      "synonyms": [
+        "recibido"
+      ]
     },
     {
       "word": "REEMPLAZO",
@@ -710,7 +868,7 @@
       "word": "ADUANA",
       "gloss": "oficina donde se controlan las mercancías que entran o salen",
       "synonyms": [
-        "arancel"
+        "paso fronterizo"
       ]
     },
     {
@@ -731,7 +889,12 @@
     },
     {
       "word": "DÁRSELO",
-      "gloss": "entregar algo a una persona"
+      "gloss": "entregar algo a una persona",
+      "synonyms": [
+        "entregar",
+        "pasar",
+        "ofrecer"
+      ]
     },
     {
       "word": "HIMNO",
@@ -742,7 +905,12 @@
     },
     {
       "word": "EXCLUIR",
-      "gloss": "dejar fuera a alguien o algo de un grupo"
+      "gloss": "dejar fuera a alguien o algo de un grupo",
+      "synonyms": [
+        "apartar",
+        "dejar fuera",
+        "rechazar"
+      ]
     },
     {
       "word": "PENTÁGONO",
@@ -805,7 +973,12 @@
     },
     {
       "word": "CONTAGIAR",
-      "gloss": "transmitir una enfermedad de una persona a otra"
+      "gloss": "transmitir una enfermedad de una persona a otra",
+      "synonyms": [
+        "pegar",
+        "transmitir",
+        "infectar"
+      ]
     },
     {
       "word": "BUFANDA",
@@ -824,27 +997,56 @@
     },
     {
       "word": "ATARDECER",
-      "gloss": "el momento en que el sol desaparece en el horizonte"
+      "gloss": "el momento en que el sol desaparece en el horizonte",
+      "synonyms": [
+        "puesta de sol",
+        "anochecer"
+      ]
     },
     {
       "word": "SUMAMENTE",
-      "gloss": "en un grado muy alto o extremo"
+      "gloss": "en un grado muy alto o extremo",
+      "synonyms": [
+        "muy",
+        "extremadamente",
+        "altamente"
+      ]
     },
     {
       "word": "PRECIADO",
-      "gloss": "que tiene gran valor o estima"
+      "gloss": "que tiene gran valor o estima",
+      "synonyms": [
+        "valioso",
+        "querido",
+        "apreciado"
+      ]
     },
     {
       "word": "GIGANTESCO",
-      "gloss": "de tamaño mucho mayor que lo normal"
+      "gloss": "de tamaño mucho mayor que lo normal",
+      "synonyms": [
+        "enorme",
+        "inmenso",
+        "colosal"
+      ]
     },
     {
       "word": "DIFUNDIR",
-      "gloss": "propagar información o ideas entre muchas personas"
+      "gloss": "propagar información o ideas entre muchas personas",
+      "synonyms": [
+        "propagar",
+        "extender",
+        "divulgar"
+      ]
     },
     {
       "word": "INTRUSO",
-      "gloss": "una persona que entra sin permiso en un lugar"
+      "gloss": "una persona que entra sin permiso en un lugar",
+      "synonyms": [
+        "ajeno",
+        "extraño",
+        "invasor"
+      ]
     },
     {
       "word": "UTILIDAD",
@@ -856,7 +1058,11 @@
     },
     {
       "word": "MANÍ",
-      "gloss": "una semilla comestible de cáscara dura"
+      "gloss": "una semilla comestible de cáscara dura",
+      "synonyms": [
+        "cacahuete",
+        "cacahuate"
+      ]
     },
     {
       "word": "PÚRPURA",
@@ -868,7 +1074,12 @@
     },
     {
       "word": "LIMONADO",
-      "gloss": "una bebida refrescante hecha con limón"
+      "gloss": "una bebida refrescante hecha con limón",
+      "synonyms": [
+        "refresco de limón",
+        "limonada",
+        "bebida de limón"
+      ]
     },
     {
       "word": "PARACAÍDAS",
@@ -876,7 +1087,7 @@
     },
     {
       "word": "ECUACIÓN",
-      "gloss": "una igualdad matemática con incógnitas",
+      "gloss": "una igualdad matemática con letras",
       "synonyms": [
         "fórmula",
         "igualdad"
@@ -884,11 +1095,20 @@
     },
     {
       "word": "PERJUDICAR",
-      "gloss": "causar daño o perjuicio a alguien o algo"
+      "gloss": "causar daño o perjuicio a alguien o algo",
+      "synonyms": [
+        "dañar",
+        "afectar"
+      ]
     },
     {
       "word": "ENFURECER",
-      "gloss": "provocar ira intensa en una persona"
+      "gloss": "provocar ira intensa en una persona",
+      "synonyms": [
+        "enfadar",
+        "irritar",
+        "enojar"
+      ]
     },
     {
       "word": "ALAMBRE",
@@ -900,11 +1120,21 @@
     },
     {
       "word": "TORNADO",
-      "gloss": "un torbellino de viento muy violento"
+      "gloss": "un torbellino de viento muy violento",
+      "synonyms": [
+        "torbellino",
+        "ciclón",
+        "huracán"
+      ]
     },
     {
       "word": "VIL",
-      "gloss": "de muy baja calidad moral"
+      "gloss": "de muy baja calidad moral",
+      "synonyms": [
+        "bajo",
+        "malo",
+        "despreciable"
+      ]
     },
     {
       "word": "COMETE",
@@ -939,15 +1169,23 @@
     },
     {
       "word": "MEZCLADO",
-      "gloss": "que contiene elementos combinados"
+      "gloss": "que contiene elementos combinados",
+      "synonyms": [
+        "combinado",
+        "unido",
+        "junto"
+      ]
     },
     {
       "word": "COLADO",
-      "gloss": "que ha pasado por un filtro o colador"
+      "gloss": "que ha pasado por un filtro o colador",
+      "synonyms": [
+        "filtrado"
+      ]
     },
     {
       "word": "ROL",
-      "gloss": "la función que desempeña alguien en una situación",
+      "gloss": "la función que tiene alguien en una situación",
       "synonyms": [
         "papel",
         "función"
@@ -971,7 +1209,12 @@
     },
     {
       "word": "RABINO",
-      "gloss": "un líder religioso de la comunidad judía"
+      "gloss": "un líder religioso de la comunidad judía",
+      "synonyms": [
+        "líder religioso",
+        "maestro judío",
+        "guía espiritual"
+      ]
     },
     {
       "word": "CAMAROTE",
@@ -991,7 +1234,12 @@
     },
     {
       "word": "IMPROVISAR",
-      "gloss": "hacer algo sin preparación previa"
+      "gloss": "hacer algo sin preparación previa",
+      "synonyms": [
+        "inventar",
+        "crear al momento",
+        "hacer sin plan"
+      ]
     },
     {
       "word": "SIMPATÍA",
@@ -1018,7 +1266,12 @@
     },
     {
       "word": "PREJUICIO",
-      "gloss": "una opinión formada sin conocimiento suficiente"
+      "gloss": "una opinión formada sin conocimiento suficiente",
+      "synonyms": [
+        "opinión previa",
+        "idea fija",
+        "juicio anticipado"
+      ]
     },
     {
       "word": "ELEVADOR",
@@ -1030,7 +1283,12 @@
     },
     {
       "word": "PRESENTIR",
-      "gloss": "tener la sensación de que algo va a ocurrir"
+      "gloss": "tener la sensación de que algo va a ocurrir",
+      "synonyms": [
+        "intuir",
+        "presagiar",
+        "sentir de antemano"
+      ]
     },
     {
       "word": "BROTE",
@@ -1041,7 +1299,12 @@
     },
     {
       "word": "REZO",
-      "gloss": "una oración dirigida a una divinidad"
+      "gloss": "una oración dirigida a una divinidad",
+      "synonyms": [
+        "oración",
+        "plegaria",
+        "súplica"
+      ]
     },
     {
       "word": "RELÁMPAGO",
@@ -1053,15 +1316,29 @@
     },
     {
       "word": "SEDIENTO",
-      "gloss": "que tiene mucha necesidad de beber"
+      "gloss": "que tiene mucha necesidad de beber",
+      "synonyms": [
+        "con sed",
+        "que necesita agua"
+      ]
     },
     {
       "word": "SABOTEAR",
-      "gloss": "dañar deliberadamente una actividad o máquina"
+      "gloss": "dañar deliberadamente una actividad o máquina",
+      "synonyms": [
+        "estropear",
+        "dañar",
+        "arruinar"
+      ]
     },
     {
       "word": "INCRIMINAR",
-      "gloss": "atribuir a alguien la comisión de un delito"
+      "gloss": "atribuir a alguien la comisión de un delito",
+      "synonyms": [
+        "acusar",
+        "culpar",
+        "señalar"
+      ]
     },
     {
       "word": "SEMEN",
@@ -1080,15 +1357,30 @@
     },
     {
       "word": "IMPRUDENTE",
-      "gloss": "que actúa sin precaución ni cuidado"
+      "gloss": "que actúa sin precaución ni cuidado",
+      "synonyms": [
+        "descuidado",
+        "temerario",
+        "arriesgado"
+      ]
     },
     {
       "word": "SOBREPASAR",
-      "gloss": "ir más allá de un límite establecido"
+      "gloss": "ir más allá de un límite establecido",
+      "synonyms": [
+        "superar",
+        "pasar",
+        "adelantar"
+      ]
     },
     {
       "word": "FUNERARIO",
-      "gloss": "relativo a los entierros o funerales"
+      "gloss": "relativo a los entierros o funerales",
+      "synonyms": [
+        "mortuorio",
+        "fúnebre",
+        "sepulcral"
+      ]
     },
     {
       "word": "TOS",
@@ -1098,7 +1390,6 @@
       "word": "TAZÓN",
       "gloss": "un recipiente hondo para líquidos o alimentos",
       "synonyms": [
-        "cuenco",
         "bol"
       ]
     },
@@ -1118,11 +1409,20 @@
     },
     {
       "word": "MANGUERA",
-      "gloss": "un tubo flexible para conducir líquidos"
+      "gloss": "un tubo flexible para conducir líquidos",
+      "synonyms": [
+        "tubo",
+        "conducto"
+      ]
     },
     {
       "word": "MUNICIPAL",
-      "gloss": "relativo a la administración de una ciudad o pueblo"
+      "gloss": "relativo a la administración de una ciudad o pueblo",
+      "synonyms": [
+        "local",
+        "público",
+        "ciudadano"
+      ]
     },
     {
       "word": "PRENDA",
@@ -1166,7 +1466,11 @@
     },
     {
       "word": "PARRILLA",
-      "gloss": "rejilla metálica para cocinar alimentos"
+      "gloss": "rejilla metálica para cocinar alimentos",
+      "synonyms": [
+        "rejilla",
+        "asador"
+      ]
     },
     {
       "word": "EMISIÓN",
@@ -1185,7 +1489,11 @@
     },
     {
       "word": "CALLEJERO",
-      "gloss": "propio de las calles o que vive en ellas"
+      "gloss": "propio de las calles o que vive en ellas",
+      "synonyms": [
+        "urbano",
+        "de ciudad"
+      ]
     },
     {
       "word": "ASAMBLEA",
@@ -1208,19 +1516,35 @@
     },
     {
       "word": "ENCUBRIR",
-      "gloss": "ocultar información o acciones ilícitas"
+      "gloss": "ocultar información o acciones malas",
+      "synonyms": [
+        "ocultar",
+        "esconder",
+        "tapar"
+      ]
     },
     {
       "word": "DACTILAR",
-      "gloss": "relativo a las huellas de los dedos"
+      "gloss": "relativo a las huellas de los dedos",
+      "synonyms": [
+        "digital",
+        "de dedos"
+      ]
     },
     {
       "word": "OBSTANTE",
-      "gloss": "que se opone o impide algo"
+      "gloss": "que se opone o impide algo",
+      "synonyms": [
+        "opuesto"
+      ]
     },
     {
       "word": "AUDAZ",
-      "gloss": "que actúa con valentía o atrevimiento"
+      "gloss": "que actúa con valentía o atrevimiento",
+      "synonyms": [
+        "valiente",
+        "atrevido"
+      ]
     },
     {
       "word": "JORNADA",
@@ -1231,18 +1555,25 @@
     },
     {
       "word": "PAPÁS",
-      "gloss": "padres de una persona"
+      "gloss": "padres de una persona",
+      "synonyms": [
+        "padres",
+        "familia"
+      ]
     },
     {
       "word": "ADMIRABLE",
-      "gloss": "que merece ser admirado"
+      "gloss": "que merece ser admirado",
+      "synonyms": [
+        "ejemplar",
+        "notable"
+      ]
     },
     {
       "word": "CATÁSTROFE",
       "gloss": "suceso que causa gran daño o destrucción",
       "synonyms": [
-        "desastre",
-        "calamidad"
+        "desastre"
       ]
     },
     {
@@ -1279,7 +1610,11 @@
     },
     {
       "word": "INFECTAR",
-      "gloss": "introducir microorganismos que causan enfermedad"
+      "gloss": "introducir microorganismos que causan enfermedad",
+      "synonyms": [
+        "contagiar",
+        "propagar"
+      ]
     },
     {
       "word": "POLACO",
@@ -1335,11 +1670,19 @@
     },
     {
       "word": "CÓSMICO",
-      "gloss": "relativo al universo o al espacio"
+      "gloss": "relativo al universo o al espacio",
+      "synonyms": [
+        "espacial",
+        "del espacio"
+      ]
     },
     {
       "word": "NAVEGACIÓN",
-      "gloss": "acción de desplazarse por el mar o internet"
+      "gloss": "acción de desplazarse por el mar o internet",
+      "synonyms": [
+        "viaje",
+        "travesía"
+      ]
     },
     {
       "word": "BARCA",
@@ -1358,23 +1701,45 @@
     },
     {
       "word": "MORIBUNDO",
-      "gloss": "que está próximo a morir"
+      "gloss": "que está próximo a morir",
+      "synonyms": [
+        "agonizante",
+        "terminal"
+      ]
     },
     {
       "word": "EFICIENTE",
-      "gloss": "que logra resultados con poco esfuerzo"
+      "gloss": "que logra resultados con poco esfuerzo",
+      "synonyms": [
+        "eficaz",
+        "productivo"
+      ]
     },
     {
       "word": "SEMINARIO",
-      "gloss": "curso o reunión para estudiar un tema"
+      "gloss": "curso o reunión para estudiar un tema",
+      "synonyms": [
+        "curso",
+        "taller",
+        "clase"
+      ]
     },
     {
       "word": "SUSPENSIÓN",
-      "gloss": "interrupción temporal de una actividad"
+      "gloss": "interrupción temporal de una actividad",
+      "synonyms": [
+        "parada",
+        "interrupción"
+      ]
     },
     {
       "word": "MADURO",
-      "gloss": "que ha alcanzado su pleno desarrollo"
+      "gloss": "que ha alcanzado su pleno desarrollo",
+      "synonyms": [
+        "listo",
+        "preparado",
+        "hecho"
+      ]
     },
     {
       "word": "ADMISIÓN",
@@ -1394,15 +1759,28 @@
     },
     {
       "word": "ÍNDICE",
-      "gloss": "lista ordenada de contenidos o temas"
+      "gloss": "lista ordenada de contenidos o temas",
+      "synonyms": [
+        "lista"
+      ]
     },
     {
       "word": "FIJAMENTE",
-      "gloss": "de manera sostenida y sin apartarse"
+      "gloss": "de manera sostenida y sin apartarse",
+      "synonyms": [
+        "con atención",
+        "con cuidado",
+        "sin mover"
+      ]
     },
     {
       "word": "FASCINAR",
-      "gloss": "atraer con gran intensidad la atención"
+      "gloss": "atraer con gran intensidad la atención",
+      "synonyms": [
+        "atraer",
+        "gustar mucho",
+        "encantar"
+      ]
     },
     {
       "word": "NARCÓTICO",
@@ -1413,23 +1791,47 @@
     },
     {
       "word": "METEORITO",
-      "gloss": "fragmento de roca que cae del espacio"
+      "gloss": "fragmento de roca que cae del espacio",
+      "synonyms": [
+        "piedra del cielo",
+        "roca del espacio",
+        "cuerpo caído"
+      ]
     },
     {
       "word": "RETOMAR",
-      "gloss": "volver a iniciar algo interrumpido"
+      "gloss": "volver a iniciar algo interrumpido",
+      "synonyms": [
+        "volver a",
+        "seguir",
+        "continuar"
+      ]
     },
     {
       "word": "TORCIDO",
-      "gloss": "que no está recto o derecho"
+      "gloss": "que no está recto o derecho",
+      "synonyms": [
+        "doblado",
+        "curvo",
+        "no recto"
+      ]
     },
     {
       "word": "FIGURA",
-      "gloss": "forma o silueta de un cuerpo"
+      "gloss": "forma o contorno de un cuerpo",
+      "synonyms": [
+        "forma",
+        "dibujo"
+      ]
     },
     {
       "word": "JOYERÍA",
-      "gloss": "tienda donde se venden joyas"
+      "gloss": "tienda donde se venden joyas",
+      "synonyms": [
+        "tienda de joyas",
+        "lugar de joyas",
+        "negocio de joyas"
+      ]
     },
     {
       "word": "MUDANZA",
@@ -1445,23 +1847,48 @@
     },
     {
       "word": "TRIÁNGULO",
-      "gloss": "figura geométrica de tres lados"
+      "gloss": "figura geométrica de tres lados",
+      "synonyms": [
+        "figura de tres lados",
+        "forma de tres lados",
+        "polígono de tres lados"
+      ]
     },
     {
       "word": "CEBO",
-      "gloss": "alimento usado para atraer animales"
+      "gloss": "alimento usado para atraer animales",
+      "synonyms": [
+        "comida para pescar",
+        "alimento para atrapar",
+        "cosa para atraer"
+      ]
     },
     {
       "word": "RECAUDAR",
-      "gloss": "reunir dinero o fondos para un fin"
+      "gloss": "reunir dinero o fondos para un fin",
+      "synonyms": [
+        "juntar",
+        "recoger",
+        "obtener"
+      ]
     },
     {
       "word": "PROMOVER",
-      "gloss": "impulsar el desarrollo de algo"
+      "gloss": "impulsar el desarrollo de algo",
+      "synonyms": [
+        "ayudar",
+        "apoyar",
+        "impulsar"
+      ]
     },
     {
       "word": "LIMO",
-      "gloss": "sedimento fino depositado por el agua"
+      "gloss": "sedimento fino depositado por el agua",
+      "synonyms": [
+        "barro",
+        "fango",
+        "tierra mojada"
+      ]
     },
     {
       "word": "RELATO",
@@ -1473,7 +1900,12 @@
     },
     {
       "word": "AGOTADOR",
-      "gloss": "Que consume mucha energía y deja sin fuerzas."
+      "gloss": "Que consume mucha energía y deja sin fuerzas.",
+      "synonyms": [
+        "cansado",
+        "duro",
+        "pesado"
+      ]
     },
     {
       "word": "FILMACIÓN",
@@ -1485,23 +1917,48 @@
     },
     {
       "word": "TRACTOR",
-      "gloss": "Vehículo agrícola que tira de maquinaria pesada."
+      "gloss": "Vehículo agrícola que tira de maquinaria pesada.",
+      "synonyms": [
+        "máquina de campo",
+        "vehículo agrícola",
+        "máquina para arar"
+      ]
     },
     {
       "word": "CUBANO",
-      "gloss": "Relativo a Cuba o a sus habitantes."
+      "gloss": "Relativo a Cuba o a sus habitantes.",
+      "synonyms": [
+        "de Cuba",
+        "de la isla",
+        "de ese país"
+      ]
     },
     {
       "word": "BORROSO",
-      "gloss": "Que carece de nitidez y resulta difícil de ver."
+      "gloss": "Que carece de nitidez y resulta difícil de ver.",
+      "synonyms": [
+        "poco claro",
+        "difícil de ver",
+        "sin nitidez"
+      ]
     },
     {
       "word": "USUARIO",
-      "gloss": "Persona que emplea un servicio o dispositivo."
+      "gloss": "Persona que emplea un servicio o dispositivo.",
+      "synonyms": [
+        "persona que usa",
+        "quien emplea",
+        "cliente"
+      ]
     },
     {
       "word": "DETONADOR",
-      "gloss": "Dispositivo que inicia una explosión."
+      "gloss": "Dispositivo que inicia una explosión.",
+      "synonyms": [
+        "aparato para explotar",
+        "mecanismo de explosión",
+        "dispositivo que hace estallar"
+      ]
     },
     {
       "word": "RACIÓN",
@@ -1529,11 +1986,21 @@
     },
     {
       "word": "HEROICO",
-      "gloss": "Que muestra valor extraordinario ante el peligro."
+      "gloss": "Que muestra valor extraordinario ante el peligro.",
+      "synonyms": [
+        "valiente",
+        "corajudo",
+        "audaz"
+      ]
     },
     {
       "word": "DISGUSTAR",
-      "gloss": "Provocar desagrado o molestia en alguien."
+      "gloss": "provocar molestia o rechazo en alguien",
+      "synonyms": [
+        "molestar",
+        "fastidiar",
+        "no gustar"
+      ]
     },
     {
       "word": "INTUICIÓN",
@@ -1577,7 +2044,12 @@
     },
     {
       "word": "INMINENTE",
-      "gloss": "Que está a punto de suceder pronto."
+      "gloss": "Que está a punto de suceder pronto.",
+      "synonyms": [
+        "próximo",
+        "cercano",
+        "que va a pasar"
+      ]
     },
     {
       "word": "BIOLOGÍA",
@@ -1589,11 +2061,19 @@
     },
     {
       "word": "CONCEBIR",
-      "gloss": "Formar una idea o plan en la mente."
+      "gloss": "Formar una idea o plan en la mente.",
+      "synonyms": [
+        "imaginar",
+        "pensar",
+        "entender"
+      ]
     },
     {
       "word": "DORAR",
-      "gloss": "Dar color dorado a un alimento al cocinarlo."
+      "gloss": "Dar color dorado a un alimento al cocinarlo.",
+      "synonyms": [
+        "tostar"
+      ]
     },
     {
       "word": "MESERO",
@@ -1613,7 +2093,10 @@
     },
     {
       "word": "EXCAVAR",
-      "gloss": "Quitar tierra para descubrir algo enterrado."
+      "gloss": "Quitar tierra para descubrir algo enterrado.",
+      "synonyms": [
+        "cavar"
+      ]
     },
     {
       "word": "OFENSA",
@@ -1641,11 +2124,17 @@
     },
     {
       "word": "USUAL",
-      "gloss": "Que ocurre o se hace con frecuencia."
+      "gloss": "Que ocurre o se hace con frecuencia.",
+      "synonyms": [
+        "normal"
+      ]
     },
     {
       "word": "NEGADO",
-      "gloss": "Que no posee habilidad para cierta actividad."
+      "gloss": "Que no posee habilidad para cierta actividad.",
+      "synonyms": [
+        "torpe"
+      ]
     },
     {
       "word": "APRIETO",
@@ -1673,7 +2162,10 @@
     },
     {
       "word": "INFLUIR",
-      "gloss": "Ejercer efecto sobre algo o alguien."
+      "gloss": "Ejercer efecto sobre algo o alguien.",
+      "synonyms": [
+        "afectar"
+      ]
     },
     {
       "word": "RESOLUCIÓN",
@@ -1692,7 +2184,11 @@
     },
     {
       "word": "GUARIDO",
-      "gloss": "Lugar donde un animal se refugia."
+      "gloss": "Lugar donde un animal se refugia.",
+      "synonyms": [
+        "refugio",
+        "cueva"
+      ]
     },
     {
       "word": "HOGUERA",
@@ -1704,7 +2200,10 @@
     },
     {
       "word": "CONTRAER",
-      "gloss": "Hacer más pequeño un músculo o tejido."
+      "gloss": "Hacer más pequeño un músculo o tejido.",
+      "synonyms": [
+        "reducir"
+      ]
     },
     {
       "word": "PROYECCIÓN",
@@ -1716,7 +2215,10 @@
     },
     {
       "word": "TIBIO",
-      "gloss": "Que tiene temperatura moderada, ni frío ni caliente."
+      "gloss": "que tiene temperatura media, ni frío ni caliente",
+      "synonyms": [
+        "templado"
+      ]
     },
     {
       "word": "CHUPA",
@@ -1750,11 +2252,17 @@
     },
     {
       "word": "POSEÍDO",
-      "gloss": "Que está dominado por una fuerza o emoción intensa."
+      "gloss": "Que está dominado por una fuerza o emoción intensa.",
+      "synonyms": [
+        "dominado"
+      ]
     },
     {
       "word": "CASUAL",
-      "gloss": "Que ocurre por azar sin planificación previa."
+      "gloss": "Que ocurre por azar sin planificación previa.",
+      "synonyms": [
+        "al azar"
+      ]
     },
     {
       "word": "ABISMO",
@@ -1766,7 +2274,10 @@
     },
     {
       "word": "CUIDO",
-      "gloss": "Atención constante que se presta a alguien."
+      "gloss": "Atención constante que se presta a alguien.",
+      "synonyms": [
+        "atención"
+      ]
     },
     {
       "word": "COBERTIZO",
@@ -1785,11 +2296,17 @@
     },
     {
       "word": "DESE",
-      "gloss": "Deseo intenso de obtener algo."
+      "gloss": "Deseo intenso de obtener algo.",
+      "synonyms": [
+        "deseo"
+      ]
     },
     {
       "word": "BREAR",
-      "gloss": "Cocer o freír ligeramente un alimento."
+      "gloss": "Cocer o freír ligeramente un alimento.",
+      "synonyms": [
+        "sofreír"
+      ]
     },
     {
       "word": "CHELÍN",
@@ -1801,11 +2318,17 @@
     },
     {
       "word": "RESISTENTE",
-      "gloss": "Que soporta bien el desgaste o la presión."
+      "gloss": "Que soporta bien el desgaste o la presión.",
+      "synonyms": [
+        "fuerte"
+      ]
     },
     {
       "word": "DIABÓLICO",
-      "gloss": "Que muestra maldad extrema o crueldad."
+      "gloss": "Que muestra maldad extrema o crueldad.",
+      "synonyms": [
+        "malo"
+      ]
     },
     {
       "word": "CACAHUETE",
@@ -1820,22 +2343,31 @@
     },
     {
       "word": "ROSADO",
-      "gloss": "De color entre blanco y rojo claro."
+      "gloss": "De color entre blanco y rojo claro.",
+      "synonyms": [
+        "rosa"
+      ]
     },
     {
       "word": "ARREBATAR",
-      "gloss": "Quitar algo de forma rápida y violenta."
+      "gloss": "Quitar algo de forma rápida y violenta.",
+      "synonyms": [
+        "quitar"
+      ]
     },
     {
       "word": "ALTAVOZ",
       "gloss": "dispositivo que convierte señales eléctricas en sonido audible",
       "synonyms": [
-        "bocina"
+        "parlante"
       ]
     },
     {
       "word": "ACERTADO",
-      "gloss": "que resulta correcto o apropiado en una situación"
+      "gloss": "que resulta correcto o apropiado en una situación",
+      "synonyms": [
+        "correcto"
+      ]
     },
     {
       "word": "FLECHA",
@@ -1847,23 +2379,38 @@
     },
     {
       "word": "RAPIDEZ",
-      "gloss": "cualidad de moverse o actuar con gran velocidad"
+      "gloss": "cualidad de moverse o actuar con gran velocidad",
+      "synonyms": [
+        "velocidad"
+      ]
     },
     {
       "word": "REBAÑO",
-      "gloss": "grupo de ovejas que pastan juntas"
+      "gloss": "grupo de ovejas que pastan juntas",
+      "synonyms": [
+        "manada"
+      ]
     },
     {
       "word": "SUCIEDAD",
-      "gloss": "presencia de polvo, manchas o impurezas en algo"
+      "gloss": "presencia de polvo, manchas o impurezas en algo",
+      "synonyms": [
+        "mugre"
+      ]
     },
     {
       "word": "CONTAGIOSO",
-      "gloss": "que se transmite fácilmente de una persona a otra"
+      "gloss": "que se transmite fácilmente de una persona a otra",
+      "synonyms": [
+        "pegadizo"
+      ]
     },
     {
       "word": "TIMÓN",
-      "gloss": "pieza que dirige la dirección de una embarcación"
+      "gloss": "pieza que dirige la dirección de una embarcación",
+      "synonyms": [
+        "caña"
+      ]
     },
     {
       "word": "PLASMA",
@@ -1871,11 +2418,18 @@
     },
     {
       "word": "PUNTUAL",
-      "gloss": "que llega o sucede exactamente en el momento previsto"
+      "gloss": "que llega o sucede exactamente en el momento previsto",
+      "synonyms": [
+        "exacto",
+        "preciso"
+      ]
     },
     {
       "word": "ISRAELÍ",
-      "gloss": "persona originaria o habitante de Israel"
+      "gloss": "persona originaria o habitante de Israel",
+      "synonyms": [
+        "de Israel"
+      ]
     },
     {
       "word": "INFANTERÍA",
@@ -1883,11 +2437,18 @@
     },
     {
       "word": "CASITA",
-      "gloss": "vivienda pequeña y sencilla"
+      "gloss": "vivienda pequeña y sencilla",
+      "synonyms": [
+        "casa"
+      ]
     },
     {
       "word": "EXIGENTE",
-      "gloss": "que demanda mucho esfuerzo o calidad"
+      "gloss": "que demanda mucho esfuerzo o calidad",
+      "synonyms": [
+        "difícil",
+        "estricto"
+      ]
     },
     {
       "word": "NUCA",
@@ -1895,7 +2456,10 @@
     },
     {
       "word": "TRUENO",
-      "gloss": "sonido fuerte producido por la expansión del aire tras un rayo"
+      "gloss": "sonido fuerte producido por la expansión del aire tras un rayo",
+      "synonyms": [
+        "estruendo"
+      ]
     },
     {
       "word": "ADÁN",
@@ -1903,15 +2467,27 @@
     },
     {
       "word": "CHISTOSO",
-      "gloss": "que provoca risa con facilidad"
+      "gloss": "que provoca risa con facilidad",
+      "synonyms": [
+        "gracioso",
+        "divertido"
+      ]
     },
     {
       "word": "LUJOSO",
-      "gloss": "que muestra gran riqueza y elegancia"
+      "gloss": "que muestra gran riqueza y elegancia",
+      "synonyms": [
+        "rico",
+        "caro"
+      ]
     },
     {
       "word": "BLOQUEADO",
-      "gloss": "que no puede avanzar o funcionar por un obstáculo"
+      "gloss": "que no puede avanzar o funcionar por un obstáculo",
+      "synonyms": [
+        "cerrado",
+        "parado"
+      ]
     },
     {
       "word": "MÉDULA",
@@ -1923,11 +2499,17 @@
     },
     {
       "word": "INUNDACIÓN",
-      "gloss": "desbordamiento de agua que cubre terrenos secos"
+      "gloss": "desbordamiento de agua que cubre terrenos secos",
+      "synonyms": [
+        "crecida"
+      ]
     },
     {
       "word": "FINCA",
-      "gloss": "propiedad rural dedicada a la agricultura o ganadería"
+      "gloss": "propiedad rural dedicada a la agricultura o ganadería",
+      "synonyms": [
+        "granja"
+      ]
     },
     {
       "word": "BUITRE",
@@ -1935,51 +2517,92 @@
     },
     {
       "word": "CONSPIRAR",
-      "gloss": "unirse en secreto para realizar un acto ilícito"
+      "gloss": "unirse en secreto para hacer algo malo",
+      "synonyms": [
+        "tramar"
+      ]
     },
     {
       "word": "CASILLERO",
-      "gloss": "mueble con compartimentos para guardar objetos"
+      "gloss": "mueble con compartimentos para guardar objetos",
+      "synonyms": [
+        "taquilla"
+      ]
     },
     {
       "word": "VINO",
-      "gloss": "bebida alcohólica obtenida de la fermentación de uvas"
+      "gloss": "una bebida alcohólica que se toma en una copa"
     },
     {
       "word": "PERCEPCIÓN",
-      "gloss": "capacidad de captar sensaciones o información"
+      "gloss": "capacidad de captar sensaciones o información",
+      "synonyms": [
+        "sensación"
+      ]
     },
     {
       "word": "VINCULAR",
-      "gloss": "establecer una relación o conexión entre cosas"
+      "gloss": "establecer una relación o conexión entre cosas",
+      "synonyms": [
+        "unir",
+        "juntar"
+      ]
     },
     {
       "word": "PRESERVAR",
-      "gloss": "mantener algo en buen estado evitando su deterioro"
+      "gloss": "mantener algo en buen estado evitando su deterioro",
+      "synonyms": [
+        "guardar",
+        "cuidar"
+      ]
     },
     {
       "word": "ACTUALIDAD",
-      "gloss": "momento presente en el que ocurren los hechos"
+      "gloss": "momento presente en el que ocurren los hechos",
+      "synonyms": [
+        "hoy",
+        "ahora"
+      ]
     },
     {
       "word": "DISPERSAR",
-      "gloss": "esparcir elementos en distintas direcciones"
+      "gloss": "esparcir elementos en distintas direcciones",
+      "synonyms": [
+        "separar",
+        "esparcir"
+      ]
     },
     {
       "word": "CONFISCAR",
-      "gloss": "apoderarse legalmente de bienes por autoridad competente"
+      "gloss": "apoderarse legalmente de bienes por autoridad competente",
+      "synonyms": [
+        "quitar",
+        "retener"
+      ]
     },
     {
       "word": "MOTIVACIÓN",
-      "gloss": "impulso interno que lleva a realizar una acción"
+      "gloss": "impulso interno que lleva a realizar una acción",
+      "synonyms": [
+        "ganas",
+        "interés"
+      ]
     },
     {
       "word": "SIERVO",
-      "gloss": "persona sometida a servidumbre feudal"
+      "gloss": "persona sometida a servidumbre feudal",
+      "synonyms": [
+        "esclavo",
+        "criado"
+      ]
     },
     {
       "word": "COMPOSITOR",
-      "gloss": "persona que crea obras musicales"
+      "gloss": "persona que crea obras musicales",
+      "synonyms": [
+        "músico",
+        "autor"
+      ]
     },
     {
       "word": "PABELLÓN",
@@ -1987,7 +2610,11 @@
     },
     {
       "word": "PRECIPITAR",
-      "gloss": "hacer que algo ocurra antes de lo previsto"
+      "gloss": "hacer que algo ocurra antes de lo previsto",
+      "synonyms": [
+        "apresurar",
+        "acelerar"
+      ]
     },
     {
       "word": "MOSTAZA",
@@ -1995,35 +2622,66 @@
     },
     {
       "word": "DILIGENCIA",
-      "gloss": "cuidado y rapidez al realizar una tarea"
+      "gloss": "cuidado y rapidez al realizar una tarea",
+      "synonyms": [
+        "cuidado",
+        "atención"
+      ]
     },
     {
       "word": "LAR",
-      "gloss": "hogar o vivienda familiar"
+      "gloss": "hogar o vivienda familiar",
+      "synonyms": [
+        "hogar",
+        "casa"
+      ]
     },
     {
       "word": "CÓMIC",
-      "gloss": "publicación con viñetas que narra una historia"
+      "gloss": "publicación con viñetas que narra una historia",
+      "synonyms": [
+        "historieta"
+      ]
     },
     {
       "word": "ESQUIVAR",
-      "gloss": "evitar un golpe o un encuentro con rapidez"
+      "gloss": "evitar un golpe o un encuentro con rapidez",
+      "synonyms": [
+        "evitar",
+        "sortear"
+      ]
     },
     {
       "word": "TESTARUDO",
-      "gloss": "que se mantiene firme en su opinión sin ceder"
+      "gloss": "que se mantiene firme en su opinión sin ceder",
+      "synonyms": [
+        "terco",
+        "obstinado"
+      ]
     },
     {
       "word": "OVNI",
-      "gloss": "objeto volador no identificado"
+      "gloss": "objeto volador no identificado",
+      "synonyms": [
+        "platillo",
+        "nave"
+      ]
     },
     {
       "word": "DESTACAR",
-      "gloss": "resaltar o sobresalir entre otros elementos"
+      "gloss": "resaltar o sobresalir entre otros elementos",
+      "synonyms": [
+        "resaltar",
+        "sobresalir"
+      ]
     },
     {
       "word": "LATERAL",
-      "gloss": "que se encuentra en un lado o costado"
+      "gloss": "que se encuentra en un lado o costado",
+      "synonyms": [
+        "lado",
+        "costado"
+      ]
     },
     {
       "word": "HUMEDAD",
@@ -2031,11 +2689,19 @@
     },
     {
       "word": "HINCHAR",
-      "gloss": "aumentar el volumen de algo al introducir aire o líquido"
+      "gloss": "aumentar el volumen de algo al introducir aire o líquido",
+      "synonyms": [
+        "inflar",
+        "agrandar"
+      ]
     },
     {
       "word": "PECULIAR",
-      "gloss": "que posee características propias y distintivas"
+      "gloss": "que posee características propias y distintivas",
+      "synonyms": [
+        "raro",
+        "extraño"
+      ]
     },
     {
       "word": "CARTUCHO",
@@ -2043,31 +2709,58 @@
     },
     {
       "word": "ADOPTIVO",
-      "gloss": "que ha sido acogido legalmente como hijo"
+      "gloss": "que ha sido acogido legalmente como hijo",
+      "synonyms": [
+        "adoptado",
+        "criado"
+      ]
     },
     {
       "word": "ARCAR",
-      "gloss": "curvar o doblar en forma de arco"
+      "gloss": "curvar o doblar en forma de arco",
+      "synonyms": [
+        "doblar",
+        "curvar"
+      ]
     },
     {
       "word": "EXILIO",
-      "gloss": "destierro forzoso fuera del propio país"
+      "gloss": "destierro forzoso fuera del propio país",
+      "synonyms": [
+        "destierro"
+      ]
     },
     {
       "word": "CAUSADO",
-      "gloss": "que ha sido originado por algo o alguien"
+      "gloss": "que ha sido originado por algo o alguien",
+      "synonyms": [
+        "provocado",
+        "hecho"
+      ]
     },
     {
       "word": "REMAR",
-      "gloss": "impulsar una embarcación moviendo los remos"
+      "gloss": "impulsar una embarcación moviendo los remos",
+      "synonyms": [
+        "bogar",
+        "impulsar"
+      ]
     },
     {
       "word": "INFILTRADO",
-      "gloss": "agente que penetra secretamente en un grupo"
+      "gloss": "agente que penetra secretamente en un grupo",
+      "synonyms": [
+        "espía",
+        "agente"
+      ]
     },
     {
       "word": "ENTREGO",
-      "gloss": "acción de entregar algo a otra persona"
+      "gloss": "acción de entregar algo a otra persona",
+      "synonyms": [
+        "doy",
+        "entregar"
+      ]
     },
     {
       "word": "MICRO",
@@ -2075,11 +2768,19 @@
     },
     {
       "word": "EDITORIAL",
-      "gloss": "un texto de opinión que aparece en un periódico o revista"
+      "gloss": "un texto de opinión que aparece en un periódico o revista",
+      "synonyms": [
+        "texto de opinión"
+      ]
     },
     {
       "word": "PROGRAMADO",
-      "gloss": "que se ha dispuesto para ejecutarse en un momento concreto"
+      "gloss": "que se ha dispuesto para ejecutarse en un momento concreto",
+      "synonyms": [
+        "planeado",
+        "organizado",
+        "previsto"
+      ]
     },
     {
       "word": "INGLE",
@@ -2087,15 +2788,27 @@
     },
     {
       "word": "RECEPTOR",
-      "gloss": "aparato que capta señales de radio o televisión"
+      "gloss": "aparato que capta señales de radio o televisión",
+      "synonyms": [
+        "radio"
+      ]
     },
     {
       "word": "GENUINO",
-      "gloss": "que es auténtico y no falso"
+      "gloss": "que es auténtico y no falso",
+      "synonyms": [
+        "auténtico",
+        "real",
+        "verdadero"
+      ]
     },
     {
       "word": "DEPRIMIR",
-      "gloss": "hundir o bajar algo con presión"
+      "gloss": "hundir o bajar algo con presión",
+      "synonyms": [
+        "entristecer",
+        "bajar"
+      ]
     },
     {
       "word": "VIRGINIDAD",
@@ -2107,55 +2820,105 @@
     },
     {
       "word": "ALUCINAR",
-      "gloss": "percibir algo que no existe en la realidad"
+      "gloss": "percibir algo que no existe en la realidad",
+      "synonyms": [
+        "imaginar"
+      ]
     },
     {
       "word": "BUSCADOR",
-      "gloss": "programa que encuentra información en internet"
+      "gloss": "programa que encuentra información en internet",
+      "synonyms": [
+        "motor",
+        "herramienta"
+      ]
     },
     {
       "word": "LANCHA",
-      "gloss": "embarcación pequeña impulsada por motor"
+      "gloss": "embarcación pequeña impulsada por motor",
+      "synonyms": [
+        "barco",
+        "embarcación"
+      ]
     },
     {
       "word": "TRANSICIÓN",
-      "gloss": "paso de un estado a otro distinto"
+      "gloss": "paso de un estado a otro distinto",
+      "synonyms": [
+        "cambio",
+        "paso"
+      ]
     },
     {
       "word": "CABREAR",
-      "gloss": "poner a alguien de mal humor"
+      "gloss": "poner a alguien de mal humor",
+      "synonyms": [
+        "enfadar",
+        "molestar"
+      ]
     },
     {
       "word": "ACOGEDOR",
-      "gloss": "que resulta cómodo y agradable para estar"
+      "gloss": "que resulta cómodo y agradable para estar",
+      "synonyms": [
+        "cómodo",
+        "agradable"
+      ]
     },
     {
       "word": "ANZUELO",
-      "gloss": "gancho con cebo para pescar peces"
+      "gloss": "gancho con cebo para pescar peces",
+      "synonyms": [
+        "gancho",
+        "trampa"
+      ]
     },
     {
       "word": "PEREZOSO",
-      "gloss": "que evita hacer esfuerzo o trabajo"
+      "gloss": "que evita hacer esfuerzo o trabajo",
+      "synonyms": [
+        "vago",
+        "flojo"
+      ]
     },
     {
       "word": "MOCIÓN",
-      "gloss": "propuesta que se presenta para ser votada"
+      "gloss": "propuesta que se presenta para ser votada",
+      "synonyms": [
+        "propuesta",
+        "idea"
+      ]
     },
     {
       "word": "ENTRANTE",
-      "gloss": "que llega o comienza en ese momento"
+      "gloss": "que llega o comienza en ese momento",
+      "synonyms": [
+        "nuevo"
+      ]
     },
     {
       "word": "HOMENAJE",
-      "gloss": "acto público para honrar a alguien"
+      "gloss": "acto público para honrar a alguien",
+      "synonyms": [
+        "honor",
+        "tributo"
+      ]
     },
     {
       "word": "COMPADRE",
-      "gloss": "amigo íntimo con quien se tiene confianza"
+      "gloss": "amigo íntimo con quien se tiene confianza",
+      "synonyms": [
+        "amigo",
+        "compañero"
+      ]
     },
     {
       "word": "DISCÍPULO",
-      "gloss": "persona que aprende de un maestro"
+      "gloss": "persona que aprende de un maestro",
+      "synonyms": [
+        "alumno",
+        "estudiante"
+      ]
     },
     {
       "word": "LORO",
@@ -2163,19 +2926,31 @@
     },
     {
       "word": "EPIDEMIA",
-      "gloss": "enfermedad que se propaga rápidamente entre muchas personas"
+      "gloss": "enfermedad que se propaga rápidamente entre muchas personas",
+      "synonyms": [
+        "brote"
+      ]
     },
     {
       "word": "MONASTERIO",
-      "gloss": "edificio donde viven monjes en comunidad"
+      "gloss": "edificio donde viven monjes en comunidad",
+      "synonyms": [
+        "convento"
+      ]
     },
     {
       "word": "CARPETA",
-      "gloss": "funda de cartón para guardar papeles"
+      "gloss": "funda de cartón para guardar papeles",
+      "synonyms": [
+        "dossier"
+      ]
     },
     {
       "word": "EMPEÑO",
-      "gloss": "esfuerzo constante para lograr algo"
+      "gloss": "esfuerzo constante para lograr algo",
+      "synonyms": [
+        "esfuerzo"
+      ]
     },
     {
       "word": "ESCOTILLA",
@@ -2183,7 +2958,10 @@
     },
     {
       "word": "DETALLADO",
-      "gloss": "que incluye muchos datos o precisiones"
+      "gloss": "que incluye muchos datos o precisiones",
+      "synonyms": [
+        "completo"
+      ]
     },
     {
       "word": "CONGELADOR",
@@ -2191,23 +2969,38 @@
     },
     {
       "word": "VÍSPERA",
-      "gloss": "día anterior a una fecha señalada"
+      "gloss": "día anterior a una fecha señalada",
+      "synonyms": [
+        "día anterior"
+      ]
     },
     {
       "word": "CERILLA",
-      "gloss": "palito con cabeza inflamable para encender fuego"
+      "gloss": "palito con cabeza inflamable para encender fuego",
+      "synonyms": [
+        "fósforo"
+      ]
     },
     {
       "word": "SEMBRAR",
-      "gloss": "colocar semillas en la tierra para que crezcan"
+      "gloss": "colocar semillas en la tierra para que crezcan",
+      "synonyms": [
+        "plantar"
+      ]
     },
     {
       "word": "SEÑA",
-      "gloss": "gesto o marca que sirve para identificar algo"
+      "gloss": "gesto o marca que sirve para identificar algo",
+      "synonyms": [
+        "señal"
+      ]
     },
     {
       "word": "DERIVO",
-      "gloss": "acción de apartarse de la dirección prevista"
+      "gloss": "acción de apartarse de la dirección prevista",
+      "synonyms": [
+        "desvío"
+      ]
     },
     {
       "word": "DISTRAÍDO",
@@ -2215,7 +3008,10 @@
     },
     {
       "word": "MORETÓN",
-      "gloss": "mancha oscura en la piel por un golpe"
+      "gloss": "mancha oscura en la piel por un golpe",
+      "synonyms": [
+        "morado"
+      ]
     },
     {
       "word": "CUÁNTICO",
@@ -2223,7 +3019,10 @@
     },
     {
       "word": "PLANEO",
-      "gloss": "desplazamiento en el aire sin motor"
+      "gloss": "desplazamiento en el aire sin motor",
+      "synonyms": [
+        "vuelo"
+      ]
     }
   ]
 }
