@@ -1,6 +1,6 @@
 # ADR 0012: Repository — private GitHub `hiato`
 
-- Status: Accepted
+- Status: Superseded by ADR 0039
 - Date: 2026-09-19
 - Deciders: Andreas Gerlach
 
