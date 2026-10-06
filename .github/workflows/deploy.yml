@@ -1,0 +1,265 @@
+name: Deploy
+
+# Full SHA, then the commit message. The expression language cannot slice
+# the subject. The SHA is first so a long subject is the tail.
+run-name: ${{ github.sha }} ${{ github.event.head_commit.message }}
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: '1.4.2'
+      - run: bun install --frozen-lockfile
+      - run: bun run packs:check
+      - name: Hunspell verdict cache is committed
+        run: |
+          if ! git diff --exit-code -- scripts/data/hunspell-verdicts.json || [ -n "$(git status --porcelain -- scripts/data/hunspell-verdicts.json)" ]; then
+            echo "hunspell-verdicts.json changed. Run bun run packs:check and commit scripts/data/hunspell-verdicts.json"
+            git status --porcelain -- scripts/data/hunspell-verdicts.json
+            exit 1
+          fi
+      - run: bun run build
+      - run: bun test
+      - name: dist is a staging shell
+        run: |
+          if [ -e dist/404.html ]; then
+            echo "dist/404.html must not exist"
+            exit 1
+          fi
+          if [ ! -f dist/index.html ] || ! grep -F -q 'https://hiato.pages.dev/og-banner.png' dist/index.html; then
+            echo "dist/index.html must contain https://hiato.pages.dev/og-banner.png"
+            exit 1
+          fi
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pages-dist
+          path: dist
+          if-no-files-found: error
+
+  staging:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: pages-staging-${{ github.workflow }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      deployments: write
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pages-dist
+          path: dist
+      - name: dist artifact has the shell
+        run: test -f dist/index.html
+      - name: Publish preview branch staging
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
+        run: |
+          set -u
+          major=$(node -p "Number(process.versions.node.split('.')[0])")
+          if [ "$major" -lt 22 ]; then
+            echo "wrangler@4.136.2 needs Node >= 22, found $(node -v)"
+            exit 1
+          fi
+          # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
+          npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
+          # --branch staging is required. An omitted branch follows git HEAD (main) and publishes Production.
+          # Working directory is the checkout so wrangler.toml and functions/ are visible.
+          node "$RUNNER_TEMP/wrangler/node_modules/wrangler/bin/wrangler.js" \
+            pages deploy dist \
+            --project-name hiato \
+            --branch staging \
+            --commit-hash "$GITHUB_SHA"
+          if ! git diff --exit-code -- package.json bun.lock || [ -n "$(git status --porcelain -- package.json bun.lock)" ]; then
+            echo "package.json or bun.lock changed. Wrangler must stay outside the checkout."
+            git status --porcelain -- package.json bun.lock
+            exit 1
+          fi
+          # 4.136.2 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
+          node <<'EOF'
+          const fs = require('fs')
+          const text = fs.readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, 'utf8')
+          const records = []
+          for (const line of text.split('\n')) {
+            const trimmed = line.trim()
+            if (!trimmed) continue
+            records.push(JSON.parse(trimmed))
+          }
+          const detailed = records.filter((record) => record.type === 'pages-deploy-detailed')
+          if (detailed.length !== 1) {
+            console.error(`expected one pages-deploy-detailed record, found ${detailed.length}`)
+            process.exit(1)
+          }
+          const record = detailed[0]
+          if (record.version !== 1) {
+            console.error(`unexpected pages-deploy-detailed version ${record.version}`)
+            process.exit(1)
+          }
+          if (record.environment !== 'preview') {
+            console.error(`expected environment preview, found ${record.environment}`)
+            process.exit(1)
+          }
+          const url = record.url
+          if (typeof url !== 'string' || !url.startsWith('https://') || /[\r\n\s]/.test(url)) {
+            console.error('pages-deploy-detailed url is missing or not https')
+            process.exit(1)
+          }
+          const commit = record.deployment_trigger && record.deployment_trigger.metadata
+            ? record.deployment_trigger.metadata.commit_hash
+            : ''
+          if (commit !== process.env.GITHUB_SHA) {
+            console.error(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
+            process.exit(1)
+          }
+          console.log(`pages-deploy-detailed environment=preview deployment_id=${record.deployment_id}`)
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `url<<HIATO_URL\n${url}\nHIATO_URL\n`)
+          EOF
+      - name: Probe the deployment URL
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          set -u
+          base=${DEPLOYMENT_URL%/}
+          ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+          hdr=$(mktemp)
+          body=$(mktemp)
+
+          header_value() {
+            awk -v name="$2" 'BEGIN { IGNORECASE = 1 }
+              {
+                line = $0
+                sub(/\r$/, "", line)
+              }
+              index(tolower(line), tolower(name) ":") == 1 {
+                sub(/^[^:]+:[[:space:]]*/, "", line)
+                print line
+              }' "$1" | tail -n 1
+          }
+
+          require_includes() {
+            value=$(header_value "$hdr" "$1")
+            case "$value" in
+              *"$2"*) ;;
+              *)
+                echo "probe failed: $3 $1 is '$value', expected to include $2" >&2
+                exit 1
+                ;;
+            esac
+          }
+
+          require_body() {
+            actual=$(tr -d '\r' < "$body")
+            actual=${actual%$'\n'}
+            if [ "$actual" != "$1" ]; then
+              echo "probe failed: $2 body is '$actual'" >&2
+              exit 1
+            fi
+          }
+
+          probe_ok() {
+            if ! curl -fsS --max-time 30 -D "$hdr" -o "$body" -A "$ua" --globoff "${base}$1"; then
+              echo "probe failed: GET $1" >&2
+              exit 1
+            fi
+          }
+
+          probe_ok /api/health
+          require_includes content-type application/json /api/health
+          require_includes cache-control no-store /api/health
+          require_includes x-content-type-options nosniff /api/health
+          require_body '{"ok":true,"stage":"staging"}' /api/health
+
+          probe_ok /packs/en/a1.json
+          require_includes content-type application/json /packs/en/a1.json
+          require_includes cache-control 'public, max-age=0, must-revalidate' /packs/en/a1.json
+
+          # -f is omitted: this request is supposed to be a 404.
+          code=$(curl -sS --max-time 30 -D "$hdr" -o "$body" -A "$ua" --globoff -w '%{http_code}' "${base}/packs/en/nope.json" || true)
+          if [ "$code" != '404' ]; then
+            echo "probe failed: /packs/en/nope.json status $code" >&2
+            exit 1
+          fi
+          require_includes content-type text/plain /packs/en/nope.json
+          require_includes cache-control no-store /packs/en/nope.json
+          require_includes x-content-type-options nosniff /packs/en/nope.json
+          require_body 'Not Found' /packs/en/nope.json
+
+          probe_ok /
+          require_includes content-type text/html /
+          require_includes cache-control no-cache /
+
+          probe_ok '/share?p=probe'
+          require_includes content-type text/html '/share?p=probe'
+          require_includes cache-control no-cache '/share?p=probe'
+      - name: Staging summary
+        if: ${{ !cancelled() }}
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          PUSHER: ${{ github.event.pusher.name }}
+        run: |
+          set -u
+          subject=$(printf '%s\n' "$COMMIT_MESSAGE" | head -n 1)
+          when=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          {
+            if [ -n "$DEPLOYMENT_URL" ]; then
+              echo 'This run published Staging only. Production is unchanged.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- Subject: $subject"
+              echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
+              echo "- Run: $GITHUB_RUN_ID"
+              echo "- UTC: $when"
+              echo "- Pusher: $PUSHER"
+              echo
+              echo "**Open this URL.** $DEPLOYMENT_URL"
+              echo
+              echo "**Do not decide from this URL.** https://staging.hiato.pages.dev. The next push to \`main\` replaces it."
+              echo
+              echo "On the deployment URL, check:"
+              echo
+              echo "- \`/\` — \"Choose language & level\" or a Daily title"
+              echo "- \`/language\` — heading \"Language\""
+              echo "- \`/play\` — Language when this host has no level"
+              echo "- \`/share\` — \"Nothing to share yet\""
+              echo "- \`/about\` — heading \"Licenses\""
+              echo
+              echo 'A 200 shell is not enough. An empty Share page is a pass.'
+            else
+              echo 'The publish failed. This run did not publish Staging.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- Subject: $subject"
+              echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
+              echo "- Run: $GITHUB_RUN_ID"
+              echo "- UTC: $when"
+              echo "- Pusher: $PUSHER"
+              echo
+              echo 'No deployment URL was recorded.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
