@@ -12,6 +12,10 @@ Do **not** rely on Cloudflare’s `bun.lock` autodetection. Pin Bun explicitly.
 
 The build command lives in the Cloudflare Pages dashboard (it is not applied by merging this file). Edit **Production and Preview** on merge so both environments run `packs:check`. GitHub CI `build-test` also runs `packs:check`; a Pages-only rebuild would not. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
 
+## What publishes a push to `main`
+
+A push to `main` runs `.github/workflows/deploy.yml`. That workflow checks out the pushed commit, runs `packs:check`, `bun run build`, and `bun test`, and uploads that `dist` to the Pages preview branch `staging` only when this SHA is still the tip of `origin/main`. An older run does not upload after `main` has moved. The dashboard build is not what publishes that push. Automatic production branch deployments stay off. This workflow does not upload Production. Preview builds for other branches stay as they are. `CLOUDFLARE_API_TOKEN` (Cloudflare Pages Edit / Pages Write only) and `CLOUDFLARE_ACCOUNT_ID` must exist as repository Actions secrets before the first push to `main`.
+
 ## Environment variables
 
 Set on **Production** and **Preview**:
