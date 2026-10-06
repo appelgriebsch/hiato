@@ -1,6 +1,6 @@
 # ADR 0022: Production promote — merge to main
 
-- Status: Accepted
+- Status: Superseded by ADR 0038
 - Date: 2026-09-19
 - Deciders: Andreas Gerlach
 
