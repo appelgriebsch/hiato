@@ -283,6 +283,14 @@ jobs:
           set -u
           subject=$(printf '%s\n' "$COMMIT_MESSAGE" | head -n 1)
           when=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          tip_now=""
+          tip_read=false
+          if git fetch --no-tags origin main; then
+            tip_now=$(git rev-parse origin/main) || true
+            if [ -n "$tip_now" ]; then
+              tip_read=true
+            fi
+          fi
           identity() {
             echo "- SHA: \`$GITHUB_SHA\`"
             echo "- Subject:" "$subject"
@@ -308,6 +316,18 @@ jobs:
             echo 'A 200 shell is not enough. An empty Share page is a pass.'
           }
           {
+            if [ "$tip_read" = "true" ] && [ "$GITHUB_SHA" = "$tip_now" ]; then
+              echo "Approve publishes this build to https://hiato.appelgriebsch.org. Reject leaves Production as it is. Staging keeps this build until the next push to \`main\`."
+              echo "At $when, \`$GITHUB_SHA\` matched \`origin/main\`."
+            elif [ "$tip_read" = "true" ]; then
+              echo "Do not approve. This run must not publish."
+              echo "At $when, \`$GITHUB_SHA\` did not match \`origin/main\` \`$tip_now\`."
+            else
+              echo "Do not approve. This run must not publish."
+              echo "At $when, \`origin/main\` could not be read, so \`$GITHUB_SHA\` is not confirmed as the tip."
+            fi
+            echo "On this run, open **Review deployments**. Approve and deploy only for this run."
+            echo
             if [ "$TIP_CURRENT" = "false" ] || [ "$DEPLOY_OUTCOME" = "stale" ]; then
               tipsha=$TIP_SHA
               if [ -n "$DEPLOY_MAIN_SHA" ]; then
@@ -349,5 +369,313 @@ jobs:
               identity
               echo
               echo 'No deployment URL was recorded.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  production:
+    needs: staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: pages-production-${{ github.workflow }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      deployments: write
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pages-dist
+          path: dist
+      - name: dist artifact has the shell
+        run: test -f dist/index.html
+      - name: This SHA is still the tip of main
+        id: tip
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          tip=$(git rev-parse origin/main)
+          echo "sha=$tip" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_SHA" != "$tip" ]; then
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "Not published. Production unchanged."
+            exit 1
+          fi
+          echo "current=true" >> "$GITHUB_OUTPUT"
+      - name: Publish production branch main
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
+        run: |
+          set -euo pipefail
+          major=$(node -p "Number(process.versions.node.split('.')[0])")
+          if [ "$major" -lt 22 ]; then
+            echo "wrangler@4.136.2 needs Node >= 22, found $(node -v)"
+            exit 1
+          fi
+          # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
+          npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
+          # Check again after the install. main can move while npm runs.
+          git fetch --no-tags origin main
+          tip=$(git rev-parse origin/main)
+          if [ "$GITHUB_SHA" != "$tip" ]; then
+            {
+              echo "outcome=stale"
+              echo "main_sha=$tip"
+            } >> "$GITHUB_OUTPUT"
+            echo "Not published. Production unchanged."
+            exit 1
+          fi
+          # --branch main is required. The checkout is detached, so an omitted branch is not Production.
+          # No --env, --config, or --commit-dirty. Working directory stays the checkout.
+          node "$RUNNER_TEMP/wrangler/node_modules/wrangler/bin/wrangler.js" \
+            pages deploy dist \
+            --project-name hiato \
+            --branch main \
+            --commit-hash "$GITHUB_SHA"
+          echo "uploaded=true" >> "$GITHUB_OUTPUT"
+          if ! git diff --exit-code -- package.json bun.lock || [ -n "$(git status --porcelain -- package.json bun.lock)" ]; then
+            echo "package.json or bun.lock changed. Wrangler must stay outside the checkout."
+            git status --porcelain -- package.json bun.lock
+            exit 1
+          fi
+          # 4.136.2 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
+          # Write outcome and url before later checks exit, so a failed check
+          # does not look like Wrangler never uploaded.
+          node <<'EOF'
+          const fs = require('fs')
+
+          function emit(outcome, url) {
+            let block = `outcome<<HIATO_OUTCOME\n${outcome}\nHIATO_OUTCOME\n`
+            if (typeof url === 'string' && url.startsWith('https://') && !/[\r\n\s]/.test(url)) {
+              block += `url<<HIATO_URL\n${url}\nHIATO_URL\n`
+            }
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, block)
+          }
+
+          function fail(message) {
+            console.error(message)
+            process.exit(1)
+          }
+
+          let text
+          try {
+            text = fs.readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, 'utf8')
+          } catch (err) {
+            fail(`pages deploy output was not written: ${err.message}`)
+          }
+
+          const records = []
+          try {
+            for (const line of text.split('\n')) {
+              const trimmed = line.trim()
+              if (!trimmed) continue
+              records.push(JSON.parse(trimmed))
+            }
+          } catch (err) {
+            fail(`pages deploy output is not NDJSON: ${err.message}`)
+          }
+
+          const detailed = records.filter((record) => record && record.type === 'pages-deploy-detailed')
+          if (detailed.length === 0) {
+            fail('expected one pages-deploy-detailed record, found 0')
+          }
+
+          const notProduction = detailed.find((record) => record.environment !== 'production')
+          if (notProduction) {
+            emit('not-production', notProduction.url)
+            fail(`expected environment production, found ${notProduction.environment}`)
+          }
+
+          const record = detailed[0]
+          emit('production', record.url)
+          if (detailed.length !== 1) {
+            fail(`expected one pages-deploy-detailed record, found ${detailed.length}`)
+          }
+          if (record.version !== 1) {
+            fail(`unexpected pages-deploy-detailed version ${record.version}`)
+          }
+          const url = record.url
+          if (typeof url !== 'string' || !url.startsWith('https://') || /[\r\n\s]/.test(url)) {
+            fail('pages-deploy-detailed url is missing or not https')
+          }
+          const commit = record.deployment_trigger && record.deployment_trigger.metadata
+            ? record.deployment_trigger.metadata.commit_hash
+            : ''
+          if (commit !== process.env.GITHUB_SHA) {
+            fail(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
+          }
+          console.log(`pages-deploy-detailed environment=production deployment_id=${record.deployment_id}`)
+          EOF
+      - name: Probe the deployment URL
+        id: probe
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+        run: |
+          set -euo pipefail
+          base=${DEPLOYMENT_URL%/}
+          ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+          hdr=$(mktemp)
+          body=$(mktemp)
+
+          header_value() {
+            awk -v name="$2" 'BEGIN { IGNORECASE = 1 }
+              {
+                line = $0
+                sub(/\r$/, "", line)
+              }
+              index(tolower(line), tolower(name) ":") == 1 {
+                sub(/^[^:]+:[[:space:]]*/, "", line)
+                print line
+              }' "$1" | tail -n 1
+          }
+
+          require_includes() {
+            value=$(header_value "$hdr" "$1")
+            case "$value" in
+              *"$2"*) ;;
+              *)
+                echo "probe failed: $3 $1 is '$value', expected to include $2" >&2
+                exit 1
+                ;;
+            esac
+          }
+
+          require_body() {
+            actual=$(tr -d '\r' < "$body")
+            actual=${actual%$'\n'}
+            if [ "$actual" != "$1" ]; then
+              echo "probe failed: $2 body is '$actual'" >&2
+              exit 1
+            fi
+          }
+
+          probe_ok() {
+            if ! curl -fsS --max-time 30 -D "$hdr" -o "$body" -A "$ua" --globoff "${base}$1"; then
+              echo "probe failed: GET $1" >&2
+              exit 1
+            fi
+          }
+
+          probe_ok /api/health
+          require_includes content-type application/json /api/health
+          require_includes cache-control no-store /api/health
+          require_includes x-content-type-options nosniff /api/health
+          require_body '{"ok":true,"stage":"production"}' /api/health
+
+          probe_ok /packs/en/a1.json
+          require_includes content-type application/json /packs/en/a1.json
+          require_includes cache-control 'public, max-age=0, must-revalidate' /packs/en/a1.json
+
+          # -f is omitted: this request is supposed to be a 404.
+          code=$(curl -sS --max-time 30 -D "$hdr" -o "$body" -A "$ua" --globoff -w '%{http_code}' "${base}/packs/en/nope.json" || true)
+          if [ "$code" != '404' ]; then
+            echo "probe failed: /packs/en/nope.json status $code" >&2
+            exit 1
+          fi
+          require_includes content-type text/plain /packs/en/nope.json
+          require_includes cache-control no-store /packs/en/nope.json
+          require_includes x-content-type-options nosniff /packs/en/nope.json
+          require_body 'Not Found' /packs/en/nope.json
+
+          probe_ok /
+          require_includes content-type text/html /
+          require_includes cache-control no-cache /
+
+          probe_ok '/share?p=probe'
+          require_includes content-type text/html '/share?p=probe'
+      - name: Probe production aliases
+        id: aliases
+        run: |
+          set -u
+          ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+          expected='{"ok":true,"stage":"production"}'
+          lag=false
+          note=""
+          check_alias() {
+            url="$1"
+            bodyfile=$(mktemp)
+            if ! curl -fsS --max-time 30 -o "$bodyfile" -A "$ua" --globoff "$url"; then
+              lag=true
+              note="${note}- \`$url\` did not return the Production health body."$'\n'
+              return 0
+            fi
+            actual=$(tr -d '\r' < "$bodyfile")
+            actual=${actual%$'\n'}
+            if [ "$actual" != "$expected" ]; then
+              lag=true
+              note="${note}- \`$url\` body is not the Production health body."$'\n'
+            fi
+          }
+          check_alias 'https://hiato.pages.dev/api/health'
+          check_alias 'https://hiato.appelgriebsch.org/api/health'
+          {
+            echo "lag=$lag"
+            echo "note<<HIATO_ALIAS"
+            printf '%s' "$note"
+            echo
+            echo "HIATO_ALIAS"
+          } >> "$GITHUB_OUTPUT"
+      - name: Production summary
+        if: ${{ !cancelled() }}
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outputs.outcome }}
+          DEPLOY_MAIN_SHA: ${{ steps.deploy.outputs.main_sha }}
+          DEPLOY_CONCLUSION: ${{ steps.deploy.conclusion }}
+          DEPLOY_UPLOADED: ${{ steps.deploy.outputs.uploaded }}
+          TIP_CURRENT: ${{ steps.tip.outputs.current }}
+          TIP_SHA: ${{ steps.tip.outputs.sha }}
+          PROBE_CONCLUSION: ${{ steps.probe.conclusion }}
+          ALIAS_LAG: ${{ steps.aliases.outputs.lag }}
+          ALIAS_NOTE: ${{ steps.aliases.outputs.note }}
+        run: |
+          set -u
+          {
+            if [ "$DEPLOY_UPLOADED" = "true" ] && [ "$DEPLOY_OUTCOME" = "production" ] && [ "$DEPLOY_CONCLUSION" = "success" ] && [ "$PROBE_CONCLUSION" = "success" ]; then
+              echo 'Published.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- https://hiato.appelgriebsch.org"
+              echo "- https://hiato.pages.dev"
+              echo "- Deployment URL: $DEPLOYMENT_URL"
+              if [ "$ALIAS_LAG" = "true" ]; then
+                echo
+                echo 'A custom domain or alias lags. The deployment URL already returned {"ok":true,"stage":"production"}. A lagging alias is not a failed job.'
+                printf '%s\n' "$ALIAS_NOTE"
+              fi
+            elif [ "$DEPLOY_UPLOADED" = "true" ] && [ "$DEPLOY_OUTCOME" = "not-production" ]; then
+              echo 'The upload happened, but pages-deploy-detailed environment was not production. Production may have changed. Do not re-run this job. If Production changed, the recovery is the existing hiato-production rollback.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              if [ -n "$DEPLOYMENT_URL" ]; then
+                echo "- Deployment URL: $DEPLOYMENT_URL"
+              fi
+            elif [ "$DEPLOY_UPLOADED" = "true" ]; then
+              echo 'The upload happened. Production already moved. Do not re-run this job. The recovery is the existing hiato-production rollback.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              if [ -n "$DEPLOYMENT_URL" ]; then
+                echo "- Deployment URL: $DEPLOYMENT_URL"
+              fi
+            else
+              echo 'Not published. Production unchanged.'
+              echo
+              echo "- SHA: \`$GITHUB_SHA\`"
+              tipsha=$TIP_SHA
+              if [ -n "$DEPLOY_MAIN_SHA" ]; then
+                tipsha=$DEPLOY_MAIN_SHA
+              fi
+              if [ -n "$tipsha" ]; then
+                echo "- Tip of main: \`$tipsha\`"
+              fi
             fi
           } >> "$GITHUB_STEP_SUMMARY"
