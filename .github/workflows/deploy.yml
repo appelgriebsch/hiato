@@ -66,6 +66,19 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.sha }}
+      - name: This SHA is still the tip of main
+        id: tip
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          tip=$(git rev-parse origin/main)
+          echo "sha=$tip" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_SHA" != "$tip" ]; then
+            echo "current=false" >> "$GITHUB_OUTPUT"
+            echo "Refusing Staging upload. $GITHUB_SHA is not origin/main $tip"
+            exit 1
+          fi
+          echo "current=true" >> "$GITHUB_OUTPUT"
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: pages-dist
@@ -87,6 +100,17 @@ jobs:
           fi
           # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
           npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
+          # Check again after the install. main can move while npm runs.
+          git fetch --no-tags origin main
+          tip=$(git rev-parse origin/main)
+          if [ "$GITHUB_SHA" != "$tip" ]; then
+            {
+              echo "outcome=stale"
+              echo "main_sha=$tip"
+            } >> "$GITHUB_OUTPUT"
+            echo "Refusing Staging upload. $GITHUB_SHA is not origin/main $tip"
+            exit 1
+          fi
           # --branch staging is required. An omitted branch follows git HEAD (main) and publishes Production.
           # Working directory is the checkout so wrangler.toml and functions/ are visible.
           node "$RUNNER_TEMP/wrangler/node_modules/wrangler/bin/wrangler.js" \
@@ -248,7 +272,10 @@ jobs:
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
           DEPLOY_OUTCOME: ${{ steps.deploy.outputs.outcome }}
+          DEPLOY_MAIN_SHA: ${{ steps.deploy.outputs.main_sha }}
           DEPLOY_CONCLUSION: ${{ steps.deploy.conclusion }}
+          TIP_CURRENT: ${{ steps.tip.outputs.current }}
+          TIP_SHA: ${{ steps.tip.outputs.sha }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           PUSHER: ${{ github.event.pusher.name }}
@@ -281,7 +308,19 @@ jobs:
             echo 'A 200 shell is not enough. An empty Share page is a pass.'
           }
           {
-            if [ "$DEPLOY_OUTCOME" = "not-preview" ]; then
+            if [ "$TIP_CURRENT" = "false" ] || [ "$DEPLOY_OUTCOME" = "stale" ]; then
+              tipsha=$TIP_SHA
+              if [ -n "$DEPLOY_MAIN_SHA" ]; then
+                tipsha=$DEPLOY_MAIN_SHA
+              fi
+              echo 'This run did not upload Staging. This SHA is no longer the tip of main.'
+              echo 'Production is unchanged. Staging stays on the newer deployment.'
+              echo
+              identity
+              echo "- Tip of main: \`$tipsha\`"
+              echo
+              echo 'No deployment URL was recorded for this run.'
+            elif [ "$DEPLOY_OUTCOME" = "not-preview" ]; then
               echo 'Production may have changed.'
               echo
               identity
