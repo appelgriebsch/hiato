@@ -24,7 +24,7 @@ The stack is Vite, TypeScript, React, Zustand, shadcn/ui, Tailwind, and Bun.
 Tests use bun:test.
 Hosting is Cloudflare Pages with a small Workers API stub.
 Branch previews are staging.
-A merge to main is production.
+A push to main publishes Staging. Promote publishes Production after approval.
 UX Uma builds a clickable prototype before coding starts.
 Impl Ivy implements after Andreas accepts the prototype and chooses handoff.
 

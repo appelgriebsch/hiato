@@ -16,7 +16,7 @@ bun run packs:check   # pack schema + spoiler rule
 
 Vite + TypeScript + React + Zustand + shadcn/ui + Tailwind + Bun + `bun:test` + `vite-plugin-pwa` (`registerType: 'prompt'`).
 
-Hosting: Cloudflare Pages + Pages Functions `/api/health` stub. A push to `main` publishes Staging. Production is still a manual upload until the Promote slice lands.
+Hosting: Cloudflare Pages + Pages Functions `/api/health` stub. A push to `main` publishes Staging. Promote publishes Production after approval.
 
 ## Local development
 
