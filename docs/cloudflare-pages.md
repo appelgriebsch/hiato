@@ -14,7 +14,7 @@ The build command lives in the Cloudflare Pages dashboard (it is not applied by 
 
 ## What publishes a push to `main`
 
-A push to `main` runs `.github/workflows/deploy.yml`. That workflow checks out the pushed commit, runs `packs:check`, `bun run build`, and `bun test`, and uploads that `dist` to the Pages preview branch `staging`. The dashboard build is not what publishes that push. Automatic production branch deployments stay off. This workflow does not upload Production. Preview builds for other branches stay as they are.
+A push to `main` runs `.github/workflows/deploy.yml`. That workflow checks out the pushed commit, runs `packs:check`, `bun run build`, and `bun test`, and uploads that `dist` to the Pages preview branch `staging`. The dashboard build is not what publishes that push. Automatic production branch deployments stay off. This workflow does not upload Production. Preview builds for other branches stay as they are. `CLOUDFLARE_API_TOKEN` (Cloudflare Pages Edit / Pages Write only) and `CLOUDFLARE_ACCOUNT_ID` must exist as repository Actions secrets before the first push to `main`.
 
 ## Environment variables
 

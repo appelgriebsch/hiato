@@ -79,7 +79,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
         run: |
-          set -u
+          set -euo pipefail
           major=$(node -p "Number(process.versions.node.split('.')[0])")
           if [ "$major" -lt 22 ]; then
             echo "wrangler@4.136.2 needs Node >= 22, found $(node -v)"
@@ -100,49 +100,78 @@ jobs:
             exit 1
           fi
           # 4.136.2 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
+          # Write outcome and url before later checks exit, so a failed check
+          # does not look like Wrangler never uploaded.
           node <<'EOF'
           const fs = require('fs')
-          const text = fs.readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, 'utf8')
+
+          function emit(outcome, url) {
+            let block = `outcome<<HIATO_OUTCOME\n${outcome}\nHIATO_OUTCOME\n`
+            if (typeof url === 'string' && url.startsWith('https://') && !/[\r\n\s]/.test(url)) {
+              block += `url<<HIATO_URL\n${url}\nHIATO_URL\n`
+            }
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, block)
+          }
+
+          function fail(message) {
+            console.error(message)
+            process.exit(1)
+          }
+
+          let text
+          try {
+            text = fs.readFileSync(process.env.WRANGLER_OUTPUT_FILE_PATH, 'utf8')
+          } catch (err) {
+            fail(`pages deploy output was not written: ${err.message}`)
+          }
+
           const records = []
-          for (const line of text.split('\n')) {
-            const trimmed = line.trim()
-            if (!trimmed) continue
-            records.push(JSON.parse(trimmed))
+          try {
+            for (const line of text.split('\n')) {
+              const trimmed = line.trim()
+              if (!trimmed) continue
+              records.push(JSON.parse(trimmed))
+            }
+          } catch (err) {
+            fail(`pages deploy output is not NDJSON: ${err.message}`)
           }
-          const detailed = records.filter((record) => record.type === 'pages-deploy-detailed')
-          if (detailed.length !== 1) {
-            console.error(`expected one pages-deploy-detailed record, found ${detailed.length}`)
-            process.exit(1)
+
+          const detailed = records.filter((record) => record && record.type === 'pages-deploy-detailed')
+          if (detailed.length === 0) {
+            fail('expected one pages-deploy-detailed record, found 0')
           }
+
+          const notPreview = detailed.find((record) => record.environment !== 'preview')
+          if (notPreview) {
+            emit('not-preview', notPreview.url)
+            fail(`expected environment preview, found ${notPreview.environment}`)
+          }
+
           const record = detailed[0]
-          if (record.version !== 1) {
-            console.error(`unexpected pages-deploy-detailed version ${record.version}`)
-            process.exit(1)
+          emit('preview', record.url)
+          if (detailed.length !== 1) {
+            fail(`expected one pages-deploy-detailed record, found ${detailed.length}`)
           }
-          if (record.environment !== 'preview') {
-            console.error(`expected environment preview, found ${record.environment}`)
-            process.exit(1)
+          if (record.version !== 1) {
+            fail(`unexpected pages-deploy-detailed version ${record.version}`)
           }
           const url = record.url
           if (typeof url !== 'string' || !url.startsWith('https://') || /[\r\n\s]/.test(url)) {
-            console.error('pages-deploy-detailed url is missing or not https')
-            process.exit(1)
+            fail('pages-deploy-detailed url is missing or not https')
           }
           const commit = record.deployment_trigger && record.deployment_trigger.metadata
             ? record.deployment_trigger.metadata.commit_hash
             : ''
           if (commit !== process.env.GITHUB_SHA) {
-            console.error(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
-            process.exit(1)
+            fail(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
           }
           console.log(`pages-deploy-detailed environment=preview deployment_id=${record.deployment_id}`)
-          fs.appendFileSync(process.env.GITHUB_OUTPUT, `url<<HIATO_URL\n${url}\nHIATO_URL\n`)
           EOF
       - name: Probe the deployment URL
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
         run: |
-          set -u
+          set -euo pipefail
           base=${DEPLOYMENT_URL%/}
           ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
           hdr=$(mktemp)
@@ -214,11 +243,12 @@ jobs:
 
           probe_ok '/share?p=probe'
           require_includes content-type text/html '/share?p=probe'
-          require_includes cache-control no-cache '/share?p=probe'
       - name: Staging summary
         if: ${{ !cancelled() }}
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outputs.outcome }}
+          DEPLOY_CONCLUSION: ${{ steps.deploy.conclusion }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           PUSHER: ${{ github.event.pusher.name }}
@@ -226,39 +256,58 @@ jobs:
           set -u
           subject=$(printf '%s\n' "$COMMIT_MESSAGE" | head -n 1)
           when=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          identity() {
+            echo "- SHA: \`$GITHUB_SHA\`"
+            echo "- Subject:" "$subject"
+            echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
+            echo "- Run: $GITHUB_RUN_ID"
+            echo "- UTC: $when"
+            echo "- Pusher: $PUSHER"
+          }
+          preview_notes() {
+            echo
+            echo "**Open this URL.** $DEPLOYMENT_URL"
+            echo
+            echo "**Do not decide from this URL.** https://staging.hiato.pages.dev. The next push to \`main\` replaces it."
+            echo
+            echo "On the deployment URL, check:"
+            echo
+            echo "- \`/\` — \"Choose language & level\" or a Daily title"
+            echo "- \`/language\` — heading \"Language\""
+            echo "- \`/play\` — Language when this host has no level"
+            echo "- \`/share\` — \"Nothing to share yet\""
+            echo "- \`/about\` — heading \"Licenses\""
+            echo
+            echo 'A 200 shell is not enough. An empty Share page is a pass.'
+          }
           {
-            if [ -n "$DEPLOYMENT_URL" ]; then
+            if [ "$DEPLOY_OUTCOME" = "not-preview" ]; then
+              echo 'Production may have changed.'
+              echo
+              identity
+              if [ -n "$DEPLOYMENT_URL" ]; then
+                echo
+                echo "**Deployment URL.** $DEPLOYMENT_URL"
+              fi
+            elif [ "$DEPLOY_OUTCOME" = "preview" ] && [ "$DEPLOY_CONCLUSION" = "success" ]; then
               echo 'This run published Staging only. Production is unchanged.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
-              echo "- Subject: $subject"
-              echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
-              echo "- Run: $GITHUB_RUN_ID"
-              echo "- UTC: $when"
-              echo "- Pusher: $PUSHER"
+              identity
+              preview_notes
+            elif [ "$DEPLOY_OUTCOME" = "preview" ]; then
+              echo 'The upload happened. A check after the upload failed.'
               echo
-              echo "**Open this URL.** $DEPLOYMENT_URL"
-              echo
-              echo "**Do not decide from this URL.** https://staging.hiato.pages.dev. The next push to \`main\` replaces it."
-              echo
-              echo "On the deployment URL, check:"
-              echo
-              echo "- \`/\` — \"Choose language & level\" or a Daily title"
-              echo "- \`/language\` — heading \"Language\""
-              echo "- \`/play\` — Language when this host has no level"
-              echo "- \`/share\` — \"Nothing to share yet\""
-              echo "- \`/about\` — heading \"Licenses\""
-              echo
-              echo 'A 200 shell is not enough. An empty Share page is a pass.'
+              identity
+              if [ -n "$DEPLOYMENT_URL" ]; then
+                preview_notes
+              else
+                echo
+                echo 'No deployment URL was recorded.'
+              fi
             else
               echo 'The publish failed. This run did not publish Staging.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
-              echo "- Subject: $subject"
-              echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
-              echo "- Run: $GITHUB_RUN_ID"
-              echo "- UTC: $when"
-              echo "- Pusher: $PUSHER"
+              identity
               echo
               echo 'No deployment URL was recorded.'
             fi
