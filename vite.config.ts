@@ -5,24 +5,18 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { resolveBuildSha } from './src/deploy/build-sha.js'
 import { socialImageOrigin } from './src/deploy/harden.js'
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 
-function resolveBuildSha(): string {
-  const fromEnv = process.env.CF_PAGES_COMMIT_SHA || process.env.GITHUB_SHA
-  if (fromEnv && fromEnv.length >= 7) return fromEnv.slice(0, 7)
-  try {
-    return execSync('git rev-parse --short=7 HEAD', {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim()
-  } catch {
-    return 'dev'
-  }
-}
-
-const buildSha = resolveBuildSha()
+// Staging/prod bake via GITHUB_SHA (GHA); branch previews via CF_PAGES_COMMIT_SHA.
+const buildSha = resolveBuildSha(process.env, () =>
+  execSync('git rev-parse --short=7 HEAD', {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }),
+)
 
 export default defineConfig({
   define: {
