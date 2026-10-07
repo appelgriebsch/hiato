@@ -124,7 +124,8 @@ export function About() {
         download on demand (ADR 0006).
       </p>
       <p className="mb-6 text-center text-[12px] leading-relaxed text-ink-muted">
-        Built by Grok Bot
+        Built by Grok Bot ·{' '}
+        <span className="font-mono">{__HIATO_BUILD_SHA__}</span>
       </p>
     </Layout>
   )

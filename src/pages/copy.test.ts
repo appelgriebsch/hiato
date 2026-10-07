@@ -126,6 +126,21 @@ describe('About license bands', () => {
   })
 })
 
+describe('About build SHA footer (gh-166)', () => {
+  test('footer bakes SHA via constant; middle-dot mono format; no fetch', async () => {
+    const src = await pageSrc('About.tsx')
+    expect(src).toContain('Built by Grok Bot ·')
+    expect(src).toContain('__HIATO_BUILD_SHA__')
+    expect(src).toContain('font-mono')
+    expect(src).not.toMatch(/Built by Grok Bot ·\s*[0-9a-f]{7}/)
+    expect(src).not.toMatch(/\bfetch\s*\(/)
+    expect(src).not.toContain('api.github.com')
+    const footer = src.slice(src.indexOf('Built by Grok Bot'))
+    expect(footer).not.toContain('github.com')
+    expect(footer).not.toContain('fetch')
+  })
+})
+
 describe('Home pocket control (gh-85)', () => {
   test('Pocket (n) uses the stored slot, outline, and sits before nav', async () => {
     const src = await pageSrc('Home.tsx')
