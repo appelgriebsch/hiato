@@ -1,14 +1,27 @@
+import { execSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { resolveBuildSha } from './src/deploy/build-sha.js'
 import { socialImageOrigin } from './src/deploy/harden.js'
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 
+// Staging/prod bake via GITHUB_SHA (GHA); branch previews via CF_PAGES_COMMIT_SHA.
+const buildSha = resolveBuildSha(process.env, () =>
+  execSync('git rev-parse --short=7 HEAD', {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  }),
+)
+
 export default defineConfig({
+  define: {
+    __HIATO_BUILD_SHA__: JSON.stringify(buildSha),
+  },
   plugins: [
     react(),
     tailwindcss(),
