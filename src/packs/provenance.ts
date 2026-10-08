@@ -9,14 +9,13 @@ export interface ProvenanceFragments {
   method: string
 }
 
-type SourceKey = 'curated' | 'cefrj' | 'octanove' | 'wiktionary' | 'wordhoard'
-type MethodKey = 'curated' | 'tagged-syllabus' | 'tagged-addon' | 'frequency-rank'
-type LicenseKey = 'CC0' | 'CC-BY-SA'
+type SourceKey = 'cefrj' | 'octanove' | 'frequencywords' | 'wordhoard'
+type MethodKey = 'tagged-syllabus' | 'tagged-addon' | 'frequency-rank'
+type LicenseKey = 'CC0' | 'CC-BY-SA' | 'CEFR-J terms'
 
-/** Honesty slot finer than PACK_LICENSES bands where ADR 0029 splits methods (EN A1–B1 vs B2). */
+/** Honesty slot. EN A1–B2 is one CEFR-J band; C1–C2 is the Octanove add-on. */
 type ProvenanceSlot =
-  | 'en-low'
-  | 'en-b2'
+  | 'en-a1b2'
   | 'en-high'
   | 'pt-all'
   | 'de-low'
@@ -26,56 +25,48 @@ type ProvenanceSlot =
 
 const SOURCE_COPY: Record<PackLang, Record<SourceKey, string>> = {
   en: {
-    curated: 'Learner lemmas',
     cefrj: 'CEFR-J',
     octanove: 'Octanove',
-    wiktionary: 'Wiktionary',
+    frequencywords: 'FrequencyWords',
     wordhoard: 'wordhoard',
   },
   pt: {
-    curated: 'Lemmas do aprendiz',
     cefrj: 'CEFR-J',
     octanove: 'Octanove',
-    wiktionary: 'Wiktionary',
+    frequencywords: 'FrequencyWords',
     wordhoard: 'wordhoard',
   },
   de: {
-    curated: 'Lerner-Lemmata',
     cefrj: 'CEFR-J',
     octanove: 'Octanove',
-    wiktionary: 'Wiktionary',
+    frequencywords: 'FrequencyWords',
     wordhoard: 'wordhoard',
   },
   es: {
-    curated: 'Lemas de aprendizaje',
     cefrj: 'CEFR-J',
     octanove: 'Octanove',
-    wiktionary: 'Wiktionary',
+    frequencywords: 'FrequencyWords',
     wordhoard: 'wordhoard',
   },
 }
 
 const METHOD_COPY: Record<PackLang, Record<MethodKey, string>> = {
   en: {
-    curated: 'curated',
     'tagged-syllabus': 'tagged syllabus',
     'tagged-addon': 'tagged add-on',
     'frequency-rank': 'frequency-rank',
   },
   pt: {
-    curated: 'curado',
     'tagged-syllabus': 'sílabo etiquetado',
     'tagged-addon': 'complemento etiquetado',
     'frequency-rank': 'por frequência',
   },
   de: {
-    curated: 'kuratiert',
     'tagged-syllabus': 'Syllabus (getaggt)',
     'tagged-addon': 'Add-on (getaggt)',
     'frequency-rank': 'Frequenzband',
   },
   es: {
-    curated: 'curado',
     'tagged-syllabus': 'temario etiquetado',
     'tagged-addon': 'complemento etiquetado',
     'frequency-rank': 'por frecuencia',
@@ -94,11 +85,10 @@ const SLOT_META: Record<
   ProvenanceSlot,
   { source: SourceKey; method: MethodKey; license: LicenseKey }
 > = {
-  'en-low': { source: 'curated', method: 'curated', license: 'CC0' },
-  'en-b2': { source: 'cefrj', method: 'tagged-syllabus', license: 'CC0' },
+  'en-a1b2': { source: 'cefrj', method: 'tagged-syllabus', license: 'CEFR-J terms' },
   'en-high': { source: 'octanove', method: 'tagged-addon', license: 'CC-BY-SA' },
   'pt-all': {
-    source: 'wiktionary',
+    source: 'frequencywords',
     method: 'frequency-rank',
     license: 'CC-BY-SA',
   },
@@ -156,8 +146,7 @@ function provenanceSlot(lang: PackLang, cefr: PackCefr): ProvenanceSlot {
   if (lang === 'pt') return 'pt-all'
   if (lang === 'en') {
     if (cefr === 'c1' || cefr === 'c2') return 'en-high'
-    if (cefr === 'b2') return 'en-b2'
-    return 'en-low'
+    return 'en-a1b2'
   }
   if (lang === 'de') {
     return cefr === 'b2' || cefr === 'c1' || cefr === 'c2' ? 'de-high' : 'de-low'
@@ -166,12 +155,13 @@ function provenanceSlot(lang: PackLang, cefr: PackCefr): ProvenanceSlot {
 }
 
 /** Short license label derived from the PACK_LICENSES band text.
- * Only known CC0 / CC-BY-SA bands — never default unknown to CC0. */
+ * Known bands only — never default an unknown label to CC0. */
 export function shortLicenseFromBand(band: PackLicenseBand): LicenseKey {
   if (/CC-BY-SA/i.test(band.license) || /BY-SA/i.test(band.license)) {
     return 'CC-BY-SA'
   }
   if (/CC0/i.test(band.license)) return 'CC0'
+  if (/CEFR-J/i.test(band.license)) return 'CEFR-J terms'
   throw new Error(
     `Unknown license in PACK_LICENSES band ${band.levels}: ${band.license}`,
   )

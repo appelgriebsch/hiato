@@ -13,6 +13,7 @@ import {
   failClosedOnHunspellMiss,
   exclusiveConflicts,
   expectedPackCount,
+  requiresCc0Style,
   requiresCcBySa,
   validatePack,
   buildLemmaEasiestByLang,
@@ -128,26 +129,34 @@ describe('packs:check exclusive bands', () => {
 })
 
 describe('packs:check license matrix (ADR 0029)', () => {
-  test('EN B2 requires CC0 and a CEFR-J / Tono citation, and rejects SA', () => {
+  test('EN A1–B2 requires a CEFR-J / Tono citation and rejects CC0 and SA', () => {
     expect(requiresCcBySa('en', 'b2')).toBe(false)
+    expect(requiresCc0Style('en', 'a1')).toBe(false)
     const enB2 = pack({
       lang: 'en',
       cefr: 'b2',
-      license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
-      attribution: ['Cite Tono Lab / CEFR-J'],
+      license: 'CEFR-J Wordlist terms: free use with citation (© Tono Laboratory, TUFS)',
+      attribution: ['Compiled by Yukio Tono'],
     })
     expect(checkPackLicense('en/b2.json', enB2)).toBeNull()
     const sa = pack({
       lang: 'en',
       cefr: 'b2',
       license: 'CC-BY-SA-4.0',
-      attribution: ['CEFR-J'],
+      attribution: ['CEFR-J Tono'],
     })
     expect(checkPackLicense('en/b2.json', sa)).toMatch(/CC-BY-SA/)
+    const cc0 = pack({
+      lang: 'en',
+      cefr: 'a1',
+      license: 'CC0-1.0',
+      attribution: ['CEFR-J Tono Laboratory'],
+    })
+    expect(checkPackLicense('en/a1.json', cc0)).toMatch(/must not be labelled CC0/)
     const noCite = pack({
       lang: 'en',
       cefr: 'b2',
-      license: 'CC0-1.0',
+      license: 'free use',
       attribution: ['curated learner lemmas'],
     })
     expect(checkPackLicense('en/b2.json', noCite)).toMatch(/CEFR-J/)
@@ -201,12 +210,12 @@ describe('packs:check license matrix (ADR 0029)', () => {
     }
   })
 
-  test('PT all levels require CC-BY-SA; EN A1–B1 keep CC0', () => {
+  test('PT all levels require CC-BY-SA; EN A1–B1 reject CC0', () => {
     const pt = pack({
       lang: 'pt',
       cefr: 'a1',
       license: 'CC-BY-SA-4.0',
-      attribution: ['Wiktionary'],
+      attribution: ['FrequencyWords pt_50k'],
     })
     expect(checkPackLicense('pt/a1.json', pt)).toBeNull()
     const ptBad = pack({
@@ -215,12 +224,12 @@ describe('packs:check license matrix (ADR 0029)', () => {
       license: 'CC0-1.0',
       attribution: ['oops'],
     })
-    expect(checkPackLicense('pt/c2.json', ptBad)).toMatch(/CC0|CC-BY-SA/)
+    expect(checkPackLicense('pt/c2.json', ptBad)).toMatch(/must not be labelled CC0/)
     const enA1 = pack({
       lang: 'en',
       cefr: 'a1',
-      license: 'CC0-1.0',
-      attribution: ['curated'],
+      license: 'CEFR-J Wordlist terms',
+      attribution: ['Yukio Tono, Tokyo University of Foreign Studies'],
     })
     expect(checkPackLicense('en/a1.json', enA1)).toBeNull()
   })

@@ -51,7 +51,7 @@ See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 
 Original application source, documentation, and brand assets are [MIT](LICENSE) (Copyright (c) 2026 Andreas Gerlach). See `NOTICE` for what that grant does not cover.
 
-Word packs ship with per-source attribution (license bands in `src/packs/licenses.ts` / `NOTICE`). German, Spanish, and Portuguese packs are CC-BY-SA at all levels; EN C1/C2 are CC-BY-SA; EN A1–B2 are CEFR-J citation / CC0 (not share-alike).
+Word packs ship with per-source attribution (license bands in `src/packs/licenses.ts` / `NOTICE`). German, Spanish, and Portuguese packs are CC-BY-SA at all levels; EN C1/C2 are CC-BY-SA; EN A1–B2 use the CEFR-J Wordlist terms (free use with citation, © Tono Laboratory, TUFS; not CC0 and not share-alike).
 
 UI and share-card typeface is self-hosted **Inter** (SIL Open Font License 1.1) — see `NOTICE` and `public/fonts/LICENSE.txt`. Share cards never load Google Fonts or a remote font CDN (ADR 0020).
 

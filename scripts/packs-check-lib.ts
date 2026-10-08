@@ -85,47 +85,39 @@ function hasCc0(blob: string): boolean {
   return /cc0/i.test(blob)
 }
 
-/** EN A1–B2 are CEFR-J citation / CC0; every other pack is SA (ADR 0029, #169). */
+/** EN A1–B2 are CEFR-J Wordlist terms; every other pack is SA (ADR 0029, #169, #171). */
 export function requiresCcBySa(lang: PackLang, cefr: PackCefr): boolean {
   return lang !== 'en' || cefr === 'c1' || cefr === 'c2'
 }
 
-export function requiresCc0Style(lang: PackLang, cefr: PackCefr): boolean {
-  return lang === 'en' && (cefr === 'a1' || cefr === 'a2' || cefr === 'b1')
+/** No shipped learner pack is a CC0 dedication. CEFR-J requires citation. */
+export function requiresCc0Style(_lang: PackLang, _cefr: PackCefr): boolean {
+  return false
 }
 
 export function checkPackLicense(rel: string, pack: WordPack): string | null {
   const blob = licenseBlob(pack)
   const sa = hasCcBySa(blob)
   const cc0 = hasCc0(blob)
+  const level = `${pack.lang.toUpperCase()} ${pack.cefr.toUpperCase()}`
+
+  if (cc0) {
+    return `${rel}: ${level} must not be labelled CC0`
+  }
 
   if (requiresCcBySa(pack.lang, pack.cefr)) {
-    if (cc0) {
-      return `${rel}: ${pack.lang.toUpperCase()} ${pack.cefr.toUpperCase()} must not be labelled CC0 (ADR 0029 requires CC-BY-SA)`
-    }
     if (!sa) {
-      return `${rel}: ${pack.lang.toUpperCase()} ${pack.cefr.toUpperCase()} license/attribution must mention CC-BY-SA`
+      return `${rel}: ${level} license/attribution must mention CC-BY-SA`
     }
     return null
   }
 
-  if (pack.lang === 'pt' && !sa) {
-    return `${rel}: PT pack license/attribution must mention CC-BY-SA`
+  if (sa) {
+    return `${rel}: ${level} must not be labelled CC-BY-SA (CEFR-J Wordlist terms)`
   }
-
-  if (requiresCc0Style(pack.lang, pack.cefr) && !cc0) {
-    return `${rel}: ${pack.lang.toUpperCase()} ${pack.cefr.toUpperCase()} must keep CC0-style labelling`
+  if (!/cefr-j/i.test(blob) || !/tono/i.test(blob)) {
+    return `${rel}: ${level} must cite the CEFR-J Wordlist / Tono Laboratory`
   }
-
-  if (pack.lang === 'en' && pack.cefr === 'b2') {
-    if (sa) return `${rel}: EN B2 must not be labelled CC-BY-SA (ADR 0029)`
-    if (!cc0) return `${rel}: EN B2 must keep CC0-style labelling`
-    if (!/cefr-j|tono/i.test(blob)) {
-      return `${rel}: EN B2 must cite CEFR-J / Tono Lab`
-    }
-    return null
-  }
-
   return null
 }
 

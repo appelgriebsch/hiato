@@ -1,12 +1,13 @@
 {
-  "version": 5,
+  "version": 6,
   "lang": "pt",
   "cefr": "c1",
-  "license": "CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
   "attribution": [
     "Hiato PT C1 learner pack — original glosses and synonym chips (2026).",
-    "Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).",
-    "Frequency selection aided by hermitdave/FrequencyWords (code MIT; frequency content CC-BY-SA-4.0); not a verbatim dump of any proprietary list.",
+    "Portuguese lemmas, including the original v0 packs and later bands, come from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt (OpenSubtitles frequency). Content CC-BY-SA-4.0; the FrequencyWords code is MIT. Not a Wiktionary dump.",
+    "Creator: Hermit Dave. Source: https://github.com/hermitdave/FrequencyWords",
+    "C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).",
     "Glosses and synonym chips are original Hiato learner copy (2026)."
   ],
   "lemmas": [
@@ -1544,13 +1545,6 @@
       ]
     },
     {
-      "word": "HOMICIDA",
-      "gloss": "pessoa que mata outra",
-      "synonyms": [
-        "matador"
-      ]
-    },
-    {
       "word": "TRADIÇÕES",
       "gloss": "costumes passados de geração em geração",
       "synonyms": [
@@ -2933,6 +2927,13 @@
     {
       "word": "TROVÃO",
       "gloss": "som forte que se ouve depois de um relâmpago"
+    },
+    {
+      "word": "POTENCIAIS",
+      "gloss": "que podem acontecer",
+      "synonyms": [
+        "possíveis"
+      ]
     }
   ]
 }

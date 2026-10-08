@@ -59,14 +59,30 @@ describe('v0 pack files', () => {
     }
   })
 
-  test('EN A1–B1 stay CC0; DE/ES A1–B1 are CC-BY-SA, not CC0 (#169)', async () => {
+  test('EN A1–B2 cite CEFR-J and are not CC0; DE/ES A1–B1 are CC-BY-SA (#169 #171)', async () => {
+    for (const cefr of ['a1', 'a2', 'b1', 'b2'] as const) {
+      const en = blob(await loadPack('en', cefr))
+      expect(en).toMatch(/CEFR-J/)
+      expect(en).toMatch(/Tono/)
+      expect(en.toUpperCase()).not.toContain('CC0')
+      expect(en.toUpperCase()).not.toContain('CC-BY-SA')
+    }
     for (const cefr of ['a1', 'a2', 'b1'] as const) {
-      expect(blob(await loadPack('en', cefr)).toUpperCase()).toContain('CC0')
       for (const lang of ['de', 'es'] as const) {
         const b = blob(await loadPack(lang, cefr)).toUpperCase()
         expect(b).toContain('CC-BY-SA')
         expect(b).not.toContain('CC0')
       }
+    }
+  })
+
+  test('PT packs name FrequencyWords pt_50k, not a Wiktionary dump', async () => {
+    for (const cefr of PACK_CEFRS) {
+      const text = blob(await loadPack('pt', cefr))
+      expect(text).toMatch(/FrequencyWords/)
+      expect(text).toMatch(/pt_50k/)
+      expect(text).not.toMatch(/Wiktionary-derived/)
+      expect(text).not.toMatch(/FrequencyWords[^)\n]*\(MIT\)|FrequencyWords MIT/)
     }
   })
 })

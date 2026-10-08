@@ -4,13 +4,36 @@ import { Card } from '@/components/ui/card'
 import { PACK_LICENSES } from '@/packs/licenses'
 import { LANG_CODES } from '@/packs/labels'
 
-const CC0_DEED = 'https://creativecommons.org/publicdomain/zero/1.0/'
 const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
+const CEFRJ_TERMS = 'http://www.cefr-j.org/download.html'
 
 function licenseDeedHref(license: string): string | null {
   if (/CC-BY-SA/i.test(license)) return CC_BY_SA_DEED
-  if (/CC0/i.test(license)) return CC0_DEED
+  if (/CEFR-J/i.test(license)) return CEFRJ_TERMS
   return null
+}
+
+function NoteText({ line }: { line: string }) {
+  const parts = line.split(/(https?:\/\/[^\s)]+)/)
+  return (
+    <>
+      {parts.map((part, i) =>
+        /^https?:\/\//.test(part) ? (
+          <a
+            key={`${part}-${i}`}
+            className="text-accent-fg underline-offset-2 hover:underline"
+            href={part}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {part}
+          </a>
+        ) : (
+          <span key={`${i}-${part.slice(0, 12)}`}>{part}</span>
+        ),
+      )}
+    </>
+  )
 }
 
 function LicenseLine({ license }: { license: string }) {
@@ -52,14 +75,16 @@ export function About() {
 
       <h1 className="text-xl font-semibold text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
-        Word packs ship with per-source attribution. English A1–B1 lemmas are
-        selected from the CEFR-J Vocabulary Profile (Tono Lab, CC0 band), as is
-        B2; C1–C2 come from the Octanove Vocabulary Profile (CC-BY-SA).
-        German, Spanish, and Portuguese are CC-BY-SA at every level. DE/ES/PT
-        C-levels are frequency-rank bands, not Goethe, Cervantes, or CAPLE
-        lists. Frequency ranks come from hermitdave/FrequencyWords
-        (OpenSubtitles; content CC-BY-SA, code MIT). Gloss and synonym copy is
-        original to Hiato and is always in the pack language.
+        Word packs ship with per-source attribution. English A1–B2 lemmas are
+        selected from the CEFR-J Wordlist (free use with citation; © Tono
+        Laboratory, TUFS). C1–C2 come from the Octanove Vocabulary Profile
+        (CC-BY-SA). German, Spanish, and Portuguese are CC-BY-SA at every
+        level. German CEFR labels are calibrated against Goethe-Institut
+        lists, not copied from them. Spanish and Portuguese C-levels are
+        frequency-rank bands, not Instituto Cervantes or CAPLE lists.
+        Portuguese lemmas come from hermitdave/FrequencyWords pt_50k
+        (OpenSubtitles; content CC-BY-SA-4.0, code MIT). Gloss and synonym
+        copy is original to Hiato and is always in the pack language.
       </p>
 
       {PACK_LICENSES.map((info) => (
@@ -74,7 +99,9 @@ export function About() {
               <LicenseLine license={band.license} />
               <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
                 {band.notes.map((line) => (
-                  <li key={line}>{line}</li>
+                  <li key={line}>
+                    <NoteText line={line} />
+                  </li>
                 ))}
               </ul>
             </div>

@@ -12,7 +12,7 @@ License original application source, documentation, and brand assets under the M
 
 Keep existing terms on materials that MIT cannot replace:
 
-- Pack JSON under the `license` field in each file (CC0-1.0 or CC-BY-SA-4.0).
+- Pack JSON under the `license` field in each file (CEFR-J Wordlist terms for EN A1–B2, otherwise CC-BY-SA-4.0).
 - `scripts/data/en-easiest-cefr.json` and `scripts/data/hint-stem-cache.json` under their source terms (CEFR-J citation and CC-BY-SA-4.0).
 - `public/fonts/` under the SIL Open Font License 1.1.
 

@@ -1,12 +1,13 @@
 {
-  "version": 6,
+  "version": 7,
   "lang": "pt",
   "cefr": "b2",
-  "license": "CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
   "attribution": [
     "Hiato PT B2 learner pack — original glosses and synonym chips (2026).",
-    "Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).",
-    "Frequency selection aided by hermitdave/FrequencyWords (code MIT; frequency content CC-BY-SA-4.0); not a verbatim dump of any proprietary list.",
+    "Portuguese lemmas, including the original v0 packs and later bands, come from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt (OpenSubtitles frequency). Content CC-BY-SA-4.0; the FrequencyWords code is MIT. Not a Wiktionary dump.",
+    "Creator: Hermit Dave. Source: https://github.com/hermitdave/FrequencyWords",
+    "C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).",
     "Glosses and synonym chips are original Hiato learner copy (2026)."
   ],
   "lemmas": [
@@ -982,10 +983,9 @@
     },
     {
       "word": "FALECIDO",
-      "gloss": "pessoa que morreu",
+      "gloss": "pessoa que já não vive",
       "synonyms": [
-        "morto",
-        "morreu"
+        "morto"
       ]
     },
     {
@@ -1459,14 +1459,6 @@
     {
       "word": "MACHADO",
       "gloss": "ferramenta de corte com lâmina larga"
-    },
-    {
-      "word": "MORREMOS",
-      "gloss": "deixar de viver, perder a vida",
-      "synonyms": [
-        "falecer",
-        "perecemos"
-      ]
     },
     {
       "word": "ORAÇÃO",
@@ -1996,9 +1988,8 @@
     },
     {
       "word": "FALECEU",
-      "gloss": "morrer ou deixar de viver",
+      "gloss": "deixar de viver",
       "synonyms": [
-        "morreu",
         "partiu"
       ]
     },
@@ -2316,10 +2307,6 @@
     {
       "word": "FORENSE",
       "gloss": "de investigações de crimes"
-    },
-    {
-      "word": "MORRI",
-      "gloss": "deixei de viver"
     },
     {
       "word": "MATERIAIS",
@@ -2943,6 +2930,20 @@
       "gloss": "disseste algo que não era verdade",
       "synonyms": [
         "enganaste"
+      ]
+    },
+    {
+      "word": "ARREPENDER",
+      "gloss": "sentir que se fez algo errado",
+      "synonyms": [
+        "lamentar"
+      ]
+    },
+    {
+      "word": "SOLIDÃO",
+      "gloss": "falta de companhia",
+      "synonyms": [
+        "silêncio"
       ]
     }
   ]
