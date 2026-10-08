@@ -194,7 +194,14 @@ describe('packs:check license matrix (ADR 0029)', () => {
     expect(checkPackLicense('es/c2.json', es)).toBeNull()
   })
 
-  test('PT all levels require CC-BY-SA; EN/DE/ES A1–B1 keep CC0', () => {
+  test('DE/ES A1–B1 labelled CC0 fails (#169)', () => {
+    for (const lang of ['de', 'es'] as const) {
+      const low = pack({ lang, cefr: 'a1', license: 'CC0-1.0', attribution: ['wordhoard samples'] })
+      expect(checkPackLicense(`${lang}/a1.json`, low)).toMatch(/must not be labelled CC0/)
+    }
+  })
+
+  test('PT all levels require CC-BY-SA; EN A1–B1 keep CC0', () => {
     const pt = pack({
       lang: 'pt',
       cefr: 'a1',

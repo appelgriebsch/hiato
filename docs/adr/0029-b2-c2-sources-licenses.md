@@ -4,6 +4,8 @@
 - Date: 2026-09-20
 - Deciders: Andreas Gerlach
 
+> Amended by #169: DE/ES A1–B1 are wordhoard-sample lemmas and are relabelled **CC-BY-SA-4.0**. EN A1–B1 stay CC0 (same-level CEFR-J headwords).
+
 A1–B1 EN/DE/ES stay labelled **CC0-1.0**; PT stays **CC-BY-SA-4.0** (ADR 0009). New packs follow the lemma source:
 
 | Packs | Source | Honesty | License on shipped lemma list |

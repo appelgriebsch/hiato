@@ -53,13 +53,13 @@ export function About() {
       <h1 className="text-xl font-semibold text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         Word packs ship with per-source attribution. English A1–B1 lemmas are
-        curated (CC0). B2 is selected from the CEFR-J Vocabulary Profile
-        (Tono Lab); C1–C2 from the Octanove Vocabulary Profile (CC-BY-SA).
-        Portuguese
-        is CC-BY-SA at every level. DE/ES/PT C-levels are frequency-rank bands,
-        not Goethe, Cervantes, or CAPLE lists. Lemma selection also draws on
-        hermitdave/FrequencyWords (MIT; OpenSubtitles-based). Gloss and synonym
-        copy is original to Hiato and is always in the pack language.
+        selected from the CEFR-J Vocabulary Profile (Tono Lab, CC0 band), as is
+        B2; C1–C2 come from the Octanove Vocabulary Profile (CC-BY-SA).
+        German, Spanish, and Portuguese are CC-BY-SA at every level. DE/ES/PT
+        C-levels are frequency-rank bands, not Goethe, Cervantes, or CAPLE
+        lists. Frequency ranks come from hermitdave/FrequencyWords
+        (OpenSubtitles; content CC-BY-SA, code MIT). Gloss and synonym copy is
+        original to Hiato and is always in the pack language.
       </p>
 
       {PACK_LICENSES.map((info) => (

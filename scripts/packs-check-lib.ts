@@ -85,16 +85,13 @@ function hasCc0(blob: string): boolean {
   return /cc0/i.test(blob)
 }
 
-/** EN B2 is CEFR-J citation / CC0 — packs:check must not require SA. */
+/** EN A1–B2 are CEFR-J citation / CC0; every other pack is SA (ADR 0029, #169). */
 export function requiresCcBySa(lang: PackLang, cefr: PackCefr): boolean {
-  if (lang === 'pt') return true
-  if (lang === 'en') return cefr === 'c1' || cefr === 'c2'
-  return cefr === 'b2' || cefr === 'c1' || cefr === 'c2'
+  return lang !== 'en' || cefr === 'c1' || cefr === 'c2'
 }
 
 export function requiresCc0Style(lang: PackLang, cefr: PackCefr): boolean {
-  if (lang === 'pt') return false
-  return cefr === 'a1' || cefr === 'a2' || cefr === 'b1'
+  return lang === 'en' && (cefr === 'a1' || cefr === 'a2' || cefr === 'b1')
 }
 
 export function checkPackLicense(rel: string, pack: WordPack): string | null {

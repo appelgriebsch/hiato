@@ -53,11 +53,12 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
     expect(a1.method).toBe('curated')
   })
 
-  test('DE/ES B2–C2 are frequency-rank SA; A1–B1 curated CC0', () => {
+  test('DE/ES are wordhoard frequency-rank SA at every level (#169)', () => {
     for (const lang of ['de', 'es'] as const) {
       const low = provenanceFragments(lang, 'b1', 'en')
-      expect(low.license).toBe('CC0')
-      expect(low.method).toBe('curated')
+      expect(low.source).toBe('wordhoard')
+      expect(low.license).toBe('CC-BY-SA')
+      expect(low.method).toBe('frequency-rank')
 
       const high = provenanceFragments(lang, 'b2', 'en')
       expect(high.source).toBe('wordhoard')

@@ -29,10 +29,12 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
     expect(c1c2.toUpperCase()).not.toContain('CC0')
   })
 
-  test('DE/ES B2–C2 are SA frequency bands, not Goethe/Cervantes', () => {
+  test('DE/ES are SA at every band (#169); B2–C2 frequency bands, not Goethe/Cervantes', () => {
     for (const lang of ['de', 'es'] as const) {
       const low = bandBlob(lang, 'A1–B1')
-      expect(low.toUpperCase()).toContain('CC0')
+      expect(low.toUpperCase()).toContain('CC-BY-SA')
+      expect(low.toUpperCase()).not.toContain('CC0')
+      expect(low).toContain('wordhoard')
 
       const high = bandBlob(lang, 'B2–C2')
       expect(high.toUpperCase()).toContain('CC-BY-SA')
@@ -48,5 +50,11 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
     expect(blob.toUpperCase()).toContain('CC-BY-SA')
     expect(blob.toLowerCase()).toMatch(/frequency/)
     expect(blob).toMatch(/not CAPLE/)
+  })
+
+  test('FrequencyWords is never cited as MIT-only content (#169)', () => {
+    for (const info of PACK_LICENSES) {
+      expect(info.attribution.join('\n')).not.toMatch(/FrequencyWords[^)]*\(MIT\)|FrequencyWords MIT/)
+    }
   })
 })

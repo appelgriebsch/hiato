@@ -59,11 +59,13 @@ describe('v0 pack files', () => {
     }
   })
 
-  test('EN/DE/ES A1–B1 still CC0', async () => {
-    for (const lang of ['en', 'de', 'es'] as const) {
-      for (const cefr of ['a1', 'a2', 'b1'] as const) {
-        const raw = await loadPack(lang, cefr)
-        expect(blob(raw).toUpperCase()).toContain('CC0')
+  test('EN A1–B1 stay CC0; DE/ES A1–B1 are CC-BY-SA, not CC0 (#169)', async () => {
+    for (const cefr of ['a1', 'a2', 'b1'] as const) {
+      expect(blob(await loadPack('en', cefr)).toUpperCase()).toContain('CC0')
+      for (const lang of ['de', 'es'] as const) {
+        const b = blob(await loadPack(lang, cefr)).toUpperCase()
+        expect(b).toContain('CC-BY-SA')
+        expect(b).not.toContain('CC0')
       }
     }
   })

@@ -102,13 +102,21 @@ const SLOT_META: Record<
     method: 'frequency-rank',
     license: 'CC-BY-SA',
   },
-  'de-low': { source: 'curated', method: 'curated', license: 'CC0' },
+  'de-low': {
+    source: 'wordhoard',
+    method: 'frequency-rank',
+    license: 'CC-BY-SA',
+  },
   'de-high': {
     source: 'wordhoard',
     method: 'frequency-rank',
     license: 'CC-BY-SA',
   },
-  'es-low': { source: 'curated', method: 'curated', license: 'CC0' },
+  'es-low': {
+    source: 'wordhoard',
+    method: 'frequency-rank',
+    license: 'CC-BY-SA',
+  },
   'es-high': {
     source: 'wordhoard',
     method: 'frequency-rank',

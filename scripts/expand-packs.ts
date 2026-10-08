@@ -554,7 +554,7 @@ function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution:
       attribution: [
         `Hiato PT ${level} learner pack — original glosses and synonym chips (2026).`,
         'Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).',
-        'Frequency selection aided by hermitdave/FrequencyWords (MIT); not a verbatim dump of any proprietary list.',
+        'Frequency selection aided by hermitdave/FrequencyWords (code MIT; frequency content CC-BY-SA-4.0); not a verbatim dump of any proprietary list.',
         'Glosses and synonym chips are original Hiato learner copy (2026).',
       ],
     }

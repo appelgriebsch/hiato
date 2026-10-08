@@ -37,8 +37,7 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
       levels: 'A1–B2',
       license: 'CC0-1.0 / CEFR-J citation (Tono Lab)',
       notes: [
-        'A1–B1: curated learner lemmas; glosses original to Hiato.',
-        'B2 lemmas selected from the CEFR-J Vocabulary Profile (Tono Laboratory, Tokyo University of Foreign Studies). Cite Tono Lab / CEFR-J; not a verbatim dump.',
+        'A1–B2 lemmas selected from the CEFR-J Vocabulary Profile (Tono Laboratory, Tokyo University of Foreign Studies). Cite Tono Lab / CEFR-J; not a verbatim dump. Glosses original to Hiato.',
       ],
     },
     {
@@ -57,17 +56,17 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
       notes: [
         'All PT levels: lemmas curated from Wiktionary-derived / OpenSubtitles frequency lists (CC-BY-SA path, ADR 0009).',
         'C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).',
-        'Frequency selection aided by hermitdave/FrequencyWords (MIT); glosses and synonym chips are original Hiato learner copy.',
+        'Frequency selection aided by hermitdave/FrequencyWords (code MIT; frequency content CC-BY-SA-4.0); glosses and synonym chips are original Hiato learner copy.',
       ],
     },
   ]),
   fromBands('de', 'Deutsch', [
     {
       levels: 'A1–B1',
-      license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0 (wordhoard samples; glosses original to Hiato)',
       notes: [
-        'Lemmas selected for CEFR classroom frequency from open frequency resources (FrequencyWords MIT; wordhoard samples where used).',
-        'Not a verbatim dump of any proprietary list (ADR 0026).',
+        'DE A1–B1 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate (OpenSubtitles frequency via hermitdave/FrequencyWords, content CC-BY-SA-4.0), not Goethe lists.',
+        'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],
     },
     {
@@ -82,10 +81,10 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
   fromBands('es', 'Español', [
     {
       levels: 'A1–B1',
-      license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0 (wordhoard samples; glosses original to Hiato)',
       notes: [
-        'Lemmas selected for CEFR classroom frequency from open frequency resources (FrequencyWords MIT; wordhoard samples where used).',
-        'Not a verbatim dump of any proprietary list (ADR 0026).',
+        'ES A1–B1 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate (OpenSubtitles frequency via hermitdave/FrequencyWords, content CC-BY-SA-4.0), not Instituto Cervantes lists.',
+        'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],
     },
     {
