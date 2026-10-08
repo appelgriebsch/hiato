@@ -36,3 +36,31 @@ describe('person-name list', () => {
     expect(isDeniedLemma('JOEY')).toBe(false)
   })
 })
+
+test('#170: inflected forms are exact denylist entries; look-alikes stay playable', () => {
+  for (const w of [
+    'NAZIS',
+    'BOMBING',
+    'GEWALTSAM',
+    'PUTADA',
+    'MORRERÁ',
+    'NUAS',
+    'MATOU',
+    'MATEI',
+    'MORREU',
+    'MORREMOS',
+    'MORRI',
+    'MORTOS',
+    'AFOGOU',
+    'AFOGAMENTO',
+    'HOMICIDA',
+    'MUERA',
+    'MUERTO',
+    'ASESINAR',
+  ]) {
+    expect(isDeniedLemma(w)).toBe(true)
+  }
+  for (const w of ['HELLSTEN', 'BALADA', 'MORDER', 'NAZISMO']) {
+    expect(isDeniedLemma(w)).toBe(false)
+  }
+})

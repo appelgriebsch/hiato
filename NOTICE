@@ -16,22 +16,34 @@ Per-language licenses and attribution ship in each pack JSON
 (`public/packs/<lang>/<cefr>.json`) and on the in-app About page.
 License bands (ADR 0029):
 
-  EN A1–B2 — CC0-1.0 / CEFR-J citation (Tono Lab). B2 lemmas are selected
-  from the CEFR-J Vocabulary Profile; not a verbatim dump.
-  EN C1–C2 — CC-BY-SA-4.0 Octanove Vocabulary Profile (olp-en-cefrj).
+  EN A1–B2 — CEFR-J Wordlist terms: free use with citation. Copyright
+  Tono Laboratory, Tokyo University of Foreign Studies. Not CC0.
+  Citation: The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono,
+  Tokyo University of Foreign Studies. Retrieved from
+  http://www.cefr-j.org/download.html on 1/20/2020
+  (via https://github.com/openlanguageprofiles/olp-en-cefrj).
+  EN C1–C2 — CC-BY-SA-4.0 Octanove Vocabulary Profile, creator Octanove
+  Labs. Source: https://github.com/openlanguageprofiles/olp-en-cefrj
 
-  DE/ES A1–B1 — CC0-1.0 curated learner lemmas.
+  DE/ES A1–B1 — CC-BY-SA-4.0 wordhoard v0.1.0 samples (issue #169: the
+  earlier CC0 label was wrong). German CEFR estimates are calibrated
+  against Goethe-Institut A1–B1 lists, not copied from them. Spanish
+  bands are not Instituto Cervantes lists. Creator: natema.
+  Source: https://github.com/natema/wordhoard
   DE/ES B2–C2 — CC-BY-SA-4.0 wordhoard v0.1.0 full dataset; frequency-rank
-  bands, not Goethe or Instituto Cervantes lists.
+  bands. Same Goethe calibration note for German. Same creator and source.
 
-  PT A1–C2 — CC-BY-SA-4.0 (Wiktionary-derived / OpenSubtitles frequency,
-  ADR 0009). C-levels are frequency slices, not CAPLE.
+  PT A1–C2 — CC-BY-SA-4.0. Lemmas, including the original v0 packs, come
+  from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt, not from a
+  Wiktionary dump. Creator: Hermit Dave.
+  Source: https://github.com/hermitdave/FrequencyWords
+  C-levels are frequency slices, not CAPLE.
 
-Gloss and synonym copy is original to Hiato. Frequency selection also draws
-on hermitdave/FrequencyWords (MIT). Packs are curated learner lists, not
-verbatim dumps of any proprietary wordlist (ADR 0026). Pack JSON stays under
-the `license` field inside each file (CC0-1.0 or CC-BY-SA-4.0). Share-alike
-applies to the redistributed CC-BY-SA lemma lists.
+Gloss and synonym copy is original to Hiato. FrequencyWords code is MIT
+and its frequency content is CC-BY-SA-4.0. Packs are learner selections,
+not verbatim dumps of any proprietary wordlist (ADR 0026). Pack JSON stays
+under the `license` field inside each file (CEFR-J Wordlist terms or
+CC-BY-SA-4.0). Share-alike applies to the redistributed CC-BY-SA lemma lists.
 
 Derived source caches (not the PWA bundle)
 ------------------------------------------

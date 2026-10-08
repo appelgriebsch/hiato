@@ -1,12 +1,13 @@
 {
-  "version": 7,
+  "version": 9,
   "lang": "es",
   "cefr": "a2",
-  "license": "CC0-1.0 (curated learner lemmas; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato)",
   "attribution": [
     "Hiato ES A2 learner pack — original glosses and synonym chips (2026).",
-    "Lemmas selected for CEFR classroom frequency from openly licensed frequency resources (OpenSubtitles via hermitdave/FrequencyWords, MIT; wordhoard samples for POS/CEFR banding where used).",
-    "Not a verbatim dump of any proprietary list. Glosses and synonym chips are original Hiato learner copy."
+    "ES A1–B1 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.",
+    "Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.",
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
@@ -275,14 +276,6 @@
       ]
     },
     {
-      "word": "MUERTO",
-      "gloss": "Un adjetivo del vocabulario inicial.",
-      "synonyms": [
-        "fallecido",
-        "difunto"
-      ]
-    },
-    {
       "word": "MATRIMONIO",
       "gloss": "unión de hombre y mujer por ley",
       "synonyms": [
@@ -345,8 +338,7 @@
       "word": "PERMISO",
       "gloss": "una palabra que dice que se puede hacer algo",
       "synonyms": [
-        "autorización",
-        "licencia"
+        "autorización"
       ]
     },
     {
@@ -2663,10 +2655,6 @@
       ]
     },
     {
-      "word": "ASESINAR",
-      "gloss": "Matar a una persona."
-    },
-    {
       "word": "ESTUDIAR",
       "gloss": "Aprender una materia.",
       "synonyms": [
@@ -2869,6 +2857,20 @@
       "gloss": "Que pertenece o es originario de América.",
       "synonyms": [
         "estadounidense"
+      ]
+    },
+    {
+      "word": "RESOLVER",
+      "gloss": "hallar la salida de un problema",
+      "synonyms": [
+        "solucionar"
+      ]
+    },
+    {
+      "word": "LIMPIO",
+      "gloss": "sin tierra encima",
+      "synonyms": [
+        "claro"
       ]
     }
   ]

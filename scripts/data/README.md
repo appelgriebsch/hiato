@@ -7,7 +7,7 @@ Downloaded on demand by `bun run packs:expand` (not committed). New dest paths s
 | `cefrj-en-with-b2.json` | derived from [olp-en-cefrj](https://github.com/openlanguageprofiles/olp-en-cefrj) CEFR-J Vocabulary Profile 1.5 (includes B2) | cite CEFR-J / Tono Lab |
 | `octanove-vocabulary-profile-c1c2-1.0.csv` | [olp-en-cefrj](https://github.com/openlanguageprofiles/olp-en-cefrj) Octanove C1/C2 | CC-BY-SA-4.0 |
 | `wordhoard-v0.1.0.db.gz` / `.db` | [natema/wordhoard](https://github.com/natema/wordhoard) **v0.1.0** full SQLite (not `samples/{lang}.csv`) | dataset CC-BY-SA-4.0 |
-| `pt.txt` | [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) PT 50k | MIT |
+| `pt.txt` | [hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords) PT 50k | content CC-BY-SA-4.0 (code MIT) |
 
 Legacy `wordhoard-{en,de,es}.csv` and `cefrj-en.json` (A1–B1 only) must not be reused for B2–C2.
 
@@ -17,11 +17,11 @@ Shipped pack license bands (pack JSON, ADR 0029):
 
 | Packs | License on lemma list |
 |-------|------------------------|
-| EN A1–B2 | CC0 / CEFR-J citation (Tono Lab) — B2 is **not** share-alike |
-| EN C1–C2 | CC-BY-SA-4.0 (Octanove) |
-| DE/ES A1–B1 | CC0 |
-| DE/ES B2–C2 | CC-BY-SA-4.0 wordhoard-full; frequency-rank bands, not Goethe/Cervantes |
-| PT A1–C2 | CC-BY-SA-4.0; C-levels are frequency slices, not CAPLE |
+| EN A1–B2 | CEFR-J Wordlist terms (free use with citation, © Tono Laboratory, TUFS) — every lemma is a same-level CEFR-J headword; **not** CC0 and **not** share-alike |
+| EN C1–C2 | CC-BY-SA-4.0 (Octanove Labs; olp-en-cefrj) |
+| DE/ES A1–B1 | CC-BY-SA-4.0 wordhoard v0.1.0 samples (#169; was mislabelled CC0). German CEFR estimates are calibrated against Goethe-Institut lists, not copied from them |
+| DE/ES B2–C2 | CC-BY-SA-4.0 wordhoard-full; frequency-rank bands. Spanish bands are not Instituto Cervantes lists |
+| PT A1–C2 | CC-BY-SA-4.0 FrequencyWords `pt_50k` (v0 packs and later bands); C-levels are frequency slices, not CAPLE |
 
 | `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate (lemma only; no substring) |
 | `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |

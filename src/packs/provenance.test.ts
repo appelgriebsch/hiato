@@ -18,7 +18,7 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
         const parts = caption.split(' · ')
         expect(parts).toHaveLength(3)
         expect(parts[0]!.length).toBeGreaterThan(0)
-        expect(parts[1]).toMatch(/^(CC0|CC-BY-SA)$/)
+        expect(parts[1]).toMatch(/^(CC-BY-SA|CEFR-J terms)$/)
         expect(parts[2]!.length).toBeGreaterThan(0)
         expect(provenanceBand(lang, cefr)).toBeDefined()
       }
@@ -32,32 +32,32 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
         const { license } = provenanceFragments(lang, cefr)
         expect(license).toBe(shortLicenseFromBand(band))
         if (/CC-BY-SA/i.test(band.license)) expect(license).toBe('CC-BY-SA')
-        else expect(license).toBe('CC0')
+        else expect(license).toBe('CEFR-J terms')
+        expect(license).not.toBe('CC0')
       }
     }
   })
 
-  test('EN B2 is CEFR-J tagged syllabus / CC0; C1–C2 Octanove SA tagged add-on', () => {
-    const b2 = provenanceFragments('en', 'b2', 'en')
-    expect(b2.source).toBe('CEFR-J')
-    expect(b2.license).toBe('CC0')
-    expect(b2.method).toBe('tagged syllabus')
+  test('EN A1–B2 is one CEFR-J band; C1–C2 is the Octanove SA add-on', () => {
+    for (const cefr of ['a1', 'a2', 'b1', 'b2'] as const) {
+      const band = provenanceFragments('en', cefr, 'en')
+      expect(band.source).toBe('CEFR-J')
+      expect(band.license).toBe('CEFR-J terms')
+      expect(band.method).toBe('tagged syllabus')
+    }
 
     const c1 = provenanceFragments('en', 'c1', 'en')
     expect(c1.source).toBe('Octanove')
     expect(c1.license).toBe('CC-BY-SA')
     expect(c1.method).toBe('tagged add-on')
-
-    const a1 = provenanceFragments('en', 'a1', 'en')
-    expect(a1.license).toBe('CC0')
-    expect(a1.method).toBe('curated')
   })
 
-  test('DE/ES B2–C2 are frequency-rank SA; A1–B1 curated CC0', () => {
+  test('DE/ES are wordhoard frequency-rank SA at every level (#169)', () => {
     for (const lang of ['de', 'es'] as const) {
       const low = provenanceFragments(lang, 'b1', 'en')
-      expect(low.license).toBe('CC0')
-      expect(low.method).toBe('curated')
+      expect(low.source).toBe('wordhoard')
+      expect(low.license).toBe('CC-BY-SA')
+      expect(low.method).toBe('frequency-rank')
 
       const high = provenanceFragments(lang, 'b2', 'en')
       expect(high.source).toBe('wordhoard')
@@ -69,7 +69,7 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
   test('PT is frequency-rank SA at every CEFR (not CAPLE)', () => {
     for (const cefr of PACK_CEFRS) {
       const f = provenanceFragments('pt', cefr, 'en')
-      expect(f.source).toBe('Wiktionary')
+      expect(f.source).toBe('FrequencyWords')
       expect(f.license).toBe('CC-BY-SA')
       expect(f.method).toBe('frequency-rank')
     }

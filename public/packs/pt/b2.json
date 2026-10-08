@@ -1,12 +1,13 @@
 {
-  "version": 5,
+  "version": 7,
   "lang": "pt",
   "cefr": "b2",
-  "license": "CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
   "attribution": [
     "Hiato PT B2 learner pack — original glosses and synonym chips (2026).",
-    "Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).",
-    "Frequency selection aided by hermitdave/FrequencyWords (MIT); not a verbatim dump of any proprietary list.",
+    "Portuguese lemmas, including the original v0 packs and later bands, come from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt (OpenSubtitles frequency). Content CC-BY-SA-4.0; the FrequencyWords code is MIT. Not a Wiktionary dump.",
+    "Creator: Hermit Dave. Source: https://github.com/hermitdave/FrequencyWords",
+    "C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).",
     "Glosses and synonym chips are original Hiato learner copy (2026)."
   ],
   "lemmas": [
@@ -480,14 +481,6 @@
       ]
     },
     {
-      "word": "NAZIS",
-      "gloss": "membros do partido de Hitler.",
-      "synonyms": [
-        "nazistas",
-        "fascistas"
-      ]
-    },
-    {
       "word": "ADORMECER",
       "gloss": "entrar num estado de sono profundo",
       "synonyms": [
@@ -693,10 +686,6 @@
         "luz",
         "claridade"
       ]
-    },
-    {
-      "word": "MORRERÁ",
-      "gloss": "deixará de viver no futuro"
     },
     {
       "word": "ESQUISITA",
@@ -994,10 +983,9 @@
     },
     {
       "word": "FALECIDO",
-      "gloss": "pessoa que morreu",
+      "gloss": "pessoa que já não vive",
       "synonyms": [
-        "morto",
-        "morreu"
+        "morto"
       ]
     },
     {
@@ -1190,14 +1178,6 @@
     {
       "word": "AUSTRÁLIA",
       "gloss": "país localizado na Oceania"
-    },
-    {
-      "word": "PORRADA",
-      "gloss": "golpe forte com a mão",
-      "synonyms": [
-        "soco",
-        "pancada"
-      ]
     },
     {
       "word": "LEMBRE",
@@ -1479,14 +1459,6 @@
     {
       "word": "MACHADO",
       "gloss": "ferramenta de corte com lâmina larga"
-    },
-    {
-      "word": "MORREMOS",
-      "gloss": "deixar de viver, perder a vida",
-      "synonyms": [
-        "falecer",
-        "perecemos"
-      ]
     },
     {
       "word": "ORAÇÃO",
@@ -2016,9 +1988,8 @@
     },
     {
       "word": "FALECEU",
-      "gloss": "morrer ou deixar de viver",
+      "gloss": "deixar de viver",
       "synonyms": [
-        "morreu",
         "partiu"
       ]
     },
@@ -2089,14 +2060,6 @@
       "synonyms": [
         "alertado",
         "informado"
-      ]
-    },
-    {
-      "word": "MATARIA",
-      "gloss": "tirar a vida de alguém",
-      "synonyms": [
-        "matava",
-        "assassinava"
       ]
     },
     {
@@ -2344,10 +2307,6 @@
     {
       "word": "FORENSE",
       "gloss": "de investigações de crimes"
-    },
-    {
-      "word": "MORRI",
-      "gloss": "deixei de viver"
     },
     {
       "word": "MATERIAIS",
@@ -2942,6 +2901,49 @@
       "gloss": "anular o que já foi feito",
       "synonyms": [
         "desmanchar"
+      ]
+    },
+    {
+      "word": "MARAVILHAS",
+      "gloss": "coisas que causam grande admiração",
+      "synonyms": [
+        "prodígios"
+      ]
+    },
+    {
+      "word": "FUGITIVO",
+      "gloss": "pessoa que fugiu e anda escondida",
+      "synonyms": [
+        "foragido"
+      ]
+    },
+    {
+      "word": "MAGOOU",
+      "gloss": "causou dor ou tristeza a alguém",
+      "synonyms": [
+        "feriu",
+        "ofendeu"
+      ]
+    },
+    {
+      "word": "MENTISTE",
+      "gloss": "disseste algo que não era verdade",
+      "synonyms": [
+        "enganaste"
+      ]
+    },
+    {
+      "word": "ARREPENDER",
+      "gloss": "sentir que se fez algo errado",
+      "synonyms": [
+        "lamentar"
+      ]
+    },
+    {
+      "word": "SOLIDÃO",
+      "gloss": "falta de companhia",
+      "synonyms": [
+        "silêncio"
       ]
     }
   ]

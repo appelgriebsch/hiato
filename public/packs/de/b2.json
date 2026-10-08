@@ -1,12 +1,13 @@
 {
-  "version": 5,
+  "version": 7,
   "lang": "de",
   "cefr": "b2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
   "attribution": [
     "Hiato DE B2 learner pack — original glosses and synonym chips (2026).",
-    "DE B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not Goethe or Instituto Cervantes lists (ADR 0029).",
-    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026)."
+    "DE B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0). German CEFR labels in that dataset are calibrated against Goethe-Institut lists, not copied from them (ADR 0029).",
+    "Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.",
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy."
   ],
   "lemmas": [
     {
@@ -2950,14 +2951,6 @@
       ]
     },
     {
-      "word": "GEWALTSAM",
-      "gloss": "mit Gewalt oder Zwang",
-      "synonyms": [
-        "hart",
-        "brutal"
-      ]
-    },
-    {
       "word": "STREIK",
       "gloss": "Arbeitsniederlegung als Protest",
       "synonyms": [
@@ -3082,6 +3075,13 @@
       "gloss": "eine offene Fläche an einem Haus",
       "synonyms": [
         "Balkon"
+      ]
+    },
+    {
+      "word": "SMOKING",
+      "gloss": "ein eleganter schwarzer Anzug für den Abend",
+      "synonyms": [
+        "Abendanzug"
       ]
     }
   ]

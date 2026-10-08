@@ -528,11 +528,12 @@ function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution:
   const level = cefr.toUpperCase()
   if (lang === 'en' && cefr === 'b2') {
     return {
-      license: 'CC0-1.0 (curated learner lemmas; glosses original to Hiato)',
+      license:
+        'CEFR-J Wordlist terms: free use with citation (© Tono Laboratory, TUFS)',
       attribution: [
         `Hiato EN ${level} learner pack — original glosses and synonym chips (2026).`,
-        'English B2 lemmas selected from the CEFR-J Vocabulary Profile (Tono Laboratory, Tokyo University of Foreign Studies). Cite Tono Lab / CEFR-J; not a verbatim dump.',
-        'Glosses and synonym chips are original Hiato learner copy (2026).',
+        'The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono, Tokyo University of Foreign Studies. Retrieved from http://www.cefr-j.org/download.html on 1/20/2020 (via openlanguageprofiles/olp-en-cefrj).',
+        'English B2 lemmas selected from that wordlist at the same level. Not a public-domain dedication and not a verbatim dump. Glosses and synonym chips are original Hiato learner copy.',
       ],
     }
   }
@@ -542,30 +543,36 @@ function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution:
         'CC-BY-SA-4.0 (lemmas from Octanove Vocabulary Profile C1/C2; glosses original to Hiato)',
       attribution: [
         `Hiato EN ${level} learner pack — original glosses and synonym chips (2026).`,
-        'English C1/C2 lemmas selected from the Octanove Vocabulary Profile (olp-en-cefrj, CC-BY-SA-4.0) as a tagged add-on above CEFR-J.',
+        'English C1/C2 lemmas selected from the Octanove Vocabulary Profile (CC-BY-SA-4.0) as a tagged add-on above CEFR-J.',
+        'Creator: Octanove Labs. Source: https://github.com/openlanguageprofiles/olp-en-cefrj',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
       ],
     }
   }
   if (lang === 'pt') {
     return {
-      license:
-        'CC-BY-SA-4.0 (lemmas curated from Wiktionary frequency + CEFR banding; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)',
       attribution: [
         `Hiato PT ${level} learner pack — original glosses and synonym chips (2026).`,
-        'Portuguese B2–C2 lemmas are frequency-rank bands (not CAPLE lists) from Wiktionary-derived / OpenSubtitles frequency (CC-BY-SA path, ADR 0009 / 0029).',
-        'Frequency selection aided by hermitdave/FrequencyWords (MIT); not a verbatim dump of any proprietary list.',
+        'Portuguese lemmas, including the original v0 packs and later bands, come from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt (OpenSubtitles frequency). Content CC-BY-SA-4.0; the FrequencyWords code is MIT. Not a Wiktionary dump.',
+        'Creator: Hermit Dave. Source: https://github.com/hermitdave/FrequencyWords',
+        'C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).',
         'Glosses and synonym chips are original Hiato learner copy (2026).',
       ],
     }
   }
   const names: Record<'de' | 'es', string> = { de: 'DE', es: 'ES' }
+  const honesty =
+    lang === 'de'
+      ? 'DE B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0). German CEFR labels in that dataset are calibrated against Goethe-Institut lists, not copied from them (ADR 0029).'
+      : 'ES B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not Instituto Cervantes lists (ADR 0029).'
   return {
     license:
       'CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)',
     attribution: [
       `Hiato ${names[lang]} ${level} learner pack — original glosses and synonym chips (2026).`,
-      `${names[lang]} B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not Goethe or Instituto Cervantes lists (ADR 0029).`,
+      honesty,
+      'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
       'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
     ],
   }
