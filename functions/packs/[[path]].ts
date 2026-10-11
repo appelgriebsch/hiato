@@ -9,7 +9,7 @@ import { withSecurityHeaders } from '../../src/deploy/harden'
  * `_headers` is not applied to a Function response, so security headers are set here.
  */
 const PACK_JSON_PATH =
-  /^\/packs\/(?:en|de|es|pt)\/(?:a1|a2|b1|b2|c1|c2)\.json$/
+  /^\/packs\/(?:en|de|es|pt|fr)\/(?:a1|a2|b1|b2|c1|c2)\.json$/
 
 export function isPackJsonPath(pathname: string): boolean {
   return PACK_JSON_PATH.test(pathname)

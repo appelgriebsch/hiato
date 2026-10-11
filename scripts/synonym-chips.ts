@@ -15,10 +15,15 @@ export function synonymCacheKeyIsSettled(
   return Object.hasOwn(cache, word)
 }
 
-function chipTokensDenied(chip: string, denylist: Set<string>): boolean {
-  if (isDeniedLemma(chip, denylist)) return true
-  for (const tok of chip.split(/\s+/)) {
-    if (tok && isDeniedLemma(tok, denylist)) return true
+function chipTokensDenied(
+  chip: string,
+  denylist: Set<string>,
+  lang?: string,
+): boolean {
+  if (isDeniedLemma(chip, denylist, lang)) return true
+  // Apostrophe and curly apostrophe split elided chips (l'école) the same way spaces do.
+  for (const tok of chip.split(/[\s'’]+/)) {
+    if (tok && isDeniedLemma(tok, denylist, lang)) return true
   }
   return false
 }
@@ -28,6 +33,7 @@ export function invalidSynonymChipReason(
   lemma: string,
   chip: string,
   denylist: Set<string>,
+  lang?: string,
 ): string | null {
   if (typeof chip !== 'string' || !chip.trim()) return 'empty'
   if (chip !== chip.normalize('NFC')) return 'not NFC'
@@ -35,7 +41,7 @@ export function invalidSynonymChipReason(
   if (!nfc) return 'empty'
   if (nfcUpper(nfc) === nfcUpper(lemma)) return 'equals lemma'
   if (spoilerContains(nfc, lemma)) return 'spoiler'
-  if (chipTokensDenied(nfc, denylist)) return 'denylist'
+  if (chipTokensDenied(nfc, denylist, lang)) return 'denylist'
   return null
 }
 
@@ -44,6 +50,7 @@ export function filterSynonymChips(
   lemma: string,
   chips: readonly string[] | undefined,
   denylist: Set<string>,
+  lang?: string,
 ): string[] {
   if (!chips?.length) return []
   const out: string[] = []
@@ -51,7 +58,7 @@ export function filterSynonymChips(
   for (const raw of chips) {
     if (typeof raw !== 'string') continue
     const chip = raw.normalize('NFC').trim()
-    if (invalidSynonymChipReason(lemma, chip, denylist)) continue
+    if (invalidSynonymChipReason(lemma, chip, denylist, lang)) continue
     const key = nfcUpper(chip)
     if (seen.has(key)) continue
     seen.add(key)
@@ -65,19 +72,21 @@ export function lemmaHasValidChips(
   lemma: string,
   chips: readonly string[] | undefined,
   denylist: Set<string>,
+  lang?: string,
 ): boolean {
-  const n = filterSynonymChips(lemma, chips, denylist).length
+  const n = filterSynonymChips(lemma, chips, denylist, lang).length
   return n >= 1 && n <= SYNONYM_CHIP_CAP
 }
 
 export function synonymCoverageRatio(
   lemmas: { word: string; synonyms?: string[] }[],
   denylist: Set<string>,
+  lang?: string,
 ): number {
   if (lemmas.length === 0) return 0
   let n = 0
   for (const L of lemmas) {
-    if (lemmaHasValidChips(L.word, L.synonyms, denylist)) n++
+    if (lemmaHasValidChips(L.word, L.synonyms, denylist, lang)) n++
   }
   return n / lemmas.length
 }

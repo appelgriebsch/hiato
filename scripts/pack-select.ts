@@ -47,6 +47,19 @@ export const DE_ES_BANDS: Record<NewCefr, readonly [number, number]> = {
   c2: [11000, 16000],
 }
 
+/**
+ * Elision stubs Hunspell still accepts (ADR 0040). Not hangman targets.
+ * The grid has no apostrophe cell, so the truncated lemma is not a word we play.
+ */
+export const FR_ELISION_STUBS = new Set([
+  'JUSQU',
+  'QUELQU',
+  'PRESQU',
+  'PUISQU',
+  'LORSQU',
+  'AUJOURD',
+])
+
 export function bandFloor(cefr: NewCefr): number {
   return cefr === 'c2' ? FLOOR_C2 : FLOOR_B2_C1
 }
@@ -64,17 +77,24 @@ export function hangmanOk(
     de: /^[A-ZÄÖÜß]+$/,
     es: /^[A-ZÁÉÍÓÚÜÑ]+$/,
     pt: /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]+$/,
+    // No Æ / Ÿ / Ù / Ü. Œ is one letter (U+0152), not O+E.
+    fr: /^[A-ZÀÂÇÉÈÊËÎÏÔÛŒ]+$/,
   }
   if (!re[lang].test(word)) return null
+  if (lang === 'fr' && FR_ELISION_STUBS.has(word)) return null
   if (/^(.)\1+$/.test(word)) return null
-  if (denylist && isDeniedLemma(word, denylist)) return null
+  if (denylist && isDeniedLemma(word, denylist, lang)) return null
   return word
 }
 
 /** DE fold so STRAßE ↔ STRASSE collide without preferring damaged SS forms. */
 export function foldKey(lang: SelectLang, word: string): string {
   const w = nfcUpper(word)
-  return lang === 'de' ? w.replaceAll('ß', 'SS') : w
+  if (lang === 'de') return w.replaceAll('ß', 'SS')
+  // Grave/acute E only (événement / évènement). Do not strip accents:
+  // MÛR≠MUR, SÛR≠SUR, PÊCHE≠PÉCHÉ (ADR 0040).
+  if (lang === 'fr') return w.replaceAll('È', 'É')
+  return w
 }
 
 export function loadFoldKeysFromPackLemmas(
@@ -151,15 +171,28 @@ export function isNewCefr(cefr: string): cefr is NewCefr {
   return (NEW_CEFRS as readonly string[]).includes(cefr)
 }
 
-/** Expand may only write b2|c1|c2 files. */
-export function assertPackWriteAllowed(filePath: string, cefr: string): void {
-  const base = filePath.replace(/\\/g, '/').split('/').pop()?.toLowerCase() ?? ''
-  if (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base)) {
+/**
+ * Expand may only write b2|c1|c2 files.
+ * `frBootstrap` allows a one-time write of missing `fr/a1|a2|b1` (ADR 0040).
+ * The caller sets it only when no FR pack exists yet.
+ */
+export function assertPackWriteAllowed(
+  filePath: string,
+  cefr: string,
+  opts?: { frBootstrap?: boolean },
+): void {
+  const posix = filePath.replace(/\\/g, '/')
+  const base = posix.split('/').pop()?.toLowerCase() ?? ''
+  const frLow =
+    opts?.frBootstrap === true &&
+    /\/fr\/(a1|a2|b1)\.json$/.test(posix) &&
+    (cefr === 'a1' || cefr === 'a2' || cefr === 'b1')
+  if (!frLow && (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base))) {
     throw new Error(
       `refuses to overwrite ${base || cefr + '.json'}; expand writes only ${NEW_CEFRS.join('|')}`,
     )
   }
-  if (!isNewCefr(cefr)) {
+  if (!frLow && !isNewCefr(cefr)) {
     throw new Error(`expand writes only ${NEW_CEFRS.join('|')} (got ${cefr})`)
   }
 }

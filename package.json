@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "bun run packs:check && tsc -b && vite build",
-    "lint": "echo \"oxlint optional \u2014 not installed in T1 scaffold\"",
+    "lint": "echo \"oxlint optional — not installed in T1 scaffold\"",
     "preview": "vite preview",
     "test": "bun test",
     "packs:check": "bun run scripts/packs-check.ts",
@@ -32,6 +32,7 @@
     "dictionary-de": "3.0.0",
     "dictionary-en": "4.0.0",
     "dictionary-es": "4.0.0",
+    "dictionary-fr": "3.0.0",
     "dictionary-pt": "4.0.0",
     "dictionary-pt-pt": "2.0.0",
     "nspell": "2.1.5",

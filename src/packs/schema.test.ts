@@ -163,14 +163,14 @@ describe('pack hosting', () => {
     expect(plain.headers.get('cache-control')).toBe('no-store')
   })
 
-  test('Workbox runtime cache uses PACK_ASSET_PATH_RE and maxEntries 24', async () => {
+  test('Workbox runtime cache uses PACK_ASSET_PATH_RE and maxEntries 30', async () => {
     const src = await Bun.file(
       new URL('../../vite.config.ts', import.meta.url),
     ).text()
     expect(src).toContain(
-      '/\\/packs\\/(en|de|es|pt)\\/(a1|a2|b1|b2|c1|c2)\\.json$/',
+      '/\\/packs\\/(en|de|es|pt|fr)\\/(a1|a2|b1|b2|c1|c2)\\.json$/',
     )
-    expect(src).toContain('maxEntries: 24')
+    expect(src).toContain('maxEntries: 30')
     expect(src).toContain(
       "globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,txt}']",
     )

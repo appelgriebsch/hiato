@@ -10,6 +10,9 @@ describe('isPersonNameGloss', () => {
     expect(isPersonNameGloss('männlicher Vorname.', 'de')).toBe(true)
     expect(isPersonNameGloss('Kleiner Ort oder Nachname.', 'de')).toBe(true)
     expect(isPersonNameGloss('a given name used in English', 'en')).toBe(true)
+    expect(isPersonNameGloss('Un prénom masculin.', 'fr')).toBe(true)
+    expect(isPersonNameGloss('nom de famille courant.', 'fr')).toBe(true)
+    expect(isPersonNameGloss('Un nom propre de personne.', 'fr')).toBe(true)
     expect(isPersonNameGloss('proper name of a person', 'en')).toBe(true)
   })
 
@@ -23,5 +26,7 @@ describe('isPersonNameGloss', () => {
     expect(isPersonNameGloss('flor perfumada de cores variadas.', 'pt')).toBe(
       false,
     )
+    expect(isPersonNameGloss('Un fruit à noyau.', 'fr')).toBe(false)
+    expect(isPersonNameGloss('Une pierre, un caillou.', 'fr')).toBe(false)
   })
 })

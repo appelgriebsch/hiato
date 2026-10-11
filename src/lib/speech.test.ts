@@ -114,6 +114,8 @@ describe('HTW-speak-helper (#115) — voice pick', () => {
     expect(voiceMatchesPackLang('es-MX', 'es')).toBe(true)
     expect(voiceMatchesPackLang('pt-BR', 'pt')).toBe(true)
     expect(voiceMatchesPackLang('pt-PT', 'pt')).toBe(true)
+    expect(voiceMatchesPackLang('fr-FR', 'fr')).toBe(true)
+    expect(voiceMatchesPackLang('fr_CA', 'fr')).toBe(true)
     expect(voiceMatchesPackLang('fr-FR', 'en')).toBe(false)
     expect(voiceMatchesPackLang('en-US', 'de')).toBe(false)
     // Do not treat "eng" or unrelated prefixes as English
@@ -127,8 +129,24 @@ describe('HTW-speak-helper (#115) — voice pick', () => {
       { lang: 'de-AT' },
     ]
     expect(pickVoiceForLang(voices, 'de')).toEqual({ lang: 'de-DE' })
+    expect(pickVoiceForLang(voices, 'fr')).toEqual({ lang: 'fr-FR' })
     expect(pickVoiceForLang(voices, 'en')).toBeNull()
     expect(pickVoiceForLang([], 'pt')).toBeNull()
+  })
+
+  test('FR EndCard speech uses fr-FR and hides when no French voice exists', async () => {
+    clearCachedSpeechVoices()
+    const german = mockSynth([{ lang: 'de-DE', localService: true }])
+    expect(canSpeakLemma('fr', { getSynth: () => german.synth })).toBe(false)
+    const french = mockSynth([{ lang: 'fr-FR', localService: true }])
+    expect(canSpeakLemma('fr', { getSynth: () => french.synth })).toBe(true)
+    const ok = await speakLemma('CHAT', 'fr', {
+      getSynth: () => french.synth,
+      createUtterance: utter,
+    })
+    expect(ok).toBe(true)
+    expect(french.spoken[0]!.lang).toBe('fr-FR')
+    french.spoken[0]!.onend?.()
   })
 
   test('prefers localService over an earlier remote voice; does not pin a name', () => {
@@ -1443,6 +1461,7 @@ describe('HTW-i18n-a11y (#117) — speak aria-label catalog', () => {
       pt: 'Ouvir a palavra',
       de: 'Wort anhören',
       es: 'Escuchar la palabra',
+      fr: 'Écouter le mot',
     })
     for (const lang of PACK_LANGS) {
       const label = SPEAK_LEMMA_ARIA[lang]
@@ -1456,6 +1475,7 @@ describe('HTW-i18n-a11y (#117) — speak aria-label catalog', () => {
     expect(speakLemmaAriaLabel('pt')).toBe('Ouvir a palavra')
     expect(speakLemmaAriaLabel('de')).toBe('Wort anhören')
     expect(speakLemmaAriaLabel('es')).toBe('Escuchar la palabra')
+    expect(speakLemmaAriaLabel('fr')).toBe('Écouter le mot')
     // Defensive: unknown / mistyped key → EN (same idea as sparse catalogs)
     expect(speakLemmaAriaLabel('xx' as PackLang)).toBe(SPEAK_LEMMA_ARIA.en)
   })

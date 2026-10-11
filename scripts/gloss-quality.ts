@@ -7,7 +7,7 @@ export function isTemplateGloss(gloss: string | undefined | null): boolean {
   return TEMPLATE_GLOSS_RE.test(gloss)
 }
 
-export type GlossLang = 'en' | 'de' | 'es' | 'pt'
+export type GlossLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
 
 /** English infinitive / definite-article openers. */
 const EN_OPENER = /^(to|the)\s/i
@@ -41,13 +41,13 @@ export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
   if (EN_A_FRAME.test(g)) return true
   // Short English dictionary frames that otherwise look like valid romance-language copy.
   if (
-    (lang === 'pt' || lang === 'es' || lang === 'de') &&
+    (lang === 'pt' || lang === 'es' || lang === 'de' || lang === 'fr') &&
     /^a\s+mistake\.?$/i.test(g)
   ) return true
   if (lang !== 'en' && /\bready for\b/i.test(g)) return true
   if (lang !== 'en' && /\bofficial in charge\b/i.test(g)) return true
   if (
-    (lang === 'pt' || lang === 'es' || lang === 'de') &&
+    (lang === 'pt' || lang === 'es' || lang === 'de' || lang === 'fr') &&
     /^[A-Za-z ]+$/.test(g) &&
     /^(father|mother|ready for use|usual or regular)$/i.test(g)
   ) return true
@@ -95,7 +95,7 @@ export function isWrongLanguageGloss(
 ): boolean {
   if (!gloss || !gloss.trim()) return false
   if (lang === 'en') return false
-  if (lang !== 'de' && lang !== 'es' && lang !== 'pt') return false
+  if (lang !== 'de' && lang !== 'es' && lang !== 'pt' && lang !== 'fr') return false
   if (isEnglishShapedGloss(gloss, lang)) return true
   if (isWordOfLang && englishGlossByMembership(lang, gloss, isWordOfLang)) {
     return true

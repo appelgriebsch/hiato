@@ -236,14 +236,14 @@ describe('packs:check license matrix (ADR 0029)', () => {
 })
 
 describe('packs:check completeness', () => {
-  test('expected count is 24 once PACK_CEFRS is six levels', () => {
-    expect(expectedPackCount()).toBe(24)
+  test('expected count is 30 once five languages have six levels', () => {
+    expect(expectedPackCount()).toBe(30)
   })
 
   test('fails on stray JSON and wrong file count', () => {
     const errors = checkCompleteness(['en/a1.json', 'notes.json'])
     expect(errors.some((e) => e.includes('stray'))).toBe(true)
-    expect(errors.some((e) => e.includes('exactly 24'))).toBe(true)
+    expect(errors.some((e) => e.includes('exactly 30'))).toBe(true)
     expect(errors.some((e) => e.includes('missing'))).toBe(true)
   })
 })

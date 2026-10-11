@@ -1,7 +1,7 @@
 /**
  * Hint ceiling: a gloss/synonym token fails when its easiest candidate band
  * is strictly above the pack (pack lemma, stem, or English CEFR-J/Octanove tag).
- * The scorer runs on every band. packs:check fails A1–C2 (all 24 packs). Pure — no I/O.
+ * The scorer runs on every band. packs:check fails A1–C2 (all 30 packs). Pure — no I/O.
  */
 import { foldKey, type SelectLang } from './pack-select'
 import { isPackLang, type PackCefr, type PackLang } from '../src/packs/schema'

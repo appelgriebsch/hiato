@@ -147,7 +147,7 @@ export function checkSynonymCoverage(
   pack: WordPack,
 ): { error: string | null; warn: string | null } {
   if ((EXISTING_CEFRS as readonly string[]).includes(pack.cefr)) {
-    const pct = synonymCoverageRatio(pack.lemmas, DENY)
+    const pct = synonymCoverageRatio(pack.lemmas, DENY, pack.lang)
     if (pct < SYNONYM_COVERAGE_FLOOR) {
       return {
         error: `${rel}: synonym chip coverage ${(pct * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
@@ -261,7 +261,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
     throw new Error(`${file}: version must be a number`)
   }
   if (!isPackLang(o.lang)) {
-    throw new Error(`${file}: lang must be en|de|es|pt`)
+    throw new Error(`${file}: lang must be en|de|es|pt|fr`)
   }
   if (!isPackCefr(o.cefr)) {
     throw new Error(`${file}: cefr must be ${PACK_CEFR_LEVELS.join('|')}`)
@@ -309,7 +309,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
       synonyms = e.synonyms.map((s, j) => {
         const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
-        const reason = invalidSynonymChipReason(word, raw, DENY)
+        const reason = invalidSynonymChipReason(word, raw, DENY, o.lang as string)
         if (reason) {
           throw new Error(
             `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,
@@ -319,7 +319,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
       })
     }
 
-    if (isDeniedLemma(word, DENY)) {
+    if (isDeniedLemma(word, DENY, o.lang as string)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
     if (membershipActive() && !isWordOfLang(o.lang as PackLang, word)) {

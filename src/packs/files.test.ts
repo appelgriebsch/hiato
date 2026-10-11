@@ -1,5 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import path from 'node:path'
+import { graphemeKey, graphemes } from '../engine/graphemes'
+import { KEYBOARDS } from '../lib/keyboards'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from './schema'
 import { requiresCcBySa } from '../../scripts/packs-check-lib'
 
@@ -12,7 +14,7 @@ async function loadPack(lang: PackLang, cefr: PackCefr) {
     cefr: string
     license: string
     attribution: string[]
-    lemmas: unknown[]
+    lemmas: { word: string }[]
   }
 }
 
@@ -21,8 +23,8 @@ function blob(raw: { license: string; attribution: string[] }): string {
 }
 
 describe('v0 pack files', () => {
-  test('EN/PT/DE/ES × A1–C2 is exactly 24 files', async () => {
-    expect(PACK_LANGS.length * PACK_CEFRS.length).toBe(24)
+  test('EN/PT/DE/ES/FR × A1–C2 is exactly 30 files', async () => {
+    expect(PACK_LANGS.length * PACK_CEFRS.length).toBe(30)
     for (const lang of PACK_LANGS) {
       for (const cefr of PACK_CEFRS) {
         const raw = await loadPack(lang, cefr)
@@ -31,6 +33,23 @@ describe('v0 pack files', () => {
         expect(raw.lemmas.length).toBeGreaterThan(10)
         expect(raw.license.length).toBeGreaterThan(0)
         expect(raw.attribution.length).toBeGreaterThan(0)
+      }
+    }
+  })
+
+  test('every lemma letter is a key on that language pad', async () => {
+    for (const lang of PACK_LANGS) {
+      const keys = new Set(KEYBOARDS[lang].flat())
+      for (const cefr of PACK_CEFRS) {
+        const raw = await loadPack(lang, cefr)
+        for (const lemma of raw.lemmas) {
+          for (const g of graphemes(lemma.word)) {
+            const key = graphemeKey(g)
+            expect(keys.has(key), `${lang}/${cefr} ${lemma.word} missing ${key}`).toBe(
+              true,
+            )
+          }
+        }
       }
     }
   })

@@ -31,6 +31,7 @@ const DICT_FOR_LANG: Record<StemLang, string[]> = {
   de: ['dictionary-de'],
   es: ['dictionary-es'],
   pt: ['dictionary-pt', 'dictionary-pt-pt'],
+  fr: ['dictionary-fr'],
 }
 
 function packageDir(pkg: string): string {
@@ -267,7 +268,7 @@ function replayAffixes(
 }
 
 function loadWordhoardStems(
-  lang: 'en' | 'de' | 'es',
+  lang: 'en' | 'de' | 'es' | 'fr',
   into: Map<string, Set<string>>,
   targets: Set<string>,
 ): void {
@@ -334,8 +335,9 @@ function main(): void {
     de: {},
     es: {},
     pt: {},
+    fr: {},
   }
-  for (const lang of ['en', 'de', 'es', 'pt'] as const) {
+  for (const lang of ['en', 'de', 'es', 'pt', 'fr'] as const) {
     const targets = collectTargetLemmas(lang)
     // English: also stem CEFR-J/Octanove headwords so tag surfaces fold.
     if (lang === 'en') {
@@ -343,7 +345,7 @@ function main(): void {
     }
     console.log(`${lang}: ${targets.size} target lemmas`)
     const into = new Map<string, Set<string>>()
-    if (lang === 'en' || lang === 'de' || lang === 'es') {
+    if (lang === 'en' || lang === 'de' || lang === 'es' || lang === 'fr') {
       console.log(`wordhoard stems ${lang}…`)
       loadWordhoardStems(lang, into, targets)
     }

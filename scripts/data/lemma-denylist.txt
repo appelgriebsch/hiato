@@ -1,5 +1,8 @@
-# Exact uppercase NFC lemma denylist (EN/DE/ES/PT).
+# Exact uppercase NFC lemma denylist.
+# A line is global (WORD) or language-scoped (lang WORD). Scoped lines do not
+# block another language (fr BITE stays out of EN; ES/PT NEGRO is not listed).
 # Whole-lemma match only — never substring (WASSER, CLASS, GRASS, PASSEN, PERGUNTA stay).
+# QUEUE is not listed.
 
 SEX
 SEXY
@@ -515,3 +518,45 @@ HOMICIDA
 MUERA
 MUERTO
 ASESINAR
+
+# FR slurs, pejoratives, dominant vulgar meanings, and G3 group words (#168).
+# Scoped so EN BITE and ES/PT NEGRO stay playable. QUEUE is intentionally absent.
+fr MERDE
+fr PUTAIN
+fr CUL
+fr PUTE
+fr SALOPE
+fr CHIER
+fr FOUTRE
+fr BAISER
+fr CON
+fr CHATTE
+fr PINE
+fr BRANLER
+fr NIQUER
+fr BITE
+fr NÈGRE
+fr PÉDÉ
+fr GOUINE
+fr YOUPIN
+fr BOUGNOULE
+fr CHINETOQUE
+fr TARLOUZE
+fr TAPETTE
+fr GOGOL
+fr RACAILLE
+fr MONGOL
+fr JUIF
+fr JUIVE
+fr ARABE
+fr GITAN
+fr GITANE
+fr MUSULMAN
+fr MUSULMANE
+fr CHRÉTIEN
+fr CHRÉTIENNE
+fr CATHOLIQUE
+fr PROTESTANT
+fr PROTESTANTE
+fr NÉGRO
+fr APACHE

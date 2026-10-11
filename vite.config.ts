@@ -104,7 +104,7 @@ export default defineConfig({
           {
             // Literal must match PACK_ASSET_PATH_RE / PACK_CEFR_LEVELS (Workbox serializes this fn).
             urlPattern: ({ url }) =>
-              /\/packs\/(en|de|es|pt)\/(a1|a2|b1|b2|c1|c2)\.json$/.test(
+              /\/packs\/(en|de|es|pt|fr)\/(a1|a2|b1|b2|c1|c2)\.json$/.test(
                 url.pathname,
               ),
             // NetworkFirst so load.ts version checks see fresh packs under SW.
@@ -114,8 +114,8 @@ export default defineConfig({
               cacheName: 'hiato-packs', // keep in sync with PACK_SW_CACHE
               networkTimeoutSeconds: 3,
               expiration: {
-                // 4 langs × 6 CEFR; LRU is best-effort (not a hard cap of 6).
-                maxEntries: 24,
+                // 5 langs × 6 CEFR; LRU is best-effort (not a hard cap of 6).
+                maxEntries: 30,
                 maxAgeSeconds: 60 * 60 * 24 * 365,
               },
               plugins: [

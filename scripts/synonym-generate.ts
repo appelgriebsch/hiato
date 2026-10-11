@@ -8,13 +8,18 @@ import {
   synonymCacheKeyIsSettled,
 } from './synonym-chips'
 
-export type SynLang = 'en' | 'de' | 'es' | 'pt'
+export type SynLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
 
 const LANG_NAME: Record<SynLang, string> = {
   en: 'English',
   de: 'German',
   es: 'Spanish',
   pt: 'Portuguese',
+  fr: 'French',
+}
+
+const SYNONYM_STYLE: Partial<Record<SynLang, string>> = {
+  fr: 'Français seulement — jamais anglais. Écris œ, pas oe. Pas d’article et pas d’élision dans les synonymes (pas de un, une, le, la, l’, d’, n’, j’, qu’).',
 }
 
 export function readXaiKey(): string | null {
@@ -77,7 +82,7 @@ function applyParsed(
       cache[w] = []
       continue
     }
-    const chips = filterSynonymChips(w, arr, denylist)
+    const chips = filterSynonymChips(w, arr, denylist, lang)
     if (chips.length === 0) {
       console.warn(`  rejected ${lang} synonyms for ${w}: ${arr.join(', ')}`)
       continue
@@ -145,6 +150,7 @@ function batchPrompt(lang: SynLang, batch: string[]): string {
     `or a colour with no near-synonym). Do not force a hypernym (never banana → fruit).\n` +
     `Most common verbs, adjectives, and abstract nouns have a close learner synonym ` +
     `(big/large, start/begin, house/home). Leave at most about one in five lemmas as [].\n` +
+    (SYNONYM_STYLE[lang] ? `${SYNONYM_STYLE[lang]}\n` : '') +
     `Return a JSON object mapping each UPPERCASE lemma to a string array.\n` +
     `Lemmas:\n${batch.join('\n')}`
   )
@@ -199,6 +205,7 @@ export async function generateSynonyms(
         `Language: ${LANG_NAME[lang]} (${lang}).\n` +
         `JSON object: UPPERCASE lemma → 1–3 close same-language synonyms, or [] if unique.\n` +
         `Never the lemma; never a translation; no NSFW; no banana→fruit hypernyms.\n` +
+        (SYNONYM_STYLE[lang] ? `${SYNONYM_STYLE[lang]}\n` : '') +
         batch.map((w) => `- ${w}`).join('\n')
       const parsed = await completeJson(
         key,

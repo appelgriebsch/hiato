@@ -3,6 +3,7 @@
 const PT = /nome\s+pr[oó]prio|\bsobrenome\b/i
 const ES = /nombre\s+propio|\bapellidos?\b/i
 const DE = /\bvornamen?\b|\bnachnamen?\b|\bfamiliennamen?\b/i
+const FR = /\bpr[eé]noms?\b|\bnom de famille\b|\bnoms? propres?\b/i
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i
@@ -18,6 +19,7 @@ export function isPersonNameGloss(
   if (code === 'pt') return PT.test(g)
   if (code === 'es') return ES.test(g)
   if (code === 'de') return DE.test(g)
+  if (code === 'fr') return FR.test(g)
   if (code === 'en') {
     if (EN_NAME.test(g)) return true
     return EN_PROPER.test(g) && EN_PERSON.test(g)
@@ -26,6 +28,7 @@ export function isPersonNameGloss(
     PT.test(g) ||
     ES.test(g) ||
     DE.test(g) ||
+    FR.test(g) ||
     EN_NAME.test(g) ||
     (EN_PROPER.test(g) && EN_PERSON.test(g))
   )
