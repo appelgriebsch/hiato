@@ -181,10 +181,10 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA'] })).toEqual([])
     expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA', 'CASA'] })[0]).toContain('stale')
   })
-  test('every shipped pack passes; IT has no baseline', async () => {
+  test('every shipped pack passes; FR and IT have no baseline (#181)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
     const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
-    expect(Object.keys(base).filter((k) => k.startsWith('it/'))).toEqual([])
+    expect(Object.keys(base).filter((k) => /^(?:fr|it)\//.test(k))).toEqual([])
     const root = `${import.meta.dir}/../public/packs`
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))

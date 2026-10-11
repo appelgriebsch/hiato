@@ -198,7 +198,7 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
 /**
  * Grandfathered stem spoilers per pack (lemma words), from before #179. Shrink-only:
  * a listed lemma that no longer leaks fails too, so the entry gets deleted.
- * IT has no entries; every IT pack must be clean.
+ * FR and IT have no entries (#181); every FR and IT pack must be clean.
  */
 export type StemBaseline = Record<string, readonly string[]>
 

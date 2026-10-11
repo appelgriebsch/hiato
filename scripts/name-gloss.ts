@@ -17,9 +17,9 @@ const IT =
 // ("un prophète biblique", "dirigeant soviétique"). Fails without the
 // name list. Plain role glosses (OGRE, DIVA, FRAPPEUR) stay common nouns.
 const FR_PERSON_ROLE =
-  '(?:personnage|personnalité|dirigeante?|prophète|déesse|acteur|actrice|chanteur|chanteuse|peintre|écrivaine?|roi|reine|poète|empereur|homme politique)s?'
+  '(?:personnage|personnalité|détective|héros|héroïne|dirigeante?|prophète|déesse|acteur|actrice|chanteur|chanteuse|peintre|écrivaine?|roi|reine|poète|empereur|homme politique)s?'
 const FR_PERSON_ORIGIN =
-  '(?:historiques?|de bande dessinée|de fiction|bibliques?|hébr(?:eu|eux|aïque)s?|nordiques?|grec(?:que)?s?|romaine?s?|latine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italien(?:ne)?s?|anglaise?s?|britanniques?|espagnole?s?|égyptien(?:ne)?s?|perse?s?)'
+  '(?:historiques?|de bande dessinée|de fiction|fictif|fictive|fictifs|fictives|bibliques?|hébr(?:eu|eux|aïque)s?|nordiques?|grec(?:que)?s?|romaine?s?|latine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italien(?:ne)?s?|anglaise?s?|britanniques?|espagnole?s?|égyptien(?:ne)?s?|perse?s?)'
 const FR_ARTICLE = '(?:(?:un|une|le|la|l[’\'])\\s*)?'
 const FR_PERSON = new RegExp(
   `(?<!\\p{L})${FR_ARTICLE}${FR_PERSON_ROLE} ${FR_PERSON_ORIGIN}(?!\\p{L})`,
@@ -34,11 +34,24 @@ const FR_PERSON_OF_PLACE = new RegExp(
 // A deity "of" something names one figure ("déesse de l'amour").
 const FR_DEITY = /(?<!\p{L})(?:déesses?|dieux?) (?:de|du|des|d[’'])(?!\p{L})/iu
 
-/** FR glosses that name one specific person, even off lemma-names.txt. */
+// #180: "créé par Conan Doyle" credits one fictional figure to its author.
+const FR_CREATED_BY = /(?<!\p{L})créée?s? par \p{Lu}/u
+// #180 CUBA: the gloss is a named place, "grande île des Caraïbes", "ville de Belgique".
+// Start-anchored so demonyms ("originaire de la région de Flandre") stay; case-sensitive
+// on the name, so "île de sable" and "pays de cocagne" stay common nouns.
+const FR_PLACE = new RegExp(
+  `^${FR_ARTICLE}(?:(?:grande?|petite?|ancienne?|vieille|vieux) )?(?:île|ville|pays|région|capitale|fleuve|rivière|archipel|province|nation|lac|mont|montagne|continent|état)s? (?:(?:de|du|des|d[’'])\\s*(?:la |l[’'])?\\p{Lu}|${FR_PERSON_ORIGIN}(?!\\p{L}))`,
+  'u',
+)
+
+/** FR glosses that name one specific person or place, even off lemma-names.txt. */
 export function isFrPersonGloss(gloss: string | undefined | null): boolean {
   if (!gloss) return false
   const g = gloss.normalize('NFC')
-  return FR_PERSON.test(g) || FR_PERSON_OF_PLACE.test(g) || FR_DEITY.test(g)
+  return (
+    FR_PERSON.test(g) || FR_PERSON_OF_PLACE.test(g) || FR_DEITY.test(g) ||
+    FR_CREATED_BY.test(g) || FR_PLACE.test(g)
+  )
 }
 
 // IT #178: a named individual or a named place, even off lemma-names.txt.

@@ -41,6 +41,26 @@ describe('isFrPersonGloss (#175)', () => {
       'chanteur de rock',
     ]) expect(isFrPersonGloss(g)).toBe(false)
   })
+  test('#180: flags fictional figures and named places', () => {
+    for (const g of [
+      'un détective fictif créé par Conan Doyle', // SHERLOCK
+      'héros de fiction',
+      'grande île des Caraïbes.', // CUBA
+      'ville de Belgique',
+      'capitale de la France',
+      'ville italienne',
+    ]) expect(isFrPersonGloss(g)).toBe(true)
+    for (const g of [
+      'Personnage cruel qui dévore les humains.', // OGRE
+      'chanteuse lyrique célèbre et exigeante', // DIVA
+      'joueur qui frappe la balle au baseball.', // FRAPPEUR
+      'reine de beauté',
+      'originaire de la région de Flandre', // FLAMAND
+      'Relatif à la capitale de la France.', // PARISIEN
+      'île de sable au milieu du fleuve',
+      'objet créé par un artisan',
+    ]) expect(isFrPersonGloss(g)).toBe(false)
+  })
 })
 
 describe('isPersonNameGloss', () => {
