@@ -60,6 +60,7 @@ const LANG_NAME: Record<PackLang, string> = {
   es: 'Spanish',
   pt: 'Portuguese',
   fr: 'French',
+  it: 'Italian',
 }
 
 const GLOSS_STYLE: Record<PackLang, string> = {
@@ -68,6 +69,7 @@ const GLOSS_STYLE: Record<PackLang, string> = {
   es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
   pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
   fr: 'Écris uniquement en français — jamais en anglais. Préfère « un/une/le/la … » ou un infinitif. Écris œ, pas oe. Pas d’article ni d’élision dans les synonymes.',
+  it: 'Scrivi solo in italiano — mai in inglese. Preferisci « un/una/il/la … » o un infinito. Scrivi à, è, é, ì, ò, ù. Niente articolo e niente elisione nei sinonimi.',
 }
 
 /**
@@ -242,7 +244,7 @@ function saveSynCache(lang: string, cache: SynCache) {
 
 function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string } {
   const posix = rel.replace(/\\/g, '/').replace(/^public\/packs\//, '')
-  const m = posix.match(/^(en|de|es|pt|fr)\/(a1|a2|b1|b2|c1|c2)\.json$/)
+  const m = posix.match(/^(en|de|es|pt|fr|it)\/(a1|a2|b1|b2|c1|c2)\.json$/)
   if (!m) throw new Error(`bad rel: ${rel}`)
   if (REFUSED.has(m[2]!)) {
     throw new Error(
@@ -258,7 +260,7 @@ function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string }
 
 function loadAllSnapshots(): { rel: string; pack: WordPack }[] {
   const out: { rel: string; pack: WordPack }[] = []
-  for (const lang of ['en', 'de', 'es', 'pt', 'fr']) {
+  for (const lang of ['en', 'de', 'es', 'pt', 'fr', 'it']) {
     for (const cefr of ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']) {
       const file = path.join(PACKS, lang, `${cefr}.json`)
       if (!existsSync(file)) continue

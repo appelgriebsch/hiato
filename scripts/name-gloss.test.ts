@@ -35,6 +35,9 @@ describe('isPersonNameGloss', () => {
         'fr',
       ),
     ).toBe(true)
+    expect(isPersonNameGloss('Un nome proprio maschile.', 'it')).toBe(true)
+    expect(isPersonNameGloss('Un cognome italiano.', 'it')).toBe(true)
+    expect(isPersonNameGloss('Nome di persona.', 'it')).toBe(true)
     expect(isPersonNameGloss('proper name of a person', 'en')).toBe(true)
   })
 
@@ -57,5 +60,7 @@ describe('isPersonNameGloss', () => {
       isPersonNameGloss('Jeune femme, dans un registre familier.', 'fr'),
     ).toBe(false)
     expect(isPersonNameGloss('variante de dialecte chinois', 'fr')).toBe(false)
+    expect(isPersonNameGloss('Un frutto con il nocciolo.', 'it')).toBe(false)
+    expect(isPersonNameGloss('Il nome della città.', 'it')).toBe(false)
   })
 })

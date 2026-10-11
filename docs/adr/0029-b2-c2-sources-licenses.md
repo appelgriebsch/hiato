@@ -7,6 +7,7 @@
 > Amended by #169: DE/ES A1–B1 are wordhoard-sample lemmas and are relabelled **CC-BY-SA-4.0**.
 > Amended by #171: EN A1–B2 stay CEFR-J headwords, but the licence is the CEFR-J Wordlist terms (free use with citation, © Tono Laboratory, TUFS), not CC0.
 > Amended by #168 / ADR 0040: FR A1–C2 are wordhoard frequency-rank bands, **CC-BY-SA-4.0**, not DELF/DALF and not FLELex.
+> Amended by #172 / ADR 0040: IT A1–C2 are wordhoard frequency-rank bands, **CC-BY-SA-4.0**, not CELI, CILS, or PLIDA.
 
 DE/ES A1–B1 are **CC-BY-SA-4.0**. PT stays **CC-BY-SA-4.0** (ADR 0009). EN A1–B2 use the CEFR-J Wordlist terms. New packs follow the lemma source:
 
@@ -17,8 +18,9 @@ DE/ES A1–B1 are **CC-BY-SA-4.0**. PT stays **CC-BY-SA-4.0** (ADR 0009). EN A1�
 | DE/ES B2–C2 | wordhoard **full** CSV (not the A1–B1 samples) | **frequency-rank bands**. German CEFR labels are calibrated against Goethe-Institut lists, not copied from them. Spanish bands are not Instituto Cervantes lists | **CC-BY-SA-4.0** |
 | PT B2–C2 | FrequencyWords rank slices beyond current B1 | frequency bands, not CAPLE | **CC-BY-SA-4.0** |
 | FR A1–C2 | wordhoard v0.1.0 `fr` (A1–B1 `cefr_estimate` rank cuts; B2–C2 `DE_ES_BANDS` index windows) | frequency bands, not DELF/DALF | **CC-BY-SA-4.0** |
+| IT A1–C2 | wordhoard v0.1.0 `it` (A1–B1 `cefr_estimate` rank cuts; B2–C2 `DE_ES_BANDS` index windows) | frequency ranks, not CELI/CILS/PLIDA | **CC-BY-SA-4.0** |
 
-Do not ingest Goethe Wortlisten, Instituto Cervantes PCIC dumps, EVP, Oxford 3000/5000, Pearson GSE, or CEFRLex (NC or all-rights-reserved), including FLELex. About/NOTICE must say DE/ES/PT C-levels and all FR bands are frequency bands.
+Do not ingest Goethe Wortlisten, Instituto Cervantes PCIC dumps, EVP, Oxford 3000/5000, Pearson GSE, or CEFRLex (NC or all-rights-reserved), including FLELex. About/NOTICE must say DE/ES/PT C-levels and all FR and IT bands are frequency bands. Italian bands are not CELI, CILS, or PLIDA.
 
 C1/C2 packs target **≥80%** of lemmas with 1–3 same-language synonym chips (UI cap 3, ADR 0023). B2 stays optional like B1. Unique referents may stay gloss-only; do not fail CI on a few gaps.
 

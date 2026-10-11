@@ -60,6 +60,55 @@ export const FR_ELISION_STUBS = new Set([
   'AUJOURD',
 ])
 
+/**
+ * One-token articulated prepositions and fused clitics (ADR 0040 addendum).
+ * COLLO / COLLA / COLLE / PELLE stay: they are content lemmas, not this class.
+ */
+export const IT_FUSED_FORMS = new Set([
+  'DEL',
+  'DELLO',
+  'DELLA',
+  'DEI',
+  'DEGLI',
+  'DELLE',
+  'NEL',
+  'NELLO',
+  'NELLA',
+  'NEI',
+  'NEGLI',
+  'NELLE',
+  'AL',
+  'ALLO',
+  'ALLA',
+  'AI',
+  'AGLI',
+  'ALLE',
+  'DAL',
+  'DALLO',
+  'DALLA',
+  'DAI',
+  'DAGLI',
+  'DALLE',
+  'SUL',
+  'SULLO',
+  'SULLA',
+  'SUI',
+  'SUGLI',
+  'SULLE',
+  'COL',
+  'COI',
+  'COGLI',
+  'PEL',
+  'PELLO',
+  'PEI',
+  'PEGLI',
+  'GLIELO',
+  'GLIELA',
+  'GLIELI',
+  'GLIELE',
+  'GLIENE',
+])
+
 export function bandFloor(cefr: NewCefr): number {
   return cefr === 'c2' ? FLOOR_C2 : FLOOR_B2_C1
 }
@@ -79,9 +128,12 @@ export function hangmanOk(
     pt: /^[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]+$/,
     // No Æ / Ÿ / Ù / Ü. Œ is one letter (U+0152), not O+E.
     fr: /^[A-ZÀÂÇÉÈÊËÎÏÔÛŒ]+$/,
+    // À È É Ì Ò Ù only. Í / Î / Ó / Ú stay out (ADR 0040 addendum).
+    it: /^[A-ZÀÈÉÌÒÙ]+$/,
   }
   if (!re[lang].test(word)) return null
   if (lang === 'fr' && FR_ELISION_STUBS.has(word)) return null
+  if (lang === 'it' && IT_FUSED_FORMS.has(word)) return null
   if (/^(.)\1+$/.test(word)) return null
   if (denylist && isDeniedLemma(word, denylist, lang)) return null
   return word
@@ -173,26 +225,27 @@ export function isNewCefr(cefr: string): cefr is NewCefr {
 
 /**
  * Expand may only write b2|c1|c2 files.
- * `frBootstrap` allows a one-time write of missing `fr/a1|a2|b1` (ADR 0040).
- * The caller sets it only when no FR pack exists yet.
+ * `bootstrapLang` allows a one-time write of missing `{lang}/a1|a2|b1`
+ * (ADR 0040). The caller sets it only when that language has no pack yet.
  */
 export function assertPackWriteAllowed(
   filePath: string,
   cefr: string,
-  opts?: { frBootstrap?: boolean },
+  opts?: { bootstrapLang?: string },
 ): void {
   const posix = filePath.replace(/\\/g, '/')
   const base = posix.split('/').pop()?.toLowerCase() ?? ''
-  const frLow =
-    opts?.frBootstrap === true &&
-    /\/fr\/(a1|a2|b1)\.json$/.test(posix) &&
+  const boot = opts?.bootstrapLang
+  const lowOk =
+    (boot === 'fr' || boot === 'it') &&
+    new RegExp(`/${boot}/(a1|a2|b1)\\.json$`).test(posix) &&
     (cefr === 'a1' || cefr === 'a2' || cefr === 'b1')
-  if (!frLow && (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base))) {
+  if (!lowOk && (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base))) {
     throw new Error(
       `refuses to overwrite ${base || cefr + '.json'}; expand writes only ${NEW_CEFRS.join('|')}`,
     )
   }
-  if (!frLow && !isNewCefr(cefr)) {
+  if (!lowOk && !isNewCefr(cefr)) {
     throw new Error(`expand writes only ${NEW_CEFRS.join('|')} (got ${cefr})`)
   }
 }

@@ -77,6 +77,17 @@ describe('provenanceCaption (#80 / #100 / #101)', () => {
     expect(frBand.notes.join('\n')).toMatch(/not DELF or DALF/)
   })
 
+  test('IT is wordhoard frequency-rank SA at every CEFR (not CELI/CILS/PLIDA)', () => {
+    for (const cefr of PACK_CEFRS) {
+      const f = provenanceFragments('it', cefr, 'it')
+      expect(f.source).toBe('wordhoard')
+      expect(f.license).toBe('CC-BY-SA')
+      expect(f.method).toBe('per frequenza')
+    }
+    const itBand = PACK_LICENSES.find((p) => p.lang === 'it')!.bands[0]!
+    expect(itBand.notes.join('\n')).toMatch(/not CELI, CILS, or PLIDA/)
+  })
+
   test('PT is frequency-rank SA at every CEFR (not CAPLE)', () => {
     for (const cefr of PACK_CEFRS) {
       const f = provenanceFragments('pt', cefr, 'en')

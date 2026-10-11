@@ -6,6 +6,7 @@ export const LANG_LABELS: Record<PackLang, string> = {
   de: 'Deutsch',
   es: 'Español',
   fr: 'Français',
+  it: 'Italiano',
 }
 
 export const LANG_CODES: Record<PackLang, string> = {
@@ -14,6 +15,7 @@ export const LANG_CODES: Record<PackLang, string> = {
   de: 'DE',
   es: 'ES',
   fr: 'FR',
+  it: 'IT',
 }
 
 export const CEFR_LABELS: Record<PackCefr, string> = {
@@ -41,6 +43,7 @@ export const NO_HINT_COPY: Record<PackLang, string> = {
   de: 'Kein Hinweis für dieses Wort',
   es: 'Sin pista para esta palabra',
   fr: 'Pas d’indice pour ce mot',
+  it: 'Nessun indizio per questa parola',
 }
 
 /** Localized aria-label for EndCard tap-to-speak (ADR 0037 / #117). */
@@ -50,6 +53,7 @@ export const SPEAK_LEMMA_ARIA: Record<PackLang, string> = {
   de: 'Wort anhören',
   es: 'Escuchar la palabra',
   fr: 'Écouter le mot',
+  it: 'Ascolta la parola',
 }
 
 /** Aria-label for the speak control; missing keys fall back to EN. */

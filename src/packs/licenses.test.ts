@@ -15,7 +15,7 @@ function bandBlob(
 describe('PACK_LICENSES About bands (ADR 0029)', () => {
   test('language cards in picker order', () => {
     expect(PACK_LICENSES.map((p) => p.lang)).toEqual([...PACK_LANGS])
-    expect(PACK_LICENSES).toHaveLength(5)
+    expect(PACK_LICENSES).toHaveLength(6)
   })
 
   test('EN A1–B2 is CEFR-J citation, not CC0; C1–C2 are SA not CC0', () => {
@@ -64,6 +64,19 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
     expect(blob).toMatch(/wordhoard/)
     expect(blob).toMatch(/frequency/)
     expect(blob).toMatch(/not DELF or DALF/)
+    expect(blob).toMatch(/github\.com\/natema\/wordhoard/)
+  })
+
+  test('IT is one SA frequency band, not CELI/CILS/PLIDA', () => {
+    const it = PACK_LICENSES.find((p) => p.lang === 'it')
+    expect(it?.title).toBe('Italiano')
+    expect(it?.bands).toHaveLength(1)
+    const blob = bandBlob('it', 'A1–C2')
+    expect(blob.toUpperCase()).toContain('CC-BY-SA')
+    expect(blob.toUpperCase()).not.toContain('CC0')
+    expect(blob).toMatch(/wordhoard/)
+    expect(blob).toMatch(/frequency/)
+    expect(blob).toMatch(/not CELI, CILS, or PLIDA/)
     expect(blob).toMatch(/github\.com\/natema\/wordhoard/)
   })
 

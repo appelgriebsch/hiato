@@ -23,6 +23,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | DE/ES B2–C2 | CC-BY-SA-4.0 wordhoard-full; frequency-rank bands. Spanish bands are not Instituto Cervantes lists |
 | PT A1–C2 | CC-BY-SA-4.0 FrequencyWords `pt_50k` (v0 packs and later bands); C-levels are frequency slices, not CAPLE |
 | FR A1–C2 | CC-BY-SA-4.0 wordhoard v0.1.0 `fr` frequency-rank bands, not DELF/DALF and not FLELex (ADR 0040). A1–B1 use `cefr_estimate` rank cuts; B2–C2 use the DE/ES index windows |
+| IT A1–C2 | CC-BY-SA-4.0 wordhoard v0.1.0 `it` frequency-rank bands, not CELI/CILS/PLIDA (ADR 0040). A1–B1 use `cefr_estimate` rank cuts; B2–C2 use the DE/ES index windows. `dictionary-it` is a build-time gate only |
 
 | `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate (lemma only; no substring) |
 | `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |
@@ -31,7 +32,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
-Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL, MIT AND BSD), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
+Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL, MIT AND BSD), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-it` (Italian Writing Aids / PLIO, GPL-3.0; membership gate only — lemmas are not mined from the `.dic`), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
 
 ## Hint ceiling caches (issue #55 / epic #49)
 
@@ -40,6 +41,6 @@ Committed outputs of `bun run scripts/build-hint-ceiling-data.ts` (person-run on
 | File | Contents | Provenance |
 |------|----------|------------|
 | `en-easiest-cefr.json` | English headword → easiest CEFR band (minimum of CEFR-J A1–B2 and Octanove C1–C2 per headword) | Adapted from [olp-en-cefrj](https://github.com/openlanguageprofiles/olp-en-cefrj) **CEFR-J Vocabulary Profile** (cite CEFR-J / Tono Lab) and **Octanove Vocabulary Profile** (CC-BY-SA-4.0). Not a verbatim dump; easiest-tag merge only. |
-| `hint-stem-cache.json` | Surface → lemma stems for `en`/`de`/`es`/`pt`/`fr` | [wordhoard](https://github.com/natema/wordhoard) v0.1.0 `word_form`→`lemma` (CC-BY-SA-4.0) for en/de/es/fr, plus regular affix replay from the build-time Hunspell dictionaries. Does **not** store `cefr_estimate`. Stamp records dictionary package bytes and a wordhoard size/hash fingerprint. |
+| `hint-stem-cache.json` | Surface → lemma stems for `en`/`de`/`es`/`pt`/`fr`/`it` | [wordhoard](https://github.com/natema/wordhoard) v0.1.0 `word_form`→`lemma` (CC-BY-SA-4.0) for en/de/es/fr/it, plus regular affix replay from the build-time Hunspell dictionaries. Does **not** store `cefr_estimate`. Stamp records dictionary package bytes and a wordhoard size/hash fingerprint. |
 
 Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octanove-vocabulary-profile-c1c2-1.0.csv`, `wordhoard-v0.1.0.db`.

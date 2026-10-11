@@ -10,7 +10,14 @@ import {
   foldKey,
   hangmanOk,
   type NewCefr,
+  type SelectLang,
 } from './pack-select'
+
+/** Wordhoard languages that share the FR band planner (ADR 0040). */
+export type WordhoardBandLang = Extract<SelectLang, 'fr' | 'it'>
+
+/** Citation infinitives only. Participles and cliticized verbs stay out. */
+const IT_INFINITIVE = /(?:ARE|ERE|IRE|URRE|ORRE)$/
 
 export const FR_RANK_CEILING = { a1: 750, a2: 1500, b1: 3000 } as const
 
@@ -33,8 +40,12 @@ export type FrBandPlan = {
 
 const LOW_BANDS = ['a1', 'a2', 'b1'] as const
 
-function foldTaken(word: string, taken: Set<string>): boolean {
-  return taken.has(foldKey('fr', word))
+function foldTaken(
+  lang: WordhoardBandLang,
+  word: string,
+  taken: Set<string>,
+): boolean {
+  return taken.has(foldKey(lang, word))
 }
 
 /**
@@ -48,15 +59,20 @@ export function filterFrRows(
   inflectedVerbs: ReadonlySet<string>,
   accept: (word: string) => boolean,
   denylist?: Set<string>,
+  lang: WordhoardBandLang = 'fr',
 ): FrFiltered[] {
   const sorted = [...rows].sort((a, b) => a.rank - b.rank)
   const seen = new Set<string>()
   const out: FrFiltered[] = []
   for (const row of sorted) {
-    if (row.pos === 'VERB' && inflectedVerbs.has(nfcUpper(row.lemma))) continue
-    const word = hangmanOk('fr', row.lemma, denylist)
+    if (lang === 'it') {
+      if (row.pos === 'VERB' && !IT_INFINITIVE.test(nfcUpper(row.lemma))) continue
+    } else if (row.pos === 'VERB' && inflectedVerbs.has(nfcUpper(row.lemma))) {
+      continue
+    }
+    const word = hangmanOk(lang, row.lemma, denylist)
     if (!word || !accept(word)) continue
-    const key = foldKey('fr', word)
+    const key = foldKey(lang, word)
     if (seen.has(key)) continue
     seen.add(key)
     out.push({ word, rank: row.rank })
@@ -65,14 +81,15 @@ export function filterFrRows(
 }
 
 function takePool(
+  lang: WordhoardBandLang,
   pool: readonly FrFiltered[],
   taken: Set<string>,
   want: number,
 ): string[] {
   const out: string[] = []
   for (const it of pool) {
-    if (foldTaken(it.word, taken)) continue
-    taken.add(foldKey('fr', it.word))
+    if (foldTaken(lang, it.word, taken)) continue
+    taken.add(foldKey(lang, it.word))
     out.push(it.word)
     if (out.length >= want) break
   }
@@ -89,14 +106,22 @@ export function selectFrBands(
     surplus?: number
     rankCeiling?: { a1: number; a2: number; b1: number }
     indexBands?: Record<NewCefr, readonly [number, number]>
+    lang?: WordhoardBandLang
   },
 ): FrBandPlan {
+  const lang = opts.lang ?? 'fr'
   const target = opts.target ?? TARGET
   const surplus = opts.surplus ?? 0
   const want = target + surplus
   const rankCeiling = { ...FR_RANK_CEILING, ...opts.rankCeiling }
   const indexBands = opts.indexBands ?? DE_ES_BANDS
-  const filtered = filterFrRows(rows, opts.inflectedVerbs, opts.accept, opts.denylist)
+  const filtered = filterFrRows(
+    rows,
+    opts.inflectedVerbs,
+    opts.accept,
+    opts.denylist,
+    lang,
+  )
   const taken = new Set<string>()
   const bands = {
     a1: [] as string[],
@@ -119,13 +144,13 @@ export function selectFrBands(
   for (const band of LOW_BANDS) {
     const initialHi = rankCeiling[band]
     const window = filtered.filter(
-      (it) => it.rank > lo && it.rank <= initialHi && !foldTaken(it.word, taken),
+      (it) => it.rank > lo && it.rank <= initialHi && !foldTaken(lang, it.word, taken),
     )
     let pool = window
     let hi = initialHi
     if (pool.length < want) {
       const extra = filtered.filter(
-        (it) => it.rank > hi && !foldTaken(it.word, taken),
+        (it) => it.rank > hi && !foldTaken(lang, it.word, taken),
       )
       for (const it of extra) {
         pool = [...pool, it]
@@ -133,7 +158,7 @@ export function selectFrBands(
         if (pool.length >= want) break
       }
     }
-    bands[band] = takePool(pool, taken, want)
+    bands[band] = takePool(lang, pool, taken, want)
     ceilings[band] = hi
     lo = hi
   }
@@ -155,7 +180,7 @@ export function selectFrBands(
       const start = indexLo[band]
       for (let i = start; i < end && i < filtered.length; i++) {
         const it = filtered[i]!
-        if (foldTaken(it.word, taken)) continue
+        if (foldTaken(lang, it.word, taken)) continue
         out.push(it)
       }
       return out
@@ -167,9 +192,17 @@ export function selectFrBands(
       if (band === 'c1') indexLo.c2 = Math.max(indexLo.c2, hi)
       pool = gather(hi)
     }
-    bands[band] = takePool(pool, taken, want)
+    bands[band] = takePool(lang, pool, taken, want)
     ceilings[band] = hi
   }
 
   return { bands, ceilings, filtered: filtered.length }
+}
+
+/** Italian bands: same windows as FR, infinitive verbs only (ADR 0040). */
+export function selectItBands(
+  rows: readonly FrSourceRow[],
+  opts: Omit<Parameters<typeof selectFrBands>[1], 'lang'>,
+): FrBandPlan {
+  return selectFrBands(rows, { ...opts, lang: 'it' })
 }

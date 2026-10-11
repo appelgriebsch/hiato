@@ -43,6 +43,12 @@ License bands (ADR 0029):
   DELF or DALF lists and not FLELex (ADR 0040). Creator: natema.
   Source: https://github.com/natema/wordhoard
 
+  IT A1–C2 — CC-BY-SA-4.0 wordhoard v0.1.0 frequency-rank bands, not
+  CELI, CILS, or PLIDA lists (ADR 0040). Creator: natema.
+  Source: https://github.com/natema/wordhoard
+  Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords
+  are credited the same way as the other wordhoard languages.
+
 Gloss and synonym copy is original to Hiato. FrequencyWords code is MIT
 and its frequency content is CC-BY-SA-4.0. Packs are learner selections,
 not verbatim dumps of any proprietary wordlist (ADR 0026). Pack JSON stays
@@ -73,6 +79,8 @@ bundle or Workbox `includeAssets`.
   dictionary-de (igerman98) — GPL-2.0 OR GPL-3.0
   dictionary-es (RLA-ES) — GPL-3.0 OR LGPL-3.0 OR MPL-1.1
   dictionary-fr (Grammalecte classique) — MPL-2.0
+  dictionary-it (Italian Writing Aids / PLIO) — GPL-3.0
+  Build-time membership gate only. Lemmas are not taken from the .dic.
   dictionary-pt — LGPL-3.0 OR MPL-2.0
   dictionary-pt-pt (Natura) — GPL-2.0 OR LGPL-2.1 OR MPL-1.1
 

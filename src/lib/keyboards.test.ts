@@ -83,6 +83,9 @@ describe('letter pad layout metadata (#138)', () => {
     expect(LETTER_PADS.fr.rows[0]!.join('')).toBe('AZERTYUIOP')
     expect(LETTER_PADS.fr.rows[1]!.join('')).toBe('QSDFGHJKLM')
     expect(LETTER_PADS.fr.rows[2]!.join('')).toBe('WXCVBNÇŒ')
+    expect(LETTER_PADS.it.rows[0]!.join('')).toBe('QWERTYUIOP')
+    expect(LETTER_PADS.it.rows[1]!.join('')).toBe('ASDFGHJKL')
+    expect(LETTER_PADS.it.rows[2]!.join('')).toBe('ZXCVBNM')
   })
 
   test('DE option A: Ü/Ö/Ä/ß on letter rows, no accent strip', () => {
@@ -102,7 +105,8 @@ describe('letter pad layout metadata (#138)', () => {
     expect(LETTER_PADS.fr.accentStrip).toEqual([
       'À', 'Â', 'É', 'È', 'Ê', 'Ë', 'Î', 'Ï', 'Ô', 'Û',
     ])
-    for (const lang of ['pt', 'es', 'fr'] as const) {
+    expect(LETTER_PADS.it.accentStrip).toEqual(['À', 'È', 'É', 'Ì', 'Ò', 'Ù'])
+    for (const lang of ['pt', 'es', 'fr', 'it'] as const) {
       const pad = LETTER_PADS[lang]
       // Accent keys live only in the strip, never mixed into letter rows.
       for (const k of pad.accentStrip!) expect(pad.rows.flat()).not.toContain(k)
@@ -116,6 +120,7 @@ describe('letter pad layout metadata (#138)', () => {
     expect(padColumns(LETTER_PADS.es)).toBe(10)
     expect(padColumns(LETTER_PADS.de)).toBe(11)
     expect(padColumns(LETTER_PADS.fr)).toBe(10)
+    expect(padColumns(LETTER_PADS.it)).toBe(10)
   })
 
 })

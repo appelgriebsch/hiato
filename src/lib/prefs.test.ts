@@ -47,7 +47,7 @@ describe('prefs (localStorage)', () => {
   test('rejects unknown lang/cefr', () => {
     localStorage.setItem(
       'hiato.prefs',
-      JSON.stringify({ lang: 'it', cefr: 'a1' }),
+      JSON.stringify({ lang: 'nl', cefr: 'a1' }),
     )
     expect(getPrefs()).toBeNull()
     localStorage.setItem(
