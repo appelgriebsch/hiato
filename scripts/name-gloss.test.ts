@@ -16,7 +16,10 @@ describe('isFrPersonGloss (#175)', () => {
       'écrivain russe',
       'roi de France',
       'un prophète hébreu',
-      'chanteur de rock',
+      'un poète italien auteur de la Divine Comédie', // DANTE
+      'poète latin',
+      'reine d’Angleterre',
+      'pharaon et roi égyptien',
       'déesse de l’amour',
       "déesse de l'amour",
       'homme politique américain',
@@ -31,6 +34,11 @@ describe('isFrPersonGloss (#175)', () => {
       'petit oiseau chanteur des champs.', // ALOUETTE
       'partie consciente de la personnalité.', // EGO
       'grande ville dirigeant une région', // MÉTROPOLE
+      'acteur de théâtre',
+      'peintre de bâtiment',
+      'reine de beauté',
+      'chanteur d’opéra',
+      'chanteur de rock',
     ]) expect(isFrPersonGloss(g)).toBe(false)
   })
 })
