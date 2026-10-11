@@ -73,4 +73,27 @@ describe('selectFrBands', () => {
     expect(plan.bands.a2).not.toContain('CHAT')
     expect(plan.bands.b2).not.toContain('CHAT')
   })
+
+  test('surplus raises a short band past the target, and the next band starts after', () => {
+    const rows = [
+      row('chat', 1),
+      row('chien', 2),
+      row('maison', 3),
+      row('livre', 4),
+      row('table', 5),
+      row('porte', 6),
+    ]
+    const plan = selectFrBands(rows, {
+      inflectedVerbs: new Set(),
+      accept: () => true,
+      target: 2,
+      surplus: 1,
+      rankCeiling: { a1: 1, a2: 4, b1: 6 },
+      indexBands: { b2: [4, 5], c1: [5, 6], c2: [6, 6] },
+    })
+    expect(plan.bands.a1).toEqual(['CHAT', 'CHIEN', 'MAISON'])
+    expect(plan.ceilings.a1).toBe(3)
+    expect(plan.bands.a2).not.toContain('MAISON')
+    expect(plan.bands.a2[0]).toBe('LIVRE')
+  })
 })

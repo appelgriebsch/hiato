@@ -123,14 +123,14 @@ export function selectFrBands(
     )
     let pool = window
     let hi = initialHi
-    if (pool.length < target) {
+    if (pool.length < want) {
       const extra = filtered.filter(
         (it) => it.rank > hi && !foldTaken(it.word, taken),
       )
       for (const it of extra) {
         pool = [...pool, it]
         hi = it.rank
-        if (pool.length >= target) break
+        if (pool.length >= want) break
       }
     }
     bands[band] = takePool(pool, taken, want)
@@ -161,7 +161,7 @@ export function selectFrBands(
       return out
     }
     let pool = gather(hi)
-    while (pool.length < target && hi < filtered.length) {
+    while (pool.length < want && hi < filtered.length) {
       hi += 1
       if (band === 'b2') indexLo.c1 = Math.max(indexLo.c1, hi)
       if (band === 'c1') indexLo.c2 = Math.max(indexLo.c2, hi)
