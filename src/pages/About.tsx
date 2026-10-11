@@ -78,12 +78,13 @@ export function About() {
         Word packs ship with per-source attribution. English A1–B2 lemmas are
         selected from the CEFR-J Wordlist (free use with citation; © Tono
         Laboratory, TUFS). C1–C2 come from the Octanove Vocabulary Profile
-        (CC-BY-SA). German, Spanish, Portuguese, and French are CC-BY-SA at
-        every level. German CEFR labels are calibrated against Goethe-Institut
-        lists, not copied from them. Spanish and Portuguese C-levels are
-        frequency-rank bands, not Instituto Cervantes or CAPLE lists. French
-        A1–C2 lemmas are wordhoard frequency-rank bands, not DELF or DALF
-        lists.
+        (CC-BY-SA). German, Spanish, Portuguese, French, and Italian are
+        CC-BY-SA at every level. German CEFR labels are calibrated against Goethe-Institut
+        lists, not copied from them. Spanish and Portuguese
+        C-levels are frequency-rank bands, not Instituto Cervantes or CAPLE
+        lists. French A1–C2 lemmas are wordhoard frequency-rank bands, not
+        DELF or DALF lists. Italian A1–C2 lemmas are wordhoard frequency-rank
+        bands, not CELI, CILS, or PLIDA lists.
         Portuguese lemmas come from hermitdave/FrequencyWords pt_50k
         (OpenSubtitles; content CC-BY-SA-4.0, code MIT). Gloss and synonym
         copy is original to Hiato and is always in the pack language.

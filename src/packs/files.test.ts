@@ -3,6 +3,7 @@ import path from 'node:path'
 import { graphemeKey, graphemes } from '../engine/graphemes'
 import { KEYBOARDS } from '../lib/keyboards'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from './schema'
+import { isDeniedLemma, loadDenylist } from '../../scripts/lemma-denylist'
 import { requiresCcBySa } from '../../scripts/packs-check-lib'
 
 const ROOT = path.join(import.meta.dir, '../../public/packs')
@@ -23,8 +24,8 @@ function blob(raw: { license: string; attribution: string[] }): string {
 }
 
 describe('v0 pack files', () => {
-  test('EN/PT/DE/ES/FR × A1–C2 is exactly 30 files', async () => {
-    expect(PACK_LANGS.length * PACK_CEFRS.length).toBe(30)
+  test('EN/PT/DE/ES/FR/IT × A1–C2 is exactly 36 files', async () => {
+    expect(PACK_LANGS.length * PACK_CEFRS.length).toBe(36)
     for (const lang of PACK_LANGS) {
       for (const cefr of PACK_CEFRS) {
         const raw = await loadPack(lang, cefr)
@@ -91,6 +92,22 @@ describe('v0 pack files', () => {
         const b = blob(await loadPack(lang, cefr)).toUpperCase()
         expect(b).toContain('CC-BY-SA')
         expect(b).not.toContain('CC0')
+      }
+    }
+  })
+
+  test('an it denylist hit is absent; an EN homograph of that line still passes', async () => {
+    const deny = loadDenylist()
+    expect(isDeniedLemma('NEGRO', deny, 'it')).toBe(true)
+    expect(isDeniedLemma('NEGRO', deny, 'en')).toBe(false)
+    for (const cefr of PACK_CEFRS) {
+      const raw = await loadPack('it', cefr)
+      for (const lemma of raw.lemmas) {
+        expect(isDeniedLemma(lemma.word, deny, 'it'), lemma.word).toBe(false)
+      }
+      const en = await loadPack('en', cefr)
+      for (const lemma of en.lemmas) {
+        expect(isDeniedLemma(lemma.word, deny, 'en'), lemma.word).toBe(false)
       }
     }
   })

@@ -4,6 +4,7 @@ import {
   PACK_CEFR_LEVELS,
   PACK_CEFRS,
   isPackCefr,
+  isPackLang,
 } from './schema'
 
 describe('isPackCefr (ADR 0027)', () => {
@@ -23,6 +24,13 @@ describe('isPackCefr (ADR 0027)', () => {
     expect(isPackCefr(null)).toBe(false)
   })
 
+  test('isPackLang accepts it and rejects unknown codes', () => {
+    expect(isPackLang('it')).toBe(true)
+    expect(isPackLang('fr')).toBe(true)
+    expect(isPackLang('nl')).toBe(false)
+    expect(isPackLang('IT')).toBe(false)
+  })
+
   test('PACK_CEFRS is the shipped A1–C2 picker list', () => {
     expect(PACK_CEFRS).toEqual(['a1', 'a2', 'b1', 'b2', 'c1', 'c2'])
     expect(PACK_CEFR_LEVELS).toEqual(['a1', 'a2', 'b1', 'b2', 'c1', 'c2'])
@@ -32,6 +40,7 @@ describe('isPackCefr (ADR 0027)', () => {
     expect(PACK_ASSET_PATH_RE.test('/packs/en/a1.json')).toBe(true)
     expect(PACK_ASSET_PATH_RE.test('/packs/en/b2.json')).toBe(true)
     expect(PACK_ASSET_PATH_RE.test('/packs/pt/c2.json')).toBe(true)
+    expect(PACK_ASSET_PATH_RE.test('/packs/it/a1.json')).toBe(true)
     expect(PACK_ASSET_PATH_RE.test('/packs/en/c3.json')).toBe(false)
     expect(PACK_ASSET_PATH_RE.test('/packs/en/missing.json')).toBe(false)
     expect(PACK_ASSET_PATH_RE.test('/index.html')).toBe(false)
@@ -124,6 +133,7 @@ describe('pack hosting', () => {
     )
     expect(isPackJsonPath('/packs/en/a1.json')).toBe(true)
     expect(isPackJsonPath('/packs/fr/a1.json')).toBe(true)
+    expect(isPackJsonPath('/packs/it/a1.json')).toBe(true)
     expect(isPackJsonPath('/packs/en/nope.json')).toBe(false)
     expect(isPackJsonPath('/index.html')).toBe(false)
 
@@ -180,7 +190,7 @@ describe('pack hosting', () => {
       new URL('../../vite.config.ts', import.meta.url),
     ).text()
     expect(src).toContain(
-      '/\\/packs\\/(en|de|es|pt|fr)\\/(a1|a2|b1|b2|c1|c2)\\.json$/',
+      '/\\/packs\\/(en|de|es|pt|fr|it)\\/(a1|a2|b1|b2|c1|c2)\\.json$/',
     )
     expect(src).toContain('maxEntries: 30')
     expect(src).toContain(

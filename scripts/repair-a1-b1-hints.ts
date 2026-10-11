@@ -48,6 +48,7 @@ const LANG_NAME: Record<PackLang, string> = {
   es: 'Spanish',
   pt: 'Portuguese',
   fr: 'French',
+  it: 'Italian',
 }
 
 const GLOSS_STYLE: Record<PackLang, string> = {
@@ -56,6 +57,7 @@ const GLOSS_STYLE: Record<PackLang, string> = {
   es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
   pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
   fr: 'Écris uniquement en français — jamais en anglais. Préfère « un/une/le/la … » ou un infinitif. Écris œ, pas oe.',
+  it: 'Scrivi solo in italiano — mai in inglese. Preferisci « un/una/il/la … » o un infinito. Scrivi à, è, é, ì, ò, ù, non la forma senza accento.',
 }
 
 /** Easy common filler examples for ceiling prompts (language + band). */
@@ -100,10 +102,23 @@ function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
     }
     return 'o, a, um, uma, e, ou, com, para, de, em, é, são, pessoa, coisa, lugar, casa, comida, água, corpo, homem, mulher, criança, gente, grande, pequeno, bom, mau, fazer, dar, ver, ir, vir, conjunto, quantidade, qualidade, veículo, tarefa'
   }
+  if (lang === 'it') {
+    // una→UNIRE, cibo→CIBARE, fila→FILO. Keep fillers that are not those stems.
+    if (cefr === 'a1') {
+      return 'il, lo, la, un, e, o, di, a, in, su, con, per, non, che, uomo, donna, bambino, casa, acqua, pane, giorno, mano, libro, amico, grande, piccolo, buono, fare, vedere, andare, mangiare'
+    }
+    if (cefr === 'a2') {
+      return 'il, lo, la, un, e, o, di, a, in, su, con, per, non, che, persona, cosa, luogo, casa, acqua, corpo, uomo, donna, bambino, grande, piccolo, buono, fare, vedere, andare, mangiare, parlare'
+    }
+    return 'il, lo, la, un, e, o, di, a, in, su, con, per, non, che, persona, cosa, luogo, casa, acqua, corpo, uomo, donna, bambino, grande, piccolo, buono, fare, vedere, andare'
+  }
   return 'the, a, an, to, of, for, with, in, on, at, is, are, person, thing, place, food, water, home, work, play, big, small, good, bad, young, old'
 }
 
 function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
+  if (lang === 'it') {
+    return 'una, cibo, fila, ali, studio, veicolo, struttura, organo, maschile, femminile, romantico, temperatura, attività, obbligo, nome proprio'
+  }
   if (lang === 'fr') {
     return 'véhicule, structure, récipient, organe, masculin, féminin, romantique, température, activité, obligation, prénom, nom propre'
   }
@@ -333,7 +348,7 @@ function saveSynCache(lang: string, cache: SynCache) {
 
 function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string } {
   const posix = rel.replace(/\\/g, '/').replace(/^public\/packs\//, '')
-  const m = posix.match(/^(en|de|es|pt|fr)\/(a1|a2|b1|b2|c1|c2)\.json$/)
+  const m = posix.match(/^(en|de|es|pt|fr|it)\/(a1|a2|b1|b2|c1|c2)\.json$/)
   if (!m) throw new Error(`bad rel: ${rel}`)
   if (FORBIDDEN.has(m[2]!)) {
     throw new Error(`refusing to repair ${posix} (b2/c1/c2 out of scope)`)
@@ -347,7 +362,7 @@ function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string }
 
 function loadAllSnapshots(): { rel: string; pack: WordPack }[] {
   const out: { rel: string; pack: WordPack }[] = []
-  for (const lang of ['en', 'de', 'es', 'pt', 'fr']) {
+  for (const lang of ['en', 'de', 'es', 'pt', 'fr', 'it']) {
     for (const cefr of ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']) {
       const file = path.join(PACKS, lang, `${cefr}.json`)
       if (!existsSync(file)) continue

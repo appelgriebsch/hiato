@@ -15,6 +15,7 @@ describe('selected-language pack URLs (ADR 0006)', () => {
     expect(packLangFromUrl('https://hiato.pages.dev/packs/de/a2.json')).toBe(
       'de',
     )
+    expect(packLangFromUrl('/packs/it/a1.json')).toBe('it')
     expect(packLangFromUrl('/icons/icon-192.png')).toBeNull()
   })
 
@@ -26,6 +27,8 @@ describe('selected-language pack URLs (ADR 0006)', () => {
     expect(shouldPurgePackUrl('/packs/de/a1.json', 'en')).toBe(true)
     expect(shouldPurgePackUrl('/packs/pt/c2.json', 'en')).toBe(true)
     expect(shouldPurgePackUrl('/packs/es/a2.json', 'pt')).toBe(true)
+    expect(shouldPurgePackUrl('/packs/it/c2.json', 'it')).toBe(false)
+    expect(shouldPurgePackUrl('/packs/it/a1.json', 'en')).toBe(true)
     expect(shouldPurgePackUrl('/sw.js', 'en')).toBe(false)
   })
 

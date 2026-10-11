@@ -1,6 +1,7 @@
 import { loadPack, purgeLocalPacksExcept } from './load'
 import {
   PACK_CEFRS,
+  PACK_LANGS,
   PACK_SW_CACHE,
   isPackLang,
   packUrl,
@@ -18,7 +19,7 @@ export function packLangFromUrl(url: string): PackLang | null {
   } catch {
     /* use raw */
   }
-  const m = path.match(/\/packs\/([a-z]{2})\//)
+  const m = path.match(new RegExp(`/packs/(${PACK_LANGS.join('|')})/`))
   if (!m) return null
   return isPackLang(m[1]) ? m[1] : null
 }

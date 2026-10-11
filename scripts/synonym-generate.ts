@@ -8,7 +8,7 @@ import {
   synonymCacheKeyIsSettled,
 } from './synonym-chips'
 
-export type SynLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
+export type SynLang = 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it'
 
 const LANG_NAME: Record<SynLang, string> = {
   en: 'English',
@@ -16,10 +16,12 @@ const LANG_NAME: Record<SynLang, string> = {
   es: 'Spanish',
   pt: 'Portuguese',
   fr: 'French',
+  it: 'Italian',
 }
 
 const SYNONYM_STYLE: Partial<Record<SynLang, string>> = {
   fr: 'Français seulement — jamais anglais. Écris œ, pas oe. Pas d’article et pas d’élision dans les synonymes (pas de un, une, le, la, l’, d’, n’, j’, qu’).',
+  it: 'Italiano soltanto — mai inglese. Niente articolo e niente elisione nei sinonimi. Scrivi la lettera accentata (à è é ì ò ù), non la forma senza accento.',
 }
 
 export function readXaiKey(): string | null {

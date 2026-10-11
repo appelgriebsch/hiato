@@ -25,6 +25,9 @@ describe('lang membership (fixture dictionaries)', () => {
     expect(isWordOfLang('en', 'XYZZY')).toBe(false)
     expect(isWordOfLang('es', 'CASA')).toBe(true)
     expect(isWordOfLang('es', 'XYZZY')).toBe(false)
+    expect(isWordOfLang('it', 'CASA')).toBe(true)
+    expect(isWordOfLang('it', 'PERCHÉ')).toBe(true)
+    expect(isWordOfLang('it', 'XYZZY')).toBe(false)
   })
 
   test('PT accepts if either pt-PT or pt-BR lists the form', () => {

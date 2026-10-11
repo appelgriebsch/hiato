@@ -16,9 +16,10 @@ import { readFileSync, renameSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import nspell from 'nspell'
+import { italianSpell } from './it-spell'
 import { nfcUpper } from './lemma-denylist'
 
-export type MembershipLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
+export type MembershipLang = 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it'
 
 export type SpellChecker = { correct(word: string): boolean }
 
@@ -34,6 +35,7 @@ const LOCK_PACKAGES = [
   'dictionary-en',
   'dictionary-es',
   'dictionary-fr',
+  'dictionary-it',
   'dictionary-pt',
   'dictionary-pt-pt',
   'nspell',
@@ -43,6 +45,7 @@ const DICT_PACKAGES = [
   'dictionary-en',
   'dictionary-es',
   'dictionary-fr',
+  'dictionary-it',
   'dictionary-pt',
   'dictionary-pt-pt',
 ] as const
@@ -213,7 +216,7 @@ export function installMembershipCacheForTests(map: Map<string, boolean>): void 
   activeStamp = 'test'
 }
 
-const LANG_TAG = new Set<MembershipLang>(['en', 'de', 'es', 'pt', 'fr'])
+const LANG_TAG = new Set<MembershipLang>(['en', 'de', 'es', 'pt', 'fr', 'it'])
 
 export function loadLoanwordAllowlist(): AllowLists {
   if (allowCache) return allowCache
@@ -224,6 +227,7 @@ export function loadLoanwordAllowlist(): AllowLists {
     es: new Set(),
     pt: new Set(),
     fr: new Set(),
+    it: new Set(),
   }
   const text = readFileSync(ALLOW_FILE, 'utf8')
   for (const raw of text.split('\n')) {
@@ -341,17 +345,19 @@ export function installFixtureSpellersFromDir(dir = TESTDATA): void {
     es: [load('es')],
     pt: [load('pt-pt'), load('pt-br')],
     fr: [load('fr')],
+    it: [load('it')],
   }
 }
 
 type DictModule = { default: { aff: Uint8Array; dic: Uint8Array } }
 
 async function loadProduction(): Promise<SpellMap> {
-  const [en, de, es, fr, ptBr, ptPt] = await Promise.all([
+  const [en, de, es, fr, it, ptBr, ptPt] = await Promise.all([
     import('dictionary-en') as Promise<DictModule>,
     import('dictionary-de') as Promise<DictModule>,
     import('dictionary-es') as Promise<DictModule>,
     import('dictionary-fr') as Promise<DictModule>,
+    import('dictionary-it') as Promise<DictModule>,
     import('dictionary-pt') as Promise<DictModule>,
     import('dictionary-pt-pt') as Promise<DictModule>,
   ])
@@ -360,6 +366,8 @@ async function loadProduction(): Promise<SpellMap> {
     de: [nspell(de.default)],
     es: [nspell(es.default)],
     fr: [nspell(fr.default)],
+    // nspell(dictionary-it) expands elision prefixes at init and does not finish.
+    it: [italianSpell(it.default.aff, it.default.dic)],
     pt: [nspell(ptPt.default), nspell(ptBr.default)],
   }
 }

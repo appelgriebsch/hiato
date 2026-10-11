@@ -42,3 +42,21 @@ AZERTY, one visual row per source row (ADR 0005; no symbols mode):
 ## Consequences
 
 Hint-ceiling rules are unchanged. `fr` is included in the stem cache (wordhoard `word_form` plus dictionary-fr affixes). About, NOTICE, `licenses.ts`, and the picker caption describe frequency bands under CC-BY-SA-4.0.
+
+## Addendum — Italian packs (#172)
+
+Italian uses this same expand. The sentence above that left IT out described the French PR only. NL and non-Latin scripts still stay out.
+
+IT A1–C2 lemmas come from wordhoard v0.1.0 `lang='it'` (CC-BY-SA-4.0). A1–B1 follow `cefr_estimate` (A1 ≤750, A2 ≤1500, B1 ≤3000). B2–C2 use `DE_ES_BANDS` (4000–7000 / 7000–11000 / 11000–16000), not the wordhoard C1/C2 rank cut. Bands do not overlap (ADR 0028). A short band raises only that band’s ceiling. Words are never copied in from another band. Every IT pack is CC-BY-SA-4.0. The bands are frequency ranks, not CELI, CILS, or PLIDA. Glosses and synonym chips are original Hiato copy in Italian.
+
+Expand may write `it/a1`–`it/b1` once, only when no IT pack file exists yet. After that, A1–B1 stay frozen.
+
+The pad is the EN QWERTY rows (J K W X Y stay) plus a labeled Accents strip, in this order: À È É Ì Ò Ù. Ten columns, same pitch as ES. No symbols mode and no long-press (ADR 0005). The hangman class is `^[A-ZÀÈÉÌÒÙ]+$`, so Í, Î, Ó, and Ú lemmas drop. There is no second accent scan.
+
+A VERB stays only when the lemma ends in `-are`, `-ere`, `-ire`, `-urre`, or `-orre`. Gender is not rewritten from `word_form`. One-token fused clitics and articulated prepositions are dropped. Apostrophe, hyphen, space, dot, and digit lemmas stay out.
+
+Denylist lines are `it WORD` (exact whole lemma). Person names drop only when the lemma is on the name list and the gloss matches an Italian person-name pattern (`nome proprio`, `cognome`, `nome di persona`), at every IT level. The strict B2–C2 name-list skip is not used.
+
+`dictionary-it` 2.0.0 (Italian Writing Aids / PLIO, GPL-3.0) is a build-time membership gate only. It is not shipped, and lemmas are not mined from the `.dic`. nspell expands that affix file's elision prefixes (`l'`, `dell'`, `un'`) into an in-memory word list and does not finish, so the Italian checker applies the same parsed rules at lookup time. Other languages still use nspell.
+
+EndCard speech uses `it-IT` and stays hidden when the device has no Italian voice (ADR 0037). `it` is in the hint-stem cache (wordhoard `word_form` plus dictionary-it affixes). Hint-ceiling rules do not change.

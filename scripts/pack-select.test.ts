@@ -54,6 +54,24 @@ describe('hangmanOk + foldKey', () => {
     expect(hangmanOk('en', 'BITE', deny)).toBe('BITE')
     expect(hangmanOk('fr', 'BITE', deny)).toBeNull()
     expect(hangmanOk('fr', 'QUEUE', deny)).toBe('QUEUE')
+    expect(hangmanOk('it', 'perché')).toBe('PERCHÉ')
+    expect(hangmanOk('it', 'città')).toBe('CITTÀ')
+    expect(hangmanOk('it', 'più')).toBe('PIÙ')
+    expect(hangmanOk('it', 'così')).toBe('COSÌ')
+    expect(hangmanOk('it', 'sí')).toBeNull()
+    expect(hangmanOk('it', 'cosí')).toBeNull()
+    expect(hangmanOk('it', 'dí')).toBeNull()
+    expect(hangmanOk('it', 'piú')).toBeNull()
+    expect(hangmanOk('it', 'íl')).toBeNull()
+    expect(hangmanOk('it', 'în')).toBeNull()
+    expect(hangmanOk('it', 'del')).toBeNull()
+    expect(hangmanOk('it', 'glielo')).toBeNull()
+    expect(hangmanOk('it', 'collo')).toBe('COLLO')
+    expect(hangmanOk('it', 'di il')).toBeNull()
+    const itDeny = new Set(['it NEGRO'])
+    expect(hangmanOk('it', 'NEGRO', itDeny)).toBeNull()
+    expect(hangmanOk('en', 'NEGRO', itDeny)).toBe('NEGRO')
+    expect(hangmanOk('es', 'NEGRO', itDeny)).toBe('NEGRO')
   })
 
   test('DE ß/SS fold collides STRAßE with STRASSE', () => {
@@ -156,17 +174,26 @@ describe('write-guard', () => {
     expect(() => assertPackWriteAllowed('public/packs/de/c2.json', 'c2')).not.toThrow()
   })
 
-  test('fr bootstrap may create missing fr/a1–b1 once; other langs stay frozen', () => {
+  test('fr/it bootstrap may create missing a1–b1 once; other langs stay frozen', () => {
     expect(() =>
-      assertPackWriteAllowed('public/packs/fr/a1.json', 'a1', { frBootstrap: true }),
+      assertPackWriteAllowed('public/packs/fr/a1.json', 'a1', { bootstrapLang: 'fr' }),
     ).not.toThrow()
     expect(() =>
-      assertPackWriteAllowed('public/packs/fr/b1.json', 'b1', { frBootstrap: true }),
+      assertPackWriteAllowed('public/packs/fr/b1.json', 'b1', { bootstrapLang: 'fr' }),
     ).not.toThrow()
     expect(() =>
-      assertPackWriteAllowed('public/packs/en/a1.json', 'a1', { frBootstrap: true }),
+      assertPackWriteAllowed('public/packs/it/a1.json', 'a1', { bootstrapLang: 'it' }),
+    ).not.toThrow()
+    expect(() =>
+      assertPackWriteAllowed('public/packs/it/b1.json', 'b1', { bootstrapLang: 'fr' }),
+    ).toThrow(/refuses to overwrite/i)
+    expect(() =>
+      assertPackWriteAllowed('public/packs/en/a1.json', 'a1', { bootstrapLang: 'fr' }),
     ).toThrow(/refuses to overwrite/i)
     expect(() => assertPackWriteAllowed('public/packs/fr/a1.json', 'a1')).toThrow(
+      /refuses to overwrite/i,
+    )
+    expect(() => assertPackWriteAllowed('public/packs/it/a1.json', 'a1')).toThrow(
       /refuses to overwrite/i,
     )
   })

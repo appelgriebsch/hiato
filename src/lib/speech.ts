@@ -66,6 +66,7 @@ export const SPEECH_LANG_PREFIX: Record<PackLang, string> = {
   es: 'es',
   pt: 'pt',
   fr: 'fr',
+  it: 'it',
 }
 
 /** Normalize voice.lang for prefix compare (underscores → hyphens). */
@@ -83,6 +84,7 @@ const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
   es: 'es-ES',
   pt: 'pt-BR',
   fr: 'fr-FR',
+  it: 'it-IT',
 }
 
 /**

@@ -38,6 +38,20 @@ describe('Keyboard render (#138 Avery W4)', () => {
     expect(fr).toContain('>Œ<')
     expect(renderPad('de')).not.toContain('data-accent-strip')
     expect(renderPad('en')).not.toContain('data-accent-strip')
+    const it = renderPad('it')
+    expect(it).toContain('data-accent-strip')
+    expect(it).toContain('Accents')
+    expect(it).toContain('flex-nowrap')
+    expect(it).toContain('overflow-hidden')
+    expect(it).toContain('data-pad-cols="10"')
+    expect(it).toContain('>À<')
+    expect(it).toContain('>È<')
+    expect(it).toContain('>É<')
+    expect(it).toContain('>Ì<')
+    expect(it).toContain('>Ò<')
+    expect(it).toContain('>Ù<')
+    expect(it).not.toContain('overflow-x-auto')
+    expect(it).not.toContain('overflow-x-scroll')
   })
 
   test('each language renders 3 letter data-pad-row rows', () => {
@@ -45,7 +59,7 @@ describe('Keyboard render (#138 Avery W4)', () => {
       const html = renderPad(lang)
       const rows = html.match(/data-pad-row/g)?.length ?? 0
       // Letter rows are always 3; PT/ES add one more row inside the accent strip.
-      if (lang === 'pt' || lang === 'es' || lang === 'fr') {
+      if (lang === 'pt' || lang === 'es' || lang === 'fr' || lang === 'it') {
         expect(rows).toBe(4)
       } else {
         expect(rows).toBe(3)

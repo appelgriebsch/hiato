@@ -1,13 +1,13 @@
 /** Pack / lemma types (ADR 0006, 0023, 0027). */
 
-export type PackLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
+export type PackLang = 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it'
 
 /** All CEFR codes the app can address. */
 export const PACK_CEFR_LEVELS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] as const
 export type PackCefr = (typeof PACK_CEFR_LEVELS)[number]
 
-/** Display order matches G0 LanguageSelect: EN / PT / DE / ES, then FR (ADR 0040). */
-export const PACK_LANGS: PackLang[] = ['en', 'pt', 'de', 'es', 'fr']
+/** Display order: EN / PT / DE / ES, then FR, then IT (ADR 0040). */
+export const PACK_LANGS: PackLang[] = ['en', 'pt', 'de', 'es', 'fr', 'it']
 
 /** Shipped CEFR bands in the picker, precache, purge, and pack completeness. */
 export const PACK_CEFRS = [
@@ -50,7 +50,7 @@ export interface WordPack {
 }
 
 export function isPackLang(v: unknown): v is PackLang {
-  return v === 'en' || v === 'de' || v === 'es' || v === 'pt' || v === 'fr'
+  return typeof v === 'string' && (PACK_LANGS as readonly string[]).includes(v)
 }
 
 export function isPackCefr(v: unknown): v is PackCefr {

@@ -11,6 +11,8 @@ const FR_VARIANT = /\bvariante de\s+\p{Lu}/u
 // (MARI, AMIE, AMOUR) stays a common noun.
 const FR_BARE_PERSON =
   /^(?:un |une )?(?:garçon|jeune fille|jeune femme|homme(?: italien)?|femme(?: biblique)?)\.?$/i
+const IT =
+  /\bcognome\b|\bnome proprio\b|\bnomi propri\b|\bnome di battesimo\b|\bnome di persona\b|\bprenome\b/i
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i
@@ -29,6 +31,7 @@ export function isPersonNameGloss(
   if (code === 'fr') {
     return FR.test(g) || FR_VARIANT.test(g) || FR_BARE_PERSON.test(g.trim())
   }
+  if (code === 'it') return IT.test(g)
   if (code === 'en') {
     if (EN_NAME.test(g)) return true
     return EN_PROPER.test(g) && EN_PERSON.test(g)
@@ -38,6 +41,7 @@ export function isPersonNameGloss(
     ES.test(g) ||
     DE.test(g) ||
     FR.test(g) ||
+    IT.test(g) ||
     EN_NAME.test(g) ||
     (EN_PROPER.test(g) && EN_PERSON.test(g))
   )

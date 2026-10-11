@@ -1,4 +1,5 @@
 import { withSecurityHeaders } from '../../src/deploy/harden'
+import { PACK_ASSET_PATH_RE } from '../../src/packs/schema'
 
 /**
  * GET /packs/* — serve shipped JSON, 404 anything else.
@@ -8,11 +9,8 @@ import { withSecurityHeaders } from '../../src/deploy/harden'
  * Keep `/packs/*` in `public/_routes.json` include (with `/api/*` only).
  * `_headers` is not applied to a Function response, so security headers are set here.
  */
-const PACK_JSON_PATH =
-  /^\/packs\/(?:en|de|es|pt|fr)\/(?:a1|a2|b1|b2|c1|c2)\.json$/
-
 export function isPackJsonPath(pathname: string): boolean {
-  return PACK_JSON_PATH.test(pathname)
+  return PACK_ASSET_PATH_RE.test(pathname)
 }
 
 function notFound(): Response {
