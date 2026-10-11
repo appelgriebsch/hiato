@@ -179,8 +179,20 @@ describe('stem spoiler gate (#179 C1)', () => {
   test('baseline is per pack and shrink-only', () => {
     const L = [{ word: 'SERATA', gloss: 'tempo della sera' }, { word: 'CASA', gloss: 'dove si abita' }]
     expect(stemSpoilerErrors('it/a2.json', L, {}).length).toBe(1)
-    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA'] })).toEqual([])
-    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA', 'CASA'] })[0]).toContain('stale')
+    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': { SERATA: ['sera'] } })).toEqual([])
+    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': { SERATA: ['sera'], CASA: ['casa'] } })[0]).toContain('stale')
+  })
+  test('#184 W3: a new leak on an exempted lemma still fails', async () => {
+    const { readFileSync } = await import('node:fs')
+    const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
+    const pack = JSON.parse(readFileSync(`${import.meta.dir}/../public/packs/de/a1.json`, 'utf8'))
+    const L = pack.lemmas.find((x: { word: string }) => x.word === 'FAHREN')
+    expect(base['de/a1.json'].FAHREN?.length).toBeGreaterThan(0)
+    const mutated = pack.lemmas.map((x: { word: string; gloss: string }) =>
+      x === L ? { ...x, gloss: `${x.gloss} Fahrer Fahrt` } : x)
+    const errs = stemSpoilerErrors('de/a1.json', mutated, base)
+    expect(errs.length).toBe(1)
+    expect(errs[0]).toContain('fahrer')
   })
   test('every shipped pack passes; FR and IT have no baseline (#181)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
@@ -195,6 +207,16 @@ describe('stem spoiler gate (#179 C1)', () => {
 })
 
 describe('stem gate widening (#184 W2)', () => {
+  test('#184 W4: unrelated roots pass, real give-aways still fail', () => {
+    for (const [lemma, text] of [['CONTRAT', 'contre'], ['TEMPÊTE', 'temps'], ['CARTON', 'carte'], ['PONTIFE', 'pont']]) {
+      expect(stemSpoilerTokens(text!, lemma!)).toEqual([])
+    }
+    for (const [lemma, text] of [
+      ['MARIER', 'mariage'], ['SOUVENIR', 'souvient'], ['SÉCHOIR', 'sécher'], ['COLLAGE', 'coller'],
+      ['SEXUEL', 'sexualité'], ['POURQUOI', 'pour'], ['PRESQUE', 'près'], ['PLUSIEURS', 'plus'],
+      ['LONGTEMPS', 'longuement'], ['VERRAIENT', 'verront'], ['OUVRAI', 'ouvris'],
+    ]) expect(stemSpoilerTokens(text!, lemma!).length).toBe(1)
+  })
   test('4-letter shared prefix flags 6+ letter lemmas', () => {
     expect(stemSpoilerTokens('unir par le mariage', 'MARIER')).toEqual(['mariage'])
     expect(stemSpoilerTokens('un homme se souvient', 'SOUVENIR')).toEqual(['souvient'])
