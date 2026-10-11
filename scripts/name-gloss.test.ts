@@ -147,3 +147,33 @@ describe('isItNameOrPlaceGloss (#178)', () => {
     ]) expect(isItNameOrPlaceGloss(g)).toBe(false)
   })
 })
+
+describe('IT gate widening (#179 W2, W3)', () => {
+  test('period names after "di" are not people or places', () => {
+    for (const g of [
+      'pittore del Novecento',
+      'poeta del Rinascimento',
+      're del Medioevo',
+      "scrittore dell'Ottocento",
+      'filosofo del Settecento',
+      'cantante del Duemila',
+    ]) expect(isItNameOrPlaceGloss(g)).toBe(false)
+  })
+  test('nationalities and deities flag', () => {
+    for (const g of [
+      'pittore fiammingo',
+      'scrittore olandese',
+      'santo svizzero',
+      're polacco',
+      'dio della guerra',
+      "dea dell'amore",
+    ]) expect(isItNameOrPlaceGloss(g)).toBe(true)
+  })
+  test('dropped IT proper nouns are denylisted whatever the gloss', async () => {
+    const { isDeniedLemma } = await import('./lemma-denylist')
+    for (const w of ['FRANCIA', 'INDIA', 'ANKARA', 'SUZANNE', 'VALENTINA', 'VILMA', 'KANT'])
+      expect(isDeniedLemma(w, undefined, 'it')).toBe(true)
+    expect(isDeniedLemma('FRANCIA', undefined, 'es')).toBe(false)
+    expect(isDeniedLemma('ROSA', undefined, 'it')).toBe(false)
+  })
+})

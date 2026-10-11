@@ -50,8 +50,13 @@ const IT_PERSON_ROLE =
 const IT_PLACE =
   '(?:città|cittadina|paese|stato|regione|capitale|fiume|isola|arcipelago|provincia|nazione|lago|monte)'
 const IT_ORIGIN =
-  '(?:storic[oaie]|biblic[oaie]|greco|greca|grec[ih]e|romano|romana|roman[ie]|latino|latina|tedesc[oa]|tedeschi|tedesche|austriac[oa]|frances[ei]|ingles[ei]|britannic[oa]|american[oaie]|italian[oaie]|spagnol[oaie]|russ[oaie]|europe[oaie]|asiatic[oa]|african[oaie]|brasilian[oaie]|cines[ei]|giappones[ei]|indian[oaie]|turc[oa]|egizi[oa]|ebre[oa]|arab[oa]|scozzes[ei]|irlandes[ei]|ottoman[oa]|sovietic[oa])'
-const IT_OF = "(?:di|del|della|dello|dei|degli|delle|dell['’]|d['’])\\s*\\p{Lu}"
+  '(?:storic[oaie]|biblic[oaie]|greco|greca|grec[ih]e|romano|romana|roman[ie]|latino|latina|tedesc[oa]|tedeschi|tedesche|austriac[oa]|frances[ei]|ingles[ei]|britannic[oa]|american[oaie]|italian[oaie]|spagnol[oaie]|russ[oaie]|europe[oaie]|asiatic[oa]|african[oaie]|brasilian[oaie]|cines[ei]|giappones[ei]|indian[oaie]|turc[oa]|egizi[oa]|ebre[oa]|arab[oa]|scozzes[ei]|irlandes[ei]|ottoman[oa]|sovietic[oa]|fiamming(?:o|a|hi|he)|olandes[ei]|svizzer[oaie]|polacc(?:o|a|hi|he)|belg[aio]|portoghes[ei]|svedes[ei]|norveges[ei]|danes[ei]|ungheres[ei]|persian[oaie]|etrusc(?:o|a|hi|he))'
+// Period names are capitalised but are not people or places (#179 W3).
+const IT_PERIOD =
+  '(?:Duecento|Trecento|Quattrocento|Cinquecento|Seicento|Settecento|Ottocento|Novecento|Duemila|Mille|Medioevo|Rinascimento|Risorgimento|Illuminismo|Romanticismo|Barocco|Rococò|Neolitico|Paleolitico)(?!\\p{L})'
+const IT_OF = `(?:di|del|della|dello|dei|degli|delle|dell['’]|d['’])\\s*(?!${IT_PERIOD})\\p{Lu}`
+// "dio della guerra", "dea dell'amore": one named deity (#179 W3).
+const IT_DEITY = /(?<!\p{L})(?:dio|dea) (?:del|della|dello|dei|degli|delle|dell['’])\s*\p{L}/u
 const IT_PERSON = new RegExp(
   `(?<!\\p{L})${IT_PERSON_ROLE} (?:${IT_ORIGIN}(?!\\p{L})|${IT_OF})`,
   'u',
@@ -69,7 +74,7 @@ export function isItNameOrPlaceGloss(gloss: string | undefined | null): boolean 
   const g = gloss.normalize('NFC')
   // Case-sensitive "di <Capitalised>"; only the gloss's first letter is folded.
   const h = g.charAt(0).toLowerCase() + g.slice(1)
-  return IT.test(h) || IT_BARE_NAME.test(h) || IT_PERSON.test(h) || IT_PLACE_RE.test(h)
+  return IT.test(h) || IT_BARE_NAME.test(h) || IT_PERSON.test(h) || IT_PLACE_RE.test(h) || IT_DEITY.test(h)
 }
 
 const EN_NAME =
