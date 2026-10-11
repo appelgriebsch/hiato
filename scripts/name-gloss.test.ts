@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { isFrPersonGloss, isPersonNameGloss } from './name-gloss'
+import { isFrPersonGloss, isItNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 
 describe('isFrPersonGloss (#175)', () => {
   test('flags one named person', () => {
@@ -104,5 +104,46 @@ describe('isPersonNameGloss', () => {
     expect(isPersonNameGloss('variante de dialecte chinois', 'fr')).toBe(false)
     expect(isPersonNameGloss('Un frutto con il nocciolo.', 'it')).toBe(false)
     expect(isPersonNameGloss('Il nome della città.', 'it')).toBe(false)
+  })
+})
+
+describe('isItNameOrPlaceGloss (#178)', () => {
+  test('flags named people and places', () => {
+    for (const g of [
+      'una donna che si chiama così', // SUZANNE, VALENTINA
+      'Forma femminile del nome mago.', // MAGDA
+      'un nome proprio di persona', // SIMO
+      'un generale tedesco noto per le campagne in Africa', // ROMMEL
+      'compositore austriaco di musica classica.', // SCHUBERT
+      'filosofo tedesco del Settecento', // KANT
+      're di Francia',
+      'regina d’Inghilterra',
+      'attrice americana',
+      'Grande paese dell’Asia meridionale.', // INDIA
+      'Stato dell’Europa occidentale con capitale Parigi.', // FRANCIA
+      'la capitale della Turchia', // ANKARA
+      'Città della Scozia situata sulle rive del fiume Clyde.', // GLASGOW
+      'città brasiliana affacciata sull’oceano', // JANEIRO
+      "isola dell'oceano Indiano nota per il tè", // LANKA
+      'arcipelago dell’Asia sud-orientale', // FILIPPINE
+      'uno stato del Caucaso', // GEORGIA
+    ]) expect(isItNameOrPlaceGloss(g)).toBe(true)
+  })
+  test('keeps role-word and place-word common nouns', () => {
+    for (const g of [
+      'persona che vende fiori e piante', // FIORAIO
+      'parte di una città', // QUARTIERE
+      'centro grande con molte strade e case', // CITTÀ
+      'piccolo centro con poche case', // PAESE
+      'cantante d’opera',
+      'attore di teatro',
+      'regina di bellezza',
+      'uno stato d’animo',
+      'capo del comune', // SINDACO
+      'lingua parlata a Londra e negli Stati Uniti', // INGLESE
+      'relativo alla Germania o alla sua lingua', // TEDESCO
+      'seguace di una chiesa protestante nata nel Settecento', // METODISTA
+      'detto di lettera grande, come quella all’inizio della frase', // MAIUSCOLO
+    ]) expect(isItNameOrPlaceGloss(g)).toBe(false)
   })
 })

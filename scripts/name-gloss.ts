@@ -61,7 +61,7 @@ const IT_PLACE_RE = new RegExp(
   'u',
 )
 // "una donna che si chiama così", "forma femminile del nome mago".
-const IT_BARE_NAME = /\bsi chiama così\b|\bforma (?:femminile|maschile) del nome\b/i
+const IT_BARE_NAME = /(?<!\p{L})si chiama così(?!\p{L})|(?<!\p{L})forma (?:femminile|maschile) del nome(?!\p{L})/iu
 
 /** IT glosses that name one person or one place (#178). */
 export function isItNameOrPlaceGloss(gloss: string | undefined | null): boolean {
