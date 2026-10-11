@@ -45,12 +45,25 @@ describe('hangmanOk + foldKey', () => {
     expect(hangmanOk('de', 'Straße')).toBe('STRAßE')
     expect(hangmanOk('es', 'niño')).toBe('NIÑO')
     expect(hangmanOk('pt', 'maçã')).toBe('MAÇÃ')
+    expect(hangmanOk('fr', 'cœur')).toBe('CŒUR')
+    expect(hangmanOk('fr', 'jusqu')).toBeNull()
+    expect(hangmanOk('fr', 'aujourd’hui')).toBeNull()
+    expect(hangmanOk('fr', 'cæcum')).toBeNull()
+    expect(hangmanOk('fr', 'où')).toBeNull()
+    const deny = new Set(['fr BITE', 'KILL'])
+    expect(hangmanOk('en', 'BITE', deny)).toBe('BITE')
+    expect(hangmanOk('fr', 'BITE', deny)).toBeNull()
+    expect(hangmanOk('fr', 'QUEUE', deny)).toBe('QUEUE')
   })
 
   test('DE ß/SS fold collides STRAßE with STRASSE', () => {
     expect(foldKey('de', 'STRAßE')).toBe(foldKey('de', 'STRASSE'))
     expect(foldKey('de', 'straße')).toBe('STRASSE')
     expect(foldKey('en', 'STRAßE')).not.toBe(foldKey('en', 'STRASSE'))
+    expect(foldKey('fr', 'ÉVÉNEMENT')).toBe(foldKey('fr', 'ÉVÈNEMENT'))
+    expect(foldKey('fr', 'MÛR')).not.toBe(foldKey('fr', 'MUR'))
+    expect(foldKey('fr', 'SÛR')).not.toBe(foldKey('fr', 'SUR'))
+    expect(foldKey('fr', 'PÊCHE')).not.toBe(foldKey('fr', 'PÉCHÉ'))
   })
 })
 
@@ -141,5 +154,20 @@ describe('write-guard', () => {
     expect(() => assertPackWriteAllowed('public/packs/en/b2.json', 'b2')).not.toThrow()
     expect(() => assertPackWriteAllowed('public/packs/es/c1.json', 'c1')).not.toThrow()
     expect(() => assertPackWriteAllowed('public/packs/de/c2.json', 'c2')).not.toThrow()
+  })
+
+  test('fr bootstrap may create missing fr/a1–b1 once; other langs stay frozen', () => {
+    expect(() =>
+      assertPackWriteAllowed('public/packs/fr/a1.json', 'a1', { frBootstrap: true }),
+    ).not.toThrow()
+    expect(() =>
+      assertPackWriteAllowed('public/packs/fr/b1.json', 'b1', { frBootstrap: true }),
+    ).not.toThrow()
+    expect(() =>
+      assertPackWriteAllowed('public/packs/en/a1.json', 'a1', { frBootstrap: true }),
+    ).toThrow(/refuses to overwrite/i)
+    expect(() => assertPackWriteAllowed('public/packs/fr/a1.json', 'a1')).toThrow(
+      /refuses to overwrite/i,
+    )
   })
 })

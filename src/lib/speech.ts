@@ -65,6 +65,7 @@ export const SPEECH_LANG_PREFIX: Record<PackLang, string> = {
   de: 'de',
   es: 'es',
   pt: 'pt',
+  fr: 'fr',
 }
 
 /** Normalize voice.lang for prefix compare (underscores → hyphens). */
@@ -81,6 +82,7 @@ const PACK_DEFAULT_UTTERANCE_LANG: Record<PackLang, string> = {
   de: 'de-DE',
   es: 'es-ES',
   pt: 'pt-BR',
+  fr: 'fr-FR',
 }
 
 /**
@@ -221,7 +223,7 @@ export function unlockSpeechGesture(opts: SpeakLemmaOptions = {}): boolean {
 /**
  * Utterance lang: the voice tag with underscores turned into hyphens.
  * A bare language (`en`, `de`) is not hyphenated BCP-47, so use the pack
- * default (`en-US`, `de-DE`, `es-ES`, `pt-BR`).
+ * default (`en-US`, `de-DE`, `es-ES`, `pt-BR`, `fr-FR`).
  */
 function utteranceLangFromVoice(voiceLang: string, packLang: PackLang): string {
   const hyphenated = voiceLang.trim().replace(/_/g, '-')

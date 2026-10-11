@@ -31,7 +31,8 @@ export const LETTER_PADS: Record<PackLang, LetterPad> = {
       ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ç'],
       ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
     ],
-    accentStrip: ['Á', 'À', 'Ã', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú'],
+    // Â is on the strip because shipped lemmas use it (DISTÂNCIA).
+    accentStrip: ['Á', 'À', 'Â', 'Ã', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú'],
   },
   // DE option A: Ü / Ö / Ä stay on the QWERTZ letter rows — no accent strip.
   de: {
@@ -49,6 +50,15 @@ export const LETTER_PADS: Record<PackLang, LetterPad> = {
       ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
     ],
     accentStrip: ['Á', 'É', 'Í', 'Ó', 'Ú', 'Ü'],
+  },
+  // AZERTY. Ç and Œ sit on row 3 (Œ is one tile). No Æ / Ÿ / Ù / Ü (ADR 0040).
+  fr: {
+    rows: [
+      ['A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+      ['Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'],
+      ['W', 'X', 'C', 'V', 'B', 'N', 'Ç', 'Œ'],
+    ],
+    accentStrip: ['À', 'Â', 'É', 'È', 'Ê', 'Ë', 'Î', 'Ï', 'Ô', 'Û'],
   },
 }
 

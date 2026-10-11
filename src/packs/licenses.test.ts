@@ -13,9 +13,9 @@ function bandBlob(
 }
 
 describe('PACK_LICENSES About bands (ADR 0029)', () => {
-  test('four language cards in picker order', () => {
+  test('language cards in picker order', () => {
     expect(PACK_LICENSES.map((p) => p.lang)).toEqual([...PACK_LANGS])
-    expect(PACK_LICENSES).toHaveLength(4)
+    expect(PACK_LICENSES).toHaveLength(5)
   })
 
   test('EN A1–B2 is CEFR-J citation, not CC0; C1–C2 are SA not CC0', () => {
@@ -52,6 +52,19 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
       expect(low).toMatch(/natema/)
       expect(low).not.toMatch(/not Goethe lists/)
     }
+  })
+
+  test('FR is SA frequency bands at every level, not DELF/DALF', () => {
+    const fr = PACK_LICENSES.find((p) => p.lang === 'fr')
+    expect(fr?.title).toBe('Français')
+    expect(fr?.bands).toHaveLength(1)
+    const blob = bandBlob('fr', 'A1–C2')
+    expect(blob.toUpperCase()).toContain('CC-BY-SA')
+    expect(blob.toUpperCase()).not.toContain('CC0')
+    expect(blob).toMatch(/wordhoard/)
+    expect(blob).toMatch(/frequency/)
+    expect(blob).toMatch(/not DELF or DALF/)
+    expect(blob).toMatch(/github\.com\/natema\/wordhoard/)
   })
 
   test('PT is SA at every band; C-levels are frequency not CAPLE', () => {

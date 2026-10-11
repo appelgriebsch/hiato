@@ -104,4 +104,15 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
       ],
     },
   ]),
+  fromBands('fr', 'Français', [
+    {
+      levels: 'A1–C2',
+      license: 'CC-BY-SA-4.0 (wordhoard frequency-rank bands)',
+      notes: [
+        'French lemmas at every level are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0). They are not DELF or DALF lists (ADR 0040).',
+        'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
+        'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy.',
+      ],
+    },
+  ]),
 ]

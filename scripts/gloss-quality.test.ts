@@ -60,6 +60,8 @@ describe('isWrongLanguageGloss', () => {
     expect(isWrongLanguageGloss('pt', 'to stop activity and relax.')).toBe(
       true,
     )
+    expect(isWrongLanguageGloss('fr', 'to move fast on foot')).toBe(true)
+    expect(isWrongLanguageGloss('fr', 'Un lieu où l’on dort.')).toBe(false)
   })
 
   test('keeps same-language learner copy', () => {
@@ -73,7 +75,7 @@ describe('isWrongLanguageGloss', () => {
 describe('englishGlossByMembership', () => {
   const en = new Set(['state', 'rest', 'when', 'eyes', 'closed', 'mind', 'awake'])
   const es = new Set(['lugar', 'donde', 'duerme'])
-  const isWord = (lang: 'en' | 'de' | 'es' | 'pt', word: string) => {
+  const isWord = (lang: 'en' | 'de' | 'es' | 'pt' | 'fr', word: string) => {
     const w = word.toLowerCase()
     if (lang === 'en') return en.has(w)
     if (lang === 'es') return es.has(w)

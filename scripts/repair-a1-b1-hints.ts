@@ -47,6 +47,7 @@ const LANG_NAME: Record<PackLang, string> = {
   de: 'German',
   es: 'Spanish',
   pt: 'Portuguese',
+  fr: 'French',
 }
 
 const GLOSS_STYLE: Record<PackLang, string> = {
@@ -54,10 +55,20 @@ const GLOSS_STYLE: Record<PackLang, string> = {
   de: 'Schreib ausschließlich auf Deutsch — kein Englisch. Bevorzuge "ein/eine/der …" oder einen Infinitiv ohne "to".',
   es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
   pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
+  fr: 'Écris uniquement en français — jamais en anglais. Préfère « un/une/le/la … » ou un infinitif. Écris œ, pas oe.',
 }
 
 /** Easy common filler examples for ceiling prompts (language + band). */
 function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
+  if (lang === 'fr') {
+    if (cefr === 'a1') {
+      return 'un, une, le, la, et, ou, avec, de, en, est, sont, homme, femme, enfant, gens, chose, lieu, maison, eau, jour, main, livre, ami, grand, petit, bon, faire, voir, aller, manger'
+    }
+    if (cefr === 'a2') {
+      return 'un, une, le, la, et, ou, avec, de, en, est, sont, homme, femme, enfant, gens, chose, lieu, maison, eau, jour, corps, grand, petit, bon, faire, voir, aller, manger, parler'
+    }
+    return 'un, une, le, la, et, ou, avec, de, en, est, sont, homme, femme, enfant, gens, chose, lieu, maison, eau, faire, voir, aller'
+  }
   if (lang === 'de') {
     // PERSON/DING/SACHE are A2+; TEIL stems to TEILEN (A2) — never suggest them for A1.
     if (cefr === 'a1') {
@@ -93,6 +104,9 @@ function easyFillerExamples(lang: PackLang, cefr: PackCefr = 'a1'): string {
 }
 
 function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
+  if (lang === 'fr') {
+    return 'véhicule, structure, récipient, organe, masculin, féminin, romantique, température, activité, obligation, prénom, nom propre'
+  }
   if (lang === 'de') {
     const always =
       'Fahrzeug, Struktur, Behälter, Organ, männlich, weiblich, Geschwister, romantisch, Temperatur, geröstet, bunt, geheim, spektakulär, Triumph, Angelegenheit, Gegenstand'
@@ -319,7 +333,7 @@ function saveSynCache(lang: string, cache: SynCache) {
 
 function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string } {
   const posix = rel.replace(/\\/g, '/').replace(/^public\/packs\//, '')
-  const m = posix.match(/^(en|de|es|pt)\/(a1|a2|b1|b2|c1|c2)\.json$/)
+  const m = posix.match(/^(en|de|es|pt|fr)\/(a1|a2|b1|b2|c1|c2)\.json$/)
   if (!m) throw new Error(`bad rel: ${rel}`)
   if (FORBIDDEN.has(m[2]!)) {
     throw new Error(`refusing to repair ${posix} (b2/c1/c2 out of scope)`)
@@ -333,7 +347,7 @@ function parseRel(rel: string): { lang: PackLang; cefr: PackCefr; file: string }
 
 function loadAllSnapshots(): { rel: string; pack: WordPack }[] {
   const out: { rel: string; pack: WordPack }[] = []
-  for (const lang of ['en', 'de', 'es', 'pt']) {
+  for (const lang of ['en', 'de', 'es', 'pt', 'fr']) {
     for (const cefr of ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']) {
       const file = path.join(PACKS, lang, `${cefr}.json`)
       if (!existsSync(file)) continue
@@ -392,7 +406,7 @@ function filterChipsInCeiling(
   chips: string[],
   ctx: ReturnType<typeof ceilingContext>,
 ): string[] {
-  const filtered = filterSynonymChips(lemma, chips, DENY)
+  const filtered = filterSynonymChips(lemma, chips, DENY, lang)
   return filtered.filter((chip) => {
     const hits = violationsForLemma(lang, cefr, '', [chip], ctx)
     return hits.length === 0
@@ -553,7 +567,7 @@ function localRescueGloss(
   word: string,
   ctx: ReturnType<typeof ceilingContext>,
 ): string | null {
-  if (lang !== 'de' && lang !== 'pt' && lang !== 'es') return null
+  if (lang !== 'de' && lang !== 'pt' && lang !== 'es' && lang !== 'fr') return null
   const upper = nfcUpper(word)
   const candidates: string[] = []
   if (lang === 'de') {
@@ -647,6 +661,26 @@ function localRescueGloss(
       'algo que a gente vê',
       'algo na casa',
       'algo no corpo',
+    )
+  } else if (lang === 'fr') {
+    candidates.push(
+      'on le fait',
+      'on peut le voir',
+      'on peut l’entendre',
+      'un homme',
+      'une femme',
+      'un enfant',
+      'à la maison',
+      'le jour',
+      'la main',
+      'un ami',
+      'très bon',
+      'très grand',
+      'très petit',
+      'on va là',
+      'on mange',
+      'on dit oui',
+      'on dit non',
     )
   } else {
     const hand = ES_HAND_GLOSS[cefr]?.[upper]
@@ -830,7 +864,9 @@ async function repairPack(rel: string): Promise<void> {
               : cefr === 'a2'
                 ? `For A2 NEVER write para (stems to PARIR=B1) or esta/este/esto (ESTE=B2). una is OK at A2. Never vehículo, objeto, actividad, sensación, or harder B1+ nouns. `
                 : `For B1 NEVER write esta/este/esto/estos/estas (stems to ESTE=B2). para is OK at B1. `)
-          : '') +
+          : lang === 'fr'
+            ? `Write French only (ADR 0030) — no English glosses or English synonym chips. Écris œ, pas oe. Synonyms have no article and no elision. Never define a lemma as a prénom, a nom de famille, or a nom propre. `
+            : '') +
     `Example easy ${cefr.toUpperCase()}-or-easier ${langName} lemmas you may use: ${easyWords}.`
 
   const BATCH = 40
@@ -986,7 +1022,7 @@ async function repairPack(rel: string): Promise<void> {
   }
 
   // If coverage would fall under 80%, ask again for in-ceiling chips on lemmas that lost last chip
-  let coverage = synonymCoverageRatio(pack.lemmas, DENY)
+  let coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   let guard = 0
   while (coverage < SYNONYM_COVERAGE_FLOOR && guard < 4) {
     guard++
@@ -1025,7 +1061,7 @@ async function repairPack(rel: string): Promise<void> {
       }
       saveSynCache(lang, synCache)
     }
-    coverage = synonymCoverageRatio(pack.lemmas, DENY)
+    coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   }
 
   if (coverage < SYNONYM_COVERAGE_FLOOR) {
@@ -1119,7 +1155,7 @@ async function repairPack(rel: string): Promise<void> {
     L.synonyms = filterChipsInCeiling(lang, cefr, L.word, L.synonyms ?? [], ctx)
     if (L.synonyms.length === 0) L.synonyms = undefined
   }
-  coverage = synonymCoverageRatio(pack.lemmas, DENY)
+  coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   if (coverage < SYNONYM_COVERAGE_FLOOR) {
     throw new Error(
       `${rel}: after final chip drop, coverage ${(coverage * 100).toFixed(1)}% < floor`,

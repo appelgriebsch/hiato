@@ -18,7 +18,7 @@ export function packLangFromUrl(url: string): PackLang | null {
   } catch {
     /* use raw */
   }
-  const m = path.match(/\/packs\/(en|de|es|pt)\//)
+  const m = path.match(/\/packs\/([a-z]{2})\//)
   if (!m) return null
   return isPackLang(m[1]) ? m[1] : null
 }

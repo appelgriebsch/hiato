@@ -22,6 +22,7 @@ type ProvenanceSlot =
   | 'de-high'
   | 'es-low'
   | 'es-high'
+  | 'fr-all'
 
 const SOURCE_COPY: Record<PackLang, Record<SourceKey, string>> = {
   en: {
@@ -43,6 +44,12 @@ const SOURCE_COPY: Record<PackLang, Record<SourceKey, string>> = {
     wordhoard: 'wordhoard',
   },
   es: {
+    cefrj: 'CEFR-J',
+    octanove: 'Octanove',
+    frequencywords: 'FrequencyWords',
+    wordhoard: 'wordhoard',
+  },
+  fr: {
     cefrj: 'CEFR-J',
     octanove: 'Octanove',
     frequencywords: 'FrequencyWords',
@@ -71,6 +78,11 @@ const METHOD_COPY: Record<PackLang, Record<MethodKey, string>> = {
     'tagged-addon': 'complemento etiquetado',
     'frequency-rank': 'por frecuencia',
   },
+  fr: {
+    'tagged-syllabus': 'syllabus étiqueté',
+    'tagged-addon': 'complément étiqueté',
+    'frequency-rank': 'par fréquence',
+  },
 }
 
 const PACK_INFO_COPY: Record<PackLang, string> = {
@@ -78,6 +90,7 @@ const PACK_INFO_COPY: Record<PackLang, string> = {
   pt: 'Info do pacote',
   de: 'Paket-Info',
   es: 'Info del paquete',
+  fr: 'Info du paquet',
 }
 
 /** Slot → short keys (license still verified against the PACK_LICENSES band). */
@@ -108,6 +121,11 @@ const SLOT_META: Record<
     license: 'CC-BY-SA',
   },
   'es-high': {
+    source: 'wordhoard',
+    method: 'frequency-rank',
+    license: 'CC-BY-SA',
+  },
+  'fr-all': {
     source: 'wordhoard',
     method: 'frequency-rank',
     license: 'CC-BY-SA',
@@ -144,6 +162,7 @@ export function provenanceBand(
 
 function provenanceSlot(lang: PackLang, cefr: PackCefr): ProvenanceSlot {
   if (lang === 'pt') return 'pt-all'
+  if (lang === 'fr') return 'fr-all'
   if (lang === 'en') {
     if (cefr === 'c1' || cefr === 'c2') return 'en-high'
     return 'en-a1b2'

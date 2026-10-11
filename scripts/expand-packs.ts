@@ -17,6 +17,7 @@ import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
+import { selectFrBands, type FrCefr } from './fr-pack'
 import {
   DE_ES_BANDS,
   EXISTING_CEFRS,
@@ -34,6 +35,7 @@ import {
   isNewCefr,
   loadFoldKeysFromPackLemmas,
 } from './pack-select'
+import { PACK_CEFR_LEVELS, type PackCefr } from '../src/packs/schema'
 
 const ROOT = path.join(import.meta.dir, '..')
 const DATA = path.join(ROOT, 'scripts/data')
@@ -70,13 +72,14 @@ DANKE GRACIAS THANKS SIR HAUSE DESTA NESTE NESTA DESTES DESTAS TIVE SINTO ESPERO
 `.trim().split(/\s+/).map(nfcUpper),
 )
 
-function okLemma(lang: Lang, raw: string): string | null {
+function okLemma(lang: Lang, raw: string, skipNameList = true): string | null {
   const word = hangmanOk(lang, raw, DENY)
   if (!word || EXTRA_STOP.has(word)) return null
   if (!isWordOfLang(lang, word)) return null
   // B2–C2 frequency bands dump proper names; skip the #24 name list entirely
   // (A1–B1 still keep WILL/MARK with a common-noun gloss).
-  if (onNameList(word, NAMES)) return null
+  // FR keeps the name at every level unless the gloss is a person-name gloss.
+  if (skipNameList && lang !== 'fr' && onNameList(word, NAMES)) return null
   return word
 }
 
@@ -330,6 +333,9 @@ function sourceCandidates(lang: Lang, ptAll: string[] | null): Record<NewCefr, s
       c2: ptBandSlice(all, 'c2'),
     }
   }
+  if (lang === 'fr') {
+    throw new Error('fr bands come from selectFrBands, not sourceCandidates')
+  }
   return parseWordhoardBands(lang)
 }
 
@@ -356,6 +362,7 @@ const LANG_NAME: Record<Lang, string> = {
   de: 'German',
   es: 'Spanish',
   pt: 'Portuguese',
+  fr: 'French',
 }
 
 const GLOSS_STYLE: Record<Lang, string> = {
@@ -363,6 +370,7 @@ const GLOSS_STYLE: Record<Lang, string> = {
   de: 'Schreib ausschließlich auf Deutsch — kein Englisch. Bevorzuge "ein/eine/der …" oder einen Infinitiv ohne "to".',
   es: 'Escribe únicamente en español — nunca inglés. Prefiere "un/una/el …" o un infinitivo sin "to".',
   pt: 'Escreve apenas em português — nunca inglês. Prefere "um/uma/o/a …" ou um infinitivo sem "to".',
+  fr: 'Écris uniquement en français — jamais en anglais. Préfère « un/une/le/la … » ou un infinitif. Écris œ, pas oe.',
 }
 
 function glossRejected(lang: Lang, word: string, gloss: string | undefined): boolean {
@@ -515,16 +523,16 @@ async function generateGlosses(
   }
 }
 
-function cleanSynonyms(lemma: string, raw: unknown): string[] {
+function cleanSynonyms(lang: Lang, lemma: string, raw: unknown): string[] {
   const list = Array.isArray(raw)
     ? raw.filter((x): x is string => typeof x === 'string')
     : typeof raw === 'string'
       ? raw.split(/[,;|/]/)
       : []
-  return filterSynonymChips(lemma, list, DENY)
+  return filterSynonymChips(lemma, list, DENY, lang)
 }
 
-function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution: string[] } {
+function attribution(lang: Lang, cefr: PackCefr): { license: string; attribution: string[] } {
   const level = cefr.toUpperCase()
   if (lang === 'en' && cefr === 'b2') {
     return {
@@ -545,6 +553,19 @@ function attribution(lang: Lang, cefr: NewCefr): { license: string; attribution:
         `Hiato EN ${level} learner pack — original glosses and synonym chips (2026).`,
         'English C1/C2 lemmas selected from the Octanove Vocabulary Profile (CC-BY-SA-4.0) as a tagged add-on above CEFR-J.',
         'Creator: Octanove Labs. Source: https://github.com/openlanguageprofiles/olp-en-cefrj',
+        'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
+      ],
+    }
+  }
+  if (lang === 'fr') {
+    const level = cefr.toUpperCase()
+    return {
+      license:
+        'CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)',
+      attribution: [
+        `Hiato FR ${level} learner pack — original glosses and synonym chips (2026).`,
+        'FR A1–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not DELF or DALF lists (ADR 0040).',
+        'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).',
       ],
     }
@@ -594,7 +615,7 @@ function buildLemmas(
     if (glossRejected(lang, w, gloss)) {
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
-    const synonyms = cleanSynonyms(w, synCache[w])
+    const synonyms = cleanSynonyms(lang, w, synCache[w])
     lemmas.push({
       word: w,
       gloss,
@@ -608,32 +629,47 @@ function parseArgs(argv: string[]) {
   let dryRun = false
   let repairGloss = false
   let forceGloss = false
-  let levels: NewCefr[] = [...NEW_CEFRS]
-  const langs: Lang[] = [...LANGS]
+  let levelsExplicit = false
+  let levels: PackCefr[] = [...NEW_CEFRS]
+  let langs: Lang[] = [...LANGS]
   for (const a of argv) {
     if (a === '--dry-run') dryRun = true
     else if (a === '--repair-gloss') repairGloss = true
     else if (a === '--force-gloss') forceGloss = true
-    else if (a.startsWith('--levels=')) {
+    else if (a.startsWith('--lang=')) {
+      const id = a.slice('--lang='.length).trim().toLowerCase()
+      if (!['en', 'pt', 'de', 'es', 'fr'].includes(id)) {
+        throw new Error(`invalid --lang=${id}`)
+      }
+      langs = [id as Lang]
+    } else if (a.startsWith('--levels=')) {
       const parts = a
         .slice('--levels='.length)
         .split(',')
         .map((s) => s.trim().toLowerCase())
         .filter(Boolean)
-      if (parts.length === 0) throw new Error('--levels= must list at least one of b2,c1,c2')
+      if (parts.length === 0) throw new Error('--levels= must list at least one CEFR band')
       for (const p of parts) {
-        assertPackWriteAllowed(`${p}.json`, p)
-        if (!isNewCefr(p)) throw new Error(`invalid level ${p}`)
+        if (!(PACK_CEFR_LEVELS as readonly string[]).includes(p)) {
+          throw new Error(`invalid level ${p}`)
+        }
       }
-      levels = parts as NewCefr[]
+      levelsExplicit = true
+      levels = parts as PackCefr[]
     }
   }
-  return { dryRun, repairGloss, forceGloss, levels, langs }
+  return { dryRun, repairGloss, forceGloss, levels, levelsExplicit, langs }
 }
 
-function writePack(lang: Lang, cefr: NewCefr, lemmas: Lemma[]) {
+function writePack(
+  lang: Lang,
+  cefr: PackCefr,
+  lemmas: Lemma[],
+  opts?: { frBootstrap?: boolean },
+) {
   const outFile = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
-  assertPackWriteAllowed(outFile, cefr)
+  mkdirSync(path.dirname(outFile), { recursive: true })
+  assertPackWriteAllowed(outFile, cefr, opts)
   const meta = attribution(lang, cefr)
   const pack = {
     version: 3,
@@ -693,8 +729,142 @@ async function repairGlossLanguage(langs: Lang[]): Promise<void> {
   }
 }
 
+function frPacksPresent(): boolean {
+  for (const cefr of PACK_CEFR_LEVELS) {
+    if (existsSync(path.join(ROOT, 'public/packs/fr', `${cefr}.json`))) return true
+  }
+  return false
+}
+
+function packFloor(cefr: PackCefr): number {
+  return cefr === 'c2' ? 200 : 350
+}
+
+function loadFrSource(): {
+  rows: { lemma: string; pos: string; rank: number }[]
+  inflected: Set<string>
+} {
+  const db = new Database(ensureWordhoardDb(), { readonly: true })
+  try {
+    const rows = db
+      .query(
+        `SELECT lemma, pos, frequency_rank AS rank
+         FROM word
+         WHERE lang = 'fr' AND pos IN ('NOUN', 'VERB', 'ADJ', 'ADV')
+         ORDER BY frequency_rank ASC`,
+      )
+      .all() as { lemma: string; pos: string; rank: number }[]
+    const inf = db
+      .query(
+        `SELECT w.lemma AS lemma
+         FROM word w
+         JOIN word_form wf ON wf.form = w.lemma
+         JOIN word other ON other.id = wf.word_id
+         WHERE w.lang = 'fr' AND w.pos = 'VERB'
+           AND other.lang = 'fr' AND other.pos = 'VERB'
+           AND other.lemma != w.lemma`,
+      )
+      .all() as { lemma: string }[]
+    return { rows, inflected: new Set(inf.map((r) => nfcUpper(r.lemma))) }
+  } finally {
+    db.close()
+  }
+}
+
+/** One-time FR A1–C2 write. A1–B1 only when no FR pack exists yet. */
+async function runFrench(opts: {
+  dryRun: boolean
+  forceGloss: boolean
+  levels: PackCefr[]
+  levelsExplicit: boolean
+}): Promise<void> {
+  const bootstrap = !frPacksPresent()
+  let levels = [...opts.levels]
+  if (bootstrap && !opts.levelsExplicit) levels = [...PACK_CEFR_LEVELS]
+  if (!bootstrap) {
+    for (const cefr of levels) {
+      if (isExistingCefr(cefr)) {
+        throw new Error(`fr/${cefr} already exists; expand will not overwrite A1–B1`)
+      }
+    }
+  }
+  console.log(`fr: loading wordhoard (bootstrap=${bootstrap})…`)
+  const { rows, inflected } = loadFrSource()
+  console.log(`fr: ${rows.length} content rows, ${inflected.size} inflected verb lemmas`)
+  const plan = selectFrBands(rows, {
+    inflectedVerbs: inflected,
+    accept: (word) => !EXTRA_STOP.has(word) && isWordOfLang('fr', word),
+    denylist: DENY,
+    target: TARGET,
+    surplus: 40,
+  })
+  console.log(`fr: filtered ${plan.filtered}`)
+  for (const cefr of PACK_CEFR_LEVELS) {
+    console.log(
+      `fr/${cefr}: candidates ${plan.bands[cefr].length} ceiling ${plan.ceilings[cefr]}`,
+    )
+  }
+  for (const cefr of levels) {
+    const floor = packFloor(cefr)
+    if (plan.bands[cefr].length < floor) {
+      throw new Error(
+        `fr/${cefr}: ${plan.bands[cefr].length} candidates below floor ${floor}`,
+      )
+    }
+  }
+  if (opts.dryRun) {
+    console.log('dry-run: skip gloss/synonym generation and pack writes')
+    return
+  }
+
+  const glossCache = loadGlossCache('fr')
+  const synCache = loadSynonymCache('fr')
+  const glossed: Record<FrCefr, string[]> = {
+    a1: [],
+    a2: [],
+    b1: [],
+    b2: [],
+    c1: [],
+    c2: [],
+  }
+  for (const cefr of levels) {
+    const pool = plan.bands[cefr]
+    if (opts.forceGloss) {
+      for (const w of pool) delete glossCache[w]
+    }
+    await generateGlosses('fr', pool, glossCache)
+    saveGlossCache('fr', glossCache)
+    const kept: string[] = []
+    for (const w of pool) {
+      if (!hasRealGloss('fr', w, glossCache)) continue
+      kept.push(w)
+      if (kept.length >= TARGET) break
+    }
+    const floor = packFloor(cefr)
+    if (kept.length < floor) {
+      throw new Error(`fr/${cefr}: only ${kept.length} glossed lemmas (floor ${floor})`)
+    }
+    glossed[cefr] = kept
+  }
+  const needSyn = levels.flatMap((cefr) => glossed[cefr])
+  await generateSynonyms('fr', needSyn, synCache, DENY, (cache) =>
+    saveSynonymCache('fr', cache),
+  )
+  saveSynonymCache('fr', synCache)
+  for (const cefr of levels) {
+    const words = glossed[cefr]
+    const withSyn = words.filter((w) => cleanSynonyms('fr', w, synCache[w]).length > 0).length
+    const pct = words.length ? withSyn / words.length : 0
+    console.log(`fr/${cefr}: synonym coverage ${(pct * 100).toFixed(0)}%`)
+    const lemmas = buildLemmas('fr', words, glossCache, synCache)
+    writePack('fr', cefr, lemmas, {
+      frBootstrap: bootstrap && isExistingCefr(cefr),
+    })
+  }
+}
+
 async function main() {
-  const { dryRun, repairGloss, forceGloss, levels, langs } = parseArgs(
+  const { dryRun, repairGloss, forceGloss, levels, levelsExplicit, langs } = parseArgs(
     process.argv.slice(2),
   )
   await ensureDicts()
@@ -709,19 +879,33 @@ async function main() {
     return
   }
 
-  const ptAll = langs.includes('pt') ? parseFreqPt() : null
-  const writeSet = new Set<string>(levels)
+  if (langs.includes('fr')) {
+    await runFrench({ dryRun, forceGloss, levels, levelsExplicit })
+  }
+  const otherLangs = langs.filter((lang) => lang !== 'fr')
+  if (otherLangs.length === 0) return
+
+  const newLevels: NewCefr[] = []
+  for (const cefr of levels) {
+    if (!isNewCefr(cefr)) {
+      throw new Error(`--levels=${cefr} is only valid when expanding fr`)
+    }
+    newLevels.push(cefr)
+  }
+
+  const ptAll = otherLangs.includes('pt') ? parseFreqPt() : null
+  const writeSet = new Set<string>(newLevels)
 
   const selections: Record<string, Record<NewCefr, string[]>> = {}
-  for (const lang of langs) {
+  for (const lang of otherLangs) {
     const frozen = loadFrozenFoldKeys(lang, writeSet)
     const candidates = sourceCandidates(lang, ptAll)
     const byBand: Record<NewCefr, string[]> = { b2: [], c1: [], c2: [] }
-    for (const cefr of levels) byBand[cefr] = candidates[cefr]
+    for (const cefr of newLevels) byBand[cefr] = candidates[cefr]
     const assigned = assignExclusiveBands(lang, frozen, byBand, TARGET, DENY)
     selections[lang] = assigned
 
-    for (const cefr of levels) {
+    for (const cefr of newLevels) {
       const sourceOk = candidates[cefr].length
       const n = assigned[cefr].length
       console.log(
@@ -741,12 +925,12 @@ async function main() {
     return
   }
 
-  for (const lang of langs) {
+  for (const lang of otherLangs) {
     const glossCache = loadGlossCache(lang)
     const synCache = loadSynonymCache(lang)
     const needGloss = new Set<string>()
     const needSyn = new Set<string>()
-    for (const cefr of levels) {
+    for (const cefr of newLevels) {
       for (const w of selections[lang]![cefr]!) {
         if (lang !== 'en' && (forceGloss || glossRejected(lang, w, glossCache[w]))) {
           delete glossCache[w]
@@ -762,7 +946,7 @@ async function main() {
     )
     saveSynonymCache(lang, synCache)
 
-    for (const cefr of levels) {
+    for (const cefr of newLevels) {
       const selected = selections[lang]![cefr]!.filter((w) =>
         hasRealGloss(lang, w, glossCache),
       )
@@ -774,7 +958,7 @@ async function main() {
       }
       const sliced = selected.slice(0, TARGET)
       if (cefr === 'c1' || cefr === 'c2') {
-        const withSyn = sliced.filter((w) => cleanSynonyms(w, synCache[w]).length > 0).length
+        const withSyn = sliced.filter((w) => cleanSynonyms(lang, w, synCache[w]).length > 0).length
         const pct = sliced.length ? withSyn / sliced.length : 0
         if (pct < 0.8) {
           console.warn(

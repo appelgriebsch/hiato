@@ -35,12 +35,13 @@ const LOCK_PACKAGES = [
   'dictionary-de',
   'dictionary-en',
   'dictionary-es',
+  'dictionary-fr',
   'dictionary-pt',
   'dictionary-pt-pt',
   'nspell',
 ] as const
 
-export type StemLang = 'en' | 'de' | 'es' | 'pt'
+export type StemLang = 'en' | 'de' | 'es' | 'pt' | 'fr'
 
 export type WordhoardFingerprint = {
   size: number
@@ -79,6 +80,7 @@ const DICTS = [
   'dictionary-de',
   'dictionary-en',
   'dictionary-es',
+  'dictionary-fr',
   'dictionary-pt',
   'dictionary-pt-pt',
 ] as const
@@ -208,8 +210,9 @@ export function loadHintStemCache(): Record<StemLang, Map<string, string[]>> {
     de: empty(),
     es: empty(),
     pt: empty(),
+    fr: empty(),
   }
-  for (const lang of ['en', 'de', 'es', 'pt'] as const) {
+  for (const lang of ['en', 'de', 'es', 'pt', 'fr'] as const) {
     const block = (parsed.stems as Record<string, unknown>)[lang]
     if (!block || typeof block !== 'object') continue
     for (const [form, lemmas] of Object.entries(

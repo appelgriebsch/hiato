@@ -38,6 +38,27 @@ describe('filterSynonymChips', () => {
     expect(synonymCacheKeyIsSettled(cache, 'APPLE')).toBe(false)
   })
 
+  test('splits elided chips on apostrophes for a scoped denylist', () => {
+    const scoped = new Set(['fr NÈGRE'])
+    expect(invalidSynonymChipReason('AMI', "l'nègre", scoped, 'fr')).toBe(
+      'denylist',
+    )
+    expect(invalidSynonymChipReason('AMI', "l'nègre", scoped, 'en')).toBeNull()
+    expect(invalidSynonymChipReason('AMI', 'nègre', scoped, 'es')).toBeNull()
+    expect(filterSynonymChips('AMI', ["l'nègre"], scoped)).toEqual(["l'nègre"])
+    expect(filterSynonymChips('AMI', ["l'nègre"], scoped, 'fr')).toEqual([])
+    expect(
+      synonymCoverageRatio(
+        [{ word: 'AMI', synonyms: ["l'nègre"] }],
+        scoped,
+        'fr',
+      ),
+    ).toBe(0)
+    expect(
+      synonymCoverageRatio([{ word: 'AMI', synonyms: ["l'nègre"] }], scoped),
+    ).toBe(1)
+  })
+
   test('drops denylisted chips and whitespace', () => {
     expect(
       filterSynonymChips('HURT', ['  ', 'kill', 'harm', 'injure'], DENY),
