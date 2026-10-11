@@ -113,22 +113,22 @@ describe('isTemplateGloss', () => {
 describe('boilerplateGlossErrors (#178)', () => {
   const L = (word: string, gloss: string) => ({ word, gloss })
   test('fails a placeholder gloss even once', () => {
-    expect(boilerplateGlossErrors('it/a1.json', [L('DARE', 'lo si fa'), L('FARE', 'compiere')], {})).toHaveLength(1)
-    expect(boilerplateGlossErrors('it/a1.json', [L('DOMANDA', 'un uomo parla.')], {})).toHaveLength(1)
-    expect(boilerplateGlossErrors('es/a1.json', [L('HACER', 'La gente lo hace')], {})).toHaveLength(1)
+    expect(boilerplateGlossErrors('it/a1.json', [L('DARE', 'lo si fa'), L('FARE', 'compiere')], {}).length).toBe(1)
+    expect(boilerplateGlossErrors('it/a1.json', [L('DOMANDA', 'un uomo parla.')], {}).length).toBe(1)
+    expect(boilerplateGlossErrors('es/a1.json', [L('HACER', 'La gente lo hace')], {}).length).toBe(1)
   })
   test('fails one text reused on BOILERPLATE_MIN lemmas', () => {
     const many = ['A', 'B', 'C', 'D'].map((w) => L(`${w}AA`, 'una donna che si chiama così'))
     expect(BOILERPLATE_MIN).toBe(4)
-    expect(boilerplateGlossErrors('it/b2.json', many, {})).toHaveLength(1)
-    expect(boilerplateGlossErrors('it/b2.json', many.slice(0, 3), {})).toHaveLength(0)
+    expect(boilerplateGlossErrors('it/b2.json', many, {}).length).toBe(1)
+    expect(boilerplateGlossErrors('it/b2.json', many.slice(0, 3), {}).length).toBe(0)
   })
   test('baseline caps grandfathered boilerplate at its count', () => {
     const base = { 'de/a1.json': { 'ein adjektiv': 2 } }
-    expect(boilerplateGlossErrors('de/a1.json', [L('ROT', 'Ein Adjektiv.'), L('BLAU', 'ein adjektiv')], base)).toHaveLength(0)
-    expect(boilerplateGlossErrors('de/a1.json', [L('ROT', 'ein adjektiv'), L('BLAU', 'ein adjektiv'), L('GRÜN', 'ein adjektiv')], base)).toHaveLength(0)
+    expect(boilerplateGlossErrors('de/a1.json', [L('ROT', 'Ein Adjektiv.'), L('BLAU', 'ein adjektiv')], base).length).toBe(0)
+    expect(boilerplateGlossErrors('de/a1.json', [L('ROT', 'ein adjektiv'), L('BLAU', 'ein adjektiv'), L('GRÜN', 'ein adjektiv')], base).length).toBe(0)
     const four = ['ROT', 'BLAU', 'GRÜN', 'GELB'].map((w) => L(w, 'ein adjektiv'))
-    expect(boilerplateGlossErrors('de/a1.json', four, base)).toHaveLength(1)
+    expect(boilerplateGlossErrors('de/a1.json', four, base).length).toBe(1)
   })
   test('every shipped pack passes', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
