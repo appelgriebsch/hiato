@@ -66,7 +66,7 @@ export function SelectionCard({
   return (
     <section
       data-selection-card
-      className="mt-4 rounded-xl border border-line bg-raised px-3 pt-2 pb-1"
+      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1"
     >
       <p className="font-semibold text-ink">
         {LANG_LABELS[lang]} · {CEFR_CODES[cefr]}
