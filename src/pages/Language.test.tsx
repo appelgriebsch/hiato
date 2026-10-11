@@ -38,6 +38,25 @@ describe('Language & level picker (#182)', () => {
     for (const c of PACK_CEFRS) expect(CEFR_LINES[c]).toStartWith(c.toUpperCase())
   })
 
+  test('level lines: exact B1–C2 copy (Uma review)', () => {
+    expect(CEFR_LINES.a1).toBe('A1 · Beginner — first words; vowels are filled in to help.')
+    expect(CEFR_LINES.b1).toBe('B1 · Intermediate — common words; no letters filled in.')
+    expect(CEFR_LINES.b2).toBe('B2 · Upper-intermediate — broader words; no letters filled in.')
+    expect(CEFR_LINES.c1).toBe('C1 · Advanced — less common words; no letters filled in.')
+    expect(CEFR_LINES.c2).toBe('C2 · Proficiency — rare and precise words; no letters filled in.')
+  })
+
+  test('language heading is a visible label that names the radiogroup', () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <Language />
+      </MemoryRouter>,
+    )
+    expect(html).toContain('<h2 id="language-heading" class="mt-4 text-sm font-semibold text-ink">Language</h2>')
+    expect(html).toContain('aria-labelledby="language-heading"')
+    expect(html).not.toContain('sr-only')
+  })
+
   test('card: selected pair, provenance, 44px Pack info', () => {
     const html = card('ready')
     expect(html).toContain('Português · A1')

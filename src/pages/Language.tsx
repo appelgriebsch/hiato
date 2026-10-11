@@ -203,7 +203,7 @@ export function Language() {
       />
 
       <h1 className="text-title text-ink">Choose language &amp; level</h1>
-      <h2 id="language-heading" className="sr-only">
+      <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink">
         Language
       </h2>
       <div

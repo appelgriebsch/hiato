@@ -65,8 +65,8 @@ export function speakLemmaAriaLabel(lang: PackLang): string {
 export const CEFR_LINES: Record<PackCefr, string> = {
   a1: 'A1 · Beginner — first words; vowels are filled in to help.',
   a2: 'A2 · Elementary — everyday words; vowels are filled in to help.',
-  b1: 'B1 · Intermediate — common words; you start with a blank word.',
-  b2: 'B2 · Upper-intermediate — broader words; you start with a blank word.',
-  c1: 'C1 · Advanced — less common words; you start with a blank word.',
-  c2: 'C2 · Proficiency — rare and precise words; you start with a blank word.',
+  b1: 'B1 · Intermediate — common words; no letters filled in.',
+  b2: 'B2 · Upper-intermediate — broader words; no letters filled in.',
+  c1: 'C1 · Advanced — less common words; no letters filled in.',
+  c2: 'C2 · Proficiency — rare and precise words; no letters filled in.',
 }
