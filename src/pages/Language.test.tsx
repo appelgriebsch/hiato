@@ -82,4 +82,26 @@ describe('Language & level picker (#182)', () => {
       expect(provenanceCaption('it', c)).not.toContain('par ')
     }
   })
+
+  test('Avery W1–W4, W7: label gate, non-colour selection, solid ring, contrast, 2-line caption', async () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <Language />
+      </MemoryRouter>,
+    )
+    // selected language + level carry a ring, not colour only
+    expect(html.match(/aria-checked="true"[^>]*ring-2 ring-accent-fg/g)?.length).toBe(2)
+    expect(html.match(/aria-checked="false"[^>]*ring-2/g)).toBeNull()
+    expect(html).not.toContain('text-ink-faint')
+    expect(html).not.toContain('aria-orientation')
+    const c = card('ready')
+    expect(c).toContain('focus-visible:ring-accent-fg ')
+    expect(c).not.toContain('ring-accent-fg/')
+    expect(c).toContain('line-clamp-2')
+    expect(c).not.toContain('truncate')
+    // status sits in the card header, before the caption (visible at 320×568)
+    expect(c.indexOf('✓ Ready offline')).toBeLessThan(c.indexOf('data-provenance-caption'))
+    const src = await Bun.file(new URL('./Language.tsx', import.meta.url)).text()
+    expect(src).toContain("cachePhase === 'caching' && showSaving\n                ? 'Caching…'")
+  })
 })

@@ -68,30 +68,35 @@ export function SelectionCard({
       data-selection-card
       className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1"
     >
-      <p className="font-semibold text-ink">
-        {LANG_LABELS[lang]} · {CEFR_CODES[cefr]}
-      </p>
-      {/* Selected-only provenance: muted non-link caption; Pack info → About */}
-      <div className="flex items-center gap-2" data-provenance-caption>
-        <span className="min-w-0 flex-1 truncate text-xs text-ink-muted" title={caption}>
-          {caption}
-        </span>
-        <Link
-          to="/about"
-          className="motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-medium text-ink underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
-        >
-          {packInfoLabel(lang)}
-        </Link>
-      </div>
-      <div className="flex min-h-11 items-center justify-between gap-2" data-pack-cache-status>
+      {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
+      <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
+        <p className="font-semibold text-ink">
+          {LANG_LABELS[lang]} · {CEFR_CODES[cefr]}
+        </p>
         <p
-          className={phase === 'ready' ? 'text-sm font-medium text-ink' : 'text-sm text-ink-muted'}
+          className={
+            phase === 'ready'
+              ? 'shrink-0 text-sm font-medium text-ink'
+              : 'min-w-0 text-right text-sm text-ink-muted'
+          }
           aria-live="polite"
         >
           {status}
         </p>
-        <InstallHelpLink visible={phase === 'ready'} />
       </div>
+      {/* Selected-only provenance: muted non-link caption; Pack info → About */}
+      <div className="flex items-center gap-2" data-provenance-caption>
+        <span className="min-w-0 flex-1 line-clamp-2 text-xs text-ink-muted" title={caption}>
+          {caption}
+        </span>
+        <Link
+          to="/about"
+          className="motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-medium text-ink underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm"
+        >
+          {packInfoLabel(lang)}
+        </Link>
+      </div>
+      <InstallHelpLink visible={phase === 'ready'} />
     </section>
   )
 }
@@ -180,7 +185,7 @@ export function Language() {
           >
             {preparing
               ? 'Preparing packs…'
-              : cachePhase === 'caching'
+              : cachePhase === 'caching' && showSaving
                 ? 'Caching…'
                 : 'Continue to daily'}
           </Button>
@@ -210,7 +215,6 @@ export function Language() {
         role="radiogroup"
         data-radio-group
         aria-labelledby="language-heading"
-        aria-orientation="horizontal"
         className="mt-3 grid grid-cols-3 gap-2"
       >
         {PACK_LANGS.map((l) => (
@@ -230,11 +234,11 @@ export function Language() {
               'motion-press min-h-12 min-w-0 rounded-xl border-2 px-2 py-1.5 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
-                ? 'border-accent-fg bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
-            <div className="text-xs font-medium text-ink-faint">{LANG_CODES[l]}</div>
+            <div className="text-xs font-medium text-ink-muted">{LANG_CODES[l]}</div>
             <div
               className={[
                 'truncate text-sm font-semibold',
@@ -255,7 +259,6 @@ export function Language() {
         data-radio-group
         aria-labelledby="cefr-heading"
         aria-describedby="cefr-help"
-        aria-orientation="horizontal"
         className="mt-2 grid grid-cols-3 gap-2"
       >
         {PACK_CEFRS.map((c) => (
@@ -275,7 +278,7 @@ export function Language() {
               'motion-press min-h-11 rounded-xl border-2 px-2 text-center font-semibold disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
-                ? 'border-accent-fg bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >
