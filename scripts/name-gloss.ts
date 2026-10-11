@@ -13,6 +13,34 @@ const FR_BARE_PERSON =
   /^(?:un |une )?(?:garçon|jeune fille|jeune femme|homme(?: italien)?|femme(?: biblique)?)\.?$/i
 const IT =
   /\bcognome\b|\bnome proprio\b|\bnomi propri\b|\bnome di battesimo\b|\bnome di persona\b|\bprenome\b/i
+// A named individual: role word straight after an origin/genre qualifier
+// ("un prophète biblique", "dirigeant soviétique"). Fails without the
+// name list. Plain role glosses (OGRE, DIVA, FRAPPEUR) stay common nouns.
+const FR_PERSON_ROLE =
+  '(?:personnage|personnalité|dirigeante?|prophète|déesse|acteur|actrice|chanteur|chanteuse|peintre|écrivaine?|roi|reine|poète|empereur|homme politique)s?'
+const FR_PERSON_ORIGIN =
+  '(?:historiques?|de bande dessinée|de fiction|bibliques?|hébr(?:eu|eux|aïque)s?|nordiques?|grec(?:que)?s?|romaine?s?|latine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italien(?:ne)?s?|anglaise?s?|britanniques?|espagnole?s?|égyptien(?:ne)?s?|perse?s?)'
+const FR_ARTICLE = '(?:(?:un|une|le|la|l[’\'])\\s*)?'
+const FR_PERSON = new RegExp(
+  `(?<!\\p{L})${FR_ARTICLE}${FR_PERSON_ROLE} ${FR_PERSON_ORIGIN}(?!\\p{L})`,
+  'iu',
+)
+// "roi de France": "de" + a capitalised place. Case-sensitive on purpose, so
+// "reine de beauté" and "acteur de théâtre" stay common nouns.
+const FR_PERSON_OF_PLACE = new RegExp(
+  `(?<!\\p{L})${FR_ARTICLE}${FR_PERSON_ROLE} (?:de |d[’'])\\p{Lu}`,
+  'u',
+)
+// A deity "of" something names one figure ("déesse de l'amour").
+const FR_DEITY = /(?<!\p{L})(?:déesses?|dieux?) (?:de|du|des|d[’'])(?!\p{L})/iu
+
+/** FR glosses that name one specific person, even off lemma-names.txt. */
+export function isFrPersonGloss(gloss: string | undefined | null): boolean {
+  if (!gloss) return false
+  const g = gloss.normalize('NFC')
+  return FR_PERSON.test(g) || FR_PERSON_OF_PLACE.test(g) || FR_DEITY.test(g)
+}
+
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i
