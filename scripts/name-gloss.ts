@@ -35,7 +35,8 @@ const FR_PERSON_OF_PLACE = new RegExp(
 const FR_DEITY = /(?<!\p{L})(?:déesses?|dieux?) (?:de|du|des|d[’'])(?!\p{L})/iu
 
 // #184 W4: "prénom féminin" names one person, even off lemma-names.txt.
-const FR_PRENOM = /(?<!\p{L})pr[eé]noms?(?!\p{L})/iu
+// Start-anchored: "diminutif d'un prénom" is the list-gated FR rule's job, not this one.
+const FR_PRENOM = /^(?:un |le )?pr[eé]noms?(?!\p{L})/iu
 // #180: "créé par Conan Doyle" credits one fictional figure to its author.
 const FR_CREATED_BY = /(?<!\p{L})créée?s? par \p{Lu}/u
 // #180 CUBA: the gloss is a named place, "grande île des Caraïbes", "ville de Belgique".

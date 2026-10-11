@@ -83,6 +83,7 @@ describe('isFrPersonGloss (#175)', () => {
       'qui vient de France',
       'habitant de Paris',
       'Île de sable au milieu du fleuve',
+      'diminutif d’un prénom',
     ]) expect(isFrPersonGloss(g)).toBe(false)
   })
 })

@@ -186,6 +186,7 @@ export const STEM_TOKEN_IGNORE: ReadonlySet<string> = new Set([
  */
 export const STEM_UNRELATED: ReadonlySet<string> = new Set([
   'contrat:contre', 'tempete:temps', 'carton:carte', 'pontife:pont',
+  'perseverer:persister', // per-severus vs per-sistere
 ])
 
 /**
