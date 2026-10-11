@@ -5,7 +5,7 @@ import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
 import { precacheSelectedLanguage } from '@/packs/cache'
-import { CEFR_LABELS, LANG_CODES, LANG_LABELS } from '@/packs/labels'
+import { CEFR_CODES, CEFR_LINES, LANG_CODES, LANG_LABELS } from '@/packs/labels'
 import { packInfoLabel, provenanceCaption } from '@/packs/provenance'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from '@/packs/schema'
 
@@ -37,7 +37,69 @@ function moveRadio<T extends string>(
   if (btn instanceof HTMLElement) btn.focus()
 }
 
-type CachePhase = 'idle' | 'caching' | 'ready' | 'error'
+export type CachePhase = 'idle' | 'caching' | 'ready' | 'error'
+
+/** Hold "Saving…" back this long so a fast cache goes straight to Ready (#182). */
+export const SAVING_DELAY_MS = 300
+
+/** Selected pair, provenance (#80/#99), offline status and A2HS once ready (#103). */
+export function SelectionCard({
+  lang,
+  cefr,
+  phase,
+  showSaving,
+}: {
+  lang: PackLang
+  cefr: PackCefr
+  phase: CachePhase
+  showSaving: boolean
+}) {
+  const caption = provenanceCaption(lang, cefr)
+  const status =
+    phase === 'ready'
+      ? '✓ Ready offline'
+      : phase === 'error'
+        ? 'Not saved yet — connect and try again.'
+        : phase === 'caching' && showSaving
+          ? 'Saving for offline…'
+          : '\u00a0'
+  return (
+    <section
+      data-selection-card
+      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1"
+    >
+      {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
+      <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
+        <p className="font-semibold text-ink">
+          {LANG_LABELS[lang]} · {CEFR_CODES[cefr]}
+        </p>
+        <p
+          className={
+            phase === 'ready'
+              ? 'shrink-0 text-sm font-medium text-ink'
+              : 'min-w-0 text-right text-sm text-ink-muted'
+          }
+          aria-live="polite"
+        >
+          {status}
+        </p>
+      </div>
+      {/* Selected-only provenance: muted non-link caption; Pack info → About */}
+      <div className="flex items-center gap-2" data-provenance-caption>
+        <span className="min-w-0 flex-1 line-clamp-2 text-xs text-ink-muted" title={caption}>
+          {caption}
+        </span>
+        <Link
+          to="/about"
+          className="motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-medium text-ink underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm"
+        >
+          {packInfoLabel(lang)}
+        </Link>
+      </div>
+      <InstallHelpLink visible={phase === 'ready'} />
+    </section>
+  )
+}
 
 export function Language() {
   const saved = getPrefs()
@@ -46,6 +108,7 @@ export function Language() {
   const [preparing, setPreparing] = useState(false)
   const [cachePhase, setCachePhase] = useState<CachePhase>('idle')
   const [error, setError] = useState<string | null>(null)
+  const [showSaving, setShowSaving] = useState(false)
   const nav = useNavigate()
   const alive = useRef(true)
   const cacheGen = useRef(0)
@@ -60,7 +123,11 @@ export function Language() {
   useEffect(() => {
     const gen = ++cacheGen.current
     setCachePhase('caching')
+    setShowSaving(false)
     setError(null)
+    const t = setTimeout(() => {
+      if (gen === cacheGen.current) setShowSaving(true)
+    }, SAVING_DELAY_MS)
     void precacheSelectedLanguage(lang, cefr)
       .then((ok) => {
         if (!alive.current || gen !== cacheGen.current) return
@@ -70,6 +137,7 @@ export function Language() {
         if (!alive.current || gen !== cacheGen.current) return
         setCachePhase('error')
       })
+    return () => clearTimeout(t)
   }, [lang, cefr])
 
   async function continuePlay() {
@@ -100,11 +168,6 @@ export function Language() {
     }
   }
 
-  const caption = provenanceCaption(lang, cefr)
-  const infoLabel = packInfoLabel(lang)
-  // A2HS only after cache ready — not during caching (#103 Avery W2)
-  const showInstall = cachePhase === 'ready'
-
   return (
     <Layout
       footer={
@@ -122,7 +185,7 @@ export function Language() {
           >
             {preparing
               ? 'Preparing packs…'
-              : cachePhase === 'caching'
+              : cachePhase === 'caching' && showSaving
                 ? 'Caching…'
                 : 'Continue to daily'}
           </Button>
@@ -133,7 +196,7 @@ export function Language() {
         left={
           <button
             type="button"
-            className="motion-press text-sm text-ink-muted disabled:opacity-40"
+            className="motion-press -ml-2 inline-flex min-h-11 min-w-11 items-center px-2 text-sm text-ink-muted disabled:opacity-40"
             disabled={preparing}
             onClick={() => {
               if (!preparing) nav('/')
@@ -142,19 +205,17 @@ export function Language() {
             ← Back
           </button>
         }
-        center={<span className="text-sm font-semibold tracking-tight text-ink">Your level</span>}
       />
 
-      <h1 id="language-heading" className="text-title text-ink">
+      <h1 className="text-title text-ink">Choose language &amp; level</h1>
+      <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink">
         Language
-      </h1>
-      <p className="text-body mt-1 text-ink-muted">Pick the language you’re learning.</p>
+      </h2>
       <div
         role="radiogroup"
         data-radio-group
         aria-labelledby="language-heading"
-        aria-orientation="horizontal"
-        className="mt-4 grid grid-cols-2 gap-2"
+        className="mt-3 grid grid-cols-3 gap-2"
       >
         {PACK_LANGS.map((l) => (
           <button
@@ -170,18 +231,19 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang)}
             className={[
-              'motion-press min-h-14 rounded-xl border-2 px-3 py-3 text-left disabled:opacity-40',
+              'motion-press min-h-12 min-w-0 rounded-xl border-2 px-2 py-1.5 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
-                ? 'border-accent-fg bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
-            <div className="text-xs font-medium text-ink-faint">{LANG_CODES[l]}</div>
+            <div className="text-xs font-medium text-ink-muted">{LANG_CODES[l]}</div>
             <div
-              className={
-                lang === l ? 'font-semibold text-accent-fg' : 'font-semibold text-ink'
-              }
+              className={[
+                'truncate text-sm font-semibold',
+                lang === l ? 'text-accent-fg' : 'text-ink',
+              ].join(' ')}
             >
               {LANG_LABELS[l]}
             </div>
@@ -189,19 +251,15 @@ export function Language() {
         ))}
       </div>
 
-      <h2 id="cefr-heading" className="text-title mt-8 text-ink">
-        CEFR level
+      <h2 id="cefr-heading" className="mt-4 text-sm font-semibold text-ink">
+        Level
       </h2>
-      <p id="cefr-help" className="text-body mt-1 text-ink-muted">
-        A1–A2 prefill vowels. B1–C2 start empty.
-      </p>
       <div
         role="radiogroup"
         data-radio-group
         aria-labelledby="cefr-heading"
         aria-describedby="cefr-help"
-        aria-orientation="vertical"
-        className="mt-4 flex flex-col gap-2"
+        className="mt-2 grid grid-cols-3 gap-2"
       >
         {PACK_CEFRS.map((c) => (
           <button
@@ -217,53 +275,22 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr)}
             className={[
-              'motion-press min-h-12 rounded-xl border-2 px-4 py-3 text-left font-medium disabled:opacity-40',
+              'motion-press min-h-11 rounded-xl border-2 px-2 text-center font-semibold disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
-                ? 'border-accent-fg bg-accent-soft text-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >
-            {CEFR_LABELS[c]}
+            {CEFR_CODES[c]}
           </button>
         ))}
       </div>
+      <p id="cefr-help" className="mt-2 text-sm text-ink-muted">
+        {CEFR_LINES[cefr]}
+      </p>
 
-      {/* Selected-only provenance (#80 / #99): muted non-link caption; Pack info → About */}
-      <div
-        className="mt-3 flex items-center gap-2"
-        data-provenance-caption
-      >
-        <span
-          className="min-w-0 flex-1 truncate text-xs text-ink-muted"
-          title={caption}
-        >
-          {caption}
-        </span>
-        <Link
-          to="/about"
-          className="motion-press inline-flex min-h-8 shrink-0 items-center py-2 text-xs text-ink-muted hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
-        >
-          {infoLabel}
-        </Link>
-      </div>
-
-      {/* Quiet pack status + optional A2HS after/with cache (#103) */}
-      <div
-        className="mt-4 mb-2 flex flex-col items-start gap-1.5"
-        data-pack-cache-status
-      >
-        <p className="text-xs text-ink-muted" aria-live="polite">
-          {cachePhase === 'caching'
-            ? `Caching ${LANG_CODES[lang]} · ${cefr.toUpperCase()}…`
-            : cachePhase === 'ready'
-              ? `Offline ready for ${LANG_CODES[lang]} · ${cefr.toUpperCase()}`
-              : cachePhase === 'error'
-                ? 'Pack not cached yet — connect and try again.'
-                : null}
-        </p>
-        <InstallHelpLink visible={showInstall} />
-      </div>
+      <SelectionCard lang={lang} cefr={cefr} phase={cachePhase} showSaving={showSaving} />
     </Layout>
   )
 }

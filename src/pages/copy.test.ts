@@ -5,12 +5,11 @@ async function pageSrc(name: string): Promise<string> {
 }
 
 describe('Language picker (gh-30)', () => {
-  test('CEFR subtitle covers B1–C2 empty start; one vertical list', async () => {
+  test('mechanic helper replaced by selected-level line; 3-column grids (#182)', async () => {
     const src = await pageSrc('Language.tsx')
-    expect(src).toContain('A1–A2 prefill vowels. B1–C2 start empty.')
-    expect(src).not.toContain('B1 starts empty.')
-    expect(src).toContain('flex flex-col gap-2')
-    expect(src).toContain('min-h-12')
+    expect(src).not.toContain('A1–A2 prefill vowels')
+    expect(src).toContain('{CEFR_LINES[cefr]}')
+    expect(src.match(/grid grid-cols-3 gap-2/g)?.length).toBe(2)
   })
 
   test('language and CEFR are labelled radiogroups with aria-checked', async () => {
@@ -24,8 +23,7 @@ describe('Language picker (gh-30)', () => {
     expect(src).toContain('tabIndex={lang === l ? 0 : -1}')
     expect(src).toContain('tabIndex={cefr === c ? 0 : -1}')
     expect(src).toContain('aria-describedby="cefr-help"')
-    expect(src).toContain('aria-orientation="horizontal"')
-    expect(src).toContain('aria-orientation="vertical"')
+    expect(src).not.toContain("aria-orientation")
     expect(src).toContain("e.key === 'ArrowUp' || e.key === 'ArrowLeft'")
     expect(src).toContain("e.key === 'ArrowDown' || e.key === 'ArrowRight'")
     expect(src).toContain("aria-busy={preparing || cachePhase === 'caching'}")
@@ -50,20 +48,23 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
     expect(src.match(/provenanceCaption\(/g)?.length).toBe(1)
     const cefrGroupAt = src.indexOf('aria-labelledby="cefr-heading"')
     const captionAt = src.indexOf('data-provenance-caption')
-    expect(captionAt).toBeGreaterThan(cefrGroupAt)
+    // #182: caption lives in SelectionCard, rendered after the level grid
+    expect(src.indexOf('<SelectionCard', cefrGroupAt)).toBeGreaterThan(cefrGroupAt)
     // Caption sits outside radio buttons (title-only rows)
     const radioMap = src.indexOf('{PACK_CEFRS.map((c) => (')
-    const radioEnd = src.indexOf('</div>', src.indexOf('{CEFR_LABELS[c]}', radioMap))
+    const radioEnd = src.indexOf('</div>', src.indexOf('{CEFR_CODES[c]}', radioMap))
+    expect(src.indexOf('{CEFR_CODES[c]}', radioMap)).toBeGreaterThan(radioMap)
+    expect(radioEnd).toBeGreaterThan(radioMap)
     expect(src.slice(radioMap, radioEnd)).not.toContain('provenanceCaption')
     expect(src.slice(radioMap, radioEnd)).not.toContain('data-provenance-caption')
     // Provenance block: caption is muted non-link; Pack info is sole /about Link
-    const block = src.slice(captionAt, src.indexOf('</Layout>', captionAt))
+    const block = src.slice(captionAt, src.indexOf('</section>', captionAt))
     expect(block.match(/to="\/about"/g)?.length).toBe(1)
     expect(block).toContain('text-ink-muted')
-    expect(block).toMatch(/<span[\s\S]*truncate[\s\S]*\{caption\}/)
+    expect(block).toMatch(/<span[\s\S]*line-clamp-2[\s\S]*\{caption\}/)
     expect(block).not.toMatch(/<Link[\s\S]*\{caption\}/)
-    expect(block).toContain('min-h-8')
-    expect(block).toContain('focus-visible:underline')
+    expect(block).toContain('min-h-11')
+    expect(block).toContain('focus-visible:ring-2')
   })
 
   test('omit provenance from Play / EndCard / Share / Home chrome', async () => {
@@ -476,8 +477,8 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
     expect(src).toContain('data-pack-cache-status')
     expect(src).toContain('InstallHelpLink')
-    expect(src).toContain('Offline ready for')
-    expect(src).toContain('const showInstall = cachePhase === \'ready\'')
+    expect(src).toContain('✓ Ready offline')
+    expect(src).toContain("<InstallHelpLink visible={phase === 'ready'} />")
     expect(src).toContain("cachePhase === 'caching'")
     expect(src).toContain("'Caching…'")
     // Provenance preserved
