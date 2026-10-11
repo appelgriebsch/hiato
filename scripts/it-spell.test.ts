@@ -60,7 +60,7 @@ describe('italian spell lookup', () => {
     expect(Date.now() - t1).toBeLessThan(3000)
   })
 
-  test('apostrophe-free forms match nspell on a dictionary-it slice', async () => {
+  test('stems, suffixes, and l-elisions match nspell on a dictionary-it slice', async () => {
     const dict = (await import('dictionary-it')).default
     const text = Buffer.from(dict.dic).toString('utf8')
     const lines = text.split('\n')
@@ -71,13 +71,13 @@ describe('italian spell lookup', () => {
     for (const line of lines.slice(1, 250)) {
       const slash = line.indexOf('/')
       const word = (slash < 0 ? line : line.slice(0, slash)).trim()
-      if (!word || word.includes("'") || word.startsWith('/') || word.startsWith('#')) continue
+      if (!word || word.startsWith('/') || word.startsWith('#')) continue
       probes.add(word)
       if (word.endsWith('are')) probes.add(word.slice(0, -3) + 'o')
       if (word.endsWith('o')) probes.add(word.slice(0, -1) + 'i')
+      if (/^[aeiouàèéìòù]/i.test(word)) probes.add(`l'${word}`)
     }
     for (const word of probes) {
-      if (word.includes("'")) continue
       expect(ours.correct(word)).toBe(ref.correct(word))
     }
   })

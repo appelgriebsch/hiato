@@ -6,8 +6,9 @@
  * Packs check keeps a committed verdict cache (scripts/data/hunspell-verdicts.json)
  * so CI does not construct nspell when every lookup is already known. The stamp
  * covers the bun.lock integrity of nspell and the dictionary packages, the
- * aff/dic bytes, this file, and lemma-denylist.ts (nfcUpper). Kinship and the
- * loanword allowlist are applied before the cache and are not stored in it.
+ * aff/dic bytes, this file, it-spell.ts, and lemma-denylist.ts (nfcUpper).
+ * Kinship and the loanword allowlist are applied before the cache and are not
+ * stored in it.
  * Editing a stamped input invalidates the file; the next packs:check reloads
  * Hunspell once and rewrites it.
  */
@@ -127,6 +128,7 @@ function membershipStamp(): string {
     h.update('\0')
   }
   hashText(h, path.join(import.meta.dir, 'lang-membership.ts'))
+  hashText(h, path.join(import.meta.dir, 'it-spell.ts'))
   hashText(h, path.join(import.meta.dir, 'lemma-denylist.ts'))
   return h.digest('hex')
 }

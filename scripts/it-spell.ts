@@ -2,15 +2,17 @@
  * Italian membership checker for dictionary-it.
  *
  * nspell expands every affix form into a hash at init. dictionary-it flags
- * about 22k stems with prefix rules whose adds are elisions (`l'`, `dell'`,
- * `un'`, …) and those prefixes cross-product with verb suffixes, so init
- * stores tens of millions of keys and climbs past 3 GB without finishing.
- * Hunspell itself checks affixes at lookup. This checker does the same with
- * nspell's parsed rules: a surface is good when it is a stem, a suffix of a
- * flagged stem, or (only if the surface contains `'`) a prefix / pair.
- * Every dictionary-it prefix add contains `'`. Apostrophe-free lemmas, which
- * is the whole hangman set, never take the prefix path. If a future affix
- * adds a prefix without `'`, that fast path turns off.
+ * about 22k stems with prefix rules. Some adds are elisions (`l'`, `dell'`,
+ * `un'`). Others are `ri`, `pre`, `stra`, `mille`, and roman numerals.
+ * Those prefixes cross-product with verb suffixes, so init stores tens of
+ * millions of keys and climbs past 3 GB without finishing.
+ * Hunspell checks affixes at lookup. This checker does the same with nspell's
+ * private affix parser (`nspell/lib/util/affix.js`; the nspell pin keeps that
+ * shape). A surface is good when it is a stem, a suffix of a flagged stem,
+ * or a prefix / pair.
+ * When every prefix add contains `'`, apostrophe-free words skip that path.
+ * dictionary-it has prefix adds without `'`, so the fast path is off and
+ * every lookup runs it.
  */
 import { createRequire } from 'node:module'
 
