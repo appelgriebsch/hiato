@@ -35,7 +35,7 @@ AZERTY, one visual row per source row (ADR 0005; no symbols mode):
 - A VERB row is dropped when wordhoard `word_form` maps it to a different verb lemma. ADJ participles stay.
 - Spelling pairs that differ only by È/É (événement / évènement) keep the more frequent form. Accents are not folded (MÛR≠MUR).
 - Denylist lines are `fr WORD`, so EN BITE and ES/PT NEGRO stay. Ethnic and religious group words in that list stay out. QUEUE stays in.
-- Person names are dropped only when the lemma is on the name list **and** the gloss matches a French person-name pattern (`prénom`, `nom de famille`, `nom propre`), at every FR level. The strict B2–C2 name-list skip is not used for French.
+- Person names are dropped only when the lemma is on the name list **and** the gloss matches a French person-name pattern, at every FR level. The pattern covers `prénom`, `nom de famille`, `nom propre`, `diminutif`, `surnom`, `petit nom`, `nom féminin` / `nom masculin`, and a bare identity gloss such as `un garçon` or `un homme`. A longer gloss that merely mentions homme or fille stays. The strict B2–C2 name-list skip is not used for French.
 - `dictionary-fr` 3.0.0 (Grammalecte classique, MPL-2.0) is a build-time Hunspell dictionary only. It is not shipped in the PWA.
 - EndCard speech uses `fr-FR` and stays hidden when the device has no French voice (ADR 0037).
 

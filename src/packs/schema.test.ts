@@ -94,6 +94,17 @@ describe('pack hosting', () => {
     expect(await json.text()).toBe('{"lang":"en"}')
     expect(json.headers.get('x-content-type-options')).toBe('nosniff')
 
+    const french = await onRequest({
+      request: new Request('https://hiato.example/packs/fr/a1.json'),
+      next: async () =>
+        new Response('{"lang":"fr"}', {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        }),
+    })
+    expect(french.status).toBe(200)
+    expect(await french.text()).toBe('{"lang":"fr"}')
+
     const html = await onRequest({
       request: new Request(pack),
       next: async () =>
@@ -112,6 +123,7 @@ describe('pack hosting', () => {
       '../../functions/packs/[[path]].ts'
     )
     expect(isPackJsonPath('/packs/en/a1.json')).toBe(true)
+    expect(isPackJsonPath('/packs/fr/a1.json')).toBe(true)
     expect(isPackJsonPath('/packs/en/nope.json')).toBe(false)
     expect(isPackJsonPath('/index.html')).toBe(false)
 

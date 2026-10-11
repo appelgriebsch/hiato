@@ -262,6 +262,19 @@ describe('packs:check person-name gloss (#24)', () => {
     ).toThrow(/person-name gloss/)
   })
 
+  test('rejects a French name-list lemma with a bare person gloss', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'fr',
+          cefr: 'b1',
+          lemmas: [{ word: 'KEVIN', gloss: 'un garçon' }],
+        }),
+        'fr/b1.json',
+      ),
+    ).toThrow(/person-name gloss/)
+  })
+
   test('keeps a name-list lemma with a common-noun gloss', () => {
     const p = validatePack(
       pack({

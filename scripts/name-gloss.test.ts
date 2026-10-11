@@ -13,6 +13,28 @@ describe('isPersonNameGloss', () => {
     expect(isPersonNameGloss('Un prénom masculin.', 'fr')).toBe(true)
     expect(isPersonNameGloss('nom de famille courant.', 'fr')).toBe(true)
     expect(isPersonNameGloss('Un nom propre de personne.', 'fr')).toBe(true)
+    expect(isPersonNameGloss('un diminutif masculin familier', 'fr')).toBe(true)
+    expect(isPersonNameGloss('un surnom masculin courant', 'fr')).toBe(true)
+    expect(isPersonNameGloss("un petit nom d'homme", 'fr')).toBe(true)
+    expect(isPersonNameGloss('nom féminin d’origine latine', 'fr')).toBe(true)
+    expect(isPersonNameGloss('forme féminine familière de Catherine', 'fr')).toBe(
+      true,
+    )
+    expect(isPersonNameGloss('variante de Stéphane', 'fr')).toBe(true)
+    expect(isPersonNameGloss('un garçon', 'fr')).toBe(true)
+    expect(isPersonNameGloss('une jeune fille', 'fr')).toBe(true)
+    expect(isPersonNameGloss('un homme', 'fr')).toBe(true)
+    expect(isPersonNameGloss('homme', 'fr')).toBe(true)
+    expect(isPersonNameGloss('femme', 'fr')).toBe(true)
+    expect(isPersonNameGloss('une femme', 'fr')).toBe(true)
+    expect(isPersonNameGloss('un homme italien', 'fr')).toBe(true)
+    expect(isPersonNameGloss('une jeune femme', 'fr')).toBe(true)
+    expect(
+      isPersonNameGloss(
+        'une jeune femme souvent présente dans des récits',
+        'fr',
+      ),
+    ).toBe(true)
     expect(isPersonNameGloss('proper name of a person', 'en')).toBe(true)
   })
 
@@ -28,5 +50,12 @@ describe('isPersonNameGloss', () => {
     )
     expect(isPersonNameGloss('Un fruit à noyau.', 'fr')).toBe(false)
     expect(isPersonNameGloss('Une pierre, un caillou.', 'fr')).toBe(false)
+    expect(isPersonNameGloss('un homme aime une femme', 'fr')).toBe(false)
+    expect(isPersonNameGloss("une fille que l'on aime bien", 'fr')).toBe(false)
+    expect(isPersonNameGloss('femme qui règne sur un royaume.', 'fr')).toBe(false)
+    expect(
+      isPersonNameGloss('Jeune femme, dans un registre familier.', 'fr'),
+    ).toBe(false)
+    expect(isPersonNameGloss('variante de dialecte chinois', 'fr')).toBe(false)
   })
 })

@@ -341,7 +341,7 @@ function filterChipsInCeiling(
   chips: string[],
   ctx: CeilingCtx,
 ): string[] {
-  const filtered = filterSynonymChips(lemma, chips, DENY).map((chip) =>
+  const filtered = filterSynonymChips(lemma, chips, DENY, lang).map((chip) =>
     lang === 'en' ? chip.toLowerCase() : chip,
   )
   const kept: string[] = []

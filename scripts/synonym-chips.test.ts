@@ -45,6 +45,18 @@ describe('filterSynonymChips', () => {
     )
     expect(invalidSynonymChipReason('AMI', "l'nègre", scoped, 'en')).toBeNull()
     expect(invalidSynonymChipReason('AMI', 'nègre', scoped, 'es')).toBeNull()
+    expect(filterSynonymChips('AMI', ["l'nègre"], scoped)).toEqual(["l'nègre"])
+    expect(filterSynonymChips('AMI', ["l'nègre"], scoped, 'fr')).toEqual([])
+    expect(
+      synonymCoverageRatio(
+        [{ word: 'AMI', synonyms: ["l'nègre"] }],
+        scoped,
+        'fr',
+      ),
+    ).toBe(0)
+    expect(
+      synonymCoverageRatio([{ word: 'AMI', synonyms: ["l'nègre"] }], scoped),
+    ).toBe(1)
   })
 
   test('drops denylisted chips and whitespace', () => {

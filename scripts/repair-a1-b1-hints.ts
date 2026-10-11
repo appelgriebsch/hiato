@@ -406,7 +406,7 @@ function filterChipsInCeiling(
   chips: string[],
   ctx: ReturnType<typeof ceilingContext>,
 ): string[] {
-  const filtered = filterSynonymChips(lemma, chips, DENY)
+  const filtered = filterSynonymChips(lemma, chips, DENY, lang)
   return filtered.filter((chip) => {
     const hits = violationsForLemma(lang, cefr, '', [chip], ctx)
     return hits.length === 0
@@ -1022,7 +1022,7 @@ async function repairPack(rel: string): Promise<void> {
   }
 
   // If coverage would fall under 80%, ask again for in-ceiling chips on lemmas that lost last chip
-  let coverage = synonymCoverageRatio(pack.lemmas, DENY)
+  let coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   let guard = 0
   while (coverage < SYNONYM_COVERAGE_FLOOR && guard < 4) {
     guard++
@@ -1061,7 +1061,7 @@ async function repairPack(rel: string): Promise<void> {
       }
       saveSynCache(lang, synCache)
     }
-    coverage = synonymCoverageRatio(pack.lemmas, DENY)
+    coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   }
 
   if (coverage < SYNONYM_COVERAGE_FLOOR) {
@@ -1155,7 +1155,7 @@ async function repairPack(rel: string): Promise<void> {
     L.synonyms = filterChipsInCeiling(lang, cefr, L.word, L.synonyms ?? [], ctx)
     if (L.synonyms.length === 0) L.synonyms = undefined
   }
-  coverage = synonymCoverageRatio(pack.lemmas, DENY)
+  coverage = synonymCoverageRatio(pack.lemmas, DENY, lang)
   if (coverage < SYNONYM_COVERAGE_FLOOR) {
     throw new Error(
       `${rel}: after final chip drop, coverage ${(coverage * 100).toFixed(1)}% < floor`,

@@ -927,6 +927,7 @@ describe('HTW-speak-helper — iOS empty voice list at tap', () => {
       ['de', 'de-DE', 'Haus'],
       ['es', 'es-ES', 'casa'],
       ['pt', 'pt-BR', 'casa'],
+      ['fr', 'fr-FR', 'CHAT'],
     ]
     for (const [lang, bcp, lemma] of cases) {
       const mock = mockSynth([])
