@@ -12,6 +12,15 @@ describe('isFrPersonGloss (#175)', () => {
       'une personnalité américaine',
       'acteur américain',
       'chanteuse française',
+      'peintre français',
+      'écrivain russe',
+      'roi de France',
+      'un prophète hébreu',
+      'chanteur de rock',
+      'déesse de l’amour',
+      "déesse de l'amour",
+      'homme politique américain',
+      'empereur romain',
     ]) expect(isFrPersonGloss(g)).toBe(true)
   })
   test('keeps role-word lemmas', () => {

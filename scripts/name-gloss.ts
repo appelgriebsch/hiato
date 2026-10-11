@@ -16,8 +16,14 @@ const IT =
 // A named individual: role word straight after an origin/genre qualifier
 // ("un prophète biblique", "dirigeant soviétique"). Fails without the
 // name list. Plain role glosses (OGRE, DIVA, FRAPPEUR) stay common nouns.
-const FR_PERSON =
-  /\b(?:personnages?|personnalités?|dirigeant(?:e|s)?|prophètes?|déesses?|acteurs?|actrices?|chanteur(?:s)?|chanteuses?) (?:historiques?|de bande dessinée|de fiction|bibliques?|nordiques?|grecs?|grecques?|romaine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italienne?s?|anglaise?s?|britanniques?)\b/i
+const FR_PERSON_ROLE =
+  '(?:personnage|personnalité|dirigeante?|prophète|déesse|acteur|actrice|chanteur|chanteuse|peintre|écrivaine?|roi|reine|poète|empereur|homme politique)s?'
+const FR_PERSON_ORIGIN =
+  '(?:historiques?|de bande dessinée|de fiction|bibliques?|hébr(?:eu|eux|aïque)s?|nordiques?|grec(?:que)?s?|romaine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italienne?s?|anglaise?s?|britanniques?|espagnole?s?|égyptienne?s?|perse?s?|(?:de |d[’\'])\\p{L}+)'
+const FR_PERSON = new RegExp(
+  `(?<!\\p{L})(?:(?:un|une|le|la|l[’'])\\s*)?${FR_PERSON_ROLE} ${FR_PERSON_ORIGIN}(?!\\p{L})`,
+  'iu',
+)
 
 /** FR glosses that name one specific person, even off lemma-names.txt. */
 export function isFrPersonGloss(gloss: string | undefined | null): boolean {
