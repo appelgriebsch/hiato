@@ -41,6 +41,42 @@ export function isFrPersonGloss(gloss: string | undefined | null): boolean {
   return FR_PERSON.test(g) || FR_PERSON_OF_PLACE.test(g) || FR_DEITY.test(g)
 }
 
+// IT #178: a named individual or a named place, even off lemma-names.txt.
+// Role/place word + origin adjective ("generale tedesco", "città brasiliana")
+// or + "di/del/della <Capitalised>" ("capitale della Turchia"). Plain role
+// glosses ("persona che vende fiori", "parte di una città") stay common nouns.
+const IT_PERSON_ROLE =
+  '(?:personaggio|attore|attrice|cantante|scrittore|scrittrice|poeta|poetessa|pittore|pittrice|compositore|filosofo|generale|re|regina|imperatore|imperatrice|principe|principessa|santo|santa|dio|dea|uomo politico|politico|presidente)'
+const IT_PLACE =
+  '(?:città|cittadina|paese|stato|regione|capitale|fiume|isola|arcipelago|provincia|nazione|lago|monte)'
+const IT_ORIGIN =
+  '(?:storic[oaie]|biblic[oaie]|greco|greca|grec[ih]e|romano|romana|roman[ie]|latino|latina|tedesc[oa]|tedeschi|tedesche|austriac[oa]|frances[ei]|ingles[ei]|britannic[oa]|american[oaie]|italian[oaie]|spagnol[oaie]|russ[oaie]|europe[oaie]|asiatic[oa]|african[oaie]|brasilian[oaie]|cines[ei]|giappones[ei]|indian[oaie]|turc[oa]|egizi[oa]|ebre[oa]|arab[oa]|scozzes[ei]|irlandes[ei]|ottoman[oa]|sovietic[oa]|fiamming(?:o|a|hi|he)|olandes[ei]|svizzer[oaie]|polacc(?:o|a|hi|he)|belg[aio]|portoghes[ei]|svedes[ei]|norveges[ei]|danes[ei]|ungheres[ei]|persian[oaie]|etrusc(?:o|a|hi|he))'
+// Period names are capitalised but are not people or places (#179 W3).
+const IT_PERIOD =
+  '(?:Duecento|Trecento|Quattrocento|Cinquecento|Seicento|Settecento|Ottocento|Novecento|Duemila|Mille|Medioevo|Rinascimento|Risorgimento|Illuminismo|Romanticismo|Barocco|Rococò|Neolitico|Paleolitico)(?!\\p{L})'
+const IT_OF = `(?:di|del|della|dello|dei|degli|delle|dell['’]|d['’])\\s*(?!${IT_PERIOD})\\p{Lu}`
+// "dio della guerra", "dea dell'amore": one named deity (#179 W3).
+const IT_DEITY = /(?<!\p{L})(?:dio|dea) (?:del|della|dello|dei|degli|delle|dell['’])\s*\p{L}/u
+const IT_PERSON = new RegExp(
+  `(?<!\\p{L})${IT_PERSON_ROLE} (?:${IT_ORIGIN}(?!\\p{L})|${IT_OF})`,
+  'u',
+)
+const IT_PLACE_RE = new RegExp(
+  `(?<!\\p{L})${IT_PLACE} (?:${IT_ORIGIN}(?!\\p{L})|${IT_OF}|dell['’]oceano)`,
+  'u',
+)
+// "una donna che si chiama così", "forma femminile del nome mago".
+const IT_BARE_NAME = /(?<!\p{L})si chiama così(?!\p{L})|(?<!\p{L})forma (?:femminile|maschile) del nome(?!\p{L})/iu
+
+/** IT glosses that name one person or one place (#178). */
+export function isItNameOrPlaceGloss(gloss: string | undefined | null): boolean {
+  if (!gloss) return false
+  const g = gloss.normalize('NFC')
+  // Case-sensitive "di <Capitalised>"; only the gloss's first letter is folded.
+  const h = g.charAt(0).toLowerCase() + g.slice(1)
+  return IT.test(h) || IT_BARE_NAME.test(h) || IT_PERSON.test(h) || IT_PLACE_RE.test(h) || IT_DEITY.test(h)
+}
+
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i
