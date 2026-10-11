@@ -173,7 +173,8 @@ describe('stem spoiler gate (#179 C1)', () => {
   test('passes unrelated glosses and ignored function words', () => {
     expect(stemSpoilerTokens('le ore dopo cena', 'SERATA')).toEqual([])
     expect(stemSpoilerTokens('chiamare qualcuno con il cellulare', 'TELEFONARE')).toEqual([])
-    expect(stemSpoilerTokens('para todos', 'PARAGUAS')).toEqual([])
+    expect(stemSpoilerTokens('para todos', 'SEPARAR')).toEqual([])
+    expect(stemSpoilerTokens('para todos', 'PARAGUAS')).toEqual(['para']) // #184 W2: its own root
   })
   test('baseline is per pack and shrink-only', () => {
     const L = [{ word: 'SERATA', gloss: 'tempo della sera' }, { word: 'CASA', gloss: 'dove si abita' }]
@@ -190,5 +191,19 @@ describe('stem spoiler gate (#179 C1)', () => {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
       expect(stemSpoilerErrors(`${lang}/${f}`, pack.lemmas, base)).toEqual([])
     }
+  })
+})
+
+describe('stem gate widening (#184 W2)', () => {
+  test('4-letter shared prefix flags 6+ letter lemmas', () => {
+    expect(stemSpoilerTokens('unir par le mariage', 'MARIER')).toEqual(['mariage'])
+    expect(stemSpoilerTokens('un homme se souvient', 'SOUVENIR')).toEqual(['souvient'])
+    expect(stemSpoilerTokens('faire sécher', 'SÉCHOIR')).toEqual(['secher'])
+    expect(stemSpoilerTokens('un gros chat', 'GROTTE')).toEqual([])
+  })
+  test('ignore list never hides the lemma’s own root', () => {
+    expect(stemSpoilerTokens('pour quelle raison', 'POURQUOI')).toEqual(['pour'])
+    expect(stemSpoilerTokens('à peu près', 'PRESQUE')).toEqual(['pres'])
+    expect(stemSpoilerTokens('un objet pour écrire', 'STYLO')).toEqual([])
   })
 })

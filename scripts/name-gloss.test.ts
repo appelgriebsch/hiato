@@ -61,6 +61,30 @@ describe('isFrPersonGloss (#175)', () => {
       'objet créé par un artisan',
     ]) expect(isFrPersonGloss(g)).toBe(false)
   })
+  test('#184 W3/W4: capitalised places, prénoms, more origins', () => {
+    for (const g of [
+      'Île des Caraïbes.',
+      'Ville de Belgique.',
+      "Pays d'Europe.",
+      'prénom féminin',
+      'Prénom masculin.',
+      'personnage de roman de Conan Doyle',
+      'État du sud des États-Unis',
+      'pays africain',
+      'héros national',
+    ]) expect(isFrPersonGloss(g)).toBe(true)
+    for (const g of [
+      'Personnage cruel qui dévore les humains.', // OGRE
+      'chanteuse lyrique célèbre et exigeante', // DIVA
+      'joueur qui frappe la balle au baseball.', // FRAPPEUR
+      'prêtre de l’Église orthodoxe.', // POPE
+      'qui vient du Mexique.',
+      'originaire de la région de Flandre',
+      'qui vient de France',
+      'habitant de Paris',
+      'Île de sable au milieu du fleuve',
+    ]) expect(isFrPersonGloss(g)).toBe(false)
+  })
 })
 
 describe('isPersonNameGloss', () => {
