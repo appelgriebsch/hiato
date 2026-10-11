@@ -28,6 +28,7 @@ import {
   writeMembershipCache,
 } from './lang-membership'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
+import { boilerplateGlossErrors } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -78,6 +79,8 @@ async function checkAll(files: string[]): Promise<boolean> {
 
     const licenseErr = checkPackLicense(rel, pack)
     if (licenseErr) errors.push(licenseErr)
+
+    errors.push(...boilerplateGlossErrors(rel, pack.lemmas))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)

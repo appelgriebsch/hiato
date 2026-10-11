@@ -102,3 +102,68 @@ export function isWrongLanguageGloss(
   }
   return false
 }
+
+/**
+ * #178: placeholder glosses ("lo si fa") and boilerplate reused across lemmas.
+ * Compared after trim, lowercase and a dropped final period.
+ */
+export const PLACEHOLDER_GLOSSES: readonly string[] = [
+  'lo si fa',
+  'lo si fa bene',
+  'lo si fa con la mano',
+  'lo si fa con la bocca',
+  'un uomo lo fa',
+  'un uomo parla',
+  'la gente lo hace',
+]
+/** One gloss text on this many lemmas of one pack is boilerplate. Legit max today is 3 (EN A1 "a young person"). */
+export const BOILERPLATE_MIN = 4
+/**
+ * Grandfathered DE/ES boilerplate from before #178, capped at today's counts so
+ * it can only shrink. Remove an entry when that pack is regenerated.
+ */
+export const BOILERPLATE_BASELINE: Record<string, Record<string, number>> = {
+  'es/a1.json': { 'la gente lo hace': 25, 'un adjetivo del vocabulario inicial': 10 },
+  'es/a2.json': { 'la gente lo hace': 6, 'un adjetivo del vocabulario inicial': 4 },
+  'es/b1.json': {
+    'un verbo frecuente en frases sencillas': 22,
+    'un adjetivo del vocabulario inicial': 22,
+    'un adjetivo de 6 letras para cualidades': 6,
+    'un verbo de 6 letras para acciones cotidianas': 5,
+    'un adjetivo de 5 letras para cualidades': 5,
+    'un verbo de 9 letras para acciones cotidianas': 4,
+    'un adjetivo de 8 letras para cualidades': 4,
+    'un verbo de 8 letras para acciones cotidianas': 4,
+  },
+  'de/a1.json': { 'ein umstandswort in einfachen lerner-sätzen': 14, 'ein adjektiv für einfache beschreibungen': 5 },
+  'de/a2.json': { 'ein umstandswort in einfachen lerner-sätzen': 17, 'ein adjektiv für einfache beschreibungen': 12 },
+  'de/b1.json': { 'ein umstandswort in einfachen lerner-sätzen': 23, 'ein adjektiv für einfache beschreibungen': 9 },
+}
+
+export function glossKey(gloss: string): string {
+  return gloss.normalize('NFC').trim().toLowerCase().replace(/\.$/, '')
+}
+
+/** Errors for placeholder glosses and any gloss text reused on BOILERPLATE_MIN+ lemmas. */
+export function boilerplateGlossErrors(
+  rel: string,
+  lemmas: readonly { word: string; gloss?: string }[],
+  baseline: Record<string, Record<string, number>> = BOILERPLATE_BASELINE,
+): string[] {
+  const allowed = baseline[rel] ?? {}
+  const counts = new Map<string, string[]>()
+  for (const L of lemmas) {
+    const k = glossKey(L.gloss ?? '')
+    counts.set(k, [...(counts.get(k) ?? []), L.word])
+  }
+  const errors: string[] = []
+  for (const [k, words] of counts) {
+    if (words.length <= (allowed[k] ?? 0)) continue
+    if (PLACEHOLDER_GLOSSES.includes(k)) {
+      errors.push(`${rel}: placeholder gloss "${k}" on ${words.join(', ')}`)
+    } else if (words.length >= BOILERPLATE_MIN) {
+      errors.push(`${rel}: boilerplate gloss "${k}" reused on ${words.length} lemmas (${words.slice(0, 5).join(', ')}…)`)
+    }
+  }
+  return errors
+}
