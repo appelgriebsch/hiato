@@ -4,6 +4,10 @@ import {
   boilerplateGlossErrors,
   englishGlossByMembership,
   isEnglishShapedGloss,
+  isPlaceholderGloss,
+  stemOf,
+  stemSpoilerErrors,
+  stemSpoilerTokens,
   isTemplateGloss,
   isWrongLanguageGloss,
 } from './gloss-quality'
@@ -136,6 +140,55 @@ describe('boilerplateGlossErrors (#178)', () => {
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
       expect(boilerplateGlossErrors(`${lang}/${f}`, pack.lemmas)).toEqual([])
+    }
+  })
+})
+
+describe('isPlaceholderGloss (#179 W1)', () => {
+  test('start-anchored: extra words after a placeholder still fail', () => {
+    for (const g of ['lo si fa spesso', 'Lo si fa con la mano.', 'un uomo parla forte', 'la gente lo hace mucho'])
+      expect(isPlaceholderGloss(g)).toBe(true)
+  })
+  test('real glosses that merely contain the words pass', () => {
+    for (const g of ['ciò che lo si fa notare', 'un uomo parlante', 'lo sifone'])
+      expect(isPlaceholderGloss(g)).toBe(false)
+  })
+})
+
+describe('stem spoiler gate (#179 C1)', () => {
+  test('stem is 5 letters, 4 for lemmas of 5 or fewer, none under 4', () => {
+    expect(stemOf('ATTENTO')).toBe('atten')
+    expect(stemOf('CERTO')).toBe('cert')
+    expect(stemOf('FOTO')).toBe('foto')
+    expect(stemOf('RE')).toBe('')
+  })
+  test('flags transparent forms both ways', () => {
+    expect(stemSpoilerTokens('che fa molta attenzione', 'ATTENTO')).toEqual(['attenzione'])
+    expect(stemSpoilerTokens('senza nessuna incertezza', 'CERTO')).toEqual(['incertezza'])
+    expect(stemSpoilerTokens('tempo della sera', 'SERATA')).toEqual(['sera'])
+    expect(stemSpoilerTokens('vedere di nuovo', 'RIVEDERE')).toEqual(['vedere'])
+    expect(stemSpoilerTokens('figura fatta con la fotografia', 'FOTO')).toEqual(['fotografia'])
+    expect(stemSpoilerTokens('Città', 'CITTÀ')).toEqual(['citta'])
+  })
+  test('passes unrelated glosses and ignored function words', () => {
+    expect(stemSpoilerTokens('le ore dopo cena', 'SERATA')).toEqual([])
+    expect(stemSpoilerTokens('chiamare qualcuno con il cellulare', 'TELEFONARE')).toEqual([])
+    expect(stemSpoilerTokens('para todos', 'PARAGUAS')).toEqual([])
+  })
+  test('baseline is per pack and shrink-only', () => {
+    const L = [{ word: 'SERATA', gloss: 'tempo della sera' }, { word: 'CASA', gloss: 'dove si abita' }]
+    expect(stemSpoilerErrors('it/a2.json', L, {}).length).toBe(1)
+    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA'] })).toEqual([])
+    expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': ['SERATA', 'CASA'] })[0]).toContain('stale')
+  })
+  test('every shipped pack passes; IT has no baseline', async () => {
+    const { readdirSync, readFileSync } = await import('node:fs')
+    const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
+    expect(Object.keys(base).filter((k) => k.startsWith('it/'))).toEqual([])
+    const root = `${import.meta.dir}/../public/packs`
+    for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
+      const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
+      expect(stemSpoilerErrors(`${lang}/${f}`, pack.lemmas, base)).toEqual([])
     }
   })
 })

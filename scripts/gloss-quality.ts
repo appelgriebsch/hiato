@@ -107,15 +107,11 @@ export function isWrongLanguageGloss(
  * #178: placeholder glosses ("lo si fa") and boilerplate reused across lemmas.
  * Compared after trim, lowercase and a dropped final period.
  */
-export const PLACEHOLDER_GLOSSES: readonly string[] = [
-  'lo si fa',
-  'lo si fa bene',
-  'lo si fa con la mano',
-  'lo si fa con la bocca',
-  'un uomo lo fa',
-  'un uomo parla',
-  'la gente lo hace',
-]
+export const PLACEHOLDER_GLOSS_RE = /^(?:lo si fa|un uomo (?:lo fa|parla)|la gente lo hace)(?![\p{L}\p{N}])/iu
+
+export function isPlaceholderGloss(gloss: string): boolean {
+  return PLACEHOLDER_GLOSS_RE.test(glossKey(gloss))
+}
 /** One gloss text on this many lemmas of one pack is boilerplate. Legit max today is 3 (EN A1 "a young person"). */
 export const BOILERPLATE_MIN = 4
 /**
@@ -159,11 +155,72 @@ export function boilerplateGlossErrors(
   const errors: string[] = []
   for (const [k, words] of counts) {
     if (words.length <= (allowed[k] ?? 0)) continue
-    if (PLACEHOLDER_GLOSSES.includes(k)) {
+    if (isPlaceholderGloss(k)) {
       errors.push(`${rel}: placeholder gloss "${k}" on ${words.join(', ')}`)
     } else if (words.length >= BOILERPLATE_MIN) {
       errors.push(`${rel}: boilerplate gloss "${k}" reused on ${words.length} lemmas (${words.slice(0, 5).join(', ')}…)`)
     }
+  }
+  return errors
+}
+
+/** #179 C1: stem length for the transparent-form gate (ADR 0023). */
+export function stemOf(lemma: string): string {
+  const w = foldWord(lemma)
+  if (w.length < 4) return ''
+  return w.slice(0, w.length <= 5 ? 4 : 5)
+}
+
+function foldWord(s: string): string {
+  return s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
+}
+
+/** Short function words whose stem may sit inside a lemma by chance. */
+export const STEM_TOKEN_IGNORE: ReadonlySet<string> = new Set([
+  'para', 'pour', 'plus', 'over', 'uber', 'fino', 'antes', 'tras', 'cima', 'pres',
+])
+
+/**
+ * Tokens of text that share a stem with the lemma (a transparent form, ADR 0023):
+ * the token contains the lemma's stem, or the lemma contains the token's stem.
+ */
+export function stemSpoilerTokens(text: string, lemma: string): string[] {
+  const w = foldWord(lemma)
+  const stem = stemOf(lemma)
+  return (foldWord(text).match(/\p{L}+/gu) ?? []).filter((t) => {
+    if (STEM_TOKEN_IGNORE.has(t)) return false
+    if (stem && t.includes(stem)) return true
+    const ts = stemOf(t)
+    return ts.length > 0 && w.includes(ts)
+  })
+}
+
+/**
+ * Grandfathered stem spoilers per pack (lemma words), from before #179. Shrink-only:
+ * a listed lemma that no longer leaks fails too, so the entry gets deleted.
+ * IT has no entries; every IT pack must be clean.
+ */
+export type StemBaseline = Record<string, readonly string[]>
+
+export function stemSpoilerErrors(
+  rel: string,
+  lemmas: readonly { word: string; gloss?: string; synonyms?: readonly string[] }[],
+  baseline: StemBaseline,
+): string[] {
+  const allowed = new Set(baseline[rel] ?? [])
+  const errors: string[] = []
+  const seen = new Set<string>()
+  for (const L of lemmas) {
+    const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
+    const hits = texts.filter((t) => stemSpoilerTokens(t, L.word).length > 0)
+    if (!hits.length) continue
+    seen.add(L.word)
+    if (!allowed.has(L.word)) {
+      errors.push(`${rel}: stem spoiler (ADR 0023) — "${L.word}" shares a stem with "${hits[0]}"`)
+    }
+  }
+  for (const w of allowed) {
+    if (!seen.has(w)) errors.push(`${rel}: stale stem-spoiler baseline entry "${w}" — remove it`)
   }
   return errors
 }
