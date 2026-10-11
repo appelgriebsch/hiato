@@ -1,6 +1,6 @@
 # Third-party bill of materials
 
-Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). Other rows were not re-checked.
+Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). The PR #177 review re-checked `dictionary-it` 2.0.0 and `nspell` 2.1.5 on 2026-10-11 (no critical update, no CVE). Other rows were not re-checked.
 
 | Name | Version | License | Critical update | CVEs |
 | --- | --- | --- | --- | --- |
@@ -16,10 +16,10 @@ Direct dependencies declared by this repository. Rows returned by the PR #40 rev
 | dictionary-en | 4.0.0 | unknown | | not checked |
 | dictionary-es | 4.0.0 | unknown | | not checked |
 | dictionary-fr | 3.0.0 | MPL-2.0 | | not checked |
-| dictionary-it | 2.0.0 | GPL-3.0 | | not checked |
+| dictionary-it | 2.0.0 | GPL-3.0 | | none found |
 | dictionary-pt | 4.0.0 | unknown | | not checked |
 | dictionary-pt-pt | 2.0.0 | unknown | | not checked |
-| nspell | 2.1.5 | unknown | | not checked |
+| nspell | 2.1.5 | MIT | | none found |
 | react | 19.3.0 | MIT | | none found |
 | react-dom | 19.3.0 | MIT | | none found |
 | react-router-dom | 7.18.4 | MIT | | none found |
