@@ -1,5 +1,30 @@
 import { describe, expect, test } from 'bun:test'
-import { isPersonNameGloss } from './name-gloss'
+import { isFrPersonGloss, isPersonNameGloss } from './name-gloss'
+
+describe('isFrPersonGloss (#175)', () => {
+  test('flags one named person', () => {
+    for (const g of [
+      'nom propre d’un dirigeant soviétique',
+      'personnage historique allemand du XXe siècle',
+      'personnage de bande dessinée belge',
+      'un prophète biblique',
+      'une déesse nordique de l’amour et de la beauté.',
+      'une personnalité américaine',
+      'acteur américain',
+      'chanteuse française',
+    ]) expect(isFrPersonGloss(g)).toBe(true)
+  })
+  test('keeps role-word lemmas', () => {
+    for (const g of [
+      'Personnage cruel qui dévore les humains.', // OGRE
+      'chanteuse lyrique célèbre et exigeante', // DIVA
+      'joueur qui frappe la balle au baseball.', // FRAPPEUR
+      'petit oiseau chanteur des champs.', // ALOUETTE
+      'partie consciente de la personnalité.', // EGO
+      'grande ville dirigeant une région', // MÉTROPOLE
+    ]) expect(isFrPersonGloss(g)).toBe(false)
+  })
+})
 
 describe('isPersonNameGloss', () => {
   test('drops person-name glosses', () => {

@@ -13,6 +13,17 @@ const FR_BARE_PERSON =
   /^(?:un |une )?(?:garçon|jeune fille|jeune femme|homme(?: italien)?|femme(?: biblique)?)\.?$/i
 const IT =
   /\bcognome\b|\bnome proprio\b|\bnomi propri\b|\bnome di battesimo\b|\bnome di persona\b|\bprenome\b/i
+// A named individual: role word straight after an origin/genre qualifier
+// ("un prophète biblique", "dirigeant soviétique"). Fails without the
+// name list. Plain role glosses (OGRE, DIVA, FRAPPEUR) stay common nouns.
+const FR_PERSON =
+  /\b(?:personnages?|personnalités?|dirigeant(?:e|s)?|prophètes?|déesses?|acteurs?|actrices?|chanteur(?:s)?|chanteuses?) (?:historiques?|de bande dessinée|de fiction|bibliques?|nordiques?|grecs?|grecques?|romaine?s?|soviétiques?|russes?|allemande?s?|américaine?s?|française?s?|belges?|italienne?s?|anglaise?s?|britanniques?)\b/i
+
+/** FR glosses that name one specific person, even off lemma-names.txt. */
+export function isFrPersonGloss(gloss: string | undefined | null): boolean {
+  return !!gloss && FR_PERSON.test(gloss.normalize('NFC'))
+}
+
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i
