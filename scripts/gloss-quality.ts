@@ -187,7 +187,9 @@ export const STEM_TOKEN_IGNORE: ReadonlySet<string> = new Set([
 export const STEM_UNRELATED: ReadonlySet<string> = new Set([
   'contrat:contre', 'tempete:temps', 'carton:carte', 'pontife:pont',
   'perseverer:persister', // per-severus vs per-sistere
-  'capable:able', 'austere:stern', // #188: capere vs habilis; austerus vs sterne
+  'austere:stern', // #188: austerus vs sterne
+  // #191 W4: shared Latin prefix, different roots
+  'complex:complicated', 'commission:committee', 'compress:compact', 'splatter:splash', 'interject:interrupt',
 ])
 
 /**

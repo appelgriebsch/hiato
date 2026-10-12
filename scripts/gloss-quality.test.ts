@@ -207,6 +207,11 @@ describe('stem spoiler gate (#179 C1)', () => {
 })
 
 describe('stem gate widening (#184 W2)', () => {
+  test('#191: EN unrelated pairs pass, related ones still fail', () => {
+    for (const [w, t] of [['COMPLEX', 'complicated'], ['COMMISSION', 'committee'], ['COMPRESS', 'compact'], ['SPLATTER', 'splash'], ['INTERJECT', 'interrupt']])
+      expect(stemSpoilerTokens(t, w)).toEqual([])
+    expect(stemSpoilerTokens('able', 'CAPABLE')).toEqual(['able'])
+  })
   test('#184 W4: unrelated roots pass, real give-aways still fail', () => {
     for (const [lemma, text] of [['CONTRAT', 'contre'], ['TEMPÊTE', 'temps'], ['CARTON', 'carte'], ['PONTIFE', 'pont']]) {
       expect(stemSpoilerTokens(text!, lemma!)).toEqual([])
