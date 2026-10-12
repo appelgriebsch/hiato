@@ -194,10 +194,21 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(errs.length).toBe(1)
     expect(errs[0]).toContain('fahrer')
   })
-  test('every shipped pack passes; FR, IT and EN have no baseline (#181, #188)', async () => {
+  test('#192: an injected ES stem leak is caught', async () => {
+    const { readFileSync } = await import('node:fs')
+    const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
+    const pack = JSON.parse(readFileSync(`${import.meta.dir}/../public/packs/es/b1.json`, 'utf8'))
+    expect(stemSpoilerErrors('es/b1.json', pack.lemmas, base)).toEqual([])
+    const mutated = pack.lemmas.map((x: { word: string; gloss: string }) =>
+      x.word === 'ABRAZAR' ? { ...x, gloss: 'dar un abrazo' } : x)
+    const errs = stemSpoilerErrors('es/b1.json', mutated, base)
+    expect(errs.length).toBe(1)
+    expect(errs[0]).toContain('abrazo')
+  })
+  test('every shipped pack passes; FR, IT, EN and ES have no baseline (#181, #188, #185)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
     const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
-    expect(Object.keys(base).filter((k) => /^(?:fr|it|en)\//.test(k))).toEqual([])
+    expect(Object.keys(base).filter((k) => /^(?:fr|it|en|es)\//.test(k))).toEqual([])
     const root = `${import.meta.dir}/../public/packs`
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
