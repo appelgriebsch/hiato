@@ -29,6 +29,8 @@ Set on **Production** and **Preview**:
 
 `packs:check` is the Hunspell / name / synonym / same-language-gloss gate (ADR 0030). The command lives in the Cloudflare Pages dashboard — edit **Production and Preview** on merge so a main deploy cannot publish packs that skipped GitHub `build-test`. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
 
+Cloudflare Pages injects `CI=true` into every build ([build configuration docs](https://developers.cloudflare.com/pages/configuration/build-configuration/#environment-variables)), so `packs:check` there fails closed on a Hunspell verdict cache miss and never loads dictionaries, the same as GitHub CI.
+
 Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revalidate` on `/packs/*` in `public/_headers`).
 
 ## Lockfile

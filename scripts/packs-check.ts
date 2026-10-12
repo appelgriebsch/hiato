@@ -22,9 +22,12 @@ import {
   type PackSnapshot,
 } from './packs-check-lib'
 import {
+  deferMembershipMisses,
   ensureDicts,
   loadMembershipCache,
   MembershipDictsNeeded,
+  resolveMembershipMisses,
+  takeMembershipMisses,
   writeMembershipCache,
 } from './lang-membership'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
@@ -52,8 +55,15 @@ async function walkJson(dir: string): Promise<string[]> {
   return out
 }
 
-/** Returns true when the packs failed a gate. */
-async function checkAll(files: string[]): Promise<boolean> {
+type Line = ['log' | 'warn' | 'error', unknown]
+
+/** Returns true when the packs failed a gate. Output is buffered in `lines` so a pass with cache misses can be discarded. */
+async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
+  const out = {
+    log: (m: unknown) => lines.push(['log', m]),
+    warn: (m: unknown) => lines.push(['warn', m]),
+    error: (m: unknown) => lines.push(['error', m]),
+  }
   const snapshots: PackSnapshot[] = []
   const rels: string[] = []
   const errors: string[] = []
@@ -91,12 +101,12 @@ async function checkAll(files: string[]): Promise<boolean> {
 
     const syn = checkSynonymCoverage(rel, pack)
     if (syn.error) errors.push(syn.error)
-    if (syn.warn) console.warn(syn.warn)
+    if (syn.warn) out.warn(syn.warn)
 
     snapshots.push({ rel, pack })
     const floor = lemmaFloor(pack.cefr)
     const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
-    console.log(
+    out.log(
       `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra})`,
     )
   }
@@ -111,7 +121,7 @@ async function checkAll(files: string[]): Promise<boolean> {
     enTags = loadEnEasiestCefr()
     stemCache = loadHintStemCache()
   } catch (e) {
-    console.error(e instanceof Error ? e.message : e)
+    out.error(e instanceof Error ? e.message : e)
     return true
   }
   const lemmaEasiestByLang = buildLemmaEasiestByLang(snapshots)
@@ -122,11 +132,11 @@ async function checkAll(files: string[]): Promise<boolean> {
   }
 
   if (errors.length) {
-    for (const e of errors) console.error(e)
+    for (const e of errors) out.error(e)
     return true
   }
 
-  console.log(`packs:check passed (${snapshots.length} file${snapshots.length === 1 ? '' : 's'})`)
+  out.log(`packs:check passed (${snapshots.length} file${snapshots.length === 1 ? '' : 's'})`)
   return false
 }
 
@@ -140,23 +150,40 @@ if (files.length === 0) {
 
 let failed = false
 let cacheMissInCi = false
+// Locally, misses are collected and resolved with only the missed languages' dicts.
+// In CI a miss still throws MembershipDictsNeeded and fails closed.
+if (!failClosedOnHunspellMiss()) {
+  await ensureDicts()
+  deferMembershipMisses()
+}
 try {
   try {
-    failed = await checkAll(files)
+    // Misses answer true provisionally; resolve them and rerun from the cache.
+    // Loop in case a pass threw early or a flipped verdict reaches new words.
+    // Terminates: every resolved miss becomes a cache hit, so each round strictly
+    // shrinks the finite set of unknown (lang, word) keys the packs can produce.
+    let lines: Line[]
+    for (;;) {
+      lines = []
+      let thrown: unknown = null
+      try {
+        failed = await checkAll(files, lines)
+      } catch (e) {
+        thrown = e
+      }
+      const misses = takeMembershipMisses()
+      if (thrown && !misses.length) throw thrown
+      if (!misses.length) break
+      console.error(`packs:check: ${misses.length} Hunspell verdict cache misses — resolving`)
+      await resolveMembershipMisses(misses)
+    }
+    for (const [kind, m] of lines) console[kind](m)
   } catch (e) {
     if (!(e instanceof MembershipDictsNeeded)) throw e
-    if (failClosedOnHunspellMiss()) {
-      cacheMissInCi = true
-      console.error(
-        'packs:check: Hunspell verdict cache miss. Run bun run packs:check locally and commit scripts/data/hunspell-verdicts.json',
-      )
-    } else {
-      console.error(
-        'packs:check: Hunspell verdict cache miss — loading dictionaries',
-      )
-      await ensureDicts()
-      failed = await checkAll(files)
-    }
+    cacheMissInCi = true
+    console.error(
+      'packs:check: Hunspell verdict cache miss. Run bun run packs:check locally and commit scripts/data/hunspell-verdicts.json',
+    )
   }
 } finally {
   if (!cacheMissInCi && writeMembershipCache()) {

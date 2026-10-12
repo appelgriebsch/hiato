@@ -10,6 +10,7 @@ Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily
 
 ```bash
 bun run packs:check   # pack schema + spoiler rule
+# CI fails on a Hunspell verdict cache miss: run packs:check locally and commit scripts/data/hunspell-verdicts.json
 ```
 
 ## Stack (locked)

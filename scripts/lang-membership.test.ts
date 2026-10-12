@@ -1,6 +1,16 @@
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
+import path from 'node:path'
 import {
   caseProbes,
+  deferMembershipMisses,
+  ensureDicts,
+  runDictWorker,
+  loadedProductionLangs,
+  loadProductionLang,
+  resolveMembershipMisses,
+  takeMembershipMisses,
+  setProductionLangLoaderForTests,
+  type MembershipLang,
   installFixtureSpellersFromDir,
   installMembershipCacheForTests,
   isAllowlistedLemma,
@@ -118,5 +128,106 @@ describe('membership verdict cache', () => {
     )
     installFixtureSpellersFromDir()
     expect(isWordOfLang('en', 'HELLO')).toBe(true)
+  })
+})
+
+describe('lazy per-language production spellers', () => {
+  const built: MembershipLang[] = []
+  const original = loadProductionLang
+  beforeAll(() => {
+    setProductionLangLoaderForTests((lang) => {
+      built.push(lang)
+      return [{ correct: (w: string) => w.toUpperCase() === 'HAUS' }]
+    })
+  })
+  afterAll(() => {
+    setProductionLangLoaderForTests(original)
+    resetDicts()
+  })
+
+  test('without a cache, ensureDicts builds only the languages looked up', async () => {
+    resetDicts()
+    built.length = 0
+    await ensureDicts()
+    expect(built).toEqual([])
+    expect(isWordOfLang('de', 'HAUS')).toBe(true)
+    expect(isWordOfLang('de', 'ZZZ')).toBe(false)
+    expect(built).toEqual(['de'])
+    expect(loadedProductionLangs()).toEqual(['de'])
+  })
+
+  test('with the cache armed, misses queue instead of loading spellers', async () => {
+    resetDicts()
+    built.length = 0
+    installMembershipCacheForTests(
+      new Map([[membershipCacheKey('en', 'HELLO'), true]]),
+    )
+    await ensureDicts()
+    deferMembershipMisses()
+    expect(isWordOfLang('en', 'HELLO')).toBe(true)
+    expect(isWordOfLang('pt', 'CASA')).toBe(true)
+    expect(isWordOfLang('pt', 'CASA')).toBe(true)
+    expect(built).toEqual([])
+    expect(takeMembershipMisses()).toEqual([membershipCacheKey('pt', 'CASA')])
+    expect(takeMembershipMisses()).toEqual([])
+  })
+
+  test('resolveMembershipMisses runs only the missed languages, OR across dicts', async () => {
+    resetDicts()
+    const map = new Map<string, boolean>()
+    installMembershipCacheForTests(map)
+    const runs: string[] = []
+    await resolveMembershipMisses(
+      [membershipCacheKey('pt', 'ÔNIBUS'), membershipCacheKey('pt', 'ZZQ')],
+      async (pkg, lang, words) => {
+        runs.push(`${pkg}:${lang}`)
+        return words.map((w) => pkg === 'dictionary-pt' && w === 'ÔNIBUS')
+      },
+    )
+    expect(runs.sort()).toEqual(['dictionary-pt-pt:pt', 'dictionary-pt:pt'])
+    expect(map.get(membershipCacheKey('pt', 'ÔNIBUS'))).toBe(true)
+    expect(map.get(membershipCacheKey('pt', 'ZZQ'))).toBe(false)
+    expect(isWordOfLang('pt', 'ÔNIBUS')).toBe(true)
+  })
+
+  test('without deferMembershipMisses (repair scripts), a miss is looked up synchronously and cached', async () => {
+    resetDicts()
+    built.length = 0
+    const map = new Map<string, boolean>()
+    installMembershipCacheForTests(map)
+    await ensureDicts()
+    expect(isWordOfLang('de', 'ZZQ')).toBe(false)
+    expect(isWordOfLang('de', 'HAUS')).toBe(true)
+    expect(built).toEqual(['de'])
+    expect(map.get(membershipCacheKey('de', 'ZZQ'))).toBe(false)
+    expect(takeMembershipMisses()).toEqual([])
+  })
+
+  for (const slow of ['dictionary-pt-pt', 'dictionary-pt']) {
+    test(`OR-merge across pt dicts does not depend on finish order (${slow} last)`, async () => {
+      resetDicts()
+      const map = new Map<string, boolean>()
+      installMembershipCacheForTests(map)
+      await resolveMembershipMisses([membershipCacheKey('pt', 'CASA')], async (pkg, _lang, words) => {
+        if (pkg === slow) await Bun.sleep(20)
+        // The fast dict accepts, the slow one rejects: the late false must not overwrite.
+        return words.map(() => pkg !== slow)
+      })
+      expect(map.get(membershipCacheKey('pt', 'CASA'))).toBe(true)
+    })
+  }
+})
+
+describe('membership worker process', () => {
+  const fixture = (name: string) => path.join(import.meta.dir, 'testdata', name)
+
+  test('real worker on fixture dicts answers a known true/false pair', async () => {
+    expect(await runDictWorker(fixture('en'), 'en', ['HELLO', 'ZZQWORD'])).toEqual([true, false])
+    expect(await runDictWorker(fixture('pt-br'), 'pt', ['come', 'for'])).toEqual([true, false])
+  })
+
+  test('a failing worker rejects with a wrapped error', async () => {
+    const err = await runDictWorker(fixture('missing'), 'en', ['HELLO']).catch((e: Error) => e)
+    expect(String(err)).toMatch(/membership-worker .*missing/)
   })
 })
