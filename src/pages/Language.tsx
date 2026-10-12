@@ -51,7 +51,7 @@ function SelectedCheck({ on }: { on: boolean }) {
   ) : null
 }
 
-/** Selected pair, provenance (#80/#99), offline status and A2HS once ready (#103). */
+/** Selected pair, provenance (#80/#99), offline status (#103); A2HS link lives under Continue (#201). */
 export function SelectionCard({
   lang,
   cefr,
@@ -105,7 +105,6 @@ export function SelectionCard({
           {packInfoLabel(lang)}
         </Link>
       </div>
-      <InstallHelpLink visible={phase === 'ready'} />
     </section>
   )
 }
@@ -198,6 +197,7 @@ export function Language() {
                 ? 'Caching…'
                 : 'Continue to daily'}
           </Button>
+          <InstallHelpLink visible={cachePhase === 'ready'} />
         </div>
       }
     >

@@ -478,7 +478,9 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     expect(src).toContain('data-pack-cache-status')
     expect(src).toContain('InstallHelpLink')
     expect(src).toContain('✓ Ready offline')
-    expect(src).toContain("<InstallHelpLink visible={phase === 'ready'} />")
+    // #201: one link under Continue, not inside the selection card
+    expect(src).toContain("<InstallHelpLink visible={cachePhase === 'ready'} />")
+    expect(src).not.toContain("<InstallHelpLink visible={phase === 'ready'} />")
     expect(src).toContain("cachePhase === 'caching'")
     expect(src).toContain("'Caching…'")
     // Provenance preserved
