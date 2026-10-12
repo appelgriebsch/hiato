@@ -182,17 +182,14 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': { SERATA: ['sera'] } })).toEqual([])
     expect(stemSpoilerErrors('de/a2.json', L, { 'de/a2.json': { SERATA: ['sera'], CASA: ['casa'] } })[0]).toContain('stale')
   })
-  test('#184 W3: a new leak on an exempted lemma still fails', async () => {
-    const { readFileSync } = await import('node:fs')
-    const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
-    const pack = JSON.parse(readFileSync(`${import.meta.dir}/../public/packs/de/a1.json`, 'utf8'))
-    const L = pack.lemmas.find((x: { word: string }) => x.word === 'FAHREN')
-    expect(base['de/a1.json'].FAHREN?.length).toBeGreaterThan(0)
-    const mutated = pack.lemmas.map((x: { word: string; gloss: string }) =>
-      x === L ? { ...x, gloss: `${x.gloss} Fahrer Fahrt` } : x)
-    const errs = stemSpoilerErrors('de/a1.json', mutated, base)
+  test('#184 W3: a new leak on an exempted lemma still fails', () => {
+    // #187: synthetic baseline, the shipped one no longer exempts DE.
+    const L = [{ word: 'FAHREN', gloss: 'der Fahrer lenkt' }]
+    const base = { 'de/a1.json': { FAHREN: ['fahrer'] } }
+    expect(stemSpoilerErrors('de/a1.json', L, base)).toEqual([])
+    const errs = stemSpoilerErrors('de/a1.json', [{ ...L[0], gloss: 'der Fahrer lenkt die Fahrt' }], base)
     expect(errs.length).toBe(1)
-    expect(errs[0]).toContain('fahrer')
+    expect(errs[0]).toContain('fahrt')
   })
   test('#192: an injected ES stem leak is caught', async () => {
     const { readFileSync } = await import('node:fs')
@@ -205,10 +202,10 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(errs.length).toBe(1)
     expect(errs[0]).toContain('abrazo')
   })
-  test('every shipped pack passes; FR, IT, EN, ES and PT have no baseline (#181, #188, #185, #186)', async () => {
+  test('every shipped pack passes; no language has a baseline (#181, #188, #185, #186, #187)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
     const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
-    expect(Object.keys(base).filter((k) => /^(?:fr|it|en|es|pt)\//.test(k))).toEqual([])
+    expect(base).toEqual({})
     const root = `${import.meta.dir}/../public/packs`
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
