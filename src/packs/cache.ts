@@ -74,7 +74,13 @@ export async function purgeOtherLanguagePacks(
 }
 
 /** Language whose six packs are already in SW cache this session (#190). */
+// ponytail: per-session module flag, reset on reload; the SW cache is not re-checked, so an evicted pack is only re-added after a reload or language switch.
 let precachedLang: PackLang | null = null
+
+/** Test seam: forget the precached language. */
+export function resetPrecachedLang(): void {
+  precachedLang = null
+}
 
 /**
  * Precache shipped CEFR packs for the selected language, then drop other langs
@@ -105,6 +111,7 @@ export async function precacheSelectedLanguage(
   // Same language, all packs in memory: a CEFR change needs no network (#190).
   if (precachedLang === lang && loaded.size === PACK_CEFRS.length) return true
 
+  let allAdded = loaded.size === PACK_CEFRS.length
   const cache = await openPackCache()
   if (cache) {
     await Promise.all(
@@ -113,7 +120,8 @@ export async function precacheSelectedLanguage(
         try {
           await cache.add(url)
         } catch {
-          // offline — loadPack may still have filled localStorage
+          // offline — loadPack may still have filled localStorage; retry next call
+          allAdded = false
         }
       }),
     )
@@ -121,6 +129,6 @@ export async function precacheSelectedLanguage(
   }
 
   purgeLocalPacksExcept(lang)
-  precachedLang = loaded.size === PACK_CEFRS.length ? lang : null
+  precachedLang = allAdded ? lang : null
   return true
 }

@@ -240,7 +240,7 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang)}
             className={[
-              'motion-press relative min-h-12 min-w-0 rounded-xl border-2 px-2 py-1.5 text-left disabled:opacity-40',
+              'motion-press relative min-h-12 min-w-0 rounded-xl border-2 ps-2 pe-4 py-1.5 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
                 ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
@@ -285,7 +285,7 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr)}
             className={[
-              'motion-press relative min-h-11 rounded-xl border-2 px-2 text-center font-semibold disabled:opacity-40',
+              'motion-press relative min-h-11 rounded-xl border-2 px-4 text-center font-semibold disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
                 ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
