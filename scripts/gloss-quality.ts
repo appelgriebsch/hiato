@@ -217,7 +217,7 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
  * Grandfathered stem spoilers per pack, from before #179: lemma → the exact
  * leaking tokens (folded). Shrink-only: a new leaking token on a listed lemma
  * fails (#184 W3), and a listed token that no longer leaks fails as stale.
- * FR, IT and EN have no entries (#181, #188); those packs must be clean.
+ * FR, IT, EN, ES and PT have no entries (#181, #188, #185, #186); only DE is left.
  */
 export type StemBaseline = Record<string, Record<string, readonly string[]>>
 
