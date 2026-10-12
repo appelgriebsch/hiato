@@ -292,3 +292,15 @@ describe('named rollback hiato-production', () => {
     ).toBeNull()
   })
 })
+
+describe('pack runtime cache offline (#193)', () => {
+  test('NetworkFirst answers 503 instead of an uncaught no-response', async () => {
+    const cfg = await readRepo('vite.config.ts')
+    const m = cfg.match(/handlerDidError: (async \(\) =>\s*new Response\([^)]*\))/)
+    expect(m).not.toBeNull()
+    const handler = new Function(`return ${m![1]}`)() as () => Promise<Response>
+    const res = await handler()
+    expect(res.status).toBe(503)
+    expect(res.ok).toBe(false)
+  })
+})

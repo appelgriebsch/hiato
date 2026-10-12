@@ -127,6 +127,11 @@ export default defineConfig({
                     if (!ct.includes('application/json')) return null
                     return response
                   },
+                  // Offline with no cached copy, NetworkFirst throws 'no-response', which
+                  // surfaces as an uncaught rejection in the SW (#193). Answer 503 instead;
+                  // load.ts and cache.add already treat a non-ok pack response as a miss.
+                  handlerDidError: async () =>
+                    new Response(null, { status: 503, statusText: 'pack offline' }),
                 },
               ],
             },
