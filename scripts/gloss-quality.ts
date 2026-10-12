@@ -203,6 +203,9 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
   const stem = stemOf(lemma)
   return (foldWord(text).match(/\p{L}+/gu) ?? []).filter((t) => {
     // #184 W2: the ignore list never hides the lemma's own root (POURQUOI "pour", PRESQUE "près").
+    // Tessa 69a77e4: an accent variant of the lemma (FIO "fío", ATE "até") is the answer.
+    // Before the ignore lists, so a function-word lemma (PARA "pára") cannot skip it.
+    if (t === w) return true
     if (STEM_TOKEN_IGNORE.has(t) && !w.startsWith(t)) return false
     if (STEM_UNRELATED.has(`${w}:${t}`)) return false
     if (stem && t.includes(stem)) return true

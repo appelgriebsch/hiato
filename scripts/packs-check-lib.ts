@@ -16,7 +16,7 @@ import {
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedLemma, loadDenylist } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
-import { isFrPersonGloss, isItNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
+import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
 import { dictsReady, isWordOfLang, membershipCacheArmed } from './lang-membership'
 import {
@@ -346,7 +346,8 @@ export function validatePack(raw: unknown, file: string): WordPack {
     if (
       (onNameList(word, NAMES) && isPersonNameGloss(gloss, o.lang as string)) ||
       (o.lang === 'fr' && isFrPersonGloss(gloss)) ||
-      (o.lang === 'it' && isItNameOrPlaceGloss(gloss))
+      (o.lang === 'it' && isItNameOrPlaceGloss(gloss)) ||
+      isNameOrPlaceGloss(gloss, o.lang as string)
     ) {
       throw new Error(
         `${file}: lemmas[${i}] person-name gloss — "${word}" / "${gloss}"`,
