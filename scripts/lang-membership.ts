@@ -11,7 +11,12 @@
  * stored in it.
  * Editing a stamped input invalidates the file; the next packs:check reloads
  * Hunspell once and rewrites it.
+ *
+ * packs:check resolves misses in one child process per dictionary, and only
+ * for the languages that missed (#195): several nspell heaps in one process
+ * slow its GC down by ~40x (a PT miss took ~25 min, now ~20 s).
  */
+import { execFile } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFileSync, renameSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -25,6 +30,7 @@ export type MembershipLang = 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it'
 export type SpellChecker = { correct(word: string): boolean }
 
 type SpellMap = Record<MembershipLang, SpellChecker[]>
+type PartialSpellMap = Partial<SpellMap>
 
 const ALLOW_FILE = path.join(import.meta.dir, 'data', 'loanword-allowlist.txt')
 const TESTDATA = path.join(import.meta.dir, 'testdata')
@@ -62,12 +68,14 @@ type AllowLists = {
 }
 
 let allowCache: AllowLists | null = null
-let production: SpellMap | null = null
+/** Non-null once ensureDicts() ran; each language's spellers load on first lookup. */
+let production: PartialSpellMap | null = null
 let fixtures: SpellMap | null = null
 let entries: Map<string, boolean> | null = null
 let activeStamp = ''
 let dirty = false
 let persistCache = false
+const pending = new Set<string>()
 
 /** Thrown when a verdict is missing and the Hunspell dictionaries are not loaded. */
 export class MembershipDictsNeeded extends Error {
@@ -323,12 +331,13 @@ export function membershipCacheArmed(): boolean {
   return entries !== null
 }
 
-function spellers(): SpellMap {
-  const map = fixtures ?? production
-  if (!map) {
+function spellersFor(lang: MembershipLang): SpellChecker[] {
+  if (fixtures) return fixtures[lang]
+  if (!production) {
     throw new Error('ensureDicts() or installFixtureSpellers() must run first')
   }
-  return map
+  production[lang] ??= loadProductionLang(lang)
+  return production[lang]
 }
 
 export function installFixtureSpellers(map: SpellMap): void {
@@ -351,41 +360,103 @@ export function installFixtureSpellersFromDir(dir = TESTDATA): void {
   }
 }
 
-type DictModule = { default: { aff: Uint8Array; dic: Uint8Array } }
-
-async function loadProduction(): Promise<SpellMap> {
-  const [en, de, es, fr, it, ptBr, ptPt] = await Promise.all([
-    import('dictionary-en') as Promise<DictModule>,
-    import('dictionary-de') as Promise<DictModule>,
-    import('dictionary-es') as Promise<DictModule>,
-    import('dictionary-fr') as Promise<DictModule>,
-    import('dictionary-it') as Promise<DictModule>,
-    import('dictionary-pt') as Promise<DictModule>,
-    import('dictionary-pt-pt') as Promise<DictModule>,
-  ])
-  return {
-    en: [nspell(en.default)],
-    de: [nspell(de.default)],
-    es: [nspell(es.default)],
-    fr: [nspell(fr.default)],
-    // nspell(dictionary-it) expands elision prefixes at init and does not finish.
-    it: [italianSpell(it.default.aff, it.default.dic)],
-    pt: [nspell(ptPt.default), nspell(ptBr.default)],
-  }
+/** Hunspell packages per language; a lemma is a member if any of them accepts it. */
+export const LANG_DICTS: Record<MembershipLang, readonly string[]> = {
+  en: ['dictionary-en'],
+  de: ['dictionary-de'],
+  es: ['dictionary-es'],
+  fr: ['dictionary-fr'],
+  it: ['dictionary-it'],
+  pt: ['dictionary-pt-pt', 'dictionary-pt'],
 }
 
-/** Load Hunspell dictionaries from node_modules (build/check only). */
+/** Build one speller. Each nspell instance is huge; see resolveMembershipMisses. */
+export function loadSpeller(pkg: string): SpellChecker {
+  const root = packageDir(pkg)
+  const aff = readFileSync(path.join(root, 'index.aff'))
+  const dic = readFileSync(path.join(root, 'index.dic'))
+  // nspell(dictionary-it) expands elision prefixes at init and does not finish.
+  return pkg === 'dictionary-it' ? italianSpell(aff, dic) : nspell({ aff, dic })
+}
+
+/** Overridable in tests to observe which languages get constructed. */
+export let loadProductionLang = (lang: MembershipLang): SpellChecker[] =>
+  LANG_DICTS[lang].map(loadSpeller)
+
+export function setProductionLangLoaderForTests(
+  fn: (lang: MembershipLang) => SpellChecker[],
+): void {
+  loadProductionLang = fn
+}
+
+/** Languages whose in-process production spellers have been constructed. */
+export function loadedProductionLangs(): MembershipLang[] {
+  return production ? (Object.keys(production) as MembershipLang[]).sort() : []
+}
+
+/**
+ * Enable Hunspell lookups (build/check only). In-process spellers are built
+ * lazily per language on first use. With the verdict cache armed, misses are
+ * collected instead (see takeMembershipMisses / resolveMembershipMisses).
+ */
 export async function ensureDicts(): Promise<void> {
   if (fixtures || production) return
-  production = await loadProduction()
+  production = {}
+}
+
+/** Missed cache keys since the last take. Each was answered true provisionally. */
+export function takeMembershipMisses(): string[] {
+  const out = [...pending]
+  pending.clear()
+  return out
+}
+
+export type DictRunner = (pkg: string, lang: MembershipLang, words: string[]) => Promise<boolean[]>
+
+/** One child process per dictionary: two big nspell heaps in one process slow GC ~40x. */
+export const runDictWorker: DictRunner = async (pkg, lang, words) => {
+  const worker = path.join(import.meta.dir, 'membership-worker.ts')
+  const stdout = await new Promise<string>((resolve, reject) => {
+    const child = execFile(process.execPath, [worker, pkg, lang], { maxBuffer: 1 << 28 }, (err, out) =>
+      err ? reject(err) : resolve(out),
+    )
+    child.stdin?.end(JSON.stringify(words))
+  })
+  const out = JSON.parse(stdout) as boolean[]
+  if (out.length !== words.length) throw new Error(`membership-worker ${pkg}: bad output`)
+  return out
+}
+
+/** Resolve missed keys with only the dictionaries of the languages that missed. */
+export async function resolveMembershipMisses(
+  keys: string[],
+  run: DictRunner = runDictWorker,
+): Promise<void> {
+  if (!entries) throw new Error('loadMembershipCache() must run first')
+  const byLang = new Map<MembershipLang, string[]>()
+  for (const key of keys) {
+    const [lang, word] = key.split('\0') as [MembershipLang, string]
+    byLang.set(lang, [...(byLang.get(lang) ?? []), word])
+  }
+  const jobs = [...byLang].flatMap(([lang, words]) =>
+    LANG_DICTS[lang].map(async (pkg) => ({ lang, words, hits: await run(pkg, lang, words) })),
+  )
+  for (const { lang, words, hits } of await Promise.all(jobs)) {
+    words.forEach((word, i) => {
+      const key = membershipCacheKey(lang, word)
+      entries!.set(key, entries!.get(key) === true || hits[i])
+    })
+  }
+  dirty = true
+}
+
+/** Membership verdict for one speller (before kinship/allowlist). */
+export function spellerAccepts(spell: SpellChecker, lang: MembershipLang, word: string): boolean {
+  return anyCorrect(spell, word, lang) || (lang === 'de' && deCompoundOk(spell, word))
 }
 
 function spellLookup(lang: MembershipLang, word: string): boolean {
-  for (const spell of spellers()[lang]) {
-    if (anyCorrect(spell, word, lang)) return true
-    if (lang === 'de' && deCompoundOk(spell, word)) return true
-  }
-  return false
+  return spellersFor(lang).some((spell) => spellerAccepts(spell, lang, word))
 }
 
 /** Clear process-global spellers so bun:test files cannot leak fixture dicts. */
@@ -396,6 +467,7 @@ export function resetDicts(): void {
   activeStamp = ''
   dirty = false
   persistCache = false
+  pending.clear()
 }
 
 export function isWordOfLang(lang: MembershipLang, word: string): boolean {
@@ -410,14 +482,13 @@ export function isWordOfLang(lang: MembershipLang, word: string): boolean {
   if (entries) {
     const hit = entries.get(key)
     if (hit !== undefined) return hit
-    // A miss is not a pass. The caller loads dictionaries and retries.
+    // A miss is not a pass. Without ensureDicts() (CI) it fails closed; with it,
+    // the miss is queued for resolveMembershipMisses() and the caller reruns.
     if (!production) throw new MembershipDictsNeeded()
+    // Provisional true: a miss must not throw out of validatePack before the rest are collected.
+    pending.add(key)
+    return true
   }
 
-  const result = spellLookup(lang, word)
-  if (entries) {
-    entries.set(key, result)
-    dirty = true
-  }
-  return result
+  return spellLookup(lang, word)
 }

@@ -1,6 +1,13 @@
 import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import {
   caseProbes,
+  ensureDicts,
+  loadedProductionLangs,
+  loadProductionLang,
+  resolveMembershipMisses,
+  takeMembershipMisses,
+  setProductionLangLoaderForTests,
+  type MembershipLang,
   installFixtureSpellersFromDir,
   installMembershipCacheForTests,
   isAllowlistedLemma,
@@ -118,5 +125,64 @@ describe('membership verdict cache', () => {
     )
     installFixtureSpellersFromDir()
     expect(isWordOfLang('en', 'HELLO')).toBe(true)
+  })
+})
+
+describe('lazy per-language production spellers', () => {
+  const built: MembershipLang[] = []
+  const original = loadProductionLang
+  beforeAll(() => {
+    setProductionLangLoaderForTests((lang) => {
+      built.push(lang)
+      return [{ correct: (w: string) => w.toUpperCase() === 'HAUS' }]
+    })
+  })
+  afterAll(() => {
+    setProductionLangLoaderForTests(original)
+    resetDicts()
+  })
+
+  test('without a cache, ensureDicts builds only the languages looked up', async () => {
+    resetDicts()
+    built.length = 0
+    await ensureDicts()
+    expect(built).toEqual([])
+    expect(isWordOfLang('de', 'HAUS')).toBe(true)
+    expect(isWordOfLang('de', 'ZZZ')).toBe(false)
+    expect(built).toEqual(['de'])
+    expect(loadedProductionLangs()).toEqual(['de'])
+  })
+
+  test('with the cache armed, misses queue instead of loading spellers', async () => {
+    resetDicts()
+    built.length = 0
+    installMembershipCacheForTests(
+      new Map([[membershipCacheKey('en', 'HELLO'), true]]),
+    )
+    await ensureDicts()
+    expect(isWordOfLang('en', 'HELLO')).toBe(true)
+    expect(isWordOfLang('pt', 'CASA')).toBe(true)
+    expect(isWordOfLang('pt', 'CASA')).toBe(true)
+    expect(built).toEqual([])
+    expect(takeMembershipMisses()).toEqual([membershipCacheKey('pt', 'CASA')])
+    expect(takeMembershipMisses()).toEqual([])
+  })
+
+  test('resolveMembershipMisses runs only the missed languages, OR across dicts', async () => {
+    resetDicts()
+    const map = new Map<string, boolean>()
+    installMembershipCacheForTests(map)
+    const runs: string[] = []
+    await resolveMembershipMisses(
+      [membershipCacheKey('pt', 'ÔNIBUS'), membershipCacheKey('pt', 'ZZQ')],
+      async (pkg, lang, words) => {
+        runs.push(`${pkg}:${lang}`)
+        return words.map((w) => pkg === 'dictionary-pt' && w === 'ÔNIBUS')
+      },
+    )
+    expect(runs.sort()).toEqual(['dictionary-pt-pt:pt', 'dictionary-pt:pt'])
+    expect(map.get(membershipCacheKey('pt', 'ÔNIBUS'))).toBe(true)
+    expect(map.get(membershipCacheKey('pt', 'ZZQ'))).toBe(false)
+    expect(isWordOfLang('pt', 'ÔNIBUS')).toBe(true)
   })
 })
