@@ -246,6 +246,10 @@ describe('ES/PT/DE name and place glosses (Tessa 69a77e4)', () => {
       ['país europeo', 'es'],
       ['cidade portuguesa', 'pt'],
       ['ilha francesa', 'pt'],
+      ['cidade localizada nos Estados Unidos', 'pt'],
+      ['ilha situada nas Caraíbas', 'pt'],
+      ['região que pertence aos Países Baixos', 'pt'],
+      ['rio que passa pelo Brasil', 'pt'],
     ] as const) expect(isNameOrPlaceGloss(g, l)).toBe(true)
   })
   test('common nouns and demonyms stay', async () => {

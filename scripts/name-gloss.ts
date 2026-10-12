@@ -99,7 +99,7 @@ export function isItNameOrPlaceGloss(gloss: string | undefined | null): boolean 
 // lemma-names.txt. Start-anchored like FR_PLACE; case-sensitive on the name, so
 // "estado de proteção" and "Land, um das herum nur Meer ist" stay common nouns.
 const IBERIAN_PLACE = new RegExp(
-  `^(?:(?:una?|um|uma|el|la|o|a)\\s+)?(?:país|ciudad|cidade|capital|estado|región|região|isla|ilha|río|rio|provincia|província|reino)(?:\\s+\\p{Ll}+){0,4}?\\s+(?:de|del|da|do|dos|das|na|no|en|em)\\s+(?:(?:la|el|los|las|a|o|os|as)\\s+)?\\p{Lu}`,
+  `^(?:(?:una?|um|uma|el|la|o|a)\\s+)?(?:país|ciudad|cidade|capital|estado|región|região|isla|ilha|río|rio|provincia|província|reino)(?:\\s+\\p{Ll}+){0,4}?\\s+(?:de|del|da|do|dos|das|na|no|nos|nas|aos|pelo|en|em)\\s+(?:(?:la|el|los|las|a|o|os|as)\\s+)?\\p{Lu}`,
   'u',
 )
 // W2: origin adjective straight after the place word ("ciudad española", "país europeo").
