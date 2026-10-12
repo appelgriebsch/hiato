@@ -190,6 +190,8 @@ export const STEM_UNRELATED: ReadonlySet<string> = new Set([
   'austere:stern', // #188: austerus vs sterne
   // #191 W4: shared Latin prefix, different roots
   'complex:complicated', 'commission:committee', 'compress:compact', 'splatter:splash', 'interject:interrupt',
+  // #192: pre-sentire vs prae-sagire, com-patre vs com-panis, per-severus vs per-sistere
+  'presentir:presagiar', 'compadre:companero', 'perseverar:persistir',
 ])
 
 /**
