@@ -22,6 +22,7 @@ import {
   type PackSnapshot,
 } from './packs-check-lib'
 import {
+  deferMembershipMisses,
   ensureDicts,
   loadMembershipCache,
   MembershipDictsNeeded,
@@ -151,11 +152,16 @@ let failed = false
 let cacheMissInCi = false
 // Locally, misses are collected and resolved with only the missed languages' dicts.
 // In CI a miss still throws MembershipDictsNeeded and fails closed.
-if (!failClosedOnHunspellMiss()) await ensureDicts()
+if (!failClosedOnHunspellMiss()) {
+  await ensureDicts()
+  deferMembershipMisses()
+}
 try {
   try {
     // Misses answer true provisionally; resolve them and rerun from the cache.
     // Loop in case a pass threw early or a flipped verdict reaches new words.
+    // Terminates: every resolved miss becomes a cache hit, so each round strictly
+    // shrinks the finite set of unknown (lang, word) keys the packs can produce.
     let lines: Line[]
     for (;;) {
       lines = []

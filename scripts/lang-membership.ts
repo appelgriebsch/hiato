@@ -76,6 +76,7 @@ let activeStamp = ''
 let dirty = false
 let persistCache = false
 const pending = new Set<string>()
+let deferMisses = false
 
 /** Thrown when a verdict is missing and the Hunspell dictionaries are not loaded. */
 export class MembershipDictsNeeded extends Error {
@@ -372,9 +373,10 @@ export const LANG_DICTS: Record<MembershipLang, readonly string[]> = {
 
 /** Build one speller. Each nspell instance is huge; see resolveMembershipMisses. */
 export function loadSpeller(pkg: string): SpellChecker {
-  const root = packageDir(pkg)
-  const aff = readFileSync(path.join(root, 'index.aff'))
-  const dic = readFileSync(path.join(root, 'index.dic'))
+  // A path (fixture prefix like scripts/testdata/en) reads <pkg>.aff/.dic; else a dictionary-* package.
+  const base = pkg.includes('/') ? pkg : path.join(packageDir(pkg), 'index')
+  const aff = readFileSync(`${base}.aff`)
+  const dic = readFileSync(`${base}.dic`)
   // nspell(dictionary-it) expands elision prefixes at init and does not finish.
   return pkg === 'dictionary-it' ? italianSpell(aff, dic) : nspell({ aff, dic })
 }
@@ -404,6 +406,14 @@ export async function ensureDicts(): Promise<void> {
   production = {}
 }
 
+/**
+ * packs:check only: with the cache armed, answer misses provisionally and queue
+ * them for resolveMembershipMisses(). Other scripts keep the synchronous lookup.
+ */
+export function deferMembershipMisses(): void {
+  deferMisses = true
+}
+
 /** Missed cache keys since the last take. Each was answered true provisionally. */
 export function takeMembershipMisses(): string[] {
   const out = [...pending]
@@ -417,8 +427,11 @@ export type DictRunner = (pkg: string, lang: MembershipLang, words: string[]) =>
 export const runDictWorker: DictRunner = async (pkg, lang, words) => {
   const worker = path.join(import.meta.dir, 'membership-worker.ts')
   const stdout = await new Promise<string>((resolve, reject) => {
-    const child = execFile(process.execPath, [worker, pkg, lang], { maxBuffer: 1 << 28 }, (err, out) =>
-      err ? reject(err) : resolve(out),
+    const child = execFile(
+      process.execPath,
+      [worker, pkg, lang],
+      { maxBuffer: 1 << 28, timeout: 120_000, killSignal: 'SIGKILL' },
+      (err, out) => (err ? reject(new Error(`membership-worker ${pkg}`, { cause: err })) : resolve(out)),
     )
     child.stdin?.end(JSON.stringify(words))
   })
@@ -438,15 +451,22 @@ export async function resolveMembershipMisses(
     const [lang, word] = key.split('\0') as [MembershipLang, string]
     byLang.set(lang, [...(byLang.get(lang) ?? []), word])
   }
-  const jobs = [...byLang].flatMap(([lang, words]) =>
-    LANG_DICTS[lang].map(async (pkg) => ({ lang, words, hits: await run(pkg, lang, words) })),
+  const queue = [...byLang].flatMap(([lang, words]) =>
+    LANG_DICTS[lang].map((pkg) => ({ pkg, lang, words })),
   )
-  for (const { lang, words, hits } of await Promise.all(jobs)) {
-    words.forEach((word, i) => {
-      const key = membershipCacheKey(lang, word)
-      entries!.set(key, entries!.get(key) === true || hits[i])
-    })
+  // ponytail: 3 workers at a time bounds peak RSS (each nspell heap is ~1-2 GB); a cold run still takes ~20 s.
+  const worker = async () => {
+    for (let job = queue.shift(); job; job = queue.shift()) {
+      const { pkg, lang, words } = job
+      const hits = await run(pkg, lang, words)
+      words.forEach((word, i) => {
+        const key = membershipCacheKey(lang, word)
+        // A language with several dicts (pt) is a member if any of them accepts it.
+        entries!.set(key, entries!.get(key) === true || hits[i])
+      })
+    }
   }
+  await Promise.all([worker(), worker(), worker()])
   dirty = true
 }
 
@@ -468,6 +488,7 @@ export function resetDicts(): void {
   dirty = false
   persistCache = false
   pending.clear()
+  deferMisses = false
 }
 
 export function isWordOfLang(lang: MembershipLang, word: string): boolean {
@@ -482,12 +503,18 @@ export function isWordOfLang(lang: MembershipLang, word: string): boolean {
   if (entries) {
     const hit = entries.get(key)
     if (hit !== undefined) return hit
-    // A miss is not a pass. Without ensureDicts() (CI) it fails closed; with it,
-    // the miss is queued for resolveMembershipMisses() and the caller reruns.
+    // A miss is not a pass. Without ensureDicts() (CI) it fails closed.
     if (!production) throw new MembershipDictsNeeded()
-    // Provisional true: a miss must not throw out of validatePack before the rest are collected.
-    pending.add(key)
-    return true
+    if (deferMisses) {
+      // Provisional true so validatePack does not throw before every miss is collected;
+      // packs:check resolves the queue and reruns.
+      pending.add(key)
+      return true
+    }
+    const result = spellLookup(lang, word)
+    entries.set(key, result)
+    dirty = true
+    return result
   }
 
   return spellLookup(lang, word)
