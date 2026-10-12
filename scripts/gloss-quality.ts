@@ -187,6 +187,9 @@ export const STEM_TOKEN_IGNORE: ReadonlySet<string> = new Set([
 export const STEM_UNRELATED: ReadonlySet<string> = new Set([
   'contrat:contre', 'tempete:temps', 'carton:carte', 'pontife:pont',
   'perseverer:persister', // per-severus vs per-sistere
+  'austere:stern', // #188: austerus vs sterne
+  // #191 W4: shared Latin prefix, different roots
+  'complex:complicated', 'commission:committee', 'compress:compact', 'splatter:splash', 'interject:interrupt',
 ])
 
 /**
@@ -212,7 +215,7 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
  * Grandfathered stem spoilers per pack, from before #179: lemma → the exact
  * leaking tokens (folded). Shrink-only: a new leaking token on a listed lemma
  * fails (#184 W3), and a listed token that no longer leaks fails as stale.
- * FR and IT have no entries (#181); every FR and IT pack must be clean.
+ * FR, IT and EN have no entries (#181, #188); those packs must be clean.
  */
 export type StemBaseline = Record<string, Record<string, readonly string[]>>
 

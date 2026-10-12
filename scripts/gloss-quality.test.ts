@@ -194,10 +194,10 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(errs.length).toBe(1)
     expect(errs[0]).toContain('fahrer')
   })
-  test('every shipped pack passes; FR and IT have no baseline (#181)', async () => {
+  test('every shipped pack passes; FR, IT and EN have no baseline (#181, #188)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
     const base = JSON.parse(readFileSync(`${import.meta.dir}/data/stem-spoiler-baseline.json`, 'utf8'))
-    expect(Object.keys(base).filter((k) => /^(?:fr|it)\//.test(k))).toEqual([])
+    expect(Object.keys(base).filter((k) => /^(?:fr|it|en)\//.test(k))).toEqual([])
     const root = `${import.meta.dir}/../public/packs`
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
@@ -207,6 +207,11 @@ describe('stem spoiler gate (#179 C1)', () => {
 })
 
 describe('stem gate widening (#184 W2)', () => {
+  test('#191: EN unrelated pairs pass, related ones still fail', () => {
+    for (const [w, t] of [['COMPLEX', 'complicated'], ['COMMISSION', 'committee'], ['COMPRESS', 'compact'], ['SPLATTER', 'splash'], ['INTERJECT', 'interrupt']])
+      expect(stemSpoilerTokens(t, w)).toEqual([])
+    expect(stemSpoilerTokens('able', 'CAPABLE')).toEqual(['able'])
+  })
   test('#184 W4: unrelated roots pass, real give-aways still fail', () => {
     for (const [lemma, text] of [['CONTRAT', 'contre'], ['TEMPÊTE', 'temps'], ['CARTON', 'carte'], ['PONTIFE', 'pont']]) {
       expect(stemSpoilerTokens(text!, lemma!)).toEqual([])
