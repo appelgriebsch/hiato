@@ -238,6 +238,14 @@ describe('ES/PT/DE name and place glosses (Tessa 69a77e4)', () => {
       ['cidade francesa situada no vale do Loire', 'pt'],
       ['eine australische Stadt', 'de'],
       ['eine fiktive Welt in einer Fantasy-Serie', 'de'],
+      ['Stadt in Bayern', 'de'],
+      ['Hauptstadt von Frankreich', 'de'],
+      ['Fluss in Europa', 'de'],
+      ['Eine australische Stadt', 'de'],
+      ['ciudad española', 'es'],
+      ['país europeo', 'es'],
+      ['cidade portuguesa', 'pt'],
+      ['ilha francesa', 'pt'],
     ] as const) expect(isNameOrPlaceGloss(g, l)).toBe(true)
   })
   test('common nouns and demonyms stay', async () => {
@@ -246,6 +254,9 @@ describe('ES/PT/DE name and place glosses (Tessa 69a77e4)', () => {
       ['persona del país cuya capital es Jerusalén', 'es'],
       ['un lugar con árboles y bancos en la ciudad', 'es'],
       ['estado de proteção.', 'pt'],
+      ['ciudad pequeña con muchas casas', 'es'],
+      ['país rico', 'es'],
+      ['cidade grande', 'pt'],
       ['pessoa ou coisa do país cuja capital é Berlim', 'pt'],
       ['Land, um das herum nur Meer ist.', 'de'],
       ['die Stadt oder das Dorf, wo jemand lebt', 'de'],

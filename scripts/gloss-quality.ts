@@ -203,10 +203,11 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
   const stem = stemOf(lemma)
   return (foldWord(text).match(/\p{L}+/gu) ?? []).filter((t) => {
     // #184 W2: the ignore list never hides the lemma's own root (POURQUOI "pour", PRESQUE "près").
+    // Tessa 69a77e4: an accent variant of the lemma (FIO "fío", ATE "até") is the answer.
+    // Before the ignore lists, so a function-word lemma (PARA "pára") cannot skip it.
+    if (t === w) return true
     if (STEM_TOKEN_IGNORE.has(t) && !w.startsWith(t)) return false
     if (STEM_UNRELATED.has(`${w}:${t}`)) return false
-    // Tessa 69a77e4: an accent variant of a short lemma (FIO "fío", ATE "até") is the answer.
-    if (t === w) return true
     if (stem && t.includes(stem)) return true
     // #184 W2: a 4-letter shared prefix gives 6+ letter lemmas away (MARIER "mariage").
     if (w.length >= 6 && t.length >= 4 && t.slice(0, 4) === w.slice(0, 4)) return true

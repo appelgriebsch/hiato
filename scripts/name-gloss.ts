@@ -102,6 +102,11 @@ const IBERIAN_PLACE = new RegExp(
   `^(?:(?:una?|um|uma|el|la|o|a)\\s+)?(?:país|ciudad|cidade|capital|estado|región|região|isla|ilha|río|rio|provincia|província|reino)(?:\\s+\\p{Ll}+){0,4}?\\s+(?:de|del|da|do|dos|das|na|no|en|em)\\s+(?:(?:la|el|los|las|a|o|os|as)\\s+)?\\p{Lu}`,
   'u',
 )
+// W2: origin adjective straight after the place word ("ciudad española", "país europeo").
+const IBERIAN_PLACE_ADJ = new RegExp(
+  `^(?:(?:una?|um|uma|el|la|o|a)\\s+)?(?:país|ciudad|cidade|capital|isla|ilha|región|região|reino|provincia|província)\\s+\\p{Ll}+(?:esa|ês|és|eses|ol|ola|ana|ano|eo|ea|eu|eia|ense)(?!\\p{L})`,
+  'u',
+)
 const ES_NAME = /nombre\s+propio|\bapellidos?\b/i
 const PT_NAME = /nome\s+pr[oó]prio|\bsobrenome\b|\bapelido de família\b/i
 const DE_NAME = /\bvornamen?\b|\bnachnamen?\b|\bfamiliennamen?\b|\beigennamen?\b/i
@@ -115,9 +120,10 @@ export function isNameOrPlaceGloss(gloss: string | undefined | null, lang: strin
   if (!gloss) return false
   const g = gloss.normalize('NFC')
   const h = g.charAt(0).toLowerCase() + g.slice(1)
-  if (lang === 'es') return ES_NAME.test(h) || IBERIAN_PLACE.test(h)
-  if (lang === 'pt') return PT_NAME.test(h) || IBERIAN_PLACE.test(h)
-  if (lang === 'de') return DE_NAME.test(g) || DE_PLACE.test(h)
+  if (lang === 'es') return ES_NAME.test(h) || IBERIAN_PLACE.test(h) || IBERIAN_PLACE_ADJ.test(h)
+  if (lang === 'pt') return PT_NAME.test(h) || IBERIAN_PLACE.test(h) || IBERIAN_PLACE_ADJ.test(h)
+  // W1: DE nouns are capitalised, so test the raw gloss too (Stadt in Bayern).
+  if (lang === 'de') return DE_NAME.test(g) || DE_PLACE.test(g) || DE_PLACE.test(h)
   return false
 }
 

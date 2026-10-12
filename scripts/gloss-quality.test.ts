@@ -175,6 +175,8 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(stemSpoilerTokens('ves', 'VÊS')).toEqual(['ves'])
     expect(stemSpoilerTokens('até', 'ATE')).toEqual(['ate'])
     expect(stemSpoilerErrors('es/c2.json', [{ word: 'FIO', gloss: 'hilo', synonyms: ['fío'] }], {}).length).toBe(1)
+    // An ignore-list function word that is the lemma still leaks (#200 review).
+    expect(stemSpoilerTokens('pára', 'PARA')).toEqual(['para'])
     // A short lemma inside a longer word is not the answer.
     expect(stemSpoilerTokens('un tomate maduro', 'ATE')).toEqual([])
   })
