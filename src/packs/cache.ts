@@ -73,6 +73,9 @@ export async function purgeOtherLanguagePacks(
   )
 }
 
+/** Language whose six packs are already in SW cache this session (#190). */
+let precachedLang: PackLang | null = null
+
 /**
  * Precache shipped CEFR packs for the selected language, then drop other langs
  * from SW cache + localStorage (ADR 0006). Returns false if the selected CEFR
@@ -99,6 +102,9 @@ export async function precacheSelectedLanguage(
     return false
   }
 
+  // Same language, all packs in memory: a CEFR change needs no network (#190).
+  if (precachedLang === lang && loaded.size === PACK_CEFRS.length) return true
+
   const cache = await openPackCache()
   if (cache) {
     await Promise.all(
@@ -115,5 +121,6 @@ export async function precacheSelectedLanguage(
   }
 
   purgeLocalPacksExcept(lang)
+  precachedLang = loaded.size === PACK_CEFRS.length ? lang : null
   return true
 }

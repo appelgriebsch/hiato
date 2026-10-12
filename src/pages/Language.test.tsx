@@ -34,6 +34,16 @@ describe('Language & level picker (#182)', () => {
     expect(html).toMatch(/min-h-11 min-w-11[^"]*"[^>]*>← Back/)
   })
 
+  test('selected tiles carry a check mark, one per group (#190)', () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <Language />
+      </MemoryRouter>,
+    )
+    expect(html.match(/data-selected-check/g)?.length).toBe(2)
+    expect(html).toMatch(/aria-checked="true"[^>]*>\s*<span aria-hidden="true" data-selected-check/)
+  })
+
   test('level line copy exists for every level', () => {
     for (const c of PACK_CEFRS) expect(CEFR_LINES[c]).toStartWith(c.toUpperCase())
   })

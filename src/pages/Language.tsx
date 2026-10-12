@@ -42,6 +42,15 @@ export type CachePhase = 'idle' | 'caching' | 'ready' | 'error'
 /** Hold "Saving…" back this long so a fast cache goes straight to Ready (#182). */
 export const SAVING_DELAY_MS = 300
 
+/** Check mark on the selected tile so selection isn't colour-only (#190). */
+function SelectedCheck({ on }: { on: boolean }) {
+  return on ? (
+    <span aria-hidden="true" data-selected-check className="absolute top-1 right-1.5 text-xs font-bold leading-none">
+      ✓
+    </span>
+  ) : null
+}
+
 /** Selected pair, provenance (#80/#99), offline status and A2HS once ready (#103). */
 export function SelectionCard({
   lang,
@@ -231,13 +240,14 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang)}
             className={[
-              'motion-press min-h-12 min-w-0 rounded-xl border-2 px-2 py-1.5 text-left disabled:opacity-40',
+              'motion-press relative min-h-12 min-w-0 rounded-xl border-2 px-2 py-1.5 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
                 ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
+            <SelectedCheck on={lang === l} />
             <div className="text-xs font-medium text-ink-muted">{LANG_CODES[l]}</div>
             <div
               className={[
@@ -275,13 +285,14 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr)}
             className={[
-              'motion-press min-h-11 rounded-xl border-2 px-2 text-center font-semibold disabled:opacity-40',
+              'motion-press relative min-h-11 rounded-xl border-2 px-2 text-center font-semibold disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
                 ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
                 : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >
+            <SelectedCheck on={cefr === c} />
             {CEFR_CODES[c]}
           </button>
         ))}
