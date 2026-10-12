@@ -222,3 +222,39 @@ describe('IT gate widening (#179 W2, W3)', () => {
     expect(isDeniedLemma('ROSA', undefined, 'it')).toBe(false)
   })
 })
+
+describe('ES/PT/DE name and place glosses (Tessa 69a77e4)', () => {
+  test('flags named people and places', async () => {
+    const { isNameOrPlaceGloss } = await import('./name-gloss')
+    for (const [g, l] of [
+      ['nombre propio masculino', 'es'],
+      ['país del sur de Asia', 'es'],
+      ['Región del este de Inglaterra.', 'es'],
+      ['nome próprio feminino', 'pt'],
+      ['sobrenome de origem espanhola.', 'pt'],
+      ['capital da França.', 'pt'],
+      ['Cidade da Flórida.', 'pt'],
+      ['país localizado na Oceania', 'pt'],
+      ['cidade francesa situada no vale do Loire', 'pt'],
+      ['eine australische Stadt', 'de'],
+      ['eine fiktive Welt in einer Fantasy-Serie', 'de'],
+    ] as const) expect(isNameOrPlaceGloss(g, l)).toBe(true)
+  })
+  test('common nouns and demonyms stay', async () => {
+    const { isNameOrPlaceGloss } = await import('./name-gloss')
+    for (const [g, l] of [
+      ['persona del país cuya capital es Jerusalén', 'es'],
+      ['un lugar con árboles y bancos en la ciudad', 'es'],
+      ['estado de proteção.', 'pt'],
+      ['pessoa ou coisa do país cuja capital é Berlim', 'pt'],
+      ['Land, um das herum nur Meer ist.', 'de'],
+      ['die Stadt oder das Dorf, wo jemand lebt', 'de'],
+    ] as const) expect(isNameOrPlaceGloss(g, l)).toBe(false)
+  })
+  test('dropped ES/PT/DE proper nouns are denylisted whatever the gloss', async () => {
+    const { isDeniedLemma } = await import('./lemma-denylist')
+    for (const [w, l] of [['RAMÓN', 'es'], ['INDIA', 'es'], ['ÍNDIA', 'pt'], ['PARIS', 'pt'], ['MENDEZ', 'pt'], ['WESTEROS', 'de'], ['REDFERN', 'de']] as const)
+      expect(isDeniedLemma(w, undefined, l)).toBe(true)
+    expect(isDeniedLemma('PARIS', undefined, 'en')).toBe(false)
+  })
+})

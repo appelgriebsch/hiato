@@ -95,6 +95,32 @@ export function isItNameOrPlaceGloss(gloss: string | undefined | null): boolean 
   return IT.test(h) || IT_BARE_NAME.test(h) || IT_PERSON.test(h) || IT_PLACE_RE.test(h) || IT_DEITY.test(h)
 }
 
+// Tessa 69a77e4: ES/PT/DE glosses that name one place or one person, even off
+// lemma-names.txt. Start-anchored like FR_PLACE; case-sensitive on the name, so
+// "estado de proteção" and "Land, um das herum nur Meer ist" stay common nouns.
+const IBERIAN_PLACE = new RegExp(
+  `^(?:(?:una?|um|uma|el|la|o|a)\\s+)?(?:país|ciudad|cidade|capital|estado|región|região|isla|ilha|río|rio|provincia|província|reino)(?:\\s+\\p{Ll}+){0,4}?\\s+(?:de|del|da|do|dos|das|na|no|en|em)\\s+(?:(?:la|el|los|las|a|o|os|as)\\s+)?\\p{Lu}`,
+  'u',
+)
+const ES_NAME = /nombre\s+propio|\bapellidos?\b/i
+const PT_NAME = /nome\s+pr[oó]prio|\bsobrenome\b|\bapelido de família\b/i
+const DE_NAME = /\bvornamen?\b|\bnachnamen?\b|\bfamiliennamen?\b|\beigennamen?\b/i
+const DE_PLACE = new RegExp(
+  `^(?:(?:eine?|die|der|das)\\s+)?(?:\\p{Ll}+(?:isch|iv)e[nrs]?\\s+(?:Stadt|Land|Insel|Welt|Region|Hauptstadt)|(?:Stadt|Land|Insel|Hauptstadt|Region|Fluss)\\s+(?:in|im|von|des|der|am)\\s+\\p{Lu})`,
+  'u',
+)
+
+/** ES/PT/DE glosses that name one person or one place (Tessa 69a77e4). */
+export function isNameOrPlaceGloss(gloss: string | undefined | null, lang: string): boolean {
+  if (!gloss) return false
+  const g = gloss.normalize('NFC')
+  const h = g.charAt(0).toLowerCase() + g.slice(1)
+  if (lang === 'es') return ES_NAME.test(h) || IBERIAN_PLACE.test(h)
+  if (lang === 'pt') return PT_NAME.test(h) || IBERIAN_PLACE.test(h)
+  if (lang === 'de') return DE_NAME.test(g) || DE_PLACE.test(h)
+  return false
+}
+
 const EN_NAME =
   /\b(?:given name|first name|surname|last name|family name)\b/i
 const EN_PROPER = /\bproper names?\b/i

@@ -170,6 +170,14 @@ describe('stem spoiler gate (#179 C1)', () => {
     expect(stemSpoilerTokens('figura fatta con la fotografia', 'FOTO')).toEqual(['fotografia'])
     expect(stemSpoilerTokens('Città', 'CITTÀ')).toEqual(['citta'])
   })
+  test('accent variants of short lemmas leak (Tessa 69a77e4)', () => {
+    expect(stemSpoilerTokens('fío', 'FIO')).toEqual(['fio'])
+    expect(stemSpoilerTokens('ves', 'VÊS')).toEqual(['ves'])
+    expect(stemSpoilerTokens('até', 'ATE')).toEqual(['ate'])
+    expect(stemSpoilerErrors('es/c2.json', [{ word: 'FIO', gloss: 'hilo', synonyms: ['fío'] }], {}).length).toBe(1)
+    // A short lemma inside a longer word is not the answer.
+    expect(stemSpoilerTokens('un tomate maduro', 'ATE')).toEqual([])
+  })
   test('passes unrelated glosses and ignored function words', () => {
     expect(stemSpoilerTokens('le ore dopo cena', 'SERATA')).toEqual([])
     expect(stemSpoilerTokens('chiamare qualcuno con il cellulare', 'TELEFONARE')).toEqual([])
