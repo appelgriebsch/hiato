@@ -181,6 +181,15 @@ export const STEM_TOKEN_IGNORE: ReadonlySet<string> = new Set([
 ])
 
 /**
+ * #184 W4: lemma/token pairs (folded) that share letters but not a root.
+ * shortcut: hand-kept list; extend it when a false pair is found in review.
+ */
+export const STEM_UNRELATED: ReadonlySet<string> = new Set([
+  'contrat:contre', 'tempete:temps', 'carton:carte', 'pontife:pont',
+  'perseverer:persister', // per-severus vs per-sistere
+])
+
+/**
  * Tokens of text that share a stem with the lemma (a transparent form, ADR 0023):
  * the token contains the lemma's stem, or the lemma contains the token's stem.
  */
@@ -188,39 +197,53 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
   const w = foldWord(lemma)
   const stem = stemOf(lemma)
   return (foldWord(text).match(/\p{L}+/gu) ?? []).filter((t) => {
-    if (STEM_TOKEN_IGNORE.has(t)) return false
+    // #184 W2: the ignore list never hides the lemma's own root (POURQUOI "pour", PRESQUE "près").
+    if (STEM_TOKEN_IGNORE.has(t) && !w.startsWith(t)) return false
+    if (STEM_UNRELATED.has(`${w}:${t}`)) return false
     if (stem && t.includes(stem)) return true
+    // #184 W2: a 4-letter shared prefix gives 6+ letter lemmas away (MARIER "mariage").
+    if (w.length >= 6 && t.length >= 4 && t.slice(0, 4) === w.slice(0, 4)) return true
     const ts = stemOf(t)
     return ts.length > 0 && w.includes(ts)
   })
 }
 
 /**
- * Grandfathered stem spoilers per pack (lemma words), from before #179. Shrink-only:
- * a listed lemma that no longer leaks fails too, so the entry gets deleted.
- * IT has no entries; every IT pack must be clean.
+ * Grandfathered stem spoilers per pack, from before #179: lemma → the exact
+ * leaking tokens (folded). Shrink-only: a new leaking token on a listed lemma
+ * fails (#184 W3), and a listed token that no longer leaks fails as stale.
+ * FR and IT have no entries (#181); every FR and IT pack must be clean.
  */
-export type StemBaseline = Record<string, readonly string[]>
+export type StemBaseline = Record<string, Record<string, readonly string[]>>
+
+/** Folded leaking tokens of one lemma across its gloss and chips, sorted and unique. */
+export function stemSpoilerLeaks(L: { word: string; gloss?: string; synonyms?: readonly string[] }): string[] {
+  const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
+  return [...new Set(texts.flatMap((t) => stemSpoilerTokens(t, L.word)))].sort()
+}
 
 export function stemSpoilerErrors(
   rel: string,
   lemmas: readonly { word: string; gloss?: string; synonyms?: readonly string[] }[],
   baseline: StemBaseline,
 ): string[] {
-  const allowed = new Set(baseline[rel] ?? [])
+  const allowed = baseline[rel] ?? {}
   const errors: string[] = []
-  const seen = new Set<string>()
+  const live = new Map<string, Set<string>>()
   for (const L of lemmas) {
-    const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
-    const hits = texts.filter((t) => stemSpoilerTokens(t, L.word).length > 0)
-    if (!hits.length) continue
-    seen.add(L.word)
-    if (!allowed.has(L.word)) {
-      errors.push(`${rel}: stem spoiler (ADR 0023) — "${L.word}" shares a stem with "${hits[0]}"`)
+    const leaks = stemSpoilerLeaks(L)
+    if (!leaks.length) continue
+    live.set(L.word, new Set(leaks))
+    const ok = new Set(allowed[L.word] ?? [])
+    const fresh = leaks.filter((t) => !ok.has(t))
+    if (fresh.length) {
+      errors.push(`${rel}: stem spoiler (ADR 0023) — "${L.word}" leaks via "${fresh.join('", "')}"`)
     }
   }
-  for (const w of allowed) {
-    if (!seen.has(w)) errors.push(`${rel}: stale stem-spoiler baseline entry "${w}" — remove it`)
+  for (const [w, toks] of Object.entries(allowed)) {
+    for (const t of toks) {
+      if (!live.get(w)?.has(t)) errors.push(`${rel}: stale stem-spoiler baseline entry "${w}: ${t}" — remove it`)
+    }
   }
   return errors
 }
