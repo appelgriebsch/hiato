@@ -13,7 +13,7 @@ import {
 const g = globalThis as Record<string, unknown>
 const saved = { window: g.window, localStorage: g.localStorage }
 
-function env({ standalone = false, opened = false } = {}) {
+function env({ standalone = false, opened = false, iosStandalone = false } = {}) {
   const store = new Map<string, string>(opened ? [[INSTALL_HELP_OPENED_KEY, '1']] : [])
   g.localStorage = {
     getItem: (k: string) => store.get(k) ?? null,
@@ -21,7 +21,7 @@ function env({ standalone = false, opened = false } = {}) {
   }
   g.window = {
     matchMedia: (q: string) => ({ matches: standalone && q === '(display-mode: standalone)' }),
-    navigator: {},
+    navigator: iosStandalone ? { standalone: true } : {},
   }
   return store
 }
@@ -57,6 +57,19 @@ describe('A2HS link under Continue (#201)', () => {
           expect(html.match(/data-install-link/g)?.length ?? 0).toBe(want ? 1 : 0)
           if (want) expect(html).toContain('Add Hiato to your Home Screen')
         }
+  })
+
+  test('iOS navigator.standalone hides the link even when matchMedia is false', () => {
+    env({ iosStandalone: true })
+    expect(link(true)).toBe('')
+    env()
+    expect(link(true)).toContain('data-install-link')
+  })
+
+  test('focus ring is the full accent (3:1), not a translucent one', () => {
+    env()
+    expect(link(true)).toMatch(/focus-visible:ring-accent-fg(?!\/)/)
+    expect(link(true)).not.toContain('ring-accent-fg/')
   })
 
   test('tap opens the how-to and persists the opened flag; hidden on reload', async () => {

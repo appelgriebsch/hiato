@@ -476,11 +476,8 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     const src = await pageSrc('Language.tsx')
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
     expect(src).toContain('data-pack-cache-status')
-    expect(src).toContain('InstallHelpLink')
     expect(src).toContain('✓ Ready offline')
-    // #201: one link under Continue, not inside the selection card
-    expect(src).toContain("<InstallHelpLink visible={cachePhase === 'ready'} />")
-    expect(src).not.toContain("<InstallHelpLink visible={phase === 'ready'} />")
+    // #201 placement/visibility is covered behaviourally in InstallHelp.test.tsx
     expect(src).toContain("cachePhase === 'caching'")
     expect(src).toContain("'Caching…'")
     // Provenance preserved

@@ -46,7 +46,24 @@ export async function openInstallHelp(
   return 'sheet'
 }
 
+// Captured at module load (app start), so a prompt fired before the picker mounts isn't lost.
+let deferredPrompt: BeforeInstallPromptEvent | null = null
+let installed = false
+const installListeners = new Set<() => void>()
+if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault()
+    deferredPrompt = e as BeforeInstallPromptEvent
+  })
+  window.addEventListener('appinstalled', () => {
+    installed = true
+    deferredPrompt = null
+    installListeners.forEach((fn) => fn())
+  })
+}
+
 function isStandaloneDisplay(): boolean {
+  if (installed) return true
   if (typeof window === 'undefined') return true
   const mq = window.matchMedia?.('(display-mode: standalone)')
   if (mq?.matches) return true
@@ -71,20 +88,16 @@ export function InstallHelpLink({
   // ponytail: read once at mount, so the link stays put this session (focus can
   // return to it when the sheet closes) and is gone from the next load on (#201).
   const [opened] = useState(readOpened)
-  const deferred = useRef<BeforeInstallPromptEvent | null>(null)
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
   const closeBtnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    setStandalone(isStandaloneDisplay())
-    const onBip = (e: Event) => {
-      e.preventDefault()
-      deferred.current = e as BeforeInstallPromptEvent
-    }
-    window.addEventListener('beforeinstallprompt', onBip)
-    return () => window.removeEventListener('beforeinstallprompt', onBip)
+    const sync = () => setStandalone(isStandaloneDisplay())
+    sync()
+    installListeners.add(sync)
+    return () => void installListeners.delete(sync)
   }, [])
 
   useLayoutEffect(() => {
@@ -118,9 +131,9 @@ export function InstallHelpLink({
   if (!installLinkVisible(visible, standalone, opened)) return null
 
   async function onInstallClick() {
-    const how = await openInstallHelp(deferred.current, () => setOpen(true))
+    const how = await openInstallHelp(deferredPrompt, () => setOpen(true))
     if (how === 'prompt') {
-      deferred.current = null
+      deferredPrompt = null
       setStandalone(isStandaloneDisplay())
     }
   }
@@ -134,11 +147,11 @@ export function InstallHelpLink({
       <button
         type="button"
         data-install-link
-        className="motion-press mx-auto mt-1 flex min-h-11 items-center px-2 text-sm text-ink-muted underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+        className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm"
         onClick={() => void onInstallClick()}
       >
         Add Hiato to your Home Screen
-        </button>
+      </button>
 
       {/* Sheet mounts only while open: keeps SSR/static render portal-free. */}
       {open && createPortal(
@@ -181,7 +194,7 @@ export function InstallHelpLink({
                 <p className="font-medium text-accent-fg">Android (Chrome)</p>
                 <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-ink-muted">
                   <li>Tap the ⋮ menu</li>
-                  <li>Tap “Install app” or “Add to Home screen”</li>
+                  <li>Tap “Install app” or “Add to Home Screen”</li>
                   <li>Confirm — packs stay cached offline</li>
                 </ol>
               </div>
