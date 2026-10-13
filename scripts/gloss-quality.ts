@@ -225,33 +225,92 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
 export type StemBaseline = Record<string, Record<string, readonly string[]>>
 
 /** Folded leaking tokens of one lemma across its gloss and chips, sorted and unique. */
-export function stemSpoilerLeaks(L: { word: string; gloss?: string; synonyms?: readonly string[] }): string[] {
+export function stemSpoilerLeaks(L: { word: string; gloss?: string; synonyms?: readonly string[] }, _lang?: string): string[] {
   const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
   return [...new Set(texts.flatMap((t) => stemSpoilerTokens(t, L.word)))].sort()
 }
 
+type GateLemma = { word: string; gloss?: string; synonyms?: readonly string[] }
+
 export function stemSpoilerErrors(
   rel: string,
-  lemmas: readonly { word: string; gloss?: string; synonyms?: readonly string[] }[],
+  lemmas: readonly GateLemma[],
   baseline: StemBaseline,
+  leaksOf: (L: GateLemma, lang: string) => string[] = stemSpoilerLeaks,
+  label = 'stem spoiler (ADR 0023)',
 ): string[] {
+  const lang = rel.split('/')[0] ?? ''
   const allowed = baseline[rel] ?? {}
   const errors: string[] = []
   const live = new Map<string, Set<string>>()
   for (const L of lemmas) {
-    const leaks = stemSpoilerLeaks(L)
+    const leaks = leaksOf(L, lang)
     if (!leaks.length) continue
     live.set(L.word, new Set(leaks))
     const ok = new Set(allowed[L.word] ?? [])
     const fresh = leaks.filter((t) => !ok.has(t))
     if (fresh.length) {
-      errors.push(`${rel}: stem spoiler (ADR 0023) — "${L.word}" leaks via "${fresh.join('", "')}"`)
+      errors.push(`${rel}: ${label} — "${L.word}" leaks via "${fresh.join('", "')}"`)
     }
   }
   for (const [w, toks] of Object.entries(allowed)) {
     for (const t of toks) {
-      if (!live.get(w)?.has(t)) errors.push(`${rel}: stale stem-spoiler baseline entry "${w}: ${t}" — remove it`)
+      if (!live.get(w)?.has(t)) errors.push(`${rel}: stale ${label} baseline entry "${w}: ${t}" — remove it`)
     }
   }
   return errors
+}
+
+/**
+ * #193: short roots, word families and compound parts the 4/5-letter stem gate misses
+ * (DEZOITO "dez", ALTO "altura", JOGAR "jogo", FREITAG "Tag", TAG "Tageslicht").
+ * ponytail: ES/PT/DE only (the #193 scope); FR/IT/EN have hits too, add them when those packs are cleaned.
+ */
+export const FAMILY_LANGS: ReadonlySet<string> = new Set(['de', 'es', 'pt'])
+
+/** Articles, prepositions and conjunctions that share 3 letters with many lemmas by chance. */
+export const FAMILY_STOP: Readonly<Record<string, ReadonlySet<string>>> = {
+  de: new Set(['der', 'die', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einen', 'einem', 'einer', 'eines', 'und', 'beim']),
+  es: new Set(['con', 'que', 'del', 'sin', 'por', 'para', 'las', 'los', 'una', 'unos', 'unas']),
+  pt: new Set(['com', 'que', 'nos', 'nas', 'para', 'por', 'mais', 'uma', 'umas', 'uns']),
+}
+
+/** Folded lemma:token pairs that share their first letters but no root. Extend when review finds one. */
+export const FAMILY_UNRELATED: ReadonlySet<string> = new Set([
+  'rock:roca', 'gral:grado', 'tim:timbre', 'servira:sera', 'capuz:capo', 'sonha:sono', 'sonhaste:sono',
+  'maior:mais', 'qualidade:quao',
+])
+
+function commonPrefix(a: string, b: string): number {
+  let i = 0
+  while (i < a.length && i < b.length && a[i] === b[i]) i++
+  return i
+}
+
+/**
+ * A token is in the lemma's family when they share a 3+ letter prefix that covers all but
+ * at most one letter of the shorter word (DEZOITO/dez, PESO/pesa, COMIDA/come), or, in DE,
+ * when one is a 3+ letter compound tail of the other (FREITAG/Tag, TAG/Geburtstag).
+ */
+export function familyLeakTokens(text: string, lemma: string, lang: string): string[] {
+  if (!FAMILY_LANGS.has(lang)) return []
+  const w = foldWord(lemma)
+  const stop = FAMILY_STOP[lang]!
+  return [...new Set(foldWord(text).match(/\p{L}+/gu) ?? [])].filter((t) => {
+    if (t === w || stop.has(t) || FAMILY_UNRELATED.has(`${w}:${t}`)) return false
+    const k = commonPrefix(w, t)
+    if (k >= 3 && k >= Math.min(w.length, t.length) - 1) return true
+    if (lang !== 'de') return false
+    return (t.length >= 3 && w.length > t.length && w.endsWith(t)) ||
+      (w.length >= 3 && t.length > w.length && t.endsWith(w))
+  })
+}
+
+export function familyLeaks(L: GateLemma, lang: string): string[] {
+  const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
+  return [...new Set(texts.flatMap((t) => familyLeakTokens(t, L.word, lang)))].sort()
+}
+
+export function familyLeakErrors(rel: string, lemmas: readonly GateLemma[], baseline: StemBaseline): string[] {
+  return stemSpoilerErrors(rel, lemmas, baseline, familyLeaks, 'word-family leak (#193)')
 }
