@@ -119,11 +119,7 @@ export const BOILERPLATE_MIN = 4
  * it can only shrink. Remove an entry when that pack is regenerated.
  */
 export const BOILERPLATE_BASELINE: Record<string, Record<string, number>> = {
-  'es/a1.json': { 'la gente lo hace': 25, 'un adjetivo del vocabulario inicial': 10 },
-  'es/a2.json': { 'la gente lo hace': 6, 'un adjetivo del vocabulario inicial': 4 },
   'es/b1.json': {
-    'un verbo frecuente en frases sencillas': 22,
-    'un adjetivo del vocabulario inicial': 22,
     'un adjetivo de 6 letras para cualidades': 6,
     'un verbo de 6 letras para acciones cotidianas': 5,
     'un adjetivo de 5 letras para cualidades': 5,
@@ -131,9 +127,6 @@ export const BOILERPLATE_BASELINE: Record<string, Record<string, number>> = {
     'un adjetivo de 8 letras para cualidades': 4,
     'un verbo de 8 letras para acciones cotidianas': 4,
   },
-  'de/a1.json': { 'ein umstandswort in einfachen lerner-sätzen': 14, 'ein adjektiv für einfache beschreibungen': 5 },
-  'de/a2.json': { 'ein umstandswort in einfachen lerner-sätzen': 17, 'ein adjektiv für einfache beschreibungen': 12 },
-  'de/b1.json': { 'ein umstandswort in einfachen lerner-sätzen': 23, 'ein adjektiv für einfache beschreibungen': 9 },
 }
 
 export function glossKey(gloss: string): string {
