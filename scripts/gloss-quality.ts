@@ -107,7 +107,7 @@ export function isWrongLanguageGloss(
  * #178: placeholder glosses ("lo si fa") and boilerplate reused across lemmas.
  * Compared after trim, lowercase and a dropped final period.
  */
-export const PLACEHOLDER_GLOSS_RE = /^(?:lo si fa|un uomo (?:lo fa|parla)|la gente lo hace)(?![\p{L}\p{N}])/iu
+export const PLACEHOLDER_GLOSS_RE = /^(?:lo si fa|un uomo (?:lo fa|parla)|la gente lo hace|una? (?:verbo|adjetivo|palabra) de \d+ letras)(?![\p{L}\p{N}])/iu
 
 export function isPlaceholderGloss(gloss: string): boolean {
   return PLACEHOLDER_GLOSS_RE.test(glossKey(gloss))
@@ -118,16 +118,7 @@ export const BOILERPLATE_MIN = 4
  * Grandfathered DE/ES boilerplate from before #178, capped at today's counts so
  * it can only shrink. Remove an entry when that pack is regenerated.
  */
-export const BOILERPLATE_BASELINE: Record<string, Record<string, number>> = {
-  'es/b1.json': {
-    'un adjetivo de 6 letras para cualidades': 6,
-    'un verbo de 6 letras para acciones cotidianas': 5,
-    'un adjetivo de 5 letras para cualidades': 5,
-    'un verbo de 9 letras para acciones cotidianas': 4,
-    'un adjetivo de 8 letras para cualidades': 4,
-    'un verbo de 8 letras para acciones cotidianas': 4,
-  },
-}
+export const BOILERPLATE_BASELINE: Record<string, Record<string, number>> = {}
 
 export function glossKey(gloss: string): string {
   return gloss.normalize('NFC').trim().toLowerCase().replace(/\.$/, '')

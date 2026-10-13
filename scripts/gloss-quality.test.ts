@@ -147,6 +147,12 @@ describe('boilerplateGlossErrors (#178)', () => {
 })
 
 describe('isPlaceholderGloss (#179 W1)', () => {
+  test('#193: "de N letras" templates are placeholders', () => {
+    for (const g of ['Un verbo de 6 letras para acciones cotidianas.', 'Un adjetivo de 10 letras para cualidades.', 'Una palabra de 9 letras sobre modo, tiempo o lugar.'])
+      expect(isPlaceholderGloss(g)).toBe(true)
+    for (const g of ['un verbo que expresa movimiento', 'una palabra de cariño'])
+      expect(isPlaceholderGloss(g)).toBe(false)
+  })
   test('start-anchored: extra words after a placeholder still fail', () => {
     for (const g of ['lo si fa spesso', 'Lo si fa con la mano.', 'un uomo parla forte', 'la gente lo hace mucho'])
       expect(isPlaceholderGloss(g)).toBe(true)
