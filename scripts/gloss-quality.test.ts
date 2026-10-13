@@ -6,6 +6,8 @@ import {
   isEnglishShapedGloss,
   isPlaceholderGloss,
   stemOf,
+  familyLeakErrors,
+  familyLeakTokens,
   stemSpoilerErrors,
   stemSpoilerTokens,
   isTemplateGloss,
@@ -250,5 +252,45 @@ describe('stem gate widening (#184 W2)', () => {
     expect(stemSpoilerTokens('pour quelle raison', 'POURQUOI')).toEqual(['pour'])
     expect(stemSpoilerTokens('à peu près', 'PRESQUE')).toEqual(['pres'])
     expect(stemSpoilerTokens('un objet pour écrire', 'STYLO')).toEqual([])
+  })
+})
+
+describe('word-family gate (#193)', () => {
+  test('catches short roots, word families and DE compound parts', () => {
+    for (const [w, t, lang] of [
+      ['DEZOITO', 'dez mais oito', 'pt'], ['ALTO', 'a altura', 'pt'], ['JOGAR', 'um jogo', 'pt'],
+      ['COMIDA', 'lo que se come', 'es'], ['PESO', 'lo que pesa', 'es'], ['MAL', 'malo', 'es'],
+      ['FREITAG', 'ein Tag', 'de'], ['TAG', 'Geburtstag', 'de'], ['TAG', 'Tageslicht', 'de'],
+      ['EISBÄR', 'ein weißer Bär', 'de'], ['HAUSTÜR', 'Tür', 'de'], ['UMWEG', 'ein langer Weg', 'de'], ['DAHIN', 'hin', 'de'],
+    ]) expect(familyLeakTokens(t!, w!, lang!).length).toBe(1)
+  })
+  test('no false positives on function words, shared 3-letter starts or chance tails', () => {
+    for (const [w, t, lang] of [
+      ['CONTAR', 'decir con números', 'es'], ['COMPRAR', 'comer algo', 'es'], ['PARTIR', 'para longe', 'pt'],
+      ['BRUDER', 'der Sohn', 'de'], ['EINSAM', 'ganz ein Mensch allein', 'de'], ['MONDSTEIN', 'ein heller Schmuck', 'de'],
+      ['ROCK', 'roca', 'es'], ['SONHA', 'tem sono', 'pt'], ['ATE', 'um tomate', 'pt'], ['HAUS', 'die Maus', 'de'],
+      // #204 review: chance tails and starts
+      ['ARM', 'warm', 'de'], ['ARM', 'Darm', 'de'], ['EIS', 'Reis', 'de'], ['OHR', 'Rohr', 'de'], ['RAD', 'grad', 'de'],
+      ['ESEL', 'Wiesel', 'de'], ['SPIEL', 'zum Beispiel', 'de'], ['MAR', 'marido', 'es'], ['PAN', 'pantalón', 'es'],
+      ['SOL', 'solo', 'es'], ['MES', 'mesa', 'es'], ['CASA', 'casi', 'es'], ['MADRUGAR', 'madre', 'es'],
+    ]) expect(familyLeakTokens(t!, w!, lang!)).toEqual([])
+  })
+  test('only ES/PT/DE are gated for now', () => {
+    expect(familyLeakTokens('un acte', 'ACTION', 'fr')).toEqual([])
+  })
+  test('baseline is shrink-only', () => {
+    const L = [{ word: 'FREITAG', gloss: 'ein Tag' }]
+    expect(familyLeakErrors('de/a2.json', L, {})[0]).toContain('word-family')
+    expect(familyLeakErrors('de/a2.json', L, { 'de/a2.json': { FREITAG: ['tag'] } })).toEqual([])
+    expect(familyLeakErrors('de/a2.json', [{ word: 'FREITAG', gloss: 'vor Samstag' }], { 'de/a2.json': { FREITAG: ['tag'] } })[0]).toContain('stale')
+  })
+  test('every shipped pack passes against the committed family baseline', async () => {
+    const { readdirSync, readFileSync } = await import('node:fs')
+    const base = JSON.parse(readFileSync(`${import.meta.dir}/data/family-leak-baseline.json`, 'utf8'))
+    const root = `${import.meta.dir}/../public/packs`
+    for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
+      const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
+      expect(familyLeakErrors(`${lang}/${f}`, pack.lemmas, base)).toEqual([])
+    }
   })
 })

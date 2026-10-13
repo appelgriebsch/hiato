@@ -31,7 +31,7 @@ import {
   writeMembershipCache,
 } from './lang-membership'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
-import { boilerplateGlossErrors, stemSpoilerErrors, type StemBaseline } from './gloss-quality'
+import { boilerplateGlossErrors, familyLeakErrors, stemSpoilerErrors, type StemBaseline } from './gloss-quality'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -71,6 +71,9 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const STEM_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/stem-spoiler-baseline.json'), 'utf8'),
   ) as StemBaseline
+  const FAMILY_BASELINE = JSON.parse(
+    await readFile(path.join(import.meta.dir, 'data/family-leak-baseline.json'), 'utf8'),
+  ) as StemBaseline
   for (const file of files) {
     const text = await readFile(file, 'utf8')
     let raw: unknown
@@ -95,6 +98,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
 
     errors.push(...boilerplateGlossErrors(rel, pack.lemmas))
     errors.push(...stemSpoilerErrors(rel, pack.lemmas, STEM_BASELINE))
+    errors.push(...familyLeakErrors(rel, pack.lemmas, FAMILY_BASELINE))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)
