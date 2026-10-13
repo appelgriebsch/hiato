@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "lang": "es",
   "cefr": "c2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
@@ -46,13 +46,6 @@
       ]
     },
     {
-      "word": "DÉJASELO",
-      "gloss": "Permite que otra persona lo conserve o use.",
-      "synonyms": [
-        "permítele"
-      ]
-    },
-    {
       "word": "AJETREADO",
       "gloss": "Que tiene muchas ocupaciones y poco descanso.",
       "synonyms": [
@@ -71,8 +64,7 @@
       "word": "TIPEJO",
       "gloss": "Persona de aspecto o comportamiento desagradable.",
       "synonyms": [
-        "individuo",
-        "tipo"
+        "individuo"
       ]
     },
     {
@@ -132,11 +124,6 @@
         "tosquedad",
         "aspereza"
       ]
-    },
-    {
-      "word": "ENTONCE",
-      "gloss": "En aquel momento o circunstancia pasada.",
-      "synonyms": []
     },
     {
       "word": "SOMBRERERO",
@@ -368,13 +355,6 @@
       ]
     },
     {
-      "word": "PRIVO",
-      "gloss": "persona que goza de favor especial",
-      "synonyms": [
-        "particular"
-      ]
-    },
-    {
       "word": "NÁUFRAGO",
       "gloss": "persona que sobrevive al hundimiento de un barco",
       "synonyms": [
@@ -439,7 +419,7 @@
     },
     {
       "word": "DÉBITO",
-      "gloss": "cantidad que se debe pagar",
+      "gloss": "cantidad pendiente de pago",
       "synonyms": [
         "deuda",
         "adeudo"
@@ -699,10 +679,10 @@
     },
     {
       "word": "FINALIZADO",
-      "gloss": "que ha llegado a su fin",
+      "gloss": "que ya ha concluido",
       "synonyms": [
         "terminado",
-        "concluido"
+        "acabado"
       ]
     },
     {
@@ -1533,13 +1513,6 @@
       ]
     },
     {
-      "word": "PLANTE",
-      "gloss": "proposición o idea que se presenta para ser discutida",
-      "synonyms": [
-        "propuesta"
-      ]
-    },
-    {
       "word": "TEBEO",
       "gloss": "publicación periódica con historietas ilustradas"
     },
@@ -1723,11 +1696,6 @@
       "synonyms": [
         "principiante"
       ]
-    },
-    {
-      "word": "MINUTE",
-      "gloss": "medida de tiempo equivalente a sesenta segundos",
-      "synonyms": []
     },
     {
       "word": "ABREVIAR",
@@ -1927,10 +1895,9 @@
     },
     {
       "word": "HOZ",
-      "gloss": "valle estrecho y profundo entre montañas",
+      "gloss": "herramienta de hoja curva para segar hierba o cereal",
       "synonyms": [
-        "hozada",
-        "hozadura"
+        "segadera"
       ]
     },
     {
@@ -2060,11 +2027,6 @@
       ]
     },
     {
-      "word": "DESPERAR",
-      "gloss": "sacar a alguien del sueño",
-      "synonyms": []
-    },
-    {
       "word": "VACILE",
       "gloss": "burla o broma ligera (coloquial)",
       "synonyms": [
@@ -2098,13 +2060,6 @@
       ]
     },
     {
-      "word": "COMÉRTELO",
-      "gloss": "tragar algo por completo",
-      "synonyms": [
-        "devorar"
-      ]
-    },
-    {
       "word": "ANACONDA",
       "gloss": "Serpiente grande y no venenosa de zonas tropicales.",
       "synonyms": [
@@ -2117,11 +2072,6 @@
       "synonyms": [
         "oca"
       ]
-    },
-    {
-      "word": "ALMENO",
-      "gloss": "como mínimo, en cantidad",
-      "synonyms": []
     },
     {
       "word": "BAZUCA",
@@ -2445,10 +2395,6 @@
       ]
     },
     {
-      "word": "FIO",
-      "gloss": "dio crédito a alguien o respondió por su deuda"
-    },
-    {
       "word": "FROTE",
       "gloss": "acción de pasar algo con fuerza",
       "synonyms": []
@@ -2626,11 +2572,6 @@
       ]
     },
     {
-      "word": "BÉSALO",
-      "gloss": "tócalo con los labios en señal de cariño",
-      "synonyms": []
-    },
-    {
       "word": "BLANQUEO",
       "gloss": "acción de poner algo del color de la nieve",
       "synonyms": [
@@ -2801,6 +2742,73 @@
       "gloss": "que muestra emoción de forma exagerada",
       "synonyms": [
         "cursi"
+      ]
+    },
+    {
+      "word": "ACÍBAR",
+      "gloss": "amargura o disgusto muy grande",
+      "synonyms": [
+        "amargura"
+      ]
+    },
+    {
+      "word": "ZOZOBRA",
+      "gloss": "inquietud y angustia por un peligro",
+      "synonyms": [
+        "desasosiego"
+      ]
+    },
+    {
+      "word": "MENOSCABO",
+      "gloss": "daño o pérdida de valor",
+      "synonyms": [
+        "perjuicio"
+      ]
+    },
+    {
+      "word": "PERGEÑAR",
+      "gloss": "esbozar algo de forma rápida o tosca",
+      "synonyms": [
+        "esbozar"
+      ]
+    },
+    {
+      "word": "ALBRICIAS",
+      "gloss": "expresión de alegría por una buena noticia"
+    },
+    {
+      "word": "ZAHERIR",
+      "gloss": "burlarse de alguien para humillarlo",
+      "synonyms": [
+        "mortificar"
+      ]
+    },
+    {
+      "word": "ENJUTO",
+      "gloss": "delgado y seco de carnes",
+      "synonyms": [
+        "flaco"
+      ]
+    },
+    {
+      "word": "PRÓDIGO",
+      "gloss": "que gasta sin medida",
+      "synonyms": [
+        "derrochador"
+      ]
+    },
+    {
+      "word": "ATAVÍO",
+      "gloss": "ropa y adornos de una persona",
+      "synonyms": [
+        "atuendo"
+      ]
+    },
+    {
+      "word": "SOSLAYO",
+      "gloss": "de lado, de forma oblicua",
+      "synonyms": [
+        "oblicuamente"
       ]
     }
   ]
