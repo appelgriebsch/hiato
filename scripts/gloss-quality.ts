@@ -225,7 +225,7 @@ export function stemSpoilerTokens(text: string, lemma: string): string[] {
 export type StemBaseline = Record<string, Record<string, readonly string[]>>
 
 /** Folded leaking tokens of one lemma across its gloss and chips, sorted and unique. */
-export function stemSpoilerLeaks(L: { word: string; gloss?: string; synonyms?: readonly string[] }, _lang?: string): string[] {
+export function stemSpoilerLeaks(L: { word: string; gloss?: string; synonyms?: readonly string[] }): string[] {
   const texts = [L.gloss ?? '', ...(L.synonyms ?? [])]
   return [...new Set(texts.flatMap((t) => stemSpoilerTokens(t, L.word)))].sort()
 }
@@ -279,7 +279,21 @@ export const FAMILY_STOP: Readonly<Record<string, ReadonlySet<string>>> = {
 export const FAMILY_UNRELATED: ReadonlySet<string> = new Set([
   'rock:roca', 'gral:grado', 'tim:timbre', 'servira:sera', 'capuz:capo', 'sonha:sono', 'sonhaste:sono',
   'maior:mais', 'qualidade:quao',
+  // #204 review: chance shared starts and a chance compound
+  'mar:marido', 'pan:pantalon', 'sol:solo', 'mes:mesa', 'casa:casi', 'madrugar:madre', 'spiel:beispiel',
 ])
+
+/** Short DE heads that do start a compound (UMWEG, DAHIN). */
+const DE_SHORT_HEADS: ReadonlySet<string> = new Set(['um', 'ab', 'an', 'zu', 'da', 'wo', 'ur'])
+
+/**
+ * The part before a shared DE tail looks like a word of its own (FREI|tag, EIS|bär),
+ * not a stray letter or two (w|arm, R|eis, G|rad, Wi|esel).
+ * ponytail: length heuristic, no lexicon; chance 3+ letter heads go to FAMILY_UNRELATED.
+ */
+function isCompoundHead(head: string): boolean {
+  return head.length >= 3 || DE_SHORT_HEADS.has(head)
+}
 
 function commonPrefix(a: string, b: string): number {
   let i = 0
@@ -290,7 +304,7 @@ function commonPrefix(a: string, b: string): number {
 /**
  * A token is in the lemma's family when they share a 3+ letter prefix that covers all but
  * at most one letter of the shorter word (DEZOITO/dez, PESO/pesa, COMIDA/come), or, in DE,
- * when one is a 3+ letter compound tail of the other (FREITAG/Tag, TAG/Geburtstag).
+ * when one is a 3+ letter compound tail of the other after a word-like head (FREITAG/Tag, TAG/Geburtstag).
  */
 export function familyLeakTokens(text: string, lemma: string, lang: string): string[] {
   if (!FAMILY_LANGS.has(lang)) return []
@@ -301,8 +315,9 @@ export function familyLeakTokens(text: string, lemma: string, lang: string): str
     const k = commonPrefix(w, t)
     if (k >= 3 && k >= Math.min(w.length, t.length) - 1) return true
     if (lang !== 'de') return false
-    return (t.length >= 3 && w.length > t.length && w.endsWith(t)) ||
-      (w.length >= 3 && t.length > w.length && t.endsWith(w))
+    const [short, long] = t.length < w.length ? [t, w] : [w, t]
+    return short.length >= 3 && short.length < long.length && long.endsWith(short) &&
+      isCompoundHead(long.slice(0, long.length - short.length))
   })
 }
 

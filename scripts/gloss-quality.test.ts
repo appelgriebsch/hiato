@@ -261,7 +261,7 @@ describe('word-family gate (#193)', () => {
       ['DEZOITO', 'dez mais oito', 'pt'], ['ALTO', 'a altura', 'pt'], ['JOGAR', 'um jogo', 'pt'],
       ['COMIDA', 'lo que se come', 'es'], ['PESO', 'lo que pesa', 'es'], ['MAL', 'malo', 'es'],
       ['FREITAG', 'ein Tag', 'de'], ['TAG', 'Geburtstag', 'de'], ['TAG', 'Tageslicht', 'de'],
-      ['EISBÄR', 'ein weißer Bär', 'de'], ['HAUSTÜR', 'Tür', 'de'], ['UMWEG', 'ein langer Weg', 'de'],
+      ['EISBÄR', 'ein weißer Bär', 'de'], ['HAUSTÜR', 'Tür', 'de'], ['UMWEG', 'ein langer Weg', 'de'], ['DAHIN', 'hin', 'de'],
     ]) expect(familyLeakTokens(t!, w!, lang!).length).toBe(1)
   })
   test('no false positives on function words, shared 3-letter starts or chance tails', () => {
@@ -269,6 +269,10 @@ describe('word-family gate (#193)', () => {
       ['CONTAR', 'decir con números', 'es'], ['COMPRAR', 'comer algo', 'es'], ['PARTIR', 'para longe', 'pt'],
       ['BRUDER', 'der Sohn', 'de'], ['EINSAM', 'ganz ein Mensch allein', 'de'], ['MONDSTEIN', 'ein heller Schmuck', 'de'],
       ['ROCK', 'roca', 'es'], ['SONHA', 'tem sono', 'pt'], ['ATE', 'um tomate', 'pt'], ['HAUS', 'die Maus', 'de'],
+      // #204 review: chance tails and starts
+      ['ARM', 'warm', 'de'], ['ARM', 'Darm', 'de'], ['EIS', 'Reis', 'de'], ['OHR', 'Rohr', 'de'], ['RAD', 'grad', 'de'],
+      ['ESEL', 'Wiesel', 'de'], ['SPIEL', 'zum Beispiel', 'de'], ['MAR', 'marido', 'es'], ['PAN', 'pantalón', 'es'],
+      ['SOL', 'solo', 'es'], ['MES', 'mesa', 'es'], ['CASA', 'casi', 'es'], ['MADRUGAR', 'madre', 'es'],
     ]) expect(familyLeakTokens(t!, w!, lang!)).toEqual([])
   })
   test('only ES/PT/DE are gated for now', () => {
