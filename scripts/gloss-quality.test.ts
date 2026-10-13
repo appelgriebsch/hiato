@@ -284,9 +284,10 @@ describe('word-family gate (#193)', () => {
     expect(familyLeakErrors('de/a2.json', L, { 'de/a2.json': { FREITAG: ['tag'] } })).toEqual([])
     expect(familyLeakErrors('de/a2.json', [{ word: 'FREITAG', gloss: 'vor Samstag' }], { 'de/a2.json': { FREITAG: ['tag'] } })[0]).toContain('stale')
   })
-  test('every shipped pack passes against the committed family baseline', async () => {
+  test('every shipped pack passes; the family baseline is empty (#193)', async () => {
     const { readdirSync, readFileSync } = await import('node:fs')
     const base = JSON.parse(readFileSync(`${import.meta.dir}/data/family-leak-baseline.json`, 'utf8'))
+    expect(base).toEqual({})
     const root = `${import.meta.dir}/../public/packs`
     for (const lang of readdirSync(root)) for (const f of readdirSync(`${root}/${lang}`)) {
       const pack = JSON.parse(readFileSync(`${root}/${lang}/${f}`, 'utf8'))
