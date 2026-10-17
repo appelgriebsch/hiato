@@ -102,7 +102,7 @@ describe('packs:check exclusive bands', () => {
     expect(errors).toEqual([])
   })
 
-  test('historical A1–B1 duplicates are grandfathered; A1 vs B2 still fails', () => {
+  test('an A1↔A2 duplicate fails; there is no A1–B1 exemption', () => {
     const frozen = exclusiveConflicts([
       {
         rel: 'en/a1.json',
@@ -113,7 +113,10 @@ describe('packs:check exclusive bands', () => {
         pack: pack({ lang: 'en', cefr: 'a2', lemmas: [{ word: 'BOOK' }] }),
       },
     ])
-    expect(frozen).toEqual([])
+    expect(frozen).toHaveLength(1)
+    expect(frozen[0]).toContain('en/a1.json')
+    expect(frozen[0]).toContain('en/a2.json')
+    expect(frozen[0]).toContain('BOOK')
     const vsNew = exclusiveConflicts([
       {
         rel: 'en/a1.json',

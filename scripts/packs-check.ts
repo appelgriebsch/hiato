@@ -32,6 +32,7 @@ import {
 } from './lang-membership'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 import { boilerplateGlossErrors, familyLeakErrors, stemSpoilerErrors, type StemBaseline } from './gloss-quality'
+import { loadAccentAllowlist, packDupeErrors } from './pack-dupes'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -117,6 +118,12 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
 
   errors.push(...checkCompleteness(rels))
   errors.push(...exclusiveConflicts(snapshots))
+  errors.push(
+    ...packDupeErrors(
+      snapshots.map(({ rel, pack }) => ({ rel, lang: pack.lang, lemmas: pack.lemmas })),
+      loadAccentAllowlist(),
+    ),
+  )
 
   // Hint ceiling: read committed caches only (fail closed). Build lemma maps after every pack parsed.
   let enTags: Map<string, string>
