@@ -87,6 +87,34 @@ describe('pack dupes', () => {
     expect(packDupeErrors(files, allow)).toEqual([])
   })
 
+  test('an unknown language fails', () => {
+    expect(() => parseAccentAllowlist({ xx: [] })).toThrow(/unknown lang/)
+  })
+
+  test('fewer than two words fails', () => {
+    expect(() =>
+      parseAccentAllowlist({ es: [{ words: ['SOLO'], reason: 'one lemma is not a pair' }] }),
+    ).toThrow(/at least two/)
+  })
+
+  test('a repeated word fails', () => {
+    expect(() =>
+      parseAccentAllowlist({ es: [{ words: ['SOLO', 'SOLO'], reason: 'the same lemma twice' }] }),
+    ).toThrow(/repeats a lemma/)
+  })
+
+  test('a missing or empty reason fails', () => {
+    expect(() => parseAccentAllowlist({ es: [{ words: ['SOLO', 'SOLA'], reason: '   ' }] })).toThrow(
+      /one-line reason/,
+    )
+  })
+
+  test('a multi-line reason fails', () => {
+    expect(() =>
+      parseAccentAllowlist({ es: [{ words: ['SOLO', 'SOLA'], reason: 'first line\nsecond line' }] }),
+    ).toThrow(/one-line reason/)
+  })
+
   test('shipped packs have no fold-key or accent-only violations', () => {
     const root = path.join(import.meta.dir, '..', 'public', 'packs')
     const files: DupeFile[] = []
