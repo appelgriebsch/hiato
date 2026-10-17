@@ -11,3 +11,9 @@ Target remains **~400 lemmas** per lang×CEFR, `packs:check` floor **350** (ADR 
 B2–C2 selection uses the same pack-quality gates as A1–B1 (#24): Hunspell language membership (loanword allowlist), NSFW denylist, hangman length 3–10, and no person-name list lemmas (frequency bands dump proper names). `packs:check` also drops a lemma when it is on the name list **and** the gloss is a person-name gloss.
 
 Rejected: overlapping/cumulative higher packs; lowering the C1 floor in this epic; stuffing C2 with B1 leftovers.
+
+## Addendum — no A1–B1 exemption, accent-pair allowlist (#208)
+
+`exclusiveConflicts` applies the rule above to every band. Fold-key duplicates that shipped inside A1–B1 are not grandfathered.
+
+Accents stay distinct letters (ADR 0005). Two lemmas that match only after NFD, stripping marks, lowercasing, and ß→ss are an accent-only pair. `packs:check` fails that pair, in one pack or across packs, unless `scripts/data/accent-pair-allowlist.json` lists both words and a one-line reason. DE ß/SS and FR È/É still follow `foldKey` and count as one lemma. An allowlist entry that matches no shipped cluster is an error.

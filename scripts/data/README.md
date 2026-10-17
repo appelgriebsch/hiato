@@ -29,6 +29,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |
 | `loanword-allowlist.txt` | Hiato curated | classroom internationalisms that nspell misses; `LANG WORD` (`*` = all pack langs) |
 | `hunspell-verdicts.json` | Hiato generated | `isWordOfLang` pass/fail for pack lemmas and gloss tokens. `packs:check` rewrites it when the stamp or a word is new; commit the file so CI skips constructing Hunspell. Not a copy of the dictionaries. |
+| `accent-pair-allowlist.json` | Hiato curated | Accent-only lemma clusters that are different words (ADR 0005, ADR 0028 addendum). Each entry is `{ "words": ["PAIS", "PAÍS"], "reason": "…" }` with a one-line reason. `packs:check` fails any other accent-only pair and fails an entry that matches no shipped cluster. DE ß/SS and FR È/É are fold-key duplicates, not entries on this list. |
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 

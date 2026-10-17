@@ -32,6 +32,8 @@ import {
 } from './lang-membership'
 import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 import { boilerplateGlossErrors, familyLeakErrors, stemSpoilerErrors, type StemBaseline } from './gloss-quality'
+import { loadAccentAllowlist, packDupeErrors } from './pack-dupes'
+import { collectPackPinErrors, loadPackPin, type PinPack } from './pack-pin'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -67,6 +69,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const snapshots: PackSnapshot[] = []
   const rels: string[] = []
   const errors: string[] = []
+  const pinPacks: { rel: string; pack: PinPack }[] = []
 
   const STEM_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/stem-spoiler-baseline.json'), 'utf8'),
@@ -85,6 +88,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     }
     const rel = path.relative(ROOT, file).split(path.sep).join('/')
     rels.push(rel)
+    pinPacks.push({ rel, pack: raw as PinPack })
     const pack = validatePack(raw, rel)
 
     if (pack.lang !== rel.split('/')[0] || pack.cefr !== rel.split('/')[1]?.replace(/\.json$/, '')) {
@@ -115,8 +119,15 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     )
   }
 
+  errors.push(...collectPackPinErrors(pinPacks, loadPackPin()))
   errors.push(...checkCompleteness(rels))
   errors.push(...exclusiveConflicts(snapshots))
+  errors.push(
+    ...packDupeErrors(
+      snapshots.map(({ rel, pack }) => ({ rel, lang: pack.lang, lemmas: pack.lemmas })),
+      loadAccentAllowlist(),
+    ),
+  )
 
   // Hint ceiling: read committed caches only (fail closed). Build lemma maps after every pack parsed.
   let enTags: Map<string, string>

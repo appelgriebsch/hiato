@@ -174,24 +174,9 @@ export function checkSynonymCoverage(
   return { error: null, warn: null }
 }
 
-function cefrFromRel(rel: string): string {
-  const base = rel.split(/[/\\]/).pop() ?? ''
-  return base.replace(/\.json$/i, '').toLowerCase()
-}
-
-function isFrozenExistingPair(relA: string, relB: string): boolean {
-  const a = cefrFromRel(relA)
-  const b = cefrFromRel(relB)
-  return (
-    (EXISTING_CEFRS as readonly string[]).includes(a) &&
-    (EXISTING_CEFRS as readonly string[]).includes(b)
-  )
-}
-
 /**
  * A lemma may appear in at most one pack per language (ADR 0028).
- * A1–B1 files are frozen, so historical A1↔A2↔B1 duplicates are grandfathered;
- * B2–C2 must still be exclusive against every other pack (including A1–B1).
+ * A1–B1 fold-key duplicates are not exempt (#208).
  */
 export function exclusiveConflicts(files: PackSnapshot[]): string[] {
   const first = new Map<string, string>()
@@ -201,7 +186,6 @@ export function exclusiveConflicts(files: PackSnapshot[]): string[] {
       const key = `${pack.lang}:${foldKey(pack.lang, L.word)}`
       const prev = first.get(key)
       if (prev && prev !== rel) {
-        if (isFrozenExistingPair(prev, rel)) continue
         errors.push(
           `lemma "${L.word}" in ${prev} and ${rel} (exclusive bands; DE ß/SS fold)`,
         )
