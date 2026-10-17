@@ -113,7 +113,7 @@ describe('packs:check exclusive bands', () => {
         pack: pack({ lang: 'en', cefr: 'a2', lemmas: [{ word: 'BOOK' }] }),
       },
     ])
-    expect(frozen).toHaveLength(1)
+    expect(frozen.length).toBe(1)
     expect(frozen[0]).toContain('en/a1.json')
     expect(frozen[0]).toContain('en/a2.json')
     expect(frozen[0]).toContain('BOOK')

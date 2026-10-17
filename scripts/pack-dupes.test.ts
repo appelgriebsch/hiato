@@ -21,7 +21,7 @@ describe('pack dupes', () => {
       [file('en/a1.json', 'en', ['BOOK']), file('en/a2.json', 'en', ['BOOK'])],
       empty,
     )
-    expect(errors).toHaveLength(1)
+    expect(errors.length).toBe(1)
     expect(errors[0]).toContain('BOOK')
     expect(errors[0]).toContain('en/a1.json')
     expect(errors[0]).toContain('en/a2.json')
@@ -30,7 +30,7 @@ describe('pack dupes', () => {
   test('an accent-only pair across packs fails, and passes when allowlisted', () => {
     const files = [file('pt/a1.json', 'pt', ['PAIS']), file('pt/a2.json', 'pt', ['PAÍS'])]
     const blocked = packDupeErrors(files, empty)
-    expect(blocked).toHaveLength(1)
+    expect(blocked.length).toBe(1)
     expect(blocked[0]).toContain('PAIS')
     expect(blocked[0]).toContain('PAÍS')
     expect(blocked[0]).toContain('pt/a1.json')
@@ -48,7 +48,7 @@ describe('pack dupes', () => {
         pt: [{ words: ['PAIS', 'PAÍS'], reason: 'PAIS means parents; PAÍS means country.' }],
       }),
     )
-    expect(errors).toHaveLength(1)
+    expect(errors.length).toBe(1)
     expect(errors[0]).toContain('unused')
     expect(errors[0]).toContain('PAIS')
     expect(errors[0]).toContain('PAÍS')
@@ -77,7 +77,7 @@ describe('pack dupes', () => {
   test('an in-pack accent-only pair fails unless allowlisted', () => {
     const files = [file('it/a1.json', 'it', ['PAPA', 'PAPÀ'])]
     const blocked = packDupeErrors(files, empty)
-    expect(blocked).toHaveLength(1)
+    expect(blocked.length).toBe(1)
     expect(blocked[0]).toContain('PAPA')
     expect(blocked[0]).toContain('PAPÀ')
     expect(blocked[0]).toContain('it/a1.json')
