@@ -147,7 +147,7 @@ export function InstallHelpLink({
       <button
         type="button"
         data-install-link
-        className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm"
+        className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm short-land:mx-0 short-land:min-w-0 short-land:flex-1 short-land:justify-start short-land:text-left short-land:leading-tight"
         onClick={() => void onInstallClick()}
       >
         Add Hiato to your Home Screen

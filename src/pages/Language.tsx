@@ -75,7 +75,7 @@ export function SelectionCard({
   return (
     <section
       data-selection-card
-      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1"
+      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-1.5"
     >
       {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
       <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
@@ -176,28 +176,38 @@ export function Language() {
     }
   }
 
+  const continueLabel = preparing
+    ? 'Preparing packs…'
+    : cachePhase === 'caching' && showSaving
+      ? 'Caching…'
+      : 'Continue to daily'
+
+  const continueControls = (land: boolean) => (
+    <>
+      {error ? (
+        <p role="alert" className={land ? 'text-sm text-accent-fg' : 'mb-2 text-sm text-accent-fg'}>
+          {error}
+        </p>
+      ) : null}
+      <Button
+        fullWidth={!land}
+        className={land ? 'shrink-0' : undefined}
+        disabled={preparing || cachePhase === 'caching'}
+        aria-busy={preparing || cachePhase === 'caching'}
+        onClick={() => void continuePlay()}
+      >
+        {continueLabel}
+      </Button>
+      <InstallHelpLink visible={cachePhase === 'ready'} />
+    </>
+  )
+
   return (
     <Layout
+      hideFooterInShortLand
       footer={
-        <div className="pt-2 pb-4">
-          {error ? (
-            <p role="alert" className="mb-2 text-sm text-accent-fg">
-              {error}
-            </p>
-          ) : null}
-          <Button
-            fullWidth
-            disabled={preparing || cachePhase === 'caching'}
-            aria-busy={preparing || cachePhase === 'caching'}
-            onClick={() => void continuePlay()}
-          >
-            {preparing
-              ? 'Preparing packs…'
-              : cachePhase === 'caching' && showSaving
-                ? 'Caching…'
-                : 'Continue to daily'}
-          </Button>
-          <InstallHelpLink visible={cachePhase === 'ready'} />
+        <div data-language-continue className="pt-2 pb-4">
+          {continueControls(false)}
         </div>
       }
     >
@@ -214,17 +224,27 @@ export function Language() {
             ← Back
           </button>
         }
+        center={
+          <h1 className="hidden text-title text-ink short-land:block">
+            Choose language &amp; level
+          </h1>
+        }
       />
 
-      <h1 className="text-title text-ink">Choose language &amp; level</h1>
-      <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink">
+      <h1 className="text-title text-ink short-land:hidden">Choose language &amp; level</h1>
+      <div
+        data-language-picker
+        className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5 short-land:overflow-hidden"
+      >
+      <div>
+      <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
         Language
       </h2>
       <div
         role="radiogroup"
         data-radio-group
         aria-labelledby="language-heading"
-        className="mt-3 grid grid-cols-3 gap-2"
+        className="mt-3 grid grid-cols-3 gap-2 short-land:mt-2"
       >
         {PACK_LANGS.map((l) => (
           <button
@@ -261,7 +281,9 @@ export function Language() {
         ))}
       </div>
 
-      <h2 id="cefr-heading" className="mt-4 text-sm font-semibold text-ink">
+      </div>
+      <div className="short-land:flex short-land:min-h-0 short-land:min-w-0 short-land:flex-col short-land:justify-center">
+      <h2 id="cefr-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
         Level
       </h2>
       <div
@@ -297,11 +319,16 @@ export function Language() {
           </button>
         ))}
       </div>
-      <p id="cefr-help" className="mt-2 text-sm text-ink-muted">
+      <p id="cefr-help" className="mt-2 text-sm text-ink-muted short-land:mt-1">
         {CEFR_LINES[cefr]}
       </p>
 
       <SelectionCard lang={lang} cefr={cefr} phase={cachePhase} showSaving={showSaving} />
+      <div className="mt-2 hidden items-center gap-2 short-land:flex">
+        {continueControls(true)}
+      </div>
+      </div>
+      </div>
     </Layout>
   )
 }

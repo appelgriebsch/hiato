@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Option A — short landscape only. Utilities: `short-land:*`. */
+@custom-variant short-land (@media (orientation: landscape) and (max-height: 500px));
+
 /* Self-hosted Inter (latin) — offline shell must not hit fonts.googleapis.com */
 @font-face {
   font-family: "Inter";
@@ -433,4 +436,68 @@ button.key-settled:disabled {
 
 .install-help-sheet-panel {
   padding: 1.25rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/*
+ * Short-landscape column shell (#209). Unlayered so it wins over the
+ * scroller's `flex` / `py-4` utilities: a `short-land:grid` on the same node
+ * is source-order dependent, and this is the same media query as the variant.
+ * `--short-land-cols` is set only when Layout is given an `aside`.
+ */
+@media (orientation: landscape) and (max-height: 500px) {
+  [data-layout-shell] {
+    max-width: 56rem;
+    padding-top: calc(env(safe-area-inset-top) + 6px);
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+  }
+
+  [data-layout-scroll] {
+    padding-top: 0;
+    padding-bottom: 0;
+    scroll-padding-bottom: 0;
+  }
+
+  [data-layout-scroll][data-short-land-cols] {
+    display: grid;
+    grid-template-columns: var(--short-land-cols);
+    grid-template-rows: auto minmax(0, 1fr);
+    column-gap: 1.5rem;
+  }
+
+  /* One letter row. The portrait grid stays mounted and is hidden here. */
+  [data-letter-grid][data-letter-cols] {
+    display: grid;
+  }
+
+  [data-letter-grid]:not([data-letter-cols]) {
+    display: none;
+  }
+
+  /* Pin Home / Practice to the left column. Kept off the class string so the
+     #133 source window still sees the pocket "← Home" link. */
+  [data-round-nav] {
+    margin-top: auto;
+    padding-top: 0.375rem;
+  }
+}
+
+/* 1024×600 is landscape but above the 500px short-land cutoff. The single
+   column still has to show every level and Pack info. Portrait is 667px tall,
+   so this query does not touch it. */
+@media (orientation: landscape) and (min-height: 501px) and (max-height: 640px) {
+  [data-layout-shell]:has([data-language-picker]) [data-layout-scroll] {
+    padding-top: 0;
+    padding-bottom: 0;
+    scroll-padding-bottom: 0;
+  }
+
+  [data-language-picker] h2 {
+    margin-top: 0.5rem;
+  }
+
+  [data-language-picker] [data-language-continue] {
+    padding-bottom: 0.5rem;
+  }
 }

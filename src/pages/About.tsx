@@ -21,7 +21,7 @@ function NoteText({ line }: { line: string }) {
         /^https?:\/\//.test(part) ? (
           <a
             key={`${part}-${i}`}
-            className="text-accent-fg underline-offset-2 hover:underline"
+            className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
             href={part}
             rel="noreferrer"
             target="_blank"
@@ -44,7 +44,7 @@ function LicenseLine({ license }: { license: string }) {
   return (
     <p className="mt-1.5 text-xs font-medium text-accent-fg">
       <a
-        className="underline-offset-2 hover:underline"
+        className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
         href={href}
         rel="noreferrer"
         target="_blank"
@@ -64,7 +64,7 @@ export function About() {
         left={
           <button
             type="button"
-            className="motion-press text-sm text-ink-muted"
+            className="motion-press -ml-2 inline-flex min-h-11 min-w-11 items-center px-2 text-sm text-ink-muted"
             onClick={() => nav('/')}
           >
             ← Back
@@ -122,7 +122,7 @@ export function About() {
           <li>
             Copyright (c) 2016 The Inter Project Authors (
             <a
-              className="text-accent-fg underline-offset-2 hover:underline"
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/rsms/inter"
             >
               github.com/rsms/inter
@@ -138,7 +138,7 @@ export function About() {
           <li>
             Full license:{' '}
             <a
-              className="text-accent-fg underline-offset-2 hover:underline"
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/LICENSE.txt"
             >
               /fonts/LICENSE.txt

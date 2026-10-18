@@ -56,6 +56,13 @@ export function Home() {
 
   useLayoutEffect(() => {
     if (!pocketCleared) return
+    const nodes = document.querySelectorAll<HTMLElement>('[data-pocket-cleared]')
+    for (const n of nodes) {
+      if (n.getClientRects().length > 0) {
+        n.focus()
+        return
+      }
+    }
     clearedRef.current?.focus()
   }, [pocketCleared])
 
@@ -122,19 +129,74 @@ export function Home() {
     ? `Daily ${LANG_CODES[prefs.lang]} ${CEFR_CODES[prefs.cefr]}`
     : 'Choose language & level'
 
+  const pocketControl = (clearedRefTarget: boolean) => {
+    if (!prefs) return null
+    if (pocketCount > 0) {
+      return (
+        <Button
+          variant="outline"
+          fullWidth
+          className="mt-2"
+          onClick={() => setPocketOpen(true)}
+        >
+          Pocket ({pocketCount})
+        </Button>
+      )
+    }
+    if (pocketCleared) {
+      return (
+        <p
+          ref={clearedRefTarget ? clearedRef : undefined}
+          data-pocket-cleared
+          tabIndex={-1}
+          role="status"
+          className="mt-2 text-center text-sm text-accent-fg"
+        >
+          Pocket cleared
+        </p>
+      )
+    }
+    return null
+  }
+
   return (
-    <Layout>
+    <Layout
+      aside={
+        <div className="flex w-full min-w-0 flex-col items-center justify-center">
+          {pocketControl(false)}
+          <nav className="mt-3 flex items-center justify-center gap-4 text-sm">
+            <Link
+              to="/language"
+              className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+            >
+              {prefs ? 'Change language' : 'Language'}
+            </Link>
+            <span className="text-ink-faint">·</span>
+            <Link
+              to="/about"
+              className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+            >
+              About
+            </Link>
+          </nav>
+        </div>
+      }
+      columns="minmax(0, 1.25fr) minmax(0, 1fr)"
+    >
       <TopBar
         left={<BrandLockup size="md" />}
         right={
           <div className="flex items-center gap-2">
             {prefs ? <StreakChip count={streak} /> : null}
             <OfflineChip />
+            <span className="hidden short-land:inline-flex" data-home-offline-signal>
+              <OfflineChip packReady={Boolean(prefs) && packCached} />
+            </span>
           </div>
         }
       />
 
-      <Card className="motion-onboarding-enter mb-4">
+      <Card className="motion-onboarding-enter mb-4 short-land:mb-0 short-land:col-start-1 short-land:row-start-2 short-land:self-center">
         <h1 className="text-title mb-2 text-ink">{dailyLabel}</h1>
         <p className="text-body mb-4 text-ink-muted">
           {prefs
@@ -175,25 +237,7 @@ export function Home() {
                 Practice isn’t available — this pack only has today’s daily word.
               </p>
             ) : null}
-            {pocketCount > 0 ? (
-              <Button
-                variant="outline"
-                fullWidth
-                className="mt-2"
-                onClick={() => setPocketOpen(true)}
-              >
-                Pocket ({pocketCount})
-              </Button>
-            ) : pocketCleared ? (
-              <p
-                ref={clearedRef}
-                tabIndex={-1}
-                role="status"
-                className="mt-2 text-center text-sm text-accent-fg"
-              >
-                Pocket cleared
-              </p>
-            ) : null}
+            <div className="short-land:hidden">{pocketControl(true)}</div>
             <PocketSheet
               lang={prefs.lang}
               cefr={prefs.cefr}
@@ -216,7 +260,7 @@ export function Home() {
         ) : null}
       </Card>
 
-      <nav className="mb-6 flex items-center justify-center gap-4 text-sm">
+      <nav className="mb-6 flex items-center justify-center gap-4 text-sm short-land:hidden">
         <Link
           to="/language"
           className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -233,7 +277,7 @@ export function Home() {
       </nav>
 
       {/* Quiet offline-ready trust signal — not loud Install (#103) */}
-      <div className="flex justify-center" data-home-offline-signal>
+      <div className="flex justify-center short-land:hidden" data-home-offline-signal>
         <OfflineChip packReady={Boolean(prefs) && packCached} />
       </div>
     </Layout>
