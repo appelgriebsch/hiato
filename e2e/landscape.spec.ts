@@ -309,6 +309,11 @@ test.describe('short landscape viewports (#209)', () => {
         const m = await measure(page)
         const where = `picker ${lang} ${vp.name}`
         assertNoHorizontalScroll(m, where)
+        // Short landscape must not scroll. overflow-hidden would clip Continue
+        // instead of fitting it, and the in-view check below catches that.
+        if (vp.short) {
+          expect(m.scroller!.scrollH, where).toBeLessThanOrEqual(m.scroller!.clientH)
+        }
         expect(m.levels, where).toHaveLength(6)
         for (const level of m.levels) {
           expect(inView(level, m.vw, m.vh), where).toBe(true)

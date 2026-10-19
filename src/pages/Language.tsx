@@ -75,7 +75,7 @@ export function SelectionCard({
   return (
     <section
       data-selection-card
-      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-1.5"
+      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-0"
     >
       {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
       <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
@@ -324,7 +324,7 @@ export function Language() {
       </p>
 
       <SelectionCard lang={lang} cefr={cefr} phase={cachePhase} showSaving={showSaving} />
-      <div className="mt-2 hidden items-center gap-2 short-land:flex">
+      <div className="mt-0.5 hidden items-center gap-2 short-land:flex">
         {continueControls(true)}
       </div>
       </div>
