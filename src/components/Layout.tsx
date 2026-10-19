@@ -31,11 +31,6 @@ export function Layout({
       className={[
         'mx-auto flex h-dvh w-full max-w-md flex-col bg-cream px-4',
         'pt-[env(safe-area-inset-top)]',
-        'short-land:max-w-4xl',
-        'short-land:pt-[calc(env(safe-area-inset-top)+6px)]',
-        'short-land:pr-[max(1rem,env(safe-area-inset-right))]',
-        'short-land:pb-[max(8px,env(safe-area-inset-bottom))]',
-        'short-land:pl-[max(1rem,env(safe-area-inset-left))]',
         footer ? '' : 'pb-[env(safe-area-inset-bottom)]',
       ].join(' ')}
     >

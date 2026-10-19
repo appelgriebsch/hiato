@@ -82,6 +82,14 @@ describe('About 44px targets (#209)', () => {
   })
 })
 
+describe('EndCard arrival scroll (#213)', () => {
+  test('scrollIntoView runs on mount, not when speech becomes available', async () => {
+    const src = await Bun.file(new URL('./pages/Play.tsx', import.meta.url)).text()
+    expect(src).toContain("scrollIntoView({ block: 'nearest', behavior: 'auto' })")
+    expect(src).not.toContain('[showSpeakControl, confirming]')
+  })
+})
+
 describe('Language footer does not cover levels (#209)', () => {
   test('level radiogroup sits outside the sticky footer', () => {
     const html = renderToStaticMarkup(

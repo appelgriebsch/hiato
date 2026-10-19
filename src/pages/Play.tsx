@@ -1142,11 +1142,25 @@ function EndCard({
   const showSpeakControl = speakSurface && speechOk
 
   // Actions start in view (#209), including 1024×600 where short-land is off.
-  // block:'nearest' + behavior:'auto' does not move focus and does not animate,
-  // so prefers-reduced-motion stays instant and the confirm focus rules still own focus.
+  // Once, on mount: a later speechOk flip must not scroll again after the
+  // reader has moved up to the badge. block:'nearest' + behavior:'auto' does
+  // not move focus and does not animate, so reduced motion stays instant and
+  // the confirm focus rules still own focus.
   useLayoutEffect(() => {
     actionsRef.current?.scrollIntoView({ block: 'nearest', behavior: 'auto' })
-  }, [showSpeakControl, confirming])
+  }, [])
+
+  // Replace-confirm can be taller than the buttons it replaces. Scroll only
+  // when that panel is outside the viewport, and only on this transition, so
+  // a later manual scroll is left alone.
+  useLayoutEffect(() => {
+    if (!confirming) return
+    const el = actionsRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const inView = rect.top >= -1 && rect.bottom <= window.innerHeight + 1
+    if (!inView) el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+  }, [confirming])
 
   return (
     <div className="motion-result-enter mb-4 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
@@ -1156,7 +1170,7 @@ function EndCard({
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
-        <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
+        <Badge tone={won ? 'accent' : 'warm'} pulse={won} data-endcard-badge>
           {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>

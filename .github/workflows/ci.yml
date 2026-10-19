@@ -11,11 +11,12 @@ concurrency:
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -34,3 +35,10 @@ jobs:
       - run: bun test
       - name: Playwright landscape viewports
         run: bunx playwright install --with-deps chromium && bunx playwright test
+      - name: Upload Playwright results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results/
+          if-no-files-found: ignore

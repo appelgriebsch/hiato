@@ -442,7 +442,8 @@ button.key-settled:disabled {
  * Short-landscape column shell (#209). Unlayered so it wins over the
  * scroller's `flex` / `py-4` utilities: a `short-land:grid` on the same node
  * is source-order dependent, and this is the same media query as the variant.
- * `--short-land-cols` is set only when Layout is given an `aside`.
+ * Shell max-width and padding live only here. `--short-land-cols` is set
+ * only when Layout is given an `aside`.
  */
 @media (orientation: landscape) and (max-height: 500px) {
   [data-layout-shell] {
@@ -495,9 +496,5 @@ button.key-settled:disabled {
 
   [data-language-picker] h2 {
     margin-top: 0.5rem;
-  }
-
-  [data-language-picker] [data-language-continue] {
-    padding-bottom: 0.5rem;
   }
 }

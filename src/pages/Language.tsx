@@ -234,7 +234,7 @@ export function Language() {
       <h1 className="text-title text-ink short-land:hidden">Choose language &amp; level</h1>
       <div
         data-language-picker
-        className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5 short-land:overflow-hidden"
+        className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5"
       >
       <div>
       <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
