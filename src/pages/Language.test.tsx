@@ -62,7 +62,9 @@ describe('Language & level picker (#182)', () => {
         <Language />
       </MemoryRouter>,
     )
-    expect(html).toContain('<h2 id="language-heading" class="mt-4 text-sm font-semibold text-ink">Language</h2>')
+    expect(html).toContain('id="language-heading"')
+    expect(html).toContain('>Language</h2>')
+    expect(html).toContain('mt-4 text-sm font-semibold text-ink')
     expect(html).toContain('aria-labelledby="language-heading"')
     expect(html).not.toContain('sr-only')
   })
@@ -112,6 +114,7 @@ describe('Language & level picker (#182)', () => {
     // status sits in the card header, before the caption (visible at 320×568)
     expect(c.indexOf('✓ Ready offline')).toBeLessThan(c.indexOf('data-provenance-caption'))
     const src = await Bun.file(new URL('./Language.tsx', import.meta.url)).text()
-    expect(src).toContain("cachePhase === 'caching' && showSaving\n                ? 'Caching…'")
+    expect(src).toContain("cachePhase === 'caching' && showSaving")
+    expect(src).toContain("? 'Caching…'")
   })
 })

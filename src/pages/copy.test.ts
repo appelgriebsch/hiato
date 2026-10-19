@@ -1152,19 +1152,21 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     expect(layout).toContain('pb-[env(safe-area-inset-bottom)]')
 
     const src = await pageSrc('Play.tsx')
-    expect(src).toContain('<Layout footer={letterPad} footerBleed>')
+    expect(src).toContain('footer={letterPad}')
+    expect(src).toContain('footerBleed')
+    expect(src).toContain('aside={letterPadLand}')
     expect(src).toContain(
       'const inRound = !loading && !error && !!wordEntry && !finished',
     )
     expect(src).toContain('const letterPad = inRound ? (')
-    // Exactly one Keyboard render — in the footer, not in the scroll content.
-    expect(src.match(/<Keyboard\b/g)?.length).toBe(1)
+    // Portrait footer pad plus the short-land column pad (#209). One is hidden.
+    expect(src.match(/<Keyboard\b/g)?.length).toBe(2)
   })
 
   test('Reveal stays in the content above the pad, not adjacent to row 1', async () => {
     const src = await pageSrc('Play.tsx')
     const revealAt = src.indexOf('data-reveal-word')
-    const layoutAt = src.indexOf('<Layout footer={letterPad} footerBleed>')
+    const layoutAt = src.indexOf('footer={letterPad}')
     expect(layoutAt).toBeGreaterThan(0)
     expect(revealAt).toBeGreaterThan(layoutAt)
     // Links sit under Reveal (no mt-auto); empty space below them buffers the pad.

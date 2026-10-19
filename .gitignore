@@ -31,6 +31,11 @@ yarn.lock
 # Bun
 .bun
 
+# Playwright
+test-results
+playwright-report
+blob-report
+
 # Interrupted verdict-cache write (same directory as the JSON so rename stays atomic)
 scripts/data/*.tmp
 

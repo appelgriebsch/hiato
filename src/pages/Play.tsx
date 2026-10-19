@@ -589,9 +589,23 @@ function PlayRound({
       shakeKey={shakeKey}
     />
   ) : undefined
+  // Second mount: short-land right column. The footer copy is display:none
+  // there, so only one pad is in the accessibility tree (#138 portrait, #209).
+  const letterPadLand = inRound ? (
+    <div className="w-full min-w-0 rounded-2xl border border-line bg-raised/40">
+      <Keyboard
+        lang={lang}
+        usedWrong={usedWrong}
+        usedCorrect={usedCorrect}
+        disabled={false}
+        onKey={onKey}
+        shakeKey={shakeKey}
+      />
+    </div>
+  ) : undefined
 
   return (
-    <Layout footer={letterPad} footerBleed>
+    <Layout footer={letterPad} footerBleed aside={letterPadLand} columns="minmax(0, 1fr) minmax(0, 1.25fr)">
       <TopBar
         left={
           <div className="flex items-center gap-2">
@@ -609,7 +623,13 @@ function PlayRound({
         right={<StreakChip count={streak} pulse={streakPulse} />}
       />
 
-      <div className="mb-3 flex items-center justify-between">
+      <div className="flex flex-col short-land:col-start-1 short-land:row-start-2 short-land:min-h-0 short-land:min-w-0 short-land:flex-1">
+      <div
+        className={[
+          'mb-3 flex items-center justify-between short-land:mb-2',
+          finished ? 'short-land:hidden' : '',
+        ].join(' ')}
+      >
         <Lives remaining={lives} total={TOTAL_LIVES} />
         <span className="text-caption tracking-wide">
           {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
@@ -649,10 +669,10 @@ function PlayRound({
 
       {!loading && !error && wordEntry && (
         <>
-          <div className="my-5">
+          <div className={['my-5 short-land:my-0', finished ? 'short-land:hidden' : ''].join(' ')}>
             <LetterGrid cells={cells} lang={lang} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
-              <p className="mt-3 text-center text-[11px] text-ink-muted">
+              <p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">
                 Soft green = vowel help (A1–A2)
               </p>
             )}
@@ -707,7 +727,7 @@ function PlayRound({
           ) : null}
 
           {!finished && mode === 'daily' && (
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm" data-round-nav>
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -730,7 +750,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'practice' && (
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm" data-round-nav>
               <Link
                 to="/play?mode=daily"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -749,7 +769,7 @@ function PlayRound({
             </div>
           )}
           {!finished && mode === 'pocket' && (
-            <div className="pt-6 text-center">
+            <div className="pt-6 text-center" data-round-nav>
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
@@ -760,6 +780,7 @@ function PlayRound({
           )}
         </>
       )}
+      </div>
     </Layout>
   )
 }
@@ -1088,6 +1109,14 @@ function EndCard({
     clearedStatusRef.current?.focus()
   }, [pocketCleared])
 
+  const actionsRef = useRef<HTMLDivElement>(null)
+  /** True after the reader moves the layout scroller. Programmatic scrolls do not set this. */
+  const userScrolledRef = useRef(false)
+  /** Ignore the scroll event from our own scrollIntoView. */
+  const ignoreScrollRef = useRef(false)
+  /** scrollTop after the last programmatic scroll. A later mismatch is the reader. */
+  const anchorTopRef = useRef<number | null>(null)
+
   const confirming = showSave && savePhase === 'confirm'
   const showViewPocket =
     mode !== 'pocket' &&
@@ -1118,14 +1147,74 @@ function EndCard({
   }, [speakSurface, lang])
   const showSpeakControl = speakSurface && speechOk
 
+  function actionsOutOfView() {
+    const el = actionsRef.current
+    if (!el) return false
+    const rect = el.getBoundingClientRect()
+    return rect.top < -1 || rect.bottom > window.innerHeight + 1
+  }
+
+  function scrollActionsIntoView() {
+    const el = actionsRef.current
+    if (!el) return
+    const scroller = el.closest('[data-layout-scroll]')
+    ignoreScrollRef.current = true
+    el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+    if (scroller instanceof HTMLElement) anchorTopRef.current = scroller.scrollTop
+    ignoreScrollRef.current = false
+  }
+
+  // Actions start in view (#209), including 1024×600 where short-land is off.
+  // block:'nearest' + behavior:'auto' does not move focus and does not
+  // animate, so reduced motion stays instant and the confirm focus rules
+  // still own focus. A speechOk flip may scroll again, but only when an
+  // action is outside the viewport and the reader has not moved the scroller
+  // since mount — a late voice must not yank someone who scrolled up.
+  useLayoutEffect(() => {
+    scrollActionsIntoView()
+    const scroller = actionsRef.current?.closest('[data-layout-scroll]')
+    if (!(scroller instanceof HTMLElement)) return
+    const onScroll = () => {
+      if (ignoreScrollRef.current) return
+      if (scroller.scrollTop !== anchorTopRef.current) userScrolledRef.current = true
+    }
+    scroller.addEventListener('scroll', onScroll)
+    return () => scroller.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!speechOk) return
+    // scrollTop moves before the scroll event is dispatched. A position that
+    // is no longer where this card left it means the reader moved.
+    const scroller = actionsRef.current?.closest('[data-layout-scroll]')
+    if (
+      scroller instanceof HTMLElement &&
+      anchorTopRef.current !== null &&
+      scroller.scrollTop !== anchorTopRef.current
+    ) {
+      userScrolledRef.current = true
+    }
+    if (userScrolledRef.current || !actionsOutOfView()) return
+    scrollActionsIntoView()
+  }, [speechOk])
+
+  // Replace-confirm can be taller than the buttons it replaces. Scroll only
+  // when that panel is outside the viewport, and only on this transition, so
+  // a later manual scroll is left alone.
+  useLayoutEffect(() => {
+    if (!confirming || !actionsOutOfView()) return
+    scrollActionsIntoView()
+  }, [confirming])
+
   return (
-    <div className="motion-result-enter mb-4 space-y-3">
+    <div className="motion-result-enter mb-4 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
+      <div className="min-w-0 space-y-3">
       <div
-        className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
+        className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center short-land:max-h-full short-land:overflow-y-auto short-land:py-3"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
-        <Badge tone={won ? 'accent' : 'warm'} pulse={won}>
+        <Badge tone={won ? 'accent' : 'warm'} pulse={won} data-endcard-badge>
           {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
@@ -1165,9 +1254,15 @@ function EndCard({
             {won || pocketRemoved ? ' · cleared from pocket' : ''}
           </p>
         )}
-      </Card>
+        </Card>
+      </div>
       </div>
 
+      <div
+        ref={actionsRef}
+        data-endcard-actions
+        className="flex min-w-0 flex-col gap-2 short-land:justify-center"
+      >
       {confirming ? (
         <div ref={confirmPanelRef}>
         <Card
@@ -1325,6 +1420,7 @@ function EndCard({
           </Button>
         </div>
       )}
+      </div>
       {mode !== 'pocket' &&
       showSave &&
       (savePhase === 'saved' || savePhase === 'duplicate') ? (

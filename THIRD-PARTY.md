@@ -1,9 +1,10 @@
 # Third-party bill of materials
 
-Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). The PR #177 review re-checked `dictionary-it` 2.0.0 and `nspell` 2.1.5 on 2026-10-11 (no critical update, no CVE). Other rows were not re-checked.
+Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). The PR #177 review re-checked `dictionary-it` 2.0.0 and `nspell` 2.1.5 on 2026-10-11 (no critical update, no CVE). The PR #213 review checked `@playwright/test` 1.64.1 on 2026-10-18 (Apache-2.0, no known vulnerabilities; CVE-2025-59288 was fixed in 1.55.1). Other rows were not re-checked.
 
 | Name | Version | License | Critical update | CVEs |
 | --- | --- | --- | --- | --- |
+| @playwright/test | 1.64.1 | Apache-2.0 | | none found |
 | @tailwindcss/vite | 4.3.3 | MIT | | none found |
 | @types/node | 24.13.6 | unknown | | not checked |
 | @types/react | 19.3.0 | unknown | | not checked |

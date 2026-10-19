@@ -40,7 +40,7 @@ export function LearnerHint({
   }
 
   return (
-    <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center">
+    <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center short-land:mt-2 short-land:max-w-none short-land:py-2">
       {gloss ? (
         <p lang={lang} className="text-sm font-medium leading-snug text-ink">
           {gloss}

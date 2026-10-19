@@ -65,10 +65,29 @@ export function LetterGrid({
   }, [cells])
 
   const maxCols = Math.max(1, ...rows.map((r) => r.length))
+  const tile = (cell: CellState, i: number) => (
+    <div
+      key={i}
+      lang={cell.revealed && lang ? lang : undefined}
+      className={[
+        'flex aspect-square w-full max-w-11 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:max-w-12',
+        'transition-[border-color,background-color,color] duration-200',
+        cell.revealed
+          ? cell.helped
+            ? 'border-accent-fg bg-helped text-accent-fg'
+            : 'border-accent-fg bg-accent-soft text-ink'
+          : 'border-line bg-raised text-ink-faint',
+        justRevealed.has(i) ? 'motion-letter-reveal' : '',
+      ].join(' ')}
+    >
+      {cell.revealed ? cell.char : '·'}
+    </div>
+  )
 
   return (
+    <>
     <div
-      className="mx-auto flex w-full max-w-sm flex-col items-center gap-2"
+      className="mx-auto flex w-full max-w-sm flex-col items-center gap-2 short-land:hidden"
       role="group"
       aria-label="Word letters"
       data-letter-grid
@@ -96,26 +115,25 @@ export function LetterGrid({
           data-letter-row={ri}
           data-row-len={row.length}
         >
-          {row.map(({ cell, index: i }) => (
-            <div
-              key={i}
-              lang={cell.revealed && lang ? lang : undefined}
-              className={[
-                'flex aspect-square w-full max-w-11 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:max-w-12',
-                'transition-[border-color,background-color,color] duration-200',
-                cell.revealed
-                  ? cell.helped
-                    ? 'border-accent-fg bg-helped text-accent-fg'
-                    : 'border-accent-fg bg-accent-soft text-ink'
-                  : 'border-line bg-raised text-ink-faint',
-                justRevealed.has(i) ? 'motion-letter-reveal' : '',
-              ].join(' ')}
-            >
-              {cell.revealed ? cell.char : '·'}
-            </div>
-          ))}
+          {row.map(({ cell, index: i }) => tile(cell, i))}
         </div>
       ))}
     </div>
+    <div
+      className={[
+        'mx-auto hidden w-full min-w-0 justify-center',
+        cells.length >= 8 ? 'short-land:gap-1' : 'short-land:gap-1.5',
+      ].join(' ')}
+      style={{
+        gridTemplateColumns: `repeat(${Math.max(cells.length, 1)}, minmax(0, 44px))`,
+      }}
+      role="group"
+      aria-label="Word letters"
+      data-letter-grid
+      data-letter-cols={cells.length}
+    >
+      {cells.map((cell, i) => tile(cell, i))}
+    </div>
+    </>
   )
 }
