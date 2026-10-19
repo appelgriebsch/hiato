@@ -54,6 +54,31 @@ async function seed(page: Page, lang: Lang, iso = clockIso) {
   }, lang)
 }
 
+/** Five entries in the EN A1 slot, none of them today's daily. Save then confirms. */
+async function seedFullPocket(page: Page, iso = SNAPSHOT_ISO) {
+  await seed(page, 'en', iso)
+  const daily = dailyWord('en', iso).toLocaleUpperCase('en')
+  const words = ['MANGO', 'BREAD', 'CHAIR', 'DANCE', 'EAGLE', 'FROST', 'GRAPE']
+    .filter((word) => word !== daily)
+    .slice(0, 5)
+  await page.addInitScript((packed: { word: string; gloss: string; addedAt: number }[]) => {
+    localStorage.setItem(
+      'hiato.pocket',
+      JSON.stringify({
+        v: 1,
+        entries: packed.map((entry) => ({
+          id: `en|a1|${entry.word.toLowerCase()}`,
+          lang: 'en',
+          cefr: 'a1',
+          word: entry.word,
+          gloss: entry.gloss,
+          addedAt: entry.addedAt,
+        })),
+      }),
+    )
+  }, words.map((word, addedAt) => ({ word, gloss: `saved meaning ${addedAt + 1}`, addedAt: addedAt + 1 })))
+}
+
 /** Same FNV-1a as src/engine/daily.ts — keep the e2e off the app alias graph. */
 function hashString(s: string): number {
   let h = 2166136261
@@ -474,6 +499,39 @@ test.describe('short landscape viewports (#209)', () => {
         expect(await layoutScrollTop(page)).toBe(parked)
       })
     }
+  }
+
+  for (const vp of [
+    { name: '375x667', width: 375, height: 667 },
+    { name: '1024x600', width: 1024, height: 600 },
+  ]) {
+    test(`full pocket confirm scroll ${vp.name}`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await seedFullPocket(page)
+      await page.goto('/play?mode=daily')
+      await (await visiblePad(page)).waitFor()
+      await loseRound(page, 'en')
+      await ready(page)
+      const before = await layoutScrollTop(page)
+      const beforeTop = (await page.locator('[data-endcard-actions]').boundingBox())?.y
+      expect(before).not.toBeNull()
+      expect(beforeTop).not.toBeUndefined()
+      await page.getByRole('button', { name: 'Save to pocket' }).click()
+      const panel = page.getByRole('dialog', { name: 'Replace oldest word?' })
+      await expect(panel).toBeVisible()
+      const box = await panel.boundingBox()
+      expect(box, vp.name).toBeTruthy()
+      expect(box!.y, vp.name).toBeGreaterThanOrEqual(-1)
+      expect(box!.y + box!.height, vp.name).toBeLessThanOrEqual(vp.height + 1)
+      const after = await layoutScrollTop(page)
+      const afterTop = (await page.locator('[data-endcard-actions]').boundingBox())?.y
+      // Arrival already pins the actions to the bottom edge, so the taller
+      // confirm card nudges a few pixels at both heights. Deleting that
+      // scroll leaves the card past the edge. Sending it to the top moves
+      // the scroller by the whole arrival offset instead of this nudge.
+      expect(Math.abs(after! - before!), vp.name).toBeLessThanOrEqual(32)
+      expect(Math.abs((afterTop ?? 0) - (beforeTop ?? 0)), vp.name).toBeLessThanOrEqual(32)
+    })
   }
 
   test('synthetic notch insets keep PT keys at least 24px wide', async ({ page }) => {
