@@ -177,6 +177,72 @@ async function ready(page: Page) {
   await page.evaluate(() => document.fonts.ready)
 }
 
+/** Empty voice list until the test calls `__hiatoEmitEnVoice`. */
+async function installOnDemandVoice(page: Page) {
+  await page.addInitScript(() => {
+    const listeners = new Set<() => void>()
+    let voices: { lang: string; localService: boolean }[] = []
+    const emit = () => {
+      voices = [{ lang: 'en-US', localService: true }]
+      for (const fn of [...listeners]) {
+        try {
+          fn()
+        } catch {
+          /* the page owns its own errors */
+        }
+      }
+    }
+    ;(window as unknown as { __hiatoEmitEnVoice?: () => void }).__hiatoEmitEnVoice = emit
+    const fake = {
+      speaking: false,
+      pending: false,
+      paused: false,
+      getVoices: () => voices.slice(),
+      cancel() {},
+      speak() {},
+      resume() {},
+      pause() {},
+      addEventListener(type: string, listener: () => void) {
+        if (type === 'voiceschanged') listeners.add(listener)
+      },
+      removeEventListener(type: string, listener: () => void) {
+        if (type === 'voiceschanged') listeners.delete(listener)
+      },
+    }
+    Object.defineProperty(window, 'speechSynthesis', {
+      configurable: true,
+      get: () => fake,
+    })
+  })
+}
+
+async function emitEnVoice(page: Page) {
+  await page.evaluate(() => {
+    const emit = (window as unknown as { __hiatoEmitEnVoice?: () => void }).__hiatoEmitEnVoice
+    if (!emit) throw new Error('voice stub missing')
+    emit()
+  })
+}
+
+async function layoutScrollTop(page: Page) {
+  return page.evaluate(() => {
+    const scroller = document.querySelector('[data-layout-scroll]')
+    if (!(scroller instanceof HTMLElement)) return null
+    return scroller.scrollTop
+  })
+}
+
+const ENDCARD_ACTIONS = ['Save to pocket', 'Share', 'Practice', 'Back home'] as const
+
+async function assertEndcardActionsInView(page: Page, where: string) {
+  const m = await measure(page)
+  for (const name of ENDCARD_ACTIONS) {
+    const hit = m.targets.find((t) => t.t.includes(name))
+    expect(hit, `${where} ${name}`).toBeTruthy()
+    expect(inView(hit!, m.vw, m.vh), `${where} ${name}`).toBe(true)
+  }
+}
+
 test.describe('short landscape viewports (#209)', () => {
   for (const vp of VIEWPORTS) {
     for (const lang of ['en', 'pt'] as const) {
@@ -356,6 +422,56 @@ test.describe('short landscape viewports (#209)', () => {
         expect(home && inView(home, m.vw, m.vh), where).toBeTruthy()
         expect(practice && inView(practice, m.vw, m.vh), where).toBeTruthy()
         assertTargets(m.targets, where)
+      })
+    }
+  }
+
+  for (const iso of [SNAPSHOT_ISO, LONG_EN_ISO]) {
+    for (const vp of [
+      { name: '375x667', width: 375, height: 667 },
+      { name: '1024x600', width: 1024, height: 600 },
+    ]) {
+      test(`voice re-scrolls endcard actions ${vp.name} ${iso.slice(0, 10)}`, async ({ page }) => {
+        await page.setViewportSize({ width: vp.width, height: vp.height })
+        await seed(page, 'en', iso)
+        await installOnDemandVoice(page)
+        await page.goto('/play?mode=daily')
+        await (await visiblePad(page)).waitFor()
+        await loseRound(page, 'en', iso)
+        await ready(page)
+        await assertTeachStaysInView(page, dailyWord('en', iso))
+        const before = await layoutScrollTop(page)
+        expect(before).not.toBeNull()
+        await emitEnVoice(page)
+        await expect(page.locator('[data-endcard-speak]')).toBeVisible()
+        await expect(page.locator('[data-endcard-speak]')).not.toBeFocused()
+        const where = `voice scroll ${vp.name} ${iso.slice(0, 10)}`
+        await assertEndcardActionsInView(page, where)
+        const after = await layoutScrollTop(page)
+        expect(after, where).not.toBe(before)
+      })
+
+      test(`voice leaves a scrolled endcard alone ${vp.name} ${iso.slice(0, 10)}`, async ({ page }) => {
+        await page.setViewportSize({ width: vp.width, height: vp.height })
+        await seed(page, 'en', iso)
+        await installOnDemandVoice(page)
+        await page.goto('/play?mode=daily')
+        await (await visiblePad(page)).waitFor()
+        await loseRound(page, 'en', iso)
+        await ready(page)
+        const arrived = await layoutScrollTop(page)
+        expect(arrived).not.toBeNull()
+        const parked = await page.evaluate(() => {
+          const scroller = document.querySelector('[data-layout-scroll]')
+          if (!(scroller instanceof HTMLElement)) return null
+          scroller.scrollTop = 0
+          return scroller.scrollTop
+        })
+        expect(parked, 'reader moved up').not.toBe(arrived)
+        await emitEnVoice(page)
+        await expect(page.locator('[data-endcard-speak]')).toBeVisible()
+        await expect(page.locator('[data-endcard-speak]')).not.toBeFocused()
+        expect(await layoutScrollTop(page)).toBe(parked)
       })
     }
   }

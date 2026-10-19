@@ -1110,6 +1110,12 @@ function EndCard({
   }, [pocketCleared])
 
   const actionsRef = useRef<HTMLDivElement>(null)
+  /** True after the reader moves the layout scroller. Programmatic scrolls do not set this. */
+  const userScrolledRef = useRef(false)
+  /** Ignore the scroll event from our own scrollIntoView. */
+  const ignoreScrollRef = useRef(false)
+  /** scrollTop after the last programmatic scroll. A later mismatch is the reader. */
+  const anchorTopRef = useRef<number | null>(null)
 
   const confirming = showSave && savePhase === 'confirm'
   const showViewPocket =
@@ -1141,25 +1147,63 @@ function EndCard({
   }, [speakSurface, lang])
   const showSpeakControl = speakSurface && speechOk
 
+  function actionsOutOfView() {
+    const el = actionsRef.current
+    if (!el) return false
+    const rect = el.getBoundingClientRect()
+    return rect.top < -1 || rect.bottom > window.innerHeight + 1
+  }
+
+  function scrollActionsIntoView() {
+    const el = actionsRef.current
+    if (!el) return
+    const scroller = el.closest('[data-layout-scroll]')
+    ignoreScrollRef.current = true
+    el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+    if (scroller instanceof HTMLElement) anchorTopRef.current = scroller.scrollTop
+    ignoreScrollRef.current = false
+  }
+
   // Actions start in view (#209), including 1024×600 where short-land is off.
-  // Once, on mount: a later speechOk flip must not scroll again after the
-  // reader has moved up to the badge. block:'nearest' + behavior:'auto' does
-  // not move focus and does not animate, so reduced motion stays instant and
-  // the confirm focus rules still own focus.
+  // block:'nearest' + behavior:'auto' does not move focus and does not
+  // animate, so reduced motion stays instant and the confirm focus rules
+  // still own focus. A speechOk flip may scroll again, but only when an
+  // action is outside the viewport and the reader has not moved the scroller
+  // since mount — a late voice must not yank someone who scrolled up.
   useLayoutEffect(() => {
-    actionsRef.current?.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+    scrollActionsIntoView()
+    const scroller = actionsRef.current?.closest('[data-layout-scroll]')
+    if (!(scroller instanceof HTMLElement)) return
+    const onScroll = () => {
+      if (ignoreScrollRef.current) return
+      if (scroller.scrollTop !== anchorTopRef.current) userScrolledRef.current = true
+    }
+    scroller.addEventListener('scroll', onScroll)
+    return () => scroller.removeEventListener('scroll', onScroll)
   }, [])
+
+  useLayoutEffect(() => {
+    if (!speechOk) return
+    // scrollTop moves before the scroll event is dispatched. A position that
+    // is no longer where this card left it means the reader moved.
+    const scroller = actionsRef.current?.closest('[data-layout-scroll]')
+    if (
+      scroller instanceof HTMLElement &&
+      anchorTopRef.current !== null &&
+      scroller.scrollTop !== anchorTopRef.current
+    ) {
+      userScrolledRef.current = true
+    }
+    if (userScrolledRef.current || !actionsOutOfView()) return
+    scrollActionsIntoView()
+  }, [speechOk])
 
   // Replace-confirm can be taller than the buttons it replaces. Scroll only
   // when that panel is outside the viewport, and only on this transition, so
   // a later manual scroll is left alone.
   useLayoutEffect(() => {
-    if (!confirming) return
-    const el = actionsRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const inView = rect.top >= -1 && rect.bottom <= window.innerHeight + 1
-    if (!inView) el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+    if (!confirming || !actionsOutOfView()) return
+    scrollActionsIntoView()
   }, [confirming])
 
   return (
