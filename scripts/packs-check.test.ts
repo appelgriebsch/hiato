@@ -251,6 +251,21 @@ describe('packs:check completeness', () => {
   })
 })
 
+describe('packs:check gloss denylist', () => {
+  test('a slur in a gloss fails the pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'fr',
+          cefr: 'a1',
+          lemmas: [{ word: 'MAISON', gloss: 'un pédé' }],
+        }),
+        'fr/a1.json',
+      ),
+    ).toThrow(/denylist — gloss/)
+  })
+})
+
 describe('packs:check person-name gloss (#24)', () => {
   test('rejects a name-list lemma with a person-name gloss', () => {
     expect(() =>

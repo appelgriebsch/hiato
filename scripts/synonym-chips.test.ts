@@ -65,6 +65,8 @@ describe('filterSynonymChips', () => {
     ).toEqual(['harm', 'injure'])
     expect(invalidSynonymChipReason('HURT', 'kill', DENY)).toBe('denylist')
     expect(invalidSynonymChipReason('BAD', 'go to hell', DENY)).toBe('denylist')
+    expect(invalidSynonymChipReason('CASA', 'merda-merda', DENY, 'pt')).toBe('denylist')
+    expect(invalidSynonymChipReason('CASA', 'stronzo/cazzo', DENY, 'it')).toBe('denylist')
   })
 
   test('requires NFC and ignores duplicate case variants', () => {

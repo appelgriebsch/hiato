@@ -14,7 +14,7 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedLemma, loadDenylist } from './lemma-denylist'
+import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
@@ -305,6 +305,11 @@ export function validatePack(raw: unknown, file: string): WordPack {
 
     if (isDeniedLemma(word, DENY, o.lang as string)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
+    }
+    for (const tok of letterTokens(gloss)) {
+      if (isDeniedGlossToken(tok, o.lang as string, word, DENY)) {
+        throw new Error(`${file}: lemmas[${i}] denylist — gloss "${word}" token "${tok}"`)
+      }
     }
     if (membershipActive() && !isWordOfLang(o.lang as PackLang, word)) {
       throw new Error(
