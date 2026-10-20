@@ -14,6 +14,10 @@ describe('exact denylist categories', () => {
   test('rejects a bad category and tags violence apart from profanity', () => {
     expect(() => parseExactEntries('# category: junk\nDIE\n')).toThrow(/bad category/)
     const cats = loadExactCategories()
+    expect(cats.get('SEX')).toBe('other')
+    expect(cats.get('SEXO')).toBe('other')
+    expect(cats.get('SEXUAL')).toBe('other')
+    expect(isDeniedLemma('SEXO', undefined, 'es')).toBe(true)
     expect(cats.get('DIE')).toBe('violence')
     expect(cats.get('ARSCHLOCH')).toBe('profanity')
     expect(cats.get('fr SALAUD')).toBe('profanity')
