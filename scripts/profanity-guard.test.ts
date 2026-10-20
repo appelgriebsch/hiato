@@ -5,6 +5,7 @@ import {
   isDeniedLemma,
   loadDenylistAllow,
   loadPatternDenylist,
+  matchesDeniedPattern,
   nfcUpper,
   staleAllowEntries,
 } from './lemma-denylist'
@@ -15,7 +16,7 @@ const PACKS = path.join(ROOT, 'public', 'packs')
 const LANGS = ['en', 'de', 'es', 'pt', 'fr', 'it'] as const
 const CEFRS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] as const
 
-type Lemma = { word: string; synonyms?: string[] }
+type Lemma = { word: string; gloss?: string; synonyms?: string[] }
 type Pack = { lemmas: Lemma[] }
 
 function readPack(lang: string, cefr: string): Pack {
@@ -26,7 +27,11 @@ function chipTokens(chip: string): string[] {
   return chip.split(/[\s'’]+/).filter(Boolean)
 }
 
-/** Exact or pattern hit on a lemma or a synonym-chip token. Allowlist is inside isDeniedLemma. */
+function glossTokens(text: string): string[] {
+  return text.match(/[\p{L}\p{M}]+/gu) ?? []
+}
+
+/** Exact or pattern hit on a lemma, a gloss token, or a synonym-chip token. */
 export function profanityHits(
   packs: { lang: string; cefr: string; lemmas: Lemma[] }[],
   caches: { lang: string; glossKeys: string[]; synonym: Record<string, string[]> }[],
@@ -36,6 +41,11 @@ export function profanityHits(
     pack.lemmas.forEach((L, i) => {
       if (isDeniedLemma(L.word, undefined, pack.lang)) {
         errors.push(`${pack.lang}/${pack.cefr} #${i} lemma ${L.word}`)
+      }
+      for (const tok of glossTokens(L.gloss ?? '')) {
+        if (isDeniedLemma(tok, undefined, pack.lang)) {
+          errors.push(`${pack.lang}/${pack.cefr} #${i} gloss ${L.word} :: ${tok}`)
+        }
       }
       for (const chip of L.synonyms ?? []) {
         const bad =
@@ -108,7 +118,35 @@ describe('profanity guard', () => {
   })
 
   test('shipped packs and both caches have no denylist hit', () => {
-    expect(profanityHits(loadPacks(), loadCaches())).toEqual([])
+    const hits = profanityHits(loadPacks(), loadCaches())
+    const gloss = hits.filter((h) => h.includes(' gloss '))
+    const rest = hits.filter((h) => !h.includes(' gloss '))
+    expect(rest).toEqual([])
+    // shortcut: global exact entries (DIE, DEAD, SEXO) are ordinary gloss words.
+    // A pattern hit in a gloss is a profanity family and still fails.
+    const patternGloss = gloss.filter((h) => {
+      const tok = h.split(' :: ').at(-1) ?? ''
+      const lang = h.slice(0, 2)
+      return matchesDeniedPattern(tok, lang)
+    })
+    expect(patternGloss).toEqual([])
+  })
+
+  test('a profane gloss fails', () => {
+    const packs = loadPacks()
+    const pt = packs.find((p) => p.lang === 'pt' && p.cefr === 'a1')!
+    pt.lemmas = pt.lemmas.map((L, i) =>
+      i === 0 ? { ...L, gloss: 'fazer merda com alguém, foder' } : L,
+    )
+    const es = packs.find((p) => p.lang === 'es' && p.cefr === 'a1')!
+    es.lemmas = es.lemmas.map((L, i) =>
+      i === 0 ? { ...L, gloss: 'follar con alguien; coño' } : L,
+    )
+    const errors = profanityHits(packs, [])
+    expect(errors.some((e) => e.includes('merda'))).toBe(true)
+    expect(errors.some((e) => e.includes('foder'))).toBe(true)
+    expect(errors.some((e) => e.includes('follar'))).toBe(true)
+    expect(errors.some((e) => e.includes('coño'))).toBe(true)
   })
 
   test('the allowlist has no stale entry', () => {
