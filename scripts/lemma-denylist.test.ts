@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  isDeniedGlossToken,
   isDeniedLemma,
   loadDenylistAllow,
   loadExactCategories,
@@ -22,6 +23,47 @@ describe('exact denylist categories', () => {
     expect(cats.get('ARSCHLOCH')).toBe('profanity')
     expect(cats.get('fr SALAUD')).toBe('profanity')
     expect(cats.get('pt LONDRES')).toBe('name')
+  })
+
+  test('sexual-violence tags stay put', () => {
+    const cats = loadExactCategories()
+    for (const word of ['VIOLAR', 'VIOLACIÓN', 'VIOLACION']) {
+      expect(cats.get(word)).toBe('violence')
+      expect(isDeniedLemma(word)).toBe(true)
+      expect(isDeniedGlossToken(word, 'es', 'LEY')).toBe(false)
+      expect(isDeniedGlossToken(word, 'pt', 'REGRA')).toBe(false)
+    }
+    for (const word of ['VIOLADOR', 'ESTUPRO', 'ESTUPRAR']) {
+      expect(cats.get(word)).toBe('profanity')
+      expect(isDeniedGlossToken(word, 'es', 'LEY')).toBe(true)
+    }
+    for (const word of ['RAPE', 'RAPED', 'RAPES', 'RAPIST']) {
+      expect(cats.get(word)).toBeUndefined()
+      expect(cats.get(`en ${word}`)).toBe('profanity')
+      expect(isDeniedLemma(word, undefined, 'en')).toBe(true)
+      expect(isDeniedLemma(word, undefined, 'es')).toBe(false)
+      expect(isDeniedGlossToken(word, 'en', 'FISH')).toBe(true)
+      expect(isDeniedGlossToken(word, 'es', 'PESCADO')).toBe(false)
+    }
+    const profanity = [
+      'HINTERN',
+      'MOLEST',
+      'PEDOPHILE',
+      'VERGEWALTIGUNG',
+      'VERGEWALTIGEN',
+      'VERGEWALTIGER',
+      'KINDERSCHÄNDER',
+      'KINDERSCHAENDER',
+      'PÄDOPHILER',
+      'PAEDOPHILER',
+      'PEDÓFILO',
+      'PEDOFILO',
+      'it STUPRO',
+      'it STUPRARE',
+    ]
+    for (const key of profanity) {
+      expect(cats.get(key)).toBe('profanity')
+    }
   })
 })
 
