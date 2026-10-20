@@ -3,7 +3,7 @@
  * Empty cache arrays mean unique referent — do not retry.
  */
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedLemma, nfcUpper } from './lemma-denylist'
+import { isDeniedLemma, letterTokens, nfcUpper } from './lemma-denylist'
 
 export const SYNONYM_CHIP_CAP = 3
 export const SYNONYM_COVERAGE_FLOOR = 0.8
@@ -21,9 +21,9 @@ function chipTokensDenied(
   lang?: string,
 ): boolean {
   if (isDeniedLemma(chip, denylist, lang)) return true
-  // Apostrophe and curly apostrophe split elided chips (l'école) the same way spaces do.
-  for (const tok of chip.split(/[\s'’]+/)) {
-    if (tok && isDeniedLemma(tok, denylist, lang)) return true
+  // Same letter tokenizer as glosses, so hyphens and slashes split too.
+  for (const tok of letterTokens(chip)) {
+    if (isDeniedLemma(tok, denylist, lang)) return true
   }
   return false
 }

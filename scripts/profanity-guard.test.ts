@@ -26,7 +26,7 @@ function readPack(lang: string, cefr: string): Pack {
 }
 
 function chipTokens(chip: string): string[] {
-  return chip.split(/[\s'’]+/).filter(Boolean)
+  return letterTokens(chip)
 }
 
 function glossTokens(text: string): string[] {
@@ -185,6 +185,17 @@ describe('profanity guard', () => {
     pt.lemmas = pt.lemmas.map((L, i) => (i === 140 ? { ...L, word: 'FODI' } : L))
     const errors = profanityHits(packs, [])
     expect(errors.some((e) => e.includes('FODI'))).toBe(true)
+  })
+
+  test('a hyphen or slash in a chip is split', () => {
+    const packs = loadPacks()
+    const pt = packs.find((p) => p.lang === 'pt' && p.cefr === 'a1')!
+    pt.lemmas = pt.lemmas.map((L, i) => (i === 0 ? { ...L, synonyms: ['merda-merda'] } : L))
+    const it = packs.find((p) => p.lang === 'it' && p.cefr === 'a1')!
+    it.lemmas = it.lemmas.map((L, i) => (i === 0 ? { ...L, synonyms: ['stronzo/cazzo'] } : L))
+    const errors = profanityHits(packs, [])
+    expect(errors.some((e) => e.includes('merda-merda'))).toBe(true)
+    expect(errors.some((e) => e.includes('stronzo/cazzo'))).toBe(true)
   })
 
   test('a multi-word chip is split', () => {
