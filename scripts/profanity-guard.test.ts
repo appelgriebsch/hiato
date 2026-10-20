@@ -222,6 +222,8 @@ describe('profanity guard', () => {
     expect(isDeniedGlossToken('die', 'de', 'ZEIT')).toBe(false)
     expect(isDeniedGlossToken('hell', 'de', 'TAG')).toBe(false)
     expect(isDeniedGlossToken('hell', 'en', 'PLACE')).toBe(true)
+    expect(isDeniedGlossToken('dick', 'de', 'BREI')).toBe(false)
+    expect(isDeniedGlossToken('dick', 'en', 'PLACE')).toBe(true)
     expect(isDeniedGlossToken('Arschloch', 'de', 'ARSCHLOCH')).toBe(false)
     expect(isDeniedGlossToken('Fotze', 'de', 'ARSCHLOCH')).toBe(true)
   })
