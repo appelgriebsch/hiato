@@ -90,6 +90,16 @@ function loadCaches() {
   })
 }
 
+/** NFC-unique and fold-unique. A DE ß/SS pair or a FR È/É pair is a fold fault. */
+export function lemmaUniquenessFaults(lang: string, words: string[]): string[] {
+  const faults: string[] = []
+  const upper = words.map((w) => nfcUpper(w))
+  if (new Set(upper).size !== upper.length) faults.push('nfc')
+  const folds = upper.map((w) => foldKey(lang as SelectLang, w))
+  if (new Set(folds).size !== folds.length) faults.push('fold')
+  return faults
+}
+
 function loadPacks() {
   return LANGS.flatMap((lang) =>
     CEFRS.map((cefr) => ({ lang, cefr, lemmas: readPack(lang, cefr).lemmas })),
@@ -110,10 +120,7 @@ describe('profanity guard', () => {
         const rel = `${lang}/${cefr}`
         counts[rel] = lemmas.length
         expect(`${rel} length ${lemmas.length}`).toBe(`${rel} length 400`)
-        const words = lemmas.map((L) => nfcUpper(L.word))
-        expect(`${rel} unique ${new Set(words).size}`).toBe(`${rel} unique 400`)
-        const folds = words.map((w) => foldKey(lang as SelectLang, w))
-        expect(`${rel} folds ${new Set(folds).size}`).toBe(`${rel} folds 400`)
+        expect(lemmaUniquenessFaults(lang, lemmas.map((L) => L.word))).toEqual([])
       }
     }
     expect(Object.keys(counts).length).toBe(36)
@@ -158,6 +165,23 @@ describe('profanity guard', () => {
         expect(errors.some((e) => e.includes(' gloss ') && e.toLowerCase().includes(tok.toLowerCase()))).toBe(true)
       }
     }
+  })
+
+  test('an NFC-unique fold duplicate is a fault', () => {
+    expect(lemmaUniquenessFaults('de', ['STRASSE', 'STRAßE'])).toEqual(['fold'])
+    expect(lemmaUniquenessFaults('fr', ['ÉVÉNEMENT', 'ÉVÈNEMENT'])).toEqual(['fold'])
+  })
+
+  test('a punctuation-glued gloss token is still reported', () => {
+    const packs = loadPacks()
+    const de = packs.find((p) => p.lang === 'de' && p.cefr === 'a1')!
+    de.lemmas = de.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'Arschloch,' } : L))
+    const fr = packs.find((p) => p.lang === 'fr' && p.cefr === 'a1')!
+    fr.lemmas = fr.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'salaud.' } : L))
+    const errors = profanityHits([de, fr], [])
+    const gloss = errors.filter((e) => e.includes(' gloss '))
+    expect(gloss.some((e) => e.includes('Arschloch'))).toBe(true)
+    expect(gloss.some((e) => e.includes('salaud'))).toBe(true)
   })
 
   test('gloss scan is language-scoped and skips the lemma itself', () => {
