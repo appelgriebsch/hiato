@@ -144,7 +144,7 @@ describe('isDeniedLemma pattern table', () => {
     ['CAGÃO', 'pt'],
     ['CARALHOS', 'pt'],
     ['BOCETA', 'pt'],
-    ['VEADO', 'pt'],
+    ['VIADO', 'pt'],
     ['JODÍ', 'es'],
     ['FOLLÓ', 'es'],
     ['MIERDAS', 'es'],
@@ -162,6 +162,8 @@ describe('isDeniedLemma pattern table', () => {
     ['PUSSY', 'en'],
     ['WANK', 'en'],
     ['TITS', 'en'],
+    ['DYKE', 'en'],
+    ['BRANLER', 'fr'],
   ]
   for (const [word, lang] of yes) {
     test(`${lang} ${word} is denied`, () => {
@@ -201,6 +203,30 @@ describe('isDeniedLemma pattern table', () => {
     ['PISCINA', 'it'],
     ['BOCCA', 'it'],
     ['CONTA', 'pt'],
+    ['VEADO', 'pt'],
+    ['BRANLE', 'fr'],
+    ['DYKE', 'de'],
+    ['TIT', 'de'],
+    ['TITS', 'de'],
+    ['PENDIENTE', 'es'],
+    ['VERGÜENZA', 'es'],
+    ['CHOCOLATE', 'es'],
+    ['PÁJARO', 'es'],
+    ['CONSEIL', 'fr'],
+    ['CONTE', 'fr'],
+    ['SALOPETTE', 'fr'],
+    ['KACHEL', 'de'],
+    ['PISTE', 'de'],
+    ['SPASTIK', 'de'],
+    ['KANAL', 'de'],
+    ['SPICE', 'en'],
+    ['TITLE', 'en'],
+    ['TITAN', 'en'],
+    ['WANKEL', 'de'],
+    ['PUSSYCAT', 'en'],
+    ['COCKPIT', 'en'],
+    ['SCUNTHORPE', 'en'],
+    ['MERENDA', 'it'],
   ]
   for (const [word, lang] of no) {
     test(`${lang ?? '—'} ${word} is not denied`, () => {
