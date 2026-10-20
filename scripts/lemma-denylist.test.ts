@@ -21,6 +21,58 @@ describe('exact denylist categories', () => {
   })
 })
 
+describe('W3 probe', () => {
+  test('plurals, slurs, and seed families are denied in their language', () => {
+    const words: [string, string][] = [
+      ['CABRONES', 'es'],
+      ['CABRÕES', 'pt'],
+      ['MARICONES', 'es'],
+      ['PÉDÉS', 'fr'],
+      ['FOTZEN', 'de'],
+      ['BITES', 'fr'],
+      ['NICHONS', 'fr'],
+      ['NIBARDS', 'fr'],
+      ['TWATS', 'en'],
+      ['PRICKS', 'en'],
+      ['PANELEIRO', 'pt'],
+      ['ZIGEUNER', 'de'],
+      ['CONA', 'pt'],
+      ['FODÃO', 'pt'],
+      ['PORRAS', 'pt'],
+      ['BUCETAS', 'pt'],
+      ['CACETES', 'pt'],
+      ['PIROCAS', 'pt'],
+      ['PINGA', 'es'],
+      ['MAMÓN', 'es'],
+      ['BOLUDO', 'es'],
+      ['CACHONDO', 'es'],
+      ['CULERO', 'es'],
+      ['PUÑETA', 'es'],
+      ['JODAMOS', 'es'],
+      ['GARCE', 'fr'],
+      ['NICHON', 'fr'],
+      ['CHIASSE', 'fr'],
+      ['CHIOTTES', 'fr'],
+      ['CAGARE', 'it'],
+      ['CAGATA', 'it'],
+      ['PISCIARE', 'it'],
+      ['POMPINO', 'it'],
+      ['BOCCHINO', 'it'],
+      ['SBORRA', 'it'],
+      ['MINCHIONE', 'it'],
+      ['MISTSTÜCK', 'de'],
+      ['DRECKSAU', 'de'],
+      ['BUMSEN', 'de'],
+      ['GEBUMST', 'de'],
+      ['BONER', 'en'],
+      ['HOOKER', 'en'],
+      ['TURD', 'en'],
+    ]
+    const missed = words.filter(([word, lang]) => !isDeniedLemma(word, undefined, lang))
+    expect(missed.map(([word, lang]) => `${lang} ${word}`)).toEqual([])
+  })
+})
+
 describe('pattern denylist parser', () => {
   test('rejects a bad line', () => {
     expect(() => parsePatternDenylist('not a pattern\n')).toThrow(/lemma-denylist-patterns:1/)
@@ -142,6 +194,13 @@ describe('isDeniedLemma pattern table', () => {
     ['PORCO', 'pt'],
     ['PORC', 'fr'],
     ['MASTURBARE', 'it'],
+    ['CHIEN', 'fr'],
+    ['CHIOT', 'fr'],
+    ['CABRA', 'es'],
+    ['CASA', 'it'],
+    ['PISCINA', 'it'],
+    ['BOCCA', 'it'],
+    ['CONTA', 'pt'],
   ]
   for (const [word, lang] of no) {
     test(`${lang ?? '—'} ${word} is not denied`, () => {
