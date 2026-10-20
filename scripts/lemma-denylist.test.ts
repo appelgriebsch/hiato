@@ -1,11 +1,16 @@
 import { describe, expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { profanityHits } from './profanity-guard.test'
 import {
   isDeniedGlossToken,
   isDeniedLemma,
+  loadDenylist,
   loadDenylistAllow,
   loadExactCategories,
   loadPatternDenylist,
   matchesDeniedPattern,
+  parseExactDenylist,
   parseExactEntries,
   parsePatternDenylist,
   staleAllowEntries,
@@ -86,6 +91,88 @@ describe('exact denylist categories', () => {
     expect(isDeniedLemma('POSTARE', undefined, 'it')).toBe(false)
     expect(isDeniedLemma('MAESTRA', undefined, 'it')).toBe(false)
     expect(isDeniedGlossToken('postare', 'it', 'RETE')).toBe(false)
+  })
+
+  test('MASTURBACION and MASTURBACAO stay on the exact list', () => {
+    const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-denylist.txt'), 'utf8')
+    const exact = parseExactDenylist(text)
+    expect(exact.has('MASTURBACION')).toBe(true)
+    expect(exact.has('MASTURBACAO')).toBe(true)
+    expect(loadDenylist().has('MASTURBACION')).toBe(true)
+    expect(loadDenylist().has('MASTURBACAO')).toBe(true)
+  })
+
+  test('masturb conjugations are denied as lemmas and gloss tokens', () => {
+    const forms: [string, string][] = [
+      ['masturbate', 'en'],
+      ['masturbates', 'en'],
+      ['masturbated', 'en'],
+      ['masturbating', 'en'],
+      ['masturbation', 'en'],
+      ['masturbator', 'en'],
+      ['masturbators', 'en'],
+      ['masturbieren', 'de'],
+      ['masturbiert', 'de'],
+      ['masturbierte', 'de'],
+      ['masturbierst', 'de'],
+      ['masturbierend', 'de'],
+      ['masturber', 'fr'],
+      ['masturbe', 'fr'],
+      ['masturbes', 'fr'],
+      ['masturbent', 'fr'],
+      ['masturbé', 'fr'],
+      ['masturbée', 'fr'],
+      ['masturbés', 'fr'],
+      ['masturbées', 'fr'],
+      ['masturbant', 'fr'],
+      ['masturbar', 'es'],
+      ['masturbo', 'es'],
+      ['masturbas', 'es'],
+      ['masturba', 'es'],
+      ['masturbamos', 'es'],
+      ['masturban', 'es'],
+      ['masturbó', 'es'],
+      ['masturbando', 'es'],
+      ['masturbado', 'es'],
+      ['masturbación', 'es'],
+      ['masturbacion', 'es'],
+      ['masturbare', 'it'],
+      ['masturbarsi', 'it'],
+      ['masturbato', 'it'],
+      ['masturbando', 'it'],
+      ['masturbazione', 'it'],
+      ['masturbava', 'it'],
+      ['masturbar', 'pt'],
+      ['masturbou', 'pt'],
+      ['masturbando', 'pt'],
+      ['masturbação', 'pt'],
+      ['masturbacao', 'pt'],
+      ['masturbei', 'pt'],
+    ]
+    expect(forms.length).toBeGreaterThanOrEqual(36)
+    const missed = forms.filter(
+      ([word, lang]) => !isDeniedLemma(word, undefined, lang) || !isDeniedGlossToken(word, lang, 'CASA'),
+    )
+    expect(missed.map(([word, lang]) => `${lang} ${word}`)).toEqual([])
+    for (const [word, lang] of [
+      ['MASTER', 'en'],
+      ['MASTICAR', 'es'],
+      ['MASTRO', 'it'],
+      ['MUSTARD', 'en'],
+      ['MOSTARDA', 'pt'],
+      ['MASTODONTE', 'it'],
+    ] as const) {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(false)
+      expect(isDeniedGlossToken(word, lang, 'CASA')).toBe(false)
+    }
+  })
+
+  test('a masturbando chip fails the profanity guard', () => {
+    const errors = profanityHits(
+      [{ lang: 'es', cefr: 'b2', lemmas: [{ word: 'CASA', synonyms: ['masturbando'] }] }],
+      [],
+    )
+    expect(errors.some((e) => e.includes('chip') && e.includes('masturbando'))).toBe(true)
   })
 })
 
