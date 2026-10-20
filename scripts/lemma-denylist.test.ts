@@ -1,0 +1,128 @@
+import { describe, expect, test } from 'bun:test'
+import {
+  isDeniedLemma,
+  loadDenylistAllow,
+  loadPatternDenylist,
+  matchesDeniedPattern,
+  parsePatternDenylist,
+  staleAllowEntries,
+} from './lemma-denylist'
+
+describe('pattern denylist parser', () => {
+  test('rejects a bad line', () => {
+    expect(() => parsePatternDenylist('not a pattern\n')).toThrow(/lemma-denylist-patterns:1/)
+    expect(() => parsePatternDenylist('en WORD\n')).toThrow(/lemma-denylist-patterns:1/)
+    expect(() => parsePatternDenylist('en WORD(\n')).toThrow(/lemma-denylist-patterns:1/)
+    expect(() => parsePatternDenylist('en WORD()\n')).toThrow(/empty suffix group/)
+    expect(() => parsePatternDenylist('en WORD(A|B) extra\n')).toThrow(/lemma-denylist-patterns:1/)
+    expect(() => parsePatternDenylist('en WO RD(A)\n')).toThrow(/lemma-denylist-patterns:1/)
+  })
+
+  test('anchors the whole lemma', () => {
+    const rules = parsePatternDenylist('COCK(|S)\nfr BAIS(ER|ANT|É)\n')
+    const cock = rules[0]!
+    expect(cock.re.test('COCK')).toBe(true)
+    expect(cock.re.test('COCKS')).toBe(true)
+    expect(cock.re.test('COCKTAIL')).toBe(false)
+    expect(cock.re.test('XCOCK')).toBe(false)
+    const bais = rules[1]!
+    expect(bais.re.test('BAISER')).toBe(true)
+    expect(bais.re.test('BAISANT')).toBe(true)
+    expect(bais.re.test('BAISSER')).toBe(false)
+    expect(bais.re.test('BAISANTX')).toBe(false)
+  })
+
+  test('keeps ß via nfcUpper', () => {
+    const rules = parsePatternDenylist('de scheiß(e|er)\n')
+    expect(rules[0]!.stem).toBe('SCHEIß')
+    expect(rules[0]!.re.source.includes('ß')).toBe(true)
+    expect(rules[0]!.re.test('SCHEIßE')).toBe(true)
+    expect(rules[0]!.re.test('SCHEISSE')).toBe(false)
+    expect(matchesDeniedPattern('scheiße', 'de', rules)).toBe(true)
+  })
+
+  test('keeps scoped and global lines distinct', () => {
+    const rules = parsePatternDenylist('FUCK(ING)\nfr BAIS(ANT)\n')
+    expect(matchesDeniedPattern('FUCKING', 'en', rules)).toBe(true)
+    expect(matchesDeniedPattern('FUCKING', 'pt', rules)).toBe(true)
+    expect(matchesDeniedPattern('FUCKING', undefined, rules)).toBe(true)
+    expect(matchesDeniedPattern('BAISANT', 'fr', rules)).toBe(true)
+    expect(matchesDeniedPattern('BAISANT', 'it', rules)).toBe(false)
+    expect(matchesDeniedPattern('BAISANT', undefined, rules)).toBe(false)
+  })
+})
+
+describe('isDeniedLemma pattern table', () => {
+  const yes: [string, string][] = [
+    ['FODI', 'pt'],
+    ['FODIDO', 'pt'],
+    ['FODAM', 'pt'],
+    ['CAGOU', 'pt'],
+    ['CHINGADO', 'es'],
+    ['JODIDA', 'es'],
+    ['FOLLANDO', 'es'],
+    ['ENCULÉ', 'fr'],
+    ['BAISANT', 'fr'],
+    ['NIQUÉ', 'fr'],
+    ['FOUTU', 'fr'],
+    ['CAZZATA', 'it'],
+    ['SCOPATO', 'it'],
+    ['FOTTUTO', 'it'],
+    ['GEFICKT', 'de'],
+    ['VÖGELN', 'de'],
+    ['GEVÖGELT', 'de'],
+    ['SCHEISSE', 'de'],
+    ['SCHEIßE', 'de'],
+    ['FUCKING', 'en'],
+  ]
+  for (const [word, lang] of yes) {
+    test(`${lang} ${word} is denied`, () => {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(true)
+    })
+  }
+
+  const no: [string, string | undefined][] = [
+    ['SCOPO', 'it'],
+    ['SCOPRIRE', 'it'],
+    ['BAISSER', 'fr'],
+    ['VEHÍCULO', 'es'],
+    ['CONOCER', 'es'],
+    ['CONNAÎTRE', 'fr'],
+    ['REPUTAÇÃO', 'pt'],
+    ['FOLLÓN', 'es'],
+    ['VOGEL', 'de'],
+    ['COCKTAIL', 'en'],
+    ['PRETO', 'pt'],
+    ['NEGRO', 'es'],
+    ['NEGRO', 'pt'],
+  ]
+  for (const [word, lang] of no) {
+    test(`${lang ?? '—'} ${word} is not denied`, () => {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(false)
+    })
+  }
+
+  test('FR BAISER and IT FIGA stay blocked', () => {
+    expect(isDeniedLemma('BAISER', undefined, 'fr')).toBe(true)
+    expect(isDeniedLemma('FIGA', undefined, 'it')).toBe(true)
+    expect(isDeniedLemma('BAISER', undefined, 'en')).toBe(false)
+    expect(isDeniedLemma('FIGA', undefined, 'en')).toBe(false)
+  })
+})
+
+describe('pattern allowlist', () => {
+  test('the shipped allowlist matches a pattern and is not stale', () => {
+    const allow = loadDenylistAllow()
+    expect(allow.map((e) => `${e.lang} ${e.word}`)).toEqual(['it SCOPO', 'it SCOPA', 'it SCOPI'])
+    expect(staleAllowEntries()).toEqual([])
+  })
+
+  test('an allowlist entry that no pattern matches is stale', () => {
+    const rules = loadPatternDenylist()
+    const stale = staleAllowEntries(rules, [
+      ...loadDenylistAllow(),
+      { lang: 'it', word: 'CASA', reason: 'not a pattern hit' },
+    ])
+    expect(stale.map((e) => e.word)).toEqual(['CASA'])
+  })
+})
