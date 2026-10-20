@@ -309,8 +309,8 @@ test.describe('short landscape viewports (#209)', () => {
         const m = await measure(page)
         const where = `picker ${lang} ${vp.name}`
         assertNoHorizontalScroll(m, where)
-        // Short landscape must not scroll. overflow-hidden would clip Continue
-        // instead of fitting it, and the in-view check below catches that.
+        // scrollH<=clientH proves the picker fits. overflow-hidden would be
+        // harmless while it fits, so this test does not (and need not) catch it.
         if (vp.short) {
           expect(m.scroller!.scrollH, where).toBeLessThanOrEqual(m.scroller!.clientH)
         }
