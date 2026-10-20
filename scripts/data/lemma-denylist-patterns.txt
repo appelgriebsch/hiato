@@ -7,9 +7,11 @@
 # Courtesy: the audit also consulted LDNOOBW (CC BY 4.0).
 # Reproduce: `node audit.mjs /path/to/hiato` from that bundle (seeds.mjs,
 # classify.mjs, audit.mjs, ldnoobw/). 2026-10-20 on this tree: 0 remove-category
-# hits. MASTURBARE and its family are exact profanity entries. SEGA, PAJA, POLLA,
-# PICA, BICHA, CORNO, PORCO,
+# hits. The MASTURB family is one global pattern; exact lines still pin
+# MASTURBACION and MASTURBACAO. SEGA, PAJA, POLLA, PICA, BICHA, CORNO, PORCO,
 # PAU, CU, NEGRO and PALLE stay unbanned.
+
+MASTURB(AÇÃO|AÇÕES|AÇÃOZINHA|ACAO|ACIÓN|ACIONES|ACION|ADA|ADAS|ADELA|ADO|ADOR|ADORA|ADOS|AIS|AIT|AM|AMOS|ANDO|ANDOSI|ÁNDOSE|ANO|ANT|AR|ARE|ARON|ARSE|ARSI|AS|ATA|ATI|ATE|ATED|ATES|ATING|ATION|ATIONEN|ATIONS|ATO|ATOR|ATORS|ATORE|ATORI|ATORY|ATRICE|ATEUR|ATEURS|ATOIRE|ATÓRIO|AVA|AVAM|AVANO|ABA|AZIONE|AZIONI|A|AN|E|É|ÉE|ÉES|EI|ENT|ER|ES|ÉS|EZ|I|IAMO|IERE|IEREN|IEREND|IERENDE|IERENDEN|IERST|IERTE|IERT|IERTEN|IERTER|IERTES|O|Ó|ONS|OU|ÁVEL)
 
 # EN set. Global, so a conjugation is denied in every pack language.
 FUCK(|S|ED|ING|IN|ER|ERS)

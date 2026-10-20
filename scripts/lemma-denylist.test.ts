@@ -1,11 +1,18 @@
 import { describe, expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { profanityHits } from './profanity-guard.test'
 import {
   isDeniedGlossToken,
   isDeniedLemma,
+  letterTokens,
+  loadDenylist,
   loadDenylistAllow,
   loadExactCategories,
   loadPatternDenylist,
   matchesDeniedPattern,
+  nfcUpper,
+  parseExactDenylist,
   parseExactEntries,
   parsePatternDenylist,
   staleAllowEntries,
@@ -86,6 +93,180 @@ describe('exact denylist categories', () => {
     expect(isDeniedLemma('POSTARE', undefined, 'it')).toBe(false)
     expect(isDeniedLemma('MAESTRA', undefined, 'it')).toBe(false)
     expect(isDeniedGlossToken('postare', 'it', 'RETE')).toBe(false)
+  })
+
+  test('MASTURBACION and MASTURBACAO stay on the exact list', () => {
+    const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-denylist.txt'), 'utf8')
+    const exact = parseExactDenylist(text)
+    expect(exact.has('MASTURBACION')).toBe(true)
+    expect(exact.has('MASTURBACAO')).toBe(true)
+    expect(loadDenylist().has('MASTURBACION')).toBe(true)
+    expect(loadDenylist().has('MASTURBACAO')).toBe(true)
+  })
+
+  test('masturb conjugations are denied as lemmas and gloss tokens', () => {
+    const forms: [string, string][] = [
+      ['masturbate', 'en'],
+      ['masturbates', 'en'],
+      ['masturbated', 'en'],
+      ['masturbating', 'en'],
+      ['masturbation', 'en'],
+      ['masturbations', 'en'],
+      ['masturbator', 'en'],
+      ['masturbators', 'en'],
+      ['masturbatory', 'en'],
+      ['masturbieren', 'de'],
+      ['masturbiert', 'de'],
+      ['masturbierte', 'de'],
+      ['masturbierten', 'de'],
+      ['masturbierter', 'de'],
+      ['masturbiertes', 'de'],
+      ['masturbierst', 'de'],
+      ['masturbiere', 'de'],
+      ['masturbierend', 'de'],
+      ['masturbierende', 'de'],
+      ['masturbierenden', 'de'],
+      ['masturbationen', 'de'],
+      ['masturber', 'fr'],
+      ['masturbe', 'fr'],
+      ['masturbes', 'fr'],
+      ['masturbent', 'fr'],
+      ['masturbons', 'fr'],
+      ['masturbez', 'fr'],
+      ['masturbé', 'fr'],
+      ['masturbée', 'fr'],
+      ['masturbés', 'fr'],
+      ['masturbées', 'fr'],
+      ['masturbant', 'fr'],
+      ['masturbait', 'fr'],
+      ['masturbais', 'fr'],
+      ['masturbations', 'fr'],
+      ['masturbateur', 'fr'],
+      ['masturbateurs', 'fr'],
+      ['masturbatoire', 'fr'],
+      ['masturbatrice', 'fr'],
+      ['masturbar', 'es'],
+      ['masturbo', 'es'],
+      ['masturbas', 'es'],
+      ['masturba', 'es'],
+      ['masturbamos', 'es'],
+      ['masturban', 'es'],
+      ['masturbó', 'es'],
+      ['masturbando', 'es'],
+      ['masturbado', 'es'],
+      ['masturbada', 'es'],
+      ['masturbados', 'es'],
+      ['masturbadas', 'es'],
+      ['masturbarse', 'es'],
+      ['masturbándose', 'es'],
+      ['masturbaba', 'es'],
+      ['masturbaron', 'es'],
+      ['masturbación', 'es'],
+      ['masturbaciones', 'es'],
+      ['masturbacion', 'es'],
+      ['masturbador', 'es'],
+      ['masturbadora', 'es'],
+      ['masturbare', 'it'],
+      ['masturbarsi', 'it'],
+      ['masturbato', 'it'],
+      ['masturbata', 'it'],
+      ['masturbati', 'it'],
+      ['masturbando', 'it'],
+      ['masturbandosi', 'it'],
+      ['masturbazione', 'it'],
+      ['masturbazioni', 'it'],
+      ['masturbava', 'it'],
+      ['masturbavano', 'it'],
+      ['masturbano', 'it'],
+      ['masturbi', 'it'],
+      ['masturbiamo', 'it'],
+      ['masturbatore', 'it'],
+      ['masturbatori', 'it'],
+      ['masturbatrice', 'it'],
+      ['masturbar', 'pt'],
+      ['masturbou', 'pt'],
+      ['masturbando', 'pt'],
+      ['masturbação', 'pt'],
+      ['masturbações', 'pt'],
+      ['masturbacao', 'pt'],
+      ['masturbei', 'pt'],
+      ['masturbada', 'pt'],
+      ['masturbados', 'pt'],
+      ['masturbadas', 'pt'],
+      ['masturbarse', 'pt'],
+      ['masturbaba', 'pt'],
+      ['masturbam', 'pt'],
+      ['masturbavam', 'pt'],
+      ['masturbador', 'pt'],
+      ['masturbadora', 'pt'],
+      ['masturbadela', 'pt'],
+      ['masturbatório', 'pt'],
+      ['masturbável', 'pt'],
+      ['masturbaçãozinha', 'pt'],
+    ]
+    expect(forms.length).toBeGreaterThanOrEqual(36)
+    const missed = forms.filter(
+      ([word, lang]) => !isDeniedLemma(word, undefined, lang) || !isDeniedGlossToken(word, lang, 'CASA'),
+    )
+    expect(missed.map(([word, lang]) => `${lang} ${word}`)).toEqual([])
+    for (const [word, lang] of [
+      ['MASTER', 'en'],
+      ['MASTICAR', 'es'],
+      ['MASTRO', 'it'],
+      ['MUSTARD', 'en'],
+      ['MOSTARDA', 'pt'],
+      ['MASTODONTE', 'it'],
+    ] as const) {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(false)
+      expect(isDeniedGlossToken(word, lang, 'CASA')).toBe(false)
+    }
+  })
+
+  test('the MASTURB rule denies no shipped token', () => {
+    const rule = loadPatternDenylist().find((r) => r.stem === 'MASTURB')!
+    const hits: string[] = []
+    const see = (token: string, where: string) => {
+      const w = nfcUpper(token)
+      if (rule.re.test(w)) hits.push(`${where} ${w}`)
+    }
+    const root = path.join(import.meta.dir, '..')
+    for (const lang of ['en', 'de', 'es', 'pt', 'fr', 'it']) {
+      for (const cefr of ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']) {
+        const pack = JSON.parse(
+          readFileSync(path.join(root, 'public/packs', lang, `${cefr}.json`), 'utf8'),
+        ) as { lemmas: { word: string; gloss?: string; synonyms?: string[] }[] }
+        for (const L of pack.lemmas) {
+          see(L.word, `${lang}/${cefr} lemma`)
+          for (const tok of letterTokens(L.gloss ?? '')) see(tok, `${lang}/${cefr} gloss`)
+          for (const chip of L.synonyms ?? []) {
+            for (const tok of letterTokens(chip)) see(tok, `${lang}/${cefr} chip`)
+          }
+        }
+      }
+      const gloss = JSON.parse(
+        readFileSync(path.join(root, 'scripts/data/gloss-cache', `${lang}.json`), 'utf8'),
+      ) as Record<string, string>
+      for (const text of Object.values(gloss)) {
+        for (const tok of letterTokens(text)) see(tok, `gloss-cache ${lang}`)
+      }
+      const syn = JSON.parse(
+        readFileSync(path.join(root, 'scripts/data/synonym-cache', `${lang}.json`), 'utf8'),
+      ) as Record<string, string[]>
+      for (const chips of Object.values(syn)) {
+        for (const chip of chips) {
+          for (const tok of letterTokens(chip)) see(tok, `synonym-cache ${lang}`)
+        }
+      }
+    }
+    expect(hits).toEqual([])
+  })
+
+  test('a masturbando chip fails the profanity guard', () => {
+    const errors = profanityHits(
+      [{ lang: 'es', cefr: 'b2', lemmas: [{ word: 'CASA', synonyms: ['masturbando'] }] }],
+      [],
+    )
+    expect(errors.some((e) => e.includes('chip') && e.includes('masturbando'))).toBe(true)
   })
 })
 

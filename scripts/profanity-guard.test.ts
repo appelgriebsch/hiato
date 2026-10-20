@@ -34,10 +34,15 @@ function glossTokens(text: string): string[] {
   return letterTokens(text)
 }
 
-/** Exact or pattern hit on a lemma, a gloss token, or a synonym-chip token. */
+/** Exact or pattern hit on a lemma, a gloss token, a gloss-cache value, or a synonym chip. */
 export function profanityHits(
   packs: { lang: string; cefr: string; lemmas: Lemma[] }[],
-  caches: { lang: string; glossKeys: string[]; synonym: Record<string, string[]> }[],
+  caches: {
+    lang: string
+    glossKeys: string[]
+    gloss?: Record<string, string>
+    synonym: Record<string, string[]>
+  }[],
 ): string[] {
   const errors: string[] = []
   for (const pack of packs) {
@@ -64,6 +69,13 @@ export function profanityHits(
         errors.push(`gloss-cache ${cache.lang} ${key}`)
       }
     }
+    for (const [key, text] of Object.entries(cache.gloss ?? {})) {
+      for (const tok of glossTokens(text)) {
+        if (isDeniedGlossToken(tok, cache.lang, key)) {
+          errors.push(`gloss-cache ${cache.lang} ${key} :: ${tok}`)
+        }
+      }
+    }
     for (const [key, chips] of Object.entries(cache.synonym)) {
       if (isDeniedLemma(key, undefined, cache.lang)) {
         errors.push(`synonym-cache ${cache.lang} key ${key}`)
@@ -87,7 +99,7 @@ function loadCaches() {
     const synonym = JSON.parse(
       readFileSync(path.join(ROOT, 'scripts/data/synonym-cache', `${lang}.json`), 'utf8'),
     ) as Record<string, string[]>
-    return { lang, glossKeys: Object.keys(gloss), synonym }
+    return { lang, glossKeys: Object.keys(gloss), gloss, synonym }
   })
 }
 
@@ -267,6 +279,14 @@ describe('profanity guard', () => {
     const errors = profanityHits([], [{ lang: 'pt', glossKeys: ['FODI'], synonym: { CASA: ['ver fodido'] } }])
     expect(errors.some((e) => e.includes('gloss-cache') && e.includes('FODI'))).toBe(true)
     expect(errors.some((e) => e.includes('fodido'))).toBe(true)
+  })
+
+  test('a gloss-cache value is scanned word by word', () => {
+    const errors = profanityHits(
+      [],
+      [{ lang: 'en', glossKeys: [], gloss: { PLACE: 'to fuck around' }, synonym: {} }],
+    )
+    expect(errors.some((e) => e.includes('gloss-cache') && e.includes('PLACE') && e.includes('fuck'))).toBe(true)
   })
 
   test('a jodido chip fails', () => {
