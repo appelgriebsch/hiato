@@ -65,6 +65,28 @@ describe('exact denylist categories', () => {
       expect(cats.get(key)).toBe('profanity')
     }
   })
+
+  test('masturbation family is denied and a clean control passes', () => {
+    const denied = [
+      'MASTURBATE',
+      'MASTURBATION',
+      'MASTURBARE',
+      'MASTURBAZIONE',
+      'MASTURBARSI',
+      'MASTURBAR',
+      'MASTURBACIÓN',
+      'MASTURBAÇÃO',
+      'MASTURBER',
+      'MASTURBIEREN',
+    ]
+    for (const word of denied) {
+      expect(isDeniedLemma(word, undefined, 'it')).toBe(true)
+      expect(isDeniedGlossToken(word, 'it', 'POSTARE')).toBe(true)
+    }
+    expect(isDeniedLemma('POSTARE', undefined, 'it')).toBe(false)
+    expect(isDeniedLemma('MAESTRA', undefined, 'it')).toBe(false)
+    expect(isDeniedGlossToken('postare', 'it', 'RETE')).toBe(false)
+  })
 })
 
 describe('W3 probe', () => {
@@ -241,7 +263,6 @@ describe('isDeniedLemma pattern table', () => {
     ['CORNO', 'pt'],
     ['PORCO', 'pt'],
     ['PORC', 'fr'],
-    ['MASTURBARE', 'it'],
     ['CHIEN', 'fr'],
     ['CHIOT', 'fr'],
     ['CABRA', 'es'],
