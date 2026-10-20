@@ -16,6 +16,7 @@ describe('pattern denylist parser', () => {
     expect(() => parsePatternDenylist('en WORD()\n')).toThrow(/empty suffix group/)
     expect(() => parsePatternDenylist('en WORD(A|B) extra\n')).toThrow(/lemma-denylist-patterns:1/)
     expect(() => parsePatternDenylist('en WO RD(A)\n')).toThrow(/lemma-denylist-patterns:1/)
+    expect(() => parsePatternDenylist('en FU2CK(ING)\n')).toThrow(/stem must be letters/)
   })
 
   test('anchors the whole lemma', () => {
@@ -148,6 +149,22 @@ describe('pattern allowlist', () => {
     const allow = loadDenylistAllow()
     expect(allow.map((e) => `${e.lang} ${e.word}`)).toEqual(['it SCOPO', 'it SCOPA', 'it SCOPI'])
     expect(staleAllowEntries()).toEqual([])
+  })
+
+  test('an allowlist entry does not override an exact hit', () => {
+    const allow = [
+      { lang: 'fr', word: 'BAISER', reason: 'must not override the exact list' },
+      { lang: 'it', word: 'FIGA', reason: 'must not override the exact list' },
+    ]
+    expect(isDeniedLemma('BAISER', undefined, 'fr', allow)).toBe(true)
+    expect(isDeniedLemma('FIGA', undefined, 'it', allow)).toBe(true)
+  })
+
+  test('allowlist entries are language-scoped', () => {
+    const other = [{ lang: 'fr', word: 'SCOPO', reason: 'aim in another language' }]
+    const same = [{ lang: 'it', word: 'SCOPO', reason: 'aim' }]
+    expect(isDeniedLemma('SCOPO', undefined, 'it', other)).toBe(true)
+    expect(isDeniedLemma('SCOPO', undefined, 'it', same)).toBe(false)
   })
 
   test('an allowlist entry that no pattern matches is stale', () => {

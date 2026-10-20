@@ -200,11 +200,12 @@ export function isDeniedLemma(
   word: string,
   denylist = loadDenylist(),
   lang?: string,
+  allow: readonly AllowEntry[] = loadDenylistAllow(),
 ): boolean {
   const w = nfcUpper(word)
   if (denylist.has(w)) return true
   if (lang && denylist.has(`${lang.toLowerCase()} ${w}`)) return true
   if (!matchesDeniedPattern(w, lang)) return false
-  if (isPatternAllowlisted(w, lang)) return false
+  if (isPatternAllowlisted(w, lang, allow)) return false
   return true
 }

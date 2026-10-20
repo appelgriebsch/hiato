@@ -161,6 +161,20 @@ describe('profanity guard', () => {
     expect(errors.some((e) => e.includes('FODI'))).toBe(true)
   })
 
+  test('a multi-word chip is split', () => {
+    const packs = loadPacks()
+    const es = packs.find((p) => p.lang === 'es' && p.cefr === 'a1')!
+    es.lemmas = es.lemmas.map((L, i) => (i === 0 ? { ...L, synonyms: ['ver jodido'] } : L))
+    const errors = profanityHits(packs, [])
+    expect(errors.some((e) => e.includes('jodido'))).toBe(true)
+  })
+
+  test('the cache scan runs', () => {
+    const errors = profanityHits([], [{ lang: 'pt', glossKeys: ['FODI'], synonym: { CASA: ['ver fodido'] } }])
+    expect(errors.some((e) => e.includes('gloss-cache') && e.includes('FODI'))).toBe(true)
+    expect(errors.some((e) => e.includes('fodido'))).toBe(true)
+  })
+
   test('a jodido chip fails', () => {
     const packs = loadPacks()
     const es = packs.find((p) => p.lang === 'es' && p.cefr === 'c1')!
