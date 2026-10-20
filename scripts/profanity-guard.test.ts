@@ -6,6 +6,7 @@ import {
   isDeniedLemma,
   letterTokens,
   loadDenylistAllow,
+  loadGlossExempt,
   loadPatternDenylist,
   nfcUpper,
   staleAllowEntries,
@@ -145,6 +146,36 @@ describe('profanity guard', () => {
     expect(errors.some((e) => e.includes('foder'))).toBe(true)
     expect(errors.some((e) => e.includes('follar'))).toBe(true)
     expect(errors.some((e) => e.includes('coño'))).toBe(true)
+  })
+
+  test('a slur in a gloss fails', () => {
+    const packs = loadPacks()
+    const fr = packs.find((p) => p.lang === 'fr' && p.cefr === 'a1')!
+    fr.lemmas = fr.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'un pédé' } : L))
+    const it = packs.find((p) => p.lang === 'it' && p.cefr === 'a1')!
+    it.lemmas = it.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'un frocio' } : L))
+    const errors = profanityHits([fr, it], [])
+    expect(errors.some((e) => e.includes(' gloss ') && e.toLowerCase().includes('pédé'))).toBe(true)
+    expect(errors.some((e) => e.includes(' gloss ') && e.toLowerCase().includes('frocio'))).toBe(true)
+  })
+
+  test('a pattern-only gloss token fails', () => {
+    const packs = loadPacks()
+    const pt = packs.find((p) => p.lang === 'pt' && p.cefr === 'a1')!
+    pt.lemmas = pt.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'ver fodido' } : L))
+    const es = packs.find((p) => p.lang === 'es' && p.cefr === 'a1')!
+    es.lemmas = es.lemmas.map((L, i) => (i === 0 ? { ...L, gloss: 'ellos chingaron' } : L))
+    const errors = profanityHits([pt, es], [])
+    expect(errors.some((e) => e.includes(' gloss ') && e.includes('fodido'))).toBe(true)
+    expect(errors.some((e) => e.includes(' gloss ') && e.includes('chingaron'))).toBe(true)
+  })
+
+  test('a stale gloss exemption is reported', () => {
+    const stale = staleGlossExempt([
+      ...loadGlossExempt(),
+      { lang: 'fr', word: 'MAISON', reason: 'not a profanity exact' },
+    ])
+    expect(stale.map((e) => `${e.lang} ${e.word}`)).toContain('fr MAISON')
   })
 
   test('exact profanity and slurs in a gloss fail', () => {
