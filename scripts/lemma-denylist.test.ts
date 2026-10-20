@@ -2,11 +2,24 @@ import { describe, expect, test } from 'bun:test'
 import {
   isDeniedLemma,
   loadDenylistAllow,
+  loadExactCategories,
   loadPatternDenylist,
   matchesDeniedPattern,
+  parseExactEntries,
   parsePatternDenylist,
   staleAllowEntries,
 } from './lemma-denylist'
+
+describe('exact denylist categories', () => {
+  test('rejects a bad category and tags violence apart from profanity', () => {
+    expect(() => parseExactEntries('# category: junk\nDIE\n')).toThrow(/bad category/)
+    const cats = loadExactCategories()
+    expect(cats.get('DIE')).toBe('violence')
+    expect(cats.get('ARSCHLOCH')).toBe('profanity')
+    expect(cats.get('fr SALAUD')).toBe('profanity')
+    expect(cats.get('pt LONDRES')).toBe('name')
+  })
+})
 
 describe('pattern denylist parser', () => {
   test('rejects a bad line', () => {

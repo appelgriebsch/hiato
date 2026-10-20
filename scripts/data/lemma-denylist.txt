@@ -3,7 +3,10 @@
 # block another language (fr BITE and it NEGRO stay out of EN; ES/PT NEGRO is not listed).
 # Whole-lemma match only — never substring (WASSER, CLASS, GRASS, PASSEN, PERGUNTA stay).
 # QUEUE is not listed.
+# `# category: profanity|slur|violence|name|other` sets the bucket for the
+# following entries. Glosses are scanned for profanity and slur only.
 
+# category: profanity
 SEX
 SEXY
 SEXUAL
@@ -26,6 +29,7 @@ DAMN
 HELL
 DEVIL
 DEVILS
+# category: violence
 BLOOD
 BLOODY
 DEAD
@@ -48,33 +52,41 @@ BOMB
 BOMBS
 SUICIDE
 SUICIDES
+# category: other
 DRUG
 DRUGS
 COCAINE
 HEROIN
 METH
+# category: profanity
 WHORE
 WHORES
 SLUT
 SLUTS
+# category: violence
 RAPE
 RAPED
 RAPES
 RAPIST
+# category: profanity
 TORTURE
 TORTURES
+# category: violence
 VIOLENCE
 VIOLENT
 CORPSE
 CORPSES
+# category: profanity
 IDIOT
 IDIOTS
 STUPID
+# category: slur
 RETARD
 NIGGER
 NIGGA
 FAGGOT
 FAG
+# category: profanity
 CUNT
 CUNTS
 COCK
@@ -93,7 +105,9 @@ PENIS
 VAGINA
 NIPPLE
 BREASTS
+# category: other
 ABORTION
+# category: violence
 HOMICIDE
 SLAUGHTER
 EXECUTION
@@ -101,8 +115,10 @@ TERRORIST
 TERRORISM
 NAZI
 HITLER
+# category: slur
 RACIST
 RACISM
+# category: violence
 GENOCIDE
 WARFARE
 SHOTGUN
@@ -111,16 +127,20 @@ PISTOL
 BULLET
 AMMUNITION
 EXPLOSIVE
+# category: other
 CRACK
 OPIUM
 FENTANYL
 OVERDOSE
 ADDICT
 ADDICTION
+# category: profanity
 BROTHEL
 PROSTITUTE
+# category: violence
 MOLEST
 PEDOPHILE
+# category: profanity
 INCEST
 BESTIALITY
 NECROPHILIA
@@ -132,6 +152,7 @@ THREESOME
 BONDAGE
 SADISM
 MASOCHISM
+# category: violence
 GORE
 GORY
 MUTILATE
@@ -154,9 +175,12 @@ DEMON
 DEMONS
 SATAN
 SATANIC
+# category: profanity
 DAMNED
 DAMNATION
+# category: violence
 HELLFIRE
+# category: profanity
 GODDAMN
 MOTHERFUCKER
 BULLSHIT
@@ -180,6 +204,7 @@ SCHEISS
 SCHEIßE
 SCHEISSE
 SCHEISSKERL
+# category: violence
 MORD
 MÖRDER
 MOERDER
@@ -191,6 +216,7 @@ HÖLLE
 HOELLE
 TEUFEL
 SELBSTMORD
+# category: profanity
 FICKEN
 VÖGELN
 FICK
@@ -199,12 +225,15 @@ HURE
 HUREN
 SCHLAMPE
 SCHLAMPEN
+# category: violence
 VERGEWALTIGUNG
 VERGEWALTIGEN
 VERGEWALTIGER
+# category: other
 DROGE
 DROGEN
 KOKAIN
+# category: violence
 BLUT
 BLUTIG
 TOT
@@ -222,11 +251,15 @@ GEWEHR
 KUGEL
 ATTENTAT
 TERRORISMUS
+# category: slur
 RASSISMUS
 RASSIST
 NEGER
+# category: violence
 SUIZID
+# category: other
 ABTREIBUNG
+# category: profanity
 NUTTE
 NUTTEN
 SCHWANZ
@@ -235,6 +268,7 @@ MUTTERFICKER
 SCHEIß
 VERDAMMT
 VERDAMMEN
+# category: violence
 DÄMON
 DAEMON
 LEICHE
@@ -261,6 +295,7 @@ KINDERSCHÄNDER
 KINDERSCHAENDER
 PÄDOPHILER
 PAEDOPHILER
+# category: profanity
 INZEST
 NEKROPHILIE
 ORGASMUS
@@ -275,21 +310,25 @@ MASTURBIEREN
 PROSTITUTION
 PROSTITUIERTE
 BORDELL
+# category: other
 RAUSCHGIFT
 ÜBERDOSIS
 UEBERDOSIS
 SUCHT
 JUNKIE
+# category: profanity
 SEXO
 CABRÓN
 CABRON
 CABRONA
+# category: violence
 MATAR
 MORIR
 MUERTE
 VIOLENCIA
 VIOLENTO
 VIOLENTA
+# category: profanity
 PUTA
 PUTAS
 MIERDA
@@ -297,6 +336,7 @@ JODER
 COÑO
 IDIOTA
 IDIOTAS
+# category: violence
 DIABLO
 INFIERNO
 SANGRE
@@ -304,10 +344,13 @@ SANGRIENTO
 ASESINO
 ASESINA
 ASESINATO
+# category: other
 DROGA
 DROGAS
+# category: profanity
 SUICIDIO
 SUICIDAR
+# category: violence
 VIOLAR
 VIOLACIÓN
 VIOLACION
@@ -321,8 +364,10 @@ FUSIL
 BALA
 TERRORISTA
 TERRORISMO
+# category: slur
 RACISTA
 RACISMO
+# category: violence
 GENOCIDIO
 CADÁVER
 CADAVER
@@ -331,6 +376,7 @@ TORTURAR
 DEMONIO
 SATANÁS
 SATANAS
+# category: profanity
 MALDITO
 MALDITA
 CARAJO
@@ -351,6 +397,7 @@ PROSTITUTA
 PROSTITUCIÓN
 PROSTITUCION
 BURDEL
+# category: other
 COCAÍNA
 COCAINA
 HEROÍNA
@@ -360,9 +407,11 @@ OVERDOSIS
 ADICTO
 ADICCIÓN
 ADICCION
+# category: slur
 MARICA
 MARICÓN
 MARICON
+# category: profanity
 PUTO
 PUTOS
 HIJOPUTA
@@ -375,7 +424,9 @@ IMBECIL
 ESTÚPIDO
 ESTUPIDO
 RETARDADO
+# category: slur
 MONGO
+# category: violence
 HOMICIDIO
 MASACRE
 ATROCIDAD
@@ -389,6 +440,7 @@ EJECUTAR
 EJECUCIÓN
 EJECUCION
 MATANZA
+# category: profanity
 SÁDICO
 SADICO
 PSICÓPATA
@@ -402,18 +454,21 @@ MASTURBACIÓN
 MASTURBACION
 ORGÍA
 ORGIA
+# category: violence
 ASSASSINO
 ASSASSINA
 ASSASSINATO
 MORRER
 MORTE
 VIOLÊNCIA
+# category: profanity
 PORRA
 CARALHO
 MERDA
 FODA
 FODER
 DIABO
+# category: violence
 INFERNO
 SANGUE
 SANGRENTO
@@ -422,6 +477,7 @@ ESTUPRO
 ESTUPRAR
 FUZIL
 DEMÔNIO
+# category: profanity
 MALDIÇÃO
 MALDICAO
 BUCETA
@@ -434,16 +490,20 @@ PÊNIS
 PROSTITUIÇÃO
 PROSTITUICAO
 BORDEL
+# category: other
 MACONHA
 VICIADO
 VÍCIO
 VICIO
+# category: slur
 VIADO
 VIADÃO
 VIADAO
 BAITOLA
 MARICAS
+# category: profanity
 FILHODAPUTA
+# category: violence
 HOMICÍDIO
 ATROCIDADE
 CRUELDADE
@@ -455,6 +515,7 @@ EXECUÇÃO
 EXECUCAO
 MATANÇA
 MATANCA
+# category: profanity
 BESTIALIDADE
 MASTURBAÇÃO
 MASTURBACAO
@@ -463,9 +524,11 @@ OTÁRIO
 OTARIO
 DESGRAÇA
 DESGRACA
+# category: violence
 INFERNAL
 
 # Avery re-check residuals (ES/DE insults, body, gunshot; junk fragments)
+# category: profanity
 CULO
 CULOS
 BASTARDO
@@ -484,29 +547,43 @@ WICHSEND
 GEWICHST
 MISTKERL
 MISTKERLE
+# category: other
 HINTERN
+# category: violence
 SCHUSS
+# category: other
 LCH
 MITGENOMM
 PASSIERT
 # #170 inflected forms of denylisted lemmas (exact entries; still no substring match)
+# category: violence
 NAZIS
+# category: other
 ADDICTED
+# category: violence
 BOMBING
 SATANISCH
 GEWALTSAM
 PISTOLERO
+# category: profanity
 PUTADA
+# category: violence
 MORTES
 HOMICÍDIOS
 MORRERÁ
+# category: profanity
 PORRADA
+# category: violence
 MATARIA
+# category: other
 DROGADOS
+# category: violence
 DEMÔNIOS
+# category: profanity
 NUAS
 
 # Inflected forms still playable after #170 (review on #171). Exact match only.
+# category: violence
 MATOU
 MATEI
 MORREU
@@ -522,6 +599,7 @@ ASESINAR
 
 # FR slurs, pejoratives, dominant vulgar meanings, and G3 group words (#168).
 # Scoped so EN BITE and ES/PT NEGRO stay playable. QUEUE is intentionally absent.
+# category: profanity
 fr MERDE
 fr PUTAIN
 fr CUL
@@ -536,6 +614,7 @@ fr PINE
 fr BRANLER
 fr NIQUER
 fr BITE
+# category: slur
 fr NÈGRE
 fr PÉDÉ
 fr GOUINE
@@ -547,11 +626,14 @@ fr TAPETTE
 fr GOGOL
 fr RACAILLE
 fr MONGOL
+# category: other
 fr JUIF
 fr JUIVE
 fr ARABE
+# category: slur
 fr GITAN
 fr GITANE
+# category: other
 fr MUSULMAN
 fr MUSULMANE
 fr CHRÉTIEN
@@ -559,12 +641,15 @@ fr CHRÉTIENNE
 fr CATHOLIQUE
 fr PROTESTANT
 fr PROTESTANTE
+# category: slur
 fr NÉGRO
+# category: other
 fr APACHE
 
 # IT slurs, pejoratives, and group nouns (#172). Exact whole lemma only.
 # Scoped so an EN homograph stays playable. Fused clitics are hangman drops,
 # not this list. COLLO / COLLA / COLLE / PELLE stay.
+# category: profanity
 it MERDA
 it MERDACCIA
 it CAZZO
@@ -607,6 +692,7 @@ it BASTARDI
 it BASTARDE
 it STUPRO
 it STUPRARE
+# category: slur
 it FROCIO
 it FROCIA
 it FROCI
@@ -645,6 +731,7 @@ it ZINGARELLO
 it ZINGARELLA
 it GIUDIO
 it GIUDIA
+# category: other
 it EBREO
 it EBREA
 it EBREI
@@ -667,6 +754,7 @@ it ARABO
 it ARABA
 it ARABI
 it ARABE
+# category: slur
 it HANDICAPPATO
 it HANDICAPPATA
 it HANDICAPPATI
@@ -698,6 +786,7 @@ it MINORATI
 it MINORATE
 
 # #178/#179 W2: IT proper nouns (people, places) dropped from IT packs; blocked whatever the gloss says.
+# category: name
 it AIRES
 it ALESSIA
 it ANKARA
@@ -763,6 +852,7 @@ pt BOMBAIM
 pt MENDEZ
 pt OMAHA
 # #193: malformed, inflected or too-easy lemmas dropped and refilled
+# category: other
 de LIESS
 de MÄNNERSACH
 de ISTJETZT
@@ -797,19 +887,26 @@ es TOMÉ
 
 # #212: remove-list lemmas no family pattern covers, plus Andreas's R items.
 # Scoped whole lemmas. Family conjugations live in lemma-denylist-patterns.txt.
+# category: profanity
 pt CABRÃO
 pt BOSTA
 pt TARADO
 pt SACANAS
+# category: slur
 pt TRAVESTI
+# category: profanity
 es PEDO
 es ZORRA
 es CORNUDO
+# category: slur
 es MORO
+# category: profanity
 fr FION
 fr SALAUD
 fr PETER
+# category: slur
 fr CRÉTIN
+# category: profanity
 fr DÉBILE
 fr DÉCONNER
 fr COUILLE

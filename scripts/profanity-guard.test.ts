@@ -2,12 +2,14 @@ import { describe, expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
+  isDeniedGlossToken,
   isDeniedLemma,
+  letterTokens,
   loadDenylistAllow,
   loadPatternDenylist,
-  matchesDeniedPattern,
   nfcUpper,
   staleAllowEntries,
+  staleGlossExempt,
 } from './lemma-denylist'
 import { foldKey, type SelectLang } from './pack-select'
 
@@ -28,7 +30,7 @@ function chipTokens(chip: string): string[] {
 }
 
 function glossTokens(text: string): string[] {
-  return text.match(/[\p{L}\p{M}]+/gu) ?? []
+  return letterTokens(text)
 }
 
 /** Exact or pattern hit on a lemma, a gloss token, or a synonym-chip token. */
@@ -43,7 +45,7 @@ export function profanityHits(
         errors.push(`${pack.lang}/${pack.cefr} #${i} lemma ${L.word}`)
       }
       for (const tok of glossTokens(L.gloss ?? '')) {
-        if (isDeniedLemma(tok, undefined, pack.lang)) {
+        if (isDeniedGlossToken(tok, pack.lang, L.word)) {
           errors.push(`${pack.lang}/${pack.cefr} #${i} gloss ${L.word} :: ${tok}`)
         }
       }
@@ -118,18 +120,7 @@ describe('profanity guard', () => {
   })
 
   test('shipped packs and both caches have no denylist hit', () => {
-    const hits = profanityHits(loadPacks(), loadCaches())
-    const gloss = hits.filter((h) => h.includes(' gloss '))
-    const rest = hits.filter((h) => !h.includes(' gloss '))
-    expect(rest).toEqual([])
-    // shortcut: global exact entries (DIE, DEAD, SEXO) are ordinary gloss words.
-    // A pattern hit in a gloss is a profanity family and still fails.
-    const patternGloss = gloss.filter((h) => {
-      const tok = h.split(' :: ').at(-1) ?? ''
-      const lang = h.slice(0, 2)
-      return matchesDeniedPattern(tok, lang)
-    })
-    expect(patternGloss).toEqual([])
+    expect(profanityHits(loadPacks(), loadCaches())).toEqual([])
   })
 
   test('a profane gloss fails', () => {
@@ -149,8 +140,43 @@ describe('profanity guard', () => {
     expect(errors.some((e) => e.includes('coño'))).toBe(true)
   })
 
+  test('exact profanity and slurs in a gloss fail', () => {
+    const packs = loadPacks()
+    const plant: [string, string, string[]][] = [
+      ['de', 'Arschloch, Fotze, Hure', ['Arschloch', 'Fotze', 'Hure']],
+      ['fr', 'salaud', ['salaud']],
+      ['it', 'puttana, vaffanculo, figa', ['puttana', 'vaffanculo', 'figa']],
+      ['es', 'hijo de puta, cabrón', ['puta', 'cabrón']],
+    ]
+    for (const [lang, gloss] of plant) {
+      const pack = packs.find((p) => p.lang === lang && p.cefr === 'a1')!
+      pack.lemmas = pack.lemmas.map((L, i) => (i === 0 ? { ...L, gloss } : L))
+    }
+    const errors = profanityHits(packs, [])
+    for (const [, , toks] of plant) {
+      for (const tok of toks) {
+        expect(errors.some((e) => e.includes(' gloss ') && e.toLowerCase().includes(tok.toLowerCase()))).toBe(true)
+      }
+    }
+  })
+
+  test('gloss scan is language-scoped and skips the lemma itself', () => {
+    expect(isDeniedGlossToken('salaud', 'de')).toBe(false)
+    expect(isDeniedGlossToken('salaud', 'fr')).toBe(true)
+    expect(isDeniedGlossToken('salaud', 'fr', 'SALAUD')).toBe(false)
+    expect(isDeniedGlossToken('die', 'de', 'ZEIT')).toBe(false)
+    expect(isDeniedGlossToken('hell', 'de', 'TAG')).toBe(false)
+    expect(isDeniedGlossToken('hell', 'en', 'PLACE')).toBe(true)
+    expect(isDeniedGlossToken('Arschloch', 'de', 'ARSCHLOCH')).toBe(false)
+    expect(isDeniedGlossToken('Fotze', 'de', 'ARSCHLOCH')).toBe(true)
+  })
+
   test('the allowlist has no stale entry', () => {
     expect(staleAllowEntries()).toEqual([])
+  })
+
+  test('the gloss exemption file has no stale entry', () => {
+    expect(staleGlossExempt()).toEqual([])
   })
 
   test('reinserting FODI into pt/c2 fails', () => {
