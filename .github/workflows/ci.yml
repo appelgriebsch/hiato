@@ -62,6 +62,15 @@ jobs:
             exit 1
           fi
       - run: bun run build
+      - name: Pages functions build leaves package.json and bun.lock untouched
+        run: |
+          set -euo pipefail
+          node node_modules/wrangler/bin/wrangler.js pages functions build --outdir "$RUNNER_TEMP/functions-build"
+          if ! git diff --exit-code -- package.json bun.lock || [ -n "$(git status --porcelain -- package.json bun.lock)" ]; then
+            echo "package.json or bun.lock changed."
+            git status --porcelain -- package.json bun.lock
+            exit 1
+          fi
       - run: bun test
       - name: Playwright landscape viewports
         run: bunx playwright install --with-deps chromium && bunx playwright test

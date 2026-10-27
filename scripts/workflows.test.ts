@@ -302,6 +302,20 @@ describe('smoke-health.sh', () => {
 })
 
 describe('ci.yml', () => {
+  test('functions build leaves package.json and bun.lock untouched', () => {
+    const build = job(ci, 'build-test')
+    const fn = step(build, 'Pages functions build leaves package.json and bun.lock untouched')
+    expect(fn).toContain(
+      'node node_modules/wrangler/bin/wrangler.js pages functions build --outdir "$RUNNER_TEMP/functions-build"',
+    )
+    expect(fn).toContain('git diff --exit-code -- package.json bun.lock')
+    expect(fn).toContain('git status --porcelain -- package.json bun.lock')
+    for (const name of ['staging', 'production']) {
+      const title = name === 'staging' ? 'Publish preview branch staging' : 'Publish production branch main'
+      expect(step(job(deploy, name), title)).toContain('git diff --exit-code -- package.json bun.lock')
+    }
+  })
+
   test('build-test gates lint, licences, prod audit, and pinned linters', () => {
     const build = job(ci, 'build-test')
     expect(build).toContain('bun run lint')
