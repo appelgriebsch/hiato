@@ -74,7 +74,7 @@ function versionGuard(script: string): string {
   return script.slice(start, end + 'esac'.length)
 }
 
-function runDigest(script: string, fault: 'ok' | 'digest' | 'recorded' | 'tamper') {
+function runDigest(script: string, fault: 'ok' | 'digest' | 'recorded' | 'tamper' | 'missing' | 'corrupt') {
   const dir = mkdtempSync(join(tmpdir(), 'hiato-digest-'))
   const runner = join(dir, 'runner')
   const stage = join(dir, 'stage')
@@ -86,19 +86,33 @@ function runDigest(script: string, fault: 'ok' | 'digest' | 'recorded' | 'tamper
     mkdirSync(ws)
     const index = 'ok\n'
     const buildSha = 'export {}\n'
-    writeFileSync(join(stage, 'dist', 'index.html'), index)
     writeFileSync(join(stage, 'functions', '_generated', 'build-sha.ts'), buildSha)
+    if (fault === 'missing') writeFileSync(join(stage, 'dist', 'other.txt'), 'x\n')
+    else writeFileSync(join(stage, 'dist', 'index.html'), index)
     const tarPath = join(runner, 'release', 'hiato-pages.tar.gz')
-    const packed = spawnSync('tar', ['-czf', tarPath, 'dist', 'functions/_generated'], { cwd: stage })
-    if (packed.status !== 0) throw new Error('tar failed')
-    const bytes = readFileSync(tarPath)
-    const digest = createHash('sha256').update(bytes).digest('hex')
+    const pack = () => {
+      const packed = spawnSync('tar', ['-czf', tarPath, 'dist', 'functions/_generated'], { cwd: stage })
+      if (packed.status !== 0) throw new Error('tar failed')
+    }
+    if (fault === 'corrupt') writeFileSync(tarPath, 'not a tarball\n')
+    else pack()
+    const digest = createHash('sha256').update(readFileSync(tarPath)).digest('hex')
     writeFileSync(
       join(runner, 'release', 'hiato-pages.tar.gz.sha256'),
       `${fault === 'recorded' ? 'c'.repeat(64) : digest}\n`,
     )
-    if (fault === 'tamper') writeFileSync(tarPath, Buffer.concat([bytes, Buffer.from('x')]))
-    const result = spawnSync('bash', ['-euo', 'pipefail', '-c', script], {
+    if (fault === 'tamper') {
+      writeFileSync(join(stage, 'dist', 'index.html'), 'evil\n')
+      pack()
+    }
+    if (fault === 'corrupt') {
+      // Already on disk, so a non-zero is `tar` failing. `tar … || true` would exit 0.
+      mkdirSync(join(ws, 'dist'), { recursive: true })
+      mkdirSync(join(ws, 'functions', '_generated'), { recursive: true })
+      writeFileSync(join(ws, 'dist', 'index.html'), index)
+      writeFileSync(join(ws, 'functions', '_generated', 'build-sha.ts'), buildSha)
+    }
+    const result = spawnSync('bash', ['-c', script], {
       cwd: ws,
       env: {
         ...process.env,
@@ -329,6 +343,7 @@ describe('deploy.yml', () => {
       expect(verify).toContain('"$digest" != "$recorded"')
       expect(verify).toContain('functions/_generated/build-sha.ts')
       const script = runBody(verify)
+      expect(script.split('\n')[0]).toBe('set -euo pipefail')
       const ok = runDigest(script, 'ok')
       expect(ok.status).toBe(0)
       expect(ok.index).toBe(ok.wantIndex)
@@ -336,6 +351,8 @@ describe('deploy.yml', () => {
       expect(runDigest(script, 'digest').status).not.toBe(0)
       expect(runDigest(script, 'recorded').status).not.toBe(0)
       expect(runDigest(script, 'tamper').status).not.toBe(0)
+      expect(runDigest(script, 'missing').status).not.toBe(0)
+      expect(runDigest(script, 'corrupt').status).not.toBe(0)
     }
     expect(deploy).not.toContain('retention-days')
   })
