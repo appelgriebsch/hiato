@@ -13,3 +13,4 @@ Pin `BUN_VERSION=1.4.4` (T1 scaffold was 1.4.2; bumped so an empty `trustedDepen
 ## Consequences
 - Preview and Production both use `BUN_VERSION=1.4.4`.
 - Bump via ADR update + `packageManager` / `.tool-versions` when intentionally upgrading Bun.
+- CI and Deploy install this pin (ADR 0042).

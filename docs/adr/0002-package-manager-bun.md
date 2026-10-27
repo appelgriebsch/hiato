@@ -31,4 +31,4 @@ Lockfile policy:
 - Do not commit `package-lock.json` or `pnpm-lock.yaml`
 - Never rely on Cloudflare bun.lock autodetection
 
-Scaffold pin (T1): `BUN_VERSION=1.4.2`, bumped to `1.4.4` (matches `packageManager` / `.tool-versions`).
+Scaffold pin (T1): `BUN_VERSION=1.4.2`, bumped to `1.4.4` (matches `packageManager` / `.tool-versions`). Install policy for that pin is ADR 0042.

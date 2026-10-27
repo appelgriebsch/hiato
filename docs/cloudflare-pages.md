@@ -14,7 +14,11 @@ The build command lives in the Cloudflare Pages dashboard (it is not applied by 
 
 ## What publishes a push to `main`
 
-A push to `main` runs `.github/workflows/deploy.yml`. That workflow checks out the pushed commit, runs `packs:check`, `bun run build`, and `bun test`, and uploads that `dist` once. The Staging job uploads those bytes to the Pages preview branch `staging` only when this SHA is still the tip of `origin/main`. An older run does not upload after `main` has moved. Promote is the `production` job in that same workflow. It uploads the Staging artifact to Pages branch `main` only after `appelgriebsch` approves that run. Reject does not upload. If `main` has moved, that job fails before Wrangler and Production stays unchanged. The dashboard build is not what publishes that push. Automatic production branch deployments stay off. Preview builds for other branches stay as they are. Rollback stays `hiato-production`. `CLOUDFLARE_API_TOKEN` (Cloudflare Pages Edit / Pages Write only) and `CLOUDFLARE_ACCOUNT_ID` stay repository Actions secrets. They are not environment secrets.
+A push to `main` runs the `CI` workflow. When that run succeeds for a push to `main` of this repository, Deploy starts (`workflow_run`, ADR 0042). Deploy checks out `github.event.workflow_run.head_sha` (the commit CI tested), builds once with `HIATO_BUILD_SHA` set to that sha, and uploads `dist` plus `functions/_generated` with a sha256. It does not run `bun test`. Staging downloads that artifact, checks the digest against the build output and the `.sha256` file, restores `functions/_generated` into the checkout, and runs `pages deploy dist --branch staging --commit-hash <sha>` only while that sha is still the tip of `origin/main` (checked again after install). Promote is the `production` job in that same workflow. It uploads the same artifact to Pages branch `main` only after `appelgriebsch` approves that run. It does not rebuild. Reject does not upload. If `main` has moved, that job fails before Wrangler and Production stays unchanged. The dashboard build is not what publishes that push. Automatic production branch deployments stay off. Preview builds for other branches stay as they are. Rollback stays `hiato-production`.
+
+Wrangler is the lockfile devDependency (`bun install --frozen-lockfile --ignore-scripts`) and runs as `node node_modules/wrangler/bin/wrangler.js`. Do not run `bunx wrangler`; it rewrites `package.json` and `bun.lock`.
+
+`CLOUDFLARE_API_TOKEN` (Cloudflare Pages Edit / Pages Write only) and `CLOUDFLARE_ACCOUNT_ID` are GitHub environment secrets on `staging` and `production`. They are not repository secrets. The deploy step is the only step that receives them.
 
 ## Environment variables
 
@@ -66,24 +70,26 @@ Security on `/*` (more specific cache rules still win for `Cache-Control`):
 | --- | --- | --- |
 | `HIATO_STAGE` | `production` | `staging` |
 
-Those two values are not equal. Do not run `bunx wrangler` inside this checkout; it rewrites `package.json` and `bun.lock`.
+Those two values are not equal. Deploy runs `node node_modules/wrangler/bin/wrangler.js`. Do not run `bunx wrangler` inside this checkout; it rewrites `package.json` and `bun.lock`.
 
-## Health stub
+## Health
 
 `functions/api/health.ts` → `GET /api/health`
 
-- `200 { "ok": true, "stage": "production" | "staging" }` when `HIATO_STAGE` is that environment's binding
-- `503 { "ok": false }` when the binding is missing or any other value
+- `200 {"ok":true,"stage":"production"|"staging","sha":"<40-char sha>"}` when `HIATO_STAGE` is that environment's binding. The sha is `HIATO_BUILD_SHA`, then `CF_PAGES_COMMIT_SHA`, then `GITHUB_SHA`, then git, else `"dev"`.
+- `503 {"ok":false}` when the binding is missing or any other value. The body has no `sha`.
 
 ## Rollback (`hiato-production`)
 
-Name: `hiato-production`. Project: `hiato`.
+Name: `hiato-production`. Project: `hiato`. This is the native Pages rollback. Do not redeploy an old artifact from GitHub.
 
-Cloudflare Pages rolls production back only to an earlier successful production deployment. Preview deployments are not valid rollback targets. The target is the newest successful production deployment older than the one currently serving (`selectRollbackTarget` in `src/deploy/harden.ts`). A newer production deployment is not a target. If no deployment is marked current, there is no target.
+Cloudflare Pages rolls production back only to an earlier successful production deployment. Preview deployments are not valid rollback targets. The target is the newest successful production deployment older than the one currently serving (`selectRollbackTarget` in `src/deploy/harden.ts`). A newer production deployment is not a target. If no deployment is marked current, there is no target. Pick that deployment in the list, and read its commit sha before you roll back.
 
 Dashboard: Pages project `hiato` → Deployments → previous successful production deployment → **Rollback to this deployment**.
 
-API: `POST /accounts/{account_id}/pages/projects/hiato/deployments/{deployment_id}/rollback`
+API: `POST /accounts/{account_id}/pages/projects/hiato/deployments/{deployment_id}/rollback` with that deployment id. The caller needs the account id and a token with Cloudflare Pages Write (Pages Edit), the same permission as the `staging` and `production` environment secrets. The token does not need account-wide admin.
+
+After rollback, `GET /api/health` must be `{"ok":true,"stage":"production","sha":"<sha of the deployment you selected>"}`. Check the deployment URL first. A custom domain can lag; a lagging alias is not a failed rollback.
 
 ## Pack URLs
 

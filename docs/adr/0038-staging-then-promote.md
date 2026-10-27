@@ -11,7 +11,7 @@ ADR 0022 publishes Production on every merge to `main`. A bad commit is then alr
 
 ## Decision
 
-A push to `main` publishes Staging only. Production changes only when `appelgriebsch` approves that same built site. Deny leaves Production on the previous deployment. An approval for a commit that is no longer the tip of `main` does not publish.
+A push to `main` publishes Staging only. Production changes only when `appelgriebsch` approves that same built site. Deny leaves Production on the previous deployment. An approval for a commit that is no longer the tip of `main` does not publish. How that build is gated and uploaded is ADR 0042.
 
 Automatic production builds on the Pages project stay off. They are already off.
 
