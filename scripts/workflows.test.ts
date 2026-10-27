@@ -25,6 +25,19 @@ function job(yaml: string, name: string): string {
   return body.join('\n')
 }
 
+function jobNames(yaml: string): string[] {
+  const lines = yaml.split('\n')
+  const start = lines.indexOf('jobs:')
+  if (start < 0) throw new Error('missing jobs')
+  const names: string[] = []
+  for (let i = start + 1; i < lines.length; i++) {
+    if (lines[i] && !lines[i].startsWith(' ')) break
+    const match = /^  ([a-z0-9-]+):$/.exec(lines[i])
+    if (match) names.push(match[1])
+  }
+  return names
+}
+
 function step(jobBody: string, title: string): string {
   const lines = jobBody.split('\n')
   const start = lines.findIndex((line) => line === `      - name: ${title}`)
@@ -224,6 +237,20 @@ describe('deploy.yml', () => {
         if (!lines[i].includes('- uses: actions/checkout@')) continue
         expect(lines.slice(i, i + 6).join('\n')).toContain('persist-credentials: false')
       }
+    }
+  })
+
+  test('pins node from .nvmrc before setup-bun in every job', () => {
+    const names = jobNames(deploy)
+    for (const name of ['build', 'staging', 'production']) expect(names).toContain(name)
+    for (const name of names) {
+      const body = job(deploy, name)
+      expect(body).toContain('node-version-file: .nvmrc')
+      expect(body).toContain('node scripts/node-check.mjs --exact')
+      const checkAt = body.indexOf('node scripts/node-check.mjs --exact')
+      const bunAt = body.indexOf('oven-sh/setup-bun')
+      expect(checkAt).toBeGreaterThanOrEqual(0)
+      expect(bunAt).toBeGreaterThan(checkAt)
     }
   })
 
