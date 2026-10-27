@@ -1,11 +1,27 @@
 import { describe, expect, test } from 'bun:test'
-import { resolveBuildSha } from './build-sha'
+import { resolveBuildSha, resolveFullBuildSha } from './build-sha'
 
 const noGit = (): string => {
   throw new Error('git unavailable')
 }
 
+const FULL = 'a'.repeat(40)
+const OTHER = 'b'.repeat(40)
+
 describe('resolveBuildSha (gh-166 / #167 W2)', () => {
+  test('HIATO_BUILD_SHA wins over CF_PAGES_COMMIT_SHA, GITHUB_SHA, and git', () => {
+    expect(
+      resolveBuildSha(
+        {
+          HIATO_BUILD_SHA: FULL,
+          CF_PAGES_COMMIT_SHA: 'abcdef0123456789',
+          GITHUB_SHA: '1111111222223333',
+        },
+        () => OTHER,
+      ),
+    ).toBe(FULL.slice(0, 7))
+  })
+
   test('prefers CF_PAGES_COMMIT_SHA over GITHUB_SHA and slices to 7', () => {
     expect(
       resolveBuildSha(
@@ -42,6 +58,37 @@ describe('resolveBuildSha (gh-166 / #167 W2)', () => {
 
   test('git throw yields dev', () => {
     expect(resolveBuildSha({}, noGit)).toBe('dev')
+  })
+})
+
+describe('resolveFullBuildSha', () => {
+  test('keeps a 40-char HIATO_BUILD_SHA over CF, GITHUB_SHA, and git', () => {
+    expect(
+      resolveFullBuildSha(
+        {
+          HIATO_BUILD_SHA: FULL,
+          CF_PAGES_COMMIT_SHA: OTHER,
+          GITHUB_SHA: 'c'.repeat(40),
+        },
+        () => 'd'.repeat(40),
+      ),
+    ).toBe(FULL)
+  })
+
+  test('a short winning source is dev, not the next source', () => {
+    expect(
+      resolveFullBuildSha({ HIATO_BUILD_SHA: 'abcdef0' }, () => FULL),
+    ).toBe('dev')
+  })
+
+  test('uses a 40-char git sha when env is missing', () => {
+    expect(resolveFullBuildSha({}, () => `${FULL}\n`)).toBe(FULL)
+  })
+
+  test('non-hex or short git is dev', () => {
+    expect(resolveFullBuildSha({}, () => 'abc1234')).toBe('dev')
+    expect(resolveFullBuildSha({}, () => '')).toBe('dev')
+    expect(resolveFullBuildSha({}, noGit)).toBe('dev')
   })
 })
 

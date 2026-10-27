@@ -28,6 +28,7 @@ export function PocketSheet({
   const restoreFocusRef = useRef(false)
   const focusRetryAt = useRef<number | null>(null)
   const onCloseRef = useRef(onClose)
+  // oxlint-disable-next-line react/refs -- latest onClose for the layout effect, not a render read
   onCloseRef.current = onClose
   const slotKey = `${lang}\0${cefr}`
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
@@ -36,6 +37,7 @@ export function PocketSheet({
   if (open && loadedFor !== slotKey) {
     setLoadedFor(slotKey)
     setEntries(listPocketStored(lang, cefr))
+    // oxlint-disable-next-line react/refs -- clear the pending focus index when the slot changes, in this render
     focusRetryAt.current = null
   } else if (!open && loadedFor !== null) {
     setLoadedFor(null)
@@ -85,6 +87,7 @@ export function PocketSheet({
   }, [open])
 
   function handleRetry(id: string) {
+    // oxlint-disable-next-line react/purity -- Date.now() runs in the click handler, not during render
     const href = pocketRetryHref(id, Date.now())
     if (!href.startsWith('/play?mode=pocket&id=') || !href.includes('&seed=')) {
       return

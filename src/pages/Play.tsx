@@ -210,6 +210,7 @@ function PlayRound({
     loading,
     alreadyPlayed,
   })
+  // oxlint-disable-next-line react/refs -- latest round snapshot so handlers do not close over a stale render
   roundRef.current = {
     cells,
     lives,

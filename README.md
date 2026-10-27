@@ -17,11 +17,11 @@ bun run packs:check   # pack schema + spoiler rule
 
 Vite + TypeScript + React + Zustand + shadcn/ui + Tailwind + Bun + `bun:test` + `vite-plugin-pwa` (`registerType: 'prompt'`).
 
-Hosting: Cloudflare Pages + Pages Functions `/api/health` stub. A push to `main` publishes Staging. Promote publishes Production after approval.
+Hosting: Cloudflare Pages + Pages Functions. `/api/health` returns stage and sha. A green CI run for a push to `main` builds once and publishes Staging. Promote publishes that same build to Production after approval.
 
 ## Local development
 
-Requires **Bun 1.4.2** (see `packageManager` / `.tool-versions`).
+Requires **Bun 1.4.4** (see `packageManager` / `.tool-versions`).
 
 ```bash
 bun install --frozen-lockfile
@@ -43,9 +43,10 @@ See [`docs/cloudflare-pages.md`](docs/cloudflare-pages.md). Summary:
 
 - **Build command:** `bun install --frozen-lockfile && bun run packs:check && bun run build`
 - **Output directory:** `dist`
-- **Env (Production + Preview):** `BUN_VERSION=1.4.2`, `SKIP_DEPENDENCY_INSTALL=true` (same pin in both)
+- **Env (Production + Preview):** `BUN_VERSION=1.4.4`, `SKIP_DEPENDENCY_INSTALL=true` (same pin in both)
 - **Bindings:** `HIATO_STAGE=production` on production, `HIATO_STAGE=staging` on preview (`wrangler.toml`)
-- **Rollback:** `hiato-production` — previous successful production deployment only
+- **Publish:** green CI on `main` builds once; Staging then Promote deploy that artifact ([ADR 0042](docs/adr/0042-ci-gated-build-once-deploy.md))
+- **Rollback:** `hiato-production` — previous successful production deployment only; confirm the `/api/health` sha
 - Commit **`bun.lock`** only; no npm/pnpm lockfiles
 
 ## License
