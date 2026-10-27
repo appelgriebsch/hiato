@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import { chmodSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
@@ -71,6 +72,53 @@ function versionGuard(script: string): string {
   const end = script.indexOf('esac')
   if (start < 0 || end < 0) throw new Error('version guard missing')
   return script.slice(start, end + 'esac'.length)
+}
+
+function runDigest(script: string, fault: 'ok' | 'digest' | 'recorded' | 'tamper') {
+  const dir = mkdtempSync(join(tmpdir(), 'hiato-digest-'))
+  const runner = join(dir, 'runner')
+  const stage = join(dir, 'stage')
+  const ws = join(dir, 'ws')
+  try {
+    mkdirSync(join(stage, 'dist'), { recursive: true })
+    mkdirSync(join(stage, 'functions', '_generated'), { recursive: true })
+    mkdirSync(join(runner, 'release'), { recursive: true })
+    mkdirSync(ws)
+    const index = 'ok\n'
+    const buildSha = 'export {}\n'
+    writeFileSync(join(stage, 'dist', 'index.html'), index)
+    writeFileSync(join(stage, 'functions', '_generated', 'build-sha.ts'), buildSha)
+    const tarPath = join(runner, 'release', 'hiato-pages.tar.gz')
+    const packed = spawnSync('tar', ['-czf', tarPath, 'dist', 'functions/_generated'], { cwd: stage })
+    if (packed.status !== 0) throw new Error('tar failed')
+    const bytes = readFileSync(tarPath)
+    const digest = createHash('sha256').update(bytes).digest('hex')
+    writeFileSync(
+      join(runner, 'release', 'hiato-pages.tar.gz.sha256'),
+      `${fault === 'recorded' ? 'c'.repeat(64) : digest}\n`,
+    )
+    if (fault === 'tamper') writeFileSync(tarPath, Buffer.concat([bytes, Buffer.from('x')]))
+    const result = spawnSync('bash', ['-euo', 'pipefail', '-c', script], {
+      cwd: ws,
+      env: {
+        ...process.env,
+        RUNNER_TEMP: runner,
+        GITHUB_WORKSPACE: ws,
+        DIGEST: fault === 'digest' ? 'b'.repeat(64) : digest,
+      },
+      encoding: 'utf8',
+    })
+    const read = (rel: string) => {
+      try {
+        return readFileSync(join(ws, rel), 'utf8')
+      } catch {
+        return ''
+      }
+    }
+    return { status: result.status, index: read('dist/index.html'), buildSha: read('functions/_generated/build-sha.ts'), wantIndex: index, wantSha: buildSha }
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
 }
 
 function runGuard(lockVersion: string, printed: string) {
@@ -280,6 +328,14 @@ describe('deploy.yml', () => {
       expect(verify).toContain('"$digest" != "$DIGEST"')
       expect(verify).toContain('"$digest" != "$recorded"')
       expect(verify).toContain('functions/_generated/build-sha.ts')
+      const script = runBody(verify)
+      const ok = runDigest(script, 'ok')
+      expect(ok.status).toBe(0)
+      expect(ok.index).toBe(ok.wantIndex)
+      expect(ok.buildSha).toBe(ok.wantSha)
+      expect(runDigest(script, 'digest').status).not.toBe(0)
+      expect(runDigest(script, 'recorded').status).not.toBe(0)
+      expect(runDigest(script, 'tamper').status).not.toBe(0)
     }
     expect(deploy).not.toContain('retention-days')
   })
