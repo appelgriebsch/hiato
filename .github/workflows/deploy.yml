@@ -85,6 +85,10 @@ jobs:
           path: dist
       - name: dist artifact has the shell
         run: test -f dist/index.html
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/node-check.mjs --exact
       - name: Publish preview branch staging
         id: deploy
         env:
@@ -93,11 +97,6 @@ jobs:
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
         run: |
           set -euo pipefail
-          major=$(node -p "Number(process.versions.node.split('.')[0])")
-          if [ "$major" -lt 22 ]; then
-            echo "wrangler@4.136.2 needs Node >= 22, found $(node -v)"
-            exit 1
-          fi
           # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
           npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
           # Check again after the install. main can move while npm runs.
@@ -425,6 +424,10 @@ jobs:
             exit 1
           fi
           echo "current=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/node-check.mjs --exact
       - name: Publish production branch main
         id: deploy
         env:
@@ -433,11 +436,6 @@ jobs:
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
         run: |
           set -euo pipefail
-          major=$(node -p "Number(process.versions.node.split('.')[0])")
-          if [ "$major" -lt 22 ]; then
-            echo "wrangler@4.136.2 needs Node >= 22, found $(node -v)"
-            exit 1
-          fi
           # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
           npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
           # Check again after the install. main can move while npm runs.

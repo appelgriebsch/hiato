@@ -18,6 +18,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/node-check.mjs --exact
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version-file: package.json
