@@ -163,11 +163,19 @@ describe('social banner', () => {
 })
 
 describe('Bun pin', () => {
-  test('packageManager, tool-versions, CI, and Pages docs share 1.4.2', async () => {
-    const pkg = JSON.parse(await readRepo('package.json')) as { packageManager: string }
+  test('packageManager, tool-versions, CI, and Pages docs share the Bun pin', async () => {
+    const pkg = JSON.parse(await readRepo('package.json')) as {
+      packageManager: string
+      trustedDependencies: unknown
+    }
     expect(pkg.packageManager).toBe(`bun@${BUN_PIN}`)
+    expect(pkg.trustedDependencies).toEqual([])
     expect((await readRepo('.tool-versions')).trim()).toBe(`bun ${BUN_PIN}`)
-    expect(await readRepo('.github/workflows/ci.yml')).toContain(`bun-version: '${BUN_PIN}'`)
+    expect(await readRepo('.github/workflows/ci.yml')).toContain('bun-version-file: package.json')
+    expect(await readRepo('.github/workflows/deploy.yml')).toContain(
+      'bun-version-file: package.json',
+    )
+    expect(await readRepo('bunfig.toml')).toContain('ignoreScripts = true')
 
     for (const path of [
       'README.md',

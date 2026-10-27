@@ -22,7 +22,7 @@ Set on **Production** and **Preview**:
 
 | Name | Value |
 |------|--------|
-| `BUN_VERSION` | `1.4.2` |
+| `BUN_VERSION` | `1.4.4` |
 | `SKIP_DEPENDENCY_INSTALL` | `true` |
 
 `SKIP_DEPENDENCY_INSTALL=true` skips CF’s default install so the build command owns `bun install --frozen-lockfile`.

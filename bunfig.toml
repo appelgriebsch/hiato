@@ -1,3 +1,8 @@
+# Bun 1.4.4 records the empty trustedDependencies list. 1.4.2 dropped it and
+# ran lifecycle scripts. `bun run` pre/post scripts are unaffected.
+[install]
+ignoreScripts = true
+
 [test]
 # Playwright specs live in e2e/ and must not load under bun:test.
 pathIgnorePatterns = ["e2e/**"]

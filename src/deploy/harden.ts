@@ -1,6 +1,6 @@
 /** H1 production-harden checks (issue #8, ADR 0011 / 0013 / 0021 / 0022). */
 
-export const BUN_PIN = '1.4.2'
+export const BUN_PIN = '1.4.4'
 export const PAGES_PROJECT = 'hiato'
 /** Named production rollback: previous successful production deployment of this project. */
 export const ROLLBACK_NAME = 'hiato-production'
