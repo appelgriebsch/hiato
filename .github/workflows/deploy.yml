@@ -1,11 +1,13 @@
 name: Deploy
 
-# Full SHA, then the commit message. The expression language cannot slice
-# the subject. The SHA is first so a long subject is the tail.
-run-name: ${{ github.sha }} ${{ github.event.head_commit.message }}
+# workflow_run runs this file from the default branch. Build the commit CI
+# tested (workflow_run.head_sha). The build job has no environment and no secrets.
+run-name: ${{ github.event.workflow_run.head_sha }} ${{ github.event.workflow_run.head_commit.message }}
 
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
 
 permissions:
@@ -13,12 +15,33 @@ permissions:
 
 jobs:
   build:
+    if: >-
+      github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      sha: ${{ steps.sha.outputs.sha }}
+      digest: ${{ steps.pack.outputs.digest }}
+      artifact: ${{ steps.pack.outputs.artifact }}
     steps:
+      - name: Resolve head sha
+        id: sha
+        env:
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::sha must match ^[0-9a-f]{40}$, got $HEAD_SHA"
+            exit 1
+          fi
+          echo "sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ steps.sha.outputs.sha }}
           persist-credentials: false
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
@@ -33,7 +56,8 @@ jobs:
             exit 1
           fi
       - run: bun run build
-      - run: bun test
+        env:
+          HIATO_BUILD_SHA: ${{ steps.sha.outputs.sha }}
       - name: dist is a staging shell
         run: |
           if [ -e dist/404.html ]; then
@@ -44,10 +68,27 @@ jobs:
             echo "dist/index.html must contain https://hiato.pages.dev/og-banner.png"
             exit 1
           fi
+      - name: Package dist and health sha
+        id: pack
+        env:
+          SHA: ${{ steps.sha.outputs.sha }}
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          test -f functions/_generated/build-sha.ts
+          mkdir -p "$RUNNER_TEMP/release"
+          tar -czf "$RUNNER_TEMP/release/hiato-pages.tar.gz" dist functions/_generated
+          digest=$(sha256sum "$RUNNER_TEMP/release/hiato-pages.tar.gz" | awk '{print $1}')
+          printf '%s\n' "$digest" > "$RUNNER_TEMP/release/hiato-pages.tar.gz.sha256"
+          echo "artifact sha256: $digest"
+          {
+            echo "digest=$digest"
+            echo "artifact=pages-dist-$SHA"
+          } >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: pages-dist
-          path: dist
+          name: ${{ steps.pack.outputs.artifact }}
+          path: ${{ runner.temp }}/release/
           if-no-files-found: error
 
   staging:
@@ -66,61 +107,100 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.build.outputs.sha }}
           persist-credentials: false
       - name: This SHA is still the tip of main
         id: tip
+        env:
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main
           tip=$(git rev-parse origin/main)
           echo "sha=$tip" >> "$GITHUB_OUTPUT"
-          if [ "$GITHUB_SHA" != "$tip" ]; then
+          if [ "$SHA" != "$tip" ]; then
             echo "current=false" >> "$GITHUB_OUTPUT"
-            echo "Refusing Staging upload. $GITHUB_SHA is not origin/main $tip"
+            echo "Refusing Staging upload. $SHA is not origin/main $tip"
             exit 1
           fi
           echo "current=true" >> "$GITHUB_OUTPUT"
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: pages-dist
-          path: dist
-      - name: dist artifact has the shell
-        run: test -f dist/index.html
+          name: ${{ needs.build.outputs.artifact }}
+          path: ${{ runner.temp }}/release
+      - name: Verify artifact digest
+        env:
+          DIGEST: ${{ needs.build.outputs.digest }}
+        run: |
+          set -euo pipefail
+          file="$RUNNER_TEMP/release/hiato-pages.tar.gz"
+          digest=$(sha256sum "$file" | awk '{print $1}')
+          recorded=$(tr -d '[:space:]' < "$file.sha256")
+          if [ "$digest" != "$DIGEST" ]; then
+            echo "::error::artifact digest mismatch: expected $DIGEST got $digest"
+            exit 1
+          fi
+          if [ "$digest" != "$recorded" ]; then
+            echo "::error::artifact digest mismatch: expected $recorded got $digest"
+            exit 1
+          fi
+          echo "artifact sha256: $digest"
+          tar -xzf "$file" -C "$GITHUB_WORKSPACE"
+          test -f dist/index.html
+          test -f functions/_generated/build-sha.ts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
       - run: node scripts/node-check.mjs --exact
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+      # wrangler is `node node_modules/wrangler/bin/wrangler.js`, never bunx
+      # (bunx wrangler rewrites package.json). --ignore-scripts: this job later holds the Cloudflare token.
+      - name: Install wrangler from the lockfile
+        run: |
+          set -euo pipefail
+          bun install --frozen-lockfile --ignore-scripts
+          version=$(bun -e 'const l = Bun.JSONC.parse(await Bun.file("bun.lock").text()); const id = l.packages.wrangler[0]; console.log(id.slice(id.lastIndexOf("@") + 1))')
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::no wrangler version in bun.lock ('$version')"; exit 1
+          fi
+          got=$(node node_modules/wrangler/bin/wrangler.js --version)
+          echo "$got"
+          case "$got" in
+            *"$version"*) ;;
+            *) echo "::error::wrangler $got does not contain $version"; exit 1 ;;
+          esac
       - name: Publish preview branch staging
         id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
-          # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
-          npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
-          # Check again after the install. main can move while npm runs.
+          # Check again after the install. main can move while bun install runs.
           git fetch --no-tags origin main
           tip=$(git rev-parse origin/main)
-          if [ "$GITHUB_SHA" != "$tip" ]; then
+          if [ "$SHA" != "$tip" ]; then
             {
               echo "outcome=stale"
               echo "main_sha=$tip"
             } >> "$GITHUB_OUTPUT"
-            echo "Refusing Staging upload. $GITHUB_SHA is not origin/main $tip"
+            echo "Refusing Staging upload. $SHA is not origin/main $tip"
             exit 1
           fi
           # --branch staging is required. An omitted branch follows git HEAD (main) and publishes Production.
           # Working directory is the checkout so wrangler.toml and functions/ are visible.
-          node "$RUNNER_TEMP/wrangler/node_modules/wrangler/bin/wrangler.js" \
+          # Pages compiles functions/ from this checkout, including functions/_generated restored from the artifact.
+          node node_modules/wrangler/bin/wrangler.js \
             pages deploy dist \
             --project-name hiato \
             --branch staging \
-            --commit-hash "$GITHUB_SHA"
+            --commit-hash "$SHA"
           if ! git diff --exit-code -- package.json bun.lock || [ -n "$(git status --porcelain -- package.json bun.lock)" ]; then
-            echo "package.json or bun.lock changed. Wrangler must stay outside the checkout."
+            echo "package.json or bun.lock changed."
             git status --porcelain -- package.json bun.lock
             exit 1
           fi
@@ -187,20 +267,22 @@ jobs:
           const commit = record.deployment_trigger && record.deployment_trigger.metadata
             ? record.deployment_trigger.metadata.commit_hash
             : ''
-          if (commit !== process.env.GITHUB_SHA) {
-            fail(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
+          if (commit !== process.env.SHA) {
+            fail(`commit_hash ${commit} does not match ${process.env.SHA}`)
           }
           console.log(`pages-deploy-detailed environment=preview deployment_id=${record.deployment_id}`)
           EOF
       - name: Probe the deployment URL
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
           base=${DEPLOYMENT_URL%/}
           ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
           hdr=$(mktemp)
           body=$(mktemp)
+          expected="{\"ok\":true,\"stage\":\"staging\",\"sha\":\"$SHA\"}"
 
           header_value() {
             awk -v name="$2" 'BEGIN { IGNORECASE = 1 }
@@ -246,7 +328,7 @@ jobs:
             require_includes content-type application/json /api/health || return 1
             require_includes cache-control no-store /api/health || return 1
             require_includes x-content-type-options nosniff /api/health || return 1
-            require_body '{"ok":true,"stage":"staging"}' /api/health || return 1
+            require_body "$expected" /api/health || return 1
 
             probe_ok /packs/en/a1.json || return 1
             require_includes content-type application/json /packs/en/a1.json || return 1
@@ -294,9 +376,10 @@ jobs:
           DEPLOY_CONCLUSION: ${{ steps.deploy.conclusion }}
           TIP_CURRENT: ${{ steps.tip.outputs.current }}
           TIP_SHA: ${{ steps.tip.outputs.sha }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
-          PUSHER: ${{ github.event.pusher.name }}
+          COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
+          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ needs.build.outputs.sha }}
+          PUSHER: ${{ github.event.workflow_run.triggering_actor.login }}
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -u
           subject=$(printf '%s\n' "$COMMIT_MESSAGE" | head -n 1)
@@ -310,9 +393,9 @@ jobs:
             fi
           fi
           identity() {
-            echo "- SHA: \`$GITHUB_SHA\`"
+            echo "- SHA: \`$SHA\`"
             echo "- Subject:" "$subject"
-            echo "- Commit: [$GITHUB_SHA]($COMMIT_URL)"
+            echo "- Commit: [$SHA]($COMMIT_URL)"
             echo "- Run: $GITHUB_RUN_ID"
             echo "- UTC: $when"
             echo "- Pusher: $PUSHER"
@@ -334,15 +417,15 @@ jobs:
             echo 'A 200 shell is not enough. An empty Share page is a pass.'
           }
           {
-            if [ "$tip_read" = "true" ] && [ "$GITHUB_SHA" = "$tip_now" ]; then
+            if [ "$tip_read" = "true" ] && [ "$SHA" = "$tip_now" ]; then
               echo "Approve publishes this build to https://hiato.appelgriebsch.org. Reject leaves Production as it is. Staging keeps this build until the next push to \`main\`."
-              echo "At $when, \`$GITHUB_SHA\` matched \`origin/main\`."
+              echo "At $when, \`$SHA\` matched \`origin/main\`."
             elif [ "$tip_read" = "true" ]; then
               echo "Do not approve. This run must not publish."
-              echo "At $when, \`$GITHUB_SHA\` did not match \`origin/main\` \`$tip_now\`."
+              echo "At $when, \`$SHA\` did not match \`origin/main\` \`$tip_now\`."
             else
               echo "Do not approve. This run must not publish."
-              echo "At $when, \`origin/main\` could not be read, so \`$GITHUB_SHA\` is not confirmed as the tip."
+              echo "At $when, \`origin/main\` could not be read, so \`$SHA\` is not confirmed as the tip."
             fi
             echo "On this run, open **Review deployments**. Approve and deploy only for this run."
             echo
@@ -391,7 +474,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
   production:
-    needs: staging
+    needs: [build, staging]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
@@ -406,45 +489,83 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ needs.build.outputs.sha }}
           persist-credentials: false
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: pages-dist
-          path: dist
-      - name: dist artifact has the shell
-        run: test -f dist/index.html
       - name: This SHA is still the tip of main
         id: tip
+        env:
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main
           tip=$(git rev-parse origin/main)
           echo "sha=$tip" >> "$GITHUB_OUTPUT"
-          if [ "$GITHUB_SHA" != "$tip" ]; then
+          if [ "$SHA" != "$tip" ]; then
             echo "current=false" >> "$GITHUB_OUTPUT"
             echo "Not published. Production unchanged."
             exit 1
           fi
           echo "current=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+          path: ${{ runner.temp }}/release
+      - name: Verify artifact digest
+        env:
+          DIGEST: ${{ needs.build.outputs.digest }}
+        run: |
+          set -euo pipefail
+          file="$RUNNER_TEMP/release/hiato-pages.tar.gz"
+          digest=$(sha256sum "$file" | awk '{print $1}')
+          recorded=$(tr -d '[:space:]' < "$file.sha256")
+          if [ "$digest" != "$DIGEST" ]; then
+            echo "::error::artifact digest mismatch: expected $DIGEST got $digest"
+            exit 1
+          fi
+          if [ "$digest" != "$recorded" ]; then
+            echo "::error::artifact digest mismatch: expected $recorded got $digest"
+            exit 1
+          fi
+          echo "artifact sha256: $digest"
+          tar -xzf "$file" -C "$GITHUB_WORKSPACE"
+          test -f dist/index.html
+          test -f functions/_generated/build-sha.ts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
       - run: node scripts/node-check.mjs --exact
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version-file: package.json
+      # wrangler is `node node_modules/wrangler/bin/wrangler.js`, never bunx
+      # (bunx wrangler rewrites package.json). --ignore-scripts: this job later holds the Cloudflare token.
+      - name: Install wrangler from the lockfile
+        run: |
+          set -euo pipefail
+          bun install --frozen-lockfile --ignore-scripts
+          version=$(bun -e 'const l = Bun.JSONC.parse(await Bun.file("bun.lock").text()); const id = l.packages.wrangler[0]; console.log(id.slice(id.lastIndexOf("@") + 1))')
+          if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::no wrangler version in bun.lock ('$version')"; exit 1
+          fi
+          got=$(node node_modules/wrangler/bin/wrangler.js --version)
+          echo "$got"
+          case "$got" in
+            *"$version"*) ;;
+            *) echo "::error::wrangler $got does not contain $version"; exit 1 ;;
+          esac
       - name: Publish production branch main
         id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/pages-deploy.ndjson
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
-          # Install outside the checkout. bunx or wrangler-action would rewrite package.json.
-          npm install --prefix "$RUNNER_TEMP/wrangler" --no-fund --no-audit wrangler@4.136.2
-          # Check again after the install. main can move while npm runs.
+          # Check again after the install. main can move while bun install runs.
           git fetch --no-tags origin main
           tip=$(git rev-parse origin/main)
-          if [ "$GITHUB_SHA" != "$tip" ]; then
+          if [ "$SHA" != "$tip" ]; then
             {
               echo "outcome=stale"
               echo "main_sha=$tip"
@@ -454,14 +575,15 @@ jobs:
           fi
           # --branch main is required. The checkout is detached, so an omitted branch is not Production.
           # No --env, --config, or --commit-dirty. Working directory stays the checkout.
-          node "$RUNNER_TEMP/wrangler/node_modules/wrangler/bin/wrangler.js" \
+          # Pages compiles functions/ from this checkout, including functions/_generated restored from the artifact.
+          node node_modules/wrangler/bin/wrangler.js \
             pages deploy dist \
             --project-name hiato \
             --branch main \
-            --commit-hash "$GITHUB_SHA"
+            --commit-hash "$SHA"
           echo "uploaded=true" >> "$GITHUB_OUTPUT"
           if ! git diff --exit-code -- package.json bun.lock || [ -n "$(git status --porcelain -- package.json bun.lock)" ]; then
-            echo "package.json or bun.lock changed. Wrangler must stay outside the checkout."
+            echo "package.json or bun.lock changed."
             git status --porcelain -- package.json bun.lock
             exit 1
           fi
@@ -528,8 +650,8 @@ jobs:
           const commit = record.deployment_trigger && record.deployment_trigger.metadata
             ? record.deployment_trigger.metadata.commit_hash
             : ''
-          if (commit !== process.env.GITHUB_SHA) {
-            fail(`commit_hash ${commit} does not match ${process.env.GITHUB_SHA}`)
+          if (commit !== process.env.SHA) {
+            fail(`commit_hash ${commit} does not match ${process.env.SHA}`)
           }
           console.log(`pages-deploy-detailed environment=production deployment_id=${record.deployment_id}`)
           EOF
@@ -537,12 +659,14 @@ jobs:
         id: probe
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -euo pipefail
           base=${DEPLOYMENT_URL%/}
           ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
           hdr=$(mktemp)
           body=$(mktemp)
+          expected="{\"ok\":true,\"stage\":\"production\",\"sha\":\"$SHA\"}"
 
           header_value() {
             awk -v name="$2" 'BEGIN { IGNORECASE = 1 }
@@ -588,7 +712,7 @@ jobs:
             require_includes content-type application/json /api/health || return 1
             require_includes cache-control no-store /api/health || return 1
             require_includes x-content-type-options nosniff /api/health || return 1
-            require_body '{"ok":true,"stage":"production"}' /api/health || return 1
+            require_body "$expected" /api/health || return 1
 
             probe_ok /packs/en/a1.json || return 1
             require_includes content-type application/json /packs/en/a1.json || return 1
@@ -629,10 +753,12 @@ jobs:
           done
       - name: Probe production aliases
         id: aliases
+        env:
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -u
           ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
-          expected='{"ok":true,"stage":"production"}'
+          expected="{\"ok\":true,\"stage\":\"production\",\"sha\":\"$SHA\"}"
           lag=false
           note=""
           check_alias() {
@@ -672,39 +798,40 @@ jobs:
           PROBE_CONCLUSION: ${{ steps.probe.conclusion }}
           ALIAS_LAG: ${{ steps.aliases.outputs.lag }}
           ALIAS_NOTE: ${{ steps.aliases.outputs.note }}
+          SHA: ${{ needs.build.outputs.sha }}
         run: |
           set -u
           {
             if [ "$DEPLOY_UPLOADED" = "true" ] && [ "$DEPLOY_OUTCOME" = "production" ] && [ "$DEPLOY_CONCLUSION" = "success" ] && [ "$PROBE_CONCLUSION" = "success" ]; then
               echo 'Published.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- SHA: \`$SHA\`"
               echo "- https://hiato.appelgriebsch.org"
               echo "- https://hiato.pages.dev"
               echo "- Deployment URL: $DEPLOYMENT_URL"
               if [ "$ALIAS_LAG" = "true" ]; then
                 echo
-                echo 'A custom domain or alias lags. The deployment URL already returned {"ok":true,"stage":"production"}. A lagging alias is not a failed job.'
+                echo "A custom domain or alias lags. The deployment URL already returned {\"ok\":true,\"stage\":\"production\",\"sha\":\"$SHA\"}. A lagging alias is not a failed job."
                 printf '%s\n' "$ALIAS_NOTE"
               fi
             elif [ "$DEPLOY_UPLOADED" = "true" ] && [ "$DEPLOY_OUTCOME" = "not-production" ]; then
               echo 'The upload happened, but pages-deploy-detailed environment was not production. Production may have changed. Do not re-run this job. If Production changed, the recovery is the existing hiato-production rollback.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- SHA: \`$SHA\`"
               if [ -n "$DEPLOYMENT_URL" ]; then
                 echo "- Deployment URL: $DEPLOYMENT_URL"
               fi
             elif [ "$DEPLOY_UPLOADED" = "true" ]; then
               echo 'The upload happened. Production already moved. Do not re-run this job. The recovery is the existing hiato-production rollback.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- SHA: \`$SHA\`"
               if [ -n "$DEPLOYMENT_URL" ]; then
                 echo "- Deployment URL: $DEPLOYMENT_URL"
               fi
             else
               echo 'Not published. Production unchanged.'
               echo
-              echo "- SHA: \`$GITHUB_SHA\`"
+              echo "- SHA: \`$SHA\`"
               tipsha=$TIP_SHA
               if [ -n "$DEPLOY_MAIN_SHA" ]; then
                 tipsha=$DEPLOY_MAIN_SHA
