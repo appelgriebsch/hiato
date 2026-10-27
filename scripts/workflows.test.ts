@@ -257,6 +257,19 @@ describe('deploy.yml', () => {
     expect(deploy).not.toContain('retention-days')
   })
 
+  test('publishes staging as a preview branch and production as main, never dirty', () => {
+    const staging = runBody(step(job(deploy, 'staging'), 'Publish preview branch staging'))
+    const production = runBody(step(job(deploy, 'production'), 'Publish production branch main'))
+    expect(staging).toMatch(/--branch staging \\\n/)
+    expect(staging).not.toMatch(/--branch main\b/)
+    expect(production).toMatch(/--branch main \\\n/)
+    for (const script of [staging, production]) {
+      expect(script).toContain('--commit-hash "$SHA"')
+      expect(script).not.toMatch(/--commit-dirty[ =]/)
+      expect(script).not.toMatch(/--env[ =]|--config[ =]/)
+    }
+  })
+
   test('wrangler install guard fails closed', () => {
     const staging = wranglerScript('staging')
     const production = wranglerScript('production')
@@ -318,6 +331,7 @@ describe('ci.yml', () => {
 
   test('build-test gates lint, licences, prod audit, and pinned linters', () => {
     const build = job(ci, 'build-test')
+    expect(build).toContain('node scripts/node-check.mjs --exact')
     expect(build).toContain('bun run lint')
     expect(build).toContain('bun run licenses:check')
     expect(build).toContain('bun audit --prod --audit-level=high')
