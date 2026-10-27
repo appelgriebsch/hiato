@@ -3,6 +3,13 @@
   "plugins": ["react", "typescript", "oxc"],
   "rules": {
     "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+    // Helpers live next to components (LivesIcons, LetterGrid, InstallHelp). Not a hooks bug.
+    "react/only-export-components": "off",
+    // Effects copy storage and props into state. Left as written; not a correctness fix.
+    "react/set-state-in-effect": "off",
+    // Play and PocketSheet read a ref during render to keep a stable id.
+    "react/refs": "off",
+    // PocketSheet calls Date.now() to render a relative time.
+    "react/purity": "off"
   }
 }

@@ -19,8 +19,11 @@ export function hasDiacritic(ch: string): boolean {
     const code = upper.codePointAt(0)!
     if (code >= 0x41 && code <= 0x5a) return false
   }
-  // Non-ASCII letter-like grapheme
-  return /[^\u0000-\u007f]/u.test(g)
+  // Non-ASCII letter-like grapheme. Code points, not a \u0000 range (no-control-regex).
+  for (const ch of g) {
+    if ((ch.codePointAt(0) ?? 0) > 0x7f) return true
+  }
+  return false
 }
 
 /** Base ASCII vowel only (A/E/I/O/U). Accented vowels are NOT base vowels (ADR 0024). */

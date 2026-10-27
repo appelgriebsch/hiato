@@ -159,7 +159,7 @@ function condMatches(word: string, cond: string): boolean {
     const re = new RegExp(`${cond}$`, 'u')
     return re.test(word)
   } catch {
-    return word.endsWith(cond.replace(/[\[\]^]/g, ''))
+    return word.endsWith(cond.replace(/[[\]^]/g, ''))
   }
 }
 
@@ -169,7 +169,7 @@ function condMatchesPrefix(word: string, cond: string): boolean {
     const re = new RegExp(`^${cond}`, 'u')
     return re.test(word)
   } catch {
-    return word.startsWith(cond.replace(/[\[\]^]/g, ''))
+    return word.startsWith(cond.replace(/[[\]^]/g, ''))
   }
 }
 

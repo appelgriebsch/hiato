@@ -120,7 +120,7 @@ export function hangmanOk(
 ): string | null {
   const word = nfcUpper(raw)
   if (word.length < 3 || word.length > 10) return null
-  if (/[\d\s\-\.'.’_/]/.test(word)) return null
+  if (/[\d\s\-.'’_/]/.test(word)) return null
   const re: Record<SelectLang, RegExp> = {
     en: /^[A-Z]+$/,
     de: /^[A-ZÄÖÜß]+$/,

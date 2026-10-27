@@ -87,7 +87,7 @@ describe('Uma polish assets', () => {
     ).text()
     expect(src).toContain('🔥')
     expect(src).toContain('aria-hidden')
-    expect(src).toMatch(/aria-label=\{\`Streak \$\{count\}\`\}/)
+    expect(src).toMatch(/aria-label=\{`Streak \$\{count\}`\}/)
     expect(src).not.toMatch(/aria-label=\{[^}]*fire/)
   })
 
