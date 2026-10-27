@@ -23,3 +23,4 @@ Bun is 1.4.4, with `ignoreScripts` and an empty `trustedDependencies`. Wrangler 
 - Production and Staging serve the bytes CI tested, including the health sha.
 - `bunx wrangler` stays forbidden in this checkout.
 - Preview deployments are still not rollback targets (ADR 0038).
+- ponytail: the package.json overrides undici 7.30.1 and sharp 0.35.5 lift miniflare's exact pins (undici 7.29.0, sharp 0.35.4) to the advisory floors. Drop them once wrangler's miniflare pins those versions or newer; re-check `bun audit` on every wrangler bump (an exact override silently downgrades a newer pin).

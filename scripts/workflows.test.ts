@@ -11,6 +11,7 @@ const deploy = readFileSync(join(root, '.github/workflows/deploy.yml'), 'utf8')
 const ci = readFileSync(join(root, '.github/workflows/ci.yml'), 'utf8')
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
   trustedDependencies: string[]
+  scripts: { build: string }
 }
 const sha = 'a'.repeat(40)
 
@@ -133,6 +134,103 @@ function runDigest(script: string, fault: 'ok' | 'digest' | 'recorded' | 'tamper
   } finally {
     rmSync(dir, { recursive: true, force: true })
   }
+}
+
+function permissionBlock(text: string, header: string): string {
+  const lines = text.split('\n')
+  const start = lines.indexOf(header)
+  if (start < 0) throw new Error(`missing ${header}`)
+  const indent = header.match(/^\s*/)?.[0] ?? ''
+  const block = [lines[start]]
+  for (let i = start + 1; i < lines.length; i++) {
+    if (!lines[i].startsWith(`${indent}  `)) break
+    block.push(lines[i])
+  }
+  return block.join('\n')
+}
+
+function runTip(script: string, aligned: boolean) {
+  const dir = mkdtempSync(join(tmpdir(), 'hiato-tip-'))
+  const remote = join(dir, 'remote.git')
+  const ws = join(dir, 'ws')
+  const output = join(dir, 'github_output')
+  const env = {
+    ...process.env,
+    GIT_AUTHOR_NAME: 't',
+    GIT_AUTHOR_EMAIL: 't@example.com',
+    GIT_COMMITTER_NAME: 't',
+    GIT_COMMITTER_EMAIL: 't@example.com',
+  }
+  const git = (args: string[]) => {
+    const result = spawnSync('git', args, { cwd: ws, env, encoding: 'utf8' })
+    if (result.status !== 0) throw new Error(result.stderr || 'git failed')
+    return result.stdout.trim()
+  }
+  try {
+    mkdirSync(ws)
+    writeFileSync(output, '')
+    const bare = spawnSync('git', ['init', '--bare', '-b', 'main', remote], { cwd: dir, env, encoding: 'utf8' })
+    if (bare.status !== 0) throw new Error(bare.stderr || 'bare init failed')
+    git(['init', '-b', 'main'])
+    writeFileSync(join(ws, 'f'), 'a\n')
+    git(['add', 'f'])
+    git(['commit', '-m', 'a'])
+    const sha = git(['rev-parse', 'HEAD'])
+    git(['remote', 'add', 'origin', remote])
+    git(['push', '-u', 'origin', 'main'])
+    if (!aligned) {
+      writeFileSync(join(ws, 'f'), 'b\n')
+      git(['commit', '-am', 'b'])
+      git(['push', 'origin', 'main'])
+    }
+    const result = spawnSync('bash', ['-c', script], {
+      cwd: ws,
+      env: { ...env, SHA: sha, GITHUB_OUTPUT: output },
+      encoding: 'utf8',
+    })
+    return { status: result.status, output: readFileSync(output, 'utf8'), sha }
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
+
+function pagesDeployCheck(script: string): string {
+  const marker = "node <<'EOF'\n"
+  const start = script.indexOf(marker)
+  const end = script.indexOf('\nEOF', start)
+  if (start < 0 || end < 0) throw new Error('missing pages-deploy-detailed check')
+  return script.slice(start + marker.length, end)
+}
+
+function runPagesDeployCheck(js: string, ndjson: string, shaValue: string) {
+  const dir = mkdtempSync(join(tmpdir(), 'hiato-ndjson-'))
+  try {
+    const file = join(dir, 'out.ndjson')
+    writeFileSync(file, ndjson)
+    writeFileSync(join(dir, 'github_output'), '')
+    return spawnSync('node', ['-e', js], {
+      env: {
+        ...process.env,
+        WRANGLER_OUTPUT_FILE_PATH: file,
+        SHA: shaValue,
+        GITHUB_OUTPUT: join(dir, 'github_output'),
+      },
+      encoding: 'utf8',
+    }).status
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
+
+function detailedRecord(environment: string, commit: string): string {
+  return `${JSON.stringify({
+    type: 'pages-deploy-detailed',
+    environment,
+    version: 1,
+    url: 'https://hiato.pages.dev',
+    deployment_id: '1',
+    deployment_trigger: { metadata: { commit_hash: commit } },
+  })}\n`
 }
 
 function runGuard(lockVersion: string, printed: string) {
@@ -387,6 +485,97 @@ describe('deploy.yml', () => {
     expect(runGuard('', '4.136.2').status).not.toBe(0)
     expect(runGuard('nope', 'nope').status).not.toBe(0)
     expect(runGuard('4.136.2', '9.9.9').status).not.toBe(0)
+  })
+
+  test('gates staging and production on their environments', () => {
+    expect(job(deploy, 'staging')).toMatch(/^    environment:\n      name: staging\n/m)
+    expect(job(deploy, 'production')).toMatch(/^    environment:\n      name: production\n/m)
+    expect(job(deploy, 'build')).not.toMatch(/^    environment:/m)
+  })
+
+  test('permissions are contents read, plus deployments write on deploy jobs', () => {
+    expect(permissionBlock(deploy, 'permissions:')).toBe('permissions:\n  contents: read')
+    for (const name of ['staging', 'production']) {
+      const body = job(deploy, name)
+      expect(permissionBlock(body, '    permissions:')).toBe(
+        '    permissions:\n      contents: read\n      deployments: write',
+      )
+      expect(body).toMatch(/^      cancel-in-progress: false$/m)
+    }
+    const build = job(deploy, 'build')
+    expect(build.includes('    permissions:')).toBe(false)
+    expect(build).not.toMatch(/write-all|contents: write|deployments: write|id-token:|actions: write/)
+  })
+
+  test('refuses a deploy when this sha is not the tip of main', () => {
+    for (const name of ['staging', 'production'] as const) {
+      const body = job(deploy, name)
+      const tip = step(body, 'This SHA is still the tip of main')
+      expect(body.indexOf('- name: This SHA is still the tip of main')).toBeLessThan(
+        body.indexOf('- name: Install wrangler from the lockfile'),
+      )
+      expect(tip).toContain('SHA: ${{ needs.build.outputs.sha }}')
+      const script = runBody(tip)
+      expect(script).toContain('tip=$(git rev-parse origin/main)')
+      expect(script).toMatch(/^if \[ "\$SHA" != "\$tip" \]; then$/m)
+      const same = runTip(script, true)
+      expect(same.status).toBe(0)
+      expect(same.output).toContain(`sha=${same.sha}`)
+      expect(same.output).toContain('current=true')
+      const moved = runTip(script, false)
+      expect(moved.status).not.toBe(0)
+      expect(moved.output).toContain('current=false')
+
+      const title = name === 'staging' ? 'Publish preview branch staging' : 'Publish production branch main'
+      const publishStep = step(body, title)
+      expect(publishStep).toContain('SHA: ${{ needs.build.outputs.sha }}')
+      expect(body.indexOf(`- name: ${title}`)).toBeGreaterThan(
+        body.indexOf('- name: Install wrangler from the lockfile'),
+      )
+      const publish = runBody(publishStep)
+      const prelude = publish.split(/^if \[ "\$SHA" != "\$tip" \]; then$/m)[0] ?? ''
+      expect(prelude.includes('tip=$(git rev-parse origin/main)')).toBe(true)
+      const statements = prelude
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line && !line.startsWith('#'))
+      expect(statements).toEqual([
+        'set -euo pipefail',
+        'git fetch --no-tags origin main',
+        'tip=$(git rev-parse origin/main)',
+      ])
+      const ifAt = publish.search(/^if \[ "\$SHA" != "\$tip" \]; then$/m)
+      const exitAt = publish.indexOf('exit 1', ifAt)
+      const deployAt = publish.indexOf('pages deploy dist')
+      expect(ifAt).toBeGreaterThanOrEqual(0)
+      expect(exitAt).toBeGreaterThan(ifAt)
+      expect(deployAt).toBeGreaterThan(exitAt)
+    }
+  })
+
+  test('pages-deploy-detailed record must match the environment and sha', () => {
+    for (const name of ['staging', 'production'] as const) {
+      const title = name === 'staging' ? 'Publish preview branch staging' : 'Publish production branch main'
+      const js = pagesDeployCheck(runBody(step(job(deploy, name), title)))
+      const environment = name === 'staging' ? 'preview' : 'production'
+      const other = environment === 'preview' ? 'production' : 'preview'
+      expect(runPagesDeployCheck(js, detailedRecord(environment, sha), sha)).toBe(0)
+      expect(runPagesDeployCheck(js, detailedRecord(other, sha), sha)).not.toBe(0)
+      expect(runPagesDeployCheck(js, detailedRecord(environment, 'b'.repeat(40)), sha)).not.toBe(0)
+      expect(runPagesDeployCheck(js, '{"type":"pages-deploy"}\n', sha)).not.toBe(0)
+    }
+  })
+
+  test('build stamps the validated sha and packs functions/_generated', () => {
+    const build = job(deploy, 'build')
+    expect(build).toMatch(/- name: Resolve head sha\n {8}id: sha\n/)
+    expect(build).toContain('HEAD_SHA: ${{ github.event.workflow_run.head_sha }}')
+    expect(build).toMatch(
+      /- run: bun run build\n {8}env:\n {10}HIATO_BUILD_SHA: \$\{\{ steps\.sha\.outputs\.sha \}\}\n/,
+    )
+    expect(pkg.scripts.build).toMatch(/^bun run scripts\/write-build-sha\.ts && /)
+    const pack = step(build, 'Package dist and health sha')
+    expect(pack).toMatch(/tar -czf "\$RUNNER_TEMP\/release\/hiato-pages\.tar\.gz" dist functions\/_generated\n/)
   })
 })
 
