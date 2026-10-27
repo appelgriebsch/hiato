@@ -31,6 +31,9 @@ yarn.lock
 # Bun
 .bun
 
+# Build SHA imported by the Pages health function. `build` and `pretest` write it.
+functions/_generated/
+
 # Playwright
 test-results
 playwright-report

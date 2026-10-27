@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "bun run packs:check && tsc -b && vite build",
+    "build": "bun run scripts/write-build-sha.ts && bun run packs:check && tsc -b && vite build",
     "lint": "oxlint --deny-warnings",
     "licenses:check": "license-checker-rseidelsohn --production --excludePrivatePackages --summary --onlyAllow \"MIT;ISC;Apache-2.0;BSD-2-Clause;BSD-3-Clause;OFL-1.1;MPL-2.0;0BSD;BlueOak-1.0.0;CC0-1.0;Python-2.0;MIT OR Apache-2.0;CC-BY-4.0;Unlicense\"",
     "preview": "vite preview",

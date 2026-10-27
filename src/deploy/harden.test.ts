@@ -71,43 +71,49 @@ describe('staging bindings differ from production', () => {
     expect(bindings.staging).not.toBe(bindings.production)
   })
 
-  test('health accepts only the two stage bindings', async () => {
-    const production = await onRequestGet({ env: { HIATO_STAGE: PRODUCTION_STAGE } })
+  test('health accepts only the two stage bindings and a stubbed sha', async () => {
+    const sha = 'a'.repeat(40)
+    const production = await onRequestGet({ env: { HIATO_STAGE: PRODUCTION_STAGE } }, sha)
     expect(production.status).toBe(200)
-    expect(await production.json()).toEqual({ ok: true, stage: PRODUCTION_STAGE })
+    expect(await production.json()).toEqual({ ok: true, stage: PRODUCTION_STAGE, sha })
     expect(production.headers.get('cache-control')).toBe('no-store')
     expect(production.headers.get('x-content-type-options')).toBe('nosniff')
     expect(production.headers.get('content-security-policy')).toBe(
       PAGES_SECURITY_HEADERS['content-security-policy'],
     )
 
-    const staging = await onRequestGet({ env: { HIATO_STAGE: STAGING_STAGE } })
+    const staging = await onRequestGet({ env: { HIATO_STAGE: STAGING_STAGE } }, sha)
     expect(staging.status).toBe(200)
-    expect(await staging.json()).toEqual({ ok: true, stage: STAGING_STAGE })
+    expect(await staging.json()).toEqual({ ok: true, stage: STAGING_STAGE, sha })
 
-    const missing = await onRequestGet({ env: {} })
+    const missing = await onRequestGet({ env: {} }, sha)
     expect(missing.status).toBe(503)
     expect(await missing.json()).toEqual({ ok: false })
     expect(missing.headers.get('cache-control')).toBe('no-store')
 
-    const legacyPreview = await onRequestGet({ env: { HIATO_STAGE: 'preview' } })
+    const legacyPreview = await onRequestGet({ env: { HIATO_STAGE: 'preview' } }, sha)
     expect(legacyPreview.status).toBe(503)
     expect(await legacyPreview.json()).toEqual({ ok: false })
+
+    const { BUILD_SHA } = await import('../../functions/_generated/build-sha')
+    const baked = await onRequestGet({ env: { HIATO_STAGE: STAGING_STAGE } })
+    expect(await baked.json()).toEqual({ ok: true, stage: STAGING_STAGE, sha: BUILD_SHA })
   })
 
-  test('getHealth resolves only a 200 body that includes stage', async () => {
+  test('getHealth resolves only a 200 body that includes stage and sha', async () => {
     const original = globalThis.fetch
+    const sha = 'a'.repeat(40)
     globalThis.fetch = (async () =>
-      Response.json({ ok: true, stage: 'staging' })) as typeof fetch
+      Response.json({ ok: true, stage: 'staging', sha })) as typeof fetch
     try {
-      expect(await getHealth()).toEqual({ ok: true, stage: 'staging' })
+      expect(await getHealth()).toEqual({ ok: true, stage: 'staging', sha })
     } finally {
       globalThis.fetch = original
     }
 
-    globalThis.fetch = (async () => Response.json({ ok: true })) as typeof fetch
+    globalThis.fetch = (async () => Response.json({ ok: true, stage: 'staging' })) as typeof fetch
     try {
-      await expect(getHealth()).rejects.toThrow('Health response missing stage')
+      await expect(getHealth()).rejects.toThrow('Health response missing stage or sha')
     } finally {
       globalThis.fetch = original
     }

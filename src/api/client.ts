@@ -29,21 +29,24 @@ export type HealthStage = 'production' | 'staging'
 export type HealthResponse = {
   ok: true
   stage: HealthStage
+  sha: string
 }
 
 function isHealthResponse(value: unknown): value is HealthResponse {
   if (typeof value !== 'object' || value === null) return false
-  const body = value as { ok?: unknown; stage?: unknown }
+  const body = value as { ok?: unknown; stage?: unknown; sha?: unknown }
   return (
     body.ok === true &&
-    (body.stage === 'production' || body.stage === 'staging')
+    (body.stage === 'production' || body.stage === 'staging') &&
+    typeof body.sha === 'string' &&
+    body.sha.length > 0
   )
 }
 
 export async function getHealth(): Promise<HealthResponse> {
   const body: unknown = await request<unknown>('/api/health')
   if (!isHealthResponse(body)) {
-    throw new ApiError('Health response missing stage', 200)
+    throw new ApiError('Health response missing stage or sha', 200)
   }
   return body
 }

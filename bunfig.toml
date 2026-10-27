@@ -6,3 +6,6 @@ ignoreScripts = true
 [test]
 # Playwright specs live in e2e/ and must not load under bun:test.
 pathIgnorePatterns = ["e2e/**"]
+# `bun test` (not `bun run test`) does not run the pretest script. This writes
+# the gitignored health SHA before test files import it.
+preload = ["./scripts/write-build-sha.ts"]
