@@ -1,11 +1,16 @@
 /**
  * Pin every pack at 400 lemmas, in slot order, with a version bump when
  * content changes (ADR 0006). CI checks out the PR head at depth 1, so the
- * committed pin is the base this guard diffs against.
+ * committed pin cannot see a reorder by itself. `stableSlotErrors` diffs
+ * the head against `PACK_PIN_BASE` and fails when a word that exists in
+ * both has changed index. A same-slot replacement still passes. An empty
+ * base tree fails closed.
  */
+import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import { nfcUpper } from './lemma-denylist'
 
 export const PACK_LEMMA_COUNT = 400
 
@@ -61,7 +66,35 @@ export function packPinErrors(rel: string, pack: PinPack & object, pin: PackPinE
   if (body !== pin.body && pack.version === pin.version) {
     errors.push(`${rel}: content changed but version was not bumped`)
   } else if (body !== pin.body || pack.version !== pin.version) {
-    errors.push(`${rel}: pack does not match pin (update scripts/data/pack-pin.json)`)
+    const expected = JSON.stringify({ [rel]: packPinEntry(pack) })
+    errors.push(`${rel}: pack does not match pin (paste this entry into scripts/data/pack-pin.json: ${expected})`)
+  }
+  return errors
+}
+
+export type SlotPack = {
+  rel: string
+  words: readonly string[]
+}
+
+/** Fail when a word present on both sides sits at a different index. */
+export function stableSlotErrors(base: readonly SlotPack[], head: readonly SlotPack[]): string[] {
+  const errors: string[] = []
+  const baseByRel = new Map(base.map((p) => [p.rel, p.words]))
+  for (const pack of head) {
+    const prev = baseByRel.get(pack.rel)
+    if (!prev) continue
+    const prevAt = new Map<string, number>()
+    prev.forEach((word, i) => {
+      const key = nfcUpper(word)
+      if (!prevAt.has(key)) prevAt.set(key, i)
+    })
+    pack.words.forEach((word, i) => {
+      const key = nfcUpper(word)
+      const from = prevAt.get(key)
+      if (from === undefined || from === i) return
+      errors.push(`${pack.rel}: "${key}" moved from slot ${from} to slot ${i}`)
+    })
   }
   return errors
 }
@@ -87,3 +120,67 @@ export function loadPackPin(
 ): PackPinFile {
   return JSON.parse(readFileSync(file, 'utf8')) as PackPinFile
 }
+
+function wordsOf(raw: string): string[] {
+  const pack = JSON.parse(raw) as { lemmas?: { word?: string }[] }
+  return (pack.lemmas ?? []).map((l) => nfcUpper(String(l.word ?? '')))
+}
+
+function headSlotPacks(root: string): SlotPack[] {
+  const out: SlotPack[] = []
+  for (const lang of readdirSync(root)) {
+    const dir = path.join(root, lang)
+    for (const name of readdirSync(dir)) {
+      if (!name.endsWith('.json')) continue
+      out.push({
+        rel: `${lang}/${name}`,
+        words: wordsOf(readFileSync(path.join(dir, name), 'utf8')),
+      })
+    }
+  }
+  return out
+}
+
+function repoRoot(): string {
+  return path.join(import.meta.dir, '..')
+}
+
+function baseSlotPacks(rev: string): SlotPack[] {
+  const cwd = repoRoot()
+  const list = execFileSync('git', ['ls-tree', '-r', '--name-only', rev, 'public/packs'], {
+    encoding: 'utf8',
+    cwd,
+  })
+  const out: SlotPack[] = []
+  for (const file of list.split('\n')) {
+    if (!file.endsWith('.json')) continue
+    const raw = execFileSync('git', ['show', `${rev}:${file}`], { encoding: 'utf8', cwd })
+    out.push({ rel: file.slice('public/packs/'.length), words: wordsOf(raw) })
+  }
+  return out
+}
+
+function runSlotGuard(): void {
+  const rev = process.env.PACK_PIN_BASE
+  if (!rev) {
+    console.error('PACK_PIN_BASE is required (git rev of the PR base)')
+    process.exit(1)
+  }
+  if (rev.startsWith('-')) {
+    console.error('PACK_PIN_BASE must not start with "-"')
+    process.exit(1)
+  }
+  const base = baseSlotPacks(rev)
+  if (base.length === 0) {
+    console.error(`PACK_PIN_BASE ${rev} has no public/packs`)
+    process.exit(1)
+  }
+  const root = path.join(repoRoot(), 'public', 'packs')
+  const errors = stableSlotErrors(base, headSlotPacks(root))
+  if (errors.length) {
+    for (const e of errors) console.error(e)
+    process.exit(1)
+  }
+}
+
+if (import.meta.main) runSlotGuard()

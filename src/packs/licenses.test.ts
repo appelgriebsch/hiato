@@ -31,12 +31,21 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
     expect(c1c2.toUpperCase()).not.toContain('CC0')
   })
 
+  test('NOTICE names wordhoard samples for A1–A2 and wordhoard\'s own B1 list', async () => {
+    const notice = await Bun.file(new URL('../../NOTICE', import.meta.url)).text()
+    expect(notice).toMatch(/wordhoard v0\.1\.0 samples/)
+    expect(notice).toMatch(/wordhoard's own B1 list/)
+  })
+
   test('DE/ES are SA at every band (#169); B2–C2 frequency bands, not Goethe/Cervantes', () => {
     for (const lang of ['de', 'es'] as const) {
       const low = bandBlob(lang, 'A1–B1')
       expect(low.toUpperCase()).toContain('CC-BY-SA')
       expect(low.toUpperCase()).not.toContain('CC0')
       expect(low).toContain('wordhoard')
+      expect(low).toMatch(/A1–A2/)
+      expect(low).toMatch(/wordhoard's own B1 list/)
+      expect(low).not.toMatch(/full B1 list/)
 
       const high = bandBlob(lang, 'B2–C2')
       expect(high.toUpperCase()).toContain('CC-BY-SA')

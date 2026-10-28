@@ -71,6 +71,26 @@ describe('packs:check exclusive bands', () => {
     expect(errors[0]).toContain('en/a1.json')
     expect(errors[0]).toContain('en/b2.json')
     expect(errors[0]).toContain('HOUSE')
+    expect(errors[0]).toContain('exact match')
+  })
+
+  test('FR È/É fold collides across packs', () => {
+    const errors = exclusiveConflicts([
+      {
+        rel: 'fr/a1.json',
+        pack: pack({ lang: 'fr', cefr: 'a1', lemmas: [{ word: 'ÉVÉNEMENT' }] }),
+      },
+      {
+        rel: 'fr/a2.json',
+        pack: pack({ lang: 'fr', cefr: 'a2', lemmas: [{ word: 'ÉVÈNEMENT' }] }),
+      },
+    ])
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('fr/a1.json')
+    expect(errors[0]).toContain('fr/a2.json')
+    expect(errors[0]).toContain('ÉVÈNEMENT')
+    expect(errors[0]).toContain('FR È/É fold')
+    expect(errors[0]).not.toContain('DE ß/SS fold')
   })
 
   test('DE ß/SS fold collides across packs', () => {
@@ -86,6 +106,7 @@ describe('packs:check exclusive bands', () => {
     ])
     expect(errors[0]).toContain('de/a1.json')
     expect(errors[0]).toContain('de/b2.json')
+    expect(errors[0]).toContain('DE ß/SS fold')
   })
 
   test('same spelling in different languages is allowed', () => {

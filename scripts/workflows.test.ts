@@ -618,6 +618,24 @@ describe('ci.yml', () => {
     }
   })
 
+  test('a pull request fails when a surviving lemma changes slot', () => {
+    const build = job(ci, 'build-test')
+    const stepBody = step(build, 'Daily slots stay put')
+    expect(stepBody).toContain(
+      "if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main')",
+    )
+    expect(stepBody).toContain(
+      'PACK_PIN_BASE: ${{ github.event_name == \'pull_request\' && github.base_ref || github.event.before }}',
+    )
+    expect(stepBody).toContain('set -euo pipefail')
+    expect(stepBody).toContain('git fetch --depth=1 --no-tags origin')
+    expect(stepBody).toContain('bun scripts/pack-pin.ts')
+    expect(stepBody).not.toContain('x-access-token')
+    expect(stepBody).not.toContain('github.token')
+    expect(stepBody).not.toContain('persist-credentials: true')
+    expect(build).toContain('persist-credentials: false')
+  })
+
   test('build-test gates lint, licences, prod audit, and pinned linters', () => {
     const build = job(ci, 'build-test')
     expect(build).toContain('node scripts/node-check.mjs --exact')

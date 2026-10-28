@@ -3,6 +3,8 @@
 interface ImportMeta {
   dir: string
   file: string
+  /** True when Bun runs this file directly. False when bun test imports it. */
+  main: boolean
 }
 
 declare module 'bun:sqlite' {
@@ -26,6 +28,7 @@ declare module 'bun:test' {
     toEqual(expected: unknown): void
     toContain(expected: unknown): void
     toBeNull(): void
+    toBeDefined(): void
     toBeUndefined(): void
     toBeTruthy(): void
     toBeFalsy(): void
