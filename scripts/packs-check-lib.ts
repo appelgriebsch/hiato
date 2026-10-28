@@ -178,6 +178,12 @@ export function checkSynonymCoverage(
  * A lemma may appear in at most one pack per language (ADR 0028).
  * A1–B1 fold-key duplicates are not exempt (#208).
  */
+function exclusiveFoldLabel(lang: string): string {
+  if (lang === 'de') return 'DE ß/SS fold'
+  if (lang === 'fr') return 'FR È/É fold'
+  return 'exact match'
+}
+
 export function exclusiveConflicts(files: PackSnapshot[]): string[] {
   const first = new Map<string, string>()
   const errors: string[] = []
@@ -187,7 +193,7 @@ export function exclusiveConflicts(files: PackSnapshot[]): string[] {
       const prev = first.get(key)
       if (prev && prev !== rel) {
         errors.push(
-          `lemma "${L.word}" in ${prev} and ${rel} (exclusive bands; DE ß/SS fold)`,
+          `lemma "${L.word}" in ${prev} and ${rel} (exclusive bands; ${exclusiveFoldLabel(pack.lang)})`,
         )
       } else if (!prev) {
         first.set(key, rel)

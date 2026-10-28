@@ -3,6 +3,8 @@
 interface ImportMeta {
   dir: string
   file: string
+  /** True when Bun runs this file directly. False when bun test imports it. */
+  main: boolean
 }
 
 declare module 'bun:sqlite' {

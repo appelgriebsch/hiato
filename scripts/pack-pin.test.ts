@@ -121,5 +121,13 @@ describe('pack pin', () => {
     })
     expect(bare.status).toBe(1)
     expect(bare.stderr).toContain('has no public/packs')
+
+    const dashed = spawnSync('bun', ['scripts/pack-pin.ts'], {
+      cwd: repo,
+      env: { ...process.env, PACK_PIN_BASE: '-main' },
+      encoding: 'utf8',
+    })
+    expect(dashed.status).toBe(1)
+    expect(dashed.stderr).toContain('must not start with')
   })
 })

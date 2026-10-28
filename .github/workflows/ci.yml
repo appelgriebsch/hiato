@@ -33,6 +33,7 @@ jobs:
         env:
           PACK_PIN_BASE: ${{ github.event_name == 'pull_request' && github.base_ref || github.event.before }}
         run: |
+          set -euo pipefail
           if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
             git fetch --depth=1 --no-tags origin \
               "+refs/heads/${PACK_PIN_BASE}:refs/remotes/origin/${PACK_PIN_BASE}"

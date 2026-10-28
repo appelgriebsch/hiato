@@ -67,9 +67,9 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
   fromBands('de', 'Deutsch', [
     {
       levels: 'A1–B1',
-      license: 'CC-BY-SA-4.0 (wordhoard v0.1.0 samples for A1–A2; wordhoard\'s own B1 list for B1; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0',
       notes: [
-        'DE A1–A2 lemmas come from the wordhoard v0.1.0 samples. DE B1 lemmas come from wordhoard\'s own B1 list (CC-BY-SA-4.0). The German CEFR estimate is calibrated against Goethe-Institut A1–B1 lists, not copied from them.',
+        'DE A1–A2 lemmas come from the wordhoard v0.1.0 samples. DE B1 lemmas come from wordhoard\'s own B1 list (CC-BY-SA-4.0). Glosses are original to Hiato. The German CEFR estimate is calibrated against Goethe-Institut A1–B1 lists, not copied from them.',
         'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],
@@ -87,9 +87,9 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
   fromBands('es', 'Español', [
     {
       levels: 'A1–B1',
-      license: 'CC-BY-SA-4.0 (wordhoard v0.1.0 samples for A1–A2; wordhoard\'s own B1 list for B1; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0',
       notes: [
-        'ES A1–A2 lemmas come from the wordhoard v0.1.0 samples. ES B1 lemmas come from wordhoard\'s own B1 list (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.',
+        'ES A1–A2 lemmas come from the wordhoard v0.1.0 samples. ES B1 lemmas come from wordhoard\'s own B1 list (CC-BY-SA-4.0). Glosses are original to Hiato. Bands use its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.',
         'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],

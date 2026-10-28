@@ -10,7 +10,6 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { nfcUpper } from './lemma-denylist'
 
 export const PACK_LEMMA_COUNT = 400
@@ -68,7 +67,7 @@ export function packPinErrors(rel: string, pack: PinPack & object, pin: PackPinE
     errors.push(`${rel}: content changed but version was not bumped`)
   } else if (body !== pin.body || pack.version !== pin.version) {
     const expected = JSON.stringify({ [rel]: packPinEntry(pack) })
-    errors.push(`${rel}: pack does not match pin (update scripts/data/pack-pin.json to ${expected})`)
+    errors.push(`${rel}: pack does not match pin (paste this entry into scripts/data/pack-pin.json: ${expected})`)
   }
   return errors
 }
@@ -167,6 +166,10 @@ function runSlotGuard(): void {
     console.error('PACK_PIN_BASE is required (git rev of the PR base)')
     process.exit(1)
   }
+  if (rev.startsWith('-')) {
+    console.error('PACK_PIN_BASE must not start with "-"')
+    process.exit(1)
+  }
   const base = baseSlotPacks(rev)
   if (base.length === 0) {
     console.error(`PACK_PIN_BASE ${rev} has no public/packs`)
@@ -180,7 +183,4 @@ function runSlotGuard(): void {
   }
 }
 
-const isDirect =
-  process.argv[1] !== undefined &&
-  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
-if (isDirect) runSlotGuard()
+if (import.meta.main) runSlotGuard()

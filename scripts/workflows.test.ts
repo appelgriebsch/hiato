@@ -627,6 +627,7 @@ describe('ci.yml', () => {
     expect(stepBody).toContain(
       'PACK_PIN_BASE: ${{ github.event_name == \'pull_request\' && github.base_ref || github.event.before }}',
     )
+    expect(stepBody).toContain('set -euo pipefail')
     expect(stepBody).toContain('git fetch --depth=1 --no-tags origin')
     expect(stepBody).toContain('bun scripts/pack-pin.ts')
     expect(stepBody).not.toContain('x-access-token')
