@@ -67,9 +67,9 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
   fromBands('de', 'Deutsch', [
     {
       levels: 'A1–B1',
-      license: 'CC-BY-SA-4.0 (wordhoard samples; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0 (wordhoard samples plus the full B1 list; glosses original to Hiato)',
       notes: [
-        'DE A1–B1 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0). The German CEFR estimate is calibrated against Goethe-Institut A1–B1 lists, not copied from them.',
+        'DE A1–B1 lemmas come from the wordhoard v0.1.0 samples plus the full B1 list (CC-BY-SA-4.0). The German CEFR estimate is calibrated against Goethe-Institut A1–B1 lists, not copied from them.',
         'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],
@@ -87,9 +87,9 @@ export const PACK_LICENSES: PackLicenseInfo[] = [
   fromBands('es', 'Español', [
     {
       levels: 'A1–B1',
-      license: 'CC-BY-SA-4.0 (wordhoard samples; glosses original to Hiato)',
+      license: 'CC-BY-SA-4.0 (wordhoard samples plus the full B1 list; glosses original to Hiato)',
       notes: [
-        'ES A1–B1 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.',
+        'ES A1–B1 lemmas come from the wordhoard v0.1.0 samples plus the full B1 list (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.',
         'Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.',
         'Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (ADR 0026).',
       ],

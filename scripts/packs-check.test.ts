@@ -73,6 +73,23 @@ describe('packs:check exclusive bands', () => {
     expect(errors[0]).toContain('HOUSE')
   })
 
+  test('FR È/É fold collides across packs', () => {
+    const errors = exclusiveConflicts([
+      {
+        rel: 'fr/a1.json',
+        pack: pack({ lang: 'fr', cefr: 'a1', lemmas: [{ word: 'ÉVÉNEMENT' }] }),
+      },
+      {
+        rel: 'fr/a2.json',
+        pack: pack({ lang: 'fr', cefr: 'a2', lemmas: [{ word: 'ÉVÈNEMENT' }] }),
+      },
+    ])
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('fr/a1.json')
+    expect(errors[0]).toContain('fr/a2.json')
+    expect(errors[0]).toContain('ÉVÈNEMENT')
+  })
+
   test('DE ß/SS fold collides across packs', () => {
     const errors = exclusiveConflicts([
       {

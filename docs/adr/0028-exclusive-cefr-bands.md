@@ -16,4 +16,6 @@ Rejected: overlapping/cumulative higher packs; lowering the C1 floor in this epi
 
 `exclusiveConflicts` applies the rule above to every band. Fold-key duplicates that shipped inside A1–B1 are not grandfathered.
 
+Editing A1–B1 in place for #208, and the EN chip and family follow-up in #211, are one-off. ADR 0040 freezes A1–B1 after that. Later lemma edits need their own decision.
+
 Accents stay distinct letters (ADR 0005). Two lemmas that match only after NFD, stripping marks, lowercasing, and ß→ss are an accent-only pair. `packs:check` fails that pair, in one pack or across packs, unless `scripts/data/accent-pair-allowlist.json` lists both words and a one-line reason. DE ß/SS and FR È/É still follow `foldKey` and count as one lemma. An allowlist entry that matches no shipped cluster is an error.

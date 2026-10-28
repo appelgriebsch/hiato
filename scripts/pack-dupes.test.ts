@@ -16,17 +16,6 @@ function file(rel: string, lang: string, words: string[]): DupeFile {
 const empty: AccentAllowlist = {}
 
 describe('pack dupes', () => {
-  test('a same-word duplicate across a1/a2 fails', () => {
-    const errors = packDupeErrors(
-      [file('en/a1.json', 'en', ['BOOK']), file('en/a2.json', 'en', ['BOOK'])],
-      empty,
-    )
-    expect(errors.length).toBe(1)
-    expect(errors[0]).toContain('BOOK')
-    expect(errors[0]).toContain('en/a1.json')
-    expect(errors[0]).toContain('en/a2.json')
-  })
-
   test('an accent-only pair across packs fails, and passes when allowlisted', () => {
     const files = [file('pt/a1.json', 'pt', ['PAIS']), file('pt/a2.json', 'pt', ['PAÍS'])]
     const blocked = packDupeErrors(files, empty)
@@ -54,23 +43,19 @@ describe('pack dupes', () => {
     expect(errors[0]).toContain('PAÍS')
   })
 
-  test('DE ß/SS and FR È/É follow foldKey', () => {
+  test('DE ß/SS and FR È/É are not accent-only pairs', () => {
     const de = packDupeErrors(
       [file('de/a1.json', 'de', ['STRASSE']), file('de/a2.json', 'de', ['STRAßE'])],
       empty,
     )
-    expect(de.some((e) => e.includes('fold-key') && e.includes('STRASSE') && e.includes('STRAßE'))).toBe(
-      true,
-    )
+    expect(de.some((e) => e.includes('fold-key'))).toBe(false)
     expect(de.some((e) => e.includes('accent-only'))).toBe(false)
 
     const fr = packDupeErrors(
       [file('fr/a1.json', 'fr', ['ÉVÉNEMENT']), file('fr/a2.json', 'fr', ['ÉVÈNEMENT'])],
       empty,
     )
-    expect(fr.some((e) => e.includes('fold-key') && e.includes('ÉVÉNEMENT') && e.includes('ÉVÈNEMENT'))).toBe(
-      true,
-    )
+    expect(fr.some((e) => e.includes('fold-key'))).toBe(false)
     expect(fr.some((e) => e.includes('accent-only'))).toBe(false)
   })
 
@@ -107,6 +92,28 @@ describe('pack dupes', () => {
     expect(() => parseAccentAllowlist({ es: [{ words: ['SOLO', 'SOLA'], reason: '   ' }] })).toThrow(
       /one-line reason/,
     )
+    expect(() => parseAccentAllowlist({ es: [{ words: ['SOLO', 'SOLA'] }] })).toThrow(/one-line reason/)
+  })
+
+  test('a non-array language entry fails', () => {
+    expect(() => parseAccentAllowlist({ es: 'SOLO' })).toThrow(/must be an array/)
+  })
+
+  test('an empty word fails', () => {
+    expect(() =>
+      parseAccentAllowlist({ es: [{ words: ['SOLO', ''], reason: 'one word is blank' }] }),
+    ).toThrow(/non-empty string/)
+  })
+
+  test('a duplicated word set fails', () => {
+    expect(() =>
+      parseAccentAllowlist({
+        es: [
+          { words: ['SOLO', 'SOLA'], reason: 'first' },
+          { words: ['SOLA', 'SOLO'], reason: 'same pair again' },
+        ],
+      }),
+    ).toThrow(/duplicate allowlist entry/)
   })
 
   test('a multi-line reason fails', () => {

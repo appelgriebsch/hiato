@@ -28,6 +28,16 @@ jobs:
         with:
           bun-version-file: package.json
       - run: bun install --frozen-lockfile
+      - name: Daily slots stay put
+        if: github.event_name == 'pull_request'
+        env:
+          PACK_PIN_BASE: ${{ github.base_ref }}
+          BASE_FETCH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --depth=1 --no-tags \
+            "https://x-access-token:${BASE_FETCH_TOKEN}@github.com/${{ github.repository }}.git" \
+            "+refs/heads/${PACK_PIN_BASE}:refs/remotes/origin/${PACK_PIN_BASE}"
+          PACK_PIN_BASE="origin/${PACK_PIN_BASE}" bun scripts/pack-pin.ts
       - run: bun run lint
       - run: bun run licenses:check
       - run: bun audit --prod --audit-level=high

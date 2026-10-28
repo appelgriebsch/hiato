@@ -1,6 +1,7 @@
 /**
- * Fold-key collisions and accent-only pairs (ADR 0028 addendum).
- * Accents stay distinct letters (ADR 0005). DE ß/SS and FR È/É stay on foldKey.
+ * Accent-only pairs (ADR 0028 addendum).
+ * Accents stay distinct letters (ADR 0005). DE ß/SS and FR È/É stay on foldKey
+ * and are reported by exclusiveConflicts, not here.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -35,6 +36,7 @@ export function parseAccentAllowlist(raw: unknown): AccentAllowlist {
   for (const [lang, entries] of Object.entries(raw)) {
     if (!LANGS.has(lang)) throw new Error(`accent-pair allowlist: unknown lang ${lang}`)
     if (!Array.isArray(entries)) throw new Error(`accent-pair allowlist: ${lang} must be an array`)
+    const seenSets = new Set<string>()
     out[lang as SelectLang] = entries.map((entry, i) => {
       if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
         throw new Error(`accent-pair allowlist: ${lang}[${i}] must be an object`)
@@ -52,6 +54,11 @@ export function parseAccentAllowlist(raw: unknown): AccentAllowlist {
       if (new Set(words).size !== words.length) {
         throw new Error(`accent-pair allowlist: ${lang}[${i}] repeats a lemma`)
       }
+      const setKey = [...words].sort().join('\n')
+      if (seenSets.has(setKey)) {
+        throw new Error(`accent-pair allowlist: ${lang} duplicate allowlist entry ${words.join('/')}`)
+      }
+      seenSets.add(setKey)
       if (typeof e.reason !== 'string' || !e.reason.trim() || e.reason.includes('\n')) {
         throw new Error(
           `accent-pair allowlist: ${lang} ${words.join('/')} needs a one-line reason`,
@@ -74,9 +81,11 @@ function covers(entries: readonly AccentAllowEntry[], a: string, b: string): boo
 }
 
 /**
- * Same foldKey across packs (or two surfaces in one pack) fails.
- * Same accent key with different foldKeys fails unless an allowlist entry
- * contains both words. An allowlist entry that is not a whole shipped cluster fails.
+ * Accent-only pairs (same accent key, different fold keys). Fold-key clashes
+ * are reported by `exclusiveConflicts` across packs and by `validatePack`
+ * inside one pack. An accent-only pair fails unless some allowlist entry
+ * contains both words. An entry is used when every listed word sits in that
+ * one cluster; any other entry is an unused-entry error.
  */
 export function packDupeErrors(
   files: readonly DupeFile[],
@@ -90,23 +99,6 @@ export function packDupeErrors(
 
   for (const [lang, packs] of byLang) {
     const langKey = lang as SelectLang
-    const seenFold = new Map<string, { rel: string; word: string }>()
-    for (const pack of packs) {
-      for (const L of pack.lemmas) {
-        const word = nfcUpper(L.word)
-        const fk = foldKey(langKey, word)
-        const prev = seenFold.get(fk)
-        if (!prev) {
-          seenFold.set(fk, { rel: pack.rel, word })
-          continue
-        }
-        if (prev.rel === pack.rel && prev.word === word) continue
-        errors.push(
-          `lemma "${prev.word}" in ${prev.rel} and "${word}" in ${pack.rel} (same fold-key)`,
-        )
-      }
-    }
-
     const groups = new Map<string, Map<string, { word: string; rel: string }>>()
     for (const pack of packs) {
       for (const L of pack.lemmas) {
