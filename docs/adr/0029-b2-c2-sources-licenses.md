@@ -5,7 +5,7 @@
 - Deciders: Andreas Gerlach
 
 > Amended by #169: DE/ES A1–B1 are wordhoard lemmas and are relabelled **CC-BY-SA-4.0**.
-> Amended by #208: B1 also draws on the full wordhoard v0.1.0 list (samples plus the full B1 list). The license stays CC-BY-SA-4.0.
+> Amended by #208: B1 draws on wordhoard's own B1 list. A1–A2 stay on the wordhoard v0.1.0 samples. The license stays CC-BY-SA-4.0.
 > Amended by #171: EN A1–B2 stay CEFR-J headwords, but the licence is the CEFR-J Wordlist terms (free use with citation, © Tono Laboratory, TUFS), not CC0.
 > Amended by #168 / ADR 0040: FR A1–C2 are wordhoard frequency-rank bands, **CC-BY-SA-4.0**, not DELF/DALF and not FLELex.
 > Amended by #172 / ADR 0040: IT A1–C2 are wordhoard frequency-rank bands, **CC-BY-SA-4.0**, not CELI, CILS, or PLIDA.

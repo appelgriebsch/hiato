@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process'
 import { describe, expect, test } from 'bun:test'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -97,5 +98,28 @@ describe('pack pin', () => {
       }
     }
     expect(collectPackPinErrors(packs, loadPackPin())).toEqual([])
+  })
+
+  test('the slot guard fails closed without a base or without packs', () => {
+    const repo = path.join(import.meta.dir, '..')
+    const env = { ...process.env }
+    delete env.PACK_PIN_BASE
+    const missing = spawnSync('bun', ['scripts/pack-pin.ts'], { cwd: repo, env, encoding: 'utf8' })
+    expect(missing.status).toBe(1)
+    expect(missing.stderr).toContain('PACK_PIN_BASE is required')
+
+    const empty = spawnSync('git', ['hash-object', '-t', 'tree', '--stdin'], {
+      cwd: repo,
+      input: '',
+      encoding: 'utf8',
+    })
+    expect(empty.status).toBe(0)
+    const bare = spawnSync('bun', ['scripts/pack-pin.ts'], {
+      cwd: repo,
+      env: { ...process.env, PACK_PIN_BASE: empty.stdout.trim() },
+      encoding: 'utf8',
+    })
+    expect(bare.status).toBe(1)
+    expect(bare.stderr).toContain('has no public/packs')
   })
 })

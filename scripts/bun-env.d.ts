@@ -26,6 +26,7 @@ declare module 'bun:test' {
     toEqual(expected: unknown): void
     toContain(expected: unknown): void
     toBeNull(): void
+    toBeDefined(): void
     toBeUndefined(): void
     toBeTruthy(): void
     toBeFalsy(): void

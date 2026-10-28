@@ -2,8 +2,9 @@
  * Pin every pack at 400 lemmas, in slot order, with a version bump when
  * content changes (ADR 0006). CI checks out the PR head at depth 1, so the
  * committed pin cannot see a reorder by itself. `stableSlotErrors` diffs
- * the head against the PR base ref and fails when a word that exists in
- * both has changed index. A same-slot replacement still passes.
+ * the head against `PACK_PIN_BASE` and fails when a word that exists in
+ * both has changed index. A same-slot replacement still passes. An empty
+ * base tree fails closed.
  */
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
@@ -141,14 +142,20 @@ function headSlotPacks(root: string): SlotPack[] {
   return out
 }
 
+function repoRoot(): string {
+  return path.join(import.meta.dir, '..')
+}
+
 function baseSlotPacks(rev: string): SlotPack[] {
+  const cwd = repoRoot()
   const list = execFileSync('git', ['ls-tree', '-r', '--name-only', rev, 'public/packs'], {
     encoding: 'utf8',
+    cwd,
   })
   const out: SlotPack[] = []
   for (const file of list.split('\n')) {
     if (!file.endsWith('.json')) continue
-    const raw = execFileSync('git', ['show', `${rev}:${file}`], { encoding: 'utf8' })
+    const raw = execFileSync('git', ['show', `${rev}:${file}`], { encoding: 'utf8', cwd })
     out.push({ rel: file.slice('public/packs/'.length), words: wordsOf(raw) })
   }
   return out
@@ -160,8 +167,13 @@ function runSlotGuard(): void {
     console.error('PACK_PIN_BASE is required (git rev of the PR base)')
     process.exit(1)
   }
-  const root = path.join(import.meta.dir, '..', 'public', 'packs')
-  const errors = stableSlotErrors(baseSlotPacks(rev), headSlotPacks(root))
+  const base = baseSlotPacks(rev)
+  if (base.length === 0) {
+    console.error(`PACK_PIN_BASE ${rev} has no public/packs`)
+    process.exit(1)
+  }
+  const root = path.join(repoRoot(), 'public', 'packs')
+  const errors = stableSlotErrors(base, headSlotPacks(root))
   if (errors.length) {
     for (const e of errors) console.error(e)
     process.exit(1)

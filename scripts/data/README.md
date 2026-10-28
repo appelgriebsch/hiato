@@ -19,7 +19,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 |-------|------------------------|
 | EN A1–B2 | CEFR-J Wordlist terms (free use with citation, © Tono Laboratory, TUFS) — every lemma is a same-level CEFR-J headword; **not** CC0 and **not** share-alike |
 | EN C1–C2 | CC-BY-SA-4.0 (Octanove Labs; olp-en-cefrj) |
-| DE/ES A1–B1 | CC-BY-SA-4.0 wordhoard v0.1.0 samples plus the full B1 list (#169, #208; was mislabelled CC0). German CEFR estimates are calibrated against Goethe-Institut lists, not copied from them |
+| DE/ES A1–B1 | CC-BY-SA-4.0 wordhoard v0.1.0: A1–A2 from the samples, B1 from wordhoard's own B1 list (#169, #208; was mislabelled CC0). German CEFR estimates are calibrated against Goethe-Institut lists, not copied from them |
 | DE/ES B2–C2 | CC-BY-SA-4.0 wordhoard-full; frequency-rank bands. Spanish bands are not Instituto Cervantes lists |
 | PT A1–C2 | CC-BY-SA-4.0 FrequencyWords `pt_50k` (v0 packs and later bands); C-levels are frequency slices, not CAPLE |
 | FR A1–C2 | CC-BY-SA-4.0 wordhoard v0.1.0 `fr` frequency-rank bands, not DELF/DALF and not FLELex (ADR 0040). A1–B1 use `cefr_estimate` rank cuts; B2–C2 use the DE/ES index windows |
@@ -30,7 +30,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `loanword-allowlist.txt` | Hiato curated | classroom internationalisms that nspell misses; `LANG WORD` (`*` = all pack langs) |
 | `hunspell-verdicts.json` | Hiato generated | `isWordOfLang` pass/fail for pack lemmas and gloss tokens. `packs:check` rewrites it when the stamp or a word is new; commit the file so CI skips constructing Hunspell. Not a copy of the dictionaries. |
 | `accent-pair-allowlist.json` | Hiato curated | Accent-only lemma clusters that are different words (ADR 0005, ADR 0028 addendum). Each entry is `{ "words": ["PAIS", "PAÍS"], "reason": "…" }` with a one-line reason. `packs:check` fails any other accent-only pair and fails an entry that matches no shipped cluster. A repeated word set is an error. DE ß/SS and FR È/É are fold-key duplicates, not entries on this list. |
-| `pack-pin.json` | Hiato generated | One entry per `lang/cefr.json`. `order` is the SHA-256 of the 400 lemma words joined by newlines, in slot order. `body` is the SHA-256 of the pack JSON with `version` removed, so a gloss, chip, or attribution edit is a content change. A content change must bump `version` and replace that entry. On a pull request, CI also diffs slots against the base ref and fails when a word present on both sides has moved. A same-slot replacement still passes. |
+| `pack-pin.json` | Hiato generated | One entry per `lang/cefr.json`. `order` is the SHA-256 of the 400 lemma words joined by newlines, in slot order. `body` is the SHA-256 of the pack JSON with `version` removed, so a gloss, chip, or attribution edit is a content change. A content change must bump `version` and replace that entry. On a pull request, and on a push to main, CI diffs slots against the base ref and fails when a word present on both sides has moved. A same-slot replacement still passes. |
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
