@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { BrandMark } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
@@ -16,7 +16,6 @@ import { LearnerHint } from '@/components/play/LearnerHint'
 import { LemmaTeach } from '@/components/play/LemmaTeach'
 import { LetterGrid } from '@/components/play/LetterGrid'
 import { Lives } from '@/components/play/Lives'
-import { PocketSheet } from '@/components/PocketSheet'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -56,9 +55,11 @@ import {
 import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
-  pocketConfirmLabel,
+  pocketListLabel,
+  pocketNoteCopy,
+  pocketNoteFromState,
   pocketRetryHref,
-  shouldShowPocketSave,
+  shouldShowPractice,
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
@@ -140,6 +141,11 @@ function PlayRound({
   cefr: PackCefr
 }) {
   const nav = useNavigate()
+  const location = useLocation()
+  const incomingNote =
+    mode === 'pocket' ? pocketNoteFromState(location.state) : null
+  const [pocketNote] = useState(incomingNote)
+  const pocketNoteRef = useRef<HTMLParagraphElement>(null)
   // Freeze local date for this remounted round (midnight cannot reseed).
   const [dateKey] = useState(() => localDateKey())
 
@@ -228,6 +234,18 @@ function PlayRound({
     ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
   }, [lang, cefr, dateKey])
+
+  // One-shot note from Practice this word. Replace drops it from history
+  // so reload and Back do not show it again (ADR 0043).
+  useEffect(() => {
+    if (!incomingNote) return
+    nav(`${location.pathname}${location.search}`, { replace: true, state: null })
+  }, [incomingNote, location.pathname, location.search, nav])
+
+  useLayoutEffect(() => {
+    if (!pocketNote) return
+    pocketNoteRef.current?.focus()
+  }, [pocketNote])
 
   useEffect(() => {
     if (streak > streakShown.current) {
@@ -625,6 +643,16 @@ function PlayRound({
       />
 
       <div className="flex flex-col short-land:col-start-1 short-land:row-start-2 short-land:min-h-0 short-land:min-w-0 short-land:flex-1">
+      {pocketNote ? (
+        <p
+          ref={pocketNoteRef}
+          tabIndex={-1}
+          role="status"
+          className="mb-3 text-center text-sm text-accent-fg short-land:mb-2"
+        >
+          {pocketNoteCopy(pocketNote)}
+        </p>
+      ) : null}
       <div
         className={[
           'mb-3 flex items-center justify-between short-land:mb-2',
@@ -970,35 +998,38 @@ function EndCard({
   onPocketCleared: () => void
 }) {
   const nav = useNavigate()
-  const showSave = shouldShowPocketSave(mode, won)
-  const [savePhase, setSavePhase] = useState<
-    'idle' | 'confirm' | 'saved' | 'duplicate'
-  >('idle')
+  const showPractice = shouldShowPractice(mode, won)
+  const [savePhase, setSavePhase] = useState<'idle' | 'confirm'>('idle')
   const [oldestLabel, setOldestLabel] = useState('')
   const [snapshotOldestId, setSnapshotOldestId] = useState('')
   const [pocketRemoved, setPocketRemoved] = useState(false)
-  const [pocketCount, setPocketCount] = useState(0)
-  const [pocketOpen, setPocketOpen] = useState(false)
-  const [pocketCleared, setPocketCleared] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
   const [shareError, setShareError] = useState<string | null>(null)
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
-  const clearedStatusRef = useRef<HTMLParagraphElement>(null)
   const confirmPanelRef = useRef<HTMLDivElement>(null)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
     // Pocket only — never touches streaks, Clerk, or D1.
     const result = addToPocket({ lang, cefr, word, gloss })
-    setPocketCount(listPocketStored(lang, cefr).length)
     // Quota / private mode: nothing was stored. Stay on the current phase
     // so a replace confirm keeps its gloss and Confirm can retry.
     if (!result.added && !result.duplicate) return false
     setSaveError(null)
-    setSavePhase(result.duplicate ? 'duplicate' : 'saved')
-    return true
+    // Another tab may have saved this lemma between the already-check and
+    // this write. addToPocket is then a keep-first no-op (addedAt unchanged).
+    return result.duplicate ? 'already' : 'saved'
   }, [lang, cefr, word, gloss])
+
+  const goPracticeWord = useCallback(
+    (note: 'saved' | 'already') => {
+      nav(pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now()), {
+        state: { pocketNote: note },
+      })
+    },
+    [nav, lang, cefr, word],
+  )
 
   const cancelConfirm = useCallback(() => {
     setSavePhase('idle')
@@ -1010,31 +1041,34 @@ function EndCard({
     const slot = listPocketStored(lang, cefr)
     const id = pocketEntryId(lang, cefr, word)
     const already = slot.some((e) => e.id === id)
+    if (already) {
+      goPracticeWord('already')
+      return
+    }
     if (needsReplaceOldestConfirm(slot.length, already)) {
       const oldest = slot[0]!
-      setOldestLabel(pocketConfirmLabel(oldest))
+      setOldestLabel(pocketListLabel(oldest))
       setSnapshotOldestId(oldest.id)
       setSaveError(null)
       setSavePhase('confirm')
       return
     }
-    if (!commitSave()) setSaveError('Could not save to pocket')
-  }, [lang, cefr, word, commitSave])
+    const stored = commitSave()
+    if (!stored) setSaveError('Could not save to pocket')
+    else goPracticeWord(stored)
+  }, [lang, cefr, word, commitSave, goPracticeWord])
 
   const onConfirmReplace = useCallback(() => {
     const slot = listPocketStored(lang, cefr)
     const id = pocketEntryId(lang, cefr, word)
     const decision = decideConfirmReCheck(snapshotOldestId, slot, id)
     if (decision === 'duplicate') {
-      setPocketCount(listPocketStored(lang, cefr).length)
-      setSavePhase('duplicate')
-      setOldestLabel('')
-      setSnapshotOldestId('')
+      goPracticeWord('already')
       return
     }
     if (decision === 'refresh') {
       const oldest = slot[0]!
-      setOldestLabel(pocketConfirmLabel(oldest))
+      setOldestLabel(pocketListLabel(oldest))
       setSnapshotOldestId(oldest.id)
       // stay in confirm so the user sees the refreshed gloss-only label
       return
@@ -1043,9 +1077,8 @@ function EndCard({
     // A failed write stays on confirm with the same gloss so Confirm retries it.
     const stored = commitSave()
     if (!stored) return setSaveError('Could not save to pocket')
-    setOldestLabel('')
-    setSnapshotOldestId('')
-  }, [lang, cefr, word, snapshotOldestId, commitSave])
+    goPracticeWord(stored)
+  }, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])
 
   const onManualRemove = useCallback(() => {
     if (!pocketId) return
@@ -1065,7 +1098,7 @@ function EndCard({
       return
     }
     if (prev !== 'confirm') return
-    // Left confirm via Cancel → Save remounts; via commit → status replaces Save
+    // Cancel returns to idle. Practice this word is still mounted, so focus it.
     if (savePhase === 'idle' && saveBtnRef.current) {
       saveBtnRef.current.focus()
     } else {
@@ -1105,21 +1138,11 @@ function EndCard({
     return () => window.removeEventListener('keydown', onKey)
   }, [savePhase, cancelConfirm])
 
-  useLayoutEffect(() => {
-    if (!pocketCleared) return
-    clearedStatusRef.current?.focus()
-  }, [pocketCleared])
-
   const actionsRef = useRef<HTMLDivElement>(null)
   /** scrollTop this card last left the scroller at. A mismatch means the reader moved. */
   const anchorTopRef = useRef<number | null>(null)
 
-  const confirming = showSave && savePhase === 'confirm'
-  const showViewPocket =
-    mode !== 'pocket' &&
-    showSave &&
-    (savePhase === 'saved' || savePhase === 'duplicate') &&
-    pocketCount > 0
+  const confirming = showPractice && savePhase === 'confirm'
   const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
   const endBadge =
     mode === 'daily' ? ' · Daily' : mode === 'pocket' ? ' · Pocket' : ' · Practice'
@@ -1255,12 +1278,11 @@ function EndCard({
             Replace oldest word?
           </p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-            Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can save
-            this one.
+            Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can practice “{pocketListLabel({ gloss })}”.
           </p>
           <div className="mt-3 flex flex-col gap-2">
             <Button ref={confirmBtnRef} fullWidth onClick={onConfirmReplace}>
-              Confirm replace
+              Replace and practice
             </Button>
             <Button fullWidth variant="ghost" onClick={cancelConfirm}>
               Cancel
@@ -1275,41 +1297,15 @@ function EndCard({
         </div>
       ) : (
         <div className="flex flex-col gap-2">
-          {showSave ? (
-            savePhase === 'saved' || savePhase === 'duplicate' ? (
-              <>
-                <p
-                  ref={clearedStatusRef}
-                  tabIndex={pocketCleared ? -1 : undefined}
-                  className="text-center text-sm text-accent-fg"
-                  role="status"
-                >
-                  {pocketCleared
-                    ? 'Pocket cleared'
-                    : savePhase === 'duplicate'
-                      ? 'Already in pocket'
-                      : 'Saved to pocket'}
-                </p>
-                {showViewPocket ? (
-                  <Button
-                    fullWidth
-                    variant="ghost"
-                    onClick={() => setPocketOpen(true)}
-                  >
-                    View pocket
-                  </Button>
-                ) : null}
-              </>
-            ) : (
-              <Button
-                ref={saveBtnRef}
-                fullWidth
-                variant="secondary"
-                onClick={onSavePress}
-              >
-                Save to pocket
-              </Button>
-            )
+          {showPractice ? (
+            <Button
+              ref={saveBtnRef}
+              fullWidth
+              variant="secondary"
+              onClick={onSavePress}
+            >
+              Practice this word
+            </Button>
           ) : null}
           {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
             <Button
@@ -1398,21 +1394,6 @@ function EndCard({
         </div>
       )}
       </div>
-      {mode !== 'pocket' &&
-      showSave &&
-      (savePhase === 'saved' || savePhase === 'duplicate') ? (
-        <PocketSheet
-          lang={lang}
-          cefr={cefr}
-          open={pocketOpen}
-          onClose={() => setPocketOpen(false)}
-          onCount={(n) => {
-            setPocketCount(n)
-            if (n === 0) setPocketCleared(true)
-          }}
-          onRetry={(id) => nav(pocketRetryHref(id, Date.now()))}
-        />
-      ) : null}
     </div>
   )
 }

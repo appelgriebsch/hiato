@@ -123,3 +123,10 @@ describe('pocketOutcomeOnFinish (#84)', () => {
     expect(pocketOutcomeOnFinish(false)).toBe('keep')
   })
 })
+
+describe('pocket play streak boundary (ADR 0043 / #219)', () => {
+  test('pocket-play never calls recordDailyWin', async () => {
+    const src = await Bun.file(new URL('./pocket-play.ts', import.meta.url)).text()
+    expect(src).not.toMatch(/recordDailyWin\s*\(/)
+  })
+})

@@ -3,29 +3,53 @@ import { POCKET_CAP } from './pocket'
 import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
-  pocketConfirmLabel,
   pocketListLabel,
+  pocketNoteCopy,
+  pocketNoteFromState,
   pocketRetryHref,
-  shouldShowPocketSave,
+  shouldShowPractice,
 } from './pocket-save'
 
-describe('shouldShowPocketSave (ADR 0034 / #83)', () => {
+describe('shouldShowPractice (ADR 0043 / #219)', () => {
   test('daily lose only', () => {
-    expect(shouldShowPocketSave('daily', false)).toBe(true)
+    expect(shouldShowPractice('daily', false)).toBe(true)
   })
 
-  test('no Save on daily win (incl. hint-used wins)', () => {
-    expect(shouldShowPocketSave('daily', true)).toBe(false)
+  test('no action on daily win (incl. hint-used wins)', () => {
+    expect(shouldShowPractice('daily', true)).toBe(false)
   })
 
-  test('no Save on practice lose or win', () => {
-    expect(shouldShowPocketSave('practice', false)).toBe(false)
-    expect(shouldShowPocketSave('practice', true)).toBe(false)
+  test('no action on practice lose or win', () => {
+    expect(shouldShowPractice('practice', false)).toBe(false)
+    expect(shouldShowPractice('practice', true)).toBe(false)
   })
 
-  test('no Save on unknown / pocket modes', () => {
-    expect(shouldShowPocketSave('pocket', false)).toBe(false)
-    expect(shouldShowPocketSave('endless', false)).toBe(false)
+  test('no action on pocket / endless', () => {
+    expect(shouldShowPractice('pocket', false)).toBe(false)
+    expect(shouldShowPractice('endless', false)).toBe(false)
+  })
+})
+
+describe('pocketNoteFromState (ADR 0043)', () => {
+  test('saved and already only', () => {
+    expect(pocketNoteFromState({ pocketNote: 'saved' })).toBe('saved')
+    expect(pocketNoteFromState({ pocketNote: 'already' })).toBe('already')
+    expect(pocketNoteFromState({ pocketNote: 'saved', extra: 1 })).toBe('saved')
+  })
+
+  test('ignores missing, foreign, and junk state', () => {
+    expect(pocketNoteFromState(null)).toBe(null)
+    expect(pocketNoteFromState(undefined)).toBe(null)
+    expect(pocketNoteFromState('saved')).toBe(null)
+    expect(pocketNoteFromState({ pocketNote: 'nope' })).toBe(null)
+    expect(pocketNoteFromState({})).toBe(null)
+  })
+})
+
+describe('pocketNoteCopy (ADR 0043)', () => {
+  test('status lines', () => {
+    expect(pocketNoteCopy('already')).toBe('Already saved')
+    expect(pocketNoteCopy('saved')).toBe('Saved to pocket')
   })
 })
 
@@ -48,18 +72,6 @@ describe('needsReplaceOldestConfirm (ADR 0034 / #83)', () => {
   test('respects custom cap', () => {
     expect(needsReplaceOldestConfirm(3, false, 3)).toBe(true)
     expect(needsReplaceOldestConfirm(2, false, 3)).toBe(false)
-  })
-})
-
-describe('pocketConfirmLabel (Avery Critical)', () => {
-  test('uses a non-empty gloss', () => {
-    expect(pocketConfirmLabel({ gloss: 'oldest meaning' })).toBe('oldest meaning')
-  })
-
-  test('never falls back to the lemma', () => {
-    expect(pocketConfirmLabel({})).toBe('your oldest pocket entry')
-    expect(pocketConfirmLabel({ gloss: '' })).toBe('your oldest pocket entry')
-    expect(pocketConfirmLabel({ gloss: '   ' })).toBe('your oldest pocket entry')
   })
 })
 
