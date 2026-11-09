@@ -19,8 +19,6 @@ import {
 export const POCKET_KEY = 'hiato.pocket'
 export const POCKET_CAP = 5
 export const POCKET_VERSION = 2 as const
-/** Ladder math is ms, not calendar-aligned (ADR 0044). */
-export const POCKET_DAY_MS = 86_400_000
 
 export type PocketStage = 0 | 1 | 2
 
@@ -104,7 +102,7 @@ export function addPocketEntry(
     word: input.word,
     addedAt,
     stage: 0,
-    dueAt: addedAt + POCKET_DAY_MS,
+    dueAt: addLocalDays(addedAt, 1),
   }
   if (typeof input.gloss === 'string' && input.gloss.length > 0) {
     entry.gloss = input.gloss
@@ -156,7 +154,7 @@ function parseEntry(
     const id = pocketEntryId(o.lang, o.cefr, o.word)
     let repaired = migrate
     let stage: PocketStage = 0
-    let dueAt = o.addedAt + POCKET_DAY_MS
+    let dueAt = addLocalDays(o.addedAt, 1)
     if (!migrate) {
       if (
         !isPocketStage(o.stage) ||
@@ -360,6 +358,13 @@ export function listPocketStored(
 /** Due for the whole local calendar day of dueAt, and every later day. */
 export function isDue(entry: { dueAt: number }, today: string): boolean {
   return localDateKey(new Date(entry.dueAt)) <= today
+}
+
+/** N local calendar days later, same wall-clock time. A 23h/25h day does not move the due day. */
+export function addLocalDays(ms: number, days: number): number {
+  const d = new Date(ms)
+  d.setDate(d.getDate() + days)
+  return d.getTime()
 }
 
 /** Due entries first, then the rest. Each group by dueAt, ties by id. */

@@ -1,7 +1,7 @@
 import { lemmaIdentity } from '../engine'
 import {
+  addLocalDays,
   isDue,
-  POCKET_DAY_MS,
   sortForSheet,
   type PocketEntry,
   type PocketStage,
@@ -75,7 +75,7 @@ export function pocketOutcomeOnFinish(
   if (!wasDueAtStart) return { type: 'keep' }
   const days = stage === 1 ? 3 : stage === 2 ? 7 : 1
   const next: PocketStage = stage < 2 ? ((stage + 1) as PocketStage) : 2
-  return { type: 'advance', stage: next, dueAt: now + days * POCKET_DAY_MS }
+  return { type: 'advance', stage: next, dueAt: addLocalDays(now, days) }
 }
 
 /** Due entries that ADR 0018 still allows, in sheet order. */

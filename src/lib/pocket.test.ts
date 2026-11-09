@@ -1,11 +1,13 @@
+import { spawnSync } from 'node:child_process'
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
+import { fileURLToPath } from 'node:url'
 import { lemmaIdentity, localDateKey } from '../engine'
 import { DAILY_KEY } from './daily-record'
 import {
   POCKET_CAP,
-  POCKET_DAY_MS,
   POCKET_KEY,
   POCKET_VERSION,
+  addLocalDays,
   addPocketEntry,
   addToPocket,
   dueInSlot,
@@ -60,7 +62,7 @@ function entry(
     word,
     addedAt,
     stage: 0,
-    dueAt: addedAt + POCKET_DAY_MS,
+    dueAt: addLocalDays(addedAt, 1),
   }
   if (gloss) e.gloss = gloss
   return e
@@ -705,7 +707,7 @@ describe('pocket spaced review (ADR 0044)', () => {
       gloss: 'fine',
       addedAt,
       stage: 0,
-      dueAt: addedAt + POCKET_DAY_MS,
+      dueAt: addLocalDays(addedAt, 1),
     })
     expect(JSON.parse(mem.get(POCKET_KEY)!).v).toBe(1)
     repairPocket()
@@ -719,7 +721,7 @@ describe('pocket spaced review (ADR 0044)', () => {
       gloss: 'fine',
       addedAt,
       stage: 0,
-      dueAt: addedAt + POCKET_DAY_MS,
+      dueAt: addLocalDays(addedAt, 1),
     })
   })
 
@@ -745,7 +747,7 @@ describe('pocket spaced review (ADR 0044)', () => {
     )
     expect(loadPocket()[0]).toMatchObject({
       stage: 0,
-      dueAt: addedAt + POCKET_DAY_MS,
+      dueAt: addLocalDays(addedAt, 1),
       gloss: 'g',
       addedAt,
     })
@@ -756,7 +758,7 @@ describe('pocket spaced review (ADR 0044)', () => {
     }
     expect(stored.v).toBe(2)
     expect(stored.entries[0]!.stage).toBe(0)
-    expect(stored.entries[0]!.dueAt).toBe(addedAt + POCKET_DAY_MS)
+    expect(stored.entries[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
     expect(stored.entries[0]!.addedAt).toBe(addedAt)
   })
 
@@ -771,7 +773,7 @@ describe('pocket spaced review (ADR 0044)', () => {
     })
     expect(once.entries[0]).toMatchObject({
       stage: 0,
-      dueAt: addedAt + POCKET_DAY_MS,
+      dueAt: addLocalDays(addedAt, 1),
       addedAt,
     })
     expect(localDateKey(new Date(once.entries[0]!.dueAt))).toBe('2026-11-10')
@@ -785,7 +787,7 @@ describe('pocket spaced review (ADR 0044)', () => {
     })
     expect(twice.duplicate).toBe(true)
     expect(twice.entries[0]!.stage).toBe(0)
-    expect(twice.entries[0]!.dueAt).toBe(addedAt + POCKET_DAY_MS)
+    expect(twice.entries[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
     expect(twice.entries[0]!.addedAt).toBe(addedAt)
     expect(twice.entries[0]!.gloss).toBe('fruit')
     expect(mem.get(POCKET_KEY)).toBe(raw)
@@ -843,6 +845,79 @@ describe('pocket spaced review (ADR 0044)', () => {
     expect(nextReviewWhen(new Date(2026, 10, 16, 12).getTime(), today)).toBe('in 7 days')
   })
 
+  test('calendar-day steps keep wall-clock time across Europe/Berlin DST', () => {
+    const script = `
+      const { addLocalDays, addPocketEntry, isDue, loadPocket, repairPocket, POCKET_KEY } = await import('./src/lib/pocket.ts')
+      const { pocketOutcomeOnFinish } = await import('./src/lib/pocket-play.ts')
+      const { localDateKey } = await import('./src/engine/daily.ts')
+      const store = new Map()
+      globalThis.localStorage = {
+        getItem: (key) => store.get(key) ?? null,
+        setItem: (key, value) => { store.set(key, value) },
+        removeItem: (key) => { store.delete(key) },
+      }
+      const fall = new Date(2026, 9, 25, 0, 30).getTime()
+      if (new Date(fall).getTimezoneOffset() !== -120) {
+        throw new Error('expected Europe/Berlin CEST at 2026-10-25 00:30, offset ' + new Date(fall).getTimezoneOffset())
+      }
+      const dayMs = 86_400_000
+      function expectStep(ms, days, label) {
+        const due = addLocalDays(ms, days)
+        const from = new Date(ms)
+        const to = new Date(due)
+        const want = new Date(from.getFullYear(), from.getMonth(), from.getDate() + days, from.getHours(), from.getMinutes())
+        if (localDateKey(to) !== localDateKey(want)) throw new Error(label + ' date ' + localDateKey(to))
+        if (to.getHours() !== from.getHours() || to.getMinutes() !== from.getMinutes()) {
+          throw new Error(label + ' wall clock ' + to.toString())
+        }
+        if (days > 0 && due === ms + days * dayMs && from.getTimezoneOffset() !== to.getTimezoneOffset()) {
+          throw new Error(label + ' matched a raw 24h step across a DST change')
+        }
+      }
+      const saved = addPocketEntry([], { lang: 'en', cefr: 'a1', word: 'tree', addedAt: fall }).entries[0]
+      if (localDateKey(new Date(saved.dueAt)) !== '2026-10-26') throw new Error('save due ' + localDateKey(new Date(saved.dueAt)))
+      if (isDue(saved, '2026-10-25')) throw new Error('00:30 fallback save is due the same day')
+      if (isDue(saved, '2026-10-26') !== true) throw new Error('save not due next day')
+      if (saved.dueAt === fall + dayMs) throw new Error('save used a raw 24h step')
+      expectStep(fall, 1, 'save')
+      const spring = new Date(2026, 2, 29, 0, 30).getTime()
+      for (const [start, label] of [[fall, 'fall'], [spring, 'spring']]) {
+        for (const [stage, days] of [[1, 3], [2, 7]]) {
+          const outcome = pocketOutcomeOnFinish(false, true, stage, start)
+          if (outcome.type !== 'advance' || outcome.dueAt !== addLocalDays(start, days)) {
+            throw new Error(label + ' ladder +' + days)
+          }
+          expectStep(start, days, label + ' +' + days)
+        }
+      }
+      for (const addedAt of [fall, spring]) {
+        store.set(POCKET_KEY, JSON.stringify({
+          v: 1,
+          entries: [{ lang: 'en', cefr: 'a1', word: 'ok', gloss: 'fine', addedAt }],
+        }))
+        const migrated = loadPocket()[0]
+        if (migrated.dueAt !== addLocalDays(addedAt, 1) || migrated.gloss !== 'fine' || migrated.stage !== 0) {
+          throw new Error('migrate ' + new Date(addedAt).toString())
+        }
+        repairPocket()
+        const stored = JSON.parse(store.get(POCKET_KEY))
+        if (stored.v !== 2 || stored.entries[0].dueAt !== addLocalDays(addedAt, 1)) throw new Error('repair v')
+        store.set(POCKET_KEY, JSON.stringify({
+          v: 2,
+          entries: [{ lang: 'en', cefr: 'a1', word: 'ok', addedAt }],
+        }))
+        const repaired = loadPocket()[0]
+        if (repaired.dueAt !== addLocalDays(addedAt, 1)) throw new Error('v2 repair')
+      }
+    `
+    const result = spawnSync('bun', ['-e', script], {
+      cwd: fileURLToPath(new URL('../..', import.meta.url)),
+      env: { ...process.env, TZ: 'Europe/Berlin' },
+      encoding: 'utf8',
+    })
+    expect(result.status, `${result.stderr ?? ''}${result.stdout ?? ''}`).toBe(0)
+  })
+
   test('replace-oldest drops the smallest addedAt even when a later row is due', () => {
     const far = new Date(2026, 11, 1).getTime()
     const past = new Date(2020, 0, 1).getTime()
@@ -870,10 +945,11 @@ describe('pocket spaced review (ADR 0044)', () => {
     mem.set(STREAKS_KEY, streaks)
     addToPocket({ lang: 'en', cefr: 'a1', word: 'tree', addedAt: 10 })
     const id = pocketEntryId('en', 'a1', 'tree')
-    reschedulePocketEntry(id, 1, 10 + 3 * POCKET_DAY_MS)
+    const dueAt = 10 + 3 * 86_400_000
+    reschedulePocketEntry(id, 1, dueAt)
     const stored = loadPocket()[0]!
     expect(stored.stage).toBe(1)
-    expect(stored.dueAt).toBe(10 + 3 * POCKET_DAY_MS)
+    expect(stored.dueAt).toBe(dueAt)
     expect(stored.addedAt).toBe(10)
     removeFromPocket(id)
     expect(mem.get(STREAKS_KEY)).toBe(streaks)

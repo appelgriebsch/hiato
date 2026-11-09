@@ -8,7 +8,7 @@ import {
   pocketOutcomeOnFinish,
 } from './pocket-play'
 import type { PocketEntry } from './pocket'
-import { POCKET_DAY_MS } from './pocket'
+import { addLocalDays } from './pocket'
 
 describe('parsePocketEntryId (#84)', () => {
   test('trims and rejects empty', () => {
@@ -138,17 +138,17 @@ describe('pocketOutcomeOnFinish (ADR 0044)', () => {
     expect(pocketOutcomeOnFinish(false, true, 0, now)).toEqual({
       type: 'advance',
       stage: 1,
-      dueAt: now + POCKET_DAY_MS,
+      dueAt: addLocalDays(now, 1),
     })
     expect(pocketOutcomeOnFinish(false, true, 1, now)).toEqual({
       type: 'advance',
       stage: 2,
-      dueAt: now + 3 * POCKET_DAY_MS,
+      dueAt: addLocalDays(now, 3),
     })
     expect(pocketOutcomeOnFinish(false, true, 2, now)).toEqual({
       type: 'advance',
       stage: 2,
-      dueAt: now + 7 * POCKET_DAY_MS,
+      dueAt: addLocalDays(now, 7),
     })
   })
 })

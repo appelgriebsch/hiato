@@ -32,6 +32,7 @@ Add a fixed ladder to pocket entries: stages 0/1/2 with intervals 1, 3, 7 days. 
 ## Solution-engineer decisions (2026-11-09, not grilled)
 
 - **Local-day due rule.** `isDue(entry, today)` is `localDateKey(dueAt) <= today`, the same device-local day key as the daily. A word is due for the whole calendar day, not from the clock time it was saved. Ladder math stays `dueAt = now + interval days` (ms).
+- Per Andreas's decision on 2026-11-09, due steps are local calendar days (wall-clock time kept), so DST never shifts the due day.
 - **New saves** (Save or the #219 action) get `stage 0`, `dueAt = now + 1 day`.
 - **Sheet order.** Due entries first, then not-due entries, each by `dueAt` ascending, ties by `id`.
 - **No notifications.** Push reminders are not planned.
