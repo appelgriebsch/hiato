@@ -12,7 +12,7 @@ The pocket (ADR 0034) is a capped retry queue: win removes the entry, fail keeps
 
 ## Decision
 
-Add a fixed ladder to pocket entries: stages 0/1/2 with intervals 1, 3, 7 days. `PocketEntry` gains `stage: 0|1|2` and `dueAt: number` (ms epoch). A pocket fail advances the stage (cap 2) and sets `dueAt = now + interval[stage]`; a pocket win still removes the entry (existing `pocketOutcomeOnFinish`). Entries missing the new fields migrate on read: `stage 0`, `dueAt = addedAt + 1 day`. Due entries sort first in the PocketSheet and show a "Due" badge, and the Practice EndCard offers due pocket entries (see grill decision 2). Pocket remains streak-immune and never calls `recordDailyWin` (ADR 0018/0034 boundaries unchanged).
+Add a fixed ladder to pocket entries: stages 0/1/2 with intervals 1, 3, 7 days. `PocketEntry` gains `stage: 0|1|2` and `dueAt: number` (ms epoch). A pocket fail advances the stage (cap 2) and sets `dueAt` to now plus N local calendar days (wall-clock time kept); a pocket win still removes the entry (existing `pocketOutcomeOnFinish`). Entries missing the new fields migrate on read: `stage 0`, `dueAt` = `addedAt` plus 1 local calendar day (wall-clock time kept). Due entries sort first in the PocketSheet and show a "Due" badge, and the Practice EndCard offers due pocket entries (see grill decision 2). Pocket remains streak-immune and never calls `recordDailyWin` (ADR 0018/0034 boundaries unchanged).
 
 ## Options Considered
 
@@ -31,12 +31,11 @@ Add a fixed ladder to pocket entries: stages 0/1/2 with intervals 1, 3, 7 days. 
 
 ## Solution-engineer decisions (2026-11-09, not grilled)
 
-- **Local-day due rule.** `isDue(entry, today)` is `localDateKey(dueAt) <= today`, the same device-local day key as the daily. A word is due for the whole calendar day, not from the clock time it was saved. Ladder math stays `dueAt = now + interval days` (ms).
-- Per Andreas's decision on 2026-11-09, due steps are local calendar days (wall-clock time kept), so DST never shifts the due day.
-- **New saves** (Save or the #219 action) get `stage 0`, `dueAt = now + 1 day`.
+- **Local-day due rule.** `isDue(entry, today)` is `localDateKey(dueAt) <= today`, the same device-local day key as the daily. A word is due for the whole calendar day, not from the clock time it was saved. Ladder math, per Andreas's decision on 2026-11-09, is `dueAt` = now plus N local calendar days (wall-clock time kept), so DST never shifts the due day.
+- **New saves** (Save or the #219 action) get `stage 0`, `dueAt` = now plus 1 local calendar day (wall-clock time kept).
 - **Sheet order.** Due entries first, then not-due entries, each by `dueAt` ascending, ties by `id`.
 - **No notifications.** Push reminders are not planned.
-- **Storage.** `POCKET_VERSION` 1 to 2. v1 parses and migrates (`stage 0`, `dueAt = addedAt + 1 day`). Repair writes v2. v>2 keeps the existing future-version fallback.
+- **Storage.** `POCKET_VERSION` 1 to 2. v1 parses and migrates (`stage 0`, `dueAt` = `addedAt` plus 1 local calendar day). Repair writes v2. v>2 keeps the existing future-version fallback.
 
 ## Consequences
 

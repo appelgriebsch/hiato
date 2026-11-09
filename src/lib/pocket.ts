@@ -1,4 +1,4 @@
-import { lemmaIdentity, localDateKey, nextLocalDateKey } from '../engine'
+import { lemmaIdentity, localDateKey } from '../engine'
 import {
   isPackCefr,
   isPackLang,
@@ -133,6 +133,15 @@ function isPocketStage(value: unknown): value is PocketStage {
   return value === 0 || value === 1 || value === 2
 }
 
+/** Finite and inside the Date range. 1e300 is finite, but `new Date(1e300)` is Invalid. */
+function isStoredTime(value: unknown): value is number {
+  return (
+    typeof value === 'number' &&
+    Number.isFinite(value) &&
+    Number.isFinite(new Date(value).getTime())
+  )
+}
+
 /**
  * v1 rows (and v2 rows missing the ladder) become stage 0, due addedAt + 1 day.
  * `repaired` means the stored row is not already that schedule.
@@ -146,9 +155,7 @@ function parseEntry(
     const o = raw as Record<string, unknown>
     if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return { entry: null, repaired: false }
     if (typeof o.word !== 'string' || o.word.length === 0) return { entry: null, repaired: false }
-    if (typeof o.addedAt !== 'number' || !Number.isFinite(o.addedAt)) {
-      return { entry: null, repaired: false }
-    }
+    if (!isStoredTime(o.addedAt)) return { entry: null, repaired: false }
     // Never trust stored id — corrupt localStorage could fork duplicates.
     // A throw from lemmaIdentity drops this row only.
     const id = pocketEntryId(o.lang, o.cefr, o.word)
@@ -156,11 +163,7 @@ function parseEntry(
     let stage: PocketStage = 0
     let dueAt = addLocalDays(o.addedAt, 1)
     if (!migrate) {
-      if (
-        !isPocketStage(o.stage) ||
-        typeof o.dueAt !== 'number' ||
-        !Number.isFinite(o.dueAt)
-      ) {
+      if (!isPocketStage(o.stage) || !isStoredTime(o.dueAt)) {
         repaired = true
       } else {
         stage = o.stage
@@ -364,7 +367,9 @@ export function isDue(entry: { dueAt: number }, today: string): boolean {
 export function addLocalDays(ms: number, days: number): number {
   const d = new Date(ms)
   d.setDate(d.getDate() + days)
-  return d.getTime()
+  const next = d.getTime()
+  // setDate past ±8.64e15 is NaN. A valid input keeps its own instant so repair does not loop.
+  return Number.isFinite(next) ? next : new Date(ms).getTime()
 }
 
 /** Due entries first, then the rest. Each group by dueAt, ties by id. */
@@ -394,14 +399,13 @@ export function dueInSlot(
 
 /** "today", "tomorrow", or "in N days" from today to the local day of dueAt. */
 export function nextReviewWhen(dueAt: number, today: string): string {
-  const dueKey = localDateKey(new Date(dueAt))
-  let days = 0
-  let cursor = today
-  while (cursor < dueKey) {
-    cursor = nextLocalDateKey(cursor)
-    days += 1
-  }
-  if (days <= 0) return 'today'
+  const due = new Date(dueAt)
+  const dueMidnight = new Date(due.getFullYear(), due.getMonth(), due.getDate()).getTime()
+  const [y, m, d] = today.split('-').map(Number)
+  const todayMidnight = new Date(y!, m! - 1, d).getTime()
+  // Round absorbs a 23h or 25h local day so the count stays calendar days.
+  const days = Math.round((dueMidnight - todayMidnight) / 86_400_000)
+  if (!Number.isFinite(days) || days <= 0) return 'today'
   return days === 1 ? 'tomorrow' : `in ${days} days`
 }
 

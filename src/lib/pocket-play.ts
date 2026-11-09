@@ -67,9 +67,9 @@ export type PocketFinish =
  */
 export function pocketOutcomeOnFinish(
   won: boolean,
-  wasDueAtStart = false,
-  stage: PocketStage = 0,
-  now = 0,
+  wasDueAtStart: boolean,
+  stage: PocketStage,
+  now: number,
 ): PocketFinish {
   if (won) return { type: 'remove' }
   if (!wasDueAtStart) return { type: 'keep' }

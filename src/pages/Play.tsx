@@ -402,6 +402,7 @@ function PlayRound({
                 true,
                 isDue(pocketEntry, dateKey),
                 pocketEntry.stage,
+                Date.now(),
               ).type === 'remove'
             ) {
               removeFromPocket(pocketEntry.id)

@@ -845,6 +845,87 @@ describe('pocket spaced review (ADR 0044)', () => {
     expect(nextReviewWhen(new Date(2026, 10, 16, 12).getTime(), today)).toBe('in 7 days')
   })
 
+  test('unrepresentable times are dropped or repaired once, and nextReviewWhen does not loop', () => {
+    const extremes = [1e300, -1e300, 8.64e15 + 1]
+    const addedAt = new Date(2026, 10, 9, 12).getTime()
+    const good = {
+      id: pocketEntryId('en', 'a1', 'ok'),
+      lang: 'en' as const,
+      cefr: 'a1' as const,
+      word: 'ok',
+      addedAt,
+      stage: 0 as const,
+      dueAt: addLocalDays(addedAt, 1),
+    }
+    for (const bad of extremes) {
+      mem.set(
+        POCKET_KEY,
+        JSON.stringify({
+          v: 2,
+          entries: [
+            good,
+            {
+              ...good,
+              id: pocketEntryId('en', 'a1', 'bad'),
+              word: 'bad',
+              addedAt: bad,
+            },
+          ],
+        }),
+      )
+      expect(loadPocket().map((row) => row.word)).toEqual(['ok'])
+      expect(repairPocket().map((row) => row.word)).toEqual(['ok'])
+      const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+        entries: { word: string; addedAt: unknown }[]
+      }
+      expect(stored.entries.map((row) => row.word)).toEqual(['ok'])
+      expect(stored.entries[0]!.addedAt).toBe(addedAt)
+      expect(JSON.stringify(stored)).not.toContain('null')
+      const writes = countWrites()
+      expect(loadPocket().map((row) => row.word)).toEqual(['ok'])
+      expect(repairPocket()).toHaveLength(1)
+      expect(writes.sets).toBe(0)
+
+      mem.set(
+        POCKET_KEY,
+        JSON.stringify({
+          v: 2,
+          entries: [{ ...good, dueAt: bad }],
+        }),
+      )
+      expect(loadPocket()[0]).toMatchObject({
+        word: 'ok',
+        addedAt,
+        stage: 0,
+        dueAt: addLocalDays(addedAt, 1),
+      })
+      expect(repairPocket()[0]).toMatchObject({
+        stage: 0,
+        dueAt: addLocalDays(addedAt, 1),
+        addedAt,
+      })
+      const again = countWrites()
+      expect(loadPocket()[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
+      expect(repairPocket()).toHaveLength(1)
+      expect(again.sets).toBe(0)
+      const raw = mem.get(POCKET_KEY)!
+      expect(raw).not.toContain('null')
+      const savedDue = (JSON.parse(raw) as { entries: { dueAt: number }[] }).entries[0]!.dueAt
+      expect(Number.isFinite(savedDue)).toBe(true)
+      expect(Number.isFinite(new Date(savedDue).getTime())).toBe(true)
+    }
+
+    expect(Number.isFinite(addLocalDays(8.64e15, 1))).toBe(true)
+    const today = '2026-11-09'
+    for (const dueAt of [...extremes, 8.64e15, -8.64e15]) {
+      const phrase = nextReviewWhen(dueAt, today)
+      expect(phrase === 'today' || /^in \d+ days$/.test(phrase)).toBe(true)
+      expect(phrase).not.toContain('NaN')
+    }
+    expect(nextReviewWhen(-8.64e15, today)).toBe('today')
+    expect(nextReviewWhen(8.64e15, today)).toMatch(/^in \d+ days$/)
+  })
+
   test('calendar-day steps keep wall-clock time across Europe/Berlin DST', () => {
     const script = `
       const { addLocalDays, addPocketEntry, isDue, loadPocket, repairPocket, POCKET_KEY } = await import('./src/lib/pocket.ts')
