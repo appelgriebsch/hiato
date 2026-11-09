@@ -1,11 +1,14 @@
 import { describe, expect, test } from 'bun:test'
 import {
   canPlayPocketEntry,
+  dailyGateFor,
   findPocketEntryById,
   parsePocketEntryId,
+  playableDueEntries,
   pocketOutcomeOnFinish,
 } from './pocket-play'
 import type { PocketEntry } from './pocket'
+import { POCKET_DAY_MS } from './pocket'
 
 describe('parsePocketEntryId (#84)', () => {
   test('trims and rejects empty', () => {
@@ -26,6 +29,8 @@ describe('findPocketEntryById (#84)', () => {
       word: 'cat',
       gloss: 'feline',
       addedAt: 1,
+      stage: 0,
+      dueAt: 1,
     },
   ]
 
@@ -117,10 +122,87 @@ describe('canPlayPocketEntry (ADR 0018 / #84)', () => {
   })
 })
 
-describe('pocketOutcomeOnFinish (#84)', () => {
-  test('win removes; lose keeps', () => {
-    expect(pocketOutcomeOnFinish(true)).toBe('remove')
-    expect(pocketOutcomeOnFinish(false)).toBe('keep')
+describe('pocketOutcomeOnFinish (ADR 0044)', () => {
+  const now = new Date(2026, 10, 9, 12, 0, 0).getTime()
+
+  test('a win removes the entry, early or due', () => {
+    expect(pocketOutcomeOnFinish(true, false, 0, now)).toEqual({ type: 'remove' })
+    expect(pocketOutcomeOnFinish(true, true, 2, now)).toEqual({ type: 'remove' })
+  })
+
+  test('an early loss keeps stage and dueAt', () => {
+    expect(pocketOutcomeOnFinish(false, false, 1, now)).toEqual({ type: 'keep' })
+  })
+
+  test('a due loss advances 0→1→2 and sets +1/+3/+7 days, capped at 2', () => {
+    expect(pocketOutcomeOnFinish(false, true, 0, now)).toEqual({
+      type: 'advance',
+      stage: 1,
+      dueAt: now + POCKET_DAY_MS,
+    })
+    expect(pocketOutcomeOnFinish(false, true, 1, now)).toEqual({
+      type: 'advance',
+      stage: 2,
+      dueAt: now + 3 * POCKET_DAY_MS,
+    })
+    expect(pocketOutcomeOnFinish(false, true, 2, now)).toEqual({
+      type: 'advance',
+      stage: 2,
+      dueAt: now + 7 * POCKET_DAY_MS,
+    })
+  })
+})
+
+describe('playableDueEntries (ADR 0044)', () => {
+  const today = '2026-11-09'
+  const entries: PocketEntry[] = [
+    {
+      id: 'en|a1|later',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'later',
+      addedAt: 1,
+      stage: 0,
+      dueAt: new Date(2026, 10, 12, 12).getTime(),
+    },
+    {
+      id: 'en|a1|daily',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'daily',
+      addedAt: 2,
+      stage: 0,
+      dueAt: new Date(2026, 10, 1, 12).getTime(),
+    },
+    {
+      id: 'en|a1|old',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'old',
+      addedAt: 3,
+      stage: 1,
+      dueAt: new Date(2026, 10, 8, 12).getTime(),
+    },
+  ]
+
+  test('skips a due daily that is not lost yet and keeps sheet order', () => {
+    const gate = dailyGateFor(today, 'daily', null)
+    expect(playableDueEntries(entries, today, gate).map((entry) => entry.word)).toEqual([
+      'old',
+    ])
+  })
+
+  test('a lost daily stays in the offer', () => {
+    const gate = dailyGateFor(today, 'daily', {
+      dateKey: today,
+      completed: true,
+      won: false,
+      word: 'daily',
+    })
+    expect(playableDueEntries(entries, today, gate).map((entry) => entry.word)).toEqual([
+      'daily',
+      'old',
+    ])
   })
 })
 

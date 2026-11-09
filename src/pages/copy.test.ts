@@ -570,12 +570,16 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(repairAt).toBeGreaterThan(pocketBranch)
     expect(listAt).toBeGreaterThan(repairAt)
     const endAt = src.indexOf('const endGame = useCallback')
-    const endDeps = src.indexOf('[mode, persistDaily, activePocketId]', endAt)
+    const endDeps = src.indexOf(
+      '[mode, persistDaily, activePocketId, pocketWasDue, pocketStage]',
+      endAt,
+    )
     expect(endAt).toBeGreaterThan(0)
     expect(endDeps).toBeGreaterThan(endAt)
     const endBody = src.slice(endAt, endDeps)
     expect(endBody).toContain("mode === 'pocket'")
     expect(endBody).toContain('removeFromPocket')
+    expect(endBody).toContain('reschedulePocketEntry')
     expect(endBody).not.toMatch(/recordDailyWin\s*\(/)
   })
 
@@ -593,6 +597,63 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(src).not.toContain('<PocketSheet')
     expect(src).toContain("mode !== 'pocket'")
     expect(src).toContain('pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now())')
+  })
+})
+
+describe('Pocket spaced review copy (gh-220 / ADR 0044)', () => {
+  test('Home labels a due slot and keeps Pocket (n) otherwise', async () => {
+    const src = await pageSrc('Home.tsx')
+    expect(src).toContain('Pocket (${pocketCount} · ${pocketDue} due)')
+    expect(src).toContain('Pocket (${pocketCount})')
+    expect(src).toContain(
+      'Pocket, ${pocketCount} words, ${pocketDue} due for review',
+    )
+    expect(src).toContain('pocketDue > 0')
+    expect(src).toContain('variant="outline"')
+    const dueLabel = src.indexOf('Pocket (${pocketCount} · ${pocketDue} due)')
+    const plainLabel = src.indexOf('Pocket (${pocketCount})')
+    expect(plainLabel).toBeGreaterThan(dueLabel)
+  })
+
+  test('sheet subtitle, Due badge, captions and Review due words match', async () => {
+    const src = await Bun.file(
+      new URL('../components/PocketSheet.tsx', import.meta.url),
+    ).text()
+    expect(src).toContain('due today. Spelling stays hidden.')
+    expect(src).toContain('Nothing due today. Next review')
+    expect(src).toContain('tone="accent"')
+    expect(src).toMatch(/>\s*Due\s*</)
+    expect(src).not.toContain('tone="warm"')
+    expect(src).toContain('Next review {nextReviewWhen(entry.dueAt, today)}')
+    expect(src).toContain('Review due words ({playable.length})')
+    expect(src).toContain('data-pocket-review')
+    expect(src).toContain('playable[0]')
+    expect(src).toContain('aria-labelledby={')
+    expect(src).toContain('pocket-sheet-retry-name')
+    expect(src).not.toContain('failed')
+  })
+
+  test('Practice offer is opt-in and a pocket loss names the next review', async () => {
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain('Review 1 due pocket word')
+    expect(src).toContain('Review ${dueReview.count} due pocket words')
+    expect(src).toContain("mode === 'practice' && dueReview")
+    expect(src).toContain("mode === 'practice' ? 'Next word'")
+    expect(src).toContain('pickPracticeLemma')
+    const offerAt = src.indexOf('Review 1 due pocket word')
+    const nextAt = src.indexOf("mode === 'practice' ? 'Next word'")
+    expect(offerAt).toBeGreaterThan(0)
+    expect(nextAt).toBeGreaterThan(offerAt)
+    expect(src).toContain("pocketWasDue ? 'Back for review' : 'Next review'")
+    expect(src).toContain('nextReviewWhen(pocketSchedule.dueAt, reviewDay)')
+    expect(src).toContain('const reviewDay = useLocalDateKey()')
+    expect(src).toContain('role="status"')
+    expect(src).toContain('Pocket doesn’t affect your streak')
+    expect(src).toContain('Practice · your streak isn’t affected')
+    expect(src).toContain('cleared from pocket')
+    const practicePick = src.indexOf('pickPracticeLemma(')
+    const dueSet = src.indexOf('setDueReview(', practicePick)
+    expect(dueSet).toBeGreaterThan(practicePick)
   })
 })
 

@@ -40,16 +40,22 @@ import {
 import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
 import {
   addToPocket,
+  isDue,
   listPocketStored,
+  nextReviewWhen,
   pocketEntryId,
   removeFromPocket,
   repairPocket,
+  reschedulePocketEntry,
   POCKET_CAP,
+  type PocketStage,
 } from '@/lib/pocket'
 import {
   canPlayPocketEntry,
+  dailyGateFor,
   findPocketEntryById,
   parsePocketEntryId,
+  playableDueEntries,
   pocketOutcomeOnFinish,
 } from '@/lib/pocket-play'
 import {
@@ -71,6 +77,7 @@ import {
 } from '@/lib/streaks'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 import { primeSpeechVoices, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
+import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
 
@@ -167,6 +174,11 @@ function PlayRound({
   const [shakeKey, setShakeKey] = useState<string | null>(null)
   const [streakPulse, setStreakPulse] = useState(false)
   const [activePocketId, setActivePocketId] = useState<string | null>(null)
+  const [pocketWasDue, setPocketWasDue] = useState(false)
+  const [pocketStage, setPocketStage] = useState<PocketStage>(0)
+  const [dueReview, setDueReview] = useState<{ id: string; count: number } | null>(
+    null,
+  )
   const streakShown = useRef(0)
   const shakeTimer = useRef(0)
   /** Latched after unlockSpeechGesture returns true (prime succeeded). */
@@ -373,6 +385,8 @@ function PlayRound({
           }
           const initial = buildInitialCells(entry.word, cefr)
           setActivePocketId(pocketEntry.id)
+          setPocketWasDue(isDue(pocketEntry, dateKey))
+          setPocketStage(pocketEntry.stage)
           setWordEntry(entry)
           setCells(initial)
           setUsedCorrect(correctKeysFromCells(initial))
@@ -383,7 +397,13 @@ function PlayRound({
           // Prefill win still clears pocket — never recordDailyWin.
           if (isWon(initial)) {
             setFinished('win')
-            if (pocketOutcomeOnFinish(true) === 'remove') {
+            if (
+              pocketOutcomeOnFinish(
+                true,
+                isDue(pocketEntry, dateKey),
+                pocketEntry.stage,
+              ).type === 'remove'
+            ) {
               removeFromPocket(pocketEntry.id)
             }
           } else {
@@ -406,6 +426,13 @@ function PlayRound({
           setLoading(false)
           return
         }
+        const daily = pickDailyLemma(pack.lemmas, dateKey, lang, cefr)
+        const due = playableDueEntries(
+          listPocketStored(lang, cefr),
+          dateKey,
+          dailyGateFor(dateKey, daily.word, getDailyRecord(lang, cefr)),
+        )
+        setDueReview(due.length > 0 ? { id: due[0]!.id, count: due.length } : null)
         const initial = buildInitialCells(entry.word, cefr)
         setWordEntry(entry)
         setCells(initial)
@@ -440,17 +467,24 @@ function PlayRound({
     (result: 'win' | 'lose', entry: PackLemma) => {
       setFinished(result)
       if (mode === 'daily') persistDaily(result, entry)
-      // Pocket: win removes; lose keeps. Never streaks / Clerk / D1.
-      if (
-        mode === 'pocket' &&
-        activePocketId &&
-        pocketOutcomeOnFinish(result === 'win') === 'remove'
-      ) {
-        removeFromPocket(activePocketId)
-        setActivePocketId(null)
+      // Pocket: win removes; a due loss advances the ladder; an early loss
+      // keeps stage and dueAt. Never streaks / Clerk / D1 / recordDailyWin.
+      if (mode === 'pocket' && activePocketId) {
+        const outcome = pocketOutcomeOnFinish(
+          result === 'win',
+          pocketWasDue,
+          pocketStage,
+          Date.now(),
+        )
+        if (outcome.type === 'remove') {
+          removeFromPocket(activePocketId)
+          setActivePocketId(null)
+        } else if (outcome.type === 'advance') {
+          reschedulePocketEntry(activePocketId, outcome.stage, outcome.dueAt)
+        }
       }
     },
-    [mode, persistDaily, activePocketId],
+    [mode, persistDaily, activePocketId, pocketWasDue, pocketStage],
   )
 
   function onKey(letter: string) {
@@ -742,6 +776,8 @@ function PlayRound({
               practiceOk={practiceOk}
               onPractice={goPractice}
               pocketId={activePocketId}
+              pocketWasDue={pocketWasDue}
+              dueReview={dueReview}
               onPocketCleared={() => setActivePocketId(null)}
             />
           ) : mode === 'practice' ? (
@@ -983,6 +1019,8 @@ function EndCard({
   practiceOk,
   onPractice,
   pocketId,
+  pocketWasDue,
+  dueReview,
   onPocketCleared,
 }: {
   won: boolean
@@ -1000,9 +1038,16 @@ function EndCard({
   practiceOk: boolean
   onPractice: () => void
   pocketId: string | null
+  /** True when this pocket round started on a due entry (ADR 0044 1A). */
+  pocketWasDue: boolean
+  /** Opt-in Practice offer. Null leaves Next word as the only practice step. */
+  dueReview: { id: string; count: number } | null
   onPocketCleared: () => void
 }) {
   const nav = useNavigate()
+  // The round freezes dateKey so a midnight cross cannot reseed the word.
+  // This line is the schedule the learner sees now, so it uses the live day.
+  const reviewDay = useLocalDateKey()
   const showPractice = shouldShowPractice(mode, won)
   const [savePhase, setSavePhase] = useState<'idle' | 'confirm'>('idle')
   const [oldestLabel, setOldestLabel] = useState('')
@@ -1153,6 +1198,10 @@ function EndCard({
   /** scrollTop this card last left the scroller at. A mismatch means the reader moved. */
   const anchorTopRef = useRef<number | null>(null)
 
+  const pocketSchedule =
+    mode === 'pocket' && pocketId
+      ? findPocketEntryById(listPocketStored(lang, cefr), pocketId)
+      : undefined
   const confirming = showPractice && savePhase === 'confirm'
   const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
   const endBadge =
@@ -1265,6 +1314,12 @@ function EndCard({
             {won || pocketRemoved ? ' · cleared from pocket' : ''}
           </p>
         )}
+        {mode === 'pocket' && !won && !pocketRemoved && pocketSchedule ? (
+          <p role="status" className="mt-2 text-xs text-ink-faint">
+            {pocketWasDue ? 'Back for review' : 'Next review'}{' '}
+            {nextReviewWhen(pocketSchedule.dueAt, reviewDay)}
+          </p>
+        ) : null}
         </Card>
       </div>
       </div>
@@ -1376,14 +1431,27 @@ function EndCard({
             </p>
           ) : null}
           {mode !== 'pocket' ? (
-            <Button
-              fullWidth
-              variant="secondary"
-              onClick={onPractice}
-              disabled={!practiceOk}
-            >
-              {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
-            </Button>
+            <>
+              {mode === 'practice' && dueReview ? (
+                <Button
+                  fullWidth
+                  variant="secondary"
+                  onClick={() => nav(pocketRetryHref(dueReview.id, Date.now()))}
+                >
+                  {dueReview.count === 1
+                    ? 'Review 1 due pocket word'
+                    : `Review ${dueReview.count} due pocket words`}
+                </Button>
+              ) : null}
+              <Button
+                fullWidth
+                variant="secondary"
+                onClick={onPractice}
+                disabled={!practiceOk}
+              >
+                {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
+              </Button>
+            </>
           ) : null}
           {mode !== 'pocket' && !practiceOk ? (
             <p className="text-center text-xs text-ink-faint">
