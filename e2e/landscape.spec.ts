@@ -257,7 +257,7 @@ async function layoutScrollTop(page: Page) {
   })
 }
 
-const ENDCARD_ACTIONS = ['Save to pocket', 'Share', 'Practice', 'Back home'] as const
+const ENDCARD_ACTIONS = ['Practice this word', 'Share', 'Practice (endless)', 'Back home'] as const
 
 async function assertEndcardActionsInView(page: Page, where: string) {
   const m = await measure(page)
@@ -365,7 +365,7 @@ test.describe('short landscape viewports (#209)', () => {
         const m = await measure(page)
         const where = `endcard ${lang} ${vp.name}`
         assertNoHorizontalScroll(m, where)
-        const wanted = ['Save to pocket', 'Share', 'Practice', 'Back home']
+        const wanted = ['Practice this word', 'Share', 'Practice (endless)', 'Back home']
         for (const name of wanted) {
           const hit = m.targets.find((t) => t.t.includes(name))
           expect(hit, `${where} ${name}`).toBeTruthy()
@@ -521,7 +521,7 @@ test.describe('short landscape viewports (#209)', () => {
       const beforeTop = (await page.locator('[data-endcard-actions]').boundingBox())?.y
       expect(before).not.toBeNull()
       expect(beforeTop).not.toBeUndefined()
-      await page.getByRole('button', { name: 'Save to pocket' }).click()
+      await page.getByRole('button', { name: 'Practice this word' }).click()
       const panel = page.getByRole('dialog', { name: 'Replace oldest word?' })
       await expect(panel).toBeVisible()
       const box = await panel.boundingBox()

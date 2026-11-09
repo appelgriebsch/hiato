@@ -1,15 +1,28 @@
 import { POCKET_CAP } from './pocket'
 
 /**
- * EndCard Save eligibility (ADR 0034 / #83).
- * Opt-in Save is daily-lose only — never practice/endless, never any win.
+ * EndCard "Practice this word" gate (ADR 0043 / #219, was Save in ADR 0034).
+ * Daily lose only — never practice/endless/pocket, never any win.
  */
-export function shouldShowPocketSave(mode: string, won: boolean): boolean {
+export function shouldShowPractice(mode: string, won: boolean): boolean {
   return mode === 'daily' && !won
 }
 
+export type PocketNote = 'saved' | 'already'
+
+/** Router state from "Practice this word". Anything else is not a note. */
+export function pocketNoteFromState(state: unknown): PocketNote | null {
+  if (!state || typeof state !== 'object') return null
+  const note = (state as { pocketNote?: unknown }).pocketNote
+  return note === 'saved' || note === 'already' ? note : null
+}
+
+export function pocketNoteCopy(note: PocketNote): string {
+  return note === 'already' ? 'Already saved' : 'Saved to pocket'
+}
+
 /**
- * Gate replace-oldest confirm when Save is pressed.
+ * Gate replace-oldest confirm when Practice this word is pressed.
  * Full slot + new word → confirm first. Duplicates are keep-first no-ops
  * and must not prompt (addToPocket is idempotent).
  */
@@ -19,17 +32,6 @@ export function needsReplaceOldestConfirm(
   cap: number = POCKET_CAP,
 ): boolean {
   return !wordAlreadyInPocket && slotCount >= cap
-}
-
-/**
- * Safe, non-lemma label for the entry shown in the replace-oldest confirm.
- * Stored pocket entries may not have a gloss, and their word must not be
- * exposed as confirmation copy without an explicit lemma decision.
- */
-export function pocketConfirmLabel(oldest: { gloss?: string }): string {
-  return typeof oldest.gloss === 'string' && oldest.gloss.trim().length > 0
-    ? oldest.gloss
-    : 'your oldest pocket entry'
 }
 
 /**

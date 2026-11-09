@@ -205,23 +205,44 @@ describe('Pocket sheet (gh-85)', () => {
   })
 })
 
-describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
-  test('Save gated on shouldShowPocketSave; uses addToPocket; no Save auto-add', async () => {
+describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
+  test('gated on shouldShowPractice; saves then opens pocket play immediately; no Save', async () => {
     const src = await pageSrc('Play.tsx')
     expect(src).toContain("from '@/lib/pocket-save'")
-    expect(src).toContain('shouldShowPocketSave(mode, won)')
+    expect(src).toContain('shouldShowPractice(mode, won)')
+    expect(src).not.toContain('shouldShowPocketSave')
+    expect(src).not.toContain('Save to pocket')
+    expect(src).not.toContain('Already in pocket')
+    expect(src).not.toContain('Confirm replace')
+    expect(src).not.toContain('practiceNoteDelayMs')
+    expect(src).not.toContain('pocketNewLabel')
+    expect(src).not.toContain('View pocket')
     expect(src).toContain('needsReplaceOldestConfirm')
     expect(src).toContain('addToPocket({ lang, cefr, word, gloss })')
     expect(src).toContain('listPocketStored(lang, cefr)')
     expect(src).toContain('Replace oldest word?')
-    expect(src).toContain('Confirm replace')
+    expect(src).toContain('Replace and practice')
     expect(src).toContain('onClick={onSavePress}')
-    expect(src).toMatch(/onClick=\{onSavePress\}[\s\S]*?>\s*Save to pocket\s*<\/Button>/)
-    expect(src).toContain('pocketConfirmLabel(oldest)')
+    expect(src).toMatch(/onClick=\{onSavePress\}[\s\S]*?>\s*Practice this word\s*<\/Button>/)
+    expect(src).toContain('pocketListLabel(oldest)')
+    expect(src).toContain('pocketListLabel({ gloss })')
+    expect(src).not.toContain('pocketConfirmLabel')
     expect(src).toContain('decideConfirmReCheck')
     expect(src).toContain('role="dialog"')
     expect(src).toContain('aria-modal="true"')
     expect(src).toContain('Pocket is full ({POCKET_CAP}).')
+    expect(src).toContain(
+      '“{oldestLabel}” will be removed so you can practice “{pocketListLabel({ gloss })}”.',
+    )
+    expect(src).toContain("state: { pocketNote: note }")
+    expect(src).toContain('pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now())')
+    const endAt = src.indexOf('function EndCard(')
+    expect(endAt).toBeGreaterThan(0)
+    const endCard = src.slice(endAt)
+    expect(endCard).not.toContain('setTimeout')
+    expect(endCard).not.toContain('matchMedia')
+    expect(endCard).not.toContain('Already saved')
+    expect(endCard).not.toContain('Saved to pocket')
     const commitAt = src.indexOf('const commitSave = useCallback')
     const commitEnd = src.indexOf('}, [lang, cefr, word, gloss])', commitAt)
     expect(commitAt).toBeGreaterThan(0)
@@ -229,22 +250,157 @@ describe('Play EndCard Save (gh-83 / ADR 0034)', () => {
     const commitBody = src.slice(commitAt, commitEnd)
     expect(commitBody).toContain('addToPocket')
     expect(commitBody).toContain('if (!result.added && !result.duplicate) return false')
+    expect(commitBody).toContain("return result.duplicate ? 'already' : 'saved'")
     expect(commitBody).not.toMatch(/recordDailyWin\s*\(/)
     expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
+    const pressAt = src.indexOf('const onSavePress = useCallback')
+    const pressEnd = src.indexOf(
+      '}, [lang, cefr, word, commitSave, goPracticeWord])',
+      pressAt,
+    )
+    expect(pressAt).toBeGreaterThan(commitEnd)
+    expect(pressEnd).toBeGreaterThan(pressAt)
+    const pressBody = src.slice(pressAt, pressEnd)
+    const alreadyAt = pressBody.indexOf("goPracticeWord('already')")
+    const saveAt = pressBody.indexOf('goPracticeWord(stored)')
+    expect(alreadyAt).toBeGreaterThan(0)
+    expect(saveAt).toBeGreaterThan(alreadyAt)
+    expect(pressBody.slice(0, alreadyAt)).not.toContain('commitSave')
+    expect(pressBody.slice(0, alreadyAt)).not.toContain('addToPocket')
     const confirmAt = src.indexOf('const onConfirmReplace = useCallback')
     const confirmEnd = src.indexOf(
-      '}, [lang, cefr, word, snapshotOldestId, commitSave])',
+      '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])',
       confirmAt,
     )
-    expect(confirmAt).toBeGreaterThan(0)
+    expect(confirmAt).toBeGreaterThan(pressEnd)
     expect(confirmEnd).toBeGreaterThan(confirmAt)
     const confirmBody = src.slice(confirmAt, confirmEnd)
+    const dupAt = confirmBody.indexOf("decision === 'duplicate'")
+    const refreshAt = confirmBody.indexOf("decision === 'refresh'")
+    expect(dupAt).toBeGreaterThan(0)
+    expect(refreshAt).toBeGreaterThan(dupAt)
+    const dupSlice = confirmBody.slice(dupAt, refreshAt)
+    expect(dupSlice).toContain("goPracticeWord('already')")
+    expect(dupSlice).not.toContain('commitSave')
+    expect(dupSlice).not.toContain('addToPocket')
     const storedAt = confirmBody.indexOf('const stored = commitSave()')
     const bailAt = confirmBody.indexOf('if (!stored) return', storedAt)
-    const clearAt = confirmBody.indexOf("setOldestLabel('')", bailAt)
-    expect(storedAt).toBeGreaterThan(0)
+    const openAt = confirmBody.indexOf('goPracticeWord(stored)', bailAt)
+    expect(storedAt).toBeGreaterThan(refreshAt)
     expect(bailAt).toBeGreaterThan(storedAt)
-    expect(clearAt).toBeGreaterThan(bailAt)
+    expect(openAt).toBeGreaterThan(bailAt)
+    const playAt = src.indexOf('const goPracticeWord = useCallback')
+    const playEnd = src.indexOf('[nav, lang, cefr, word],', playAt)
+    expect(playAt).toBeGreaterThan(commitEnd)
+    expect(playEnd).toBeGreaterThan(playAt)
+    const playBody = src.slice(playAt, playEnd)
+    expect(playBody).toContain('pocketRetryHref')
+    expect(playBody).not.toContain('setTimeout')
+    expect(playBody).not.toMatch(/recordDailyWin\s*\(/)
+  })
+
+  test('a second Practice tap does not navigate or save again', async () => {
+    const src = await pageSrc('Play.tsx')
+    const endAt = src.indexOf('function EndCard(')
+    expect(endAt).toBeGreaterThan(0)
+    const endCard = src.slice(endAt)
+    expect(endCard).toContain('const leavingRef = useRef(false)')
+    const playAt = endCard.indexOf('const goPracticeWord = useCallback')
+    const playEnd = endCard.indexOf('[nav, lang, cefr, word],', playAt)
+    const playBody = endCard.slice(playAt, playEnd)
+    const guardAt = playBody.indexOf('if (leavingRef.current) return')
+    const setAt = playBody.indexOf('leavingRef.current = true')
+    const navAt = playBody.indexOf('nav(')
+    expect(guardAt).toBeGreaterThan(0)
+    expect(setAt).toBeGreaterThan(guardAt)
+    expect(navAt).toBeGreaterThan(setAt)
+    const handlers = [
+      [
+        'const onSavePress = useCallback',
+        '}, [lang, cefr, word, commitSave, goPracticeWord])',
+      ],
+      [
+        'const onConfirmReplace = useCallback',
+        '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])',
+      ],
+    ] as const
+    for (const [start, end] of handlers) {
+      const at = endCard.indexOf(start)
+      const stop = endCard.indexOf(end, at)
+      expect(at).toBeGreaterThan(0)
+      expect(stop).toBeGreaterThan(at)
+      const body = endCard.slice(at, stop)
+      const bailAt = body.indexOf('if (leavingRef.current) return')
+      expect(bailAt).toBeGreaterThan(0)
+      const before = body.slice(0, bailAt)
+      for (const write of [
+        'commitSave',
+        'addToPocket',
+        'setSavePhase',
+        'setOldestLabel',
+        'setSnapshotOldestId',
+        'goPracticeWord',
+      ]) {
+        expect(before).not.toContain(write)
+      }
+      // First tap still saves, then navigates. addToPocket lives in commitSave.
+      expect(body.indexOf('commitSave', bailAt)).toBeGreaterThan(bailAt)
+      expect(body.indexOf('goPracticeWord', bailAt)).toBeGreaterThan(bailAt)
+    }
+  })
+
+  test('pocket play shows the router note once, then clears it', async () => {
+    const src = await pageSrc('Play.tsx')
+    expect(src).toContain('pocketNoteFromState(location.state)')
+    expect(src).toContain("mode === 'pocket'")
+    expect(src).toContain('replace: true, state: null')
+    expect(src).toContain('pocketNoteRef.current?.focus()')
+    expect(src).toContain('tabIndex={-1}')
+    expect(src).toContain('pocketNoteCopy(pocketNote)')
+    const noteAt = src.indexOf('pocketNoteCopy(pocketNote)')
+    const livesAt = src.indexOf('<Lives remaining={lives}', noteAt)
+    expect(noteAt).toBeGreaterThan(0)
+    expect(livesAt).toBeGreaterThan(noteAt)
+    const roundAt = src.indexOf('function PlayRound(')
+    const endAt = src.indexOf('function EndCard(', roundAt)
+    const round = src.slice(roundAt, endAt)
+    expect(round).toContain('pocketNoteCopy(pocketNote)')
+    expect(round).toContain('role="status"')
+    expect(round).not.toContain('Already saved')
+    expect(round).not.toContain('Saved to pocket')
+    const clearAt = round.indexOf('if (!incomingNote) return')
+    const clearEnd = round.indexOf(
+      '}, [incomingNote, location.pathname, location.search, nav])',
+      clearAt,
+    )
+    expect(clearAt).toBeGreaterThan(0)
+    expect(clearEnd).toBeGreaterThan(clearAt)
+    expect(round.slice(clearAt, clearEnd)).not.toMatch(/recordDailyWin\s*\(/)
+  })
+
+  test('pocket play says the streak is unaffected', async () => {
+    const src = await pageSrc('Play.tsx')
+    const line = 'Practice \u00b7 your streak isn\u2019t affected'
+    const straight = 'Practice \u00b7 your streak isn\u0027t affected'
+    expect(src).toContain(line)
+    expect(src).not.toContain(straight)
+    const roundAt = src.indexOf('function PlayRound(')
+    const endAt = src.indexOf('function EndCard(', roundAt)
+    const round = src.slice(roundAt, endAt)
+    const lineAt = round.indexOf(line)
+    expect(lineAt).toBeGreaterThan(0)
+    const gateAt = round.lastIndexOf("mode === 'pocket'", lineAt)
+    expect(gateAt).toBeGreaterThan(0)
+    const gate = round.slice(gateAt, lineAt)
+    expect(gate).toContain('text-ink-muted')
+    expect(gate).not.toContain("mode === 'daily'")
+    expect(gate).not.toContain("mode === 'practice'")
+    expect(src.slice(endAt)).not.toContain(line)
+    const noteAt = round.indexOf('pocketNoteCopy(pocketNote)')
+    const livesAt = round.indexOf('<Lives remaining={lives}', lineAt)
+    expect(noteAt).toBeGreaterThan(0)
+    expect(noteAt).toBeLessThan(lineAt)
+    expect(livesAt).toBeGreaterThan(lineAt)
   })
 })
 
@@ -423,7 +579,7 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(endBody).not.toMatch(/recordDailyWin\s*\(/)
   })
 
-  test('View pocket is daily-lose saved only, not the replace confirm', async () => {
+  test('replace confirm does not open pocket play or the pocket sheet', async () => {
     const src = await pageSrc('Play.tsx')
     const start = src.indexOf('confirming ? (')
     const end = src.indexOf(') : (', start)
@@ -432,20 +588,11 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     const confirmingSlice = src.slice(start, end)
     expect(confirmingSlice).not.toContain('View pocket')
     expect(confirmingSlice).not.toContain('PocketSheet')
-    const viewAt = src.indexOf('View pocket')
-    const shareAt = src.indexOf('\n            Share\n')
-    expect(viewAt).toBeGreaterThan(end)
-    expect(shareAt).toBeGreaterThan(viewAt)
+    expect(confirmingSlice).not.toContain('goPracticeWord')
+    expect(src).not.toContain('View pocket')
+    expect(src).not.toContain('<PocketSheet')
     expect(src).toContain("mode !== 'pocket'")
-    expect(src).toContain('pocketRetryHref(id, Date.now())')
-    expect(src).toContain('listPocketStored(lang, cefr).length')
-    expect(src).toContain('Pocket cleared')
-    const savedAt = src.indexOf(
-      "savePhase === 'saved' || savePhase === 'duplicate'",
-      end,
-    )
-    expect(savedAt).toBeGreaterThan(end)
-    expect(src.indexOf('Pocket cleared', savedAt)).toBeGreaterThan(savedAt)
+    expect(src).toContain('pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now())')
   })
 })
 
