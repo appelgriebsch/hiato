@@ -653,6 +653,11 @@ function PlayRound({
           {pocketNoteCopy(pocketNote)}
         </p>
       ) : null}
+      {mode === 'pocket' ? (
+        <p className="mb-3 text-center text-sm text-ink-muted short-land:mb-2">
+          Practice · your streak isn’t affected
+        </p>
+      ) : null}
       <div
         className={[
           'mb-3 flex items-center justify-between short-land:mb-2',

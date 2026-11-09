@@ -327,6 +327,31 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(clearEnd).toBeGreaterThan(clearAt)
     expect(round.slice(clearAt, clearEnd)).not.toMatch(/recordDailyWin\s*\(/)
   })
+
+  test('pocket play says the streak is unaffected', async () => {
+    const src = await pageSrc('Play.tsx')
+    const line = 'Practice \u00b7 your streak isn\u2019t affected'
+    const straight = 'Practice \u00b7 your streak isn\u0027t affected'
+    expect(src).toContain(line)
+    expect(src).not.toContain(straight)
+    const roundAt = src.indexOf('function PlayRound(')
+    const endAt = src.indexOf('function EndCard(', roundAt)
+    const round = src.slice(roundAt, endAt)
+    const lineAt = round.indexOf(line)
+    expect(lineAt).toBeGreaterThan(0)
+    const gateAt = round.lastIndexOf("mode === 'pocket'", lineAt)
+    expect(gateAt).toBeGreaterThan(0)
+    const gate = round.slice(gateAt, lineAt)
+    expect(gate).toContain('text-ink-muted')
+    expect(gate).not.toContain("mode === 'daily'")
+    expect(gate).not.toContain("mode === 'practice'")
+    expect(src.slice(endAt)).not.toContain(line)
+    const noteAt = round.indexOf('pocketNoteCopy(pocketNote)')
+    const livesAt = round.indexOf('<Lives remaining={lives}', lineAt)
+    expect(noteAt).toBeGreaterThan(0)
+    expect(noteAt).toBeLessThan(lineAt)
+    expect(livesAt).toBeGreaterThan(lineAt)
+  })
 })
 
 describe('Play LearnerHint after finish (gh-95 / ADR 0035)', () => {
