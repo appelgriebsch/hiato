@@ -299,6 +299,56 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(playBody).not.toMatch(/recordDailyWin\s*\(/)
   })
 
+  test('a second Practice tap does not navigate or save again', async () => {
+    const src = await pageSrc('Play.tsx')
+    const endAt = src.indexOf('function EndCard(')
+    expect(endAt).toBeGreaterThan(0)
+    const endCard = src.slice(endAt)
+    expect(endCard).toContain('const leavingRef = useRef(false)')
+    const playAt = endCard.indexOf('const goPracticeWord = useCallback')
+    const playEnd = endCard.indexOf('[nav, lang, cefr, word],', playAt)
+    const playBody = endCard.slice(playAt, playEnd)
+    const guardAt = playBody.indexOf('if (leavingRef.current) return')
+    const setAt = playBody.indexOf('leavingRef.current = true')
+    const navAt = playBody.indexOf('nav(')
+    expect(guardAt).toBeGreaterThan(0)
+    expect(setAt).toBeGreaterThan(guardAt)
+    expect(navAt).toBeGreaterThan(setAt)
+    const handlers = [
+      [
+        'const onSavePress = useCallback',
+        '}, [lang, cefr, word, commitSave, goPracticeWord])',
+      ],
+      [
+        'const onConfirmReplace = useCallback',
+        '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])',
+      ],
+    ] as const
+    for (const [start, end] of handlers) {
+      const at = endCard.indexOf(start)
+      const stop = endCard.indexOf(end, at)
+      expect(at).toBeGreaterThan(0)
+      expect(stop).toBeGreaterThan(at)
+      const body = endCard.slice(at, stop)
+      const bailAt = body.indexOf('if (leavingRef.current) return')
+      expect(bailAt).toBeGreaterThan(0)
+      const before = body.slice(0, bailAt)
+      for (const write of [
+        'commitSave',
+        'addToPocket',
+        'setSavePhase',
+        'setOldestLabel',
+        'setSnapshotOldestId',
+        'goPracticeWord',
+      ]) {
+        expect(before).not.toContain(write)
+      }
+      // First tap still saves, then navigates. addToPocket lives in commitSave.
+      expect(body.indexOf('commitSave', bailAt)).toBeGreaterThan(bailAt)
+      expect(body.indexOf('goPracticeWord', bailAt)).toBeGreaterThan(bailAt)
+    }
+  })
+
   test('pocket play shows the router note once, then clears it', async () => {
     const src = await pageSrc('Play.tsx')
     expect(src).toContain('pocketNoteFromState(location.state)')

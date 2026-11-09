@@ -1013,6 +1013,8 @@ function EndCard({
   const confirmBtnRef = useRef<HTMLButtonElement>(null)
   const saveBtnRef = useRef<HTMLButtonElement>(null)
   const confirmPanelRef = useRef<HTMLDivElement>(null)
+  // Latch before nav: a second tap can land before the route paints.
+  const leavingRef = useRef(false)
   const confirmHeadingId = 'pocket-replace-confirm-heading'
 
   const commitSave = useCallback(() => {
@@ -1029,6 +1031,8 @@ function EndCard({
 
   const goPracticeWord = useCallback(
     (note: 'saved' | 'already') => {
+      if (leavingRef.current) return
+      leavingRef.current = true
       nav(pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now()), {
         state: { pocketNote: note },
       })
@@ -1043,6 +1047,7 @@ function EndCard({
   }, [])
 
   const onSavePress = useCallback(() => {
+    if (leavingRef.current) return
     const slot = listPocketStored(lang, cefr)
     const id = pocketEntryId(lang, cefr, word)
     const already = slot.some((e) => e.id === id)
@@ -1064,6 +1069,7 @@ function EndCard({
   }, [lang, cefr, word, commitSave, goPracticeWord])
 
   const onConfirmReplace = useCallback(() => {
+    if (leavingRef.current) return
     const slot = listPocketStored(lang, cefr)
     const id = pocketEntryId(lang, cefr, word)
     const decision = decideConfirmReCheck(snapshotOldestId, slot, id)
