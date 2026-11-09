@@ -405,12 +405,79 @@ test.describe('short landscape viewports (#209)', () => {
     }
   }
 
+  for (const vp of VIEWPORTS) {
+    if (!vp.short) continue
+    test(`home pocket due label fits the aside ${vp.name}`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await seed(page, 'en')
+      const words = ['MANGO', 'BREAD', 'CHAIR', 'DANCE', 'EAGLE']
+      await page.addInitScript((packed: { word: string; addedAt: number }[]) => {
+        localStorage.setItem(
+          'hiato.pocket',
+          JSON.stringify({
+            v: 1,
+            entries: packed.map((entry) => ({
+              id: `en|a1|${entry.word.toLowerCase()}`,
+              lang: 'en',
+              cefr: 'a1',
+              word: entry.word,
+              gloss: `saved meaning ${entry.word}`,
+              addedAt: entry.addedAt,
+            })),
+          }),
+        )
+      }, words.map((word, addedAt) => ({ word, addedAt: addedAt + 1 })))
+      await page.goto('/')
+      const due = page.getByRole('button', { name: 'Pocket, 5 words, 5 due for review' })
+      await expect(due).toBeVisible()
+      await expect(due).toHaveText('Pocket (5 · 5 due)')
+      const fit = await due.evaluate((el) => {
+        const rect = el.getBoundingClientRect()
+        let node: Element | null = el
+        let column: DOMRect | null = null
+        while (node) {
+          if ((node.getAttribute('class') ?? '').includes('short-land:col-start-2')) {
+            column = node.getBoundingClientRect()
+            break
+          }
+          node = node.parentElement
+        }
+        return {
+          inAside: column !== null,
+          insideColumn: column
+            ? rect.left >= column.left - 1 &&
+              rect.right <= column.right + 1 &&
+              rect.top >= column.top - 1 &&
+              rect.bottom <= column.bottom + 1
+            : false,
+          inView:
+            rect.top >= -1 &&
+            rect.left >= -1 &&
+            rect.bottom <= window.innerHeight + 1 &&
+            rect.right <= window.innerWidth + 1,
+          tallEnough: rect.height >= 44,
+          textFits: el.scrollWidth <= el.clientWidth + 1,
+          docScrollW: document.scrollingElement?.scrollWidth ?? 0,
+          vw: window.innerWidth,
+        }
+      })
+      const where = `pocket due ${vp.name}`
+      expect(fit.inAside, where).toBe(true)
+      expect(fit.insideColumn, where).toBe(true)
+      expect(fit.inView, where).toBe(true)
+      expect(fit.tallEnough, where).toBe(true)
+      expect(fit.textFits, where).toBe(true)
+      expect(fit.docScrollW, where).toBeLessThanOrEqual(fit.vw + 1)
+    })
+  }
+
   test('portrait pocket sheet', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
     await seed(page, 'en')
     await page.goto('/')
     await page.getByRole('button', { name: /Pocket/ }).click()
     await expect(page.getByRole('dialog')).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Review due words (1)' })).toBeVisible()
     await ready(page)
     if (isSnapshotClock()) await expect(page).toHaveScreenshot('pocket-portrait.png')
   })

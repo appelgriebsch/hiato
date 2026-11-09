@@ -1,14 +1,30 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { listPocketStored, removeFromPocket } from '@/lib/pocket'
+import { pickDailyLemma } from '@/engine'
+import { getDailyRecord } from '@/lib/daily-record'
+import {
+  isDue,
+  listPocketStored,
+  nextReviewWhen,
+  removeFromPocket,
+  sortForSheet,
+} from '@/lib/pocket'
 import type { PocketEntry } from '@/lib/pocket'
+import {
+  dailyGateFor,
+  playableDueEntries,
+  type DailyGateSnapshot,
+} from '@/lib/pocket-play'
 import { pocketListLabel, pocketRetryHref } from '@/lib/pocket-save'
+import { loadPack } from '@/packs/load'
 import type { PackCefr, PackLang } from '@/packs/schema'
 
 type PocketSheetProps = {
   lang: PackLang
   cefr: PackCefr
+  today: string
   open: boolean
   onClose: () => void
   onCount: (n: number) => void
@@ -18,6 +34,7 @@ type PocketSheetProps = {
 export function PocketSheet({
   lang,
   cefr,
+  today,
   open,
   onClose,
   onCount,
@@ -27,25 +44,50 @@ export function PocketSheet({
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
   const focusRetryAt = useRef<number | null>(null)
+  const reviewFocusedRef = useRef(false)
   const onCloseRef = useRef(onClose)
   // oxlint-disable-next-line react/refs -- latest onClose for the layout effect, not a render read
   onCloseRef.current = onClose
-  const slotKey = `${lang}\0${cefr}`
+  const slotKey = `${lang}\0${cefr}\0${today}`
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [entries, setEntries] = useState<PocketEntry[]>([])
+  const [gate, setGate] = useState<DailyGateSnapshot | null>(null)
 
   if (open && loadedFor !== slotKey) {
     setLoadedFor(slotKey)
-    setEntries(listPocketStored(lang, cefr))
+    setEntries(sortForSheet(listPocketStored(lang, cefr), today))
+    setGate(null)
     // oxlint-disable-next-line react/refs -- clear the pending focus index when the slot changes, in this render
     focusRetryAt.current = null
   } else if (!open && loadedFor !== null) {
     setLoadedFor(null)
   }
 
+  const playable = gate ? playableDueEntries(entries, today, gate) : []
+  const dueCount = entries.filter((entry) => isDue(entry, today)).length
+  const nextAt = entries.find((entry) => !isDue(entry, today))?.dueAt
+
+  useEffect(() => {
+    if (!open) return
+    let cancelled = false
+    void loadPack(lang, cefr)
+      .then((pack) => {
+        if (cancelled) return
+        const daily = pickDailyLemma(pack.lemmas, today, lang, cefr)
+        setGate(dailyGateFor(today, daily.word, getDailyRecord(lang, cefr)))
+      })
+      .catch(() => {
+        if (!cancelled) setGate(dailyGateFor(today, '\0', null))
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [open, lang, cefr, today])
+
   useLayoutEffect(() => {
     const dialog = dialogRef.current
     if (!open) {
+      reviewFocusedRef.current = false
       if (dialog?.open) dialog.close()
       return
     }
@@ -65,11 +107,20 @@ export function PocketSheet({
         ?.focus()
       return
     }
-    const active = document.activeElement
-    openerRef.current = active instanceof HTMLElement ? active : null
-    restoreFocusRef.current = true
-    if (!dialog.open) dialog.showModal()
-  }, [open, entries, loadedFor, slotKey])
+    if (!dialog.open) {
+      const active = document.activeElement
+      openerRef.current = active instanceof HTMLElement ? active : null
+      restoreFocusRef.current = true
+      dialog.showModal()
+    }
+    if (playable.length > 0 && !reviewFocusedRef.current) {
+      const review = dialog.querySelector<HTMLButtonElement>('[data-pocket-review]')
+      if (review) {
+        reviewFocusedRef.current = true
+        review.focus()
+      }
+    }
+  }, [open, entries, loadedFor, slotKey, playable.length])
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -100,7 +151,7 @@ export function PocketSheet({
   function handleRemove(id: string) {
     const removedAt = entries.findIndex((entry) => entry.id === id)
     removeFromPocket(id)
-    const next = listPocketStored(lang, cefr)
+    const next = sortForSheet(listPocketStored(lang, cefr), today)
     onCount(next.length)
     if (next.length === 0) {
       // Status stays on the opener. Restoring focus would land on a control
@@ -147,23 +198,58 @@ export function PocketSheet({
           </Button>
         </div>
         <p className="mt-1 mb-3 text-sm text-ink-muted">
-          Meanings to retry, oldest first. Spelling stays hidden.
+          {dueCount > 0
+            ? `${dueCount} due today. Spelling stays hidden.`
+            : `Nothing due today. Next review ${nextAt == null ? 'tomorrow' : nextReviewWhen(nextAt, today)}.`}
         </p>
+        {playable.length > 0 ? (
+          <Button
+            type="button"
+            fullWidth
+            className="mb-3 min-h-11"
+            data-pocket-review
+            onClick={() => {
+              const first = playable[0]
+              if (first) handleRetry(first.id)
+            }}
+          >
+            Review due words ({playable.length})
+          </Button>
+        ) : null}
         <ul className="flex flex-col gap-3">
             {entries.map((entry, index) => {
               const glossId = `pocket-sheet-gloss-${index}`
+              const dueId = `pocket-sheet-due-${index}`
+              const whenId = `pocket-sheet-when-${index}`
+              const due = isDue(entry, today)
               return (
                 <li key={entry.id} className="flex flex-col gap-2">
-                  <p id={glossId} className="text-sm text-ink">
-                    {pocketListLabel(entry)}
-                  </p>
+                  <div className="flex items-start justify-between gap-2">
+                    <p id={glossId} className="min-w-0 text-sm text-ink">
+                      {pocketListLabel(entry)}
+                    </p>
+                    {due ? (
+                      <Badge id={dueId} tone="accent" className="shrink-0">
+                        Due
+                      </Badge>
+                    ) : null}
+                  </div>
+                  {due ? null : (
+                    <p id={whenId} className="text-xs text-ink-muted">
+                      Next review {nextReviewWhen(entry.dueAt, today)}
+                    </p>
+                  )}
                   <div className="flex gap-2">
                     <Button
                       type="button"
                       variant="secondary"
                       className="min-h-11 flex-1"
                       data-pocket-retry={index}
-                      aria-labelledby={`${glossId} pocket-sheet-retry-name`}
+                      aria-labelledby={
+                        due
+                          ? `${glossId} ${dueId} pocket-sheet-retry-name`
+                          : `${glossId} ${whenId} pocket-sheet-retry-name`
+                      }
                       onClick={() => handleRetry(entry.id)}
                     >
                       Retry

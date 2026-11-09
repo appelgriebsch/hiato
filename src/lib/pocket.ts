@@ -1,4 +1,4 @@
-import { lemmaIdentity } from '../engine'
+import { lemmaIdentity, localDateKey } from '../engine'
 import {
   isPackCefr,
   isPackLang,
@@ -18,7 +18,9 @@ import {
 
 export const POCKET_KEY = 'hiato.pocket'
 export const POCKET_CAP = 5
-export const POCKET_VERSION = 1 as const
+export const POCKET_VERSION = 2 as const
+
+export type PocketStage = 0 | 1 | 2
 
 export type PocketEntry = {
   id: string
@@ -26,8 +28,11 @@ export type PocketEntry = {
   cefr: PackCefr
   word: string
   gloss?: string
-  /** ms epoch — ordering only; no soft TTL in v1 */
+  /** ms epoch — replace-oldest stays the smallest addedAt (ADR 0044 3A). */
   addedAt: number
+  stage: PocketStage
+  /** ms epoch. Due for the whole local day of this instant, and after. */
+  dueAt: number
 }
 
 export type PocketEnvelope = {
@@ -89,12 +94,15 @@ export function addPocketEntry(
     return { entries, added: false, replaced: null, duplicate: true }
   }
 
+  const addedAt = input.addedAt ?? Date.now()
   const entry: PocketEntry = {
     id,
     lang: input.lang,
     cefr: input.cefr,
     word: input.word,
-    addedAt: input.addedAt ?? Date.now(),
+    addedAt,
+    stage: 0,
+    dueAt: addLocalDays(addedAt, 1),
   }
   if (typeof input.gloss === 'string' && input.gloss.length > 0) {
     entry.gloss = input.gloss
@@ -121,27 +129,60 @@ export function removePocketEntry(
   return entries.filter((e) => e.id !== id)
 }
 
-function parseEntry(raw: unknown): PocketEntry | null {
+function isPocketStage(value: unknown): value is PocketStage {
+  return value === 0 || value === 1 || value === 2
+}
+
+/** Finite and inside the Date range. 1e300 is finite, but `new Date(1e300)` is Invalid. */
+function isStoredTime(value: unknown): value is number {
+  return (
+    typeof value === 'number' &&
+    Number.isFinite(value) &&
+    Number.isFinite(new Date(value).getTime())
+  )
+}
+
+/**
+ * v1 rows (and v2 rows missing the ladder) become stage 0, due addedAt + 1 day.
+ * `repaired` means the stored row is not already that schedule.
+ */
+function parseEntry(
+  raw: unknown,
+  migrate: boolean,
+): { entry: PocketEntry | null; repaired: boolean } {
   try {
-    if (!raw || typeof raw !== 'object') return null
+    if (!raw || typeof raw !== 'object') return { entry: null, repaired: false }
     const o = raw as Record<string, unknown>
-    if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return null
-    if (typeof o.word !== 'string' || o.word.length === 0) return null
-    if (typeof o.addedAt !== 'number' || !Number.isFinite(o.addedAt)) return null
+    if (!isPackLang(o.lang) || !isPackCefr(o.cefr)) return { entry: null, repaired: false }
+    if (typeof o.word !== 'string' || o.word.length === 0) return { entry: null, repaired: false }
+    if (!isStoredTime(o.addedAt)) return { entry: null, repaired: false }
     // Never trust stored id — corrupt localStorage could fork duplicates.
     // A throw from lemmaIdentity drops this row only.
     const id = pocketEntryId(o.lang, o.cefr, o.word)
+    let repaired = migrate
+    let stage: PocketStage = 0
+    let dueAt = addLocalDays(o.addedAt, 1)
+    if (!migrate) {
+      if (!isPocketStage(o.stage) || !isStoredTime(o.dueAt)) {
+        repaired = true
+      } else {
+        stage = o.stage
+        dueAt = o.dueAt
+      }
+    }
     const entry: PocketEntry = {
       id,
       lang: o.lang,
       cefr: o.cefr,
       word: o.word,
       addedAt: o.addedAt,
+      stage,
+      dueAt,
     }
     if (typeof o.gloss === 'string' && o.gloss.length > 0) entry.gloss = o.gloss
-    return entry
+    return { entry, repaired }
   } catch {
-    return null
+    return { entry: null, repaired: false }
   }
 }
 
@@ -186,14 +227,15 @@ type PocketRead = {
   /** Present key's raw string. Null when missing or getItem threw. */
   raw: string | null
   entries: PocketEntry[]
-  /** Shape is unusable (not a row salvage). v > 1 is not unusable. */
+  /** Shape is unusable (not a row salvage). v > POCKET_VERSION is not unusable. */
   unusable: boolean
 }
 
 /**
  * Normalize hiato.pocket. Does not write.
- * Empty string is unreadable, not missing. v > 1 stays on disk and
- * reads as an empty list so a newer schema is neither shown nor crashed on.
+ * Empty string is unreadable, not missing. v1 migrates on read
+ * (stage 0, dueAt = addedAt + 1 day) and repair writes v2.
+ * v > POCKET_VERSION stays on disk and reads as an empty list.
  */
 function readPocket(): PocketRead {
   let raw: string | null
@@ -224,22 +266,23 @@ function readPocket(): PocketRead {
   if (version > POCKET_VERSION) {
     return { kind: 'future', raw, entries: [], unusable: false }
   }
-  if (version !== POCKET_VERSION || !Array.isArray(record.entries)) {
+  if ((version !== 1 && version !== POCKET_VERSION) || !Array.isArray(record.entries)) {
     return { kind: 'dirty', raw, entries: [], unusable: true }
   }
 
-  let dirty = false
+  const migrate = version !== POCKET_VERSION
+  let dirty = migrate
   const entries: PocketEntry[] = []
   const seen = new Set<string>()
   for (const item of record.entries) {
-    const entry = parseEntry(item)
-    if (!entry || seen.has(entry.id)) {
+    const parsed = parseEntry(item, migrate)
+    if (!parsed.entry || seen.has(parsed.entry.id)) {
       dirty = true
       continue
     }
-    seen.add(entry.id)
-    if (!storedIdMatches(item, entry.id)) dirty = true
-    entries.push(entry)
+    seen.add(parsed.entry.id)
+    if (parsed.repaired || !storedIdMatches(item, parsed.entry.id)) dirty = true
+    entries.push(parsed.entry)
   }
   const clamped = clampSlots(entries)
   if (clamped.dropped) dirty = true
@@ -267,7 +310,7 @@ function writeEnvelope(env: PocketEnvelope): boolean {
 
 /**
  * Write a normalized envelope only when the key is present and dirty
- * (unusable shape other than v > 1, a dropped row, a non-canonical id,
+ * (unusable shape other than v > POCKET_VERSION, a dropped row, a non-canonical id,
  * or a slot over cap). Key order, whitespace, and unknown fields are not
  * dirt. Re-reads immediately before setItem and skips if the bytes moved.
  */
@@ -315,6 +358,57 @@ export function listPocketStored(
   return listPocket(loadPocket(), lang, cefr)
 }
 
+/** Due for the whole local calendar day of dueAt, and every later day. */
+export function isDue(entry: { dueAt: number }, today: string): boolean {
+  return localDateKey(new Date(entry.dueAt)) <= today
+}
+
+/** N local calendar days later, same wall-clock time. A 23h/25h day does not move the due day. */
+export function addLocalDays(ms: number, days: number): number {
+  const d = new Date(ms)
+  d.setDate(d.getDate() + days)
+  const next = d.getTime()
+  // setDate past ±8.64e15 is NaN. A valid input keeps its own instant so repair does not loop.
+  return Number.isFinite(next) ? next : new Date(ms).getTime()
+}
+
+/** Due entries first, then the rest. Each group by dueAt, ties by id. */
+export function sortForSheet<T extends PocketEntry>(
+  entries: readonly T[],
+  today: string,
+): T[] {
+  return entries.slice().sort((a, b) => {
+    const due = Number(isDue(b, today)) - Number(isDue(a, today))
+    return due || a.dueAt - b.dueAt || a.id.localeCompare(b.id)
+  })
+}
+
+/** How many entries in one lang×CEFR slot are due on today. */
+export function dueInSlot(
+  entries: readonly PocketEntry[],
+  lang: PackLang,
+  cefr: PackCefr,
+  today: string,
+): number {
+  let count = 0
+  for (const entry of entries) {
+    if (entry.lang === lang && entry.cefr === cefr && isDue(entry, today)) count += 1
+  }
+  return count
+}
+
+/** "today", "tomorrow", or "in N days" from today to the local day of dueAt. */
+export function nextReviewWhen(dueAt: number, today: string): string {
+  const due = new Date(dueAt)
+  const dueMidnight = new Date(due.getFullYear(), due.getMonth(), due.getDate()).getTime()
+  const [y, m, d] = today.split('-').map(Number)
+  const todayMidnight = new Date(y!, m! - 1, d).getTime()
+  // Round absorbs a 23h or 25h local day so the count stays calendar days.
+  const days = Math.round((dueMidnight - todayMidnight) / 86_400_000)
+  if (!Number.isFinite(days) || days <= 0) return 'today'
+  return days === 1 ? 'tomorrow' : `in ${days} days`
+}
+
 export function addToPocket(input: {
   lang: PackLang
   cefr: PackCefr
@@ -334,6 +428,27 @@ export function addToPocket(input: {
     if (!stored) return { ...result, added: false }
   }
   return result
+}
+
+/** Write stage and dueAt for one id. Missing id and newer schemas do not write. */
+export function reschedulePocketEntry(
+  id: string,
+  stage: PocketStage,
+  dueAt: number,
+): PocketEntry[] {
+  const read = readPocket()
+  if (read.kind === 'future' || read.kind === 'blocked') return []
+  repairFromRead(read)
+  let changed = false
+  const next = read.entries.map((entry) => {
+    if (entry.id !== id || (entry.stage === stage && entry.dueAt === dueAt)) {
+      return entry
+    }
+    changed = true
+    return { ...entry, stage, dueAt }
+  })
+  if (changed) writeEnvelope({ v: POCKET_VERSION, entries: next })
+  return next
 }
 
 /** Persist remove by id; returns the full remaining entry list. */

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
-import { listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
+import { isDue, listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
 import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
 import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
@@ -28,10 +28,12 @@ export function Home() {
     selectedLang && selectedCefr
       ? getStreakCount(selectedLang, selectedCefr, dateKey)
       : 0
-  const pocketCount =
+  const pocketEntries =
     selectedLang && selectedCefr
-      ? listPocketStored(selectedLang, selectedCefr).length
-      : 0
+      ? listPocketStored(selectedLang, selectedCefr)
+      : []
+  const pocketCount = pocketEntries.length
+  const pocketDue = pocketEntries.filter((entry) => isDue(entry, dateKey)).length
   const slotKey =
     selectedLang && selectedCefr ? pocketSlot(selectedLang, selectedCefr) : null
   const dailyDone =
@@ -137,9 +139,16 @@ export function Home() {
           variant="outline"
           fullWidth
           className="mt-2"
+          aria-label={
+            pocketDue > 0
+              ? `Pocket, ${pocketCount} words, ${pocketDue} due for review`
+              : undefined
+          }
           onClick={() => setPocketOpen(true)}
         >
-          Pocket ({pocketCount})
+          {pocketDue > 0
+            ? `Pocket (${pocketCount} · ${pocketDue} due)`
+            : `Pocket (${pocketCount})`}
         </Button>
       )
     }
@@ -241,6 +250,7 @@ export function Home() {
             <PocketSheet
               lang={prefs.lang}
               cefr={prefs.cefr}
+              today={dateKey}
               open={pocketOpen}
               onClose={() => setPocketOpen(false)}
               onCount={(n) => {

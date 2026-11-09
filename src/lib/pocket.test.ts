@@ -1,20 +1,28 @@
+import { spawnSync } from 'node:child_process'
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
-import { lemmaIdentity } from '../engine'
+import { fileURLToPath } from 'node:url'
+import { lemmaIdentity, localDateKey } from '../engine'
 import { DAILY_KEY } from './daily-record'
 import {
   POCKET_CAP,
   POCKET_KEY,
   POCKET_VERSION,
+  addLocalDays,
   addPocketEntry,
   addToPocket,
+  dueInSlot,
+  isDue,
   listPocket,
   listPocketStored,
   loadPocket,
+  nextReviewWhen,
   pocketEntryId,
   pocketSlot,
   removeFromPocket,
   removePocketEntry,
   repairPocket,
+  reschedulePocketEntry,
+  sortForSheet,
   type PocketEntry,
 } from './pocket'
 import { STREAKS_KEY } from './streaks'
@@ -53,6 +61,8 @@ function entry(
     cefr,
     word,
     addedAt,
+    stage: 0,
+    dueAt: addLocalDays(addedAt, 1),
   }
   if (gloss) e.gloss = gloss
   return e
@@ -141,6 +151,8 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     expect(twice.entries).toBe(once.entries)
     expect(twice.entries[0]!.addedAt).toBe(1000)
     expect(twice.entries[0]!.gloss).toBe('fruit')
+    expect(twice.entries[0]!.stage).toBe(0)
+    expect(twice.entries[0]!.dueAt).toBe(first.dueAt)
   })
 
   test('cap is 5 per lang x CEFR; other slots are independent', () => {
@@ -347,7 +359,7 @@ describe('pocket repair (#86)', () => {
     mem.clear()
   })
 
-  test('unreadable values repair to an empty v1 envelope after a pure read', () => {
+  test('unreadable values repair to an empty v2 envelope after a pure read', () => {
     const samples = [
       '{not json',
       '',
@@ -363,7 +375,7 @@ describe('pocket repair (#86)', () => {
       expect(mem.get(POCKET_KEY)).toBe(raw)
       expect(writes.sets).toBe(0)
       expect(repairPocket()).toEqual([])
-      expect(mem.get(POCKET_KEY)).toBe('{"v":1,"entries":[]}')
+      expect(mem.get(POCKET_KEY)).toBe('{"v":2,"entries":[]}')
     }
   })
 
@@ -406,9 +418,9 @@ describe('pocket repair (#86)', () => {
     expect(removes).toBe(0)
   })
 
-  test('v greater than 1 reads empty and does not change the stored string', () => {
+  test('v greater than 2 reads empty and does not change the stored string', () => {
     const raw = JSON.stringify({
-      v: 2,
+      v: 3,
       entries: [{ word: 'x', lang: 'en', cefr: 'a1', addedAt: 1 }],
     })
     mem.set(POCKET_KEY, raw)
@@ -509,7 +521,7 @@ describe('pocket repair (#86)', () => {
   })
 
   test('a second read of a clean envelope does not call setItem', () => {
-    const pretty = '{ "v": 1, "extra": true, "entries": [] }'
+    const pretty = '{ "v": 2, "extra": true, "entries": [] }'
     mem.set(POCKET_KEY, pretty)
     const writes = countWrites()
     expect(loadPocket()).toEqual([])
@@ -604,7 +616,7 @@ describe('pocket repair (#86)', () => {
 
     mem.set(POCKET_KEY, '[]')
     expect(removeFromPocket('missing-id')).toEqual([])
-    expect(mem.get(POCKET_KEY)).toBe('{"v":1,"entries":[]}')
+    expect(mem.get(POCKET_KEY)).toBe('{"v":2,"entries":[]}')
   })
 
   test('repair rewrites only hiato.pocket and drops ttl fields', () => {
@@ -633,7 +645,7 @@ describe('pocket repair (#86)', () => {
     const pocket = JSON.parse(mem.get(POCKET_KEY)!) as Record<string, unknown>
     expect(pocket.expiresAt).toBeUndefined()
     expect(pocket.ttl).toBeUndefined()
-    expect(pocket.v).toBe(1)
+    expect(pocket.v).toBe(POCKET_VERSION)
     expect(pocket.entries).toHaveLength(1)
   })
 
@@ -655,5 +667,373 @@ describe('pocket repair (#86)', () => {
     expect(repairPocket()).toEqual([])
     expect(mem.get(POCKET_KEY)).toBe('{"v":2,"entries":[]}')
     expect(reads).toBeGreaterThanOrEqual(2)
+  })
+})
+
+describe('pocket spaced review (ADR 0044)', () => {
+  let mem: Map<string, string>
+
+  beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
+    mem.clear()
+  })
+
+  test('v1 migrates with no data loss and repair writes v2', () => {
+    const addedAt = new Date(2026, 0, 2, 8, 0, 0).getTime()
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 1,
+        entries: [
+          {
+            id: 'forged',
+            lang: 'en',
+            cefr: 'a1',
+            word: 'ok',
+            gloss: 'fine',
+            addedAt,
+          },
+        ],
+      }),
+    )
+    const loaded = loadPocket()
+    expect(loaded).toHaveLength(1)
+    expect(loaded[0]).toMatchObject({
+      id: pocketEntryId('en', 'a1', 'ok'),
+      word: 'ok',
+      gloss: 'fine',
+      addedAt,
+      stage: 0,
+      dueAt: addLocalDays(addedAt, 1),
+    })
+    expect(JSON.parse(mem.get(POCKET_KEY)!).v).toBe(1)
+    repairPocket()
+    const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+      v: number
+      entries: PocketEntry[]
+    }
+    expect(stored.v).toBe(2)
+    expect(stored.entries[0]).toMatchObject({
+      word: 'ok',
+      gloss: 'fine',
+      addedAt,
+      stage: 0,
+      dueAt: addLocalDays(addedAt, 1),
+    })
+  })
+
+  test('v greater than 2 is left untouched', () => {
+    const raw = JSON.stringify({
+      v: 4,
+      entries: [{ lang: 'en', cefr: 'a1', word: 'keep', addedAt: 5, stage: 9 }],
+    })
+    mem.set(POCKET_KEY, raw)
+    expect(loadPocket()).toEqual([])
+    expect(repairPocket()).toEqual([])
+    expect(mem.get(POCKET_KEY)).toBe(raw)
+  })
+
+  test('a v2 row missing the ladder repairs in place', () => {
+    const addedAt = 50
+    mem.set(
+      POCKET_KEY,
+      JSON.stringify({
+        v: 2,
+        entries: [{ lang: 'en', cefr: 'a1', word: 'ok', gloss: 'g', addedAt }],
+      }),
+    )
+    expect(loadPocket()[0]).toMatchObject({
+      stage: 0,
+      dueAt: addLocalDays(addedAt, 1),
+      gloss: 'g',
+      addedAt,
+    })
+    repairPocket()
+    const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+      v: number
+      entries: PocketEntry[]
+    }
+    expect(stored.v).toBe(2)
+    expect(stored.entries[0]!.stage).toBe(0)
+    expect(stored.entries[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
+    expect(stored.entries[0]!.addedAt).toBe(addedAt)
+  })
+
+  test('a new save is stage 0 due tomorrow and a duplicate changes nothing', () => {
+    const addedAt = new Date(2026, 10, 9, 15, 30, 0).getTime()
+    const once = addToPocket({
+      lang: 'en',
+      cefr: 'a1',
+      word: 'apple',
+      gloss: 'fruit',
+      addedAt,
+    })
+    expect(once.entries[0]).toMatchObject({
+      stage: 0,
+      dueAt: addLocalDays(addedAt, 1),
+      addedAt,
+    })
+    expect(localDateKey(new Date(once.entries[0]!.dueAt))).toBe('2026-11-10')
+    const raw = mem.get(POCKET_KEY)
+    const twice = addToPocket({
+      lang: 'en',
+      cefr: 'a1',
+      word: 'APPLE',
+      addedAt: addedAt + 9,
+      gloss: 'other',
+    })
+    expect(twice.duplicate).toBe(true)
+    expect(twice.entries[0]!.stage).toBe(0)
+    expect(twice.entries[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
+    expect(twice.entries[0]!.addedAt).toBe(addedAt)
+    expect(twice.entries[0]!.gloss).toBe('fruit')
+    expect(mem.get(POCKET_KEY)).toBe(raw)
+  })
+
+  test('isDue is the whole local day of dueAt, including the midnight boundary', () => {
+    const midnight = new Date(2026, 10, 9, 0, 0, 0, 0).getTime()
+    const afternoon = new Date(2026, 10, 9, 18, 30, 0).getTime()
+    expect(localDateKey(new Date(midnight - 1))).toBe('2026-11-08')
+    expect(localDateKey(new Date(midnight))).toBe('2026-11-09')
+    expect(isDue({ dueAt: midnight - 1 }, '2026-11-09')).toBe(true)
+    expect(isDue({ dueAt: midnight }, '2026-11-08')).toBe(false)
+    expect(isDue({ dueAt: midnight }, '2026-11-09')).toBe(true)
+    expect(isDue({ dueAt: afternoon }, '2026-11-09')).toBe(true)
+    expect(isDue({ dueAt: afternoon }, '2026-11-08')).toBe(false)
+    expect(
+      isDue({ dueAt: new Date(2026, 10, 9, 23, 59, 59, 999).getTime() }, '2026-11-09'),
+    ).toBe(true)
+    expect(
+      isDue({ dueAt: new Date(2026, 10, 10, 0, 0, 0, 0).getTime() }, '2026-11-09'),
+    ).toBe(false)
+    expect(isDue({ dueAt: afternoon }, '2026-11-10')).toBe(true)
+  })
+
+  test('sortForSheet lists due first, then the rest, each by dueAt then id', () => {
+    const today = '2026-11-09'
+    const row = (word: string, dueAt: number): PocketEntry => ({
+      ...entry('en', 'a1', word, dueAt),
+      dueAt,
+    })
+    const rows = [
+      row('late', new Date(2026, 10, 12).getTime()),
+      row('tie-b', new Date(2026, 10, 8).getTime()),
+      row('soon', new Date(2026, 10, 10).getTime()),
+      row('tie-a', new Date(2026, 10, 8).getTime()),
+      row('old', new Date(2026, 10, 1).getTime()),
+    ]
+    expect(sortForSheet(rows, today).map((item) => item.word)).toEqual([
+      'old',
+      'tie-a',
+      'tie-b',
+      'soon',
+      'late',
+    ])
+    expect(dueInSlot(rows, 'en', 'a1', today)).toBe(3)
+    expect(dueInSlot(rows, 'de', 'a1', today)).toBe(0)
+  })
+
+  test('nextReviewWhen is today, tomorrow, or in N days', () => {
+    const today = '2026-11-09'
+    expect(nextReviewWhen(new Date(2026, 10, 9, 23).getTime(), today)).toBe('today')
+    expect(nextReviewWhen(new Date(2026, 10, 8, 12).getTime(), today)).toBe('today')
+    expect(nextReviewWhen(new Date(2026, 10, 10, 23).getTime(), today)).toBe('tomorrow')
+    expect(nextReviewWhen(new Date(2026, 10, 12, 1).getTime(), today)).toBe('in 3 days')
+    expect(nextReviewWhen(new Date(2026, 10, 16, 12).getTime(), today)).toBe('in 7 days')
+  })
+
+  test('unrepresentable times are dropped or repaired once, and nextReviewWhen does not loop', () => {
+    const extremes = [1e300, -1e300, 8.64e15 + 1]
+    const addedAt = new Date(2026, 10, 9, 12).getTime()
+    const good = {
+      id: pocketEntryId('en', 'a1', 'ok'),
+      lang: 'en' as const,
+      cefr: 'a1' as const,
+      word: 'ok',
+      addedAt,
+      stage: 0 as const,
+      dueAt: addLocalDays(addedAt, 1),
+    }
+    for (const bad of extremes) {
+      mem.set(
+        POCKET_KEY,
+        JSON.stringify({
+          v: 2,
+          entries: [
+            good,
+            {
+              ...good,
+              id: pocketEntryId('en', 'a1', 'bad'),
+              word: 'bad',
+              addedAt: bad,
+            },
+          ],
+        }),
+      )
+      expect(loadPocket().map((row) => row.word)).toEqual(['ok'])
+      expect(repairPocket().map((row) => row.word)).toEqual(['ok'])
+      const stored = JSON.parse(mem.get(POCKET_KEY)!) as {
+        entries: { word: string; addedAt: unknown }[]
+      }
+      expect(stored.entries.map((row) => row.word)).toEqual(['ok'])
+      expect(stored.entries[0]!.addedAt).toBe(addedAt)
+      expect(JSON.stringify(stored)).not.toContain('null')
+      const writes = countWrites()
+      expect(loadPocket().map((row) => row.word)).toEqual(['ok'])
+      expect(repairPocket()).toHaveLength(1)
+      expect(writes.sets).toBe(0)
+
+      mem.set(
+        POCKET_KEY,
+        JSON.stringify({
+          v: 2,
+          entries: [{ ...good, dueAt: bad }],
+        }),
+      )
+      expect(loadPocket()[0]).toMatchObject({
+        word: 'ok',
+        addedAt,
+        stage: 0,
+        dueAt: addLocalDays(addedAt, 1),
+      })
+      expect(repairPocket()[0]).toMatchObject({
+        stage: 0,
+        dueAt: addLocalDays(addedAt, 1),
+        addedAt,
+      })
+      const again = countWrites()
+      expect(loadPocket()[0]!.dueAt).toBe(addLocalDays(addedAt, 1))
+      expect(repairPocket()).toHaveLength(1)
+      expect(again.sets).toBe(0)
+      const raw = mem.get(POCKET_KEY)!
+      expect(raw).not.toContain('null')
+      const savedDue = (JSON.parse(raw) as { entries: { dueAt: number }[] }).entries[0]!.dueAt
+      expect(Number.isFinite(savedDue)).toBe(true)
+      expect(Number.isFinite(new Date(savedDue).getTime())).toBe(true)
+    }
+
+    expect(Number.isFinite(addLocalDays(8.64e15, 1))).toBe(true)
+    const today = '2026-11-09'
+    for (const dueAt of [...extremes, 8.64e15, -8.64e15]) {
+      const phrase = nextReviewWhen(dueAt, today)
+      expect(phrase === 'today' || /^in \d+ days$/.test(phrase)).toBe(true)
+      expect(phrase).not.toContain('NaN')
+    }
+    expect(nextReviewWhen(-8.64e15, today)).toBe('today')
+    expect(nextReviewWhen(8.64e15, today)).toMatch(/^in \d+ days$/)
+  })
+
+  test('calendar-day steps keep wall-clock time across Europe/Berlin DST', () => {
+    const script = `
+      const { addLocalDays, addPocketEntry, isDue, loadPocket, repairPocket, POCKET_KEY } = await import('./src/lib/pocket.ts')
+      const { pocketOutcomeOnFinish } = await import('./src/lib/pocket-play.ts')
+      const { localDateKey } = await import('./src/engine/daily.ts')
+      const store = new Map()
+      globalThis.localStorage = {
+        getItem: (key) => store.get(key) ?? null,
+        setItem: (key, value) => { store.set(key, value) },
+        removeItem: (key) => { store.delete(key) },
+      }
+      const fall = new Date(2026, 9, 25, 0, 30).getTime()
+      if (new Date(fall).getTimezoneOffset() !== -120) {
+        throw new Error('expected Europe/Berlin CEST at 2026-10-25 00:30, offset ' + new Date(fall).getTimezoneOffset())
+      }
+      const dayMs = 86_400_000
+      function expectStep(ms, days, label) {
+        const due = addLocalDays(ms, days)
+        const from = new Date(ms)
+        const to = new Date(due)
+        const want = new Date(from.getFullYear(), from.getMonth(), from.getDate() + days, from.getHours(), from.getMinutes())
+        if (localDateKey(to) !== localDateKey(want)) throw new Error(label + ' date ' + localDateKey(to))
+        if (to.getHours() !== from.getHours() || to.getMinutes() !== from.getMinutes()) {
+          throw new Error(label + ' wall clock ' + to.toString())
+        }
+        if (days > 0 && due === ms + days * dayMs && from.getTimezoneOffset() !== to.getTimezoneOffset()) {
+          throw new Error(label + ' matched a raw 24h step across a DST change')
+        }
+      }
+      const saved = addPocketEntry([], { lang: 'en', cefr: 'a1', word: 'tree', addedAt: fall }).entries[0]
+      if (localDateKey(new Date(saved.dueAt)) !== '2026-10-26') throw new Error('save due ' + localDateKey(new Date(saved.dueAt)))
+      if (isDue(saved, '2026-10-25')) throw new Error('00:30 fallback save is due the same day')
+      if (isDue(saved, '2026-10-26') !== true) throw new Error('save not due next day')
+      if (saved.dueAt === fall + dayMs) throw new Error('save used a raw 24h step')
+      expectStep(fall, 1, 'save')
+      const spring = new Date(2026, 2, 29, 0, 30).getTime()
+      for (const [start, label] of [[fall, 'fall'], [spring, 'spring']]) {
+        for (const [stage, days] of [[1, 3], [2, 7]]) {
+          const outcome = pocketOutcomeOnFinish(false, true, stage, start)
+          if (outcome.type !== 'advance' || outcome.dueAt !== addLocalDays(start, days)) {
+            throw new Error(label + ' ladder +' + days)
+          }
+          expectStep(start, days, label + ' +' + days)
+        }
+      }
+      for (const addedAt of [fall, spring]) {
+        store.set(POCKET_KEY, JSON.stringify({
+          v: 1,
+          entries: [{ lang: 'en', cefr: 'a1', word: 'ok', gloss: 'fine', addedAt }],
+        }))
+        const migrated = loadPocket()[0]
+        if (migrated.dueAt !== addLocalDays(addedAt, 1) || migrated.gloss !== 'fine' || migrated.stage !== 0) {
+          throw new Error('migrate ' + new Date(addedAt).toString())
+        }
+        repairPocket()
+        const stored = JSON.parse(store.get(POCKET_KEY))
+        if (stored.v !== 2 || stored.entries[0].dueAt !== addLocalDays(addedAt, 1)) throw new Error('repair v')
+        store.set(POCKET_KEY, JSON.stringify({
+          v: 2,
+          entries: [{ lang: 'en', cefr: 'a1', word: 'ok', addedAt }],
+        }))
+        const repaired = loadPocket()[0]
+        if (repaired.dueAt !== addLocalDays(addedAt, 1)) throw new Error('v2 repair')
+      }
+    `
+    const result = spawnSync('bun', ['-e', script], {
+      cwd: fileURLToPath(new URL('../..', import.meta.url)),
+      env: { ...process.env, TZ: 'Europe/Berlin' },
+      encoding: 'utf8',
+    })
+    expect(result.status, `${result.stderr ?? ''}${result.stdout ?? ''}`).toBe(0)
+  })
+
+  test('replace-oldest drops the smallest addedAt even when a later row is due', () => {
+    const far = new Date(2026, 11, 1).getTime()
+    const past = new Date(2020, 0, 1).getTime()
+    const words = ['fresh', 'b', 'c', 'd', 'due']
+    const entries: PocketEntry[] = words.map((word, index) => {
+      const addedAt = word === 'fresh' ? 1 : 100 + index
+      return {
+        ...entry('en', 'a1', word, addedAt),
+        dueAt: word === 'due' ? past : far,
+        stage: word === 'due' ? 2 : 0,
+      }
+    })
+    const result = addPocketEntry(entries, {
+      lang: 'en',
+      cefr: 'a1',
+      word: 'extra',
+      addedAt: 500,
+    })
+    expect(result.replaced?.word).toBe('fresh')
+    expect(result.entries.some((item) => item.word === 'due')).toBe(true)
+  })
+
+  test('reschedule and remove do not touch the streak', () => {
+    const streaks = '{"en|a1":{"count":4,"lastWinDate":"2026-09-01"}}'
+    mem.set(STREAKS_KEY, streaks)
+    addToPocket({ lang: 'en', cefr: 'a1', word: 'tree', addedAt: 10 })
+    const id = pocketEntryId('en', 'a1', 'tree')
+    const dueAt = 10 + 3 * 86_400_000
+    reschedulePocketEntry(id, 1, dueAt)
+    const stored = loadPocket()[0]!
+    expect(stored.stage).toBe(1)
+    expect(stored.dueAt).toBe(dueAt)
+    expect(stored.addedAt).toBe(10)
+    removeFromPocket(id)
+    expect(mem.get(STREAKS_KEY)).toBe(streaks)
+    expect(loadPocket()).toEqual([])
   })
 })
