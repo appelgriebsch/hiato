@@ -9,15 +9,18 @@ describe('StreakChip freeze copy (ADR 0046)', () => {
 
   test('omits the freeze count at 0 and names 1 freeze or 2 freezes', () => {
     const none = renderToStaticMarkup(<StreakChip count={12} />)
+    expect(none).toContain('role="img"')
     expect(none).toContain('aria-label="Streak 12"')
     expect(none).not.toContain('❄️')
 
     const one = renderToStaticMarkup(<StreakChip count={12} freezes={1} />)
+    expect(one).toContain('role="img"')
     expect(one).toContain('aria-label="Streak 12, 1 freeze"')
     expect(one).toContain('❄️')
     expect(one).toContain('>1<')
 
     const two = renderToStaticMarkup(<StreakChip count={12} freezes={2} />)
+    expect(two).toContain('role="img"')
     expect(two).toContain('aria-label="Streak 12, 2 freezes"')
     expect(two).toContain('>2<')
   })

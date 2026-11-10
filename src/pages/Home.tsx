@@ -12,7 +12,7 @@ import { isDailyComplete } from '@/lib/daily-record'
 import { isDue, listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
 import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
-import { ensureStreakPersisted, getStreak, getStreakCount } from '@/lib/streaks'
+import { ensureStreakPersisted, getStreak, visibleStreak } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
@@ -28,10 +28,7 @@ export function Home() {
     selectedLang && selectedCefr
       ? getStreak(selectedLang, selectedCefr, dateKey)
       : null
-  const streak =
-    streakState && selectedLang && selectedCefr
-      ? getStreakCount(selectedLang, selectedCefr, dateKey)
-      : 0
+  const streak = streakState ? visibleStreak(streakState, dateKey) : 0
   const freezes = streakState?.freezes ?? 0
   const pocketEntries =
     selectedLang && selectedCefr

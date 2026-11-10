@@ -16,7 +16,7 @@ export function StreakChip({
       ? `Streak ${count}, ${held} ${held === 1 ? 'freeze' : 'freezes'}`
       : `Streak ${count}`
   return (
-    <Badge aria-label={label} pulse={pulse}>
+    <Badge role="img" aria-label={label} pulse={pulse}>
       <span aria-hidden="true">🔥</span>
       {count}
       {held > 0 ? (
