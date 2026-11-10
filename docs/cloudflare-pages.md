@@ -60,7 +60,7 @@ Security on `/*` (more specific cache rules still win for `Cache-Control`):
 - `X-Frame-Options: DENY`
 - `Permissions-Policy` with camera, microphone, geolocation, and payment disabled
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
-- `Content-Security-Policy` locked to `'self'` (same-origin scripts, styles, fonts, workers; `frame-ancestors 'none'`; no `unsafe-inline` or `unsafe-eval`)
+- `Content-Security-Policy` locked to `'self'` plus the two Web Analytics hosts: `script-src https://static.cloudflareinsights.com` and `connect-src https://cloudflareinsights.com` (ADR 0047; the beacon is only injected on Production, so staging loads nothing cross-origin). Same-origin scripts, styles, fonts, workers; `frame-ancestors 'none'`; no `unsafe-inline` or `unsafe-eval`
 
 ## Bindings
 
