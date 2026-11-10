@@ -161,19 +161,22 @@ describe('Home pocket control (gh-85)', () => {
     expect(src).not.toContain('Pocket (0)')
   })
 
-  test('count is read beside getStreakCount during render, not a useState cache', async () => {
+  test('count is read from one midnight-broken getStreak during render, not a useState cache', async () => {
     const src = await pageSrc('Home.tsx')
     const streakAt = src.indexOf(
-      'getStreakCount(selectedLang, selectedCefr, dateKey)',
+      'getStreak(selectedLang, selectedCefr, dateKey)',
     )
+    const visibleAt = src.indexOf('visibleStreak(streakState, dateKey)', streakAt)
     const countAt = src.indexOf(
       'listPocketStored(selectedLang, selectedCefr)',
       streakAt,
     )
     const returnAt = src.indexOf('return (', streakAt)
     expect(streakAt).toBeGreaterThan(0)
-    expect(countAt).toBeGreaterThan(streakAt)
+    expect(visibleAt).toBeGreaterThan(streakAt)
+    expect(countAt).toBeGreaterThan(visibleAt)
     expect(returnAt).toBeGreaterThan(countAt)
+    expect(src).not.toContain('getStreakCount')
     expect(src).not.toMatch(/useState\(\(\)\s*=>[\s\S]{0,240}listPocketStored/)
     expect(src).toMatch(
       /useEffect\(\(\) => \{[\s\S]*repairPocket\(\)[\s\S]*\}, \[selectedLang, selectedCefr\]\)/,

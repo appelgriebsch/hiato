@@ -72,6 +72,7 @@ import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
 import {
   ensureStreakPersisted,
+  getStreak,
   getStreakCount,
   recordDailyWin,
 } from '@/lib/streaks'
@@ -170,6 +171,7 @@ function PlayRound({
   const [revealedWord, setRevealedWord] = useState(false)
   const [alreadyPlayed, setAlreadyPlayed] = useState(false)
   const [streak, setStreak] = useState(0)
+  const [freezes, setFreezes] = useState(0)
   const [practiceOk, setPracticeOk] = useState(true)
   const [shakeKey, setShakeKey] = useState<string | null>(null)
   const [streakPulse, setStreakPulse] = useState(false)
@@ -243,8 +245,9 @@ function PlayRound({
   }
 
   useEffect(() => {
-    ensureStreakPersisted(lang, cefr, dateKey)
+    const next = ensureStreakPersisted(lang, cefr, dateKey)
     setStreak(getStreakCount(lang, cefr, dateKey))
+    setFreezes(next.freezes)
   }, [lang, cefr, dateKey])
 
   // One-shot note from Practice this word. Replace drops it from history
@@ -275,8 +278,10 @@ function PlayRound({
       if (result === 'win') {
         const next = recordDailyWin(lang, cefr, dateKey)
         setStreak(next.count)
+        setFreezes(next.freezes)
       } else {
         setStreak(getStreakCount(lang, cefr, dateKey))
+        setFreezes(getStreak(lang, cefr, dateKey).freezes)
       }
       setDailyRecord({
         dateKey,
@@ -594,7 +599,7 @@ function PlayRound({
             </div>
           }
           center={<Badge>Practice</Badge>}
-          right={<StreakChip count={streak} pulse={streakPulse} />}
+          right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
         />
         <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
           <h1 className="text-title text-ink">Practice unavailable</h1>
@@ -622,6 +627,7 @@ function PlayRound({
         cefr={cefr}
         dateKey={dateKey}
         streak={streak}
+        freezes={freezes}
         streakPulse={streakPulse}
         practiceOk={practiceOk}
         onPractice={goPractice}
@@ -674,7 +680,7 @@ function PlayRound({
             <Badge>{modeBadgeLabel(mode)}</Badge>
           )
         }
-        right={<StreakChip count={streak} pulse={streakPulse} />}
+        right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
       />
 
       <div className="flex flex-col short-land:col-start-1 short-land:row-start-2 short-land:min-h-0 short-land:min-w-0 short-land:flex-1">
@@ -773,6 +779,7 @@ function PlayRound({
               cefr={cefr}
               dateKey={dateKey}
               streak={streak}
+              freezes={freezes}
               streakPulse={streakPulse}
               practiceOk={practiceOk}
               onPractice={goPractice}
@@ -861,6 +868,7 @@ function DoneDaily({
   cefr,
   dateKey,
   streak,
+  freezes,
   streakPulse,
   practiceOk,
   onPractice,
@@ -870,6 +878,7 @@ function DoneDaily({
   cefr: PackCefr
   dateKey: string
   streak: number
+  freezes: number
   streakPulse: boolean
   practiceOk: boolean
   onPractice: () => void
@@ -899,7 +908,7 @@ function DoneDaily({
           </div>
         }
         center={<Badge tone="accent">Daily</Badge>}
-        right={<StreakChip count={streak} pulse={streakPulse} />}
+        right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
       />
       <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
         <div
@@ -938,7 +947,7 @@ function DoneDaily({
             <span className="text-ink-muted">
               {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
             </span>
-            <StreakChip count={streak} />
+            <StreakChip count={streak} freezes={freezes} />
           </div>
           {won ? (
             <p className="mt-2 text-xs text-accent-fg">
@@ -1016,6 +1025,7 @@ function EndCard({
   cefr,
   dateKey,
   streak,
+  freezes,
   streakPulse,
   practiceOk,
   onPractice,
@@ -1035,6 +1045,7 @@ function EndCard({
   cefr: PackCefr
   dateKey: string
   streak: number
+  freezes: number
   streakPulse: boolean
   practiceOk: boolean
   onPractice: () => void
@@ -1294,7 +1305,7 @@ function EndCard({
           <span className="text-ink-muted">
             {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
           </span>
-          <StreakChip count={streak} pulse={streakPulse} />
+          <StreakChip count={streak} freezes={freezes} pulse={streakPulse} />
         </div>
         {mode === 'daily' && won && (
           <p className="mt-2 text-xs text-accent-fg">Streak updated for {dateKey}</p>
