@@ -21,6 +21,9 @@ const buildSha = resolveBuildSha(process.env, () =>
 export default defineConfig({
   define: {
     __HIATO_BUILD_SHA__: JSON.stringify(buildSha),
+    // Baked at build time from the WEB_ANALYTICS_TOKEN Actions variable (ADR 0047).
+    // Empty/unset keeps the beacon off on every environment.
+    __HIATO_WEB_ANALYTICS_TOKEN__: JSON.stringify(process.env.WEB_ANALYTICS_TOKEN ?? ''),
   },
   plugins: [
     react(),

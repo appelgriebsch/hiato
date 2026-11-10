@@ -6,6 +6,7 @@ import {
   initAnalytics,
   loadBeacon,
   resetAnalyticsForTest,
+  WEB_ANALYTICS_TOKEN,
   type AnalyticsDeps,
 } from './analytics'
 import { parseHeadersFile, headerRule } from '../deploy/harden'
@@ -89,6 +90,21 @@ describe('cookieless Web Analytics gating (ADR 0047, #224)', () => {
     const { doc, scripts } = fakeDocument()
     await run({ token: '   ', health: async () => health('production'), doc: doc as never })
     expect(scripts.length).toBe(0)
+  })
+
+  test('default token comes from the build-time env define and is empty under bun test', async () => {
+    expect(WEB_ANALYTICS_TOKEN).toBe('')
+    const { doc, scripts } = fakeDocument()
+    await run({ health: async () => health('production'), doc: doc as never })
+    expect(scripts.length).toBe(0)
+  })
+
+  test('vite.config bakes WEB_ANALYTICS_TOKEN into the bundle via define', async () => {
+    const root = new URL('../../', import.meta.url)
+    const cfg = await Bun.file(new URL('vite.config.ts', root)).text()
+    expect(cfg).toContain(
+      "__HIATO_WEB_ANALYTICS_TOKEN__: JSON.stringify(process.env.WEB_ANALYTICS_TOKEN ?? '')",
+    )
   })
 
   test('initAnalytics runs at most once per page load', async () => {

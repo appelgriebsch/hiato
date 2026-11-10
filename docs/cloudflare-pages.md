@@ -35,6 +35,8 @@ Set on **Production** and **Preview**:
 
 Cloudflare Pages injects `CI=true` into every build ([build configuration docs](https://developers.cloudflare.com/pages/configuration/build-configuration/#environment-variables)), so `packs:check` there fails closed on a Hunspell verdict cache miss and never loads dictionaries, the same as GitHub CI.
 
+Build-time Actions variables (not Pages dashboard vars): `WEB_ANALYTICS_TOKEN` is baked into the bundle by the Vite `define` in `vite.config.ts` (ADR 0047). Set it as a repository Actions variable; unset/empty keeps the cookieless Web Analytics beacon off on every environment. The token is public by design, so a variable (not a secret) is enough.
+
 Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revalidate` on `/packs/*` in `public/_headers`).
 
 ## Lockfile

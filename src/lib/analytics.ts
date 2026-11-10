@@ -6,11 +6,13 @@ export const CF_BEACON_SRC = `${CF_BEACON_HOST}/beacon.min.js`
 export const CF_RUM_HOST = 'https://cloudflareinsights.com'
 
 /**
- * Web Analytics site token from the Cloudflare dashboard (manual snippet).
- * Public by design. Empty until the site is added and the token is pasted;
- * an empty token keeps the beacon off on every environment.
+ * Web Analytics site token, baked at build time from the `WEB_ANALYTICS_TOKEN`
+ * environment variable via the Vite define (ADR 0047). Public by design, but
+ * kept out of the repo. Unset/empty keeps the beacon off on every environment.
+ * The `typeof` guard lets `bun test` run without the define.
  */
-export const WEB_ANALYTICS_TOKEN = ''
+export const WEB_ANALYTICS_TOKEN: string =
+  typeof __HIATO_WEB_ANALYTICS_TOKEN__ === 'string' ? __HIATO_WEB_ANALYTICS_TOKEN__ : ''
 
 export type AnalyticsDeps = {
   token?: string
