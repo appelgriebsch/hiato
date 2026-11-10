@@ -50,10 +50,10 @@ describe('cache and security headers', () => {
     expect(security['strict-transport-security']).toContain('max-age=31536000')
     const csp = security['content-security-policy'] ?? ''
     expect(csp).toContain("default-src 'self'")
-    expect(csp).toContain("script-src 'self'")
+    expect(csp).toContain("script-src 'self' https://static.cloudflareinsights.com")
     expect(csp).toContain("style-src 'self'")
     expect(csp).toContain("font-src 'self'")
-    expect(csp).toContain("connect-src 'self'")
+    expect(csp).toContain("connect-src 'self' https://cloudflareinsights.com")
     expect(csp).toContain("worker-src 'self'")
     expect(csp).toContain("frame-ancestors 'none'")
     expect(csp).toContain("object-src 'none'")

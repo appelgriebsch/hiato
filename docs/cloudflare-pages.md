@@ -35,6 +35,8 @@ Set on **Production** and **Preview**:
 
 Cloudflare Pages injects `CI=true` into every build ([build configuration docs](https://developers.cloudflare.com/pages/configuration/build-configuration/#environment-variables)), so `packs:check` there fails closed on a Hunspell verdict cache miss and never loads dictionaries, the same as GitHub CI.
 
+Build-time Actions variables (not Pages dashboard vars): `WEB_ANALYTICS_TOKEN` is baked into the bundle by the Vite `define` in `vite.config.ts` (ADR 0047). Set it as a repository Actions variable; unset/empty keeps the cookieless Web Analytics beacon off on every environment. The token is public by design, so a variable (not a secret) is enough.
+
 Learner pack JSON is revalidated (`Cache-Control: public, max-age=0, must-revalidate` on `/packs/*` in `public/_headers`).
 
 ## Lockfile
@@ -60,7 +62,7 @@ Security on `/*` (more specific cache rules still win for `Cache-Control`):
 - `X-Frame-Options: DENY`
 - `Permissions-Policy` with camera, microphone, geolocation, and payment disabled
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
-- `Content-Security-Policy` locked to `'self'` (same-origin scripts, styles, fonts, workers; `frame-ancestors 'none'`; no `unsafe-inline` or `unsafe-eval`)
+- `Content-Security-Policy` locked to `'self'` plus the two Web Analytics hosts: `script-src https://static.cloudflareinsights.com` and `connect-src https://cloudflareinsights.com` (ADR 0047; the beacon is only injected on Production, so staging loads nothing cross-origin). Same-origin scripts, styles, fonts, workers; `frame-ancestors 'none'`; no `unsafe-inline` or `unsafe-eval`
 
 ## Bindings
 

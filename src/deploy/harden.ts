@@ -65,7 +65,7 @@ export const PAGES_SECURITY_HEADERS: Readonly<Record<string, string>> = {
   'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
   'strict-transport-security': 'max-age=31536000; includeSubDomains',
   'content-security-policy':
-    "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
+    "default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://cloudflareinsights.com; worker-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'none'",
 }
 
 /** Copy a response and set the `/*` security headers. Optional extras override. */

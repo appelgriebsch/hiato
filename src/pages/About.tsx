@@ -73,6 +73,15 @@ export function About() {
         center={<span className="text-sm font-semibold text-ink">About</span>}
       />
 
+      <h1 className="text-xl font-semibold text-ink">What we count</h1>
+      <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
+        On the production site only, Hiato uses cookieless Cloudflare Web Analytics
+        to count visits and page views per screen. It sets no cookies, uses no
+        device storage for tracking, and collects nothing that identifies you. No
+        accounts are needed to play. Staging previews and offline play are not
+        counted (ADR 0047).
+      </p>
+
       <h1 className="text-xl font-semibold text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         Word packs ship with per-source attribution. English A1–B2 lemmas are

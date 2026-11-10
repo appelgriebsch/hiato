@@ -1403,3 +1403,15 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     }
   })
 })
+
+describe('About states what is counted (ADR 0047, #224)', () => {
+  test('privacy card names cookieless Web Analytics, production-only, and the exclusions', async () => {
+    const src = await pageSrc('About.tsx')
+    expect(src).toContain('What we count')
+    expect(src).toContain('cookieless Cloudflare Web Analytics')
+    expect(src).toContain('production site only')
+    expect(src).toContain('no cookies')
+    expect(src).toContain('device storage for tracking')
+    expect(src).toContain('Staging previews and offline play are not')
+  })
+})
