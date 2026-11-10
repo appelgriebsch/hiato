@@ -12,7 +12,7 @@ import { isDailyComplete } from '@/lib/daily-record'
 import { isDue, listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
 import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
-import { ensureStreakPersisted, getStreakCount } from '@/lib/streaks'
+import { ensureStreakPersisted, getStreak, getStreakCount } from '@/lib/streaks'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
@@ -24,10 +24,15 @@ export function Home() {
   const selectedLang = prefs?.lang
   const selectedCefr = prefs?.cefr
   const dateKey = useLocalDateKey()
-  const streak =
+  const streakState =
     selectedLang && selectedCefr
+      ? getStreak(selectedLang, selectedCefr, dateKey)
+      : null
+  const streak =
+    streakState && selectedLang && selectedCefr
       ? getStreakCount(selectedLang, selectedCefr, dateKey)
       : 0
+  const freezes = streakState?.freezes ?? 0
   const pocketEntries =
     selectedLang && selectedCefr
       ? listPocketStored(selectedLang, selectedCefr)
@@ -196,7 +201,7 @@ export function Home() {
         left={<BrandLockup size="md" />}
         right={
           <div className="flex items-center gap-2">
-            {prefs ? <StreakChip count={streak} /> : null}
+            {prefs ? <StreakChip count={streak} freezes={freezes} /> : null}
             <OfflineChip />
             <span className="hidden short-land:inline-flex" data-home-offline-signal>
               <OfflineChip packReady={Boolean(prefs) && packCached} />

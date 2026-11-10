@@ -15,6 +15,8 @@ export const STREAKS_KEY = 'hiato.streaks'
 
 export type StreakState = {
   count: number
+  /** Guest-local streak freezes held (ADR 0046). Cap 2. */
+  freezes: number
   lastWinDate: string | null
 }
 
@@ -24,7 +26,8 @@ export function streakSlot(lang: PackLang, cefr: PackCefr): string {
   return `${lang}|${cefr}`
 }
 
-const EMPTY: StreakState = { count: 0, lastWinDate: null }
+const EMPTY: StreakState = { count: 0, freezes: 0, lastWinDate: null }
+const FREEZE_CAP = 2
 
 function isDateKey(v: unknown): v is string {
   return typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)
@@ -43,7 +46,13 @@ function parseState(raw: unknown): StreakState | null {
         ? o.lastWinDate
         : null
   if (o.lastWinDate != null && lastWinDate === null) return null
-  return { count: Math.floor(o.count), lastWinDate }
+  // Legacy rows omit freezes. Junk numbers clamp to 0..2 so a bad write cannot crash.
+  const rawFreezes = o.freezes
+  const freezes =
+    typeof rawFreezes === 'number' && Number.isFinite(rawFreezes)
+      ? Math.min(FREEZE_CAP, Math.max(0, Math.floor(rawFreezes)))
+      : 0
+  return { count: Math.floor(o.count), freezes, lastWinDate }
 }
 
 function readMap(): StreakMap {
@@ -92,14 +101,27 @@ export function visibleStreak(state: StreakState, today: string): number {
   return 0
 }
 
-/** Zero the stored count when the local-midnight grace day has passed. */
+/**
+ * Zero the stored count when the local-midnight grace day has passed.
+ * One held freeze covers exactly one missed local day (ADR 0046): count stays
+ * and lastWinDate moves to yesterday. A wider gap still breaks and keeps the freeze.
+ */
 export function applyMidnightBreak(
   state: StreakState,
   today: string,
 ): StreakState {
   if (visibleStreak(state, today) > 0) return state
-  if (state.count === 0) return state
-  return { count: 0, lastWinDate: state.lastWinDate }
+  if (state.count === 0 || !state.lastWinDate) return state
+  // One missed day: last win is the day before yesterday. Anything older is two misses.
+  const oneMiss = state.lastWinDate === previousLocalDateKey(previousLocalDateKey(today))
+  if (oneMiss && state.freezes > 0) {
+    return {
+      count: state.count,
+      freezes: state.freezes - 1,
+      lastWinDate: previousLocalDateKey(today),
+    }
+  }
+  return { count: 0, freezes: state.freezes, lastWinDate: state.lastWinDate }
 }
 
 /**
@@ -113,8 +135,11 @@ export function nextStreakOnWin(
 ): StreakState {
   if (state.lastWinDate === dateKey) return state
   const yesterday = previousLocalDateKey(dateKey)
+  const count = state.lastWinDate === yesterday ? state.count + 1 : 1
+  const earned = count % 7 === 0 ? 1 : 0
   return {
-    count: state.lastWinDate === yesterday ? state.count + 1 : 1,
+    count,
+    freezes: Math.min(FREEZE_CAP, state.freezes + earned),
     lastWinDate: dateKey,
   }
 }
@@ -147,7 +172,14 @@ export function ensureStreakPersisted(
 ): StreakState {
   const stored = readSlot(lang, cefr)
   const next = applyMidnightBreak(stored, today)
-  if (next.count !== stored.count) writeSlot(lang, cefr, next)
+  // A freeze consume keeps count, so compare the whole row or the chip re-breaks every midnight.
+  if (
+    next.count !== stored.count ||
+    next.freezes !== stored.freezes ||
+    next.lastWinDate !== stored.lastWinDate
+  ) {
+    writeSlot(lang, cefr, next)
+  }
   return next
 }
 
