@@ -241,7 +241,7 @@ export function Home() {
               className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-accent-fg bg-accent-soft px-5 text-[15px] font-medium text-accent-fg hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
               onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
             >
-              Practice (endless)
+              Practice
             </button>
             {!practiceOk ? (
               <p className="mt-2 text-center text-xs text-ink-faint">

@@ -382,7 +382,7 @@ describe('daily pick', () => {
   })
 })
 
-describe('ADR 0018 endless excludes today’s daily', () => {
+describe('ADR 0018 Practice excludes today’s daily', () => {
   const lemmas = [
     { word: 'APPLE' },
     { word: 'HOUSE' },

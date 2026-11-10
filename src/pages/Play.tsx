@@ -604,8 +604,7 @@ function PlayRound({
         <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
           <h1 className="text-title text-ink">Practice unavailable</h1>
           <p className="max-w-xs text-sm text-ink-muted">
-            This pack only has today’s daily word, so endless practice would
-            spoil it.
+            This pack only has today’s daily word, so Practice would spoil it.
           </p>
           <div className="mt-2 flex w-full flex-col gap-2">
             <Button fullWidth onClick={() => nav('/play?mode=daily')}>
@@ -818,7 +817,7 @@ function PlayRound({
                   onClick={goPractice}
                   className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
                 >
-                  Practice (endless)
+                  Practice
                 </button>
               ) : (
                 <p className="text-xs text-ink-faint">
@@ -995,7 +994,7 @@ function DoneDaily({
             onClick={onPractice}
             disabled={!practiceOk}
           >
-            Practice (endless)
+            Practice
           </Button>
           {!practiceOk ? (
             <p className="text-xs text-ink-faint">
@@ -1461,7 +1460,7 @@ function EndCard({
                 onClick={onPractice}
                 disabled={!practiceOk}
               >
-                {mode === 'practice' ? 'Next word' : 'Practice (endless)'}
+                {mode === 'practice' ? 'Next word' : 'Practice'}
               </Button>
             </>
           ) : null}

@@ -2,7 +2,7 @@ import { POCKET_CAP } from './pocket'
 
 /**
  * EndCard "Practice this word" gate (ADR 0043 / #219, was Save in ADR 0034).
- * Daily lose only — never practice/endless/pocket, never any win.
+ * Daily lose only — never practice or pocket, never any win.
  */
 export function shouldShowPractice(mode: string, won: boolean): boolean {
   return mode === 'daily' && !won
