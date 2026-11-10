@@ -1165,7 +1165,7 @@ describe('Unfinished daily Home exit (#133)', () => {
     const daily = src.slice(start, end)
     expect(daily).toContain('← Home')
     expect(daily).toContain('to="/"')
-    expect(daily).toContain('Practice (endless)')
+    expect(daily).toContain('\n                  Practice\n')
     expect(daily).toContain('min-h-11')
     expect(daily).not.toContain('endGame')
     expect(daily).not.toContain('persistDaily')
@@ -1279,7 +1279,7 @@ describe('Home and in-round 44px text links (#136)', () => {
     const revealClass = play.slice(revealAt, play.indexOf('</button>', revealAt))
     expect(revealClass).toContain('focus-visible:ring-2')
     expect(revealClass).toContain('focus-visible:ring-accent-fg/40')
-    for (const label of ['← Home', 'Practice (endless)', '← Daily', 'Next word'] as const) {
+    for (const label of ['← Home', '                  Practice', '← Daily', 'Next word'] as const) {
       const at = play.indexOf(label)
       expect(at).toBeGreaterThan(0)
       const around = play.slice(Math.max(0, at - 320), at)

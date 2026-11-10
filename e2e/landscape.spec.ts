@@ -257,12 +257,16 @@ async function layoutScrollTop(page: Page) {
   })
 }
 
-const ENDCARD_ACTIONS = ['Practice this word', 'Share', 'Practice (endless)', 'Back home'] as const
+const ENDCARD_ACTIONS = ['Practice this word', 'Share', 'Practice', 'Back home'] as const
+
+function targetNamed(targets: Box[], name: string) {
+  return targets.find((t) => (name === 'Practice' ? t.t === name : t.t.includes(name)))
+}
 
 async function assertEndcardActionsInView(page: Page, where: string) {
   const m = await measure(page)
   for (const name of ENDCARD_ACTIONS) {
-    const hit = m.targets.find((t) => t.t.includes(name))
+    const hit = targetNamed(m.targets, name)
     expect(hit, `${where} ${name}`).toBeTruthy()
     expect(inView(hit!, m.vw, m.vh), `${where} ${name}`).toBe(true)
   }
@@ -365,9 +369,8 @@ test.describe('short landscape viewports (#209)', () => {
         const m = await measure(page)
         const where = `endcard ${lang} ${vp.name}`
         assertNoHorizontalScroll(m, where)
-        const wanted = ['Practice this word', 'Share', 'Practice (endless)', 'Back home']
-        for (const name of wanted) {
-          const hit = m.targets.find((t) => t.t.includes(name))
+        for (const name of ENDCARD_ACTIONS) {
+          const hit = targetNamed(m.targets, name)
           expect(hit, `${where} ${name}`).toBeTruthy()
           expect(inView(hit!, m.vw, m.vh), `${where} ${name}`).toBe(true)
         }

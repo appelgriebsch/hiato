@@ -4,7 +4,7 @@
 - Date: 2026-10-02
 - Deciders: Andreas Gerlach (via Product Priya)
 - Epic: [#78](https://github.com/appelgriebsch/hiato/issues/78)
-- References: ADR 0007 (Web Share + card; supersedes its "no stable share URLs" clause); ADR 0011 (Pages + Workers skeleton); ADR 0018 (endless anti-spoiler); PR/issue lineage for offline-ready PWA (#104).
+- References: ADR 0007 (Web Share + card; supersedes its "no stable share URLs" clause); ADR 0011 (Pages + Workers skeleton); ADR 0018 (Practice anti-spoiler); PR/issue lineage for offline-ready PWA (#104).
 
 ## Context
 
@@ -20,7 +20,7 @@ ADR 0007 shipped Web Share + generated share card without stable URLs (reserved 
 
 4. **Wire:** Keep PNG ShareCard / share-render. Append the stable URL to `formatShareText` and Web Share text so copy/share carries the deep link.
 
-5. **Spoiler policy:** Daily shares may include `dateKey` + stats (Wordle-like; must not leak tomorrow's answer). Practice/endless shares use the same allowlist, never lemma, and **distinct copy** so they do not look like a daily. Pocket and teacher (#79) stay out of viral URL scope.
+5. **Spoiler policy:** Daily shares may include `dateKey` + stats (Wordle-like; must not leak tomorrow's answer). Practice shares use the same allowlist, never lemma, and **distinct copy** so they do not look like a daily. Pocket and teacher (#79) stay out of viral URL scope.
 
 6. **Offline / CSP:** Rely on existing SPA fallback (`_redirects`, VitePWA navigateFallback). Do not denylist `/share`. Client-only URLs need **no CSP change**. Defer per-result Open Graph (Workers) — keep static `og-banner.png`.
 

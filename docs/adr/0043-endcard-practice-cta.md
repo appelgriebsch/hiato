@@ -30,7 +30,7 @@ Ship the EndCard "Practice this word" CTA only. No pack schema change. On a **lo
 
 ## Consequences
 
-- `shouldShowPocketSave` (`src/lib/pocket-save.ts`) becomes the gate for the new action; it stays `mode === 'daily' && !won`. Practice, endless and pocket EndCards stay action-free.
+- `shouldShowPocketSave` (`src/lib/pocket-save.ts`) becomes the gate for the new action; it stays `mode === 'daily' && !won`. Practice and pocket EndCards stay action-free.
 - Pocket full and lemma new: the existing inline replace-oldest confirm (ADR 0034, #83/#85) runs first. Cancel keeps the EndCard; confirm saves, then navigates. "Oldest" stays min `addedAt` per lang x CEFR slot (cap 5).
 - `canPlayPocketEntry` is unchanged.
 - Pocket play stays streak-immune: it never calls `recordDailyWin`.

@@ -168,7 +168,7 @@ describe('SUR-text-wire (#108) — absolute /share?p= in share text', () => {
 })
 
 describe('SUR-spoiler-matrix (#109) — daily vs practice (ADR 0018)', () => {
-  // ADR 0018: endless practice never selects today's daily lemma.
+  // ADR 0018: Practice never selects today's daily lemma.
   // Share URLs must never carry lemma/answer/gloss for either mode.
 
   test('daily URL may include dateKey + stats; never lemma/answer/gloss', () => {

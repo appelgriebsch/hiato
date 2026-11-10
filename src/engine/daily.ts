@@ -93,7 +93,7 @@ export function isPracticeAvailable(
 }
 
 /**
- * Endless practice pick (ADR 0018). Never returns today's daily lemma.
+ * Practice pick (ADR 0018). Never returns today's daily lemma.
  * Returns null when the pack has no other word (single-lemma pack).
  * Does not use the daily seed; `seed` is a caller-supplied index
  * (G0 Date.now() / query param).

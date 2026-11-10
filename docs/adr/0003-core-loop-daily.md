@@ -8,9 +8,9 @@
 Game must feel fun and addictive without overloading learners.
 
 ## Decision
-Daily challenge is primary; streaks are tracked; endless practice mode is secondary.
+Daily challenge is primary; streaks are tracked; Practice mode is secondary.
 
 ## Consequences
 - Need deterministic daily word selection per language+CEFR+local date.
 - Streak state stored locally (IndexedDB/localStorage) in v1.
-- Endless mode reuses the same engine without the daily seed.
+- Practice reuses the same engine without the daily seed.

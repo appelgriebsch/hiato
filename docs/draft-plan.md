@@ -5,7 +5,7 @@ Date: 2026-09-19
 Status: Draft for Ask Avery Plan review
 
 ## Goal
-Mobile-first offline-installable PWA: CEFR-leveled word guessing (gap fill / soft hangman) for EN, PT, DE, ES. Daily + streaks primary; endless practice secondary. Share achievements via Web Share card. Host on Cloudflare Pages with Workers skeleton.
+Mobile-first offline-installable PWA: CEFR-leveled word guessing (gap fill / soft hangman) for EN, PT, DE, ES. Daily + streaks primary; Practice secondary. Share achievements via Web Share card. Host on Cloudflare Pages with Workers skeleton.
 
 ## Locked decisions (ADRs 0001–0012)
 - Vite + TS + React + Zustand + shadcn + Tailwind; Bun; vite-plugin-pwa (prompt updates)
@@ -53,7 +53,7 @@ Mobile-first offline-installable PWA: CEFR-leveled word guessing (gap fill / sof
 T1: Repo scaffold + PWA install shell + CF Pages Bun build + Workers health stub (empty play screen)
 T2: Pack schema + one EN A1 pack + loader/cache + letter-gap engine playable offline
 T3: Lang/CEFR select + precache selected lang + DE/ES/PT packs (PT curated v0) + attribution About
-T4: Daily seed + streaks + endless mode + soft lives/hints
+T4: Daily seed + streaks + Practice + soft lives/hints
 T5: Results + Web Share/clipboard share card
 T6: Polish from Uma prototype (motion, onboarding, addictive loop) + iOS install hint
 
