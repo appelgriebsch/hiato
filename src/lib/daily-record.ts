@@ -11,6 +11,7 @@ export type DailyRecord = {
   word: string
   gloss?: string
   synonyms?: string[]
+  example?: string
   won: boolean
   completed: boolean
 }
@@ -39,6 +40,9 @@ function parseRecord(raw: unknown): DailyRecord | null {
     completed: o.completed,
   }
   if (typeof o.gloss === 'string' && o.gloss.length > 0) rec.gloss = o.gloss
+  if (typeof o.example === 'string' && o.example.trim().length > 0) {
+    rec.example = o.example
+  }
   if (Array.isArray(o.synonyms)) {
     const synonyms = o.synonyms
       .filter((item): item is string => typeof item === 'string' && item.trim().length > 0)

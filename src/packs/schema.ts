@@ -38,6 +38,11 @@ export interface PackLemma {
   gloss?: string
   /** Same-language synonym chips (≤3 shown) — must not contain `word`. */
   synonyms?: string[]
+  /**
+   * One example sentence using `word`, in `pack.lang` (ADR 0048).
+   * Post-round only: shown on the EndCard, never in-round. Must contain `word`.
+   */
+  example?: string
 }
 
 export interface WordPack {

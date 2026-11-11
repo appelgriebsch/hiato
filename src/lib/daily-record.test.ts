@@ -58,6 +58,38 @@ describe('daily record (per lang+CEFR)', () => {
     expect(isDailyComplete('pt', 'a1', '2026-09-19')).toBe(false)
   })
 
+  test('round-trips the example sentence (ADR 0048 / #225)', () => {
+    setDailyRecord({
+      dateKey: '2026-09-19',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'APPLE',
+      gloss: 'fruit',
+      example: 'She wrote “apple” on the board.',
+      won: true,
+      completed: true,
+    })
+    expect(getDailyRecord('en', 'a1')?.example).toBe('She wrote “apple” on the board.')
+  })
+
+  test('drops a missing or empty example on parse', () => {
+    mem.set(
+      DAILY_KEY,
+      JSON.stringify({
+        'en|a1': {
+          dateKey: '2026-09-19',
+          lang: 'en',
+          cefr: 'a1',
+          word: 'APPLE',
+          example: '   ',
+          won: true,
+          completed: true,
+        },
+      }),
+    )
+    expect(getDailyRecord('en', 'a1')?.example).toBeUndefined()
+  })
+
   test('lang+CEFR slots are independent', () => {
     setDailyRecord({
       dateKey: '2026-09-19',

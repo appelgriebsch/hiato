@@ -28,6 +28,7 @@ export type PocketEntry = {
   cefr: PackCefr
   word: string
   gloss?: string
+  example?: string
   /** ms epoch — replace-oldest stays the smallest addedAt (ADR 0044 3A). */
   addedAt: number
   stage: PocketStage
@@ -86,6 +87,7 @@ export function addPocketEntry(
     cefr: PackCefr
     word: string
     gloss?: string
+    example?: string
     addedAt?: number
   },
 ): AddPocketResult {
@@ -106,6 +108,9 @@ export function addPocketEntry(
   }
   if (typeof input.gloss === 'string' && input.gloss.length > 0) {
     entry.gloss = input.gloss
+  }
+  if (typeof input.example === 'string' && input.example.length > 0) {
+    entry.example = input.example
   }
 
   const slot = listPocket(entries, input.lang, input.cefr)
@@ -180,6 +185,7 @@ function parseEntry(
       dueAt,
     }
     if (typeof o.gloss === 'string' && o.gloss.length > 0) entry.gloss = o.gloss
+    if (typeof o.example === 'string' && o.example.length > 0) entry.example = o.example
     return { entry, repaired }
   } catch {
     return { entry: null, repaired: false }
@@ -414,6 +420,7 @@ export function addToPocket(input: {
   cefr: PackCefr
   word: string
   gloss?: string
+  example?: string
   addedAt?: number
 }): AddPocketResult {
   const read = readPocket()

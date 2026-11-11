@@ -354,6 +354,85 @@ describe('packs:check gloss language (ADR 0030)', () => {
   })
 })
 
+describe('packs:check example sentence (ADR 0048 / #225)', () => {
+  test('accepts a pack-language example that uses the lemma', () => {
+    const p = validatePack(
+      pack({
+        lang: 'de',
+        cefr: 'a1',
+        lemmas: [
+          {
+            word: 'HAUS',
+            gloss: 'Ein Gebäude zum Wohnen.',
+            example: 'Wir wohnen in einem „Haus“.',
+          },
+        ],
+      }),
+      'de/a1.json',
+    )
+    expect(p.lemmas[0]?.example).toContain('Haus')
+  })
+
+  test('rejects an example that does not use the lemma', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            { word: 'HOUSE', gloss: 'a building', example: 'We live in a flat.' },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/example must use the lemma/)
+  })
+
+  test('rejects an English-shaped example in a non-EN pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'b2',
+          lemmas: [
+            { word: 'LACHEN', gloss: 'Geräusche der Freude.', example: 'to laugh out loud: lachen!' },
+          ],
+        }),
+        'de/b2.json',
+      ),
+    ).toThrow(/example not in pack language/)
+  })
+
+  test('rejects a non-string example', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            { word: 'HOUSE', gloss: 'a building', example: 42 as unknown as string },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/example must be a string/)
+  })
+
+  test('example is exempt from the ADR 0023 spoiler rule (it must contain the word)', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'a1',
+        lemmas: [
+          { word: 'CAT', gloss: 'a small pet', example: 'The cat sleeps on the mat.' },
+        ],
+      }),
+      'en/a1.json',
+    )
+    expect(p.lemmas[0]?.example).toBe('The cat sleeps on the mat.')
+  })
+})
+
 describe('packs:check A1–B1 synonym floor (#24)', () => {
   test('fails A1–B1 below 80% chip coverage', () => {
     const lemmas = Array.from({ length: 10 }, (_, i) => ({

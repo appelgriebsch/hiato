@@ -291,6 +291,7 @@ function PlayRound({
         word: entry.word,
         gloss: entry.gloss,
         synonyms: entry.synonyms,
+        example: entry.example,
         won: result === 'win',
         completed: true,
       })
@@ -331,6 +332,7 @@ function PlayRound({
             setWordEntry({
               word: rec.word,
               gloss: rec.gloss,
+              example: rec.example,
             })
             setFinished(rec.won ? 'win' : 'lose')
             setLoading(false)
@@ -401,6 +403,7 @@ function PlayRound({
           const entry: PackLemma = {
             word: pocketEntry.word,
             gloss: pocketEntry.gloss,
+            example: pocketEntry.example,
           }
           const initial = buildInitialCells(entry.word, cefr)
           setActivePocketId(pocketEntry.id)
@@ -791,6 +794,7 @@ function PlayRound({
               word={wordEntry.word}
               gloss={wordEntry.gloss}
               synonyms={wordEntry.synonyms}
+              example={wordEntry.example}
               lang={lang}
               cefr={cefr}
               dateKey={dateKey}
@@ -1037,6 +1041,7 @@ function EndCard({
   word,
   gloss,
   synonyms,
+  example,
   lang,
   cefr,
   dateKey,
@@ -1057,6 +1062,7 @@ function EndCard({
   word: string
   gloss?: string
   synonyms?: string[]
+  example?: string
   lang: PackLang
   cefr: PackCefr
   dateKey: string
@@ -1092,7 +1098,7 @@ function EndCard({
 
   const commitSave = useCallback(() => {
     // Pocket only — never touches streaks, Clerk, or D1.
-    const result = addToPocket({ lang, cefr, word, gloss })
+    const result = addToPocket({ lang, cefr, word, gloss, example })
     // Quota / private mode: nothing was stored. Stay on the current phase
     // so a replace confirm keeps its gloss and Confirm can retry.
     if (!result.added && !result.duplicate) return false
@@ -1100,7 +1106,7 @@ function EndCard({
     // Another tab may have saved this lemma between the already-check and
     // this write. addToPocket is then a keep-first no-op (addedAt unchanged).
     return result.duplicate ? 'already' : 'saved'
-  }, [lang, cefr, word, gloss])
+  }, [lang, cefr, word, gloss, example])
 
   const goPracticeWord = useCallback(
     (note: 'saved' | 'already') => {
@@ -1239,6 +1245,9 @@ function EndCard({
   const teachSynonyms = (synonyms ?? [])
     .filter((s) => s.trim().length > 0)
     .slice(0, 3)
+  // ADR 0048 / #225: one example sentence, pack language, EndCard only (this
+  // component mounts solely when the round is finished).
+  const teachExample = example?.trim() ?? ''
 
   // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
   const speakSurface = mode === 'daily' || mode === 'practice'
@@ -1313,6 +1322,15 @@ function EndCard({
           synonyms={teachSynonyms}
           showSpeak={showSpeakControl}
         />
+        {teachExample ? (
+          <p
+            lang={lang}
+            data-endcard-example
+            className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-ink-muted italic"
+          >
+            {teachExample}
+          </p>
+        ) : null}
       </div>
 
       <div inert={confirming ? true : undefined}>

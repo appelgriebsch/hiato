@@ -95,8 +95,11 @@ export function About() {
         DELF or DALF lists. Italian A1–C2 lemmas are wordhoard frequency-rank
         bands, not CELI, CILS, or PLIDA lists.
         Portuguese lemmas come from hermitdave/FrequencyWords pt_50k
-        (OpenSubtitles; content CC-BY-SA-4.0, code MIT). Gloss and synonym
-        copy is original to Hiato and is always in the pack language.
+        (OpenSubtitles; content CC-BY-SA-4.0, code MIT). Gloss, synonym, and
+        example-sentence copy is original to Hiato, is always in the pack
+        language, and ships under the MIT license with the app (see LICENSE and
+        NOTICE). Example sentences appear only on the end card after a round
+        finishes, never during play.
       </p>
 
       {PACK_LICENSES.map((info) => (

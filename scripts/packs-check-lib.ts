@@ -309,6 +309,28 @@ export function validatePack(raw: unknown, file: string): WordPack {
       })
     }
 
+    let example: string | undefined
+    if (e.example !== undefined) {
+      if (typeof e.example !== 'string') {
+        throw new Error(`${file}: lemmas[${i}].example must be a string`)
+      }
+      example = assertString(e.example, `${file}: lemmas[${i}].example`).normalize('NFC')
+      // ADR 0048: an example sentence is post-round only, so the ADR 0023
+      // spoiler rule does not apply — it must instead USE the lemma.
+      if (!spoilerContains(example, word)) {
+        throw new Error(
+          `${file}: lemmas[${i}] example must use the lemma "${word}" — "${example}"`,
+        )
+      }
+      // Heuristic only (no Hunspell membership) so new sentences never miss
+      // the committed verdict cache in CI.
+      if (isWrongLanguageGloss(o.lang as string, example)) {
+        throw new Error(
+          `${file}: lemmas[${i}] example not in pack language ${o.lang} — "${word}" / "${example}"`,
+        )
+      }
+    }
+
     if (isDeniedLemma(word, DENY, o.lang as string)) {
       throw new Error(`${file}: lemmas[${i}] denylist — lemma "${word}"`)
     }
@@ -363,7 +385,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
     }
 
-    return { word, gloss, synonyms }
+    return { word, gloss, synonyms, example }
   })
 
   return {

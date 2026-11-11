@@ -221,7 +221,7 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(src).not.toContain('pocketNewLabel')
     expect(src).not.toContain('View pocket')
     expect(src).toContain('needsReplaceOldestConfirm')
-    expect(src).toContain('addToPocket({ lang, cefr, word, gloss })')
+    expect(src).toContain('addToPocket({ lang, cefr, word, gloss, example })')
     expect(src).toContain('listPocketStored(lang, cefr)')
     expect(src).toContain('Replace oldest word?')
     expect(src).toContain('Replace and practice')
@@ -247,7 +247,7 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(endCard).not.toContain('Already saved')
     expect(endCard).not.toContain('Saved to pocket')
     const commitAt = src.indexOf('const commitSave = useCallback')
-    const commitEnd = src.indexOf('}, [lang, cefr, word, gloss])', commitAt)
+    const commitEnd = src.indexOf('}, [lang, cefr, word, gloss, example])', commitAt)
     expect(commitAt).toBeGreaterThan(0)
     expect(commitEnd).toBeGreaterThan(commitAt)
     const commitBody = src.slice(commitAt, commitEnd)
@@ -1413,5 +1413,44 @@ describe('About states what is counted (ADR 0047, #224)', () => {
     expect(src).toContain('no cookies')
     expect(src).toContain('device storage for tracking')
     expect(src).toContain('Staging previews and offline play are not')
+  })
+})
+
+describe('EndCard example sentence (ADR 0048 / #225)', () => {
+  test('EndCard receives the lemma example and renders it post-round only', async () => {
+    const src = await pageSrc('Play.tsx')
+    // example flows from the loaded lemma into the EndCard props
+    expect(src).toContain('example={wordEntry.example}')
+    // EndCard mounts only when the round is finished
+    const endCardAt = src.indexOf('<EndCard')
+    const finishedGateAt = src.lastIndexOf('{finished ? (', endCardAt)
+    expect(finishedGateAt).toBeGreaterThan(-1)
+    expect(finishedGateAt).toBeLessThan(endCardAt)
+    // rendered inside the teach card with a stable test hook
+    expect(src).toContain('data-endcard-example')
+    const teachAt = src.indexOf('data-endcard-teach')
+    const exampleAt = src.indexOf('data-endcard-example')
+    expect(exampleAt).toBeGreaterThan(teachAt)
+  })
+
+  test('the in-round LearnerHint never sees the example', async () => {
+    const hint = await Bun.file(
+      new URL('../components/play/LearnerHint.tsx', import.meta.url),
+    ).text()
+    expect(hint).not.toContain('example')
+    const src = await pageSrc('Play.tsx')
+    const hintUse = src.indexOf('<LearnerHint')
+    const exampleProp = src.indexOf('data-endcard-example')
+    // LearnerHint is only rendered while !finished; the example only inside EndCard
+    expect(src.slice(0, hintUse)).toContain('{!finished && (')
+    expect(exampleProp).toBeGreaterThan(hintUse)
+  })
+
+  test('About credits the example-sentence source with its license', async () => {
+    const src = await pageSrc('About.tsx')
+    expect(src).toContain('example-sentence copy is original to Hiato')
+    expect(src).toContain('MIT license')
+    expect(src).toContain('after a round')
+    expect(src).toContain('never during play')
   })
 })

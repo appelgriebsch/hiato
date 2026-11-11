@@ -155,6 +155,20 @@ describe('pocket identity / cap / replace-oldest (ADR 0034 / #82)', () => {
     expect(twice.entries[0]!.dueAt).toBe(first.dueAt)
   })
 
+  test('example sentence rides along on add and survives the stored round-trip (ADR 0048 / #225)', () => {
+    const r = addPocketEntry([], {
+      lang: 'en',
+      cefr: 'a1',
+      word: 'apple',
+      gloss: 'fruit',
+      example: 'She wrote “apple” on the board.',
+      addedAt: 1000,
+    })
+    expect(r.entries[0]?.example).toBe('She wrote “apple” on the board.')
+    mem.set(POCKET_KEY, JSON.stringify({ v: POCKET_VERSION, entries: r.entries }))
+    expect(listPocketStored('en', 'a1')[0]?.example).toBe('She wrote “apple” on the board.')
+  })
+
   test('cap is 5 per lang x CEFR; other slots are independent', () => {
     let entries: PocketEntry[] = []
     for (let i = 0; i < POCKET_CAP; i++) {
