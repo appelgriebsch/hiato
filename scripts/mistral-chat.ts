@@ -26,6 +26,9 @@ export async function mistralChat(
       body: JSON.stringify({
         model: MISTRAL_MODEL,
         temperature,
+        // Mistral rejects greedy sampling (temperature 0) unless top_p is 1
+        // (API error 3054 "top_p must be 1 when using greedy sampling").
+        ...(temperature === 0 ? { top_p: 1 } : {}),
         messages: [
           { role: 'system', content: system },
           { role: 'user', content: prompt },
