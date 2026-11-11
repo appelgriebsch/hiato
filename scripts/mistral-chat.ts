@@ -18,6 +18,7 @@ export async function mistralChat(
   for (let attempt = 0; attempt < 5; attempt++) {
     const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
       method: 'POST',
+      signal: AbortSignal.timeout(60_000),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${key}`,
