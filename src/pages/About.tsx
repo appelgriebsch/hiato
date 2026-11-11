@@ -6,10 +6,13 @@ import { LANG_CODES } from '@/packs/labels'
 
 const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
 const CEFRJ_TERMS = 'http://www.cefr-j.org/download.html'
+const CC_BY_2_FR_DEED = 'https://creativecommons.org/licenses/by/2.0/fr/'
+const TATOEBA = 'https://tatoeba.org'
 
 function licenseDeedHref(license: string): string | null {
   if (/CC-BY-SA/i.test(license)) return CC_BY_SA_DEED
   if (/CEFR-J/i.test(license)) return CEFRJ_TERMS
+  if (/CC-BY 2\.0 FR/i.test(license)) return CC_BY_2_FR_DEED
   return null
 }
 
@@ -120,6 +123,39 @@ export function About() {
           ))}
         </Card>
       ))}
+
+      <Card className="mb-3">
+        <div className="mb-1 text-xs font-medium text-ink-faint">EndCard</div>
+        <h2 className="text-[15px] font-semibold text-ink">Example sentences</h2>
+        <p className="mt-1.5 text-xs font-medium text-accent-fg">
+          <a
+            className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
+            href={CC_BY_2_FR_DEED}
+            rel="noreferrer"
+            target="_blank"
+          >
+            CC-BY 2.0 FR
+          </a>
+        </p>
+        <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
+          <li>
+            Some EndCard sentences are from{' '}
+            <a
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              href={TATOEBA}
+              rel="noreferrer"
+              target="_blank"
+            >
+              tatoeba.org
+            </a>{' '}
+            (CC-BY 2.0 FR).
+          </li>
+          <li>
+            Sentences without a Tatoeba match are original Hiato copy generated
+            with Mistral AI — no external credit required.
+          </li>
+        </ul>
+      </Card>
 
       <Card className="mb-3">
         <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>

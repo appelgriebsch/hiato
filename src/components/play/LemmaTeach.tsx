@@ -12,12 +12,15 @@ export function LemmaTeach({
   word,
   gloss,
   synonyms,
+  example,
   showSpeak,
 }: {
   lang: PackLang
   word: string
   gloss: string
   synonyms: string[]
+  /** One example sentence in the pack language (ADR 0049); EndCard-only. */
+  example?: string
   showSpeak: boolean
 }) {
   const speakBtnRef = useRef<HTMLButtonElement>(null)
@@ -120,6 +123,15 @@ export function LemmaTeach({
           </button>
         ) : null}
       </div>
+      {example?.trim() ? (
+        <p
+          lang={lang}
+          data-endcard-example
+          className="mx-auto mt-3 max-w-sm text-sm leading-snug text-ink-muted italic"
+        >
+          {example.trim()}
+        </p>
+      ) : null}
       {speakNote === 'playing' ? (
         <p lang="en" role="status" className="mt-2 text-xs text-ink-muted">
           Playing

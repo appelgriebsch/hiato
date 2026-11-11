@@ -46,3 +46,11 @@ Committed outputs of `bun run scripts/build-hint-ceiling-data.ts` (person-run on
 | `hint-stem-cache.json` | Surface → lemma stems for `en`/`de`/`es`/`pt`/`fr`/`it` | [wordhoard](https://github.com/natema/wordhoard) v0.1.0 `word_form`→`lemma` (CC-BY-SA-4.0) for en/de/es/fr/it, plus regular affix replay from the build-time Hunspell dictionaries. Does **not** store `cefr_estimate`. Stamp records dictionary package bytes and a wordhoard size/hash fingerprint. |
 
 Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octanove-vocabulary-profile-c1c2-1.0.csv`, `wordhoard-v0.1.0.db`.
+
+## Example-sentence gate log (#225 / ADR 0048, #247)
+
+Committed output of `scripts/example-sentences.ts` (run via the `Example sentences` workflow_dispatch with the `MISTRAL_API_KEY` secret). `packs:check` **reads** `example-gate.json` and fails any shipped `example` without a matching `pass` verdict. Tatoeba dumps fetched on demand live under the gitignored `tatoeba/` directory (CC-BY 2.0 FR — never committed).
+
+| File | Contents | Provenance |
+|------|----------|------------|
+| `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `mistral` / hand-written `fixture`), CEFR verdict, level, date | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Mistral-generated Hiato copy, each gated by a Mistral CEFR check |

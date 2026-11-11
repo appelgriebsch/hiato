@@ -6,11 +6,13 @@
  * person-name gloss gate (#24), hint ceiling (#146 / all twenty-four EN+DE+ES+PT a1–c2).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import path from 'node:path'
 import {
   C2_MIN,
   buildLemmaEasiestByLang,
   checkCompleteness,
+  checkExampleGate,
   checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
@@ -19,6 +21,7 @@ import {
   exclusiveConflicts,
   lemmaFloor,
   validatePack,
+  type ExampleGateLog,
   type PackSnapshot,
 } from './packs-check-lib'
 import {
@@ -70,6 +73,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const rels: string[] = []
   const errors: string[] = []
   const pinPacks: { rel: string; pack: PinPack }[] = []
+  let totalBytes = 0
 
   const STEM_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/stem-spoiler-baseline.json'), 'utf8'),
@@ -77,6 +81,11 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const FAMILY_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/family-leak-baseline.json'), 'utf8'),
   ) as StemBaseline
+  // ADR 0048: every shipped example needs a passing CEFR gate entry (#247).
+  const gatePath = path.join(import.meta.dir, 'data', 'example-gate.json')
+  const gateLog = (existsSync(gatePath)
+    ? JSON.parse(await readFile(gatePath, 'utf8'))
+    : {}) as ExampleGateLog
   for (const file of files) {
     const text = await readFile(file, 'utf8')
     let raw: unknown
@@ -103,6 +112,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     errors.push(...boilerplateGlossErrors(rel, pack.lemmas))
     errors.push(...stemSpoilerErrors(rel, pack.lemmas, STEM_BASELINE))
     errors.push(...familyLeakErrors(rel, pack.lemmas, FAMILY_BASELINE))
+    errors.push(...checkExampleGate(rel, pack, gateLog))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)
@@ -114,10 +124,18 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     snapshots.push({ rel, pack })
     const floor = lemmaFloor(pack.cefr)
     const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
+    const kb = (Buffer.byteLength(text, 'utf8') / 1024).toFixed(1)
+    totalBytes += Buffer.byteLength(text, 'utf8')
     out.log(
-      `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra})`,
+      `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra}, ${kb} KB)`,
     )
   }
+
+  // Pack-size sanity (ADR 0006/0026, #248): report the shipped total so the
+  // example-sentence widen run can diff it in the workflow log.
+  out.log(
+    `public/packs total: ${(totalBytes / 1024 / 1024).toFixed(2)} MB across ${snapshots.length} packs`,
+  )
 
   errors.push(...collectPackPinErrors(pinPacks, loadPackPin()))
   errors.push(...checkCompleteness(rels))

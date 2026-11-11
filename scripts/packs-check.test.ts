@@ -354,6 +354,112 @@ describe('packs:check gloss language (ADR 0030)', () => {
   })
 })
 
+describe('packs:check example sentence (ADR 0049, #246)', () => {
+  test('accepts an example that contains the lemma as a whole word', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'a1',
+        lemmas: [
+          { word: 'HOUSE', gloss: 'a building to live in', example: 'We live in a small house.' },
+        ],
+      }),
+      'en/a1.json',
+    )
+    expect(p.lemmas[0]?.example).toBe('We live in a small house.')
+  })
+
+  test('rejects an example that does not contain the lemma as a whole word', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            { word: 'HOUSE', gloss: 'a building to live in', example: 'We live in a small home.' },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/whole word/)
+    // Substring of a longer word does not count either.
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            { word: 'ADD', gloss: 'put together', example: 'The address has one more letter.' },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/whole word/)
+  })
+
+  test('rejects an over-length or non-string example', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            {
+              word: 'HOUSE',
+              gloss: 'a building to live in',
+              example: `The house is ${'very '.repeat(40)}big.`,
+            },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/exceeds cap/)
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [
+            { word: 'HOUSE', gloss: 'a building to live in', example: 42 as never },
+          ],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/example/)
+  })
+
+  test('rejects an English-shaped example in a DE pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'a1',
+          lemmas: [
+            {
+              word: 'HAUS',
+              gloss: 'Ein Gebäude zum Wohnen.',
+              example: 'The Haus is very old and big.',
+            },
+          ],
+        }),
+        'de/a1.json',
+      ),
+    ).toThrow(/pack language/)
+  })
+
+  test('lemmas without an example stay valid and carry no field', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'a1',
+        lemmas: [{ word: 'HOUSE', gloss: 'a building to live in' }],
+      }),
+      'en/a1.json',
+    )
+    expect(p.lemmas[0]?.example).toBeUndefined()
+  })
+})
+
 describe('packs:check A1–B1 synonym floor (#24)', () => {
   test('fails A1–B1 below 80% chip coverage', () => {
     const lemmas = Array.from({ length: 10 }, (_, i) => ({
