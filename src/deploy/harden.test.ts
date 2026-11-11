@@ -100,6 +100,16 @@ describe('staging bindings differ from production', () => {
     expect(await baked.json()).toEqual({ ok: true, stage: STAGING_STAGE, sha: BUILD_SHA })
   })
 
+  test('unknown /api/* (/api/nope, /api/health/x) is a JSON 404', async () => {
+    const { onRequest } = await import('../../functions/api/[[path]].ts')
+    const res = onRequest()
+    expect(res.status).toBe(404)
+    expect(res.headers.get('content-type')).toContain('application/json')
+    expect(res.headers.get('cache-control')).toBe('no-store')
+    expect(res.headers.get('x-content-type-options')).toBe('nosniff')
+    expect(await res.json()).toEqual({ ok: false, error: 'not_found' })
+  })
+
   test('getHealth resolves only a 200 body that includes stage and sha', async () => {
     const original = globalThis.fetch
     const sha = 'a'.repeat(40)
