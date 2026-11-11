@@ -26,4 +26,12 @@ Streaks (`src/lib/streaks.ts`) clear at the local midnight after a missed day (`
 
 - `streaks.ts` pure functions change (`recordDailyWin`, `applyMidnightBreak`) with parse migration; `streaks.test.ts` gains cases for earn, cap, consume, and survive-one-missed-day.
 - StreakChip renders the freeze count; no other surface changes.
-- A freeze covers one missed local day only; two consecutive missed days still break the streak.
+- A freeze covers one missed local day per midnight check. A gap of two or more missed days seen in one check still breaks the streak.
+
+## Amendment (2026-11-09): match shipped behaviour
+
+Status: Accepted. Docs-only; no code change.
+
+- **Daily opens chain freezes.** Each open runs the midnight check (`ensureStreakPersisted`). A spent freeze moves `lastWinDate` to yesterday. So a learner with 2 freezes who opens the app on the first missed day and again on the second missed day spends both freezes, and the streak survives two missed days (`streaks.test.ts`, "opening the app each day with 2 freezes covers two missed days"). Two missed days with no open in between still break the streak; the freezes are kept.
+- **Leftover freezes stay stored and hidden.** When the streak breaks with freezes held, `freezes` stays in storage. StreakChip renders nothing at count 0, so the freezes are hidden. They show again after the next daily win restarts the streak.
+- Product acceptance "two missed days still break it" now reads: two missed days break it unless the learner opened the app on the first missed day and held 2 freezes.
