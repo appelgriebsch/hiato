@@ -62,6 +62,7 @@ jobs:
       - run: bun run build
         env:
           HIATO_BUILD_SHA: ${{ steps.sha.outputs.sha }}
+          WEB_ANALYTICS_TOKEN: ${{ vars.WEB_ANALYTICS_TOKEN }}
       - name: dist is a staging shell
         run: |
           if [ -e dist/404.html ]; then
