@@ -133,6 +133,7 @@ describe('About build SHA footer (gh-166)', () => {
   test('footer bakes SHA via constant; middle-dot mono format; no fetch', async () => {
     const src = await pageSrc('About.tsx')
     expect(src).toContain('Built by Mistral AI ·')
+    expect(src).toContain('/brand/mistral-mark.svg')
     expect(src).toContain('__HIATO_BUILD_SHA__')
     expect(src).toContain('font-mono')
     expect(src).not.toMatch(/Built by Mistral AI ·\s*[0-9a-f]{7}/)
