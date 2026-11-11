@@ -37,6 +37,7 @@ Status: Accepted. Deciders: Andreas Gerlach. UX: UX Uma.
 - **Prefill wins (Q3 B).** An A1/A2 round whose vowel help reveals the whole word at load is recorded as a win with 6 lives left.
 - **Scope (Q4 A).** Stats shows the current language × CEFR slot only. No slot picker.
 - **Grid (Q5 A, relabelled).** Heading `Wins by lives left`; rows `6, 5, 4, 3, 2, 1, Lost`. Labels use lives left, matching Play ("N lives remaining") and the headline average. The data is unchanged: lives used = `TOTAL_LIVES − livesLeft`. This replaces the earlier "lives-used grid" wording.
+- **What counts as Lost (Q8 A).** Lost is any recorded round that was not won: out of lives, or a Practice Reveal ("Word revealed"). A Reveal is recorded as a loss with its lives left kept in the entry.
 - **Headline.** Win rate as an integer percent; average lives left on wins with one decimal, or `No wins yet` when there are no wins (never `NaN`).
 - **No backfill (Q6 A).** `hiato.history` starts empty; `hiato.daily` is not migrated.
 - **Idempotence.** A Daily entry is written at most once per `dateKey` per slot, so re-opening "View today's result" does not double-count.
