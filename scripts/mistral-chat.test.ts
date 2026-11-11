@@ -64,6 +64,19 @@ describe('mistralChat', () => {
         { role: 'system', content: 'sys' },
         { role: 'user', content: 'prompt' },
       ])
+      expect('top_p' in sent).toBe(false)
+    } finally {
+      restoreGlobals()
+    }
+  })
+
+  test('greedy sampling (temperature 0) sends top_p 1 — API error 3054 otherwise', async () => {
+    try {
+      const { bodies } = stubFetch([OK])
+      await mistralChat('k', 'sys', 'prompt', 0)
+      const sent = JSON.parse(bodies[0]) as { temperature: number; top_p?: number }
+      expect(sent.temperature).toBe(0)
+      expect(sent.top_p).toBe(1)
     } finally {
       restoreGlobals()
     }
