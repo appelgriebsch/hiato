@@ -28,6 +28,7 @@ Direct dependencies declared by this repository. Rows returned by the PR #40 rev
 | react-router-dom | 7.18.4 | MIT | | none found |
 | tailwind-merge | 3.7.0 | MIT | | none found |
 | tailwindcss | 4.3.3 | MIT | | none found |
+| Tatoeba sentences (per-language dumps, data not a package) | downloaded dump | CC-BY 2.0 FR — https://tatoeba.org | | n/a — data, not a package; used under CC-BY 2.0 FR attribution (ADR 0048) |
 | typescript | 6.0.3 | unknown | | not checked |
 | vite | 8.3.0 | MIT | | none found |
 | vite-plugin-pwa | 1.3.0 | MIT | | none found |

@@ -56,6 +56,18 @@ not verbatim dumps of any proprietary wordlist (ADR 0026). Pack JSON stays
 under the `license` field inside each file (CEFR-J Wordlist terms or
 CC-BY-SA-4.0). Share-alike applies to the redistributed CC-BY-SA lemma lists.
 
+Example sentences (ADR 0048)
+----------------------------
+EndCard example sentences come from two sources (per-pack credit ships in
+each pack JSON `license`/`attribution` and on the in-app About page):
+
+  Tatoeba sentences — CC-BY 2.0 FR. Source: https://tatoeba.org
+  License: https://creativecommons.org/licenses/by/2.0/fr/
+  Used wherever a Tatoeba sentence ships; attribution is aggregate
+  (Tatoeba + license + link), the model Tatoeba's own FAQ endorses.
+  Sentences without a Tatoeba match are original Hiato copy generated
+  with Mistral AI — no external credit required.
+
 Derived source caches (not the PWA bundle)
 ------------------------------------------
 These committed files adapt third-party datasets and stay under those terms

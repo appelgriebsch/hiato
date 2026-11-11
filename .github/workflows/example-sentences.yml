@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       lang:
-        description: 'Language to fill (all = every supported language; pilot is en,de)'
+        description: 'Languages to fill (pilot #247: en,de; widen #248: all)'
         required: true
         type: choice
         default: en,de
@@ -18,7 +18,7 @@ on:
           - fr
           - it
       levels:
-        description: 'Comma-separated CEFR bands (pilot is a1,a2,b1)'
+        description: 'Comma-separated CEFR bands (pilot #247: a1,a2,b1; widen #248: a1,a2,b1,b2,c1,c2)'
         required: false
         type: string
         default: a1,a2,b1

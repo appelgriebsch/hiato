@@ -73,6 +73,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const rels: string[] = []
   const errors: string[] = []
   const pinPacks: { rel: string; pack: PinPack }[] = []
+  let totalBytes = 0
 
   const STEM_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/stem-spoiler-baseline.json'), 'utf8'),
@@ -123,10 +124,18 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     snapshots.push({ rel, pack })
     const floor = lemmaFloor(pack.cefr)
     const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
+    const kb = (Buffer.byteLength(text, 'utf8') / 1024).toFixed(1)
+    totalBytes += Buffer.byteLength(text, 'utf8')
     out.log(
-      `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra})`,
+      `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra}, ${kb} KB)`,
     )
   }
+
+  // Pack-size sanity (ADR 0006/0026, #248): report the shipped total so the
+  // example-sentence widen run can diff it in the workflow log.
+  out.log(
+    `public/packs total: ${(totalBytes / 1024 / 1024).toFixed(2)} MB across ${snapshots.length} packs`,
+  )
 
   errors.push(...collectPackPinErrors(pinPacks, loadPackPin()))
   errors.push(...checkCompleteness(rels))
