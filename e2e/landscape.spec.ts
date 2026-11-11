@@ -513,9 +513,10 @@ test.describe('short landscape viewports (#209)', () => {
     await expect(pocket).toBeVisible()
     const fit = await stats.evaluate((el) => {
       const rect = el.getBoundingClientRect()
-      const pocket = [...document.querySelectorAll('button')].find((b) =>
-        b.textContent?.trim().startsWith('Pocket'),
-      )
+      const pocket = [...document.querySelectorAll('button')].find((b) => {
+        // The card copy sits in a short-land:hidden node with height 0 — skip it.
+        return b.textContent?.trim().startsWith('Pocket') && b.getBoundingClientRect().height > 0
+      })
       const pr = pocket?.getBoundingClientRect()
       const dailyCard = el.closest('[data-layout-shell]')?.querySelector('.short-land\\:col-start-1')
       const dr = dailyCard?.getBoundingClientRect()
