@@ -97,4 +97,31 @@ describe('daily record (per lang+CEFR)', () => {
       'dwelling',
     ])
   })
+
+  test('round-trips the EndCard example sentence (#246)', () => {
+    setDailyRecord({
+      dateKey: '2026-09-19',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'HOUSE',
+      gloss: 'a building to live in',
+      example: 'We live in a small house.',
+      won: true,
+      completed: true,
+    })
+    expect(getDailyRecord('en', 'a1')?.example).toBe('We live in a small house.')
+  })
+
+  test('drops a missing or empty example', () => {
+    setDailyRecord({
+      dateKey: '2026-09-19',
+      lang: 'en',
+      cefr: 'a1',
+      word: 'HOUSE',
+      example: '',
+      won: true,
+      completed: true,
+    })
+    expect(getDailyRecord('en', 'a1')?.example).toBeUndefined()
+  })
 })

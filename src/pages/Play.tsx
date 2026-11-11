@@ -291,6 +291,7 @@ function PlayRound({
         word: entry.word,
         gloss: entry.gloss,
         synonyms: entry.synonyms,
+        example: entry.example,
         won: result === 'win',
         completed: true,
       })
@@ -331,6 +332,7 @@ function PlayRound({
             setWordEntry({
               word: rec.word,
               gloss: rec.gloss,
+              example: rec.example,
             })
             setFinished(rec.won ? 'win' : 'lose')
             setLoading(false)
@@ -791,6 +793,7 @@ function PlayRound({
               word={wordEntry.word}
               gloss={wordEntry.gloss}
               synonyms={wordEntry.synonyms}
+              example={wordEntry.example}
               lang={lang}
               cefr={cefr}
               dateKey={dateKey}
@@ -954,6 +957,7 @@ function DoneDaily({
               word={rec.word}
               gloss={teachGloss}
               synonyms={teachSynonyms}
+              example={rec.example}
               showSpeak={speechOk}
             />
           </div>
@@ -1037,6 +1041,7 @@ function EndCard({
   word,
   gloss,
   synonyms,
+  example,
   lang,
   cefr,
   dateKey,
@@ -1057,6 +1062,7 @@ function EndCard({
   word: string
   gloss?: string
   synonyms?: string[]
+  example?: string
   lang: PackLang
   cefr: PackCefr
   dateKey: string
@@ -1239,6 +1245,8 @@ function EndCard({
   const teachSynonyms = (synonyms ?? [])
     .filter((s) => s.trim().length > 0)
     .slice(0, 3)
+  // ADR 0049: one example sentence, pack language, EndCard only
+  const teachExample = example?.trim() ?? ''
 
   // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
   const speakSurface = mode === 'daily' || mode === 'practice'
@@ -1311,6 +1319,7 @@ function EndCard({
           word={word}
           gloss={teachGloss}
           synonyms={teachSynonyms}
+          example={teachExample}
           showSpeak={showSpeakControl}
         />
       </div>

@@ -4,6 +4,7 @@
  * Pure helpers so bun:test can cover exclusive/license without walking disk twice.
  */
 import {
+  EXAMPLE_SENTENCE_MAX,
   PACK_CEFR_LEVELS,
   PACK_CEFRS,
   PACK_LANGS,
@@ -363,7 +364,33 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
     }
 
-    return { word, gloss, synonyms }
+    let example: string | undefined
+    if (e.example !== undefined) {
+      example = assertString(e.example, `${file}: lemmas[${i}].example`).normalize('NFC')
+      if (example.length > EXAMPLE_SENTENCE_MAX) {
+        throw new Error(
+          `${file}: lemmas[${i}] example length ${example.length} exceeds cap ${EXAMPLE_SENTENCE_MAX} — "${word}"`,
+        )
+      }
+      if (!spoilerContains(example, word)) {
+        throw new Error(
+          `${file}: lemmas[${i}] example must contain the lemma as a whole word — "${word}" / "${example}"`,
+        )
+      }
+      if (
+        isWrongLanguageGloss(
+          o.lang as string,
+          example,
+          membershipActive() ? isWordOfLang : undefined,
+        )
+      ) {
+        throw new Error(
+          `${file}: lemmas[${i}] example not in pack language ${o.lang} — "${word}" / "${example}"`,
+        )
+      }
+    }
+
+    return { word, gloss, synonyms, example }
   })
 
   return {

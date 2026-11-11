@@ -38,7 +38,12 @@ export interface PackLemma {
   gloss?: string
   /** Same-language synonym chips (≤3 shown) — must not contain `word`. */
   synonyms?: string[]
+  /** One example sentence in `pack.lang` (ADR 0049) — must contain `word` as a whole word; EndCard-only. */
+  example?: string
 }
+
+/** Max length of a lemma example sentence (ADR 0049 length cap). */
+export const EXAMPLE_SENTENCE_MAX = 160
 
 export interface WordPack {
   version: number
