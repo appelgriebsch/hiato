@@ -40,10 +40,11 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
       return
     }
     if (!dialog) return
-    if (stats && stats.played === 0) {
-      // Only after this open has snapshotted storage. Empty is not a wipe.
-      if (loadedFor !== slotKey) return
+    // Live read, not the snapshot: a wipe while open (same tab or another)
+    // closes the sheet and restores focus even if no render re-snapshotted.
+    if (loadedFor === slotKey && statsFor(slotKey).played === 0) {
       if (dialog.open) dialog.close()
+      restoreFocusRef.current = true
       onCloseRef.current()
       return
     }
@@ -55,6 +56,18 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
       closeRef.current?.focus()
     }
   }, [open, stats, loadedFor, slotKey])
+
+  // Cross-tab wipe while open: storage events do not fire in the tab that
+  // wrote, so re-snapshot here and let the layout effect above close.
+  useEffect(() => {
+    if (!open) return
+    const onStorage = (event: StorageEvent) => {
+      if (event.key && event.key !== 'hiato.history') return
+      setStats(statsFor(slotKey))
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [open, slotKey])
 
   useEffect(() => {
     const dialog = dialogRef.current
