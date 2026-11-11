@@ -107,6 +107,14 @@ describe('cookieless Web Analytics gating (ADR 0047, #224)', () => {
     )
   })
 
+  test('deploy.yml passes WEB_ANALYTICS_TOKEN from vars to the build step', async () => {
+    const root = new URL('../../', import.meta.url)
+    const yml = await Bun.file(new URL('.github/workflows/deploy.yml', root)).text()
+    expect(yml).toMatch(
+      /- run: bun run build\n {8}env:\n {10}HIATO_BUILD_SHA: \$\{\{ steps\.sha\.outputs\.sha \}\}\n {10}WEB_ANALYTICS_TOKEN: \$\{\{ vars\.WEB_ANALYTICS_TOKEN \}\}\n/,
+    )
+  })
+
   test('initAnalytics runs at most once per page load', async () => {
     const { doc, scripts } = fakeDocument()
     resetAnalyticsForTest()
