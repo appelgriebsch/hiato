@@ -190,7 +190,7 @@ describe('lazy per-language production spellers', () => {
     expect(isWordOfLang('pt', 'ÔNIBUS')).toBe(true)
   })
 
-  test('without deferMembershipMisses (repair scripts), a miss is looked up synchronously and cached', async () => {
+  test('without deferMembershipMisses, a miss is looked up synchronously and cached', async () => {
     resetDicts()
     built.length = 0
     const map = new Map<string, boolean>()
