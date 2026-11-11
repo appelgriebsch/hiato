@@ -544,7 +544,9 @@ test.describe('short landscape viewports (#209)', () => {
           rect.right <= window.innerWidth + 1,
         tallEnough: rect.height >= 44,
         pocketTallEnough: (pr?.height ?? 0) >= 44,
-        noDailyOverlap: dr ? rect.top >= dr.bottom - 1 || rect.bottom <= dr.top + 1 : false,
+        // Side-by-side short-landscape columns share a vertical range, so
+        // "not covering the Daily card" means no horizontal intersection.
+        noDailyOverlap: dr ? rect.right <= dr.left + 1 || rect.left >= dr.right - 1 : false,
         docScrollW: document.scrollingElement?.scrollWidth ?? 0,
         vw: window.innerWidth,
       }
