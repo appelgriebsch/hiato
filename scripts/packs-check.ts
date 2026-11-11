@@ -6,11 +6,13 @@
  * person-name gloss gate (#24), hint ceiling (#146 / all twenty-four EN+DE+ES+PT a1–c2).
  */
 import { readdir, readFile, stat } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import path from 'node:path'
 import {
   C2_MIN,
   buildLemmaEasiestByLang,
   checkCompleteness,
+  checkExampleGate,
   checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
@@ -19,6 +21,7 @@ import {
   exclusiveConflicts,
   lemmaFloor,
   validatePack,
+  type ExampleGateLog,
   type PackSnapshot,
 } from './packs-check-lib'
 import {
@@ -77,6 +80,11 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const FAMILY_BASELINE = JSON.parse(
     await readFile(path.join(import.meta.dir, 'data/family-leak-baseline.json'), 'utf8'),
   ) as StemBaseline
+  // ADR 0048: every shipped example needs a passing CEFR gate entry (#247).
+  const gatePath = path.join(import.meta.dir, 'data', 'example-gate.json')
+  const gateLog = (existsSync(gatePath)
+    ? JSON.parse(await readFile(gatePath, 'utf8'))
+    : {}) as ExampleGateLog
   for (const file of files) {
     const text = await readFile(file, 'utf8')
     let raw: unknown
@@ -103,6 +111,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     errors.push(...boilerplateGlossErrors(rel, pack.lemmas))
     errors.push(...stemSpoilerErrors(rel, pack.lemmas, STEM_BASELINE))
     errors.push(...familyLeakErrors(rel, pack.lemmas, FAMILY_BASELINE))
+    errors.push(...checkExampleGate(rel, pack, gateLog))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)

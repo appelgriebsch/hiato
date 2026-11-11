@@ -15,7 +15,7 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist } from './lemma-denylist'
+import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
@@ -133,6 +133,56 @@ export function checkLemmaFloor(rel: string, pack: WordPack): string | null {
     return `${rel}: lemma count ${pack.lemmas.length} is below floor ${floor} (ADR 0026/0028)`
   }
   return null
+}
+
+/** One CEFR-gate verdict per shipped example (ADR 0048; written by scripts/example-sentences.ts). */
+export type ExampleGateEntry = {
+  sentence: string
+  source: 'tatoeba' | 'mistral' | 'fixture'
+  verdict: 'pass' | 'reject'
+  level: string
+  at: string
+}
+
+export type ExampleGateLog = Record<string, ExampleGateEntry>
+
+export function exampleGateKey(rel: string, word: string): string {
+  return `${rel}|${nfcUpper(word)}`
+}
+
+/**
+ * ADR 0048: every shipped `example` must have a passing entry in the gate log,
+ * and the logged sentence must match the pack exactly (tamper / stale guard).
+ * Hand-written `fixture` entries are maintainer copy and count as passed.
+ */
+export function checkExampleGate(
+  rel: string,
+  pack: WordPack,
+  gate: ExampleGateLog,
+): string[] {
+  const errors: string[] = []
+  for (const L of pack.lemmas) {
+    if (L.example === undefined) continue
+    const entry = gate[exampleGateKey(rel, L.word)]
+    if (!entry) {
+      errors.push(
+        `${rel}: example for "${L.word}" has no CEFR gate entry (scripts/data/example-gate.json) — run scripts/example-sentences.ts`,
+      )
+      continue
+    }
+    if (entry.verdict !== 'pass') {
+      errors.push(
+        `${rel}: example for "${L.word}" is gated ${entry.verdict.toUpperCase()} (above level or rejected) — "${L.example}"`,
+      )
+      continue
+    }
+    if (entry.sentence !== L.example) {
+      errors.push(
+        `${rel}: example for "${L.word}" differs from the gated sentence — "${L.example}" vs gate "${entry.sentence}"`,
+      )
+    }
+  }
+  return errors
 }
 
 export function synonymCoverage(pack: WordPack): number {

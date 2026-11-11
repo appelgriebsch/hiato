@@ -57,6 +57,10 @@ declare const Bun: {
   ): {
     text(): Promise<string>
   }
+  spawnSync(
+    cmd: string[],
+    opts?: { stdout?: 'pipe' | 'inherit' },
+  ): { exitCode: number; stdout: Buffer }
   /** bun.lock is JSONC (trailing commas). */
   JSONC: {
     parse(text: string): unknown
