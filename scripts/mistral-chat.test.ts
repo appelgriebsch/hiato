@@ -82,6 +82,33 @@ describe('mistralChat', () => {
     }
   })
 
+  test('content returned as an array of blocks is joined to a string (run 43104173938)', async () => {
+    try {
+      stubFetch([
+        {
+          status: 200,
+          body: {
+            choices: [
+              {
+                message: {
+                  content: [
+                    { type: 'text', text: 'PASS' },
+                    { type: 'text', text: ' — A1 ok.' },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ])
+      const content = await mistralChat('k', 'sys', 'prompt', 0)
+      expect(content).toBe('PASS — A1 ok.')
+      expect(typeof content).toBe('string')
+    } finally {
+      restoreGlobals()
+    }
+  })
+
   test('backs off and retries on 429', async () => {
     try {
       stubSleep()

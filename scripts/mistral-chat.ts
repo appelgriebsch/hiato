@@ -9,6 +9,24 @@ export function readMistralKey(): string | null {
   return process.env.MISTRAL_API_KEY || null
 }
 
+/**
+ * Mistral returns message.content either as a string or as an array of
+ * content blocks; join the text blocks so callers always get a string
+ * (run 43104173938 crashed on `content.replace` when the API sent blocks).
+ */
+export function messageContentToString(
+  content: string | { type?: string; text?: string }[] | null | undefined,
+): string {
+  if (typeof content === 'string') return content
+  if (Array.isArray(content)) {
+    return content
+      .filter((p) => p && (p.type === undefined || p.type === 'text'))
+      .map((p) => p.text ?? '')
+      .join('')
+  }
+  return ''
+}
+
 export async function mistralChat(
   key: string,
   system: string,
@@ -46,9 +64,14 @@ export async function mistralChat(
       throw new Error(`Mistral API ${res.status}: ${t.slice(0, 300)}`)
     }
     const body = (await res.json()) as {
-      choices?: { message?: { content?: string } }[]
+      choices?: {
+        message?: {
+          /** String, or a list of content blocks ({type:'text', text}) on newer models. */
+          content?: string | { type?: string; text?: string }[]
+        }
+      }[]
     }
-    return body.choices?.[0]?.message?.content || ''
+    return messageContentToString(body.choices?.[0]?.message?.content)
   }
   throw new Error('Mistral API 429: retries exhausted')
 }
