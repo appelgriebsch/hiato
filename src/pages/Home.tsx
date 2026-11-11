@@ -4,11 +4,13 @@ import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
 import { OfflineChip } from '@/components/OfflineChip'
 import { PocketSheet } from '@/components/PocketSheet'
+import { StatsSheet } from '@/components/StatsSheet'
 import { StreakChip } from '@/components/StreakChip'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { isPracticeAvailable } from '@/engine'
 import { isDailyComplete } from '@/lib/daily-record'
+import { historySlot, listHistory } from '@/lib/history'
 import { isDue, listPocketStored, pocketSlot, repairPocket } from '@/lib/pocket'
 import { pocketRetryHref } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
@@ -42,6 +44,10 @@ export function Home() {
     selectedLang && selectedCefr
       ? isDailyComplete(selectedLang, selectedCefr, dateKey)
       : false
+  const historyCount =
+    selectedLang && selectedCefr
+      ? listHistory(historySlot(selectedLang, selectedCefr)).length
+      : 0
   const [practiceOk, setPracticeOk] = useState(true)
   const [packCached, setPackCached] = useState(() =>
     selectedLang && selectedCefr
@@ -50,6 +56,7 @@ export function Home() {
   )
   const [, bumpPocket] = useState(0)
   const [pocketOpen, setPocketOpen] = useState(false)
+  const [statsOpen, setStatsOpen] = useState(false)
   const [clearedSlot, setClearedSlot] = useState<string | null>(null)
   // A slot change must not paint the previous slot's "Pocket cleared".
   if (clearedSlot !== null && clearedSlot !== slotKey) {
@@ -170,11 +177,27 @@ export function Home() {
     return null
   }
 
+  const statsButton = () => {
+    if (!prefs || historyCount === 0) return null
+    return (
+      <Button
+        variant="outline"
+        fullWidth
+        className="mt-2"
+        aria-label={`Stats, ${historyCount} ${historyCount === 1 ? 'round' : 'rounds'}`}
+        onClick={() => setStatsOpen(true)}
+      >
+        Stats
+      </Button>
+    )
+  }
+
   return (
     <Layout
       aside={
         <div className="flex w-full min-w-0 flex-col items-center justify-center">
           {pocketControl(false)}
+          {statsButton()}
           <nav className="mt-3 flex items-center justify-center gap-4 text-sm">
             <Link
               to="/language"
@@ -248,7 +271,16 @@ export function Home() {
                 Practice isn’t available — this pack only has today’s daily word.
               </p>
             ) : null}
-            <div className="short-land:hidden">{pocketControl(true)}</div>
+            <div className="short-land:hidden">
+              {pocketControl(true)}
+              {statsButton()}
+            </div>
+            <StatsSheet
+              lang={prefs.lang}
+              cefr={prefs.cefr}
+              open={statsOpen}
+              onClose={() => setStatsOpen(false)}
+            />
             <PocketSheet
               lang={prefs.lang}
               cefr={prefs.cefr}
