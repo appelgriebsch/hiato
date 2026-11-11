@@ -1,8 +1,8 @@
 /**
- * xAI synonym generation for expand-packs (not run on CI / bun:test).
+ * Mistral synonym generation for expand-packs (not run on CI / bun:test).
  */
-import { existsSync, readFileSync } from 'node:fs'
 import { nfcUpper } from './lemma-denylist'
+import { mistralChat, readMistralKey } from './mistral-chat'
 import {
   filterSynonymChips,
   synonymCacheKeyIsSettled,
@@ -22,23 +22,6 @@ const LANG_NAME: Record<SynLang, string> = {
 const SYNONYM_STYLE: Partial<Record<SynLang, string>> = {
   fr: 'Français seulement — jamais anglais. Écris œ, pas oe. Pas d’article et pas d’élision dans les synonymes (pas de un, une, le, la, l’, d’, n’, j’, qu’).',
   it: 'Italiano soltanto — mai inglese. Niente articolo e niente elisione nei sinonimi. Scrivi la lettera accentata (à è é ì ò ù), non la forma senza accento.',
-}
-
-export function readXaiKey(): string | null {
-  try {
-    const authPath = `${process.env.HOME}/.grok/auth.json`
-    if (!existsSync(authPath)) return process.env.XAI_API_KEY || null
-    const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<
-      string,
-      { key?: string }
-    >
-    for (const v of Object.values(auth)) {
-      if (v?.key) return v.key
-    }
-  } catch {
-    /* ignore */
-  }
-  return process.env.XAI_API_KEY || null
 }
 
 function asStringArray(raw: unknown): string[] | null {
@@ -100,32 +83,14 @@ async function completeJson(
   prompt: string,
   soft = false,
 ): Promise<Record<string, unknown> | null> {
-  const res = await fetch('https://api.x.ai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`,
-    },
-    body: JSON.stringify({
-      model: 'grok-4-fast-non-reasoning',
-      temperature,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: prompt },
-      ],
-    }),
-  })
-  if (!res.ok) {
-    const t = await res.text()
-    const msg = `xAI synonym API ${res.status}: ${t.slice(0, 300)}`
-    if (!soft) throw new Error(msg)
-    console.warn(`  ${msg}`)
+  let content: string
+  try {
+    content = await mistralChat(key, system, prompt, temperature)
+  } catch (e) {
+    if (!soft) throw e
+    console.warn(`  ${(e as Error).message}`)
     return null
   }
-  const body = (await res.json()) as {
-    choices?: { message?: { content?: string } }[]
-  }
-  const content = body.choices?.[0]?.message?.content || ''
   const jsonMatch = content.match(/\{[\s\S]*\}/)
   if (!jsonMatch) {
     const msg = `No JSON in synonym response: ${content.slice(0, 200)}`
@@ -172,10 +137,10 @@ export async function generateSynonyms(
   let missing = unique.filter((w) => !synonymCacheKeyIsSettled(cache, w))
   if (missing.length === 0) return
 
-  const key = readXaiKey()
+  const key = readMistralKey()
   if (!key) {
     throw new Error(
-      `Need synonyms for ${missing.length} ${lang} lemmas but no xAI key (set XAI_API_KEY or ~/.grok/auth.json)`,
+      `Need synonyms for ${missing.length} ${lang} lemmas but no Mistral key (set MISTRAL_API_KEY)`,
     )
   }
 

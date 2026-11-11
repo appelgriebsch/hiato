@@ -4,7 +4,7 @@
  * Sources: CEFR-J B2; Octanove C1/C2; wordhoard v0.1.0 frequency-rank bands (DE/ES);
  * FrequencyWords PT. Same #24 gates as A1–B1: Hunspell membership, person-name
  * list skip, denylist, pack-language gloss (ADR 0030). --dry-run selects without
- * xAI or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
+ * Mistral or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
  */
 import { Database } from 'bun:sqlite'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
@@ -17,6 +17,7 @@ import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
+import { mistralChat, readMistralKey } from './mistral-chat'
 import { selectFrBands, type FrCefr } from './fr-pack'
 import {
   DE_ES_BANDS,
@@ -339,24 +340,6 @@ function sourceCandidates(lang: Lang, ptAll: string[] | null): Record<NewCefr, s
   return parseWordhoardBands(lang)
 }
 
-function readXaiKey(): string | null {
-  const authPath = `${process.env.HOME}/.grok/auth.json`
-  if (existsSync(authPath)) {
-    try {
-      const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<
-        string,
-        { key?: string }
-      >
-      for (const v of Object.values(auth)) {
-        if (v?.key) return v.key
-      }
-    } catch {
-      /* fall through to env */
-    }
-  }
-  return process.env.XAI_API_KEY || null
-}
-
 const LANG_NAME: Record<Lang, string> = {
   en: 'English',
   de: 'German',
@@ -379,41 +362,6 @@ function glossRejected(lang: Lang, word: string, gloss: string | undefined): boo
   if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, word)) return true
   if (onNameList(word, NAMES) && isPersonNameGloss(gloss, lang)) return true
   return isWrongLanguageGloss(lang, gloss, isWordOfLang)
-}
-
-async function xaiChat(key: string, system: string, prompt: string, temperature: number): Promise<string> {
-  for (let attempt = 0; attempt < 5; attempt++) {
-    const res = await fetch('https://api.x.ai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model: 'grok-4-fast-non-reasoning',
-        temperature,
-        messages: [
-          { role: 'system', content: system },
-          { role: 'user', content: prompt },
-        ],
-      }),
-    })
-    if (res.status === 429) {
-      const wait = 1000 * 2 ** attempt
-      console.warn(`  xAI 429, backing off ${wait}ms`)
-      await Bun.sleep(wait)
-      continue
-    }
-    if (!res.ok) {
-      const t = await res.text()
-      throw new Error(`xAI API ${res.status}: ${t.slice(0, 300)}`)
-    }
-    const body = (await res.json()) as {
-      choices?: { message?: { content?: string } }[]
-    }
-    return body.choices?.[0]?.message?.content || ''
-  }
-  throw new Error('xAI API 429: retries exhausted')
 }
 
 function parseJsonObject(content: string): Record<string, unknown> | null {
@@ -443,10 +391,10 @@ async function generateGlosses(
   const missing = words.filter((w) => glossRejected(lang, w, cache[w]))
   if (missing.length === 0) return
 
-  const key = readXaiKey()
+  const key = readMistralKey()
   if (!key) {
     throw new Error(
-      `Need glosses for ${missing.length} ${lang} lemmas but no xAI key (set XAI_API_KEY or ~/.grok/auth.json)`,
+      `Need glosses for ${missing.length} ${lang} lemmas but no Mistral key (set MISTRAL_API_KEY)`,
     )
   }
 
@@ -462,7 +410,7 @@ async function generateGlosses(
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
 
-    const content = await xaiChat(
+    const content = await mistralChat(
       key,
       `You write concise learner-dictionary glosses in ${LANG_NAME[lang]} only (ADR 0030). Reply with a single JSON object only.`,
       prompt,
@@ -498,7 +446,7 @@ async function generateGlosses(
         `${GLOSS_STYLE[lang]} Define the meaning using other ${LANG_NAME[lang]} words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       try {
-        const content = await xaiChat(
+        const content = await mistralChat(
           key,
           `JSON only. Gloss in ${LANG_NAME[lang]} only (ADR 0030). Each gloss must avoid the headword as a whole word (ADR 0023).`,
           prompt,
