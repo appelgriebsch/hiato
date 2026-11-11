@@ -38,6 +38,7 @@ import {
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
+import { hasDailyFor, historySlot, recordResult } from '@/lib/history'
 import {
   addToPocket,
   isDue,
@@ -297,6 +298,18 @@ function PlayRound({
     [lang, cefr, dateKey],
   )
 
+  // One write path for Daily and Practice rounds (ADR 0045). Pocket never
+  // records; a Daily already recorded for this dateKey is not double-counted.
+  const recordRound = useCallback(
+    (result: 'win' | 'lose', livesLeft: number) => {
+      if (mode !== 'daily' && mode !== 'practice') return
+      const slot = historySlot(lang, cefr)
+      if (mode === 'daily' && hasDailyFor(slot, dateKey)) return
+      recordResult(slot, { dateKey, won: result === 'win', livesLeft, mode })
+    },
+    [mode, lang, cefr, dateKey],
+  )
+
   useEffect(() => {
     let cancelled = false
     setLoading(true)
@@ -336,6 +349,7 @@ function PlayRound({
           if (isWon(initial)) {
             setFinished('win')
             persistDaily('win', entry)
+            recordRound('win', TOTAL_LIVES)
           } else {
             setFinished(null)
           }
@@ -447,7 +461,9 @@ function PlayRound({
         setLives(TOTAL_LIVES)
         setMisses(0)
         setHintUsed(false)
-        setFinished(isWon(initial) ? 'win' : null)
+        const prefillWon = isWon(initial)
+        setFinished(prefillWon ? 'win' : null)
+        if (prefillWon) recordRound('win', TOTAL_LIVES)
         setLoading(false)
       })
       .catch((e: unknown) => {
@@ -459,7 +475,7 @@ function PlayRound({
     return () => {
       cancelled = true
     }
-  }, [dateKey, lang, cefr, mode, practiceSeed, pocketParamId, persistDaily])
+  }, [dateKey, lang, cefr, mode, practiceSeed, pocketParamId, persistDaily, recordRound])
 
   const showHint = useMemo(() => {
     if (!wordEntry) return false
@@ -472,6 +488,7 @@ function PlayRound({
   const endGame = useCallback(
     (result: 'win' | 'lose', entry: PackLemma) => {
       setFinished(result)
+      recordRound(result, roundRef.current.lives)
       if (mode === 'daily') persistDaily(result, entry)
       // Pocket: win removes; a due loss advances the ladder; an early loss
       // keeps stage and dueAt. Never streaks / Clerk / D1 / recordDailyWin.
@@ -490,7 +507,7 @@ function PlayRound({
         }
       }
     },
-    [mode, persistDaily, activePocketId, pocketWasDue, pocketStage],
+    [mode, persistDaily, recordRound, activePocketId, pocketWasDue, pocketStage],
   )
 
   function onKey(letter: string) {

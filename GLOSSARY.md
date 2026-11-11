@@ -39,7 +39,7 @@ Up to five missed Daily words per language and level, kept on the device for a r
 The card after a round, with the word, its gloss, synonym chips, and speech.
 
 **Lives**:
-Six misses allowed in a round.
+Six misses allowed in a round. Lives left is what remains (shown in Play and Stats); lives used = 6 − lives left.
 
 **Streak**:
 Consecutive Daily wins for one language and level.
@@ -75,4 +75,7 @@ A guest-local pass, capped at 2: a Daily win that lands the streak on a multiple
 A Pocket word whose review day has come (`dueAt`): the ladder is +1 / +3 / +7 local calendar days (clock time kept), due-first in the sheet with a Due badge, on Home as “Pocket (n · k due)”, and on the Practice EndCard as an offer to review.
 
 **Stats**:
-Results history per language and level: the last 50 rounds kept on the device for that slot.
+Results history per language and level: the last 50 rounds kept on the device for that slot. It shows win rate, average lives left on wins, and the lives-left grid; Pocket rounds are excluded.
+
+**Lost**:
+A recorded round that was not won. It covers both EndCard outcomes “Out of lives” and “Word revealed” (Practice Reveal).

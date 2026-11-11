@@ -474,6 +474,111 @@ test.describe('short landscape viewports (#209)', () => {
     })
   }
 
+  test('home aside fits Pocket and Stats at 844x390; stats sheet opens and scrolls (#221)', async ({ page }) => {
+    await page.setViewportSize({ width: 844, height: 390 })
+    await seed(page, 'en')
+    await page.addInitScript(() => {
+      localStorage.setItem(
+        'hiato.pocket',
+        JSON.stringify({
+          v: 1,
+          entries: [
+            {
+              id: 'en|a1|mango',
+              lang: 'en',
+              cefr: 'a1',
+              word: 'MANGO',
+              gloss: 'a sweet fruit',
+              addedAt: 1,
+            },
+          ],
+        }),
+      )
+      const slots: Record<string, unknown[]> = { 'en|a1': [] }
+      for (let i = 0; i < 24; i++) {
+        slots['en|a1'].push({
+          dateKey: '2026-10-18',
+          won: i < 16,
+          livesLeft: i < 16 ? 6 - (i % 6) : 0,
+          mode: i % 3 === 0 ? 'daily' : 'practice',
+        })
+      }
+      localStorage.setItem('hiato.history', JSON.stringify({ v: 1, slots }))
+    })
+    await page.goto('/')
+    const stats = page.getByRole('button', { name: 'Stats, 24 rounds' })
+    const pocket = page.getByRole('button', { name: /Pocket/ })
+    await expect(stats).toBeVisible()
+    await expect(stats).toHaveText('Stats')
+    await expect(pocket).toBeVisible()
+    const fit = await stats.evaluate((el) => {
+      const rect = el.getBoundingClientRect()
+      const pocket = [...document.querySelectorAll('button')].find((b) =>
+        b.textContent?.trim().startsWith('Pocket'),
+      )
+      const pr = pocket?.getBoundingClientRect()
+      const dailyCard = el.closest('[data-layout-shell]')?.querySelector('.short-land\\:col-start-1')
+      const dr = dailyCard?.getBoundingClientRect()
+      let node: Element | null = el
+      let column: DOMRect | null = null
+      while (node) {
+        if ((node.getAttribute('class') ?? '').includes('short-land:col-start-2')) {
+          column = node.getBoundingClientRect()
+          break
+        }
+        node = node.parentElement
+      }
+      return {
+        inAside: column !== null,
+        insideColumn: column
+          ? rect.left >= column.left - 1 &&
+            rect.right <= column.right + 1 &&
+            rect.top >= column.top - 1 &&
+            rect.bottom <= column.bottom + 1
+          : false,
+        inView:
+          rect.top >= -1 &&
+          rect.left >= -1 &&
+          rect.bottom <= window.innerHeight + 1 &&
+          rect.right <= window.innerWidth + 1,
+        tallEnough: rect.height >= 44,
+        pocketTallEnough: (pr?.height ?? 0) >= 44,
+        noDailyOverlap: dr ? rect.top >= dr.bottom - 1 || rect.bottom <= dr.top + 1 : false,
+        docScrollW: document.scrollingElement?.scrollWidth ?? 0,
+        vw: window.innerWidth,
+      }
+    })
+    expect(fit.inAside).toBe(true)
+    expect(fit.insideColumn).toBe(true)
+    expect(fit.inView).toBe(true)
+    expect(fit.tallEnough).toBe(true)
+    expect(fit.pocketTallEnough).toBe(true)
+    expect(fit.noDailyOverlap).toBe(true)
+    expect(fit.docScrollW).toBeLessThanOrEqual(fit.vw + 1)
+
+    await stats.click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Stats' })).toBeVisible()
+    await expect(page.getByText('English A1 · last 24 rounds')).toBeVisible()
+    await expect(page.getByText('Daily and Practice only.')).toBeVisible()
+    await expect(page.getByRole('img', { name: 'Win rate, 67 percent' })).toBeVisible()
+    await expect(page.getByText('Wins by lives left')).toBeVisible()
+    await expect(page.getByRole('img', { name: 'Lost: 8 rounds' })).toBeVisible()
+    const scrollable = await dialog.evaluate((d) => d.scrollHeight > d.clientHeight + 1)
+    expect(scrollable).toBe(true)
+    await page.getByRole('button', { name: 'Close' }).click()
+    await expect(dialog).toBeHidden()
+    await expect(page.getByRole('button', { name: 'Stats, 24 rounds' })).toBeFocused()
+  })
+
+  test('home hides the Stats button when the slot has no history (#221)', async ({ page }) => {
+    await page.setViewportSize({ width: 844, height: 390 })
+    await seed(page, 'en')
+    await page.goto('/')
+    await expect(page.getByRole('button', { name: /Stats/ })).toHaveCount(0)
+  })
+
   test('portrait pocket sheet', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
     await seed(page, 'en')

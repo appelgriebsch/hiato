@@ -574,7 +574,7 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(listAt).toBeGreaterThan(repairAt)
     const endAt = src.indexOf('const endGame = useCallback')
     const endDeps = src.indexOf(
-      '[mode, persistDaily, activePocketId, pocketWasDue, pocketStage]',
+      '[mode, persistDaily, recordRound, activePocketId, pocketWasDue, pocketStage]',
       endAt,
     )
     expect(endAt).toBeGreaterThan(0)
