@@ -15,6 +15,7 @@ import type { PackCefr, PackLang, WordPack } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { loadDenylist, nfcUpper } from './lemma-denylist'
+import { mistralChat, readMistralKey } from './mistral-chat'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import {
@@ -198,64 +199,6 @@ function hardWordsToAvoid(lang: PackLang, cefr: PackCefr = 'a1'): string {
     return always + ', ' + stemTrapsAlways + ', prenda, figura, rapidez, simpatía, actualidad, lujoso, sinceridad, contexto, empeño, suciedad'
   }
   return 'vehicle, structure, container, organ, male, female, sibling, romantic, temperature, roasted, colorful, secret'
-}
-
-function readXaiKey(): string | null {
-  const authPath = `${process.env.HOME}/.grok/auth.json`
-  if (existsSync(authPath)) {
-    try {
-      const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<
-        string,
-        { key?: string }
-      >
-      for (const v of Object.values(auth)) {
-        if (v?.key) return v.key
-      }
-    } catch {
-      /* fall through to env */
-    }
-  }
-  return process.env.XAI_API_KEY || null
-}
-
-async function xaiChat(
-  key: string,
-  system: string,
-  prompt: string,
-  temperature: number,
-): Promise<string> {
-  for (let attempt = 0; attempt < 5; attempt++) {
-    const res = await fetch('https://api.x.ai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model: 'grok-4-fast-non-reasoning',
-        temperature,
-        messages: [
-          { role: 'system', content: system },
-          { role: 'user', content: prompt },
-        ],
-      }),
-    })
-    if (res.status === 429) {
-      const wait = 1000 * 2 ** attempt
-      console.warn(`  xAI 429, backing off ${wait}ms`)
-      await Bun.sleep(wait)
-      continue
-    }
-    if (!res.ok) {
-      const t = await res.text()
-      throw new Error(`xAI API ${res.status}: ${t.slice(0, 300)}`)
-    }
-    const body = (await res.json()) as {
-      choices?: { message?: { content?: string } }[]
-    }
-    return body.choices?.[0]?.message?.content || ''
-  }
-  throw new Error('xAI API 429: retries exhausted')
 }
 
 function parseJsonObject(content: string): Record<string, unknown> | null {
@@ -760,11 +703,9 @@ async function repairPack(rel: string): Promise<void> {
       `note: issue #52/#54/#53/#51 ship EN+DE+PT+ES A1–B1; still repairing ${lang}/${cefr}`,
     )
   }
-  const key = readXaiKey()
+  const key = readMistralKey()
   if (!key) {
-    throw new Error(
-      'Need xAI key (set XAI_API_KEY or ~/.grok/auth.json SuperGrok login)',
-    )
+    throw new Error('Need Mistral key (set MISTRAL_API_KEY)')
   }
 
   loadMembershipCache()
@@ -896,7 +837,7 @@ async function repairPack(rel: string): Promise<void> {
       `${GLOSS_STYLE[lang]} ${ceilingPromptExtra}\n` +
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
-    const content = await xaiChat(
+    const content = await mistralChat(
       key,
       `You write concise ${cefr.toUpperCase()}-or-easier learner-dictionary glosses in ${langName} only (ADR 0030). Reply with a single JSON object only.`,
       prompt,
@@ -957,7 +898,7 @@ async function repairPack(rel: string): Promise<void> {
             : `- ${w}`
         }).join('\n')
       try {
-        const content = await xaiChat(
+        const content = await mistralChat(
           key,
           `JSON only. ${cefr.toUpperCase()}-ceiling ${langName} glosses. Avoid the headword.`,
           prompt,
@@ -1009,7 +950,7 @@ async function repairPack(rel: string): Promise<void> {
       `Use [] if there is no close synonym. Do not force a hypernym.\n` +
       `Return a JSON object mapping each UPPERCASE lemma to a string array.\n` +
       `Lemmas:\n${batch.join('\n')}`
-    const content = await xaiChat(
+    const content = await mistralChat(
       key,
       `You write ${cefr.toUpperCase()}-or-easier ${langName} learner synonyms (same language only, ADR 0030). Reply with a single JSON object only.`,
       prompt,
@@ -1054,7 +995,7 @@ async function repairPack(rel: string): Promise<void> {
         `JSON object: UPPERCASE lemma → 1–3 close ${cefr.toUpperCase()}-or-easier ${langName} synonyms (never the lemma).\n` +
         `Prefer very common easy ${langName} words. Use [] only if truly unique.\n` +
         batch.map((w) => `- ${w}`).join('\n')
-      const content = await xaiChat(
+      const content = await mistralChat(
         key,
         `JSON only. In-ceiling ${cefr.toUpperCase()} ${langName} synonyms.`,
         prompt,
@@ -1118,7 +1059,7 @@ async function repairPack(rel: string): Promise<void> {
         `${GLOSS_STYLE[lang]} Return JSON {"${L.word}":"gloss"}.`
       let rescued = false
       try {
-        const content = await xaiChat(
+        const content = await mistralChat(
           key,
           `JSON only. One ${cefr.toUpperCase()}-ceiling ${langName} gloss.`,
           prompt,
