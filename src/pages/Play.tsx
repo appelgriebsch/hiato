@@ -38,7 +38,12 @@ import {
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
-import { hasDailyFor, historySlot, recordResult } from '@/lib/history'
+import {
+  hasPrefillRecorded,
+  historySlot,
+  markPrefillRecorded,
+  recordRoundFor,
+} from '@/lib/history'
 import {
   addToPocket,
   isDue,
@@ -299,14 +304,13 @@ function PlayRound({
     [lang, cefr, dateKey],
   )
 
-  // One write path for Daily and Practice rounds (ADR 0045). Pocket never
-  // records; a Daily already recorded for this dateKey is not double-counted.
   const recordRound = useCallback(
     (result: 'win' | 'lose', livesLeft: number) => {
-      if (mode !== 'daily' && mode !== 'practice') return
-      const slot = historySlot(lang, cefr)
-      if (mode === 'daily' && hasDailyFor(slot, dateKey)) return
-      recordResult(slot, { dateKey, won: result === 'win', livesLeft, mode })
+      recordRoundFor(historySlot(lang, cefr), mode, {
+        dateKey,
+        won: result === 'win',
+        livesLeft,
+      })
     },
     [mode, lang, cefr, dateKey],
   )
@@ -465,7 +469,13 @@ function PlayRound({
         setHintUsed(false)
         const prefillWon = isWon(initial)
         setFinished(prefillWon ? 'win' : null)
-        if (prefillWon) recordRound('win', TOTAL_LIVES)
+        if (prefillWon) {
+          const slot = historySlot(lang, cefr)
+          if (!hasPrefillRecorded(slot, practiceSeed, dateKey)) {
+            recordRound('win', TOTAL_LIVES)
+            markPrefillRecorded(slot, practiceSeed, dateKey)
+          }
+        }
         setLoading(false)
       })
       .catch((e: unknown) => {

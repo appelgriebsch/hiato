@@ -57,16 +57,26 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
     }
   }, [open, stats, loadedFor, slotKey])
 
-  // Cross-tab wipe while open: storage events do not fire in the tab that
-  // wrote, so re-snapshot here and let the layout effect above close.
+  // Wipe while open: storage events do not fire in the tab that wrote, so
+  // also re-snapshot on focus / visibility return and let the layout effect
+  // above close.
   useEffect(() => {
     if (!open) return
-    const onStorage = (event: StorageEvent) => {
-      if (event.key && event.key !== 'hiato.history') return
+    const refresh = () => {
       setStats(statsFor(slotKey))
     }
+    const onStorage = (event: StorageEvent) => {
+      if (event.key && event.key !== 'hiato.history') return
+      refresh()
+    }
     window.addEventListener('storage', onStorage)
-    return () => window.removeEventListener('storage', onStorage)
+    window.addEventListener('focus', refresh)
+    document.addEventListener('visibilitychange', refresh)
+    return () => {
+      window.removeEventListener('storage', onStorage)
+      window.removeEventListener('focus', refresh)
+      document.removeEventListener('visibilitychange', refresh)
+    }
   }, [open, slotKey])
 
   useEffect(() => {
