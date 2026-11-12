@@ -121,6 +121,46 @@ describe('mistralChat', () => {
     }
   })
 
+  test('backs off and retries when fetch rejects (e.g. AbortSignal TimeoutError, run 43198026054)', async () => {
+    try {
+      stubSleep()
+      const timeout = new DOMException('The operation timed out.', 'TimeoutError')
+      let calls = 0
+      globalThis.fetch = (async () => {
+        calls++
+        if (calls < 3) throw timeout
+        return new Response(JSON.stringify(OK.body), { status: 200 })
+      }) as typeof fetch
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
+      expect(content).toBe('{"A": ["b"]}')
+      expect(calls).toBe(3)
+    } finally {
+      restoreGlobals()
+    }
+  })
+
+  test('rethrows a fetch rejection after 5 exhausted attempts', async () => {
+    try {
+      stubSleep()
+      const timeout = new DOMException('The operation timed out.', 'TimeoutError')
+      let calls = 0
+      globalThis.fetch = (async () => {
+        calls++
+        throw timeout
+      }) as typeof fetch
+      let err: unknown
+      try {
+        await mistralChat('k', 'sys', 'prompt', 0.2)
+      } catch (e) {
+        err = e
+      }
+      expect(err).toBe(timeout)
+      expect(calls).toBe(5)
+    } finally {
+      restoreGlobals()
+    }
+  })
+
   test('throws after 5 exhausted 429 retries', async () => {
     try {
       stubSleep()
