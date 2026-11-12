@@ -5,7 +5,9 @@
  * Source 1: Tatoeba per-language sentence dump (CC-BY 2.0 FR) — one sentence per
  * lemma: whole-Unicode-word match, shortest/cleanest, denylist + person-name
  * guards. Source 2 (fallback): original Mistral-generated sentence
- * (mistral-large-4-0 via MISTRAL_API_KEY). Every candidate passes a Mistral
+ * (mistral-large-4-0 via MISTRAL_API_KEY). Tatoeba is optional (--no-tatoeba, or
+ * when the dump download fails): the pipeline then ships Mistral-only examples.
+ * Every candidate passes a Mistral
  * CEFR gate against the pack level; failures are rejected, not patched.
  * Verdicts cached in scripts/data/example-gate.json; packs:check enforces it.
  *
@@ -242,7 +244,7 @@ export async function fetchTatoebaTsv(lang: PackLang, dir = TATOEBA_DIR): Promis
         console.log(`downloading ${tatoebaUrl(lang)} (attempt ${attempt}/3)`)
         try {
           const res = await fetch(tatoebaUrl(lang), {
-            signal: AbortSignal.timeout(30 * 60_000),
+            signal: AbortSignal.timeout(10 * 60_000),
           })
           if (!res.ok || !res.body) throw new Error(`Tatoeba ${lang} dump ${res.status}`)
           await Bun.write(bz2, await res.arrayBuffer())
@@ -280,6 +282,7 @@ type Cli = {
   dryRun: boolean
   force: boolean
   sentencesFile?: string
+  noTatoeba: boolean
 }
 
 function parseCli(argv: string[]): Cli {
@@ -288,9 +291,11 @@ function parseCli(argv: string[]): Cli {
   let dryRun = false
   let force = false
   let sentencesFile: string | undefined
+  let noTatoeba = false
   for (const a of argv) {
     if (a === '--dry-run') dryRun = true
     else if (a === '--force') force = true
+    else if (a === '--no-tatoeba') noTatoeba = true
     else if (a.startsWith('--lang=')) {
       for (const v of a.slice(7).split(',')) {
         if (v === 'all') langs.push('en', 'de', 'es', 'pt', 'fr', 'it')
@@ -308,6 +313,7 @@ function parseCli(argv: string[]): Cli {
     dryRun,
     force,
     sentencesFile,
+    noTatoeba,
   }
 }
 
@@ -391,9 +397,16 @@ async function main() {
       // Tatoeba selection runs even in --dry-run (no Mistral, no writes);
       // --sentences-file points at an already-downloaded TSV instead.
       if (!index) {
-        const tsv = cli.sentencesFile
-          ? cli.sentencesFile
-          : await fetchTatoebaTsv(lang)
+        let tsv = cli.sentencesFile
+        if (!tsv && !cli.noTatoeba) {
+          try {
+            tsv = await fetchTatoebaTsv(lang)
+          } catch (err) {
+            console.warn(
+              `Tatoeba dump for ${lang} unavailable (${(err as Error).message}); continuing with Mistral-only examples`,
+            )
+          }
+        }
         const wanted = new Set(
           cli.levels
             .flatMap((c) => {
@@ -405,7 +418,9 @@ async function main() {
                 : []
             }),
         )
-        index = buildSentenceIndex(parseTatoebaTsv(readFileSync(tsv, 'utf8')), wanted)
+        index = tsv
+          ? buildSentenceIndex(parseTatoebaTsv(readFileSync(tsv, 'utf8')), wanted)
+          : new Map()
       }
 
       let tatoebaCount = 0
