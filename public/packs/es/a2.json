@@ -1,19 +1,21 @@
 {
-  "version": 15,
+  "version": 16,
   "lang": "es",
   "cefr": "a2",
-  "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
   "attribution": [
     "Hiato ES A2 learner pack — original glosses and synonym chips (2026).",
     "ES A1–A2 lemmas come from the wordhoard v0.1.0 samples (CC-BY-SA-4.0), banded by its frequency-calibrated CEFR estimate, not Instituto Cervantes lists.",
     "Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.",
-    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy."
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy.",
+    "Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR."
   ],
   "lemmas": [
     {
       "word": "ABUELA",
       "gloss": "madre del padre o de la madre.",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Mary es abuela."
     },
     {
       "word": "SALA",
@@ -21,7 +23,8 @@
       "synonyms": [
         "habitación",
         "cuarto"
-      ]
+      ],
+      "example": "Anda a la sala."
     },
     {
       "word": "CLUB",
@@ -29,14 +32,16 @@
       "synonyms": [
         "asociación",
         "grupo"
-      ]
+      ],
+      "example": "Bienvenido al club."
     },
     {
       "word": "CONTACTO",
       "gloss": "relación o trato entre personas.",
       "synonyms": [
         "toque"
-      ]
+      ],
+      "example": "Estaré en contacto."
     },
     {
       "word": "CONSEJO",
@@ -44,7 +49,8 @@
       "synonyms": [
         "aviso",
         "recomendación"
-      ]
+      ],
+      "example": "Dale un consejo."
     },
     {
       "word": "DON",
@@ -52,7 +58,8 @@
       "synonyms": [
         "regalo",
         "obsequio"
-      ]
+      ],
+      "example": "Tiene un don."
     },
     {
       "word": "ACCIÓN",
@@ -60,7 +67,8 @@
       "synonyms": [
         "acto",
         "hecho"
-      ]
+      ],
+      "example": "Necesitamos acción."
     },
     {
       "word": "TREN",
@@ -68,7 +76,8 @@
       "synonyms": [
         "ferrocarril",
         "convoy"
-      ]
+      ],
+      "example": "¿Irás en tren?"
     },
     {
       "word": "PRISA",
@@ -76,7 +85,8 @@
       "synonyms": [
         "urgencia",
         "apresuramiento"
-      ]
+      ],
+      "example": "Daos prisa."
     },
     {
       "word": "CUMPLEAÑOS",
@@ -84,7 +94,8 @@
       "synonyms": [
         "aniversario",
         "celebración"
-      ]
+      ],
+      "example": "Feliz cumpleaños."
     },
     {
       "word": "VENTANA",
@@ -92,7 +103,8 @@
       "synonyms": [
         "cristal",
         "vano"
-      ]
+      ],
+      "example": "Abre la ventana."
     },
     {
       "word": "SUELO",
@@ -100,7 +112,8 @@
       "synonyms": [
         "piso",
         "tierra"
-      ]
+      ],
+      "example": "¡Al suelo!"
     },
     {
       "word": "CÁRCEL",
@@ -108,7 +121,8 @@
       "synonyms": [
         "prisión",
         "penitenciaría"
-      ]
+      ],
+      "example": "Está en la cárcel."
     },
     {
       "word": "ENEMIGO",
@@ -116,14 +130,16 @@
       "synonyms": [
         "adversario",
         "rival"
-      ]
+      ],
+      "example": "Es mi enemigo."
     },
     {
       "word": "GOBIERNO",
       "gloss": "grupo que manda en un país",
       "synonyms": [
         "poder"
-      ]
+      ],
+      "example": "Aún no hay gobierno."
     },
     {
       "word": "NOTA",
@@ -131,7 +147,8 @@
       "synonyms": [
         "calificación",
         "puntuación"
-      ]
+      ],
+      "example": "Toma nota."
     },
     {
       "word": "NAVIDAD",
@@ -139,11 +156,13 @@
       "synonyms": [
         "fiesta",
         "celebración"
-      ]
+      ],
+      "example": "Es navidad."
     },
     {
       "word": "EMBARGO",
-      "gloss": "retención judicial de bienes."
+      "gloss": "retención judicial de bienes.",
+      "example": "Sin embargo, quiero verla."
     },
     {
       "word": "MAESTRO",
@@ -151,7 +170,8 @@
       "synonyms": [
         "profesor",
         "docente"
-      ]
+      ],
+      "example": "Sos maestro."
     },
     {
       "word": "TEMA",
@@ -159,21 +179,24 @@
       "synonyms": [
         "asunto",
         "materia"
-      ]
+      ],
+      "example": "Un tema delicado."
     },
     {
       "word": "ESCENA",
       "gloss": "parte de una obra teatral.",
       "synonyms": [
         "lugar"
-      ]
+      ],
+      "example": "¡Qué escena linda!"
     },
     {
       "word": "SORPRESA",
       "gloss": "cosa inesperada que deja a alguien sin palabras",
       "synonyms": [
         "asombro"
-      ]
+      ],
+      "example": "¡Sorpresa!"
     },
     {
       "word": "EJÉRCITO",
@@ -181,12 +204,14 @@
       "synonyms": [
         "tropa",
         "fuerzas"
-      ]
+      ],
+      "example": "El ejército llegó."
     },
     {
       "word": "MALDICIÓN",
       "gloss": "deseo de que a alguien le pase algo terrible",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Es una maldición."
     },
     {
       "word": "MENTIRA",
@@ -194,7 +219,8 @@
       "synonyms": [
         "falsedad",
         "engaño"
-      ]
+      ],
+      "example": "Era mentira."
     },
     {
       "word": "REGLA",
@@ -202,7 +228,8 @@
       "synonyms": [
         "norma",
         "ley"
-      ]
+      ],
+      "example": "Tengo la regla."
     },
     {
       "word": "SILENCIO",
@@ -210,7 +237,8 @@
       "synonyms": [
         "calma",
         "quietud"
-      ]
+      ],
+      "example": "¡Silencio!"
     },
     {
       "word": "EDIFICIO",
@@ -218,7 +246,8 @@
       "synonyms": [
         "casa",
         "construcción"
-      ]
+      ],
+      "example": "¿Ese edificio gris?"
     },
     {
       "word": "PISO",
@@ -226,25 +255,29 @@
       "synonyms": [
         "suelo",
         "planta"
-      ]
+      ],
+      "example": "Buscas piso."
     },
     {
       "word": "FONDO",
       "gloss": "parte más honda o lejana.",
       "synonyms": [
         "base"
-      ]
+      ],
+      "example": "¡Hasta el fondo!"
     },
     {
       "word": "TESTIGO",
       "gloss": "persona que ve un hecho y lo cuenta",
       "synonyms": [
         "observador"
-      ]
+      ],
+      "example": "Soy testigo."
     },
     {
       "word": "CORTE",
-      "gloss": "acción de dividir algo con un cuchillo o unas tijeras"
+      "gloss": "acción de dividir algo con un cuchillo o unas tijeras",
+      "example": "Corte el césped."
     },
     {
       "word": "GUARDIA",
@@ -252,21 +285,24 @@
       "synonyms": [
         "vigilante",
         "policía"
-      ]
+      ],
+      "example": "Hago guardia."
     },
     {
       "word": "ESPALDA",
       "gloss": "parte posterior del torso.",
       "synonyms": [
         "dorso"
-      ]
+      ],
+      "example": "Cubre mi espalda."
     },
     {
       "word": "LOCURA",
       "gloss": "pérdida de la razón.",
       "synonyms": [
         "demencia"
-      ]
+      ],
+      "example": "¡Qué locura!"
     },
     {
       "word": "MATRIMONIO",
@@ -274,49 +310,56 @@
       "synonyms": [
         "boda",
         "casamiento"
-      ]
+      ],
+      "example": "Son matrimonio."
     },
     {
       "word": "PELIGRO",
       "gloss": "riesgo de daño o mal.",
       "synonyms": [
         "riesgo"
-      ]
+      ],
+      "example": "¡Qué peligro!"
     },
     {
       "word": "CERVEZA",
       "gloss": "bebida alcohólica de cebada.",
       "synonyms": [
         "bebida"
-      ]
+      ],
+      "example": "Tengo cerveza."
     },
     {
       "word": "JURO",
       "gloss": "afirmación solemne de verdad.",
       "synonyms": [
         "promesa"
-      ]
+      ],
+      "example": "¡Ah, te lo juro!"
     },
     {
       "word": "CEREBRO",
       "gloss": "órgano del pensamiento.",
       "synonyms": [
         "mente"
-      ]
+      ],
+      "example": "Me duele el cerebro."
     },
     {
       "word": "TENIENTE",
       "gloss": "hombre que manda un grupo pequeño de soldados",
       "synonyms": [
         "oficial"
-      ]
+      ],
+      "example": "Tom era teniente."
     },
     {
       "word": "BANCO",
       "gloss": "asiento largo o entidad financiera.",
       "synonyms": [
         "asiento"
-      ]
+      ],
+      "example": "Voy al banco."
     },
     {
       "word": "ESPACIO",
@@ -324,14 +367,16 @@
       "synonyms": [
         "lugar",
         "área"
-      ]
+      ],
+      "example": "Danos espacio."
     },
     {
       "word": "PERMISO",
       "gloss": "una palabra que dice que se puede hacer algo",
       "synonyms": [
         "autorización"
-      ]
+      ],
+      "example": "Con permiso."
     },
     {
       "word": "BASURA",
@@ -339,7 +384,8 @@
       "synonyms": [
         "desecho",
         "residuo"
-      ]
+      ],
+      "example": "¡Es basura!"
     },
     {
       "word": "COLOR",
@@ -347,39 +393,45 @@
       "synonyms": [
         "tono",
         "matiz"
-      ]
+      ],
+      "example": "¡Es tu color!"
     },
     {
       "word": "BAR",
       "gloss": "Local donde se sirven bebidas.",
       "synonyms": [
         "taberna"
-      ]
+      ],
+      "example": "Voy al bar."
     },
     {
       "word": "LIBERTAD",
       "gloss": "Capacidad de actuar sin restricciones.",
       "synonyms": [
         "independencia"
-      ]
+      ],
+      "example": "Habla de libertad."
     },
     {
       "word": "PERTENECER",
-      "gloss": "Ser de una persona o de un grupo."
+      "gloss": "Ser de una persona o de un grupo.",
+      "example": "Islandia solía pertenecer a Dinamarca."
     },
     {
       "word": "MAR",
       "gloss": "Extensión de agua salada.",
       "synonyms": [
         "océano"
-      ]
+      ],
+      "example": "El mar es azul."
     },
     {
       "word": "INTENTO",
       "gloss": "Acción de probar algo.",
       "synonyms": [
         "prueba"
-      ]
+      ],
+      "example": "Lo intento."
     },
     {
       "word": "PISTA",
@@ -387,7 +439,8 @@
       "synonyms": [
         "señal",
         "indicio"
-      ]
+      ],
+      "example": "Dame una pista."
     },
     {
       "word": "HONOR",
@@ -395,14 +448,16 @@
       "synonyms": [
         "honra",
         "dignidad"
-      ]
+      ],
+      "example": "Fue un honor."
     },
     {
       "word": "ABUELO",
       "gloss": "Padre del padre o de la madre.",
       "synonyms": [
         "anciano"
-      ]
+      ],
+      "example": "Hola, abuelo."
     },
     {
       "word": "OPCIÓN",
@@ -410,7 +465,8 @@
       "synonyms": [
         "elección",
         "alternativa"
-      ]
+      ],
+      "example": "No hay opción."
     },
     {
       "word": "GOLPE",
@@ -418,7 +474,8 @@
       "synonyms": [
         "impacto",
         "choque"
-      ]
+      ],
+      "example": "Tuve un golpe."
     },
     {
       "word": "MISIÓN",
@@ -426,21 +483,24 @@
       "synonyms": [
         "tarea",
         "encargo"
-      ]
+      ],
+      "example": "Misión superada."
     },
     {
       "word": "DEDO",
       "gloss": "Extremidad de la mano.",
       "synonyms": [
         "falange"
-      ]
+      ],
+      "example": "Fue mi dedo."
     },
     {
       "word": "ORO",
       "gloss": "Metal precioso de color amarillo.",
       "synonyms": [
         "metal"
-      ]
+      ],
+      "example": "Vales oro."
     },
     {
       "word": "OPINIÓN",
@@ -449,14 +509,16 @@
         "parecer",
         "criterio",
         "juicio"
-      ]
+      ],
+      "example": "Quiero tu opinión."
     },
     {
       "word": "ÁNGEL",
       "gloss": "Ser espiritual protector.",
       "synonyms": [
         "ser"
-      ]
+      ],
+      "example": "Es un ángel."
     },
     {
       "word": "COCINA",
@@ -464,7 +526,8 @@
       "synonyms": [
         "fogón",
         "office"
-      ]
+      ],
+      "example": "Él cocina."
     },
     {
       "word": "SALUD",
@@ -472,42 +535,48 @@
       "synonyms": [
         "bienestar",
         "vitalidad"
-      ]
+      ],
+      "example": "¡A tu salud!"
     },
     {
       "word": "INFORME",
       "gloss": "papel con datos sobre algo",
       "synonyms": [
         "reporte"
-      ]
+      ],
+      "example": "Leí el informe."
     },
     {
       "word": "GATO",
       "gloss": "animal pequeño que vive en casa",
       "synonyms": [
         "animal"
-      ]
+      ],
+      "example": "Pobre gato."
     },
     {
       "word": "PARTIDO",
       "gloss": "Competencia entre equipos.",
       "synonyms": [
         "juego"
-      ]
+      ],
+      "example": "Gané el partido."
     },
     {
       "word": "FRÍO",
       "gloss": "Temperatura baja.",
       "synonyms": [
         "helado"
-      ]
+      ],
+      "example": "Hace frío."
     },
     {
       "word": "BOLSA",
       "gloss": "una cosa que lleva cosas",
       "synonyms": [
         "saco"
-      ]
+      ],
+      "example": "Abra su bolsa."
     },
     {
       "word": "ZONA",
@@ -515,21 +584,24 @@
       "synonyms": [
         "área",
         "región"
-      ]
+      ],
+      "example": "Él me mostró la zona."
     },
     {
       "word": "LUNA",
       "gloss": "El cuerpo brillante que vemos de noche.",
       "synonyms": [
         "astro nocturno"
-      ]
+      ],
+      "example": "Se ve la luna."
     },
     {
       "word": "BASE",
       "gloss": "Fundamento sobre el que se apoya algo.",
       "synonyms": [
         "fundamento"
-      ]
+      ],
+      "example": "Su base es el Kabyl."
     },
     {
       "word": "ÁRBOL",
@@ -537,7 +609,8 @@
       "synonyms": [
         "planta",
         "tronco"
-      ]
+      ],
+      "example": "Eso es un árbol."
     },
     {
       "word": "CAUSA",
@@ -545,19 +618,22 @@
       "synonyms": [
         "motivo",
         "razón"
-      ]
+      ],
+      "example": "¿Qué causa eso?"
     },
     {
       "word": "FLOR",
       "gloss": "La parte colorida de una planta que se abre.",
       "synonyms": [
         "pétalo"
-      ]
+      ],
+      "example": "¿Ves mi flor?"
     },
     {
       "word": "MAYORÍA",
       "gloss": "parte más grande de un grupo",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Tom no es como la mayoría."
     },
     {
       "word": "ENERGÍA",
@@ -565,81 +641,93 @@
       "synonyms": [
         "fuerza",
         "poder"
-      ]
+      ],
+      "example": "Usa energía solar."
     },
     {
       "word": "CARNE",
-      "gloss": "Tejido muscular de los animales."
+      "gloss": "Tejido muscular de los animales.",
+      "example": "Añade carne."
     },
     {
       "word": "POSICIÓN",
       "gloss": "Lugar que ocupa algo.",
       "synonyms": [
         "lugar"
-      ]
+      ],
+      "example": "Mantén tu posición."
     },
     {
       "word": "LLAMA",
       "gloss": "Fuego visible que sale de algo.",
       "synonyms": [
         "fuego"
-      ]
+      ],
+      "example": "Anda, llama."
     },
     {
       "word": "ENTRADA",
       "gloss": "lugar por donde se pasa a un sitio",
       "synonyms": [
         "puerta"
-      ]
+      ],
+      "example": "Entrada libre."
     },
     {
       "word": "OBRA",
       "gloss": "Trabajo realizado por alguien.",
       "synonyms": [
         "trabajo"
-      ]
+      ],
+      "example": "¡Manos a la obra!"
     },
     {
       "word": "NIVEL",
       "gloss": "un punto alto o bajo de una cosa",
       "synonyms": [
         "grado"
-      ]
+      ],
+      "example": "Bienvenido al nivel 3."
     },
     {
       "word": "JUEZ",
       "gloss": "Persona que decide en un juicio.",
       "synonyms": [
         "magistrado"
-      ]
+      ],
+      "example": "El juez es injusto."
     },
     {
       "word": "VERA",
       "gloss": "Orilla de un río.",
       "synonyms": [
         "orilla"
-      ]
+      ],
+      "example": "Su casa está a la vera del río."
     },
     {
       "word": "ESPERANZA",
       "gloss": "Confianza en que algo bueno ocurra.",
       "synonyms": [
         "ilusión"
-      ]
+      ],
+      "example": "Hay esperanza."
     },
     {
       "word": "ENFERMO",
       "gloss": "persona que no tiene buena salud",
       "synonyms": [
         "malo"
-      ]
+      ],
+      "example": "Estoy enfermo."
     },
     {
       "word": "ZAPATO",
       "gloss": "Calzado que cubre el pie.",
       "synonyms": [
         "calzado"
-      ]
+      ],
+      "example": "Átate ese zapato."
     },
     {
       "word": "RESULTADO",
@@ -647,98 +735,112 @@
       "synonyms": [
         "desenlace",
         "efecto"
-      ]
+      ],
+      "example": "El resultado es este."
     },
     {
       "word": "PLANETA",
       "gloss": "Cuerpo celeste que orbita una estrella.",
       "synonyms": [
         "mundo"
-      ]
+      ],
+      "example": "No hay planeta B."
     },
     {
       "word": "NENE",
       "gloss": "Niño pequeño.",
       "synonyms": [
         "niño"
-      ]
+      ],
+      "example": "Nene, ¿y tu mamá?"
     },
     {
       "word": "ESPECIE",
       "gloss": "Grupo de seres con características comunes.",
       "synonyms": [
         "tipo"
-      ]
+      ],
+      "example": "Es una especie de naranja."
     },
     {
       "word": "REINA",
       "gloss": "mujer que gobierna un país por herencia de la corona",
       "synonyms": [
         "monarca"
-      ]
+      ],
+      "example": "El rey reina."
     },
     {
       "word": "TARJETA",
       "gloss": "Placa rectangular con información.",
       "synonyms": [
         "carta"
-      ]
+      ],
+      "example": "Pago con tarjeta."
     },
     {
       "word": "MÁQUINA",
       "gloss": "Aparato que realiza trabajo.",
       "synonyms": [
         "aparato"
-      ]
+      ],
+      "example": "La máquina se usa así."
     },
     {
       "word": "ESTUDIO",
       "gloss": "lugar donde se aprende",
       "synonyms": [
         "aula"
-      ]
+      ],
+      "example": "No estudio."
     },
     {
       "word": "IMAGEN",
       "gloss": "Representación visual de algo.",
       "synonyms": [
         "foto"
-      ]
+      ],
+      "example": "Vi la imagen."
     },
     {
       "word": "VUESTRO",
       "gloss": "Que pertenece a ustedes.",
       "synonyms": [
         "tu"
-      ]
+      ],
+      "example": "¿Es vuestro?"
     },
     {
       "word": "PRISIÓN",
       "gloss": "un lugar donde la gente no puede salir",
       "synonyms": [
         "cárcel"
-      ]
+      ],
+      "example": "Él está en prisión."
     },
     {
       "word": "ENCUENTRO",
       "gloss": "Reunión de personas.",
       "synonyms": [
         "reunión"
-      ]
+      ],
+      "example": "No los encuentro."
     },
     {
       "word": "BANDA",
       "gloss": "Grupo de músicos.",
       "synonyms": [
         "grupo"
-      ]
+      ],
+      "example": "Toco en una banda."
     },
     {
       "word": "HOGAR",
       "gloss": "Casa donde vive una familia.",
       "synonyms": [
         "casa"
-      ]
+      ],
+      "example": "¿Tienes hogar?"
     },
     {
       "word": "ESTACIÓN",
@@ -746,93 +848,107 @@
       "synonyms": [
         "apeadero",
         "terminal"
-      ]
+      ],
+      "example": "Fui a la estación."
     },
     {
       "word": "ARTE",
       "gloss": "Expresión creativa de belleza.",
       "synonyms": [
         "pintura"
-      ]
+      ],
+      "example": "Vendo arte."
     },
     {
       "word": "DESTINO",
       "gloss": "Lugar adonde se va.",
       "synonyms": [
         "lugar"
-      ]
+      ],
+      "example": "Es mi destino."
     },
     {
       "word": "VISITA",
       "gloss": "Acto de ir a ver a alguien.",
       "synonyms": [
         "viaje"
-      ]
+      ],
+      "example": "Tenemos visita."
     },
     {
       "word": "MOTIVO",
       "gloss": "razón por la que se hace algo",
       "synonyms": [
         "razón"
-      ]
+      ],
+      "example": "¿Por qué motivo?"
     },
     {
       "word": "OPERACIÓN",
       "gloss": "Procedimiento quirúrgico.",
       "synonyms": [
         "trabajo"
-      ]
+      ],
+      "example": "¿Necesito una operación?"
     },
     {
       "word": "JUICIO",
       "gloss": "acto de un juez que decide si alguien es culpable",
       "synonyms": [
         "opinión"
-      ]
+      ],
+      "example": "Hubo un juicio."
     },
     {
       "word": "MIEMBRO",
       "gloss": "Parte de un grupo.",
       "synonyms": [
         "parte"
-      ]
+      ],
+      "example": "No soy miembro."
     },
     {
       "word": "CUÁNTO",
       "gloss": "qué cantidad de algo",
-      "synonyms": []
+      "synonyms": [],
+      "example": "¿Cuánto es?"
     },
     {
       "word": "METRO",
-      "gloss": "Unidad de longitud."
+      "gloss": "Unidad de longitud.",
+      "example": "Voy en metro."
     },
     {
       "word": "SARGENTO",
       "gloss": "hombre que manda un grupo pequeño de soldados",
       "synonyms": [
         "soldado"
-      ]
+      ],
+      "example": "Él ascendió al rango de sargento."
     },
     {
       "word": "PORQUÉ",
       "gloss": "Razón de algo.",
       "synonyms": [
         "razón"
-      ]
+      ],
+      "example": "Entiendo el porqué."
     },
     {
       "word": "MOVIMIENTO",
       "gloss": "Acción de cambiar de lugar o posición.",
       "synonyms": [
         "acción"
-      ]
+      ],
+      "example": "El movimiento es sensual."
     },
     {
       "word": "PAREJA",
       "gloss": "hombre y mujer que están juntos",
       "synonyms": [
         "compañero"
-      ]
+      ],
+      "example": "Son una pareja."
     },
     {
       "word": "ÉXITO",
@@ -840,263 +956,301 @@
       "synonyms": [
         "triunfo",
         "logro"
-      ]
+      ],
+      "example": "¡Mucho éxito!"
     },
     {
       "word": "FELICIDAD",
-      "gloss": "sentir bien por algo bueno"
+      "gloss": "sentir bien por algo bueno",
+      "example": "Eres mi felicidad."
     },
     {
       "word": "PRECIO",
       "gloss": "Cantidad de dinero que cuesta algo.",
       "synonyms": [
         "costo"
-      ]
+      ],
+      "example": "Mira el precio."
     },
     {
       "word": "SALIDA",
       "gloss": "lugar por donde uno abandona un edificio",
       "synonyms": [
         "puerta"
-      ]
+      ],
+      "example": "No hay salida."
     },
     {
       "word": "RADIO",
       "gloss": "Distancia desde el centro hasta el borde de un círculo.",
       "synonyms": [
         "emisora"
-      ]
+      ],
+      "example": "Baje la radio."
     },
     {
       "word": "EJEMPLO",
       "gloss": "una cosa que muestra cómo es otra cosa",
       "synonyms": [
         "caso"
-      ]
+      ],
+      "example": "Dame un ejemplo."
     },
     {
       "word": "PELEA",
       "gloss": "Disputa violenta entre personas.",
       "synonyms": [
         "lucha"
-      ]
+      ],
+      "example": "Vi una pelea."
     },
     {
       "word": "VALOR",
       "gloss": "Cualidad de ser valiente.",
       "synonyms": [
         "precio"
-      ]
+      ],
+      "example": "Mi valor bajó."
     },
     {
       "word": "NORTE",
       "gloss": "Dirección opuesta al sur.",
       "synonyms": [
         "arriba"
-      ]
+      ],
+      "example": "Vivo en el norte."
     },
     {
       "word": "OBJETIVO",
       "gloss": "Meta que se quiere alcanzar.",
       "synonyms": [
         "meta"
-      ]
+      ],
+      "example": "Sé objetivo."
     },
     {
       "word": "ELECCIÓN",
       "gloss": "Decisión entre varias opciones.",
       "synonyms": [
         "opción"
-      ]
+      ],
+      "example": "Haz tu elección."
     },
     {
       "word": "PARED",
       "gloss": "Superficie vertical que divide espacios.",
       "synonyms": [
         "muro"
-      ]
+      ],
+      "example": "Rozan la pared."
     },
     {
       "word": "TOQUE",
       "gloss": "acción de poner la mano en algo",
       "synonyms": [
         "golpe"
-      ]
+      ],
+      "example": "¡No la toque!"
     },
     {
       "word": "TONTERÍA",
       "gloss": "Cosa sin importancia o sentido.",
       "synonyms": [
         "bobería"
-      ]
+      ],
+      "example": "¡Qué tontería!"
     },
     {
       "word": "CALMA",
       "gloss": "Estado de tranquilidad y paz.",
       "synonyms": [
         "paz"
-      ]
+      ],
+      "example": "Mantén la calma."
     },
     {
       "word": "CUESTIÓN",
       "gloss": "Asunto o tema que se discute.",
       "synonyms": [
         "tema"
-      ]
+      ],
+      "example": "Es cuestión de gustos."
     },
     {
       "word": "BESO",
       "gloss": "poner la boca en otra persona por cariño",
       "synonyms": [
         "abrazo"
-      ]
+      ],
+      "example": "Dame un beso."
     },
     {
       "word": "RÍO",
       "gloss": "agua que corre por la tierra",
       "synonyms": [
         "agua"
-      ]
+      ],
+      "example": "Un río fluye."
     },
     {
       "word": "RESPECTO",
       "gloss": "Consideración hacia alguien.",
       "synonyms": [
         "sobre"
-      ]
+      ],
+      "example": "Él bromeó al respecto."
     },
     {
       "word": "REGRESO",
       "gloss": "Acción de volver al lugar de origen.",
       "synonyms": [
         "vuelta"
-      ]
+      ],
+      "example": "Voy de regreso."
     },
     {
       "word": "HÉROE",
       "gloss": "Persona que realiza actos valientes.",
       "synonyms": [
         "valiente"
-      ]
+      ],
+      "example": "Es mi héroe."
     },
     {
       "word": "COLEGA",
       "gloss": "Persona que comparte la misma profesión.",
       "synonyms": [
         "compañero"
-      ]
+      ],
+      "example": "Él es mi colega."
     },
     {
       "word": "HUEVO",
       "gloss": "cosa redonda que pone la gallina",
       "synonyms": [
         "comida"
-      ]
+      ],
+      "example": "Comí un huevo."
     },
     {
       "word": "ESPÍRITU",
       "gloss": "parte que no se ve de una persona",
       "synonyms": [
         "alma"
-      ]
+      ],
+      "example": "Ese es el espíritu."
     },
     {
       "word": "VUELO",
       "gloss": "Desplazamiento por el aire.",
       "synonyms": [
         "viaje"
-      ]
+      ],
+      "example": "Buen vuelo."
     },
     {
       "word": "UNIDAD",
       "gloss": "Cantidad o elemento individual.",
       "synonyms": [
         "parte"
-      ]
+      ],
+      "example": "En el hogar reina la unidad."
     },
     {
       "word": "EMPRESA",
       "gloss": "un grupo de gente que hace cosas juntas",
       "synonyms": [
         "compañía"
-      ]
+      ],
+      "example": "Será una empresa."
     },
     {
       "word": "INGLÉS",
       "gloss": "Idioma hablado en Reino Unido y otros países.",
       "synonyms": [
         "idioma"
-      ]
+      ],
+      "example": "Hablo inglés."
     },
     {
       "word": "DETALLE",
       "gloss": "Parte pequeña de algo.",
       "synonyms": [
         "parte"
-      ]
+      ],
+      "example": "Es un detalle."
     },
     {
       "word": "VISTAZO",
       "gloss": "Mirada rápida a algo.",
       "synonyms": [
         "mirada"
-      ]
+      ],
+      "example": "Da un vistazo."
     },
     {
       "word": "MARCHA",
       "gloss": "acción de ir de un lugar a otro",
       "synonyms": [
         "paso"
-      ]
+      ],
+      "example": "¡En marcha!"
     },
     {
       "word": "COMANDANTE",
       "gloss": "persona que dirige un grupo de soldados",
       "synonyms": [
         "jefe"
-      ]
+      ],
+      "example": "Él es el comandante Joki."
     },
     {
       "word": "MARCA",
       "gloss": "Señal que identifica algo.",
       "synonyms": [
         "señal"
-      ]
+      ],
+      "example": "Adoro esa marca."
     },
     {
       "word": "ESTUDIANTE",
       "gloss": "Persona que aprende en una escuela.",
       "synonyms": [
         "alumno"
-      ]
+      ],
+      "example": "Soy estudiante."
     },
     {
       "word": "BATALLA",
       "gloss": "una pelea grande entre dos grupos",
       "synonyms": [
         "lucha"
-      ]
+      ],
+      "example": "¡A la batalla!"
     },
     {
       "word": "SUR",
       "gloss": "Dirección opuesta al norte.",
       "synonyms": [
         "abajo"
-      ]
+      ],
+      "example": "Ve al sur."
     },
     {
       "word": "TRAGO",
       "gloss": "Cantidad de líquido que se bebe de una vez.",
       "synonyms": [
         "bebida"
-      ]
+      ],
+      "example": "Tomé otro trago."
     },
     {
       "word": "PIEL",
       "gloss": "Capa externa que cubre el cuerpo.",
       "synonyms": [
         "cuero"
-      ]
+      ],
+      "example": "Su piel es lisa."
     },
     {
       "word": "SANTO",
@@ -1104,7 +1258,8 @@
       "synonyms": [
         "sagrado",
         "bendito"
-      ]
+      ],
+      "example": "¡Santo cielo!"
     },
     {
       "word": "GANA",
@@ -1112,14 +1267,16 @@
       "synonyms": [
         "deseo",
         "apetito"
-      ]
+      ],
+      "example": "¿Quién gana?"
     },
     {
       "word": "RIESGO",
       "gloss": "Posibilidad de que ocurra algo malo.",
       "synonyms": [
         "peligro"
-      ]
+      ],
+      "example": "Es un riesgo."
     },
     {
       "word": "ESTILO",
@@ -1127,7 +1284,8 @@
       "synonyms": [
         "forma",
         "manera"
-      ]
+      ],
+      "example": "No es mi estilo."
     },
     {
       "word": "ASIENTO",
@@ -1135,11 +1293,13 @@
       "synonyms": [
         "silla",
         "banco"
-      ]
+      ],
+      "example": "Toma asiento."
     },
     {
       "word": "TRAMPA",
-      "gloss": "una cosa que hace que algo caiga"
+      "gloss": "una cosa que hace que algo caiga",
+      "example": "Hizo trampa."
     },
     {
       "word": "FANTASMA",
@@ -1147,14 +1307,16 @@
       "synonyms": [
         "espíritu",
         "alma"
-      ]
+      ],
+      "example": "Es un fantasma."
     },
     {
       "word": "CAMIÓN",
       "gloss": "una cosa grande que lleva cosas",
       "synonyms": [
         "coche"
-      ]
+      ],
+      "example": "El camión pasó."
     },
     {
       "word": "MONSTRUO",
@@ -1162,14 +1324,16 @@
       "synonyms": [
         "bestia",
         "criatura"
-      ]
+      ],
+      "example": "¡Monstruo!"
     },
     {
       "word": "PIEDRA",
       "gloss": "Fragmento duro de roca.",
       "synonyms": [
         "roca"
-      ]
+      ],
+      "example": "Cogió una piedra."
     },
     {
       "word": "ESTADO",
@@ -1177,7 +1341,8 @@
       "synonyms": [
         "situación",
         "condición"
-      ]
+      ],
+      "example": "He estado ocupado."
     },
     {
       "word": "REGISTRO",
@@ -1185,7 +1350,8 @@
       "synonyms": [
         "anotación",
         "apunte"
-      ]
+      ],
+      "example": "Decide el registro."
     },
     {
       "word": "MAJESTAD",
@@ -1193,7 +1359,8 @@
       "synonyms": [
         "alteza",
         "señoría"
-      ]
+      ],
+      "example": "Su Majestad está esperando."
     },
     {
       "word": "MONTAÑA",
@@ -1201,7 +1368,8 @@
       "synonyms": [
         "cima",
         "pico"
-      ]
+      ],
+      "example": "Va a la montaña."
     },
     {
       "word": "EXACTO",
@@ -1209,7 +1377,8 @@
       "synonyms": [
         "preciso",
         "justo"
-      ]
+      ],
+      "example": "Es exacto."
     },
     {
       "word": "VERANO",
@@ -1217,7 +1386,8 @@
       "synonyms": [
         "estío",
         "calor"
-      ]
+      ],
+      "example": "El verano terminó."
     },
     {
       "word": "ANILLO",
@@ -1225,21 +1395,24 @@
       "synonyms": [
         "aro",
         "sortija"
-      ]
+      ],
+      "example": "Llevaba mi anillo."
     },
     {
       "word": "HUELLA",
       "gloss": "Marca que deja el pie al caminar.",
       "synonyms": [
         "marca"
-      ]
+      ],
+      "example": "Desapareció sin dejar huella."
     },
     {
       "word": "DIENTE",
       "gloss": "una parte dura de la boca",
       "synonyms": [
         "muela"
-      ]
+      ],
+      "example": "Me duele el diente."
     },
     {
       "word": "CUELLO",
@@ -1247,7 +1420,8 @@
       "synonyms": [
         "garganta",
         "pescuezo"
-      ]
+      ],
+      "example": "Lávate el cuello."
     },
     {
       "word": "ENFERMEDAD",
@@ -1255,7 +1429,8 @@
       "synonyms": [
         "mal",
         "afección"
-      ]
+      ],
+      "example": "No es una enfermedad."
     },
     {
       "word": "EFECTO",
@@ -1263,7 +1438,8 @@
       "synonyms": [
         "resultado",
         "consecuencia"
-      ]
+      ],
+      "example": "En efecto."
     },
     {
       "word": "HUMANO",
@@ -1271,14 +1447,16 @@
       "synonyms": [
         "persona",
         "ser"
-      ]
+      ],
+      "example": "Soy humano."
     },
     {
       "word": "PANTALÓN",
       "gloss": "ropa que cubre las piernas.",
       "synonyms": [
         "ropa"
-      ]
+      ],
+      "example": "Subíos el pantalón."
     },
     {
       "word": "BOTELLA",
@@ -1286,7 +1464,8 @@
       "synonyms": [
         "frasco",
         "envase"
-      ]
+      ],
+      "example": "Es una botella."
     },
     {
       "word": "REPENTE",
@@ -1294,7 +1473,8 @@
       "synonyms": [
         "susto",
         "sorpresa"
-      ]
+      ],
+      "example": "Pasó de repente."
     },
     {
       "word": "ANIMAL",
@@ -1302,7 +1482,8 @@
       "synonyms": [
         "bestia",
         "bicho"
-      ]
+      ],
+      "example": "Soy un animal."
     },
     {
       "word": "SONIDO",
@@ -1310,14 +1491,16 @@
       "synonyms": [
         "ruido",
         "tono"
-      ]
+      ],
+      "example": "El sonido cesó."
     },
     {
       "word": "DEFENSA",
       "gloss": "Acción de proteger algo o a alguien.",
       "synonyms": [
         "cuidado"
-      ]
+      ],
+      "example": "Atacar es la mejor defensa."
     },
     {
       "word": "PRESIÓN",
@@ -1325,7 +1508,8 @@
       "synonyms": [
         "tensión",
         "fuerza"
-      ]
+      ],
+      "example": "Tengo presión alta."
     },
     {
       "word": "RED",
@@ -1333,7 +1517,8 @@
       "synonyms": [
         "malla",
         "tejido"
-      ]
+      ],
+      "example": "Reparó la red."
     },
     {
       "word": "TURNO",
@@ -1341,7 +1526,8 @@
       "synonyms": [
         "vez",
         "orden"
-      ]
+      ],
+      "example": "Es tu turno."
     },
     {
       "word": "RUIDO",
@@ -1349,7 +1535,8 @@
       "synonyms": [
         "sonido",
         "estruendo"
-      ]
+      ],
+      "example": "¡Qué ruido!"
     },
     {
       "word": "DUEÑO",
@@ -1357,7 +1544,8 @@
       "synonyms": [
         "propietario",
         "amo"
-      ]
+      ],
+      "example": "No soy el dueño."
     },
     {
       "word": "SILLA",
@@ -1365,14 +1553,16 @@
       "synonyms": [
         "asiento",
         "banco"
-      ]
+      ],
+      "example": "Es una silla."
     },
     {
       "word": "RAYO",
       "gloss": "Descarga eléctrica en la atmósfera.",
       "synonyms": [
         "luz"
-      ]
+      ],
+      "example": "Vi un rayo."
     },
     {
       "word": "NARIZ",
@@ -1380,14 +1570,16 @@
       "synonyms": [
         "hocico",
         "trompa"
-      ]
+      ],
+      "example": "Tócate la nariz."
     },
     {
       "word": "CÓDIGO",
       "gloss": "Conjunto de reglas o señales.",
       "synonyms": [
         "regla"
-      ]
+      ],
+      "example": "Ingrese el código."
     },
     {
       "word": "EMERGENCIA",
@@ -1395,18 +1587,21 @@
       "synonyms": [
         "urgencia",
         "crisis"
-      ]
+      ],
+      "example": "Es una emergencia."
     },
     {
       "word": "COMPRA",
       "gloss": "Acción de adquirir algo pagando.",
       "synonyms": [
         "adquisición"
-      ]
+      ],
+      "example": "Compra pan."
     },
     {
       "word": "JUSTICIA",
-      "gloss": "acción de dar a cada uno lo que le corresponde."
+      "gloss": "acción de dar a cada uno lo que le corresponde.",
+      "example": "Quiero justicia."
     },
     {
       "word": "CONDICIÓN",
@@ -1414,7 +1609,8 @@
       "synonyms": [
         "estado",
         "situación"
-      ]
+      ],
+      "example": "Puso una condición."
     },
     {
       "word": "DISPARO",
@@ -1422,7 +1618,8 @@
       "synonyms": [
         "tiro",
         "balazo"
-      ]
+      ],
+      "example": "Un disparo sonó."
     },
     {
       "word": "INTERÉS",
@@ -1430,7 +1627,8 @@
       "synonyms": [
         "atención",
         "curiosidad"
-      ]
+      ],
+      "example": "Perdí el interés."
     },
     {
       "word": "CALOR",
@@ -1438,7 +1636,8 @@
       "synonyms": [
         "caliente",
         "ardor"
-      ]
+      ],
+      "example": "Hace calor."
     },
     {
       "word": "PROYECTO",
@@ -1446,14 +1645,16 @@
       "synonyms": [
         "plan",
         "idea"
-      ]
+      ],
+      "example": "¡Buen proyecto!"
     },
     {
       "word": "RELOJ",
       "gloss": "Instrumento que mide el tiempo.",
       "synonyms": [
         "cronómetro"
-      ]
+      ],
+      "example": "Perdí el reloj."
     },
     {
       "word": "CINE",
@@ -1461,7 +1662,8 @@
       "synonyms": [
         "sala",
         "pantalla"
-      ]
+      ],
+      "example": "Voy al cine."
     },
     {
       "word": "MEMORIA",
@@ -1470,7 +1672,8 @@
         "recuerdo",
         "mente",
         "retentiva"
-      ]
+      ],
+      "example": "¡Qué memoria!"
     },
     {
       "word": "INTENCIÓN",
@@ -1478,7 +1681,8 @@
       "synonyms": [
         "propósito",
         "meta"
-      ]
+      ],
+      "example": "Era mi intención."
     },
     {
       "word": "PROPÓSITO",
@@ -1486,7 +1690,8 @@
       "synonyms": [
         "intención",
         "objetivo"
-      ]
+      ],
+      "example": "Fallé a propósito."
     },
     {
       "word": "VACACIÓN",
@@ -1494,7 +1699,8 @@
       "synonyms": [
         "descanso",
         "fiesta"
-      ]
+      ],
+      "example": "Podemos pasar toda la vacación en cama."
     },
     {
       "word": "TAXI",
@@ -1502,7 +1708,8 @@
       "synonyms": [
         "coche",
         "auto"
-      ]
+      ],
+      "example": "Iré en taxi."
     },
     {
       "word": "PESAR",
@@ -1510,7 +1717,8 @@
       "synonyms": [
         "dolor",
         "pena"
-      ]
+      ],
+      "example": "A pesar de todo, él vino."
     },
     {
       "word": "CONFIANZA",
@@ -1518,7 +1726,8 @@
       "synonyms": [
         "fe",
         "seguridad"
-      ]
+      ],
+      "example": "Ten confianza."
     },
     {
       "word": "TIRO",
@@ -1526,19 +1735,22 @@
       "synonyms": [
         "disparo",
         "balazo"
-      ]
+      ],
+      "example": "¡Buen tiro!"
     },
     {
       "word": "LUCHA",
       "gloss": "acción de pelear o competir.",
       "synonyms": [
         "pelea"
-      ]
+      ],
+      "example": "Jennifer lucha."
     },
     {
       "word": "CUCHILLO",
       "gloss": "cosa con filo que la gente usa en la cocina y en la mesa",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Es un cuchillo."
     },
     {
       "word": "VICTORIA",
@@ -1546,7 +1758,8 @@
       "synonyms": [
         "triunfo",
         "éxito"
-      ]
+      ],
+      "example": "Esa es tu victoria."
     },
     {
       "word": "LÍDER",
@@ -1554,7 +1767,8 @@
       "synonyms": [
         "jefe",
         "guía"
-      ]
+      ],
+      "example": "Eres el líder."
     },
     {
       "word": "CABO",
@@ -1562,14 +1776,16 @@
       "synonyms": [
         "extremo",
         "punta"
-      ]
+      ],
+      "example": "Tiene galones de cabo."
     },
     {
       "word": "CANTIDAD",
       "gloss": "Número o porción de algo.",
       "synonyms": [
         "número"
-      ]
+      ],
+      "example": "Esa es la cantidad."
     },
     {
       "word": "NECESIDAD",
@@ -1577,7 +1793,8 @@
       "synonyms": [
         "falta",
         "precisión"
-      ]
+      ],
+      "example": "Fui allí por necesidad."
     },
     {
       "word": "AMENAZA",
@@ -1585,26 +1802,30 @@
       "synonyms": [
         "peligro",
         "riesgo"
-      ]
+      ],
+      "example": "Amenaza lluvia."
     },
     {
       "word": "PLATO",
       "gloss": "una cosa redonda donde se pone la comida",
       "synonyms": [
         "comida"
-      ]
+      ],
+      "example": "Usé este plato."
     },
     {
       "word": "VIENTO",
       "gloss": "Aire en movimiento.",
       "synonyms": [
         "aire"
-      ]
+      ],
+      "example": "Hay viento."
     },
     {
       "word": "CUÁNTA",
       "gloss": "pregunta por la cantidad de algo",
-      "synonyms": []
+      "synonyms": [],
+      "example": "¡Cuánta agua!"
     },
     {
       "word": "LECHE",
@@ -1612,28 +1833,32 @@
       "synonyms": [
         "lácteo",
         "bebida"
-      ]
+      ],
+      "example": "Tomé leche."
     },
     {
       "word": "PIEZA",
       "gloss": "Parte de un todo.",
       "synonyms": [
         "habitación"
-      ]
+      ],
+      "example": "Limpia la pieza."
     },
     {
       "word": "ÁREA",
       "gloss": "Superficie o zona determinada.",
       "synonyms": [
         "zona"
-      ]
+      ],
+      "example": "¿Tú eres del área?"
     },
     {
       "word": "INSPECTOR",
       "gloss": "Persona que examina o vigila.",
       "synonyms": [
         "vigilante"
-      ]
+      ],
+      "example": "Retenlos un par de minutos hasta que llegue el inspector."
     },
     {
       "word": "PAN",
@@ -1641,21 +1866,24 @@
       "synonyms": [
         "hogaza",
         "pieza"
-      ]
+      ],
+      "example": "Tengo pan."
     },
     {
       "word": "COLEGIO",
       "gloss": "Centro de enseñanza primaria.",
       "synonyms": [
         "escuela"
-      ]
+      ],
+      "example": "Fui al colegio."
     },
     {
       "word": "PASTEL",
       "gloss": "Postre dulce horneado.",
       "synonyms": [
         "tarta"
-      ]
+      ],
+      "example": "¿Quiere pastel?"
     },
     {
       "word": "MEDICINA",
@@ -1663,60 +1891,69 @@
       "synonyms": [
         "fármaco",
         "remedio"
-      ]
+      ],
+      "example": "Toma la medicina."
     },
     {
       "word": "PRÍNCIPE",
       "gloss": "Hijo de un rey.",
       "synonyms": [
         "rey"
-      ]
+      ],
+      "example": "Tom es un príncipe."
     },
     {
       "word": "DESASTRE",
       "gloss": "Suceso que causa gran daño.",
       "synonyms": [
         "daño"
-      ]
+      ],
+      "example": "¡Qué desastre!"
     },
     {
       "word": "CUENTA",
       "gloss": "Registro de operaciones financieras.",
       "synonyms": [
         "factura"
-      ]
+      ],
+      "example": "Cuenta conmigo."
     },
     {
       "word": "CONTRATO",
       "gloss": "Acuerdo escrito entre partes.",
       "synonyms": [
         "acuerdo"
-      ]
+      ],
+      "example": "Firma el contrato."
     },
     {
       "word": "AGUJERO",
       "gloss": "Abertura en una superficie.",
       "synonyms": [
         "hueco"
-      ]
+      ],
+      "example": "Él tapó el agujero."
     },
     {
       "word": "ACTO",
       "gloss": "Acción realizada por alguien.",
       "synonyms": [
         "acción"
-      ]
+      ],
+      "example": "Lo hizo en el acto."
     },
     {
       "word": "CABELLO",
-      "gloss": "el pelo de las personas"
+      "gloss": "el pelo de las personas",
+      "example": "Él tocó su cabello."
     },
     {
       "word": "ESCALERA",
       "gloss": "una cosa con pasos que ayuda a subir",
       "synonyms": [
         "peldaños"
-      ]
+      ],
+      "example": "Subió la escalera."
     },
     {
       "word": "PLAYA",
@@ -1724,322 +1961,369 @@
       "synonyms": [
         "costa",
         "orilla"
-      ]
+      ],
+      "example": "Amo la playa."
     },
     {
       "word": "EXAMEN",
       "gloss": "una prueba que hace un profesor en clase",
       "synonyms": [
         "prueba"
-      ]
+      ],
+      "example": "Era un examen."
     },
     {
       "word": "CINTA",
       "gloss": "Tira larga y estrecha de tela.",
       "synonyms": [
         "tira"
-      ]
+      ],
+      "example": "Desaté la cinta."
     },
     {
       "word": "PECHO",
       "gloss": "Parte frontal del torso humano.",
       "synonyms": [
         "torso"
-      ]
+      ],
+      "example": "Me duele el pecho."
     },
     {
       "word": "FUENTE",
       "gloss": "Origen de agua que brota del suelo.",
       "synonyms": [
         "manantial"
-      ]
+      ],
+      "example": "Conozco la fuente."
     },
     {
       "word": "SOCIO",
       "gloss": "Persona que comparte una empresa o club.",
       "synonyms": [
         "compañero"
-      ]
+      ],
+      "example": "Soy tu socio."
     },
     {
       "word": "SHOW",
       "gloss": "Espectáculo presentado ante público.",
       "synonyms": [
         "espectáculo"
-      ]
+      ],
+      "example": "No veo ese show."
     },
     {
       "word": "AUTOBÚS",
       "gloss": "un coche grande que lleva a muchas personas",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Es mi autobús."
     },
     {
       "word": "CUENTO",
       "gloss": "historia breve de niños",
       "synonyms": [
         "historia"
-      ]
+      ],
+      "example": "Cuento con él."
     },
     {
       "word": "AMANTE",
       "gloss": "Persona que mantiene una relación amorosa.",
       "synonyms": [
         "novio"
-      ]
+      ],
+      "example": "¡Ella es mi amante!"
     },
     {
       "word": "PARQUE",
       "gloss": "un lugar con árboles y bancos en la ciudad",
       "synonyms": [
         "jardín"
-      ]
+      ],
+      "example": "Ve al parque."
     },
     {
       "word": "HUESO",
       "gloss": "Parte dura del esqueleto.",
       "synonyms": [
         "osamenta"
-      ]
+      ],
+      "example": "Esto es un hueso."
     },
     {
       "word": "HIELO",
       "gloss": "Agua congelada y sólida.",
       "synonyms": [
         "frío"
-      ]
+      ],
+      "example": "Té sin hielo."
     },
     {
       "word": "VOTO",
       "gloss": "Expresión de preferencia en una elección.",
       "synonyms": [
         "sufragio"
-      ]
+      ],
+      "example": "Yo ni voto."
     },
     {
       "word": "PRENSA",
       "gloss": "Medios impresos que informan noticias.",
       "synonyms": [
         "papel"
-      ]
+      ],
+      "example": "La prensa me persigue."
     },
     {
       "word": "DATO",
       "gloss": "Información concreta y verificable.",
       "synonyms": [
         "información"
-      ]
+      ],
+      "example": "El dato es alentador."
     },
     {
       "word": "PUENTE",
       "gloss": "Construcción que cruza un obstáculo.",
       "synonyms": [
         "pasarela"
-      ]
+      ],
+      "example": "El puente cedió."
     },
     {
       "word": "PEZ",
       "gloss": "Un animal que vive en el agua y tiene branquias.",
       "synonyms": [
         "animal"
-      ]
+      ],
+      "example": "Es un pez."
     },
     {
       "word": "VECINO",
       "gloss": "Persona que vive cerca.",
       "synonyms": [
         "compañero"
-      ]
+      ],
+      "example": "Soy tu vecino."
     },
     {
       "word": "TELEVISIÓN",
       "gloss": "una pantalla que muestra imágenes y sonido",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Veo la televisión."
     },
     {
       "word": "SERIE",
       "gloss": "Conjunto de episodios de una historia.",
       "synonyms": [
         "programa"
-      ]
+      ],
+      "example": "¡Eres un fuera de serie!"
     },
     {
       "word": "SIGLO",
       "gloss": "Período de cien años.",
       "synonyms": [
         "época"
-      ]
+      ],
+      "example": "Un siglo es cien años."
     },
     {
       "word": "CARGA",
       "gloss": "peso que se lleva o transporta.",
       "synonyms": [
         "peso"
-      ]
+      ],
+      "example": "La batería no carga."
     },
     {
       "word": "VIDEO",
       "gloss": "Grabación de imágenes en movimiento.",
       "synonyms": [
         "película"
-      ]
+      ],
+      "example": "Vea este video."
     },
     {
       "word": "VELOCIDAD",
       "gloss": "qué tan rápido va una cosa o una persona",
       "synonyms": [
         "paso"
-      ]
+      ],
+      "example": "¡Más velocidad!"
     },
     {
       "word": "OFERTA",
       "gloss": "una cosa que se da a un precio bajo",
       "synonyms": [
         "regalo"
-      ]
+      ],
+      "example": "Haz una oferta."
     },
     {
       "word": "PROPIEDAD",
       "gloss": "Bien que pertenece a alguien.",
       "synonyms": [
         "posesión"
-      ]
+      ],
+      "example": "La propiedad es mía."
     },
     {
       "word": "NATURALEZA",
       "gloss": "Conjunto de todo lo que existe sin intervención humana.",
       "synonyms": [
         "entorno"
-      ]
+      ],
+      "example": "Amo la naturaleza."
     },
     {
       "word": "SEÑORÍA",
       "gloss": "una forma de hablar a un juez",
       "synonyms": [
         "título"
-      ]
+      ],
+      "example": "Por favor, señoría, ¿puede explicar la ley con más claridad?"
     },
     {
       "word": "PAPI",
       "gloss": "Forma cariñosa de dirigirse al padre.",
       "synonyms": [
         "padre"
-      ]
+      ],
+      "example": "¡Te quiero papi!"
     },
     {
       "word": "PELOTA",
       "gloss": "cosa redonda con la que juegan los niños",
       "synonyms": [
         "balón"
-      ]
+      ],
+      "example": "Dame la pelota."
     },
     {
       "word": "DISCO",
       "gloss": "una cosa redonda que tiene música",
       "synonyms": [
         "círculo"
-      ]
+      ],
+      "example": "Pareces un disco rayado."
     },
     {
       "word": "DISTANCIA",
       "gloss": "Espacio entre dos puntos.",
       "synonyms": [
         "espacio"
-      ]
+      ],
+      "example": "¿A qué distancia?"
     },
     {
       "word": "ÉPOCA",
       "gloss": "Período histórico determinado.",
       "synonyms": [
         "tiempo"
-      ]
+      ],
+      "example": "En esa época era joven."
     },
     {
       "word": "ESPADA",
-      "gloss": "Arma blanca larga y afilada."
+      "gloss": "Arma blanca larga y afilada.",
+      "example": "Dame mi espada."
     },
     {
       "word": "ARTISTA",
       "gloss": "persona que crea pinturas, música u otras obras",
       "synonyms": [
         "pintor"
-      ]
+      ],
+      "example": "Soy un artista."
     },
     {
       "word": "MANDO",
       "gloss": "aparato de la tele",
       "synonyms": [
         "control"
-      ]
+      ],
+      "example": "Tomas el mando."
     },
     {
       "word": "MODELO",
       "gloss": "Ejemplo o prototipo a seguir.",
       "synonyms": [
         "ejemplo"
-      ]
+      ],
+      "example": "Ella es modelo."
     },
     {
       "word": "PRINCESA",
       "gloss": "Hija de un rey.",
       "synonyms": [
         "reina"
-      ]
+      ],
+      "example": "Sos mi princesa."
     },
     {
       "word": "MINISTRO",
       "gloss": "Miembro del gobierno que dirige un área.",
       "synonyms": [
         "gobernante"
-      ]
+      ],
+      "example": "El Primer Ministro dimitió."
     },
     {
       "word": "PESO",
       "gloss": "cuántos kilos tiene una cosa",
       "synonyms": [
         "masa"
-      ]
+      ],
+      "example": "Pierde peso."
     },
     {
       "word": "PLANTA",
       "gloss": "Ser vivo que crece en la tierra.",
       "synonyms": [
         "flor"
-      ]
+      ],
+      "example": "Es una planta."
     },
     {
       "word": "SOMBRERO",
       "gloss": "una cosa que se pone en la cabeza",
       "synonyms": [
         "gorra"
-      ]
+      ],
+      "example": "Trae mi sombrero."
     },
     {
       "word": "UNIVERSO",
       "gloss": "Conjunto de todo lo existente.",
       "synonyms": [
         "cosmos"
-      ]
+      ],
+      "example": "El universo me odia."
     },
     {
       "word": "BELLEZA",
       "gloss": "cualidad de ser hermoso.",
       "synonyms": [
         "encanto"
-      ]
+      ],
+      "example": "¡Oh, qué belleza!"
     },
     {
       "word": "POLLO",
       "gloss": "Ave de corral joven.",
       "synonyms": [
         "ave"
-      ]
+      ],
+      "example": "Sabe a pollo."
     },
     {
       "word": "MIRADA",
       "gloss": "Acción de dirigir los ojos hacia algo.",
       "synonyms": [
         "vista"
-      ]
+      ],
+      "example": "Bajó la mirada."
     },
     {
       "word": "JARDÍN",
@@ -2048,109 +2332,125 @@
         "huerto",
         "parque",
         "patio"
-      ]
+      ],
+      "example": "No en mi jardín."
     },
     {
       "word": "DESCANSO",
       "gloss": "un tiempo sin trabajo",
       "synonyms": [
         "pausa"
-      ]
+      ],
+      "example": "¡Descanso!"
     },
     {
       "word": "APOYO",
       "gloss": "Ayuda o respaldo que se da a alguien.",
       "synonyms": [
         "ayuda"
-      ]
+      ],
+      "example": "Yo lo apoyo."
     },
     {
       "word": "MERCADO",
       "gloss": "un lugar donde la gente compra y vende comida y otras cosas",
       "synonyms": [
         "tienda"
-      ]
+      ],
+      "example": "Voy al mercado."
     },
     {
       "word": "TEORÍA",
       "gloss": "Explicación sistemática de un fenómeno.",
       "synonyms": [
         "idea"
-      ]
+      ],
+      "example": "Esa es mi teoría."
     },
     {
       "word": "PREMIO",
       "gloss": "Recompensa por un logro.",
       "synonyms": [
         "regalo"
-      ]
+      ],
+      "example": "Qué premio ganó?"
     },
     {
       "word": "SOCIEDAD",
       "gloss": "un grupo de personas que viven juntas en un lugar",
       "synonyms": [
         "gente"
-      ]
+      ],
+      "example": "Somos la sociedad."
     },
     {
       "word": "TAREA",
       "gloss": "Trabajo que debe realizarse.",
       "synonyms": [
         "trabajo"
-      ]
+      ],
+      "example": "Tengo tarea."
     },
     {
       "word": "PAGO",
       "gloss": "Entrega de dinero por un bien o servicio.",
       "synonyms": [
         "dinero"
-      ]
+      ],
+      "example": "¿Dónde pago?"
     },
     {
       "word": "DOMINGO",
       "gloss": "el séptimo día de la semana",
       "synonyms": [
         "día"
-      ]
+      ],
+      "example": "Hoy es domingo."
     },
     {
       "word": "ASPECTO",
       "gloss": "Apariencia externa de algo.",
       "synonyms": [
         "forma"
-      ]
+      ],
+      "example": "Tenía mal aspecto."
     },
     {
       "word": "TONTA",
       "gloss": "Persona que actúa sin sensatez.",
       "synonyms": [
         "boba"
-      ]
+      ],
+      "example": "No soy tonta."
     },
     {
       "word": "MAGIA",
       "gloss": "una cosa que hace que pasen cosas que parecen imposibles",
       "synonyms": [
         "hechizo"
-      ]
+      ],
+      "example": "Eso es magia."
     },
     {
       "word": "VERGÜENZA",
       "gloss": "Sentimiento de humillación por algo hecho.",
       "synonyms": [
         "pena"
-      ]
+      ],
+      "example": "¡Qué vergüenza!"
     },
     {
       "word": "PRISIONERO",
       "gloss": "Persona privada de libertad.",
       "synonyms": [
         "preso"
-      ]
+      ],
+      "example": "Soy un prisionero."
     },
     {
       "word": "USO",
-      "gloss": "Acción de emplear algo."
+      "gloss": "Acción de emplear algo.",
+      "example": "Yo lo uso."
     },
     {
       "word": "PÁJARO",
@@ -2158,313 +2458,361 @@
       "synonyms": [
         "ave",
         "volador"
-      ]
+      ],
+      "example": "Es un pájaro."
     },
     {
       "word": "CARRETERA",
       "gloss": "Vía grande y larga donde van los coches.",
       "synonyms": [
         "camino"
-      ]
+      ],
+      "example": "Nevaba en la carretera."
     },
     {
       "word": "PÁGINA",
-      "gloss": "una parte de un texto"
+      "gloss": "una parte de un texto",
+      "example": "¿Qué página?"
     },
     {
       "word": "CRIATURA",
       "gloss": "Ser vivo, animal o persona.",
       "synonyms": [
         "animal"
-      ]
+      ],
+      "example": "La criatura se fue."
     },
     {
       "word": "VIERNES",
       "gloss": "el sexto día de la semana",
       "synonyms": [
         "día"
-      ]
+      ],
+      "example": "Hoy es viernes."
     },
     {
       "word": "ENFRENTAR",
-      "gloss": "Oponerse a un problema o a alguien."
+      "gloss": "Oponerse a un problema o a alguien.",
+      "example": "Debes enfrentar la realidad."
     },
     {
       "word": "BRUJA",
       "gloss": "Mujer con poderes mágicos.",
       "synonyms": [
         "hechicera"
-      ]
+      ],
+      "example": "Era bruja."
     },
     {
       "word": "CIENCIA",
       "gloss": "Estudio sistemático de la naturaleza.",
       "synonyms": [
         "estudio"
-      ]
+      ],
+      "example": "¿Qué es la ciencia?"
     },
     {
       "word": "HABILIDAD",
       "gloss": "la capacidad de hacer bien una cosa",
       "synonyms": [
         "destreza"
-      ]
+      ],
+      "example": "Tengo habilidad."
     },
     {
       "word": "TALENTO",
       "gloss": "una cosa que una persona hace bien",
       "synonyms": [
         "don"
-      ]
+      ],
+      "example": "Tienes talento."
     },
     {
       "word": "ENFERMERO",
       "gloss": "persona que cuida a la gente en un hospital",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Soy enfermero."
     },
     {
       "word": "DATE",
       "gloss": "un momento en el tiempo que se puede señalar",
       "synonyms": [
         "día"
-      ]
+      ],
+      "example": "¡Date prisa!"
     },
     {
       "word": "META",
       "gloss": "Objetivo que se desea alcanzar.",
       "synonyms": [
         "objetivo"
-      ]
+      ],
+      "example": "Ésa no es la meta."
     },
     {
       "word": "OESTE",
       "gloss": "la dirección donde se pone el sol",
       "synonyms": [
         "lado"
-      ]
+      ],
+      "example": "Vamos al oeste."
     },
     {
       "word": "VENTA",
       "gloss": "Acción de vender algo.",
       "synonyms": [
         "compra"
-      ]
+      ],
+      "example": "Estaba en venta."
     },
     {
       "word": "ARTÍCULO",
-      "gloss": "texto de la prensa"
+      "gloss": "texto de la prensa",
+      "example": "Lee el artículo."
     },
     {
       "word": "EXCELENTE",
-      "gloss": "Muy bueno, de la mejor calidad."
+      "gloss": "Muy bueno, de la mejor calidad.",
+      "example": "Excelente."
     },
     {
       "word": "MOTOR",
       "gloss": "la parte de una máquina que la hace moverse",
       "synonyms": [
         "máquina"
-      ]
+      ],
+      "example": "Apaga el motor."
     },
     {
       "word": "PÉRDIDA",
       "gloss": "Falta de algo que se tenía.",
       "synonyms": [
         "daño"
-      ]
+      ],
+      "example": "¡Qué pérdida!"
     },
     {
       "word": "KILÓMETRO",
-      "gloss": "unidad de distancia: a pie se recorren unos cinco en una hora"
+      "gloss": "unidad de distancia: a pie se recorren unos cinco en una hora",
+      "example": "Mil metros son un kilómetro."
     },
     {
       "word": "JUGADOR",
       "gloss": "una persona que juega en un equipo",
       "synonyms": [
         "atleta"
-      ]
+      ],
+      "example": "Él parece un jugador."
     },
     {
       "word": "HUMOR",
       "gloss": "el estado de ánimo de una persona",
       "synonyms": [
         "broma"
-      ]
+      ],
+      "example": "No estoy de humor."
     },
     {
       "word": "PINTURA",
       "gloss": "Arte de aplicar color.",
       "synonyms": [
         "color"
-      ]
+      ],
+      "example": "Necesito pintura."
     },
     {
       "word": "COPIA",
       "gloss": "Reproducción idéntica de algo.",
       "synonyms": [
         "duplicado"
-      ]
+      ],
+      "example": "Es una copia."
     },
     {
       "word": "DEJADO",
       "gloss": "que ya no se usa o se tiene",
       "synonyms": [
         "abandonado"
-      ]
+      ],
+      "example": "Ya lo he dejado."
     },
     {
       "word": "TRASERO",
       "gloss": "que está detrás",
       "synonyms": [
         "parte de atrás"
-      ]
+      ],
+      "example": "Hay alguien en el patio trasero."
     },
     {
       "word": "DIVERTIR",
       "gloss": "hacer que una persona se ría o se sienta bien",
       "synonyms": [
         "entretener"
-      ]
+      ],
+      "example": "¿Te quieres divertir?"
     },
     {
       "word": "ENGAÑAR",
       "gloss": "hacer que una persona crea algo que no es verdad",
       "synonyms": [
         "mentir"
-      ]
+      ],
+      "example": "Me dejé engañar."
     },
     {
       "word": "IZQUIERDO",
       "gloss": "el lado que está al contrario de la mano que se usa más",
       "synonyms": [
         "lado"
-      ]
+      ],
+      "example": "Me duele el pie izquierdo."
     },
     {
       "word": "COSTAR",
       "gloss": "tener un precio",
       "synonyms": [
         "valer"
-      ]
+      ],
+      "example": "¿Cuánto va a costar?"
     },
     {
       "word": "OLER",
       "gloss": "notar con la nariz",
       "synonyms": [
         "husmear"
-      ]
+      ],
+      "example": "Puedo oler el mar."
     },
     {
       "word": "ACORDAR",
       "gloss": "decidir algo entre varias personas",
       "synonyms": [
         "decidir"
-      ]
+      ],
+      "example": "No me puedo acordar."
     },
     {
       "word": "CONTROLAR",
       "gloss": "Ejercer dominio sobre algo.",
       "synonyms": [
         "dirigir"
-      ]
+      ],
+      "example": "No me puedo controlar."
     },
     {
       "word": "MANEJAR",
       "gloss": "Guiar un coche.",
       "synonyms": [
         "conducir"
-      ]
+      ],
+      "example": "Ya sé manejar."
     },
     {
       "word": "ALEJAR",
       "gloss": "Poner distancia entre cosas.",
       "synonyms": [
         "apartar"
-      ]
+      ],
+      "example": "No lo puedes alejar de mí."
     },
     {
       "word": "UTILIZAR",
       "gloss": "usar una cosa",
       "synonyms": [
         "usar"
-      ]
+      ],
+      "example": "¿Cuál vas a utilizar?"
     },
     {
       "word": "BESAR",
-      "gloss": "tocar a alguien con la boca con cariño"
+      "gloss": "tocar a alguien con la boca con cariño",
+      "example": "Te voy a besar."
     },
     {
       "word": "RECONOCER",
       "gloss": "saber quién es una persona o qué es una cosa",
       "synonyms": [
         "aceptar"
-      ]
+      ],
+      "example": "¿Puedes reconocer esto?"
     },
     {
       "word": "LIMPIAR",
       "gloss": "quitar lo sucio",
       "synonyms": [
         "asear"
-      ]
+      ],
+      "example": "Quiero limpiar."
     },
     {
       "word": "CENAR",
       "gloss": "comer la comida de la noche",
       "synonyms": [
         "comer"
-      ]
+      ],
+      "example": "Voy a cenar."
     },
     {
       "word": "SAL",
-      "gloss": "Condimento blanco y cristalino."
+      "gloss": "Condimento blanco y cristalino.",
+      "example": "Ponle sal."
     },
     {
       "word": "ABANDONAR",
       "gloss": "dejar algo o a alguien",
       "synonyms": [
         "dejar"
-      ]
+      ],
+      "example": "¿Quieres abandonar?"
     },
     {
       "word": "BAJO",
       "gloss": "no alto",
       "synonyms": [
         "pequeño"
-      ]
+      ],
+      "example": "Tom es bajo."
     },
     {
       "word": "HERIDO",
       "gloss": "que se ha hecho daño",
       "synonyms": [
         "lastimado"
-      ]
+      ],
+      "example": "Estoy herido."
     },
     {
       "word": "RESPIRAR",
       "gloss": "tomar aire y soltarlo por la nariz o la boca",
       "synonyms": [
         "vivir"
-      ]
+      ],
+      "example": "¿Podés respirar?"
     },
     {
       "word": "REUNIR",
       "gloss": "juntar a varias personas en un lugar",
       "synonyms": [
         "juntar"
-      ]
+      ],
+      "example": "Debes reunir más información."
     },
     {
       "word": "UNIR",
       "gloss": "Juntar dos o más cosas.",
       "synonyms": [
         "juntar"
-      ]
+      ],
+      "example": "¿A qué grupo te quieres unir?"
     },
     {
       "word": "TRISTE",
       "gloss": "que siente pena o dolor",
       "synonyms": [
         "penoso"
-      ]
+      ],
+      "example": "Es triste."
     },
     {
       "word": "CANSADO",
@@ -2472,159 +2820,182 @@
       "synonyms": [
         "agotado",
         "fatigado"
-      ]
+      ],
+      "example": "Estoy cansado."
     },
     {
       "word": "DOLER",
       "gloss": "Causar dolor físico.",
       "synonyms": [
         "lastimar"
-      ]
+      ],
+      "example": "No va a doler."
     },
     {
       "word": "ENTREGAR",
       "gloss": "Dar algo a alguien.",
       "synonyms": [
         "dar"
-      ]
+      ],
+      "example": "Podemos entregar en una semana."
     },
     {
       "word": "ENCARGAR",
       "gloss": "Pedir que se haga algo.",
       "synonyms": [
         "pedir"
-      ]
+      ],
+      "example": "¿Por qué no encargar pizzas?"
     },
     {
       "word": "DULCE",
       "gloss": "De sabor azucarado.",
       "synonyms": [
         "azucarado"
-      ]
+      ],
+      "example": "¿Es dulce?"
     },
     {
       "word": "PARTIR",
       "gloss": "dividir en trozos",
       "synonyms": [
         "dividir"
-      ]
+      ],
+      "example": "¡Déjanos partir!"
     },
     {
       "word": "INTERESAR",
       "gloss": "Despertar atención o curiosidad.",
       "synonyms": [
         "gustar"
-      ]
+      ],
+      "example": "Pensaba que eso te podría interesar."
     },
     {
       "word": "UNIDO",
       "gloss": "Que está junto o ligado.",
       "synonyms": [
         "junto"
-      ]
+      ],
+      "example": "Estoy unido a ti."
     },
     {
       "word": "SUFRIR",
       "gloss": "Padecer dolor o pena.",
       "synonyms": [
         "padecer"
-      ]
+      ],
+      "example": "No quiero sufrir."
     },
     {
       "word": "AGARRAR",
       "gloss": "Tomar con la mano.",
       "synonyms": [
         "coger"
-      ]
+      ],
+      "example": "Lo voy a agarrar."
     },
     {
       "word": "NACER",
       "gloss": "Salir del vientre materno.",
       "synonyms": [
         "salir"
-      ]
+      ],
+      "example": "Nadie pide nacer."
     },
     {
       "word": "HUIR",
       "gloss": "Escapar de un peligro.",
       "synonyms": [
         "escapar"
-      ]
+      ],
+      "example": "Lo vi huir."
     },
     {
       "word": "CERRADO",
       "gloss": "Que no está abierto.",
       "synonyms": [
         "tapado"
-      ]
+      ],
+      "example": "Caso cerrado."
     },
     {
       "word": "PRECIOSO",
       "gloss": "Que resulta muy hermoso.",
       "synonyms": [
         "bonito"
-      ]
+      ],
+      "example": "El día está precioso."
     },
     {
       "word": "DELANTE",
       "gloss": "en la parte que está antes de otra",
       "synonyms": [
         "frente"
-      ]
+      ],
+      "example": "Ve delante."
     },
     {
       "word": "DISCUTIR",
       "gloss": "Debatir con alguien.",
       "synonyms": [
         "pelear"
-      ]
+      ],
+      "example": "Deja de discutir."
     },
     {
       "word": "SIMPLE",
       "gloss": "Que no es complicado.",
       "synonyms": [
         "fácil"
-      ]
+      ],
+      "example": "Es simple."
     },
     {
       "word": "SOBREVIVIR",
       "gloss": "seguir con vida tras un peligro",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Voy a sobrevivir."
     },
     {
       "word": "DESCANSAR",
       "gloss": "dejar de hacer algo",
       "synonyms": [
         "reposar"
-      ]
+      ],
+      "example": "Debo descansar."
     },
     {
       "word": "ACOSTAR",
       "gloss": "Poner en posición horizontal.",
       "synonyms": [
         "tumbar"
-      ]
+      ],
+      "example": "Me voy a acostar."
     },
     {
       "word": "COMPARTIR",
       "gloss": "Usar algo con otros.",
       "synonyms": [
         "repartir"
-      ]
+      ],
+      "example": "Puedo compartir."
     },
     {
       "word": "ESTUDIAR",
       "gloss": "Aprender una materia.",
       "synonyms": [
         "aprender"
-      ]
+      ],
+      "example": "Odio estudiar."
     },
     {
       "word": "ESPOSO",
       "gloss": "Hombre casado.",
       "synonyms": [
         "marido"
-      ]
+      ],
+      "example": "Él es su esposo."
     },
     {
       "word": "NERVIOSO",
@@ -2632,200 +3003,230 @@
       "synonyms": [
         "ansioso",
         "tenso"
-      ]
+      ],
+      "example": "Está nervioso."
     },
     {
       "word": "DEMOSTRAR",
       "gloss": "dejar claro con datos que algo es cierto",
       "synonyms": [
         "probar"
-      ]
+      ],
+      "example": "Permíteme demostrar."
     },
     {
       "word": "CONSTRUIR",
       "gloss": "hacer una casa o un edificio",
       "synonyms": [
         "hacer"
-      ]
+      ],
+      "example": "¿Qué deberían construir?"
     },
     {
       "word": "SENTADO",
-      "gloss": "Que está en una silla."
+      "gloss": "Que está en una silla.",
+      "example": "¡Sigue sentado!"
     },
     {
       "word": "DALE",
-      "gloss": "dar algo a una persona"
+      "gloss": "dar algo a una persona",
+      "example": "Dale todo."
     },
     {
       "word": "ACOMPAÑAR",
       "gloss": "Ir junto a alguien.",
       "synonyms": [
         "ir"
-      ]
+      ],
+      "example": "¿Te puedo acompañar?"
     },
     {
       "word": "AGRADABLE",
       "gloss": "que gusta o es bueno",
       "synonyms": [
         "amable"
-      ]
+      ],
+      "example": "Es agradable."
     },
     {
       "word": "CUMPLIR",
       "gloss": "hacer lo que se debe hacer",
       "synonyms": [
         "hacer"
-      ]
+      ],
+      "example": "¡Sabremos cumplir!"
     },
     {
       "word": "RATO",
       "gloss": "Espacio breve de tiempo.",
       "synonyms": [
         "tiempo"
-      ]
+      ],
+      "example": "Esperé un rato."
     },
     {
       "word": "CALLAR",
       "gloss": "dejar de emitir sonidos con la voz",
       "synonyms": [
         "silenciar"
-      ]
+      ],
+      "example": "¿Te vas a callar?"
     },
     {
       "word": "AUN",
       "gloss": "todavía",
       "synonyms": [
         "todavía"
-      ]
+      ],
+      "example": "Tom no ha vuelto aun."
     },
     {
       "word": "ORGULLOSO",
       "gloss": "que se siente muy satisfecho de sí mismo",
       "synonyms": [
         "vanidoso"
-      ]
+      ],
+      "example": "Estoy orgulloso."
     },
     {
       "word": "EQUIVOCAR",
       "gloss": "tomar una decisión o acción incorrecta",
       "synonyms": [
         "errar"
-      ]
+      ],
+      "example": "No te vayas a equivocar."
     },
     {
       "word": "FALSO",
       "gloss": "Que no es verdadero ni real.",
       "synonyms": [
         "mentiroso"
-      ]
+      ],
+      "example": "No es falso."
     },
     {
       "word": "ENCANTADO",
       "gloss": "Que siente mucho gusto o placer por algo.",
       "synonyms": [
         "muy feliz"
-      ]
+      ],
+      "example": "Encantado."
     },
     {
       "word": "GUAPO",
       "gloss": "persona con cara bonita",
       "synonyms": [
         "bonito"
-      ]
+      ],
+      "example": "Soy guapo."
     },
     {
       "word": "ARRUINAR",
       "gloss": "Destruir o echar a perder algo por completo.",
       "synonyms": [
         "estropear"
-      ]
+      ],
+      "example": "Me vais a arruinar."
     },
     {
       "word": "ENAMORADO",
       "gloss": "que siente un cariño muy fuerte por otra persona",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Está enamorado."
     },
     {
       "word": "VIAJAR",
       "gloss": "Ir de un lugar a otro.",
       "synonyms": [
         "ir"
-      ]
+      ],
+      "example": "Odio viajar."
     },
     {
       "word": "POLÍTICO",
       "gloss": "Relacionado con el gobierno o la administración pública.",
       "synonyms": [
         "persona"
-      ]
+      ],
+      "example": "Tom es político."
     },
     {
       "word": "ADENTRO",
       "gloss": "Hacia el interior de un lugar.",
-      "synonyms": []
+      "synonyms": [],
+      "example": "Ve adentro."
     },
     {
       "word": "ENSEGUIDA",
       "gloss": "En un momento muy breve después de otro.",
       "synonyms": [
         "pronto"
-      ]
+      ],
+      "example": "Ve enseguida."
     },
     {
       "word": "MENCIONAR",
       "gloss": "Hacer referencia a algo o a alguien al hablar.",
       "synonyms": [
         "decir"
-      ]
+      ],
+      "example": "No volveré a mencionar eso."
     },
     {
       "word": "ENTERAR",
       "gloss": "Informar a alguien sobre un hecho o noticia.",
       "synonyms": [
         "saber"
-      ]
+      ],
+      "example": "Se va a enterar."
     },
     {
       "word": "PRIVADO",
       "gloss": "Que pertenece a una persona o grupo y no es público.",
       "synonyms": [
         "personal"
-      ]
+      ],
+      "example": "¿Es privado?"
     },
     {
       "word": "TEMPRANO",
       "gloss": "Que ocurre antes de la hora habitual.",
       "synonyms": [
         "pronto"
-      ]
+      ],
+      "example": "Es temprano."
     },
     {
       "word": "CAMBIADO",
       "gloss": "Que ha sufrido una transformación o modificación.",
       "synonyms": [
         "distinto"
-      ]
+      ],
+      "example": "Ha cambiado."
     },
     {
       "word": "AMERICANO",
       "gloss": "que es de Estados Unidos o de otro país del Nuevo Mundo",
       "synonyms": [
         "estadounidense"
-      ]
+      ],
+      "example": "Es americano."
     },
     {
       "word": "RESOLVER",
       "gloss": "hallar la salida de un problema",
       "synonyms": [
         "solucionar"
-      ]
+      ],
+      "example": "Voy a resolver esto."
     },
     {
       "word": "LIMPIO",
       "gloss": "sin tierra encima",
       "synonyms": [
         "claro"
-      ]
+      ],
+      "example": "Soy limpio."
     }
   ]
 }
