@@ -27,7 +27,7 @@ export function messageContentToString(
   return ''
 }
 
-/** Non-429 HTTP status from the Mistral API — deliberate, never retried. */
+/** Non-transient HTTP status from the Mistral API (4xx other than 408/429) — deliberate, never retried. */
 export class MistralHttpError extends Error {
   readonly status: number
   constructor(status: number, body: string) {
@@ -36,17 +36,26 @@ export class MistralHttpError extends Error {
   }
 }
 
+/** 408/429/5xx are transient (rate limit, upstream gateway failure) — retried with backoff. */
+function isTransientStatus(status: number): boolean {
+  return status === 408 || status === 429 || status >= 500
+}
+
 export async function mistralChat(
   key: string,
   system: string,
   prompt: string,
   temperature: number,
 ): Promise<string> {
+  let lastStatus = 0
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
       const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
         method: 'POST',
-        signal: AbortSignal.timeout(60_000),
+        // mistral-large-4-0 (1T-param MoE) can take well over 60s per response
+        // under load (run 43222663925: every 60s-capped request aborted with a
+        // TimeoutError, then the upstream answered 502) — allow 120s.
+        signal: AbortSignal.timeout(120_000),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${key}`,
@@ -63,9 +72,10 @@ export async function mistralChat(
           ],
         }),
       })
-      if (res.status === 429) {
+      if (isTransientStatus(res.status)) {
+        lastStatus = res.status
         const wait = 1000 * 2 ** attempt
-        console.warn(`  Mistral 429, backing off ${wait}ms`)
+        console.warn(`  Mistral ${res.status}, backing off ${wait}ms`)
         await Bun.sleep(wait)
         continue
       }
@@ -82,9 +92,9 @@ export async function mistralChat(
       }
       return messageContentToString(body.choices?.[0]?.message?.content)
     } catch (err) {
-      // HTTP status errors are deliberate and not retried; anything else
-      // (a hung request aborts with a TimeoutError, run 43198026054) is
-      // transient — back off and retry instead of crashing the pipeline.
+      // Deliberate HTTP errors are not retried; anything else (a hung request
+      // aborts with a TimeoutError, run 43198026054; transient 5xx handled
+      // above) is transient — back off and retry instead of crashing.
       if (err instanceof MistralHttpError) throw err
       if (attempt === 4) throw err
       const wait = 1000 * 2 ** attempt
@@ -92,5 +102,5 @@ export async function mistralChat(
       await Bun.sleep(wait)
     }
   }
-  throw new Error('Mistral API 429: retries exhausted')
+  throw new Error(`Mistral API ${lastStatus}: retries exhausted`)
 }

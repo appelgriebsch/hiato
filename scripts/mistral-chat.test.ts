@@ -178,16 +178,45 @@ describe('mistralChat', () => {
     }
   })
 
-  test('throws on non-429 errors without retrying', async () => {
+  test('backs off and retries on transient 5xx (run 43222663925 answered 502)', async () => {
     try {
-      const { calls } = stubFetch([{ status: 500, body: { error: 'boom' } }])
+      stubSleep()
+      const { calls } = stubFetch([{ status: 502 }, { status: 503 }, OK])
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
+      expect(content).toBe('{"A": ["b"]}')
+      expect(calls.length).toBe(3)
+    } finally {
+      restoreGlobals()
+    }
+  })
+
+  test('throws after 5 exhausted 5xx retries', async () => {
+    try {
+      stubSleep()
+      const { calls } = stubFetch(Array(5).fill({ status: 502, body: { error: 'upstream' } }))
       let err: unknown
       try {
         await mistralChat('k', 'sys', 'prompt', 0.2)
       } catch (e) {
         err = e
       }
-      expect((err as Error).message).toContain('Mistral API 500')
+      expect((err as Error).message).toBe('Mistral API 502: retries exhausted')
+      expect(calls.length).toBe(5)
+    } finally {
+      restoreGlobals()
+    }
+  })
+
+  test('throws on deliberate 4xx errors without retrying', async () => {
+    try {
+      const { calls } = stubFetch([{ status: 400, body: { error: 'boom' } }])
+      let err: unknown
+      try {
+        await mistralChat('k', 'sys', 'prompt', 0.2)
+      } catch (e) {
+        err = e
+      }
+      expect((err as Error).message).toContain('Mistral API 400')
       expect(calls.length).toBe(1)
     } finally {
       restoreGlobals()
