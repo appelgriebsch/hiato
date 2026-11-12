@@ -14,6 +14,7 @@ import type { PackCefr, PackLang } from '../packs/schema'
 
 export const HISTORY_KEY = 'hiato.history'
 export const HISTORY_LIMIT = 50
+export const PREFILL_RECORDED_KEY = 'hiato.prefillRecorded'
 
 export type HistoryMode = 'daily' | 'practice'
 
@@ -125,6 +126,38 @@ export function recordResult(slot: string, entry: HistoryEntry): HistoryEntry[] 
   file.slots[slot] = next
   writeFile(file)
   return next
+}
+
+export function recordRoundFor(
+  slot: string,
+  mode: string,
+  entry: Omit<HistoryEntry, 'mode'>,
+): boolean {
+  if (mode !== 'daily' && mode !== 'practice') return false
+  if (mode === 'daily' && hasDailyFor(slot, entry.dateKey)) return false
+  recordResult(slot, { ...entry, mode })
+  return true
+}
+
+function prefillMarkerKey(slot: string, seed: number, dateKey: string): string {
+  return `${PREFILL_RECORDED_KEY}|${slot}|${seed}|${dateKey}`
+}
+
+export function hasPrefillRecorded(slot: string, seed: number, dateKey: string): boolean {
+  try {
+    return sessionStorage.getItem(prefillMarkerKey(slot, seed, dateKey)) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function markPrefillRecorded(slot: string, seed: number, dateKey: string): boolean {
+  try {
+    sessionStorage.setItem(prefillMarkerKey(slot, seed, dateKey), '1')
+    return true
+  } catch {
+    return false
+  }
 }
 
 /** Aggregates over the slot's ring buffer, computed on read. */
