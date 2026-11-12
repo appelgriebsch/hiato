@@ -1,9 +1,12 @@
 /**
  * Shared Mistral chat client for pack tooling scripts (not run on CI / bun:test).
- * Model and key follow ADR 0048: mistral-large-4-0 via api.mistral.ai, MISTRAL_API_KEY.
+ * Key follows ADR 0048 via MISTRAL_API_KEY. Model defaults to mistral-small-latest
+ * (ADR 0048 amendment 2026-11-12: mistral-large-4-0 was still in preview and hung/
+ * 502'd on every CI call, run 43222663925; the gate/generate tasks need speed, not
+ * frontier quality). Override with MISTRAL_MODEL.
  */
 
-export const MISTRAL_MODEL = 'mistral-large-4-0'
+export const MISTRAL_MODEL = process.env.MISTRAL_MODEL || 'mistral-small-latest'
 
 export function readMistralKey(): string | null {
   return process.env.MISTRAL_API_KEY || null

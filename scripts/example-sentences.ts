@@ -5,7 +5,7 @@
  * Source 1: Tatoeba per-language sentence dump (CC-BY 2.0 FR) — one sentence per
  * lemma: whole-Unicode-word match, shortest/cleanest, denylist + person-name
  * guards. Source 2 (fallback): original Mistral-generated sentence
- * (mistral-large-4-0 via MISTRAL_API_KEY). Tatoeba is optional (--no-tatoeba, or
+ * (mistral-small-latest via MISTRAL_API_KEY, MISTRAL_MODEL to override). Tatoeba is optional (--no-tatoeba, or
  * when the dump download fails): the pipeline then ships Mistral-only examples.
  * Every candidate passes a Mistral
  * CEFR gate against the pack level; failures are rejected, not patched.
