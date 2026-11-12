@@ -30,7 +30,7 @@ Hybrid source, per the 2026-11-11 grill:
 ## Grill decisions (2026-11-11, Andreas)
 
 1. **Hybrid source.** Tatoeba and our own LLM.
-2. **Pilot then widen.** EN + DE A1–B1 first, then all 36 packs.
+2. **Pilot then widen.** EN + DE A1–B1 first, then all 36 packs. *Amended 2026-11-12 (Andreas): widen to the 24 A1–B2 packs only; C1/C2 ship no examples (ADR 0049 §3, #248).*
 3. **LLM CEFR check per sentence** as the A1–B1 level gate.
 
 ## Consequences

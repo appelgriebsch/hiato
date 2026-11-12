@@ -14,7 +14,11 @@ The EndCard (`src/pages/Play.tsx`) teaches the lemma after a round via `LemmaTea
 
 1. **Schema.** `PackLemma` gains optional `example?: string` — one sentence, in `pack.lang` (ADR 0030), must contain the lemma as a whole Unicode word (opposite of the gloss spoiler rule, ADR 0023), length-capped. `validatePack` (`scripts/packs-check-lib.ts`) enforces presence-of-lemma, language, and length; the level gate lives in the pipeline (ADR 0048).
 2. **Render.** The EndCard passes `example` into the teach block and renders exactly one sentence in the pack language. `<EndCard>` mounts only when `finished` is truthy (`Play.tsx`), so a sentence can never appear before the round ends. In-round UI (`LearnerHint`, `LetterGrid`, keyboard) never receives `example`. `DailyRecord` carries `example` so the already-played replay shows it too.
-3. **Scope.** Pilot: EN + DE A1–B1 packs get examples first (#247), then all 36 packs (#248).
+3. **Scope.** Pilot: EN + DE A1–B1 packs get examples first (#247), then the 24 A1–B2 packs (#248). C1/C2 packs ship no `example` on purpose; the EndCard shows no sentence for them (point 2).
+
+## Amendment (2026-11-12, Andreas)
+
+Point 3 is narrowed from "all 36 packs" to the 24 A1–B2 packs. The 12 C1/C2 packs have no example sentences on purpose. This matches the shipped data at `248b588` and the amended #248.
 
 ## Options Considered
 
