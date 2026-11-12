@@ -47,7 +47,7 @@ describe('readMistralKey', () => {
 })
 
 describe('mistralChat', () => {
-  test('posts mistral-large-4-0 to api.mistral.ai and returns the first choice', async () => {
+  test('posts MISTRAL_MODEL to api.mistral.ai and returns the first choice', async () => {
     try {
       const { calls, bodies } = stubFetch([OK])
       const content = await mistralChat('k', 'sys', 'prompt', 0.2)

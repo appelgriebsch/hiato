@@ -15,7 +15,7 @@ Issue #225 wants one example sentence per word on the EndCard, in the pack langu
 Hybrid source, per the 2026-11-11 grill:
 
 1. **Primary: Tatoeba sentences, CC-BY 2.0 FR.** A build-time script downloads the per-language Tatoeba dumps and selects one sentence per lemma (whole-word match, shortest/cleanest, profanity guard and denylist reuse). Every pack that ships a Tatoeba sentence credits Tatoeba in `attribution`/`license`, About shows one "Example sentences" card (Tatoeba, CC-BY 2.0 FR, link), and NOTICE/THIRD-PARTY.md carry the same line.
-2. **Fallback: original Mistral-generated sentences** (Mistral AI, `mistral-large-4-0`, via `MISTRAL_API_KEY`) when no Tatoeba sentence qualifies. These are original Hiato copy and need no external credit.
+2. **Fallback: original Mistral-generated sentences** (Mistral AI, `mistral-small-latest` via `MISTRAL_API_KEY`, `MISTRAL_MODEL` to override; amended 2026-11-12 — `mistral-large-4-0` was still in preview and hung/502'd on every CI call in run 43222663925) when no Tatoeba sentence qualifies. These are original Hiato copy and need no external credit.
 3. **Level gate: Mistral CEFR check per sentence.** Every candidate — Tatoeba or generated — must pass a Mistral check that the sentence stays within the pack's CEFR level (A1–B1 must stay within level, same standard as glosses per ADR 0030). Failures are rejected, not patched. `packs:check` enforces the gate log.
 
 ## Options Considered
