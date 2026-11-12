@@ -68,7 +68,12 @@ jobs:
         run: |
           set -euo pipefail
           IFS=',' read -ra parts <<< "${{ inputs.levels }}"
-          json=$(printf '"%s",' "${parts[@]}")
+          json=""
+          for v in "${parts[@]}"; do
+            v="${v#"${v%%[![:space:]]*}"}"
+            v="${v%"${v##*[![:space:]]}"}"
+            json+="\"$v\","
+          done
           echo "levels=[${json%,}]" >> "$GITHUB_OUTPUT"
   examples:
     needs: plan

@@ -27,6 +27,16 @@ export function messageContentToString(
   return ''
 }
 
+/** Non-429 HTTP status from the Mistral API — deliberate, never retried. */
+export class MistralHttpError extends Error {
+  constructor(
+    readonly status: number,
+    body: string,
+  ) {
+    super(`Mistral API ${status}: ${body.slice(0, 300)}`)
+  }
+}
+
 export async function mistralChat(
   key: string,
   system: string,
@@ -61,8 +71,7 @@ export async function mistralChat(
         continue
       }
       if (!res.ok) {
-        const t = await res.text()
-        throw new Error(`Mistral API ${res.status}: ${t.slice(0, 300)}`)
+        throw new MistralHttpError(res.status, await res.text())
       }
       const body = (await res.json()) as {
         choices?: {
@@ -77,7 +86,7 @@ export async function mistralChat(
       // HTTP status errors are deliberate and not retried; anything else
       // (a hung request aborts with a TimeoutError, run 43198026054) is
       // transient — back off and retry instead of crashing the pipeline.
-      if (err instanceof Error && err.message.startsWith('Mistral API ')) throw err
+      if (err instanceof MistralHttpError) throw err
       if (attempt === 4) throw err
       const wait = 1000 * 2 ** attempt
       console.warn(`  Mistral request failed (${(err as Error)?.name ?? err}), backing off ${wait}ms`)
