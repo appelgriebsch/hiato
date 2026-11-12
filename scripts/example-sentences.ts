@@ -10,6 +10,9 @@
  * Every candidate passes a Mistral
  * CEFR gate against the pack level; failures are rejected, not patched.
  * Verdicts cached in scripts/data/example-gate.json; packs:check enforces it.
+ * The gate log and pin are persisted after every lemma and pack level, so a
+ * re-run resumes where a previous run stopped and skips levels that are
+ * already complete (no cached-pass misses, no --force) without writing again.
  *
  * --dry-run selects Tatoeba sentences without Mistral calls or writes.
  * Run in CI via .github/workflows/example-sentences.yml (MISTRAL_API_KEY secret);
@@ -383,6 +386,11 @@ async function main() {
   const at = new Date().toISOString().slice(0, 10)
   const log = loadExampleGateLog()
   const pin = JSON.parse(readFileSync(PIN_FILE, 'utf8')) as Record<string, unknown>
+  // Persist verdicts incrementally: a crashed or re-run job then resumes here.
+  const persist = (): void => {
+    writeFileSync(GATE_LOG, JSON.stringify(log, null, 2) + '\n')
+    writeFileSync(PIN_FILE, JSON.stringify(pin, null, 2) + '\n')
+  }
 
   for (const lang of cli.langs) {
     let index: Map<string, string[]> | null = null
@@ -426,7 +434,7 @@ async function main() {
       let tatoebaCount = 0
       let generatedCount = 0
       let skipped = 0
-      const before = readFileSync(file, 'utf8').length
+      const original = readFileSync(file, 'utf8')
 
       const pending: WordPack['lemmas'] = []
       for (const lemma of pack.lemmas) {
@@ -452,9 +460,11 @@ async function main() {
       }
 
       if (pending.length) {
-        const sources = await mapPool(pending, MISTRAL_CONCURRENCY, (lemma) =>
-          gateLemma(rel, lang, cefr, lemma, index!, apiKey!, log, at),
-        )
+        const sources = await mapPool(pending, MISTRAL_CONCURRENCY, async (lemma) => {
+          const source = await gateLemma(rel, lang, cefr, lemma, index!, apiKey!, log, at)
+          persist()
+          return source
+        })
         for (const source of sources) {
           if (source === 'tatoeba') tatoebaCount++
           else if (source === 'mistral') generatedCount++
@@ -478,20 +488,20 @@ async function main() {
           pack.license = `${pack.license}; example sentences from Tatoeba, CC-BY 2.0 FR`
         }
       }
-      pack.version += 1
-      const out = JSON.stringify(pack, null, 2) + '\n'
-      writeFileSync(file, out)
-      pin[rel] = packPinEntry(pack)
-      const after = out.length
-      console.log(
-        `${rel}: ${tatoebaCount} tatoeba + ${generatedCount} generated, ${skipped} skipped; version ${pack.version}; ${before} -> ${after} bytes (+${after - before})`,
-      )
+      let out = JSON.stringify(pack, null, 2) + '\n'
+      if (out === original) {
+        console.log(`${rel}: pack already up to date, no changes (${skipped} skipped)`)
+      } else {
+        pack.version += 1
+        out = JSON.stringify(pack, null, 2) + '\n'
+        writeFileSync(file, out)
+        pin[rel] = packPinEntry(pack)
+        console.log(
+          `${rel}: ${tatoebaCount} tatoeba + ${generatedCount} generated, ${skipped} skipped; version ${pack.version}; ${original.length} -> ${out.length} bytes (+${out.length - original.length})`,
+        )
+      }
+      persist()
     }
-  }
-
-  if (!cli.dryRun) {
-    writeFileSync(GATE_LOG, JSON.stringify(log, null, 2) + '\n')
-    writeFileSync(PIN_FILE, JSON.stringify(pin, null, 2) + '\n')
   }
 }
 
