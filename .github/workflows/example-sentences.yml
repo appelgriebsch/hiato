@@ -22,6 +22,11 @@ on:
         required: false
         type: string
         default: a1,a2,b1
+      tatoeba:
+        description: 'Use the Tatoeba dump as sentence source (falls back to Mistral-only examples when the download fails)'
+        required: false
+        type: boolean
+        default: true
       dry_run:
         description: 'Select Tatoeba sentences without calling Mistral or writing packs (no API key needed)'
         required: false
@@ -60,7 +65,7 @@ jobs:
   examples:
     needs: plan
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       max-parallel: 2
@@ -86,6 +91,7 @@ jobs:
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           EXAMPLE_LEVELS: ${{ inputs.levels }}
+          EXAMPLE_TATOEBA: ${{ inputs.tatoeba }}
           EXAMPLE_DRY_RUN: ${{ inputs.dry_run }}
           EXAMPLE_FORCE: ${{ inputs.force }}
         run: |
@@ -95,6 +101,7 @@ jobs:
             exit 1
           fi
           args=(--levels="$EXAMPLE_LEVELS" --lang="${{ matrix.lang }}")
+          if [ "$EXAMPLE_TATOEBA" = "false" ]; then args+=(--no-tatoeba); fi
           if [ "$EXAMPLE_DRY_RUN" = "true" ]; then args+=(--dry-run); fi
           if [ "$EXAMPLE_FORCE" = "true" ]; then args+=(--force); fi
           bun run scripts/example-sentences.ts "${args[@]}"
