@@ -29,11 +29,10 @@ export function messageContentToString(
 
 /** Non-429 HTTP status from the Mistral API — deliberate, never retried. */
 export class MistralHttpError extends Error {
-  constructor(
-    readonly status: number,
-    body: string,
-  ) {
+  readonly status: number
+  constructor(status: number, body: string) {
     super(`Mistral API ${status}: ${body.slice(0, 300)}`)
+    this.status = status
   }
 }
 
