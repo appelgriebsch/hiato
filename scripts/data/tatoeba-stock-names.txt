@@ -1,0 +1,23 @@
+# Tatoeba stock persona names (NFC uppercase, one per line).
+# Seeded from a scan of the Tatoeba per-language dumps for the most frequent
+# capitalized sentence-initial tokens, minus real common words removed by hand.
+# A sentence containing one of these as a capitalized token at ANY position
+# (including sentence-initial) is rejected as an example candidate (#247).
+# The lemma itself is exempt, so a lemma that equals a stock name (e.g. JACK)
+# can still get an example.
+BOB
+DAN
+JACK
+JOHN
+KEN
+LAYLA
+MARIA
+MARY
+MENNAD
+MUIRIEL
+RIMA
+SAMI
+SKURA
+TOM
+YANNI
+ZIRI

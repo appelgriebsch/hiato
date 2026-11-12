@@ -4,8 +4,10 @@ import { tmpdir } from 'node:os'
 import type { WordPack } from '../src/packs/schema'
 import {
   C2_MIN,
+  GATE_VERSION,
   PACK_MIN,
   checkCompleteness,
+  checkExampleGate,
   checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
@@ -18,6 +20,7 @@ import {
   validatePack,
   buildLemmaEasiestByLang,
   isHintCeilingEnforcedRel,
+  type ExampleGateLog,
 } from './packs-check-lib'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
@@ -457,6 +460,52 @@ describe('packs:check example sentence (ADR 0049, #246)', () => {
       'en/a1.json',
     )
     expect(p.lemmas[0]?.example).toBeUndefined()
+  })
+})
+
+describe('packs:check example gate — stock names and gate version (#247 reopen)', () => {
+  const gate: ExampleGateLog = {
+    'en/a1.json|HAPPY': {
+      sentence: 'Tom is happy today.',
+      source: 'tatoeba',
+      verdict: 'pass',
+      level: 'a1',
+      at: '2026-11-12',
+      gate: GATE_VERSION,
+    },
+    'en/a1.json|HOUSE': {
+      sentence: 'We live in a small house.',
+      source: 'fixture',
+      verdict: 'pass',
+      level: 'a1',
+      at: '2026-11-12',
+      gate: GATE_VERSION,
+    },
+  }
+
+  test('fails a pack whose example contains a Tatoeba stock name', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'a1',
+      lemmas: [{ word: 'HAPPY', gloss: 'feeling joy', example: 'Tom is happy today.' }],
+    })
+    const errors = checkExampleGate('en/a1.json', p, gate)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toMatch(/Tatoeba stock name "Tom"/)
+  })
+
+  test('passes a gate-2 pass entry and fails a version-1 entry as stale', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'a1',
+      lemmas: [{ word: 'HOUSE', gloss: 'a building', example: 'We live in a small house.' }],
+    })
+    expect(checkExampleGate('en/a1.json', p, gate)).toEqual([])
+    const stale: ExampleGateLog = {
+      'en/a1.json|HOUSE': { ...gate['en/a1.json|HOUSE']!, gate: 1 },
+    }
+    const errors = checkExampleGate('en/a1.json', p, stale)
+    expect(errors[0]).toMatch(/stale gate entry/)
   })
 })
 

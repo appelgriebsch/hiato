@@ -25,6 +25,7 @@ import { EXAMPLE_SENTENCE_MAX, type PackCefr, type PackLang, type WordPack } fro
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
+import { loadStockNameList, onStockNameList } from './tatoeba-stock-names'
 import { readXaiKey, xaiChat } from './xai-chat'
 import { packPinEntry } from './pack-pin'
 
@@ -66,12 +67,17 @@ const SENTENCE_MIN = 10
 export type GateSource = 'tatoeba' | 'xai' | 'mistral' | 'fixture'
 export type GateVerdict = 'pass' | 'reject'
 
+/** Gate prompt version (see ADR 0048 amendment, #247 reopen). Version 2 adds the
+ * gloss-sense and content-suitability checks plus the stock-name guard. */
+export const GATE_VERSION = 2
+
 export type ExampleGateEntry = {
   sentence: string
   source: GateSource
   verdict: GateVerdict
   level: string
   at: string
+  gate: number
 }
 
 export type ExampleGateLog = Record<string, ExampleGateEntry>
@@ -96,19 +102,28 @@ export function cleanSentence(raw: string): string | null {
 
 /**
  * Guards every candidate must pass (ADR 0048): whole-word lemma match, denylist
- * (profanity/slur) tokens, no capitalized person names. The lemma itself is
- * exempt from the denylist (isDeniedGlossToken skips it).
+ * (profanity/slur) tokens, no capitalized person names, and no Tatoeba stock
+ * persona names at any position (#247 reopen). The lemma itself is exempt from
+ * both the denylist (isDeniedGlossToken skips it) and the stock-name guard, so
+ * a lemma that equals a stock name (e.g. JACK) can still get an example.
  */
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
   const DENY = loadDenylist()
   const NAMES = loadNameList()
+  const STOCK = loadStockNameList()
+  const lemmaKey = nfcUpper(word)
   const re = /[\p{L}\p{M}]+/gu
   let m: RegExpExecArray | null
   let first = true
   while ((m = re.exec(sentence)) !== null) {
     const tok = m[0]!
     if (isDeniedGlossToken(tok, lang, word, DENY)) return false
+    // Stock Tatoeba names are rejected at any position, including sentence-initial
+    // (they nearly always start the sentence); the lemma itself is exempt.
+    if (/^\p{Lu}/u.test(tok) && nfcUpper(tok) !== lemmaKey && onStockNameList(tok, STOCK)) {
+      return false
+    }
     // A name-list token is a person name only when capitalized mid-sentence;
     // the first word is capitalized by sentence case alone.
     if (!first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
@@ -176,29 +191,53 @@ export function parseGateVerdict(content: string): GateVerdict | null {
   return m[1]!.toUpperCase() === 'PASS' ? 'pass' : 'reject'
 }
 
+export const CONTENT_RULE =
+  'It must suit a general-audience learning app: no death, killing, crime or prison, ' +
+  'violence or threats, sex or affairs, drugs, self-harm, or illness used for shock.'
+
 const GATE_SYSTEM =
-  'You judge whether a sentence fits a CEFR level for language learners. ' +
+  'You judge whether a sentence fits a CEFR level and sense for language learners, ' +
+  'and whether it suits a general-audience app. ' +
   'Answer exactly "PASS" or "FAIL" followed by a one-line reason.'
 
-function gatePrompt(lang: PackLang, cefr: PackCefr, sentence: string): string {
-  return [
+export function gatePrompt(
+  lang: PackLang,
+  cefr: PackCefr,
+  sentence: string,
+  word: string,
+  gloss?: string,
+): string {
+  const lines = [
     `Language: ${LANG_NAMES[lang]} (${lang}). CEFR level: ${cefr.toUpperCase()}.`,
+    `Word: "${word}"${gloss ? ` — meaning: "${gloss}"` : ''}.`,
     `Sentence: "${sentence}"`,
-    `Is every word and structure in this sentence within CEFR ${cefr.toUpperCase()} for learners of ${LANG_NAMES[lang]}?`,
-  ].join('\n')
+    `PASS only if all of these hold:`,
+    `1. Every word and structure is within CEFR ${cefr.toUpperCase()} for learners of ${LANG_NAMES[lang]}.`,
+  ]
+  if (gloss) {
+    lines.push(`2. The sentence uses "${word}" in the meaning given by the gloss above.`)
+  }
+  lines.push(`3. ${CONTENT_RULE}`)
+  return lines.join('\n')
 }
 
 const GEN_SYSTEM =
   'You write one short example sentence for a language-learning app. ' +
   'Output only the sentence, nothing else.'
 
-function generatePrompt(lang: PackLang, cefr: PackCefr, word: string): string {
-  return [
+export function generatePrompt(
+  lang: PackLang,
+  cefr: PackCefr,
+  word: string,
+  gloss?: string,
+): string {
+  const lines = [
     `Language: ${LANG_NAMES[lang]} (${lang}). CEFR level: ${cefr.toUpperCase()}.`,
-    `Word: "${word}"`,
-    `Write one original sentence in ${LANG_NAMES[lang]} at CEFR ${cefr.toUpperCase()} level that uses "${word}" as a whole word.`,
-    `At most 140 characters. No real person names. No translation. Output only the sentence.`,
-  ].join('\n')
+    `Word: "${word}"${gloss ? ` — meaning: "${gloss}"` : ''}.`,
+    `Write one original sentence in ${LANG_NAMES[lang]} at CEFR ${cefr.toUpperCase()} level that uses "${word}" as a whole word in the meaning given above.`,
+    `At most 140 characters. No real person names. ${CONTENT_RULE} No translation. Output only the sentence.`,
+  ]
+  return lines.join('\n')
 }
 
 async function generateAndGate(
@@ -206,16 +245,17 @@ async function generateAndGate(
   lang: PackLang,
   cefr: PackCefr,
   word: string,
+  gloss: string | undefined,
   apiKey: string,
   log: ExampleGateLog,
   at: string,
 ): Promise<ExampleGateEntry | null> {
   for (let i = 0; i < GENERATE_TRIES; i++) {
-    const out = await xaiChat(apiKey, GEN_SYSTEM, generatePrompt(lang, cefr, word), 0.7)
+    const out = await xaiChat(apiKey, GEN_SYSTEM, generatePrompt(lang, cefr, word, gloss), 0.7)
     const s = cleanSentence(out)
     if (!s || !sentenceAllowed(s, lang, word)) continue
     const verdict = parseGateVerdict(
-      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s), 0),
+      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, word, gloss), 0),
     )
     const entry: ExampleGateEntry = {
       sentence: s,
@@ -223,6 +263,7 @@ async function generateAndGate(
       verdict: verdict === 'pass' ? 'pass' : 'reject',
       level: cefr,
       at,
+      gate: GATE_VERSION,
     }
     log[gateKey(rel, word)] = entry
     if (entry.verdict === 'pass') return entry
@@ -355,7 +396,7 @@ async function gateLemma(
 ): Promise<'tatoeba' | 'xai' | null> {
   for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
     const verdict = parseGateVerdict(
-      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s), 0),
+      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, lemma.word, lemma.gloss), 0),
     )
     log[gateKey(rel, lemma.word)] = {
       sentence: s,
@@ -363,13 +404,14 @@ async function gateLemma(
       verdict: verdict === 'pass' ? 'pass' : 'reject',
       level: cefr,
       at,
+      gate: GATE_VERSION,
     }
     if (verdict === 'pass') {
       lemma.example = s
       return 'tatoeba'
     }
   }
-  const entry = await generateAndGate(rel, lang, cefr, lemma.word, apiKey, log, at)
+  const entry = await generateAndGate(rel, lang, cefr, lemma.word, lemma.gloss, apiKey, log, at)
   if (entry && entry.verdict === 'pass') {
     lemma.example = entry.sentence
     return 'xai'
@@ -441,7 +483,9 @@ async function main() {
       for (const lemma of pack.lemmas) {
         const key = gateKey(rel, lemma.word)
         const cached = log[key]
-        if (cached && cached.verdict === 'pass' && !cli.force) {
+        // Gate version 2 (#247 reopen): entries with no version or version 1 are
+        // stale — every existing verdict must re-run once under the stricter gate.
+        if (cached && cached.verdict === 'pass' && cached.gate === GATE_VERSION && !cli.force) {
           if (cached.sentence !== lemma.example) lemma.example = cached.sentence
           if (cached.source === 'tatoeba') tatoebaCount++
           else if (cached.source === 'xai' || cached.source === 'mistral') generatedCount++
