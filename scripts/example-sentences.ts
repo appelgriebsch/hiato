@@ -13,7 +13,7 @@
  * Run in CI via .github/workflows/example-sentences.yml (MISTRAL_API_KEY secret);
  * committed artifacts are public/packs + scripts/data/example-gate.json.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { EXAMPLE_SENTENCE_MAX, type PackCefr, type PackLang, type WordPack } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
@@ -52,6 +52,8 @@ const LANG_NAMES: Record<PackLang, string> = {
 const BUCKET_CAP = 400
 const GATE_TRIES = 8
 const GENERATE_TRIES = 3
+/** Concurrent Mistral gate/generate pipelines across lemmas of one pack level. */
+const MISTRAL_CONCURRENCY = 4
 /** Shortest sentence we accept; shorter reads as telegraphic, not a sentence. */
 const SENTENCE_MIN = 10
 
@@ -236,10 +238,21 @@ export async function fetchTatoebaTsv(lang: PackLang, dir = TATOEBA_DIR): Promis
   const tsv = path.join(dir, `${iso}_sentences.tsv`)
   if (!existsSync(tsv)) {
     if (!existsSync(bz2)) {
-      console.log(`downloading ${tatoebaUrl(lang)}`)
-      const res = await fetch(tatoebaUrl(lang))
-      if (!res.ok || !res.body) throw new Error(`Tatoeba ${lang} dump ${res.status}`)
-      writeFileSync(bz2, Buffer.from(await res.arrayBuffer()))
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        console.log(`downloading ${tatoebaUrl(lang)} (attempt ${attempt}/3)`)
+        try {
+          const res = await fetch(tatoebaUrl(lang), {
+            signal: AbortSignal.timeout(30 * 60_000),
+          })
+          if (!res.ok || !res.body) throw new Error(`Tatoeba ${lang} dump ${res.status}`)
+          await Bun.write(bz2, await res.arrayBuffer())
+          break
+        } catch (err) {
+          rmSync(bz2, { force: true })
+          if (attempt === 3) throw err
+          console.warn(`  download attempt ${attempt} failed, retrying`)
+        }
+      }
     }
     const proc = Bun.spawnSync(['bzip2', '-dc', bz2], { stdout: 'pipe' })
     if (proc.exitCode !== 0) throw new Error(`bzip2 failed for ${bz2}`)
@@ -301,6 +314,59 @@ function parseCli(argv: string[]): Cli {
 const TATOEBA_ATTRIBUTION =
   'Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR.'
 
+async function mapPool<T, R>(
+  items: readonly T[],
+  size: number,
+  fn: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const out: R[] = new Array(items.length)
+  let next = 0
+  await Promise.all(
+    Array.from({ length: Math.min(size, items.length) }, async () => {
+      while (next < items.length) {
+        const i = next++
+        out[i] = await fn(items[i]!)
+      }
+    }),
+  )
+  return out
+}
+
+/** Tatoeba-first pipeline with Mistral fallback and CEFR gate; resolves the shipped source. */
+async function gateLemma(
+  rel: string,
+  lang: PackLang,
+  cefr: PackCefr,
+  lemma: WordPack['lemmas'][number],
+  index: Map<string, string[]>,
+  apiKey: string,
+  log: ExampleGateLog,
+  at: string,
+): Promise<'tatoeba' | 'mistral' | null> {
+  for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
+    const verdict = parseGateVerdict(
+      await mistralChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s), 0),
+    )
+    log[gateKey(rel, lemma.word)] = {
+      sentence: s,
+      source: 'tatoeba',
+      verdict: verdict === 'pass' ? 'pass' : 'reject',
+      level: cefr,
+      at,
+    }
+    if (verdict === 'pass') {
+      lemma.example = s
+      return 'tatoeba'
+    }
+  }
+  const entry = await generateAndGate(rel, lang, cefr, lemma.word, apiKey, log, at)
+  if (entry && entry.verdict === 'pass') {
+    lemma.example = entry.sentence
+    return 'mistral'
+  }
+  return null
+}
+
 async function main() {
   const cli = parseCli(process.argv.slice(2))
   const apiKey = readMistralKey()
@@ -347,6 +413,7 @@ async function main() {
       let skipped = 0
       const before = readFileSync(file, 'utf8').length
 
+      const pending: WordPack['lemmas'] = []
       for (const lemma of pack.lemmas) {
         const key = gateKey(rel, lemma.word)
         const cached = log[key]
@@ -366,33 +433,17 @@ async function main() {
           }
           continue
         }
-        // Full pipeline: Tatoeba first, Mistral fallback, CEFR gate on each.
-        let entry: ExampleGateEntry | null = null
-        for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
-          const verdict = parseGateVerdict(
-            await mistralChat(apiKey!, GATE_SYSTEM, gatePrompt(lang, cefr, s), 0),
-          )
-          log[gateKey(rel, lemma.word)] = {
-            sentence: s,
-            source: 'tatoeba',
-            verdict: verdict === 'pass' ? 'pass' : 'reject',
-            level: cefr,
-            at,
-          }
-          if (verdict === 'pass') {
-            entry = log[gateKey(rel, lemma.word)]!
-            break
-          }
-        }
-        if (!entry && apiKey) {
-          entry = await generateAndGate(rel, lang, cefr, lemma.word, apiKey, log, at)
-        }
-        if (entry && entry.verdict === 'pass') {
-          lemma.example = entry.sentence
-          if (entry.source === 'tatoeba') tatoebaCount++
-          else generatedCount++
-        } else {
-          skipped++
+        pending.push(lemma)
+      }
+
+      if (pending.length) {
+        const sources = await mapPool(pending, MISTRAL_CONCURRENCY, (lemma) =>
+          gateLemma(rel, lang, cefr, lemma, index!, apiKey!, log, at),
+        )
+        for (const source of sources) {
+          if (source === 'tatoeba') tatoebaCount++
+          else if (source === 'mistral') generatedCount++
+          else skipped++
         }
       }
 
