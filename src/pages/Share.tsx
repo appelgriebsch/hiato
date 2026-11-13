@@ -148,6 +148,7 @@ export function Share() {
           ) : null}
           <Button
             fullWidth
+            variant={invite ? 'secondary' : undefined}
             disabled={busy}
             onClick={() => run(() => shareResult(payload))}
           >

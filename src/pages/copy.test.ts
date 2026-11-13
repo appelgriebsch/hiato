@@ -1276,6 +1276,8 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     expect(src).toContain('disabled={busy || preparing}')
     expect(src).toContain('aria-busy={preparing}')
     expect(src).toContain('onClick={() => void onPlayDaily()}')
+    // One primary action: Share drops to secondary only while the CTA shows.
+    expect(src).toContain("variant={invite ? 'secondary' : undefined}")
   })
 
   test('tap runs acceptDailyInvite; success navigates, failure shows role=alert and stays', async () => {
