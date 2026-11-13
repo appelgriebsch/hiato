@@ -4,20 +4,19 @@
  *
  * Source 1: Tatoeba per-language sentence dump (CC-BY 2.0 FR) — one sentence per
  * lemma: whole-Unicode-word match, shortest/cleanest, denylist + person-name
- * guards. Source 2 (fallback): original Hiato sentence, generated and
- * level-checked with xAI (grok-4.7, reasoning_effort medium, via XAI_API_KEY
- * or ~/.grok/auth.json; XAI_MODEL and XAI_REASONING_EFFORT override). Tatoeba
- * is optional (--no-tatoeba, or when the dump download fails): the pipeline
- * then ships generated-only examples. Every candidate passes an xAI
+ * guards. Source 2 (fallback): original Mistral-generated sentence
+ * (mistral-small-latest via MISTRAL_API_KEY, MISTRAL_MODEL to override). Tatoeba is optional (--no-tatoeba, or
+ * when the dump download fails): the pipeline then ships Mistral-only examples.
+ * Every candidate passes a Mistral
  * CEFR gate against the pack level; failures are rejected, not patched.
  * Verdicts cached in scripts/data/example-gate.json; packs:check enforces it.
  * The gate log and pin are persisted after every lemma and pack level, so a
  * re-run resumes where a previous run stopped and skips levels that are
  * already complete (no cached-pass misses, no --force) without writing again.
  *
- * --dry-run selects Tatoeba sentences without xAI calls or writes.
- * Run locally with XAI_API_KEY (or ~/.grok/auth.json).
- * Committed artifacts are public/packs + scripts/data/example-gate.json.
+ * --dry-run selects Tatoeba sentences without Mistral calls or writes.
+ * Run in CI via .github/workflows/example-sentences.yml (MISTRAL_API_KEY secret);
+ * committed artifacts are public/packs + scripts/data/example-gate.json.
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -27,10 +26,8 @@ import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemm
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { stockNameInText } from './tatoeba-stock-names'
-import { readXaiKey, xaiChat } from './xai-chat'
+import { mistralChat, readMistralKey } from './mistral-chat'
 import { packPinEntry } from './pack-pin'
-
-export { GATE_VERSION, isCurrentPass }
 
 const ROOT = path.join(import.meta.dir, '..')
 const PACKS = path.join(ROOT, 'public', 'packs')
@@ -62,12 +59,12 @@ const LANG_NAMES: Record<PackLang, string> = {
 const BUCKET_CAP = 400
 const GATE_TRIES = 8
 const GENERATE_TRIES = 3
-/** Concurrent gate/generate pipelines across lemmas of one pack level. */
-const CONCURRENCY = 4
+/** Concurrent Mistral gate/generate pipelines across lemmas of one pack level. */
+const MISTRAL_CONCURRENCY = 4
 /** Shortest sentence we accept; shorter reads as telegraphic, not a sentence. */
 const SENTENCE_MIN = 10
 
-export type GateSource = 'tatoeba' | 'xai' | 'mistral' | 'fixture'
+export type GateSource = 'tatoeba' | 'mistral' | 'fixture'
 export type GateVerdict = 'pass' | 'reject'
 
 export type ExampleGateEntry = {
@@ -179,7 +176,7 @@ export function pickTatoebaCandidate(
   return tatoebaCandidates(index, lang, word)[0] ?? null
 }
 
-/** Parse the CEFR gate answer, keeping the one-line reason after PASS/FAIL. */
+/** Parse the Mistral CEFR gate answer, keeping the one-line reason after PASS/FAIL. */
 export function parseGateVerdict(content: string): { verdict: GateVerdict; reason: string } | null {
   const m = /^\s*(PASS|FAIL)\b\s*[:—–-]?\s*(.*)$/is.exec(content)
   if (!m) return null
@@ -293,13 +290,13 @@ async function generateAndGate(
   shipped?: string,
 ): Promise<ExampleGateEntry | null> {
   for (let i = 0; i < GENERATE_TRIES; i++) {
-    const out = await xaiChat(apiKey, GEN_SYSTEM, generatePrompt(lang, cefr, word, gloss), 0.7)
+    const out = await mistralChat(apiKey, GEN_SYSTEM, generatePrompt(lang, cefr, word, gloss), 0.7)
     const s = cleanSentence(out)
     if (!s || !sentenceAllowed(s, lang, word)) continue
     const parsed = parseGateVerdict(
-      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, word, gloss), 0),
+      await mistralChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, word, gloss), 0),
     )
-    const entry = gateEntry(s, 'xai', parsed, cefr, at)
+    const entry = gateEntry(s, 'mistral', parsed, cefr, at)
     recordGateEntry(log, rel, word, entry, shipped)
     if (entry.verdict === 'pass') return entry
   }
@@ -435,7 +432,7 @@ async function mapPool<T, R>(
   return out
 }
 
-/** Tatoeba-first pipeline with an xAI fallback and CEFR gate; resolves the shipped source. */
+/** Tatoeba-first pipeline with Mistral fallback and CEFR gate; resolves the shipped source. */
 async function gateLemma(
   rel: string,
   lang: PackLang,
@@ -449,7 +446,7 @@ async function gateLemma(
   const shipped = lemma.example
   for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
     const parsed = parseGateVerdict(
-      await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, lemma.word, lemma.gloss), 0),
+      await mistralChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, lemma.word, lemma.gloss), 0),
     )
     const entry = gateEntry(s, 'tatoeba', parsed, cefr, at)
     recordGateEntry(log, rel, lemma.word, entry, shipped)
@@ -479,9 +476,9 @@ async function gateLemma(
 
 async function main() {
   const cli = parseCli(process.argv.slice(2))
-  const apiKey = readXaiKey()
+  const apiKey = readMistralKey()
   if (!cli.dryRun && !apiKey) {
-    console.error('set XAI_API_KEY (or ~/.grok/auth.json)')
+    console.error('set MISTRAL_API_KEY (required unless --dry-run)')
     process.exit(1)
   }
   const at = new Date().toISOString().slice(0, 10)
@@ -503,7 +500,7 @@ async function main() {
         process.exit(1)
       }
       const pack = JSON.parse(readFileSync(file, 'utf8')) as WordPack
-      // Tatoeba selection runs even in --dry-run (no xAI, no writes);
+      // Tatoeba selection runs even in --dry-run (no Mistral, no writes);
       // --sentences-file points at an already-downloaded TSV instead.
       if (!index) {
         let tsv = cli.sentencesFile
@@ -512,7 +509,7 @@ async function main() {
             tsv = await fetchTatoebaTsv(lang)
           } catch (err) {
             console.warn(
-              `Tatoeba dump for ${lang} unavailable (${(err as Error).message}); continuing with generated-only examples`,
+              `Tatoeba dump for ${lang} unavailable (${(err as Error).message}); continuing with Mistral-only examples`,
             )
           }
         }
@@ -546,7 +543,7 @@ async function main() {
         if (isCurrentPass(cached) && !cli.force) {
           if (cached.sentence !== lemma.example) lemma.example = cached.sentence
           if (cached.source === 'tatoeba') tatoebaCount++
-          else if (cached.source === 'xai' || cached.source === 'mistral') generatedCount++
+          else if (cached.source === 'mistral') generatedCount++
           continue
         }
         if (cli.dryRun) {
@@ -563,21 +560,21 @@ async function main() {
       }
 
       if (pending.length) {
-        const sources = await mapPool(pending, CONCURRENCY, async (lemma) => {
+        const sources = await mapPool(pending, MISTRAL_CONCURRENCY, async (lemma) => {
           const source = await gateLemma(rel, lang, cefr, lemma, index!, apiKey!, log, at)
           persist()
           return source
         })
         for (const source of sources) {
           if (source === 'tatoeba') tatoebaCount++
-          else if (source === 'xai') generatedCount++
+          else if (source === 'mistral') generatedCount++
           else skipped++
         }
       }
 
       if (cli.dryRun) {
         console.log(
-          `${rel} dry-run: ${tatoebaCount} tatoeba candidates, ${skipped} without a qualifying Tatoeba sentence (would need an xAI fallback)`,
+          `${rel} dry-run: ${tatoebaCount} tatoeba candidates, ${skipped} without a qualifying Tatoeba sentence (would need Mistral fallback)`,
         )
         continue
       }

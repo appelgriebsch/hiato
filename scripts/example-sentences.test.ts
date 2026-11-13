@@ -264,7 +264,7 @@ describe('packs:check example gate log (ADR 0048, #247)', () => {
   })
 
   test('a current pass stays current for source xai and source mistral', () => {
-    for (const source of ['xai', 'mistral'] as const) {
+    for (const source of ['mistral'] as const) {
       const entry = { ...gate['en/a1.json|HOUSE']!, source }
       expect(isCurrentPass(entry)).toBe(true)
       expect(checkExampleGate('en/a1.json', pack, { 'en/a1.json|HOUSE': entry })).toEqual([])

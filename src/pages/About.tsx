@@ -151,7 +151,8 @@ export function About() {
             (CC-BY 2.0 FR).
           </li>
           <li>
-            Sentences without a Tatoeba match are original Hiato sentences, generated and level-checked with xAI — no external credit required. Older entries were made with Mistral AI.
+            Sentences without a Tatoeba match are original Hiato copy generated
+            with Mistral AI — no external credit required.
           </li>
         </ul>
       </Card>
@@ -198,7 +199,15 @@ export function About() {
         download on demand (ADR 0006).
       </p>
       <p className="mb-6 text-center text-[12px] leading-relaxed text-ink-muted">
-        Built by Grok Bot ·{' '}
+        <img
+          src="/brand/mistral-mark.svg"
+          alt=""
+          width={12}
+          height={12}
+          className="mr-1 inline-block h-3 w-3 select-none align-[-2px]"
+          draggable={false}
+        />
+        Built by Mistral AI ·{' '}
         <span className="font-mono">{__HIATO_BUILD_SHA__}</span>
       </p>
     </Layout>

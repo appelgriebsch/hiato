@@ -49,8 +49,8 @@ Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octa
 
 ## Example-sentence gate log (#225 / ADR 0048, #247)
 
-Committed output of `scripts/example-sentences.ts` (run locally with `XAI_API_KEY` or `~/.grok/auth.json`). `packs:check` **reads** `example-gate.json` and fails any shipped `example` without a matching `pass` verdict. Tatoeba dumps fetched on demand live under the gitignored `tatoeba/` directory (CC-BY 2.0 FR — never committed).
+Committed output of `scripts/example-sentences.ts` (run via the `Example sentences` workflow_dispatch with the `MISTRAL_API_KEY` secret). `packs:check` **reads** `example-gate.json` and fails any shipped `example` without a matching `pass` verdict. Tatoeba dumps fetched on demand live under the gitignored `tatoeba/` directory (CC-BY 2.0 FR — never committed).
 
 | File | Contents | Provenance |
 |------|----------|------------|
-| `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `xai` / hand-written `fixture`; earlier generated rows keep the source recorded at the time), CEFR verdict, level, date, gate version; rejects also store `reason`. A `pack\|WORD\|reject` key keeps a shipped sentence's reject when a later candidate replaces the lemma key | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Hiato sentences, generated and level-checked with xAI |
+| `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `mistral` / hand-written `fixture`), CEFR verdict, level, date | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Mistral-generated Hiato copy, each gated by a Mistral CEFR check |

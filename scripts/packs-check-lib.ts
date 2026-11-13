@@ -142,7 +142,7 @@ export function checkLemmaFloor(rel: string, pack: WordPack): string | null {
 /** One CEFR-gate verdict per shipped example (ADR 0048; written by scripts/example-sentences.ts). */
 export type ExampleGateEntry = {
   sentence: string
-  source: 'tatoeba' | 'xai' | 'mistral' | 'fixture'
+  source: 'tatoeba' | 'mistral' | 'fixture'
   verdict: 'pass' | 'reject'
   level: string
   at: string
