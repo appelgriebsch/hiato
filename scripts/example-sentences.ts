@@ -185,7 +185,7 @@ export function parseGateVerdict(content: string): { verdict: GateVerdict; reaso
   if (!m) return null
   return {
     verdict: m[1]!.toUpperCase() === 'PASS' ? 'pass' : 'reject',
-    reason: m[2]!.trim(),
+    reason: m[2]!.split(/\r?\n/, 1)[0]!.trim(),
   }
 }
 
@@ -399,6 +399,23 @@ function parseCli(argv: string[]): Cli {
 
 const TATOEBA_ATTRIBUTION =
   'Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR.'
+const TATOEBA_LICENSE = '; example sentences from Tatoeba, CC-BY 2.0 FR'
+
+/** CC-BY credit for packs that still ship a Tatoeba sentence; drop it when none do. */
+export function applyTatoebaCredit(
+  pack: { attribution: string[]; license: string },
+  tatoebaCount: number,
+): void {
+  if (tatoebaCount > 0) {
+    if (!pack.attribution.includes(TATOEBA_ATTRIBUTION)) pack.attribution.push(TATOEBA_ATTRIBUTION)
+    if (!pack.license.includes(TATOEBA_LICENSE)) pack.license += TATOEBA_LICENSE
+    return
+  }
+  pack.attribution = pack.attribution.filter((line) => line !== TATOEBA_ATTRIBUTION)
+  if (pack.license.endsWith(TATOEBA_LICENSE)) {
+    pack.license = pack.license.slice(0, -TATOEBA_LICENSE.length)
+  }
+}
 
 async function mapPool<T, R>(
   items: readonly T[],
@@ -565,15 +582,7 @@ async function main() {
         continue
       }
 
-      // Credit Tatoeba wherever a Tatoeba sentence ships (ADR 0048).
-      if (tatoebaCount > 0) {
-        if (!pack.attribution.includes(TATOEBA_ATTRIBUTION)) {
-          pack.attribution.push(TATOEBA_ATTRIBUTION)
-        }
-        if (!/tatoeba/i.test(pack.license)) {
-          pack.license = `${pack.license}; example sentences from Tatoeba, CC-BY 2.0 FR`
-        }
-      }
+      applyTatoebaCredit(pack, tatoebaCount)
       let out = JSON.stringify(pack, null, 2) + '\n'
       if (out === original) {
         console.log(`${rel}: pack already up to date, no changes (${skipped} skipped)`)

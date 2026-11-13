@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  applyTatoebaCredit,
   buildSentenceIndex,
   cleanSentence,
   CONTENT_RULE,
@@ -111,6 +112,10 @@ describe('example-sentences CEFR gate parsing (#247)', () => {
       verdict: 'reject',
       reason: 'uses B2 structure',
     })
+    expect(parseGateVerdict('FAIL: death\n\nThe sentence describes a death.')).toEqual({
+      verdict: 'reject',
+      reason: 'death',
+    })
     expect(parseGateVerdict('maybe?')).toBeNull()
   })
 
@@ -173,6 +178,34 @@ describe('example-sentences CEFR gate parsing (#247)', () => {
       at: '2026-11-12',
       gate: GATE_VERSION,
     })
+  })
+})
+
+describe('Tatoeba credit (#247)', () => {
+  test('stays with one sentence and goes at zero', () => {
+    const credit =
+      'Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR.'
+    const suffix = '; example sentences from Tatoeba, CC-BY 2.0 FR'
+    const kept = {
+      attribution: ['Hiato pack', credit],
+      license: `CC-BY-SA-4.0${suffix}`,
+    }
+    applyTatoebaCredit(kept, 1)
+    expect(kept.attribution).toEqual(['Hiato pack', credit])
+    expect(kept.license).toBe(`CC-BY-SA-4.0${suffix}`)
+
+    const gone = {
+      attribution: ['Hiato pack', credit],
+      license: `CC-BY-SA-4.0${suffix}`,
+    }
+    applyTatoebaCredit(gone, 0)
+    expect(gone.attribution).toEqual(['Hiato pack'])
+    expect(gone.license).toBe('CC-BY-SA-4.0')
+
+    const added = { attribution: ['Hiato pack'], license: 'CC-BY-SA-4.0' }
+    applyTatoebaCredit(added, 2)
+    expect(added.attribution).toEqual(['Hiato pack', credit])
+    expect(added.license).toBe(`CC-BY-SA-4.0${suffix}`)
   })
 })
 
