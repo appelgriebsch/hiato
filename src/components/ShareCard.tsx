@@ -55,7 +55,7 @@ export function ShareCard(payload: ShareCardPayload) {
         <div className="inline-flex items-center gap-2 rounded-full bg-raised px-4 py-2 text-sm font-medium text-ink shadow-sm">
           {shareCardOutcome(payload)} · {letterCountLabel(payload.wordLength)}
         </div>
-        <p className="mt-3 text-xs text-ink-faint">
+        <p className="mt-3 text-xs text-ink-muted">
           Answer hidden — come play yours
         </p>
       </div>

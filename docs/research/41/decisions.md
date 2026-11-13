@@ -53,7 +53,7 @@ Source: brainstorm grilling for OS-dependent light/dark appearance.
 
 ## Dark hex (warm inverse)
 
-From the UI consult. Light values stay as in `src/index.css` `@theme`, except `--color-accent-mid`, which is `#4c7f64` so white primary-hover labels clear 4.5:1.
+From the UI consult. Light values stay as in `src/index.css` `@theme`, except `--color-accent-mid`, which is `#4c7f64` so white primary-hover labels clear 4.5:1, and `--color-ink-faint`, which is `#737067` so caption text clears 4.5:1 on cream and raised.
 
 | Role | Token | Dark |
 | --- | --- | --- |
@@ -73,4 +73,4 @@ From the UI consult. Light values stay as in `src/index.css` `@theme`, except `-
 | danger-soft | `--color-danger-soft` | `#3a2a28` |
 | wrong | `--color-wrong` | `#5a564e` |
 
-Contrast must meet WCAG 2.2 AA: text 4.5:1, UI 3:1. `ink-faint` as caption is classified in tests (do not silently drop below 4.5:1 for body text).
+Contrast must meet WCAG 2.2 AA: text 4.5:1, UI 3:1. Light `ink-faint` (`#737067`) is caption text and meets 4.5:1 on cream and on raised. Dark `ink-faint` stays `#a8a49a`. Caption text on cream-dark or accent-soft uses `ink-muted` and keeps that background. Do not drop body text below 4.5:1. Captions stay lighter than body text.
