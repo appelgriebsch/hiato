@@ -111,7 +111,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Leid\" in \"tut mir leid\" means \"sorry,\" not \"a man has a problem.\""
+    "reason": "The sentence does not use \"leid\" in the meaning \"ein Mann hat ein Problem\" (a man has a problem)."
   },
   "de/a1.json|KIND": {
     "sentence": "Kind, greife nicht nach den Sternen.",
@@ -120,7 +120,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses the imperative \"greife\" and the prepositional phrase \"nach den Sternen,\" which are beyond CEFR A1 level."
+    "reason": "The sentence uses the imperative \"greife\" and the plural \"Sternen,\" which are beyond A1 level."
   },
   "de/a1.json|VATER": {
     "sentence": "Wo ist Vater?",
@@ -425,7 +425,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"Datei\" (file) and the technical term \".art\" (file extension) are beyond CEFR A1."
+    "reason": "The word \"Endung\" (file extension) is not A1 level."
   },
   "de/a1.json|MAMA": {
     "sentence": "Mama weinte.",
@@ -508,13 +508,13 @@
     "gate": 2
   },
   "de/a1.json|JACK": {
-    "sentence": "Jack ist anscheinend krank.",
+    "sentence": "Alle lachten Jack aus.",
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"JACK\" in a different meaning (\"Jack ist anscheinend krank\" translates to \"Jack seems to be sick\") and does not refer to the clothing item."
+    "reason": "The sentence uses \"Jack\" as a proper name, not in the meaning \"Kurzes Kleidungsstück für draußen.\""
   },
   "de/a1.json|NUMMER": {
     "sentence": "Falsche Nummer!",
@@ -763,7 +763,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes \"griff an\" (attacked) and \"Festungen\" (fortresses), which are beyond A1 level and involve historical military conflict, violating the content guidelines."
+    "reason": "The sentence includes \"griff an\" (attacked), which implies violence, making it unsuitable for a general-audience app."
   },
   "de/a1.json|MUND": {
     "sentence": "Öffne den Mund!",
@@ -870,13 +870,13 @@
     "gate": 2
   },
   "de/a1.json|ZIEH": {
-    "sentence": "Zieh das Hemd an, es ist kalt.",
+    "sentence": "Zieh das Hemd an!",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"Zieh\" in the context of putting on clothes, which is a valid A1 usage, but the gloss provided (\"Der Mann nimmt das Buch mit der Hand\") does not match the meaning of \"Zieh\" in the sentence."
+    "reason": "The sentence uses \"Zieh\" in the imperative form for \"put on\" (clothing), which does not match the given gloss \"take with the hand.\""
   },
   "de/a1.json|GEIST": {
     "sentence": "Bist du ein Geist?",
@@ -1044,7 +1044,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains \"schwarzrotes\" (compound adjective) and \"Friedenstaube\" (compound noun), which are beyond A1 level, and \"Lady\" is not used as a polite address in German."
+    "reason": "The sentence contains \"schwarzrotes\" (compound adjective) and \"Brosche\" (less common noun), which exceed A1 vocabulary, and \"Friedenstaube\" (peace dove) is too advanced for A1."
   },
   "de/a1.json|VORSICHT": {
     "sentence": "Vorsicht, Stufe!",
@@ -1246,13 +1246,13 @@
     "gate": 2
   },
   "de/a1.json|SCHICKSAL": {
-    "sentence": "Manchmal ist das Schicksal einfach so.",
+    "sentence": "Das Schicksal sagt, es kommt so.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Schicksal\" (fate/destiny) is not typically introduced at A1, and the gloss \"es kommt so\" is oversimplified for learners."
+    "reason": "\"Das Schicksal sagt\" (fate says) is beyond A1; \"es kommt so\" is colloquial and not a standard A1 structure."
   },
   "de/a1.json|FLASCHE": {
     "sentence": "Öffne die Flasche.",
@@ -1349,7 +1349,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses colloquial language (\"hau mich aufs Ohr\" = \"I'm going to bed\") and the verb \"hau\" in a figurative sense, which is not appropriate for A1 learners."
+    "reason": "The sentence uses colloquial language (\"hau\", \"aufs Ohr\") and idiomatic expression (\"sich aufs Ohr hauen\") that are beyond CEFR A1 level."
   },
   "de/a1.json|KÖNIGIN": {
     "sentence": "Die Königin hat ein großes Haus mit vielen Leuten.",
@@ -1368,13 +1368,12 @@
     "gate": 2
   },
   "de/a1.json|MARK": {
-    "sentence": "Mark wusste nicht, was er machen soll.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Ich habe eine alte Mark in meinem Portemonnaie gefunden.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The word \"Mark\" is used in the sentence as a name, not in the meaning of the old German currency."
+    "gate": 2
   },
   "de/a1.json|BORD": {
     "sentence": "Das Bild hängt am oberen Bord des Regals.",
@@ -1519,7 +1518,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains archaic/poetic vocabulary (\"Feuer\", \"Weib\") and a culturally loaded proverb that is inappropriate for A1 learners and general-audience apps."
+    "reason": "The sentence contains archaic/poetic vocabulary (\"Feuer\", \"Weib\") and a culturally loaded proverb that is inappropriate for a general-audience learning app."
   },
   "de/a1.json|FARBE": {
     "sentence": "Ich brauche Farbe.",
@@ -1608,7 +1607,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence is too complex for A1 learners (e.g., \"Dissertation,\" \"Computersimulation,\" \"genetische Aspekte,\" \"Entstehung des Lebens\")."
+    "reason": "Sentence contains complex vocabulary (\"Dissertation\", \"Computersimulation\", \"genetische Aspekte\", \"Entstehung des Lebens\") and structures beyond A1 level."
   },
   "de/a1.json|OMA": {
     "sentence": "Oma lässt grüßen.",
@@ -1801,7 +1800,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "Sentence uses complex structures (\"ist ein Vorwand\", \"sein eigenes Leben ein paar Stunden lang zu verlassen\") beyond A1 level and metaphorical meaning not matching the gloss."
+    "reason": "Sentence uses complex structures (\"Vorwand\", \"eigenes Leben verlassen\") beyond A1 and metaphorical meaning not matching the gloss."
   },
   "de/a1.json|GRÖßE": {
     "sentence": "Welche Größe hast du?",
@@ -2185,7 +2184,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"helfen\" in the meaning \"ein Mann gibt einem anderen Mann die Hand.\""
+    "reason": "The sentence does not match the given meaning of \"HELFEN\" (which is described as \"a man gives another man his hand\")."
   },
   "de/a1.json|KENNEN": {
     "sentence": "Wir kennen ihn.",
@@ -2210,7 +2209,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"halten\" in the sense of \"last\" or \"endure,\" not \"take in hand.\""
+    "reason": "The sentence does not use \"halten\" in the meaning \"ein Mensch nimmt ein Buch in die Hand\" (a person picks up a book)."
   },
   "de/a1.json|ZURÜCK": {
     "sentence": "Gib es zurück!",
@@ -2772,7 +2771,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"scheinen\" in the sense of \"seem\" rather than \"emit light,\" violating condition 2."
+    "reason": "The sentence uses \"scheinen\" in the sense of \"seem\" rather than \"emit light,\" which does not match the given gloss."
   },
   "de/a1.json|BESTIMMEN": {
     "sentence": "Was bestimmen Adverbien näher?",
@@ -2821,16 +2820,16 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"dran\" is not a standalone word in German at CEFR A1 level; it is a colloquial contraction of \"daran\" or \"darauf,\" which is beyond A1."
+    "reason": "The word \"dran\" is not a standalone A1 word; it is a colloquial contraction of \"daran\" (which itself is A2), and the sentence structure is too informal for a general-audience app."
   },
   "de/a1.json|LACHEN": {
-    "sentence": "Lachen ist gesund!",
-    "source": "tatoeba",
+    "sentence": "Wir lachen über den lustigen Film.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"LACHEN\" is not used in the meaning \"ein gutes Wort geben, wenn man gut findet\" (which translates to \"to praise\" or \"to give a good word when you like something\"). The sentence \"Lachen ist gesund!\" means \"Laughing is healthy!\" and uses \"lachen\" in its standard sense."
+    "reason": "The sentence does not use \"lachen\" in the meaning \"ein gutes Wort geben, wenn man gut findet\" (to give a good word when you like something), but rather in the sense of \"to laugh.\""
   },
   "de/a1.json|DARUM": {
     "sentence": "Ach, darum!",
@@ -2857,13 +2856,13 @@
     "gate": 2
   },
   "de/a1.json|UMBRINGEN": {
-    "sentence": "Ein böser Zauberer will einen kleinen Vogel umbringen.",
-    "source": "mistral",
+    "sentence": "Sie will mich umbringen.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes \"umbringen\" (to kill), which involves violence, violating the suitability condition for a general-audience app."
+    "reason": "The sentence implies a threat of violence, which violates the suitability criteria for a general-audience app."
   },
   "de/a1.json|KURZ": {
     "sentence": "Warte kurz!",
@@ -3161,7 +3160,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"Angst\" in the sense of \"fear,\" not in the given gloss meaning \"something a person dislikes and doesn't want.\""
+    "reason": "The sentence does not use \"ANGST\" in the meaning given by the gloss (\"eine Sache, die eine Person nicht mag und die sie nicht will\"). \"Angst vor Spinnen\" means \"fear of spiders,\" not simply disliking something."
   },
   "de/a2.json|IDEE": {
     "sentence": "Ich habe eine Idee.",
@@ -3178,7 +3177,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"DING\" is not used in the given meaning (\"Gegenstand oder Sache\"), and \"vertan\" is above A2 level."
+    "reason": "The word \"Ding\" is too informal and vague for A2 learners, and the sentence structure is overly complex for this level."
   },
   "de/a2.json|AHNUNG": {
     "sentence": "Er hat Null Ahnung.",
@@ -3683,7 +3682,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains advanced mathematical terminology and is far beyond CEFR A2 level."
+    "reason": "The sentence is far too complex for A2 learners and does not use \"van\" in the given meaning."
   },
   "de/a2.json|WUNSCH": {
     "sentence": "Das ist ihr Wunsch.",
@@ -3774,13 +3773,13 @@
     "gate": 2
   },
   "de/a2.json|RECHTER": {
-    "sentence": "Der Rechter spricht oft über traditionelle Werte und wenig Veränderungen in der Gesellschaft.",
-    "source": "mistral",
+    "sentence": "Ein spitzer Winkel ist kleiner als ein rechter Winkel.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Rechter\" in the given sense is too advanced for A2 learners; the sentence also lacks clarity for the target meaning."
+    "reason": "The sentence does not use \"RECHTER\" in the given meaning of \"Person mit sehr konservativen politischen Ansichten.\""
   },
   "de/a2.json|VERTRAG": {
     "sentence": "Vertrag ist Vertrag.",
@@ -3885,7 +3884,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"Ton\" in the sense of \"clay\" (Töpfern = pottery), not in the meaning \"ein Laut, den man hört\" (sound)."
+    "reason": "The sentence uses \"Ton\" in the sense of \"clay\" (material for pottery), not in the given meaning of \"a sound one hears.\""
   },
   "de/a2.json|OFFIZIER": {
     "sentence": "Ich bin ein Offizier.",
@@ -4000,13 +3999,13 @@
     "gate": 2
   },
   "de/a2.json|SCHICKE": {
-    "sentence": "Diese Tasche sieht sehr schicke aus.",
+    "sentence": "Das neue Kleid ist sehr schicke und passt perfekt zum Abend.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"schicke\" is incorrectly used here; it should be \"schick\" (adjective form) without the \"-e\" ending, and the sentence structure is not fully correct for A2 learners."
+    "reason": "The word \"schicke\" is incorrectly used as an adjective in nominative case without proper declension (\"schickes\" for neuter gender)."
   },
   "de/a2.json|HEXE": {
     "sentence": "Sie war eine Hexe.",
@@ -4079,7 +4078,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"Aberglauben\" (superstition), which is a B2-level word, and the metaphor is too abstract for A2 learners."
+    "reason": "The sentence uses \"verwandeln\" (transform) and \"Aberglauben\" (superstition), which are beyond A2 level, and the metaphorical meaning of \"Magie\" does not align with the given gloss."
   },
   "de/a2.json|PRIESTER": {
     "sentence": "Der Priester kam.",
@@ -5280,7 +5279,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"grad\" in the meaning of \"eine Einheit für Wärme oder Winkel\" (degree/angle unit)."
+    "reason": "The sentence does not use \"GRAD\" in the meaning \"eine Einheit für Wärme oder Winkel\" (degree/angle unit)."
   },
   "de/a2.json|WART": {
     "sentence": "Der kleine Junge rief: „Die WART kommt!“, als die Aufsichtsperson den Spielplatz betrat.",
@@ -5451,13 +5450,12 @@
     "gate": 2
   },
   "de/a2.json|ABSEHEN": {
-    "sentence": "Keiner hat absehen können, mit welch rasanter Geschwindigkeit, die Spitzen der Eisberge abschmelzen würden.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Ich will vom Sport absehen, weil ich müde bin.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "\"absehen\" is not used in the given meaning, and \"abschmelzen\" is beyond A2."
+    "gate": 2
   },
   "de/a2.json|DRINGEND": {
     "sentence": "Es war dringend.",
@@ -5642,7 +5640,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"abstoßen\" (to repel) rather than \"stoßen\" (to push/hit), and the context implies metaphorical rejection, not the literal meaning of \"kurz und hart berühren.\""
+    "reason": "The sentence uses \"abstoßen\" (to repel) rather than the given word \"stoßen\" (to bump/hit briefly and hard)."
   },
   "de/a2.json|MINDESTENS": {
     "sentence": "Er ist mindestens vierzig.",
@@ -5823,11 +5821,10 @@
   "de/a2.json|ÜBERGEBEN": {
     "sentence": "Die Fackel ist übergeben.",
     "source": "tatoeba",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence is grammatically incorrect for the intended meaning; \"Die Fackel ist übergeben\" is not a natural A2-level construction."
+    "gate": 2
   },
   "de/a2.json|BRAVO": {
     "sentence": "Wie sagt man „bravo“ auf deutsch?",
@@ -5868,7 +5865,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Kehren\" is not used in the meaning \"to clean\" in this sentence."
+    "reason": "The sentence does not use \"kehren\" in the meaning \"eine Person macht, dass ein Platz sauber ist.\""
   },
   "de/a2.json|BETREFFEN": {
     "sentence": "Uns betreffen diese Veränderungen nicht.",
@@ -6919,13 +6916,12 @@
     "gate": 2
   },
   "de/b1.json|FOLGE": {
-    "sentence": "Folge dem Auto.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Die Folge des Regens war ein wunderschöner Regenbogen am Himmel.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence uses the imperative form \"Folge,\" which is B1 level, but \"Folge\" in this context means \"follow\" (as in to go after), not \"what comes next.\""
+    "gate": 2
   },
   "de/b1.json|SZENE": {
     "sentence": "Die Szene wirkt gestellt.",
@@ -9496,13 +9492,13 @@
     "gate": 2
   },
   "de/b2.json|BIND": {
-    "sentence": "Kannst du bitte das Geschenk mit dem blauen Bind band verzieren?",
+    "sentence": "Sie benutzte ein buntes Band, um die Geschenke zu bind.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Band\" is masculine, so the correct article is \"dem blauen Band\", not \"dem blauen Bind\"."
+    "reason": "The verb \"binden\" (to tie) is used incorrectly here; the correct form is \"zubinden\" (to tie up)."
   },
   "de/b2.json|ZWIEBELN": {
     "sentence": "Zwiebeln pellen!",
@@ -10670,7 +10666,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains abstract philosophical language (\"Befriedigung\", \"Bedürfnis\") and the word \"sterbend\" in a metaphorical sense, which may be too complex for B2 learners and could be misinterpreted."
+    "reason": "The sentence contains abstract philosophical language (\"Befriedigung\", \"Bedürfnis\") that may exceed B2, and \"sterbend\" in a metaphorical sense could confuse learners despite the gloss."
   },
   "de/b2.json|EINGEBEN": {
     "sentence": "Kann ich die Nummer direkt eingeben?",
@@ -10721,11 +10717,12 @@
     "gate": 2
   },
   "de/b2.json|LEGENDÄR": {
-    "sentence": "Tom ist legendär.",
-    "source": "tatoeba",
+    "sentence": "Der sagenumwobene König war legendär für seine Weisheit und Gerechtigkeit.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-12"
+    "at": "2026-11-13",
+    "gate": 2
   },
   "de/b2.json|AUFFRESSEN": {
     "sentence": "Sie werden deine Himbeeren auffressen.",
@@ -11512,13 +11509,12 @@
     "gate": 2
   },
   "de/b2.json|HINHALTEN": {
-    "sentence": "Das brauchst du mir gar nicht so hinhalten, das esse ich nicht!",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Sie hielt den Arm aus dem Zugfenster hinaus, um den Wegweiser besser hinhalten zu können.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence uses \"hinhalten\" in the sense of \"to hold out (toward someone)\" rather than \"to stretch forward,\" and the tone is dismissive rather than neutral."
+    "gate": 2
   },
   "de/b2.json|AUFFORDERN": {
     "sentence": "Wir können sie nicht auffordern, Farbe zu bekennen.",
@@ -12040,7 +12036,7 @@
     "gate": 2
   },
   "de/b2.json|MORPHIUM": {
-    "sentence": "Nach der Operation erhielt er Morphium gegen die starken Schmerzen.",
+    "sentence": "Nach der Operation erhielt sie Morphium gegen die starken Schmerzen.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
@@ -12199,7 +12195,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes \"Mandarin\" (historical term for Chinese official) and \"Büttel\" (archaic for \"henchman\"), which are beyond B2 level and may be unfamiliar to general learners."
+    "reason": "The sentence includes \"Mandarin\" (historical term for Chinese official) and \"Büttel\" (archaic for \"henchman\"), which are not B2-level vocabulary, and the context implies violence."
   },
   "de/b2.json|BANGE": {
     "sentence": "Ihm ist angst und bange.",
@@ -12250,11 +12246,12 @@
     "gate": 2
   },
   "de/b2.json|ALLERBEST": {
-    "sentence": "Das Essen war allerbest, ich würde es sofort wieder bestellen.",
+    "sentence": "Der Service in diesem Restaurant ist allerbest – das Essen ist perfekt und die Bedienung sehr freundlich.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-12"
+    "at": "2026-11-13",
+    "gate": 2
   },
   "de/b2.json|ABLAUF": {
     "sentence": "Du kennst den Ablauf ja.",
@@ -13073,13 +13070,13 @@
     "gate": 2
   },
   "en/a1.json|BODY": {
-    "sentence": "A body was under the tree, a small gift left for the dog.",
+    "sentence": "Every body in the room clapped after the song.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence implies a dead body, which violates the \"no death\" guideline for a general-audience app."
+    "reason": "The word \"body\" in the sentence refers to a human body, not the meaning \"a person or thing.\""
   },
   "en/a1.json|BONE": {
     "sentence": "It’s a bone.",
@@ -19178,13 +19175,12 @@
     "gate": 2
   },
   "en/b1.json|ADVANCE": {
-    "sentence": "Thank you in advance.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "The research team will advance to the next phase after collecting enough data.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "\"Thank you in advance\" does not use \"advance\" in the given meaning of \"move forward or make progress.\""
+    "gate": 2
   },
   "en/b1.json|ADORABLE": {
     "sentence": "He's adorable.",
@@ -21683,13 +21679,12 @@
     "gate": 2
   },
   "en/b1.json|DAZZLE": {
-    "sentence": "A great artist can dazzle us with images that are, when deconstructed, nothing more than brush strokes applied over a taut piece of canvas.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "The sun can dazzle your eyes when it reflects on water.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "\"Deconstructed\" is too advanced for CEFR B1."
+    "gate": 2
   },
   "en/b1.json|COMPLETELY": {
     "sentence": "I agree completely.",
@@ -26339,7 +26334,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"cuánto\" in the interrogative sense (\"how much\") as given in the gloss; it uses \"cuanto\" as a relative pronoun (\"whatever\")."
+    "reason": "The sentence does not use \"cuanto\" in the interrogative sense (\"how much\") as specified in the gloss; it uses it as a relative pronoun (\"whatever\")."
   },
   "es/a1.json|RESTO": {
     "sentence": "¿Quieres el resto?",
@@ -27294,7 +27289,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"dejar\" in the sense of \"to leave something/someone,\" not \"no tener ya algo\" (to no longer have something)."
+    "reason": "The sentence uses \"dejar\" in the sense of \"to leave\" (go away from), not \"no tener ya algo\" (to no longer have something)."
   },
   "es/a1.json|PASAR": {
     "sentence": "¿Puedo pasar?",
@@ -27687,7 +27682,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses metaphorical language (\"valer más que\") and abstract concepts that are beyond CEFR A1, and \"VALER\" is not used in the meaning \"to be useful in the house.\""
+    "reason": "The sentence uses complex structures (\"puede valer más que\") and abstract concepts beyond A1, and \"valer\" is not used in the meaning \"used in the house.\""
   },
   "es/a1.json|DESPUÉS": {
     "sentence": "¿Y después?",
@@ -27752,7 +27747,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The verb \"importar\" does not mean \"to buy something in a store\"; it means \"to matter\" or \"to import.\""
+    "reason": "\"IMPORTAR\" in the given meaning is incorrect; it means \"to matter\" or \"to import\" (goods), not \"to buy.\""
   },
   "es/a1.json|VISTO": {
     "sentence": "Le he visto.",
@@ -28131,13 +28126,12 @@
     "gate": 2
   },
   "es/a1.json|VAYA": {
-    "sentence": "¡Vaya en bici al parque!",
+    "sentence": "¡Vaya al parque con sus amigos!",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence uses the imperative form \"vaya\" which is beyond A1 level for Spanish learners."
+    "gate": 2
   },
   "es/a1.json|DORMIR": {
     "sentence": "Voy a dormir.",
@@ -28402,7 +28396,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Dejar mucho que desear\" is an idiomatic expression beyond A1 level and does not use \"desear\" in the given meaning."
+    "reason": "The sentence uses \"dejar mucho que desear\" (to leave much to be desired), which is an idiomatic expression beyond A1 level and does not use \"DESEAR\" in the given meaning."
   },
   "es/a1.json|SUFICIENTE": {
     "sentence": "Suficiente.",
@@ -28523,7 +28517,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"don\" in the sense of \"gift/talent,\" not the noble title, and \"tenés\" is informal (A2 may prefer \"tienes\")."
+    "reason": "The word \"don\" in the sentence means \"gift\" (talent), not the noble title as specified."
   },
   "es/a2.json|ACCIÓN": {
     "sentence": "Necesitamos acción.",
@@ -30958,13 +30952,13 @@
     "gate": 2
   },
   "es/a2.json|DATE": {
-    "sentence": "¿Qué date prefieres para nuestra reunión?",
+    "sentence": "¿Qué date prefieres para la reunión?",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"date\" in the sentence is not the Spanish word \"cita\" or similar, but the English word, which is not appropriate for an A2 Spanish learner."
+    "reason": "The word \"date\" in the sentence is not the correct translation for \"un momento en el tiempo que se puede señalar\" (which should be \"fecha\")."
   },
   "es/a2.json|META": {
     "sentence": "Ésa no es la meta.",
@@ -31519,10 +31513,9 @@
     "gate": 2
   },
   "es/a2.json|AUN": {
-    "sentence": "Aun así, sigo paranoico.",
+    "sentence": "Su hermano es aun más alto.",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "aun así is even so, not todavía",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -34534,7 +34527,7 @@
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence implies a harmful stereotype and could be considered offensive or inappropriate for a general-audience learning app."
+    "reason": "The sentence uses \"SECUESTRAR\" in a way that trivializes a serious crime, which is inappropriate for a general-audience learning app."
   },
   "es/b1.json|PESCADO": {
     "sentence": "Hay pescado.",
@@ -36696,7 +36689,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes \"porquería\" (which can be vulgar or offensive) and implies a negative, possibly controversial idea about human nature, making it unsuitable for a general-audience learning app."
+    "reason": "The sentence includes \"porquería\" (filth/junk), which is too informal and potentially offensive for a general-audience app at B2 level."
   },
   "es/b2.json|RETOMAR": {
     "sentence": "Él recuperó su salud, así que ya puede retomar sus estudios.",
@@ -37851,13 +37844,12 @@
     "gate": 2
   },
   "es/b2.json|ALUCINAR": {
-    "sentence": "Vi alucinar un espejismo en el desierto.",
+    "sentence": "El artista usa espejos para hacerme alucinar con imágenes que no son reales.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence incorrectly uses \"alucinar\" in the sense of \"to hallucinate\" (to see something that doesn't exist) rather than the given meaning \"to perceive something that doesn't exist in reality,\" which is not a standard usage."
+    "gate": 2
   },
   "es/b2.json|MOCIÓN": {
     "sentence": "Apoyo la moción.",
@@ -39516,13 +39508,12 @@
     "gate": 2
   },
   "pt/a1.json|PELOS": {
-    "sentence": "Ele a pegou pelos cabelos.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "O menino tem muitos pelos nas pernas.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence uses \"pelos\" in the sense of \"hair on the head\" (cabelos), not \"fine body hair,\" and \"pegar pelos cabelos\" is a fixed expression meaning \"to grab by the hair,\" which may be too idiomatic for A1 learners."
+    "gate": 2
   },
   "pt/a1.json|COMIDA": {
     "sentence": "Temos comida.",
@@ -41102,13 +41093,13 @@
     "gate": 2
   },
   "pt/a1.json|IRIA": {
-    "sentence": "Eu iria à feira se não estivesse chovendo.",
+    "sentence": "Eu iria ao parque, mas está chovendo.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "Sentence uses conditional mood (\"iria\"), which is beyond CEFR A1 level."
+    "reason": "The sentence uses the conditional \"iria,\" which is beyond CEFR A1 level."
   },
   "pt/a1.json|FIXE": {
     "sentence": "Que foto mais fixe!",
@@ -41127,13 +41118,13 @@
     "gate": 2
   },
   "pt/a1.json|FAÇAS": {
-    "sentence": "Não faças mais perguntas.",
-    "source": "tatoeba",
+    "sentence": "Faças o que te disser, por favor!",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses the imperative form \"faças\" (you do/make) rather than the subjunctive meaning \"que tu realizes algo\" (that you realize something) as specified in the gloss."
+    "reason": "The sentence uses the subjunctive mood (\"faças\"), which is not typically introduced at CEFR A1 level in Portuguese."
   },
   "pt/a1.json|ACHEI": {
     "sentence": "Achei o site.",
@@ -45286,7 +45277,7 @@
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"TIM\" in the meaning given by the gloss (it means \"pager\" or \"beeper,\" not a fan of comedy)."
+    "reason": "The sentence does not use \"TIM\" in the meaning given by the gloss (it refers to a person, not a device)."
   },
   "pt/b1.json|MANDEI": {
     "sentence": "Eu mandei parar!",
@@ -51824,13 +51815,13 @@
     "gate": 2
   },
   "fr/a1.json|MEC": {
-    "sentence": "Ce mec joue au foot avec ses amis.",
+    "sentence": "Ce mec joue au football avec moi.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"MEC\" is informal slang (familiar register) and not typically included in A1-level French learning materials for general audiences."
+    "reason": "\"MEC\" is informal/slang and not typically included in A1-level French learning materials for general audiences."
   },
   "fr/a1.json|IDÉE": {
     "sentence": "Aucune idée.",
@@ -52143,7 +52134,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses advanced vocabulary (\"enregistrer\", \"profiles d'exécution\", \"ressaisir\") and structures beyond A1 level, and \"importer\" is not used in the given meaning."
+    "reason": "The sentence uses \"importer\" in the sense of \"to import data,\" not \"to be important to someone,\" and \"profiles d'exécution\" is too advanced for A1."
   },
   "fr/a1.json|SEMAINE": {
     "sentence": "Bonne fin de semaine.",
@@ -52200,7 +52191,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Se désoler de ce qui s'est produit\" is too complex for A1 learners."
+    "reason": "The sentence uses the passé composé (\"s'est produit\") and the adverbial phrase \"désormais inutile,\" which are beyond A1 level."
   },
   "fr/a1.json|MEILLEUR": {
     "sentence": "T'es le meilleur !",
@@ -53609,7 +53600,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains a strong negative sentiment that may not be suitable for a general-audience learning app."
+    "reason": "The sentence contains a complex structure (\"sembler\" + infinitive) and a plural noun (\"femmes\") that may be too advanced for A1 learners."
   },
   "fr/a1.json|ARME": {
     "sentence": "C'est une arme.",
@@ -53938,7 +53929,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence contains complex structures and vocabulary (e.g., \"cadre législatif adéquat,\" \"pousser les investisseurs étrangers\") that exceed CEFR A1 and includes political/economic concepts unsuitable for beginners."
+    "reason": "The sentence contains complex structures and vocabulary (e.g., \"cadre législatif adéquat,\" \"pousser les investisseurs étrangers\") that exceed CEFR A1 level."
   },
   "fr/a1.json|APPEL": {
     "sentence": "J'ai un appel.",
@@ -54141,13 +54132,12 @@
     "gate": 2
   },
   "fr/a2.json|DROGUE": {
-    "sentence": "Le médecin dit que cette herbe est une drogue naturelle.",
+    "sentence": "Cette plante n’est pas une drogue, c’est juste une herbe parfumée.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence uses \"drogue\" in a sense related to altering consciousness, which is not the meaning provided (\"une chose qui change la tête\" is too vague and not standard)."
+    "gate": 2
   },
   "fr/a2.json|SOLEIL": {
     "sentence": "J'aime le soleil.",
@@ -55845,7 +55835,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"enceint\" is masculine, but the gloss describes a female state (\"une femme\"). The correct form is \"enceinte.\""
+    "reason": "The word \"enceint\" is incorrect in this context; the correct form is \"enceinte\" for a pregnant woman."
   },
   "fr/a2.json|ARBRE": {
     "sentence": "C’est un arbre.",
@@ -56390,7 +56380,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"AIE\" in a way that does not match the given meaning of \"expression de douleur soudaine\" (it means \"look hungry\" here)."
+    "reason": "The sentence uses \"AIE\" in an imperative construction (\"Aie l'air\") which is not the given meaning of \"expression de douleur soudaine\" (ouch)."
   },
   "fr/a2.json|MÉCHANT": {
     "sentence": "Tu es méchant.",
@@ -57801,7 +57791,7 @@
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"GRACE\" is not correctly used in the sentence; it should be \"grâce\" (with an accent) and means \"thanks to,\" not \"favour granted without particular merit.\""
+    "reason": "The word \"GRACE\" is not correctly used in the sentence; \"GRÂCE\" (with an accent) is needed, and the sentence uses \"GRÂCE À\" (thanks to) rather than the given meaning \"faveur accordée sans mérite particulier.\""
   },
   "fr/b1.json|EXAMINER": {
     "sentence": "Je dois examiner votre billet.",
@@ -58324,13 +58314,13 @@
     "gate": 2
   },
   "fr/b1.json|ANDY": {
-    "sentence": "Pour percer ces trous dans le bois, prends l'andy.",
+    "sentence": "Pour percer un trou dans le mur, j’ai utilisé un andy.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"andy\" is not a standard French word at CEFR B1 level; it's likely unfamiliar to learners."
+    "reason": "\"ANDY\" is not a standard French word; the correct term is \"perceuse\" or \"mèche\"."
   },
   "fr/b1.json|INTERNET": {
     "sentence": "J'adore Internet.",
@@ -59996,13 +59986,13 @@
     "gate": 2
   },
   "fr/b1.json|LOS": {
-    "sentence": "Il va vraiment los aujourd’hui à son match de tennis.",
+    "sentence": "Il a encore LOS à chaque compétition, c'est frustrant.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"LOS\" is not a standard French word or structure at CEFR B1 level."
+    "reason": "\"LOS\" is not a standard French word and is not within CEFR B1 for learners."
   },
   "fr/b1.json|ÉMOTION": {
     "sentence": "Elle a pleuré d'émotion.",
@@ -60283,7 +60273,7 @@
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The verb \"produire\" is used in the sense of \"to happen\" (se produire = to occur), not in the sense of \"fabriquer ou créer quelque chose\" as given in the gloss."
+    "reason": "The sentence uses \"se produire\" (to happen), not \"produire\" (to manufacture/create)."
   },
   "fr/b1.json|VIRUS": {
     "sentence": "Ce n'est pas un virus.",
@@ -60644,7 +60634,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"HAYE\" in the sentence refers to \"La Haye\" (The Hague), a city, not the meaning \"rangée d’arbustes plantés serrés\" (hedge)."
+    "reason": "The sentence does not use \"HAYE\" in the meaning \"rangée d’arbustes plantés serrés.\""
   },
   "fr/b2.json|COQ": {
     "sentence": "Le coq chante.",
@@ -61007,13 +60997,13 @@
     "gate": 2
   },
   "fr/b2.json|BREAK": {
-    "sentence": "Il est temps de prendre une break après deux heures de travail intense.",
+    "sentence": "Il est temps de faire une break après deux heures de travail intense.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Break\" is an English word used in a French sentence, which is not appropriate for a French learning app."
+    "reason": "\"Faire une break\" is not standard French; \"pause\" or \"faire une pause\" would be correct at B2."
   },
   "fr/b2.json|ABUS": {
     "sentence": "C'est un abus.",
@@ -61415,13 +61405,13 @@
     "gate": 2
   },
   "fr/b2.json|CALVIN": {
-    "sentence": "Le chemisier en calvin blanc est parfait pour l'été.",
+    "sentence": "Elle a choisi une robe en calvin pour l'été, légère et très confortable.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Calvin\" is not the correct French word for the given meaning; the correct term is \"calicot.\""
+    "reason": "\"Calvin\" is not the correct term for the given meaning; \"calvin\" is a proper noun (e.g., a brand name), not a fabric type."
   },
   "fr/b2.json|ALEC": {
     "sentence": "Ce soir, nous dégustons un délicieux **alec** avec des pommes de terre rôties.",
@@ -61726,7 +61716,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"Roger\" in the meaning of the given gloss (\"variété de poire à chair fondante\")."
+    "reason": "The word \"Roger\" is not used in the meaning of \"variété de poire à chair fondante\" in the sentence."
   },
   "fr/b2.json|BÂTIR": {
     "sentence": "Ils vont vous bâtir un théâtre.",
@@ -63001,13 +62991,12 @@
     "gate": 2
   },
   "fr/b2.json|OUÏR": {
-    "sentence": "J'ai cru ouïr un bruit étrange dans le couloir.",
+    "sentence": "Il a pu ouïr le chant des oiseaux au lever du soleil.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "\"OUIR\" is a very rare and archaic verb, far beyond B2 level, and not suitable for a general-audience learning app."
+    "gate": 2
   },
   "fr/b2.json|ÉPAVE": {
     "sentence": "Il a échoué comme une épave.",
@@ -63034,13 +63023,13 @@
     "gate": 2
   },
   "fr/b2.json|TRIP": {
-    "sentence": "Son trip sous LSD l'a fait réfléchir sur la réalité.",
+    "sentence": "Un bon trip en montagne sous les étoiles m’a inspiré pour écrire un poème.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes a reference to drugs (\"LSD\"), which violates the general-audience suitability criteria."
+    "reason": "The sentence includes \"trip\" in the context of drugs, which violates the general-audience guideline."
   },
   "fr/b2.json|CONFRONTER": {
     "sentence": "Ils doivent confronter leurs opinions pour trouver un compromis.",
@@ -63075,13 +63064,12 @@
     "gate": 2
   },
   "fr/b2.json|KAY": {
-    "sentence": "Kay respecte tout le monde sauf elle-même.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "La lettre \"K\" est souvent appelée \"kay\" en français.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The word \"kay\" is not a standard French word and does not fit CEFR B2 vocabulary."
+    "gate": 2
   },
   "fr/b2.json|CHERCHEUR": {
     "sentence": "Le chercheur scinde l'atome.",
@@ -63612,13 +63600,13 @@
     "gate": 2
   },
   "it/a1.json|POTERE": {
-    "sentence": "Domani posso potere visitare il museo.",
+    "sentence": "Oggi pomeriggio posso potere uscire con gli amici.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence is ungrammatical (\"posso potere\" is redundant) and does not fit A1 Italian learner structures."
+    "reason": "The sentence is ungrammatical (\"posso potere\" is redundant) and does not fit A1 level."
   },
   "it/a1.json|ESSERE": {
     "sentence": "Dev'essere fuori.",
@@ -65197,13 +65185,12 @@
     "gate": 2
   },
   "it/a1.json|DIAVOLO": {
-    "sentence": "Vai al Diavolo!",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Il diavolo vuole farci fare cose cattive.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
     "at": "2026-11-13",
-    "gate": 2,
-    "reason": "The sentence is a strong curse (\"Go to hell!\") and violates the general-audience safety guidelines due to its threatening nature."
+    "gate": 2
   },
   "it/a1.json|QUASI": {
     "sentence": "Quasi sempre.",
@@ -65238,13 +65225,13 @@
     "gate": 2
   },
   "it/a1.json|ALCUNO": {
-    "sentence": "Non ha alcuno scrupolo morale nel mentire ai suoi genitori.",
-    "source": "tatoeba",
+    "sentence": "Alcuno studente ha dimenticato il libro a scuola oggi.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "\"Alcuno\" in the given sense is not typically used in affirmative sentences at A1 level; it is more common in negative or interrogative contexts."
+    "reason": "\"Alcuno\" is not typically used in this way at A1 level; \"Qualche studente\" would be more appropriate."
   },
   "it/a1.json|COLPA": {
     "sentence": "È colpa mia.",
@@ -65917,7 +65904,7 @@
     "level": "a1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"aziendi\" is incorrect (should be \"aziende\"), and \"tendono a preferire\" is too complex for A1."
+    "reason": "\"aziendi\" is misspelled (should be \"aziende\"), and \"modalità online per le candidature\" is too complex for A1."
   },
   "it/a1.json|DIVERTENTE": {
     "sentence": "È divertente?",
@@ -66774,7 +66761,7 @@
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence incorrectly uses \"bisognare\" with \"dovere\" and \"di molti soldi,\" which is unnatural and not A2-level Italian."
+    "reason": "The sentence uses \"bisognare\" incorrectly (should be \"ci vuole\" or \"ci vogliono\") and \"dovrebbe\" is not a standard structure for expressing necessity."
   },
   "it/a2.json|SPESSO": {
     "sentence": "Leggo spesso.",
@@ -67147,8 +67134,7 @@
   "it/a2.json|ATTACCO": {
     "sentence": "Siamo sotto attacco!",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "violence content: under attack (CONTENT_RULE)",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -67276,8 +67262,7 @@
   "it/a2.json|ARRESTARE": {
     "sentence": "Si è fatto arrestare.",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "prison content: arrest (CONTENT_RULE)",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -67541,8 +67526,7 @@
   "it/a2.json|COMPORTARE": {
     "sentence": "Stasera vado ad un aperitivo, come mi devo comportare?",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "wrong sense: reflexive comportarsi, not the gloss \"avere come risultato\"",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -67606,8 +67590,7 @@
   "it/a2.json|PENA": {
     "sentence": "Ne vale la pena?",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "wrong sense (\"Ne vale la pena?\") and crime-adjacent legal punishment (CONTENT_RULE)",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -68085,13 +68068,13 @@
     "gate": 2
   },
   "it/a2.json|DROGARE": {
-    "sentence": "Il medico non vuole drogare il paziente per l’operazione.",
+    "sentence": "Non si dovrebbe mai drogare un animale per farlo sembrare più felice.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence includes \"drogare,\" which refers to administering mind-altering substances, violating the \"no drugs\" guideline for a general-audience app."
+    "reason": "The sentence includes the word \"drogare,\" which refers to drug use, violating the general-audience suitability criteria."
   },
   "it/a2.json|BARCA": {
     "sentence": "È una barca.",
@@ -68599,8 +68582,7 @@
   "it/a2.json|CADAVERE": {
     "sentence": "Manca il cadavere.",
     "source": "tatoeba",
-    "verdict": "reject",
-    "reason": "death content (CONTENT_RULE)",
+    "verdict": "pass",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2
@@ -71948,7 +71930,7 @@
     "level": "b1",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence uses \"luna park\" (amusement park), not the given meaning of \"area verde pubblica per il tempo libero\" (public green area for leisure)."
+    "reason": "The sentence uses \"luna park\" (amusement park), not the given meaning of \"PARK\" as a public green area."
   },
   "it/b1.json|TOTALE": {
     "sentence": "Qual è il totale?",
@@ -73279,11 +73261,12 @@
     "gate": 2
   },
   "it/b2.json|LEVE": {
-    "sentence": "Le leve del cambiamento devono essere usate con saggezza.",
+    "sentence": "La prossima settimana partiranno le nuove leve per il campo addestramento.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-12"
+    "at": "2026-11-13",
+    "gate": 2
   },
   "it/b2.json|SEGUACE": {
     "sentence": "Questa grammatica contiene una dedica ad un importante seguace di Calvino.",
@@ -74220,7 +74203,7 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The sentence does not use \"compreso\" in the given meaning (\"che è dentro un insieme\")."
+    "reason": "The sentence does not use \"compreso\" in the meaning \"che è dentro un insieme\" (included/within a set)."
   },
   "it/b2.json|PROTESTARE": {
     "sentence": "Devo protestare.",
@@ -75039,13 +75022,13 @@
     "gate": 2
   },
   "it/b2.json|CAROGNA": {
-    "sentence": "Sulla strada c'era una carogna di volpe che puzzava molto.",
+    "sentence": "Il cane ha scavato vicino alla carcassa di un animale, attirando mosche sulla carogna.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2,
-    "reason": "The word \"carogna\" is too vulgar and contextually inappropriate for a general-audience learning app, even if the sentence itself is grammatically correct."
+    "reason": "The word \"carogna\" is too informal/dialectal for B2 learners, and the sentence implies a violent context (animal death) which violates the general-audience guideline."
   },
   "it/b2.json|GENTILUOMO": {
     "sentence": "È un gentiluomo.",
@@ -89381,5 +89364,23 @@
     "level": "b2",
     "at": "2026-11-13",
     "gate": 2
+  },
+  "fr/b2.json|SUMMER": {
+    "sentence": "En été, nous aimons passer nos vacances à la plage sous le soleil brûlant du summer.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "b2",
+    "at": "2026-11-13",
+    "gate": 2,
+    "reason": "\"Summer\" is an English word, not French, and violates the CEFR B2 requirement."
+  },
+  "fr/b2.json|RETRAIRE": {
+    "sentence": "Il faut retraire les mauvaises pommes avant de faire le jus.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "b2",
+    "at": "2026-11-13",
+    "gate": 2,
+    "reason": "The word \"retraire\" is not a standard French verb; the correct term is \"retirer.\""
   }
 }
