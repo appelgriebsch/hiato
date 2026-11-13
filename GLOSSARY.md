@@ -50,6 +50,9 @@ The word list for one language and one CEFR level.
 **CEFR level**:
 A1 to C2, chosen with the language on Choose language & level.
 
+**Level check**:
+The optional six-question check on Choose language & level that suggests a CEFR level from one Pack word per level. It stores nothing and never changes the Streak.
+
 **Gloss**:
 The meaning of the word, always written in the Pack language.
 
