@@ -1,4 +1,10 @@
 import { describe, expect, test } from 'bun:test'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { MemoryRouter } from 'react-router-dom'
+import { buildShareCardPayload } from '@/lib/share-card'
+import { sharePathWithToken } from '@/lib/share-url'
+import { Share } from './Share'
 
 async function pageSrc(name: string): Promise<string> {
   return Bun.file(new URL(`./${name}`, import.meta.url)).text()
@@ -1232,10 +1238,10 @@ describe('Share copy confirmation (#135)', () => {
     const catchArm = fn.slice(fn.indexOf('} catch {'))
     expect(catchArm).toContain('window.clearTimeout(copyReset.current)')
     expect(catchArm).toContain("setCopyLabel('Copy text')")
-    // Unmount clears any open timer
-    expect(src).toContain(
-      'useEffect(() => () => window.clearTimeout(copyReset.current), [])',
-    )
+    // Unmount clears any open timer (same cleanup as the alive ref).
+    const effect = src.slice(src.indexOf('useEffect('), src.indexOf('const show'))
+    expect(effect).toContain('alive.current = false')
+    expect(effect).toContain('window.clearTimeout(copyReset.current)')
     // Simulate success→failure label transitions (no DOM harness)
     let label = 'Copy text'
     label = 'Copied' // success
@@ -1247,13 +1253,13 @@ describe('Share copy confirmation (#135)', () => {
 })
 
 describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
-  test('CTA is gated on dailyInviteTarget(payload) and rendered first in the footer', async () => {
+  test('CTA is gated on a cold open and rendered first in the footer', async () => {
     const src = await pageSrc('Share.tsx')
     expect(src).toContain(
       "import { acceptDailyInvite, dailyInviteTarget } from '@/lib/invite'",
     )
     expect(src).toContain(
-      'const invite = payload ? dailyInviteTarget(payload) : null',
+      'const invite = loc.state == null && payload ? dailyInviteTarget(payload) : null',
     )
     const footerAt = src.indexOf('footer={')
     expect(footerAt).toBeGreaterThan(-1)
@@ -1285,11 +1291,14 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     const fnAt = src.indexOf('async function onPlayDaily')
     expect(fnAt).toBeGreaterThan(0)
     const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
-    expect(fn).toContain('await acceptDailyInvite(invite)')
+    expect(fn).toContain('await acceptDailyInvite(invite, () => alive.current)')
+    const aliveAt = fn.indexOf('if (!alive.current) return')
     const failAt = fn.indexOf('if (!ok)')
     const navAt = fn.indexOf("nav('/play?mode=daily')")
-    expect(failAt).toBeGreaterThan(-1)
+    expect(aliveAt).toBeGreaterThan(-1)
+    expect(failAt).toBeGreaterThan(aliveAt)
     expect(navAt).toBeGreaterThan(failAt)
+    expect(fn).toContain('if (alive.current) setPreparing(false)')
     expect(fn).toContain('setInviteError(fail)')
     expect(src).toContain(
       'Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.',
@@ -1301,6 +1310,45 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     expect(alertAt).toBeLessThan(src.indexOf('aria-busy={preparing}'))
     // Prefs are written only inside acceptDailyInvite (invite.ts), never on the page.
     expect(src).not.toContain('setPrefs')
+  })
+
+  test('in-app Share (location.state set) keeps Share primary and hides the invite CTA', () => {
+    const payload = buildShareCardPayload({
+      lang: 'en',
+      cefr: 'a1',
+      streak: 4,
+      dateKey: '2026-11-13',
+      word: 'BANANA',
+      won: true,
+      mode: 'daily',
+    })
+    const href = sharePathWithToken(payload)
+    const q = href.indexOf('?')
+    const markup = (state: typeof payload | null) =>
+      renderToStaticMarkup(
+        createElement(
+          MemoryRouter,
+          {
+            initialEntries: [
+              { pathname: href.slice(0, q), search: href.slice(q), state },
+            ],
+          },
+          createElement(Share),
+        ),
+      )
+    const buttonClass = (html: string, label: string) => {
+      const end = html.indexOf(`>${label}<`)
+      expect(end).toBeGreaterThan(-1)
+      return html.slice(html.lastIndexOf('<button', end), end)
+    }
+
+    const inApp = markup(payload)
+    expect(inApp).not.toContain('Play today')
+    expect(buttonClass(inApp, 'Share')).toContain('bg-accent text-white')
+
+    const cold = markup(null)
+    expect(cold).toContain('Play today')
+    expect(buttonClass(cold, 'Share')).toContain('border-2 border-accent-fg')
   })
 })
 

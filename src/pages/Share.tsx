@@ -23,11 +23,19 @@ export function Share() {
   const [busy, setBusy] = useState(false)
   const [preparing, setPreparing] = useState(false)
   const [inviteError, setInviteError] = useState<string | null>(null)
-  const invite = payload ? dailyInviteTarget(payload) : null
+  // Play navigates here with state. A cold /share link does not.
+  const invite = loc.state == null && payload ? dailyInviteTarget(payload) : null
   const [copyLabel, setCopyLabel] = useState('Copy text')
+  const alive = useRef(true)
   const copyReset = useRef(0)
 
-  useEffect(() => () => window.clearTimeout(copyReset.current), [])
+  useEffect(
+    () => () => {
+      alive.current = false
+      window.clearTimeout(copyReset.current)
+    },
+    [],
+  )
 
   const show = useCallback((message: string) => {
     setToast(message)
@@ -85,23 +93,25 @@ export function Share() {
     }
   }
 
-  /** ADR 0036 amendment: the tap runs precache; prefs write + nav only on success. */
+  /** Tap runs precache. Prefs and /play run only on success, and only if still mounted. */
   async function onPlayDaily(): Promise<void> {
     if (!invite || busy || preparing) return
     setPreparing(true)
     setInviteError(null)
     const fail = `Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.`
     try {
-      const ok = await acceptDailyInvite(invite)
+      const ok = await acceptDailyInvite(invite, () => alive.current)
+      if (!alive.current) return
       if (!ok) {
         setInviteError(fail)
         return
       }
       nav('/play?mode=daily')
     } catch {
+      if (!alive.current) return
       setInviteError(fail)
     } finally {
-      setPreparing(false)
+      if (alive.current) setPreparing(false)
     }
   }
 

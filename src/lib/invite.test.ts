@@ -124,4 +124,13 @@ describe('acceptDailyInvite — consent is the tap', () => {
     expect(precacheCalls).toEqual([['en', 'b1']])
     expect(getPrefs()).toEqual({ lang: 'en', cefr: 'b1' })
   })
+
+  test('unmounted after precache → false and prefs untouched', async () => {
+    precacheStub = true
+    const target = invite.dailyInviteTarget(dailyPayload())!
+    expect(await invite.acceptDailyInvite(target, () => false)).toBe(false)
+    expect(precacheCalls).toEqual([['en', 'b1']])
+    expect(getPrefs()).toBeNull()
+    expect(mem.has('hiato.prefs')).toBe(false)
+  })
 })
