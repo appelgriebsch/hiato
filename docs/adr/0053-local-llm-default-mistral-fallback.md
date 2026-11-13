@@ -47,7 +47,7 @@ Andreas runs the pack scripts locally on an Apple M4 Mac with 32 GB or more. He 
 | SuperGrok token read from `~/.grok/auth.json` | Fast | Unofficial client against a private proxy; Acceptable Use Policy risk |
 | `XAI_API_KEY` on `api.x.ai` | Official API | Paid Console credits; reverted in #266 |
 | Automatic Mistral fallback | Runs finish unattended | Spends money without notice; mixes providers in one pack |
-| Any open-weight family (e.g. Gemma, Qwen) | Wider choice | Andreas allows only Mistral and Apple models; more licence variety to review |
+| Any other open-weight model family | Wider choice | Andreas allows only Mistral and Apple models; more licence variety to review |
 | Local gate without calibration | Simplest | A wrong PASS ships a bad sentence |
 | Separate `local-chat.ts` client | Isolated | Duplicates the backoff code; the Mistral client is already OpenAI-shaped |
 
