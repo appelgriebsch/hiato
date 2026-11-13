@@ -10,6 +10,8 @@
  * Every candidate passes a Mistral
  * CEFR gate against the pack level; failures are rejected, not patched.
  * Verdicts cached in scripts/data/example-gate.json; packs:check enforces it.
+ * Lemmas in scripts/data/example-skip.txt ship no example: no Tatoeba search
+ * and no Mistral call (#279).
  * The gate log and pin are persisted after every lemma and pack level, so a
  * re-run resumes where a previous run stopped and skips levels that are
  * already complete (no cached-pass misses, no --force) without writing again.
@@ -25,7 +27,7 @@ import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
-import { stockNameInText } from './tatoeba-stock-names'
+import { isStockName, stockNameInText } from './tatoeba-stock-names'
 import { mistralChat, readMistralKey } from './mistral-chat'
 import { packPinEntry } from './pack-pin'
 
@@ -34,6 +36,7 @@ const PACKS = path.join(ROOT, 'public', 'packs')
 const DATA = path.join(ROOT, 'scripts', 'data')
 const TATOEBA_DIR = path.join(DATA, 'tatoeba')
 const GATE_LOG = path.join(DATA, 'example-gate.json')
+const SKIP_FILE = path.join(DATA, 'example-skip.txt')
 const PIN_FILE = path.join(DATA, 'pack-pin.json')
 
 /** Tatoeba per-language exports use ISO 639-3 codes. */
@@ -98,19 +101,61 @@ export function cleanSentence(raw: string): string | null {
   return s
 }
 
+const SKIP_KEY = /^([a-z]{2}\/[a-z][a-z0-9]*)\|([\p{L}\p{M}]+)$/u
+
+let skipCache: Set<string> | null = null
+
+/** `lang/cefr|WORD` keys that must ship no example (#279). */
+export function loadExampleSkip(file = SKIP_FILE): Set<string> {
+  if (file === SKIP_FILE && skipCache) return skipCache
+  if (!existsSync(file)) throw new Error(`missing example skip list ${file}`)
+  const set = new Set<string>()
+  for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const raw = line.split('#')[0]?.trim()
+    if (!raw) continue
+    const m = SKIP_KEY.exec(raw)
+    if (!m) throw new Error(`example-skip.txt: bad line ${raw}`)
+    set.add(`${m[1]}|${nfcUpper(m[2]!)}`)
+  }
+  if (file === SKIP_FILE) skipCache = set
+  return set
+}
+
+export function exampleSkipped(lang: string, cefr: string, word: string): boolean {
+  return loadExampleSkip().has(`${lang}/${cefr}|${nfcUpper(word)}`)
+}
+
+/**
+ * `gate` is the only action that searches Tatoeba or calls the model.
+ * Skip wins over a cached pass and over --force.
+ */
+export function lemmaExampleAction(
+  lang: string,
+  cefr: string,
+  word: string,
+  cached: { verdict?: string; gate?: number; sentence?: string } | null | undefined,
+  force: boolean,
+): 'skip' | 'reuse' | 'gate' {
+  if (exampleSkipped(lang, cefr, word)) return 'skip'
+  if (!force && reuseCachedPass(cached, lang, word)) return 'reuse'
+  return 'gate'
+}
+
 /**
  * Guards every candidate must pass (ADR 0048): whole-word lemma match, denylist
  * (profanity/slur) tokens, no capitalized person names, and no Tatoeba stock
- * persona names at any position (#247 reopen). The lemma itself is exempt from
- * both the denylist (isDeniedGlossToken skips it) and the stock-name guard, so
- * a lemma that equals a stock name (e.g. JACK) can still get an example.
+ * persona names at any position (#247 reopen, #279). A capitalised stock-name
+ * token is rejected even when it is the lemma, except in German, where the
+ * lemma's own spelling stays allowed. A lowercase use stays allowed.
+ * The lemma stays exempt from the denylist (isDeniedGlossToken skips it).
  */
 /** A gate-2 pass is reusable only while its sentence still clears the stock-name guard. */
 export function reuseCachedPass(
   entry: { verdict?: string; gate?: number; sentence?: string } | null | undefined,
+  lang: string,
   word: string,
 ): boolean {
-  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word)
+  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word, lang)
 }
 
 /**
@@ -124,7 +169,7 @@ export function aunAsiMismatch(sentence: string, word: string): boolean {
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
   if (aunAsiMismatch(sentence, word)) return false
-  if (stockNameInText(sentence, word)) return false
+  if (stockNameInText(sentence, word, lang)) return false
   const DENY = loadDenylist()
   const NAMES = loadNameList()
   const re = /[\p{L}\p{M}]+/gu
@@ -134,8 +179,11 @@ export function sentenceAllowed(sentence: string, lang: PackLang, word: string):
     const tok = m[0]!
     if (isDeniedGlossToken(tok, lang, word, DENY)) return false
     // A name-list token is a person name only when capitalized mid-sentence;
-    // the first word is capitalized by sentence case alone.
-    if (!first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
+    // the first word is capitalized by sentence case alone. A German stock-name
+    // lemma stays: nouns are capitalised, so "Die Mark…" would fail here.
+    const ownGermanStockLemma =
+      lang === 'de' && nfcUpper(tok) === nfcUpper(word) && isStockName(tok)
+    if (!ownGermanStockLemma && !first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
     first = false
   }
   return true
@@ -535,9 +583,9 @@ async function main() {
             .flatMap((c) => {
               const f = path.join(PACKS, lang, `${c}.json`)
               return existsSync(f)
-                ? (JSON.parse(readFileSync(f, 'utf8')) as WordPack).lemmas.map((l) =>
-                    nfcUpper(l.word),
-                  )
+                ? (JSON.parse(readFileSync(f, 'utf8')) as WordPack).lemmas
+                    .filter((l) => !exampleSkipped(lang, c, l.word))
+                    .map((l) => nfcUpper(l.word))
                 : []
             }),
         )
@@ -553,11 +601,15 @@ async function main() {
 
       const pending: WordPack['lemmas'] = []
       for (const lemma of pack.lemmas) {
-        const key = gateKey(rel, lemma.word)
-        const cached = log[key]
+        const cached = log[gateKey(rel, lemma.word)]
+        const action = lemmaExampleAction(lang, cefr, lemma.word, cached, cli.force)
+        if (action === 'skip') {
+          setLemmaExample(lemma, null)
+          continue
+        }
         // Gate version 2 (#247 reopen): entries with no version or version 1 are
         // stale — every existing verdict must re-run once under the stricter gate.
-        if (reuseCachedPass(cached, lemma.word) && !cli.force) {
+        if (action === 'reuse') {
           if (cached.sentence !== lemma.example) lemma.example = cached.sentence
           if (cached.source === 'tatoeba') tatoebaCount++
           else if (cached.source === 'mistral') generatedCount++

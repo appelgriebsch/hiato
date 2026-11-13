@@ -18,7 +18,7 @@ import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
-import { aunAsiMismatch } from './example-sentences'
+import { aunAsiMismatch, exampleSkipped } from './example-sentences'
 import { stockNameInText } from './tatoeba-stock-names'
 import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
@@ -160,8 +160,10 @@ export function exampleGateKey(rel: string, word: string): string {
 /**
  * ADR 0048: every shipped `example` must have a passing entry in the gate log,
  * the logged sentence must match the pack exactly (tamper guard), the entry must
- * be gate version 2 (version 1 / missing is stale — #247 reopen), and
- * the example must not contain a Tatoeba stock persona name.
+ * be gate version 2 (version 1 / missing is stale — #247 reopen),
+ * the example must not contain a capitalised Tatoeba stock name (including
+ * the lemma's own spelling, except in German, #279), and a skip-listed lemma
+ * must have none.
  */
 export function checkExampleGate(
   rel: string,
@@ -171,13 +173,19 @@ export function checkExampleGate(
   const errors: string[] = []
   for (const L of pack.lemmas) {
     if (L.example === undefined) continue
+    if (exampleSkipped(pack.lang, pack.cefr, L.word)) {
+      errors.push(
+        `${rel}: example for "${L.word}" is on the no-example list (scripts/data/example-skip.txt) — "${L.example}"`,
+      )
+      continue
+    }
     if (aunAsiMismatch(L.example, L.word)) {
       errors.push(
         `${rel}: example for "${L.word}" uses "aun así" (even so), not gloss todavía — "${L.example}"`,
       )
       continue
     }
-    const stock = stockNameInText(L.example, L.word)
+    const stock = stockNameInText(L.example, L.word, pack.lang)
     if (stock) {
       errors.push(
         `${rel}: example for "${L.word}" contains Tatoeba stock name "${stock}" — "${L.example}"`,

@@ -494,6 +494,46 @@ describe('packs:check example gate — stock names and gate version (#247 reopen
     expect(errors[0]).toMatch(/Tatoeba stock name "Tom"/)
   })
 
+  test('fails a skip-listed lemma that still has an example (#279)', () => {
+    const p = pack({
+      lang: 'pt',
+      cefr: 'a1',
+      lemmas: [{ word: 'TOM', gloss: 'maneira de falar', example: 'Ele falou em tom baixo.' }],
+    })
+    const errors = checkExampleGate('pt/a1.json', p, {})
+    expect(errors[0]).toMatch(/no-example list/)
+  })
+
+  test('fails a stock-name lemma written capitalised (#279)', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'a1',
+      lemmas: [{ word: 'JACK', gloss: 'a tool', example: 'Jack is a nice jacket.' }],
+    })
+    const errors = checkExampleGate('en/a1.json', p, {})
+    expect(errors[0]).toMatch(/Tatoeba stock name "Jack"/)
+  })
+
+  test('a German stock-name lemma may be capitalised (#279)', () => {
+    const sentence = 'Die Mark war die alte Währung.'
+    const p = pack({
+      lang: 'de',
+      cefr: 'a1',
+      lemmas: [{ word: 'MARK', gloss: 'alte Währung', example: sentence }],
+    })
+    const deGate: ExampleGateLog = {
+      'de/a1.json|MARK': {
+        sentence,
+        source: 'fixture',
+        verdict: 'pass',
+        level: 'a1',
+        at: '2026-11-13',
+        gate: GATE_VERSION,
+      },
+    }
+    expect(checkExampleGate('de/a1.json', p, deGate)).toEqual([])
+  })
+
   test('fails a shipped AUN example that uses aun así', () => {
     const p = pack({
       lang: 'es',

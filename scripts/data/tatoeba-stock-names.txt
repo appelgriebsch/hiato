@@ -1,5 +1,6 @@
 # Tatoeba stock persona names (NFC uppercase, one per line).
-# A capitalized token at any position is rejected; the lemma itself is exempt (#247).
+# A capitalized token at any position is rejected, including the lemma's own spelling (#279).
+# German (de) keeps that spelling: German nouns are capitalised. Lowercase uses stay allowed.
 # Match is exact NFC uppercase, so María does not match MARIA.
 #
 # Scan (2026-11-12). Dumps stay gitignored: scripts/data/tatoeba/{eng,deu,spa,por,fra,ita}_sentences.tsv.bz2.

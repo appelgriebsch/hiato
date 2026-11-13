@@ -41,6 +41,10 @@ Staging verification of 248b588 found Tatoeba stock persona names (Tom, Mary, Sa
 2. **Stricter single gate call (gate version 2).** The one gate prompt now receives the lemma's `gloss` and answers PASS only if (a) the sentence is within the CEFR level, (b) it uses the word in the gloss sense (skipped when there is no gloss), and (c) it suits a general-audience learning app — no death, killing, crime or prison, violence or threats, sex or affairs, drugs, self-harm, or illness used for shock. The generate fallback prompt gets the same gloss and content rule. Failures are still rejected, not patched. The call goes through `mistralChat` (Mistral AI, `mistral-small-latest` via `MISTRAL_API_KEY`; the xAI experiment of #267/#268 did not work out and was reverted).
 3. **Gate versioning.** Every gate-log entry carries `gate: 2`. `packs:check` treats an entry with no version or version 1 as stale for any shipped `example`, so every existing verdict re-runs once under the stricter gate and no old wrong-sense or dark sentence survives via the cache. Staleness uses the gate version and the verdict only; the logged source (`tatoeba` / `mistral` / hand-written `fixture`) does not affect it.
 
+## Amendment (2026-11-13, #279)
+
+The lemma exemption in the stock-name guard above no longer applies, except in German: nouns are capitalised, so a `de` lemma's own spelling stays allowed. Elsewhere a capitalised stock-name token is rejected even when it is the lemma (`Tom`, `Jack`). A lowercase use stays allowed. Lemmas listed in `scripts/data/example-skip.txt` ship no example: the pipeline does not search Tatoeba or call the model for them, and `packs:check` fails if one still has an `example`.
+
 ## Consequences
 
 - Pack JSON gains `example?: string` per lemma (ADR 0049); pack `version` bumps when examples land.
