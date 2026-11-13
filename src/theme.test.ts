@@ -46,7 +46,7 @@ const LIGHT: Record<string, string> = {
   'cream-dark': '#ebe9e4',
   ink: '#1c1b19',
   'ink-muted': '#6b6860',
-  'ink-faint': '#9a968c',
+  'ink-faint': '#737067',
   line: '#e4e1da',
   accent: '#3d6b55',
   'accent-fg': '#3d6b55',
@@ -158,14 +158,17 @@ describe('OS appearance tokens', () => {
     }
   })
 
-  test('ink-faint is caption text, not a body pair with a lowered bar', () => {
+  test('ink-faint caption text meets 4.5:1 on cream and raised', () => {
     expect(BODY_TEXT.some(([foreground]) => foreground === 'ink-faint')).toBe(false)
-    const lightCaption = contrastRatio(LIGHT['ink-faint'], LIGHT.cream)
-    const darkCaption = contrastRatio(DARK['ink-faint'], DARK.cream)
+    const lightOnCream = contrastRatio(LIGHT['ink-faint'], LIGHT.cream)
+    const lightOnRaised = contrastRatio(LIGHT['ink-faint'], LIGHT.raised)
+    const darkOnCream = contrastRatio(DARK['ink-faint'], DARK.cream)
     const darkOnRaised = contrastRatio(DARK['ink-faint'], DARK.raised)
-    expect(lightCaption).toBeLessThan(4.5)
-    expect(lightCaption).toBeGreaterThan(2.5)
-    expect(darkCaption).toBeGreaterThanOrEqual(4.5)
+    expect(lightOnCream).toBeGreaterThanOrEqual(4.5)
+    expect(lightOnRaised).toBeGreaterThanOrEqual(4.5)
+    expect(darkOnCream).toBeGreaterThanOrEqual(4.5)
     expect(darkOnRaised).toBeGreaterThanOrEqual(4.5)
+    expect(lightOnCream).toBeLessThan(contrastRatio(LIGHT['ink-muted'], LIGHT.cream))
+    expect(darkOnCream).toBeLessThan(contrastRatio(DARK['ink-muted'], DARK.cream))
   })
 })
