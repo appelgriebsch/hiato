@@ -1,35 +1,23 @@
 /**
- * Shared xAI chat client for pack tooling scripts (not run on CI / bun:test).
- * Key: XAI_API_KEY, else ~/.grok/auth.json (pre-#251). Model defaults to
- * grok-4.7 with reasoning_effort medium (#267). Override with XAI_MODEL and
- * XAI_REASONING_EFFORT.
+ * Shared Mistral chat client for pack tooling scripts (not run on CI / bun:test).
+ * Key follows ADR 0048 via MISTRAL_API_KEY. Model defaults to mistral-small-latest
+ * (ADR 0048 amendment 2026-11-12: mistral-large-4-0 was still in preview and hung/
+ * 502'd on every CI call, run 43222663925; the gate/generate tasks need speed, not
+ * frontier quality). Override with MISTRAL_MODEL.
  */
-import { existsSync, readFileSync } from 'node:fs'
-import { homedir } from 'node:os'
-import path from 'node:path'
 
-export function readXaiKey(): string | null {
-  if (process.env.XAI_API_KEY) return process.env.XAI_API_KEY
-  const authPath = path.join(homedir(), '.grok', 'auth.json')
-  if (!existsSync(authPath)) return null
-  try {
-    const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<string, { key?: string }>
-    for (const v of Object.values(auth)) {
-      if (v?.key) return v.key
-    }
-  } catch {
-    /* malformed JSON falls through to the warning */
-  }
-  console.warn('auth.json unreadable')
-  return null
+export const MISTRAL_MODEL = process.env.MISTRAL_MODEL || 'mistral-small-latest'
+
+export function readMistralKey(): string | null {
+  return process.env.MISTRAL_API_KEY || null
 }
 
 /**
- * The API returns message.content as a string or as content blocks; join the
- * text blocks so callers always get a string (run 43104173938 crashed on
- * `content.replace` when the API sent blocks).
+ * Mistral returns message.content either as a string or as an array of
+ * content blocks; join the text blocks so callers always get a string
+ * (run 43104173938 crashed on `content.replace` when the API sent blocks).
  */
-function messageContentToString(
+export function messageContentToString(
   content: string | { type?: string; text?: string }[] | null | undefined,
 ): string {
   if (typeof content === 'string') return content
@@ -42,11 +30,11 @@ function messageContentToString(
   return ''
 }
 
-/** Non-transient HTTP status (4xx other than 408/429) — deliberate, never retried. */
-class XaiHttpError extends Error {
+/** Non-transient HTTP status from the Mistral API (4xx other than 408/429) — deliberate, never retried. */
+export class MistralHttpError extends Error {
   readonly status: number
   constructor(status: number, body: string) {
-    super(`xAI API ${status}: ${body.slice(0, 300)}`)
+    super(`Mistral API ${status}: ${body.slice(0, 300)}`)
     this.status = status
   }
 }
@@ -56,7 +44,7 @@ function isTransientStatus(status: number): boolean {
   return status === 408 || status === 429 || status >= 500
 }
 
-export async function xaiChat(
+export async function mistralChat(
   key: string,
   system: string,
   prompt: string,
@@ -66,18 +54,20 @@ export async function xaiChat(
   let lastStatus = 0
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
-      const res = await fetch('https://api.x.ai/v1/chat/completions', {
+      const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
         method: 'POST',
-        // shortcut: 300s because reasoning_effort medium is slower, raise timeoutMs if a real batch still aborts.
+        // 300s default timeout; raise timeoutMs if a real batch still aborts.
         signal: AbortSignal.timeout(timeoutMs),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${key}`,
         },
         body: JSON.stringify({
-          model: process.env.XAI_MODEL || 'grok-4.7',
-          reasoning_effort: process.env.XAI_REASONING_EFFORT || 'medium',
+          model: MISTRAL_MODEL,
           temperature,
+          // Mistral rejects greedy sampling (temperature 0) unless top_p is 1
+          // (API error 3054 "top_p must be 1 when using greedy sampling").
+          ...(temperature === 0 ? { top_p: 1 } : {}),
           messages: [
             { role: 'system', content: system },
             { role: 'user', content: prompt },
@@ -87,12 +77,12 @@ export async function xaiChat(
       if (isTransientStatus(res.status)) {
         lastStatus = res.status
         const wait = 1000 * 2 ** attempt
-        console.warn(`  xAI ${res.status}, backing off ${wait}ms`)
+        console.warn(`  Mistral ${res.status}, backing off ${wait}ms`)
         await Bun.sleep(wait)
         continue
       }
       if (!res.ok) {
-        throw new XaiHttpError(res.status, await res.text())
+        throw new MistralHttpError(res.status, await res.text())
       }
       const body = (await res.json()) as {
         choices?: {
@@ -107,12 +97,12 @@ export async function xaiChat(
       // Deliberate HTTP errors are not retried; anything else (a hung request
       // aborts with a TimeoutError, run 43198026054; transient 5xx handled
       // above) is transient — back off and retry instead of crashing.
-      if (err instanceof XaiHttpError) throw err
+      if (err instanceof MistralHttpError) throw err
       if (attempt === 4) throw err
       const wait = 1000 * 2 ** attempt
-      console.warn(`  xAI request failed (${(err as Error)?.name ?? err}), backing off ${wait}ms`)
+      console.warn(`  Mistral request failed (${(err as Error)?.name ?? err}), backing off ${wait}ms`)
       await Bun.sleep(wait)
     }
   }
-  throw new Error(`xAI API ${lastStatus}: retries exhausted`)
+  throw new Error(`Mistral API ${lastStatus}: retries exhausted`)
 }

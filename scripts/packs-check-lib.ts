@@ -17,6 +17,9 @@ import {
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
+import { GATE_VERSION, isCurrentPass } from './example-gate'
+import { aunAsiMismatch } from './example-sentences'
+import { stockNameInText } from './tatoeba-stock-names'
 import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
 import { dictsReady, isWordOfLang, membershipCacheArmed } from './lang-membership'
@@ -33,6 +36,8 @@ import {
   isHintCeilingEnforcedRel,
   type PackBandSnapshot,
 } from './hint-ceiling'
+
+export { GATE_VERSION, isCurrentPass }
 
 /** Hunspell, or a committed verdict cache that can answer without loading it. */
 function membershipActive(): boolean {
@@ -138,10 +143,12 @@ export function checkLemmaFloor(rel: string, pack: WordPack): string | null {
 /** One CEFR-gate verdict per shipped example (ADR 0048; written by scripts/example-sentences.ts). */
 export type ExampleGateEntry = {
   sentence: string
-  source: 'tatoeba' | 'xai' | 'mistral' | 'fixture'
+  source: 'tatoeba' | 'mistral' | 'fixture'
   verdict: 'pass' | 'reject'
   level: string
   at: string
+  gate?: number
+  reason?: string
 }
 
 export type ExampleGateLog = Record<string, ExampleGateEntry>
@@ -152,8 +159,9 @@ export function exampleGateKey(rel: string, word: string): string {
 
 /**
  * ADR 0048: every shipped `example` must have a passing entry in the gate log,
- * and the logged sentence must match the pack exactly (tamper / stale guard).
- * Hand-written `fixture` entries are maintainer copy and count as passed.
+ * the logged sentence must match the pack exactly (tamper guard), the entry must
+ * be gate version 2 (version 1 / missing is stale — #247 reopen), and
+ * the example must not contain a Tatoeba stock persona name.
  */
 export function checkExampleGate(
   rel: string,
@@ -163,6 +171,19 @@ export function checkExampleGate(
   const errors: string[] = []
   for (const L of pack.lemmas) {
     if (L.example === undefined) continue
+    if (aunAsiMismatch(L.example, L.word)) {
+      errors.push(
+        `${rel}: example for "${L.word}" uses "aun así" (even so), not gloss todavía — "${L.example}"`,
+      )
+      continue
+    }
+    const stock = stockNameInText(L.example, L.word)
+    if (stock) {
+      errors.push(
+        `${rel}: example for "${L.word}" contains Tatoeba stock name "${stock}" — "${L.example}"`,
+      )
+      continue
+    }
     const entry = gate[exampleGateKey(rel, L.word)]
     if (!entry) {
       errors.push(
@@ -173,6 +194,12 @@ export function checkExampleGate(
     if (entry.verdict !== 'pass') {
       errors.push(
         `${rel}: example for "${L.word}" is gated ${entry.verdict.toUpperCase()} (above level or rejected) — "${L.example}"`,
+      )
+      continue
+    }
+    if (!isCurrentPass(entry)) {
+      errors.push(
+        `${rel}: example for "${L.word}" has a stale gate entry (gate ${entry.gate ?? 'none'}, need ${GATE_VERSION}) — re-run scripts/example-sentences.ts`,
       )
       continue
     }

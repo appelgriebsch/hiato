@@ -1,8 +1,5 @@
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { homedir } from 'node:os'
-import path from 'node:path'
 import { describe, expect, test } from 'bun:test'
-import { readXaiKey, xaiChat } from './xai-chat'
+import { MISTRAL_MODEL, mistralChat, readMistralKey } from './mistral-chat'
 
 const originalFetch = globalThis.fetch
 const originalSleep = Bun.sleep
@@ -29,9 +26,7 @@ function stubSleep(): void {
 function restoreGlobals(): void {
   globalThis.fetch = originalFetch
   ;(Bun as unknown as { sleep: unknown }).sleep = originalSleep
-  delete process.env.XAI_API_KEY
-  delete process.env.XAI_MODEL
-  delete process.env.XAI_REASONING_EFFORT
+  delete process.env.MISTRAL_API_KEY
 }
 
 const OK = {
@@ -39,78 +34,31 @@ const OK = {
   body: { choices: [{ message: { content: '{"A": ["b"]}' } }] },
 }
 
-/** Bun caches os.homedir(), so these tests use that path and put the old file back. */
-function withAuthFile(contents: string | null, run: () => void): void {
-  const file = path.join(homedir(), '.grok', 'auth.json')
-  mkdirSync(path.dirname(file), { recursive: true })
-  const prev = existsSync(file) ? readFileSync(file) : null
-  try {
-    if (contents === null) {
-      if (prev) rmSync(file)
-    } else writeFileSync(file, contents)
-    run()
-  } finally {
-    if (prev) writeFileSync(file, prev)
-    else if (existsSync(file)) rmSync(file)
-  }
-}
-
-describe('readXaiKey', () => {
-  test('returns XAI_API_KEY, else the first key in ~/.grok/auth.json, else null', () => {
+describe('readMistralKey', () => {
+  test('returns MISTRAL_API_KEY when set, null otherwise', () => {
     try {
-      delete process.env.XAI_API_KEY
-      withAuthFile(null, () => expect(readXaiKey()).toBeNull())
-      withAuthFile(JSON.stringify({ grok: { key: 'file-key' } }), () =>
-        expect(readXaiKey()).toBe('file-key'),
-      )
-      process.env.XAI_API_KEY = 'env-key'
-      expect(readXaiKey()).toBe('env-key')
+      expect(readMistralKey()).toBeNull()
+      process.env.MISTRAL_API_KEY = 'test-key'
+      expect(readMistralKey()).toBe('test-key')
     } finally {
-      restoreGlobals()
-    }
-  })
-
-  test('warns auth.json unreadable when the file is malformed or has no key field', () => {
-    const warnings: string[] = []
-    const prevWarn = console.warn
-    console.warn = ((...args: unknown[]) => {
-      warnings.push(args.map(String).join(' '))
-    }) as typeof console.warn
-    try {
-      delete process.env.XAI_API_KEY
-      withAuthFile(null, () => {
-        expect(readXaiKey()).toBeNull()
-        expect(warnings).toEqual([])
-      })
-      withAuthFile('{', () => expect(readXaiKey()).toBeNull())
-      withAuthFile(JSON.stringify({ grok: { token: 'not-a-key' } }), () =>
-        expect(readXaiKey()).toBeNull(),
-      )
-      expect(warnings).toEqual(['auth.json unreadable', 'auth.json unreadable'])
-    } finally {
-      console.warn = prevWarn
       restoreGlobals()
     }
   })
 })
 
-describe('xaiChat', () => {
-  test('posts grok-4.7 and reasoning_effort medium to api.x.ai', async () => {
+describe('mistralChat', () => {
+  test('posts MISTRAL_MODEL to api.mistral.ai and returns the first choice', async () => {
     try {
-      delete process.env.XAI_MODEL
-      delete process.env.XAI_REASONING_EFFORT
       const { calls, bodies } = stubFetch([OK])
-      const content = await xaiChat('k', 'sys', 'prompt', 0.2)
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
       expect(content).toBe('{"A": ["b"]}')
-      expect(calls).toEqual(['https://api.x.ai/v1/chat/completions'])
-      const sent = JSON.parse(bodies[0]!) as {
+      expect(calls).toEqual(['https://api.mistral.ai/v1/chat/completions'])
+      const sent = JSON.parse(bodies[0]) as {
         model: string
-        reasoning_effort: string
         temperature: number
         messages: unknown
       }
-      expect(sent.model).toBe('grok-4.7')
-      expect(sent.reasoning_effort).toBe('medium')
+      expect(sent.model).toBe(MISTRAL_MODEL)
       expect(sent.temperature).toBe(0.2)
       expect(sent.messages).toEqual([
         { role: 'system', content: 'sys' },
@@ -122,27 +70,13 @@ describe('xaiChat', () => {
     }
   })
 
-  test('XAI_MODEL and XAI_REASONING_EFFORT override the request body', async () => {
-    try {
-      process.env.XAI_MODEL = 'grok-test-model'
-      process.env.XAI_REASONING_EFFORT = 'high'
-      const { bodies } = stubFetch([OK])
-      await xaiChat('k', 'sys', 'prompt', 0.2)
-      const sent = JSON.parse(bodies[0]!) as { model: string; reasoning_effort: string }
-      expect(sent.model).toBe('grok-test-model')
-      expect(sent.reasoning_effort).toBe('high')
-    } finally {
-      restoreGlobals()
-    }
-  })
-
-  test('temperature 0 does not send top_p', async () => {
+  test('greedy sampling (temperature 0) sends top_p 1 — API error 3054 otherwise', async () => {
     try {
       const { bodies } = stubFetch([OK])
-      await xaiChat('k', 'sys', 'prompt', 0)
-      const sent = JSON.parse(bodies[0]!) as { temperature: number; top_p?: number }
+      await mistralChat('k', 'sys', 'prompt', 0)
+      const sent = JSON.parse(bodies[0]) as { temperature: number; top_p?: number }
       expect(sent.temperature).toBe(0)
-      expect('top_p' in sent).toBe(false)
+      expect(sent.top_p).toBe(1)
     } finally {
       restoreGlobals()
     }
@@ -167,7 +101,7 @@ describe('xaiChat', () => {
           },
         },
       ])
-      const content = await xaiChat('k', 'sys', 'prompt', 0)
+      const content = await mistralChat('k', 'sys', 'prompt', 0)
       expect(content).toBe('PASS — A1 ok.')
       expect(typeof content).toBe('string')
     } finally {
@@ -179,21 +113,9 @@ describe('xaiChat', () => {
     try {
       stubSleep()
       const { calls } = stubFetch([{ status: 429 }, { status: 429 }, OK])
-      const content = await xaiChat('k', 'sys', 'prompt', 0.2)
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
       expect(content).toBe('{"A": ["b"]}')
       expect(calls.length).toBe(3)
-    } finally {
-      restoreGlobals()
-    }
-  })
-
-  test('backs off and retries on 408', async () => {
-    try {
-      stubSleep()
-      const { calls } = stubFetch([{ status: 408 }, OK])
-      const content = await xaiChat('k', 'sys', 'prompt', 0.2)
-      expect(content).toBe('{"A": ["b"]}')
-      expect(calls.length).toBe(2)
     } finally {
       restoreGlobals()
     }
@@ -209,7 +131,7 @@ describe('xaiChat', () => {
         if (calls < 3) throw timeout
         return new Response(JSON.stringify(OK.body), { status: 200 })
       }) as typeof fetch
-      const content = await xaiChat('k', 'sys', 'prompt', 0.2)
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
       expect(content).toBe('{"A": ["b"]}')
       expect(calls).toBe(3)
     } finally {
@@ -228,7 +150,7 @@ describe('xaiChat', () => {
       }) as typeof fetch
       let err: unknown
       try {
-        await xaiChat('k', 'sys', 'prompt', 0.2)
+        await mistralChat('k', 'sys', 'prompt', 0.2)
       } catch (e) {
         err = e
       }
@@ -245,11 +167,11 @@ describe('xaiChat', () => {
       const { calls } = stubFetch(Array(5).fill({ status: 429 }))
       let err: unknown
       try {
-        await xaiChat('k', 'sys', 'prompt', 0.2)
+        await mistralChat('k', 'sys', 'prompt', 0.2)
       } catch (e) {
         err = e
       }
-      expect((err as Error).message).toBe('xAI API 429: retries exhausted')
+      expect((err as Error).message).toBe('Mistral API 429: retries exhausted')
       expect(calls.length).toBe(5)
     } finally {
       restoreGlobals()
@@ -260,7 +182,7 @@ describe('xaiChat', () => {
     try {
       stubSleep()
       const { calls } = stubFetch([{ status: 502 }, { status: 503 }, OK])
-      const content = await xaiChat('k', 'sys', 'prompt', 0.2)
+      const content = await mistralChat('k', 'sys', 'prompt', 0.2)
       expect(content).toBe('{"A": ["b"]}')
       expect(calls.length).toBe(3)
     } finally {
@@ -274,11 +196,11 @@ describe('xaiChat', () => {
       const { calls } = stubFetch(Array(5).fill({ status: 502, body: { error: 'upstream' } }))
       let err: unknown
       try {
-        await xaiChat('k', 'sys', 'prompt', 0.2)
+        await mistralChat('k', 'sys', 'prompt', 0.2)
       } catch (e) {
         err = e
       }
-      expect((err as Error).message).toBe('xAI API 502: retries exhausted')
+      expect((err as Error).message).toBe('Mistral API 502: retries exhausted')
       expect(calls.length).toBe(5)
     } finally {
       restoreGlobals()
@@ -290,11 +212,11 @@ describe('xaiChat', () => {
       const { calls } = stubFetch([{ status: 400, body: { error: 'boom' } }])
       let err: unknown
       try {
-        await xaiChat('k', 'sys', 'prompt', 0.2)
+        await mistralChat('k', 'sys', 'prompt', 0.2)
       } catch (e) {
         err = e
       }
-      expect((err as Error).message).toContain('xAI API 400')
+      expect((err as Error).message).toContain('Mistral API 400')
       expect(calls.length).toBe(1)
     } finally {
       restoreGlobals()

@@ -4,7 +4,7 @@
  * Sources: CEFR-J B2; Octanove C1/C2; wordhoard v0.1.0 frequency-rank bands (DE/ES);
  * FrequencyWords PT. Same #24 gates as A1–B1: Hunspell membership, person-name
  * list skip, denylist, pack-language gloss (ADR 0030). --dry-run selects without
- * xAI or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
+ * Mistral or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
  */
 import { Database } from 'bun:sqlite'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
@@ -17,7 +17,7 @@ import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
-import { readXaiKey, xaiChat } from './xai-chat'
+import { mistralChat, readMistralKey } from './mistral-chat'
 import { selectFrBands, type FrCefr } from './fr-pack'
 import {
   DE_ES_BANDS,
@@ -391,10 +391,10 @@ async function generateGlosses(
   const missing = words.filter((w) => glossRejected(lang, w, cache[w]))
   if (missing.length === 0) return
 
-  const key = readXaiKey()
+  const key = readMistralKey()
   if (!key) {
     throw new Error(
-      `Need glosses for ${missing.length} ${lang} lemmas but no xAI key — set XAI_API_KEY (or ~/.grok/auth.json)`,
+      `Need glosses for ${missing.length} ${lang} lemmas but no Mistral key (set MISTRAL_API_KEY)`,
     )
   }
 
@@ -410,7 +410,7 @@ async function generateGlosses(
       `Return JSON object mapping each UPPERCASE lemma to its gloss string.\n` +
       `Lemmas:\n${batch.join('\n')}`
 
-    const content = await xaiChat(
+    const content = await mistralChat(
       key,
       `You write concise learner-dictionary glosses in ${LANG_NAME[lang]} only (ADR 0030). Reply with a single JSON object only.`,
       prompt,
@@ -446,7 +446,7 @@ async function generateGlosses(
         `${GLOSS_STYLE[lang]} Define the meaning using other ${LANG_NAME[lang]} words only. JSON object mapping UPPERCASE lemma → gloss.\n` +
         batch.map((w) => `- ${w}`).join('\n')
       try {
-        const content = await xaiChat(
+        const content = await mistralChat(
           key,
           `JSON only. Gloss in ${LANG_NAME[lang]} only (ADR 0030). Each gloss must avoid the headword as a whole word (ADR 0023).`,
           prompt,
