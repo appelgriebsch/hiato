@@ -1,4 +1,4 @@
-# ADR 0050: Retro 80s arcade look replaces the current look
+# ADR 0052: Retro 80s arcade look replaces the current look
 
 - **Status**: Proposed
 - **Date**: 2026-11-13

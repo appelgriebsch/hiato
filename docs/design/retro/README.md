@@ -1,6 +1,6 @@
 # Retro 80s arcade look: design source
 
-This folder holds UX Uma's locked design for the retro look (ADR 0050).
+This folder holds UX Uma's locked design for the retro look (ADR 0052).
 
 - `spec.md` is the spec. It is the source of truth for tokens, type, icons, components, motion, sound and accessibility.
 - `assets/retro-theme.css` holds the token values to copy into `src/index.css`.
