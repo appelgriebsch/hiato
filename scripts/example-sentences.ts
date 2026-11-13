@@ -442,7 +442,7 @@ async function gateLemma(
   apiKey: string,
   log: ExampleGateLog,
   at: string,
-): Promise<'tatoeba' | 'xai' | null> {
+): Promise<'tatoeba' | 'mistral' | null> {
   const shipped = lemma.example
   for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
     const parsed = parseGateVerdict(
@@ -468,7 +468,7 @@ async function gateLemma(
   )
   if (generated?.verdict === 'pass') {
     setLemmaExample(lemma, generated.sentence)
-    return 'xai'
+    return 'mistral'
   }
   setLemmaExample(lemma, null)
   return null

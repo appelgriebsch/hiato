@@ -4,10 +4,8 @@ import {
   buildSentenceIndex,
   cleanSentence,
   CONTENT_RULE,
-  GATE_VERSION,
   gatePrompt,
   generatePrompt,
-  isCurrentPass,
   parseGateVerdict,
   pickTatoebaCandidate,
   recordGateEntry,
@@ -19,6 +17,7 @@ import {
   type ExampleGateEntry,
   type ExampleGateLog,
 } from './example-sentences'
+import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { nfcUpper } from './lemma-denylist'
 import { checkExampleGate } from './packs-check-lib'
 import type { WordPack } from '../src/packs/schema'
@@ -263,7 +262,7 @@ describe('packs:check example gate log (ADR 0048, #247)', () => {
     expect(checkExampleGate('en/a1.json', pack, gate)).toEqual([])
   })
 
-  test('a current pass stays current for source xai and source mistral', () => {
+  test('a current pass stays current for source mistral', () => {
     for (const source of ['mistral'] as const) {
       const entry = { ...gate['en/a1.json|HOUSE']!, source }
       expect(isCurrentPass(entry)).toBe(true)
