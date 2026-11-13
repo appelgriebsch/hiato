@@ -1,5 +1,5 @@
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { homedir } from 'node:os'
 import path from 'node:path'
 import { describe, expect, test } from 'bun:test'
 import { readXaiKey, xaiChat } from './xai-chat'
@@ -39,27 +39,56 @@ const OK = {
   body: { choices: [{ message: { content: '{"A": ["b"]}' } }] },
 }
 
+/** Bun caches os.homedir(), so these tests use that path and put the old file back. */
+function withAuthFile(contents: string | null, run: () => void): void {
+  const file = path.join(homedir(), '.grok', 'auth.json')
+  mkdirSync(path.dirname(file), { recursive: true })
+  const prev = existsSync(file) ? readFileSync(file) : null
+  try {
+    if (contents === null) {
+      if (prev) rmSync(file)
+    } else writeFileSync(file, contents)
+    run()
+  } finally {
+    if (prev) writeFileSync(file, prev)
+    else if (existsSync(file)) rmSync(file)
+  }
+}
+
 describe('readXaiKey', () => {
   test('returns XAI_API_KEY, else the first key in ~/.grok/auth.json, else null', () => {
-    const prevHome = process.env.HOME
-    const dir = mkdtempSync(path.join(tmpdir(), 'xai-key-'))
     try {
       delete process.env.XAI_API_KEY
-      process.env.HOME = dir
-      expect(readXaiKey()).toBeNull()
-      mkdirSync(path.join(dir, '.grok'))
-      writeFileSync(
-        path.join(dir, '.grok', 'auth.json'),
-        JSON.stringify({ grok: { key: 'file-key' } }),
+      withAuthFile(null, () => expect(readXaiKey()).toBeNull())
+      withAuthFile(JSON.stringify({ grok: { key: 'file-key' } }), () =>
+        expect(readXaiKey()).toBe('file-key'),
       )
-      expect(readXaiKey()).toBe('file-key')
-      writeFileSync(path.join(dir, '.grok', 'auth.json'), '{')
-      expect(readXaiKey()).toBeNull()
       process.env.XAI_API_KEY = 'env-key'
       expect(readXaiKey()).toBe('env-key')
     } finally {
-      process.env.HOME = prevHome
-      rmSync(dir, { recursive: true, force: true })
+      restoreGlobals()
+    }
+  })
+
+  test('warns auth.json unreadable when the file is malformed or has no key field', () => {
+    const warnings: string[] = []
+    const prevWarn = console.warn
+    console.warn = ((...args: unknown[]) => {
+      warnings.push(args.map(String).join(' '))
+    }) as typeof console.warn
+    try {
+      delete process.env.XAI_API_KEY
+      withAuthFile(null, () => {
+        expect(readXaiKey()).toBeNull()
+        expect(warnings).toEqual([])
+      })
+      withAuthFile('{', () => expect(readXaiKey()).toBeNull())
+      withAuthFile(JSON.stringify({ grok: { token: 'not-a-key' } }), () =>
+        expect(readXaiKey()).toBeNull(),
+      )
+      expect(warnings).toEqual(['auth.json unreadable', 'auth.json unreadable'])
+    } finally {
+      console.warn = prevWarn
       restoreGlobals()
     }
   })

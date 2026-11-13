@@ -5,10 +5,12 @@
  * XAI_REASONING_EFFORT.
  */
 import { existsSync, readFileSync } from 'node:fs'
+import { homedir } from 'node:os'
+import path from 'node:path'
 
 export function readXaiKey(): string | null {
   if (process.env.XAI_API_KEY) return process.env.XAI_API_KEY
-  const authPath = `${process.env.HOME}/.grok/auth.json`
+  const authPath = path.join(homedir(), '.grok', 'auth.json')
   if (!existsSync(authPath)) return null
   try {
     const auth = JSON.parse(readFileSync(authPath, 'utf8')) as Record<string, { key?: string }>
@@ -16,8 +18,9 @@ export function readXaiKey(): string | null {
       if (v?.key) return v.key
     }
   } catch {
-    /* unreadable auth file: no key */
+    /* malformed JSON falls through to the warning */
   }
+  console.warn('auth.json unreadable')
   return null
 }
 
@@ -58,14 +61,15 @@ export async function xaiChat(
   system: string,
   prompt: string,
   temperature: number,
+  timeoutMs = 300_000,
 ): Promise<string> {
   let lastStatus = 0
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
       const res = await fetch('https://api.x.ai/v1/chat/completions', {
         method: 'POST',
-        // shortcut: 120s may be short for a 60-gloss batch at medium reasoning, raise it if a real batch aborts.
-        signal: AbortSignal.timeout(120_000),
+        // shortcut: 300s because reasoning_effort medium is slower, raise timeoutMs if a real batch still aborts.
+        signal: AbortSignal.timeout(timeoutMs),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${key}`,
