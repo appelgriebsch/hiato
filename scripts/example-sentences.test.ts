@@ -7,6 +7,7 @@ import {
   gatePrompt,
   generatePrompt,
   parseGateVerdict,
+  aunAsiMismatch,
   pickTatoebaCandidate,
   recordGateEntry,
   reuseCachedPass,
@@ -77,6 +78,17 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(sentenceAllowed('The director is Flavio.', 'en', 'DIRECTOR')).toBe(false)
     expect(sentenceAllowed('Quiero conocer a María.', 'es', 'CONOCER')).toBe(false)
     expect(sentenceAllowed('Fadil left the house.', 'en', 'FADIL')).toBe(true)
+  })
+
+  test('AUN rejects "aun así" and still allows another sentence', () => {
+    expect(aunAsiMismatch('Aun así, sigo paranoico.', 'AUN')).toBe(true)
+    expect(sentenceAllowed('Aun así, sigo paranoico.', 'es', 'AUN')).toBe(false)
+    expect(sentenceAllowed('Aun no ha llegado el correo.', 'es', 'AUN')).toBe(true)
+    const index = buildSentenceIndex(
+      ['Aun así, sigo paranoico.', 'Aun no ha llegado el correo.'],
+      new Set([nfcUpper('AUN')]),
+    )
+    expect(tatoebaCandidates(index, 'es', 'AUN')).toEqual(['Aun no ha llegado el correo.'])
   })
 
   test('a cached pass is not reused when it contains a stock name', () => {

@@ -113,8 +113,17 @@ export function reuseCachedPass(
   return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word)
 }
 
+/**
+ * Lemma AUN's gloss is todavía ("still"). "aun así" is the other sense ("even so").
+ * The candidate filter rejects that phrase so a later regen cannot ship it.
+ */
+export function aunAsiMismatch(sentence: string, word: string): boolean {
+  return nfcUpper(word) === 'AUN' && /(?<![\p{L}])a[uú]n\s+as[ií](?![\p{L}])/iu.test(sentence)
+}
+
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
+  if (aunAsiMismatch(sentence, word)) return false
   if (stockNameInText(sentence, word)) return false
   const DENY = loadDenylist()
   const NAMES = loadNameList()

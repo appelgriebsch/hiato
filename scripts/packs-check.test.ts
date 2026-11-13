@@ -494,6 +494,16 @@ describe('packs:check example gate — stock names and gate version (#247 reopen
     expect(errors[0]).toMatch(/Tatoeba stock name "Tom"/)
   })
 
+  test('fails a shipped AUN example that uses aun así', () => {
+    const p = pack({
+      lang: 'es',
+      cefr: 'a2',
+      lemmas: [{ word: 'AUN', gloss: 'todavía', example: 'Aun así, sigo paranoico.' }],
+    })
+    const errors = checkExampleGate('es/a2.json', p, {})
+    expect(errors[0]).toMatch(/aun así/)
+  })
+
   test('passes a gate-2 pass entry and fails a version-1 entry as stale', () => {
     const p = pack({
       lang: 'en',

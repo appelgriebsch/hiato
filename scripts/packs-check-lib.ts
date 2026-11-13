@@ -18,6 +18,7 @@ import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
+import { aunAsiMismatch } from './example-sentences'
 import { stockNameInText } from './tatoeba-stock-names'
 import { isFrPersonGloss, isItNameOrPlaceGloss, isNameOrPlaceGloss, isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss, TEMPLATE_GLOSS_RE } from './gloss-quality'
@@ -170,6 +171,12 @@ export function checkExampleGate(
   const errors: string[] = []
   for (const L of pack.lemmas) {
     if (L.example === undefined) continue
+    if (aunAsiMismatch(L.example, L.word)) {
+      errors.push(
+        `${rel}: example for "${L.word}" uses "aun así" (even so), not gloss todavía — "${L.example}"`,
+      )
+      continue
+    }
     const stock = stockNameInText(L.example, L.word)
     if (stock) {
       errors.push(
