@@ -534,14 +534,16 @@ describe('packs:check example gate — stock names and gate version (#247 reopen
     expect(checkExampleGate('de/a1.json', p, deGate)).toEqual([])
   })
 
-  test('fails a shipped AUN example that uses aun así', () => {
-    const p = pack({
-      lang: 'es',
-      cefr: 'a2',
-      lemmas: [{ word: 'AUN', gloss: 'todavía', example: 'Aun así, sigo paranoico.' }],
-    })
-    const errors = checkExampleGate('es/a2.json', p, {})
-    expect(errors[0]).toMatch(/aun así/)
+  test('fails a shipped AUN example that uses unaccented aun', () => {
+    for (const example of ['Aun así, sigo paranoico.', 'Su hermano es aun más alto.']) {
+      const p = pack({
+        lang: 'es',
+        cefr: 'a2',
+        lemmas: [{ word: 'AUN', gloss: 'todavía', example }],
+      })
+      const errors = checkExampleGate('es/a2.json', p, {})
+      expect(errors[0]).toMatch(/unaccented "aun"/)
+    }
   })
 
   test('passes a gate-2 pass entry and fails a version-1 entry as stale', () => {

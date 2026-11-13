@@ -95,15 +95,20 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(sentenceAllowed('A fadil left the house.', 'en', 'FADIL')).toBe(true)
   })
 
-  test('AUN rejects "aun así" and still allows another sentence', () => {
+  test('AUN rejects any unaccented aun', () => {
     expect(aunAsiMismatch('Aun así, sigo paranoico.', 'AUN')).toBe(true)
+    expect(aunAsiMismatch('Su hermano es aun más alto.', 'AUN')).toBe(true)
+    expect(aunAsiMismatch('Aun no ha llegado el correo.', 'AUN')).toBe(true)
+    expect(aunAsiMismatch('Aún no ha llegado el correo.', 'AUN')).toBe(false)
+    expect(aunAsiMismatch('Su hermano es aun más alto.', 'ALTO')).toBe(false)
     expect(sentenceAllowed('Aun así, sigo paranoico.', 'es', 'AUN')).toBe(false)
-    expect(sentenceAllowed('Aun no ha llegado el correo.', 'es', 'AUN')).toBe(true)
+    expect(sentenceAllowed('Su hermano es aun más alto.', 'es', 'AUN')).toBe(false)
+    expect(sentenceAllowed('Aun no ha llegado el correo.', 'es', 'AUN')).toBe(false)
     const index = buildSentenceIndex(
-      ['Aun así, sigo paranoico.', 'Aun no ha llegado el correo.'],
+      ['Aun así, sigo paranoico.', 'Su hermano es aun más alto.', 'Aún no ha llegado el correo.'],
       new Set([nfcUpper('AUN')]),
     )
-    expect(tatoebaCandidates(index, 'es', 'AUN')).toEqual(['Aun no ha llegado el correo.'])
+    expect(tatoebaCandidates(index, 'es', 'AUN')).toEqual([])
   })
 
   test('a cached pass is not reused when it contains a stock name', () => {
@@ -113,6 +118,8 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(reuseCachedPass({ ...pass, sentence: 'Tom tem namorada?' }, 'pt', 'TOM')).toBe(false)
     expect(reuseCachedPass({ ...pass, sentence: 'Ele falou em tom baixo.' }, 'pt', 'TOM')).toBe(true)
     expect(reuseCachedPass({ ...pass, sentence: 'Die Mark war die alte Währung.' }, 'de', 'MARK')).toBe(true)
+    expect(reuseCachedPass({ ...pass, sentence: 'Su hermano es aun más alto.' }, 'es', 'AUN')).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'Aún no ha llegado el correo.' }, 'es', 'AUN')).toBe(true)
     expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' }, 'en', 'HOUSE')).toBe(false)
   })
 
@@ -163,9 +170,22 @@ describe('example skip list (#279)', () => {
     expect(() => loadExampleSkip(file)).toThrow(/bad line/)
   })
 
-  test('the shipped list is the three wrong-sense lemmas', () => {
+  test('the shipped list is the curated no-example lemmas', () => {
     const skip = loadExampleSkip()
-    expect([...skip].sort()).toEqual(['fr/a2|BILL', 'fr/b1|DAN', 'pt/a1|TOM'])
+    expect([...skip].sort()).toEqual([
+      'de/a2|ÜBERGEBEN',
+      'de/b2|ALLERBEST',
+      'de/b2|HINHALTEN',
+      'fr/a2|BILL',
+      'fr/b1|DAN',
+      'fr/b2|KAY',
+      'it/a2|ARRESTARE',
+      'it/a2|ATTACCO',
+      'it/a2|CADAVERE',
+      'it/a2|COMPORTARE',
+      'it/a2|PENA',
+      'pt/a1|TOM',
+    ])
     expect(exampleSkipped('pt', 'a1', 'tom')).toBe(true)
     expect(exampleSkipped('en', 'a2', 'BILL')).toBe(false)
   })
@@ -188,7 +208,28 @@ describe('example skip list (#279)', () => {
     expect(lemmaExampleAction('en', 'a1', 'HOUSE', house, true)).toBe('gate')
   })
 
-  test('the three lemmas ship no example and their gate entries are gate-2 rejects', () => {
+  test('a --force re-gate keeps curated rejects rejected', () => {
+    const curated = [
+      ['it', 'a2', 'ATTACCO', 'Siamo sotto attacco!'],
+      ['it', 'a2', 'ARRESTARE', 'Si è fatto arrestare.'],
+      ['it', 'a2', 'CADAVERE', 'Manca il cadavere.'],
+      ['it', 'a2', 'COMPORTARE', 'Stasera vado ad un aperitivo, come mi devo comportare?'],
+      ['it', 'a2', 'PENA', 'Ne vale la pena?'],
+      ['fr', 'b2', 'KAY', 'La lettre "K" est souvent appelée "kay" en français.'],
+      ['de', 'b2', 'HINHALTEN', 'Sie hielt den Arm aus dem Zugfenster hinaus, um den Wegweiser besser hinhalten zu können.'],
+      ['de', 'b2', 'ALLERBEST', 'Der Service in diesem Restaurant ist allerbest – das Essen ist perfekt und die Bedienung sehr freundlich.'],
+      ['de', 'a2', 'ÜBERGEBEN', 'Die Fackel ist übergeben.'],
+    ] as const
+    for (const [lang, cefr, word, sentence] of curated) {
+      const cached = { ...pass, sentence }
+      const row: { example?: string } = { example: sentence }
+      expect(lemmaExampleAction(lang, cefr, word, cached, true)).toBe('skip')
+      setLemmaExample(row, null)
+      expect(row.example).toBeUndefined()
+    }
+  })
+
+  test('curated drops ship no example and their gate entries are gate-2 rejects', () => {
     const gate = JSON.parse(
       readFileSync(path.join(import.meta.dir, 'data', 'example-gate.json'), 'utf8'),
     ) as Record<string, { verdict: string; gate: number; reason?: string }>
@@ -196,6 +237,16 @@ describe('example skip list (#279)', () => {
       ['pt/a1.json', 'TOM', 'Tom is a person name, not tom (manner of speaking)'],
       ['fr/a2.json', 'BILL', 'bill is not natural French for the bill; sentence is artificial'],
       ['fr/b1.json', 'DAN', 'dan is not natural French for a group dance; sentence is artificial'],
+      ['it/a2.json', 'ATTACCO', 'violence content: under attack (CONTENT_RULE)'],
+      ['it/a2.json', 'ARRESTARE', 'prison content: arrest (CONTENT_RULE)'],
+      ['it/a2.json', 'CADAVERE', 'death content (CONTENT_RULE)'],
+      ['it/a2.json', 'COMPORTARE', 'wrong sense: reflexive comportarsi, not the gloss "avere come risultato"'],
+      ['it/a2.json', 'PENA', 'wrong sense ("Ne vale la pena?") and crime-adjacent legal punishment (CONTENT_RULE)'],
+      ['fr/b2.json', 'KAY', 'kay is not a standard French word'],
+      ['de/b2.json', 'HINHALTEN', 'convoluted for B2; curated no-example'],
+      ['de/b2.json', 'ALLERBEST', 'not a natural German predicate'],
+      ['de/a2.json', 'ÜBERGEBEN', '"Die Fackel ist übergeben" is not a natural A2 sentence'],
+      ['es/a2.json', 'AUN', 'unaccented aun is incluso, not todavía'],
     ] as const
     for (const [rel, word, reason] of rows) {
       const pack = JSON.parse(
