@@ -13,7 +13,7 @@ Source: brainstorm grilling for OS-dependent light/dark appearance.
 
 ## Share PNG stays cream/ink
 
-**Chosen:** Exported share images from `src/lib/share-render.ts` keep the existing cream/ink hex palette. The on-screen `ShareCard` follows the OS.
+**Chosen:** Exported share images from `src/lib/share-render.ts` stay on the light cream/ink palette and do not follow OS dark. Panel captions use `#737067`. The tinted footer caption uses `#6b6860`. The on-screen `ShareCard` follows the OS.
 
 **Why:** The PNG leaves the app. A dark bitmap in a light Messages/WhatsApp thread reads as a screenshot, not a brand card.
 

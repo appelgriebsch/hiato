@@ -14,7 +14,7 @@ import {
 /** Cream / ink tokens matching G0 ShareCard. */
 const INK = '#1c1b19'
 const INK_MUTED = '#6b6860'
-const INK_FAINT = '#9a968c'
+const INK_FAINT = '#737067'
 const ACCENT = '#3d6b55'
 const ACCENT_SOFT = '#eef5f0'
 const WHITE = '#ffffff'
@@ -176,7 +176,7 @@ function drawShareCard(
   ctx.fillText(pillLabel, w / 2, pillY + pillH / 2)
 
   ctx.textBaseline = 'alphabetic'
-  ctx.fillStyle = INK_FAINT
+  ctx.fillStyle = INK_MUTED
   ctx.font = font('400', 14)
   ctx.fillText('Answer hidden — come play yours', w / 2, 556)
 }
