@@ -1,10 +1,10 @@
-# ADR 0048: Example sentence source and license — Tatoeba (CC-BY 2.0 FR) + original Mistral-generated fallback
+# ADR 0048: Example sentence source and license — Tatoeba (CC-BY 2.0 FR) + original xAI-generated fallback
 
 - **Status**: Accepted
 - **Date**: 2026-11-11
 - **Deciders**: Andreas Gerlach
 - **Supersedes**: none (ADR 0043 deferred this decision)
-- **Related issues**: #225, #246, #247, #248
+- **Related issues**: #225, #246, #247, #248, #250, #267
 
 ## Context
 
@@ -12,19 +12,19 @@ Issue #225 wants one example sentence per word on the EndCard, in the pack langu
 
 ## Decision
 
-Hybrid source, per the 2026-11-11 grill:
+Hybrid source, per the 2026-11-11 grill, amended 2026-11-13 (#267):
 
 1. **Primary: Tatoeba sentences, CC-BY 2.0 FR.** A build-time script downloads the per-language Tatoeba dumps and selects one sentence per lemma (whole-word match, shortest/cleanest, profanity guard and denylist reuse). Every pack that ships a Tatoeba sentence credits Tatoeba in `attribution`/`license`, About shows one "Example sentences" card (Tatoeba, CC-BY 2.0 FR, link), and NOTICE/THIRD-PARTY.md carry the same line.
-2. **Fallback: original Mistral-generated sentences** (Mistral AI, `mistral-small-latest` via `MISTRAL_API_KEY`, `MISTRAL_MODEL` to override; amended 2026-11-12 — `mistral-large-4-0` was still in preview and hung/502'd on every CI call in run 43222663925) when no Tatoeba sentence qualifies. These are original Hiato copy and need no external credit.
-3. **Level gate: Mistral CEFR check per sentence.** Every candidate — Tatoeba or generated — must pass a Mistral check that the sentence stays within the pack's CEFR level (A1–B1 must stay within level, same standard as glosses per ADR 0030). Failures are rejected, not patched. `packs:check` enforces the gate log.
+2. **Fallback: original xAI-generated sentences** (`scripts/xai-chat.ts`, model `grok-4.7`, `reasoning_effort` `medium`, via `XAI_API_KEY` or `~/.grok/auth.json`; `XAI_MODEL` and `XAI_REASONING_EFFORT` override) when no Tatoeba sentence qualifies. These are original Hiato copy and need no external credit. New gate-log rows record source `xai`.
+3. **Level gate: xAI CEFR check per sentence.** Every candidate — Tatoeba or generated — must pass an xAI check that the sentence stays within the pack's CEFR level (A1–B1 must stay within level, same standard as glosses per ADR 0030). Failures are rejected, not patched. `packs:check` enforces the gate log. Source `mistral` stays an accepted legacy value so rows written before this amendment still pass; the log is not rewritten.
 
 ## Options Considered
 
 | Option | Pros | Cons |
 | --- | --- | --- |
 | Tatoeba only | Real sentences, proven model | Gaps for rare lemmas; level fit unverified without a gate |
-| Original Mistral-generated only (chosen fallback) | Zero licensing surface; level-promptable | Model quality risk at A1–B1; needs the CEFR gate anyway |
-| **Hybrid Tatoeba + Mistral (chosen)** | Best sentence where one exists; original copy fills gaps; one gate covers both | Two source kinds to credit and maintain |
+| Original xAI-generated only (chosen fallback) | Zero licensing surface; level-promptable | Model quality risk at A1–B1; needs the CEFR gate anyway |
+| **Hybrid Tatoeba + xAI (chosen)** | Best sentence where one exists; original copy fills gaps; one gate covers both | Two source kinds to credit and maintain |
 | Other corpora (OpenSubtitles, CEFRLex, Tatoeba audio) | — | OpenSubtitles text licensing murky; CEFRLex all-rights-reserved (already rejected in ADR 0029); audio out of scope |
 
 ## Grill decisions (2026-11-11, Andreas)
@@ -32,6 +32,10 @@ Hybrid source, per the 2026-11-11 grill:
 1. **Hybrid source.** Tatoeba and our own LLM.
 2. **Pilot then widen.** EN + DE A1–B1 first, then all 36 packs.
 3. **LLM CEFR check per sentence** as the A1–B1 level gate.
+
+## Amendment (2026-11-13, #267)
+
+The client moves from Mistral AI back to xAI. This is a forward change, not a revert of #251. Retries, the 120 s timeout, resume, the content normalizer, and the example-sentence pipeline stay. `top_p` is dropped; only Mistral required it. The 2026-11-12 amendment had picked `mistral-small-latest` (`MISTRAL_MODEL` to override) because `mistral-large-4-0` was still in preview and hung or returned 502 on every CI call in run 43222663925. Scripts now run locally with `XAI_API_KEY`. The pack workflows stay deleted. Older generated entries were made with Mistral AI and keep source `mistral`.
 
 ## Consequences
 
