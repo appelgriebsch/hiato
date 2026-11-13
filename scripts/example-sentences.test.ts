@@ -68,10 +68,14 @@ describe('example-sentences guards (ADR 0048)', () => {
   test('a capitalised stock-name lemma is rejected; lowercase stays (#279)', () => {
     expect(sentenceAllowed('Tom tem namorada?', 'pt', 'TOM')).toBe(false)
     expect(sentenceAllowed('Ele falou em tom baixo.', 'pt', 'TOM')).toBe(true)
-    expect(sentenceAllowed('Jack stand früh auf.', 'de', 'JACK')).toBe(false)
     expect(sentenceAllowed('Jack is a nice jacket.', 'en', 'JACK')).toBe(false)
     expect(sentenceAllowed('Der jack ist warm.', 'de', 'JACK')).toBe(true)
     expect(sentenceAllowed('A jack lifts the car.', 'en', 'JACK')).toBe(true)
+  })
+
+  test('German keeps a capitalised stock-name lemma (#279)', () => {
+    expect(sentenceAllowed('Die Mark war die alte Währung.', 'de', 'MARK')).toBe(true)
+    expect(sentenceAllowed('Tom zahlt eine Mark.', 'de', 'MARK')).toBe(false)
   })
 
   test('a sentence-initial common word is not rejected as a stock name', () => {
@@ -104,11 +108,12 @@ describe('example-sentences guards (ADR 0048)', () => {
 
   test('a cached pass is not reused when it contains a stock name', () => {
     const pass = { verdict: 'pass' as const, gate: GATE_VERSION, sentence: 'Fadil left the house.' }
-    expect(reuseCachedPass(pass)).toBe(false)
-    expect(reuseCachedPass({ ...pass, sentence: 'The house is big.' })).toBe(true)
-    expect(reuseCachedPass({ ...pass, sentence: 'Tom tem namorada?' })).toBe(false)
-    expect(reuseCachedPass({ ...pass, sentence: 'Ele falou em tom baixo.' })).toBe(true)
-    expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' })).toBe(false)
+    expect(reuseCachedPass(pass, 'en', 'HOUSE')).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'The house is big.' }, 'en', 'HOUSE')).toBe(true)
+    expect(reuseCachedPass({ ...pass, sentence: 'Tom tem namorada?' }, 'pt', 'TOM')).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'Ele falou em tom baixo.' }, 'pt', 'TOM')).toBe(true)
+    expect(reuseCachedPass({ ...pass, sentence: 'Die Mark war die alte Währung.' }, 'de', 'MARK')).toBe(true)
+    expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' }, 'en', 'HOUSE')).toBe(false)
   })
 
   test('tatoebaCandidates sorts shortest first and skips non-whole-word hits', () => {

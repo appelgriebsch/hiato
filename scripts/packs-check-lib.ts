@@ -162,7 +162,8 @@ export function exampleGateKey(rel: string, word: string): string {
  * the logged sentence must match the pack exactly (tamper guard), the entry must
  * be gate version 2 (version 1 / missing is stale — #247 reopen),
  * the example must not contain a capitalised Tatoeba stock name (including
- * the lemma's own spelling, #279), and a skip-listed lemma must have none.
+ * the lemma's own spelling, except in German, #279), and a skip-listed lemma
+ * must have none.
  */
 export function checkExampleGate(
   rel: string,
@@ -184,7 +185,7 @@ export function checkExampleGate(
       )
       continue
     }
-    const stock = stockNameInText(L.example)
+    const stock = stockNameInText(L.example, L.word, pack.lang)
     if (stock) {
       errors.push(
         `${rel}: example for "${L.word}" contains Tatoeba stock name "${stock}" — "${L.example}"`,

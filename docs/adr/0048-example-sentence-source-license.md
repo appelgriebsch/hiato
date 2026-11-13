@@ -43,7 +43,7 @@ Staging verification of 248b588 found Tatoeba stock persona names (Tom, Mary, Sa
 
 ## Amendment (2026-11-13, #279)
 
-The lemma exemption in the stock-name guard above no longer applies. A capitalised stock-name token is rejected even when it is the lemma (`Tom`, `Jack`). A lowercase use stays allowed. Lemmas listed in `scripts/data/example-skip.txt` ship no example: the pipeline does not search Tatoeba or call the model for them, and `packs:check` fails if one still has an `example`.
+The lemma exemption in the stock-name guard above no longer applies, except in German: nouns are capitalised, so a `de` lemma's own spelling stays allowed. Elsewhere a capitalised stock-name token is rejected even when it is the lemma (`Tom`, `Jack`). A lowercase use stays allowed. Lemmas listed in `scripts/data/example-skip.txt` ship no example: the pipeline does not search Tatoeba or call the model for them, and `packs:check` fails if one still has an `example`.
 
 ## Consequences
 

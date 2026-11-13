@@ -27,7 +27,7 @@ import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
-import { stockNameInText } from './tatoeba-stock-names'
+import { isStockName, stockNameInText } from './tatoeba-stock-names'
 import { mistralChat, readMistralKey } from './mistral-chat'
 import { packPinEntry } from './pack-pin'
 
@@ -137,7 +137,7 @@ export function lemmaExampleAction(
   force: boolean,
 ): 'skip' | 'reuse' | 'gate' {
   if (exampleSkipped(lang, cefr, word)) return 'skip'
-  if (!force && reuseCachedPass(cached)) return 'reuse'
+  if (!force && reuseCachedPass(cached, lang, word)) return 'reuse'
   return 'gate'
 }
 
@@ -145,14 +145,17 @@ export function lemmaExampleAction(
  * Guards every candidate must pass (ADR 0048): whole-word lemma match, denylist
  * (profanity/slur) tokens, no capitalized person names, and no Tatoeba stock
  * persona names at any position (#247 reopen, #279). A capitalised stock-name
- * token is rejected even when it is the lemma; a lowercase use stays allowed.
+ * token is rejected even when it is the lemma, except in German, where the
+ * lemma's own spelling stays allowed. A lowercase use stays allowed.
  * The lemma stays exempt from the denylist (isDeniedGlossToken skips it).
  */
 /** A gate-2 pass is reusable only while its sentence still clears the stock-name guard. */
 export function reuseCachedPass(
   entry: { verdict?: string; gate?: number; sentence?: string } | null | undefined,
+  lang: string,
+  word: string,
 ): boolean {
-  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '')
+  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word, lang)
 }
 
 /**
@@ -166,7 +169,7 @@ export function aunAsiMismatch(sentence: string, word: string): boolean {
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
   if (aunAsiMismatch(sentence, word)) return false
-  if (stockNameInText(sentence)) return false
+  if (stockNameInText(sentence, word, lang)) return false
   const DENY = loadDenylist()
   const NAMES = loadNameList()
   const re = /[\p{L}\p{M}]+/gu
@@ -176,8 +179,11 @@ export function sentenceAllowed(sentence: string, lang: PackLang, word: string):
     const tok = m[0]!
     if (isDeniedGlossToken(tok, lang, word, DENY)) return false
     // A name-list token is a person name only when capitalized mid-sentence;
-    // the first word is capitalized by sentence case alone.
-    if (!first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
+    // the first word is capitalized by sentence case alone. A German stock-name
+    // lemma stays: nouns are capitalised, so "Die Mark…" would fail here.
+    const ownGermanStockLemma =
+      lang === 'de' && nfcUpper(tok) === nfcUpper(word) && isStockName(tok)
+    if (!ownGermanStockLemma && !first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
     first = false
   }
   return true

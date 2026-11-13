@@ -20,13 +20,29 @@ function loadStockNameList(): Set<string> {
   return set
 }
 
-/** Capitalized stock-persona token, or null. The lemma's own spelling counts (#279). */
-export function stockNameInText(text: string, names = loadStockNameList()): string | null {
+export function isStockName(word: string, names = loadStockNameList()): boolean {
+  return names.has(nfcUpper(word))
+}
+
+/**
+ * Capitalized stock-persona token, or null.
+ * German nouns are capitalised, so a `de` lemma's own spelling is allowed (#279).
+ */
+export function stockNameInText(
+  text: string,
+  lemma: string,
+  lang: string,
+  names = loadStockNameList(),
+): string | null {
+  const lemmaKey = nfcUpper(lemma)
   const re = /[\p{L}\p{M}]+/gu
   let m: RegExpExecArray | null
   while ((m = re.exec(text)) !== null) {
     const tok = m[0]!
-    if (/^\p{Lu}/u.test(tok) && names.has(nfcUpper(tok))) return tok
+    const key = nfcUpper(tok)
+    if (!/^\p{Lu}/u.test(tok) || !names.has(key)) continue
+    if (lang === 'de' && key === lemmaKey) continue
+    return tok
   }
   return null
 }
