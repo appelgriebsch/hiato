@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
+import { dailyInviteTarget } from './invite'
 import {
   SHARE_CARD_KEYS,
   buildShareCardPayload,
@@ -243,6 +244,38 @@ describe('SUR-spoiler-matrix (#109) — daily vs practice (ADR 0018)', () => {
   })
 })
 
+
+describe('SUR-invite-matrix (#226 amendment) — daily token invites, practice does not', () => {
+  test('daily token → invite target is the token lang×cefr', () => {
+    const payload = sampleDaily()
+    const decoded = decodeShareUrlToken(encodeShareUrlToken(payload))!
+    expect(decoded.mode).toBe('daily')
+    expect(dailyInviteTarget(decoded)).toEqual({ lang: 'en', cefr: 'a1' })
+  })
+
+  test('practice token → null (ADR 0018: a Practice share is not today’s Daily)', () => {
+    const decoded = decodeShareUrlToken(encodeShareUrlToken(samplePractice()))!
+    expect(decoded.mode).toBe('practice')
+    expect(dailyInviteTarget(decoded)).toBeNull()
+  })
+
+  test('token polluted with lemma/answer → invite target still carries only lang×cefr', () => {
+    const spoilerJson = JSON.stringify({
+      ...sampleDaily(),
+      lemma: SAMPLE_LEMMA,
+      answer: SAMPLE_LEMMA,
+    })
+    const token = btoa(spoilerJson)
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '')
+    const decoded = decodeShareUrlToken(token)!
+    const target = dailyInviteTarget(decoded)
+    expect(target).toEqual({ lang: 'en', cefr: 'a1' })
+    expect(Object.keys(target!).sort()).toEqual(['cefr', 'lang'])
+    expect(JSON.stringify(target).toLowerCase()).not.toContain('banana')
+  })
+})
 
 describe('SUR-hydrate (#107) — resolveSharePayload precedence', () => {
   test('valid p= ignores polluted location.state', () => {
