@@ -23,3 +23,15 @@ export function loadStockNameList(): Set<string> {
 export function onStockNameList(word: string, names = loadStockNameList()): boolean {
   return names.has(nfcUpper(word))
 }
+
+/** Capitalized stock-persona token, or null. The lemma itself is exempt (#247). */
+export function stockNameInText(text: string, lemma: string, names = loadStockNameList()): string | null {
+  const lemmaKey = nfcUpper(lemma)
+  const re = /[\p{L}\p{M}]+/gu
+  let m: RegExpExecArray | null
+  while ((m = re.exec(text)) !== null) {
+    const tok = m[0]!
+    if (/^\p{Lu}/u.test(tok) && nfcUpper(tok) !== lemmaKey && names.has(nfcUpper(tok))) return tok
+  }
+  return null
+}

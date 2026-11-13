@@ -53,4 +53,4 @@ Committed output of `scripts/example-sentences.ts` (run locally with `XAI_API_KE
 
 | File | Contents | Provenance |
 |------|----------|------------|
-| `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `xai` / hand-written `fixture`; earlier generated rows keep the source recorded at the time), CEFR verdict, level, date | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Hiato sentences, generated and level-checked with xAI |
+| `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `xai` / hand-written `fixture`; earlier generated rows keep the source recorded at the time), CEFR verdict, level, date, gate version; rejects also store `reason`. A `pack\|WORD\|reject` key keeps a shipped sentence's reject when a later candidate replaces the lemma key | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Hiato sentences, generated and level-checked with xAI |

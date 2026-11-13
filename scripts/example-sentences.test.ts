@@ -6,9 +6,12 @@ import {
   GATE_VERSION,
   gatePrompt,
   generatePrompt,
+  isCurrentPass,
   parseGateVerdict,
   pickTatoebaCandidate,
+  recordGateEntry,
   sentenceAllowed,
+  setLemmaExample,
   tatoebaCandidates,
   tatoebaUrl,
   parseTatoebaTsv,
@@ -49,6 +52,7 @@ describe('example-sentences guards (ADR 0048)', () => {
 
   test('rejects sentence-initial Tatoeba stock names (#247 reopen)', () => {
     expect(sentenceAllowed('Tom is happy today.', 'en', 'HAPPY')).toBe(false)
+    expect(sentenceAllowed('Foste tu, Tomás?', 'pt', 'FOSTE')).toBe(false)
     expect(sentenceAllowed('Mary has a big house.', 'en', 'HOUSE')).toBe(false)
     expect(sentenceAllowed('Bob and Dan are friends.', 'en', 'FRIEND')).toBe(false)
   })
@@ -98,10 +102,77 @@ describe('example-sentences guards (ADR 0048)', () => {
 })
 
 describe('example-sentences CEFR gate parsing (#247)', () => {
-  test('PASS/FAIL verdicts, case-insensitive, garbage rejects', () => {
-    expect(parseGateVerdict('PASS — all A1 words.')).toBe('pass')
-    expect(parseGateVerdict('fail: uses B2 structure')).toBe('reject')
+  test('PASS/FAIL verdicts keep the reason', () => {
+    expect(parseGateVerdict('PASS — all A1 words.')).toEqual({
+      verdict: 'pass',
+      reason: 'all A1 words.',
+    })
+    expect(parseGateVerdict('fail: uses B2 structure')).toEqual({
+      verdict: 'reject',
+      reason: 'uses B2 structure',
+    })
     expect(parseGateVerdict('maybe?')).toBeNull()
+  })
+
+  test('isCurrentPass is only a pass at GATE_VERSION', () => {
+    expect(isCurrentPass({ verdict: 'pass', gate: GATE_VERSION })).toBe(true)
+    expect(isCurrentPass({ verdict: 'pass', gate: 1 })).toBe(false)
+    expect(isCurrentPass({ verdict: 'pass' })).toBe(false)
+    expect(isCurrentPass({ verdict: 'reject', gate: GATE_VERSION })).toBe(false)
+    expect(isCurrentPass(undefined)).toBe(false)
+  })
+
+  test('a failed re-gate drops the previous example', () => {
+    const lemma: { example?: string } = { example: 'Jack stand früh auf.' }
+    setLemmaExample(lemma, null)
+    expect(lemma.example).toBeUndefined()
+    expect('example' in lemma).toBe(false)
+    setLemmaExample(lemma, 'Die Jacke ist blau.')
+    expect(lemma.example).toBe('Die Jacke ist blau.')
+  })
+
+  test('a later candidate does not overwrite the shipped sentence reject', () => {
+    const log: ExampleGateLog = {}
+    const shipped = 'Tom è morto.'
+    recordGateEntry(
+      log,
+      'it/a1.json',
+      'MORTO',
+      {
+        sentence: shipped,
+        source: 'tatoeba',
+        verdict: 'reject',
+        reason: 'death',
+        level: 'a1',
+        at: '2026-11-12',
+        gate: GATE_VERSION,
+      },
+      shipped,
+    )
+    recordGateEntry(
+      log,
+      'it/a1.json',
+      'MORTO',
+      {
+        sentence: 'Il gatto è morto.',
+        source: 'mistral',
+        verdict: 'pass',
+        level: 'a1',
+        at: '2026-11-12',
+        gate: GATE_VERSION,
+      },
+      shipped,
+    )
+    expect(log['it/a1.json|MORTO']?.sentence).toBe('Il gatto è morto.')
+    expect(log['it/a1.json|MORTO|reject']).toEqual({
+      sentence: shipped,
+      source: 'tatoeba',
+      verdict: 'reject',
+      reason: 'death',
+      level: 'a1',
+      at: '2026-11-12',
+      gate: GATE_VERSION,
+    })
   })
 })
 
@@ -159,12 +230,11 @@ describe('packs:check example gate log (ADR 0048, #247)', () => {
     expect(checkExampleGate('en/a1.json', pack, gate)).toEqual([])
   })
 
-  test('accepts a new xai entry and a legacy generated entry', () => {
+  test('a current pass stays current for source xai and source mistral', () => {
     for (const source of ['xai', 'mistral'] as const) {
-      const log: ExampleGateLog = {
-        'en/a1.json|HOUSE': { ...gate['en/a1.json|HOUSE']!, source },
-      }
-      expect(checkExampleGate('en/a1.json', pack, log)).toEqual([])
+      const entry = { ...gate['en/a1.json|HOUSE']!, source }
+      expect(isCurrentPass(entry)).toBe(true)
+      expect(checkExampleGate('en/a1.json', pack, { 'en/a1.json|HOUSE': entry })).toEqual([])
     }
   })
 

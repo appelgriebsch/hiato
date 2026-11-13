@@ -25,9 +25,12 @@ import { EXAMPLE_SENTENCE_MAX, type PackCefr, type PackLang, type WordPack } fro
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
-import { loadStockNameList, onStockNameList } from './tatoeba-stock-names'
+import { GATE_VERSION, isCurrentPass } from './example-gate'
+import { stockNameInText } from './tatoeba-stock-names'
 import { readXaiKey, xaiChat } from './xai-chat'
 import { packPinEntry } from './pack-pin'
+
+export { GATE_VERSION, isCurrentPass }
 
 const ROOT = path.join(import.meta.dir, '..')
 const PACKS = path.join(ROOT, 'public', 'packs')
@@ -67,10 +70,6 @@ const SENTENCE_MIN = 10
 export type GateSource = 'tatoeba' | 'xai' | 'mistral' | 'fixture'
 export type GateVerdict = 'pass' | 'reject'
 
-/** Gate prompt version (see ADR 0048 amendment, #247 reopen). Version 2 adds the
- * gloss-sense and content-suitability checks plus the stock-name guard. */
-export const GATE_VERSION = 2
-
 export type ExampleGateEntry = {
   sentence: string
   source: GateSource
@@ -78,6 +77,8 @@ export type ExampleGateEntry = {
   level: string
   at: string
   gate: number
+  /** Set on rejects: the gate's one-line reason. */
+  reason?: string
 }
 
 export type ExampleGateLog = Record<string, ExampleGateEntry>
@@ -109,21 +110,15 @@ export function cleanSentence(raw: string): string | null {
  */
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
+  if (stockNameInText(sentence, word)) return false
   const DENY = loadDenylist()
   const NAMES = loadNameList()
-  const STOCK = loadStockNameList()
-  const lemmaKey = nfcUpper(word)
   const re = /[\p{L}\p{M}]+/gu
   let m: RegExpExecArray | null
   let first = true
   while ((m = re.exec(sentence)) !== null) {
     const tok = m[0]!
     if (isDeniedGlossToken(tok, lang, word, DENY)) return false
-    // Stock Tatoeba names are rejected at any position, including sentence-initial
-    // (they nearly always start the sentence); the lemma itself is exempt.
-    if (/^\p{Lu}/u.test(tok) && nfcUpper(tok) !== lemmaKey && onStockNameList(tok, STOCK)) {
-      return false
-    }
     // A name-list token is a person name only when capitalized mid-sentence;
     // the first word is capitalized by sentence case alone.
     if (!first && /^\p{Lu}/u.test(tok) && onNameList(tok, NAMES)) return false
@@ -184,11 +179,57 @@ export function pickTatoebaCandidate(
   return tatoebaCandidates(index, lang, word)[0] ?? null
 }
 
-/** Parse the CEFR gate answer. */
-export function parseGateVerdict(content: string): GateVerdict | null {
-  const m = /^\s*(PASS|FAIL)\b/i.exec(content)
+/** Parse the CEFR gate answer, keeping the one-line reason after PASS/FAIL. */
+export function parseGateVerdict(content: string): { verdict: GateVerdict; reason: string } | null {
+  const m = /^\s*(PASS|FAIL)\b\s*[:—–-]?\s*(.*)$/is.exec(content)
   if (!m) return null
-  return m[1]!.toUpperCase() === 'PASS' ? 'pass' : 'reject'
+  return {
+    verdict: m[1]!.toUpperCase() === 'PASS' ? 'pass' : 'reject',
+    reason: m[2]!.trim(),
+  }
+}
+
+function gateEntry(
+  sentence: string,
+  source: GateSource,
+  parsed: { verdict: GateVerdict; reason: string } | null,
+  level: string,
+  at: string,
+): ExampleGateEntry {
+  const verdict = parsed?.verdict === 'pass' ? 'pass' : 'reject'
+  const entry: ExampleGateEntry = { sentence, source, verdict, level, at, gate: GATE_VERSION }
+  if (verdict === 'reject') entry.reason = parsed ? parsed.reason || 'no reason given' : 'unparseable gate answer'
+  return entry
+}
+
+/**
+ * Log a verdict. A reject of the sentence already shipped on the lemma is kept
+ * under `|reject` when a later candidate replaces the lemma key (#247).
+ */
+export function recordGateEntry(
+  log: ExampleGateLog,
+  rel: string,
+  word: string,
+  entry: ExampleGateEntry,
+  shipped?: string,
+): void {
+  const key = gateKey(rel, word)
+  const prev = log[key]
+  if (
+    shipped &&
+    prev?.verdict === 'reject' &&
+    prev.sentence === shipped &&
+    entry.sentence !== shipped
+  ) {
+    log[`${key}|reject`] = prev
+  }
+  log[key] = entry
+}
+
+/** `null` drops a stale example when the re-gate does not pass (#247). */
+export function setLemmaExample(lemma: { example?: string }, sentence: string | null): void {
+  if (sentence) lemma.example = sentence
+  else delete lemma.example
 }
 
 export const CONTENT_RULE =
@@ -249,23 +290,17 @@ async function generateAndGate(
   apiKey: string,
   log: ExampleGateLog,
   at: string,
+  shipped?: string,
 ): Promise<ExampleGateEntry | null> {
   for (let i = 0; i < GENERATE_TRIES; i++) {
     const out = await xaiChat(apiKey, GEN_SYSTEM, generatePrompt(lang, cefr, word, gloss), 0.7)
     const s = cleanSentence(out)
     if (!s || !sentenceAllowed(s, lang, word)) continue
-    const verdict = parseGateVerdict(
+    const parsed = parseGateVerdict(
       await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, word, gloss), 0),
     )
-    const entry: ExampleGateEntry = {
-      sentence: s,
-      source: 'xai',
-      verdict: verdict === 'pass' ? 'pass' : 'reject',
-      level: cefr,
-      at,
-      gate: GATE_VERSION,
-    }
-    log[gateKey(rel, word)] = entry
+    const entry = gateEntry(s, 'xai', parsed, cefr, at)
+    recordGateEntry(log, rel, word, entry, shipped)
     if (entry.verdict === 'pass') return entry
   }
   return null
@@ -394,28 +429,34 @@ async function gateLemma(
   log: ExampleGateLog,
   at: string,
 ): Promise<'tatoeba' | 'xai' | null> {
+  const shipped = lemma.example
   for (const s of tatoebaCandidates(index, lang, lemma.word, GATE_TRIES)) {
-    const verdict = parseGateVerdict(
+    const parsed = parseGateVerdict(
       await xaiChat(apiKey, GATE_SYSTEM, gatePrompt(lang, cefr, s, lemma.word, lemma.gloss), 0),
     )
-    log[gateKey(rel, lemma.word)] = {
-      sentence: s,
-      source: 'tatoeba',
-      verdict: verdict === 'pass' ? 'pass' : 'reject',
-      level: cefr,
-      at,
-      gate: GATE_VERSION,
-    }
-    if (verdict === 'pass') {
-      lemma.example = s
+    const entry = gateEntry(s, 'tatoeba', parsed, cefr, at)
+    recordGateEntry(log, rel, lemma.word, entry, shipped)
+    if (entry.verdict === 'pass') {
+      setLemmaExample(lemma, s)
       return 'tatoeba'
     }
   }
-  const entry = await generateAndGate(rel, lang, cefr, lemma.word, lemma.gloss, apiKey, log, at)
-  if (entry && entry.verdict === 'pass') {
-    lemma.example = entry.sentence
+  const generated = await generateAndGate(
+    rel,
+    lang,
+    cefr,
+    lemma.word,
+    lemma.gloss,
+    apiKey,
+    log,
+    at,
+    shipped,
+  )
+  if (generated?.verdict === 'pass') {
+    setLemmaExample(lemma, generated.sentence)
     return 'xai'
   }
+  setLemmaExample(lemma, null)
   return null
 }
 
@@ -485,7 +526,7 @@ async function main() {
         const cached = log[key]
         // Gate version 2 (#247 reopen): entries with no version or version 1 are
         // stale — every existing verdict must re-run once under the stricter gate.
-        if (cached && cached.verdict === 'pass' && cached.gate === GATE_VERSION && !cli.force) {
+        if (isCurrentPass(cached) && !cli.force) {
           if (cached.sentence !== lemma.example) lemma.example = cached.sentence
           if (cached.source === 'tatoeba') tatoebaCount++
           else if (cached.source === 'xai' || cached.source === 'mistral') generatedCount++

@@ -1,23 +1,37 @@
 # Tatoeba stock persona names (NFC uppercase, one per line).
-# Seeded from a scan of the Tatoeba per-language dumps for the most frequent
-# capitalized sentence-initial tokens, minus real common words removed by hand.
-# A sentence containing one of these as a capitalized token at ANY position
-# (including sentence-initial) is rejected as an example candidate (#247).
-# The lemma itself is exempt, so a lemma that equals a stock name (e.g. JACK)
-# can still get an example.
+# A capitalized token at any position is rejected; the lemma itself is exempt (#247).
+#
+# Scan (2026-11-12). Dumps stay gitignored: scripts/data/tatoeba/{eng,deu,spa,por,fra,ita}_sentences.tsv.bz2.
+# Command:
+#   python3 -c 'import bz2,re,pathlib; R=pathlib.Path("scripts/data/tatoeba"); T=re.compile(r"[^\W\d_]+"); W={"Tomás","Joki","Tony","Ann","Paul","Bill","Shuu","Susuki"}; c={w:0 for w in W}
+# for lang in ("eng","deu","spa","por","fra","ita"):
+#  [c.__setitem__(t, c[t]+1) for line in bz2.open(R/f"{lang}_sentences.tsv.bz2","rt",encoding="utf-8",errors="replace") for t in T.findall(line.split(chr(9),2)[-1]) if t in W]
+# print(c)'
+# Output: {'Tomás': 2150, 'Paul': 1962, 'Bill': 1154, 'Tony': 634, 'Ann': 356, 'Joki': 12, 'Shuu': 3, 'Susuki': 2}
+# Wider capitalized-token pass (2+ languages, rare lowercase) also shows the names already listed
+# (Tom, Mary, Sami, Ziri, Yanni, Maria, Layla, Rima, Skura, Mennad, John, Dan).
+# Removed by hand: places (Boston, Algeria, Paris), common words (Io, Frau, Arbeit, Buch), genitive Toms.
+ANN
+BILL
 BOB
 DAN
 JACK
 JOHN
+JOKI
 KEN
 LAYLA
 MARIA
 MARY
 MENNAD
 MUIRIEL
+PAUL
 RIMA
 SAMI
+SHUU
 SKURA
+SUSUKI
 TOM
+TOMÁS
+TONY
 YANNI
 ZIRI
