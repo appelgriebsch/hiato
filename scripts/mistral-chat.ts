@@ -56,7 +56,7 @@ export async function mistralChat(
     try {
       const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
         method: 'POST',
-        // shortcut: 300s because reasoning_effort medium is slower, raise timeoutMs if a real batch still aborts.
+        // 300s default timeout; raise timeoutMs if a real batch still aborts.
         signal: AbortSignal.timeout(timeoutMs),
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 /**
- * Exclusive B2–C2 lemma selection (ADR 0028). No I/O, no xAI, no top-level await.
+ * Exclusive B2–C2 lemma selection (ADR 0028). No I/O, no Mistral AI call, no top-level await.
  */
 import { isDeniedLemma, nfcUpper } from './lemma-denylist'
 import {

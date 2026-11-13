@@ -49,7 +49,7 @@ Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octa
 
 ## Example-sentence gate log (#225 / ADR 0048, #247)
 
-Committed output of `scripts/example-sentences.ts` (run via the `Example sentences` workflow_dispatch with the `MISTRAL_API_KEY` secret). `packs:check` **reads** `example-gate.json` and fails any shipped `example` without a matching `pass` verdict. Tatoeba dumps fetched on demand live under the gitignored `tatoeba/` directory (CC-BY 2.0 FR — never committed).
+Committed output of `scripts/example-sentences.ts` (run locally with `MISTRAL_API_KEY`; there is no pack workflow — the GitHub Actions attempt did not work out). `packs:check` **reads** `example-gate.json` and fails any shipped `example` without a matching `pass` verdict. Tatoeba dumps fetched on demand live under the gitignored `tatoeba/` directory (CC-BY 2.0 FR — never committed).
 
 | File | Contents | Provenance |
 |------|----------|------------|

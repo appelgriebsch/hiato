@@ -15,8 +15,8 @@
  * already complete (no cached-pass misses, no --force) without writing again.
  *
  * --dry-run selects Tatoeba sentences without Mistral calls or writes.
- * Run in CI via .github/workflows/example-sentences.yml (MISTRAL_API_KEY secret);
- * committed artifacts are public/packs + scripts/data/example-gate.json.
+ * Run locally with MISTRAL_API_KEY (required unless --dry-run); committed
+ * artifacts are public/packs + scripts/data/example-gate.json.
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'

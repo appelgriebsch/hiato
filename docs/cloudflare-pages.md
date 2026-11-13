@@ -10,7 +10,7 @@ Do **not** rely on Cloudflare’s `bun.lock` autodetection. Pin Bun explicitly.
 | Build output directory | `dist` |
 | Root directory | `/` (repo root) |
 
-The build command lives in the Cloudflare Pages dashboard (it is not applied by merging this file). Edit **Production and Preview** on merge so both environments run `packs:check`. GitHub CI `build-test` also runs `packs:check`; a Pages-only rebuild would not. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
+The build command lives in the Cloudflare Pages dashboard (it is not applied by merging this file). Edit **Production and Preview** on merge so both environments run `packs:check`. GitHub CI `build-test` also runs `packs:check`; a Pages-only rebuild would not. Do **not** run `scripts/expand-packs.ts` or call Mistral AI on Pages.
 
 ## What publishes a push to `main`
 
@@ -31,7 +31,7 @@ Set on **Production** and **Preview**:
 
 `SKIP_DEPENDENCY_INSTALL=true` skips CF’s default install so the build command owns `bun install --frozen-lockfile`.
 
-`packs:check` is the Hunspell / name / synonym / same-language-gloss gate (ADR 0030). The command lives in the Cloudflare Pages dashboard — edit **Production and Preview** on merge so a main deploy cannot publish packs that skipped GitHub `build-test`. Do **not** run `scripts/expand-packs.ts` or call xAI on Pages.
+`packs:check` is the Hunspell / name / synonym / same-language-gloss gate (ADR 0030). The command lives in the Cloudflare Pages dashboard — edit **Production and Preview** on merge so a main deploy cannot publish packs that skipped GitHub `build-test`. Do **not** run `scripts/expand-packs.ts` or call Mistral AI on Pages.
 
 Cloudflare Pages injects `CI=true` into every build ([build configuration docs](https://developers.cloudflare.com/pages/configuration/build-configuration/#environment-variables)), so `packs:check` there fails closed on a Hunspell verdict cache miss and never loads dictionaries, the same as GitHub CI.
 

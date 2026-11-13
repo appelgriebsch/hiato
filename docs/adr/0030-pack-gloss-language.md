@@ -4,7 +4,7 @@ Learner packs are L2 hangman: the puzzle word is German in a DE pack, Portuguese
 
 ## Decision
 
-`lemmas[].gloss` is written in `pack.lang` (EN→EN, DE→DE, ES→ES, PT→PT). English is not a substitute for missing L2 copy. Expand (xAI) must prompt and accept only same-language glosses; `packs:check` fails a pack that ships English-shaped or English-majority glosses in DE/ES/PT. Synonym chips stay same-language as well (ADR 0023).
+`lemmas[].gloss` is written in `pack.lang` (EN→EN, DE→DE, ES→ES, PT→PT). English is not a substitute for missing L2 copy. Expand (Mistral AI) must prompt and accept only same-language glosses; `packs:check` fails a pack that ships English-shaped or English-majority glosses in DE/ES/PT. Synonym chips stay same-language as well (ADR 0023).
 
 ## Considered options
 
