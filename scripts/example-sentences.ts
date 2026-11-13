@@ -105,6 +105,14 @@ export function cleanSentence(raw: string): string | null {
  * both the denylist (isDeniedGlossToken skips it) and the stock-name guard, so
  * a lemma that equals a stock name (e.g. JACK) can still get an example.
  */
+/** A gate-2 pass is reusable only while its sentence still clears the stock-name guard. */
+export function reuseCachedPass(
+  entry: { verdict?: string; gate?: number; sentence?: string } | null | undefined,
+  word: string,
+): boolean {
+  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word)
+}
+
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
   if (!spoilerContains(sentence, word)) return false
   if (stockNameInText(sentence, word)) return false
@@ -540,7 +548,7 @@ async function main() {
         const cached = log[key]
         // Gate version 2 (#247 reopen): entries with no version or version 1 are
         // stale — every existing verdict must re-run once under the stricter gate.
-        if (isCurrentPass(cached) && !cli.force) {
+        if (reuseCachedPass(cached, lemma.word) && !cli.force) {
           if (cached.sentence !== lemma.example) lemma.example = cached.sentence
           if (cached.source === 'tatoeba') tatoebaCount++
           else if (cached.source === 'mistral') generatedCount++

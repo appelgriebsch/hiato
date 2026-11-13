@@ -9,6 +9,7 @@ import {
   parseGateVerdict,
   pickTatoebaCandidate,
   recordGateEntry,
+  reuseCachedPass,
   sentenceAllowed,
   setLemmaExample,
   tatoebaCandidates,
@@ -69,6 +70,20 @@ describe('example-sentences guards (ADR 0048)', () => {
 
   test('stock names are rejected mid-sentence too', () => {
     expect(sentenceAllowed('I saw Tom at the house.', 'en', 'HOUSE')).toBe(false)
+  })
+
+  test('rejects person names that still ship, including accented forms', () => {
+    expect(sentenceAllowed('Fadil left the house.', 'en', 'HOUSE')).toBe(false)
+    expect(sentenceAllowed('The director is Flavio.', 'en', 'DIRECTOR')).toBe(false)
+    expect(sentenceAllowed('Quiero conocer a María.', 'es', 'CONOCER')).toBe(false)
+    expect(sentenceAllowed('Fadil left the house.', 'en', 'FADIL')).toBe(true)
+  })
+
+  test('a cached pass is not reused when it contains a stock name', () => {
+    const pass = { verdict: 'pass' as const, gate: GATE_VERSION, sentence: 'Fadil left the house.' }
+    expect(reuseCachedPass(pass, 'HOUSE')).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'The house is big.' }, 'HOUSE')).toBe(true)
+    expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' }, 'HOUSE')).toBe(false)
   })
 
   test('tatoebaCandidates sorts shortest first and skips non-whole-word hits', () => {

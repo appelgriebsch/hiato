@@ -31529,7 +31529,8 @@
   "es/a2.json|AUN": {
     "sentence": "Aun no ha llegado el correo.",
     "source": "fixture",
-    "verdict": "pass",
+    "verdict": "reject",
+    "reason": "todavía is Aún, already a lemma in es/a1",
     "level": "a2",
     "at": "2026-11-13",
     "gate": 2

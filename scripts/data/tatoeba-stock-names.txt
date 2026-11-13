@@ -1,5 +1,6 @@
 # Tatoeba stock persona names (NFC uppercase, one per line).
 # A capitalized token at any position is rejected; the lemma itself is exempt (#247).
+# Match is exact NFC uppercase, so María does not match MARIA.
 #
 # Scan (2026-11-12). Dumps stay gitignored: scripts/data/tatoeba/{eng,deu,spa,por,fra,ita}_sentences.tsv.bz2.
 # Command:
@@ -10,31 +11,86 @@
 # Output: {'Tomás': 2150, 'Paul': 1962, 'Bill': 1154, 'Tony': 634, 'Ann': 356, 'Joki': 12, 'Shuu': 3, 'Susuki': 2}
 # Wider capitalized-token pass (2+ languages, rare lowercase) also shows the names already listed
 # (Tom, Mary, Sami, Ziri, Yanni, Maria, Layla, Rima, Skura, Mennad, John, Dan).
-# Removed by hand: places (Boston, Algeria, Paris), common words (Io, Frau, Arbeit, Buch), genitive Toms.
+# Removed by hand: places (Boston, Algeria, Paris) and common words (Io, Frau, Arbeit, Buch).
 # Added 2026-11-13 from staging review of regenerated packs (#247): Colombo, Jim, Leila.
+# Added 2026-11-13 from the shipped A1–B2 packs: person names that still ship,
+# including accented forms (María, Antônio, Raúl, Béni) and the genitives Toms and Davids.
+ALAIN
 ANN
+ANTONIO
+ANTÔNIO
+AOI
+ASHBURTON
+BENEDITO
 BILL
+BOLDI
+BORIS
+BRUNO
+BÉNI
+CLAUDIO
 COLOMBO
+CYRUS
+DAMIEN
 DAN
+DARIO
+DAVIDS
+DIDO
+DMITRI
+DORJE
+DÍAZ
+EDMUNDO
+ELIAS
+FADIL
+FILIPPO
+FLAVIO
+FREUD
+GABOR
+GUNTER
+HARRY
+HOCHSCHILD
+IGOR
 JACK
+JAMES
+JENNIFER
+JESU
 JIM
+JIMMY
 JOHN
 JOKI
+JUAN
+JUBA
 KEN
 LAYLA
 LEILA
+LINDA
 MARIA
+MARK
+MARTINO
 MARY
+MARÍA
 MENNAD
 MUIRIEL
+NAKANO
+OLEG
+PABLO
+PAPI
 PAUL
+RAÚL
+REMEDIOS
 RIMA
+RODRIGO
 SAMI
+SANTIAGO
 SHUU
 SKURA
 SUSUKI
+THOMAS
 TOM
+TOMS
 TOMÁS
 TONY
+TRUMP
+YAMADA
 YANNI
+ZAZEL
 ZIRI
