@@ -1246,6 +1246,62 @@ describe('Share copy confirmation (#135)', () => {
   })
 })
 
+describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
+  test('CTA is gated on dailyInviteTarget(payload) and rendered first in the footer', async () => {
+    const src = await pageSrc('Share.tsx')
+    expect(src).toContain(
+      "import { acceptDailyInvite, dailyInviteTarget } from '@/lib/invite'",
+    )
+    expect(src).toContain(
+      'const invite = payload ? dailyInviteTarget(payload) : null',
+    )
+    const footerAt = src.indexOf('footer={')
+    expect(footerAt).toBeGreaterThan(-1)
+    const gateAt = src.indexOf('{invite ? (', footerAt)
+    expect(gateAt).toBeGreaterThan(footerAt)
+    // Existing Share / Save image / Copy text (+ Home) stay below the CTA.
+    const shareBtnAt = src.indexOf('shareResult(payload)', gateAt)
+    expect(shareBtnAt).toBeGreaterThan(gateAt)
+    expect(src.indexOf('downloadShareCard(payload)', shareBtnAt)).toBeGreaterThan(shareBtnAt)
+    expect(src.indexOf('onCopyText()', shareBtnAt)).toBeGreaterThan(shareBtnAt)
+    expect(src.indexOf("nav('/')", shareBtnAt)).toBeGreaterThan(shareBtnAt)
+  })
+
+  test('CTA label, busy label, and disabled/aria-busy wiring', async () => {
+    const src = await pageSrc('Share.tsx')
+    expect(src).toContain(
+      'Play today’s Daily · ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]}',
+    )
+    expect(src).toContain("'Preparing packs…'")
+    expect(src).toContain('disabled={busy || preparing}')
+    expect(src).toContain('aria-busy={preparing}')
+    expect(src).toContain('onClick={() => void onPlayDaily()}')
+  })
+
+  test('tap runs acceptDailyInvite; success navigates, failure shows role=alert and stays', async () => {
+    const src = await pageSrc('Share.tsx')
+    const fnAt = src.indexOf('async function onPlayDaily')
+    expect(fnAt).toBeGreaterThan(0)
+    const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
+    expect(fn).toContain('await acceptDailyInvite(invite)')
+    const failAt = fn.indexOf('if (!ok)')
+    const navAt = fn.indexOf("nav('/play?mode=daily')")
+    expect(failAt).toBeGreaterThan(-1)
+    expect(navAt).toBeGreaterThan(failAt)
+    expect(fn).toContain('setInviteError(fail)')
+    expect(src).toContain(
+      'Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.',
+    )
+    // Inline alert sits above the CTA inside the same footer gate.
+    const gateAt = src.indexOf('{invite ? (')
+    const alertAt = src.indexOf('role="alert"', gateAt)
+    expect(alertAt).toBeGreaterThan(gateAt)
+    expect(alertAt).toBeLessThan(src.indexOf('aria-busy={preparing}'))
+    // Prefs are written only inside acceptDailyInvite (invite.ts), never on the page.
+    expect(src).not.toContain('setPrefs')
+  })
+})
+
 describe('Pocket sheet Close (#136)', () => {
   test('visible Close calls onClose and does not remove pocket entries', async () => {
     const src = await Bun.file(

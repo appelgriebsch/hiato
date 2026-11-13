@@ -4,12 +4,14 @@ import { Layout, TopBar } from '@/components/Layout'
 import { ShareCard } from '@/components/ShareCard'
 import { Button } from '@/components/ui/button'
 import { Toast } from '@/components/ui/toast'
+import { acceptDailyInvite, dailyInviteTarget } from '@/lib/invite'
 import {
   copyShareText,
   downloadShareCard,
   shareResult,
 } from '@/lib/share-actions'
 import { resolveSharePayload } from '@/lib/share-url'
+import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 
 export function Share() {
   const nav = useNavigate()
@@ -19,6 +21,9 @@ export function Share() {
   const payload = resolveSharePayload(searchParams, loc.state)
   const [toast, setToast] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const [preparing, setPreparing] = useState(false)
+  const [inviteError, setInviteError] = useState<string | null>(null)
+  const invite = payload ? dailyInviteTarget(payload) : null
   const [copyLabel, setCopyLabel] = useState('Copy text')
   const copyReset = useRef(0)
 
@@ -26,7 +31,7 @@ export function Share() {
 
   const show = useCallback((message: string) => {
     setToast(message)
-  }, [])
+  }, [setToast])
 
   /** A shared link (`?p=`) opens Home. In-app share uses browser history. */
   const goBack = useCallback(() => {
@@ -80,6 +85,26 @@ export function Share() {
     }
   }
 
+  /** ADR 0036 amendment: the tap runs precache; prefs write + nav only on success. */
+  async function onPlayDaily(): Promise<void> {
+    if (!invite || busy || preparing) return
+    setPreparing(true)
+    setInviteError(null)
+    const fail = `Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.`
+    try {
+      const ok = await acceptDailyInvite(invite)
+      if (!ok) {
+        setInviteError(fail)
+        return
+      }
+      nav('/play?mode=daily')
+    } catch {
+      setInviteError(fail)
+    } finally {
+      setPreparing(false)
+    }
+  }
+
   if (!payload) {
     const emptyCopy = fromToken
       ? 'This share link can’t be opened.'
@@ -102,6 +127,25 @@ export function Share() {
     <Layout
       footer={
         <div className="space-y-2 pt-4 pb-6">
+          {invite ? (
+            <>
+              {inviteError ? (
+                <p role="alert" className="text-sm text-accent-fg">
+                  {inviteError}
+                </p>
+              ) : null}
+              <Button
+                fullWidth
+                disabled={busy || preparing}
+                aria-busy={preparing}
+                onClick={() => void onPlayDaily()}
+              >
+                {preparing
+                  ? 'Preparing packs…'
+                  : `Play today’s Daily · ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]}`}
+              </Button>
+            </>
+          ) : null}
           <Button
             fullWidth
             disabled={busy}
