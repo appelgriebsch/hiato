@@ -7,7 +7,7 @@ const FILE = path.join(import.meta.dir, 'data', 'tatoeba-stock-names.txt')
 
 let cached: Set<string> | null = null
 
-export function loadStockNameList(): Set<string> {
+function loadStockNameList(): Set<string> {
   if (cached) return cached
   const text = readFileSync(FILE, 'utf8')
   const set = new Set<string>()
@@ -18,10 +18,6 @@ export function loadStockNameList(): Set<string> {
   }
   cached = set
   return set
-}
-
-export function onStockNameList(word: string, names = loadStockNameList()): boolean {
-  return names.has(nfcUpper(word))
 }
 
 /** Capitalized stock-persona token, or null. The lemma itself is exempt (#247). */
