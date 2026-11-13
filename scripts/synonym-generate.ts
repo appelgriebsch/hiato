@@ -1,8 +1,8 @@
 /**
- * Mistral synonym generation for expand-packs (not run on CI / bun:test).
+ * xAI synonym generation for expand-packs (not run on CI / bun:test).
  */
 import { nfcUpper } from './lemma-denylist'
-import { mistralChat, readMistralKey } from './mistral-chat'
+import { readXaiKey, xaiChat } from './xai-chat'
 import {
   filterSynonymChips,
   synonymCacheKeyIsSettled,
@@ -85,7 +85,7 @@ async function completeJson(
 ): Promise<Record<string, unknown> | null> {
   let content: string
   try {
-    content = await mistralChat(key, system, prompt, temperature)
+    content = await xaiChat(key, system, prompt, temperature)
   } catch (e) {
     if (!soft) throw e
     console.warn(`  ${(e as Error).message}`)
@@ -137,10 +137,10 @@ export async function generateSynonyms(
   let missing = unique.filter((w) => !synonymCacheKeyIsSettled(cache, w))
   if (missing.length === 0) return
 
-  const key = readMistralKey()
+  const key = readXaiKey()
   if (!key) {
     throw new Error(
-      `Need synonyms for ${missing.length} ${lang} lemmas but no Mistral key (set MISTRAL_API_KEY)`,
+      `Need synonyms for ${missing.length} ${lang} lemmas but no xAI key — set XAI_API_KEY (or ~/.grok/auth.json)`,
     )
   }
 

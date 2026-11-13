@@ -107,6 +107,15 @@ describe('packs:check example gate log (ADR 0048, #247)', () => {
     expect(checkExampleGate('en/a1.json', pack, gate)).toEqual([])
   })
 
+  test('accepts a new xai entry and a legacy generated entry', () => {
+    for (const source of ['xai', 'mistral'] as const) {
+      const log: ExampleGateLog = {
+        'en/a1.json|HOUSE': { ...gate['en/a1.json|HOUSE']!, source },
+      }
+      expect(checkExampleGate('en/a1.json', pack, log)).toEqual([])
+    }
+  })
+
   test('fails when the gate entry is missing, rejected, or stale', () => {
     const missing = checkExampleGate('en/a1.json', pack, {})
     expect(missing[0]).toMatch(/no CEFR gate entry/)
