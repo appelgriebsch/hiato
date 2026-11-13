@@ -41071,10 +41071,11 @@
   "pt/a1.json|TOM": {
     "sentence": "Tom tem namorada?",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a1",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "Tom is a person name, not tom (manner of speaking)"
   },
   "pt/a1.json|MESA": {
     "sentence": "Limpe a mesa.",
@@ -56722,10 +56723,11 @@
   "fr/a2.json|BILL": {
     "sentence": "L'addition est sur la table, mais qui va payer le bill ?",
     "source": "mistral",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "bill is not natural French for the bill; sentence is artificial"
   },
   "fr/a2.json|GÂTEAU": {
     "sentence": "C'est du gâteau.",
@@ -57786,10 +57788,11 @@
   "fr/b1.json|DAN": {
     "sentence": "Ce samedi, ils organiseront un grand \"dan\" traditionnel dans la cour du village.",
     "source": "mistral",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "b1",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "dan is not natural French for a group dance; sentence is artificial"
   },
   "fr/b1.json|GRACE": {
     "sentence": "Grace à son conseil, nous avons pu terminer plus tôt que prévu.",

@@ -20,14 +20,13 @@ function loadStockNameList(): Set<string> {
   return set
 }
 
-/** Capitalized stock-persona token, or null. The lemma itself is exempt (#247). */
-export function stockNameInText(text: string, lemma: string, names = loadStockNameList()): string | null {
-  const lemmaKey = nfcUpper(lemma)
+/** Capitalized stock-persona token, or null. The lemma's own spelling counts (#279). */
+export function stockNameInText(text: string, names = loadStockNameList()): string | null {
   const re = /[\p{L}\p{M}]+/gu
   let m: RegExpExecArray | null
   while ((m = re.exec(text)) !== null) {
     const tok = m[0]!
-    if (/^\p{Lu}/u.test(tok) && nfcUpper(tok) !== lemmaKey && names.has(nfcUpper(tok))) return tok
+    if (/^\p{Lu}/u.test(tok) && names.has(nfcUpper(tok))) return tok
   }
   return null
 }

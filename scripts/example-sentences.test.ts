@@ -1,4 +1,7 @@
 import { describe, expect, test } from 'bun:test'
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
 import {
   applyTatoebaCredit,
   buildSentenceIndex,
@@ -8,6 +11,9 @@ import {
   generatePrompt,
   parseGateVerdict,
   aunAsiMismatch,
+  exampleSkipped,
+  lemmaExampleAction,
+  loadExampleSkip,
   pickTatoebaCandidate,
   recordGateEntry,
   reuseCachedPass,
@@ -59,9 +65,13 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(sentenceAllowed('Bob and Dan are friends.', 'en', 'FRIEND')).toBe(false)
   })
 
-  test('a lemma that equals a stock name is not rejected for itself', () => {
-    expect(sentenceAllowed('Jack stand früh auf.', 'de', 'JACK')).toBe(true)
-    expect(sentenceAllowed('Jack is a nice jacket.', 'en', 'JACK')).toBe(true)
+  test('a capitalised stock-name lemma is rejected; lowercase stays (#279)', () => {
+    expect(sentenceAllowed('Tom tem namorada?', 'pt', 'TOM')).toBe(false)
+    expect(sentenceAllowed('Ele falou em tom baixo.', 'pt', 'TOM')).toBe(true)
+    expect(sentenceAllowed('Jack stand früh auf.', 'de', 'JACK')).toBe(false)
+    expect(sentenceAllowed('Jack is a nice jacket.', 'en', 'JACK')).toBe(false)
+    expect(sentenceAllowed('Der jack ist warm.', 'de', 'JACK')).toBe(true)
+    expect(sentenceAllowed('A jack lifts the car.', 'en', 'JACK')).toBe(true)
   })
 
   test('a sentence-initial common word is not rejected as a stock name', () => {
@@ -77,7 +87,8 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(sentenceAllowed('Fadil left the house.', 'en', 'HOUSE')).toBe(false)
     expect(sentenceAllowed('The director is Flavio.', 'en', 'DIRECTOR')).toBe(false)
     expect(sentenceAllowed('Quiero conocer a María.', 'es', 'CONOCER')).toBe(false)
-    expect(sentenceAllowed('Fadil left the house.', 'en', 'FADIL')).toBe(true)
+    expect(sentenceAllowed('Fadil left the house.', 'en', 'FADIL')).toBe(false)
+    expect(sentenceAllowed('A fadil left the house.', 'en', 'FADIL')).toBe(true)
   })
 
   test('AUN rejects "aun así" and still allows another sentence', () => {
@@ -93,9 +104,11 @@ describe('example-sentences guards (ADR 0048)', () => {
 
   test('a cached pass is not reused when it contains a stock name', () => {
     const pass = { verdict: 'pass' as const, gate: GATE_VERSION, sentence: 'Fadil left the house.' }
-    expect(reuseCachedPass(pass, 'HOUSE')).toBe(false)
-    expect(reuseCachedPass({ ...pass, sentence: 'The house is big.' }, 'HOUSE')).toBe(true)
-    expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' }, 'HOUSE')).toBe(false)
+    expect(reuseCachedPass(pass)).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'The house is big.' })).toBe(true)
+    expect(reuseCachedPass({ ...pass, sentence: 'Tom tem namorada?' })).toBe(false)
+    expect(reuseCachedPass({ ...pass, sentence: 'Ele falou em tom baixo.' })).toBe(true)
+    expect(reuseCachedPass({ verdict: 'pass', gate: 1, sentence: 'The house is big.' })).toBe(false)
   })
 
   test('tatoebaCandidates sorts shortest first and skips non-whole-word hits', () => {
@@ -125,6 +138,70 @@ describe('example-sentences guards (ADR 0048)', () => {
     expect(tatoebaUrl('de')).toBe(
       'https://downloads.tatoeba.org/exports/per_language/deu/deu_sentences.tsv.bz2',
     )
+  })
+})
+
+describe('example skip list (#279)', () => {
+  const pass = {
+    verdict: 'pass' as const,
+    gate: GATE_VERSION,
+    sentence: 'Tom tem namorada?',
+    source: 'tatoeba' as const,
+  }
+
+  test('parses lang/cefr|WORD and ignores comments', () => {
+    const dir = mkdtempSync(path.join(tmpdir(), 'example-skip-'))
+    const file = path.join(dir, 'example-skip.txt')
+    writeFileSync(file, '# comment\n\npt/a1|tom # reason\n')
+    expect(loadExampleSkip(file)).toEqual(new Set(['pt/a1|TOM']))
+    writeFileSync(file, 'bad line\n')
+    expect(() => loadExampleSkip(file)).toThrow(/bad line/)
+  })
+
+  test('the shipped list is the three wrong-sense lemmas', () => {
+    const skip = loadExampleSkip()
+    expect([...skip].sort()).toEqual(['fr/a2|BILL', 'fr/b1|DAN', 'pt/a1|TOM'])
+    expect(exampleSkipped('pt', 'a1', 'tom')).toBe(true)
+    expect(exampleSkipped('en', 'a2', 'BILL')).toBe(false)
+  })
+
+  test('skip wins over a cached pass and over force, so the gate action is not taken', () => {
+    const lemmas = [
+      ['pt', 'a1', 'TOM', 'Tom tem namorada?'],
+      ['fr', 'a2', 'BILL', "L'addition est sur la table, mais qui va payer le bill ?"],
+      ['fr', 'b1', 'DAN', 'Ce samedi, ils organiseront un grand dan.'],
+    ] as const
+    for (const [lang, cefr, word, example] of lemmas) {
+      const action = lemmaExampleAction(lang, cefr, word, pass, true)
+      const row: { example?: string } = { example }
+      if (action === 'skip') setLemmaExample(row, null)
+      expect(action).toBe('skip')
+      expect(row.example).toBeUndefined()
+    }
+    const house = { ...pass, sentence: 'The house is big.' }
+    expect(lemmaExampleAction('en', 'a1', 'HOUSE', house, false)).toBe('reuse')
+    expect(lemmaExampleAction('en', 'a1', 'HOUSE', house, true)).toBe('gate')
+  })
+
+  test('the three lemmas ship no example and their gate entries are gate-2 rejects', () => {
+    const gate = JSON.parse(
+      readFileSync(path.join(import.meta.dir, 'data', 'example-gate.json'), 'utf8'),
+    ) as Record<string, { verdict: string; gate: number; reason?: string }>
+    const rows = [
+      ['pt/a1.json', 'TOM', 'Tom is a person name, not tom (manner of speaking)'],
+      ['fr/a2.json', 'BILL', 'bill is not natural French for the bill; sentence is artificial'],
+      ['fr/b1.json', 'DAN', 'dan is not natural French for a group dance; sentence is artificial'],
+    ] as const
+    for (const [rel, word, reason] of rows) {
+      const pack = JSON.parse(
+        readFileSync(path.join(import.meta.dir, '..', 'public', 'packs', rel), 'utf8'),
+      ) as { lemmas: { word: string; example?: string }[] }
+      expect(pack.lemmas.find((l) => l.word === word)?.example).toBeUndefined()
+      const entry = gate[`${rel}|${word}`]
+      expect(entry?.verdict).toBe('reject')
+      expect(entry?.gate).toBe(2)
+      expect(entry?.reason).toBe(reason)
+    }
   })
 })
 

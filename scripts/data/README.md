@@ -54,3 +54,4 @@ Committed output of `scripts/example-sentences.ts` (run locally with `MISTRAL_AP
 | File | Contents | Provenance |
 |------|----------|------------|
 | `example-gate.json` | `pack|WORD` → gated sentence, source (`tatoeba` / `mistral` / hand-written `fixture`), CEFR verdict, level, date | Tatoeba sentences [CC-BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) + original Mistral-generated Hiato copy, each gated by a Mistral CEFR check |
+| `example-skip.txt` | `lang/cefr\|WORD` lemmas that ship no example (#279) | Hiato curated. The pipeline does not search Tatoeba or call the model for them. `packs:check` fails if one still has an `example`. |
