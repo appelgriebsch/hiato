@@ -16,7 +16,7 @@ The pack scripts call an LLM for three jobs:
 
 Today they call Mistral (`scripts/mistral-chat.ts`, `MISTRAL_API_KEY`). #267/#268 moved them to the paid xAI API, which used up credits fast, and #266 (bf7caed) reverted that.
 
-Andreas runs the pack scripts locally on an Apple M4 Mac with 32 GB or more. Local OpenAI-compatible servers (Ollama, LM Studio, llama.cpp server, vLLM) serve `/v1/models` and `/v1/chat/completions`. Support for `response_format` json_schema varies by server and version. A local model may not be a reliable PASS/FAIL judge for gate v2. The licence of a model's output depends on the model. Sentences, glosses and synonyms all ship in the packs.
+Andreas runs the pack scripts locally on an Apple M4 Mac with 32 GB or more. He allows only Mistral open-weight models or Apple local models. Local OpenAI-compatible servers (Ollama, LM Studio, llama.cpp server, vLLM) serve `/v1/models` and `/v1/chat/completions`. Support for `response_format` json_schema varies by server and version. A local model may not be a reliable PASS/FAIL judge for gate v2. The licence of a model's output depends on the model. Sentences, glosses and synonyms all ship in the packs.
 
 ## Decision
 
@@ -34,7 +34,7 @@ Andreas runs the pack scripts locally on an Apple M4 Mac with 32 GB or more. Loc
 5. **Mistral fallback is opt-in and used only for early failures.** With `PACK_LLM_FALLBACK=mistral` or `--fallback mistral`, a pre-flight failure switches the whole run to Mistral. Without it, the run stops with a clear message. A failure in the middle of a run never falls back: the run saves its caches and stops, and a re-run continues from the caches. Decision 4 handles the uncalibrated gate.
 6. **Labels and logs.** Every entry records the provider that actually produced it (`'local'` or `'mistral'`). A fallback entry is `'mistral'`. New gate-log entries record `provider`, `model` and `fallback`. Each fallback writes one loud log line with the reason, and the run ends with a summary of calls per provider.
 7. **Licence gate.** Local output ships only from models listed in `scripts/data/local-models.json` with their licence and `approved: true`, which is Andreas's OK. `packs:check` fails on any shipped `'local'` sentence, gloss or synonym from a model that is not listed and approved. NOTICE and About credit each approved model.
-8. **Starter model.** `gemma4:31b` is listed with `approved: false`, pending Andreas's OK. Licence checked 2026-11-13: the Hugging Face card `google/gemma-4-31B-it` has `license: apache-2.0` and is not gated. Its licence link (https://ai.google.dev/gemma/docs/gemma_4_license) is the plain Apache License 2.0, and the Ollama `gemma4:31b` tag lists Apache 2.0.
+8. **Allowed families and starter model.** Every entry in `local-models.json` has a `family` field. `ALLOWED_FAMILIES = ['mistral', 'apple']`. The pre-flight rejects a `LOCAL_LLM_MODEL` that is not listed or has a disallowed family. `packs:check` fails on disallowed families in `local-models.json` and on any shipped `'local'` entry from such a model. The starter model is TBD, pending Andreas's pick, and it is listed with `approved: false` until he gives his OK.
 9. **CI is unchanged.** CI runs no pack scripts, and `packs:check` makes no model calls. Tests stub `fetch`.
 
 ## Options Considered
@@ -47,6 +47,7 @@ Andreas runs the pack scripts locally on an Apple M4 Mac with 32 GB or more. Loc
 | SuperGrok token read from `~/.grok/auth.json` | Fast | Unofficial client against a private proxy; Acceptable Use Policy risk |
 | `XAI_API_KEY` on `api.x.ai` | Official API | Paid Console credits; reverted in #266 |
 | Automatic Mistral fallback | Runs finish unattended | Spends money without notice; mixes providers in one pack |
+| Any open-weight family (e.g. Gemma, Qwen) | Wider choice | Andreas allows only Mistral and Apple models; more licence variety to review |
 | Local gate without calibration | Simplest | A wrong PASS ships a bad sentence |
 | Separate `local-chat.ts` client | Isolated | Duplicates the backoff code; the Mistral client is already OpenAI-shaped |
 
