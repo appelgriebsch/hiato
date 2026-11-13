@@ -181,7 +181,7 @@ export function checkExampleGate(
     }
     if (aunAsiMismatch(L.example, L.word)) {
       errors.push(
-        `${rel}: example for "${L.word}" uses "aun así" (even so), not gloss todavía — "${L.example}"`,
+        `${rel}: example for "${L.word}" uses unaccented "aun" (even), not gloss todavía — "${L.example}"`,
       )
       continue
     }

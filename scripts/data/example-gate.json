@@ -5821,10 +5821,11 @@
   "de/a2.json|ÜBERGEBEN": {
     "sentence": "Die Fackel ist übergeben.",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "\"Die Fackel ist übergeben\" is not a natural A2 sentence"
   },
   "de/a2.json|BRAVO": {
     "sentence": "Wie sagt man „bravo“ auf deutsch?",
@@ -11511,10 +11512,11 @@
   "de/b2.json|HINHALTEN": {
     "sentence": "Sie hielt den Arm aus dem Zugfenster hinaus, um den Wegweiser besser hinhalten zu können.",
     "source": "mistral",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "convoluted for B2; curated no-example"
   },
   "de/b2.json|AUFFORDERN": {
     "sentence": "Wir können sie nicht auffordern, Farbe zu bekennen.",
@@ -12248,10 +12250,11 @@
   "de/b2.json|ALLERBEST": {
     "sentence": "Der Service in diesem Restaurant ist allerbest – das Essen ist perfekt und die Bedienung sehr freundlich.",
     "source": "mistral",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "not a natural German predicate"
   },
   "de/b2.json|ABLAUF": {
     "sentence": "Du kennst den Ablauf ja.",
@@ -31515,10 +31518,11 @@
   "es/a2.json|AUN": {
     "sentence": "Su hermano es aun más alto.",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "unaccented aun is incluso, not todavía"
   },
   "es/a2.json|ORGULLOSO": {
     "sentence": "Estoy orgulloso.",
@@ -63066,10 +63070,11 @@
   "fr/b2.json|KAY": {
     "sentence": "La lettre \"K\" est souvent appelée \"kay\" en français.",
     "source": "mistral",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "b2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "kay is not a standard French word"
   },
   "fr/b2.json|CHERCHEUR": {
     "sentence": "Le chercheur scinde l'atome.",
@@ -67134,10 +67139,11 @@
   "it/a2.json|ATTACCO": {
     "sentence": "Siamo sotto attacco!",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "violence content: under attack (CONTENT_RULE)"
   },
   "it/a2.json|DURO": {
     "sentence": "Sarà duro.",
@@ -67262,10 +67268,11 @@
   "it/a2.json|ARRESTARE": {
     "sentence": "Si è fatto arrestare.",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "prison content: arrest (CONTENT_RULE)"
   },
   "it/a2.json|ATTACCARE": {
     "sentence": "Devo attaccare il poster al muro con la colla.",
@@ -67526,10 +67533,11 @@
   "it/a2.json|COMPORTARE": {
     "sentence": "Stasera vado ad un aperitivo, come mi devo comportare?",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "wrong sense: reflexive comportarsi, not the gloss \"avere come risultato\""
   },
   "it/a2.json|STELLA": {
     "sentence": "È una stella.",
@@ -67590,10 +67598,11 @@
   "it/a2.json|PENA": {
     "sentence": "Ne vale la pena?",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "wrong sense (\"Ne vale la pena?\") and crime-adjacent legal punishment (CONTENT_RULE)"
   },
   "it/a2.json|LEGARE": {
     "sentence": "Gli devono legare le mani.",
@@ -68582,10 +68591,11 @@
   "it/a2.json|CADAVERE": {
     "sentence": "Manca il cadavere.",
     "source": "tatoeba",
-    "verdict": "pass",
+    "verdict": "reject",
     "level": "a2",
     "at": "2026-11-13",
-    "gate": 2
+    "gate": 2,
+    "reason": "death content (CONTENT_RULE)"
   },
   "it/a2.json|POMERIGGIO": {
     "sentence": "Buon pomeriggio.",

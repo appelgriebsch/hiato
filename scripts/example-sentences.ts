@@ -149,21 +149,22 @@ export function lemmaExampleAction(
  * lemma's own spelling stays allowed. A lowercase use stays allowed.
  * The lemma stays exempt from the denylist (isDeniedGlossToken skips it).
  */
-/** A gate-2 pass is reusable only while its sentence still clears the stock-name guard. */
+/** A gate-2 pass is reusable only while its sentence still clears the stock-name and AUN guards. */
 export function reuseCachedPass(
   entry: { verdict?: string; gate?: number; sentence?: string } | null | undefined,
   lang: string,
   word: string,
 ): boolean {
-  return isCurrentPass(entry) && !stockNameInText(entry?.sentence ?? '', word, lang)
+  const sentence = entry?.sentence ?? ''
+  return isCurrentPass(entry) && !stockNameInText(sentence, word, lang) && !aunAsiMismatch(sentence, word)
 }
 
 /**
- * Lemma AUN's gloss is todavía ("still"). "aun así" is the other sense ("even so").
- * The candidate filter rejects that phrase so a later regen cannot ship it.
+ * Lemma AUN's gloss is todavía ("still"). Unaccented "aun" is the other word
+ * ("even", including "aun así").
  */
 export function aunAsiMismatch(sentence: string, word: string): boolean {
-  return nfcUpper(word) === 'AUN' && /(?<![\p{L}])a[uú]n\s+as[ií](?![\p{L}])/iu.test(sentence)
+  return nfcUpper(word) === 'AUN' && /(?<![\p{L}])aun(?![\p{L}])/iu.test(sentence)
 }
 
 export function sentenceAllowed(sentence: string, lang: PackLang, word: string): boolean {
