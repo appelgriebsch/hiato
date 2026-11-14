@@ -89,7 +89,7 @@ function drawPixelIcon(
  */
 export function ensureShareCardFonts(): Promise<void> {
   if (fontsReady) return fontsReady
-  fontsReady = (async () => {
+  const ready = (async () => {
     if (typeof FontFace === 'undefined' || typeof document === 'undefined') {
       return
     }
@@ -125,14 +125,17 @@ export function ensureShareCardFonts(): Promise<void> {
       }
       pixelFontOk = true
     } catch {
-      // Offline cold start without precache: keep Inter 600 at the same positions.
+      // Offline cold start without precache: keep Inter 600 at the same
+      // positions, and re-arm the loader so the next save retries Jersey.
       pixelFontOk = false
+      fontsReady = null
     }
   })().catch((err) => {
     fontsReady = null
     throw err
   })
-  return fontsReady
+  fontsReady = ready
+  return ready
 }
 
 function drawShareCard(

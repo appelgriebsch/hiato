@@ -325,6 +325,14 @@ describe('share PNG palette (ADR 0052 §5.10 — always light Cartridge)', () =>
     expect(src.slice(src.lastIndexOf('ctx.fillStyle', label), label)).toContain('INK_MUTED')
   })
 
+  test('share-render falls back to Inter 600 when Jersey fails, and retries on the next save (#270)', async () => {
+    const src = await Bun.file(path.join(REPO, 'src/lib/share-render.ts')).text()
+    // Jersey-fails path: pixel values render in Inter 600 at the same positions
+    expect(src).toContain("pixelFontOk ? '400' : '600'")
+    // a failed pixel-face load re-arms the loader so the next save retries Jersey
+    expect(src).toMatch(/pixelFontOk = false\s*\n\s*fontsReady = null/)
+  })
+
   test('share page says the saved image stays cream', async () => {
     const src = await Bun.file(path.join(REPO, 'src/pages/Share.tsx')).text()
     expect(src).toContain('The saved image stays cream.')

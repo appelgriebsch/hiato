@@ -70,7 +70,6 @@ describe('Uma polish assets', () => {
     expect(css).toContain('.motion-letter-reveal')
     expect(css).toContain('.motion-key-shake')
     expect(css).toContain('.motion-life-deplete')
-    expect(css).toContain('.motion-heart-deplete')
     expect(css).toContain('.motion-onboarding-enter')
     expect(css).toContain('.motion-result-enter')
     expect(css).toContain('.motion-share-card')

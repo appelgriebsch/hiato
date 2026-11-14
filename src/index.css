@@ -516,8 +516,7 @@ button.key-settled:disabled {
     transform var(--dur-fast) steps(2, end);
 }
 
-.motion-life-deplete,
-.motion-heart-deplete {
+.motion-life-deplete {
   animation: hiato-life-blink var(--dur-blink) steps(2, end) 3;
   outline: 2px dashed var(--color-danger);
   outline-offset: 2px;
@@ -606,8 +605,7 @@ button.key-settled:disabled {
     transform: none !important;
   }
 
-  .motion-life-deplete,
-  .motion-heart-deplete {
+  .motion-life-deplete {
     animation: none !important;
     transition: none !important;
     transform: none !important;
