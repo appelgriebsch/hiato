@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BrandLockup } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
+import { PixelIcon } from '@/components/PixelIcon'
 import { OfflineChip } from '@/components/OfflineChip'
 import { PocketSheet } from '@/components/PocketSheet'
 import { StatsSheet } from '@/components/StatsSheet'
@@ -155,6 +156,7 @@ export function Home() {
           }
           onClick={() => setPocketOpen(true)}
         >
+          <PixelIcon name="pocket" size={24} className="shrink-0" aria-hidden="true" />
           {pocketDue > 0
             ? `Pocket (${pocketCount} · ${pocketDue} due)`
             : `Pocket (${pocketCount})`}
@@ -187,6 +189,7 @@ export function Home() {
         aria-label={`Stats, ${historyCount} ${historyCount === 1 ? 'round' : 'rounds'}`}
         onClick={() => setStatsOpen(true)}
       >
+        <PixelIcon name="chart" size={24} className="shrink-0 text-accent-fg" aria-hidden="true" />
         Stats
       </Button>
     )
@@ -201,14 +204,14 @@ export function Home() {
           <nav className="mt-3 flex items-center justify-center gap-4 text-sm">
             <Link
               to="/language"
-              className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+              className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
             >
               {prefs ? 'Change language' : 'Language'}
             </Link>
             <span className="text-ink-faint">·</span>
             <Link
               to="/about"
-              className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+              className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
             >
               About
             </Link>
@@ -230,8 +233,10 @@ export function Home() {
         }
       />
 
-      <Card className="motion-onboarding-enter mb-4 short-land:mb-0 short-land:col-start-1 short-land:row-start-2 short-land:self-center">
-        <h1 className="text-title mb-2 text-ink">{dailyLabel}</h1>
+      <Card className="motion-onboarding-enter mb-4 overflow-hidden p-0 short-land:mb-0 short-land:col-start-1 short-land:row-start-2 short-land:self-center">
+        <div className="px-stripe" aria-hidden="true" />
+        <div className="p-5">
+        <h1 className="text-pixel-display mb-2 text-ink">{dailyLabel}</h1>
         <p className="text-body mb-4 text-ink-muted">
           {prefs
             ? dailyDone
@@ -244,28 +249,32 @@ export function Home() {
         {prefs ? (
           <Link
             to="/play?mode=daily"
-            className="motion-press inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid"
+            className="text-pixel-title px-frame px-drop motion-press inline-flex min-h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-white hover:bg-accent-mid"
           >
             {dailyDone ? 'View today’s result' : 'Play today'}
+            {!dailyDone ? (
+              <span aria-hidden="true">▸</span>
+            ) : null}
           </Link>
         ) : (
           <Link
             to="/language"
-            className="motion-press inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 text-[15px] font-medium text-white shadow-sm hover:bg-accent-mid"
+            className="text-pixel-title px-frame px-drop motion-press inline-flex min-h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-white hover:bg-accent-mid"
           >
             Choose language
           </Link>
         )}
         {prefs ? (
           <>
-            <button
-              type="button"
+            <Button
+              fullWidth
+              variant="secondary"
+              className="mt-2"
               disabled={!practiceOk}
-              className="motion-press mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-accent-fg bg-accent-soft px-5 text-[15px] font-medium text-accent-fg hover:bg-helped disabled:pointer-events-none disabled:opacity-45"
               onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
             >
               Practice
-            </button>
+            </Button>
             {!practiceOk ? (
               <p className="mt-2 text-center text-xs text-ink-faint">
                 Practice isn’t available — this pack only has today’s daily word.
@@ -302,19 +311,20 @@ export function Home() {
             />
           </>
         ) : null}
+        </div>
       </Card>
 
       <nav className="mb-6 flex items-center justify-center gap-4 text-sm short-land:hidden">
         <Link
           to="/language"
-          className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+          className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
         >
           {prefs ? 'Change language' : 'Language'}
         </Link>
         <span className="text-ink-faint">·</span>
         <Link
           to="/about"
-          className="inline-flex min-h-11 items-center px-3 text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+          className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
         >
           About
         </Link>

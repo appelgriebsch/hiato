@@ -42,6 +42,19 @@ export const SHARE_CARD_FONT_URLS = [
 
 export const SHARE_CARD_FONT_WEIGHTS = ['400', '500', '600'] as const
 
+/**
+ * Second share face: same-origin Jersey 10 latin for the retro PNG
+ * (ADR 0052 §5.10). If it fails to load (offline cold start without
+ * precache), the renderer falls back to Inter 600 at the same positions.
+ */
+export const SHARE_CARD_PIXEL_FONT_FAMILY = 'HiatoShareJersey'
+
+export const SHARE_CARD_PIXEL_FONT_URLS = [
+  '/fonts/jersey-10-latin-400-normal.woff2',
+] as const
+
+export const SHARE_CARD_PIXEL_FONT_WEIGHTS = ['400'] as const
+
 const FONT_PATH = /^\/fonts\/[A-Za-z0-9._-]+\.woff2$/
 
 const REMOTE_FONT_HOST = /fonts\.googleapis\.com|fonts\.gstatic\.com/i
@@ -76,7 +89,7 @@ export function isSameOriginFontUrl(url: string): boolean {
 }
 
 export function shareCardFontUrls(): readonly string[] {
-  return SHARE_CARD_FONT_URLS
+  return [...SHARE_CARD_FONT_URLS, ...SHARE_CARD_PIXEL_FONT_URLS]
 }
 
 /** Round result → card payload. `word` is read only for grapheme length. */

@@ -29,7 +29,7 @@ export function LearnerHint({
     const empty = NO_HINT_COPY[lang]
     return (
       <div
-        className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-dashed border-line bg-raised/40 px-3 py-2.5 text-center"
+        className="mx-auto mt-4 w-full max-w-sm border-2 border-dashed border-line bg-raised/40 px-3 py-2.5 text-center"
         aria-label={empty}
       >
         <p lang={lang} className="text-[11px] leading-snug text-ink-faint">
@@ -40,7 +40,7 @@ export function LearnerHint({
   }
 
   return (
-    <div className="mx-auto mt-4 w-full max-w-sm rounded-xl border border-line/80 bg-raised/80 px-3.5 py-3 text-center short-land:mt-2 short-land:max-w-none short-land:py-2">
+    <div className="mx-auto mt-4 w-full max-w-sm border-2 border-line bg-raised px-3.5 py-3 text-center short-land:mt-2 short-land:max-w-none short-land:py-2">
       {gloss ? (
         <p lang={lang} className="text-sm font-medium leading-snug text-ink">
           {gloss}
@@ -56,7 +56,7 @@ export function LearnerHint({
             <span
               key={s}
               lang={lang}
-              className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
+              className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
             >
               {s}
             </span>

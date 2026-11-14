@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { InstallHelpLink } from '@/components/InstallHelp'
+import { PixelIcon } from '@/components/PixelIcon'
 import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
@@ -45,8 +46,8 @@ export const SAVING_DELAY_MS = 300
 /** Check mark on the selected tile so selection isn't colour-only (#190). */
 function SelectedCheck({ on }: { on: boolean }) {
   return on ? (
-    <span aria-hidden="true" data-selected-check className="absolute top-1 right-1.5 text-xs font-bold leading-none">
-      ✓
+    <span aria-hidden="true" data-selected-check className="absolute top-1 right-1.5 leading-none">
+      <PixelIcon name="check" size={12} className="text-accent-fg" />
     </span>
   ) : null
 }
@@ -75,7 +76,7 @@ export function SelectionCard({
   return (
     <section
       data-selection-card
-      className="mt-3 rounded-xl border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-0"
+      className="mt-3 border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-0"
     >
       {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
       <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
@@ -100,7 +101,7 @@ export function SelectionCard({
         </span>
         <Link
           to="/about"
-          className="motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-medium text-ink underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm"
+          className="motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-medium text-ink underline decoration-2 underline-offset-4"
         >
           {packInfoLabel(lang)}
         </Link>
@@ -225,13 +226,13 @@ export function Language() {
           </button>
         }
         center={
-          <h1 className="hidden text-title text-ink short-land:block">
+          <h1 className="text-pixel-title hidden text-ink short-land:block">
             Choose language &amp; level
           </h1>
         }
       />
 
-      <h1 className="text-title text-ink short-land:hidden">Choose language &amp; level</h1>
+      <h1 className="text-pixel-display text-ink short-land:hidden">Choose language &amp; level</h1>
       <div
         data-language-picker
         className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5"
@@ -260,10 +261,10 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_LANGS, lang, setLang)}
             className={[
-              'motion-press relative min-h-12 min-w-0 rounded-xl border-2 ps-2 pe-4 py-1.5 text-left disabled:opacity-40',
+              'motion-press relative min-h-12 min-w-0 border-2 ps-2 pe-4 py-1.5 text-left disabled:opacity-40',
               'transition-[border-color,background-color] duration-200',
               lang === l
-                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg'
                 : 'border-line bg-raised hover:bg-cream-dark',
             ].join(' ')}
           >
@@ -307,10 +308,10 @@ export function Language() {
             }}
             onKeyDown={(e) => moveRadio(e, PACK_CEFRS, cefr, setCefr)}
             className={[
-              'motion-press relative min-h-11 rounded-xl border-2 px-4 text-center font-semibold disabled:opacity-40',
+              'motion-press relative min-h-11 border-2 px-4 text-center font-semibold disabled:opacity-40',
               'transition-[border-color,background-color,color] duration-200',
               cefr === c
-                ? 'border-accent-fg bg-accent-soft text-accent-fg ring-2 ring-accent-fg'
+                ? 'border-accent-fg bg-accent-soft text-accent-fg'
                 : 'border-line bg-raised text-ink hover:bg-cream-dark',
             ].join(' ')}
           >

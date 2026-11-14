@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
+import { PixelIcon } from '@/components/PixelIcon'
 import { Card } from '@/components/ui/card'
 import { PACK_LICENSES } from '@/packs/licenses'
 import { LANG_CODES } from '@/packs/labels'
+import { getSoundOn, playCue, setSoundOn, subscribeSoundChange } from '@/lib/sound'
 
 const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
 const CEFRJ_TERMS = 'http://www.cefr-j.org/download.html'
@@ -58,6 +61,80 @@ function LicenseLine({ license }: { license: string }) {
   )
 }
 
+/**
+ * "Sound effects" switch (ADR 0052 decision 3 / §5.9). Off by default, stored
+ * in `hiato.sound`. role="switch" named "Sound effects", described by the
+ * helper line; the visible Off/On word plus the thumb position mean colour is
+ * never the only cue. Turning it on plays one coin cue from the same tap.
+ */
+function SoundCard() {
+  const [on, setOn] = useState(getSoundOn)
+
+  useEffect(() => subscribeSoundChange(() => setOn(getSoundOn())), [])
+
+  function toggle() {
+    const next = !on
+    setSoundOn(next)
+    setOn(next)
+    if (next) playCue('coin')
+  }
+
+  return (
+    <Card className="mb-4">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-start gap-2.5">
+          <PixelIcon
+            name="speaker"
+            size={24}
+            className="mt-1 shrink-0 text-ink-muted"
+            aria-hidden="true"
+          />
+          <div className="min-w-0">
+            <p id="sound-label" className="text-pixel-title text-ink">
+              Sound effects
+            </p>
+            <p id="sound-help" className="mt-1 text-sm leading-snug text-ink-muted">
+              Short arcade beeps for letters, misses and results. Everything also shows on screen.
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={on}
+          aria-labelledby="sound-label"
+          aria-describedby="sound-help"
+          onClick={toggle}
+          className="motion-press relative h-12 w-[72px] shrink-0"
+        >
+          <span
+            aria-hidden="true"
+            className={[
+              'px-frame absolute inset-y-0 left-0 flex w-[68px] items-center px-1.5',
+              on ? 'bg-accent [--px-edge:var(--color-edge)]' : 'bg-cream-dark',
+            ].join(' ')}
+          >
+            <span
+              className={[
+                'block h-[26px] w-[26px] transition-[transform] duration-150 [transition-timing-function:steps(2,end)] motion-reduce:transition-none',
+                on ? 'translate-x-[30px] bg-white' : 'translate-x-0 bg-ink',
+              ].join(' ')}
+            />
+            <span
+              className={[
+                'text-pixel-label absolute top-1/2 -translate-y-1/2',
+                on ? 'left-2 text-white' : 'right-2 text-ink',
+              ].join(' ')}
+            >
+              {on ? 'On' : 'Off'}
+            </span>
+          </span>
+        </button>
+      </div>
+    </Card>
+  )
+}
+
 export function About() {
   const nav = useNavigate()
 
@@ -73,10 +150,12 @@ export function About() {
             ← Back
           </button>
         }
-        center={<span className="text-sm font-semibold text-ink">About</span>}
+        center={<span className="text-pixel-title text-ink">About</span>}
       />
 
-      <h1 className="text-xl font-semibold text-ink">What we count</h1>
+      <SoundCard />
+
+      <h1 className="text-pixel-display text-ink">What we count</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         On the production site only, Hiato uses cookieless Cloudflare Web Analytics
         to count visits and page views per screen. It sets no cookies, uses no
@@ -85,7 +164,7 @@ export function About() {
         counted (ADR 0047).
       </p>
 
-      <h1 className="text-xl font-semibold text-ink">Licenses</h1>
+      <h1 className="text-pixel-display text-ink">Licenses</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         Word packs ship with per-source attribution. English A1–B2 lemmas are
         selected from the CEFR-J Wordlist (free use with citation; © Tono
@@ -187,6 +266,41 @@ export function About() {
               href="/fonts/LICENSE.txt"
             >
               /fonts/LICENSE.txt
+            </a>
+            {' · '}
+            repo <code className="text-[12px]">NOTICE</code>.
+          </li>
+        </ul>
+      </Card>
+
+      <Card className="mb-3">
+        <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>
+        <h2 className="text-[15px] font-semibold text-ink">Jersey 10</h2>
+        <p className="mt-1.5 text-xs font-medium text-accent-fg">
+          SIL Open Font License 1.1
+        </p>
+        <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
+          <li>
+            Copyright 2023 The Soft Type Project Authors (
+            <a
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              href="https://github.com/scfried/soft-type-jersey"
+            >
+              github.com/scfried/soft-type-jersey
+            </a>
+            ).
+          </li>
+          <li>
+            Self-hosted latin woff2 under <code className="text-[12px]">public/fonts</code>,
+            also used by share cards (ADR 0020).
+          </li>
+          <li>
+            Full license:{' '}
+            <a
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              href="/fonts/Jersey10-OFL.txt"
+            >
+              /fonts/Jersey10-OFL.txt
             </a>
             {' · '}
             repo <code className="text-[12px]">NOTICE</code>.

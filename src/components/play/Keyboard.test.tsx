@@ -67,12 +67,15 @@ describe('Keyboard render (#138 Avery W4)', () => {
     }
   })
 
-  test('tap height floor marker and solid focus ring are present', () => {
+  test('tap height floor marker and keycap face are present; focus ring is CSS-driven', async () => {
     const html = renderPad('en')
     expect(html).toContain('data-tap-min-h="44"')
     expect(html).toContain('data-hit-slop')
-    // className string is rendered; solid ring (no /60 opacity)
-    expect(html).toContain('ring-accent-fg')
-    expect(html).not.toContain('ring-accent-fg/')
+    expect(html).toContain('key-face')
+    expect(html).not.toContain('ring-accent-fg')
+    const css = await Bun.file(new URL('../../index.css', import.meta.url)).text()
+    // 3px focus ring on the painted face, not a /60 ring on the hit box
+    expect(css).toContain('[data-hit-slop]:focus-visible .key-face')
+    expect(css).toMatch(/:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--color-focus\)/)
   })
 })

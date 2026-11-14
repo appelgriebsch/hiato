@@ -99,14 +99,18 @@ bundle or Workbox `includeAssets`.
 
 Fonts
 -----
-Share cards and the app UI use self-hosted Inter (latin 400 / 500 / 600
-woff2) under the SIL Open Font License, Version 1.1.
+The app UI and share cards use self-hosted Inter (latin 400 / 500 / 600
+woff2) and Jersey 10 (latin + latin-ext 400 woff2, pixel display face,
+ADR 0052) under the SIL Open Font License, Version 1.1.
 
-  Copyright (c) 2016 The Inter Project Authors
+  Inter — Copyright (c) 2016 The Inter Project Authors
   https://github.com/rsms/inter
   Reserved Font Name: "Inter"
+  Full license text: public/fonts/LICENSE.txt
 
-Full license text: public/fonts/LICENSE.txt
+  Jersey 10 — Copyright 2023 The Soft Type Project Authors
+  https://github.com/scfried/soft-type-jersey
+  Full license text: public/fonts/Jersey10-OFL.txt
 
 Share-card rendering loads only these same-origin files (ADR 0020).
 No Google Fonts, fonts.gstatic, or other remote font CDN is used on

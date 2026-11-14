@@ -31,30 +31,59 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Self-hosted Jersey 10 (latin + latin-ext, SIL OFL 1.1) — pixel display face.
+ * unicode-range split mirrors the Inter faces above (ADR 0052 §3). */
+@font-face {
+  font-family: "Jersey 10";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jersey-10-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Jersey 10";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/jersey-10-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --color-cream: #f7f6f3;
-  --color-raised: #ffffff;
-  --color-cream-dark: #ebe9e4;
-  --color-ink: #1c1b19;
-  --color-ink-muted: #6b6860;
-  --color-ink-faint: #737067;
-  --color-line: #e4e1da;
-  --color-accent: #3d6b55;
-  --color-accent-fg: #3d6b55;
-  --color-accent-soft: #eef5f0;
-  --color-accent-mid: #4c7f64;
-  --color-danger: #b54a3f;
-  --color-danger-soft: #f8ecea;
-  --color-helped: #d4e5db;
-  --color-wrong: #c4c0b6;
+  --font-pixel: "Jersey 10", "Inter", system-ui, sans-serif;
+  --fpx: 18.667px;
 
-  /* Motion tokens (Uma T6) — calm Wordle-adjacent */
-  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  /* Light "Cartridge" palette (ADR 0052 §2, docs/design/retro/assets/retro-theme.css) */
+  --color-cream: #f3ecd8;
+  --color-raised: #fffaee;
+  --color-cream-dark: #e6dcc0;
+  --color-ink: #1b1830;
+  --color-ink-muted: #545068;
+  --color-ink-faint: #545068;
+  --color-line: #77708c;
+  --color-accent: #1c6e42;
+  --color-accent-fg: #17633b;
+  --color-accent-soft: #dcefd9;
+  --color-accent-mid: #14593a;
+  --color-danger: #a8261c;
+  --color-danger-soft: #fbe1db;
+  --color-helped: #bfe3b0;
+  --color-wrong: #cfc8d8;
+  --color-edge: #1b1830;
+  --color-shadow: #1b1830;
+  --color-focus: #c4410c;
+  --color-coin: #b86e00;
+  --color-spark: #e0a100;
+  --color-scan: rgba(0, 0, 0, 0);
+
+  /* Motion tokens — hardware steps() frames, no easing curves (ADR 0052 §6) */
   --dur-fast: 150ms;
   --dur-mid: 220ms;
   --dur-slow: 300ms;
+  --dur-blink: 480ms;
 }
 
 :root {
@@ -75,10 +104,20 @@ body,
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-cream);
+  background-color: var(--color-cream);
+  /* Faint 8px dot grid on the cartridge paper (removed by prefers-contrast: more). */
+  background-image: radial-gradient(var(--color-cream-dark) 1px, transparent 1.5px);
+  background-size: 8px 8px;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "ss01" on, "cv11" on;
+}
+
+/* The shell is bg-cream (opaque); paint the same dot grid inside it so links
+ * sit over dot pixels on every viewport width. */
+[data-layout-shell] {
+  background-image: radial-gradient(var(--color-cream-dark) 1px, transparent 1.5px);
+  background-size: 8px 8px;
 }
 
 button:disabled {
@@ -106,6 +145,7 @@ button.key-settled:disabled {
 }
 [data-letter-pad] {
   --pad-half-gap: 2px;
+  border-top: 2px solid var(--color-edge);
 }
 
 /* Dead under max-w-md (448px): 6–8px visual gap only ≥468px container. */
@@ -128,7 +168,7 @@ button.key-settled:disabled {
   [data-letter-pad][data-pad-cols="11"] { --pad-half-gap: 4px; }
 }
 
-/* ─── Type scale (tighten hierarchy) ─── */
+/* ─── Type scale ─── */
 .text-display {
   font-size: 1.75rem;
   line-height: 1.25;
@@ -162,7 +202,178 @@ button.key-settled:disabled {
   color: var(--color-accent-fg);
 }
 
-/* ─── Motion primitives ─── */
+/* Pixel display type (Jersey 10). Sizes are multiples of --fpx; never below
+ * 1 fpx, and never for glosses, hints, examples or errors (ADR 0052 §3).
+ * Jersey 10 has one weight: font-synthesis none stops fake bold. */
+.text-pixel-stat,
+.text-pixel-display,
+.text-pixel-title,
+.text-pixel-label,
+.text-pixel-value {
+  font-family: var(--font-pixel);
+  font-synthesis: none;
+}
+.text-pixel-stat {
+  font-size: calc(var(--fpx) * 2.5);
+  line-height: 44px;
+}
+.text-pixel-display {
+  font-size: calc(var(--fpx) * 2);
+  line-height: 40px;
+}
+.text-pixel-title {
+  font-size: calc(var(--fpx) * 1.5);
+  line-height: 28px;
+}
+.text-pixel-label {
+  font-size: var(--fpx);
+  line-height: 20px;
+  letter-spacing: 0.04em;
+}
+.text-pixel-value {
+  font-size: calc(var(--fpx) * 1.25);
+  line-height: 26px;
+}
+
+/* ─── Pixel utilities (ADR 0052 §5 outline technique) ───
+ * Chunky outlines are four box-shadows (notched corners, no layout shift).
+ * --px-edge recolors the frame (e.g. accent-fg on secondary buttons). */
+.px-frame {
+  box-shadow:
+    0 -2px 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--px-edge, var(--color-edge)),
+    -2px 0 0 var(--px-edge, var(--color-edge)),
+    2px 0 0 var(--px-edge, var(--color-edge));
+}
+.px-drop {
+  box-shadow:
+    0 -2px 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--px-edge, var(--color-edge)),
+    -2px 0 0 var(--px-edge, var(--color-edge)),
+    2px 0 0 var(--px-edge, var(--color-edge)),
+    0 6px 0 var(--color-shadow);
+}
+/* Cabinet press: drop shrinks to 2px while the face moves down 4px. */
+.px-drop:active:not(:disabled) {
+  box-shadow:
+    0 -2px 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--px-edge, var(--color-edge)),
+    -2px 0 0 var(--px-edge, var(--color-edge)),
+    2px 0 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--color-shadow);
+}
+.px-drop-card {
+  box-shadow:
+    0 -2px 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--px-edge, var(--color-edge)),
+    -2px 0 0 var(--px-edge, var(--color-edge)),
+    2px 0 0 var(--px-edge, var(--color-edge)),
+    4px 6px 0 var(--color-shadow);
+}
+.px-drop-dialog {
+  box-shadow:
+    0 -4px 0 var(--px-edge, var(--color-edge)),
+    0 4px 0 var(--px-edge, var(--color-edge)),
+    -4px 0 0 var(--px-edge, var(--color-edge)),
+    4px 0 0 var(--px-edge, var(--color-edge)),
+    6px 10px 0 var(--color-shadow);
+}
+.px-drop-only {
+  box-shadow: 0 6px 0 var(--color-shadow);
+}
+.px-drop-only:active:not(:disabled) {
+  box-shadow: 0 2px 0 var(--color-shadow);
+}
+/* Later than .px-drop-card / .px-drop-dialog so it wins as a flat override. */
+.px-flat {
+  box-shadow:
+    0 -2px 0 var(--px-edge, var(--color-edge)),
+    0 2px 0 var(--px-edge, var(--color-edge)),
+    -2px 0 0 var(--px-edge, var(--color-edge)),
+    2px 0 0 var(--px-edge, var(--color-edge));
+}
+/* Arcade stripe: repeating 12px blocks of accent / coin / danger. */
+.px-stripe {
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 12px,
+    var(--color-coin) 12px 24px,
+    var(--color-danger) 24px 36px
+  );
+}
+.px-pressed {
+  transform: translateY(4px);
+}
+.px-dashed {
+  outline: 2px dashed var(--px-dash, var(--color-line));
+  outline-offset: -2px;
+}
+
+/* ─── Letter tiles (LetterGrid states, ADR 0052 §2) ─── */
+.tile-hidden {
+  box-shadow:
+    0 -2px 0 var(--color-line),
+    0 2px 0 var(--color-line),
+    -2px 0 0 var(--color-line),
+    2px 0 0 var(--color-line),
+    0 4px 0 var(--color-line);
+}
+.tile-revealed {
+  box-shadow:
+    0 -2px 0 var(--color-accent-fg),
+    0 2px 0 var(--color-accent-fg),
+    -2px 0 0 var(--color-accent-fg),
+    2px 0 0 var(--color-accent-fg);
+}
+.tile-helped {
+  outline: 2px dashed var(--color-accent-fg);
+  outline-offset: -2px;
+}
+
+/* ─── Keycap faces (Keyboard, ADR 0052 §5.4) ───
+ * Idle: 2px line outline + 4px edge base. Pressed: base 0, translateY(4px).
+ * Correct: pressed, no outline, ✓ corner mark. Miss: pressed, dashed line, × mark. */
+.key-face {
+  box-shadow:
+    0 -2px 0 var(--color-line),
+    0 2px 0 var(--color-line),
+    -2px 0 0 var(--color-line),
+    2px 0 0 var(--color-line),
+    0 4px 0 var(--color-edge);
+}
+[data-hit-slop]:active:not(:disabled) .key-face {
+  transform: translateY(4px);
+  box-shadow:
+    0 -2px 0 var(--color-line),
+    0 2px 0 var(--color-line),
+    -2px 0 0 var(--color-line),
+    2px 0 0 var(--color-line);
+}
+.key-correct {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+.key-wrong {
+  transform: translateY(4px);
+  box-shadow: none;
+  outline: 2px dashed var(--color-line);
+  outline-offset: -2px;
+}
+/* The key button is the hit box: focus ring lands on the painted face. */
+[data-hit-slop].motion-press:active:not(:disabled) {
+  transform: none;
+}
+[data-hit-slop]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+[data-hit-slop]:focus-visible .key-face {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ─── Motion primitives — steps() frames only (ADR 0052 §6) ─── */
 @keyframes hiato-fade-slide-in {
   from {
     opacity: 0;
@@ -185,49 +396,66 @@ button.key-settled:disabled {
   }
 }
 
-@keyframes hiato-letter-pop {
+/* Tile flip: scaleY 1 → 0 → 1 in steps(4), then a one-frame 4px pop. */
+@keyframes hiato-letter-reveal {
   0% {
-    transform: scale(0.88) rotateX(55deg);
-    opacity: 0.35;
+    transform: scaleY(1);
   }
-  60% {
-    transform: scale(1.04) rotateX(0deg);
-    opacity: 1;
+  25% {
+    transform: scaleY(0);
   }
+  50% {
+    transform: scaleY(1) translateY(-4px);
+  }
+  75%,
   100% {
-    transform: scale(1) rotateX(0deg);
-    opacity: 1;
+    transform: scaleY(1) translateY(0);
   }
 }
 
 @keyframes hiato-key-shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-3px); }
-  40% { transform: translateX(3px); }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
 }
 
-@keyframes hiato-heart-deplete {
-  0% { transform: scale(1); opacity: 1; }
-  40% { transform: scale(0.72); opacity: 0.55; }
-  100% { transform: scale(1); opacity: 0.25; filter: grayscale(1); }
+/* Life lost: the seed blinks 3 times inside a 2px dashed danger outline. */
+@keyframes hiato-life-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
 }
 
 @keyframes hiato-streak-pulse {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.06); }
-  100% { transform: scale(1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
 }
 
 @keyframes hiato-result-enter {
   from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.985);
+    transform: translateY(8px);
   }
   to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -242,99 +470,136 @@ button.key-settled:disabled {
   }
 }
 
+/* Win sparks: one 4-frame scale-and-opacity loop over 600ms, then hold. */
+@keyframes hiato-spark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  75%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.px-spark {
+  position: absolute;
+  animation: hiato-spark calc(var(--dur-slow) * 2) steps(4, end) both;
+}
+
 .motion-onboarding-enter {
-  animation: hiato-fade-slide-in var(--dur-slow) var(--ease-out-soft) both;
+  animation: hiato-fade-slide-in var(--dur-slow) steps(3, end) both;
 }
 
 .motion-letter-reveal {
-  animation: hiato-letter-pop var(--dur-slow) var(--ease-out-soft) both;
-  transform-origin: center bottom;
-  transform-style: preserve-3d;
+  animation: hiato-letter-reveal var(--dur-mid) steps(4, end) both;
+  transform-origin: center;
 }
 
 .motion-key-shake {
-  animation: hiato-key-shake var(--dur-mid) var(--ease-in-out-soft);
+  animation: hiato-key-shake var(--dur-fast) steps(4, end);
 }
 
 .motion-key-wrong-dim {
-  transition: background-color var(--dur-mid) var(--ease-in-out-soft),
-    color var(--dur-mid) var(--ease-in-out-soft),
-    opacity var(--dur-mid) var(--ease-in-out-soft),
-    transform var(--dur-fast) var(--ease-out-soft);
+  transition: background-color var(--dur-mid) steps(2, end),
+    color var(--dur-mid) steps(2, end),
+    opacity var(--dur-mid) steps(2, end),
+    transform var(--dur-fast) steps(2, end);
 }
 
 .motion-life-deplete,
 .motion-heart-deplete {
-  animation: hiato-heart-deplete var(--dur-slow) var(--ease-out-soft) both;
+  animation: hiato-life-blink var(--dur-blink) steps(2, end) 3;
+  outline: 2px dashed var(--color-danger);
+  outline-offset: 2px;
 }
 
 .motion-streak-pulse {
-  animation: hiato-streak-pulse var(--dur-mid) var(--ease-out-soft);
+  animation: hiato-streak-pulse var(--dur-mid) steps(2, end) 2;
 }
 
 .motion-result-enter {
-  animation: hiato-result-enter var(--dur-slow) var(--ease-out-soft) both;
+  animation: hiato-result-enter var(--dur-mid) steps(3, end) both;
 }
 
 .motion-share-card {
-  animation: hiato-share-lift var(--dur-slow) var(--ease-out-soft) both;
-  transition: box-shadow var(--dur-mid) var(--ease-out-soft),
-    transform var(--dur-mid) var(--ease-out-soft);
-}
-
-.motion-share-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(28, 27, 25, 0.08), 0 1px 0 rgba(28, 27, 25, 0.04);
-}
-
-/* After the light hover rule so this unlayered shadow wins. Reduced motion below still resets it. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-cream: #1c1b19;
-    --color-raised: #2a2824;
-    --color-cream-dark: #24221e;
-    --color-ink: #f3f1ec;
-    --color-ink-muted: #b8b4aa;
-    --color-ink-faint: #a8a49a;
-    --color-line: #6a655c;
-    --color-accent: #3d6b55;
-    --color-accent-fg: #8fbfa3;
-    --color-accent-soft: #24352c;
-    --color-accent-mid: #4e7d64;
-    --color-helped: #2f4538;
-    --color-danger: #e09288;
-    --color-danger-soft: #3a2a28;
-    --color-wrong: #5a564e;
-  }
-
-  .motion-share-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  }
+  animation: hiato-share-lift var(--dur-slow) steps(3, end) both;
 }
 
 .motion-press {
-  transition: transform var(--dur-fast) var(--ease-out-soft),
-    box-shadow var(--dur-fast) var(--ease-out-soft),
-    background-color var(--dur-mid) var(--ease-in-out-soft),
-    opacity var(--dur-mid) var(--ease-in-out-soft);
+  transition: transform var(--dur-fast) steps(2, end),
+    box-shadow var(--dur-fast) steps(2, end),
+    background-color var(--dur-mid) steps(2, end),
+    color var(--dur-mid) steps(2, end),
+    opacity var(--dur-mid) steps(2, end);
 }
 
+/* Cabinet press: the painted control moves down 4px in one frame. */
 .motion-press:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: translateY(4px);
 }
 
 .motion-fade {
-  transition: opacity var(--dur-mid) var(--ease-in-out-soft);
+  transition: opacity var(--dur-mid) steps(2, end);
 }
 
-/* Reduced motion: disable / shorten */
+/* ─── Dark "CRT night" (ADR 0052 §2) ─── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #0f0d1c;
+    --color-raised: #1b1830;
+    --color-cream-dark: #262142;
+    --color-ink: #f3ecd8;
+    --color-ink-muted: #b9b2d2;
+    --color-ink-faint: #b9b2d2;
+    --color-line: #7a71a0;
+    --color-accent: #1f7f4a;
+    --color-accent-fg: #7fe39a;
+    --color-accent-soft: #17331f;
+    --color-accent-mid: #1a6e40;
+    --color-danger: #ff8f80;
+    --color-danger-soft: #3b1a24;
+    --color-helped: #1f4a2c;
+    --color-wrong: #3a3456;
+    --color-edge: #8a81b3;
+    --color-shadow: #000000;
+    --color-focus: #ffb703;
+    --color-coin: #ffb703;
+    --color-spark: #ffd166;
+    --color-scan: rgba(255, 255, 255, 0.03);
+  }
+
+  /* 3% scanline overlay on the CRT glass. */
+  body,
+  [data-layout-shell] {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--color-scan) 0,
+      var(--color-scan) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
+
+/* Reduced motion: instant state changes only (ADR 0052 §6). */
 @media (prefers-reduced-motion: reduce) {
   .motion-onboarding-enter,
   .motion-letter-reveal,
   .motion-key-shake,
   .motion-streak-pulse,
   .motion-result-enter,
-  .motion-share-card {
+  .motion-share-card,
+  .px-spark {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
@@ -346,22 +611,25 @@ button.key-settled:disabled {
     animation: none !important;
     transition: none !important;
     transform: none !important;
+    outline: none !important;
   }
 
   .animate-spin {
     animation: none !important;
   }
 
-  .motion-share-card:hover {
-    transform: none;
-    box-shadow: 0 1px 2px rgba(28, 27, 25, 0.06);
-  }
-
   .motion-press,
   .motion-press:active:not(:disabled),
-  .motion-key-wrong-dim {
+  .motion-key-wrong-dim,
+  .px-drop:active:not(:disabled),
+  [data-hit-slop]:active:not(:disabled) .key-face {
     transition: none !important;
     transform: none !important;
+  }
+
+  .px-drop:active:not(:disabled),
+  [data-hit-slop]:active:not(:disabled) .key-face {
+    box-shadow: revert !important;
   }
 
   * {
@@ -369,85 +637,12 @@ button.key-settled:disabled {
   }
 }
 
-/* Pocket sheet (#85). Native top-layer dialog — in-card fixed is clipped by
-   transformed ancestors and Layout overflow. No enter animation. */
-.pocket-sheet {
-  position: fixed;
-  inset: auto 0 0 0;
-  width: min(100%, 28rem);
-  max-width: 28rem;
-  max-height: 85dvh;
-  height: auto;
-  margin: 0 auto;
-  padding: 0;
-  border: 1px solid var(--color-line);
-  border-bottom: none;
-  border-radius: 1rem 1rem 0 0;
-  background: var(--color-raised);
-  color: var(--color-ink);
-  box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.pocket-sheet::backdrop {
-  background: rgb(0 0 0 / 0.45);
-}
-
-@media (prefers-color-scheme: dark) {
-  .pocket-sheet {
-    box-shadow: 0 -12px 32px rgb(0 0 0 / 0.65);
-  }
-}
-
-.pocket-sheet-panel {
-  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
-}
-
-/* Stats sheet (#221). Same native top-layer dialog shell as PocketSheet —
-   no enter animation, so reduced motion needs no override. */
-.stats-sheet {
-  position: fixed;
-  inset: auto 0 0 0;
-  width: min(100%, 28rem);
-  max-width: 28rem;
-  max-height: 85dvh;
-  height: auto;
-  margin: 0 auto;
-  padding: 0;
-  border: 1px solid var(--color-line);
-  border-bottom: none;
-  border-radius: 1rem 1rem 0 0;
-  background: var(--color-raised);
-  color: var(--color-ink);
-  box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.stats-sheet::backdrop {
-  background: rgb(0 0 0 / 0.45);
-}
-
-@media (prefers-color-scheme: dark) {
-  .stats-sheet {
-    box-shadow: 0 -12px 32px rgb(0 0 0 / 0.65);
-  }
-}
-
-.stats-sheet-panel {
-  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
-}
-
-.stats-bar-track {
-  background: var(--color-line);
-}
-
-.stats-bar {
-  background: var(--color-ink);
-}
-
-/* Install help sheet (#103). Native top-layer dialog — same a11y as PocketSheet. */
+/* ─── Sheets (Pocket, Stats, Install help) ───
+ * Native top-layer dialogs, square corners, 4px edge top border, hard drop.
+ * The 6px arcade stripe is the first .px-stripe child in each panel.
+ * No enter animation (#85 / #221). Backdrop unchanged. */
+.pocket-sheet,
+.stats-sheet,
 .install-help-sheet {
   position: fixed;
   inset: auto 0 0 0;
@@ -457,28 +652,45 @@ button.key-settled:disabled {
   height: auto;
   margin: 0 auto;
   padding: 0;
-  border: 1px solid var(--color-line);
-  border-bottom: none;
-  border-radius: 1rem 1rem 0 0;
+  border: 0;
+  border-top: 4px solid var(--color-edge);
+  border-radius: 0;
   background: var(--color-raised);
   color: var(--color-ink);
-  box-shadow: 0 -8px 24px rgb(0 0 0 / 0.18);
+  box-shadow: 0 -6px 0 var(--color-shadow);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
+.pocket-sheet::backdrop,
+.stats-sheet::backdrop,
 .install-help-sheet::backdrop {
   background: rgb(0 0 0 / 0.45);
 }
 
-@media (prefers-color-scheme: dark) {
-  .install-help-sheet {
-    box-shadow: 0 -12px 32px rgb(0 0 0 / 0.65);
-  }
+.pocket-sheet-panel {
+  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
+}
+
+.stats-sheet-panel {
+  padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom));
 }
 
 .install-help-sheet-panel {
   padding: 1.25rem 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/* Stats bars: 6px ink blocks with 2px gaps on a 14px line track. */
+.stats-bar-track {
+  background: var(--color-line);
+}
+
+.stats-bar {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-ink) 0 6px,
+    transparent 6px 8px
+  );
 }
 
 /*
@@ -539,5 +751,28 @@ button.key-settled:disabled {
 
   [data-language-picker] h2 {
     margin-top: 0.5rem;
+  }
+}
+
+/* ─── Focus (ADR 0052 §2/§7) ───
+ * Always visible on :focus-visible: 3px focus ring outside a 3px cream gap.
+ * The gap box-shadow intentionally replaces px-frame/px-drop while focused. */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--color-cream);
+}
+
+/* prefers-contrast: more removes decorative layers: dot grid, scanlines,
+ * stripe and sparks. */
+@media (prefers-contrast: more) {
+  body,
+  [data-layout-shell] {
+    background-image: none;
+  }
+
+  .px-stripe,
+  .px-spark {
+    display: none;
   }
 }

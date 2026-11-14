@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { StreakChip } from './StreakChip'
 
-describe('StreakChip freeze copy (ADR 0046)', () => {
+describe('StreakChip freeze copy (ADR 0046) + pixel icons (ADR 0052)', () => {
   test('hides when the streak is 0', () => {
     expect(renderToStaticMarkup(<StreakChip count={0} freezes={1} />)).toBe('')
   })
@@ -12,16 +12,26 @@ describe('StreakChip freeze copy (ADR 0046)', () => {
     expect(none).toContain('role="img"')
     expect(none).toContain('aria-label="Streak 12"')
     expect(none).not.toContain('❄️')
+    expect(none).toContain('<svg')
 
     const one = renderToStaticMarkup(<StreakChip count={12} freezes={1} />)
     expect(one).toContain('role="img"')
     expect(one).toContain('aria-label="Streak 12, 1 freeze"')
-    expect(one).toContain('❄️')
+    expect(one).not.toContain('❄️')
     expect(one).toContain('>1<')
 
     const two = renderToStaticMarkup(<StreakChip count={12} freezes={2} />)
     expect(two).toContain('role="img"')
     expect(two).toContain('aria-label="Streak 12, 2 freezes"')
     expect(two).toContain('>2<')
+  })
+
+  test('emoji are gone; flame and freeze are aria-hidden pixel icons', () => {
+    const html = renderToStaticMarkup(<StreakChip count={12} freezes={1} />)
+    expect(html).not.toContain('🔥')
+    expect(html).not.toContain('❄️')
+    expect(html.match(/aria-hidden="true"/g)?.length).toBe(2)
+    expect(html).toContain('text-coin')
+    expect(html).toContain('text-ink-muted')
   })
 })

@@ -101,13 +101,14 @@ describe('Language & level picker (#182)', () => {
         <Language />
       </MemoryRouter>,
     )
-    // selected language + level carry a ring, not colour only
-    expect(html.match(/aria-checked="true"[^>]*ring-2 ring-accent-fg/g)?.length).toBe(2)
-    expect(html.match(/aria-checked="false"[^>]*ring-2/g)).toBeNull()
+    // selected language + level carry the accent border + check mark, not colour only
+    expect(html.match(/aria-checked="true"[^>]*border-accent-fg/g)?.length).toBe(2)
+    expect(html.match(/aria-checked="false"[^>]*border-accent-fg/g)).toBeNull()
+    expect(html.match(/data-selected-check/g)?.length).toBe(2)
     expect(html).not.toContain('text-ink-faint')
     expect(html).not.toContain('aria-orientation')
     const c = card('ready')
-    expect(c).toContain('focus-visible:ring-accent-fg ')
+    expect(c).not.toContain('focus-visible:outline-none')
     expect(c).not.toContain('ring-accent-fg/')
     expect(c).toContain('line-clamp-2')
     expect(c).not.toContain('truncate')

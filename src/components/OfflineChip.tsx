@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
 /**
- * Quiet network / pack-ready signal.
+ * Quiet network / pack-ready signal (ADR 0052 §5.8: Inter 12px 600 on
+ * cream-dark with a 2px line outline, square corners).
  * - Offline (no network): muted "Offline" chip
  * - packReady while online: muted "Offline ready" (landing trust signal; #103)
  * - Otherwise: null (never loud Install CTA)
@@ -27,7 +28,7 @@ export function OfflineChip({ packReady = false }: { packReady?: boolean } = {})
     // TopBar OfflineChip is the sole network chrome (#103 Avery W3).
     if (packReady) return null
     return (
-      <span className="rounded-full bg-cream-dark px-2.5 py-1 text-xs font-medium text-ink-muted">
+      <span className="inline-flex items-center border-2 border-line bg-cream-dark px-2.5 py-1 text-xs font-semibold text-ink-muted">
         Offline
       </span>
     )
@@ -36,7 +37,7 @@ export function OfflineChip({ packReady = false }: { packReady?: boolean } = {})
   if (packReady) {
     return (
       <span
-        className="rounded-full bg-cream-dark/80 px-2.5 py-1 text-xs font-medium text-ink-muted"
+        className="inline-flex items-center border-2 border-line bg-cream-dark/80 px-2.5 py-1 text-xs font-semibold text-ink-muted"
         data-offline-ready
       >
         Offline ready

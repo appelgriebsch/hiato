@@ -49,6 +49,7 @@ export default defineConfig({
         'brand/*',
         'fonts/*.woff2',
         'fonts/LICENSE.txt',
+        'fonts/Jersey10-OFL.txt',
         'icons/*',
         // Packs are NOT precached at install (ADR 0006) — selected language
         // is cached at runtime; other langs fetch on demand.

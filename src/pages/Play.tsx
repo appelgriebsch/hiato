@@ -9,6 +9,7 @@ import {
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { BrandMark } from '@/components/brand/BrandMark'
 import { Layout, TopBar } from '@/components/Layout'
+import { PixelIcon } from '@/components/PixelIcon'
 import { OfflineChip } from '@/components/OfflineChip'
 import { StreakChip } from '@/components/StreakChip'
 import { Keyboard } from '@/components/play/Keyboard'
@@ -76,6 +77,7 @@ import {
 import { getPrefs } from '@/lib/prefs'
 import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
+import { playCue } from '@/lib/sound'
 import {
   ensureStreakPersisted,
   getStreak,
@@ -268,15 +270,30 @@ function PlayRound({
     pocketNoteRef.current?.focus()
   }, [pocketNote])
 
+  const freezesShown = useRef(0)
+
   useEffect(() => {
     if (streak > streakShown.current) {
       setStreakPulse(true)
-      const t = window.setTimeout(() => setStreakPulse(false), 280)
+      const t = window.setTimeout(() => setStreakPulse(false), 440)
+      // Daily win raises the streak: coin cue 300ms after the win cue (ADR 0052 §6).
+      const cue = window.setTimeout(() => playCue('streak'), 300)
       streakShown.current = streak
-      return () => clearTimeout(t)
+      return () => {
+        clearTimeout(t)
+        clearTimeout(cue)
+      }
     }
     streakShown.current = streak
   }, [streak])
+
+  // A Daily win can also earn a Streak freeze — cue with the icon change.
+  useEffect(() => {
+    if (freezes > freezesShown.current) {
+      playCue('freeze')
+    }
+    freezesShown.current = freezes
+  }, [freezes])
 
   const persistDaily = useCallback(
     (result: 'win' | 'lose', entry: PackLemma) => {
@@ -500,6 +517,7 @@ function PlayRound({
   const endGame = useCallback(
     (result: 'win' | 'lose', entry: PackLemma) => {
       setFinished(result)
+      playCue(result === 'win' ? 'win' : 'loss')
       recordRound(result, roundRef.current.lives)
       if (mode === 'daily') persistDaily(result, entry)
       // Pocket: win removes; a due loss advances the ladder; an early loss
@@ -530,6 +548,7 @@ function PlayRound({
 
     const { cells: next, hit } = applyGuess(r.cells, r.wordEntry.word, letter)
     if (hit) {
+      playCue('key-correct')
       const usedCorrect = new Set(r.usedCorrect).add(k)
       const won = isWon(next)
       roundRef.current = {
@@ -558,6 +577,8 @@ function PlayRound({
       setUsedWrong(usedWrong)
       if (misses !== r.misses) setMisses(misses)
       setLives(lives)
+      playCue('key-miss')
+      if (lives === 1) playCue('life-lost')
       window.clearTimeout(shakeTimer.current)
       setShakeKey(k)
       shakeTimer.current = window.setTimeout(() => setShakeKey(null), 240)
@@ -577,6 +598,7 @@ function PlayRound({
       return
     }
     const next = revealOneDiacritic(r.cells, r.wordEntry.word)
+    playCue('hint')
     const usedCorrect = correctKeysFromCells(next)
     const won = isWon(next)
     roundRef.current = {
@@ -631,7 +653,7 @@ function PlayRound({
           right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
         />
         <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <h1 className="text-title text-ink">Practice unavailable</h1>
+          <h1 className="text-pixel-display text-ink">Practice unavailable</h1>
           <p className="max-w-xs text-sm text-ink-muted">
             This pack only has today’s daily word, so Practice would spoil it.
           </p>
@@ -680,7 +702,7 @@ function PlayRound({
   // Second mount: short-land right column. The footer copy is display:none
   // there, so only one pad is in the accessibility tree (#138 portrait, #209).
   const letterPadLand = inRound ? (
-    <div className="w-full min-w-0 rounded-2xl border border-line bg-raised/40">
+    <div className="px-frame w-full min-w-0 bg-raised/40">
       <Keyboard
         lang={lang}
         usedWrong={usedWrong}
@@ -734,14 +756,14 @@ function PlayRound({
         ].join(' ')}
       >
         <Lives remaining={lives} total={TOTAL_LIVES} />
-        <span className="text-caption tracking-wide">
+        <span className="text-pixel-label tracking-[0.08em] text-ink">
           {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
         </span>
       </div>
 
       {loading && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 py-16">
-          <div className="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-2 border-line border-t-accent" />
+          <div className="h-8 w-8 animate-spin motion-reduce:animate-none border-2 border-line border-t-accent" />
           <p className="text-sm text-ink-muted">
             {mode === 'daily'
               ? 'Loading today’s word…'
@@ -826,7 +848,7 @@ function PlayRound({
                 data-reveal-word
                 aria-label="Reveal word and end this practice round"
                 onClick={onReveal}
-                className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline decoration-2 underline-offset-4 hover:text-ink"
               >
                 Reveal word
               </button>
@@ -837,7 +859,7 @@ function PlayRound({
             <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm" data-round-nav>
               <Link
                 to="/"
-                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
               >
                 ← Home
               </Link>
@@ -845,7 +867,7 @@ function PlayRound({
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline-offset-2 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline decoration-2 underline-offset-4"
                 >
                   Practice
                 </button>
@@ -860,7 +882,7 @@ function PlayRound({
             <div className="flex flex-wrap items-center justify-center gap-4 pt-6 text-sm" data-round-nav>
               <Link
                 to="/play?mode=daily"
-                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
               >
                 ← Daily
               </Link>
@@ -868,7 +890,7 @@ function PlayRound({
                 <button
                   type="button"
                   onClick={goPractice}
-                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                  className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline decoration-2 underline-offset-4"
                 >
                   Next word
                 </button>
@@ -879,7 +901,7 @@ function PlayRound({
             <div className="pt-6 text-center" data-round-nav>
               <Link
                 to="/"
-                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg/40 rounded-sm"
+                className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink"
               >
                 ← Home
               </Link>
@@ -943,14 +965,14 @@ function DoneDaily({
         <div
           className={
             won
-              ? 'flex h-16 w-16 items-center justify-center rounded-full bg-accent-soft text-2xl text-accent-fg'
-              : 'flex h-16 w-16 items-center justify-center rounded-full bg-cream-dark text-2xl text-ink-muted'
+              ? 'px-frame flex h-16 w-16 items-center justify-center bg-accent-soft text-accent-fg [--px-edge:var(--color-accent-fg)]'
+              : 'px-frame flex h-16 w-16 items-center justify-center bg-cream-dark text-ink-muted [--px-edge:var(--color-line)]'
           }
           aria-hidden="true"
         >
-          {won ? '✓' : '✕'}
+          {won ? <PixelIcon name="check" size={32} /> : <PixelIcon name="close" size={32} />}
         </div>
-        <h1 className="text-title text-ink">
+        <h1 className="text-pixel-display text-ink">
           {won ? 'Today’s daily is done' : 'Today’s daily was missed'}
         </h1>
         <p className="text-body max-w-xs text-ink-muted">
@@ -959,7 +981,7 @@ function DoneDaily({
         </p>
         {rec ? (
           <div
-            className="w-full rounded-xl border border-line bg-raised/80 px-4 py-4 text-center"
+            className="px-frame w-full bg-raised/80 px-4 py-4 text-center"
             data-endcard-teach
           >
             <LemmaTeach
@@ -972,7 +994,7 @@ function DoneDaily({
             />
           </div>
         ) : null}
-        <Card className="w-full text-left">
+        <Card className="px-flat w-full text-left [--px-edge:var(--color-line)]">
           <div className="flex items-center justify-between text-sm">
             <span className="text-ink-muted">
               {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
@@ -1314,9 +1336,27 @@ function EndCard({
 
   return (
     <div className="motion-result-enter mb-4 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
-      <div className="min-w-0 space-y-3">
+      <div className="relative min-w-0 space-y-3">
+      {won
+        ? ([
+            { top: -6, left: -6 },
+            { top: -6, right: -6 },
+            { bottom: -6, left: -6 },
+            { bottom: -6, right: -6 },
+            { top: '45%', left: -10 },
+            { top: '45%', right: -10 },
+          ] as const).map((pos, i) => (
+            <PixelIcon
+              key={i}
+              name="spark"
+              size={16}
+              className="px-spark text-spark [--icon-2:var(--color-coin)]"
+              style={pos}
+            />
+          ))
+        : null}
       <div
-        className="rounded-xl border border-line bg-raised/80 px-4 py-4 text-center short-land:max-h-full short-land:overflow-y-auto short-land:py-3"
+        className="px-frame bg-raised/80 px-4 py-4 text-center short-land:max-h-full short-land:overflow-y-auto short-land:py-3"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
@@ -1335,7 +1375,7 @@ function EndCard({
       </div>
 
       <div inert={confirming ? true : undefined}>
-      <Card className="w-full text-left">
+      <Card className="px-flat w-full text-left [--px-edge:var(--color-line)]">
         <div className="flex items-center justify-between text-sm">
           <span className="text-ink-muted">
             {LANG_CODES[lang]} · {CEFR_CODES[cefr]}
@@ -1379,21 +1419,21 @@ function EndCard({
       {confirming ? (
         <div ref={confirmPanelRef}>
         <Card
-          className="w-full text-left"
+          className="px-drop-dialog w-full p-4 text-left"
           role="dialog"
           aria-modal="true"
           aria-labelledby={confirmHeadingId}
         >
           <p
             id={confirmHeadingId}
-            className="text-sm font-medium text-ink"
+            className="text-pixel-title text-ink"
           >
             Replace oldest word?
           </p>
-          <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+          <p className="mt-1 text-[13px] leading-snug text-ink-muted">
             Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can practice “{pocketListLabel({ gloss })}”.
           </p>
-          <div className="mt-3 flex flex-col gap-2">
+          <div className="mt-2 flex flex-col gap-2">
             <Button ref={confirmBtnRef} fullWidth onClick={onConfirmReplace}>
               Replace and practice
             </Button>

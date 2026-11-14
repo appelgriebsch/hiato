@@ -65,18 +65,19 @@ export function LetterGrid({
   }, [cells])
 
   const maxCols = Math.max(1, ...rows.map((r) => r.length))
+  // Pixel tiles (ADR 0052 §2/§5.4): 44px squares, Jersey 37px uppercase, square
+  // corners. Colour states also get their shape cue (solid / dashed / base).
   const tile = (cell: CellState, i: number) => (
     <div
       key={i}
       lang={cell.revealed && lang ? lang : undefined}
       className={[
-        'flex aspect-square w-full max-w-11 items-center justify-center rounded-lg border-2 text-xl font-semibold uppercase sm:max-w-12',
-        'transition-[border-color,background-color,color] duration-200',
+        'flex aspect-square w-full max-w-11 items-center justify-center text-pixel-display uppercase sm:max-w-12',
         cell.revealed
           ? cell.helped
-            ? 'border-accent-fg bg-helped text-accent-fg'
-            : 'border-accent-fg bg-accent-soft text-ink'
-          : 'border-line bg-raised text-ink-faint',
+            ? 'tile-helped bg-helped text-accent-fg'
+            : 'tile-revealed bg-accent-soft text-ink'
+          : 'tile-hidden bg-raised text-ink-muted',
         justRevealed.has(i) ? 'motion-letter-reveal' : '',
       ].join(' ')}
     >

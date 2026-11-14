@@ -29,6 +29,7 @@ Direct dependencies declared by this repository. Rows returned by the PR #40 rev
 | tailwind-merge | 3.7.0 | MIT | | none found |
 | tailwindcss | 4.3.3 | MIT | | none found |
 | Tatoeba sentences (per-language dumps, data not a package) | downloaded dump | CC-BY 2.0 FR — https://tatoeba.org | | n/a — data, not a package; used under CC-BY 2.0 FR attribution (ADR 0048) |
+| Jersey 10 font (self-hosted woff2 in public/fonts, not an npm package) | v5.3.0 files from @fontsource/jersey-10 | OFL-1.1 — https://openfontlicense.org | | n/a — font files, not a package; © 2023 The Soft Type Project Authors, https://github.com/scfried/soft-type-jersey (ADR 0052) |
 | typescript | 6.0.3 | unknown | | not checked |
 | vite | 8.3.0 | MIT | | none found |
 | vite-plugin-pwa | 1.3.0 | MIT | | none found |

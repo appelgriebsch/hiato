@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { PixelIcon } from '@/components/PixelIcon'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { pickDailyLemma } from '@/engine'
@@ -183,9 +184,11 @@ export function PocketSheet({
         if (event.target === event.currentTarget) onClose()
       }}
     >
+      <div className="px-stripe" aria-hidden="true" />
       <div className="pocket-sheet-panel">
         <div className="flex items-center justify-between gap-2">
-          <h2 id="pocket-sheet-heading" className="text-title text-ink">
+          <h2 id="pocket-sheet-heading" className="text-pixel-display flex items-center gap-2 text-ink">
+            <PixelIcon name="pocket" size={24} aria-hidden="true" />
             Pocket
           </h2>
           <Button
@@ -194,6 +197,7 @@ export function PocketSheet({
             className="min-h-11 min-w-11 shrink-0 px-3"
             onClick={onClose}
           >
+            <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
             Close
           </Button>
         </div>
@@ -224,7 +228,7 @@ export function PocketSheet({
               const due = isDue(entry, today)
               return (
                 <li key={entry.id} className="flex flex-col gap-2">
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-start justify-between gap-2 border-2 border-line bg-cream px-3 py-2">
                     <p id={glossId} className="min-w-0 text-sm text-ink">
                       {pocketListLabel(entry)}
                     </p>
