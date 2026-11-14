@@ -1,18 +1,11 @@
 import { expect, test, type Locator, type Page } from '@playwright/test'
+import { sharePath } from './share-path'
 
 /**
  * #286: on short screens the /share card must keep its natural height and
  * scroll inside the layout scroll region instead of shrinking. The sticky
  * footer keeps the invite CTA and the share actions on screen.
- * Token encoding mirrors src/lib/share-url.ts, as in share-invite.spec.ts.
  */
-function shareToken(payload: Record<string, unknown>): string {
-  return Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url')
-}
-
-function sharePath(payload: Record<string, unknown>): string {
-  return `/share?p=${encodeURIComponent(shareToken(payload))}`
-}
 
 const DAILY_PAYLOAD = {
   lang: 'en',
