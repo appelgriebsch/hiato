@@ -20,8 +20,8 @@ export function ShareCard(payload: ShareCardPayload) {
   const outcome = shareCardOutcome(payload)
   const visibleOutcome = payload.won ? outcome.replace('✓', '').trim() : outcome
   const level = shareCardCefrLabel(payload.cefr)
-  // "B2 · Upper-intermediate" does not fit one value-size line in half the card.
-  const levelLines = level.length > 18 ? level.split(' · ') : null
+  // Code at value size, name underneath. One value-size line overflows the half-width cell.
+  const levelLines = level.split(' · ')
   return (
     <div
       id="hiato-share-card"
@@ -46,10 +46,11 @@ export function ShareCard(payload: ShareCardPayload) {
           <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-muted">
             Level
           </div>
-          {levelLines && levelLines.length === 2 ? (
+          {levelLines.length === 2 ? (
             <div className="text-ink">
               <div className="text-pixel-value leading-none">{levelLines[0]}</div>
-              <div className="text-pixel-label leading-none tracking-normal whitespace-nowrap">
+              {/* break-words lands later in the Tailwind sheet and would cancel anywhere. */}
+              <div className="text-pixel-label leading-none tracking-normal break-words ![overflow-wrap:anywhere]">
                 {levelLines[1]}
               </div>
             </div>
