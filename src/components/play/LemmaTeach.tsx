@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import { PixelIcon } from '@/components/PixelIcon'
 import { speakLemma, subscribeSpeakActivity } from '@/lib/speech'
 import { speakLemmaAriaLabel } from '@/packs/labels'
 import type { PackLang } from '@/packs/schema'
 
 /**
- * Post-round gloss, lemma, and tap-to-speak.
- * click is native so iOS keeps the user gesture (ADR 0037).
+ * Post-round gloss, lemma, and tap-to-speak (ADR 0052 §5.5: gloss Inter 18px 600,
+ * the word Jersey 37px with +0.06em tracking, example Inter italic, speaker
+ * pixel icon). click is native so iOS keeps the user gesture (ADR 0037).
  */
 export function LemmaTeach({
   lang,
@@ -84,8 +86,8 @@ export function LemmaTeach({
         <p
           lang={lang}
           className={[
-            'tracking-wide text-ink',
-            gloss ? 'mt-0.5 text-base font-medium' : 'mt-1 text-lg font-semibold',
+            'text-pixel-display tracking-[0.06em] text-ink',
+            gloss ? 'mt-0.5' : 'mt-1',
           ].join(' ')}
         >
           {word}
@@ -100,26 +102,12 @@ export function LemmaTeach({
             aria-label={speakLemmaAriaLabel(lang)}
             aria-busy={speaking}
             className={[
-              'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-xl hover:bg-cream-dark active:bg-cream-dark focus-visible:outline-none focus-visible:bg-accent-soft focus-visible:ring-2 focus-visible:ring-accent-fg',
+              'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center hover:bg-cream-dark active:bg-cream-dark focus-visible:bg-accent-soft',
               speaking ? 'text-accent-fg' : 'text-ink-muted',
               gloss ? 'mt-0.5' : 'mt-1',
             ].join(' ')}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-            </svg>
+            <PixelIcon name="speaker" size={20} />
           </button>
         ) : null}
       </div>
@@ -153,7 +141,7 @@ export function LemmaTeach({
             <span
               key={s}
               lang={lang}
-              className="inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink"
+              className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
             >
               {s}
             </span>

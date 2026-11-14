@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
 import { historySlot, statsFor, type SlotStats } from '@/lib/history'
 import { CEFR_CODES, LANG_LABELS } from '@/packs/labels'
@@ -118,9 +119,11 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
         if (event.target === event.currentTarget) onClose()
       }}
     >
+      <div className="px-stripe" aria-hidden="true" />
       <div className="stats-sheet-panel">
         <div className="flex items-center justify-between gap-2">
-          <h2 id="stats-sheet-heading" className="text-title text-ink">
+          <h2 id="stats-sheet-heading" className="text-pixel-display flex items-center gap-2 text-ink">
+            <PixelIcon name="chart" size={24} className="text-accent-fg" aria-hidden="true" />
             Stats
           </h2>
           <Button
@@ -130,6 +133,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
             className="min-h-11 min-w-11 shrink-0 px-3"
             onClick={onClose}
           >
+            <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
             Close
           </Button>
         </div>
@@ -144,7 +148,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
               <div className="flex items-baseline justify-between gap-2">
                 <dt className="text-sm text-ink-muted">Win rate</dt>
                 <dd
-                  className="text-title text-ink"
+                  className="text-pixel-stat text-ink"
                   role="img"
                   aria-label={`Win rate, ${stats.winRate} percent`}
                 >
@@ -154,7 +158,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
               <div className="flex items-baseline justify-between gap-2">
                 <dt className="text-sm text-ink-muted">Average lives left</dt>
                 <dd
-                  className="text-title text-ink"
+                  className={stats.avgLivesLeftOnWins === null ? 'text-lg font-semibold text-ink' : 'text-pixel-stat text-ink'}
                   role="img"
                   aria-label={
                     stats.avgLivesLeftOnWins === null
@@ -168,7 +172,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                 </dd>
               </div>
             </dl>
-            <h3 className="mb-2 text-sm font-medium text-ink">Wins by lives left</h3>
+            <h3 className="text-pixel-title mb-2 text-ink">Wins by lives left</h3>
             <ul className="flex flex-col gap-2">
               {ROW_LEFTS.map((left) => {
                 const count = stats.rows[String(left) as '6' | '5' | '4' | '3' | '2' | '1']
@@ -179,14 +183,17 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                     aria-label={`${left} ${left === 1 ? 'life' : 'lives'} left: ${count} ${count === 1 ? 'win' : 'wins'}`}
                     className="flex items-center gap-2 text-sm"
                   >
-                    <span className="w-10 shrink-0 text-ink">{left}</span>
-                    <span className="stats-bar-track h-3 min-w-0 flex-1 overflow-hidden rounded-full">
+                    <span className="flex w-14 shrink-0 items-center gap-1 text-ink">
+                      <span className="text-pixel-title">{left}</span>
+                      <PixelIcon name="seed" size={16} className="text-accent-fg" aria-hidden="true" />
+                    </span>
+                    <span className="stats-bar-track h-3.5 min-w-0 flex-1 overflow-hidden">
                       <span
-                        className="stats-bar block h-full rounded-full"
+                        className="stats-bar block h-full"
                         style={{ width: `${barPct(count)}%` }}
                       />
                     </span>
-                    <span className="w-6 shrink-0 text-right text-ink">{count}</span>
+                    <span className="text-pixel-title w-6 shrink-0 text-right text-ink">{count}</span>
                   </li>
                 )
               })}
@@ -195,14 +202,14 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                 aria-label={`Lost: ${stats.rows.lost} ${stats.rows.lost === 1 ? 'round' : 'rounds'}`}
                 className="flex items-center gap-2 text-sm"
               >
-                <span className="w-10 shrink-0 text-ink">Lost</span>
-                <span className="stats-bar-track h-3 min-w-0 flex-1 overflow-hidden rounded-full">
+                <span className="text-pixel-title w-14 shrink-0 text-ink">Lost</span>
+                <span className="stats-bar-track h-3.5 min-w-0 flex-1 overflow-hidden">
                   <span
-                    className="stats-bar block h-full rounded-full"
+                    className="stats-bar block h-full"
                     style={{ width: `${barPct(stats.rows.lost)}%` }}
                   />
                 </span>
-                <span className="w-6 shrink-0 text-right text-ink">{stats.rows.lost}</span>
+                <span className="text-pixel-title w-6 shrink-0 text-right text-ink">{stats.rows.lost}</span>
               </li>
             </ul>
           </>

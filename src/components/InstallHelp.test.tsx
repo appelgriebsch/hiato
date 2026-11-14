@@ -66,10 +66,14 @@ describe('A2HS link under Continue (#201)', () => {
     expect(link(true)).toContain('data-install-link')
   })
 
-  test('focus ring is the full accent (3:1), not a translucent one', () => {
+  test('focus ring comes from the global 3px focus rule (ADR 0052 §7)', async () => {
     env()
-    expect(link(true)).toMatch(/focus-visible:ring-accent-fg(?!\/)/)
+    expect(link(true)).not.toContain('focus-visible:outline-none')
     expect(link(true)).not.toContain('ring-accent-fg/')
+    const css = await Bun.file(
+      new URL('../index.css', import.meta.url),
+    ).text()
+    expect(css).toMatch(/:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--color-focus\)/)
   })
 
   test('tap opens the how-to and persists the opened flag; hidden on reload', async () => {

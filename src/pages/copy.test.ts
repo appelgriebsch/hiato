@@ -70,7 +70,7 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
     expect(block).toMatch(/<span[\s\S]*line-clamp-2[\s\S]*\{caption\}/)
     expect(block).not.toMatch(/<Link[\s\S]*\{caption\}/)
     expect(block).toContain('min-h-11')
-    expect(block).toContain('focus-visible:ring-2')
+    expect(block).not.toContain('focus-visible:outline-none')
   })
 
   test('omit provenance from Play / EndCard / Share / Home chrome', async () => {
@@ -463,7 +463,7 @@ describe('Play LearnerHint in-progress teach cue (gh-93 / ADR 0035)', () => {
 
     // Synonym chips: exactly one cream-pill ink class (cross-surface match with EndCard)
     const chipClass =
-      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink'
+      'inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink'
     expect(src.split(chipClass).length - 1).toBe(1)
     expect(src).toContain('.slice(0, 3)')
 
@@ -519,16 +519,16 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     )
 
     // Lemma revealed but not sole hero when gloss present (demoted vs text-lg font-semibold)
-    expect(teach).toContain("'mt-0.5 text-base font-medium'")
+    expect(teach).toContain('text-pixel-display tracking-[0.06em] text-ink')
     expect(teach).toContain('The word was')
     expect(teach).toContain('{word}')
 
     // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
     expect(teach).toContain(
-      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink',
+      'inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink',
     )
     expect(teach).not.toContain(
-      'inline-flex items-center rounded-full bg-cream-dark/90 px-2.5 py-1 text-[11px] font-medium text-ink-muted',
+      'inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink-muted',
     )
     expect(teach).toContain('synonyms.map')
 
@@ -537,8 +537,8 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(endCard).not.toContain('NO_HINT_COPY')
     expect(teach).not.toContain('NO_HINT_COPY')
     expect(endCard).not.toMatch(/No hint|no hint available|Add a gloss/i)
-    const panelStart = endCard.indexOf('rounded-xl border border-line bg-raised/80')
-    const panelEnd = endCard.indexOf('<Card className="w-full text-left">', panelStart)
+    const panelStart = endCard.indexOf('px-frame bg-raised/80')
+    const panelEnd = endCard.indexOf('<Card className="px-flat w-full text-left', panelStart)
     expect(panelStart).toBeGreaterThan(0)
     expect(panelEnd).toBeGreaterThan(panelStart)
     const teachPanel = endCard.slice(panelStart, panelEnd)
@@ -969,9 +969,7 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     const btn = teach.slice(btnAt, teach.indexOf('</button>', btnAt))
     expect(btn).toContain('min-h-11')
     expect(btn).toContain('min-w-11')
-    expect(btn).toContain('focus-visible:ring-2')
-    expect(btn).toContain('focus-visible:ring-accent-fg')
-    expect(btn).not.toContain('focus-visible:ring-accent-fg/')
+    expect(btn).not.toContain('focus-visible:outline-none')
     expect(btn).toContain('focus-visible:bg-accent-soft')
     expect(btn).toContain('active:bg-cream-dark')
     expect(btn).toContain('data-speaking=')
@@ -1357,7 +1355,7 @@ describe('Pocket sheet Close (#136)', () => {
     const src = await Bun.file(
       new URL('../components/PocketSheet.tsx', import.meta.url),
     ).text()
-    const closeAt = src.indexOf('>\n            Close\n          </Button>')
+    const closeAt = src.indexOf('Close\n          </Button>')
     expect(closeAt).toBeGreaterThan(0)
     const control = src.slice(closeAt - 280, closeAt)
     expect(control).toContain('onClick={onClose}')
@@ -1377,28 +1375,27 @@ describe('Home and in-round 44px text links (#136)', () => {
     expect(nav).toContain('Change language')
     expect(nav).toContain('About')
     expect(nav.match(/min-h-11/g)?.length).toBe(2)
-    expect(nav).toContain('focus-visible:ring-2')
-    expect(nav).toContain('focus-visible:ring-accent-fg/40')
+    expect(nav).not.toContain('focus-visible:outline-none')
+    expect(nav).toContain('underline decoration-2')
 
     const play = await pageSrc('Play.tsx')
     const revealAt = play.indexOf('data-reveal-word')
     expect(revealAt).toBeGreaterThan(0)
     const revealClass = play.slice(revealAt, play.indexOf('</button>', revealAt))
-    expect(revealClass).toContain('focus-visible:ring-2')
-    expect(revealClass).toContain('focus-visible:ring-accent-fg/40')
+    expect(revealClass).not.toContain('focus-visible:outline-none')
+    expect(revealClass).toContain('underline decoration-2')
     for (const label of ['← Home', '                  Practice', '← Daily', 'Next word'] as const) {
       const at = play.indexOf(label)
       expect(at).toBeGreaterThan(0)
       const around = play.slice(Math.max(0, at - 320), at)
       expect(around).toContain('min-h-11')
-      expect(around).toContain('focus-visible:ring-2')
-      expect(around).toContain('focus-visible:ring-accent-fg/40')
+      expect(around).not.toContain('focus-visible:outline-none')
     }
     // Pocket Close focus order unchanged
     const pocket = await Bun.file(
       new URL('../components/PocketSheet.tsx', import.meta.url),
     ).text()
-    const closeAt = pocket.indexOf('>\n            Close\n          </Button>')
+    const closeAt = pocket.indexOf('Close\n          </Button>')
     expect(closeAt).toBeGreaterThan(0)
   })
 })
@@ -1425,16 +1422,23 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     expect(kb).toContain('data-tap-min-h="44"')
     expect(kb).toContain('h-12 min-h-11')
     expect(kb).toContain('px-[var(--pad-half-gap)] py-[3px]')
-    // W3: solid accent-fg focus ring (≥3:1), not /60
-    expect(kb).toContain('group-focus-visible:ring-accent-fg')
-    expect(kb).not.toContain('group-focus-visible:ring-accent-fg/')
-    // Painted face is the inner span; colors live there, not on the button.
+    // Focus ring lands on the painted face via index.css [data-hit-slop]:focus-visible .key-face
+    expect(kb).not.toContain('group-focus-visible:ring')
+    const css = await Bun.file(new URL('../index.css', import.meta.url)).text()
+    expect(css).toContain('[data-hit-slop]:focus-visible .key-face')
+    expect(css).toMatch(/:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--color-focus\)/)
+    // Painted face is the inner span keycap; colors live there, not on the button.
     const faceAt = kb.indexOf('<span')
     expect(faceAt).toBeGreaterThan(kb.indexOf('<button'))
     const face = kb.slice(faceAt, kb.indexOf('</span>', faceAt))
-    expect(face).toContain('rounded-lg')
-    expect(face).toContain('bg-raised border border-line')
+    expect(face).toContain('key-face')
+    expect(face).toContain('bg-raised')
     expect(face).toContain('{key}')
+    // Settled keys get their shape cues: ✓ / × corner marks, dashed miss outline
+    expect(kb).toContain('key-correct')
+    expect(kb).toContain('key-wrong')
+    expect(kb).toContain('name="check"')
+    expect(kb).toContain('name="close"')
   })
 
   test('gap ≤4px until rows fit; 6–8px only when width allows ≥40px faces', async () => {
@@ -1456,7 +1460,8 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     expect(kb).toContain('data-accent-strip')
     expect(kb).toContain('aria-label="Accent keys"')
     expect(kb).toContain('{ACCENT_STRIP_LABEL}')
-    expect(kb).toContain('rounded-xl border border-line')
+    expect(kb).toContain('px-frame')
+    expect(kb).toContain('bg-cream-dark/60')
     expect(kb).toContain('pad.accentStrip ?')
   })
 
@@ -1520,5 +1525,54 @@ describe('About states what is counted (ADR 0047, #224)', () => {
     expect(src).toContain('no cookies')
     expect(src).toContain('device storage for tracking')
     expect(src).toContain('Staging previews and offline play are not')
+  })
+})
+
+describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)', () => {
+  test('Sound card is first, with role=switch, approved copy, and hiato.sound storage', async () => {
+    const src = await pageSrc('About.tsx')
+    expect(src).toContain('Sound effects')
+    expect(src).toContain(
+      'Short arcade beeps for letters, misses and results. Everything also shows on screen.',
+    )
+    expect(src).toContain('role="switch"')
+    expect(src).toContain('aria-checked={on}')
+    expect(src).toContain('aria-labelledby="sound-label"')
+    expect(src).toContain('aria-describedby="sound-help"')
+    expect(src).toContain('id="sound-label"')
+    expect(src).toContain('id="sound-help"')
+    // first card on the page, above "What we count"
+    const soundAt = src.indexOf('<SoundCard />')
+    const countAt = src.indexOf('What we count')
+    expect(soundAt).toBeGreaterThan(0)
+    expect(countAt).toBeGreaterThan(soundAt)
+    // visible Off/On word; turning on plays the coin cue, off is silent
+    expect(src).toContain("{on ? 'On' : 'Off'}")
+    expect(src).toContain("if (next) playCue('coin')")
+    expect(src).not.toMatch(/setSoundOn\(next\)[\s\S]{0,80}playCue\('coin'\)[\s\S]{0,40}!next/)
+    // storage module wiring
+    expect(src).toContain("from '@/lib/sound'")
+    expect(src).toContain('getSoundOn')
+    expect(src).toContain('setSoundOn')
+    expect(src).toContain('subscribeSoundChange')
+    const sound = await Bun.file(new URL('../lib/sound.ts', import.meta.url)).text()
+    expect(sound).toContain("'hiato.sound'")
+    expect(sound).toContain('speechSynthesis')
+    expect(sound).toContain('document.hidden')
+    expect(sound).toContain("'ambient'")
+    expect(sound).not.toMatch(/audioSession\.type\s*=\s*'playback'/)
+  })
+
+  test('Jersey 10 typeface card credits the font like Inter', async () => {
+    const src = await pageSrc('About.tsx')
+    expect(src).toContain('Jersey 10')
+    expect(src).toContain('SIL Open Font License 1.1')
+    expect(src).toContain('Copyright 2023 The Soft Type Project Authors')
+    expect(src).toContain('github.com/scfried/soft-type-jersey')
+    expect(src).toContain('/fonts/Jersey10-OFL.txt')
+    expect(src).toContain('public/fonts')
+    // the existing Inter card stays
+    expect(src).toContain('>Inter</h2>')
+    expect(src).toContain('/fonts/LICENSE.txt')
   })
 })

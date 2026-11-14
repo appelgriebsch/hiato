@@ -3,6 +3,8 @@ import path from 'node:path'
 import {
   SHARE_CARD_FONT_URLS,
   SHARE_CARD_KEYS,
+  SHARE_CARD_PIXEL_FONT_FAMILY,
+  SHARE_CARD_PIXEL_FONT_URLS,
   SHARE_WORD_LENGTH_MAX,
   buildShareCardPayload,
   formatShareText,
@@ -197,10 +199,12 @@ describe('formatShareText / filename', () => {
 })
 
 describe('share-card fonts (ADR 0020)', () => {
-  test('bundled font URLs are same-origin /fonts/*.woff2', () => {
+  test('bundled font URLs are same-origin /fonts/*.woff2, incl. the Jersey face', () => {
     const urls = shareCardFontUrls()
-    expect(urls.length).toBe(3)
-    expect(urls).toEqual([...SHARE_CARD_FONT_URLS])
+    expect(urls.length).toBe(4)
+    expect(urls).toEqual([...SHARE_CARD_FONT_URLS, ...SHARE_CARD_PIXEL_FONT_URLS])
+    expect(SHARE_CARD_PIXEL_FONT_FAMILY).toBe('HiatoShareJersey')
+    expect(SHARE_CARD_PIXEL_FONT_URLS).toEqual(['/fonts/jersey-10-latin-400-normal.woff2'])
     for (const url of urls) {
       expect(isSameOriginFontUrl(url)).toBe(true)
       expect(url.startsWith('/fonts/')).toBe(true)
@@ -233,8 +237,8 @@ describe('share-card fonts (ADR 0020)', () => {
     expect(isSameOriginFontUrl('')).toBe(false)
   })
 
-  test('woff2 files and OFL license ship in public/fonts', async () => {
-    for (const url of SHARE_CARD_FONT_URLS) {
+  test('woff2 files and OFL licenses ship in public/fonts', async () => {
+    for (const url of shareCardFontUrls()) {
       const file = path.join(REPO, 'public', url.replace(/^\//, ''))
       expect(Bun.file(file).size).toBeGreaterThan(1000)
     }
@@ -243,18 +247,31 @@ describe('share-card fonts (ADR 0020)', () => {
     ).text()
     expect(license).toContain('SIL OPEN FONT LICENSE')
     expect(license).toContain('Inter Project Authors')
+    const jerseyLicense = await Bun.file(
+      path.join(REPO, 'public/fonts/Jersey10-OFL.txt'),
+    ).text()
+    expect(jerseyLicense).toContain('SIL OPEN FONT LICENSE')
+    expect(jerseyLicense).toContain('Soft Type Project Authors')
     const notice = await Bun.file(path.join(REPO, 'NOTICE')).text()
     expect(notice).toContain('SIL Open Font License')
     expect(notice).toContain('Inter')
+    expect(notice).toContain('Jersey 10')
+    expect(notice).toContain('Jersey10-OFL.txt')
   })
 
-  test('ShareCard does not wrap stats in role=img', async () => {
+  test('ShareCard does not wrap stats in role=img; new graphics are aria-hidden', async () => {
     const src = await Bun.file(
       path.join(REPO, 'src/components/ShareCard.tsx'),
     ).text()
     expect(src).not.toContain('role="img"')
     expect(src).not.toContain("role='img'")
     expect(src).toContain('alt=""')
+    // the ✓ is drawn as check.svg; the outcome string stays as sr-only text
+    expect(src).toContain('name="check"')
+    expect(src).toContain('sr-only')
+    // hidden-letter tile row is decorative and never shows the answer
+    expect(src).toContain('aria-hidden="true"')
+    expect(src).not.toMatch(/payload\.word(?!Length)/)
   })
 
   test('share-card path sources never mention font CDNs', async () => {
@@ -274,23 +291,52 @@ describe('share-card fonts (ADR 0020)', () => {
   })
 })
 
-describe('share PNG palette', () => {
-  test('share-render freezes cream, ink, sage, and line hex', async () => {
+describe('share PNG palette (ADR 0052 §5.10 — always light Cartridge)', () => {
+  test('share-render freezes the light Cartridge hex values', async () => {
     const src = await Bun.file(path.join(REPO, 'src/lib/share-render.ts')).text()
-    expect(src).toContain("const INK = '#1c1b19'")
-    expect(src).toContain("const INK_MUTED = '#6b6860'")
-    expect(src).toContain("const INK_FAINT = '#737067'")
-    expect(src).not.toContain('#9a968c')
-    expect(src).toContain("const ACCENT = '#3d6b55'")
-    expect(src).toContain("const ACCENT_SOFT = '#eef5f0'")
-    expect(src).toContain("const WHITE = '#ffffff'")
-    expect(src).toContain("const LINE = '#e4e1da'")
+    expect(src).toContain("const CREAM = '#f3ecd8'")
+    expect(src).toContain("const RAISED = '#fffaee'")
+    expect(src).toContain("const INK = '#1b1830'")
+    expect(src).toContain("const INK_MUTED = '#545068'")
+    expect(src).toContain("const LINE = '#77708c'")
+    expect(src).toContain("const ACCENT = '#1c6e42'")
+    expect(src).toContain("const ACCENT_FG = '#17633b'")
+    expect(src).toContain("const ACCENT_SOFT = '#dcefd9'")
+    expect(src).toContain("const COIN = '#b86e00'")
+    expect(src).toContain("const DANGER = '#a8261c'")
+    // flat cream background, no dot grid / scanlines / theme detection
+    expect(src).toContain('ctx.fillStyle = CREAM')
     expect(src).not.toContain('prefers-color-scheme')
     expect(src).not.toContain('matchMedia')
+    expect(src).not.toContain('roundRect')
+    // pixel frames are fillRect-based; stripe + mark + check come from rect data
+    expect(src).toContain('pixelFrame(')
+    expect(src).toContain("drawPixelIcon(ctx, 'mark'")
+    expect(src).toContain("drawPixelIcon(ctx, 'check'")
+    expect(src).toContain("drawPixelIcon(ctx, 'flame'")
+    // the Jersey face is a second same-origin FontFace family
+    expect(src).toContain('SHARE_CARD_PIXEL_FONT_FAMILY')
+    const cardLib = await Bun.file(path.join(REPO, 'src/lib/share-card.ts')).text()
+    expect(cardLib).toContain("SHARE_CARD_PIXEL_FONT_FAMILY = 'HiatoShareJersey'")
+    expect(cardLib).toContain("'/fonts/jersey-10-latin-400-normal.woff2'")
     const hidden = src.indexOf("fillText('Answer hidden — come play yours'")
     expect(src.slice(src.lastIndexOf('ctx.fillStyle', hidden), hidden)).toContain('INK_MUTED')
     const label = src.indexOf('.toUpperCase()')
-    expect(src.slice(src.lastIndexOf('ctx.fillStyle', label), label)).toContain('INK_FAINT')
+    expect(src.slice(src.lastIndexOf('ctx.fillStyle', label), label)).toContain('INK_MUTED')
+    const flame = src.indexOf("drawPixelIcon(ctx, 'flame'")
+    const fitted = src.indexOf('fillPixelFitted(ctx')
+    expect(fitted).toBeGreaterThan(flame)
+    const fn = src.slice(src.indexOf('function fillPixelFitted'), src.indexOf('function drawPixelIcon'))
+    expect(fn).toContain('measureText')
+    expect(fn.indexOf('ctx.fillStyle = INK')).toBeLessThan(fn.indexOf('ctx.fillText'))
+  })
+
+  test('share-render falls back to Inter 600 when Jersey fails, and retries on the next save (#270)', async () => {
+    const src = await Bun.file(path.join(REPO, 'src/lib/share-render.ts')).text()
+    // Jersey-fails path: pixel values render in Inter 600 at the same positions
+    expect(src).toContain("pixelFontOk ? '400' : '600'")
+    // a failed pixel-face load re-arms the loader so the next save retries Jersey
+    expect(src).toMatch(/pixelFontOk = false\s*\n\s*fontsReady = null/)
   })
 
   test('share page says the saved image stays cream', async () => {

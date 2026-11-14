@@ -70,7 +70,6 @@ describe('Uma polish assets', () => {
     expect(css).toContain('.motion-letter-reveal')
     expect(css).toContain('.motion-key-shake')
     expect(css).toContain('.motion-life-deplete')
-    expect(css).toContain('.motion-heart-deplete')
     expect(css).toContain('.motion-onboarding-enter')
     expect(css).toContain('.motion-result-enter')
     expect(css).toContain('.motion-share-card')
@@ -81,12 +80,14 @@ describe('Uma polish assets', () => {
     )
   })
 
-  test('StreakChip shows calm fire streak symbol', async () => {
+  test('StreakChip uses the pixel flame icon, not the emoji (ADR 0052)', async () => {
     const src = await Bun.file(
       path.join(REPO, 'src/components/StreakChip.tsx'),
     ).text()
-    expect(src).toContain('🔥')
-    expect(src).toContain('aria-hidden')
+    expect(src).not.toContain('🔥')
+    expect(src).not.toContain('❄️')
+    expect(src).toContain('name="flame"')
+    expect(src).toContain('name="freeze"')
     expect(src).toContain('`Streak ${count}`')
     expect(src).not.toMatch(/aria-label=\{[^}]*fire/)
   })

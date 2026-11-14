@@ -9,4 +9,14 @@ describe('cn', () => {
       'text-ink font-medium',
     )
   })
+
+  test('keeps text-pixel-* next to a text colour', () => {
+    expect(cn('text-pixel-title bg-accent text-white')).toBe(
+      'text-pixel-title bg-accent text-white',
+    )
+    expect(cn('text-pixel-label text-ink', 'text-accent-fg')).toBe(
+      'text-pixel-label text-accent-fg',
+    )
+    expect(cn('text-lg', 'text-pixel-title')).toBe('text-pixel-title')
+  })
 })

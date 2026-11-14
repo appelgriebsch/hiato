@@ -1,0 +1,12 @@
+Jersey 10 subset (ADR 0052, the ~8.5 KB option). One file replaces the
+fontsource latin + latin-ext pair. It keeps ASCII, Latin-1, and the
+latin-ext letters used by en/pt/de/es/fr/it (Œ œ Ÿ ẞ), plus pack punctuation.
+
+Source TTF: https://github.com/scfried/soft-type-jersey fonts/ttf/Jersey10-Regular.ttf
+
+pyftsubset Jersey10-Regular.ttf \
+  --flavor=woff2 \
+  --output-file=jersey-10-latin-400-normal.woff2 \
+  --unicodes=U+0020-007E,U+00A0-00FF,U+0152-0153,U+0178,U+1E9E,U+2013-2014,U+2018-2019,U+201C-201E,U+2026,U+20AC \
+  --ignore-missing-unicodes \
+  --no-hinting

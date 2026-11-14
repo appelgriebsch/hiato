@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { PixelIcon } from '@/components/PixelIcon'
 import { graphemeKey } from '@/engine'
 import {
   ACCENT_STRIP_LABEL,
@@ -26,10 +27,11 @@ type KeyState = {
  *
  * Hit-slop: the `<button>` is an invisible tap box — 48px tall (height floor
  * ≥44 via `data-tap-min-h`), edge-to-edge with its neighbours (no dead gap) —
- * and the painted face is an inset `<span>`. Width is the row’s column share
- * (not a 44×44 square — phone columns are narrower). The visual gap is the
- * inset (`--pad-half-gap`: ≤4px gap until rows fit; 6–8px rules exist but do
- * not fire under `max-w-md` — see `[data-letter-pad]` in index.css).
+ * and the painted face is an inset `<span class="key-face">`. Width is the row's
+ * column share (not a 44×44 square — phone columns are narrower). The visual
+ * gap is the inset (`--pad-half-gap`: ≤4px gap until rows fit; 6–8px rules
+ * exist but do not fire under `max-w-md` — see `[data-letter-pad]` in
+ * index.css). The pad's top edge is a 2px `edge` line (ADR 0052 §5.4).
  */
 export function Keyboard({
   lang,
@@ -65,11 +67,11 @@ export function Keyboard({
             role="group"
             aria-label="Accent keys"
             data-accent-strip
-            className="mt-1 rounded-xl border border-line bg-cream-dark/60 px-0.5 pt-0.5"
+            className="px-frame mt-1 bg-cream-dark/60 px-0.5 pt-0.5 [--px-edge:var(--color-line)]"
           >
             <p
               aria-hidden="true"
-              className="px-1.5 text-[10px] font-semibold uppercase leading-4 tracking-wider text-ink-muted"
+              className="px-1.5 text-[11px] font-semibold uppercase leading-4 tracking-wider text-ink-muted"
             >
               {ACCENT_STRIP_LABEL}
             </p>
@@ -107,23 +109,37 @@ function KeyRow({
             disabled={disabled || wrong || correct}
             onClick={() => onKey(key)}
             className={[
-              'group flex h-12 min-h-11 min-w-0 max-w-[calc(100%/var(--pad-cols))] flex-1 basis-0 touch-manipulation select-none px-[var(--pad-half-gap)] py-[3px] motion-press focus-visible:outline-none',
+              'group flex h-12 min-h-11 min-w-0 max-w-[calc(100%/var(--pad-cols))] flex-1 basis-0 touch-manipulation select-none px-[var(--pad-half-gap)] py-[3px] motion-press',
               wrong || correct ? 'key-settled' : '',
               shaking ? 'motion-key-shake' : '',
             ].join(' ')}
           >
             <span
               className={[
-                'flex min-w-0 flex-1 items-center justify-center rounded-lg text-base font-semibold motion-key-wrong-dim group-focus-visible:ring-2 group-focus-visible:ring-accent-fg',
+                'key-face relative flex min-w-0 flex-1 items-center justify-center text-pixel-title motion-key-wrong-dim',
                 keyUsesUppercaseFace(key) ? 'uppercase' : 'normal-case',
                 wrong
-                  ? 'bg-wrong/70 text-ink'
+                  ? 'key-wrong bg-wrong text-ink'
                   : correct
-                    ? 'bg-accent text-white'
-                    : 'bg-raised border border-line text-ink group-hover:bg-cream-dark',
+                    ? 'key-correct bg-accent text-white'
+                    : 'bg-raised text-ink group-hover:bg-cream-dark',
               ].join(' ')}
             >
               {key}
+              {correct ? (
+                <PixelIcon
+                  name="check"
+                  size={10}
+                  className="absolute top-0.5 right-0.5 text-white"
+                />
+              ) : null}
+              {wrong ? (
+                <PixelIcon
+                  name="close"
+                  size={10}
+                  className="absolute top-0.5 right-0.5 text-ink"
+                />
+              ) : null}
             </span>
           </button>
         )

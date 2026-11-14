@@ -20,6 +20,7 @@ export function Share() {
   const fromToken = searchParams.has('p')
   const payload = resolveSharePayload(searchParams, loc.state)
   const [toast, setToast] = useState<string | null>(null)
+  const [toastTone, setToastTone] = useState<'neutral' | 'error'>('neutral')
   const [busy, setBusy] = useState(false)
   const [preparing, setPreparing] = useState(false)
   const [inviteError, setInviteError] = useState<string | null>(null)
@@ -37,9 +38,13 @@ export function Share() {
     [],
   )
 
-  const show = useCallback((message: string) => {
-    setToast(message)
-  }, [setToast])
+  const show = useCallback(
+    (message: string, tone: 'neutral' | 'error' = 'neutral') => {
+      setToastTone(tone)
+      setToast(message)
+    },
+    [setToast, setToastTone],
+  )
 
   /** A shared link (`?p=`) opens Home. In-app share uses browser history. */
   const goBack = useCallback(() => {
@@ -60,7 +65,7 @@ export function Share() {
       if (result.method === 'cancelled') return
       show(result.message)
     } catch {
-      show('Couldn’t share')
+      show('Couldn’t share', 'error')
     } finally {
       setBusy(false)
     }
@@ -87,7 +92,7 @@ export function Share() {
       window.clearTimeout(copyReset.current)
       copyReset.current = 0
       setCopyLabel('Copy text')
-      show('Couldn’t share')
+      show('Couldn’t share', 'error')
     } finally {
       setBusy(false)
     }
@@ -199,7 +204,7 @@ export function Share() {
             ← Back
           </button>
         }
-        center={<span className="text-sm font-semibold tracking-tight">Share card</span>}
+        center={<span className="text-pixel-title text-ink">Share card</span>}
       />
 
       <p className="mb-4 text-center text-xs leading-[1.4] tracking-wide text-ink-muted">
@@ -208,7 +213,7 @@ export function Share() {
 
       <ShareCard {...payload} />
 
-      {toast ? <Toast message={toast} onDone={() => setToast(null)} /> : null}
+      {toast ? <Toast message={toast} tone={toastTone} onDone={() => setToast(null)} /> : null}
     </Layout>
   )
 }

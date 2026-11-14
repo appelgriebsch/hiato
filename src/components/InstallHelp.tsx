@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
 
 export type BeforeInstallPromptEvent = Event & {
@@ -147,7 +148,7 @@ export function InstallHelpLink({
       <button
         type="button"
         data-install-link
-        className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-fg rounded-sm short-land:mx-0 short-land:min-w-0 short-land:flex-1 short-land:justify-start short-land:text-left short-land:leading-tight"
+        className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline decoration-2 underline-offset-4 short-land:mx-0 short-land:min-w-0 short-land:flex-1 short-land:justify-start short-land:text-left short-land:leading-tight"
         onClick={() => void onInstallClick()}
       >
         Add Hiato to your Home Screen
@@ -170,10 +171,11 @@ export function InstallHelpLink({
             if (event.target === event.currentTarget) closeSheet()
           }}
         >
+          <div className="px-stripe" aria-hidden="true" />
           <div className="install-help-sheet-panel">
             <h2
               id="install-help-title"
-              className="text-base font-semibold text-ink"
+              className="text-pixel-title text-ink"
             >
               Optional: install Hiato
             </h2>
@@ -206,6 +208,7 @@ export function InstallHelpLink({
               className="mt-4"
               onClick={closeSheet}
             >
+              <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
               Close
             </Button>
           </div>

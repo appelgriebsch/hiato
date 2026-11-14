@@ -3,12 +3,14 @@ import {
   LIVES_METAPHOR,
   type LivesMetaphor,
 } from '@/brand/livesMetaphor'
-import {
-  LivesMetaphorIcon,
-  livesAccentClass,
-} from '@/brand/LivesIcons'
+import { LivesMetaphorIcon } from '@/brand/LivesIcons'
 import { TOTAL_LIVES } from '@/engine'
 
+/**
+ * Lives row: six 24px pixel seeds (ADR 0025 + ADR 0052 §2). A lost life blinks
+ * 3 times inside a 2px dashed danger outline, then becomes the outline seed.
+ * The aria-live announcement is unchanged.
+ */
 export function Lives({
   remaining,
   total = TOTAL_LIVES,
@@ -32,14 +34,14 @@ export function Lives({
         return
       }
       setDepleting(remaining)
-      const t = window.setTimeout(() => setDepleting(null), 320)
+      const t = window.setTimeout(() => setDepleting(null), 1500)
       prev.current = remaining
       return () => clearTimeout(t)
     }
     prev.current = remaining
   }, [remaining])
 
-  const accent = livesAccentClass(metaphor)
+  const accent = 'text-accent-fg'
 
   return (
     <div
@@ -55,14 +57,14 @@ export function Lives({
           <span
             key={i}
             className={[
-              'inline-flex h-5 w-5 items-center justify-center',
-              'transition-[opacity,filter,transform] duration-200',
+              'inline-flex h-6 w-6 items-center justify-center',
+              'transition-[opacity] duration-200',
               'motion-reduce:transition-none motion-reduce:duration-0',
               isDepleting
                 ? `motion-life-deplete ${accent}`
                 : alive
                   ? accent
-                  : 'text-ink-faint',
+                  : 'text-ink-muted',
             ].join(' ')}
             aria-hidden
           >

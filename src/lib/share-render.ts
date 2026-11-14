@@ -1,8 +1,12 @@
 import { letterCountLabel } from '../engine'
+import { PIXEL_ICONS, type PixelIconName } from '../brand/pixel-icons'
 import {
   SHARE_CARD_FONT_FAMILY,
   SHARE_CARD_FONT_URLS,
   SHARE_CARD_FONT_WEIGHTS,
+  SHARE_CARD_PIXEL_FONT_FAMILY,
+  SHARE_CARD_PIXEL_FONT_URLS,
+  SHARE_CARD_PIXEL_FONT_WEIGHTS,
   isSameOriginFontUrl,
   shareCardCefrLabel,
   shareCardKicker,
@@ -11,68 +15,103 @@ import {
   type ShareCardPayload,
 } from './share-card'
 
-/** Cream / ink tokens matching G0 ShareCard. */
-const INK = '#1c1b19'
-const INK_MUTED = '#6b6860'
-const INK_FAINT = '#737067'
-const ACCENT = '#3d6b55'
-const ACCENT_SOFT = '#eef5f0'
-const WHITE = '#ffffff'
-const LINE = '#e4e1da'
+/**
+ * Retro share PNG (ADR 0052 §5.10): always light "Cartridge", flat cream
+ * background (no dot grid), pixel frames drawn with fillRect, the arcade
+ * stripe, the pixel mark, a hidden-letter tile row and the check drawn from
+ * rect data (neither Inter nor Jersey has U+2713). 720×780 CSS px at SCALE 2.
+ */
+const CREAM = '#f3ecd8'
+const RAISED = '#fffaee'
+const INK = '#1b1830'
+const INK_MUTED = '#545068'
+const LINE = '#77708c'
+const ACCENT = '#1c6e42'
+const ACCENT_FG = '#17633b'
+const ACCENT_SOFT = '#dcefd9'
+const COIN = '#b86e00'
+const DANGER = '#a8261c'
 
 export const SHARE_CARD_WIDTH = 720
 export const SHARE_CARD_HEIGHT = 780
 const SCALE = 2
 
 let fontsReady: Promise<void> | null = null
+let pixelFontOk = false
 
 function font(weight: string, size: number): string {
   return `${weight} ${size}px ${SHARE_CARD_FONT_FAMILY}, Inter, ui-sans-serif, system-ui, sans-serif`
 }
 
-function roundRect(
+/** Pixel face; falls back to Inter 600 at the same positions when Jersey failed. */
+function fontPixel(size: number): string {
+  const weight = pixelFontOk ? '400' : '600'
+  return `${weight} ${size}px ${SHARE_CARD_PIXEL_FONT_FAMILY}, ${SHARE_CARD_FONT_FAMILY}, Inter, ui-sans-serif, system-ui, sans-serif`
+}
+
+/** 2px square pixel frame (notched corners) drawn with fillRect. */
+function pixelFrame(
   ctx: CanvasRenderingContext2D,
   x: number,
   y: number,
   w: number,
   h: number,
-  r: number,
+  color: string,
+  t = 2,
 ): void {
-  const rr = Math.min(r, w / 2, h / 2)
-  ctx.beginPath()
-  ctx.moveTo(x + rr, y)
-  ctx.arcTo(x + w, y, x + w, y + h, rr)
-  ctx.arcTo(x + w, y + h, x, y + h, rr)
-  ctx.arcTo(x, y + h, x, y, rr)
-  ctx.arcTo(x, y, x + w, y, rr)
-  ctx.closePath()
+  ctx.fillStyle = color
+  ctx.fillRect(x, y, w, t)
+  ctx.fillRect(x, y + h - t, w, t)
+  ctx.fillRect(x, y, t, h)
+  ctx.fillRect(x + w - t, y, t, h)
 }
 
-function fillTracked(
+const PIXEL_VALUE = 37.33
+const PIXEL_MIN = 18.67
+
+/** Shrink a Jersey value until it fits the score cell, then paint it in ink. */
+function fillPixelFitted(
   ctx: CanvasRenderingContext2D,
   text: string,
-  cx: number,
+  x: number,
   y: number,
-  tracking: number,
+  maxW: number,
 ): void {
-  const chars = Array.from(text)
-  const widths = chars.map((c) => ctx.measureText(c).width)
-  const total =
-    widths.reduce((a, b) => a + b, 0) + tracking * Math.max(0, chars.length - 1)
-  let x = cx - total / 2
-  for (let i = 0; i < chars.length; i++) {
-    ctx.fillText(chars[i], x, y)
-    x += widths[i] + tracking
+  let size = PIXEL_VALUE
+  ctx.font = fontPixel(size)
+  while (size > PIXEL_MIN && ctx.measureText(text).width > maxW) {
+    size -= 1
+    ctx.font = fontPixel(size)
+  }
+  // drawPixelIcon leaves its last fill (coin on the flame). Values are ink.
+  ctx.fillStyle = INK
+  ctx.fillText(text, x, y)
+}
+
+function drawPixelIcon(
+  ctx: CanvasRenderingContext2D,
+  name: PixelIconName,
+  x: number,
+  y: number,
+  size: number,
+  color: string,
+  color2?: string,
+): void {
+  const s = size / 16
+  for (const r of PIXEL_ICONS[name]) {
+    ctx.fillStyle = r.c === '2' ? (color2 ?? color) : color
+    ctx.fillRect(x + r.x * s, y + r.y * s, r.w * s, r.h * s)
   }
 }
 
 /**
- * Load self-hosted Inter via FontFace. Refuses any non-same-origin URL
- * so a future edit cannot silently pull Google Fonts (ADR 0020).
+ * Load self-hosted Inter + Jersey 10 via FontFace. Refuses any non-same-origin
+ * URL so a future edit cannot silently pull Google Fonts (ADR 0020).
+ * The Jersey face loads on its own so its failure never blocks Inter.
  */
 export function ensureShareCardFonts(): Promise<void> {
   if (fontsReady) return fontsReady
-  fontsReady = (async () => {
+  const ready = (async () => {
     if (typeof FontFace === 'undefined' || typeof document === 'undefined') {
       return
     }
@@ -93,11 +132,32 @@ export function ensureShareCardFonts(): Promise<void> {
       }))
     }
     await Promise.all(loads)
+    try {
+      for (let i = 0; i < SHARE_CARD_PIXEL_FONT_URLS.length; i++) {
+        const url = SHARE_CARD_PIXEL_FONT_URLS[i]
+        if (!isSameOriginFontUrl(url)) {
+          throw new Error(`share-card font is not same-origin: ${url}`)
+        }
+        const face = new FontFace(
+          SHARE_CARD_PIXEL_FONT_FAMILY,
+          `url("${url}") format("woff2")`,
+          { weight: SHARE_CARD_PIXEL_FONT_WEIGHTS[i], style: 'normal', display: 'swap' },
+        )
+        document.fonts.add(await face.load())
+      }
+      pixelFontOk = true
+    } catch {
+      // Offline cold start without precache: keep Inter 600 at the same
+      // positions, and re-arm the loader so the next save retries Jersey.
+      pixelFontOk = false
+      fontsReady = null
+    }
   })().catch((err) => {
     fontsReady = null
     throw err
   })
-  return fontsReady
+  fontsReady = ready
+  return ready
 }
 
 function drawShareCard(
@@ -106,38 +166,44 @@ function drawShareCard(
   w: number,
   h: number,
 ): void {
-  const g = ctx.createLinearGradient(0, 0, 0, h)
-  g.addColorStop(0, WHITE)
-  g.addColorStop(1, ACCENT_SOFT)
-  ctx.fillStyle = g
+  // Flat cream — no dot grid, so the PNG compresses well and stays identical everywhere.
+  ctx.fillStyle = CREAM
   ctx.fillRect(0, 0, w, h)
+
+  // 10px arcade stripe: repeating 12px blocks of accent / coin / danger.
+  const stripeColors = [ACCENT, COIN, DANGER]
+  for (let x = 0; x < w; x += 12) {
+    ctx.fillStyle = stripeColors[(x / 12) % 3]!
+    ctx.fillRect(x, 0, 12, 10)
+  }
 
   ctx.textAlign = 'center'
   ctx.textBaseline = 'alphabetic'
-  ctx.fillStyle = ACCENT
-  ctx.font = font('600', 15)
-  fillTracked(ctx, 'HIATO', w / 2, 72, 4.2)
+
+  // Pixel mark + wordmark.
+  drawPixelIcon(ctx, 'mark', w / 2 - 24, 34, 48, ACCENT, RAISED)
+  ctx.fillStyle = ACCENT_FG
+  ctx.font = fontPixel(56)
+  ctx.fillText('Hiato', w / 2, 132)
 
   ctx.fillStyle = INK_MUTED
   ctx.font = font('400', 18)
-  ctx.fillText(shareCardKicker(payload), w / 2, 106)
+  ctx.fillText(shareCardKicker(payload), w / 2, 168)
 
+  // Score panel: raised, 2px line pixel frame, 2×2 grid.
   const panelX = 56
-  const panelY = 148
+  const panelY = 204
   const panelW = w - 112
-  const panelH = 280
-  roundRect(ctx, panelX, panelY, panelW, panelH, 20)
-  ctx.fillStyle = 'rgba(255,255,255,0.86)'
-  ctx.fill()
-  ctx.strokeStyle = LINE
-  ctx.lineWidth = 1
-  ctx.stroke()
+  const panelH = 240
+  ctx.fillStyle = RAISED
+  ctx.fillRect(panelX, panelY, panelW, panelH)
+  pixelFrame(ctx, panelX, panelY, panelW, panelH, LINE)
 
-  const cells: [string, string][] = [
-    ['Language', shareCardLangLabel(payload.lang)],
-    ['Level', shareCardCefrLabel(payload.cefr)],
-    ['Streak', String(payload.streak)],
-    ['Date', payload.dateKey],
+  const cells: [string, string, boolean][] = [
+    ['Language', shareCardLangLabel(payload.lang), false],
+    ['Level', shareCardCefrLabel(payload.cefr), false],
+    ['Streak', String(payload.streak), true],
+    ['Date', payload.dateKey, false],
   ]
   const colW = panelW / 2
   const rowH = panelH / 2
@@ -146,39 +212,84 @@ function drawShareCard(
     const col = i % 2
     const row = Math.floor(i / 2)
     const x = panelX + 28 + col * colW
-    const y = panelY + 36 + row * rowH
-    ctx.fillStyle = INK_FAINT
-    ctx.font = font('500', 12)
-    ctx.fillText(cells[i][0].toUpperCase(), x, y)
-    ctx.fillStyle = INK
-    ctx.font = font('500', 20)
-    ctx.fillText(cells[i][1], x, y + 32)
+    const y = panelY + 40 + row * rowH
+    ctx.fillStyle = INK_MUTED
+    ctx.font = font('600', 14)
+    fillTrackedLeft(ctx, cells[i][0].toUpperCase(), x, y, 0.84)
+    const valueX = cells[i][2] ? x + 30 : x
+    if (cells[i][2]) {
+      drawPixelIcon(ctx, 'flame', x, y + 14, 22, COIN, DANGER)
+    }
+    const maxW = panelX + (col + 1) * colW - 28 - valueX
+    fillPixelFitted(ctx, cells[i][1], valueX, y + 46, maxW)
   }
 
-  const pillLabel = `${shareCardOutcome(payload)}  ·  ${letterCountLabel(payload.wordLength)}`
-  ctx.font = font('500', 16)
+  // Hidden-letter tiles: one empty · tile per letter — never the answer.
+  const tile = 44
+  const gap = 8
+  const rowW = payload.wordLength * tile + Math.max(0, payload.wordLength - 1) * gap
+  let tileX = (w - rowW) / 2
+  const tileY = 496
+  ctx.font = font('600', 20)
   ctx.textAlign = 'center'
-  const pillW = Math.min(panelW, ctx.measureText(pillLabel).width + 48)
-  const pillH = 44
-  const pillX = (w - pillW) / 2
-  const pillY = 468
-  ctx.shadowColor = 'rgba(28, 27, 25, 0.08)'
-  ctx.shadowBlur = 10
-  ctx.shadowOffsetY = 2
-  roundRect(ctx, pillX, pillY, pillW, pillH, pillH / 2)
-  ctx.fillStyle = WHITE
-  ctx.fill()
-  ctx.shadowColor = 'transparent'
-  ctx.shadowBlur = 0
-  ctx.shadowOffsetY = 0
-  ctx.fillStyle = INK
-  ctx.textBaseline = 'middle'
-  ctx.fillText(pillLabel, w / 2, pillY + pillH / 2)
+  for (let i = 0; i < payload.wordLength; i++) {
+    ctx.fillStyle = RAISED
+    ctx.fillRect(tileX, tileY, tile, tile)
+    pixelFrame(ctx, tileX, tileY, tile, tile, LINE)
+    ctx.fillStyle = INK_MUTED
+    ctx.textBaseline = 'middle'
+    ctx.fillText('·', tileX + tile / 2, tileY + tile / 2 + 1)
+    ctx.textBaseline = 'alphabetic'
+    tileX += tile + gap
+  }
 
+  // Outcome badge: win = accent tone with a drawn ✓; non-win = neutral.
+  const outcome = shareCardOutcome(payload)
+  const visible = payload.won ? outcome.replace('✓', '').trim() : outcome
+  const badgeText = `${visible} · ${letterCountLabel(payload.wordLength)}`
+  ctx.font = fontPixel(28)
+  const textW = ctx.measureText(badgeText).width
+  const iconW = payload.won ? 24 : 0
+  const padX = 28
+  const badgeW = textW + iconW + padX * 2
+  const badgeH = 52
+  const badgeX = (w - badgeW) / 2
+  const badgeY = 588
+  if (payload.won) {
+    ctx.fillStyle = ACCENT_SOFT
+    ctx.fillRect(badgeX, badgeY, badgeW, badgeH)
+    pixelFrame(ctx, badgeX, badgeY, badgeW, badgeH, ACCENT_FG)
+    drawPixelIcon(ctx, 'check', badgeX + padX, badgeY + (badgeH - 22) / 2, 22, ACCENT_FG)
+    ctx.fillStyle = ACCENT_FG
+  } else {
+    ctx.fillStyle = RAISED
+    ctx.fillRect(badgeX, badgeY, badgeW, badgeH)
+    pixelFrame(ctx, badgeX, badgeY, badgeW, badgeH, LINE)
+    ctx.fillStyle = INK
+  }
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(badgeText, badgeX + padX + iconW, badgeY + badgeH / 2 + 1)
   ctx.textBaseline = 'alphabetic'
+  ctx.textAlign = 'center'
+
   ctx.fillStyle = INK_MUTED
-  ctx.font = font('400', 14)
-  ctx.fillText('Answer hidden — come play yours', w / 2, 556)
+  ctx.font = font('400', 16)
+  ctx.fillText('Answer hidden — come play yours', w / 2, 716)
+}
+
+function fillTrackedLeft(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  tracking: number,
+): void {
+  let cx = x
+  for (const c of Array.from(text)) {
+    ctx.fillText(c, cx, y)
+    cx += ctx.measureText(c).width + tracking
+  }
 }
 
 export async function renderShareCardPng(

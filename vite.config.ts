@@ -49,6 +49,7 @@ export default defineConfig({
         'brand/*',
         'fonts/*.woff2',
         'fonts/LICENSE.txt',
+        'fonts/Jersey10-OFL.txt',
         'icons/*',
         // Packs are NOT precached at install (ADR 0006) — selected language
         // is cached at runtime; other langs fetch on demand.
@@ -93,7 +94,7 @@ export default defineConfig({
         // JSON packs are runtime-cached (ADR 0006), not precached.
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,webmanifest,txt}'],
         // Crawlers fetch this; the installed PWA does not need it offline.
-        globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', '**/og-banner.png'],
+        globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js', '**/og-banner.png', '**/jersey-10-subset.txt'],
         navigateFallback: 'index.html',
         // NavigationRoute would otherwise serve index.html for /og-banner.png
         // (and other static files) when the tab is a document navigation.
