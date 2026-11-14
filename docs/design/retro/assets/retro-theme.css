@@ -1,0 +1,50 @@
+/* Hiato Retro theme — DRAFT design artifact, not repo code. Drop-in values for src/index.css. */
+@theme {
+  --color-cream: #f3ecd8;
+  --color-raised: #fffaee;
+  --color-cream-dark: #e6dcc0;
+  --color-ink: #1b1830;
+  --color-ink-muted: #545068;
+  --color-ink-faint: #545068;
+  --color-line: #77708c;
+  --color-accent: #1c6e42;
+  --color-accent-fg: #17633b;
+  --color-accent-soft: #dcefd9;
+  --color-accent-mid: #14593a;
+  --color-danger: #a8261c;
+  --color-danger-soft: #fbe1db;
+  --color-helped: #bfe3b0;
+  --color-wrong: #cfc8d8;
+  --color-edge: #1b1830;
+  --color-shadow: #1b1830;
+  --color-focus: #c4410c;
+  --color-coin: #b86e00;
+  --color-spark: #e0a100;
+  --color-scan: rgba(0,0,0,0);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #0f0d1c;
+    --color-raised: #1b1830;
+    --color-cream-dark: #262142;
+    --color-ink: #f3ecd8;
+    --color-ink-muted: #b9b2d2;
+    --color-ink-faint: #b9b2d2;
+    --color-line: #7a71a0;
+    --color-accent: #1f7f4a;
+    --color-accent-fg: #7fe39a;
+    --color-accent-soft: #17331f;
+    --color-accent-mid: #1a6e40;
+    --color-danger: #ff8f80;
+    --color-danger-soft: #3b1a24;
+    --color-helped: #1f4a2c;
+    --color-wrong: #3a3456;
+    --color-edge: #8a81b3;
+    --color-shadow: #000000;
+    --color-focus: #ffb703;
+    --color-coin: #ffb703;
+    --color-spark: #ffd166;
+    --color-scan: rgba(255,255,255,0.03);
+  }
+}
