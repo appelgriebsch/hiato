@@ -19,6 +19,9 @@ import {
 export function ShareCard(payload: ShareCardPayload) {
   const outcome = shareCardOutcome(payload)
   const visibleOutcome = payload.won ? outcome.replace('✓', '').trim() : outcome
+  const level = shareCardCefrLabel(payload.cefr)
+  // "B2 · Upper-intermediate" does not fit one value-size line in half the card.
+  const levelLines = level.length > 18 ? level.split(' · ') : null
   return (
     <div
       id="hiato-share-card"
@@ -32,24 +35,33 @@ export function ShareCard(payload: ShareCardPayload) {
         <div className="text-pixel-display text-accent-fg">Hiato</div>
         <p className="mt-1 text-sm text-ink-muted">{shareCardKicker(payload)}</p>
       </div>
-      <div className="px-frame mx-6 my-4 grid grid-cols-2 gap-3 bg-raised p-4 text-left [--px-edge:var(--color-line)]">
-        <div>
+      <div className="px-frame mx-6 my-4 grid min-w-0 grid-cols-2 gap-3 bg-raised p-4 text-left [--px-edge:var(--color-line)]">
+        <div className="min-w-0">
           <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-muted">
             Language
           </div>
-          <div className="text-pixel-value text-ink">{shareCardLangLabel(payload.lang)}</div>
+          <div className="text-pixel-value whitespace-nowrap text-ink">{shareCardLangLabel(payload.lang)}</div>
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-muted">
             Level
           </div>
-          <div className="text-pixel-value text-ink">{shareCardCefrLabel(payload.cefr)}</div>
+          {levelLines && levelLines.length === 2 ? (
+            <div className="text-ink">
+              <div className="text-pixel-value leading-none">{levelLines[0]}</div>
+              <div className="text-pixel-label leading-none tracking-normal whitespace-nowrap">
+                {levelLines[1]}
+              </div>
+            </div>
+          ) : (
+            <div className="text-pixel-value whitespace-nowrap text-ink">{level}</div>
+          )}
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-muted">
             Streak
           </div>
-          <div className="text-pixel-value flex items-center gap-1 text-ink">
+          <div className="text-pixel-value flex items-center gap-1 whitespace-nowrap text-ink">
             <PixelIcon
               name="flame"
               size={18}
@@ -58,18 +70,18 @@ export function ShareCard(payload: ShareCardPayload) {
             {payload.streak}
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-ink-muted">
             Date
           </div>
-          <div className="text-pixel-value text-ink">{payload.dateKey}</div>
+          <div className="text-pixel-value whitespace-nowrap text-ink">{payload.dateKey}</div>
         </div>
       </div>
-      <div className="flex justify-center gap-2 px-6" aria-hidden="true">
+      <div className="flex flex-wrap justify-center gap-2 px-6" aria-hidden="true">
         {Array.from({ length: payload.wordLength }, (_, i) => (
           <span
             key={i}
-            className="tile-hidden flex h-11 w-11 items-center justify-center bg-raised text-lg text-ink-muted"
+            className="tile-hidden flex h-11 w-11 shrink-0 items-center justify-center bg-raised text-lg text-ink-muted"
           >
             ·
           </span>

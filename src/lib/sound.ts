@@ -1,13 +1,8 @@
 /**
- * Arcade sound cues (ADR 0052 decision 3 / §6). Off by default, stored in the
- * guest-local key `hiato.sound` = { "v": 1, "on": boolean } — separate from
- * `hiato.prefs`. Missing, invalid or unreadable storage means Off; a failed
- * write keeps the in-memory session state. A `storage` event updates other tabs.
- *
- * Web Audio only: one lazy AudioContext created/resumed on a user gesture,
- * oscillators + gain, master gain 0.08, 5ms attack/release, every cue ≤ 600ms.
- * No audio files, no autoplay, never the only carrier of meaning: every cue
- * repeats a state that is already on screen and announced.
+ * Arcade cues (ADR 0052 §6). Off by default. `hiato.sound` is
+ * { "v": 1, "on": boolean }, separate from prefs. getSoundOn() reads storage
+ * on each call so another tab's write is heard on the next cue. A failed
+ * write keeps this tab's in-memory value. No audio files.
  */
 
 export const SOUND_STORAGE_KEY = 'hiato.sound'
@@ -23,157 +18,107 @@ export type CueName =
   | 'freeze'
   | 'coin'
 
-const MASTER_GAIN = 0.08
-const ATTACK_RELEASE_S = 0.005
+const MASTER = 0.08
+const EDGE = 0.005
 
-let sessionOn: boolean | null = null
+let sessionOn = false
+let persistFailed = false
 
 function readStored(): boolean {
   try {
     const raw = localStorage.getItem(SOUND_STORAGE_KEY)
     if (!raw) return false
     const parsed: unknown = JSON.parse(raw)
-    return (
-      !!parsed &&
-      typeof parsed === 'object' &&
-      (parsed as { v?: unknown }).v === 1 &&
-      (parsed as { on?: unknown }).on === true
-    )
+    if (!parsed || typeof parsed !== 'object') return false
+    const row = parsed as { v?: unknown; on?: unknown }
+    return row.v === 1 && row.on === true
   } catch {
     return false
   }
 }
 
 export function getSoundOn(): boolean {
-  if (sessionOn === null) sessionOn = readStored()
-  return sessionOn
+  return persistFailed ? sessionOn : readStored()
 }
 
 export function setSoundOn(on: boolean): void {
   sessionOn = on
   try {
     localStorage.setItem(SOUND_STORAGE_KEY, JSON.stringify({ v: 1, on }))
+    persistFailed = false
   } catch {
-    // Private mode / quota: the session state above still applies.
+    persistFailed = true
   }
 }
 
-/** Other tabs: a storage event on `hiato.sound` re-reads the stored value. */
+/** About switch: re-render when another tab writes `hiato.sound`. */
 export function subscribeSoundChange(listener: () => void): () => void {
   if (typeof window === 'undefined') return () => {}
   const onStorage = (event: StorageEvent) => {
     if (event.key && event.key !== SOUND_STORAGE_KEY) return
-    sessionOn = null
     listener()
   }
   window.addEventListener('storage', onStorage)
   return () => window.removeEventListener('storage', onStorage)
 }
 
-type Note = {
-  freq: number
-  freqEnd?: number
-  type: OscillatorType
-  at: number
-  dur: number
-}
+type Note = { f: number; wave: OscillatorType; at: number; d: number; end?: number }
 
-const N = {
-  A3: 220,
-  C4: 261.63,
-  E4: 329.63,
-  G4: 392,
-  A4: 440,
-  C5: 523.25,
-  E5: 659.25,
-  G5: 783.99,
-  B5: 987.77,
-  C6: 1046.5,
-  E6: 1318.51,
-  A6: 1760,
-} as const
+const step = (freqs: number[], wave: OscillatorType, d: number): Note[] =>
+  freqs.map((f, i) => ({ f, wave, at: i * d, d }))
+
+const A3 = 220
+const C4 = 261.63
+const E4 = 329.63
+const G4 = 392
+const A4 = 440
+const C5 = 523.25
+const E5 = 659.25
+const G5 = 783.99
+const B5 = 987.77
+const C6 = 1046.5
+const E6 = 1318.51
+const A6 = 1760
+
+const bling: Note[] = [
+  { f: B5, end: E6, wave: 'square', at: 0, d: 0.06 },
+  { f: E6, wave: 'square', at: 0.06, d: 0.06 },
+]
 
 const CUES: Record<CueName, Note[]> = {
   'key-correct': [
-    { freq: N.C6, freqEnd: N.E6, type: 'square', at: 0, dur: 0.05 },
-    { freq: N.E6, type: 'square', at: 0.05, dur: 0.05 },
+    { f: C6, end: E6, wave: 'square', at: 0, d: 0.05 },
+    { f: E6, wave: 'square', at: 0.05, d: 0.05 },
   ],
-  'key-miss': [
-    { freq: N.A3, freqEnd: N.A3 * Math.pow(2, -60 / 1200), type: 'triangle', at: 0, dur: 0.12 },
-  ],
-  'life-lost': [N.E5, N.C5, N.A4].map((freq, i) => ({
-    freq,
-    type: 'square' as const,
-    at: i * 0.06,
-    dur: 0.06,
-  })),
-  hint: [{ freq: N.G5, type: 'triangle', at: 0, dur: 0.14 }],
-  win: [N.C5, N.E5, N.G5, N.C6, N.E6].map((freq, i) => ({
-    freq,
-    type: 'square' as const,
-    at: i * 0.09,
-    dur: 0.09,
-  })),
-  loss: [N.G4, N.E4, N.C4].map((freq, i) => ({
-    freq,
-    type: 'triangle' as const,
-    at: i * 0.14,
-    dur: 0.14,
-  })),
-  streak: [
-    { freq: N.B5, freqEnd: N.E6, type: 'square', at: 0, dur: 0.06 },
-    { freq: N.E6, type: 'square', at: 0.06, dur: 0.06 },
-  ],
+  'key-miss': [{ f: A3, end: A3 * 2 ** (-60 / 1200), wave: 'triangle', at: 0, d: 0.12 }],
+  'life-lost': step([E5, C5, A4], 'square', 0.06),
+  hint: [{ f: G5, wave: 'triangle', at: 0, d: 0.14 }],
+  win: step([C5, E5, G5, C6, E6], 'square', 0.09),
+  loss: step([G4, E4, C4], 'triangle', 0.14),
+  streak: bling,
   freeze: [
-    { freq: N.A6, type: 'sine', at: 0, dur: 0.05 },
-    { freq: N.A6, type: 'sine', at: 0.05, dur: 0.05 },
+    { f: A6, wave: 'sine', at: 0, d: 0.05 },
+    { f: A6, wave: 'sine', at: 0.05, d: 0.05 },
   ],
-  coin: [
-    { freq: N.B5, freqEnd: N.E6, type: 'square', at: 0, dur: 0.06 },
-    { freq: N.E6, type: 'square', at: 0.06, dur: 0.06 },
-  ],
+  coin: bling,
 }
 
-type AudioContextLike = {
-  state: string
-  currentTime: number
-  destination: unknown
-  resume: () => Promise<void>
-  createGain: () => GainNodeLike
-  createOscillator: () => OscillatorNodeLike
-}
+let audioCtx: AudioContext | null = null
+let master: GainNode | null = null
+let live: OscillatorNode[] = []
 
-type GainNodeLike = {
-  gain: { value: number; setValueAtTime: (v: number, t: number) => void; linearRampToValueAtTime: (v: number, t: number) => void }
-  connect: (dest: unknown) => void
-}
-
-type OscillatorNodeLike = {
-  type: OscillatorType
-  frequency: { value: number; setValueAtTime: (v: number, t: number) => void; linearRampToValueAtTime: (v: number, t: number) => void }
-  connect: (dest: unknown) => void
-  start: (t?: number) => void
-  stop: (t?: number) => void
-}
-
-let audioCtx: AudioContextLike | null = null
-let masterGain: GainNodeLike | null = null
-let liveNodes: { stop: () => void }[] = []
-
-function getContext(): AudioContextLike | null {
+function getContext(): AudioContext | null {
   const g = globalThis as unknown as {
-    AudioContext?: new () => AudioContextLike
-    webkitAudioContext?: new () => AudioContextLike
+    AudioContext?: new () => AudioContext
+    webkitAudioContext?: new () => AudioContext
   }
   const Ctor = g.AudioContext ?? g.webkitAudioContext
   if (!Ctor) return null
   if (!audioCtx) {
     audioCtx = new Ctor()
-    masterGain = audioCtx.createGain()
-    masterGain.gain.value = MASTER_GAIN
-    masterGain.connect(audioCtx.destination)
-    // Respect the device silent switch where supported (Safari 16.4+).
-    // Never 'playback' and never a silent <audio> element.
+    master = audioCtx.createGain()
+    master.gain.value = MASTER
+    master.connect(audioCtx.destination)
     const nav = navigator as Navigator & { audioSession?: { type?: string } }
     if (nav.audioSession && typeof nav.audioSession.type === 'string') {
       try {
@@ -183,52 +128,46 @@ function getContext(): AudioContextLike | null {
       }
     }
   }
-  if (audioCtx.state === 'suspended') {
-    void audioCtx.resume()
-  }
+  if (audioCtx.state === 'suspended') void audioCtx.resume()
   return audioCtx
 }
 
-/**
- * Play a cue — only when sound is on, the page is visible and speech is not
- * speaking. Call sites are user gestures (key tap, hint, round end, switch).
- * A new cue cuts the previous one.
- */
+/** Play a cue when sound is on, the page is visible, and speech is idle. A new cue cuts the previous one. */
 export function playCue(name: CueName): void {
   if (!getSoundOn()) return
   if (typeof document !== 'undefined' && document.hidden) return
   try {
     if (typeof speechSynthesis !== 'undefined' && speechSynthesis.speaking) return
   } catch {
-    /* no speech API — cues may play */
+    /* no speech API */
   }
   const ctx = getContext()
-  if (!ctx || !masterGain) return
-  for (const node of liveNodes) {
+  if (!ctx || !master) return
+  for (const node of live) {
     try {
       node.stop()
     } catch {
       /* already stopped */
     }
   }
-  liveNodes = []
+  live = []
   const t0 = ctx.currentTime
   for (const note of CUES[name]) {
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
-    osc.type = note.type
+    osc.type = note.wave
     const start = t0 + note.at
-    const end = start + note.dur
-    osc.frequency.setValueAtTime(note.freq, start)
-    if (note.freqEnd) osc.frequency.linearRampToValueAtTime(note.freqEnd, end)
+    const end = start + note.d
+    osc.frequency.setValueAtTime(note.f, start)
+    if (note.end) osc.frequency.linearRampToValueAtTime(note.end, end)
     gain.gain.setValueAtTime(0.0001, start)
-    gain.gain.linearRampToValueAtTime(1, start + ATTACK_RELEASE_S)
-    gain.gain.setValueAtTime(1, Math.max(start + ATTACK_RELEASE_S, end - ATTACK_RELEASE_S))
+    gain.gain.linearRampToValueAtTime(1, start + EDGE)
+    gain.gain.setValueAtTime(1, Math.max(start + EDGE, end - EDGE))
     gain.gain.linearRampToValueAtTime(0.0001, end)
     osc.connect(gain)
-    gain.connect(masterGain)
+    gain.connect(master)
     osc.start(start)
-    osc.stop(end + ATTACK_RELEASE_S)
-    liveNodes.push(osc)
+    osc.stop(end + EDGE)
+    live.push(osc)
   }
 }

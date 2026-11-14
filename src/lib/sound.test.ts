@@ -80,10 +80,12 @@ function invalidateSession() {
 
 /** Any AudioContext construction means a cue tried to play. */
 let audioConstructed: number
+let oscStarted: number
 let originalAudioContext: unknown
 
 function installAudioSpy() {
   audioConstructed = 0
+  oscStarted = 0
   originalAudioContext = (globalThis as Record<string, unknown>).AudioContext
   const param = () => ({
     value: 0,
@@ -111,7 +113,9 @@ function installAudioSpy() {
           type: 'sine',
           frequency: param(),
           connect: () => {},
-          start: () => {},
+          start: () => {
+            oscStarted += 1
+          },
           stop: () => {},
         }
       }
@@ -217,6 +221,13 @@ describe('sound storage (hiato.sound, ADR 0052 §6)', () => {
     localStorage.setItem = original
   })
 
+  test('getSoundOn reads storage, so another tab is seen with no subscriber', () => {
+    setSoundOn(true)
+    expect(getSoundOn()).toBe(true)
+    mem.set(SOUND_STORAGE_KEY, '{"v":1,"on":false}')
+    expect(getSoundOn()).toBe(false)
+  })
+
   test('a storage event on hiato.sound updates this tab from storage', () => {
     setSoundOn(false)
     expect(getSoundOn()).toBe(false)
@@ -285,5 +296,15 @@ describe('playCue guards (ADR 0052 §6)', () => {
     expect(audioConstructed).toBe(1)
     playCue('win')
     expect(audioConstructed).toBe(1)
+  })
+
+  test('a cue stops after another tab turns sound off, with no subscriber', () => {
+    setSoundOn(true)
+    playCue('win')
+    const started = oscStarted
+    expect(started).toBeGreaterThan(0)
+    mem.set(SOUND_STORAGE_KEY, '{"v":1,"on":false}')
+    playCue('key-correct')
+    expect(oscStarted).toBe(started)
   })
 })

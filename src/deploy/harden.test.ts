@@ -211,9 +211,9 @@ describe('OS appearance chrome', () => {
   test('dual theme-color, color-scheme, and no inline style or script', async () => {
     const html = await readRepo('index.html')
     const darkTheme = html.indexOf(
-      'name="theme-color" media="(prefers-color-scheme: dark)" content="#1c1b19"',
+      'name="theme-color" media="(prefers-color-scheme: dark)" content="#0f0d1c"',
     )
-    const creamTheme = html.indexOf('name="theme-color" content="#f7f6f3"')
+    const creamTheme = html.indexOf('name="theme-color" content="#f3ecd8"')
     expect(darkTheme).toBeGreaterThan(-1)
     expect(creamTheme).toBeGreaterThan(darkTheme)
     expect(html.match(/name="theme-color"/g)?.length).toBe(2)

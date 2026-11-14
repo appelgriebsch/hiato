@@ -323,6 +323,12 @@ describe('share PNG palette (ADR 0052 §5.10 — always light Cartridge)', () =>
     expect(src.slice(src.lastIndexOf('ctx.fillStyle', hidden), hidden)).toContain('INK_MUTED')
     const label = src.indexOf('.toUpperCase()')
     expect(src.slice(src.lastIndexOf('ctx.fillStyle', label), label)).toContain('INK_MUTED')
+    const flame = src.indexOf("drawPixelIcon(ctx, 'flame'")
+    const fitted = src.indexOf('fillPixelFitted(ctx')
+    expect(fitted).toBeGreaterThan(flame)
+    const fn = src.slice(src.indexOf('function fillPixelFitted'), src.indexOf('function drawPixelIcon'))
+    expect(fn).toContain('measureText')
+    expect(fn.indexOf('ctx.fillStyle = INK')).toBeLessThan(fn.indexOf('ctx.fillText'))
   })
 
   test('share-render falls back to Inter 600 when Jersey fails, and retries on the next save (#270)', async () => {

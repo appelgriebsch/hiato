@@ -189,7 +189,7 @@ function PlayRound({
   const [dueReview, setDueReview] = useState<{ id: string; count: number } | null>(
     null,
   )
-  const streakShown = useRef(0)
+  const streakTimers = useRef<number[]>([])
   const shakeTimer = useRef(0)
   /** Latched after unlockSpeechGesture returns true (prime succeeded). */
   const speechGestureRef = useRef(false)
@@ -270,38 +270,39 @@ function PlayRound({
     pocketNoteRef.current?.focus()
   }, [pocketNote])
 
-  const freezesShown = useRef(0)
-
-  useEffect(() => {
-    if (streak > streakShown.current) {
-      setStreakPulse(true)
-      const t = window.setTimeout(() => setStreakPulse(false), 440)
-      // Daily win raises the streak: coin cue 300ms after the win cue (ADR 0052 §6).
-      const cue = window.setTimeout(() => playCue('streak'), 300)
-      streakShown.current = streak
-      return () => {
-        clearTimeout(t)
-        clearTimeout(cue)
-      }
-    }
-    streakShown.current = streak
-  }, [streak])
-
-  // A Daily win can also earn a Streak freeze — cue with the icon change.
-  useEffect(() => {
-    if (freezes > freezesShown.current) {
-      playCue('freeze')
-    }
-    freezesShown.current = freezes
-  }, [freezes])
+  useEffect(
+    () => () => {
+      for (const id of streakTimers.current) window.clearTimeout(id)
+    },
+    [],
+  )
 
   const persistDaily = useCallback(
     (result: 'win' | 'lose', entry: PackLemma) => {
       if (!lang || !cefr) return
       if (result === 'win') {
+        const prev = getStreak(lang, cefr, dateKey)
         const next = recordDailyWin(lang, cefr, dateKey)
         setStreak(next.count)
         setFreezes(next.freezes)
+        // Cues only when this win raised the count. The chip starts at 0, so a
+        // mount effect would bling every visit. Streak waits out the 450ms win
+        // arpeggio; a freeze earned on that same win waits out the streak bling,
+        // because a new cue cuts the one that is playing.
+        for (const id of streakTimers.current) window.clearTimeout(id)
+        const timers: number[] = []
+        if (next.count > prev.count) {
+          setStreakPulse(true)
+          timers.push(
+            window.setTimeout(() => setStreakPulse(false), 440),
+            window.setTimeout(() => playCue('streak'), 460),
+          )
+        }
+        if (next.freezes > prev.freezes) {
+          const afterStreak = next.count > prev.count ? 590 : 0
+          timers.push(window.setTimeout(() => playCue('freeze'), afterStreak))
+        }
+        streakTimers.current = timers
       } else {
         setStreak(getStreakCount(lang, cefr, dateKey))
         setFreezes(getStreak(lang, cefr, dateKey).freezes)

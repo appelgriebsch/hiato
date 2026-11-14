@@ -66,6 +66,28 @@ function pixelFrame(
   ctx.fillRect(x + w - t, y, t, h)
 }
 
+const PIXEL_VALUE = 37.33
+const PIXEL_MIN = 18.67
+
+/** Shrink a Jersey value until it fits the score cell, then paint it in ink. */
+function fillPixelFitted(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  maxW: number,
+): void {
+  let size = PIXEL_VALUE
+  ctx.font = fontPixel(size)
+  while (size > PIXEL_MIN && ctx.measureText(text).width > maxW) {
+    size -= 1
+    ctx.font = fontPixel(size)
+  }
+  // drawPixelIcon leaves its last fill (coin on the flame). Values are ink.
+  ctx.fillStyle = INK
+  ctx.fillText(text, x, y)
+}
+
 function drawPixelIcon(
   ctx: CanvasRenderingContext2D,
   name: PixelIconName,
@@ -194,13 +216,12 @@ function drawShareCard(
     ctx.fillStyle = INK_MUTED
     ctx.font = font('600', 14)
     fillTrackedLeft(ctx, cells[i][0].toUpperCase(), x, y, 0.84)
-    ctx.fillStyle = INK
-    ctx.font = fontPixel(37.33)
     const valueX = cells[i][2] ? x + 30 : x
     if (cells[i][2]) {
       drawPixelIcon(ctx, 'flame', x, y + 14, 22, COIN, DANGER)
     }
-    ctx.fillText(cells[i][1], valueX, y + 46)
+    const maxW = panelX + (col + 1) * colW - 28 - valueX
+    fillPixelFitted(ctx, cells[i][1], valueX, y + 46, maxW)
   }
 
   // Hidden-letter tiles: one empty · tile per letter — never the answer.

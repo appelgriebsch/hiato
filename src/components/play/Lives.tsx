@@ -3,10 +3,7 @@ import {
   LIVES_METAPHOR,
   type LivesMetaphor,
 } from '@/brand/livesMetaphor'
-import {
-  LivesMetaphorIcon,
-  livesAccentClass,
-} from '@/brand/LivesIcons'
+import { LivesMetaphorIcon } from '@/brand/LivesIcons'
 import { TOTAL_LIVES } from '@/engine'
 
 /**
@@ -44,7 +41,7 @@ export function Lives({
     prev.current = remaining
   }, [remaining])
 
-  const accent = livesAccentClass(metaphor)
+  const accent = 'text-accent-fg'
 
   return (
     <div

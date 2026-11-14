@@ -130,15 +130,13 @@ describe('Retro arcade tokens (ADR 0052)', () => {
     expect(css).toContain('color-scheme: light dark')
     expect(css).toContain('background-color: var(--color-cream)')
     expect(css).toContain('color: var(--color-ink)')
-    expect(css).toMatch(/\.text-kicker\s*\{[^}]*color:\s*var\(--color-accent-fg\)/)
   })
 
-  test('Jersey 10 is self-hosted with the same unicode-range split as Inter', async () => {
+  test('Jersey 10 is one self-hosted subset, not a CDN face', async () => {
     const css = await Bun.file(new URL('./index.css', import.meta.url)).text()
     expect(css).toContain('font-family: "Jersey 10"')
     expect(css).toContain('/fonts/jersey-10-latin-400-normal.woff2')
-    expect(css).toContain('/fonts/jersey-10-latin-ext-400-normal.woff2')
-    expect(css).toContain('U+0100-02BA')
+    expect(css).not.toContain('jersey-10-latin-ext')
     expect(css).not.toMatch(/https?:\/\/fonts\.(googleapis|gstatic)\.com|\/\/fonts\.(googleapis|gstatic)\.com/i)
   })
 
