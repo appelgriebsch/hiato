@@ -84,12 +84,13 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
 })
 
 describe('Layout pinned Continue footer', () => {
-  test('footer is sticky on cream with safe-area; content scrolls above', async () => {
+  test('footer is sticky on cream with safe-area', async () => {
     const src = await Bun.file(
       new URL('../components/Layout.tsx', import.meta.url),
     ).text()
     expect(src).toContain('h-dvh')
-    expect(src).toContain('overflow-y-auto')
+    // A scrollport on this column clips pixel frames on the right.
+    expect(src).not.toContain('overflow-y-auto')
     expect(src).toContain('sticky bottom-0 z-10')
     expect(src).toContain('border-t border-line')
     expect(src).toContain('bg-cream')

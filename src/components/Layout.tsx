@@ -43,7 +43,8 @@ export function Layout({
             : undefined
         }
         className={[
-          'flex min-h-0 flex-1 flex-col overflow-y-auto py-4',
+          // No vertical scrollport: overflow-y other than visible clips pixel frames on the right.
+          'flex min-h-0 flex-1 flex-col py-4',
           'short-land:py-0',
           footer ? 'scroll-pb-6 pb-2' : '',
         ].join(' ')}

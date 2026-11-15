@@ -639,7 +639,7 @@ test.describe('short landscape viewports (#209)', () => {
       { name: '375x667', width: 375, height: 667 },
       { name: '1024x600', width: 1024, height: 600 },
     ]) {
-      test(`voice re-scrolls endcard actions ${vp.name} ${iso.slice(0, 10)}`, async ({ page }) => {
+      test(`voice keeps endcard actions in view ${vp.name} ${iso.slice(0, 10)}`, async ({ page }) => {
         await page.setViewportSize({ width: vp.width, height: vp.height })
         await seed(page, 'en', iso)
         await installOnDemandVoice(page)
@@ -649,37 +649,15 @@ test.describe('short landscape viewports (#209)', () => {
         await ready(page)
         await assertTeachStaysInView(page, dailyWord('en', iso))
         const before = await layoutScrollTop(page)
-        expect(before).not.toBeNull()
+        // The layout column is not a scrollport, so voice cannot move it.
+        expect(before).toBe(0)
         await emitEnVoice(page)
         await expect(page.locator('[data-endcard-speak]')).toBeVisible()
         await expect(page.locator('[data-endcard-speak]')).not.toBeFocused()
         const where = `voice scroll ${vp.name} ${iso.slice(0, 10)}`
         await assertEndcardActionsInView(page, where)
         const after = await layoutScrollTop(page)
-        expect(after, where).not.toBe(before)
-      })
-
-      test(`voice leaves a scrolled endcard alone ${vp.name} ${iso.slice(0, 10)}`, async ({ page }) => {
-        await page.setViewportSize({ width: vp.width, height: vp.height })
-        await seed(page, 'en', iso)
-        await installOnDemandVoice(page)
-        await page.goto('/play?mode=daily')
-        await (await visiblePad(page)).waitFor()
-        await loseRound(page, 'en', iso)
-        await ready(page)
-        const arrived = await layoutScrollTop(page)
-        expect(arrived).not.toBeNull()
-        const parked = await page.evaluate(() => {
-          const scroller = document.querySelector('[data-layout-scroll]')
-          if (!(scroller instanceof HTMLElement)) return null
-          scroller.scrollTop = 0
-          return scroller.scrollTop
-        })
-        expect(parked, 'reader moved up').not.toBe(arrived)
-        await emitEnVoice(page)
-        await expect(page.locator('[data-endcard-speak]')).toBeVisible()
-        await expect(page.locator('[data-endcard-speak]')).not.toBeFocused()
-        expect(await layoutScrollTop(page)).toBe(parked)
+        expect(after, where).toBe(before)
       })
     }
   }

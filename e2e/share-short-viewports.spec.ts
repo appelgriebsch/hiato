@@ -2,9 +2,10 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 import { sharePath } from './share-path'
 
 /**
- * #286: on short screens the /share card must keep its natural height and
- * scroll inside the layout scroll region instead of shrinking. The sticky
- * footer keeps the invite CTA and the share actions on screen.
+ * #286: on short screens the /share card must keep its natural height
+ * instead of shrinking. The layout column is not a scrollport (that clips
+ * pixel frames on the right), so the document scrolls. Footer actions stay
+ * reachable; they are not pinned over the card.
  */
 
 const DAILY_PAYLOAD = {
@@ -80,24 +81,31 @@ test.describe('share card on short screens (#286)', () => {
       // Nothing clipped: the card renders at its natural height, not shrunk.
       expect(m.card!.h, where).toBeGreaterThanOrEqual(m.card!.scrollH - 1)
       expect(m.card!.clientH, where).toBeGreaterThanOrEqual(m.card!.scrollH - 1)
-      // The layout scroll region scrolls instead of the card shrinking.
+      // Content is taller than the column. The document scrolls, not the column.
       expect(m.scroller, where).not.toBeNull()
       expect(m.scroller!.scrollH, where).toBeGreaterThan(m.scroller!.clientH + 1)
       // Same card width as the 375x812 reference: identical natural height.
       if (vp.width === REFERENCE_VIEWPORT.width) {
         expect(m.card!.h, where).toBeGreaterThanOrEqual(referenceH - 1)
       }
-      // The caption is reachable by scrolling the layout scroll region.
       const caption = page.getByText(CAPTION)
       await caption.scrollIntoViewIfNeeded()
       await expect(caption, where).toBeVisible()
       await expectOnScreen(caption, `${where} caption`)
-      // The sticky footer keeps the CTA and the share actions on screen.
-      await expectOnScreen(page.getByRole('button', { name: PLAY_CTA }), `${where} CTA`)
-      await expectOnScreen(page.getByRole('button', { name: 'Share', exact: true }), `${where} Share`)
-      await expectOnScreen(page.getByRole('button', { name: 'Save image' }), `${where} Save image`)
-      await expectOnScreen(page.getByRole('button', { name: 'Copy text' }), `${where} Copy text`)
-      await expectOnScreen(page.getByRole('button', { name: 'Home' }), `${where} Home`)
+      for (const action of [
+        { name: PLAY_CTA, label: 'CTA' },
+        { name: 'Share', label: 'Share', exact: true },
+        { name: 'Save image', label: 'Save image' },
+        { name: 'Copy text', label: 'Copy text' },
+        { name: 'Home', label: 'Home' },
+      ] as const) {
+        const button = page.getByRole('button', {
+          name: action.name,
+          exact: 'exact' in action ? action.exact : undefined,
+        })
+        await button.scrollIntoViewIfNeeded()
+        await expectOnScreen(button, `${where} ${action.label}`)
+      }
     }
   })
 })
