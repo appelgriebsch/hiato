@@ -1589,9 +1589,11 @@ describe('Play accent teach line (ADR 0053 / #75 / #293 / #295)', () => {
     expect(round).toContain(
       'const [teachLine, setTeachLine] = useState<AccentTeachLine | null>(null)',
     )
-    const lineAt = round.indexOf("{lang !== 'en' && !finished ? (")
+    const lineAt = round.indexOf(
+      "{lang !== 'en' && !finished && hasUnrevealedDiacritic(cells, wordEntry.word) ? (",
+    )
     expect(lineAt).toBeGreaterThan(0)
-    const block = round.slice(lineAt, lineAt + 800)
+    const block = round.slice(lineAt, lineAt + 1000)
     expect(block).toContain('lang="en"')
     expect(block).toContain('role="status"')
     expect(block).toContain('text-ink-muted')
@@ -1613,9 +1615,11 @@ describe('Play accent teach line (ADR 0053 / #75 / #293 / #295)', () => {
     expect(gridAt).toBeGreaterThan(0)
     expect(lineAt).toBeGreaterThan(gridAt)
     expect(hintAt).toBeGreaterThan(lineAt)
-    // under-grid transient notes share one type size (#295)
+    // under-grid transient notes share one type size (#295); the slot only
+    // reserves space while a diacritic is still hidden, so no-diacritic words
+    // keep the previous layout (landscape snapshots unchanged)
     expect(round).toContain(
-      '<p className="mt-3 text-center text-xs text-ink-muted short-land:mt-1">',
+      '<p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">',
     )
     // cleared on the next key, on hint, and on practice Reveal
     expect(round.match(/setTeachLine\(null\)/g)?.length).toBe(3)

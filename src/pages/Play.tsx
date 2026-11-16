@@ -29,6 +29,7 @@ import {
   buildInitialCells,
   correctKeysFromCells,
   graphemeKey,
+  hasUnrevealedDiacritic,
   isDiacriticHintMiss,
   isDiacriticHintReady,
   isForgivenAccentMiss,
@@ -820,15 +821,15 @@ function PlayRound({
           <div className={['my-5 short-land:my-0', finished ? 'short-land:hidden' : ''].join(' ')}>
             <LetterGrid cells={cells} lang={lang} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
-              <p className="mt-3 text-center text-xs text-ink-muted short-land:mt-1">
+              <p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">
                 Soft green = vowel help (A1–A2)
               </p>
             )}
-            {lang !== 'en' && !finished ? (
+            {lang !== 'en' && !finished && hasUnrevealedDiacritic(cells, wordEntry.word) ? (
               <p
                 lang="en"
                 role="status"
-                className="mt-3 text-center text-xs text-ink-muted short-land:mt-1"
+                className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1"
               >
                 {teachLine ? (
                   <span
