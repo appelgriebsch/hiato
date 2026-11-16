@@ -2,10 +2,11 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 import { sharePath } from './share-path'
 
 /**
- * #286: on short screens the /share card must keep its natural height
- * instead of shrinking. The layout column is not a scrollport (that clips
- * pixel frames on the right), so the document scrolls. Footer actions stay
- * reachable; they are not pinned over the card.
+ * #286/#307: on short screens the /share card must keep its natural height
+ * instead of shrinking. The shell grows past the viewport (min-h-dvh), the
+ * layout column is not a scrollport (that clips pixel frames on the right),
+ * so the document scrolls. Footer actions stay reachable; they are not pinned
+ * over the card.
  */
 
 const DAILY_PAYLOAD = {
@@ -81,9 +82,14 @@ test.describe('share card on short screens (#286)', () => {
       // Nothing clipped: the card renders at its natural height, not shrunk.
       expect(m.card!.h, where).toBeGreaterThanOrEqual(m.card!.scrollH - 1)
       expect(m.card!.clientH, where).toBeGreaterThanOrEqual(m.card!.scrollH - 1)
-      // Content is taller than the column. The document scrolls, not the column.
+      // Content plus the sticky footer is taller than the viewport: the
+      // document scrolls, not the column (#307).
       expect(m.scroller, where).not.toBeNull()
-      expect(m.scroller!.scrollH, where).toBeGreaterThan(m.scroller!.clientH + 1)
+      const doc = await page.evaluate(() => ({
+        scrollH: document.scrollingElement?.scrollHeight ?? 0,
+        innerH: window.innerHeight,
+      }))
+      expect(doc.scrollH, `${where} document scrolls`).toBeGreaterThan(doc.innerH + 1)
       // Same card width as the 375x812 reference: identical natural height.
       if (vp.width === REFERENCE_VIEWPORT.width) {
         expect(m.card!.h, where).toBeGreaterThanOrEqual(referenceH - 1)

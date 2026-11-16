@@ -49,7 +49,9 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
     expect(src).toContain('provenanceCaption(lang, cefr)')
     expect(src).toContain('packInfoLabel(lang)')
     expect(src).toContain('data-provenance-caption')
-    expect(src).toContain('truncate')
+    // #307 m2: the language radio label must not truncate ('Português' at 320px).
+    expect(src).toContain('break-words text-sm font-semibold')
+    expect(src).not.toContain('truncate text-sm font-semibold')
     // One caption block — not mapped onto every lang/CEFR row
     expect(src.match(/data-provenance-caption/g)?.length).toBe(1)
     expect(src.match(/provenanceCaption\(/g)?.length).toBe(1)
@@ -89,7 +91,12 @@ describe('Layout pinned Continue footer', () => {
     const src = await Bun.file(
       new URL('../components/Layout.tsx', import.meta.url),
     ).text()
-    expect(src).toContain('h-dvh')
+    // min-h-dvh (not a fixed h-dvh): with a sticky footer the shell grows past
+    // the viewport so the document scrolls and the card clears the footer (#307).
+    expect(src).toContain('min-h-dvh')
+    expect(src).not.toContain("'mx-auto flex h-dvh ")
+    // Root scroll padding reserves the footer height for scrollIntoView (#307).
+    expect(src).toContain('scroll-padding-bottom')
     // A scrollport on this column clips pixel frames on the right.
     expect(src).not.toContain('overflow-y-auto')
     expect(src).toContain('sticky bottom-0 z-10')
