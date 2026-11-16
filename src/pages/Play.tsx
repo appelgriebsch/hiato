@@ -631,6 +631,7 @@ function PlayRound({
   function onReveal() {
     const r = roundRef.current
     if (!r.wordEntry || r.finished || r.loading || mode !== 'practice') return
+    setTeachLine(null)
     const next = revealAllCells(r.wordEntry.word)
     const usedCorrect = correctKeysFromCells(next)
     roundRef.current = {
