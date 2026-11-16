@@ -35,7 +35,7 @@ export function isForgivenAccentMiss(lang: PackLang, cefr: PackCefr): boolean {
 /**
  * ADR 0053: one-line English micro-lesson per grapheme, keyed by the
  * uppercased NFC key (ß stays ß). Covers every diacritic grapheme that
- * ships in the packs (measured 2026-11-16).
+ * ships in the packs (enforced by scanning public/packs in accents.test.ts).
  */
 export const ACCENT_TEACH: Record<string, string> = {
   À: 'A with a grave accent, a more open "a" sound',
@@ -68,9 +68,26 @@ export const ACCENT_TEACH: Record<string, string> = {
 const ACCENT_TEACH_FALLBACK =
   'this letter carries a special mark that changes its sound'
 
-/** ADR 0053: the teach line shown on an accent miss, e.g. "Ñ: N with a tilde, sounds like \"ny\"". */
-export function accentTeachLine(grapheme: string): string {
+/** ADR 0053 / #295: suffix appended at A1–A2 (non-EN) when the accent miss is forgiven and the life is kept. */
+export const ACCENT_TEACH_FORGIVEN_CUE = ' — life kept'
+
+/** ADR 0053 / #295: teach-line parts for styled rendering — the uppercased NFC grapheme plus the English explanation. */
+export type AccentTeachParts = { grapheme: string; text: string }
+
+/** ADR 0053 / #295: what Play renders and announces on an accent miss; `forgiven` adds the life-kept cue. */
+export type AccentTeachLine = AccentTeachParts & { forgiven: boolean }
+
+/** ADR 0053 / #295: split a grapheme into its renderable parts (pixel-face grapheme + explanation text). */
+export function accentTeachParts(grapheme: string): AccentTeachParts {
   const key = graphemeKey(normalizeNfc(grapheme))
-  const explain = ACCENT_TEACH[key]
-  return explain ? `${key}: ${explain}` : `${key}: ${ACCENT_TEACH_FALLBACK}`
+  return { grapheme: key, text: ACCENT_TEACH[key] ?? ACCENT_TEACH_FALLBACK }
+}
+
+/** ADR 0053: the teach line shown on an accent miss, e.g. "Ñ: N with a tilde, sounds like \"ny\"". */
+export function accentTeachLine(
+  grapheme: string,
+  opts?: { forgiven?: boolean },
+): string {
+  const { grapheme: key, text } = accentTeachParts(grapheme)
+  return `${key}: ${text}${opts?.forgiven ? ACCENT_TEACH_FORGIVEN_CUE : ''}`
 }

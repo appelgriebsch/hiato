@@ -1,12 +1,19 @@
+import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, test } from 'bun:test'
 import {
   ACCENT_TEACH,
+  ACCENT_TEACH_FORGIVEN_CUE,
   accentMissTarget,
   accentTeachLine,
+  accentTeachParts,
   applyGuess,
   buildInitialCells,
+  graphemeKey,
+  graphemes,
+  hasDiacritic,
   isDiacriticHintMiss,
   isForgivenAccentMiss,
+  normalizeNfc,
   revealOneDiacritic,
 } from './index'
 
@@ -134,14 +141,63 @@ describe('accentTeachLine (ADR 0053)', () => {
     )
   })
 
-  test('every diacritic grapheme shipped in the packs has a real entry', () => {
-    const packGraphemes = [
-      'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ì', 'Í', 'Î', 'Ï',
-      'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Œ', 'ß',
-    ]
-    expect(Object.keys(ACCENT_TEACH).sort()).toEqual([...packGraphemes].sort())
-    for (const g of packGraphemes) {
+  test('forgiven option appends the life-kept cue (#295)', () => {
+    expect(accentTeachLine('É', { forgiven: true })).toBe(
+      `É: E with an acute accent, sounds like "ay"${ACCENT_TEACH_FORGIVEN_CUE}`,
+    )
+    expect(accentTeachLine('É')).not.toContain(ACCENT_TEACH_FORGIVEN_CUE)
+  })
+
+  test('every diacritic grapheme shipped in the packs has a real entry (#295: scan public/packs, not a hardcoded list)', () => {
+    const packsDir = new URL('../../public/packs/', import.meta.url)
+    const shipped = new Set<string>()
+    for (const lang of readdirSync(packsDir)) {
+      for (const file of readdirSync(new URL(`${lang}/`, packsDir))) {
+        if (!file.endsWith('.json')) continue
+        const pack = JSON.parse(
+          readFileSync(new URL(`${lang}/${file}`, packsDir), 'utf8'),
+        ) as { lemmas: { word: string }[] }
+        for (const lemma of pack.lemmas) {
+          for (const ch of graphemes(lemma.word)) {
+            if (hasDiacritic(ch)) shipped.add(graphemeKey(normalizeNfc(ch)))
+          }
+        }
+      }
+    }
+    expect(shipped.size).toBeGreaterThan(0)
+    for (const g of shipped) {
+      expect(ACCENT_TEACH[g]).toBeDefined()
       expect(accentTeachLine(g)).not.toContain('special mark that changes')
     }
+  })
+})
+
+describe('accentTeachParts (ADR 0053 / #295)', () => {
+  test('splits the line into pixel-face grapheme + explanation text', () => {
+    expect(accentTeachParts('Ñ')).toEqual({
+      grapheme: 'Ñ',
+      text: 'N with a tilde, sounds like "ny"',
+    })
+    expect(accentTeachParts('ß')).toEqual({
+      grapheme: 'ß',
+      text: 'the German sharp s, sounds like "ss"',
+    })
+  })
+
+  test('lowercase and decomposed input map to the same parts', () => {
+    expect(accentTeachParts('ñ')).toEqual(accentTeachParts('Ñ'))
+    expect(accentTeachParts('ñ')).toEqual(accentTeachParts('Ñ')) // n + combining tilde
+  })
+
+  test('unmapped grapheme gets the generic fallback text', () => {
+    expect(accentTeachParts('Å')).toEqual({
+      grapheme: 'Å',
+      text: 'this letter carries a special mark that changes its sound',
+    })
+  })
+
+  test('parts compose back to the pinned line', () => {
+    const p = accentTeachParts('É')
+    expect(`${p.grapheme}: ${p.text}`).toBe(accentTeachLine('É'))
   })
 })
