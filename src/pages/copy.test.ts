@@ -2,6 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
+import { accentTeachLine } from '@/engine'
 import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
 import { Share } from './Share'
@@ -1575,5 +1576,51 @@ describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)',
     // the existing Inter card stays
     expect(src).toContain('>Inter</h2>')
     expect(src).toContain('/fonts/LICENSE.txt')
+  })
+})
+
+describe('Play accent teach line (ADR 0053 / #75 / #293)', () => {
+  test('teach line renders under the grid as role=status with an AA-safe token and short-land margin', async () => {
+    const src = await pageSrc('Play.tsx')
+    const roundAt = src.indexOf('function PlayRound(')
+    const endAt = src.indexOf('function EndCard(', roundAt)
+    expect(roundAt).toBeGreaterThan(0)
+    const round = src.slice(roundAt, endAt)
+    expect(round).toContain(
+      'const [teachLine, setTeachLine] = useState<string | null>(null)',
+    )
+    const lineAt = round.indexOf('{teachLine ? (')
+    expect(lineAt).toBeGreaterThan(0)
+    const block = round.slice(lineAt, lineAt + 400)
+    expect(block).toContain('role="status"')
+    expect(block).toContain('text-ink-muted')
+    // #229: text-ink-faint fails WCAG AA contrast — never on this line
+    expect(block).not.toContain('text-ink-faint')
+    expect(block).toContain('short-land:mt-1')
+    expect(block).toContain('{teachLine}')
+    // sits between the grid and the LearnerHint strip, inside the short-land wrapper
+    const gridAt = round.indexOf('<LetterGrid cells={cells} lang={lang} />')
+    const hintAt = round.indexOf('<LearnerHint entry={wordEntry} lang={lang} />')
+    expect(gridAt).toBeGreaterThan(0)
+    expect(lineAt).toBeGreaterThan(gridAt)
+    expect(hintAt).toBeGreaterThan(lineAt)
+    // cleared on the next key, on hint, and on practice Reveal
+    expect(round.match(/setTeachLine\(null\)/g)?.length).toBe(3)
+    // accent-miss wiring: teach at every band, EN gated off, life rule per ADR 0053
+    expect(round).toContain("if (accentMiss && lang !== 'en')")
+    expect(round).toContain('accentMissTarget(r.cells, r.wordEntry.word, letter)')
+    expect(round).toContain('accentTeachLine(target)')
+    expect(round).toContain('isForgivenAccentMiss(lang, cefr)')
+  })
+
+  test('micro-lesson copy is pinned', () => {
+    expect(accentTeachLine('Ñ')).toBe('Ñ: N with a tilde, sounds like "ny"')
+    expect(accentTeachLine('ß')).toBe('ß: the German sharp s, sounds like "ss"')
+    expect(accentTeachLine('Ç')).toBe('Ç: C with a cedilla, the C sounds like "s"')
+    expect(accentTeachLine('Ã')).toBe('Ã: A with a tilde, a nasal vowel sound')
+    // unmapped grapheme (future packs) gets the generic fallback
+    expect(accentTeachLine('Å')).toBe(
+      'Å: this letter carries a special mark that changes its sound',
+    )
   })
 })

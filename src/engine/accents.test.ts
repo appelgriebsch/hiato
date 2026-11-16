@@ -83,6 +83,18 @@ describe('accentMissTarget (ADR 0053)', () => {
     expect(accentMissTarget(cells, pt, 'O')).toBe('Õ')
   })
 
+  test('two hidden diacritics: N-for-Ñ explains Ñ; a wrong diacritic key explains the first unrevealed', () => {
+    const word = 'ÑÕ'
+    let cells = buildInitialCells(word, 'b1')
+    expect(accentMissTarget(cells, word, 'N')).toBe('Ñ')
+    expect(accentMissTarget(cells, word, 'Á')).toBe('Ñ')
+    expect(accentMissTarget(cells, word, 'Ç')).toBe('Ñ')
+    cells = revealOneDiacritic(cells, word) // reveals Ñ
+    expect(accentMissTarget(cells, word, 'Á')).toBe('Õ')
+    expect(accentMissTarget(cells, word, 'O')).toBe('Õ')
+    expect(accentMissTarget(cells, word, 'N')).toBeNull()
+  })
+
   test('already-revealed cells do not count: reveal Ç first, C is then unrelated', () => {
     const pt = 'ÃÇ'
     let cells = buildInitialCells(pt, 'b1')
