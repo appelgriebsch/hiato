@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
-import { accentTeachLine } from '@/engine'
+import { ACCENT_TEACH_FORGIVEN_CUE, accentTeachLine, accentTeachParts } from '@/engine'
 import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
 import { Share } from './Share'
@@ -1579,38 +1579,61 @@ describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)',
   })
 })
 
-describe('Play accent teach line (ADR 0053 / #75 / #293)', () => {
-  test('teach line renders under the grid as role=status with an AA-safe token and short-land margin', async () => {
+describe('Play accent teach line (ADR 0053 / #75 / #293 / #295)', () => {
+  test('teach line slot renders under the grid as role=status, AA-safe, with a stable slot and short-land margin', async () => {
     const src = await pageSrc('Play.tsx')
     const roundAt = src.indexOf('function PlayRound(')
     const endAt = src.indexOf('function EndCard(', roundAt)
     expect(roundAt).toBeGreaterThan(0)
     const round = src.slice(roundAt, endAt)
     expect(round).toContain(
-      'const [teachLine, setTeachLine] = useState<string | null>(null)',
+      'const [teachLine, setTeachLine] = useState<AccentTeachLine | null>(null)',
     )
-    const lineAt = round.indexOf('{teachLine ? (')
+    const lineAt = round.indexOf("{lang !== 'en' && !finished ? (")
     expect(lineAt).toBeGreaterThan(0)
-    const block = round.slice(lineAt, lineAt + 400)
+    const block = round.slice(lineAt, lineAt + 800)
+    expect(block).toContain('lang="en"')
     expect(block).toContain('role="status"')
     expect(block).toContain('text-ink-muted')
     // #229: text-ink-faint fails WCAG AA contrast — never on this line
     expect(block).not.toContain('text-ink-faint')
     expect(block).toContain('short-land:mt-1')
-    expect(block).toContain('{teachLine}')
+    // #295: stable slot (nbsp placeholder, no short-land collapse) so the line never shifts the layout
+    expect(block).toContain("'\\u00a0'")
+    expect(block).not.toContain('short-land:hidden')
+    // #295: pixel-face grapheme in the pack language + accent colour, enter motion replayed per line
+    expect(block).toContain('lang={lang}')
+    expect(block).toContain('text-pixel-label')
+    expect(block).toContain('text-accent-fg')
+    expect(block).toContain('motion-teach-enter')
+    expect(block).toContain('ACCENT_TEACH_FORGIVEN_CUE')
     // sits between the grid and the LearnerHint strip, inside the short-land wrapper
     const gridAt = round.indexOf('<LetterGrid cells={cells} lang={lang} />')
     const hintAt = round.indexOf('<LearnerHint entry={wordEntry} lang={lang} />')
     expect(gridAt).toBeGreaterThan(0)
     expect(lineAt).toBeGreaterThan(gridAt)
     expect(hintAt).toBeGreaterThan(lineAt)
+    // under-grid transient notes share one type size (#295)
+    expect(round).toContain(
+      '<p className="mt-3 text-center text-xs text-ink-muted short-land:mt-1">',
+    )
     // cleared on the next key, on hint, and on practice Reveal
     expect(round.match(/setTeachLine\(null\)/g)?.length).toBe(3)
     // accent-miss wiring: teach at every band, EN gated off, life rule per ADR 0053
     expect(round).toContain("if (accentMiss && lang !== 'en')")
     expect(round).toContain('accentMissTarget(r.cells, r.wordEntry.word, letter)')
-    expect(round).toContain('accentTeachLine(target)')
+    expect(round).toContain('accentTeachParts(target)')
     expect(round).toContain('isForgivenAccentMiss(lang, cefr)')
+    // #295: a finishing losing accent miss carries the line into the EndCard (short-land hides the grid wrapper)
+    expect(round).toContain('teachLine={teachLine}')
+    const endSrc = src.slice(endAt)
+    const endLineAt = endSrc.indexOf('{teachLine ? (')
+    expect(endLineAt).toBeGreaterThan(0)
+    const endBlock = endSrc.slice(endLineAt, endLineAt + 400)
+    expect(endBlock).toContain('lang="en"')
+    expect(endBlock).toContain('role="status"')
+    expect(endBlock).toContain('lang={lang}')
+    expect(endBlock).toContain('ACCENT_TEACH_FORGIVEN_CUE')
   })
 
   test('micro-lesson copy is pinned', () => {
@@ -1622,5 +1645,15 @@ describe('Play accent teach line (ADR 0053 / #75 / #293)', () => {
     expect(accentTeachLine('Å')).toBe(
       'Å: this letter carries a special mark that changes its sound',
     )
+    // #295: forgiven cue and styled parts are pinned
+    expect(ACCENT_TEACH_FORGIVEN_CUE).toBe(' — life kept')
+    expect(accentTeachLine('É', { forgiven: true })).toBe(
+      `É: E with an acute accent, sounds like "ay"${ACCENT_TEACH_FORGIVEN_CUE}`,
+    )
+    expect(accentTeachLine('É')).not.toContain(ACCENT_TEACH_FORGIVEN_CUE)
+    expect(accentTeachParts('É')).toEqual({
+      grapheme: 'É',
+      text: 'E with an acute accent, sounds like "ay"',
+    })
   })
 })

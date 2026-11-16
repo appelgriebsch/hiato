@@ -22,8 +22,9 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
   TOTAL_LIVES,
+  ACCENT_TEACH_FORGIVEN_CUE,
   accentMissTarget,
-  accentTeachLine,
+  accentTeachParts,
   applyGuess,
   buildInitialCells,
   correctKeysFromCells,
@@ -39,6 +40,7 @@ import {
   pickPracticeLemma,
   revealOneDiacritic,
   revealAllCells,
+  type AccentTeachLine,
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
@@ -177,8 +179,8 @@ function PlayRound({
   const [usedWrong, setUsedWrong] = useState<Set<string>>(() => new Set())
   const [usedCorrect, setUsedCorrect] = useState<Set<string>>(() => new Set())
   const [hintUsed, setHintUsed] = useState(false)
-  /** ADR 0053: one-line accent micro-lesson on an accent miss; cleared on the next key/hint. */
-  const [teachLine, setTeachLine] = useState<string | null>(null)
+  /** ADR 0053 / #295: accent micro-lesson on an accent miss; cleared on the next key/hint. */
+  const [teachLine, setTeachLine] = useState<AccentTeachLine | null>(null)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
   /** Practice Reveal lose — EndCard says "Word revealed", not "Out of lives". */
   const [revealedWord, setRevealedWord] = useState(false)
@@ -587,7 +589,14 @@ function PlayRound({
       setLives(lives)
       if (accentMiss && lang !== 'en') {
         const target = accentMissTarget(r.cells, r.wordEntry.word, letter)
-        setTeachLine(target ? accentTeachLine(target) : null)
+        setTeachLine(
+          target
+            ? {
+                ...accentTeachParts(target),
+                forgiven: isForgivenAccentMiss(lang, cefr),
+              }
+            : null,
+        )
       }
       playCue('key-miss')
       if (lives === 1) playCue('life-lost')
@@ -811,16 +820,30 @@ function PlayRound({
           <div className={['my-5 short-land:my-0', finished ? 'short-land:hidden' : ''].join(' ')}>
             <LetterGrid cells={cells} lang={lang} />
             {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
-              <p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">
+              <p className="mt-3 text-center text-xs text-ink-muted short-land:mt-1">
                 Soft green = vowel help (A1–A2)
               </p>
             )}
-            {teachLine ? (
+            {lang !== 'en' && !finished ? (
               <p
+                lang="en"
                 role="status"
                 className="mt-3 text-center text-xs text-ink-muted short-land:mt-1"
               >
-                {teachLine}
+                {teachLine ? (
+                  <span
+                    key={`${teachLine.grapheme}${teachLine.text}${teachLine.forgiven}`}
+                    className="motion-teach-enter"
+                  >
+                    <span lang={lang} className="text-pixel-label text-accent-fg">
+                      {teachLine.grapheme}
+                    </span>
+                    {`: ${teachLine.text}`}
+                    {teachLine.forgiven ? ACCENT_TEACH_FORGIVEN_CUE : null}
+                  </span>
+                ) : (
+                  '\u00a0'
+                )}
               </p>
             ) : null}
             {!finished && (
@@ -843,6 +866,7 @@ function PlayRound({
             <EndCard
               won={finished === 'win'}
               revealed={revealedWord}
+              teachLine={teachLine}
               mode={mode}
               word={wordEntry.word}
               gloss={wordEntry.gloss}
@@ -1091,6 +1115,7 @@ function DoneDaily({
 function EndCard({
   won,
   revealed = false,
+  teachLine,
   mode,
   word,
   gloss,
@@ -1112,6 +1137,8 @@ function EndCard({
   won: boolean
   /** Practice Reveal — badge "Word revealed" instead of "Out of lives". */
   revealed?: boolean
+  /** ADR 0053 / #295: final losing accent miss — the teach line survives in the EndCard (short-land hides the grid). */
+  teachLine: AccentTeachLine | null
   mode: PlayMode
   word: string
   gloss?: string
@@ -1386,6 +1413,15 @@ function EndCard({
           {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
+        {teachLine ? (
+          <p lang="en" role="status" className="mb-3 text-center text-xs text-ink-muted">
+            <span lang={lang} className="text-pixel-label text-accent-fg">
+              {teachLine.grapheme}
+            </span>
+            {`: ${teachLine.text}`}
+            {teachLine.forgiven ? ACCENT_TEACH_FORGIVEN_CUE : null}
+          </p>
+        ) : null}
         <LemmaTeach
           lang={lang}
           word={word}
