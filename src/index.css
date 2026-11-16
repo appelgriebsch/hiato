@@ -460,6 +460,11 @@ button.key-settled:disabled {
   animation: hiato-fade-slide-in var(--dur-slow) steps(3, end) both;
 }
 
+/* Accent teach line (#295): replays per line via a keyed span, instant under reduced motion. */
+.motion-teach-enter {
+  animation: hiato-fade-slide-in var(--dur-fast) steps(3, end) both;
+}
+
 .motion-letter-reveal {
   animation: hiato-letter-reveal var(--dur-mid) steps(4, end) both;
   transform-origin: center;
@@ -549,6 +554,7 @@ button.key-settled:disabled {
 /* Reduced motion: instant state changes only (ADR 0052 §6). */
 @media (prefers-reduced-motion: reduce) {
   .motion-onboarding-enter,
+  .motion-teach-enter,
   .motion-letter-reveal,
   .motion-key-shake,
   .motion-streak-pulse,

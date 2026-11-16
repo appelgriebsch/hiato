@@ -22,12 +22,17 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
   TOTAL_LIVES,
+  ACCENT_TEACH_FORGIVEN_CUE,
+  accentMissTarget,
+  accentTeachParts,
   applyGuess,
   buildInitialCells,
   correctKeysFromCells,
   graphemeKey,
+  hasUnrevealedDiacritic,
   isDiacriticHintMiss,
   isDiacriticHintReady,
+  isForgivenAccentMiss,
   isPracticeAvailable,
   isWon,
   lemmaIdentity,
@@ -36,6 +41,7 @@ import {
   pickPracticeLemma,
   revealOneDiacritic,
   revealAllCells,
+  type AccentTeachLine,
   type CellState,
 } from '@/engine'
 import { getDailyRecord, setDailyRecord, type DailyRecord } from '@/lib/daily-record'
@@ -174,6 +180,8 @@ function PlayRound({
   const [usedWrong, setUsedWrong] = useState<Set<string>>(() => new Set())
   const [usedCorrect, setUsedCorrect] = useState<Set<string>>(() => new Set())
   const [hintUsed, setHintUsed] = useState(false)
+  /** ADR 0053 / #295: accent micro-lesson on an accent miss; cleared on the next key/hint. */
+  const [teachLine, setTeachLine] = useState<AccentTeachLine | null>(null)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
   /** Practice Reveal lose — EndCard says "Word revealed", not "Out of lives". */
   const [revealedWord, setRevealedWord] = useState(false)
@@ -547,6 +555,7 @@ function PlayRound({
     const k = graphemeKey(letter)
     if (r.usedWrong.has(k) || r.usedCorrect.has(k)) return
 
+    setTeachLine(null)
     const { cells: next, hit } = applyGuess(r.cells, r.wordEntry.word, letter)
     if (hit) {
       playCue('key-correct')
@@ -563,10 +572,11 @@ function PlayRound({
       if (won) endGame('win', r.wordEntry)
     } else {
       const usedWrong = new Set(r.usedWrong).add(k)
-      const misses =
-        r.misses +
-        (isDiacriticHintMiss(r.cells, r.wordEntry.word, letter) ? 1 : 0)
-      const lives = r.lives - 1
+      // ADR 0053: an accent miss always teaches; A1–A2 keeps the life, B1+ loses it.
+      const accentMiss = isDiacriticHintMiss(r.cells, r.wordEntry.word, letter)
+      const misses = r.misses + (accentMiss ? 1 : 0)
+      const lives =
+        accentMiss && isForgivenAccentMiss(lang, cefr) ? r.lives : r.lives - 1
       const lost = lives <= 0
       roundRef.current = {
         ...r,
@@ -578,6 +588,17 @@ function PlayRound({
       setUsedWrong(usedWrong)
       if (misses !== r.misses) setMisses(misses)
       setLives(lives)
+      if (accentMiss && lang !== 'en') {
+        const target = accentMissTarget(r.cells, r.wordEntry.word, letter)
+        setTeachLine(
+          target
+            ? {
+                ...accentTeachParts(target),
+                forgiven: isForgivenAccentMiss(lang, cefr),
+              }
+            : null,
+        )
+      }
       playCue('key-miss')
       if (lives === 1) playCue('life-lost')
       window.clearTimeout(shakeTimer.current)
@@ -598,6 +619,7 @@ function PlayRound({
     ) {
       return
     }
+    setTeachLine(null)
     const next = revealOneDiacritic(r.cells, r.wordEntry.word)
     playCue('hint')
     const usedCorrect = correctKeysFromCells(next)
@@ -619,6 +641,7 @@ function PlayRound({
   function onReveal() {
     const r = roundRef.current
     if (!r.wordEntry || r.finished || r.loading || mode !== 'practice') return
+    setTeachLine(null)
     const next = revealAllCells(r.wordEntry.word)
     const usedCorrect = correctKeysFromCells(next)
     roundRef.current = {
@@ -802,6 +825,28 @@ function PlayRound({
                 Soft green = vowel help (A1–A2)
               </p>
             )}
+            {lang !== 'en' && !finished && hasUnrevealedDiacritic(cells, wordEntry.word) ? (
+              <p
+                lang="en"
+                role="status"
+                className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1"
+              >
+                {teachLine ? (
+                  <span
+                    key={`${teachLine.grapheme}${teachLine.text}${teachLine.forgiven}`}
+                    className="motion-teach-enter"
+                  >
+                    <span lang={lang} className="text-pixel-label text-accent-fg">
+                      {teachLine.grapheme}
+                    </span>
+                    {`: ${teachLine.text}`}
+                    {teachLine.forgiven ? ACCENT_TEACH_FORGIVEN_CUE : null}
+                  </span>
+                ) : (
+                  '\u00a0'
+                )}
+              </p>
+            ) : null}
             {!finished && (
               <LearnerHint entry={wordEntry} lang={lang} />
             )}
@@ -822,6 +867,7 @@ function PlayRound({
             <EndCard
               won={finished === 'win'}
               revealed={revealedWord}
+              teachLine={teachLine}
               mode={mode}
               word={wordEntry.word}
               gloss={wordEntry.gloss}
@@ -1070,6 +1116,7 @@ function DoneDaily({
 function EndCard({
   won,
   revealed = false,
+  teachLine,
   mode,
   word,
   gloss,
@@ -1091,6 +1138,8 @@ function EndCard({
   won: boolean
   /** Practice Reveal — badge "Word revealed" instead of "Out of lives". */
   revealed?: boolean
+  /** ADR 0053 / #295: final losing accent miss — the teach line survives in the EndCard (short-land hides the grid). */
+  teachLine: AccentTeachLine | null
   mode: PlayMode
   word: string
   gloss?: string
@@ -1365,6 +1414,15 @@ function EndCard({
           {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
           {endBadge}
         </Badge>
+        {teachLine ? (
+          <p lang="en" role="status" className="mb-3 text-center text-xs text-ink-muted">
+            <span lang={lang} className="text-pixel-label text-accent-fg">
+              {teachLine.grapheme}
+            </span>
+            {`: ${teachLine.text}`}
+            {teachLine.forgiven ? ACCENT_TEACH_FORGIVEN_CUE : null}
+          </p>
+        ) : null}
         <LemmaTeach
           lang={lang}
           word={word}
