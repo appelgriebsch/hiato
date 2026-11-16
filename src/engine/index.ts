@@ -28,3 +28,9 @@ export {
 } from './game'
 export { graphemes, normalizeNfc, graphemeKey } from './graphemes'
 export { hasDiacritic, isBaseAsciiVowel } from './letters'
+export {
+  ACCENT_TEACH,
+  accentMissTarget,
+  accentTeachLine,
+  isForgivenAccentMiss,
+} from './accents'

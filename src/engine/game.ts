@@ -80,7 +80,7 @@ export function hasUnrevealedDiacritic(
 }
 
 /** ASCII/base letter after stripping combining marks (É → E, Ç → C; ß stays ß). */
-function asciiBaseKey(ch: string): string {
+export function asciiBaseKey(ch: string): string {
   return graphemeKey(normalizeNfc(ch).normalize('NFD').replace(/\p{M}+/gu, ''))
 }
 

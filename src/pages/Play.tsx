@@ -22,12 +22,15 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
   TOTAL_LIVES,
+  accentMissTarget,
+  accentTeachLine,
   applyGuess,
   buildInitialCells,
   correctKeysFromCells,
   graphemeKey,
   isDiacriticHintMiss,
   isDiacriticHintReady,
+  isForgivenAccentMiss,
   isPracticeAvailable,
   isWon,
   lemmaIdentity,
@@ -174,6 +177,8 @@ function PlayRound({
   const [usedWrong, setUsedWrong] = useState<Set<string>>(() => new Set())
   const [usedCorrect, setUsedCorrect] = useState<Set<string>>(() => new Set())
   const [hintUsed, setHintUsed] = useState(false)
+  /** ADR 0053: one-line accent micro-lesson on an accent miss; cleared on the next key/hint. */
+  const [teachLine, setTeachLine] = useState<string | null>(null)
   const [finished, setFinished] = useState<'win' | 'lose' | null>(null)
   /** Practice Reveal lose — EndCard says "Word revealed", not "Out of lives". */
   const [revealedWord, setRevealedWord] = useState(false)
@@ -547,6 +552,7 @@ function PlayRound({
     const k = graphemeKey(letter)
     if (r.usedWrong.has(k) || r.usedCorrect.has(k)) return
 
+    setTeachLine(null)
     const { cells: next, hit } = applyGuess(r.cells, r.wordEntry.word, letter)
     if (hit) {
       playCue('key-correct')
@@ -563,10 +569,11 @@ function PlayRound({
       if (won) endGame('win', r.wordEntry)
     } else {
       const usedWrong = new Set(r.usedWrong).add(k)
-      const misses =
-        r.misses +
-        (isDiacriticHintMiss(r.cells, r.wordEntry.word, letter) ? 1 : 0)
-      const lives = r.lives - 1
+      // ADR 0053: an accent miss always teaches; A1–A2 keeps the life, B1+ loses it.
+      const accentMiss = isDiacriticHintMiss(r.cells, r.wordEntry.word, letter)
+      const misses = r.misses + (accentMiss ? 1 : 0)
+      const lives =
+        accentMiss && isForgivenAccentMiss(lang, cefr) ? r.lives : r.lives - 1
       const lost = lives <= 0
       roundRef.current = {
         ...r,
@@ -578,6 +585,10 @@ function PlayRound({
       setUsedWrong(usedWrong)
       if (misses !== r.misses) setMisses(misses)
       setLives(lives)
+      if (accentMiss && lang !== 'en') {
+        const target = accentMissTarget(r.cells, r.wordEntry.word, letter)
+        setTeachLine(target ? accentTeachLine(target) : null)
+      }
       playCue('key-miss')
       if (lives === 1) playCue('life-lost')
       window.clearTimeout(shakeTimer.current)
@@ -598,6 +609,7 @@ function PlayRound({
     ) {
       return
     }
+    setTeachLine(null)
     const next = revealOneDiacritic(r.cells, r.wordEntry.word)
     playCue('hint')
     const usedCorrect = correctKeysFromCells(next)
@@ -802,6 +814,14 @@ function PlayRound({
                 Soft green = vowel help (A1–A2)
               </p>
             )}
+            {teachLine ? (
+              <p
+                role="status"
+                className="mt-3 text-center text-xs text-ink-muted short-land:mt-1"
+              >
+                {teachLine}
+              </p>
+            ) : null}
             {!finished && (
               <LearnerHint entry={wordEntry} lang={lang} />
             )}
