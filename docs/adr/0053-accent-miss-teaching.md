@@ -4,7 +4,7 @@
 - **Date**: 2026-11-16
 - **Deciders**: Andreas Gerlach (CEFR rule decided in #75 comment, 2026-11-09; scope and UI confirmed in solution-engineering grilling, 2026-11-16)
 - **Supersedes**: none (extends ADR 0005 and ADR 0015)
-- **Related issues**: #75 (epic), tracer children TBD
+- **Related issues**: #75 (epic), tracer children #292 (AT-1), #293 (AT-2), #294 (AT-3)
 
 ## Context
 
