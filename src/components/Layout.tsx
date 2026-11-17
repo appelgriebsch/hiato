@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react'
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 
 export function Layout({
   children,
@@ -25,11 +25,32 @@ export function Layout({
   /** Portrait footer stays; short-land hides it (picker CTA moves into the column). */
   hideFooterInShortLand?: boolean
 }) {
+  const footerRef = useRef<HTMLDivElement | null>(null)
+  const hasFooter = footer != null
+  // The document scrolls (the column is not a scrollport). Reserve the sticky
+  // footer's height as root scroll padding so scrollIntoView can park the
+  // last content element fully above the footer (#307).
+  useEffect(() => {
+    if (!hasFooter) return
+    const root = document.documentElement
+    const footerEl = footerRef.current
+    if (!footerEl) return
+    const apply = () => {
+      root.style.setProperty('scroll-padding-bottom', `${footerEl.offsetHeight}px`)
+    }
+    apply()
+    const observer = new ResizeObserver(apply)
+    observer.observe(footerEl)
+    return () => {
+      observer.disconnect()
+      root.style.removeProperty('scroll-padding-bottom')
+    }
+  }, [hasFooter])
   return (
     <div
       data-layout-shell
       className={[
-        'mx-auto flex h-dvh w-full max-w-md flex-col bg-cream px-4',
+        'mx-auto flex min-h-dvh w-full max-w-md flex-col bg-cream px-4',
         'pt-[env(safe-area-inset-top)]',
         footer ? '' : 'pb-[env(safe-area-inset-bottom)]',
       ].join(' ')}
@@ -62,6 +83,7 @@ export function Layout({
       {footer ? (
         <div
           data-layout-footer
+          ref={footerRef}
           className={[
             'sticky bottom-0 z-10 shrink-0 border-t border-line bg-cream pb-[env(safe-area-inset-bottom)]',
             footerBleed

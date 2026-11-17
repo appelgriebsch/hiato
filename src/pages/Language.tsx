@@ -272,7 +272,7 @@ export function Language() {
             <div className="text-xs font-medium text-ink-muted">{LANG_CODES[l]}</div>
             <div
               className={[
-                'truncate text-sm font-semibold',
+                'break-words text-sm font-semibold',
                 lang === l ? 'text-accent-fg' : 'text-ink',
               ].join(' ')}
             >
