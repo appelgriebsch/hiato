@@ -1668,3 +1668,50 @@ describe('Play accent teach line (ADR 0053 / #75 / #293 / #295)', () => {
     })
   })
 })
+
+describe('Level check guards (#227/#277)', () => {
+  test('new level-check modules never import streak/analytics code and write no storage', async () => {
+    for (const rel of ['../lib/level-check.ts', '../components/LevelCheckSheet.tsx']) {
+      const src = await Bun.file(new URL(rel, import.meta.url)).text()
+      expect(src, rel).not.toMatch(/from\s+['"][^'"]*streaks['"]/)
+      expect(src, rel).not.toContain('recordDailyWin')
+      expect(src, rel).not.toContain('STREAKS_KEY')
+      expect(src, rel).not.toContain('hiato.streaks')
+      expect(src, rel).not.toMatch(/from\s+['"][^'"]*analytics['"]/)
+      expect(src, rel).not.toContain('localStorage')
+      expect(src, rel).not.toContain('sessionStorage')
+      expect(src, rel).not.toMatch(/\bsetItem\s*\(/)
+      expect(src, rel).not.toMatch(/\bgetItem\s*\(/)
+    }
+  })
+
+  test('Language.tsx: no streak/storage access; the only prefs write is Continue → setPrefs', async () => {
+    const src = await pageSrc('Language.tsx')
+    expect(src).not.toMatch(/from\s+['"][^'"]*streaks['"]/)
+    expect(src).not.toContain('localStorage')
+    expect(src).not.toContain('hiato.streaks')
+    expect(src.match(/setPrefs\s*\(/g)?.length).toBe(1)
+    const contAt = src.indexOf('async function continuePlay')
+    const prefsAt = src.indexOf('setPrefs({ lang, cefr })')
+    const navAt = src.indexOf("nav('/play?mode=daily')")
+    expect(contAt).toBeGreaterThan(0)
+    expect(prefsAt).toBeGreaterThan(contAt)
+    expect(navAt).toBeGreaterThan(prefsAt)
+  })
+
+  test('picker offers the optional check; onApply only preselects the tile', async () => {
+    const src = await pageSrc('Language.tsx')
+    expect(src).toContain('data-level-check-open')
+    expect(src).toContain('Not sure of your level?')
+    expect(src).toContain('<LevelCheckSheet')
+    const applyAt = src.indexOf('onApply={(c) => {')
+    expect(applyAt).toBeGreaterThan(0)
+    const applyBlock = src.slice(applyAt, applyAt + 220)
+    const cefrAt = applyBlock.indexOf('setCefr(c)')
+    const closeAt = applyBlock.indexOf('setCheckOpen(false)')
+    expect(cefrAt).toBeGreaterThan(0)
+    expect(closeAt).toBeGreaterThan(cefrAt)
+    expect(applyBlock).not.toContain('setPrefs')
+    expect(applyBlock).not.toContain('localStorage')
+  })
+})

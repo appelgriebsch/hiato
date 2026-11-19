@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { expect, test, type Page } from '@playwright/test'
+import { expect, test, type Locator, type Page } from '@playwright/test'
 
 const VIEWPORTS = [
   { name: '667x375', width: 667, height: 375, short: true },
@@ -89,13 +89,18 @@ function hashString(s: string): number {
   return h >>> 0
 }
 
-function dailyWord(lang: Lang, iso = clockIso): string {
+/** Seeded pack word for any level — same FNV-1a seed as pickDailyLemma. */
+function packWord(lang: Lang, cefr: string, iso = clockIso): string {
   const date = new Date(iso)
   const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-  const pack = JSON.parse(readFileSync(new URL(`../public/packs/${lang}/a1.json`, import.meta.url), 'utf8')) as {
+  const pack = JSON.parse(readFileSync(new URL(`../public/packs/${lang}/${cefr}.json`, import.meta.url), 'utf8')) as {
     lemmas: { word: string }[]
   }
-  return pack.lemmas[hashString(`${dateKey}|${lang}|a1`) % pack.lemmas.length]!.word
+  return pack.lemmas[hashString(`${dateKey}|${lang}|${cefr}`) % pack.lemmas.length]!.word
+}
+
+function dailyWord(lang: Lang, iso = clockIso): string {
+  return packWord(lang, 'a1', iso)
 }
 
 async function visiblePad(page: Page) {
@@ -727,6 +732,88 @@ test.describe('short landscape viewports (#209)', () => {
     const keys = m.targets.filter((t) => t.key)
     expect(keys.length, where).toBeGreaterThan(0)
     assertTargets(m.targets, where)
+  })
+})
+
+test.describe('level check on /language (#227/#277)', () => {
+  const LEVELS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] as const
+
+  async function openCheck(page: Page): Promise<Locator> {
+    await page.getByRole('button', { name: 'Not sure of your level?' }).click()
+    const dialog = page.getByRole('dialog', { name: 'Check your level' })
+    await expect(dialog).toBeVisible()
+    return dialog
+  }
+
+  /** Answer all six questions; levels up to `knownUpTo` are marked "Know". */
+  async function answerAll(dialog: Locator, knownUpTo: (typeof LEVELS)[number]) {
+    for (const level of LEVELS) {
+      await expect(dialog.locator('[data-level-check-progress]')).toHaveText(
+        `Question ${LEVELS.indexOf(level) + 1} of ${LEVELS.length}`,
+      )
+      // The shown word is the seeded pick of that level pack for the pinned day.
+      await expect(dialog.locator('[data-level-check-word]')).toHaveText(packWord('en', level))
+      const knows = LEVELS.indexOf(level) <= LEVELS.indexOf(knownUpTo)
+      await dialog
+        .getByRole('button', { name: knows ? 'Know' : 'Don’t know', exact: true })
+        .click()
+    }
+  }
+
+  function cefrTile(page: Page, level: string) {
+    return page.locator(`[aria-labelledby="cefr-heading"] [role="radio"][data-radio="${level}"]`)
+  }
+
+  test('apply: suggestion preselects the tile (✓ + aria-checked); Continue saves prefs; streak untouched', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    await seed(page, 'en')
+    await page.goto('/language')
+    await page.getByRole('heading', { name: 'Choose language & level' }).waitFor()
+    const dialog = await openCheck(page)
+    // Know A1–B1, don't know B2–C2 → suggested B1.
+    await answerAll(dialog, 'b1')
+    await expect(dialog.locator('[data-level-check-level]')).toHaveText('B1')
+    await expect(dialog.locator('[data-level-check-result]')).toContainText('Intermediate')
+    await dialog.getByRole('button', { name: 'Use B1' }).click()
+    await expect(dialog).toBeHidden()
+    await expect(cefrTile(page, 'b1')).toHaveAttribute('aria-checked', 'true')
+    await expect(cefrTile(page, 'b1').locator('[data-selected-check]')).toBeVisible()
+    await expect(cefrTile(page, 'a1')).toHaveAttribute('aria-checked', 'false')
+    // Continue still saves prefs — now with the suggested level.
+    const cont = page.getByRole('button', { name: /Continue to daily|Caching|Preparing/ })
+    await expect(cont).toBeEnabled()
+    await cont.click()
+    await expect(page).toHaveURL(/\/play\?mode=daily/)
+    expect(await page.evaluate(() => localStorage.getItem('hiato.prefs'))).toBe(
+      JSON.stringify({ lang: 'en', cefr: 'b1' }),
+    )
+    // The check never touched the streak.
+    expect(await page.evaluate(() => localStorage.getItem('hiato.streaks'))).toBeNull()
+  })
+
+  test('ignore: "Keep my pick" and Esc leave the tile and storage unchanged', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    await seed(page, 'en')
+    await page.goto('/language')
+    await page.getByRole('heading', { name: 'Choose language & level' }).waitFor()
+    // All known → suggests C2, but "Keep my pick" ignores it.
+    let dialog = await openCheck(page)
+    await answerAll(dialog, 'c2')
+    await expect(dialog.locator('[data-level-check-level]')).toHaveText('C2')
+    await dialog.getByRole('button', { name: 'Keep my pick' }).click()
+    await expect(dialog).toBeHidden()
+    await expect(cefrTile(page, 'a1')).toHaveAttribute('aria-checked', 'true')
+    await expect(cefrTile(page, 'c2')).toHaveAttribute('aria-checked', 'false')
+    // Esc closes without applying either.
+    dialog = await openCheck(page)
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
+    await expect(cefrTile(page, 'a1')).toHaveAttribute('aria-checked', 'true')
+    // The check wrote nothing: prefs stay as seeded, no streak key exists.
+    expect(await page.evaluate(() => localStorage.getItem('hiato.prefs'))).toBe(
+      JSON.stringify({ lang: 'en', cefr: 'a1' }),
+    )
+    expect(await page.evaluate(() => localStorage.getItem('hiato.streaks'))).toBeNull()
   })
 })
 

@@ -48,6 +48,19 @@ describe('Language & level picker (#182)', () => {
     for (const c of PACK_CEFRS) expect(CEFR_LINES[c]).toStartWith(c.toUpperCase())
   })
 
+  test('optional level check: quiet button present, sheet closed by default (#227/#276)', () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <Language />
+      </MemoryRouter>,
+    )
+    expect(html).toContain('Not sure of your level?')
+    expect(html).toContain('data-level-check-open')
+    expect(html).toMatch(/data-level-check-open[^>]*min-h-11|min-h-11[^>]*data-level-check-open/)
+    // Sheet mounts only while open — closed by default, no portal in the markup
+    expect(html).not.toContain('data-level-check-sheet')
+  })
+
   test('level lines: exact B1–C2 copy (Uma review)', () => {
     expect(CEFR_LINES.a1).toBe('A1 · Beginner — first words; vowels are filled in to help.')
     expect(CEFR_LINES.b1).toBe('B1 · Intermediate — common words; no letters filled in.')
