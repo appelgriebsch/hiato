@@ -577,11 +577,8 @@ test.describe('short landscape viewports (#209)', () => {
     await expect(page.getByRole('img', { name: 'Words learned, 2 words' })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Streak history' })).toBeVisible()
     await expect(page.getByText('Daily · last 8 days · best 6')).toBeVisible()
-    await expect(
-      page.getByRole('img', {
-        name: 'Streak history over the last 8 recorded days, best streak 6, latest day lost',
-      }),
-    ).toBeVisible()
+    await expect(page.getByRole('img', { name: '2026-10-15: won, streak 6' })).toBeVisible()
+    await expect(page.getByRole('img', { name: '2026-10-17: lost' })).toBeVisible()
     await expect(page.getByText('Wins by lives left')).toBeVisible()
     await expect(page.getByRole('img', { name: 'Lost: 8 rounds' })).toBeVisible()
     const scrollable = await dialog.evaluate((d) => d.scrollHeight > d.clientHeight + 1)

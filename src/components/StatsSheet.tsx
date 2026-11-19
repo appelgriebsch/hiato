@@ -217,19 +217,17 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
             ) : (
               <>
                 <p className="mb-2 text-sm text-ink-muted">Daily &middot; last {streak.length} {streak.length === 1 ? 'day' : 'days'} &middot; best {bestStreak}</p>
-                <ul
-                  className="mb-4 flex h-16 items-stretch gap-px"
-                  role="img"
-                  aria-label={`Streak history over the last ${streak.length} recorded ${
-                    streak.length === 1 ? 'day' : 'days'
-                  }, best streak ${bestStreak}, latest day ${
-                    streak[streak.length - 1]!.won ? 'won' : 'lost'
-                  }`}
-                >
+                <ul className="mb-4 flex h-16 items-stretch gap-px overflow-x-auto">
                   {streak.map((point) => (
                     <li
                       key={point.dateKey}
-                      className="streak-bar-track flex h-full min-w-0 flex-1 items-end overflow-hidden"
+                      role="img"
+                      aria-label={
+                        point.won
+                          ? `${point.dateKey}: won, streak ${point.streak}`
+                          : `${point.dateKey}: lost`
+                      }
+                      className="streak-bar-track flex h-full min-w-2 flex-1 items-end overflow-hidden"
                     >
                       {point.won ? (
                         <span
