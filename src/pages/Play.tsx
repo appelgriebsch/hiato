@@ -51,6 +51,7 @@ import {
   markPrefillRecorded,
   recordRoundFor,
 } from '@/lib/history'
+import { recordLearned } from '@/lib/learned'
 import {
   addToPocket,
   isDue,
@@ -291,6 +292,7 @@ function PlayRound({
       if (result === 'win') {
         const prev = getStreak(lang, cefr, dateKey)
         const next = recordDailyWin(lang, cefr, dateKey)
+        recordLearned(historySlot(lang, cefr), entry.word)
         setStreak(next.count)
         setFreezes(next.freezes)
         // Cues only when this win raised the count. The chip starts at 0, so a
@@ -448,6 +450,7 @@ function PlayRound({
           // Prefill win still clears pocket — never recordDailyWin.
           if (isWon(initial)) {
             setFinished('win')
+            recordLearned(historySlot(lang, cefr), pocketEntry.word)
             if (
               pocketOutcomeOnFinish(
                 true,
@@ -529,6 +532,7 @@ function PlayRound({
       playCue(result === 'win' ? 'win' : 'loss')
       recordRound(result, roundRef.current.lives)
       if (mode === 'daily') persistDaily(result, entry)
+      if (mode === 'pocket' && result === 'win') recordLearned(historySlot(lang, cefr), entry.word)
       // Pocket: win removes; a due loss advances the ladder; an early loss
       // keeps stage and dueAt. Never streaks / Clerk / D1 / recordDailyWin.
       if (mode === 'pocket' && activePocketId) {
@@ -546,7 +550,7 @@ function PlayRound({
         }
       }
     },
-    [mode, persistDaily, recordRound, activePocketId, pocketWasDue, pocketStage],
+    [mode, persistDaily, recordRound, activePocketId, pocketWasDue, pocketStage, lang, cefr],
   )
 
   function onKey(letter: string) {

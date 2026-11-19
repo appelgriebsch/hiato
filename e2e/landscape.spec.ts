@@ -496,14 +496,22 @@ test.describe('short landscape viewports (#209)', () => {
       )
       const slots: Record<string, unknown[]> = { 'en|a1': [] }
       for (let i = 0; i < 24; i++) {
+        const daily = i % 3 === 0
         slots['en|a1'].push({
-          dateKey: '2026-10-18',
+          // Daily entries land on consecutive days so the streak graph has 8 days.
+          dateKey: daily
+            ? `2026-10-${String(10 + Math.floor(i / 3)).padStart(2, '0')}`
+            : '2026-10-18',
           won: i < 16,
           livesLeft: i < 16 ? 6 - (i % 6) : 0,
-          mode: i % 3 === 0 ? 'daily' : 'practice',
+          mode: daily ? 'daily' : 'practice',
         })
       }
       localStorage.setItem('hiato.history', JSON.stringify({ v: 1, slots }))
+      localStorage.setItem(
+        'hiato.learned',
+        JSON.stringify({ v: 1, slots: { 'en|a1': ['MANGO', 'PERA'] } }),
+      )
     })
     await page.goto('/')
     const stats = page.getByRole('button', { name: 'Stats, 24 rounds' })
@@ -566,6 +574,11 @@ test.describe('short landscape viewports (#209)', () => {
     await expect(page.getByText('English A1 · last 24 rounds')).toBeVisible()
     await expect(page.getByText('Daily and Practice only.')).toBeVisible()
     await expect(page.getByRole('img', { name: 'Win rate, 67 percent' })).toBeVisible()
+    await expect(page.getByRole('img', { name: 'Words learned, 2 words' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Streak history' })).toBeVisible()
+    await expect(page.getByText('Daily · last 8 days · best 6')).toBeVisible()
+    await expect(page.getByRole('img', { name: '2026-10-15: won, streak 6' })).toBeVisible()
+    await expect(page.getByRole('img', { name: '2026-10-17: lost' })).toBeVisible()
     await expect(page.getByText('Wins by lives left')).toBeVisible()
     await expect(page.getByRole('img', { name: 'Lost: 8 rounds' })).toBeVisible()
     const scrollable = await dialog.evaluate((d) => d.scrollHeight > d.clientHeight + 1)

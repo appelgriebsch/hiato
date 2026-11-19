@@ -2,7 +2,14 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
-import { historySlot, statsFor, type SlotStats } from '@/lib/history'
+import {
+  historySlot,
+  statsFor,
+  streakHistory,
+  type SlotStats,
+  type StreakPoint,
+} from '@/lib/history'
+import { learnedCount } from '@/lib/learned'
 import { CEFR_CODES, LANG_LABELS } from '@/packs/labels'
 import type { PackCefr, PackLang } from '@/packs/schema'
 
@@ -15,6 +22,20 @@ type StatsSheetProps = {
 
 const ROW_LEFTS = [6, 5, 4, 3, 2, 1] as const
 
+type StatsSnapshot = {
+  stats: SlotStats
+  learned: number
+  streak: StreakPoint[]
+}
+
+function readSnapshot(slotKey: string): StatsSnapshot {
+  return {
+    stats: statsFor(slotKey),
+    learned: learnedCount(slotKey),
+    streak: streakHistory(slotKey),
+  }
+}
+
 export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -25,11 +46,11 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
   onCloseRef.current = onClose
   const slotKey = historySlot(lang, cefr)
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
-  const [stats, setStats] = useState<SlotStats | null>(null)
+  const [snapshot, setSnapshot] = useState<StatsSnapshot | null>(null)
 
   if (open && loadedFor !== slotKey) {
     setLoadedFor(slotKey)
-    setStats(statsFor(slotKey))
+    setSnapshot(readSnapshot(slotKey))
   } else if (!open && loadedFor !== null) {
     setLoadedFor(null)
   }
@@ -56,7 +77,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
       dialog.showModal()
       closeRef.current?.focus()
     }
-  }, [open, stats, loadedFor, slotKey])
+  }, [open, snapshot, loadedFor, slotKey])
 
   // Wipe while open: storage events do not fire in the tab that wrote, so
   // also re-snapshot on focus / visibility return and let the layout effect
@@ -64,10 +85,10 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
   useEffect(() => {
     if (!open) return
     const refresh = () => {
-      setStats(statsFor(slotKey))
+      setSnapshot(readSnapshot(slotKey))
     }
     const onStorage = (event: StorageEvent) => {
-      if (event.key && event.key !== 'hiato.history') return
+      if (event.key && event.key !== 'hiato.history' && event.key !== 'hiato.learned') return
       refresh()
     }
     window.addEventListener('storage', onStorage)
@@ -94,6 +115,11 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
     const opener = openerRef.current
     if (opener && opener.isConnected) opener.focus()
   }, [open])
+
+  const stats = snapshot?.stats ?? null
+  const learned = snapshot?.learned ?? 0
+  const streak = snapshot?.streak ?? []
+  const bestStreak = streak.reduce((max, point) => Math.max(max, point.streak), 0)
 
   const maxRow = stats
     ? Math.max(...ROW_LEFTS.map((left) => stats.rows[String(left) as '6' | '5' | '4' | '3' | '2' | '1']), stats.rows.lost)
@@ -171,7 +197,54 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                     : stats.avgLivesLeftOnWins.toFixed(1)}
                 </dd>
               </div>
+              <div className="flex items-baseline justify-between gap-2">
+                <dt className="text-sm text-ink-muted">Words learned</dt>
+                <dd
+                  className="text-pixel-stat text-ink"
+                  role="img"
+                  aria-label={`Words learned, ${learned} ${learned === 1 ? 'word' : 'words'}`}
+                >
+                  {learned}
+                </dd>
+              </div>
             </dl>
+            <h3 className="text-pixel-title mb-2 flex items-center gap-2 text-ink">
+              <PixelIcon name="flame" size={16} className="text-accent-fg" aria-hidden="true" />
+              Streak history
+            </h3>
+            {streak.length === 0 ? (
+              <p className="mb-4 text-sm text-ink-muted">No Daily rounds yet.</p>
+            ) : (
+              <>
+                <p className="mb-2 text-sm text-ink-muted">Daily &middot; last {streak.length} {streak.length === 1 ? 'day' : 'days'} &middot; best {bestStreak}</p>
+                <ul className="mb-4 flex h-16 items-stretch gap-px overflow-x-auto">
+                  {streak.map((point) => (
+                    <li
+                      key={point.dateKey}
+                      role="img"
+                      aria-label={
+                        point.won
+                          ? `${point.dateKey}: won, streak ${point.streak}`
+                          : `${point.dateKey}: lost`
+                      }
+                      className="streak-bar-track flex h-full min-w-2 flex-1 items-end overflow-hidden"
+                    >
+                      {point.won ? (
+                        <span
+                          className="streak-bar block w-full"
+                          style={{ height: `${(point.streak / bestStreak) * 100}%` }}
+                        />
+                      ) : (
+                        <span
+                          className="streak-bar-lost block w-full"
+                          style={{ height: '12.5%' }}
+                        />
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             <h3 className="text-pixel-title mb-2 text-ink">Wins by lives left</h3>
             <ul className="flex flex-col gap-2">
               {ROW_LEFTS.map((left) => {

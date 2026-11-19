@@ -12,6 +12,7 @@ import {
   recordResult,
   recordRoundFor,
   statsFor,
+  streakHistory,
   type HistoryEntry,
 } from './history'
 
@@ -288,5 +289,74 @@ describe('prefill reload marker', () => {
     delete (globalThis as Record<string, unknown>).sessionStorage
     expect(hasPrefillRecorded(SLOT, 15, '2026-11-11')).toBe(false)
     expect(markPrefillRecorded(SLOT, 15, '2026-11-11')).toBe(false)
+  })
+})
+
+describe('streakHistory (ADR 0054)', () => {
+  let mem: Map<string, string>
+
+  beforeEach(() => {
+    mem = installLocalStorageMock()
+  })
+
+  afterEach(() => {
+    mem.clear()
+  })
+
+  test('empty slot yields no points', () => {
+    expect(streakHistory(SLOT)).toEqual([])
+  })
+
+  test('consecutive daily wins increment the running streak', () => {
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-10', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-11', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-12', won: true }))
+    expect(streakHistory(SLOT)).toEqual([
+      { dateKey: '2026-11-10', won: true, streak: 1 },
+      { dateKey: '2026-11-11', won: true, streak: 2 },
+      { dateKey: '2026-11-12', won: true, streak: 3 },
+    ])
+  })
+
+  test('a gap restarts at 1 and a loss zeroes the next point', () => {
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-10', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-11', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-13', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-14', won: false, livesLeft: 0 }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-15', won: true }))
+    expect(streakHistory(SLOT).map((p) => p.streak)).toEqual([1, 2, 1, 0, 1])
+  })
+
+  test('practice entries are ignored and insertion order does not matter', () => {
+    recordResult(SLOT, entry({ mode: 'practice', dateKey: '2026-11-12', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-12', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-11-11', won: true }))
+    recordResult(SLOT, entry({ mode: 'practice', dateKey: '2026-11-11', won: false, livesLeft: 0 }))
+    expect(streakHistory(SLOT)).toEqual([
+      { dateKey: '2026-11-11', won: true, streak: 1 },
+      { dateKey: '2026-11-12', won: true, streak: 2 },
+    ])
+  })
+
+  test('a duplicate daily dateKey keeps the last entry', () => {
+    mem.set(
+      HISTORY_KEY,
+      JSON.stringify({
+        v: 1,
+        slots: {
+          [SLOT]: [
+            { dateKey: '2026-11-11', won: false, livesLeft: 0, mode: 'daily' },
+            { dateKey: '2026-11-11', won: true, livesLeft: 6, mode: 'daily' },
+          ],
+        },
+      }),
+    )
+    expect(streakHistory(SLOT)).toEqual([{ dateKey: '2026-11-11', won: true, streak: 1 }])
+  })
+
+  test('month boundary: a win on the 1st continues a streak from the last day of the previous month', () => {
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-01-31', won: true }))
+    recordResult(SLOT, entry({ mode: 'daily', dateKey: '2026-02-01', won: true }))
+    expect(streakHistory(SLOT).map((p) => p.streak)).toEqual([1, 2])
   })
 })

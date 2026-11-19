@@ -653,6 +653,23 @@ button.key-settled:disabled {
   );
 }
 
+/* Streak history: vertical 6px ink blocks with 2px gaps on a line track; a lost day is a danger stub at the baseline. */
+.streak-bar-track {
+  background: var(--color-line);
+}
+
+.streak-bar {
+  background: repeating-linear-gradient(
+    0deg,
+    var(--color-ink) 0 6px,
+    transparent 6px 8px
+  );
+}
+
+.streak-bar-lost {
+  background: var(--color-danger);
+}
+
 /*
  * Short-landscape column shell (#209). Unlayered so it wins over the
  * scroller's `flex` / `py-4` utilities: a `short-land:grid` on the same node
