@@ -117,12 +117,13 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
     if (opener && opener.isConnected) opener.focus()
   }, [open])
 
-  // Open the streak graph at the newest bar (right edge) and keep it there on
-  // refresh; the list is focusable so arrow keys scroll it (#324 m1).
+  // Open the streak graph at the newest bar (right edge); the list is
+  // focusable so arrow keys scroll it (#324 m1). Runs on open and slot change
+  // only — a mid-session refresh keeps the user's scroll position.
   useLayoutEffect(() => {
     const el = streakListRef.current
     if (el) el.scrollLeft = el.scrollWidth
-  }, [open, snapshot])
+  }, [open, loadedFor])
 
   const stats = snapshot?.stats ?? null
   const learned = snapshot?.learned ?? 0

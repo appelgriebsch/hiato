@@ -88,9 +88,11 @@ describe('LevelCheckSheet (#227/#276)', () => {
     expect(src).toContain('checkItems(map, today, lang)')
     expect(src).toContain('suggestLevel(known)')
     // #324 L2: result announced once via a polite live region mounted before the
-    // result content, and focus moves to the result heading after the last answer
-    expect(src).toContain('data-level-check-announcement')
-    expect(src).toContain('aria-live="polite"')
+    // result content (role=status implies aria-live=polite), and focus moves to
+    // the result heading after the last answer
+    const annAt = src.indexOf('data-level-check-announcement')
+    expect(annAt).toBeGreaterThan(0)
+    expect(src.slice(annAt - 120, annAt)).toContain('role="status"')
     expect(src).toContain('tabIndex={-1}')
     expect(src).toContain('resultHeadingRef.current?.focus()')
   })

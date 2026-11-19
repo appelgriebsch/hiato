@@ -290,13 +290,8 @@ export function LevelCheckSheet({
                 Six words, one per level. Nothing is saved and your streak is
                 not touched.
               </p>
-              {/* Mounted before the result content so the result is announced once (#324 L2). */}
-              <div
-                role="status"
-                aria-live="polite"
-                className="sr-only"
-                data-level-check-announcement
-              >
+              {/* Mounted before the result content so the result is announced once; role=status implies aria-live=polite (#324 L2). */}
+              <div role="status" className="sr-only" data-level-check-announcement>
                 {phase === 'result' ? `Suggested level ${CEFR_CODES[resultLevel]}` : ''}
               </div>
               {phase === 'loading' ? (
