@@ -393,6 +393,8 @@ The variants in `ui/button.tsx` keep their names.
   - Win rate “75%” and average lives left “3.8” in Jersey 46.67px.
   - With no wins, the average shows **“No wins yet” in Inter 18px 600**: text, never NaN.
   - Both keep `role="img"` and their aria-labels.
+  - “Words learned” (#298, ADR 0054) is a third headline row: the distinct-word count in Jersey 46.67px, `role="img"` with the label “Words learned, N words”.
+- **Streak history (#298, ADR 0054):** between the headline rows and the grid, an `h3` with the 16px `flame` icon, a visible caption “Daily · last N days · best M” in Inter 14px `ink-muted`, and a `role="img"` bar row: one bar per recorded Daily day, height proportional to the running streak on a `line` track (segmented 6px `ink` blocks like the grid bars), a lost day as a short `danger` stub at the baseline. A slot with only Practice rounds shows “No Daily rounds yet.” instead.
 - **Grid:** the heading “Wins by lives left” is Jersey 28px. Rows run 6 down to 1, then Lost. Each row has:
   - A label: the number plus a 16px seed (`aria-hidden`).
   - A segmented bar: 6px `ink` blocks with 2px gaps on a 14px `line` track (3.67:1 light, 3.79:1 dark).

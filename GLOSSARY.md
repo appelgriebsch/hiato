@@ -78,7 +78,7 @@ A guest-local pass, capped at 2: a Daily win that lands the streak on a multiple
 A Pocket word whose review day has come (`dueAt`): the ladder is +1 / +3 / +7 local calendar days (clock time kept), due-first in the sheet with a Due badge, on Home as “Pocket (n · k due)”, and on the Practice EndCard as an offer to review.
 
 **Stats**:
-Results history per language and level: the last 50 rounds kept on the device for that slot. It shows win rate, average lives left on wins, and the lives-left grid; Pocket rounds are excluded.
+Results history per language and level: the last 50 rounds kept on the device for that slot. It shows win rate, average lives left on wins, the lives-left grid, a words-learned counter (distinct words won in Daily and Pocket rounds), and the streak history graph; Pocket rounds are excluded from the rounds and win rate, but a won Pocket word counts as learned.
 
 **Lost**:
 A recorded round that was not won. It covers both EndCard outcomes “Out of lives” and “Word revealed” (Practice Reveal).
