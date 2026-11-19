@@ -1,4 +1,4 @@
-import { TOTAL_LIVES } from '../engine'
+import { previousLocalDateKey, TOTAL_LIVES } from '../engine'
 import type { PackCefr, PackLang } from '../packs/schema'
 
 /**
@@ -158,6 +158,41 @@ export function markPrefillRecorded(slot: string, seed: number, dateKey: string)
   } catch {
     return false
   }
+}
+
+export type StreakPoint = {
+  dateKey: string
+  won: boolean
+  /** Running streak after this day: consecutive-day wins, 0 on a loss. */
+  streak: number
+}
+
+/**
+ * Streak-over-time from the slot's Daily entries (ADR 0054), computed on read.
+ * Covers at most the HISTORY_LIMIT recorded rounds. A freeze-spent missed day
+ * (ADR 0046) has no win entry and therefore shows as a break here.
+ */
+export function streakHistory(slot: string): StreakPoint[] {
+  const byDate = new Map<string, HistoryEntry>()
+  for (const entry of listHistory(slot)) {
+    if (entry.mode !== 'daily') continue
+    byDate.set(entry.dateKey, entry)
+  }
+  const points: StreakPoint[] = []
+  let prevDate: string | null = null
+  let prevStreak = 0
+  for (const dateKey of [...byDate.keys()].sort()) {
+    const entry = byDate.get(dateKey)!
+    const streak = entry.won
+      ? prevDate === previousLocalDateKey(dateKey)
+        ? prevStreak + 1
+        : 1
+      : 0
+    points.push({ dateKey, won: entry.won, streak })
+    prevDate = dateKey
+    prevStreak = streak
+  }
+  return points
 }
 
 /** Aggregates over the slot's ring buffer, computed on read. */
