@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { InstallHelpLink } from '@/components/InstallHelp'
+import { LevelCheckSheet } from '@/components/LevelCheckSheet'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Layout, TopBar } from '@/components/Layout'
 import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
+import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
 import { CEFR_CODES, CEFR_LINES, LANG_CODES, LANG_LABELS } from '@/packs/labels'
 import { packInfoLabel, provenanceCaption } from '@/packs/provenance'
@@ -118,6 +120,8 @@ export function Language() {
   const [cachePhase, setCachePhase] = useState<CachePhase>('idle')
   const [error, setError] = useState<string | null>(null)
   const [showSaving, setShowSaving] = useState(false)
+  const [checkOpen, setCheckOpen] = useState(false)
+  const today = useLocalDateKey()
   const nav = useNavigate()
   const alive = useRef(true)
   const cacheGen = useRef(0)
@@ -230,6 +234,21 @@ export function Language() {
             Choose language &amp; level
           </h1>
         }
+        right={
+          // Optional level check (ADR 0051, #227/#276): advisory only, writes
+          // nothing. Lives in the existing 44px TopBar so the locked one-screen
+          // picker layout (#182/#209) is untouched.
+          <button
+            type="button"
+            data-level-check-open
+            disabled={preparing}
+            className="motion-press flex min-h-11 shrink-0 items-center px-2 text-sm text-ink-muted underline decoration-2 underline-offset-4 hover:text-ink disabled:opacity-40"
+            onClick={() => setCheckOpen(true)}
+          >
+            <span className="short-land:hidden">Not sure of your level?</span>
+            <span className="hidden short-land:inline">Not sure?</span>
+          </button>
+        }
       />
 
       <h1 className="text-pixel-display text-ink short-land:hidden">Choose language &amp; level</h1>
@@ -330,6 +349,17 @@ export function Language() {
       </div>
       </div>
       </div>
+      <LevelCheckSheet
+        lang={lang}
+        today={today}
+        open={checkOpen}
+        onClose={() => setCheckOpen(false)}
+        onApply={(c) => {
+          // Advisory only: preselect the tile; Continue still saves prefs.
+          setCefr(c)
+          setCheckOpen(false)
+        }}
+      />
     </Layout>
   )
 }
