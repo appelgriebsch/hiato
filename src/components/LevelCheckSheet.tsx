@@ -225,8 +225,6 @@ export function LevelCheckSheet({
     else setStep(step + 1)
   }
 
-  const suggested = suggestLevel(known)
-
   return (
     <>
       {/* Sheet mounts only while open: keeps SSR/static render portal-free. */}
@@ -303,7 +301,7 @@ export function LevelCheckSheet({
               ) : null}
               {phase === 'result' ? (
                 <LevelCheckResult
-                  level={suggested}
+                  level={suggestLevel(known)}
                   onApply={onApply}
                   onKeep={() => onCloseRef.current()}
                 />
