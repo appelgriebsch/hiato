@@ -291,8 +291,9 @@ export function Language() {
             <SelectedCheck on={lang === l} />
             <div className="text-xs font-medium text-ink-muted">{LANG_CODES[l]}</div>
             <div
+              lang={l}
               className={[
-                'break-words text-sm font-semibold',
+                'break-words hyphens-auto text-sm font-semibold',
                 lang === l ? 'text-accent-fg' : 'text-ink',
               ].join(' ')}
             >

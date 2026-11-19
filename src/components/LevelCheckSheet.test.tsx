@@ -62,6 +62,8 @@ describe('LevelCheckSheet (#227/#276)', () => {
     )
     expect(html).toContain('data-level-check-result')
     expect(html).toContain('Suggested level')
+    // #324 L2: the result heading is the focus target (tabIndex -1, programmatic focus only)
+    expect(html).toMatch(/<h3[^>]*tabindex="-1"[^>]*>/)
     expect(html).toContain('>B1<')
     expect(html).toContain(CEFR_LINES.b1)
     expect(html).toContain('data-level-check-apply')
@@ -85,5 +87,11 @@ describe('LevelCheckSheet (#227/#276)', () => {
     expect(src).toContain('PACK_CEFR_LEVELS.map((cefr) => loadPack(lang, cefr))')
     expect(src).toContain('checkItems(map, today, lang)')
     expect(src).toContain('suggestLevel(known)')
+    // #324 L2: result announced once via a polite live region mounted before the
+    // result content, and focus moves to the result heading after the last answer
+    expect(src).toContain('data-level-check-announcement')
+    expect(src).toContain('aria-live="polite"')
+    expect(src).toContain('tabIndex={-1}')
+    expect(src).toContain('resultHeadingRef.current?.focus()')
   })
 })
