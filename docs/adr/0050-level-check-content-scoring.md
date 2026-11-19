@@ -29,3 +29,11 @@ The level check shows one word from each level pack (A1–C2) of the chosen lang
 - New pure module `src/lib/level-check.ts`: `suggestLevel(known)` and `checkItems(packs, dateKey, lang)`, unit-tested (none → A1, gaps, all → C2, seeding stable per date key) in `src/lib/level-check.test.ts`.
 - No pack schema change, no new content, no `packs:check` impact; every shipped level pack is non-empty, so sampling works at A1 through C2.
 - Risk accepted: the suggestion is accurate to about ±1 level. The learner can always ignore it, which is an acceptance criterion of #227.
+
+## Amendment 2026-11-19: level-check seed separate from the Daily
+
+- **Status**: Accepted
+- **Context**: Staging aed0b04 (Tessa, M1). `checkItems` reused `pickDailyLemma` with the Daily seed, so every level-check word was that day's Daily answer for its level — a spoiler.
+- **Decision**: The level check picks with its own seed, `dailySeedKey(dateKey, lang, cefr) + '|level-check'`. If that index equals the Daily index and the pack has more than one lemma, it takes the next lemma. The pick stays stable per local day. `pickDailyLemma` and the Daily are unchanged.
+- **Rejected**: salt only (a 1-in-n chance per level of still showing the Daily); excluding the Daily lemma by filtering and then re-seeding (same result, more code).
+- **Consequences**: A level-check word never equals today's Daily for its level. Unit test pins this for all 6 languages × 6 levels.
