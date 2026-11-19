@@ -241,6 +241,7 @@ export function Language() {
           <button
             type="button"
             data-level-check-open
+            aria-label="Not sure of your level?"
             disabled={preparing}
             className="motion-press flex min-h-11 shrink-0 items-center px-2 text-sm text-ink-muted underline decoration-2 underline-offset-4 hover:text-ink disabled:opacity-40"
             onClick={() => setCheckOpen(true)}
