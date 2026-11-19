@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, type Ref } from 'react'
 import { createPortal } from 'react-dom'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
@@ -88,16 +88,21 @@ export function LevelCheckQuestions({
 /** Result: suggested level is advisory; "Keep my pick" always ignores it (ADR 0050/0051). */
 export function LevelCheckResult({
   level,
+  headingRef,
   onApply,
   onKeep,
 }: {
   level: PackCefr
+  headingRef?: Ref<HTMLHeadingElement>
   onApply: (cefr: PackCefr) => void
   onKeep: () => void
 }) {
   return (
     <div className="mt-4" data-level-check-result>
-      <p className="text-sm text-ink-muted">Suggested level</p>
+      {/* Focus target after the last answer; announced via the sheet's live region (#324 L2). */}
+      <h3 ref={headingRef} tabIndex={-1} className="text-sm text-ink-muted">
+        Suggested level
+      </h3>
       <p data-level-check-level className="text-pixel-display mt-1 text-ink">
         {CEFR_CODES[level]}
       </p>
@@ -141,6 +146,7 @@ export function LevelCheckSheet({
 }: LevelCheckSheetProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
+  const resultHeadingRef = useRef<HTMLHeadingElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
   const onCloseRef = useRef(onClose)
@@ -225,6 +231,14 @@ export function LevelCheckSheet({
     else setStep(step + 1)
   }
 
+  // After the last answer, move focus to the result heading instead of
+  // dropping to <body> (#324 L2).
+  useEffect(() => {
+    if (phase === 'result') resultHeadingRef.current?.focus()
+  }, [phase])
+
+  const resultLevel = suggestLevel(known)
+
   return (
     <>
       {/* Sheet mounts only while open: keeps SSR/static render portal-free. */}
@@ -276,6 +290,10 @@ export function LevelCheckSheet({
                 Six words, one per level. Nothing is saved and your streak is
                 not touched.
               </p>
+              {/* Mounted before the result content so the result is announced once; role=status implies aria-live=polite (#324 L2). */}
+              <div role="status" className="sr-only" data-level-check-announcement>
+                {phase === 'result' ? `Suggested level ${CEFR_CODES[resultLevel]}` : ''}
+              </div>
               {phase === 'loading' ? (
                 <p role="status" className="mt-4 text-sm text-ink-muted">
                   Loading words…
@@ -301,7 +319,8 @@ export function LevelCheckSheet({
               ) : null}
               {phase === 'result' ? (
                 <LevelCheckResult
-                  level={suggestLevel(known)}
+                  level={resultLevel}
+                  headingRef={resultHeadingRef}
                   onApply={onApply}
                   onKeep={() => onCloseRef.current()}
                 />

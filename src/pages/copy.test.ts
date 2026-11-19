@@ -50,7 +50,9 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
     expect(src).toContain('packInfoLabel(lang)')
     expect(src).toContain('data-provenance-caption')
     // #307 m2: the language radio label must not truncate ('Português' at 320px).
-    expect(src).toContain('break-words text-sm font-semibold')
+    // #324 L1: hyphenate with the label's own lang instead of breaking mid-word.
+    expect(src).toContain('break-words hyphens-auto text-sm font-semibold')
+    expect(src).toContain('lang={l}')
     expect(src).not.toContain('truncate text-sm font-semibold')
     // One caption block — not mapped onto every lang/CEFR row
     expect(src.match(/data-provenance-caption/g)?.length).toBe(1)

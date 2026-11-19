@@ -103,6 +103,25 @@ function dailyWord(lang: Lang, iso = clockIso): string {
   return packWord(lang, 'a1', iso)
 }
 
+/**
+ * Level-check word for any level (#324 M1): own seed
+ * `dateKey|lang|cefr|level-check`, bumped one past the Daily index on a
+ * collision — mirrors pickLevelCheckLemma in src/lib/level-check.ts.
+ */
+function levelCheckWord(lang: Lang, cefr: string, iso = clockIso): string {
+  const date = new Date(iso)
+  const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+  const pack = JSON.parse(readFileSync(new URL(`../public/packs/${lang}/${cefr}.json`, import.meta.url), 'utf8')) as {
+    lemmas: { word: string }[]
+  }
+  const n = pack.lemmas.length
+  const seed = `${dateKey}|${lang}|${cefr}`
+  const dailyIdx = hashString(seed) % n
+  let idx = hashString(`${seed}|level-check`) % n
+  if (idx === dailyIdx && n > 1) idx = (idx + 1) % n
+  return pack.lemmas[idx]!.word
+}
+
 async function visiblePad(page: Page) {
   return page.locator('[data-letter-pad]:visible').first()
 }
@@ -577,11 +596,13 @@ test.describe('short landscape viewports (#209)', () => {
     await expect(dialog).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Stats' })).toBeVisible()
     await expect(page.getByText('English A1 · last 24 rounds')).toBeVisible()
-    await expect(page.getByText('Daily and Practice only.')).toBeVisible()
+    await expect(
+      page.getByText('Rounds: Daily and Practice · Words learned: Daily and Pocket'),
+    ).toBeVisible()
     await expect(page.getByRole('img', { name: 'Win rate, 67 percent' })).toBeVisible()
     await expect(page.getByRole('img', { name: 'Words learned, 2 words' })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Streak history' })).toBeVisible()
-    await expect(page.getByText('Daily · last 8 days · best 6')).toBeVisible()
+    await expect(page.getByText('Daily · last 8 played days · best 6')).toBeVisible()
     await expect(page.getByRole('img', { name: '2026-10-15: won, streak 6' })).toBeVisible()
     await expect(page.getByRole('img', { name: '2026-10-17: lost' })).toBeVisible()
     await expect(page.getByText('Wins by lives left')).toBeVisible()
@@ -751,8 +772,11 @@ test.describe('level check on /language (#227/#277)', () => {
       await expect(dialog.locator('[data-level-check-progress]')).toHaveText(
         `Question ${LEVELS.indexOf(level) + 1} of ${LEVELS.length}`,
       )
-      // The shown word is the seeded pick of that level pack for the pinned day.
-      await expect(dialog.locator('[data-level-check-word]')).toHaveText(packWord('en', level))
+      // The shown word is the level-check pick of that level pack for the pinned
+      // day — never that level's Daily answer (#324 M1).
+      const shown = levelCheckWord('en', level)
+      expect(shown).not.toBe(packWord('en', level))
+      await expect(dialog.locator('[data-level-check-word]')).toHaveText(shown)
       const knows = LEVELS.indexOf(level) <= LEVELS.indexOf(knownUpTo)
       await dialog
         .getByRole('button', { name: knows ? 'Know' : 'Don’t know', exact: true })

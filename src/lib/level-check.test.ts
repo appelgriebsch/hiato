@@ -1,12 +1,13 @@
 import { describe, expect, test } from 'bun:test'
-import { pickDailyLemma } from '../engine/daily'
+import { dailySeedKey, hashString, localDateKey, pickDailyLemma } from '../engine/daily'
 import {
   PACK_CEFR_LEVELS,
+  PACK_LANGS,
   type PackCefr,
   type PackLang,
   type WordPack,
 } from '../packs/schema'
-import { checkItems, suggestLevel } from './level-check'
+import { checkItems, pickLevelCheckLemma, suggestLevel } from './level-check'
 
 function pack(lang: PackLang, cefr: PackCefr, words: string[]): WordPack {
   return {
@@ -58,6 +59,40 @@ describe('suggestLevel (ADR 0050)', () => {
   })
 })
 
+describe('pickLevelCheckLemma (ADR 0050 amendment 2026-11-19)', () => {
+  test('seed is dailySeedKey + "|level-check", bumped past the Daily index', () => {
+    const lang = 'en'
+    const cefr: PackCefr = 'b1'
+    const lemmas = packsFor(lang)[cefr].lemmas
+    for (const dateKey of ['2026-11-13', '2026-11-19', localDateKey()]) {
+      const seed = dailySeedKey(dateKey, lang, cefr)
+      const dailyIdx = hashString(seed) % lemmas.length
+      let expected = hashString(`${seed}|level-check`) % lemmas.length
+      if (expected === dailyIdx && lemmas.length > 1) expected = (expected + 1) % lemmas.length
+      expect(pickLevelCheckLemma(lemmas, dateKey, lang, cefr).word).toBe(lemmas[expected]!.word)
+    }
+  })
+
+  test('never returns the Daily lemma, for all 6 languages × 6 levels × several date keys incl. today', () => {
+    const dateKeys = ['2026-10-18', '2026-11-13', '2026-11-19', localDateKey()]
+    for (const lang of PACK_LANGS) {
+      const packs = packsFor(lang)
+      for (const dateKey of dateKeys) {
+        for (const item of checkItems(packs, dateKey, lang)) {
+          const daily = pickDailyLemma(packs[item.cefr].lemmas, dateKey, lang, item.cefr)
+          expect(item.word).not.toBe(daily.word)
+          expect(packs[item.cefr].lemmas.some((l) => l.word === item.word)).toBe(true)
+        }
+      }
+    }
+  })
+
+  test('single-lemma pack: no alternative lemma exists, returns the only one', () => {
+    const lemmas = [{ word: 'ONLY' }]
+    expect(pickLevelCheckLemma(lemmas, '2026-11-19', 'en', 'a1').word).toBe('ONLY')
+  })
+})
+
 describe('checkItems (ADR 0050)', () => {
   const dateKey = '2026-11-13'
 
@@ -68,13 +103,13 @@ describe('checkItems (ADR 0050)', () => {
     expect(items).toHaveLength(6)
   })
 
-  test('each word is the seeded daily pick of its own level pack', () => {
+  test('each word comes from its own level pack and never equals that level\u2019s Daily', () => {
     const lang = 'pt'
     const packs = packsFor(lang)
     const items = checkItems(packs, dateKey, lang)
     for (const item of items) {
-      const expected = pickDailyLemma(packs[item.cefr].lemmas, dateKey, lang, item.cefr)
-      expect(item.word).toBe(expected.word)
+      const daily = pickDailyLemma(packs[item.cefr].lemmas, dateKey, lang, item.cefr)
+      expect(item.word).not.toBe(daily.word)
       expect(packs[item.cefr].lemmas.some((l) => l.word === item.word)).toBe(true)
     }
   })
@@ -89,7 +124,7 @@ describe('checkItems (ADR 0050)', () => {
     for (const lang of ['en', 'fr', 'it'] as const) {
       for (const item of checkItems(packs, dateKey, lang)) {
         expect(item.word).toBe(
-          pickDailyLemma(packs[item.cefr].lemmas, dateKey, lang, item.cefr).word,
+          pickLevelCheckLemma(packs[item.cefr].lemmas, dateKey, lang, item.cefr).word,
         )
       }
     }

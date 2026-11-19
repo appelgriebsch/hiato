@@ -39,6 +39,7 @@ function readSnapshot(slotKey: string): StatsSnapshot {
 export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
+  const streakListRef = useRef<HTMLUListElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
   const onCloseRef = useRef(onClose)
@@ -116,6 +117,14 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
     if (opener && opener.isConnected) opener.focus()
   }, [open])
 
+  // Open the streak graph at the newest bar (right edge); the list is
+  // focusable so arrow keys scroll it (#324 m1). Runs on open and slot change
+  // only — a mid-session refresh keeps the user's scroll position.
+  useLayoutEffect(() => {
+    const el = streakListRef.current
+    if (el) el.scrollLeft = el.scrollWidth
+  }, [open, loadedFor])
+
   const stats = snapshot?.stats ?? null
   const learned = snapshot?.learned ?? 0
   const streak = snapshot?.streak ?? []
@@ -169,7 +178,9 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
               {LANG_LABELS[lang]} {CEFR_CODES[cefr]} &middot; last {stats.played}{' '}
               {stats.played === 1 ? 'round' : 'rounds'}
             </p>
-            <p className="mt-1 mb-4 text-sm text-ink-muted">Daily and Practice only.</p>
+            <p className="mt-1 mb-4 text-sm text-ink-muted">
+              Rounds: Daily and Practice &middot; Words learned: Daily and Pocket
+            </p>
             <dl className="mb-4 flex flex-col gap-2">
               <div className="flex items-baseline justify-between gap-2">
                 <dt className="text-sm text-ink-muted">Win rate</dt>
@@ -216,8 +227,15 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
               <p className="mb-4 text-sm text-ink-muted">No Daily rounds yet.</p>
             ) : (
               <>
-                <p className="mb-2 text-sm text-ink-muted">Daily &middot; last {streak.length} {streak.length === 1 ? 'day' : 'days'} &middot; best {bestStreak}</p>
-                <ul className="mb-4 flex h-16 items-stretch gap-px overflow-x-auto">
+                <p className="mb-2 text-sm text-ink-muted">
+                  Daily &middot; last {streak.length} played {streak.length === 1 ? 'day' : 'days'} &middot; best {bestStreak}
+                </p>
+                <ul
+                  ref={streakListRef}
+                  tabIndex={0}
+                  aria-label="Streak history, newest on the right"
+                  className="mb-4 flex h-16 items-stretch gap-px overflow-x-auto"
+                >
                   {streak.map((point) => (
                     <li
                       key={point.dateKey}
