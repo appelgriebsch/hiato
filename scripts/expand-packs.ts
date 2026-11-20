@@ -19,6 +19,7 @@ import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
 import { mistralChat, readMistralKey } from './mistral-chat'
 import { selectFrBands, type FrCefr } from './fr-pack'
+import { posSourceInfo } from './lemma-pos'
 import {
   DE_ES_BANDS,
   EXISTING_CEFRS,
@@ -36,13 +37,13 @@ import {
   isNewCefr,
   loadFoldKeysFromPackLemmas,
 } from './pack-select'
-import { PACK_CEFR_LEVELS, type PackCefr } from '../src/packs/schema'
+import { PACK_CEFR_LEVELS, type PackCefr, type PackPos } from '../src/packs/schema'
 
 const ROOT = path.join(import.meta.dir, '..')
 const DATA = path.join(ROOT, 'scripts/data')
 const LANGS = ['en', 'pt', 'de', 'es'] as const
 
-type Lemma = { word: string; gloss?: string; synonyms?: string[] }
+type Lemma = { word: string; gloss?: string; synonyms?: string[]; pos?: PackPos }
 
 const DENY = loadDenylist()
 const NAMES = loadNameList()
@@ -559,6 +560,7 @@ function hasRealGloss(lang: Lang, word: string, cache: Record<string, string>): 
 
 function buildLemmas(
   lang: Lang,
+  cefr: PackCefr,
   words: string[],
   glossCache: Record<string, string>,
   synCache: Record<string, string[]>,
@@ -570,10 +572,14 @@ function buildLemmas(
       throw new Error(`${lang}: missing real gloss for ${w}`)
     }
     const synonyms = cleanSynonyms(lang, w, synCache[w])
+    // ADR 0055 / #315: carry the source pos through (CEFR-J/Octanove for EN,
+    // wordhoard word.pos for DE/ES/FR/IT; PT has no licensed pos source).
+    const pos = posSourceInfo(lang, cefr, w).pos
     lemmas.push({
       word: w,
       gloss,
       ...(synonyms.length ? { synonyms } : {}),
+      ...(pos ? { pos } : {}),
     })
   }
   return lemmas
@@ -815,7 +821,7 @@ async function runFrequencyLang(
     const withSyn = words.filter((w) => cleanSynonyms(lang, w, synCache[w]).length > 0).length
     const pct = words.length ? withSyn / words.length : 0
     console.log(`${lang}/${cefr}: synonym coverage ${(pct * 100).toFixed(0)}%`)
-    const lemmas = buildLemmas(lang, words, glossCache, synCache)
+    const lemmas = buildLemmas(lang, cefr, words, glossCache, synCache)
     writePack(lang, cefr, lemmas, {
       bootstrapLang: bootstrap && isExistingCefr(cefr) ? lang : undefined,
     })
@@ -927,7 +933,7 @@ async function main() {
           )
         }
       }
-      const lemmas = buildLemmas(lang, sliced, glossCache, synCache)
+      const lemmas = buildLemmas(lang, cefr, sliced, glossCache, synCache)
       writePack(lang, cefr, lemmas)
     }
   }
