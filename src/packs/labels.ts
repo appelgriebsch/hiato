@@ -1,4 +1,4 @@
-import type { PackCefr, PackLang } from './schema'
+import type { PackCefr, PackLang, PackPos } from './schema'
 
 export const LANG_LABELS: Record<PackLang, string> = {
   en: 'English',
@@ -59,6 +59,21 @@ export const SPEAK_LEMMA_ARIA: Record<PackLang, string> = {
 /** Aria-label for the speak control; missing keys fall back to EN. */
 export function speakLemmaAriaLabel(lang: PackLang): string {
   return SPEAK_LEMMA_ARIA[lang] ?? SPEAK_LEMMA_ARIA.en
+}
+
+/** Localized POS chip labels in the pack language (ADR 0055; glosses are same-language per ADR 0030). */
+export const POS_LABELS: Record<PackLang, Record<PackPos, string>> = {
+  en: { noun: 'noun', verb: 'verb', adjective: 'adjective', adverb: 'adverb' },
+  pt: { noun: 'substantivo', verb: 'verbo', adjective: 'adjetivo', adverb: 'advérbio' },
+  de: { noun: 'Substantiv', verb: 'Verb', adjective: 'Adjektiv', adverb: 'Adverb' },
+  es: { noun: 'sustantivo', verb: 'verbo', adjective: 'adjetivo', adverb: 'adverbio' },
+  fr: { noun: 'nom', verb: 'verbe', adjective: 'adjectif', adverb: 'adverbe' },
+  it: { noun: 'sostantivo', verb: 'verbo', adjective: 'aggettivo', adverb: 'avverbio' },
+}
+
+/** POS chip label; missing keys fall back to EN. */
+export function posLabel(lang: PackLang, pos: PackPos): string {
+  return POS_LABELS[lang]?.[pos] ?? POS_LABELS.en[pos]
 }
 
 /** One plain line for the selected level on the picker (#182). */

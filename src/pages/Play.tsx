@@ -95,7 +95,7 @@ import { CEFR_CODES, LANG_CODES } from '@/packs/labels'
 import { primeSpeechVoices, subscribeSpeechAvailability, unlockSpeechGesture } from '@/lib/speech'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { loadPack } from '@/packs/load'
-import type { PackCefr, PackLang, PackLemma } from '@/packs/schema'
+import { FAMILY_MAX, type PackCefr, type PackLang, type PackLemma, type PackPos } from '@/packs/schema'
 
 type PlayMode = 'daily' | 'practice' | 'pocket'
 
@@ -325,6 +325,9 @@ function PlayRound({
         gloss: entry.gloss,
         synonyms: entry.synonyms,
         example: entry.example,
+        pos: entry.pos,
+        ipa: entry.ipa,
+        family: entry.family,
         won: result === 'win',
         completed: true,
       })
@@ -365,6 +368,9 @@ function PlayRound({
               word: rec.word,
               gloss: rec.gloss,
               example: rec.example,
+              pos: rec.pos,
+              ipa: rec.ipa,
+              family: rec.family,
             })
             setFinished(rec.won ? 'win' : 'lose')
             setLoading(false)
@@ -877,6 +883,9 @@ function PlayRound({
               gloss={wordEntry.gloss}
               synonyms={wordEntry.synonyms}
               example={wordEntry.example}
+              pos={wordEntry.pos}
+              ipa={wordEntry.ipa}
+              family={wordEntry.family}
               lang={lang}
               cefr={cefr}
               dateKey={dateKey}
@@ -1041,6 +1050,9 @@ function DoneDaily({
               gloss={teachGloss}
               synonyms={teachSynonyms}
               example={rec.example}
+              pos={rec.pos}
+              ipa={rec.ipa}
+              family={rec.family}
               showSpeak={speechOk}
             />
           </div>
@@ -1126,6 +1138,9 @@ function EndCard({
   gloss,
   synonyms,
   example,
+  pos,
+  ipa,
+  family,
   lang,
   cefr,
   dateKey,
@@ -1149,6 +1164,10 @@ function EndCard({
   gloss?: string
   synonyms?: string[]
   example?: string
+  /** ADR 0055 extras — EndCard-only, never in-round. */
+  pos?: PackPos
+  ipa?: string
+  family?: string[]
   lang: PackLang
   cefr: PackCefr
   dateKey: string
@@ -1333,6 +1352,12 @@ function EndCard({
     .slice(0, 3)
   // ADR 0049: one example sentence, pack language, EndCard only
   const teachExample = example?.trim() ?? ''
+  // ADR 0055: pos / ipa / family render only here, inside the finished EndCard.
+  const teachPos = pos
+  const teachIpa = ipa?.trim() ?? ''
+  const teachFamily = (family ?? [])
+    .filter((f) => f.trim().length > 0)
+    .slice(0, FAMILY_MAX)
 
   // ADR 0037 / #113: EndCard tap-to-speak on daily + practice only (not pocket).
   const speakSurface = mode === 'daily' || mode === 'practice'
@@ -1389,7 +1414,7 @@ function EndCard({
   }, [confirming])
 
   return (
-    <div className="motion-result-enter mb-4 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
+    <div className="motion-result-enter mb-3 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
       <div className="relative min-w-0 space-y-3">
       {won
         ? ([
@@ -1410,7 +1435,7 @@ function EndCard({
           ))
         : null}
       <div
-        className="px-frame bg-raised/80 px-4 py-4 text-center short-land:max-h-full short-land:overflow-y-auto short-land:py-3"
+        className="px-frame bg-raised/80 px-4 py-3 text-center short-land:max-h-full short-land:overflow-y-auto"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
@@ -1433,6 +1458,9 @@ function EndCard({
           gloss={teachGloss}
           synonyms={teachSynonyms}
           example={teachExample}
+          pos={teachPos}
+          ipa={teachIpa}
+          family={teachFamily}
           showSpeak={showSpeakControl}
         />
       </div>

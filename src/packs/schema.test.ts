@@ -1,10 +1,14 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  FAMILY_MAX,
+  IPA_MAX,
   PACK_ASSET_PATH_RE,
   PACK_CEFR_LEVELS,
   PACK_CEFRS,
+  PACK_POS,
   isPackCefr,
   isPackLang,
+  isPackPos,
 } from './schema'
 
 describe('isPackCefr (ADR 0027)', () => {
@@ -44,6 +48,26 @@ describe('isPackCefr (ADR 0027)', () => {
     expect(PACK_ASSET_PATH_RE.test('/packs/en/c3.json')).toBe(false)
     expect(PACK_ASSET_PATH_RE.test('/packs/en/missing.json')).toBe(false)
     expect(PACK_ASSET_PATH_RE.test('/index.html')).toBe(false)
+  })
+})
+
+describe('PackPos + extras caps (ADR 0055, #314)', () => {
+  test('PACK_POS is the four content-word codes', () => {
+    expect(PACK_POS).toEqual(['noun', 'verb', 'adjective', 'adverb'])
+  })
+
+  test('isPackPos accepts the codes and rejects everything else', () => {
+    for (const pos of PACK_POS) expect(isPackPos(pos)).toBe(true)
+    expect(isPackPos('NOUN')).toBe(false)
+    expect(isPackPos('pronoun')).toBe(false)
+    expect(isPackPos('')).toBe(false)
+    expect(isPackPos(7)).toBe(false)
+    expect(isPackPos(undefined)).toBe(false)
+  })
+
+  test('extras caps: FAMILY_MAX = 3, IPA_MAX covers a long transcription', () => {
+    expect(FAMILY_MAX).toBe(3)
+    expect(IPA_MAX).toBeGreaterThanOrEqual(30)
   })
 })
 
