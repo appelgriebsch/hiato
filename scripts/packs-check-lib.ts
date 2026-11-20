@@ -526,6 +526,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
           `${file}: lemmas[${i}] family length ${e.family.length} exceeds cap ${FAMILY_MAX} — "${word}"`,
         )
       }
+      const seenFamily = new Set<string>()
       family = e.family.map((f, j) => {
         const raw = assertString(f, `${file}: lemmas[${i}].family[${j}]`).normalize('NFC')
         if (nfcUpper(raw) === nfcUpper(word)) {
@@ -541,11 +542,27 @@ export function validatePack(raw: unknown, file: string): WordPack {
         if (isDeniedLemma(raw, DENY, o.lang as string)) {
           throw new Error(`${file}: lemmas[${i}] denylist — family[${j}] "${raw}"`)
         }
+        // Same token pass as synonym chips, so hyphen/slash-joined denied
+        // tokens inside an entry are caught too.
+        for (const tok of letterTokens(raw)) {
+          if (isDeniedLemma(tok, DENY, o.lang as string)) {
+            throw new Error(
+              `${file}: lemmas[${i}] denylist — family[${j}] token "${tok}" — "${raw}"`,
+            )
+          }
+        }
         if (membershipActive() && !isWordOfLang(o.lang as PackLang, raw)) {
           throw new Error(
             `${file}: lemmas[${i}] family[${j}] not a word of ${o.lang} — "${raw}"`,
           )
         }
+        const key = nfcUpper(raw)
+        if (seenFamily.has(key)) {
+          throw new Error(
+            `${file}: lemmas[${i}] family[${j}] duplicate — "${raw}"`,
+          )
+        }
+        seenFamily.add(key)
         return raw
       })
     }

@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
+import { IPA_MAX } from '../packs/schema'
 import {
   DAILY_KEY,
   getDailyRecord,
@@ -188,5 +189,25 @@ describe('daily record (per lang+CEFR)', () => {
     expect(rec?.pos).toBeUndefined()
     expect(rec?.ipa).toBeUndefined()
     expect(rec?.family).toEqual(['Häuser', 'haus', 'Hausbau'])
+  })
+
+  test('caps a stored ipa at IPA_MAX (localStorage trust boundary)', () => {
+    mem.set(
+      DAILY_KEY,
+      JSON.stringify({
+        'en|a1': {
+          dateKey: '2026-09-19',
+          lang: 'en',
+          cefr: 'a1',
+          word: 'ACTION',
+          ipa: `/${'a'.repeat(200)}/`,
+          won: true,
+          completed: true,
+        },
+      }),
+    )
+    const rec = getDailyRecord('en', 'a1')
+    expect(rec?.ipa?.length).toBe(IPA_MAX)
+    expect(rec?.ipa?.startsWith('/')).toBe(true)
   })
 })

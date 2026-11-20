@@ -583,6 +583,32 @@ describe('packs:check lemma extras pos/ipa/family (ADR 0055, #314)', () => {
       ),
     ).toThrow(/denylist — family/)
   })
+
+  test('rejects a denied token inside a hyphen-joined family entry (synonym-chip token pass)', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'fr',
+          cefr: 'a1',
+          lemmas: [{ word: 'MAISON', gloss: 'une habitation', family: ['foo-pédé'] }],
+        }),
+        'fr/a1.json',
+      ),
+    ).toThrow(/denylist — family\[0\] token/)
+  })
+
+  test('rejects duplicate family entries (case-insensitive)', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'a1',
+          lemmas: [{ word: 'HAUS', gloss: 'Ein Gebäude zum Wohnen.', family: ['Häuser', 'HÄUSER'] }],
+        }),
+        'de/a1.json',
+      ),
+    ).toThrow(/family\[1\] duplicate/)
+  })
 })
 
 describe('packs:check example gate — stock names and gate version (#247 reopen)', () => {

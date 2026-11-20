@@ -1,6 +1,7 @@
 import { localDateKey } from '../engine'
 import {
   FAMILY_MAX,
+  IPA_MAX,
   isPackCefr,
   isPackLang,
   isPackPos,
@@ -54,7 +55,8 @@ function parseRecord(raw: unknown): DailyRecord | null {
   if (typeof o.gloss === 'string' && o.gloss.length > 0) rec.gloss = o.gloss
   if (typeof o.example === 'string' && o.example.length > 0) rec.example = o.example
   if (isPackPos(o.pos)) rec.pos = o.pos
-  if (typeof o.ipa === 'string' && o.ipa.trim().length > 0) rec.ipa = o.ipa
+  // localStorage is a trust boundary — bound the stored transcription like the pack cap.
+  if (typeof o.ipa === 'string' && o.ipa.trim().length > 0) rec.ipa = o.ipa.slice(0, IPA_MAX)
   if (Array.isArray(o.synonyms)) {
     const synonyms = o.synonyms
       .filter((item): item is string => typeof item === 'string' && item.trim().length > 0)

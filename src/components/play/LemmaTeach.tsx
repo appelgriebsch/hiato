@@ -176,8 +176,8 @@ export function LemmaTeach({
         </p>
       ) : null}
       {synonyms.length > 0 ? (
-        <div data-endcard-synonyms className="mt-2.5">
-          <span lang="en" className="mb-1.5 block text-pixel-label text-ink-faint">
+        <div data-endcard-synonyms className="mt-2">
+          <span lang="en" className="mb-1 block text-pixel-label text-ink-faint">
             Synonyms
           </span>
           <div className="flex flex-wrap justify-center gap-1.5">
@@ -194,8 +194,8 @@ export function LemmaTeach({
         </div>
       ) : null}
       {familyChips.length > 0 ? (
-        <div data-endcard-family className="mt-2.5">
-          <span lang="en" className="mb-1.5 block text-pixel-label text-ink-faint">
+        <div data-endcard-family className="mt-2">
+          <span lang="en" className="mb-1 block text-pixel-label text-ink-faint">
             Word family
           </span>
           <div className="flex flex-wrap justify-center gap-1.5">

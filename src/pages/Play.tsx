@@ -1414,7 +1414,7 @@ function EndCard({
   }, [confirming])
 
   return (
-    <div className="motion-result-enter mb-4 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
+    <div className="motion-result-enter mb-3 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
       <div className="relative min-w-0 space-y-3">
       {won
         ? ([
@@ -1435,7 +1435,7 @@ function EndCard({
           ))
         : null}
       <div
-        className="px-frame bg-raised/80 px-4 py-4 text-center short-land:max-h-full short-land:overflow-y-auto short-land:py-3"
+        className="px-frame bg-raised/80 px-4 py-3 text-center short-land:max-h-full short-land:overflow-y-auto"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
