@@ -16,17 +16,24 @@ export interface PackLicenseInfo {
   bands: PackLicenseBand[]
 }
 
+/** Wiktionary-derived lemma extras (ADR 0055 / #316) — noted on each language's first band. */
+export const WIKTIONARY_EXTRAS_NOTE =
+  'IPA transcriptions and word-family chips on lemmas come from Wiktionary via wiktextract/kaikki.org pre-extracted data (CC-BY-SA 4.0, https://kaikki.org) wherever they ship (ADR 0055); entries without wiktextract coverage are original Hiato copy.'
+
 function fromBands(
   lang: PackLang,
   title: string,
   bands: PackLicenseBand[],
 ): PackLicenseInfo {
+  const withExtras = bands.map((b, i) =>
+    i === 0 ? { ...b, notes: [WIKTIONARY_EXTRAS_NOTE, ...b.notes] } : b,
+  )
   return {
     lang,
     title,
-    license: bands.map((b) => `${b.levels}: ${b.license}`).join(' · '),
-    attribution: bands.flatMap((b) => [`${b.levels} — ${b.license}`, ...b.notes]),
-    bands,
+    license: withExtras.map((b) => `${b.levels}: ${b.license}`).join(' · '),
+    attribution: withExtras.flatMap((b) => [`${b.levels} — ${b.license}`, ...b.notes]),
+    bands: withExtras,
   }
 }
 

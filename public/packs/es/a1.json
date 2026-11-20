@@ -1,5 +1,5 @@
 {
-  "version": 22,
+  "version": 25,
   "lang": "es",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -18,7 +18,8 @@
         "momento"
       ],
       "example": "Hazlo otra vez.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbes/"
     },
     {
       "word": "COSA",
@@ -27,13 +28,15 @@
         "asunto"
       ],
       "example": "¿Qué es esa cosa?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkosa/"
     },
     {
       "word": "DÍA",
       "gloss": "El tiempo en que hay luz afuera.",
       "example": "¡Buen día!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪ia/"
     },
     {
       "word": "HOMBRE",
@@ -42,7 +45,8 @@
         "varón"
       ],
       "example": "Soy un hombre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈõmbɾe/"
     },
     {
       "word": "CASA",
@@ -51,7 +55,8 @@
         "vivienda"
       ],
       "example": "Fui a casa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkasa/"
     },
     {
       "word": "VERDAD",
@@ -60,7 +65,8 @@
         "realidad"
       ],
       "example": "¿Es verdad?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/beɾˈð̞að̞/"
     },
     {
       "word": "TIEMPO",
@@ -70,7 +76,13 @@
         "momento"
       ],
       "example": "¿Cuánto tiempo?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "eternidad",
+        "presente",
+        "pasado"
+      ],
+      "ipa": "/ˈt̪jẽmpo/"
     },
     {
       "word": "AÑO",
@@ -80,7 +92,8 @@
         "ciclo"
       ],
       "example": "¿Qué año es?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈaɲo/"
     },
     {
       "word": "SEÑOR",
@@ -89,7 +102,11 @@
         "caballero"
       ],
       "example": "Gracias, señor.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "don"
+      ],
+      "ipa": "/seˈɲoɾ/"
     },
     {
       "word": "FAVOR",
@@ -107,7 +124,8 @@
         "tarde"
       ],
       "example": "¡Qué noche!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnot͡ʃe/"
     },
     {
       "word": "VIDA",
@@ -116,7 +134,8 @@
         "existencia"
       ],
       "example": "La vida es así.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbið̞a/"
     },
     {
       "word": "PADRE",
@@ -126,7 +145,8 @@
         "progenitor"
       ],
       "example": "Mi padre fuma.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpað̞ɾe/"
     },
     {
       "word": "AMIGO",
@@ -135,7 +155,13 @@
         "compañero"
       ],
       "example": "Es mi amigo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "amante",
+        "barragana",
+        "manceba"
+      ],
+      "ipa": "/aˈmiɣ̞o/"
     },
     {
       "word": "TRABAJO",
@@ -153,7 +179,8 @@
         "pacto"
       ],
       "example": "De acuerdo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈkweɾð̞o/"
     },
     {
       "word": "GENTE",
@@ -162,7 +189,8 @@
         "personas"
       ],
       "example": "Son buena gente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxẽn̪t̪e/"
     },
     {
       "word": "HIJO",
@@ -171,7 +199,13 @@
         "niño"
       ],
       "example": "Es tu hijo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "vástago",
+        "retoño",
+        "prole"
+      ],
+      "ipa": "/ˈixo/"
     },
     {
       "word": "MUJER",
@@ -180,7 +214,8 @@
         "dama"
       ],
       "example": "Soy una mujer.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muˈxeɾ/"
     },
     {
       "word": "TAL",
@@ -189,7 +224,8 @@
         "semejante"
       ],
       "example": "No quiero tal cosa en mi casa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪al/"
     },
     {
       "word": "MOMENTO",
@@ -198,7 +234,8 @@
         "instante"
       ],
       "example": "Un momento...",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/moˈmẽn̪t̪o/"
     },
     {
       "word": "PROBLEMA",
@@ -216,7 +253,11 @@
         "tiempo"
       ],
       "example": "¿A qué hora?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "horario"
+      ],
+      "ipa": "/ˈoɾa/"
     },
     {
       "word": "MUNDO",
@@ -225,7 +266,8 @@
         "tierra"
       ],
       "example": "Dios creó el mundo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmũn̪d̪o/"
     },
     {
       "word": "LUGAR",
@@ -234,7 +276,8 @@
         "sitio"
       ],
       "example": "Reservé un lugar.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/luˈɣ̞aɾ/"
     },
     {
       "word": "DINERO",
@@ -243,7 +286,8 @@
         "plata"
       ],
       "example": "Tengo dinero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪iˈneɾo/"
     },
     {
       "word": "TIPO",
@@ -252,7 +296,8 @@
         "clase"
       ],
       "example": "Este tipo de planta necesita mucha luz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪ipo/"
     },
     {
       "word": "PERSONA",
@@ -261,7 +306,8 @@
         "individuo"
       ],
       "example": "Soy una persona.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peɾˈsona/"
     },
     {
       "word": "PARTE",
@@ -270,7 +316,8 @@
         "porción"
       ],
       "example": "Ya hice mi parte.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaɾt̪e/"
     },
     {
       "word": "MAMÁ",
@@ -279,7 +326,8 @@
         "madre"
       ],
       "example": "Mamá lloró.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈma/"
     },
     {
       "word": "NOMBRE",
@@ -288,7 +336,8 @@
         "denominación"
       ],
       "example": "Sé su nombre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnõmbɾe/"
     },
     {
       "word": "PAPÁ",
@@ -297,7 +346,8 @@
         "padre"
       ],
       "example": "¡No, papá!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈpa/"
     },
     {
       "word": "NIÑO",
@@ -308,7 +358,8 @@
         "infante"
       ],
       "example": "Veo al niño.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈniɲo/"
     },
     {
       "word": "MANO",
@@ -318,13 +369,15 @@
         "puño"
       ],
       "example": "Le di la mano.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmano/"
     },
     {
       "word": "RAZÓN",
       "gloss": "Por qué ocurre algo o es cierto.",
       "example": "Tengo razón.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/raˈsõn/"
     },
     {
       "word": "IDEA",
@@ -333,7 +386,8 @@
         "concepto"
       ],
       "example": "No tengo idea.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/iˈð̞ea/"
     },
     {
       "word": "POLICÍA",
@@ -342,7 +396,8 @@
         "agente"
       ],
       "example": "Soy policía.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/poliˈsia/"
     },
     {
       "word": "SEMANA",
@@ -351,7 +406,8 @@
         "siete días"
       ],
       "example": "Falta una semana.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/seˈmana/"
     },
     {
       "word": "MINUTO",
@@ -360,7 +416,8 @@
         "instante"
       ],
       "example": "Un minuto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈnut̪o/"
     },
     {
       "word": "HERMANO",
@@ -369,7 +426,8 @@
         "pariente"
       ],
       "example": "Es mi hermano.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɾˈmano/"
     },
     {
       "word": "FAMILIA",
@@ -379,7 +437,8 @@
         "parentela"
       ],
       "example": "¿Tenés familia?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/faˈmilja/"
     },
     {
       "word": "AMOR",
@@ -388,7 +447,8 @@
         "pasión"
       ],
       "example": "¡Qué amor!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈmoɾ/"
     },
     {
       "word": "FORMA",
@@ -398,7 +458,13 @@
         "modo"
       ],
       "example": "Hay otra forma.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "aspecto",
+        "diseño",
+        "hechura"
+      ],
+      "ipa": "/ˈfoɾma/"
     },
     {
       "word": "CHICO",
@@ -407,7 +473,8 @@
         "niño"
       ],
       "example": "Buen chico.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃiko/"
     },
     {
       "word": "CABEZA",
@@ -425,13 +492,18 @@
         "situación"
       ],
       "example": "¡Caso resuelto!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "casuística"
+      ],
+      "ipa": "/ˈkaso/"
     },
     {
       "word": "LADO",
       "gloss": "sitio junto a otra cosa",
       "example": "Está a su lado.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlað̞o/"
     },
     {
       "word": "VEO",
@@ -440,7 +512,8 @@
         "observo"
       ],
       "example": "No lo veo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeo/"
     },
     {
       "word": "SEÑORA",
@@ -449,7 +522,8 @@
         "dama"
       ],
       "example": "Sí, señora.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/seˈɲoɾa/"
     },
     {
       "word": "HISTORIA",
@@ -458,7 +532,12 @@
         "cuento"
       ],
       "example": "He oído la historia.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "anales",
+        "crónica"
+      ],
+      "ipa": "/isˈt̪oɾja/"
     },
     {
       "word": "PUERTA",
@@ -468,7 +547,8 @@
         "portal"
       ],
       "example": "Abre la puerta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpweɾt̪a/"
     },
     {
       "word": "CARIÑO",
@@ -477,7 +557,13 @@
         "ternura"
       ],
       "example": "Hola, cariño.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cariñar",
+        "afecto",
+        "amistad"
+      ],
+      "ipa": "/kaˈɾiɲo/"
     },
     {
       "word": "MANERA",
@@ -486,7 +572,8 @@
         "modo"
       ],
       "example": "Hay una manera.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈneɾa/"
     },
     {
       "word": "CAMINO",
@@ -495,7 +582,8 @@
         "sendero"
       ],
       "example": "Estoy de camino.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaˈmino/"
     },
     {
       "word": "AYUDA",
@@ -504,7 +592,11 @@
         "auxilio"
       ],
       "example": "¿Me ayuda?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ayúdate"
+      ],
+      "ipa": "/aˈʝuð̞a/"
     },
     {
       "word": "OJO",
@@ -514,7 +606,8 @@
         "mirada"
       ],
       "example": "Abrí un ojo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈoxo/"
     },
     {
       "word": "TÍO",
@@ -523,7 +616,8 @@
         "pariente"
       ],
       "example": "Es mi tío.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪io/"
     },
     {
       "word": "MES",
@@ -532,7 +626,8 @@
         "período"
       ],
       "example": "¿En qué mes estamos?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmes/"
     },
     {
       "word": "PALABRA",
@@ -541,7 +636,12 @@
         "término"
       ],
       "example": "Pido la palabra.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bit",
+        "byte",
+        "octeto"
+      ]
     },
     {
       "word": "JEFE",
@@ -550,7 +650,8 @@
         "director"
       ],
       "example": "Era mi jefe.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxefe/"
     },
     {
       "word": "HIJA",
@@ -559,7 +660,8 @@
         "niña"
       ],
       "example": "¿Es tu hija?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈixa/"
     },
     {
       "word": "CIUDAD",
@@ -569,7 +671,8 @@
         "metrópoli"
       ],
       "example": "Vivo en la ciudad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sjuˈð̞að̞/"
     },
     {
       "word": "CORAZÓN",
@@ -578,7 +681,8 @@
         "alma"
       ],
       "example": "Te amo, corazón.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koɾaˈsõn/"
     },
     {
       "word": "SUERTE",
@@ -587,7 +691,8 @@
         "azar"
       ],
       "example": "Tuve suerte.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsweɾt̪e/"
     },
     {
       "word": "PUNTO",
@@ -596,7 +701,8 @@
         "lugar"
       ],
       "example": "El punto está en el mapa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpũn̪t̪o/"
     },
     {
       "word": "SIQUIERA",
@@ -605,7 +711,8 @@
         "al menos"
       ],
       "example": "¿Tienes siquiera un lápiz para escribir?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/siˈkjeɾa/"
     },
     {
       "word": "AGUA",
@@ -615,7 +722,8 @@
         "fluido"
       ],
       "example": "Quiero agua.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈaɣ̞wa/"
     },
     {
       "word": "ESPOSA",
@@ -624,7 +732,8 @@
         "cónyuge"
       ],
       "example": "Es mi esposa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈposa/"
     },
     {
       "word": "CLASE",
@@ -633,7 +742,8 @@
         "tipo"
       ],
       "example": "No fue a clase.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈklase/"
     },
     {
       "word": "CARA",
@@ -642,7 +752,11 @@
         "faz"
       ],
       "example": "Lávate la cara.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cariz"
+      ],
+      "ipa": "/ˈkaɾa/"
     },
     {
       "word": "REALIDAD",
@@ -651,7 +765,8 @@
         "verdad"
       ],
       "example": "Es una realidad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/realiˈð̞að̞/"
     },
     {
       "word": "MIEDO",
@@ -660,7 +775,8 @@
         "temor"
       ],
       "example": "Tengo miedo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmjeð̞o/"
     },
     {
       "word": "ESCUCHA",
@@ -669,7 +785,8 @@
         "oído"
       ],
       "example": "Escucha...",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈkut͡ʃa/"
     },
     {
       "word": "EQUIPO",
@@ -678,7 +795,8 @@
         "grupo"
       ],
       "example": "¿Qué equipo ganó?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈkipo/"
     },
     {
       "word": "COCHE",
@@ -687,13 +805,15 @@
         "AUTO"
       ],
       "example": "Es su coche.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkot͡ʃe/"
     },
     {
       "word": "JUEGO",
       "gloss": "lo que hacen los niños con amigos",
       "example": "Juego con él.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxweɣ̞o/"
     },
     {
       "word": "FIN",
@@ -702,7 +822,8 @@
         "término"
       ],
       "example": "¿Con qué fin?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfĩn/"
     },
     {
       "word": "CUERPO",
@@ -711,25 +832,32 @@
         "organismo"
       ],
       "example": "Es tu cuerpo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkweɾpo/"
     },
     {
       "word": "VUELTA",
       "gloss": "es ir y venir al mismo lugar.",
       "example": "Da la vuelta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbwel̪t̪a/"
     },
     {
       "word": "TIERRA",
       "gloss": "Es el lugar donde vive la gente.",
       "example": "La tierra es redonda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪jera/"
     },
     {
       "word": "DOCTOR",
       "gloss": "es un hombre o mujer que ayuda a la gente cuando está mal.",
       "example": "Soy doctor.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "catedrático"
+      ],
+      "ipa": "/d̪okˈt̪oɾ/"
     },
     {
       "word": "NÚMERO",
@@ -738,7 +866,8 @@
         "cifra"
       ],
       "example": "Dame el número.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnumeɾo/"
     },
     {
       "word": "PRUEBA",
@@ -763,7 +892,8 @@
       "gloss": "mujer hija de los mismos padres que otra persona",
       "synonyms": [],
       "example": "No tengo hermana.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɾˈmana/"
     },
     {
       "word": "FIESTA",
@@ -772,7 +902,8 @@
         "celebración"
       ],
       "example": "Mañana es fiesta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfjest̪a/"
     },
     {
       "word": "AUTO",
@@ -781,7 +912,8 @@
         "coche"
       ],
       "example": "¿Tenés auto?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈawt̪o/"
     },
     {
       "word": "GUERRA",
@@ -790,7 +922,8 @@
         "conflicto"
       ],
       "example": "La guerra estalló.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgera/"
     },
     {
       "word": "TELÉFONO",
@@ -799,7 +932,8 @@
         "CELULAR"
       ],
       "example": "Coge el teléfono.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪eˈlefono/"
     },
     {
       "word": "BEBÉ",
@@ -808,7 +942,10 @@
         "niño"
       ],
       "example": "Es mi bebé.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cachorro"
+      ]
     },
     {
       "word": "LUZ",
@@ -817,7 +954,8 @@
         "lámpara"
       ],
       "example": "Veo la luz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlus/"
     },
     {
       "word": "MUCHACHO",
@@ -826,7 +964,8 @@
         "chico"
       ],
       "example": "Es un muchacho.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muˈt͡ʃat͡ʃo/"
     },
     {
       "word": "PLAN",
@@ -835,13 +974,15 @@
         "idea"
       ],
       "example": "¿Tienes un plan?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈplãn/"
     },
     {
       "word": "ESCUELA",
       "gloss": "Un lugar donde los niños van a aprender.",
       "example": "Voy a la escuela.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈkwela/"
     },
     {
       "word": "HABITACIÓN",
@@ -860,7 +1001,12 @@
         "volumen"
       ],
       "example": "Es tu libro.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "texto",
+        "obra",
+        "folleto"
+      ]
     },
     {
       "word": "CULPA",
@@ -869,7 +1015,8 @@
         "responsabilidad"
       ],
       "example": "Culpa mía.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkulpa/"
     },
     {
       "word": "MEDIO",
@@ -878,7 +1025,8 @@
         "centro"
       ],
       "example": "Estaba medio lleno.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmeð̞jo/"
     },
     {
       "word": "COMIDA",
@@ -887,7 +1035,8 @@
         "cena"
       ],
       "example": "Esto es comida.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈmið̞a/"
     },
     {
       "word": "CAPITÁN",
@@ -896,7 +1045,8 @@
         "JEFE"
       ],
       "example": "Soy el capitán.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kapiˈt̪ãn/"
     },
     {
       "word": "MODO",
@@ -905,13 +1055,15 @@
         "forma"
       ],
       "example": "Hay un modo mejor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmoð̞o/"
     },
     {
       "word": "FOTO",
       "gloss": "lo que se mira de un momento",
       "example": "Es su foto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfot̪o/"
     },
     {
       "word": "CHICA",
@@ -920,7 +1072,8 @@
         "muchacha"
       ],
       "example": "Es una chica.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃika/"
     },
     {
       "word": "NEGOCIO",
@@ -929,13 +1082,15 @@
         "TRABAJO"
       ],
       "example": "Voy al negocio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/neˈɣ̞osjo/"
     },
     {
       "word": "PIE",
       "gloss": "parte del cuerpo donde van los calcetines",
       "example": "Me pongo los calcetines en el pie.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpje/"
     },
     {
       "word": "PAR",
@@ -944,7 +1099,8 @@
         "DOS"
       ],
       "example": "Dos son un par.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaɾ/"
     },
     {
       "word": "NIÑA",
@@ -954,7 +1110,8 @@
         "pequeña"
       ],
       "example": "Es una niña.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈniɲa/"
     },
     {
       "word": "PERRO",
@@ -964,20 +1121,28 @@
         "cachorro"
       ],
       "example": "Yo vi el perro.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "jauría",
+        "canino",
+        "rehala"
+      ],
+      "ipa": "/ˈpero/"
     },
     {
       "word": "PELÍCULA",
       "gloss": "cosa que la gente ve en la casa",
       "example": "¿Qué película vio?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈlikula/"
     },
     {
       "word": "MILLÓN",
       "gloss": "un número con seis ceros",
       "synonyms": [],
       "example": "Ni en un millón de años.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈʝõn/"
     },
     {
       "word": "DÓLAR",
@@ -986,7 +1151,12 @@
         "euro"
       ],
       "example": "Quiero un dólar.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "duro",
+        "peso"
+      ],
+      "ipa": "/ˈd̪olaɾ/"
     },
     {
       "word": "SUEÑO",
@@ -995,7 +1165,13 @@
         "ilusión"
       ],
       "example": "Yo no sueño.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "modorra",
+        "coma",
+        "narcosis"
+      ],
+      "ipa": "/ˈsweɲo/"
     },
     {
       "word": "CALLE",
@@ -1005,13 +1181,18 @@
         "avenida"
       ],
       "example": "Cruza la calle.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaʝe/"
     },
     {
       "word": "PASO",
       "gloss": "lo que haces con un pie al andar",
       "example": "Cada paso que das en la arena queda marcado.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "etapa"
+      ],
+      "ipa": "/ˈpaso/"
     },
     {
       "word": "NOTICIA",
@@ -1020,7 +1201,8 @@
         "información"
       ],
       "example": "¡Qué mala noticia!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/noˈt̪isja/"
     },
     {
       "word": "PODRÍA",
@@ -1029,7 +1211,8 @@
         "puede"
       ],
       "example": "Podría ver eso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/poˈð̞ɾia/"
     },
     {
       "word": "SITIO",
@@ -1038,7 +1221,8 @@
         "lugar"
       ],
       "example": "Hay sitio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsit̪jo/"
     },
     {
       "word": "ASUNTO",
@@ -1047,7 +1231,8 @@
         "COSA"
       ],
       "example": "Es asunto suyo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈsũn̪t̪o/"
     },
     {
       "word": "OFICINA",
@@ -1056,7 +1241,8 @@
         "TRABAJO"
       ],
       "example": "¿Voy a tu oficina?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ofiˈsina/"
     },
     {
       "word": "SENTIDO",
@@ -1065,13 +1251,18 @@
         "significado"
       ],
       "example": "Eso tiene sentido.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "sentirse"
+      ],
+      "ipa": "/sẽn̪ˈt̪ið̞o/"
     },
     {
       "word": "CAMA",
       "gloss": "Mueble en el que se duerme por la noche.",
       "example": "Haz tu cama.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkama/"
     },
     {
       "word": "AGENTE",
@@ -1080,13 +1271,15 @@
         "policía"
       ],
       "example": "Soy agente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈxẽn̪t̪e/"
     },
     {
       "word": "SEGURIDAD",
       "gloss": "es cuando no hay problemas",
       "example": "He llamado a seguridad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/seɣ̞uɾiˈð̞að̞/"
     },
     {
       "word": "PAÍS",
@@ -1095,7 +1288,8 @@
         "TIERRA"
       ],
       "example": "Vivo en el país.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈis/"
     },
     {
       "word": "PUEBLO",
@@ -1104,7 +1298,12 @@
         "ciudad"
       ],
       "example": "Es un pueblo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "aldea",
+        "asentamiento",
+        "ciudad"
+      ]
     },
     {
       "word": "REY",
@@ -1113,7 +1312,8 @@
         "monarca"
       ],
       "example": "Soy tu rey.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrej/"
     },
     {
       "word": "MARIDO",
@@ -1122,7 +1322,8 @@
         "COMPAÑERO"
       ],
       "example": "Él es mi marido.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈɾið̞o/"
     },
     {
       "word": "PAZ",
@@ -1131,14 +1332,16 @@
         "tranquilidad"
       ],
       "example": "Amor y paz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpas/"
     },
     {
       "word": "AMIGA",
       "gloss": "mujer a la que quieres y con la que pasas tiempo",
       "synonyms": [],
       "example": "Es su amiga.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈmiɣ̞a/"
     },
     {
       "word": "FUERZA",
@@ -1147,7 +1350,8 @@
         "poder"
       ],
       "example": "Perdí mi fuerza.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfweɾsa/"
     },
     {
       "word": "CAMBIO",
@@ -1156,7 +1360,8 @@
         "variación"
       ],
       "example": "El cambio de estación trae hojas rojas y aire fresco.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkãmbjo/"
     },
     {
       "word": "CARTA",
@@ -1165,7 +1370,8 @@
         "mensaje"
       ],
       "example": "Recibí su carta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaɾt̪a/"
     },
     {
       "word": "SECRETO",
@@ -1174,12 +1380,14 @@
         "misterio"
       ],
       "example": "Es secreto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/seˈkɾet̪o/"
     },
     {
       "word": "CUANTO",
       "gloss": "pregunta: ¿… dinero tienes?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwãn̪t̪o/"
     },
     {
       "word": "RESTO",
@@ -1188,7 +1396,8 @@
         "sobra"
       ],
       "example": "¿Quieres el resto?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrest̪o/"
     },
     {
       "word": "VIAJE",
@@ -1197,7 +1406,8 @@
         "excursión"
       ],
       "example": "Buen viaje.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbjaxe/"
     },
     {
       "word": "MENSAJE",
@@ -1206,7 +1416,8 @@
         "AVISO"
       ],
       "example": "Oí el mensaje.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mẽnˈsaxe/"
     },
     {
       "word": "HOSPITAL",
@@ -1216,7 +1427,8 @@
         "sanatorio"
       ],
       "example": "Ve al hospital.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ospiˈt̪al/"
     },
     {
       "word": "FUEGO",
@@ -1225,7 +1437,8 @@
         "llama"
       ],
       "example": "Deme fuego.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfweɣ̞o/"
     },
     {
       "word": "MÚSICA",
@@ -1234,7 +1447,8 @@
         "canción"
       ],
       "example": "No es música.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmusika/"
     },
     {
       "word": "PERDÓN",
@@ -1243,7 +1457,8 @@
         "disculpa"
       ],
       "example": "Pido perdón.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peɾˈð̞õn/"
     },
     {
       "word": "ERROR",
@@ -1252,7 +1467,11 @@
         "fallo"
       ],
       "example": "Error mío.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "erróneo"
+      ],
+      "ipa": "/eˈroɾ/"
     },
     {
       "word": "CABALLERO",
@@ -1270,7 +1489,8 @@
         "jefe"
       ],
       "example": "El presidente se negó.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾesiˈð̞ẽn̪t̪e/"
     },
     {
       "word": "RELACIÓN",
@@ -1279,7 +1499,8 @@
         "vínculo"
       ],
       "example": "No hay relación.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/relaˈsjõn/"
     },
     {
       "word": "ROPA",
@@ -1288,7 +1509,8 @@
         "vestido"
       ],
       "example": "Ponte la ropa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈropa/"
     },
     {
       "word": "CAFÉ",
@@ -1298,7 +1520,8 @@
         "bebida"
       ],
       "example": "¿Café o té?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaˈfe/"
     },
     {
       "word": "GRUPO",
@@ -1307,7 +1530,8 @@
         "equipo"
       ],
       "example": "El grupo es bueno.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgɾupo/"
     },
     {
       "word": "ORDEN",
@@ -1316,7 +1540,8 @@
         "mandato"
       ],
       "example": "Orden, por favor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈoɾð̞ẽn/"
     },
     {
       "word": "DAÑO",
@@ -1325,7 +1550,8 @@
         "perjuicio"
       ],
       "example": "No le haré daño.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪aɲo/"
     },
     {
       "word": "CIELO",
@@ -1334,7 +1560,8 @@
         "firmamento"
       ],
       "example": "Miró al cielo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsjelo/"
     },
     {
       "word": "PREGUNTA",
@@ -1344,7 +1571,8 @@
         "duda"
       ],
       "example": "Buena pregunta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾeˈɣ̞ũn̪t̪a/"
     },
     {
       "word": "ABOGADO",
@@ -1362,7 +1590,8 @@
         "PALABRA"
       ],
       "example": "Baja la voz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbos/"
     },
     {
       "word": "CONTROL",
@@ -1371,7 +1600,8 @@
         "dominio"
       ],
       "example": "Toma el control.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõn̪ˈt̪ɾol/"
     },
     {
       "word": "CITA",
@@ -1380,7 +1610,12 @@
         "encuentro"
       ],
       "example": "Pida cita.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "quedada",
+        "nota"
+      ],
+      "ipa": "/ˈsit̪a/"
     },
     {
       "word": "RESPUESTA",
@@ -1389,7 +1624,8 @@
         "contestación"
       ],
       "example": "Sé la respuesta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/resˈpwest̪a/"
     },
     {
       "word": "SISTEMA",
@@ -1398,7 +1634,8 @@
         "conjunto"
       ],
       "example": "Es un buen sistema.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sisˈt̪ema/"
     },
     {
       "word": "CAMPO",
@@ -1407,13 +1644,15 @@
         "terreno"
       ],
       "example": "Aró el campo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkãmpo/"
     },
     {
       "word": "FRENTE",
       "gloss": "parte de la cara encima de los ojos",
       "example": "Tócale la frente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfɾẽn̪t̪e/"
     },
     {
       "word": "CLIENTE",
@@ -1422,7 +1661,8 @@
         "comprador"
       ],
       "example": "Soy un cliente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkljẽn̪t̪e/"
     },
     {
       "word": "BAÑO",
@@ -1431,7 +1671,8 @@
         "aseo"
       ],
       "example": "¿Tiene baño?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaɲo/"
     },
     {
       "word": "ODIO",
@@ -1440,7 +1681,8 @@
         "rencor"
       ],
       "example": "Odio leer.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈoð̞jo/"
     },
     {
       "word": "CAJA",
@@ -1449,7 +1691,8 @@
         "recipiente"
       ],
       "example": "Abrí la caja.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaxa/"
     },
     {
       "word": "LÍNEA",
@@ -1458,13 +1701,23 @@
         "raya"
       ],
       "example": "La línea se cortó.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "frontera"
+      ],
+      "ipa": "/ˈlinea/"
     },
     {
       "word": "BOCA",
       "gloss": "parte de la cara con la que comes",
       "example": "Es mi boca.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "pico",
+        "dentadura",
+        "epiglotis"
+      ],
+      "ipa": "/ˈboka/"
     },
     {
       "word": "PENA",
@@ -1473,7 +1726,8 @@
         "tristeza"
       ],
       "example": "¡Qué pena!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpena/"
     },
     {
       "word": "DOLOR",
@@ -1482,7 +1736,8 @@
         "molestia"
       ],
       "example": "Qué dolor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪oˈloɾ/"
     },
     {
       "word": "ATENCIÓN",
@@ -1491,7 +1746,8 @@
         "cuidado"
       ],
       "example": "¡Atención!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/at̪ẽnˈsjõn/"
     },
     {
       "word": "PROFESOR",
@@ -1500,7 +1756,8 @@
         "DOCENTE"
       ],
       "example": "Él es profesor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾofeˈsoɾ/"
     },
     {
       "word": "CANCIÓN",
@@ -1509,7 +1766,8 @@
         "música"
       ],
       "example": "¡Es mi canción!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kãnˈsjõn/"
     },
     {
       "word": "NOVIA",
@@ -1542,7 +1800,8 @@
       "word": "PAPEL",
       "gloss": "lo que usas en la escuela con un lápiz",
       "example": "Quiero papel.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈpel/"
     },
     {
       "word": "LEY",
@@ -1551,7 +1810,8 @@
         "norma"
       ],
       "example": "Es la ley.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlej/"
     },
     {
       "word": "MENTE",
@@ -1560,7 +1820,8 @@
         "cabeza"
       ],
       "example": "Abre tu mente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmẽn̪t̪e/"
     },
     {
       "word": "CABALLO",
@@ -1575,7 +1836,8 @@
       "word": "CÁMARA",
       "gloss": "aparato de fotos",
       "example": "Deja mi cámara.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkamaɾa/"
     },
     {
       "word": "SEA",
@@ -1583,7 +1845,8 @@
       "synonyms": [
         "océano"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsea/"
     },
     {
       "word": "AIRE",
@@ -1592,13 +1855,15 @@
         "aliento"
       ],
       "example": "Hoy hace aire.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈajɾe/"
     },
     {
       "word": "DECISIÓN",
       "gloss": "la idea que se elige",
       "example": "Es tu decisión.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪esiˈsjõn/"
     },
     {
       "word": "DISCULPA",
@@ -1607,7 +1872,8 @@
         "perdón"
       ],
       "example": "¡Disculpa!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪isˈkulpa/"
     },
     {
       "word": "VÍCTIMA",
@@ -1616,7 +1882,8 @@
         "persona"
       ],
       "example": "Ella no es la víctima.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbikt̪ima/"
     },
     {
       "word": "SITUACIÓN",
@@ -1625,7 +1892,8 @@
         "caso"
       ],
       "example": "¡Qué situación!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sit̪waˈsjõn/"
     },
     {
       "word": "ESTRELLA",
@@ -1634,7 +1902,8 @@
         "astro"
       ],
       "example": "Veo una estrella.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈt̪ɾeʝa/"
     },
     {
       "word": "FUTURO",
@@ -1643,7 +1912,8 @@
         "mañana"
       ],
       "example": "¡Por tu futuro!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fuˈt̪uɾo/"
     },
     {
       "word": "REGALO",
@@ -1652,7 +1922,8 @@
         "presente"
       ],
       "example": "Es un regalo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈɣ̞alo/"
     },
     {
       "word": "TIENDA",
@@ -1661,7 +1932,8 @@
         "comercio"
       ],
       "example": "Fue a la tienda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪jẽn̪d̪a/"
     },
     {
       "word": "HOTEL",
@@ -1670,7 +1942,8 @@
         "alojamiento"
       ],
       "example": "Es un hotel.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/oˈt̪el/"
     },
     {
       "word": "PELO",
@@ -1679,7 +1952,8 @@
         "MELENA"
       ],
       "example": "Le tocó el pelo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpelo/"
     },
     {
       "word": "GUSTO",
@@ -1688,7 +1962,13 @@
         "sabor"
       ],
       "example": "Me gusta el chocolate, es mi gusto favorito.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "afición",
+        "antojo",
+        "capricho"
+      ],
+      "ipa": "/ˈgust̪o/"
     },
     {
       "word": "COMPAÑÍA",
@@ -1697,7 +1977,8 @@
         "GRUPO"
       ],
       "example": "Tienes compañía.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõmpaˈɲia/"
     },
     {
       "word": "EDAD",
@@ -1706,7 +1987,8 @@
         "años"
       ],
       "example": "¿Qué edad tengo?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈð̞að̞/"
     },
     {
       "word": "COMPAÑERO",
@@ -1715,14 +1997,16 @@
         "amigo"
       ],
       "example": "Soy tu compañero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõmpaˈɲeɾo/"
     },
     {
       "word": "BARCO",
       "gloss": "cosa que navega en el agua",
       "synonyms": [],
       "example": "Es mi barco.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaɾko/"
     },
     {
       "word": "LAMENTO",
@@ -1731,7 +2015,8 @@
         "queja"
       ],
       "example": "Lo lamento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/laˈmẽn̪t̪o/"
     },
     {
       "word": "MONTÓN",
@@ -1740,7 +2025,8 @@
         "pila"
       ],
       "example": "¡Qué montón!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mõn̪ˈt̪õn/"
     },
     {
       "word": "ACCIDENTE",
@@ -1749,7 +2035,8 @@
         "choque"
       ],
       "example": "¡Fue un accidente!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aksiˈð̞ẽn̪t̪e/"
     },
     {
       "word": "CARRERA",
@@ -1758,7 +2045,8 @@
         "trabajo"
       ],
       "example": "¿En qué carrera estás?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaˈreɾa/"
     },
     {
       "word": "REUNIÓN",
@@ -1767,7 +2055,8 @@
         "encuentro"
       ],
       "example": "Voy a la reunión.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/rewˈnjõn/"
     },
     {
       "word": "TRAJE",
@@ -1776,13 +2065,17 @@
         "vestido"
       ],
       "example": "Bonito traje.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪ɾaxe/"
     },
     {
       "word": "NOVIO",
       "gloss": "hombre con quien sales y al que quieres",
       "example": "Es su novio.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "esposo"
+      ]
     },
     {
       "word": "MESA",
@@ -1792,7 +2085,8 @@
         "superficie"
       ],
       "example": "Veo mi mesa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmesa/"
     },
     {
       "word": "CARGO",
@@ -1801,7 +2095,8 @@
         "puesto"
       ],
       "example": "Estás a cargo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaɾɣ̞o/"
     },
     {
       "word": "BODA",
@@ -1810,7 +2105,8 @@
         "fiesta"
       ],
       "example": "Su boda es mañana.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈboð̞a/"
     },
     {
       "word": "CENA",
@@ -1819,7 +2115,8 @@
         "comida nocturna"
       ],
       "example": "Preparé cena.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsena/"
     },
     {
       "word": "BRAZO",
@@ -1828,7 +2125,8 @@
         "mano"
       ],
       "example": "Alzó su brazo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɾaso/"
     },
     {
       "word": "DIRECCIÓN",
@@ -1837,13 +2135,20 @@
         "rumbo"
       ],
       "example": "Dame tu dirección.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪iɾekˈsjõn/"
     },
     {
       "word": "MITAD",
       "gloss": "la que queda cuando divides algo en dos",
       "example": "Dame la mitad.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "fracción",
+        "fragmento",
+        "media"
+      ],
+      "ipa": "/miˈt̪að̞/"
     },
     {
       "word": "HABLA",
@@ -1859,7 +2164,12 @@
         "AERONAVE"
       ],
       "example": "Vi un avión.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "golondrina",
+        "globo",
+        "aerostato"
+      ]
     },
     {
       "word": "BROMA",
@@ -1868,7 +2178,8 @@
         "chiste"
       ],
       "example": "¡Es broma!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɾoma/"
     },
     {
       "word": "CENTRO",
@@ -1877,7 +2188,8 @@
         "CORAZÓN"
       ],
       "example": "Vamos al centro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsẽn̪t̪ɾo/"
     },
     {
       "word": "DETECTIVE",
@@ -1895,7 +2207,11 @@
         "indicio"
       ],
       "example": "No hay señal.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "huella"
+      ],
+      "ipa": "/seˈɲal/"
     },
     {
       "word": "PROGRAMA",
@@ -1904,7 +2220,8 @@
         "plan"
       ],
       "example": "¿Hay un programa?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾoˈɣ̞ɾama/"
     },
     {
       "word": "ATAQUE",
@@ -1913,13 +2230,18 @@
         "agresión"
       ],
       "example": "No esperaban el ataque.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "defensa"
+      ],
+      "ipa": "/aˈt̪ake/"
     },
     {
       "word": "SOLDADO",
       "gloss": "hombre que va a la guerra",
       "example": "No soy un soldado.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sol̪ˈd̪að̞o/"
     },
     {
       "word": "TRAVÉS",
@@ -1934,7 +2256,11 @@
       "word": "PRINCIPIO",
       "gloss": "Momento o punto en que algo comienza.",
       "example": "Sólo es el principio.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "valor"
+      ],
+      "ipa": "/pɾĩnˈsipjo/"
     },
     {
       "word": "ERA",
@@ -1943,7 +2269,8 @@
         "tiempo"
       ],
       "example": "La era de los dinosaurios terminó hace millones de años.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈeɾa/"
     },
     {
       "word": "DAMA",
@@ -1952,7 +2279,8 @@
         "señora"
       ],
       "example": "Él saludó a la dama.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪ama/"
     },
     {
       "word": "DUDA",
@@ -1961,7 +2289,8 @@
         "incertidumbre"
       ],
       "example": "No hay duda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪uð̞a/"
     },
     {
       "word": "CRIMEN",
@@ -1970,7 +2299,8 @@
         "FALTA"
       ],
       "example": "¿Es un crimen?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɾimẽn/"
     },
     {
       "word": "SOL",
@@ -1980,7 +2310,8 @@
         "luz diurna"
       ],
       "example": "Amo el sol.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsol/"
     },
     {
       "word": "ALMA",
@@ -1989,7 +2320,8 @@
         "CORAZÓN"
       ],
       "example": "Mi alma canta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈalma/"
     },
     {
       "word": "NAVE",
@@ -2007,7 +2339,8 @@
         "gusto"
       ],
       "example": "¡Con placer!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/plaˈseɾ/"
     },
     {
       "word": "DIRECTOR",
@@ -2016,13 +2349,15 @@
         "jefe"
       ],
       "example": "Respondí al director.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪iɾekˈt̪oɾ/"
     },
     {
       "word": "PIERNA",
       "gloss": "parte del cuerpo con la que andas",
       "example": "¿Qué pierna duele?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpjeɾna/"
     },
     {
       "word": "TONTO",
@@ -2031,7 +2366,8 @@
         "bobo"
       ],
       "example": "Él es tonto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪õn̪t̪o/"
     },
     {
       "word": "HAMBRE",
@@ -2041,7 +2377,8 @@
         "voracidad"
       ],
       "example": "Tenía hambre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈãmbɾe/"
     },
     {
       "word": "ESTAR",
@@ -2050,7 +2387,8 @@
         "hallarse"
       ],
       "example": "¿Vas a estar bien?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/esˈt̪aɾ/"
     },
     {
       "word": "TENER",
@@ -2059,7 +2397,8 @@
         "poseer"
       ],
       "example": "Puedes tener el mío.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t̪eˈneɾ/"
     },
     {
       "word": "HACER",
@@ -2068,7 +2407,8 @@
         "realizar"
       ],
       "example": "Dime qué hacer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈseɾ/"
     },
     {
       "word": "DECIR",
@@ -2077,7 +2417,8 @@
         "expresar"
       ],
       "example": "No sé qué decir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪eˈsiɾ/"
     },
     {
       "word": "SABER",
@@ -2095,7 +2436,8 @@
         "desear"
       ],
       "example": "¿Vas a querer más?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/keˈɾeɾ/"
     },
     {
       "word": "BIEN",
@@ -2104,7 +2446,8 @@
         "correcto"
       ],
       "example": "¿Todo bien?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbjẽn/"
     },
     {
       "word": "PODER",
@@ -2113,7 +2456,8 @@
         "capacidad"
       ],
       "example": "Espero poder verla.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/poˈð̞eɾ/"
     },
     {
       "word": "SER",
@@ -2122,7 +2466,11 @@
         "existir"
       ],
       "example": "¿Qué quieres ser?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "existir"
+      ],
+      "ipa": "/ˈseɾ/"
     },
     {
       "word": "VER",
@@ -2131,7 +2479,8 @@
         "observar"
       ],
       "example": "Déjame ver.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈbeɾ/"
     },
     {
       "word": "AQUÍ",
@@ -2140,7 +2489,8 @@
         "acá"
       ],
       "example": "Vivo aquí.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈki/"
     },
     {
       "word": "MÁS",
@@ -2149,7 +2499,8 @@
         "adicional"
       ],
       "example": "¿Algo más?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈmas/"
     },
     {
       "word": "DEBER",
@@ -2167,7 +2518,8 @@
         "actualmente"
       ],
       "example": "Ahora soy libre.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈoɾa/"
     },
     {
       "word": "MUY",
@@ -2176,7 +2528,8 @@
         "bastante"
       ],
       "example": "Es muy caro.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈmuj/"
     },
     {
       "word": "CREER",
@@ -2186,7 +2539,8 @@
         "aceptar"
       ],
       "example": "Quiero creer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɾeˈeɾ/"
     },
     {
       "word": "ASÍ",
@@ -2195,7 +2549,8 @@
         "TAL"
       ],
       "example": "Hazlo así.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈsi/"
     },
     {
       "word": "DAR",
@@ -2204,7 +2559,8 @@
         "REGALAR"
       ],
       "example": "¿Qué le vas a dar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈd̪aɾ/"
     },
     {
       "word": "HABER",
@@ -2212,7 +2568,12 @@
       "synonyms": [
         "existir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "hacer",
+        "caudal",
+        "hacienda"
+      ]
     },
     {
       "word": "DEJAR",
@@ -2220,7 +2581,8 @@
       "synonyms": [
         "permitir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪eˈxaɾ/"
     },
     {
       "word": "PASAR",
@@ -2229,7 +2591,8 @@
         "suceder"
       ],
       "example": "¿Puedo pasar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/paˈsaɾ/"
     },
     {
       "word": "HABLAR",
@@ -2239,7 +2602,12 @@
         "contar"
       ],
       "example": "¿Podemos hablar?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "articular",
+        "decir",
+        "declarar"
+      ]
     },
     {
       "word": "VENIR",
@@ -2248,7 +2616,13 @@
         "llegar"
       ],
       "example": "Puedes venir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "herencia",
+        "causa",
+        "origen"
+      ],
+      "ipa": "/beˈniɾ/"
     },
     {
       "word": "ESPERAR",
@@ -2258,7 +2632,8 @@
         "permanecer"
       ],
       "example": "Odio esperar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/espeˈɾaɾ/"
     },
     {
       "word": "TANTO",
@@ -2267,7 +2642,8 @@
         "mucho"
       ],
       "example": "El niño come tanto en el día que siempre tiene sueño.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈt̪ãn̪t̪o/"
     },
     {
       "word": "PENSAR",
@@ -2276,7 +2652,13 @@
         "reflexionar"
       ],
       "example": "Dejame pensar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "discurrir",
+        "idear",
+        "imaginar"
+      ],
+      "ipa": "/pẽnˈsaɾ/"
     },
     {
       "word": "SENTIR",
@@ -2285,13 +2667,15 @@
         "percibir"
       ],
       "example": "Me hizo sentir mal.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/sẽn̪ˈt̪iɾ/"
     },
     {
       "word": "CAER",
       "gloss": "Bajar de forma rápida.",
       "example": "Se va a caer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kaˈeɾ/"
     },
     {
       "word": "NECESITAR",
@@ -2300,7 +2684,8 @@
         "querer"
       ],
       "example": "Voy a necesitar ayuda.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/nesesiˈt̪aɾ/"
     },
     {
       "word": "MIRAR",
@@ -2309,7 +2694,8 @@
         "observar"
       ],
       "example": "Puedes mirar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/miˈɾaɾ/"
     },
     {
       "word": "ENTONCES",
@@ -2318,13 +2704,20 @@
         "por lo tanto"
       ],
       "example": "¿Y entonces?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ẽn̪ˈt̪õnses/"
     },
     {
       "word": "SOLO",
       "gloss": "Sin compañía de otros.",
       "example": "Hablo solo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "solitario",
+        "mero",
+        "puro"
+      ],
+      "ipa": "/ˈsolo/"
     },
     {
       "word": "VOLVER",
@@ -2351,7 +2744,8 @@
         "nombrar"
       ],
       "example": "Quiero llamar...",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʝaˈmaɾ/"
     },
     {
       "word": "MEJOR",
@@ -2360,7 +2754,8 @@
         "superior"
       ],
       "example": "El té está bueno y el jugo está mejor.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/meˈxoɾ/"
     },
     {
       "word": "PARECER",
@@ -2369,7 +2764,13 @@
         "semejar"
       ],
       "example": "Puede parecer raro.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "parecerse",
+        "resultar",
+        "sentir"
+      ],
+      "ipa": "/paɾeˈseɾ/"
     },
     {
       "word": "MUCHO",
@@ -2378,7 +2779,8 @@
         "bastante"
       ],
       "example": "Él come mucho.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈmut͡ʃo/"
     },
     {
       "word": "GUSTAR",
@@ -2387,7 +2789,8 @@
         "encantar"
       ],
       "example": "Te va a gustar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/gusˈt̪aɾ/"
     },
     {
       "word": "ENCONTRAR",
@@ -2396,7 +2799,8 @@
         "hallar"
       ],
       "example": "¡Le acabo de encontrar!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽŋkõn̪ˈt̪ɾaɾ/"
     },
     {
       "word": "TAMBIÉN",
@@ -2405,7 +2809,8 @@
         "igualmente"
       ],
       "example": "Yo también.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/t̪ãmˈbjẽn/"
     },
     {
       "word": "DIO",
@@ -2414,7 +2819,8 @@
         "dar"
       ],
       "example": "Me lo dio.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈd̪jo/"
     },
     {
       "word": "PONER",
@@ -2423,14 +2829,20 @@
         "colocar"
       ],
       "example": "¿Quieres poner?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "comenzar",
+        "empezar"
+      ],
+      "ipa": "/poˈneɾ/"
     },
     {
       "word": "BUEN",
       "gloss": "Que tiene cualidades positivas.",
       "synonyms": [],
       "example": "¡Buen día!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbwẽn/"
     },
     {
       "word": "TOMAR",
@@ -2439,7 +2851,8 @@
         "coger"
       ],
       "example": "¿Va a tomar pan?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t̪oˈmaɾ/"
     },
     {
       "word": "QUEDAR",
@@ -2448,7 +2861,8 @@
         "permanecer"
       ],
       "example": "¿Me puedo quedar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/keˈð̞aɾ/"
     },
     {
       "word": "NUEVO",
@@ -2466,7 +2880,8 @@
         "arribar"
       ],
       "example": "Le vi llegar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʝeˈɣ̞aɾ/"
     },
     {
       "word": "SALIR",
@@ -2476,7 +2891,8 @@
         "marchar"
       ],
       "example": "Le oí salir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/saˈliɾ/"
     },
     {
       "word": "CONOCER",
@@ -2486,7 +2902,13 @@
         "entender"
       ],
       "example": "Necesito conocer gente.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "comprender",
+        "entender",
+        "advertir"
+      ],
+      "ipa": "/konoˈseɾ/"
     },
     {
       "word": "SEGUIR",
@@ -2495,7 +2917,12 @@
         "continuar"
       ],
       "example": "¿Debo seguir?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "proseguir",
+        "suceder"
+      ],
+      "ipa": "/seˈɣ̞iɾ/"
     },
     {
       "word": "SIEMPRE",
@@ -2505,7 +2932,8 @@
         "jamás lo contrario"
       ],
       "example": "Siempre te amaré.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈsjẽmpɾe/"
     },
     {
       "word": "AHÍ",
@@ -2515,7 +2943,8 @@
         "acá"
       ],
       "example": "Ahí viene.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈi/"
     },
     {
       "word": "HECHO",
@@ -2525,7 +2954,8 @@
         "acontecimiento"
       ],
       "example": "¡Lo has hecho!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈet͡ʃo/"
     },
     {
       "word": "ANTES",
@@ -2535,7 +2965,13 @@
         "primero"
       ],
       "example": "Antes te respetaba.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "ante",
+        "delante",
+        "detrás"
+      ],
+      "ipa": "/ˈãn̪t̪es/"
     },
     {
       "word": "POCO",
@@ -2544,7 +2980,8 @@
         "breve"
       ],
       "example": "Le vi hace poco.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈpoko/"
     },
     {
       "word": "SEGURO",
@@ -2554,7 +2991,8 @@
         "cierto"
       ],
       "example": "Es seguro.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/seˈɣ̞uɾo/"
     },
     {
       "word": "AYUDAR",
@@ -2564,7 +3002,8 @@
         "colaborar"
       ],
       "example": "¿Puedo ayudar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aʝuˈð̞aɾ/"
     },
     {
       "word": "TRATAR",
@@ -2574,7 +3013,8 @@
         "probar"
       ],
       "example": "¡Tienes que tratar!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t̪ɾaˈt̪aɾ/"
     },
     {
       "word": "ENTENDER",
@@ -2584,7 +3024,13 @@
         "captar"
       ],
       "example": "Van a entender.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "deducir",
+        "discernir",
+        "discurrir"
+      ],
+      "ipa": "/ẽn̪t̪ẽn̪ˈd̪eɾ/"
     },
     {
       "word": "CONTAR",
@@ -2594,7 +3040,8 @@
         "narrar"
       ],
       "example": "Empieza a contar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõn̪ˈt̪aɾ/"
     },
     {
       "word": "CLARO",
@@ -2603,7 +3050,8 @@
         "evidente"
       ],
       "example": "Sí, claro.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈklaɾo/"
     },
     {
       "word": "ACABAR",
@@ -2623,7 +3071,13 @@
         "explorar"
       ],
       "example": "¿Sabes qué buscar?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "enojar",
+        "irritar",
+        "provocar"
+      ],
+      "ipa": "/busˈkaɾ/"
     },
     {
       "word": "DESPUÉS",
@@ -2633,7 +3087,8 @@
         "posteriormente"
       ],
       "example": "¿Y después?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/d̪esˈpwes/"
     },
     {
       "word": "PREGUNTAR",
@@ -2643,7 +3098,8 @@
         "consultar"
       ],
       "example": "Pueden preguntar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɾeɣ̞ũn̪ˈt̪aɾ/"
     },
     {
       "word": "VALER",
@@ -2652,7 +3108,8 @@
         "servir",
         "importar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/baˈleɾ/"
     },
     {
       "word": "TRABAJAR",
@@ -2671,7 +3128,8 @@
         "hacer"
       ],
       "example": "Quiero crear mi mundo.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɾeˈaɾ/"
     },
     {
       "word": "MAÑANA",
@@ -2681,7 +3139,8 @@
         "alba"
       ],
       "example": "Hasta mañana.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈɲana/"
     },
     {
       "word": "ESCUCHAR",
@@ -2691,7 +3150,8 @@
         "atender"
       ],
       "example": "Voy a escuchar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/eskuˈt͡ʃaɾ/"
     },
     {
       "word": "RECORDAR",
@@ -2701,7 +3161,8 @@
         "traer a la mente"
       ],
       "example": "Quería recordar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/rekoɾˈð̞aɾ/"
     },
     {
       "word": "ALLÍ",
@@ -2710,7 +3171,8 @@
         "ahí"
       ],
       "example": "Ponlo allí.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈʝi/"
     },
     {
       "word": "MENOS",
@@ -2720,7 +3182,8 @@
         "salvo"
       ],
       "example": "Él tiene menos pan.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈmenos/"
     },
     {
       "word": "GRAN",
@@ -2729,7 +3192,8 @@
         "enorme"
       ],
       "example": "Es un gran poema.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈgɾãn/"
     },
     {
       "word": "IMPORTAR",
@@ -2738,7 +3202,8 @@
         "valer",
         "contar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ĩmpoɾˈt̪aɾ/"
     },
     {
       "word": "VISTO",
@@ -2747,7 +3212,8 @@
         "observado"
       ],
       "example": "Le he visto.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbist̪o/"
     },
     {
       "word": "INTENTAR",
@@ -2757,7 +3223,8 @@
         "tratar"
       ],
       "example": "Dejame intentar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ĩn̪t̪ẽn̪ˈt̪aɾ/"
     },
     {
       "word": "TRAER",
@@ -2767,7 +3234,8 @@
         "portar"
       ],
       "example": "Ve a traer café.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t̪ɾaˈeɾ/"
     },
     {
       "word": "LUEGO",
@@ -2777,7 +3245,8 @@
         "entonces"
       ],
       "example": "Te veo luego.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈlweɣ̞o/"
     },
     {
       "word": "PERDER",
@@ -2787,7 +3256,8 @@
         "fallar"
       ],
       "example": "Odio perder.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peɾˈð̞eɾ/"
     },
     {
       "word": "HOY",
@@ -2797,7 +3267,8 @@
         "ahora"
       ],
       "example": "Hoy llueve.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈoj/"
     },
     {
       "word": "ENTRAR",
@@ -2807,7 +3278,8 @@
         "penetrar"
       ],
       "example": "Debo entrar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽn̪ˈt̪ɾaɾ/"
     },
     {
       "word": "PEDIR",
@@ -2816,7 +3288,8 @@
         "rogar"
       ],
       "example": "No sé qué pedir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peˈð̞iɾ/"
     },
     {
       "word": "VIVIR",
@@ -2836,7 +3309,8 @@
         "a mi lado"
       ],
       "example": "Ven conmigo.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/kõmˈmiɣ̞o/"
     },
     {
       "word": "PEQUEÑO",
@@ -2847,7 +3321,8 @@
         "mini"
       ],
       "example": "Es muy pequeño.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈkeɲo/"
     },
     {
       "word": "ÚLTIMO",
@@ -2857,7 +3332,12 @@
         "postrero"
       ],
       "example": "Quedé último.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "antepenúltimo",
+        "penúltimo"
+      ],
+      "ipa": "/ˈul̪t̪imo/"
     },
     {
       "word": "SUPONER",
@@ -2867,7 +3347,11 @@
         "creer"
       ],
       "example": "Eso tampoco debería suponer ningún problema.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "creer"
+      ],
+      "ipa": "/supoˈneɾ/"
     },
     {
       "word": "MAL",
@@ -2876,7 +3360,8 @@
         "incorrecto"
       ],
       "example": "Canto mal.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmal/"
     },
     {
       "word": "REALMENTE",
@@ -2886,7 +3371,8 @@
         "efectivamente"
       ],
       "example": "¡Realmente bien!",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/reˌalˈmẽn̪t̪e/"
     },
     {
       "word": "EMPEZAR",
@@ -2895,7 +3381,8 @@
         "comenzar"
       ],
       "example": "Voy a empezar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽmpeˈsaɾ/"
     },
     {
       "word": "SERIO",
@@ -2905,7 +3392,8 @@
         "grave"
       ],
       "example": "Es en serio.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈseɾjo/"
     },
     {
       "word": "LISTO",
@@ -2915,7 +3403,8 @@
         "dispuesto"
       ],
       "example": "Soy listo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈlist̪o/"
     },
     {
       "word": "AÚN",
@@ -2925,7 +3414,8 @@
         "hasta ahora"
       ],
       "example": "No, aún no sé.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈũn/"
     },
     {
       "word": "CONSEGUIR",
@@ -2935,7 +3425,12 @@
         "lograr"
       ],
       "example": "Lo voy a conseguir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "lograr",
+        "obtener"
+      ],
+      "ipa": "/kõnseˈɣ̞iɾ/"
     },
     {
       "word": "USAR",
@@ -2944,13 +3439,15 @@
         "emplear"
       ],
       "example": "Debo usar botas.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/uˈsaɾ/"
     },
     {
       "word": "PASADO",
       "gloss": "que ya ocurrió",
       "example": "El verano pasado viajé a la playa.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/paˈsað̞o/"
     },
     {
       "word": "CONTIGO",
@@ -2960,7 +3457,12 @@
         "a tu lado"
       ],
       "example": "¿Y contigo?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "conmigo",
+        "consigo"
+      ],
+      "ipa": "/kõn̪ˈt̪iɣ̞o/"
     },
     {
       "word": "ÚNICO",
@@ -2970,7 +3472,8 @@
         "exclusivo"
       ],
       "example": "¿Soy el único?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈuniko/"
     },
     {
       "word": "JUNTO",
@@ -2980,7 +3483,8 @@
         "cerca"
       ],
       "example": "No me junto con él.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈxũn̪t̪o/"
     },
     {
       "word": "TARDE",
@@ -2990,7 +3494,13 @@
         "ocaso"
       ],
       "example": "¡Qué tarde es!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "tardanza",
+        "tardío",
+        "tardíamente"
+      ],
+      "ipa": "/ˈt̪aɾð̞e/"
     },
     {
       "word": "DICHO",
@@ -2999,7 +3509,13 @@
         "nombrado"
       ],
       "example": "¿Lo he dicho?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "adagio",
+        "aforismo",
+        "apotegma"
+      ],
+      "ipa": "/ˈd̪it͡ʃo/"
     },
     {
       "word": "PREOCUPAR",
@@ -3008,7 +3524,8 @@
         "angustiar"
       ],
       "example": "Es lo último de lo que me voy a preocupar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɾeokuˈpaɾ/"
     },
     {
       "word": "COMER",
@@ -3018,7 +3535,11 @@
         "devorar"
       ],
       "example": "Quiero comer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "beber"
+      ],
+      "ipa": "/koˈmeɾ/"
     },
     {
       "word": "CIERTO",
@@ -3028,7 +3549,11 @@
         "verdadero"
       ],
       "example": "Es cierto.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "algún"
+      ],
+      "ipa": "/ˈsjeɾt̪o/"
     },
     {
       "word": "GANAR",
@@ -3038,7 +3563,8 @@
         "lograr"
       ],
       "example": "Va a ganar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/gaˈnaɾ/"
     },
     {
       "word": "DEMASIADO",
@@ -3047,7 +3573,8 @@
         "sobrante"
       ],
       "example": "Comí demasiado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/d̪emaˈsjað̞o/"
     },
     {
       "word": "OÍR",
@@ -3057,7 +3584,8 @@
         "percibir"
       ],
       "example": "Lo puedo oír.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/oˈiɾ/"
     },
     {
       "word": "AMAR",
@@ -3067,7 +3595,8 @@
         "adorar"
       ],
       "example": "Puedo amar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈmaɾ/"
     },
     {
       "word": "TERMINAR",
@@ -3077,7 +3606,8 @@
         "finalizar"
       ],
       "example": "Déjame terminar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t̪eɾmiˈnaɾ/"
     },
     {
       "word": "GRANDE",
@@ -3087,7 +3617,8 @@
         "amplio"
       ],
       "example": "¡Qué grande!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈgɾãn̪d̪e/"
     },
     {
       "word": "OLVIDAR",
@@ -3106,7 +3637,11 @@
         "inicial"
       ],
       "example": "Tú primero.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "alto"
+      ],
+      "ipa": "/pɾiˈmeɾo/"
     },
     {
       "word": "MALO",
@@ -3116,7 +3651,8 @@
         "defectuoso"
       ],
       "example": "Eres malo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈmalo/"
     },
     {
       "word": "VIEJO",
@@ -3126,7 +3662,8 @@
         "anciano"
       ],
       "example": "Él es viejo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbjexo/"
     },
     {
       "word": "CAMBIAR",
@@ -3136,13 +3673,20 @@
         "alterar"
       ],
       "example": "Quiero cambiar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "convertir",
+        "mudar",
+        "transformar"
+      ],
+      "ipa": "/kãmˈbjaɾ/"
     },
     {
       "word": "HAZ",
       "gloss": "orden: ¡… la cama!",
       "example": "Haz tu cama.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈas/"
     },
     {
       "word": "TODAVÍA",
@@ -3162,7 +3706,8 @@
         "guardar"
       ],
       "example": "Debe mantener su promesa.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mãn̪t̪eˈneɾ/"
     },
     {
       "word": "SACAR",
@@ -3172,7 +3717,11 @@
         "retirar"
       ],
       "example": "Voy a sacar dinero.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "salir"
+      ],
+      "ipa": "/saˈkaɾ/"
     },
     {
       "word": "PAGAR",
@@ -3181,13 +3730,15 @@
         "abonar"
       ],
       "example": "Voy a pagar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/paˈɣ̞aɾ/"
     },
     {
       "word": "VAYA",
       "gloss": "ir en forma",
       "example": "¡Vaya al parque con sus amigos!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaʝa/"
     },
     {
       "word": "RÁPIDO",
@@ -3197,7 +3748,8 @@
         "ágil"
       ],
       "example": "¡Ven rápido!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈrapið̞o/"
     },
     {
       "word": "DORMIR",
@@ -3206,7 +3758,8 @@
         "reposar"
       ],
       "example": "Voy a dormir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪oɾˈmiɾ/"
     },
     {
       "word": "SIGNIFICAR",
@@ -3216,13 +3769,18 @@
         "representar"
       ],
       "example": "¿Qué podría significar?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "apercibir"
+      ],
+      "ipa": "/siɣ̞nifiˈkaɾ/"
     },
     {
       "word": "BUENA",
       "gloss": "que gusta mucho",
       "example": "Buena pregunta.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbwena/"
     },
     {
       "word": "GENIAL",
@@ -3232,7 +3790,8 @@
         "fantástico"
       ],
       "example": "Es genial.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/xeˈnjal/"
     },
     {
       "word": "LLAMADO",
@@ -3242,7 +3801,8 @@
         "denominado"
       ],
       "example": "El animal llamado jirafa tiene un cuello muy largo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʝaˈmað̞o/"
     },
     {
       "word": "FELIZ",
@@ -3251,7 +3811,8 @@
         "alegre"
       ],
       "example": "Soy feliz.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/feˈlis/"
     },
     {
       "word": "SUCEDER",
@@ -3261,7 +3822,8 @@
         "ocurrir"
       ],
       "example": "Podría suceder.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/suseˈð̞eɾ/"
     },
     {
       "word": "JUGAR",
@@ -3270,7 +3832,11 @@
         "entretenerse"
       ],
       "example": "Vamos a jugar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "mover"
+      ],
+      "ipa": "/xuˈɣ̞aɾ/"
     },
     {
       "word": "SUPUESTO",
@@ -3280,7 +3846,13 @@
         "presunción"
       ],
       "example": "Por supuesto.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "asunción",
+        "premisa",
+        "supuestamente"
+      ],
+      "ipa": "/suˈpwest̪o/"
     },
     {
       "word": "MISMO",
@@ -3290,7 +3862,8 @@
         "idéntico"
       ],
       "example": "Me da lo mismo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈmismo/"
     },
     {
       "word": "ABRIR",
@@ -3310,7 +3883,8 @@
         "posiblemente"
       ],
       "example": "Quizá nieve.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/kiˈsa/"
     },
     {
       "word": "MOVER",
@@ -3330,7 +3904,8 @@
         "retornar"
       ],
       "example": "Debo regresar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/reɣ̞ɾeˈsaɾ/"
     },
     {
       "word": "SENTAR",
@@ -3340,7 +3915,8 @@
         "poner"
       ],
       "example": "¿Me puedo sentar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/sẽn̪ˈt̪aɾ/"
     },
     {
       "word": "ENVIAR",
@@ -3350,7 +3926,8 @@
         "remitir"
       ],
       "example": "Le voy a enviar el enlace.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽmˈbjaɾ/"
     },
     {
       "word": "IMPORTANTE",
@@ -3360,7 +3937,8 @@
         "esencial"
       ],
       "example": "¿Es importante?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ĩmpoɾˈt̪ãn̪t̪e/"
     },
     {
       "word": "DENTRO",
@@ -3369,7 +3947,8 @@
         "en"
       ],
       "example": "Están dentro.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈd̪ẽn̪t̪ɾo/"
     },
     {
       "word": "CASI",
@@ -3379,7 +3958,8 @@
         "cerca de"
       ],
       "example": "Casi tres.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈkasi/"
     },
     {
       "word": "QUERIDO",
@@ -3389,7 +3969,8 @@
         "apreciado"
       ],
       "example": "¡Querido mío!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/keˈɾið̞o/"
     },
     {
       "word": "COMPRAR",
@@ -3399,7 +3980,8 @@
         "obtener"
       ],
       "example": "Iré a comprar pan.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõmˈpɾaɾ/"
     },
     {
       "word": "PROPIO",
@@ -3409,7 +3991,8 @@
         "particular"
       ],
       "example": "Soy mi propio jefe.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈpɾopjo/"
     },
     {
       "word": "QUIZÁS",
@@ -3419,7 +4002,8 @@
         "posiblemente"
       ],
       "example": "Quizás sea cierto.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/kiˈsas/"
     },
     {
       "word": "PRONTO",
@@ -3428,7 +4012,8 @@
         "rápido"
       ],
       "example": "Hasta pronto.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈpɾõn̪t̪o/"
     },
     {
       "word": "FUNCIONAR",
@@ -3438,7 +4023,8 @@
         "servir"
       ],
       "example": "Va a funcionar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fũnsjoˈnaɾ/"
     },
     {
       "word": "JUSTO",
@@ -3448,7 +4034,13 @@
         "correcto"
       ],
       "example": "Era justo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "bueno",
+        "correcto",
+        "equitativo"
+      ],
+      "ipa": "/ˈxust̪o/"
     },
     {
       "word": "OCURRIR",
@@ -3458,7 +4050,8 @@
         "suceder"
       ],
       "example": "Volverá a ocurrir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/okuˈriɾ/"
     },
     {
       "word": "LOCO",
@@ -3467,7 +4060,8 @@
         "chiflado"
       ],
       "example": "Está loco.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈloko/"
     },
     {
       "word": "ALTO",
@@ -3477,7 +4071,8 @@
         "levantado"
       ],
       "example": "Él es alto.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈal̪t̪o/"
     },
     {
       "word": "LEER",
@@ -3487,7 +4082,8 @@
         "descifrar"
       ],
       "example": "Él sabe leer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/leˈeɾ/"
     },
     {
       "word": "VIVO",
@@ -3503,7 +4099,8 @@
         "excusar"
       ],
       "example": "¿No te vas a disculpar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪iskulˈpaɾ/"
     },
     {
       "word": "DESEAR",
@@ -3512,7 +4109,13 @@
         "querer",
         "anhelar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "anhelar",
+        "codiciar",
+        "suspirar"
+      ],
+      "ipa": "/d̪eseˈaɾ/"
     },
     {
       "word": "SUFICIENTE",
@@ -3521,7 +4124,8 @@
         "bastante"
       ],
       "example": "Suficiente.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/sufiˈsjẽn̪t̪e/"
     },
     {
       "word": "ECHAR",
@@ -3531,7 +4135,8 @@
         "lanzar"
       ],
       "example": "Echar sal.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/eˈt͡ʃaɾ/"
     },
     {
       "word": "MOSTRAR",
@@ -3541,7 +4146,8 @@
         "exhibir"
       ],
       "example": "Te voy a mostrar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mosˈt̪ɾaɾ/"
     },
     {
       "word": "DIFÍCIL",
@@ -3551,7 +4157,12 @@
         "complicado"
       ],
       "example": "Eso es difícil.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "dificultad",
+        "dificultar"
+      ],
+      "ipa": "/d̪iˈfisil/"
     },
     {
       "word": "CUIDADO",
@@ -3561,7 +4172,8 @@
         "precaución"
       ],
       "example": "Ten cuidado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kwiˈð̞að̞o/"
     },
     {
       "word": "CORRER",
@@ -3571,13 +4183,20 @@
         "apresurarse"
       ],
       "example": "Sé correr.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/koˈreɾ/"
     },
     {
       "word": "TOCAR",
       "gloss": "poner la mano en algo",
       "example": "¡No tocar!",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "toque",
+        "intocable",
+        "intacto"
+      ],
+      "ipa": "/t̪oˈkaɾ/"
     },
     {
       "word": "DISPARAR",
@@ -3586,13 +4205,15 @@
         "tirar"
       ],
       "example": "Voy a disparar!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪ispaˈɾaɾ/"
     },
     {
       "word": "ADELANTE",
       "gloss": "ir más lejos",
       "example": "¡Adelante!",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/að̞eˈlãn̪t̪e/"
     },
     {
       "word": "RECIBIR",

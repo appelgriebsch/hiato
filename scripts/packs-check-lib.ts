@@ -41,18 +41,74 @@ import {
   isHintCeilingEnforcedRel,
   type PackBandSnapshot,
 } from './hint-ceiling'
+import {
+  extrasGateKey,
+  isCurrentExtrasPass,
+  EXTRAS_GATE_VERSION,
+  type ExtrasGateLog,
+} from './extras-gate'
 
 export { GATE_VERSION, isCurrentPass }
 
 /**
- * ADR 0055: one `/…/` IPA transcription. Allowlist = ASCII letters, IPA
- * Extensions (U+0250–02AF), Spacing Modifier Letters (U+02B0–02FF, covers
- * stress / length / aspiration marks), Combining Diacritical Marks
- * (any Unicode mark, \p{M}, covers U+0300–036F and the double tie U+0361),
- * undertie (U+203F). No spaces — one word.
+ * ADR 0055 / #316: every shipped `ipa` / `family` must have a passing entry in
+ * the committed gate log (scripts/data/lemma-extras-gate.json), the logged value
+ * must match the pack exactly (tamper guard), and the entry must be current.
+ */
+export function checkExtrasGate(
+  rel: string,
+  pack: WordPack,
+  gate: ExtrasGateLog,
+): string[] {
+  const errors: string[] = []
+  for (const L of pack.lemmas) {
+    for (const field of ['ipa', 'family'] as const) {
+      const value = field === 'ipa' ? L.ipa : L.family
+      if (value === undefined) continue
+      const key = extrasGateKey(pack.lang, L.word, field)
+      const entry = gate[key]
+      const shown = field === 'ipa' ? `"${value}"` : JSON.stringify(value)
+      if (!entry) {
+        errors.push(
+          `${rel}: ${field} for "${L.word}" has no gate entry (scripts/data/lemma-extras-gate.json) — run scripts/lemma-extras.ts`,
+        )
+        continue
+      }
+      if (entry.verdict !== 'pass') {
+        errors.push(
+          `${rel}: ${field} for "${L.word}" is gated ${entry.verdict.toUpperCase()} — ${shown}`,
+        )
+        continue
+      }
+      if (!isCurrentExtrasPass(entry)) {
+        errors.push(
+          `${rel}: ${field} for "${L.word}" has a stale gate entry (gate ${entry.gate ?? 'none'}, need ${EXTRAS_GATE_VERSION}) — re-run scripts/lemma-extras.ts`,
+        )
+        continue
+      }
+      const logged = field === 'ipa' ? entry.value : JSON.stringify(entry.value)
+      const want = field === 'ipa' ? value : JSON.stringify(value)
+      if (logged !== want) {
+        errors.push(
+          `${rel}: ${field} for "${L.word}" differs from the gated value — ${shown} vs gate ${logged}`,
+        )
+      }
+    }
+  }
+  return errors
+}
+
+/**
+ * ADR 0055: one `/…/` IPA transcription. Allowlist = all Latin-script letters
+ * (\p{Script=Latin} — wiktextract transcriptions use precomposed Latin vowels
+ * like ã õ ø œ ŋ, not only IPA Extensions), IPA Extensions (U+0250–02AF),
+ * Spacing Modifier Letters (U+02B0–02FF, covers stress / length / aspiration
+ * marks), Combining Diacritical Marks (any Unicode mark, \p{M}, covers
+ * U+0300–036F and the double tie U+0361), undertie (U+203F), syllable break
+ * `.` and ASCII secondary stress `'`. No spaces — one word.
  */
 export const IPA_FORM_RE =
-  /^\/[A-Za-z\u0250-\u02AF\u02B0-\u02FF\p{M}\u203F]+\/$/u
+  /^\/[\p{Script=Latin}\u0250-\u02AF\u02B0-\u02FF\p{M}\u203F.']+\/$/u
 
 /** Hunspell, or a committed verdict cache that can answer without loading it. */
 function membershipActive(): boolean {

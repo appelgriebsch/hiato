@@ -11,6 +11,7 @@ const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
 const CEFRJ_TERMS = 'http://www.cefr-j.org/download.html'
 const CC_BY_2_FR_DEED = 'https://creativecommons.org/licenses/by/2.0/fr/'
 const TATOEBA = 'https://tatoeba.org'
+const WIKTEXTRACT = 'https://kaikki.org/dictionary/'
 
 function licenseDeedHref(license: string): string | null {
   if (/CC-BY-SA/i.test(license)) return CC_BY_SA_DEED
@@ -232,6 +233,41 @@ export function About() {
           <li>
             Sentences without a Tatoeba match are original Hiato copy generated
             with Mistral AI — no external credit required.
+          </li>
+        </ul>
+      </Card>
+
+      <Card className="mb-3">
+        <div className="mb-1 text-xs font-medium text-ink-faint">EndCard</div>
+        <h2 className="text-[15px] font-semibold text-ink">
+          Pronunciation &amp; word family
+        </h2>
+        <p className="mt-1.5 text-xs font-medium text-accent-fg">
+          <a
+            className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
+            href={CC_BY_SA_DEED}
+            rel="noreferrer"
+            target="_blank"
+          >
+            CC-BY-SA 4.0
+          </a>
+        </p>
+        <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
+          <li>
+            EndCard IPA transcriptions and word-family chips come from{' '}
+            <a
+              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              href={WIKTEXTRACT}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Wiktionary via wiktextract (kaikki.org)
+            </a>{' '}
+            (CC-BY-SA 4.0).
+          </li>
+          <li>
+            Entries without wiktextract coverage are original Hiato copy
+            generated with Mistral AI — no external credit required.
           </li>
         </ul>
       </Card>
