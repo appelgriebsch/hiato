@@ -124,4 +124,69 @@ describe('daily record (per lang+CEFR)', () => {
     })
     expect(getDailyRecord('en', 'a1')?.example).toBeUndefined()
   })
+
+  test('round-trips the ADR 0055 extras (pos/ipa/family) for the replay EndCard', () => {
+    setDailyRecord({
+      dateKey: '2026-09-19',
+      lang: 'pt',
+      cefr: 'a2',
+      word: 'CARTÃO',
+      gloss: 'peça retangular de plástico',
+      pos: 'noun',
+      ipa: '/kaʁˈtɐ̃w̃/',
+      family: ['cartões', 'carteiro'],
+      won: true,
+      completed: true,
+    })
+    expect(getDailyRecord('pt', 'a2')).toMatchObject({
+      pos: 'noun',
+      ipa: '/kaʁˈtɐ̃w̃/',
+      family: ['cartões', 'carteiro'],
+    })
+  })
+
+  test('stale record without the extras still parses (no migration)', () => {
+    mem.set(
+      DAILY_KEY,
+      JSON.stringify({
+        'en|a1': {
+          dateKey: '2026-09-19',
+          lang: 'en',
+          cefr: 'a1',
+          word: 'APPLE',
+          won: true,
+          completed: true,
+        },
+      }),
+    )
+    const rec = getDailyRecord('en', 'a1')
+    expect(rec?.word).toBe('APPLE')
+    expect(rec?.pos).toBeUndefined()
+    expect(rec?.ipa).toBeUndefined()
+    expect(rec?.family).toBeUndefined()
+  })
+
+  test('tolerant parsing drops an invalid pos, empty ipa, and caps family at 3', () => {
+    mem.set(
+      DAILY_KEY,
+      JSON.stringify({
+        'de|a2': {
+          dateKey: '2026-09-19',
+          lang: 'de',
+          cefr: 'a2',
+          word: 'HAUS',
+          pos: 'pronoun',
+          ipa: '   ',
+          family: ['Häuser', 'haus', 'Hausbau', 'extra'],
+          won: false,
+          completed: true,
+        },
+      }),
+    )
+    const rec = getDailyRecord('de', 'a2')
+    expect(rec?.word).toBe('HAUS')
+    expect(rec?.pos).toBeUndefined()
+    expect(rec?.ipa).toBeUndefined()
+    expect(rec?.family).toEqual(['Häuser', 'haus', 'Hausbau'])
+  })
 })

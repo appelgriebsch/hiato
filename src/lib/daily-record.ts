@@ -1,5 +1,13 @@
 import { localDateKey } from '../engine'
-import { isPackCefr, isPackLang, type PackCefr, type PackLang } from '../packs/schema'
+import {
+  FAMILY_MAX,
+  isPackCefr,
+  isPackLang,
+  isPackPos,
+  type PackCefr,
+  type PackLang,
+  type PackPos,
+} from '../packs/schema'
 
 /** One completed daily attempt per lang+CEFR (latest dateKey wins). */
 export const DAILY_KEY = 'hiato.daily'
@@ -12,6 +20,10 @@ export type DailyRecord = {
   gloss?: string
   synonyms?: string[]
   example?: string
+  /** ADR 0055 extras — optional so stale records without them still parse. */
+  pos?: PackPos
+  ipa?: string
+  family?: string[]
   won: boolean
   completed: boolean
 }
@@ -41,11 +53,19 @@ function parseRecord(raw: unknown): DailyRecord | null {
   }
   if (typeof o.gloss === 'string' && o.gloss.length > 0) rec.gloss = o.gloss
   if (typeof o.example === 'string' && o.example.length > 0) rec.example = o.example
+  if (isPackPos(o.pos)) rec.pos = o.pos
+  if (typeof o.ipa === 'string' && o.ipa.trim().length > 0) rec.ipa = o.ipa
   if (Array.isArray(o.synonyms)) {
     const synonyms = o.synonyms
       .filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
       .slice(0, 3)
     if (synonyms.length > 0) rec.synonyms = synonyms
+  }
+  if (Array.isArray(o.family)) {
+    const family = o.family
+      .filter((item): item is string => typeof item === 'string' && item.trim().length > 0)
+      .slice(0, FAMILY_MAX)
+    if (family.length > 0) rec.family = family
   }
   return rec
 }

@@ -463,6 +463,128 @@ describe('packs:check example sentence (ADR 0049, #246)', () => {
   })
 })
 
+describe('packs:check lemma extras pos/ipa/family (ADR 0055, #314)', () => {
+  test('accepts well-formed pos / ipa / family', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'b2',
+        lemmas: [
+          {
+            word: 'ENVISAGE',
+            gloss: 'to imagine in the future',
+            pos: 'verb',
+            ipa: '/ɪnˈvɪzɪdʒ/',
+            family: ['envisaged', 'envisaging'],
+          },
+        ],
+      }),
+      'en/b2.json',
+    )
+    expect(p.lemmas[0]?.pos).toBe('verb')
+    expect(p.lemmas[0]?.ipa).toBe('/ɪnˈvɪzɪdʒ/')
+    expect(p.lemmas[0]?.family).toEqual(['envisaged', 'envisaging'])
+  })
+
+  test('lemmas without the extras stay valid and carry no fields', () => {
+    const p = validatePack(
+      pack({
+        lang: 'en',
+        cefr: 'a1',
+        lemmas: [{ word: 'HOUSE', gloss: 'a building to live in' }],
+      }),
+      'en/a1.json',
+    )
+    expect(p.lemmas[0]?.pos).toBeUndefined()
+    expect(p.lemmas[0]?.ipa).toBeUndefined()
+    expect(p.lemmas[0]?.family).toBeUndefined()
+  })
+
+  test('rejects an unknown pos code', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'b2',
+          lemmas: [{ word: 'ENVISAGE', gloss: 'to imagine', pos: 'pronoun' as never }],
+        }),
+        'en/b2.json',
+      ),
+    ).toThrow(/\.pos must be noun\|verb\|adjective\|adverb/)
+  })
+
+  test('rejects ipa without slashes, outside the allowlist, or over the cap', () => {
+    const lemma = { word: 'ACTION', gloss: 'something someone does' }
+    expect(() =>
+      validatePack(
+        pack({ lang: 'en', cefr: 'a1', lemmas: [{ ...lemma, ipa: 'ˈækʃən' }] }),
+        'en/a1.json',
+      ),
+    ).toThrow(/ipa must be one/)
+    expect(() =>
+      validatePack(
+        pack({ lang: 'en', cefr: 'a1', lemmas: [{ ...lemma, ipa: '/ækʃən?/' }] }),
+        'en/a1.json',
+      ),
+    ).toThrow(/ipa must be one/)
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [{ ...lemma, ipa: `/${'a'.repeat(45)}/` }],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/ipa length 47 exceeds cap/)
+  })
+
+  test('rejects family over the cap, equal to the lemma, or containing it', () => {
+    const lemma = { word: 'HOUSE', gloss: 'a building to live in' }
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [{ ...lemma, family: ['homes', 'houseboat', 'housing', 'houseful'] }],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/family length 4 exceeds cap 3/)
+    expect(() =>
+      validatePack(
+        pack({ lang: 'en', cefr: 'a1', lemmas: [{ ...lemma, family: ['house'] }] }),
+        'en/a1.json',
+      ),
+    ).toThrow(/must differ from the lemma/)
+    expect(() =>
+      validatePack(
+        pack({ lang: 'en', cefr: 'a1', lemmas: [{ ...lemma, family: ['the house'] }] }),
+        'en/a1.json',
+      ),
+    ).toThrow(/spoiler — family/)
+    // Derivational forms that merely share the stem stay valid.
+    const ok = validatePack(
+      pack({ lang: 'en', cefr: 'a1', lemmas: [{ ...lemma, family: ['houseboat'] }] }),
+      'en/a1.json',
+    )
+    expect(ok.lemmas[0]?.family).toEqual(['houseboat'])
+  })
+
+  test('rejects a denylisted family entry', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'fr',
+          cefr: 'a1',
+          lemmas: [{ word: 'MAISON', gloss: 'une habitation', family: ['pédé'] }],
+        }),
+        'fr/a1.json',
+      ),
+    ).toThrow(/denylist — family/)
+  })
+})
+
 describe('packs:check example gate — stock names and gate version (#247 reopen)', () => {
   const gate: ExampleGateLog = {
     'en/a1.json|HAPPY': {

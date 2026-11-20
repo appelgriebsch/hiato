@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { PixelIcon } from '@/components/PixelIcon'
 import { speakLemma, subscribeSpeakActivity } from '@/lib/speech'
-import { speakLemmaAriaLabel } from '@/packs/labels'
-import type { PackLang } from '@/packs/schema'
+import { posLabel, speakLemmaAriaLabel } from '@/packs/labels'
+import { FAMILY_MAX, type PackLang, type PackPos } from '@/packs/schema'
 
 /**
  * Post-round gloss, lemma, and tap-to-speak (ADR 0052 §5.5: gloss Inter 18px 600,
  * the word Jersey 37px with +0.06em tracking, example Inter italic, speaker
- * pixel icon). click is native so iOS keeps the user gesture (ADR 0037).
+ * pixel icon). ADR 0057 adds the pos/ipa meta row under the word and the labeled
+ * Synonyms / Word family chip groups — all EndCard-only. click is native so iOS
+ * keeps the user gesture (ADR 0037).
  */
 export function LemmaTeach({
   lang,
@@ -15,6 +17,9 @@ export function LemmaTeach({
   gloss,
   synonyms,
   example,
+  pos,
+  ipa,
+  family,
   showSpeak,
 }: {
   lang: PackLang
@@ -23,8 +28,20 @@ export function LemmaTeach({
   synonyms: string[]
   /** One example sentence in the pack language (ADR 0049); EndCard-only. */
   example?: string
+  /** ADR 0055: pos code, label localized via POS_LABELS; EndCard-only. */
+  pos?: PackPos
+  /** ADR 0055: one `/…/` IPA transcription; EndCard-only. */
+  ipa?: string
+  /** ADR 0055: derivational relatives (≤ FAMILY_MAX chips); EndCard-only. */
+  family?: string[]
   showSpeak: boolean
 }) {
+  const posChip = pos ? posLabel(lang, pos) : null
+  // Stored with slashes; the slashes render aria-hidden around the glyphs.
+  const ipaBody = (ipa ?? '').trim().replace(/^\//, '').replace(/\/$/, '')
+  const familyChips = (family ?? [])
+    .filter((f) => f.trim().length > 0)
+    .slice(0, FAMILY_MAX)
   const speakBtnRef = useRef<HTMLButtonElement>(null)
   const [speaking, setSpeaking] = useState(false)
   const [speakNote, setSpeakNote] = useState<'idle' | 'playing' | 'failed'>('idle')
@@ -111,6 +128,29 @@ export function LemmaTeach({
           </button>
         ) : null}
       </div>
+      {posChip || ipaBody ? (
+        <div
+          data-endcard-meta
+          className="mt-2 flex flex-wrap items-center justify-center gap-2"
+        >
+          {posChip ? (
+            <span
+              lang={lang}
+              data-endcard-pos
+              className="px-frame inline-flex items-center bg-accent-soft px-2.5 py-1 text-pixel-label text-accent-fg [--px-edge:var(--color-accent-fg)]"
+            >
+              {posChip}
+            </span>
+          ) : null}
+          {ipaBody ? (
+            <span lang={lang} data-endcard-ipa className="text-sm text-ink-muted">
+              <span aria-hidden="true">/</span>
+              {ipaBody}
+              <span aria-hidden="true">/</span>
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       {example?.trim() ? (
         <p
           lang={lang}
@@ -136,16 +176,39 @@ export function LemmaTeach({
         </p>
       ) : null}
       {synonyms.length > 0 ? (
-        <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
-          {synonyms.map((s) => (
-            <span
-              key={s}
-              lang={lang}
-              className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
-            >
-              {s}
-            </span>
-          ))}
+        <div data-endcard-synonyms className="mt-2.5">
+          <span lang="en" className="mb-1.5 block text-pixel-label text-ink-faint">
+            Synonyms
+          </span>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {synonyms.map((s) => (
+              <span
+                key={s}
+                lang={lang}
+                className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+      ) : null}
+      {familyChips.length > 0 ? (
+        <div data-endcard-family className="mt-2.5">
+          <span lang="en" className="mb-1.5 block text-pixel-label text-ink-faint">
+            Word family
+          </span>
+          <div className="flex flex-wrap justify-center gap-1.5">
+            {familyChips.map((f) => (
+              <span
+                key={f}
+                lang={lang}
+                className="px-frame inline-flex items-center bg-transparent px-2.5 py-1 text-[13px] font-medium text-ink [--px-edge:var(--color-line)]"
+              >
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
       ) : null}
     </>
