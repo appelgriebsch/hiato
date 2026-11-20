@@ -55,3 +55,6 @@ scripts/data/wordhoard*.zip
 
 # Tatoeba sentence dumps (fetched by example-sentences.ts, CC-BY 2.0 FR — never committed)
 scripts/data/tatoeba/
+
+# wiktextract per-language extracts (fetched by lemma-extras.ts, CC-BY-SA 4.0 — never committed; checksums in sha256.json are)
+scripts/data/wiktextract/*.gz

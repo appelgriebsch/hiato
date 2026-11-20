@@ -1,5 +1,5 @@
 {
-  "version": 16,
+  "version": 18,
   "lang": "pt",
   "cefr": "c2",
   "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
@@ -13,7 +13,8 @@
   "lemmas": [
     {
       "word": "CEGUEIRA",
-      "gloss": "falta total ou parcial de visão"
+      "gloss": "falta total ou parcial de visão",
+      "ipa": "/se.ˈgej.ɾə/"
     },
     {
       "word": "ENCOMENDOU",
@@ -47,7 +48,13 @@
     },
     {
       "word": "MARISCO",
-      "gloss": "animais do oceano com concha comestíveis"
+      "gloss": "animais do oceano com concha comestíveis",
+      "family": [
+        "mariscada",
+        "mariscagem",
+        "mariscar"
+      ],
+      "ipa": "/maˈɾiʃ.ku/"
     },
     {
       "word": "CONSOLA",
@@ -89,7 +96,8 @@
       "gloss": "retorno de doença ou mau hábito",
       "synonyms": [
         "retrocesso"
-      ]
+      ],
+      "ipa": "/Rɨ.kɐ.ˈi.dɐ/"
     },
     {
       "word": "MENTIRAM",
@@ -127,14 +135,16 @@
       "synonyms": [
         "carinho",
         "doçura"
-      ]
+      ],
+      "ipa": "/tɨɾ.ˈnu.ɾɐ/"
     },
     {
       "word": "COMUNISMO",
       "gloss": "sistema político sem propriedade privada",
       "synonyms": [
         "marxismo"
-      ]
+      ],
+      "ipa": "/ko.muˈniz.mʊ/"
     },
     {
       "word": "LEVAVAM",
@@ -180,7 +190,8 @@
       "synonyms": [
         "eternos",
         "perenes"
-      ]
+      ],
+      "ipa": "/ɪ.moɹ.ˈtajs/"
     },
     {
       "word": "VESTI",
@@ -260,7 +271,8 @@
       "synonyms": [
         "objeto",
         "utensílio"
-      ]
+      ],
+      "ipa": "/ˈtɾaʃ.tɨ/"
     },
     {
       "word": "CURTOS",
@@ -288,7 +300,11 @@
       "synonyms": [
         "legal",
         "forense"
-      ]
+      ],
+      "family": [
+        "juridicamente"
+      ],
+      "ipa": "/ʒu.ˈɾi.di.ku/"
     },
     {
       "word": "ENVIÁMOS",
@@ -334,7 +350,11 @@
       "synonyms": [
         "avaro",
         "pouco"
-      ]
+      ],
+      "family": [
+        "mesquinhez"
+      ],
+      "ipa": "/mɨʃ.ˈki.ɲu/"
     },
     {
       "word": "ENVOLVENDO",
@@ -349,7 +369,8 @@
       "gloss": "fruta de polpa doce e casca alaranjada.",
       "synonyms": [
         "abricó"
-      ]
+      ],
+      "ipa": "/daˈmas.ku/"
     },
     {
       "word": "ENDEREÇOS",
@@ -373,7 +394,8 @@
       "synonyms": [
         "loucura",
         "insanidade"
-      ]
+      ],
+      "ipa": "/dɨ.ˈmẽ.sjɐ/"
     },
     {
       "word": "PRODUZEM",
@@ -388,12 +410,14 @@
       "gloss": "quem vê o lado negativo das coisas",
       "synonyms": [
         "desanimado"
-      ]
+      ],
+      "ipa": "/pɛ.si.ˈmiʃ.tɐ/"
     },
     {
       "word": "ESCADARIA",
       "gloss": "conjunto de degraus que liga pisos diferentes.",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/iʃ.kɐ.dɐ.ˈɾi.ɐ/"
     },
     {
       "word": "INCERTEZA",
@@ -401,7 +425,8 @@
       "synonyms": [
         "dúvida",
         "hesitação"
-      ]
+      ],
+      "ipa": "/ĩ.sɨɾ.ˈte.zɐ/"
     },
     {
       "word": "SUBSÍDIO",
@@ -409,7 +434,8 @@
       "synonyms": [
         "ajuda",
         "apoio"
-      ]
+      ],
+      "ipa": "/sub'sidʒjʊ/"
     },
     {
       "word": "AMPLIAR",
@@ -417,7 +443,8 @@
       "synonyms": [
         "alargar",
         "expandir"
-      ]
+      ],
+      "ipa": "/ɐ̃.pli.ˈaɾ/"
     },
     {
       "word": "TRAPOS",
@@ -453,7 +480,8 @@
       "synonyms": [
         "prever",
         "adiantar"
-      ]
+      ],
+      "ipa": "/ɐ̃.tɨ.si.ˈpaɾ/"
     },
     {
       "word": "BANCÁRIOS",
@@ -476,7 +504,8 @@
       "synonyms": [
         "confortável",
         "prática"
-      ]
+      ],
+      "ipa": "/ˈkɔ.mu.dɐ/"
     },
     {
       "word": "ASSISTIU",
@@ -491,6 +520,11 @@
       "gloss": "violar uma regra ou lei.",
       "synonyms": [
         "transgredir"
+      ],
+      "family": [
+        "infração",
+        "infrator",
+        "infringido"
       ]
     },
     {
@@ -499,7 +533,8 @@
       "synonyms": [
         "guardar",
         "manter"
-      ]
+      ],
+      "ipa": "/kõ.sɨɾ.ˈvaɾ/"
     },
     {
       "word": "JUNTAREM",
@@ -523,18 +558,23 @@
       "synonyms": [
         "gancho",
         "isca"
+      ],
+      "family": [
+        "anzolar"
       ]
     },
     {
       "word": "SALGADO",
-      "gloss": "com muito cloreto de sódio"
+      "gloss": "com muito cloreto de sódio",
+      "ipa": "/saɫ.ˈɡa.du/"
     },
     {
       "word": "JATO",
       "gloss": "um fluxo forte e contínuo de líquido ou gás",
       "synonyms": [
         "avião"
-      ]
+      ],
+      "ipa": "/ˈʒa.tu/"
     },
     {
       "word": "ALARIDO",
@@ -542,7 +582,8 @@
       "synonyms": [
         "barulho",
         "ruído"
-      ]
+      ],
+      "ipa": "/ɐ.lɐ.ˈɾi.du/"
     },
     {
       "word": "DÉCIMA",
@@ -682,7 +723,8 @@
       "synonyms": [
         "confeitaria",
         "padaria"
-      ]
+      ],
+      "ipa": "/pɐʃ.tɨ.lɐ.ˈɾi.ɐ/"
     },
     {
       "word": "BETÃO",
@@ -710,7 +752,8 @@
     },
     {
       "word": "SÍFILIS",
-      "gloss": "doença infecciosa transmitida sexualmente."
+      "gloss": "doença infecciosa transmitida sexualmente.",
+      "ipa": "/ˈsi.fi.liʃ/"
     },
     {
       "word": "REJEITOU",
@@ -834,7 +877,8 @@
       "synonyms": [
         "egocentrismo",
         "individualismo"
-      ]
+      ],
+      "ipa": "/i.ˈɡwiʒ.mu/"
     },
     {
       "word": "TRAZEREM",
@@ -844,7 +888,8 @@
     {
       "word": "ÍNDICE",
       "gloss": "lista ordenada de capítulos e páginas",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/ˈin.ʤi.si/"
     },
     {
       "word": "PAGAREM",
@@ -874,7 +919,8 @@
       "synonyms": [
         "cúpula",
         "encontro"
-      ]
+      ],
+      "ipa": "/si.ˈmɐj.ɾɐ/"
     },
     {
       "word": "CUMPRO",
@@ -904,7 +950,8 @@
       "synonyms": [
         "tetravô",
         "antepassado"
-      ]
+      ],
+      "ipa": "/bi.zɐ.ˈvo/"
     },
     {
       "word": "PRIMÁRIAS",
@@ -954,7 +1001,8 @@
       "gloss": "parte colorida do olho que controla a entrada de luz.",
       "synonyms": [
         "pupila"
-      ]
+      ],
+      "ipa": "/ˈi.ɾiʃ/"
     },
     {
       "word": "MARCADAS",
@@ -977,12 +1025,14 @@
       "synonyms": [
         "cão",
         "vira-lata"
-      ]
+      ],
+      "ipa": "/Rɐ.ˈfɐj.ɾu/"
     },
     {
       "word": "OITAVA",
       "gloss": "intervalo musical entre uma nota e a mesma nota mais aguda",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/oj.ˈta.vɐ/"
     },
     {
       "word": "GANCHOS",
@@ -1010,7 +1060,8 @@
       "gloss": "massa sólida formada pelo sangue fora da veia",
       "synonyms": [
         "trombo"
-      ]
+      ],
+      "ipa": "/ˈkwa.ɡu.lu/"
     },
     {
       "word": "LUTAVA",
@@ -1037,7 +1088,8 @@
       "gloss": "que nota detalhes pequenos depressa",
       "synonyms": [
         "atento"
-      ]
+      ],
+      "ipa": "/pɨɾʃ.pi.ˈkaʃ/"
     },
     {
       "word": "PROTETOR",
@@ -1045,6 +1097,9 @@
       "synonyms": [
         "guardião",
         "defensor"
+      ],
+      "family": [
+        "superprotetor"
       ]
     },
     {
@@ -1053,7 +1108,8 @@
       "synonyms": [
         "túnica",
         "manto"
-      ]
+      ],
+      "ipa": "/ˈRɔ.bɨ/"
     },
     {
       "word": "AORTA",
@@ -1077,7 +1133,8 @@
       "synonyms": [
         "tendência",
         "propensão"
-      ]
+      ],
+      "ipa": "/ĩ.kli.nɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "ESTANTE",
@@ -1085,14 +1142,16 @@
       "synonyms": [
         "prateleira",
         "suporte"
-      ]
+      ],
+      "ipa": "/iʃ.ˈtɐ̃.tɨ/"
     },
     {
       "word": "DESLOCADO",
       "gloss": "que foi movido de sua posição original.",
       "synonyms": [
         "desajustado"
-      ]
+      ],
+      "ipa": "/dɨʒ.lu.ˈka.du/"
     },
     {
       "word": "MEDITAR",
@@ -1100,7 +1159,8 @@
       "synonyms": [
         "ponderar",
         "refletir"
-      ]
+      ],
+      "ipa": "/mɨ.di.ˈtaɾ/"
     },
     {
       "word": "PASSAREMOS",
@@ -1116,7 +1176,8 @@
       "synonyms": [
         "modista",
         "designer"
-      ]
+      ],
+      "ipa": "/iʃ.ti.ˈliʃ.tɐ/"
     },
     {
       "word": "PROGRAMADA",
@@ -1140,7 +1201,8 @@
       "synonyms": [
         "mente",
         "razão"
-      ]
+      ],
+      "ipa": "/ĩ.tɨ.ˈlɛk.tu/"
     },
     {
       "word": "MARIONETAS",
@@ -1164,7 +1226,8 @@
       "synonyms": [
         "queixa",
         "protesto"
-      ]
+      ],
+      "ipa": "/Rɨ.klɐ.mɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "LIDEI",
@@ -1180,7 +1243,8 @@
       "synonyms": [
         "etiqueta",
         "designação"
-      ]
+      ],
+      "ipa": "/ˈRɔ.tu.lu/"
     },
     {
       "word": "DEVASTADOR",
@@ -1196,7 +1260,8 @@
       "synonyms": [
         "tremer",
         "oscilar"
-      ]
+      ],
+      "ipa": "/vi.ˈbɾaɾ/"
     },
     {
       "word": "GATE",
@@ -1212,7 +1277,8 @@
       "synonyms": [
         "integralidade",
         "conjunto"
-      ]
+      ],
+      "ipa": "/tu.tɐ.li.ˈda.dɨ/"
     },
     {
       "word": "VARÍOLA",
@@ -1220,7 +1286,8 @@
       "synonyms": [
         "doença",
         "peste"
-      ]
+      ],
+      "ipa": "/vɐ.ˈɾi.u.lɐ/"
     },
     {
       "word": "ORDINÁRIO",
@@ -1228,7 +1295,11 @@
       "synonyms": [
         "comum",
         "vulgar"
-      ]
+      ],
+      "family": [
+        "transordinário"
+      ],
+      "ipa": "/ɔɾ.di.ˈna.ɾju/"
     },
     {
       "word": "FEDELHO",
@@ -1236,7 +1307,8 @@
       "synonyms": [
         "moleque",
         "menino"
-      ]
+      ],
+      "ipa": "/fɨ.ˈdɐj.ʎu/"
     },
     {
       "word": "DESTROEM",
@@ -1259,7 +1331,8 @@
       "synonyms": [
         "barco",
         "embarcação"
-      ]
+      ],
+      "ipa": "/kɜˈnoɜ/"
     },
     {
       "word": "DESFORRA",
@@ -1282,7 +1355,8 @@
       "gloss": "aparelho que produz calor",
       "synonyms": [
         "calefator"
-      ]
+      ],
+      "ipa": "/ɐ.kɛ.sɨ.ˈdoɾ/"
     },
     {
       "word": "RECEIA",
@@ -1305,7 +1379,8 @@
       "synonyms": [
         "inseto",
         "himenóptero"
-      ]
+      ],
+      "ipa": "/ˈveʃ.pɐ/"
     },
     {
       "word": "CONCURSOS",
@@ -1336,7 +1411,8 @@
       "synonyms": [
         "sofrimento",
         "angústia"
-      ]
+      ],
+      "ipa": "/tuɾ.ˈmẽ.tu/"
     },
     {
       "word": "DECLÍNIO",
@@ -1344,7 +1420,8 @@
       "synonyms": [
         "queda",
         "decadência"
-      ]
+      ],
+      "ipa": "/dɨ.ˈkli.nju/"
     },
     {
       "word": "VERSOS",
@@ -1381,7 +1458,8 @@
     {
       "word": "CINZEIRO",
       "gloss": "recipiente para os restos de cigarro",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/sĩ.ˈzej.ɾu/"
     },
     {
       "word": "ATRASOS",
@@ -1485,7 +1563,8 @@
       "synonyms": [
         "hospitaleiro",
         "receptivo"
-      ]
+      ],
+      "ipa": "/ɐ.ku.ʎɨ.ˈdoɾ/"
     },
     {
       "word": "PARECENDO",
@@ -1500,7 +1579,8 @@
       "gloss": "fase de desenvolvimento sexual",
       "synonyms": [
         "adolescência"
-      ]
+      ],
+      "ipa": "/pu.bɨɾ.ˈda.dɨ/"
     },
     {
       "word": "MITOS",
@@ -1524,7 +1604,8 @@
       "synonyms": [
         "cortante",
         "afiado"
-      ]
+      ],
+      "ipa": "/tɜˈʎɜ̃tɨ/"
     },
     {
       "word": "MERAMENTE",
@@ -1579,7 +1660,8 @@
       "synonyms": [
         "irado",
         "furioso"
-      ]
+      ],
+      "ipa": "/Raj.ˈvo.zu/"
     },
     {
       "word": "FORMADA",
@@ -1625,11 +1707,13 @@
       "gloss": "que não faz mal a ninguém",
       "synonyms": [
         "inofensivo"
-      ]
+      ],
+      "ipa": "/i.ˈnɔ.kwu/"
     },
     {
       "word": "ESPANTALHO",
-      "gloss": "boneco para afastar aves"
+      "gloss": "boneco para afastar aves",
+      "ipa": "/iʃ.pɐ̃.ˈta.ʎu/"
     },
     {
       "word": "VIAJADO",
@@ -1637,7 +1721,8 @@
     },
     {
       "word": "CONCESSÃO",
-      "gloss": "ato de permitir algo a alguém."
+      "gloss": "ato de permitir algo a alguém.",
+      "ipa": "/kõ.sɨ.ˈsɐ̃w̃/"
     },
     {
       "word": "TRAREI",
@@ -1672,7 +1757,8 @@
     },
     {
       "word": "LEGISLAÇÃO",
-      "gloss": "conjunto de leis de um país."
+      "gloss": "conjunto de leis de um país.",
+      "ipa": "/lɨ.ʒiʒ.lɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "RENOVAÇÃO",
@@ -1716,7 +1802,8 @@
     },
     {
       "word": "PAVILHÃO",
-      "gloss": "grande construção para eventos."
+      "gloss": "grande construção para eventos.",
+      "ipa": "/pɐ.vi.ˈʎɐ̃w̃/"
     },
     {
       "word": "COMETIDOS",
@@ -1764,7 +1851,13 @@
     },
     {
       "word": "BANAL",
-      "gloss": "comum e sem originalidade."
+      "gloss": "comum e sem originalidade.",
+      "family": [
+        "banalidade",
+        "banalização",
+        "banalizado"
+      ],
+      "ipa": "/bɐ.ˈnaɫ/"
     },
     {
       "word": "OPOSTA",
@@ -1772,7 +1865,8 @@
     },
     {
       "word": "SATURAÇÃO",
-      "gloss": "estado de estar completamente cheio."
+      "gloss": "estado de estar completamente cheio.",
+      "ipa": "/sɐ.tu.ɾɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "PARVAS",
@@ -1780,7 +1874,8 @@
     },
     {
       "word": "TALHO",
-      "gloss": "corte feito com instrumento afiado."
+      "gloss": "corte feito com instrumento afiado.",
+      "ipa": "/ˈta.ʎu/"
     },
     {
       "word": "MESADA",
@@ -1792,7 +1887,8 @@
     },
     {
       "word": "CLIQUE",
-      "gloss": "som ou ação de apertar um botão."
+      "gloss": "som ou ação de apertar um botão.",
+      "ipa": "/ˈkli.kɨ/"
     },
     {
       "word": "DESPACHADO",
@@ -1833,7 +1929,8 @@
       "synonyms": [
         "aplicado",
         "colocado"
-      ]
+      ],
+      "ipa": "/ĩ.vɨʃ.ˈti.du/"
     },
     {
       "word": "ELFOS",
@@ -1849,7 +1946,8 @@
       "synonyms": [
         "talento",
         "dom"
-      ]
+      ],
+      "ipa": "/ˈdɔ.tɨ/"
     },
     {
       "word": "PRESSÕES",
@@ -1869,7 +1967,8 @@
       "gloss": "ato de dominar com força.",
       "synonyms": [
         "domínio"
-      ]
+      ],
+      "ipa": "/ɔ.pɾɨ.ˈsɐ̃w̃/"
     },
     {
       "word": "TIROTEIOS",
@@ -1882,7 +1981,8 @@
       "synonyms": [
         "presunto",
         "frio"
-      ]
+      ],
+      "ipa": "/ˈfjɐ̃.bɾɨ/"
     },
     {
       "word": "FÓRUM",
@@ -1996,7 +2096,8 @@
       "synonyms": [
         "pedir",
         "requerer"
-      ]
+      ],
+      "ipa": "/su.li.si.ˈtaɾ/"
     },
     {
       "word": "PATRIOTAS",
@@ -2017,7 +2118,13 @@
       "synonyms": [
         "sonda",
         "tubo"
-      ]
+      ],
+      "family": [
+        "cateterismo",
+        "cateterização",
+        "cateterizar"
+      ],
+      "ipa": "/kate'tɛɾ/"
     },
     {
       "word": "ALMOÇOS",
@@ -2033,14 +2140,21 @@
       "synonyms": [
         "oposição",
         "discordância"
-      ]
+      ],
+      "ipa": "/ɔb.ʒɛ.ˈsɐ̃w̃/"
     },
     {
       "word": "RELATIVO",
       "gloss": "que tem ligação com outra coisa",
       "synonyms": [
         "comparado"
-      ]
+      ],
+      "family": [
+        "relatividade",
+        "relativismo",
+        "relativista"
+      ],
+      "ipa": "/Rɨ.lɐ.ˈti.vu/"
     },
     {
       "word": "ASES",
@@ -2090,7 +2204,8 @@
       "synonyms": [
         "barulho",
         "ruído"
-      ]
+      ],
+      "ipa": "/es.ˈtrõ.du/"
     },
     {
       "word": "BURRITO",
@@ -2131,7 +2246,8 @@
       "synonyms": [
         "andando",
         "marchando"
-      ]
+      ],
+      "ipa": "/kɐ.mɪ.ˈɲãⁿ.dʊ/"
     },
     {
       "word": "VEGETAÇÃO",
@@ -2139,7 +2255,8 @@
       "synonyms": [
         "plantas",
         "folhagem"
-      ]
+      ],
+      "ipa": "/vɨ.ʒɨ.tɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "CÁLCIO",
@@ -2147,7 +2264,8 @@
       "synonyms": [
         "mineral",
         "osso"
-      ]
+      ],
+      "ipa": "/ˈkałsju/"
     },
     {
       "word": "SEDUÇÃO",
@@ -2163,7 +2281,8 @@
       "synonyms": [
         "envoltório",
         "cápsula"
-      ]
+      ],
+      "ipa": "/kɐ.ˈzu.lu/"
     },
     {
       "word": "SAÍAM",
@@ -2193,7 +2312,8 @@
       "synonyms": [
         "precisar",
         "requerer"
-      ]
+      ],
+      "ipa": "/nɨ.sɨ.si.ˈtaɾ/"
     },
     {
       "word": "CHORÃO",
@@ -2215,7 +2335,8 @@
       "gloss": "cama de dois andares sobreposta",
       "synonyms": [
         "cama"
-      ]
+      ],
+      "ipa": "/bɨ.ˈli.ʃɨ/"
     },
     {
       "word": "PROJETOS",
@@ -2246,7 +2367,8 @@
       "synonyms": [
         "lâmina",
         "placa"
-      ]
+      ],
+      "ipa": "/ˈʃa.pɐ/"
     },
     {
       "word": "AMBIENTAIS",
@@ -2272,7 +2394,8 @@
     },
     {
       "word": "TRÉGUA",
-      "gloss": "pausa combinada nos combates de uma guerra"
+      "gloss": "pausa combinada nos combates de uma guerra",
+      "ipa": "/ˈtɾɛ.ɡwɐ/"
     },
     {
       "word": "EXTREMAS",
@@ -2351,7 +2474,8 @@
     {
       "word": "FABRICO",
       "gloss": "produção industrial de mercadorias",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/fɐ.ˈbɾi.ku/"
     },
     {
       "word": "HOSPEDADO",
@@ -2443,11 +2567,13 @@
       "gloss": "peça de roupa de banho feminina.",
       "synonyms": [
         "maiô"
-      ]
+      ],
+      "ipa": "/bi.ˈki.ni/"
     },
     {
       "word": "TOURNÉE",
-      "gloss": "turnê ou série de apresentações em vários locais."
+      "gloss": "turnê ou série de apresentações em vários locais.",
+      "ipa": "/tuɾ.ˈne/"
     },
     {
       "word": "QUEIMEI",
@@ -2466,14 +2592,16 @@
     {
       "word": "ESPÉCIME",
       "gloss": "exemplar ou amostra",
-      "synonyms": []
+      "synonyms": [],
+      "ipa": "/iʃ.ˈpɛ.si.mɨ/"
     },
     {
       "word": "EXÓTICO",
       "gloss": "algo originário de lugar distante e diferente.",
       "synonyms": [
         "estrangeiro"
-      ]
+      ],
+      "ipa": "/i.ˈzɔ.ti.ku/"
     },
     {
       "word": "VOMITEI",
@@ -2510,11 +2638,13 @@
     },
     {
       "word": "ESTALEIRO",
-      "gloss": "lugar onde se constroem e reparam navios"
+      "gloss": "lugar onde se constroem e reparam navios",
+      "ipa": "/iʃ.tɐ.ˈlɐj.ɾu/"
     },
     {
       "word": "ZULU",
-      "gloss": "povo africano e sua língua."
+      "gloss": "povo africano e sua língua.",
+      "ipa": "/zu.ˈlu/"
     },
     {
       "word": "LATINOS",
@@ -2526,7 +2656,8 @@
       "gloss": "ato de restabelecer funções vitais.",
       "synonyms": [
         "ressuscitação"
-      ]
+      ],
+      "ipa": "/Rjɐ.ni.mɐ.ˈsɐ̃w̃/"
     },
     {
       "word": "PASSADEIRA",
@@ -2541,7 +2672,8 @@
       "synonyms": [
         "abençoado",
         "sagrado"
-      ]
+      ],
+      "ipa": "/bẽ.ˈdi.tu/"
     },
     {
       "word": "EXISTES",
@@ -2601,14 +2733,16 @@
       "gloss": "algo que determina ou resolve uma questão.",
       "synonyms": [
         "crucial"
-      ]
+      ],
+      "ipa": "/dɨ.si.ˈzi.vu/"
     },
     {
       "word": "DEVORAR",
       "gloss": "comer algo com grande rapidez.",
       "synonyms": [
         "consumir"
-      ]
+      ],
+      "ipa": "/dɨ.vu.ˈɾaɾ/"
     },
     {
       "word": "BALDES",
@@ -2636,7 +2770,8 @@
       "gloss": "ação de introduzir algo em um espaço.",
       "synonyms": [
         "inserida"
-      ]
+      ],
+      "ipa": "/ẽ.ˈfja.dɐ/"
     },
     {
       "word": "APAGUEM",
@@ -2676,7 +2811,8 @@
         "tensão",
         "expectativa",
         "intriga"
-      ]
+      ],
+      "ipa": "/suʃ.ˈpsɨ/"
     },
     {
       "word": "BÚFALOS",
@@ -2721,7 +2857,8 @@
       "synonyms": [
         "munição",
         "cápsula"
-      ]
+      ],
+      "ipa": "/kɐɾ.ˈtu.ʃu/"
     },
     {
       "word": "AUTORES",
@@ -2755,7 +2892,8 @@
       "synonyms": [
         "regente",
         "líder"
-      ]
+      ],
+      "ipa": "/ɡu.vɨɾ.ˈnɐ̃.tɨ/"
     },
     {
       "word": "RABINHO",
@@ -2785,7 +2923,11 @@
         "objetivo",
         "propósito",
         "meta"
-      ]
+      ],
+      "family": [
+        "equifinalidade"
+      ],
+      "ipa": "/fi.nɐ.li.ˈda.dɨ/"
     },
     {
       "word": "BARONESA",
@@ -2794,7 +2936,8 @@
         "nobre",
         "aristocrata",
         "titular"
-      ]
+      ],
+      "ipa": "/bɐ.ɾu.ˈne.zɐ/"
     },
     {
       "word": "BRACELETE",
@@ -2808,7 +2951,8 @@
       "gloss": "pessoa que entra no lugar de outra",
       "synonyms": [
         "reserva"
-      ]
+      ],
+      "ipa": "/su.ˈplẽ.tɨ/"
     },
     {
       "word": "ESTALAR",

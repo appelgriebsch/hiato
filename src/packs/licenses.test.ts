@@ -23,8 +23,14 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
     expect(a1b2).toMatch(/CEFR-J/)
     expect(a1b2).toMatch(/Yukio Tono/)
     expect(a1b2).toMatch(/cefr-j\.org/)
-    expect(a1b2.toUpperCase()).not.toContain('CC0')
-    expect(a1b2.toUpperCase()).not.toMatch(/CC-BY-SA/)
+    // the band's own license stays CEFR-J citation; the wiktextract CC-BY-SA
+    // lemma-extras note (ADR 0055 / #316) rides on the first band as a note
+    const a1b2License = PACK_LICENSES.find((p) => p.lang === 'en')!.bands.find(
+      (b) => b.levels === 'A1–B2',
+    )!.license
+    expect(a1b2License.toUpperCase()).not.toContain('CC0')
+    expect(a1b2License.toUpperCase()).not.toMatch(/CC-BY-SA/)
+    expect(a1b2.toUpperCase()).toContain('CC-BY-SA')
 
     const c1c2 = bandBlob('en', 'C1–C2')
     expect(c1c2.toUpperCase()).toContain('CC-BY-SA')

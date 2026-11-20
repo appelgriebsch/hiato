@@ -518,7 +518,7 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
 
     // Gloss is teach headline (larger / ink) — not muted buried chip
     expect(teach).toContain(
-      'className="mt-2 text-lg font-semibold leading-snug text-ink"',
+      'className="mt-1.5 text-lg font-semibold leading-snug text-ink"',
     )
     expect(teach).toContain('{gloss}')
     // Old buried gloss chip must not remain
@@ -549,7 +549,7 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(teach).not.toContain('NO_HINT_COPY')
     expect(endCard).not.toMatch(/No hint|no hint available|Add a gloss/i)
     const panelStart = endCard.indexOf('px-frame bg-raised/80')
-    const panelEnd = endCard.indexOf('<Card className="px-flat w-full p-3 text-left', panelStart)
+    const panelEnd = endCard.indexOf('<Card className="px-flat w-full p-2.5 text-left', panelStart)
     expect(panelStart).toBeGreaterThan(0)
     expect(panelEnd).toBeGreaterThan(panelStart)
     const teachPanel = endCard.slice(panelStart, panelEnd)

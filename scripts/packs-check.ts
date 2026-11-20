@@ -13,6 +13,7 @@ import {
   buildLemmaEasiestByLang,
   checkCompleteness,
   checkExampleGate,
+  checkExtrasGate,
   checkHintCeiling,
   checkLemmaFloor,
   checkPackLicense,
@@ -24,6 +25,7 @@ import {
   type ExampleGateLog,
   type PackSnapshot,
 } from './packs-check-lib'
+import type { ExtrasGateLog as ExtrasLog } from './extras-gate'
 import {
   deferMembershipMisses,
   ensureDicts,
@@ -87,6 +89,11 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const gateLog = (existsSync(gatePath)
     ? JSON.parse(await readFile(gatePath, 'utf8'))
     : {}) as ExampleGateLog
+  // ADR 0055 / #316: every shipped ipa/family needs a passing lemma-extras gate entry.
+  const extrasPath = path.join(import.meta.dir, 'data', 'lemma-extras-gate.json')
+  const extrasLog = (existsSync(extrasPath)
+    ? JSON.parse(await readFile(extrasPath, 'utf8'))
+    : {}) as ExtrasLog
   // ADR 0055 / #315: every shipped pos must match the committed source map (or be exempt).
   const posMap = loadLemmaPosMap()
   const posExempt = loadPosExemptions()
@@ -117,6 +124,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     errors.push(...stemSpoilerErrors(rel, pack.lemmas, STEM_BASELINE))
     errors.push(...familyLeakErrors(rel, pack.lemmas, FAMILY_BASELINE))
     errors.push(...checkExampleGate(rel, pack, gateLog))
+    errors.push(...checkExtrasGate(rel, pack, extrasLog))
     errors.push(...checkLemmaPos(rel, pack, posMap, posExempt))
 
     const floorErr = checkLemmaFloor(rel, pack)
