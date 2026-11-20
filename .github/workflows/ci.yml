@@ -75,6 +75,13 @@ jobs:
             git status --porcelain -- scripts/data/hunspell-verdicts.json
             exit 1
           fi
+      - name: Lemma-extras gate log is committed
+        run: |
+          if ! git diff --exit-code -- scripts/data/lemma-extras-gate.json || [ -n "$(git status --porcelain -- scripts/data/lemma-extras-gate.json)" ]; then
+            echo "lemma-extras-gate.json changed. Run bun run scripts/lemma-extras.ts and commit scripts/data/lemma-extras-gate.json"
+            git status --porcelain -- scripts/data/lemma-extras-gate.json
+            exit 1
+          fi
       - run: bun run build
       - name: Pages functions build leaves package.json and bun.lock untouched
         run: |

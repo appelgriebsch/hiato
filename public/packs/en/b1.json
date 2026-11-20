@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 22,
   "lang": "en",
   "cefr": "b1",
   "license": "CEFR-J Wordlist terms: free use with citation (© Tono Laboratory, TUFS); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -18,7 +18,13 @@
         "desert"
       ],
       "example": "Don't abandon me!",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "abandoned",
+        "abandonment",
+        "flee"
+      ],
+      "ipa": "/əˈbæn.dən/"
     },
     {
       "word": "ABOARD",
@@ -28,7 +34,8 @@
         "onto"
       ],
       "example": "Come aboard.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/əˈbɔːd/"
     },
     {
       "word": "ABSENCE",
@@ -38,7 +45,13 @@
         "missing"
       ],
       "example": "He excused his absence.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "absent",
+        "absentee",
+        "absenteeism"
+      ],
+      "ipa": "/ˈæb.sn̩ts/"
     },
     {
       "word": "ABSENT",
@@ -48,7 +61,13 @@
         "away"
       ],
       "example": "I was absent.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "absently",
+        "absence",
+        "absentee"
+      ],
+      "ipa": "/ˈæb.sn̩t/"
     },
     {
       "word": "ABSOLUTE",
@@ -58,7 +77,13 @@
         "complete"
       ],
       "example": "He has absolute power.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈæb.sə.luːt/",
+      "family": [
+        "absolutism",
+        "absolutist",
+        "absolution"
+      ]
     },
     {
       "word": "ABSOLUTELY",
@@ -68,7 +93,8 @@
         "completely"
       ],
       "example": "I absolutely agree.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈap.səˌlʉʊt.lɪi/"
     },
     {
       "word": "ABSORB",
@@ -77,7 +103,13 @@
         "take in"
       ],
       "example": "Paper can absorb water.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əbˈzɔːb/",
+      "family": [
+        "absorbance",
+        "absorbent",
+        "absorption"
+      ]
     },
     {
       "word": "ABSTRACT",
@@ -87,7 +119,13 @@
         "conceptual"
       ],
       "example": "Do you like abstract art?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "abstractly",
+        "abstractness",
+        "reify"
+      ],
+      "ipa": "/ˈæbˌstɹækt/"
     },
     {
       "word": "ABUNDANCE",
@@ -97,7 +135,13 @@
         "lots"
       ],
       "example": "She lives in abundance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "overabundance",
+        "superabundance",
+        "abound"
+      ],
+      "ipa": "/əˈbʌn.dn̩s/"
     },
     {
       "word": "ABUNDANT",
@@ -107,7 +151,13 @@
         "lots"
       ],
       "example": "Spain is abundant in oranges.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "abundantly",
+        "overabundant",
+        "superabundant"
+      ],
+      "ipa": "/əˈbʌn.dənt/"
     },
     {
       "word": "ACADEMIC",
@@ -117,7 +167,13 @@
         "educational"
       ],
       "example": "The academic year is over.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "nonacademic",
+        "academia",
+        "academical"
+      ],
+      "ipa": "/ˌæk.əˈdɛm.ɪk/"
     },
     {
       "word": "ACADEMY",
@@ -127,7 +183,13 @@
         "college"
       ],
       "example": "Do you go to an academy?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "academe",
+        "academia",
+        "academic"
+      ],
+      "ipa": "/əˈkæd.ə.mi/"
     },
     {
       "word": "ACCENT",
@@ -137,7 +199,12 @@
         "tone"
       ],
       "example": "I love his accent.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "circumflex",
+        "diacritic"
+      ],
+      "ipa": "/ˈak.sənt/"
     },
     {
       "word": "ACCEPTANCE",
@@ -147,7 +214,11 @@
         "agreement"
       ],
       "example": "Beauty is found in self-acceptance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "nonacceptance"
+      ],
+      "ipa": "/əkˈsɛp.təns/"
     },
     {
       "word": "ACCESS",
@@ -157,7 +228,13 @@
         "approach"
       ],
       "example": "She was denied access.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈæksɛs/",
+      "family": [
+        "accede",
+        "accessibility",
+        "accessible"
+      ]
     },
     {
       "word": "ACCESSIBLE",
@@ -167,7 +244,12 @@
         "available"
       ],
       "example": "Is it accessible?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "accessibility",
+        "accessibly"
+      ],
+      "ipa": "/əkˈsɛs.ɪ.bəl/"
     },
     {
       "word": "ACCESSORY",
@@ -177,7 +259,10 @@
         "extra"
       ],
       "example": "It's a fashion accessory.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "accessorize"
+      ]
     },
     {
       "word": "ACCIDENTAL",
@@ -187,7 +272,12 @@
         "chance"
       ],
       "example": "The timing was accidental.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "accidentally",
+        "accident"
+      ],
+      "ipa": "/ˌæk.sɪˈdɛn.tl̩/"
     },
     {
       "word": "ACCOMPANY",
@@ -197,7 +287,12 @@
         "join"
       ],
       "example": "I'll accompany you.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "accompaniment",
+        "accompanist"
+      ],
+      "ipa": "/əˈkʌm.pə.ni/"
     },
     {
       "word": "ACCOMPLISH",
@@ -206,7 +301,13 @@
         "achieve"
       ],
       "example": "What can I accomplish?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "accomplishment",
+        "complete",
+        "comply"
+      ],
+      "ipa": "/əˈkʌm.plɪʃ/"
     },
     {
       "word": "COURAGEOUS",
@@ -216,7 +317,12 @@
         "bold"
       ],
       "example": "I'm courageous!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kəˈɹeɪd͡ʒəs/",
+      "family": [
+        "courageously",
+        "courageousness"
+      ]
     },
     {
       "word": "ACCOUNTANT",
@@ -226,7 +332,11 @@
         "auditor"
       ],
       "example": "I'm an accountant.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "account"
+      ],
+      "ipa": "/əˈkaʊn.tənt/"
     },
     {
       "word": "ACCURACY",
@@ -236,7 +346,13 @@
         "precision"
       ],
       "example": "I doubt the accuracy of the report.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "precision",
+        "integrity",
+        "exactness"
+      ],
+      "ipa": "/ˈak.jʊ.ɹə.si/"
     },
     {
       "word": "ACCURATE",
@@ -246,7 +362,13 @@
         "right"
       ],
       "example": "It's accurate.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "accuracy",
+        "accurately",
+        "accurateness"
+      ],
+      "ipa": "/ˈak.jʊ.ɹɪt/"
     },
     {
       "word": "ACCURATELY",
@@ -256,7 +378,12 @@
         "precisely"
       ],
       "example": "Can AI accurately predict this?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "accuracy",
+        "inaccurately"
+      ],
+      "ipa": "/ˈak.jə.ɹɪt.li/"
     },
     {
       "word": "ACCUSE",
@@ -266,7 +393,13 @@
         "charge"
       ],
       "example": "Don't accuse anyone.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈkjuːz/",
+      "family": [
+        "accusation",
+        "accusative",
+        "accusatory"
+      ]
     },
     {
       "word": "ACCUSTOM",
@@ -276,7 +409,13 @@
         "familiarize"
       ],
       "example": "You will soon accustom yourself to the new life.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "custom",
+        "customary",
+        "familiarize"
+      ],
+      "ipa": "/əˈkʌs.təm/"
     },
     {
       "word": "ACHE",
@@ -286,7 +425,13 @@
         "hurt"
       ],
       "example": "My arms ache.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɪk/",
+      "family": [
+        "achy",
+        "backache",
+        "bellyache"
+      ]
     },
     {
       "word": "ACQUIRE",
@@ -296,7 +441,13 @@
         "obtain"
       ],
       "example": "We'd love to acquire it.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈkwaɪɚ/",
+      "family": [
+        "acquirable",
+        "acquirer",
+        "reacquire"
+      ]
     },
     {
       "word": "COURGETTE",
@@ -305,7 +456,13 @@
         "zucchini"
       ],
       "example": "He was bent over a courgette plant.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kʊɚˈʒɛt/",
+      "family": [
+        "cucumber",
+        "gherkin",
+        "marrow"
+      ]
     },
     {
       "word": "ACTIVE",
@@ -315,7 +472,13 @@
         "lively"
       ],
       "example": "He's active.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "activate",
+        "actively",
+        "activeness"
+      ],
+      "ipa": "/ˈæk.tɪv/"
     },
     {
       "word": "ACTRESS",
@@ -325,7 +488,8 @@
         "actor"
       ],
       "example": "I'm an actress.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈæk.tɹɪs/"
     },
     {
       "word": "ADAPT",
@@ -335,7 +499,13 @@
         "change"
       ],
       "example": "I'll adapt.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "adaptable",
+        "adaptation",
+        "adapter"
+      ],
+      "ipa": "/əˈdæpt/"
     },
     {
       "word": "CREATOR",
@@ -345,7 +515,13 @@
         "author"
       ],
       "example": "I'm your creator.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɹiːˈeɪ̯təː/",
+      "family": [
+        "create",
+        "creation",
+        "creative"
+      ]
     },
     {
       "word": "ADDRESSEE",
@@ -354,7 +530,11 @@
         "receiver"
       ],
       "example": "Please check the label to find the name of the addressee before mailing the letter.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "address"
+      ],
+      "ipa": "/ˌædɹɛˈsiː/"
     },
     {
       "word": "ADMIRATION",
@@ -363,7 +543,8 @@
         "respect"
       ],
       "example": "You have my admiration.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˌæd.məˈɹeɪ.ʃən/"
     },
     {
       "word": "ADMISSION",
@@ -372,7 +553,11 @@
         "entry"
       ],
       "example": "Free Admission.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ədˈmɪʃən/",
+      "family": [
+        "readmission"
+      ]
     },
     {
       "word": "ADOPT",
@@ -381,7 +566,13 @@
         "take"
       ],
       "example": "He wanted to adopt you.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈdɒpt/",
+      "family": [
+        "adoptable",
+        "readopt",
+        "adoption"
+      ]
     },
     {
       "word": "ADORABLE",
@@ -390,7 +581,12 @@
         "lovely"
       ],
       "example": "He's adorable.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈdɔːɹəbəl/",
+      "family": [
+        "adorableness",
+        "adorably"
+      ]
     },
     {
       "word": "ADVANCE",
@@ -399,7 +595,11 @@
         "progress"
       ],
       "example": "The research team will advance to the next phase after collecting enough data.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ədˈvɑːns/",
+      "family": [
+        "advancement"
+      ]
     },
     {
       "word": "ADVERB",
@@ -408,7 +608,12 @@
         "modifier"
       ],
       "example": "This here is an adverb.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "adverbial",
+        "adverbially"
+      ],
+      "ipa": "/ˈæd.vɜːb/"
     },
     {
       "word": "ADVERBIAL",
@@ -417,7 +622,11 @@
         "modifier"
       ],
       "example": "Can you help me to work out the adverbial forms of these verbs?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "adverbially"
+      ],
+      "ipa": "/ædˈvɝbi.əl/"
     },
     {
       "word": "ADVERT",
@@ -426,7 +635,12 @@
         "ad"
       ],
       "example": "What's your favourite advert?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "inadvertent",
+        "inadvertently"
+      ],
+      "ipa": "/ˈædvɜːt/"
     },
     {
       "word": "ADVERTISE",
@@ -435,7 +649,13 @@
         "promote"
       ],
       "example": "Advertise with us.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "ad",
+        "advert",
+        "advertisement"
+      ],
+      "ipa": "/ˈædvəˌtaɪ̯z/"
     },
     {
       "word": "ADVISER",
@@ -444,7 +664,8 @@
         "guide"
       ],
       "example": "I'm the adviser.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ædˈvaɪ.zɚ/"
     },
     {
       "word": "AEROBICS",
@@ -453,7 +674,11 @@
         "exercise"
       ],
       "example": "I'd like to try aerobics.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈɹəʊbɪks/",
+      "family": [
+        "aerobic"
+      ]
     },
     {
       "word": "AFFECT",
@@ -462,7 +687,13 @@
         "change"
       ],
       "example": "Will this affect me?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈfɛkt/",
+      "family": [
+        "affectingly",
+        "disaffect",
+        "affected"
+      ]
     },
     {
       "word": "AFFECTION",
@@ -471,7 +702,13 @@
         "love"
       ],
       "example": "He wants affection.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "affectionate",
+        "affectionately",
+        "affect"
+      ],
+      "ipa": "/əˈfɛk.ʃən/"
     },
     {
       "word": "AFFORD",
@@ -480,7 +717,12 @@
         "buy"
       ],
       "example": "I can afford it.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈfoɹd/",
+      "family": [
+        "affordability",
+        "affordable"
+      ]
     },
     {
       "word": "AFTERWARD",
@@ -489,7 +731,8 @@
         "later"
       ],
       "example": "And afterward?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈɑːftə.wəd/"
     },
     {
       "word": "AFTERWARDS",
@@ -498,7 +741,11 @@
         "later"
       ],
       "example": "Where to afterwards?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "after"
+      ],
+      "ipa": "/ˈɑːftə.wədz/"
     },
     {
       "word": "AGENDA",
@@ -507,7 +754,8 @@
         "plan"
       ],
       "example": "This is our agenda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈd͡ʒɛn.də/"
     },
     {
       "word": "AGGRESSIVE",
@@ -517,7 +765,13 @@
         "pushy"
       ],
       "example": "He's aggressive.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "aggressively",
+        "aggressiveness",
+        "overaggressive"
+      ],
+      "ipa": "/əˈɡɹɛs.ɪv/"
     },
     {
       "word": "AGREEMENT",
@@ -526,7 +780,13 @@
         "deal"
       ],
       "example": "We're in agreement.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈɡɹiːmənt/",
+      "family": [
+        "disagreement",
+        "agreed",
+        "approval"
+      ]
     },
     {
       "word": "AID",
@@ -535,7 +795,13 @@
         "help"
       ],
       "example": "I need first aid.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɪd/",
+      "family": [
+        "Medicaid",
+        "unaided",
+        "AIDS"
+      ]
     },
     {
       "word": "AIM",
@@ -544,7 +810,12 @@
         "goal"
       ],
       "example": "Aim higher.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɪm/",
+      "family": [
+        "aimless",
+        "ready"
+      ]
     },
     {
       "word": "AIRLINE",
@@ -553,7 +824,8 @@
         "carrier"
       ],
       "example": "What airline?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɛəˌlaɪn/"
     },
     {
       "word": "CRISIS",
@@ -563,7 +835,13 @@
         "trouble"
       ],
       "example": "We have a crisis.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɹaɪsɪs/",
+      "family": [
+        "criterion",
+        "critic",
+        "critical"
+      ]
     },
     {
       "word": "ALCOHOL",
@@ -572,7 +850,13 @@
         "drink"
       ],
       "example": "I drink alcohol.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "alcoholic",
+        "alcoholism",
+        "chloral"
+      ],
+      "ipa": "/ˈæl.kə.hɒl/"
     },
     {
       "word": "ALCOHOLIC",
@@ -581,7 +865,13 @@
         "drinker"
       ],
       "example": "He's an alcoholic.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "alcoholically",
+        "nonalcoholic",
+        "alcohol"
+      ],
+      "ipa": "/ˌæl.kəˈhɒl.ɪk/"
     },
     {
       "word": "ALIKE",
@@ -590,7 +880,13 @@
         "similar"
       ],
       "example": "We think alike.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈlaɪk/",
+      "family": [
+        "lookalike",
+        "soundalike",
+        "unalike"
+      ]
     },
     {
       "word": "ALLERGIC",
@@ -600,7 +896,13 @@
         "hurt by"
       ],
       "example": "I must be allergic.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "nonallergic",
+        "allergen",
+        "allergically"
+      ],
+      "ipa": "/əˈlɜː.dʒɪk/"
     },
     {
       "word": "ALLOWANCE",
@@ -609,7 +911,8 @@
         "money"
       ],
       "example": "Don't waste your allowance.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈlaʊəns/"
     },
     {
       "word": "ALOUD",
@@ -618,7 +921,8 @@
         "loudly"
       ],
       "example": "Read aloud.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/əˈlaʊd/"
     },
     {
       "word": "ALPHABET",
@@ -627,7 +931,13 @@
         "letters"
       ],
       "example": "I knew the alphabet.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "alphabetize",
+        "F",
+        "r"
+      ],
+      "ipa": "/ˈæl.fəˌbɛt/"
     },
     {
       "word": "ALTOGETHER",
@@ -636,7 +946,8 @@
         "completely"
       ],
       "example": "It's €35 altogether.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ɔːl.təˈɡɛð.ə/"
     },
     {
       "word": "AMAZED",
@@ -645,7 +956,8 @@
         "surprised"
       ],
       "example": "I'm amazed.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈmeɪzd/"
     },
     {
       "word": "AMAZING",
@@ -654,7 +966,12 @@
         "great"
       ],
       "example": "It's amazing.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "amazingly",
+        "amazement"
+      ],
+      "ipa": "/əˈmeɪ.zɪŋ/"
     },
     {
       "word": "AMBITIOUS",
@@ -663,7 +980,13 @@
         "eager"
       ],
       "example": "I'm ambitious.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "ambitiously",
+        "ambitiousness",
+        "overambitious"
+      ],
+      "ipa": "/æmˈbɪʃ.əs/"
     },
     {
       "word": "AMBULANCE",
@@ -672,7 +995,13 @@
         "vehicle"
       ],
       "example": "Call an ambulance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ambulanceman",
+        "ambulancewoman",
+        "ambulant"
+      ],
+      "ipa": "/ˈæm.bjə.ləns/"
     },
     {
       "word": "AMOUNT",
@@ -681,7 +1010,13 @@
         "quantity"
       ],
       "example": "It's a large amount.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈmaʊnt/",
+      "family": [
+        "paramount",
+        "extent",
+        "magnitude"
+      ]
     },
     {
       "word": "AMUSING",
@@ -690,7 +1025,11 @@
         "funny"
       ],
       "example": "It's amusing.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "amusingly"
+      ],
+      "ipa": "/əˈmjuːzɪŋ/"
     },
     {
       "word": "ANALYSIS",
@@ -699,7 +1038,13 @@
         "study"
       ],
       "example": "I want your analysis.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈnælɪsɪs/",
+      "family": [
+        "cryptanalysis",
+        "psychoanalysis",
+        "reanalysis"
+      ]
     },
     {
       "word": "ANALYZE",
@@ -708,7 +1053,13 @@
         "study"
       ],
       "example": "Let me analyze this.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "analyzable",
+        "analyzer",
+        "psychoanalyze"
+      ],
+      "ipa": "/ˈæn.ə.laɪz/"
     },
     {
       "word": "ANGER",
@@ -717,7 +1068,13 @@
         "rage"
       ],
       "example": "My anger faded.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "angry",
+        "anguish",
+        "anxiety"
+      ],
+      "ipa": "/ˈæŋɡə/"
     },
     {
       "word": "ANGLE",
@@ -726,7 +1083,13 @@
         "corner"
       ],
       "example": "This table is at an angle.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "angular",
+        "angulation",
+        "quadrangle"
+      ],
+      "ipa": "/ˈæŋ.ɡəl/"
     },
     {
       "word": "ANIMATED",
@@ -735,7 +1098,11 @@
         "lively"
       ],
       "example": "The discussion was animated.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "animatedly"
+      ],
+      "ipa": "/ˈæn.ɪ.meɪ.tɪd/"
     },
     {
       "word": "ANIMATION",
@@ -744,7 +1111,12 @@
         "cartoon"
       ],
       "example": "He creates stop-motion animation in his studio.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "animalcule",
+        "reanimation"
+      ],
+      "ipa": "/ˌæn.ɪˈmeɪ.ʃən/"
     },
     {
       "word": "ANNOUNCE",
@@ -753,7 +1125,13 @@
         "tell"
       ],
       "example": "Let me announce it.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈnaʊns/",
+      "family": [
+        "announcement",
+        "announcer",
+        "unannounced"
+      ]
     },
     {
       "word": "ANNOYANCE",
@@ -762,7 +1140,13 @@
         "bother"
       ],
       "example": "He tried to hide his annoyance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "chagrin",
+        "disappointment",
+        "pique"
+      ],
+      "ipa": "/əˈnɔɪ.əns/"
     },
     {
       "word": "ANNOYED",
@@ -771,7 +1155,13 @@
         "upset"
       ],
       "example": "I'm annoyed.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈnɔɪd/",
+      "family": [
+        "snippy",
+        "anger",
+        "annoy"
+      ]
     },
     {
       "word": "ANNUAL",
@@ -780,7 +1170,13 @@
         "yearly"
       ],
       "example": "He has an annual examination.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈæn.ju.əl/",
+      "family": [
+        "annually",
+        "biannual",
+        "biannually"
+      ]
     },
     {
       "word": "ANNUALLY",
@@ -789,7 +1185,11 @@
         "yearly"
       ],
       "example": "It's published annually.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "semiannually"
+      ],
+      "ipa": "/ˈæn.jʊə.li/"
     },
     {
       "word": "ANT",
@@ -798,7 +1198,13 @@
         "insect"
       ],
       "example": "An ant bit me.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ænt/",
+      "family": [
+        "anteater",
+        "anthill",
+        "antsy"
+      ]
     },
     {
       "word": "ANTI",
@@ -807,7 +1213,8 @@
         "against"
       ],
       "example": "I need anti-itch ointment.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈænti/"
     },
     {
       "word": "ANTIQUE",
@@ -816,7 +1223,13 @@
         "old"
       ],
       "example": "It's an antique.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˌanˈtiːk/",
+      "family": [
+        "ancient",
+        "antic",
+        "antiquarian"
+      ]
     },
     {
       "word": "ANTONYM",
@@ -825,7 +1238,11 @@
         "opposite"
       ],
       "example": "Concave is the antonym of convex.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "antonymous"
+      ],
+      "ipa": "/ˈæn.təˌnɪm/"
     },
     {
       "word": "ANXIETY",
@@ -834,7 +1251,8 @@
         "worry"
       ],
       "example": "I have anxiety.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/æŋˈzaɪ.əti/"
     },
     {
       "word": "ANXIOUSLY",
@@ -852,7 +1270,8 @@
         "anyway"
       ],
       "example": "Anyhow, let's begin.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈɛn.i.haʊ/"
     },
     {
       "word": "APE",
@@ -861,7 +1280,13 @@
         "monkey"
       ],
       "example": "The male ape is intelligent by nature.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eɪp/",
+      "family": [
+        "apelike",
+        "apish",
+        "monkey"
+      ]
     },
     {
       "word": "APOLOGY",
@@ -870,7 +1295,13 @@
         "sorry"
       ],
       "example": "Apology accepted.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "apologist",
+        "apologize",
+        "apologetic"
+      ],
+      "ipa": "/əˈpɒl.ə.d͡ʒi/"
     },
     {
       "word": "APPARENT",
@@ -879,7 +1310,13 @@
         "clear"
       ],
       "example": "The danger wasn't apparent.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈpæɹənt/",
+      "family": [
+        "apparently",
+        "unapparent",
+        "apparition"
+      ]
     },
     {
       "word": "APPEAL",
@@ -888,7 +1325,13 @@
         "call"
       ],
       "example": "He tried to appeal.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈpiːl/",
+      "family": [
+        "appellant",
+        "appellate",
+        "Rehabilitation"
+      ]
     },
     {
       "word": "APPETITE",
@@ -897,7 +1340,13 @@
         "hunger"
       ],
       "example": "I have no appetite.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "appetizer",
+        "appetizing",
+        "appetizingly"
+      ],
+      "ipa": "/ˈæp.ɪ.taɪt/"
     },
     {
       "word": "APPLAUD",
@@ -906,7 +1355,13 @@
         "cheer"
       ],
       "example": "You may now applaud.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈplɔːd/",
+      "family": [
+        "applause",
+        "applauder",
+        "explosion"
+      ]
     },
     {
       "word": "APPLAUSE",
@@ -915,7 +1370,8 @@
         "cheers"
       ],
       "example": "Applause broke out.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈplɔːz/"
     },
     {
       "word": "APPOINT",
@@ -925,7 +1381,13 @@
         "name"
       ],
       "example": "Appoint me as the project manager.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈpɔɪnt/",
+      "family": [
+        "appointee",
+        "appointive",
+        "appointment"
+      ]
     },
     {
       "word": "APPROACH",
@@ -935,7 +1397,13 @@
         "go near"
       ],
       "example": "Approach him!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈpɹəʊt͡ʃ/",
+      "family": [
+        "approachable",
+        "approaching",
+        "unapproachable"
+      ]
     },
     {
       "word": "APPROVAL",
@@ -945,7 +1413,13 @@
         "permission"
       ],
       "example": "This has my approval.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈpɹuːvəl/",
+      "family": [
+        "disapproval",
+        "approve",
+        "approved"
+      ]
     },
     {
       "word": "APPROVE",
@@ -955,7 +1429,13 @@
         "accept"
       ],
       "example": "I approve.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈpɹuːv/",
+      "family": [
+        "approbation",
+        "approval",
+        "disapprove"
+      ]
     },
     {
       "word": "ARCHITECT",
@@ -965,7 +1445,11 @@
         "planner"
       ],
       "example": "I'm an architect.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "architecture"
+      ],
+      "ipa": "/ˈɑː.kɪˌtɛkt/"
     },
     {
       "word": "ARISE",
@@ -975,7 +1459,8 @@
         "happen"
       ],
       "example": "Problems may arise.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈɹaɪz/"
     },
     {
       "word": "ARITHMETIC",
@@ -985,7 +1470,11 @@
         "sums"
       ],
       "example": "He's good at arithmetic.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "arithmetician",
+        "arithmetically"
+      ]
     },
     {
       "word": "CRITIC",
@@ -994,7 +1483,13 @@
         "commentator"
       ],
       "example": "I'm a film critic.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "crisis",
+        "criterion",
+        "critical"
+      ],
+      "ipa": "/ˈkɹɪt.ɪk/"
     },
     {
       "word": "ARMY",
@@ -1004,7 +1499,13 @@
         "force"
       ],
       "example": "I miss the army.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "armament",
+        "arm",
+        "arms"
+      ],
+      "ipa": "/ˈɑː.mi/"
     },
     {
       "word": "ARRANGE",
@@ -1014,7 +1515,13 @@
         "plan"
       ],
       "example": "I'll arrange it.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈɹeɪnd͡ʒ/",
+      "family": [
+        "disarrange",
+        "prearrange",
+        "rearrange"
+      ]
     },
     {
       "word": "ARREST",
@@ -1024,7 +1531,12 @@
         "take"
       ],
       "example": "Am I under arrest?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈɹɛst/",
+      "family": [
+        "arresting",
+        "rearrest"
+      ]
     },
     {
       "word": "ARRIVAL",
@@ -1034,7 +1546,8 @@
         "reaching"
       ],
       "example": "I await your arrival.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈɹaɪ.vl̩/"
     },
     {
       "word": "ARROW",
@@ -1044,7 +1557,12 @@
         "sign"
       ],
       "example": "Give me the arrow.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈæ.ɹəʊ/",
+      "family": [
+        "arrowhead",
+        "arrowroot"
+      ]
     },
     {
       "word": "ARTIST",
@@ -1054,7 +1572,13 @@
         "creator"
       ],
       "example": "I'm an artist.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɑːtɪst/",
+      "family": [
+        "artiste",
+        "artistry",
+        "art"
+      ]
     },
     {
       "word": "ARTISTIC",
@@ -1064,7 +1588,8 @@
         "talented"
       ],
       "example": "I'm artistic.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɑːˈtɪs.tɪk/"
     },
     {
       "word": "ASHAMED",
@@ -1074,7 +1599,12 @@
         "guilty"
       ],
       "example": "I'm ashamed.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈʃeɪmd/",
+      "family": [
+        "ashamedly",
+        "unashamed"
+      ]
     },
     {
       "word": "ASIDE",
@@ -1083,7 +1613,8 @@
         "away"
       ],
       "example": "Jump aside!",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/əˈsaɪd/"
     },
     {
       "word": "ASPECT",
@@ -1093,7 +1624,8 @@
         "side"
       ],
       "example": "I love every aspect of the game.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈæspɛkt/"
     },
     {
       "word": "ASPIRIN",
@@ -1103,7 +1635,12 @@
         "tablet"
       ],
       "example": "I need aspirin.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "spiral",
+        "spirea"
+      ],
+      "ipa": "/ˈæs.pɹɪn/"
     },
     {
       "word": "ASSIGN",
@@ -1113,7 +1650,13 @@
         "set"
       ],
       "example": "Did she assign any homework?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈsaɪn/",
+      "family": [
+        "assignable",
+        "assignor",
+        "preassigned"
+      ]
     },
     {
       "word": "ASSIGNMENT",
@@ -1123,7 +1666,11 @@
         "job"
       ],
       "example": "What's my assignment?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "reassignment"
+      ],
+      "ipa": "/əˈsaɪn.mənt/"
     },
     {
       "word": "ASSIST",
@@ -1133,7 +1680,13 @@
         "support"
       ],
       "example": "I'll assist you.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈsɪst/",
+      "family": [
+        "assistive",
+        "unassisted",
+        "assistant"
+      ]
     },
     {
       "word": "ASSISTANCE",
@@ -1143,7 +1696,8 @@
         "support"
       ],
       "example": "I need assistance.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/əˈsɪs.təns/"
     },
     {
       "word": "CRASH",
@@ -1152,7 +1706,11 @@
         "collision"
       ],
       "example": "I heard a crash.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "gatecrash"
+      ],
+      "ipa": "/ˈkɹæʃ/"
     },
     {
       "word": "ASSOCIATE",
@@ -1162,7 +1720,13 @@
         "link"
       ],
       "example": "I associate it with this.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈsəʊʃi.ət/",
+      "family": [
+        "accomplice",
+        "aide",
+        "apprentice"
+      ]
     },
     {
       "word": "ASSUME",
@@ -1172,7 +1736,13 @@
         "guess"
       ],
       "example": "I assume so.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈsjuːm/",
+      "family": [
+        "assumable",
+        "assuming",
+        "assumption"
+      ]
     },
     {
       "word": "ASTRONOMER",
@@ -1182,7 +1752,11 @@
         "space scientist"
       ],
       "example": "I'm an astronomer.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cosmologist"
+      ],
+      "ipa": "/əˈstɹɒn.ə.mə/"
     },
     {
       "word": "ATHLETIC",
@@ -1191,7 +1765,12 @@
         "strong"
       ],
       "example": "I'm athletic.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "athletically",
+        "athleticism",
+        "athletics"
+      ]
     },
     {
       "word": "ATLANTIC",
@@ -1201,7 +1780,11 @@
         "sea"
       ],
       "example": "They crossed the Atlantic.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "transatlantic"
+      ],
+      "ipa": "/ətˈlæn.tɪk/"
     },
     {
       "word": "ATMOSPHERE",
@@ -1211,7 +1794,13 @@
         "mood"
       ],
       "example": "Pluto has an atmosphere.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈætməsˌfɪə/",
+      "family": [
+        "atmospheric",
+        "atmospherics",
+        "ambiance"
+      ]
     },
     {
       "word": "ATOMIC",
@@ -1221,7 +1810,13 @@
         "nuclear"
       ],
       "example": "We live in the atomic age.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "atomically",
+        "diatomic",
+        "subatomic"
+      ],
+      "ipa": "/əˈtɒm.ɪk/"
     },
     {
       "word": "ATTACH",
@@ -1231,7 +1826,13 @@
         "join"
       ],
       "example": "I can attach it.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "attachable",
+        "attachment",
+        "reattach"
+      ],
+      "ipa": "/əˈtæt͡ʃ/"
     },
     {
       "word": "ATTACHMENT",
@@ -1241,7 +1842,11 @@
         "extra"
       ],
       "example": "The resume is in the attachment.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "reattachment"
+      ],
+      "ipa": "/əˈtæt͡ʃmənt/"
     },
     {
       "word": "ATTAIN",
@@ -1251,7 +1856,13 @@
         "get"
       ],
       "example": "He endeavors to attain his goal.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈteɪn/",
+      "family": [
+        "attainability",
+        "attainable",
+        "attained"
+      ]
     },
     {
       "word": "CROP",
@@ -1261,7 +1872,13 @@
         "farm"
       ],
       "example": "Maize is a crop.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɹɒp/",
+      "family": [
+        "cropland",
+        "croplands",
+        "cropper"
+      ]
     },
     {
       "word": "ATTEND",
@@ -1271,7 +1888,13 @@
         "be at"
       ],
       "example": "I'll attend.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/əˈtɛnd/",
+      "family": [
+        "attended",
+        "attendee",
+        "attender"
+      ]
     },
     {
       "word": "ATTRACT",
@@ -1281,7 +1904,13 @@
         "draw"
       ],
       "example": "Opposites attract.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "attractable",
+        "attraction",
+        "attractive"
+      ],
+      "ipa": "/əˈtɹækt/"
     },
     {
       "word": "ATTRACTION",
@@ -1291,7 +1920,11 @@
         "pull"
       ],
       "example": "What's the attraction?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "orientation"
+      ],
+      "ipa": "/əˈtɹækʃn̩/"
     },
     {
       "word": "AUTHORITY",
@@ -1301,7 +1934,13 @@
         "control"
       ],
       "example": "They respect authority.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɒːˈtɒɹɪti/",
+      "family": [
+        "author",
+        "authoritarian",
+        "authoritative"
+      ]
     },
     {
       "word": "AUXILIARY",
@@ -1311,7 +1950,13 @@
         "helping"
       ],
       "example": "The centurion summoned his auxiliary troops.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "auction",
+        "auctioneer",
+        "augment"
+      ],
+      "ipa": "/ɔːɡˈzɪl.i.ə.ɹi/"
     },
     {
       "word": "AVAILABLE",
@@ -1321,7 +1966,12 @@
         "free"
       ],
       "example": "I'm available.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "availability",
+        "unavailable"
+      ],
+      "ipa": "/əˈveɪ.lə.bəl/"
     },
     {
       "word": "AVENUE",
@@ -1331,7 +1981,8 @@
         "road"
       ],
       "example": "They live on Third Avenue.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈæv.əˌnjuː/"
     },
     {
       "word": "CROSSING",
@@ -1341,7 +1992,8 @@
         "intersection"
       ],
       "example": "Be careful when you reach the crossing, look left and right first.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɹɒsɪŋ/"
     },
     {
       "word": "AWARE",
@@ -1351,7 +2003,13 @@
         "conscious"
       ],
       "example": "I wasn't aware.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/əˈwɛə/",
+      "family": [
+        "awareness",
+        "beware",
+        "wary"
+      ]
     },
     {
       "word": "AWARENESS",
@@ -1361,7 +2019,13 @@
         "understanding"
       ],
       "example": "Awareness is important.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "alertness",
+        "consciousness",
+        "knowledge"
+      ],
+      "ipa": "/əˈwɛɹ.nəs/"
     },
     {
       "word": "AWESOME",
@@ -1370,13 +2034,24 @@
         "great"
       ],
       "example": "Oh, awesome.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈɔːsəm/",
+      "family": [
+        "awesomely",
+        "awesomeness",
+        "awful"
+      ]
     },
     {
       "word": "AWKWARD",
       "gloss": "uncomfortable or difficult to handle",
       "example": "It's awkward.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "awkwardly",
+        "awkwardness"
+      ],
+      "ipa": "/ˈɔːk.wəd/"
     },
     {
       "word": "BABYSIT",
@@ -1386,7 +2061,11 @@
         "care"
       ],
       "example": "My mom will babysit.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "babysitter"
+      ],
+      "ipa": "/ˈbeɪ.bi.sɪt/"
     },
     {
       "word": "BABYSITTER",
@@ -1396,14 +2075,24 @@
         "nanny"
       ],
       "example": "I need a babysitter.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeɪ̯biˌsɪtə/",
+      "family": [
+        "babysit",
+        "nanny",
+        "nurse"
+      ]
     },
     {
       "word": "BACKACHE",
       "gloss": "pain felt along the spine",
       "synonyms": [],
       "example": "I have a backache.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "lumbago"
+      ],
+      "ipa": "/ˈbækeɪk/"
     },
     {
       "word": "BACKPACK",
@@ -1413,7 +2102,13 @@
         "bag"
       ],
       "example": "Hold my backpack.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "backpacker",
+        "backpacking",
+        "packing"
+      ],
+      "ipa": "/ˈbæk.pæk/"
     },
     {
       "word": "BACKPACKER",
@@ -1433,7 +2128,13 @@
         "meat"
       ],
       "example": "I like bacon.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "macon",
+        "back",
+        "gammon"
+      ],
+      "ipa": "/ˈbeɪ.kən/"
     },
     {
       "word": "BAGGAGE",
@@ -1443,7 +2144,8 @@
         "luggage"
       ],
       "example": "Here is my baggage.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbæɡɪd͡ʒ/"
     },
     {
       "word": "BAKER",
@@ -1453,7 +2155,13 @@
         "cook"
       ],
       "example": "I'm a baker.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeɪ.kə/",
+      "family": [
+        "bakery",
+        "Bakers",
+        "Bakersfield"
+      ]
     },
     {
       "word": "BAKERY",
@@ -1463,7 +2171,12 @@
         "cake shop"
       ],
       "example": "Where is a bakery?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bake",
+        "baker"
+      ],
+      "ipa": "/ˈbeɪ.kə.ɹi/"
     },
     {
       "word": "BALANCE",
@@ -1473,7 +2186,13 @@
         "even"
       ],
       "example": "I lost my balance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "counterbalance",
+        "imbalance",
+        "overbalance"
+      ],
+      "ipa": "/ˈbæləns/"
     },
     {
       "word": "BALD",
@@ -1483,7 +2202,13 @@
         "smooth"
       ],
       "example": "Am I bald?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bɔːld/",
+      "family": [
+        "baldfaced",
+        "balding",
+        "baldly"
+      ]
     },
     {
       "word": "BANDAGE",
@@ -1493,7 +2218,13 @@
         "cover"
       ],
       "example": "Apply a bandage.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "dressing",
+        "plaster",
+        "splint"
+      ],
+      "ipa": "/ˈbæn.dɪd͡ʒ/"
     },
     {
       "word": "BANG",
@@ -1503,7 +2234,13 @@
         "noise"
       ],
       "example": "Bang a gong.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "beep",
+        "tap",
+        "snap"
+      ],
+      "ipa": "/ˈbæŋ/"
     },
     {
       "word": "CROSSROADS",
@@ -1522,7 +2259,13 @@
         "raven"
       ],
       "example": "The crow caws.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɹəʊ/",
+      "family": [
+        "crowfoot",
+        "scarecrow",
+        "caw"
+      ]
     },
     {
       "word": "BARE",
@@ -1531,7 +2274,13 @@
         "uncovered"
       ],
       "example": "Her feet were bare.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bɛə/",
+      "family": [
+        "bareback",
+        "barebacked",
+        "barefaced"
+      ]
     },
     {
       "word": "BARELY",
@@ -1541,7 +2290,8 @@
         "just"
       ],
       "example": "We barely spoke.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈbɛə.li/"
     },
     {
       "word": "BARK",
@@ -1551,7 +2301,13 @@
         "yelp"
       ],
       "example": "Dogs bark.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɑːk/",
+      "family": [
+        "barking",
+        "debark",
+        "embark"
+      ]
     },
     {
       "word": "BARMAN",
@@ -1561,7 +2317,8 @@
         "worker"
       ],
       "example": "Barman, I need a drink.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɑːmən/"
     },
     {
       "word": "BARREL",
@@ -1571,7 +2328,11 @@
         "drum"
       ],
       "example": "The barrel is full.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbæɹəɫ/",
+      "family": [
+        "cooper"
+      ]
     },
     {
       "word": "CRUEL",
@@ -1581,7 +2342,13 @@
         "mean"
       ],
       "example": "How cruel!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɹuːəl/",
+      "family": [
+        "cruelly",
+        "cruelness",
+        "crude"
+      ]
     },
     {
       "word": "BASEMENT",
@@ -1590,7 +2357,11 @@
         "room"
       ],
       "example": "Go to the basement.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeɪsmənt/",
+      "family": [
+        "subbasement"
+      ]
     },
     {
       "word": "BASIN",
@@ -1600,7 +2371,13 @@
         "sink"
       ],
       "example": "What is in the basin?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeɪsɪn/",
+      "family": [
+        "basinful",
+        "bassinet",
+        "washbasin"
+      ]
     },
     {
       "word": "BASIS",
@@ -1609,7 +2386,11 @@
         "foundation"
       ],
       "example": "What's the basis?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "basic"
+      ],
+      "ipa": "/ˈbeɪ.sɪs/"
     },
     {
       "word": "CRUSH",
@@ -1619,7 +2400,12 @@
         "press"
       ],
       "example": "Crush the ginger.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɹʌʃ/",
+      "family": [
+        "crusher",
+        "crushing"
+      ]
     },
     {
       "word": "BATHE",
@@ -1629,7 +2415,13 @@
         "shower"
       ],
       "example": "I bathe daily.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "bather",
+        "bathers",
+        "sunbathe"
+      ],
+      "ipa": "/beɪð/"
     },
     {
       "word": "BATTLE",
@@ -1639,7 +2431,13 @@
         "war"
       ],
       "example": "The battle is on.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "battledress",
+        "battlefield",
+        "battlefront"
+      ],
+      "ipa": "/ˈbætl̩/"
     },
     {
       "word": "BEARD",
@@ -1649,7 +2447,13 @@
         "face hair"
       ],
       "example": "He has a beard.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɪəd/",
+      "family": [
+        "bearded",
+        "bearding",
+        "beardless"
+      ]
     },
     {
       "word": "BEAST",
@@ -1659,7 +2463,13 @@
         "creature"
       ],
       "example": "It's a vicious beast.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/biːst/",
+      "family": [
+        "beastly",
+        "bestial",
+        "bestiary"
+      ]
     },
     {
       "word": "BEAT",
@@ -1669,7 +2479,13 @@
         "strike"
       ],
       "example": "The drum beats were so loud they seemed to beat the walls of the room.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/biːt/",
+      "family": [
+        "Beatles",
+        "deadbeat",
+        "downbeat"
+      ]
     },
     {
       "word": "BEAVER",
@@ -1679,7 +2495,12 @@
         "animal"
       ],
       "example": "That's a beaver dam.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbiːvə/",
+      "family": [
+        "beavered",
+        "Beverley"
+      ]
     },
     {
       "word": "BEDSIDE",
@@ -1688,7 +2509,8 @@
         "nightstand"
       ],
       "example": "Turn off the bedside light.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɛdˌsaɪd/"
     },
     {
       "word": "BEHALF",
@@ -1698,7 +2520,8 @@
         "in place of"
       ],
       "example": "On behalf of whom?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɪˈhæf/"
     },
     {
       "word": "BEHAVE",
@@ -1708,7 +2531,13 @@
         "conduct oneself"
       ],
       "example": "Behave well.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bᵻˈheɪv/",
+      "family": [
+        "misbehave",
+        "behavior",
+        "behavioral"
+      ]
     },
     {
       "word": "BELIEF",
@@ -1718,7 +2547,13 @@
         "trust"
       ],
       "example": "My belief is strong.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɪˈliːf/",
+      "family": [
+        "disbelief",
+        "unbelief",
+        "believe"
+      ]
     },
     {
       "word": "BELOVED",
@@ -1727,7 +2562,8 @@
         "dear"
       ],
       "example": "I'm with my beloved.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bɪˈlʌvd/"
     },
     {
       "word": "BENEFIT",
@@ -1737,7 +2573,13 @@
         "gain"
       ],
       "example": "I see no benefit.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "beneficial",
+        "lagniappe",
+        "benefactor"
+      ],
+      "ipa": "/ˈbɛn.ɪ.fɪt/"
     },
     {
       "word": "BENT",
@@ -1747,7 +2589,13 @@
         "crooked"
       ],
       "example": "He bent down.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bɛnt/",
+      "family": [
+        "Bentley",
+        "bentwood",
+        "hellbent"
+      ]
     },
     {
       "word": "BET",
@@ -1757,7 +2605,13 @@
         "gamble"
       ],
       "example": "Wanna bet?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bɛt/",
+      "family": [
+        "bettor",
+        "Bets",
+        "Betsy"
+      ]
     },
     {
       "word": "BILINGUAL",
@@ -1767,7 +2621,12 @@
         "multilingual"
       ],
       "example": "I'm bilingual.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "bilingualism",
+        "bilingually"
+      ],
+      "ipa": "/baɪˈlɪŋ.ɡwəl/"
     },
     {
       "word": "CUCUMBER",
@@ -1776,7 +2635,8 @@
         "cuke"
       ],
       "example": "I eat cucumber.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkjuːˌkʌmbə/"
     },
     {
       "word": "BIN",
@@ -1786,7 +2646,12 @@
         "box"
       ],
       "example": "The bin is full.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɪn/",
+      "family": [
+        "binman",
+        "dustbin"
+      ]
     },
     {
       "word": "BIOGRAPHY",
@@ -1796,7 +2661,13 @@
         "life history"
       ],
       "example": "I'm reading a biography.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baɪˈɒɡɹəfi/",
+      "family": [
+        "autobiography",
+        "biographer",
+        "biographical"
+      ]
     },
     {
       "word": "BIOLOGY",
@@ -1806,7 +2677,13 @@
         "study of living things"
       ],
       "example": "What is biology?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baɪˈɒləd͡ʒi/",
+      "family": [
+        "biologic",
+        "biological",
+        "biologically"
+      ]
     },
     {
       "word": "BISHOP",
@@ -1816,7 +2693,13 @@
         "clergyman"
       ],
       "example": "The bishop moves diagonally.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɪʃəp/",
+      "family": [
+        "archbishop",
+        "bishopric",
+        "episcopal"
+      ]
     },
     {
       "word": "CULTIVATE",
@@ -1826,7 +2709,13 @@
         "farm"
       ],
       "example": "We cultivate rice.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkʌltɪveɪt/",
+      "family": [
+        "cultivable",
+        "cultivar",
+        "cultivatable"
+      ]
     },
     {
       "word": "BITTER",
@@ -1836,7 +2725,13 @@
         "sour"
       ],
       "example": "It's bitter.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "bitterly",
+        "bitterness",
+        "bittersweet"
+      ],
+      "ipa": "/ˈbɪt.ə/"
     },
     {
       "word": "CULTURAL",
@@ -1846,7 +2741,12 @@
         "shared"
       ],
       "example": "It's a cultural thing.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "culturally",
+        "intercultural",
+        "multicultural"
+      ]
     },
     {
       "word": "BLEED",
@@ -1855,7 +2755,13 @@
         "hurt"
       ],
       "example": "My gums bleed.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈbliːd/",
+      "family": [
+        "bleeder",
+        "nosebleed",
+        "bless"
+      ]
     },
     {
       "word": "BLEND",
@@ -1865,7 +2771,13 @@
         "combine"
       ],
       "example": "Will it blend?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/blɛnd/",
+      "family": [
+        "blended",
+        "blender",
+        "blunder"
+      ]
     },
     {
       "word": "BLESS",
@@ -1875,7 +2787,13 @@
         "praise"
       ],
       "example": "Bless you!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/blɛs/",
+      "family": [
+        "blessed",
+        "blessing",
+        "bleed"
+      ]
     },
     {
       "word": "BLESSING",
@@ -1885,7 +2803,8 @@
         "good fortune"
       ],
       "example": "What a blessing!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈblɛs.ɪŋ/"
     },
     {
       "word": "BLIND",
@@ -1895,7 +2814,13 @@
         "unable to see"
       ],
       "example": "I'm blind.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈblaɪ̯nd/",
+      "family": [
+        "blinders",
+        "blindfold",
+        "blindly"
+      ]
     },
     {
       "word": "DEBT",
@@ -1904,7 +2829,13 @@
         "bill"
       ],
       "example": "I'm in debt.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdɛt/",
+      "family": [
+        "debit",
+        "debtor",
+        "indebted"
+      ]
     },
     {
       "word": "BLOG",
@@ -1914,7 +2845,13 @@
         "web journal"
       ],
       "example": "He has a blog.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/blɒɡ/",
+      "family": [
+        "blag",
+        "blogger",
+        "flog"
+      ]
     },
     {
       "word": "BLOGGER",
@@ -1923,7 +2860,8 @@
         "online writer"
       ],
       "example": "I'm a blogger.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈblɒ.ɡə/"
     },
     {
       "word": "BLUSH",
@@ -1933,7 +2871,12 @@
         "flush"
       ],
       "example": "Don't blush.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈblʌʃ/",
+      "family": [
+        "blusher",
+        "unblushing"
+      ]
     },
     {
       "word": "CURIOUS",
@@ -1943,7 +2886,13 @@
         "nosy"
       ],
       "example": "I'm curious.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkjʊə.ɹi.əs/",
+      "family": [
+        "curiously",
+        "curiousness",
+        "curio"
+      ]
     },
     {
       "word": "BOAST",
@@ -1952,7 +2901,13 @@
         "show off"
       ],
       "example": "Don't boast.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bəʊst/",
+      "family": [
+        "boaster",
+        "boastful",
+        "boastfully"
+      ]
     },
     {
       "word": "BOLD",
@@ -1962,7 +2917,13 @@
         "daring"
       ],
       "example": "He's bold.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbəʊld/",
+      "family": [
+        "boldface",
+        "boldfaced",
+        "boldly"
+      ]
     },
     {
       "word": "BOLDLY",
@@ -1972,7 +2933,8 @@
         "fearlessly"
       ],
       "example": "I boldly painted my answer.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈbəʊldli/"
     },
     {
       "word": "BOND",
@@ -1982,7 +2944,13 @@
         "connection"
       ],
       "example": "We have a unique bond.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɒnd/",
+      "family": [
+        "bondholder",
+        "bonding",
+        "bondsman"
+      ]
     },
     {
       "word": "DECLARE",
@@ -1992,7 +2960,13 @@
         "state"
       ],
       "example": "I have nothing to declare.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɪˈklɛə/",
+      "family": [
+        "declarable",
+        "declaration",
+        "declarative"
+      ]
     },
     {
       "word": "BOOKING",
@@ -2002,7 +2976,12 @@
         "appointment"
       ],
       "example": "Can I make a booking?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "overbooking",
+        "inscription"
+      ],
+      "ipa": "/ˈbʊkɪŋ/"
     },
     {
       "word": "BOOM",
@@ -2012,7 +2991,12 @@
         "explosion"
       ],
       "example": "A loud boom was heard.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/buːm/",
+      "family": [
+        "kaboom",
+        "bumpkin"
+      ]
     },
     {
       "word": "BOOT",
@@ -2022,7 +3006,13 @@
         "footwear"
       ],
       "example": "This is a boot.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/buːt/",
+      "family": [
+        "bootblack",
+        "bootee",
+        "bootlace"
+      ]
     },
     {
       "word": "BORDER",
@@ -2032,7 +3022,13 @@
         "boundary"
       ],
       "example": "The border is closed.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "borderland",
+        "borderline",
+        "board"
+      ],
+      "ipa": "/ˈbɔə.də/"
     },
     {
       "word": "BORE",
@@ -2042,7 +3038,13 @@
         "make a hole"
       ],
       "example": "You bore me.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bɔː/",
+      "family": [
+        "bored",
+        "boredom",
+        "borer"
+      ]
     },
     {
       "word": "BOREDOM",
@@ -2052,7 +3054,13 @@
         "nothing to do"
       ],
       "example": "Boredom is commonplace.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bore",
+        "bored",
+        "boring"
+      ],
+      "ipa": "/ˈbɔː.dəm/"
     },
     {
       "word": "CURRENT",
@@ -2062,7 +3070,13 @@
         "flow"
       ],
       "example": "She's his current wife.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkʌɹənt/",
+      "family": [
+        "crosscurrent",
+        "undercurrent",
+        "course"
+      ]
     },
     {
       "word": "BOUNCE",
@@ -2072,7 +3086,13 @@
         "spring back"
       ],
       "example": "You'll bounce back.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/baʊns/",
+      "family": [
+        "bouncer",
+        "bouncing",
+        "jounce"
+      ]
     },
     {
       "word": "BOUND",
@@ -2082,7 +3102,13 @@
         "fastened"
       ],
       "example": "My hands are bound.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbaʊ̯nd/",
+      "family": [
+        "hardbound",
+        "hidebound",
+        "housebound"
+      ]
     },
     {
       "word": "BOW",
@@ -2092,7 +3118,13 @@
         "stoop"
       ],
       "example": "Let's bow.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbəʊ̯/",
+      "family": [
+        "bowleg",
+        "bowman",
+        "bowstring"
+      ]
     },
     {
       "word": "DEFEND",
@@ -2102,7 +3134,13 @@
         "guard"
       ],
       "example": "Defend yourself.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɪˈfɛnd/",
+      "family": [
+        "defendant",
+        "defender",
+        "defending"
+      ]
     },
     {
       "word": "BOXING",
@@ -2112,7 +3150,13 @@
         "pugilism"
       ],
       "example": "I like boxing.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "kickboxing",
+        "shadowboxing",
+        "box"
+      ],
+      "ipa": "/ˈbɒksɪŋ/"
     },
     {
       "word": "BRACELET",
@@ -2122,7 +3166,12 @@
         "armband"
       ],
       "example": "This is a bracelet.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɹeɪslət/",
+      "family": [
+        "armband",
+        "bangle"
+      ]
     },
     {
       "word": "CURTAIN",
@@ -2132,7 +3181,12 @@
         "blind"
       ],
       "example": "Draw the curtain.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɜːtn̩/",
+      "family": [
+        "blind",
+        "drape"
+      ]
     },
     {
       "word": "BRASS",
@@ -2142,7 +3196,13 @@
         "yellow metal"
       ],
       "example": "It's made of brass.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɹɑːs/",
+      "family": [
+        "brassy",
+        "braze",
+        "brazen"
+      ]
     },
     {
       "word": "BRAVELY",
@@ -2152,7 +3212,8 @@
         "boldly"
       ],
       "example": "They fought bravely.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈbɹeɪvli/"
     },
     {
       "word": "BREAST",
@@ -2162,7 +3223,13 @@
         "bosom"
       ],
       "example": "Breast cancer is a disease.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɹɛst/",
+      "family": [
+        "abreast",
+        "breastbone",
+        "breastfeed"
+      ]
     },
     {
       "word": "BREATH",
@@ -2172,7 +3239,12 @@
         "inhalation"
       ],
       "example": "Take a breath.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "breathalyzer",
+        "breather",
+        "breathless"
+      ]
     },
     {
       "word": "BREATHLESS",
@@ -2181,7 +3253,11 @@
         "panting"
       ],
       "example": "I'm breathless.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "breathlessly",
+        "breathlessness"
+      ]
     },
     {
       "word": "BREED",
@@ -2191,7 +3267,13 @@
         "reproduce"
       ],
       "example": "I breed sheep.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈbɹiːd/",
+      "family": [
+        "breeder",
+        "breeding",
+        "crossbreed"
+      ]
     },
     {
       "word": "BREEDING",
@@ -2201,7 +3283,11 @@
         "reproduction"
       ],
       "example": "He learned cattle breeding.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "inbreeding"
+      ],
+      "ipa": "/ˈbɹiːdɪŋ/"
     },
     {
       "word": "BRICK",
@@ -2211,7 +3297,13 @@
         "building block"
       ],
       "example": "It's a brick wall.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɹɪk/",
+      "family": [
+        "brickbat",
+        "brickie",
+        "bricklayer"
+      ]
     },
     {
       "word": "BRIEF",
@@ -2221,7 +3313,13 @@
         "concise"
       ],
       "example": "It was brief.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbɹiːf/",
+      "family": [
+        "briefly",
+        "briefness",
+        "brevity"
+      ]
     },
     {
       "word": "BRIEFLY",
@@ -2231,7 +3329,8 @@
         "concisely"
       ],
       "example": "We spoke briefly.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈbɹiːfli/"
     },
     {
       "word": "BRIGHTLY",
@@ -2241,7 +3340,8 @@
         "vividly"
       ],
       "example": "The sun shone brightly.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈbɹaɪtli/"
     },
     {
       "word": "BROAD",
@@ -2251,7 +3351,13 @@
         "large"
       ],
       "example": "He has broad views.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bɹɔːd/",
+      "family": [
+        "abroad",
+        "breadth",
+        "broadband"
+      ]
     },
     {
       "word": "BROADCAST",
@@ -2261,7 +3367,12 @@
         "show"
       ],
       "example": "Is this a live broadcast?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cablecast",
+        "newscast",
+        "podcast"
+      ]
     },
     {
       "word": "BROCCOLI",
@@ -2270,7 +3381,11 @@
         "vegetable"
       ],
       "example": "I love broccoli.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "brocade"
+      ],
+      "ipa": "/ˈbɹɒk.ə.li/"
     },
     {
       "word": "BRONZE",
@@ -2279,7 +3394,11 @@
         "metal"
       ],
       "example": "This is bronze.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɹɒnz/",
+      "family": [
+        "penny"
+      ]
     },
     {
       "word": "BUBBLE",
@@ -2288,7 +3407,12 @@
         "balloon"
       ],
       "example": "The bubble burst.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbʌbəl/",
+      "family": [
+        "bubblegum",
+        "bubbly"
+      ]
     },
     {
       "word": "BUDDY",
@@ -2298,7 +3422,11 @@
         "pal"
       ],
       "example": "Bye, buddy.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbʌdi/",
+      "family": [
+        "bud"
+      ]
     },
     {
       "word": "BUILDER",
@@ -2308,7 +3436,12 @@
         "constructor"
       ],
       "example": "My father is a master builder.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bodybuilder",
+        "shipbuilder"
+      ],
+      "ipa": "/ˈbɪl.də/"
     },
     {
       "word": "BULL",
@@ -2318,7 +3451,13 @@
         "ox"
       ],
       "example": "It's a bull.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bʊl/",
+      "family": [
+        "bulldog",
+        "bulldoze",
+        "bulldozer"
+      ]
     },
     {
       "word": "BULLETIN",
@@ -2328,7 +3467,8 @@
         "report"
       ],
       "example": "We can get a weather bulletin every day.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbʊl.ə.tən/"
     },
     {
       "word": "BUMP",
@@ -2338,7 +3478,12 @@
         "knock"
       ],
       "example": "We hit a bump.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bʌmp/",
+      "family": [
+        "bumpy",
+        "bumper"
+      ]
     },
     {
       "word": "BUNCH",
@@ -2348,7 +3493,11 @@
         "bundle"
       ],
       "example": "I bought a bunch of fresh carrots at the market.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bʌntʃ/",
+      "family": [
+        "bunchy"
+      ]
     },
     {
       "word": "BURDEN",
@@ -2358,7 +3507,13 @@
         "weight"
       ],
       "example": "Am I a burden?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɜːdn̩/",
+      "family": [
+        "burdensome",
+        "overburden",
+        "unburden"
+      ]
     },
     {
       "word": "BUREAU",
@@ -2368,7 +3523,13 @@
         "agency"
       ],
       "example": "She's with a government bureau, isn't she?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bu",
+        "bureaucrat",
+        "bureaucracy"
+      ],
+      "ipa": "/ˈbjʊ.ɹəʊ/"
     },
     {
       "word": "BURGLAR",
@@ -2378,7 +3539,13 @@
         "robber"
       ],
       "example": "A burglar broke in.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɝɡlɚ/",
+      "family": [
+        "burglarize",
+        "burglarproof",
+        "burglary"
+      ]
     },
     {
       "word": "CURVE",
@@ -2388,7 +3555,12 @@
         "arc"
       ],
       "example": "Don't hug the inside of the curve.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɜːv/",
+      "family": [
+        "curvaceous",
+        "curvy"
+      ]
     },
     {
       "word": "BURNING",
@@ -2398,7 +3570,8 @@
         "fiery"
       ],
       "example": "It's burning.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbɝnɪŋ/"
     },
     {
       "word": "BURST",
@@ -2408,7 +3581,13 @@
         "pop"
       ],
       "example": "The bubble burst.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bɜːst/",
+      "family": [
+        "bust",
+        "cloudburst",
+        "outburst"
+      ]
     },
     {
       "word": "BUST",
@@ -2418,7 +3597,13 @@
         "chest"
       ],
       "example": "The museum displayed a marble bust of a famous scientist.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bʌst/",
+      "family": [
+        "buster",
+        "busted",
+        "busty"
+      ]
     },
     {
       "word": "BUTCHER",
@@ -2427,7 +3612,8 @@
         "meat-seller"
       ],
       "example": "He's a butcher.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbʊt͡ʃə/"
     },
     {
       "word": "BUYER",
@@ -2437,7 +3623,8 @@
         "shopper"
       ],
       "example": "I found a buyer.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaɪ.ə/"
     },
     {
       "word": "CABBAGE",
@@ -2446,7 +3633,13 @@
         "vegetable"
       ],
       "example": "I love cabbage!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkæbɪd͡ʒ/",
+      "family": [
+        "broccoli",
+        "cauliflower",
+        "kale"
+      ]
     },
     {
       "word": "CABIN",
@@ -2456,7 +3649,12 @@
         "room"
       ],
       "example": "Is this our cabin?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cabinet",
+        "cabana"
+      ],
+      "ipa": "/ˈkæbɪn/"
     },
     {
       "word": "CAGE",
@@ -2466,7 +3664,12 @@
         "enclosure"
       ],
       "example": "Lock the cage.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/keɪd͡ʒ/",
+      "family": [
+        "birdcage",
+        "cagey"
+      ]
     },
     {
       "word": "CALCULATE",
@@ -2476,7 +3679,13 @@
         "work out"
       ],
       "example": "Can't you calculate it?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "calculable",
+        "calculated",
+        "calculating"
+      ],
+      "ipa": "/ˈkælkjʊleɪt/"
     },
     {
       "word": "CALCULATOR",
@@ -2485,7 +3694,12 @@
         "machine"
       ],
       "example": "Use a calculator.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "calculate",
+        "table"
+      ],
+      "ipa": "/kæl.kjə.leɪ.tɚ/"
     },
     {
       "word": "CALF",
@@ -2494,7 +3708,13 @@
         "baby cow"
       ],
       "example": "She branded the calf.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɑːf/",
+      "family": [
+        "calfskin",
+        "calve",
+        "bull"
+      ]
     },
     {
       "word": "CALLER",
@@ -2504,7 +3724,8 @@
         "visitor"
       ],
       "example": "The caller hung up.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɔːlə/"
     },
     {
       "word": "CALM",
@@ -2514,7 +3735,13 @@
         "peaceful"
       ],
       "example": "Calm down.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kɑm/",
+      "family": [
+        "becalm",
+        "calmly",
+        "calmness"
+      ]
     },
     {
       "word": "CALMNESS",
@@ -2524,7 +3751,8 @@
         "quiet"
       ],
       "example": "In calmness lies strength.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɑːmnəs/"
     },
     {
       "word": "CAMEL",
@@ -2533,7 +3761,11 @@
         "animal"
       ],
       "example": "He rode a camel.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "camelhair"
+      ],
+      "ipa": "/ˈkæml̩/"
     },
     {
       "word": "CAMPSITE",
@@ -2542,7 +3774,13 @@
         "tent place"
       ],
       "example": "I booked a campsite.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "camp",
+        "campground",
+        "encampment"
+      ],
+      "ipa": "/ˈkæmpˌsaɪt/"
     },
     {
       "word": "CANAL",
@@ -2552,7 +3790,13 @@
         "channel"
       ],
       "example": "The canal is clogged.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈnæl/",
+      "family": [
+        "canalize",
+        "channel",
+        "channelization"
+      ]
     },
     {
       "word": "CANCEL",
@@ -2562,7 +3806,13 @@
         "call off"
       ],
       "example": "Cancel it.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "canceler",
+        "precancel",
+        "invalidation"
+      ],
+      "ipa": "/ˈkæn.sl̩/"
     },
     {
       "word": "CANCER",
@@ -2572,7 +3822,13 @@
         "disease"
       ],
       "example": "Is it cancer?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "anticancer",
+        "cancerous",
+        "canker"
+      ],
+      "ipa": "/ˈkænsə/"
     },
     {
       "word": "CANDLE",
@@ -2581,7 +3837,13 @@
         "light"
       ],
       "example": "I lit a candle.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "candlelight",
+        "candlelit",
+        "candlepower"
+      ],
+      "ipa": "/ˈkæn.dəl/"
     },
     {
       "word": "CANNED",
@@ -2591,7 +3853,8 @@
         "preserved"
       ],
       "example": "I like canned fruits.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kænd/"
     },
     {
       "word": "CANTEEN",
@@ -2601,7 +3864,8 @@
         "dining hall"
       ],
       "example": "Where's my canteen?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kænˈtiːn/"
     },
     {
       "word": "CAPABLE",
@@ -2610,7 +3874,13 @@
         "skilled"
       ],
       "example": "Is he capable?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "capability",
+        "capably",
+        "incapable"
+      ],
+      "ipa": "/ˈkeɪ.pə.bəl/"
     },
     {
       "word": "CAPACITY",
@@ -2620,7 +3890,13 @@
         "room"
       ],
       "example": "The room is at capacity.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈpæsɪti/",
+      "family": [
+        "incapacity",
+        "overcapacity",
+        "capacious"
+      ]
     },
     {
       "word": "CAPSULE",
@@ -2630,7 +3906,13 @@
         "tablet"
       ],
       "example": "The capsule won't come out.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "caplet",
+        "capsular",
+        "capsulize"
+      ],
+      "ipa": "/ˈkæpsjuːl/"
     },
     {
       "word": "CAPTURE",
@@ -2640,7 +3922,12 @@
         "take"
       ],
       "example": "We'll capture them.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "recapture",
+        "caption",
+        "captivate"
+      ]
     },
     {
       "word": "CUSHION",
@@ -2650,7 +3937,13 @@
         "bolster"
       ],
       "example": "She hugged a cushion.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkʊʃən/",
+      "family": [
+        "pincushion",
+        "pillow",
+        "squab"
+      ]
     },
     {
       "word": "CAREER",
@@ -2660,7 +3953,12 @@
         "vocation"
       ],
       "example": "Focus on your career.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈɹɪə/",
+      "family": [
+        "careerism",
+        "careerist"
+      ]
     },
     {
       "word": "CARELESS",
@@ -2669,7 +3967,13 @@
         "thoughtless"
       ],
       "example": "He's careless.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɛəlɪs/",
+      "family": [
+        "carelessly",
+        "carelessness",
+        "guilty"
+      ]
     },
     {
       "word": "CARELESSLY",
@@ -2679,7 +3983,8 @@
         "poorly"
       ],
       "example": "I carelessly dropped a vase.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈkɛɹləsli/"
     },
     {
       "word": "CARPET",
@@ -2688,7 +3993,12 @@
         "floor cover"
       ],
       "example": "This is a carpet.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "carpetbag",
+        "carpeting"
+      ],
+      "ipa": "/ˈkɑː.pɪt/"
     },
     {
       "word": "CARRIAGE",
@@ -2698,7 +4008,13 @@
         "wagon"
       ],
       "example": "Is that your carriage?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkæɹɪd͡ʒ/",
+      "family": [
+        "carriageway",
+        "miscarriage",
+        "undercarriage"
+      ]
     },
     {
       "word": "CARTON",
@@ -2708,7 +4024,8 @@
         "pack"
       ],
       "example": "Buy a carton of milk.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɑːtən/"
     },
     {
       "word": "CASHPOINT",
@@ -2727,7 +4044,13 @@
         "simple"
       ],
       "example": "I'm a casual gamer.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkaʒjuːəl/",
+      "family": [
+        "casually",
+        "casualness",
+        "casualty"
+      ]
     },
     {
       "word": "CATEGORIZE",
@@ -2737,7 +4060,12 @@
         "sort"
       ],
       "example": "It is time consuming to categorize your flash cards.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "category",
+        "categorization"
+      ],
+      "ipa": "/ˈkætɪɡəˌɹaɪz/"
     },
     {
       "word": "CATEGORY",
@@ -2747,7 +4075,13 @@
         "type"
       ],
       "example": "Pick a category.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkæt.ɪˌɡoɹ.i/",
+      "family": [
+        "subcategory",
+        "categorical",
+        "categorize"
+      ]
     },
     {
       "word": "CATTLE",
@@ -2757,7 +4091,13 @@
         "livestock"
       ],
       "example": "I rear cattle.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cattleman",
+        "capital",
+        "chattel"
+      ],
+      "ipa": "/ˈkætəl/"
     },
     {
       "word": "CAUTION",
@@ -2767,7 +4107,12 @@
         "warning"
       ],
       "example": "Use caution.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cautionary",
+        "cautious",
+        "precaution"
+      ]
     },
     {
       "word": "CAUTIOUS",
@@ -2777,7 +4122,13 @@
         "safe"
       ],
       "example": "Be cautious.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɔːʃəs/",
+      "family": [
+        "cautiously",
+        "cautiousness",
+        "incautious"
+      ]
     },
     {
       "word": "CAVE",
@@ -2787,7 +4138,12 @@
         "den"
       ],
       "example": "This is a cave.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/keɪv/",
+      "family": [
+        "caveman",
+        "caver"
+      ]
     },
     {
       "word": "CELEBRITY",
@@ -2797,7 +4153,13 @@
         "famous person"
       ],
       "example": "He is a celebrity.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "celeb",
+        "celebrate",
+        "celebration"
+      ],
+      "ipa": "/sɪˈlɛb.ɹɪ.ti/"
     },
     {
       "word": "CELL",
@@ -2807,7 +4169,13 @@
         "unit"
       ],
       "example": "He left the cell.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sɛl/",
+      "family": [
+        "cellmate",
+        "photocell",
+        "cellar"
+      ]
     },
     {
       "word": "CENTRAL",
@@ -2817,7 +4185,12 @@
         "main"
       ],
       "example": "Religion's role is central.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "centrality",
+        "centralize",
+        "centrally"
+      ]
     },
     {
       "word": "CEREMONY",
@@ -2827,7 +4200,13 @@
         "act"
       ],
       "example": "He is fond of ceremony.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ceremonial",
+        "ceremonially",
+        "ceremonious"
+      ],
+      "ipa": "/ˈsɛɹ.ɪ.mə.ni/"
     },
     {
       "word": "CERTAINTY",
@@ -2837,7 +4216,11 @@
         "fact"
       ],
       "example": "More eyes, more certainty.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsɝtn̩ti/",
+      "family": [
+        "certain"
+      ]
     },
     {
       "word": "CHAMPION",
@@ -2847,7 +4230,11 @@
         "hero"
       ],
       "example": "I'm the champion.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "championship"
+      ],
+      "ipa": "/ˈt͡ʃæm.pi.ən/"
     },
     {
       "word": "CHANNEL",
@@ -2857,7 +4244,13 @@
         "passage"
       ],
       "example": "We sailed our boat through the narrow channel between the islands.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃænəl/",
+      "family": [
+        "channelization",
+        "channelize",
+        "multichannel"
+      ]
     },
     {
       "word": "CHAOS",
@@ -2867,7 +4260,13 @@
         "mess"
       ],
       "example": "It'll be chaos.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkeɪ.ɒs/",
+      "family": [
+        "chaotic",
+        "chaotically",
+        "entropy"
+      ]
     },
     {
       "word": "CHARGE",
@@ -2878,7 +4277,13 @@
         "bill"
       ],
       "example": "How much do they charge for a haircut?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃɑːd͡ʒ/",
+      "family": [
+        "discharge",
+        "overcharge",
+        "recharge"
+      ]
     },
     {
       "word": "CHARIOT",
@@ -2889,7 +4294,11 @@
         "carriage"
       ],
       "example": "A quadriga is a chariot drawn by four horses.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃæɹi.ət/",
+      "family": [
+        "charioteer"
+      ]
     },
     {
       "word": "CHARITY",
@@ -2900,7 +4309,12 @@
         "support"
       ],
       "example": "I run a charity.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtʃæɹɪti/",
+      "family": [
+        "chug",
+        "Cherry"
+      ]
     },
     {
       "word": "CHARM",
@@ -2911,7 +4325,13 @@
         "attraction"
       ],
       "example": "My little sister carries a rabbit-foot charm in her pocket for good luck.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʃɑːm/",
+      "family": [
+        "charmer",
+        "charming",
+        "charmless"
+      ]
     },
     {
       "word": "CHASE",
@@ -2922,13 +4342,22 @@
         "run after"
       ],
       "example": "I won't chase.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t͡ʃeɪs/",
+      "family": [
+        "steeplechase",
+        "follow"
+      ]
     },
     {
       "word": "CUSTOMS",
       "gloss": "Office checking bags at a border.",
       "example": "Where is Customs?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "customhouse"
+      ],
+      "ipa": "/ˈkʌs.təmz/"
     },
     {
       "word": "CHECKOUT",
@@ -2939,7 +4368,8 @@
         "exit"
       ],
       "example": "What time is checkout?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃɛkˌaʊt/"
     },
     {
       "word": "CHEERFUL",
@@ -2950,7 +4380,12 @@
         "joyful"
       ],
       "example": "I'm cheerful.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈt͡ʃɪəfl̩/",
+      "family": [
+        "cheerfully",
+        "cheerfulness"
+      ]
     },
     {
       "word": "CYCLE",
@@ -2960,7 +4395,13 @@
         "round"
       ],
       "example": "It’s a repetitive cycle.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cyclic",
+        "bicycle",
+        "motorcycle"
+      ],
+      "ipa": "/ˈsaɪ.kəl/"
     },
     {
       "word": "CHEMIST",
@@ -2971,7 +4412,12 @@
         "researcher"
       ],
       "example": "He is a chemist.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɛmɪst/",
+      "family": [
+        "chemistry",
+        "alchemist"
+      ]
     },
     {
       "word": "CHEMISTRY",
@@ -2982,7 +4428,13 @@
         "subject"
       ],
       "example": "I failed chemistry.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "biochemistry",
+        "geochemistry",
+        "alchemy"
+      ],
+      "ipa": "/ˈkɛm.ɪ.stɹi/"
     },
     {
       "word": "CHERISH",
@@ -2993,7 +4445,13 @@
         "value"
       ],
       "example": "Cherish this moment.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈt͡ʃɛɹɪʃ/",
+      "family": [
+        "cherished",
+        "cherishing",
+        "caress"
+      ]
     },
     {
       "word": "CHIEF",
@@ -3004,7 +4462,13 @@
         "head"
       ],
       "example": "I'm the chief.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/t͡ʃiːf/",
+      "family": [
+        "chiefdom",
+        "chiefly",
+        "captain"
+      ]
     },
     {
       "word": "CHOIR",
@@ -3015,7 +4479,13 @@
         "chorus"
       ],
       "example": "I sang in the choir.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kwaɪɚ/",
+      "family": [
+        "choirboy",
+        "choirmaster",
+        "chorister"
+      ]
     },
     {
       "word": "CHOKE",
@@ -3024,7 +4494,12 @@
         "stop breathing"
       ],
       "example": "The smoke made him cough and almost choke.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t͡ʃəʊk/",
+      "family": [
+        "chokecherry",
+        "choker"
+      ]
     },
     {
       "word": "CHRISTIAN",
@@ -3035,7 +4510,13 @@
         "worshipper"
       ],
       "example": "Christian lives next door.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɹɪʃt͡ʃən/",
+      "family": [
+        "Christina",
+        "Christine",
+        "unchristian"
+      ]
     },
     {
       "word": "CHUCKLE",
@@ -3044,7 +4525,8 @@
         "laugh quietly"
       ],
       "example": "It made me chuckle.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt͡ʃʌkəl/"
     },
     {
       "word": "DAMAGE",
@@ -3054,7 +4536,13 @@
         "hurt"
       ],
       "example": "There's no damage.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "indemnity",
+        "damageable",
+        "undamaged"
+      ],
+      "ipa": "/ˈdæmɪd͡ʒ/"
     },
     {
       "word": "CIRCULAR",
@@ -3065,7 +4553,13 @@
         "curved"
       ],
       "example": "Kalman camped in a circular clearing.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "circularity",
+        "circularize",
+        "circularly"
+      ],
+      "ipa": "/ˈsɜː.kjə.lə/"
     },
     {
       "word": "CIRCUS",
@@ -3076,7 +4570,12 @@
         "entertainment"
       ],
       "example": "That is a circus!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsɜːkəs/",
+      "family": [
+        "circle",
+        "circular"
+      ]
     },
     {
       "word": "CIVIL",
@@ -3087,7 +4586,13 @@
         "respectful"
       ],
       "example": "I'm a civil servant.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "civilian",
+        "civility",
+        "civilize"
+      ],
+      "ipa": "/ˈsɪv.əl/"
     },
     {
       "word": "DELETE",
@@ -3097,7 +4602,12 @@
         "remove"
       ],
       "example": "Delete it!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɪˈliːt/",
+      "family": [
+        "deletion",
+        "diminish"
+      ]
     },
     {
       "word": "CLASSICAL",
@@ -3108,7 +4618,13 @@
         "historic"
       ],
       "example": "I enjoy classical music.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "classically",
+        "neoclassical",
+        "classicism"
+      ],
+      "ipa": "/ˈklæs.ɪ.kɫ̩/"
     },
     {
       "word": "CLASSIFY",
@@ -3119,7 +4635,13 @@
         "arrange"
       ],
       "example": "I classify his music as rock.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "classifiable",
+        "reclassify",
+        "class"
+      ],
+      "ipa": "/ˈklæs.ɪ.faɪ/"
     },
     {
       "word": "DAMP",
@@ -3129,7 +4651,13 @@
         "wet"
       ],
       "example": "It smells damp.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈdæmp/",
+      "family": [
+        "dampen",
+        "damply",
+        "dampness"
+      ]
     },
     {
       "word": "DARKNESS",
@@ -3139,7 +4667,11 @@
         "shadow"
       ],
       "example": "Darkness is falling.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "semidarkness"
+      ],
+      "ipa": "/ˈdɑːk.nəs/"
     },
     {
       "word": "CLIFF",
@@ -3150,7 +4682,13 @@
         "edge"
       ],
       "example": "He jumped off a cliff.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/klɪf/",
+      "family": [
+        "Cleveland",
+        "cliffhanger",
+        "clifftop"
+      ]
     },
     {
       "word": "CLIMATE",
@@ -3159,7 +4697,13 @@
         "weather pattern"
       ],
       "example": "Climate change is real.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "acclimate",
+        "acclimatize",
+        "climatology"
+      ],
+      "ipa": "/ˈklaɪ.mɪt/"
     },
     {
       "word": "CLIMBER",
@@ -3170,7 +4714,8 @@
         "mountaineer"
       ],
       "example": "He's a climber.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈklaɪmə/"
     },
     {
       "word": "CLINIC",
@@ -3181,7 +4726,13 @@
         "surgery"
       ],
       "example": "I work in a clinic.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "clinical",
+        "clinically",
+        "clinician"
+      ],
+      "ipa": "/ˈklɪn.ɪk/"
     },
     {
       "word": "CLIP",
@@ -3192,7 +4743,11 @@
         "shorten"
       ],
       "example": "Can you help me clip these papers together?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/klɪp/",
+      "family": [
+        "clipboard"
+      ]
     },
     {
       "word": "CLOSELY",
@@ -3203,7 +4758,8 @@
         "carefully"
       ],
       "example": "Look closely.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈkləʊsliː/"
     },
     {
       "word": "COAL",
@@ -3214,7 +4770,13 @@
         "black"
       ],
       "example": "I'm a coal miner.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəʊl/",
+      "family": [
+        "coalface",
+        "coalfield",
+        "coalmine"
+      ]
     },
     {
       "word": "DATING",
@@ -3224,7 +4786,8 @@
         "courtship"
       ],
       "example": "We're dating.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdeɪt.ɪŋ/"
     },
     {
       "word": "COASTAL",
@@ -3235,7 +4798,8 @@
         "beach"
       ],
       "example": "Zadar is a coastal city.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkəʊstəl/"
     },
     {
       "word": "COD",
@@ -3246,7 +4810,13 @@
         "seafood"
       ],
       "example": "He cooked the cod.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɒd/",
+      "family": [
+        "codfish",
+        "codpiece",
+        "cody"
+      ]
     },
     {
       "word": "COFFIN",
@@ -3257,7 +4827,8 @@
         "container"
       ],
       "example": "The coffin was empty.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒfɪn/"
     },
     {
       "word": "COLLAPSE",
@@ -3268,7 +4839,11 @@
         "crash"
       ],
       "example": "I may collapse.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈlæps/",
+      "family": [
+        "collapsible"
+      ]
     },
     {
       "word": "COLLAR",
@@ -3279,7 +4854,13 @@
         "ring"
       ],
       "example": "That's a collar.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒlə/",
+      "family": [
+        "collarbone",
+        "collarless",
+        "accolade"
+      ]
     },
     {
       "word": "COLUMNIST",
@@ -3290,7 +4871,11 @@
         "journalist"
       ],
       "example": "That man is a newspaper columnist.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "column"
+      ],
+      "ipa": "/ˈkɒ.lə.mɪst/"
     },
     {
       "word": "COMBINE",
@@ -3299,7 +4884,13 @@
         "put together"
       ],
       "example": "Let's combine forces.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kəmˈbaɪn/",
+      "family": [
+        "combination",
+        "combined",
+        "recombine"
+      ]
     },
     {
       "word": "COMEDIAN",
@@ -3310,7 +4901,8 @@
         "entertainer"
       ],
       "example": "I'm a comedian.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈmiː.di.ən/"
     },
     {
       "word": "COMEDY",
@@ -3321,7 +4913,13 @@
         "joke"
       ],
       "example": "This is not comedy.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmədi/",
+      "family": [
+        "comedian",
+        "comedic",
+        "sitcom"
+      ]
     },
     {
       "word": "COMET",
@@ -3332,7 +4930,8 @@
         "space object"
       ],
       "example": "Tonight a comet will be visible.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmɪt/"
     },
     {
       "word": "COMFORT",
@@ -3341,7 +4940,13 @@
         "make feel better"
       ],
       "example": "That's a comfort.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkʌm.fət/",
+      "family": [
+        "comfortable",
+        "comfortless",
+        "discomfort"
+      ]
     },
     {
       "word": "COMMA",
@@ -3352,7 +4957,13 @@
         "pause"
       ],
       "example": "A comma is missing.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmə/",
+      "family": [
+        "apostrophe",
+        "brace",
+        "bracket"
+      ]
     },
     {
       "word": "COMMAND",
@@ -3363,7 +4974,13 @@
         "direct"
       ],
       "example": "He's in command.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈmɑːnd/",
+      "family": [
+        "commend",
+        "mandate",
+        "manipulation"
+      ]
     },
     {
       "word": "COMMENT",
@@ -3374,7 +4991,13 @@
         "opinion"
       ],
       "example": "I can't comment.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmɛnt/",
+      "family": [
+        "commentary",
+        "commentate",
+        "commentator"
+      ]
     },
     {
       "word": "COMMERCIAL",
@@ -3385,7 +5008,13 @@
         "selling"
       ],
       "example": "He did a commercial.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "infomercial",
+        "commercialism",
+        "commercially"
+      ],
+      "ipa": "/kəˈmɜː.ʃəl/"
     },
     {
       "word": "COMMIT",
@@ -3396,7 +5025,13 @@
         "carry out"
       ],
       "example": "I promise to commit to my fitness goals this year.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kəˈmɪt/",
+      "family": [
+        "commitment",
+        "committed",
+        "committer"
+      ]
     },
     {
       "word": "COMMONLY",
@@ -3407,7 +5042,8 @@
         "normally"
       ],
       "example": "The term is not commonly used.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈkɑmənli/"
     },
     {
       "word": "COMPANION",
@@ -3416,7 +5052,13 @@
         "friend"
       ],
       "example": "Where is our companion?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "companionable",
+        "companionship",
+        "companionway"
+      ],
+      "ipa": "/kəmˈpæn.jən/"
     },
     {
       "word": "COMPARISON",
@@ -3427,7 +5069,13 @@
         "match"
       ],
       "example": "I like your comparison.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "comparable",
+        "comparative",
+        "compare"
+      ],
+      "ipa": "/kəmˈpæɹ.ɪ.sən/"
     },
     {
       "word": "COMPETE",
@@ -3438,13 +5086,25 @@
         "race"
       ],
       "example": "Let's compete.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kəmˈpiːt/",
+      "family": [
+        "competent",
+        "competition",
+        "competitor"
+      ]
     },
     {
       "word": "COMPETITOR",
       "gloss": "Person or team who wants to win against others.",
       "example": "You're a competitor.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "compete",
+        "competition",
+        "competitive"
+      ],
+      "ipa": "/kəmˈpɛt.ɪ.tɚ/"
     },
     {
       "word": "COMPLEMENT",
@@ -3454,7 +5114,13 @@
         "add to"
       ],
       "example": "We complement each other.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmpləmənt/",
+      "family": [
+        "complementary",
+        "complete",
+        "compliment"
+      ]
     },
     {
       "word": "DAZZLE",
@@ -3464,7 +5130,12 @@
         "shine"
       ],
       "example": "The sun can dazzle your eyes when it reflects on water.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bedazzle",
+        "dazzler"
+      ],
+      "ipa": "/ˈdæzəl/"
     },
     {
       "word": "COMPLETELY",
@@ -3475,7 +5146,13 @@
         "entirely"
       ],
       "example": "I agree completely.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/kəmˈpliːtli/",
+      "family": [
+        "degree",
+        "extent",
+        "abundantly"
+      ]
     },
     {
       "word": "COMPLEX",
@@ -3486,7 +5163,13 @@
         "complicated"
       ],
       "example": "Life is complex.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɒmplɛks/",
+      "family": [
+        "complexity",
+        "complexly",
+        "multiplex"
+      ]
     },
     {
       "word": "COMPLICATE",
@@ -3495,7 +5178,13 @@
         "make hard"
       ],
       "example": "You complicate things.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkɑmplɪkeɪt/",
+      "family": [
+        "complication",
+        "explicate",
+        "implicate"
+      ]
     },
     {
       "word": "COMPLIMENT",
@@ -3504,7 +5193,12 @@
         "say something nice"
       ],
       "example": "It's a compliment.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɑmpləmənt/",
+      "family": [
+        "complimentary",
+        "complement"
+      ]
     },
     {
       "word": "COMPOSE",
@@ -3515,7 +5209,13 @@
         "make"
       ],
       "example": "I compose songs.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kəmˈpəʊz/",
+      "family": [
+        "composer",
+        "composite",
+        "composition"
+      ]
     },
     {
       "word": "COMPOUND",
@@ -3526,7 +5226,11 @@
         "combine"
       ],
       "example": "Do you know what compound words are?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmpaʊnd/",
+      "family": [
+        "compoundable"
+      ]
     },
     {
       "word": "COMPROMISE",
@@ -3537,7 +5241,12 @@
         "middle way"
       ],
       "example": "Let's compromise.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒmpɹəˌmaɪz/",
+      "family": [
+        "promise",
+        "compromising"
+      ]
     },
     {
       "word": "CONCEPT",
@@ -3548,7 +5257,13 @@
         "notion"
       ],
       "example": "It's a good concept.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "conceive",
+        "conceptional",
+        "conceptual"
+      ],
+      "ipa": "/ˈkɒn.sɛpt/"
     },
     {
       "word": "CONCERNED",
@@ -3559,7 +5274,12 @@
         "troubled"
       ],
       "example": "I'm concerned.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kənˈsɝnd/",
+      "family": [
+        "concernedly",
+        "unconcerned"
+      ]
     },
     {
       "word": "CONCLUDE",
@@ -3570,7 +5290,13 @@
         "decide"
       ],
       "example": "The inquiry did not conclude.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈkluːd/",
+      "family": [
+        "conclusion",
+        "conclusive",
+        "include"
+      ]
     },
     {
       "word": "CONCLUSION",
@@ -3581,7 +5307,13 @@
         "decision"
       ],
       "example": "Draw a conclusion.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kənˈkluːʒən/",
+      "family": [
+        "conclude",
+        "conclusive",
+        "conclusively"
+      ]
     },
     {
       "word": "CONDUCT",
@@ -3592,7 +5324,13 @@
         "direct"
       ],
       "example": "Let's conduct a study.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒndʌkt/",
+      "family": [
+        "misconduct",
+        "conductance",
+        "conductible"
+      ]
     },
     {
       "word": "CONFIDENCE",
@@ -3601,7 +5339,11 @@
         "trust"
       ],
       "example": "I lack confidence.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "overconfidence"
+      ],
+      "ipa": "/ˈkɒn.fɪ.dəns/"
     },
     {
       "word": "CONFIRM",
@@ -3610,7 +5352,13 @@
         "check"
       ],
       "example": "Please confirm.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈfɜːm/",
+      "family": [
+        "reconfirm",
+        "confirmation",
+        "verify"
+      ]
     },
     {
       "word": "CONFLICT",
@@ -3619,7 +5367,11 @@
         "fight"
       ],
       "example": "Avoid conflict.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɒn.flɪkt/",
+      "family": [
+        "conflicted"
+      ]
     },
     {
       "word": "CONFUSING",
@@ -3628,7 +5380,13 @@
         "unclear"
       ],
       "example": "It's confusing.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "confusingly",
+        "confuse",
+        "confused"
+      ],
+      "ipa": "/kənˈfjuːzɪŋ/"
     },
     {
       "word": "CONFUSION",
@@ -3637,7 +5395,13 @@
         "mix-up"
       ],
       "example": "What confusion!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kənˈfjuːʒən/",
+      "family": [
+        "confuse",
+        "confusing",
+        "commotion"
+      ]
     },
     {
       "word": "CONNECT",
@@ -3646,7 +5410,13 @@
         "join"
       ],
       "example": "Connect the microphone.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kəˈnɛkt/",
+      "family": [
+        "connectable",
+        "connection",
+        "connective"
+      ]
     },
     {
       "word": "CONNECTION",
@@ -3655,7 +5425,12 @@
         "link"
       ],
       "example": "I know the connection!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "disconnection",
+        "interconnection",
+        "connect"
+      ]
     },
     {
       "word": "CONQUER",
@@ -3664,7 +5439,13 @@
         "beat"
       ],
       "example": "You cannot conquer us.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "conquerable",
+        "conqueror",
+        "conquest"
+      ],
+      "ipa": "/ˈkɒŋkə/"
     },
     {
       "word": "CONSCIOUS",
@@ -3673,7 +5454,13 @@
         "awake"
       ],
       "example": "He's conscious.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɑn.ʃəs/",
+      "family": [
+        "consciously",
+        "consciousness",
+        "semiconscious"
+      ]
     },
     {
       "word": "CONSONANT",
@@ -3682,7 +5469,13 @@
         "letter"
       ],
       "example": "Is \"Y\" a consonant or a vowel?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "consonantly",
+        "consonance",
+        "vowel"
+      ],
+      "ipa": "/ˈkɒn.sə.nənt/"
     },
     {
       "word": "CONSTANTLY",
@@ -3691,7 +5484,8 @@
         "always"
       ],
       "example": "It snows constantly.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈkɒnstəntli/"
     },
     {
       "word": "CONSTITUTE",
@@ -3700,7 +5494,13 @@
         "form"
       ],
       "example": "Six members constitute the committee.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkɒnstɪtjuːt/",
+      "family": [
+        "reconstitute",
+        "constituency",
+        "constituent"
+      ]
     },
     {
       "word": "CONSTRUCT",
@@ -3709,7 +5509,13 @@
         "build"
       ],
       "example": "I will construct a wooden building.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkɒn.stɹʌkt/",
+      "family": [
+        "constructive",
+        "deconstruct",
+        "reconstruct"
+      ]
     },
     {
       "word": "CONSUME",
@@ -3718,7 +5524,13 @@
         "use"
       ],
       "example": "Consume it all.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈsjuːm/",
+      "family": [
+        "consumable",
+        "consumer",
+        "consumption"
+      ]
     },
     {
       "word": "CONSUMER",
@@ -3727,7 +5539,13 @@
         "buyer"
       ],
       "example": "Consumer confidence is up.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kənˈsjuːmə/",
+      "family": [
+        "consumerism",
+        "consumerist",
+        "consumption"
+      ]
     },
     {
       "word": "CONTAIN",
@@ -3736,7 +5554,13 @@
         "hold"
       ],
       "example": "May contain nuts.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈteɪn/",
+      "family": [
+        "container",
+        "containable",
+        "containment"
+      ]
     },
     {
       "word": "CONTENT",
@@ -3745,7 +5569,13 @@
         "happy"
       ],
       "example": "Check the content of the box before you pack it.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kənˈtɛnt/",
+      "family": [
+        "contently",
+        "contentment",
+        "discontent"
+      ]
     },
     {
       "word": "CONTINUAL",
@@ -3754,7 +5584,13 @@
         "endless"
       ],
       "example": "I am fatigued from their continual demands.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kənˈtɪnjuəl/",
+      "family": [
+        "continually",
+        "continuance",
+        "continuation"
+      ]
     },
     {
       "word": "CONTINUOUS",
@@ -3763,7 +5599,13 @@
         "non-stop"
       ],
       "example": "I have a continuous pain here.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "continuously",
+        "contain",
+        "continuity"
+      ],
+      "ipa": "/kənˈtɪn.juː.əs/"
     },
     {
       "word": "CONTRARY",
@@ -3772,7 +5614,13 @@
         "opposite"
       ],
       "example": "I have no proof to the contrary.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkɒntɹəɹi/",
+      "family": [
+        "contrarian",
+        "contrarily",
+        "contrariness"
+      ]
     },
     {
       "word": "CONTRIBUTE",
@@ -3781,7 +5629,13 @@
         "give"
       ],
       "example": "I can contribute.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈt͡ʃɹɪbjʉwt/",
+      "family": [
+        "noncontributing",
+        "contribution",
+        "contributor"
+      ]
     },
     {
       "word": "DEADLINE",
@@ -3791,7 +5645,8 @@
         "due"
       ],
       "example": "I have a deadline.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdɛdˌlaɪn/"
     },
     {
       "word": "CONVEY",
@@ -3800,7 +5655,13 @@
         "carry"
       ],
       "example": "I want to convey my sympathy.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈveɪ/",
+      "family": [
+        "conveyable",
+        "conveyance",
+        "conveyor"
+      ]
     },
     {
       "word": "CONVINCE",
@@ -3809,14 +5670,24 @@
         "persuade"
       ],
       "example": "We'll convince him.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kənˈvɪns/",
+      "family": [
+        "convict",
+        "conviction",
+        "convincingly"
+      ]
     },
     {
       "word": "COPYRIGHT",
       "gloss": "the legal power to control who may use creative work",
       "synonyms": [],
       "example": "What is copyright?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkɑpiˌɹaɪt/",
+      "family": [
+        "copyleft"
+      ]
     },
     {
       "word": "CORRECTION",
@@ -3825,7 +5696,11 @@
         "fix"
       ],
       "example": "This needs correction.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kəˈɹɛkʃən/",
+      "family": [
+        "correctional"
+      ]
     },
     {
       "word": "COTTON",
@@ -3834,13 +5709,24 @@
         "cloth"
       ],
       "example": "It's cotton.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cottonmouth",
+        "cottonseed",
+        "cottontail"
+      ],
+      "ipa": "/ˈkɒt.n̩/"
     },
     {
       "word": "COUGH",
       "gloss": "to force air out of the lungs suddenly and noisily",
       "example": "I cough a lot.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɒf/",
+      "family": [
+        "coughing",
+        "hiccough"
+      ]
     },
     {
       "word": "COUNCIL",
@@ -3849,7 +5735,13 @@
         "group"
       ],
       "example": "The council agreed on it.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "councilor",
+        "councilman",
+        "councilperson"
+      ],
+      "ipa": "/ˈkaʊn.səl/"
     },
     {
       "word": "COUNSELING",
@@ -3867,7 +5759,11 @@
         "lethal"
       ],
       "example": "Are tasers deadly?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈdɛdli/",
+      "family": [
+        "deadliness"
+      ]
     },
     {
       "word": "COUNTER",
@@ -3876,7 +5772,11 @@
         "table"
       ],
       "example": "Wipe the counter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "counterman"
+      ],
+      "ipa": "/ˈkaʊn.tə/"
     },
     {
       "word": "COUNTLESS",
@@ -3885,7 +5785,8 @@
         "many"
       ],
       "example": "He has countless books.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkaʊntləs/"
     },
     {
       "word": "COUNTY",
@@ -3894,7 +5795,13 @@
         "area"
       ],
       "example": "I live in Yolo County.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaʊnti/",
+      "family": [
+        "countywide",
+        "count",
+        "barony"
+      ]
     },
     {
       "word": "COURAGE",
@@ -3903,7 +5810,13 @@
         "brave feeling"
       ],
       "example": "Have courage.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkʌɹ.ɪd͡ʒ/",
+      "family": [
+        "courageous",
+        "discourage",
+        "encourage"
+      ]
     }
   ]
 }

@@ -68,6 +68,19 @@ each pack JSON `license`/`attribution` and on the in-app About page):
   Sentences without a Tatoeba match are original Hiato copy generated
   with Mistral AI — no external credit required.
 
+Pronunciation and word family (ADR 0055)
+----------------------------------------
+EndCard IPA transcriptions and word-family chips ship per lemma from
+Wiktionary via wiktextract pre-extracted data (kaikki.org), CC-BY-SA 4.0:
+
+  Source: https://kaikki.org/dictionary/ (wiktextract extracts of
+  Wiktionary, by Tatu Ylonen / the wiktextract project)
+  License: https://creativecommons.org/licenses/by-sa/4.0/
+  Aggregate attribution (link + license), the wordhoard/Tatoeba model.
+  Entries without wiktextract coverage are original Hiato copy generated
+  with Mistral AI — no external credit required. The per-entry source is
+  recorded in scripts/data/lemma-extras-gate.json.
+
 Derived source caches (not the PWA bundle)
 ------------------------------------------
 These committed files adapt third-party datasets and stay under those terms

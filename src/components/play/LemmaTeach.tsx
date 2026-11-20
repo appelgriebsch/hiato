@@ -86,7 +86,7 @@ export function LemmaTeach({
       {gloss ? (
         <p
           lang={lang}
-          className="mt-2 text-lg font-semibold leading-snug text-ink"
+          className="mt-1.5 text-lg font-semibold leading-snug text-ink"
         >
           {gloss}
         </p>
@@ -94,7 +94,7 @@ export function LemmaTeach({
       <p
         className={[
           'text-sm text-ink-muted',
-          gloss ? 'mt-1.5' : 'mt-2',
+          gloss ? 'mt-1' : 'mt-1.5',
         ].join(' ')}
       >
         The word was
@@ -104,7 +104,7 @@ export function LemmaTeach({
           lang={lang}
           className={[
             'text-pixel-display tracking-[0.06em] text-ink',
-            gloss ? 'mt-0.5' : 'mt-1',
+            gloss ? 'mt-0' : 'mt-0.5',
           ].join(' ')}
         >
           {word}
@@ -121,7 +121,7 @@ export function LemmaTeach({
             className={[
               'motion-press inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center hover:bg-cream-dark active:bg-cream-dark focus-visible:bg-accent-soft',
               speaking ? 'text-accent-fg' : 'text-ink-muted',
-              gloss ? 'mt-0.5' : 'mt-1',
+              gloss ? 'mt-0' : 'mt-0.5',
             ].join(' ')}
           >
             <PixelIcon name="speaker" size={20} />
@@ -131,7 +131,7 @@ export function LemmaTeach({
       {posChip || ipaBody ? (
         <div
           data-endcard-meta
-          className="mt-1.5 flex flex-wrap items-center justify-center gap-2"
+          className="mt-1 flex flex-wrap items-center justify-center gap-2"
         >
           {posChip ? (
             <span
@@ -155,60 +155,62 @@ export function LemmaTeach({
         <p
           lang={lang}
           data-endcard-example
-          className="mx-auto mt-2 max-w-sm text-sm leading-snug text-ink-muted italic"
+          className="mx-auto mt-1.5 max-w-sm text-sm leading-snug text-ink-muted italic"
         >
           {example.trim()}
         </p>
       ) : null}
       {speakNote === 'playing' ? (
-        <p lang="en" role="status" className="mt-2 text-xs text-ink-muted">
+        <p lang="en" role="status" className="mt-1.5 text-xs text-ink-muted">
           Playing
         </p>
       ) : null}
       {speakNote === 'failed' ? (
-        <p lang="en" role="status" className="mt-2 text-xs text-danger">
+        <p lang="en" role="status" className="mt-1.5 text-xs text-danger">
           Could not play the word.
         </p>
       ) : null}
       {showSpeak ? (
-        <p lang="en" className="mt-1 text-xs text-ink-muted">
+        <p lang="en" className="mt-0.5 text-xs text-ink-muted">
           If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.
         </p>
       ) : null}
       {synonyms.length > 0 ? (
-        <div data-endcard-synonyms className="mt-1.5">
-          <span lang="en" className="mb-0.5 block text-pixel-label text-ink-faint">
+        <div
+          data-endcard-synonyms
+          className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
+        >
+          <span lang="en" className="text-pixel-label text-ink-faint">
             Synonyms
           </span>
-          <div className="flex flex-wrap justify-center gap-1.5">
-            {synonyms.map((s) => (
-              <span
-                key={s}
-                lang={lang}
-                className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
+          {synonyms.map((s) => (
+            <span
+              key={s}
+              lang={lang}
+              className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
+            >
+              {s}
+            </span>
+          ))}
         </div>
       ) : null}
       {familyChips.length > 0 ? (
-        <div data-endcard-family className="mt-1.5">
-          <span lang="en" className="mb-0.5 block text-pixel-label text-ink-faint">
+        <div
+          data-endcard-family
+          className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
+        >
+          <span lang="en" className="text-pixel-label text-ink-faint">
             Word family
           </span>
-          <div className="flex flex-wrap justify-center gap-1.5">
-            {familyChips.map((f) => (
-              <span
-                key={f}
-                lang={lang}
-                className="px-frame inline-flex items-center bg-transparent px-2.5 py-1 text-[13px] font-medium text-ink [--px-edge:var(--color-line)]"
-              >
-                {f}
-              </span>
-            ))}
-          </div>
+          {familyChips.map((f) => (
+            <span
+              key={f}
+              lang={lang}
+              className="px-frame inline-flex items-center bg-transparent px-2.5 py-1 text-[13px] font-medium text-ink [--px-edge:var(--color-line)]"
+            >
+              {f}
+            </span>
+          ))}
         </div>
       ) : null}
     </>
