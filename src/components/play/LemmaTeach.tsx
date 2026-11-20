@@ -86,7 +86,7 @@ export function LemmaTeach({
       {gloss ? (
         <p
           lang={lang}
-          className="mt-3 text-lg font-semibold leading-snug text-ink"
+          className="mt-2 text-lg font-semibold leading-snug text-ink"
         >
           {gloss}
         </p>
@@ -94,7 +94,7 @@ export function LemmaTeach({
       <p
         className={[
           'text-sm text-ink-muted',
-          gloss ? 'mt-2' : 'mt-3',
+          gloss ? 'mt-1.5' : 'mt-2',
         ].join(' ')}
       >
         The word was
@@ -131,7 +131,7 @@ export function LemmaTeach({
       {posChip || ipaBody ? (
         <div
           data-endcard-meta
-          className="mt-2 flex flex-wrap items-center justify-center gap-2"
+          className="mt-1.5 flex flex-wrap items-center justify-center gap-2"
         >
           {posChip ? (
             <span
@@ -155,7 +155,7 @@ export function LemmaTeach({
         <p
           lang={lang}
           data-endcard-example
-          className="mx-auto mt-3 max-w-sm text-sm leading-snug text-ink-muted italic"
+          className="mx-auto mt-2 max-w-sm text-sm leading-snug text-ink-muted italic"
         >
           {example.trim()}
         </p>
@@ -171,13 +171,13 @@ export function LemmaTeach({
         </p>
       ) : null}
       {showSpeak ? (
-        <p lang="en" className="mt-2 text-xs text-ink-muted">
+        <p lang="en" className="mt-1 text-xs text-ink-muted">
           If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.
         </p>
       ) : null}
       {synonyms.length > 0 ? (
-        <div data-endcard-synonyms className="mt-2">
-          <span lang="en" className="mb-1 block text-pixel-label text-ink-faint">
+        <div data-endcard-synonyms className="mt-1.5">
+          <span lang="en" className="mb-0.5 block text-pixel-label text-ink-faint">
             Synonyms
           </span>
           <div className="flex flex-wrap justify-center gap-1.5">
@@ -194,8 +194,8 @@ export function LemmaTeach({
         </div>
       ) : null}
       {familyChips.length > 0 ? (
-        <div data-endcard-family className="mt-2">
-          <span lang="en" className="mb-1 block text-pixel-label text-ink-faint">
+        <div data-endcard-family className="mt-1.5">
+          <span lang="en" className="mb-0.5 block text-pixel-label text-ink-faint">
             Word family
           </span>
           <div className="flex flex-wrap justify-center gap-1.5">

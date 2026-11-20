@@ -37,6 +37,7 @@ import { loadEnEasiestCefr, loadHintStemCache } from './hint-ceiling-data'
 import { boilerplateGlossErrors, familyLeakErrors, stemSpoilerErrors, type StemBaseline } from './gloss-quality'
 import { loadAccentAllowlist, packDupeErrors } from './pack-dupes'
 import { collectPackPinErrors, loadPackPin, type PinPack } from './pack-pin'
+import { checkLemmaPos, loadLemmaPosMap, loadPosExemptions } from './lemma-pos'
 
 const ROOT = path.join(import.meta.dir, '..', 'public', 'packs')
 
@@ -86,6 +87,9 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const gateLog = (existsSync(gatePath)
     ? JSON.parse(await readFile(gatePath, 'utf8'))
     : {}) as ExampleGateLog
+  // ADR 0055 / #315: every shipped pos must match the committed source map (or be exempt).
+  const posMap = loadLemmaPosMap()
+  const posExempt = loadPosExemptions()
   for (const file of files) {
     const text = await readFile(file, 'utf8')
     let raw: unknown
@@ -113,6 +117,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     errors.push(...stemSpoilerErrors(rel, pack.lemmas, STEM_BASELINE))
     errors.push(...familyLeakErrors(rel, pack.lemmas, FAMILY_BASELINE))
     errors.push(...checkExampleGate(rel, pack, gateLog))
+    errors.push(...checkLemmaPos(rel, pack, posMap, posExempt))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)
