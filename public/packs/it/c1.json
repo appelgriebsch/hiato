@@ -1,27 +1,29 @@
 {
-  "version": 11,
+  "version": 12,
   "lang": "it",
   "cefr": "c1",
-  "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
   "attribution": [
-    "Hiato IT C1 learner pack — original glosses and synonym chips (2026).",
-    "IT A1–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not CELI, CILS, or PLIDA lists (ADR 0040).",
+    "Hiato IT C1 learner pack \u2014 original glosses and synonym chips (2026).",
+    "IT A1\u2013C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0), not CELI, CILS, or PLIDA lists (ADR 0040).",
     "Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.",
-    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026)."
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy (2026).",
+    "Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR."
   ],
   "lemmas": [
     {
       "word": "RILEGGERE",
-      "gloss": "Rivedere un testo già letto per capirlo meglio.",
+      "gloss": "Rivedere un testo gi\u00e0 letto per capirlo meglio.",
       "synonyms": [
         "ricontrollare",
         "rivedere"
       ],
+      "example": "Lo devo rileggere comunque.",
       "pos": "verb",
+      "ipa": "/ri.led\u02c8d\u0361\u0292e.re/",
       "family": [
         "leggere"
-      ],
-      "ipa": "/ri.ledˈd͡ʒe.re/"
+      ]
     },
     {
       "word": "PREMATURA",
@@ -30,11 +32,12 @@
         "anticipata",
         "precoce"
       ],
+      "example": "Prese una decisione prematura in materia.",
       "pos": "noun",
-      "ipa": "/pre.maˈtu.ra/",
+      "ipa": "/pre.ma\u02c8tu.ra/",
       "family": [
         "prematuro",
-        "prematurità",
+        "prematurit\u00e0",
         "prematuramente"
       ]
     },
@@ -45,8 +48,9 @@
         "tappeto",
         "tela"
       ],
+      "example": "Questa tovaglia \u00e8 sporca.",
       "pos": "noun",
-      "ipa": "/toˈvaʎʎa/",
+      "ipa": "/to\u02c8va\u028e\u028ea/",
       "family": [
         "tovagliolo",
         "tovagliato",
@@ -59,8 +63,9 @@
       "synonyms": [
         "vite"
       ],
+      "example": "Questo bullone \u00e8 sicuro?",
       "pos": "noun",
-      "ipa": "/bulˈlone/",
+      "ipa": "/bul\u02c8lone/",
       "family": [
         "bulloneria",
         "bullonare",
@@ -74,8 +79,9 @@
         "radunare",
         "chiamare"
       ],
+      "example": "Si doveva mobilitare il popolo per arrivare alla vittoria in guerra.",
       "pos": "verb",
-      "ipa": "/mobiliˈtare/",
+      "ipa": "/mobili\u02c8tare/",
       "family": [
         "mobilitarsi"
       ]
@@ -87,8 +93,9 @@
         "turbato",
         "agitato"
       ],
+      "example": "\u00c8 sconvolto.",
       "pos": "adjective",
-      "ipa": "/skonˈvɔlto/",
+      "ipa": "/skon\u02c8v\u0254lto/",
       "family": [
         "sconvoltone"
       ]
@@ -97,8 +104,9 @@
       "word": "GOBBO",
       "gloss": "Persona con la schiena curva in avanti.",
       "synonyms": [],
+      "example": "Sono gobbo.",
       "pos": "noun",
-      "ipa": "/ˈɡɔbbo/",
+      "ipa": "/\u02c8\u0261\u0254bbo/",
       "family": [
         "ingobbire",
         "ingobbirsi"
@@ -111,8 +119,9 @@
         "bastone",
         "gruccia"
       ],
+      "example": "Questa stampella \u00e8 rotta.",
       "pos": "noun",
-      "ipa": "/stamˈpɛlla/"
+      "ipa": "/stam\u02c8p\u025blla/"
     },
     {
       "word": "SPOSINO",
@@ -120,8 +129,9 @@
       "synonyms": [
         "marito"
       ],
+      "example": "Il mio sposo e io stiamo ancora ridendo per come il mio sposino ha bruciato la colazione stamattina!",
       "pos": "noun",
-      "ipa": "/spoˈzino/",
+      "ipa": "/spo\u02c8zino/",
       "family": [
         "sposo",
         "sposare",
@@ -135,8 +145,9 @@
         "striscione",
         "cartellone"
       ],
+      "example": "Se vuoi mettere il tuo banner sul mio sito, basta che mi mandi il codice.",
       "pos": "noun",
-      "ipa": "/ˈban.ner/"
+      "ipa": "/\u02c8ban.ner/"
     },
     {
       "word": "GIOVANOTTO",
@@ -144,8 +155,9 @@
       "synonyms": [
         "ragazzo"
       ],
+      "example": "Grazie, giovanotto!",
       "pos": "noun",
-      "ipa": "/d͡ʒovaˈnɔtto/",
+      "ipa": "/d\u0361\u0292ova\u02c8n\u0254tto/",
       "family": [
         "giovanottata",
         "giovinotto",
@@ -159,21 +171,23 @@
         "gola",
         "orrido"
       ],
+      "example": "Un altro passo e cadrai nel burrone.",
       "pos": "noun",
-      "ipa": "/burˈrone/",
+      "ipa": "/bur\u02c8rone/",
       "family": [
         "burrificare"
       ]
     },
     {
       "word": "ANESTETICO",
-      "gloss": "Sostanza che elimina la sensibilità al dolore.",
+      "gloss": "Sostanza che elimina la sensibilit\u00e0 al dolore.",
       "synonyms": [
         "sedativo",
         "calmante"
       ],
+      "example": "Dopo l'intervento, il medico ha somministrato un anestetico locale per alleviare il dolore.",
       "pos": "noun",
-      "ipa": "/a.neˈstɛ.ti.ko/",
+      "ipa": "/a.ne\u02c8st\u025b.ti.ko/",
       "family": [
         "anestesia",
         "anestetizzato"
@@ -186,8 +200,9 @@
         "sogno",
         "ideale"
       ],
+      "example": "\u00c8 pura utopia.",
       "pos": "noun",
-      "ipa": "/utoˈpia/",
+      "ipa": "/uto\u02c8pia/",
       "family": [
         "utopico",
         "utopista",
@@ -196,10 +211,11 @@
     },
     {
       "word": "ALLUCE",
-      "gloss": "dito più grande del piede",
+      "gloss": "dito pi\u00f9 grande del piede",
       "synonyms": [],
+      "example": "Mi sono rotto l'alluce.",
       "pos": "noun",
-      "ipa": "/ˈallut͡ʃe/",
+      "ipa": "/\u02c8allut\u0361\u0283e/",
       "family": [
         "allucinare",
         "allucinazione"
@@ -212,8 +228,9 @@
         "investire",
         "schiacciare"
       ],
+      "example": "Mi sono lasciato travolgere dalle emozioni.",
       "pos": "verb",
-      "ipa": "/traˈvɔld͡ʒere/",
+      "ipa": "/tra\u02c8v\u0254ld\u0361\u0292ere/",
       "family": [
         "travolgente",
         "travolgimento",
@@ -227,11 +244,12 @@
         "realizzare",
         "eseguire"
       ],
+      "example": "Facile da prevedere - difficile da attuare.",
       "pos": "verb",
-      "ipa": "/attwˈare/",
+      "ipa": "/attw\u02c8are/",
       "family": [
         "attuabile",
-        "attuabilità"
+        "attuabilit\u00e0"
       ]
     },
     {
@@ -241,8 +259,9 @@
         "evidente",
         "chiaro"
       ],
+      "example": "Furono presi in flagrante.",
       "pos": "adjective",
-      "ipa": "/flaˈɡrante/",
+      "ipa": "/fla\u02c8\u0261rante/",
       "family": [
         "fragrante"
       ]
@@ -253,8 +272,9 @@
       "synonyms": [
         "contrabbando"
       ],
+      "example": "Cacciare di frodo \u00e8 illegale.",
       "pos": "noun",
-      "ipa": "/ˈfrɔdo/",
+      "ipa": "/\u02c8fr\u0254do/",
       "family": [
         "frodare",
         "frode"
@@ -267,33 +287,36 @@
         "zelo",
         "impegno"
       ],
+      "example": "La diligenza porta i suoi frutti.",
       "pos": "noun",
-      "ipa": "/diliˈd͡ʒɛntsa/",
+      "ipa": "/dili\u02c8d\u0361\u0292\u025bntsa/",
       "family": [
         "diligente"
       ]
     },
     {
       "word": "INNATURALE",
-      "gloss": "che non è spontaneo",
+      "gloss": "che non \u00e8 spontaneo",
       "synonyms": [
         "artificioso",
         "forzato"
       ],
+      "example": "Era innaturale.",
       "pos": "adjective",
-      "ipa": "/innatuˈrale/",
+      "ipa": "/innatu\u02c8rale/",
       "family": [
         "innaturalmente"
       ]
     },
     {
       "word": "RIMUGINARE",
-      "gloss": "ripensare più volte a una cosa",
+      "gloss": "ripensare pi\u00f9 volte a una cosa",
       "synonyms": [
         "ripensare"
       ],
+      "example": "Non rimuginare sui fallimenti.",
       "pos": "verb",
-      "ipa": "/rimud͡ʒiˈnare/",
+      "ipa": "/rimud\u0361\u0292i\u02c8nare/",
       "family": [
         "rimuginato"
       ]
@@ -304,8 +327,9 @@
       "synonyms": [
         "trenta minuti"
       ],
+      "example": "Sar\u00f2 l\u00ec tra mezzora.",
       "pos": "noun",
-      "ipa": "/medˈdzoːra/",
+      "ipa": "/med\u02c8dzo\u02d0ra/",
       "family": [
         "ora",
         "mezzogiorno"
@@ -317,8 +341,9 @@
       "synonyms": [
         "merletto"
       ],
+      "example": "Non hanno pagato il pizzo.",
       "pos": "noun",
-      "ipa": "/ˈpittso/",
+      "ipa": "/\u02c8pittso/",
       "family": [
         "minaccia",
         "pizzetto"
@@ -326,13 +351,14 @@
     },
     {
       "word": "DEFICIT",
-      "gloss": "Mancanza di una quantità necessaria.",
+      "gloss": "Mancanza di una quantit\u00e0 necessaria.",
       "synonyms": [
         "mancanza",
-        "scarsità"
+        "scarsit\u00e0"
       ],
+      "example": "Abbiamo un deficit.",
       "pos": "noun",
-      "ipa": "/ˈdefitʃit/",
+      "ipa": "/\u02c8defit\u0283it/",
       "family": [
         "deficitario"
       ]
@@ -343,8 +369,9 @@
       "synonyms": [
         "utensile"
       ],
+      "example": "Quanto costa questo arnese?",
       "pos": "noun",
-      "ipa": "/arˈneze/",
+      "ipa": "/ar\u02c8neze/",
       "family": [
         "arnesi"
       ]
@@ -356,8 +383,9 @@
         "ossessivo",
         "impulsivo"
       ],
+      "example": "\u00c8 compulsivo, vero?",
       "pos": "adjective",
-      "ipa": "/kompulˈsivo/",
+      "ipa": "/kompul\u02c8sivo/",
       "family": [
         "compulsione"
       ]
@@ -369,8 +397,9 @@
         "duo",
         "coppia"
       ],
+      "example": "Che bel duetto.",
       "pos": "noun",
-      "ipa": "/duˈetto/",
+      "ipa": "/du\u02c8etto/",
       "family": [
         "duettino"
       ]
@@ -382,12 +411,13 @@
         "mentale",
         "intellettivo"
       ],
+      "example": "La stimolazione ambientale gioca un ruolo cruciale nello sviluppo cognitivo dei bambini.",
       "pos": "adjective",
+      "ipa": "/ko\u02c8\u00f1itivo/",
       "family": [
         "cognitivismo",
         "cognizione"
-      ],
-      "ipa": "/koˈñitivo/"
+      ]
     },
     {
       "word": "SANTE",
@@ -395,11 +425,12 @@
       "synonyms": [
         "beate"
       ],
+      "example": "Le leggende delle sante sono spesso fonte di ispirazione per molti fedeli.",
       "pos": "adverb",
-      "ipa": "/ˈsante/",
+      "ipa": "/\u02c8sante/",
       "family": [
         "santo",
-        "santità"
+        "santit\u00e0"
       ]
     },
     {
@@ -409,8 +440,9 @@
         "negozio",
         "bottega"
       ],
+      "example": "All\u2019alba ho trovato un emporio aperto vicino al porto per comprare acqua e pane.",
       "pos": "noun",
-      "ipa": "/emˈpɔrjo/"
+      "ipa": "/em\u02c8p\u0254rjo/"
     },
     {
       "word": "FEMMINISTA",
@@ -418,21 +450,23 @@
       "synonyms": [
         "paritario"
       ],
+      "example": "Sei una femminista?",
       "pos": "noun",
-      "ipa": "/femmiˈnista/",
+      "ipa": "/femmi\u02c8nista/",
       "family": [
         "femminismo"
       ]
     },
     {
       "word": "FRIVOLO",
-      "gloss": "Che non ha peso o serietà.",
+      "gloss": "Che non ha peso o seriet\u00e0.",
       "synonyms": [
         "leggero",
         "superficiale"
       ],
+      "example": "Il suo atteggiamento frivolo nasconde una grande insicurezza.",
       "pos": "adjective",
-      "ipa": "/ˈfrivolo/",
+      "ipa": "/\u02c8frivolo/",
       "family": [
         "frivoleggiare",
         "frivolezza"
@@ -445,18 +479,20 @@
         "copia",
         "salvataggio"
       ],
+      "example": "Il backup dei dati \u00e8 una precauzione essenziale per evitare la perdita di informazioni.",
       "pos": "noun",
-      "ipa": "/ˈbækap/"
+      "ipa": "/\u02c8b\u00e6kap/"
     },
     {
-      "word": "STUPIDITÀ",
+      "word": "STUPIDIT\u00c0",
       "gloss": "Mancanza di intelligenza o buon senso.",
       "synonyms": [
         "idiozia",
         "stoltezza"
       ],
+      "example": "Che stupidit\u00e0!",
       "pos": "noun",
-      "ipa": "/stupidiˈta/",
+      "ipa": "/stupidi\u02c8ta/",
       "family": [
         "stupido",
         "stupidaggine"
@@ -464,13 +500,14 @@
     },
     {
       "word": "AUGUSTO",
-      "gloss": "Che ispira rispetto e maestosità.",
+      "gloss": "Che ispira rispetto e maestosit\u00e0.",
       "synonyms": [
         "nobile",
         "solenne"
       ],
+      "example": "Augusto \u00e8 la persona pi\u00f9 meticolosa che abbia conosciuto nella mia vita.",
       "pos": "noun",
-      "ipa": "/awˈɡusto/",
+      "ipa": "/aw\u02c8\u0261usto/",
       "family": [
         "augusteo"
       ]
@@ -482,8 +519,9 @@
         "epoca",
         "periodo"
       ],
+      "example": "La fine dell'evo antico segn\u00f2 l'inizio di una nuova era storica.",
       "pos": "noun",
-      "ipa": "/ˈɛvo/",
+      "ipa": "/\u02c8\u025bvo/",
       "family": [
         "coevo",
         "anno",
@@ -492,13 +530,14 @@
     },
     {
       "word": "CONGIUNTO",
-      "gloss": "Che unisce due o più elementi.",
+      "gloss": "Che unisce due o pi\u00f9 elementi.",
       "synonyms": [
         "unito",
         "associato"
       ],
+      "example": "Abbiamo l'affidamento congiunto.",
       "pos": "noun",
-      "ipa": "/kondˈʒunto/",
+      "ipa": "/kond\u02c8\u0292unto/",
       "family": [
         "congiuntamente"
       ]
@@ -507,8 +546,9 @@
       "word": "DIAMETRO",
       "gloss": "linea che attraversa un cerchio passando per il centro",
       "synonyms": [],
+      "example": "Lo stagno ha un diametro di 100 metri.",
       "pos": "noun",
-      "ipa": "/diˈametro/",
+      "ipa": "/di\u02c8ametro/",
       "family": [
         "diametrale",
         "diametralmente",
@@ -523,7 +563,7 @@
         "disseminare"
       ],
       "pos": "verb",
-      "ipa": "/kostelˈlare/",
+      "ipa": "/kostel\u02c8lare/",
       "family": [
         "costellato"
       ]
@@ -534,11 +574,12 @@
       "synonyms": [
         "vagabondo"
       ],
+      "example": "Non \u00e8 un randagio.",
       "pos": "noun",
+      "ipa": "/ran\u02c8da\u02d0d\u0292o/",
       "family": [
         "randagismo"
-      ],
-      "ipa": "/ranˈdaːdʒo/"
+      ]
     },
     {
       "word": "CLIMATICO",
@@ -547,8 +588,9 @@
         "atmosferico",
         "meteorologico"
       ],
+      "example": "Il cambiamento climatico \u00e8 reale.",
       "pos": "adjective",
-      "ipa": "/kliˈmatiko/",
+      "ipa": "/kli\u02c8matiko/",
       "family": [
         "climaticamente",
         "climatizzazione"
@@ -558,17 +600,19 @@
       "word": "VIDEOGAME",
       "gloss": "gioco elettronico interattivo",
       "synonyms": [],
+      "example": "Ho battuto il mio punteggio personale in quel videogame di corsa.",
       "pos": "noun",
-      "ipa": "/ˈviːdeoɡeim/"
+      "ipa": "/\u02c8vi\u02d0deo\u0261eim/"
     },
     {
       "word": "RISTRETTO",
-      "gloss": "limitato nello spazio o nella quantità",
+      "gloss": "limitato nello spazio o nella quantit\u00e0",
       "synonyms": [
         "limitato"
       ],
+      "example": "Mi porti un caff\u00e8 ristretto.",
       "pos": "verb",
-      "ipa": "/risˈtretto/",
+      "ipa": "/ris\u02c8tretto/",
       "family": [
         "ristrettezza"
       ]
@@ -580,8 +624,9 @@
         "somiglianza",
         "paragone"
       ],
+      "example": "L'analogia \u00e8 essenzialmente corretta.",
       "pos": "noun",
-      "ipa": "/analoˈd͡ʒia/",
+      "ipa": "/analo\u02c8d\u0361\u0292ia/",
       "family": [
         "analogico"
       ]
@@ -593,10 +638,11 @@
         "eccelso",
         "magnifico"
       ],
+      "example": "Era una scena sublime.",
       "pos": "adjective",
-      "ipa": "/suˈblime/",
+      "ipa": "/su\u02c8blime/",
       "family": [
-        "sublimità",
+        "sublimit\u00e0",
         "platonico",
         "raggiungibile"
       ]
@@ -608,8 +654,9 @@
         "parole crociate",
         "enigmistica"
       ],
+      "example": "Chi ha risolto questo cruciverba?",
       "pos": "noun",
-      "ipa": "/krut͡ʃiˈvɛrba/"
+      "ipa": "/krut\u0361\u0283i\u02c8v\u025brba/"
     },
     {
       "word": "FALCONE",
@@ -617,8 +664,9 @@
       "synonyms": [
         "rapace"
       ],
+      "example": "Il falcone planava alto nel cielo limpido, scrutando il terreno con i suoi acuti occhi gialli.",
       "pos": "noun",
-      "ipa": "/falˈkoːne/",
+      "ipa": "/fal\u02c8ko\u02d0ne/",
       "family": [
         "falco",
         "falconeria"
@@ -630,8 +678,9 @@
       "synonyms": [
         "circuito"
       ],
+      "example": "Quell'azienda produce microchip.",
       "pos": "noun",
-      "ipa": "/mikroˈt͡ʃip/"
+      "ipa": "/mikro\u02c8t\u0361\u0283ip/"
     },
     {
       "word": "CENSURA",
@@ -640,8 +689,9 @@
         "divieto",
         "controllo"
       ],
+      "example": "Troppa censura!",
       "pos": "noun",
-      "ipa": "/t͡ʃenˈsura/",
+      "ipa": "/t\u0361\u0283en\u02c8sura/",
       "family": [
         "autocensura",
         "diffamare",
@@ -650,13 +700,14 @@
     },
     {
       "word": "MANOVRARE",
-      "gloss": "Muovere con abilità un veicolo o un oggetto.",
+      "gloss": "Muovere con abilit\u00e0 un veicolo o un oggetto.",
       "synonyms": [
         "guidare",
         "muovere"
       ],
+      "example": "Non sa manovrare un muletto, vero?",
       "pos": "verb",
-      "ipa": "/manoˈvrare/",
+      "ipa": "/mano\u02c8vrare/",
       "family": [
         "manovrato",
         "manovratore"
@@ -668,31 +719,34 @@
       "synonyms": [
         "tettarella"
       ],
+      "example": "Nutro il mio bambino con il biberon.",
       "pos": "noun",
-      "ipa": "/biˈberoŋ/"
+      "ipa": "/bi\u02c8bero\u014b/"
     },
     {
       "word": "MEDIOEVO",
-      "gloss": "Periodo storico tra antichità e rinascimento.",
+      "gloss": "Periodo storico tra antichit\u00e0 e rinascimento.",
       "synonyms": [
-        "età di mezzo"
+        "et\u00e0 di mezzo"
       ],
+      "example": "Il Medioevo veniva travisato.",
       "pos": "noun",
+      "ipa": "/me\u02c8dj\u0254\u02d0evo/",
       "family": [
         "medioevale",
         "medievale",
         "medievalismo"
-      ],
-      "ipa": "/meˈdjɔːevo/"
+      ]
     },
     {
       "word": "MARCHIARE",
-      "gloss": "segnare con un segno di proprietà",
+      "gloss": "segnare con un segno di propriet\u00e0",
       "synonyms": [
         "segnare"
       ],
+      "example": "Il contadino decise di marchiare le sue pecore per distinguerle da quelle dei vicini.",
       "pos": "verb",
-      "ipa": "/marˈkjare/",
+      "ipa": "/mar\u02c8kjare/",
       "family": [
         "marchiatura",
         "marchiato",
@@ -705,8 +759,9 @@
       "synonyms": [
         "scadenze"
       ],
+      "example": "La tempistica \u00e8 molto importante.",
       "pos": "noun",
-      "ipa": "/temˈpistika/",
+      "ipa": "/tem\u02c8pistika/",
       "family": [
         "tempistico"
       ]
@@ -717,8 +772,9 @@
       "synonyms": [
         "ostia"
       ],
+      "example": "La cialda si mangia?",
       "pos": "noun",
-      "ipa": "/ˈt͡ʃalda/",
+      "ipa": "/\u02c8t\u0361\u0283alda/",
       "family": [
         "cialdino"
       ]
@@ -729,8 +785,9 @@
       "synonyms": [
         "tenda"
       ],
+      "example": "Dobbiamo andarci solo per vedere questo splendido padiglione.",
       "pos": "noun",
-      "ipa": "/padiʎˈʎɔne/"
+      "ipa": "/padi\u028e\u02c8\u028e\u0254ne/"
     },
     {
       "word": "IMITATORE",
@@ -738,8 +795,9 @@
       "synonyms": [
         "copiatore"
       ],
+      "example": "Non essere un imitatore.",
       "pos": "noun",
-      "ipa": "/imitaˈtore/",
+      "ipa": "/imita\u02c8tore/",
       "family": [
         "imitare",
         "imitazione"
@@ -752,8 +810,9 @@
         "diffidente",
         "dubbioso"
       ],
+      "example": "\u00c8 scettico.",
       "pos": "noun",
-      "ipa": "/ʃˈʃɛttiko/",
+      "ipa": "/\u0283\u02c8\u0283\u025bttiko/",
       "family": [
         "scetticamente",
         "scetticismo"
@@ -766,8 +825,9 @@
         "secco",
         "improvviso"
       ],
+      "example": "Il mio amico sta per avere un brusco risveglio.",
       "pos": "noun",
-      "ipa": "/ˈbrusko/",
+      "ipa": "/\u02c8brusko/",
       "family": [
         "bruschezza",
         "rozzo"
@@ -779,8 +839,9 @@
       "synonyms": [
         "casupola"
       ],
+      "example": "Il bungalow \u00e8 raggiungibile solamente da uno stretto sentiero.",
       "pos": "noun",
-      "ipa": "/ˈbuŋɡalo/"
+      "ipa": "/\u02c8bu\u014b\u0261alo/"
     },
     {
       "word": "SCURE",
@@ -788,8 +849,9 @@
       "synonyms": [
         "ascia"
       ],
+      "example": "Fino a questo momento non avevo mai usato una scure.",
       "pos": "noun",
-      "ipa": "/ˈskure/",
+      "ipa": "/\u02c8skure/",
       "family": [
         "accetta"
       ]
@@ -801,8 +863,9 @@
         "collegamento",
         "legame"
       ],
+      "example": "Non capisci il nesso?",
       "pos": "noun",
-      "ipa": "/nɛsso/",
+      "ipa": "/n\u025bsso/",
       "family": [
         "interconnesso"
       ]
@@ -811,8 +874,9 @@
       "word": "FIORAIO",
       "gloss": "chi vende piante e mazzi",
       "synonyms": [],
+      "example": "Questo \u00e8 il fioraio.",
       "pos": "noun",
-      "ipa": "/fjoˈrajo/",
+      "ipa": "/fjo\u02c8rajo/",
       "family": [
         "fiorista"
       ]
@@ -823,8 +887,9 @@
       "synonyms": [
         "obbedire"
       ],
+      "example": "Devo ubbidire.",
       "pos": "noun",
-      "ipa": "/ubbiˈdire/",
+      "ipa": "/ubbi\u02c8dire/",
       "family": [
         "ubbidienza",
         "obbedire",
@@ -838,8 +903,9 @@
         "davanti",
         "innanzi"
       ],
+      "example": "Voglio che sia portata dinanzi alla giustizia.",
       "pos": "adverb",
-      "ipa": "/diˈnantsi/",
+      "ipa": "/di\u02c8nantsi/",
       "family": [
         "dianzi",
         "dinnanzi"
@@ -847,21 +913,23 @@
     },
     {
       "word": "SHOGUN",
-      "gloss": "comandante supremo dell’antico esercito giapponese",
+      "gloss": "comandante supremo dell\u2019antico esercito giapponese",
       "synonyms": [
         "signore"
       ],
+      "example": "I samurai erano una sorta di esercito personale degli shogun e dei daimyo.",
       "pos": "noun",
-      "ipa": "/ˈʃoɡun/"
+      "ipa": "/\u02c8\u0283o\u0261un/"
     },
     {
       "word": "LANCIATO",
-      "gloss": "che si muove a grande velocità",
+      "gloss": "che si muove a grande velocit\u00e0",
       "synonyms": [
         "gettato"
       ],
+      "example": "Mi ha lanciato la mela.",
       "pos": "adjective",
-      "ipa": "/lanˈt͡ʃato/",
+      "ipa": "/lan\u02c8t\u0361\u0283ato/",
       "family": [
         "lanciare",
         "lancio"
@@ -873,18 +941,20 @@
       "synonyms": [
         "mutande"
       ],
+      "example": "I miei slip sono bagnati.",
       "pos": "noun",
-      "ipa": "/ˈslip/"
+      "ipa": "/\u02c8slip/"
     },
     {
       "word": "INVITANTE",
-      "gloss": "che attira o stimola l’interesse",
+      "gloss": "che attira o stimola l\u2019interesse",
       "synonyms": [
         "allettante",
         "appetitoso"
       ],
+      "example": "L'acqua sembrava invitante.",
       "pos": "adjective",
-      "ipa": "/inviˈtante/",
+      "ipa": "/invi\u02c8tante/",
       "family": [
         "invitare",
         "invito"
@@ -897,8 +967,9 @@
         "studioso",
         "saputello"
       ],
+      "example": "Lui \u00e8 un secchione.",
       "pos": "noun",
-      "ipa": "/sekˈkjone/",
+      "ipa": "/sek\u02c8kjone/",
       "family": [
         "secchio"
       ]
@@ -910,8 +981,9 @@
         "echeggiare",
         "rimbombare"
       ],
+      "example": "Durante la notte di tempesta, le palpitazioni del mio cuore sembravano risuonare con il tuono che rimbombava all'esterno.",
       "pos": "verb",
-      "ipa": "/riswoˈnare/",
+      "ipa": "/riswo\u02c8nare/",
       "family": [
         "suonare"
       ]
@@ -923,11 +995,12 @@
         "accattone",
         "questuante"
       ],
+      "example": "Non sono un mendicante.",
       "pos": "adjective",
-      "ipa": "/mendiˈkante/",
+      "ipa": "/mendi\u02c8kante/",
       "family": [
         "mendicare",
-        "mendicità"
+        "mendicit\u00e0"
       ]
     },
     {
@@ -937,8 +1010,9 @@
         "vivace",
         "allegro"
       ],
+      "example": "\u00c8 animato.",
       "pos": "noun",
-      "ipa": "/aniˈmato/",
+      "ipa": "/ani\u02c8mato/",
       "family": [
         "anima",
         "animare"
@@ -950,8 +1024,9 @@
       "synonyms": [
         "seme"
       ],
+      "example": "Questo \u00e8 un nocciolo.",
       "pos": "noun",
-      "ipa": "/ˈnɔtt͡ʃolo/",
+      "ipa": "/\u02c8n\u0254tt\u0361\u0283olo/",
       "family": [
         "snocciolare",
         "nocciuolo",
@@ -964,11 +1039,12 @@
       "synonyms": [
         "peto"
       ],
+      "example": "Molte persone provano imbarazzo quando qualcuno scoreggia in una stanza silenziosa.",
       "pos": "noun",
+      "ipa": "/sko.\u02c8red.d\u0361\u0292a/",
       "family": [
         "correggia"
-      ],
-      "ipa": "/sko.ˈred.d͡ʒa/"
+      ]
     },
     {
       "word": "ABRASIONE",
@@ -976,22 +1052,24 @@
       "synonyms": [
         "sfregamento"
       ],
+      "example": "Dopo la caduta dal monopattino, si \u00e8 procurato solo una piccola abrasione sul ginocchio.",
       "pos": "noun",
+      "ipa": "/a.bra.\u02c8zjo.ne/",
       "family": [
         "abradere",
         "radere",
         "abraso"
-      ],
-      "ipa": "/a.bra.ˈzjo.ne/"
+      ]
     },
     {
       "word": "AZIONARIO",
-      "gloss": "relativo ai titoli di una società",
+      "gloss": "relativo ai titoli di una societ\u00e0",
       "synonyms": [
         "borsistico"
       ],
+      "example": "Il mercato azionario sal\u00ec.",
       "pos": "adjective",
-      "ipa": "/attsjoˈnarjo/",
+      "ipa": "/attsjo\u02c8narjo/",
       "family": [
         "azione",
         "azionista"
@@ -999,12 +1077,13 @@
     },
     {
       "word": "ARBITRIO",
-      "gloss": "libertà di decidere senza vincoli",
+      "gloss": "libert\u00e0 di decidere senza vincoli",
       "synonyms": [
         "volere"
       ],
+      "example": "Le persone hanno il libero arbitrio?",
       "pos": "noun",
-      "ipa": "/arˈbitrjo/",
+      "ipa": "/ar\u02c8bitrjo/",
       "family": [
         "determinismo",
         "provvidenza"
@@ -1016,8 +1095,9 @@
       "synonyms": [
         "salto"
       ],
+      "example": "Prendere la palla al balzo.",
       "pos": "noun",
-      "ipa": "/ˈbaltso/",
+      "ipa": "/\u02c8baltso/",
       "family": [
         "rimbalzo",
         "balzello"
@@ -1030,7 +1110,7 @@
         "bellissimo"
       ],
       "pos": "adjective",
-      "ipa": "/fiˈɡis.si.mo/",
+      "ipa": "/fi\u02c8\u0261is.si.mo/",
       "family": [
         "figo"
       ]
@@ -1039,8 +1119,9 @@
       "word": "RIGARE",
       "gloss": "tracciare linee diritte su una superficie",
       "synonyms": [],
+      "example": "L'artista usa un righello per rigare la tela con linee perfette.",
       "pos": "verb",
-      "ipa": "/riˈɡare/",
+      "ipa": "/ri\u02c8\u0261are/",
       "family": [
         "rigatura"
       ]
@@ -1051,8 +1132,9 @@
       "synonyms": [
         "montare"
       ],
+      "example": "Devo assemblare questo armadio.",
       "pos": "verb",
-      "ipa": "/as.semˈbla.re/",
+      "ipa": "/as.sem\u02c8bla.re/",
       "family": [
         "assemblea",
         "simile"
@@ -1062,10 +1144,11 @@
       "word": "RENDIMENTO",
       "gloss": "rapporto tra risultato ottenuto e risorse usate",
       "synonyms": [
-        "produttività"
+        "produttivit\u00e0"
       ],
+      "example": "Ricever\u00e0 due certificati di rendimento.",
       "pos": "noun",
-      "ipa": "/rendiˈmento/",
+      "ipa": "/rendi\u02c8mento/",
       "family": [
         "rendere",
         "rendita"
@@ -1077,13 +1160,14 @@
       "synonyms": [
         "portabagagli"
       ],
+      "example": "Lavoro come facchino per questa ditta di trasporti.",
       "pos": "noun",
+      "ipa": "/fat\u02c8ki.no/",
       "family": [
         "facchinaggio",
         "sfacchinare",
         "sfacchinata"
-      ],
-      "ipa": "/fatˈki.no/"
+      ]
     },
     {
       "word": "SUBENTRARE",
@@ -1092,7 +1176,7 @@
         "sostituire"
       ],
       "pos": "verb",
-      "ipa": "/subenˈtrare/",
+      "ipa": "/suben\u02c8trare/",
       "family": [
         "subentrante"
       ]
@@ -1103,8 +1187,9 @@
       "synonyms": [
         "illegale"
       ],
+      "example": "Ti fanno fare il tassista abusivo?",
       "pos": "adjective",
-      "ipa": "/abuˈzivo/",
+      "ipa": "/abu\u02c8zivo/",
       "family": [
         "abusivamente",
         "abuso"
@@ -1114,8 +1199,9 @@
       "word": "PARA",
       "gloss": "gomma usata per le suole delle scarpe",
       "synonyms": [],
+      "example": "Ho sostituito la para delle scarpe da ginnastica perch\u00e9 si era consumata.",
       "pos": "adjective",
-      "ipa": "/ˈpa.ra/",
+      "ipa": "/\u02c8pa.ra/",
       "family": [
         "paracarro",
         "parapioggia"
@@ -1127,8 +1213,9 @@
       "synonyms": [
         "maresciallo"
       ],
+      "example": "Il brigadiere supervision\u00f2 con attenzione il nuovo protocollo operativo.",
       "pos": "noun",
-      "ipa": "/briɡaˈdjɛre/",
+      "ipa": "/bri\u0261a\u02c8dj\u025bre/",
       "family": [
         "brigata"
       ]
@@ -1139,8 +1226,9 @@
       "synonyms": [
         "cortese"
       ],
+      "example": "Come sei galante!",
       "pos": "noun",
-      "ipa": "/ɡaˈlante/",
+      "ipa": "/\u0261a\u02c8lante/",
       "family": [
         "galanteria"
       ]
@@ -1151,8 +1239,9 @@
       "synonyms": [
         "evitare"
       ],
+      "example": "Non eludere la domanda.",
       "pos": "verb",
-      "ipa": "/eˈludere/",
+      "ipa": "/e\u02c8ludere/",
       "family": [
         "eludibile"
       ]
@@ -1163,8 +1252,9 @@
       "synonyms": [
         "toccare"
       ],
+      "example": "Durante l'esame fisico, il medico pu\u00f2 palpare lo scroto per valutare eventuali anomalie o cambiamenti.",
       "pos": "verb",
-      "ipa": "/palˈpare/",
+      "ipa": "/pal\u02c8pare/",
       "family": [
         "palparsi",
         "palpata",
@@ -1177,8 +1267,9 @@
       "synonyms": [
         "ripostiglio"
       ],
+      "example": "Basterebbe uno sgabuzzino.",
       "pos": "noun",
-      "ipa": "/zɡa.butˈt͡si.no/"
+      "ipa": "/z\u0261a.but\u02c8t\u0361si.no/"
     },
     {
       "word": "CONTATORE",
@@ -1186,8 +1277,9 @@
       "synonyms": [
         "misuratore"
       ],
+      "example": "Fai una lettura del contatore.",
       "pos": "noun",
-      "ipa": "/kontaˈtore/",
+      "ipa": "/konta\u02c8tore/",
       "family": [
         "contare",
         "conto"
@@ -1199,8 +1291,9 @@
       "synonyms": [
         "buffetto"
       ],
+      "example": "Mentre facevo una corsetta, qualcuno mi ha dato un colpetto sulla spalla.",
       "pos": "noun",
-      "ipa": "/kolˈpet.to/",
+      "ipa": "/kol\u02c8pet.to/",
       "family": [
         "colpo"
       ]
@@ -1211,8 +1304,9 @@
       "synonyms": [
         "binario"
       ],
+      "example": "Stiamo costruendo una rotaia.",
       "pos": "noun",
-      "ipa": "/roˈtaja/",
+      "ipa": "/ro\u02c8taja/",
       "family": [
         "monorotaia"
       ]
@@ -1223,8 +1317,9 @@
       "synonyms": [
         "clanico"
       ],
+      "example": "Hai visto il mio nuovo tatuaggio tribale?",
       "pos": "adjective",
-      "ipa": "/triˈbale/"
+      "ipa": "/tri\u02c8bale/"
     },
     {
       "word": "SPARTIRE",
@@ -1232,8 +1327,9 @@
       "synonyms": [
         "dividere"
       ],
+      "example": "Dobbiamo spartire la pizza in modo equo per non litigare.",
       "pos": "verb",
-      "ipa": "/sparˈtire/",
+      "ipa": "/spar\u02c8tire/",
       "family": [
         "spartirsi",
         "spartitorio",
@@ -1246,18 +1342,20 @@
       "synonyms": [
         "sostenitore"
       ],
+      "example": "Neanche io sono un tifoso.",
       "pos": "noun",
-      "ipa": "/tiˈfoso/",
+      "ipa": "/ti\u02c8foso/",
       "family": [
         "tifoseria"
       ]
     },
     {
       "word": "FRANO",
-      "gloss": "io vengo giù, io crollo",
+      "gloss": "io vengo gi\u00f9, io crollo",
       "synonyms": [],
+      "example": "Quando sento troppo stress, dentro di me frano.",
       "pos": "adjective",
-      "ipa": "/ˈfra.no/",
+      "ipa": "/\u02c8fra.no/",
       "family": [
         "franare",
         "franamento"
@@ -1269,8 +1367,9 @@
       "synonyms": [
         "scura"
       ],
+      "example": "Tua moglie \u00e8 bionda o bruna?",
       "pos": "noun",
-      "ipa": "/ˈbru.na/",
+      "ipa": "/\u02c8bru.na/",
       "family": [
         "bruno",
         "brunastro"
@@ -1280,8 +1379,9 @@
       "word": "COTTURA",
       "gloss": "il cuocere sul fuoco o in forno",
       "synonyms": [],
+      "example": "Vuoi che ti aiuti con la cottura?",
       "pos": "noun",
-      "ipa": "/kotˈtura/",
+      "ipa": "/kot\u02c8tura/",
       "family": [
         "cuocere",
         "cotto"
@@ -1293,8 +1393,9 @@
       "synonyms": [
         "mixer"
       ],
+      "example": "Puoi mescolare cibi differenti in un frullatore.",
       "pos": "noun",
-      "ipa": "/frul.laˈto.re/",
+      "ipa": "/frul.la\u02c8to.re/",
       "family": [
         "frullare",
         "frullato"
@@ -1302,36 +1403,39 @@
     },
     {
       "word": "FORTISSIMO",
-      "gloss": "di intensità sonora molto elevata",
+      "gloss": "di intensit\u00e0 sonora molto elevata",
       "synonyms": [
         "potentissimo"
       ],
+      "example": "Ti abbraccio fortissimo.",
       "pos": "adjective",
-      "ipa": "/forˈtis.si.mo/",
+      "ipa": "/for\u02c8tis.si.mo/",
       "family": [
         "forte"
       ]
     },
     {
       "word": "LAGUNA",
-      "gloss": "specchio d’acqua salmastra separato dal mare",
+      "gloss": "specchio d\u2019acqua salmastra separato dal mare",
       "synonyms": [
         "stagno"
       ],
+      "example": "Al centro di quella laguna si dice che l'acqua giri.",
       "pos": "noun",
+      "ipa": "/la\u02c8\u0261u.na/",
       "family": [
         "lagunare",
         "lacunoso",
         "lacuna"
-      ],
-      "ipa": "/laˈɡu.na/"
+      ]
     },
     {
       "word": "CAVIGLIERA",
       "gloss": "fascia elastica che sostiene il malleolo",
       "synonyms": [],
+      "example": "Dopo l\u2019infortunio, il medico mi ha consigliato di indossare una cavigliera per ridurre il carico sul malleolo.",
       "pos": "noun",
-      "ipa": "/ka.viʎˈʎɛ.ra/",
+      "ipa": "/ka.vi\u028e\u02c8\u028e\u025b.ra/",
       "family": [
         "caviglia",
         "cavigliere"
@@ -1343,11 +1447,12 @@
       "synonyms": [
         "viscere"
       ],
+      "example": "Lo studio dell'anatomia rivela come gli organi interni, chiamati interiora, siano fondamentali per il nostro benessere.",
       "pos": "noun",
-      "ipa": "/inteˈrjora/",
+      "ipa": "/inte\u02c8rjora/",
       "family": [
         "interno",
-        "interiorità"
+        "interiorit\u00e0"
       ]
     },
     {
@@ -1355,7 +1460,7 @@
       "gloss": "venire a conoscenza di un fatto da altri",
       "synonyms": [],
       "pos": "verb",
-      "ipa": "/riˈsa.pe.re/",
+      "ipa": "/ri\u02c8sa.pe.re/",
       "family": [
         "sapere",
         "risaputo"
@@ -1368,10 +1473,10 @@
         "piantare"
       ],
       "pos": "verb",
+      "ipa": "/ko\u014bfik\u02c8kare/",
       "family": [
         "conficcarsi"
-      ],
-      "ipa": "/koŋfikˈkare/"
+      ]
     },
     {
       "word": "CALLO",
@@ -1379,8 +1484,9 @@
       "synonyms": [
         "indurimento"
       ],
+      "example": "Bisogna farci il callo?",
       "pos": "noun",
-      "ipa": "/ˈkallo/",
+      "ipa": "/\u02c8kallo/",
       "family": [
         "callifugo",
         "callista"
@@ -1392,8 +1498,9 @@
       "synonyms": [
         "vezzeggiare"
       ],
+      "example": "E quand'\u00e8 che me la fai coccolare?",
       "pos": "verb",
-      "ipa": "/kokkoˈlare/",
+      "ipa": "/kokko\u02c8lare/",
       "family": [
         "coccolarsi"
       ]
@@ -1404,8 +1511,9 @@
       "synonyms": [
         "abisso"
       ],
+      "example": "Siamo arrivati al precipizio e abbiamo ammirato il panorama dall\u2019alto.",
       "pos": "noun",
-      "ipa": "/pret͡ʃiˈpittsjo/",
+      "ipa": "/pret\u0361\u0283i\u02c8pittsjo/",
       "family": [
         "precipitare"
       ]
@@ -1416,8 +1524,9 @@
       "synonyms": [
         "seduttore"
       ],
+      "example": "\u00c8 un donnaiolo.",
       "pos": "noun",
-      "ipa": "/donnaˈjɔlo/",
+      "ipa": "/donna\u02c8j\u0254lo/",
       "family": [
         "corteggiamento",
         "donna",
@@ -1430,8 +1539,9 @@
       "synonyms": [
         "cadavere"
       ],
+      "example": "Hanno cercato il DNA in quella salma.",
       "pos": "noun",
-      "ipa": "/ˈsalma/",
+      "ipa": "/\u02c8salma/",
       "family": [
         "salmeria",
         "salmerista"
@@ -1441,8 +1551,9 @@
       "word": "PAVONE",
       "gloss": "un uccello grande con piume colorate e coda a ventaglio",
       "synonyms": [],
+      "example": "C'\u00e8 un pavone in cortile.",
       "pos": "noun",
-      "ipa": "/paˈvone/",
+      "ipa": "/pa\u02c8vone/",
       "family": [
         "pavoneggiarsi"
       ]
@@ -1453,8 +1564,9 @@
       "synonyms": [
         "scherzo"
       ],
+      "example": "Rischia la beffa.",
       "pos": "noun",
-      "ipa": "/ˈbɛffa/",
+      "ipa": "/\u02c8b\u025bffa/",
       "family": [
         "beffardo",
         "beffare"
@@ -1466,34 +1578,37 @@
       "synonyms": [
         "termine"
       ],
+      "example": "Sei al capolinea.",
       "pos": "noun",
-      "ipa": "/ka.po.liˈne.a/",
+      "ipa": "/ka.po.li\u02c8ne.a/",
       "family": [
         "capo",
         "linea"
       ]
     },
     {
-      "word": "OSTILITÀ",
+      "word": "OSTILIT\u00c0",
       "gloss": "un sentimento di forte avversione verso qualcuno",
       "synonyms": [
         "avversione"
       ],
+      "example": "Sono riprese le ostilit\u00e0.",
       "pos": "noun",
-      "ipa": "/ostiliˈta/",
+      "ipa": "/ostili\u02c8ta/",
       "family": [
         "ostile",
         "guerra"
       ]
     },
     {
-      "word": "SERVITÙ",
-      "gloss": "condizione di chi è sottomesso; personale di casa",
+      "word": "SERVIT\u00d9",
+      "gloss": "condizione di chi \u00e8 sottomesso; personale di casa",
       "synonyms": [
-        "schiavitù"
+        "schiavit\u00f9"
       ],
+      "example": "La sua servit\u00f9 personale lo odiava.",
       "pos": "noun",
-      "ipa": "/serviˈtu/",
+      "ipa": "/servi\u02c8tu/",
       "family": [
         "servire",
         "servitore"
@@ -1501,12 +1616,13 @@
     },
     {
       "word": "FUSA",
-      "gloss": "il suono continuo che fa il gatto quando è contento",
+      "gloss": "il suono continuo che fa il gatto quando \u00e8 contento",
       "synonyms": [
         "ronzio"
       ],
+      "example": "Sono decisamente fusa.",
       "pos": "noun",
-      "ipa": "/ˈfu.za/",
+      "ipa": "/\u02c8fu.za/",
       "family": [
         "fuso"
       ]
@@ -1517,8 +1633,9 @@
       "synonyms": [
         "serpillo"
       ],
+      "example": "Amo l'odore del timo.",
       "pos": "noun",
-      "ipa": "/ˈtimo/",
+      "ipa": "/\u02c8timo/",
       "family": [
         "timi"
       ]
@@ -1529,11 +1646,12 @@
       "synonyms": [
         "mantello"
       ],
+      "example": "Le scarpe e la toga bianca sono in camera da letto.",
       "pos": "noun",
+      "ipa": "/\u02c8t\u0254\u02d0\u0261a/",
       "family": [
         "togato"
-      ],
-      "ipa": "/ˈtɔːɡa/"
+      ]
     },
     {
       "word": "GHINEA",
@@ -1541,8 +1659,9 @@
       "synonyms": [
         "moneta"
       ],
+      "example": "Nel Settecento una ghinea valeva ventuno scellini.",
       "pos": "noun",
-      "ipa": "/ɡiˈnɛːa/",
+      "ipa": "/\u0261i\u02c8n\u025b\u02d0a/",
       "family": [
         "guinea"
       ]
@@ -1553,8 +1672,9 @@
       "synonyms": [
         "scuro"
       ],
+      "example": "Il cavallo pi\u00f9 bello del branco era un morello con criniera lucida.",
       "pos": "noun",
-      "ipa": "/moˈrɛllo/",
+      "ipa": "/mo\u02c8r\u025bllo/",
       "family": [
         "morella"
       ]
@@ -1565,8 +1685,9 @@
       "synonyms": [
         "morboso"
       ],
+      "example": "Il suo comportamento patologico era evidente durante i test clinici.",
       "pos": "adjective",
-      "ipa": "/patoˈlɔd͡ʒiko/",
+      "ipa": "/pato\u02c8l\u0254d\u0361\u0292iko/",
       "family": [
         "patologicamente",
         "psicopatologico",
@@ -1579,12 +1700,13 @@
       "synonyms": [
         "congenito"
       ],
+      "example": "Il talento \u00e8 qualcosa di innato.",
       "pos": "adjective",
+      "ipa": "/in\u02c8na\u02d0to/",
       "family": [
         "innatismo",
-        "potenzialità"
-      ],
-      "ipa": "/inˈnaːto/"
+        "potenzialit\u00e0"
+      ]
     },
     {
       "word": "SANZIONE",
@@ -1592,8 +1714,9 @@
       "synonyms": [
         "pena"
       ],
+      "example": "Questa sanzione va ben oltre.",
       "pos": "noun",
-      "ipa": "/sanˈtsjone/",
+      "ipa": "/san\u02c8tsjone/",
       "family": [
         "sanzionare"
       ]
@@ -1604,17 +1727,19 @@
       "synonyms": [
         "cioccolato"
       ],
+      "example": "Il cacao pu\u00f2 essere molto amaro.",
       "pos": "noun",
-      "ipa": "/kaˈkao/"
+      "ipa": "/ka\u02c8kao/"
     },
     {
       "word": "ANARCHIA",
-      "gloss": "l'assenza di un'autorità che governa",
+      "gloss": "l'assenza di un'autorit\u00e0 che governa",
       "synonyms": [
         "disordine"
       ],
+      "example": "Diciamo che c'\u00e8 troppa anarchia!",
       "pos": "noun",
-      "ipa": "/anarˈkia/",
+      "ipa": "/anar\u02c8kia/",
       "family": [
         "anarchico",
         "impero",
@@ -1625,10 +1750,11 @@
       "word": "CAMBIALE",
       "gloss": "un titolo di credito che impegna a pagare una somma",
       "synonyms": [
-        "pagherò"
+        "pagher\u00f2"
       ],
+      "example": "Mi firmeresti questa cambiale?",
       "pos": "noun",
-      "ipa": "/kamˈbjale/",
+      "ipa": "/kam\u02c8bjale/",
       "family": [
         "rata"
       ]
@@ -1639,8 +1765,9 @@
       "synonyms": [
         "ambientale"
       ],
+      "example": "\u00c8 un disastro ecologico.",
       "pos": "adjective",
-      "ipa": "/ekoˈlɔd͡ʒiko/",
+      "ipa": "/eko\u02c8l\u0254d\u0361\u0292iko/",
       "family": [
         "ecologicamente",
         "ecologia"
@@ -1652,17 +1779,19 @@
       "synonyms": [
         "pantaloncino"
       ],
+      "example": "In vacanza al mare indossa sempre Bermuda per sentirsi comodo e fresco.",
       "pos": "noun",
-      "ipa": "/berˈmuda/"
+      "ipa": "/ber\u02c8muda/"
     },
     {
       "word": "BISESSUALE",
       "gloss": "che prova attrazione per uomini e donne",
       "synonyms": [],
+      "example": "\u00c8 bisessuale.",
       "pos": "adjective",
-      "ipa": "/bisessuˈale/",
+      "ipa": "/bisessu\u02c8ale/",
       "family": [
-        "bisessualità"
+        "bisessualit\u00e0"
       ]
     },
     {
@@ -1671,10 +1800,11 @@
       "synonyms": [
         "instabile"
       ],
+      "example": "Mi sto sentendo molto precario.",
       "pos": "adjective",
-      "ipa": "/preˈkarjo/",
+      "ipa": "/pre\u02c8karjo/",
       "family": [
-        "precarietà"
+        "precariet\u00e0"
       ]
     },
     {
@@ -1683,8 +1813,9 @@
       "synonyms": [
         "trattativa"
       ],
+      "example": "Pu\u00f2 essere negoziato.",
       "pos": "noun",
-      "ipa": "/neɡoˈtsjato/",
+      "ipa": "/ne\u0261o\u02c8tsjato/",
       "family": [
         "rinegoziato"
       ]
@@ -1695,8 +1826,9 @@
       "synonyms": [
         "supermercato"
       ],
+      "example": "Mi piace passeggiare tra i banchi del market per scoprire offerte interessanti.",
       "pos": "noun",
-      "ipa": "/ˈmarket/",
+      "ipa": "/\u02c8market/",
       "family": [
         "marketing"
       ]
@@ -1708,7 +1840,7 @@
         "gentile"
       ],
       "pos": "noun",
-      "ipa": "/paˈɡano/",
+      "ipa": "/pa\u02c8\u0261ano/",
       "family": [
         "paganamente"
       ]
@@ -1719,8 +1851,9 @@
       "synonyms": [
         "dissoluto"
       ],
+      "example": "\u00c8 un circolo vizioso.",
       "pos": "adjective",
-      "ipa": "/vitˈtsjoso/",
+      "ipa": "/vit\u02c8tsjoso/",
       "family": [
         "vizio"
       ]
@@ -1731,20 +1864,21 @@
       "synonyms": [
         "infantile"
       ],
+      "example": "Il reparto pediatrico dell'ospedale offre cure specializzate per i bambini.",
       "pos": "adjective",
-      "ipa": "/peˈdjaːtriko/",
+      "ipa": "/pe\u02c8dja\u02d0triko/",
       "family": [
         "pediatria"
       ]
     },
     {
       "word": "SFRENARE",
-      "gloss": "perdere il controllo della velocità",
+      "gloss": "perdere il controllo della velocit\u00e0",
       "synonyms": [
         "accelerare"
       ],
       "pos": "verb",
-      "ipa": "/sfreˈnare/",
+      "ipa": "/sfre\u02c8nare/",
       "family": [
         "sfrenarsi"
       ]
@@ -1755,8 +1889,9 @@
       "synonyms": [
         "desiderare"
       ],
+      "example": "Da quando ho visto quella casa in collina, non posso che bramare viverci ogni giorno.",
       "pos": "verb",
-      "ipa": "/braˈmare/",
+      "ipa": "/bra\u02c8mare/",
       "family": [
         "bramato"
       ]
@@ -1765,8 +1900,9 @@
       "word": "ELIO",
       "gloss": "un gas leggero usato nei palloni",
       "synonyms": [],
+      "example": "L'elio \u00e8 un gas.",
       "pos": "noun",
-      "ipa": "/ˈɛljo/",
+      "ipa": "/\u02c8\u025bljo/",
       "family": [
         "elione",
         "litio",
@@ -1779,20 +1915,22 @@
       "synonyms": [
         "osservato"
       ],
+      "example": "L'ho notato.",
       "pos": "noun",
-      "ipa": "/noˈtato/",
+      "ipa": "/no\u02c8tato/",
       "family": [
         "notare"
       ]
     },
     {
       "word": "COMPOSTO",
-      "gloss": "formato da più parti unite insieme",
+      "gloss": "formato da pi\u00f9 parti unite insieme",
       "synonyms": [
         "misto"
       ],
+      "example": "\u00c8 composto da tre atti.",
       "pos": "noun",
-      "ipa": "/komˈposto/",
+      "ipa": "/kom\u02c8posto/",
       "family": [
         "compostamente",
         "decomposto"
@@ -1800,10 +1938,11 @@
     },
     {
       "word": "BATTISTA",
-      "gloss": "chi immerge i fedeli nell’acqua per consacrarli",
+      "gloss": "chi immerge i fedeli nell\u2019acqua per consacrarli",
       "synonyms": [],
+      "example": "Il sacerdote battista immerse delicatamente il bimbo nell'acqua per il battesimo.",
       "pos": "noun",
-      "ipa": "/batˈtista/",
+      "ipa": "/bat\u02c8tista/",
       "family": [
         "battistina"
       ]
@@ -1814,8 +1953,9 @@
       "synonyms": [
         "sostentamento"
       ],
+      "example": "Dovrete solo pagare vitto e alloggio.",
       "pos": "adverb",
-      "ipa": "/ˈvitto/"
+      "ipa": "/\u02c8vitto/"
     },
     {
       "word": "GIUBBA",
@@ -1823,8 +1963,9 @@
       "synonyms": [
         "giacca"
       ],
+      "example": "Indossava sempre una giubba di pelle nera per andare in moto.",
       "pos": "noun",
-      "ipa": "/ˈdʒubba/",
+      "ipa": "/\u02c8d\u0292ubba/",
       "family": [
         "giubbotto"
       ]
@@ -1836,8 +1977,9 @@
         "spremere",
         "estrarre"
       ],
+      "example": "So mungere una mucca.",
       "pos": "verb",
-      "ipa": "/ˈmunʤere/",
+      "ipa": "/\u02c8mun\u02a4ere/",
       "family": [
         "smungere",
         "emulsione",
@@ -1850,11 +1992,12 @@
       "synonyms": [
         "agitato"
       ],
+      "example": "Il bambino continua ad essere turbolento.",
       "pos": "adjective",
+      "ipa": "/turbo\u02c8l\u025bnto/",
       "family": [
         "turbolentemente"
-      ],
-      "ipa": "/turboˈlɛnto/"
+      ]
     },
     {
       "word": "PRASSI",
@@ -1862,8 +2005,9 @@
       "synonyms": [
         "uso"
       ],
+      "example": "Non \u00e8 la prassi.",
       "pos": "noun",
-      "ipa": "/ˈprassi/",
+      "ipa": "/\u02c8prassi/",
       "family": [
         "praticare"
       ]
@@ -1874,8 +2018,9 @@
       "synonyms": [
         "luminoso"
       ],
+      "example": "Sei proprio raggiante!",
       "pos": "adjective",
-      "ipa": "/raˈd͡ʒante/",
+      "ipa": "/ra\u02c8d\u0361\u0292ante/",
       "family": [
         "raggiare"
       ]
@@ -1887,8 +2032,9 @@
         "amputare",
         "troncare"
       ],
+      "example": "In alcune culture antiche si usava mutilare i prigionieri per renderli riconoscibili.",
       "pos": "noun",
-      "ipa": "/mutilˈlaːre/",
+      "ipa": "/mutil\u02c8la\u02d0re/",
       "family": [
         "mutilazione"
       ]
@@ -1899,10 +2045,11 @@
       "synonyms": [
         "fiorire"
       ],
+      "example": "Ogni rapporto ha bisogno di rispetto per prosperare.",
       "pos": "verb",
-      "ipa": "/prospeˈraːre/",
+      "ipa": "/prospe\u02c8ra\u02d0re/",
       "family": [
-        "prosperità"
+        "prosperit\u00e0"
       ]
     },
     {
@@ -1911,8 +2058,9 @@
       "synonyms": [
         "cancellazione"
       ],
+      "example": "L'annullo della prenotazione \u00e8 possibile fino a 24 ore prima della partenza.",
       "pos": "noun",
-      "ipa": "/anˈnullo/",
+      "ipa": "/an\u02c8nullo/",
       "family": [
         "annullare"
       ]
@@ -1923,8 +2071,9 @@
       "synonyms": [
         "acido"
       ],
+      "example": "Il vino \u00e8 aspro.",
       "pos": "adjective",
-      "ipa": "/ˈaspro/",
+      "ipa": "/\u02c8aspro/",
       "family": [
         "aspramente",
         "esasperare",
@@ -1937,8 +2086,9 @@
       "synonyms": [
         "attraversare"
       ],
+      "example": "La sua determinazione le permise di varcare ogni ostacolo che incontrava.",
       "pos": "verb",
-      "ipa": "/varˈkare/",
+      "ipa": "/var\u02c8kare/",
       "family": [
         "varco"
       ]
@@ -1949,8 +2099,9 @@
       "synonyms": [
         "rinnovare"
       ],
+      "example": "La vacanza al mare mi aiuta a rigenerare le energie dopo un anno di lavoro intenso.",
       "pos": "verb",
-      "ipa": "/ridʒeneˈraːre/",
+      "ipa": "/rid\u0292ene\u02c8ra\u02d0re/",
       "family": [
         "rigenerazione"
       ]
@@ -1962,8 +2113,9 @@
         "donnola",
         "faina"
       ],
+      "example": "Ecco un furetto.",
       "pos": "noun",
-      "ipa": "/fuˈretto/",
+      "ipa": "/fu\u02c8retto/",
       "family": [
         "visone",
         "faina",
@@ -1977,10 +2129,11 @@
         "fraterno",
         "concorde"
       ],
+      "example": "Cercavo di mostrarmi solidale.",
       "pos": "adjective",
-      "ipa": "/soliˈdale/",
+      "ipa": "/soli\u02c8dale/",
       "family": [
-        "solidarietà",
+        "solidariet\u00e0",
         "partecipazione",
         "amicizia"
       ]
@@ -1991,15 +2144,17 @@
       "synonyms": [
         "canale"
       ],
+      "example": "Il mugnaio controlla spesso la gora per assicurarsi che l'acqua scorra correttamente verso la ruota.",
       "pos": "noun",
-      "ipa": "/ˈɡɔːra/"
+      "ipa": "/\u02c8\u0261\u0254\u02d0ra/"
     },
     {
       "word": "SCROTO",
       "gloss": "la sacca cutanea che contiene i testicoli",
       "synonyms": [],
+      "example": "Durante la pubert\u00e0, vi \u00e8 un notevole sviluppo dello scroto e dei testicoli nei ragazzi.",
       "pos": "noun",
-      "ipa": "/ˈskroːto/",
+      "ipa": "/\u02c8skro\u02d0to/",
       "family": [
         "scrotale"
       ]
@@ -2010,8 +2165,9 @@
       "synonyms": [
         "commerciale"
       ],
+      "example": "Il \"Convivio\" pu\u00f2 essere basato sulla nuova classe mercantile fiorentina.",
       "pos": "adjective",
-      "ipa": "/merkanˈtile/",
+      "ipa": "/merkan\u02c8tile/",
       "family": [
         "mercantilismo",
         "mercante"
@@ -2023,8 +2179,9 @@
       "synonyms": [
         "equilibrato"
       ],
+      "example": "La musica del violino aveva un suono armonico e avvolgente.",
       "pos": "adjective",
-      "ipa": "/arˈmɔniko/",
+      "ipa": "/ar\u02c8m\u0254niko/",
       "family": [
         "armonica",
         "armonicamente",
@@ -2037,20 +2194,22 @@
       "synonyms": [
         "bici"
       ],
+      "example": "Il ciclista non \u00e8 prudente.",
       "pos": "noun",
-      "ipa": "/t͡ʃi'klista/",
+      "ipa": "/t\u0361\u0283i'klista/",
       "family": [
         "ciclismo"
       ]
     },
     {
       "word": "AMICONE",
-      "gloss": "persona con cui si è molto in confidenza",
+      "gloss": "persona con cui si \u00e8 molto in confidenza",
       "synonyms": [
         "compagnone"
       ],
+      "example": "Mario \u00e8 un amicone, mi aiuta sempre senza chiedere nulla in cambio.",
       "pos": "noun",
-      "ipa": "/a.miˈko.ne/",
+      "ipa": "/a.mi\u02c8ko.ne/",
       "family": [
         "amico",
         "amicizia"
@@ -2062,21 +2221,23 @@
       "synonyms": [
         "copertura"
       ],
+      "example": "Sotto il piccolo tettuccio di plastica c'\u00e8 la lampadina da sostituire.",
       "pos": "noun",
-      "ipa": "/tetˈtutt͡ʃo/",
+      "ipa": "/tet\u02c8tutt\u0361\u0283o/",
       "family": [
         "tetto"
       ]
     },
     {
       "word": "RUGGINE",
-      "gloss": "la corrosione del ferro esposto all'umidità",
+      "gloss": "la corrosione del ferro esposto all'umidit\u00e0",
       "synonyms": [
         "ossido",
         "corrosione"
       ],
+      "example": "C'\u00e8 odore di ruggine.",
       "pos": "noun",
-      "ipa": "/ˈrudd͡ʒine/",
+      "ipa": "/\u02c8rudd\u0361\u0292ine/",
       "family": [
         "rugginoso",
         "antiruggine",
@@ -2090,8 +2251,9 @@
         "assonare",
         "versificare"
       ],
+      "example": "Il poeta amava far rimare le parole nei suoi versi per creare armonia.",
       "pos": "verb",
-      "ipa": "/riˈma.re/",
+      "ipa": "/ri\u02c8ma.re/",
       "family": [
         "rima",
         "rimatore"
@@ -2101,8 +2263,9 @@
       "word": "AGNELLINO",
       "gloss": "cucciolo della pecora",
       "synonyms": [],
+      "example": "Sul prato pascolano un montone, una pecora e un agnellino.",
       "pos": "noun",
-      "ipa": "/aɲ.ɲelˈli.no/",
+      "ipa": "/a\u0272.\u0272el\u02c8li.no/",
       "family": [
         "agnello"
       ]
@@ -2113,8 +2276,9 @@
       "synonyms": [
         "volley"
       ],
+      "example": "Gioco a pallavolo.",
       "pos": "noun",
-      "ipa": "/pallaˈvolo/",
+      "ipa": "/palla\u02c8volo/",
       "family": [
         "pallavolista"
       ]
@@ -2122,8 +2286,9 @@
     {
       "word": "FAMIGLIARE",
       "gloss": "un parente stretto o un amico intimo",
+      "example": "Il tuo nome mi \u00e8 famigliare.",
       "pos": "verb",
-      "ipa": "/famiʎˈʎare/",
+      "ipa": "/fami\u028e\u02c8\u028eare/",
       "family": [
         "famiglia",
         "familiare"
@@ -2135,8 +2300,9 @@
       "synonyms": [
         "compagno"
       ],
+      "example": "Il mio camerata di stanza ha sempre la musica accesa quando studio.",
       "pos": "noun",
-      "ipa": "/kameˈrata/",
+      "ipa": "/kame\u02c8rata/",
       "family": [
         "camera",
         "cameratismo"
@@ -2148,8 +2314,9 @@
       "synonyms": [
         "vagabondo"
       ],
+      "example": "Il poeta errante attraversava i vicoli della citt\u00e0, ispirato dalla libert\u00e0 e dalla solitudine.",
       "pos": "adjective",
-      "ipa": "/erˈrante/",
+      "ipa": "/er\u02c8rante/",
       "family": [
         "errare",
         "errore"
@@ -2159,8 +2326,9 @@
       "word": "NUOTATORE",
       "gloss": "chi pratica lo sport in acqua a bracciate",
       "synonyms": [],
+      "example": "Sono un nuotatore.",
       "pos": "noun",
-      "ipa": "/nwotaˈtore/",
+      "ipa": "/nwota\u02c8tore/",
       "family": [
         "nuotare",
         "nuoto"
@@ -2170,20 +2338,22 @@
       "word": "POLLAIO",
       "gloss": "recinto dove si tengono le galline",
       "synonyms": [],
+      "example": "\u00c8 un pollaio.",
       "pos": "noun",
-      "ipa": "/polˈlajo/",
+      "ipa": "/pol\u02c8lajo/",
       "family": [
         "appollaiarsi"
       ]
     },
     {
-      "word": "FALÒ",
-      "gloss": "un grande fuoco acceso all’aperto",
+      "word": "FAL\u00d2",
+      "gloss": "un grande fuoco acceso all\u2019aperto",
       "synonyms": [
         "fuocherello"
       ],
+      "example": "Dobbiamo costruire un fal\u00f2.",
       "pos": "noun",
-      "ipa": "/faˈlɔ/",
+      "ipa": "/fa\u02c8l\u0254/",
       "family": [
         "fuoco"
       ]
@@ -2194,8 +2364,9 @@
       "synonyms": [
         "posateria"
       ],
+      "example": "Dov'\u00e8 l'argenteria?",
       "pos": "noun",
-      "ipa": "/ard͡ʒenteˈria/",
+      "ipa": "/ard\u0361\u0292ente\u02c8ria/",
       "family": [
         "oreficeria"
       ]
@@ -2204,6 +2375,7 @@
       "word": "PANCREAS",
       "gloss": "organo che produce succhi digestivi e insulina",
       "synonyms": [],
+      "example": "L'insulina \u00e8 prodotta dal pancreas.",
       "pos": "noun",
       "ipa": "/pankreas/",
       "family": [
@@ -2213,13 +2385,14 @@
       ]
     },
     {
-      "word": "INTENSITÀ",
+      "word": "INTENSIT\u00c0",
       "gloss": "grado di forza o di energia",
       "synonyms": [
         "forza"
       ],
+      "example": "Si sta riducendo di intensit\u00e0.",
       "pos": "noun",
-      "ipa": "/intensiˈta/",
+      "ipa": "/intensi\u02c8ta/",
       "family": [
         "intenso"
       ]
@@ -2228,8 +2401,9 @@
       "word": "CAVALLA",
       "gloss": "femmina adulta dello stallone",
       "synonyms": [],
+      "example": "Questa \u00e8 una cavalla.",
       "pos": "noun",
-      "ipa": "/kaˈvalla/",
+      "ipa": "/ka\u02c8valla/",
       "family": [
         "cavallina"
       ]
@@ -2237,8 +2411,9 @@
     {
       "word": "LARDARE",
       "gloss": "inserire strisce di grasso di maiale nella carne",
+      "example": "Per insaporire il pollo, \u00e8 tradizione lardare la carne con strisce di pancetta.",
       "pos": "verb",
-      "ipa": "/larˈda.re/",
+      "ipa": "/lar\u02c8da.re/",
       "family": [
         "lardo",
         "lardellare"
@@ -2248,8 +2423,9 @@
       "word": "OFFERENTE",
       "gloss": "chi presenta una proposta in un'asta",
       "synonyms": [],
+      "example": "Sono sempre pronti a svendersi al migliore offerente?",
       "pos": "noun",
-      "ipa": "/of.feˈren.te/",
+      "ipa": "/of.fe\u02c8ren.te/",
       "family": [
         "offrire",
         "offerta"
@@ -2261,20 +2437,22 @@
       "synonyms": [
         "solo"
       ],
+      "example": "Io vengo unicamente per te.",
       "pos": "adverb",
-      "ipa": "/unikaˈmente/",
+      "ipa": "/unika\u02c8mente/",
       "family": [
         "unico"
       ]
     },
     {
       "word": "TURISMO",
-      "gloss": "attività di viaggio per svago o cultura",
+      "gloss": "attivit\u00e0 di viaggio per svago o cultura",
       "synonyms": [
         "viaggi"
       ],
+      "example": "Il turismo \u00e8 molto importante qui.",
       "pos": "noun",
-      "ipa": "/tuˈrizmo/",
+      "ipa": "/tu\u02c8rizmo/",
       "family": [
         "agriturismo",
         "cicloturismo",
@@ -2287,8 +2465,9 @@
       "synonyms": [
         "massaia"
       ],
+      "example": "Sono casalinga.",
       "pos": "noun",
-      "ipa": "/kazaˈliŋɡa/",
+      "ipa": "/kaza\u02c8li\u014b\u0261a/",
       "family": [
         "casa",
         "casalingo"
@@ -2296,17 +2475,18 @@
     },
     {
       "word": "ZERO",
-      "gloss": "il numero che indica assenza di quantità",
+      "gloss": "il numero che indica assenza di quantit\u00e0",
       "synonyms": [
         "nulla"
       ],
+      "example": "Siamo partiti da zero.",
       "pos": "noun",
+      "ipa": "/\u02c8dze.ro/",
       "family": [
         "sottozero",
         "azzeramento",
         "azzerato"
-      ],
-      "ipa": "/ˈdze.ro/"
+      ]
     },
     {
       "word": "BACCHETTA",
@@ -2314,8 +2494,9 @@
       "synonyms": [
         "verga"
       ],
+      "example": "Alza timidamente la bacchetta.",
       "pos": "noun",
-      "ipa": "/bakˈketta/",
+      "ipa": "/bak\u02c8ketta/",
       "family": [
         "bacchettata",
         "bacchettina",
@@ -2328,8 +2509,9 @@
       "synonyms": [
         "errante"
       ],
+      "example": "Da giovane ero una mina vagante.",
       "pos": "noun",
-      "ipa": "/vaˈɡante/",
+      "ipa": "/va\u02c8\u0261ante/",
       "family": [
         "vagare",
         "vagabondo"
@@ -2341,34 +2523,37 @@
       "synonyms": [
         "accessorio"
       ],
+      "example": "Amo questi gadget.",
       "pos": "noun",
+      "ipa": "/\u0261ad\u02c8d\u0292\u025bt/",
       "family": [
         "peluche",
         "giocattolo",
         "gioco"
-      ],
-      "ipa": "/ɡadˈdʒɛt/"
+      ]
     },
     {
       "word": "REPERTORIO",
-      "gloss": "elenco di opere o numeri pronti per l’esecuzione",
+      "gloss": "elenco di opere o numeri pronti per l\u2019esecuzione",
       "synonyms": [
         "elenco"
       ],
+      "example": "\u00c8 una foto di repertorio.",
       "pos": "noun",
-      "ipa": "/reperˈtɔrjo/",
+      "ipa": "/reper\u02c8t\u0254rjo/",
       "family": [
         "reperire"
       ]
     },
     {
-      "word": "NULLITÀ",
-      "gloss": "mancanza totale di valore o validità",
+      "word": "NULLIT\u00c0",
+      "gloss": "mancanza totale di valore o validit\u00e0",
       "synonyms": [
-        "invalidità"
+        "invalidit\u00e0"
       ],
+      "example": "Era e resta una nullit\u00e0.",
       "pos": "noun",
-      "ipa": "/nulliˈta/",
+      "ipa": "/nulli\u02c8ta/",
       "family": [
         "nulla",
         "nullo"
@@ -2380,8 +2565,9 @@
       "synonyms": [
         "puritano"
       ],
+      "example": "\u00c8 un moralista.",
       "pos": "noun",
-      "ipa": "/moraˈlista/",
+      "ipa": "/mora\u02c8lista/",
       "family": [
         "morale",
         "moralismo"
@@ -2391,8 +2577,9 @@
       "word": "COLONIALE",
       "gloss": "relativo ai territori dominati da uno stato straniero",
       "synonyms": [],
+      "example": "L'espansione coloniale \u00e8 molto forte in questo periodo.",
       "pos": "adjective",
-      "ipa": "/koloˈnjale/",
+      "ipa": "/kolo\u02c8njale/",
       "family": [
         "colonialismo",
         "colonialista",
@@ -2405,8 +2592,9 @@
       "synonyms": [
         "scarpa"
       ],
+      "example": "Ogni bella scarpa diventa ciabatta, ogni bella donna diventa nonna.",
       "pos": "noun",
-      "ipa": "/t͡ʃaˈbatːa/",
+      "ipa": "/t\u0361\u0283a\u02c8bat\u02d0a/",
       "family": [
         "acciabattare",
         "ciabattare",
@@ -2415,12 +2603,13 @@
     },
     {
       "word": "LOGISTICO",
-      "gloss": "relativo all’organizzazione dei trasporti e dei rifornimenti",
+      "gloss": "relativo all\u2019organizzazione dei trasporti e dei rifornimenti",
       "synonyms": [
         "organizzativo"
       ],
+      "example": "Offrir\u00e0 supporto logistico.",
       "pos": "adjective",
-      "ipa": "/loˈd͡ʒistiko/",
+      "ipa": "/lo\u02c8d\u0361\u0292istiko/",
       "family": [
         "logistica"
       ]
@@ -2431,13 +2620,14 @@
       "synonyms": [
         "diffamazione"
       ],
+      "example": "Si chiama calunnia.",
       "pos": "noun",
+      "ipa": "/ka\u02c8lun.nja/",
       "family": [
         "autocalunnia",
         "calunnioso",
         "calunniare"
-      ],
-      "ipa": "/kaˈlun.nja/"
+      ]
     },
     {
       "word": "IDEM",
@@ -2445,8 +2635,9 @@
       "synonyms": [
         "stesso"
       ],
+      "example": "Se lui parte domani, idem per noi: viaggeremo insieme.",
       "pos": "adjective",
-      "ipa": "/ˈidem/"
+      "ipa": "/\u02c8idem/"
     },
     {
       "word": "ABOMINIO",
@@ -2454,8 +2645,9 @@
       "synonyms": [
         "orrore"
       ],
+      "example": "Questo \u00e8 un abominio.",
       "pos": "noun",
-      "ipa": "/aboˈminjo/",
+      "ipa": "/abo\u02c8minjo/",
       "family": [
         "abominevole"
       ]
@@ -2466,8 +2658,9 @@
       "synonyms": [
         "bevanda"
       ],
+      "example": "Voglio del sidro.",
       "pos": "noun",
-      "ipa": "/ˈsi.dro/"
+      "ipa": "/\u02c8si.dro/"
     },
     {
       "word": "TINO",
@@ -2475,8 +2668,9 @@
       "synonyms": [
         "botte"
       ],
+      "example": "Il mosto fermenta nel tino.",
       "pos": "noun",
-      "ipa": "/ˈtino/",
+      "ipa": "/\u02c8tino/",
       "family": [
         "botte"
       ]
@@ -2487,8 +2681,9 @@
       "synonyms": [
         "spingere"
       ],
+      "example": "\u00c8 come incitare all'autodistruzione?",
       "pos": "verb",
-      "ipa": "/int͡ʃiˈtare/",
+      "ipa": "/int\u0361\u0283i\u02c8tare/",
       "family": [
         "incitamento",
         "incitatore"
@@ -2496,24 +2691,26 @@
     },
     {
       "word": "VARIABILE",
-      "gloss": "che può cambiare",
+      "gloss": "che pu\u00f2 cambiare",
       "synonyms": [
         "instabile"
       ],
+      "example": "\"h\" \u00e8 una variabile temporanea.",
       "pos": "noun",
-      "ipa": "/vaˈrjabile/",
+      "ipa": "/va\u02c8rjabile/",
       "family": [
-        "variabilità"
+        "variabilit\u00e0"
       ]
     },
     {
       "word": "LEGGEREZZA",
-      "gloss": "mancanza di peso o di serietà",
+      "gloss": "mancanza di peso o di seriet\u00e0",
       "synonyms": [
-        "futilità"
+        "futilit\u00e0"
       ],
+      "example": "Non parla con leggerezza di cose serie.",
       "pos": "noun",
-      "ipa": "/ledd͡ʒeˈrettsa/",
+      "ipa": "/ledd\u0361\u0292e\u02c8rettsa/",
       "family": [
         "leggero"
       ]
@@ -2522,8 +2719,9 @@
       "word": "CUCINA",
       "gloss": "stanza dove si preparano i pasti",
       "synonyms": [],
+      "example": "\u00c8 in cucina.",
       "pos": "noun",
-      "ipa": "/kuˌt͡ʃiːna/",
+      "ipa": "/ku\u02cct\u0361\u0283i\u02d0na/",
       "family": [
         "cucinare",
         "cuciniere",
@@ -2536,8 +2734,9 @@
       "synonyms": [
         "filtrazione"
       ],
+      "example": "Lui ha bisogno di dialisi due volte alla settimana.",
       "pos": "noun",
-      "ipa": "/diˈalizi/",
+      "ipa": "/di\u02c8alizi/",
       "family": [
         "emodialisi",
         "dializzato",
@@ -2546,22 +2745,24 @@
     },
     {
       "word": "STAMINALE",
-      "gloss": "detto di cellula che può trasformarsi in altre",
+      "gloss": "detto di cellula che pu\u00f2 trasformarsi in altre",
       "synonyms": [],
+      "example": "Cos'\u00e8 una cellula staminale?",
       "pos": "adjective",
-      "ipa": "/sta.miˈna.le/",
+      "ipa": "/sta.mi\u02c8na.le/",
       "family": [
         "stame"
       ]
     },
     {
       "word": "BOLLITORE",
-      "gloss": "recipiente per scaldare l’acqua",
+      "gloss": "recipiente per scaldare l\u2019acqua",
       "synonyms": [
         "pentola"
       ],
+      "example": "Metti su il bollitore.",
       "pos": "noun",
-      "ipa": "/bolliˈtore/",
+      "ipa": "/bolli\u02c8tore/",
       "family": [
         "bollire",
         "bollente"
@@ -2573,8 +2774,9 @@
       "synonyms": [
         "valutazione"
       ],
+      "example": "La pagella pu\u00f2 rimanere a scuola.",
       "pos": "noun",
-      "ipa": "/paˈdʒɛl.la/",
+      "ipa": "/pa\u02c8d\u0292\u025bl.la/",
       "family": [
         "pagina",
         "pagellina"
@@ -2586,8 +2788,9 @@
       "synonyms": [
         "paura"
       ],
+      "example": "Ha la fobia dei cani.",
       "pos": "noun",
-      "ipa": "/foˈbia/",
+      "ipa": "/fo\u02c8bia/",
       "family": [
         "agorafobia",
         "anglofobia",
@@ -2600,34 +2803,38 @@
       "synonyms": [
         "esplosivo"
       ],
+      "example": "Questo petardo non \u00e8 esploso.",
       "pos": "noun",
-      "ipa": "/peˈtardo/"
+      "ipa": "/pe\u02c8tardo/"
     },
     {
       "word": "VACILLARE",
-      "gloss": "oscillare o perdere stabilità",
+      "gloss": "oscillare o perdere stabilit\u00e0",
       "synonyms": [
         "barcollare"
       ],
+      "example": "Questo fa vacillare i miei propositi.",
       "pos": "verb",
-      "ipa": "/vat͡ʃilˈlare/",
+      "ipa": "/vat\u0361\u0283il\u02c8lare/",
       "family": [
         "vacillamento",
-        "instabilità"
+        "instabilit\u00e0"
       ]
     },
     {
       "word": "BRISTOL",
       "gloss": "cartone sottile e liscio per disegnare",
       "synonyms": [],
+      "example": "Ho comprato un foglio di bristol per fare un disegno a matita.",
       "pos": "noun",
-      "ipa": "/ˈbris.tol/"
+      "ipa": "/\u02c8bris.tol/"
     },
     {
       "word": "SINGHIOZZO",
       "gloss": "contrazione involontaria del diaframma",
+      "example": "Ho il singhiozzo.",
       "pos": "noun",
-      "ipa": "/sinˈɡhjozzo/",
+      "ipa": "/sin\u02c8\u0261hjozzo/",
       "family": [
         "singhiozzare",
         "singhiozzante"
@@ -2639,11 +2846,12 @@
       "synonyms": [
         "inosservato"
       ],
+      "example": "Ma \u00e8 rimasto impunito?",
       "pos": "adjective",
-      "ipa": "/impuˈnito/",
+      "ipa": "/impu\u02c8nito/",
       "family": [
         "impune",
-        "impunità"
+        "impunit\u00e0"
       ]
     },
     {
@@ -2652,8 +2860,9 @@
       "synonyms": [
         "spargere"
       ],
+      "example": "Il muratore sta utilizzando una cazzuola per spalmare e livellare l'intonaco sulle pareti.",
       "pos": "verb",
-      "ipa": "/spalˈmare/",
+      "ipa": "/spal\u02c8mare/",
       "family": [
         "spalmarsi",
         "spalmata",
@@ -2664,8 +2873,9 @@
       "word": "ISRAELIANO",
       "gloss": "dello stato ebraico moderno o dei suoi abitanti",
       "synonyms": [],
+      "example": "Il mio amico \u00e8 israeliano.",
       "pos": "noun",
-      "ipa": "/izraeˈljano/",
+      "ipa": "/izrae\u02c8ljano/",
       "family": [
         "Israele",
         "ebraismo"
@@ -2678,7 +2888,7 @@
         "bufere"
       ],
       "pos": "noun",
-      "ipa": "/torˈmen.te/",
+      "ipa": "/tor\u02c8men.te/",
       "family": [
         "tormentare",
         "tormentoso"
@@ -2690,8 +2900,9 @@
       "synonyms": [
         "pullman"
       ],
+      "example": "C'\u00e8 uno scuolabus?",
       "pos": "noun",
-      "ipa": "/ˈskwɔ.la.bus/",
+      "ipa": "/\u02c8skw\u0254.la.bus/",
       "family": [
         "scuola",
         "autobus"
@@ -2699,9 +2910,10 @@
     },
     {
       "word": "NERVINO",
-      "gloss": "rimedio che stimola o calma l’eccitazione",
+      "gloss": "rimedio che stimola o calma l\u2019eccitazione",
+      "example": "Il medico mi ha consigliato un rimedio nervino per alleviare lo stress quotidiano.",
       "pos": "adjective",
-      "ipa": "/nerˈvino/",
+      "ipa": "/ner\u02c8vino/",
       "family": [
         "nervo",
         "nervosismo"
@@ -2709,12 +2921,13 @@
     },
     {
       "word": "SOTTOPOSTO",
-      "gloss": "chi è agli ordini di un superiore",
+      "gloss": "chi \u00e8 agli ordini di un superiore",
       "synonyms": [
         "subordinato"
       ],
+      "example": "Il nuovo impiegato era sottoposto al controllo del direttore per i primi tre mesi.",
       "pos": "noun",
-      "ipa": "/sottoˈposto/",
+      "ipa": "/sotto\u02c8posto/",
       "family": [
         "sottoporre"
       ]
@@ -2725,20 +2938,22 @@
       "synonyms": [
         "magiaro"
       ],
+      "example": "\u00c8 ungherese.",
       "pos": "noun",
-      "ipa": "/uŋɡheˈreze/",
+      "ipa": "/u\u014b\u0261he\u02c8reze/",
       "family": [
         "Ungheria"
       ]
     },
     {
       "word": "COMFORT",
-      "gloss": "sensazione di comodità e benessere",
+      "gloss": "sensazione di comodit\u00e0 e benessere",
       "synonyms": [
-        "comodità"
+        "comodit\u00e0"
       ],
+      "example": "Vivo nel comfort.",
       "pos": "noun",
-      "ipa": "/ˈkomfort/",
+      "ipa": "/\u02c8komfort/",
       "family": [
         "relax",
         "lusso"
@@ -2750,8 +2965,9 @@
       "synonyms": [
         "indicativo"
       ],
+      "example": "Il suo sorriso \u00e8 stato un elemento rivelatore del suo vero carattere.",
       "pos": "noun",
-      "ipa": "/rilevaˈtore/",
+      "ipa": "/rileva\u02c8tore/",
       "family": [
         "rivelare",
         "rivelazione"
@@ -2763,21 +2979,23 @@
       "synonyms": [
         "matematica"
       ],
+      "example": "Tu studi algebra.",
       "pos": "noun",
-      "ipa": "/ˈald͡ʒebra/",
+      "ipa": "/\u02c8ald\u0361\u0292ebra/",
       "family": [
         "algebrista",
         "algebrico"
       ]
     },
     {
-      "word": "MATERNITÀ",
+      "word": "MATERNIT\u00c0",
       "gloss": "condizione di madre",
       "synonyms": [
-        "genitorialità"
+        "genitorialit\u00e0"
       ],
+      "example": "Che bella la maternit\u00e0!",
       "pos": "noun",
-      "ipa": "/materniˈta/",
+      "ipa": "/materni\u02c8ta/",
       "family": [
         "madre",
         "materno"
@@ -2785,12 +3003,13 @@
     },
     {
       "word": "SCIOLTO",
-      "gloss": "libero da legami o da rigidità",
+      "gloss": "libero da legami o da rigidit\u00e0",
       "synonyms": [
         "libero"
       ],
+      "example": "Dopo la lezione di yoga, mi sentivo sciolto e leggero.",
       "pos": "adjective",
-      "ipa": "/ʃˈʃɔlto/",
+      "ipa": "/\u0283\u02c8\u0283\u0254lto/",
       "family": [
         "disciolto",
         "prosciolto",
@@ -2803,8 +3022,9 @@
       "synonyms": [
         "attraente"
       ],
+      "example": "Era una donna seducente.",
       "pos": "adjective",
-      "ipa": "/seduˈt͡ʃɛnte/",
+      "ipa": "/sedu\u02c8t\u0361\u0283\u025bnte/",
       "family": [
         "sedurre",
         "seduzione"
@@ -2816,8 +3036,9 @@
       "synonyms": [
         "salto"
       ],
+      "example": "Il gatto \u00e8 salito sullo sbalzo del camino per osservare meglio la stanza.",
       "pos": "noun",
-      "ipa": "/ˈzbaltso/",
+      "ipa": "/\u02c8zbaltso/",
       "family": [
         "sbalzare",
         "sbalzato"
@@ -2825,12 +3046,13 @@
     },
     {
       "word": "CALMANTE",
-      "gloss": "Un medicinale che riduce l’agitazione e favorisce il rilassamento.",
+      "gloss": "Un medicinale che riduce l\u2019agitazione e favorisce il rilassamento.",
       "synonyms": [
         "sedativo"
       ],
+      "example": "Stare nella natura ha un effetto calmante.",
       "pos": "adjective",
-      "ipa": "/kalˈmante/",
+      "ipa": "/kal\u02c8mante/",
       "family": [
         "calmare"
       ]
@@ -2841,8 +3063,9 @@
       "synonyms": [
         "ritirarsi"
       ],
+      "example": "Dopo aver letto la lettera, decise di ripiegare con cura il foglio prima di riporlo nella busta.",
       "pos": "verb",
-      "ipa": "/ripjeˈɡare/",
+      "ipa": "/ripje\u02c8\u0261are/",
       "family": [
         "ripiegabile",
         "ripiegamento",
@@ -2851,12 +3074,13 @@
     },
     {
       "word": "REALIZZO",
-      "gloss": "Il momento in cui un’idea diventa concreta e visibile.",
+      "gloss": "Il momento in cui un\u2019idea diventa concreta e visibile.",
       "synonyms": [
         "compimento"
       ],
+      "example": "Realizzo il mio progetto quando vedo i primi disegni sulla carta.",
       "pos": "noun",
-      "ipa": "/re.aˈlid.dzo/",
+      "ipa": "/re.a\u02c8lid.dzo/",
       "family": [
         "realizzare",
         "realizzazione"
@@ -2868,8 +3092,9 @@
       "synonyms": [
         "plasmare"
       ],
+      "example": "Il fabbro usa il martello per forgiare il ferro rovente.",
       "pos": "noun",
-      "ipa": "/forˈd͡ʒare/",
+      "ipa": "/for\u02c8d\u0361\u0292are/",
       "family": [
         "forgiato",
         "spada"
@@ -2881,17 +3106,19 @@
       "synonyms": [
         "associazione"
       ],
+      "example": "Il fabbro era un membro di una gilda.",
       "pos": "noun",
-      "ipa": "/ˈɡil.da/"
+      "ipa": "/\u02c8\u0261il.da/"
     },
     {
       "word": "ARTRITE",
-      "gloss": "Infiammazione delle articolazioni che causa dolore e rigidità.",
+      "gloss": "Infiammazione delle articolazioni che causa dolore e rigidit\u00e0.",
       "synonyms": [
         "infiammazione"
       ],
+      "example": "Ho l'artrite.",
       "pos": "noun",
-      "ipa": "/arˈtrite/",
+      "ipa": "/ar\u02c8trite/",
       "family": [
         "artritico",
         "poliartrite",
@@ -2904,15 +3131,17 @@
       "synonyms": [
         "elaboratore"
       ],
+      "example": "L'azienda ha spostato tutti i dati aziendali sul nuovo mainframe per migliorare l'efficienza.",
       "pos": "noun",
-      "ipa": "/ˈmejn.frejm/"
+      "ipa": "/\u02c8mejn.frejm/"
     },
     {
       "word": "CARROZZINA",
-      "gloss": "sedile con ruote usato per spostare chi non può camminare",
+      "gloss": "sedile con ruote usato per spostare chi non pu\u00f2 camminare",
       "synonyms": [],
+      "example": "Quella carrozzina \u00e8 nostra.",
       "pos": "noun",
-      "ipa": "/karrotˈtsina/",
+      "ipa": "/karrot\u02c8tsina/",
       "family": [
         "carrozza",
         "carrozzabile"
@@ -2924,8 +3153,9 @@
       "synonyms": [
         "vigoroso"
       ],
+      "example": "Nonostante l'et\u00e0, il nonno vegeto continua a passeggiare nel parco ogni mattina.",
       "pos": "noun",
-      "ipa": "/ˈvɛd͡ʒeto/",
+      "ipa": "/\u02c8v\u025bd\u0361\u0292eto/",
       "family": [
         "vegetare",
         "vegetativo"
@@ -2937,8 +3167,9 @@
       "synonyms": [
         "saccente"
       ],
+      "example": "Ma guarda, \u00e8 arrivato il sapientone!",
       "pos": "noun",
-      "ipa": "/sa.pjɛnˈto.ne/",
+      "ipa": "/sa.pj\u025bn\u02c8to.ne/",
       "family": [
         "sapiente",
         "sapienza"
@@ -2950,8 +3181,9 @@
       "synonyms": [
         "cenno"
       ],
+      "example": "Al saggio basta un'allusione.",
       "pos": "noun",
-      "ipa": "/alluˈzjone/",
+      "ipa": "/allu\u02c8zjone/",
       "family": [
         "alludere",
         "allusivo"
@@ -2963,8 +3195,9 @@
       "synonyms": [
         "aprire"
       ],
+      "example": "Come far\u00e0 a inaugurare scuole e a far discorsi su principi e valori?",
       "pos": "verb",
-      "ipa": "/inauɡuˈrare/",
+      "ipa": "/inau\u0261u\u02c8rare/",
       "family": [
         "inaugurale",
         "inaugurazione"
@@ -2976,8 +3209,9 @@
       "synonyms": [
         "odorato"
       ],
+      "example": "Ho un buon olfatto.",
       "pos": "noun",
-      "ipa": "/olˈfatto/",
+      "ipa": "/ol\u02c8fatto/",
       "family": [
         "odorato",
         "olfattivo"
@@ -2989,8 +3223,9 @@
       "synonyms": [
         "ampio"
       ],
+      "example": "Il ponte \u00e8 stato esteso.",
       "pos": "adjective",
-      "ipa": "/eˈstezo/",
+      "ipa": "/e\u02c8stezo/",
       "family": [
         "estesamente"
       ]
@@ -3001,17 +3236,19 @@
       "synonyms": [
         "ricordo"
       ],
+      "example": "Ho dei flashback.",
       "pos": "noun",
-      "ipa": "/ˈflaʃ.bak/"
+      "ipa": "/\u02c8fla\u0283.bak/"
     },
     {
       "word": "LASCITO",
-      "gloss": "beni o denaro dati in eredità con un testamento",
+      "gloss": "beni o denaro dati in eredit\u00e0 con un testamento",
       "synonyms": [
-        "eredità"
+        "eredit\u00e0"
       ],
+      "example": "Il nonno lasci\u00f2 un lascito ai nipoti per pagare gli studi.",
       "pos": "noun",
-      "ipa": "/ˈlaʃʃito/",
+      "ipa": "/\u02c8la\u0283\u0283ito/",
       "family": [
         "lasciare",
         "ereditare"
@@ -3019,23 +3256,25 @@
     },
     {
       "word": "SORELLANZA",
-      "gloss": "Rapporto di solidarietà tra donne che condividono ideali.",
+      "gloss": "Rapporto di solidariet\u00e0 tra donne che condividono ideali.",
       "synonyms": [
         "fratellanza"
       ],
+      "example": "La sorellanza tra collettive ambientaliste rafforza la loro lotta per il clima.",
       "pos": "noun",
-      "ipa": "/so.relˈlan.tsa/",
+      "ipa": "/so.rel\u02c8lan.tsa/",
       "family": [
         "sorella",
-        "solidarietà"
+        "solidariet\u00e0"
       ]
     },
     {
       "word": "PROIETTORE",
       "gloss": "apparecchio che manda immagini su uno schermo",
       "synonyms": [],
+      "example": "Ecco il proiettore.",
       "pos": "noun",
-      "ipa": "/projetˈtore/",
+      "ipa": "/projet\u02c8tore/",
       "family": [
         "proiettare",
         "proiezione",
@@ -3048,8 +3287,9 @@
       "synonyms": [
         "giornalista"
       ],
+      "example": "Il cronista investigativo ha svolto un ruolo chiave nel portare alla luce scandali e corruzione nel mondo politico.",
       "pos": "noun",
-      "ipa": "/kroˈnista/",
+      "ipa": "/kro\u02c8nista/",
       "family": [
         "capocronista",
         "fotocronista",
@@ -3062,11 +3302,12 @@
       "synonyms": [
         "officioso"
       ],
+      "example": "L'ora di partenza \u00e8 ufficioso: dobbiamo aspettare la conferma ufficiale.",
       "pos": "adjective",
+      "ipa": "/uf.fi\u02c8t\u0283o.so/",
       "family": [
-        "ufficiosità"
-      ],
-      "ipa": "/uf.fiˈtʃo.so/"
+        "ufficiosit\u00e0"
+      ]
     },
     {
       "word": "SURGELARE",
@@ -3074,13 +3315,14 @@
       "synonyms": [
         "congelare"
       ],
+      "example": "Per conservare la frutta estiva, si pu\u00f2 surgelare immediatamente dopo la raccolta.",
       "pos": "noun",
+      "ipa": "/sur.d\u0292e\u02c8la.re/",
       "family": [
         "surgelamento",
         "surgelato",
         "surgelazione"
-      ],
-      "ipa": "/sur.dʒeˈla.re/"
+      ]
     },
     {
       "word": "ZOTICONE",
@@ -3088,8 +3330,9 @@
       "synonyms": [
         "rozzo"
       ],
+      "example": "Il piccolo zoticone compr\u00f2 una grande zucca.",
       "pos": "noun",
-      "ipa": "/dzotiˈkone/",
+      "ipa": "/dzoti\u02c8kone/",
       "family": [
         "zotico",
         "rozzo",
@@ -3097,13 +3340,14 @@
       ]
     },
     {
-      "word": "VANITÀ",
-      "gloss": "Eccessivo compiacimento della propria apparenza o delle proprie qualità.",
+      "word": "VANIT\u00c0",
+      "gloss": "Eccessivo compiacimento della propria apparenza o delle proprie qualit\u00e0.",
       "synonyms": [
         "orgoglio"
       ],
+      "example": "La sua vanit\u00e0 non conosce limiti.",
       "pos": "noun",
-      "ipa": "/vaniˈta/",
+      "ipa": "/vani\u02c8ta/",
       "family": [
         "ambizione"
       ]
@@ -3114,20 +3358,22 @@
       "synonyms": [
         "zona"
       ],
+      "example": "In che distretto vivi?",
       "pos": "noun",
+      "ipa": "/di\u02c8str\u025bt.to/",
       "family": [
         "distrettuale"
-      ],
-      "ipa": "/diˈstrɛt.to/"
+      ]
     },
     {
       "word": "PULSAZIONE",
-      "gloss": "Battito ritmico del cuore o di un’arteria.",
+      "gloss": "Battito ritmico del cuore o di un\u2019arteria.",
       "synonyms": [
         "battito"
       ],
+      "example": "Il medico controll\u00f2 la mia pulsazione dopo la corsa per assicurarsi che fosse regolare.",
       "pos": "noun",
-      "ipa": "/pulsaˈtsjone/",
+      "ipa": "/pulsa\u02c8tsjone/",
       "family": [
         "pulsare",
         "polso",
@@ -3140,8 +3386,9 @@
       "synonyms": [
         "tagliare"
       ],
+      "example": "Puoi affettare le patate?",
       "pos": "verb",
-      "ipa": "/affetˈtare/",
+      "ipa": "/affet\u02c8tare/",
       "family": [
         "affettamento",
         "affettato"
@@ -3149,23 +3396,25 @@
     },
     {
       "word": "CULMINE",
-      "gloss": "Punto più alto di una montagna o di un processo.",
+      "gloss": "Punto pi\u00f9 alto di una montagna o di un processo.",
       "synonyms": [
         "apice"
       ],
+      "example": "Ecco il culmine della follia.",
       "pos": "noun",
       "ipa": "/kulmine/",
       "family": [
         "colmo",
-        "sommità"
+        "sommit\u00e0"
       ]
     },
     {
       "word": "AORTA",
       "gloss": "Arteria principale che porta il sangue dal cuore al resto del corpo.",
       "synonyms": [],
+      "example": "L'aorta \u00e8 la pi\u00f9 grande arteria del corpo umano; origina dal ventricolo sinistro del cuore e trasporta sangue ossigenato.",
       "pos": "noun",
-      "ipa": "/aˈɔrta/",
+      "ipa": "/a\u02c8\u0254rta/",
       "family": [
         "aortico"
       ]
@@ -3176,8 +3425,9 @@
       "synonyms": [
         "margine"
       ],
+      "example": "Il negozio applica un piccolo ricarico sui prodotti importati.",
       "pos": "adjective",
-      "ipa": "/riˈka.ri.ko/",
+      "ipa": "/ri\u02c8ka.ri.ko/",
       "family": [
         "caricare",
         "ricarica",
@@ -3188,8 +3438,9 @@
       "word": "CENTAURO",
       "gloss": "Creatura mitologica con corpo di cavallo e torso di uomo.",
       "synonyms": [],
+      "example": "Il centauro, met\u00e0 uomo e met\u00e0 cavallo, \u00e8 una figura leggendaria della mitologia greca.",
       "pos": "noun",
-      "ipa": "/t͡ʃenˈtauro/",
+      "ipa": "/t\u0361\u0283en\u02c8tauro/",
       "family": [
         "mitologia",
         "cavallo"
@@ -3201,8 +3452,9 @@
       "synonyms": [
         "accontentare"
       ],
+      "example": "\u00c8 difficile da compiacere.",
       "pos": "verb",
-      "ipa": "/kompjaˈt͡ʃere/",
+      "ipa": "/kompja\u02c8t\u0361\u0283ere/",
       "family": [
         "compiacersi",
         "compiaciuto"
@@ -3210,12 +3462,13 @@
     },
     {
       "word": "SUDDETTO",
-      "gloss": "Che è stato nominato o citato in precedenza.",
+      "gloss": "Che \u00e8 stato nominato o citato in precedenza.",
       "synonyms": [
         "citato"
       ],
+      "example": "E lei rappresenta suddetto sindacato?",
       "pos": "adjective",
-      "ipa": "/sudˈdetto/",
+      "ipa": "/sud\u02c8detto/",
       "family": [
         "detto",
         "precedente"
@@ -3227,10 +3480,11 @@
       "synonyms": [
         "razziale"
       ],
+      "example": "Qual \u00e8 il tuo cibo etnico preferito?",
       "pos": "adjective",
-      "ipa": "/ˈɛtniko/",
+      "ipa": "/\u02c8\u025btniko/",
       "family": [
-        "etnicità",
+        "etnicit\u00e0",
         "etnicamente",
         "etnia"
       ]
@@ -3241,8 +3495,9 @@
       "synonyms": [
         "cofanetto"
       ],
+      "example": "La sua stanza \u00e8 uno scrigno di ricordi d'infanzia.",
       "pos": "noun",
-      "ipa": "/ˈskriɲɲo/",
+      "ipa": "/\u02c8skri\u0272\u0272o/",
       "family": [
         "cassa",
         "gioielli"
@@ -3250,12 +3505,13 @@
     },
     {
       "word": "DUPLICE",
-      "gloss": "Che presenta due aspetti o due possibilità opposte.",
+      "gloss": "Che presenta due aspetti o due possibilit\u00e0 opposte.",
       "synonyms": [
         "doppio"
       ],
+      "example": "Questo apparecchio ha una duplice funzione.",
       "pos": "adjective",
-      "ipa": "/ˈduplit͡ʃe/",
+      "ipa": "/\u02c8duplit\u0361\u0283e/",
       "family": [
         "duo",
         "doppio",
@@ -3268,8 +3524,9 @@
       "synonyms": [
         "schiacciata"
       ],
+      "example": "Il giocatore ha eseguito uno smash vincente a rete.",
       "pos": "noun",
-      "ipa": "/ˈzmɛʃ/",
+      "ipa": "/\u02c8zm\u025b\u0283/",
       "family": [
         "tennis",
         "badminton"
@@ -3281,8 +3538,9 @@
       "synonyms": [
         "fideiussore"
       ],
+      "example": "Sar\u00f2 il tuo garante.",
       "pos": "noun",
-      "ipa": "/ɡaˈrante/",
+      "ipa": "/\u0261a\u02c8rante/",
       "family": [
         "garanzia",
         "garantire",
@@ -3295,11 +3553,12 @@
       "synonyms": [
         "separare"
       ],
+      "example": "Bisogna distaccare con delicatezza le due parti incollate per non rovinarle.",
       "pos": "noun",
+      "ipa": "/di\u02c8stat.ka.re/",
       "family": [
         "distaccarsi"
-      ],
-      "ipa": "/diˈstat.ka.re/"
+      ]
     },
     {
       "word": "SIEPE",
@@ -3307,8 +3566,9 @@
       "synonyms": [
         "recinto"
       ],
+      "example": "Pota la sua siepe.",
       "pos": "noun",
-      "ipa": "/ˈsjɛpe/",
+      "ipa": "/\u02c8sj\u025bpe/",
       "family": [
         "assiepare",
         "assieparsi",
@@ -3317,12 +3577,13 @@
     },
     {
       "word": "REPRIMERE",
-      "gloss": "Impedire con la forza l’espressione di sentimenti o ribellioni.",
+      "gloss": "Impedire con la forza l\u2019espressione di sentimenti o ribellioni.",
       "synonyms": [
         "soffocare"
       ],
+      "example": "Ho dovuto reprimere tutto.",
       "pos": "verb",
-      "ipa": "/reˈprimere/",
+      "ipa": "/re\u02c8primere/",
       "family": [
         "reprimersi",
         "reprimibile",
@@ -3335,8 +3596,9 @@
       "synonyms": [
         "tovagliolo"
       ],
+      "example": "Usa una salvietta alla malva?",
       "pos": "noun",
-      "ipa": "/salˈvjɛt.ta/",
+      "ipa": "/sal\u02c8vj\u025bt.ta/",
       "family": [
         "salva",
         "panno",
@@ -3349,8 +3611,9 @@
       "synonyms": [
         "pappa"
       ],
+      "example": "Ponete nel mortaio le foglie di basilico, gli spicchi d\u2019aglio, i pinoli e pestate tutto accuratamente fino ad ottenere una poltiglia.",
       "pos": "noun",
-      "ipa": "/polˈtiʎʎa/",
+      "ipa": "/pol\u02c8ti\u028e\u028ea/",
       "family": [
         "poltiglioso"
       ]
@@ -3359,60 +3622,64 @@
       "word": "TRIS",
       "gloss": "Combinazione di tre simboli uguali in fila nei giochi.",
       "synonyms": [],
+      "example": "Ho vinto il tris sulla lavagna dopo un'accesa partita.",
       "pos": "noun",
+      "ipa": "/tris/",
       "family": [
         "trisagio",
         "trisavolo",
         "trisdrucciolo"
-      ],
-      "ipa": "/tris/"
+      ]
     },
     {
       "word": "FULMINARE",
-      "gloss": "Colpire con un lampo o con un’osservazione tagliente.",
+      "gloss": "Colpire con un lampo o con un\u2019osservazione tagliente.",
       "synonyms": [
         "colpire"
       ],
       "pos": "verb",
+      "ipa": "/ful.mi\u02c8na.re/",
       "family": [
         "fulminarsi"
-      ],
-      "ipa": "/ful.miˈna.re/"
+      ]
     },
     {
       "word": "POEMA",
-      "gloss": "Composizione poetica di notevole estensione e solennità.",
+      "gloss": "Composizione poetica di notevole estensione e solennit\u00e0.",
       "synonyms": [
         "componimento"
       ],
+      "example": "\u00c8 un grande poema.",
       "pos": "noun",
-      "ipa": "/poˈɛma/",
+      "ipa": "/po\u02c8\u025bma/",
       "family": [
         "poemetto"
       ]
     },
     {
       "word": "AFFIANCARE",
-      "gloss": "Porre una cosa accanto a un’altra per sostenerla.",
+      "gloss": "Porre una cosa accanto a un\u2019altra per sostenerla.",
       "synonyms": [
         "accostare"
       ],
+      "example": "Chi devo affiancare?",
       "pos": "verb",
+      "ipa": "/affja\u014b\u02c8kare/",
       "family": [
         "affiancamento",
         "affiancarsi",
         "affiancato"
-      ],
-      "ipa": "/affjaŋˈkare/"
+      ]
     },
     {
       "word": "RITRATTARE",
-      "gloss": "Ritirare pubblicamente un’affermazione precedente.",
+      "gloss": "Ritirare pubblicamente un\u2019affermazione precedente.",
       "synonyms": [
         "ritirare"
       ],
+      "example": "Dopo aver sbagliato, il politico dovette ritrattare le sue dichiarazioni.",
       "pos": "verb",
-      "ipa": "/ritratˈtare/",
+      "ipa": "/ritrat\u02c8tare/",
       "family": [
         "ritrattarsi",
         "ritrattazione",
@@ -3425,8 +3692,9 @@
       "synonyms": [
         "vagabondare"
       ],
+      "example": "L'estate scorsa ho trascorso le giornate a girovagare per i vicoli della citt\u00e0 vecchia.",
       "pos": "verb",
-      "ipa": "/d͡ʒirovaˈɡare/",
+      "ipa": "/d\u0361\u0292irova\u02c8\u0261are/",
       "family": [
         "giro",
         "vagare",
@@ -3439,10 +3707,11 @@
       "synonyms": [
         "ampio"
       ],
+      "example": "\u00c8 spazioso, vero?",
       "pos": "adjective",
-      "ipa": "/spatˈtsjoso/",
+      "ipa": "/spat\u02c8tsjoso/",
       "family": [
-        "spaziosità",
+        "spaziosit\u00e0",
         "spazio",
         "spaziosamente"
       ]
@@ -3453,8 +3722,9 @@
       "synonyms": [
         "dondolare"
       ],
+      "example": "Fino a che punto \u00e8 lecito oscillare tra gusti musicali?",
       "pos": "verb",
-      "ipa": "/oʃʃilˈlare/",
+      "ipa": "/o\u0283\u0283il\u02c8lare/",
       "family": [
         "oscillante",
         "oscillatore",
@@ -3467,8 +3737,9 @@
       "synonyms": [
         "barbecue"
       ],
+      "example": "E grigliata sia!",
       "pos": "noun",
-      "ipa": "/ɡriʎˈʎata/",
+      "ipa": "/\u0261ri\u028e\u02c8\u028eata/",
       "family": [
         "griglia",
         "brace",
@@ -3481,8 +3752,9 @@
       "synonyms": [
         "massacro"
       ],
+      "example": "Qualcuno ha il coraggio di dire che non esiste una guerra di sterminio non dichiarata?",
       "pos": "noun",
-      "ipa": "/sterˈminjo/",
+      "ipa": "/ster\u02c8minjo/",
       "family": [
         "sterminare",
         "sterminatore"
@@ -3492,8 +3764,9 @@
       "word": "CONOSCENTE",
       "gloss": "persona con cui si ha un rapporto superficiale",
       "synonyms": [],
+      "example": "Tu non sei un suo conoscente.",
       "pos": "noun",
-      "ipa": "/konoʃˈʃɛnte/",
+      "ipa": "/kono\u0283\u02c8\u0283\u025bnte/",
       "family": [
         "conoscere",
         "conoscenza",
@@ -3502,25 +3775,27 @@
     },
     {
       "word": "TERRAZZO",
-      "gloss": "Piano scoperto sopra un edificio usato per stare all’aperto.",
+      "gloss": "Piano scoperto sopra un edificio usato per stare all\u2019aperto.",
       "synonyms": [
         "balcone"
       ],
+      "example": "Hai voluto il terrazzo?",
       "pos": "noun",
+      "ipa": "/ter\u02c8rat.tso/",
       "family": [
         "terrazzare",
         "terrazzino"
-      ],
-      "ipa": "/terˈrat.tso/"
+      ]
     },
     {
       "word": "SEGHERIA",
-      "gloss": "Luogo dove tronchi d’albero vengono tagliati in assi.",
+      "gloss": "Luogo dove tronchi d\u2019albero vengono tagliati in assi.",
       "synonyms": [
         "falegnameria"
       ],
+      "example": "Lavoro in una segheria.",
       "pos": "noun",
-      "ipa": "/seɡeˈriːa/",
+      "ipa": "/se\u0261e\u02c8ri\u02d0a/",
       "family": [
         "sega",
         "tagliare",
@@ -3529,12 +3804,13 @@
     },
     {
       "word": "BANDO",
-      "gloss": "Avviso pubblico con cui si comunica un divieto o un’asta.",
+      "gloss": "Avviso pubblico con cui si comunica un divieto o un\u2019asta.",
       "synonyms": [
         "avviso"
       ],
+      "example": "C'\u00e8 stato un bando per medici.",
       "pos": "noun",
-      "ipa": "/ˈbando/",
+      "ipa": "/\u02c8bando/",
       "family": [
         "bandire",
         "bandito"
@@ -3542,12 +3818,13 @@
     },
     {
       "word": "GLACIALE",
-      "gloss": "Che è formato da ghiacciai o caratterizzato da freddo estremo.",
+      "gloss": "Che \u00e8 formato da ghiacciai o caratterizzato da freddo estremo.",
       "synonyms": [
         "freddo"
       ],
+      "example": "Fa un freddo glaciale.",
       "pos": "adjective",
-      "ipa": "/ɡlaˈt͡ʃale/",
+      "ipa": "/\u0261la\u02c8t\u0361\u0283ale/",
       "family": [
         "glacialmente",
         "interglaciale",
@@ -3560,8 +3837,9 @@
       "synonyms": [
         "macina"
       ],
+      "example": "Ponete nel mortaio le foglie di basilico, gli spicchi d\u2019aglio, i pinoli e pestate tutto accuratamente fino ad ottenere una poltiglia.",
       "pos": "noun",
-      "ipa": "/morˈtajo/",
+      "ipa": "/mor\u02c8tajo/",
       "family": [
         "mortaretto",
         "mortadella"
@@ -3571,6 +3849,7 @@
       "word": "SLOT",
       "gloss": "una fessura stretta in cui si inserisce qualcosa",
       "synonyms": [],
+      "example": "Inserisci la carta nella slot del distributore automatico.",
       "pos": "noun",
       "ipa": "/slot/"
     },
@@ -3580,8 +3859,9 @@
       "synonyms": [
         "cucciolo"
       ],
+      "example": "\u00c8 un cagnolino.",
       "pos": "noun",
-      "ipa": "/kaɲɲoˈlino/",
+      "ipa": "/ka\u0272\u0272o\u02c8lino/",
       "family": [
         "cane"
       ]
@@ -3592,8 +3872,9 @@
       "synonyms": [
         "fondare"
       ],
+      "example": "In Germania hanno deciso di istituire un salario minimo di 8,50 euro all'ora.",
       "pos": "verb",
-      "ipa": "/istituˈire/",
+      "ipa": "/istitu\u02c8ire/",
       "family": [
         "istituto",
         "istitutore",
@@ -3604,8 +3885,9 @@
       "word": "LAMPONE",
       "gloss": "un frutto rosso e dolce che cresce su cespugli",
       "synonyms": [],
+      "example": "Vorrei un lampone.",
       "pos": "noun",
-      "ipa": "/lamˈpone/"
+      "ipa": "/lam\u02c8pone/"
     },
     {
       "word": "MONOTONO",
@@ -3613,8 +3895,9 @@
       "synonyms": [
         "noioso"
       ],
+      "example": "\u00c8 monotono.",
       "pos": "adjective",
-      "ipa": "/moˈnɔtono/",
+      "ipa": "/mo\u02c8n\u0254tono/",
       "family": [
         "tono",
         "monotonia"
@@ -3626,8 +3909,9 @@
       "synonyms": [
         "bersaglio"
       ],
+      "example": "\u00c8 lo zimbello della classe.",
       "pos": "noun",
-      "ipa": "/tsimˈbɛllo/",
+      "ipa": "/tsim\u02c8b\u025bllo/",
       "family": [
         "zimbellare"
       ]
@@ -3636,8 +3920,9 @@
       "word": "PORTELLONE",
       "gloss": "ampia apertura laterale di un veicolo o di un aereo",
       "synonyms": [],
+      "example": "Il portellone posteriore del furgone si apr\u00ec lentamente, permettendo l'accesso a grandi scatole.",
       "pos": "noun",
-      "ipa": "/portelˈlone/",
+      "ipa": "/portel\u02c8lone/",
       "family": [
         "porta",
         "portellino"
@@ -3649,8 +3934,9 @@
       "synonyms": [
         "parlare"
       ],
+      "example": "Vi piace conversare?",
       "pos": "verb",
-      "ipa": "/konverˈsare/",
+      "ipa": "/konver\u02c8sare/",
       "family": [
         "conversazione"
       ]
@@ -3661,8 +3947,9 @@
       "synonyms": [
         "schiacciare"
       ],
+      "example": "Per estrarre il succo, devi pressare bene le arance con lo spremiagrumi.",
       "pos": "verb",
-      "ipa": "/presˈsare/",
+      "ipa": "/pres\u02c8sare/",
       "family": [
         "pressione",
         "pressa"
@@ -3672,8 +3959,9 @@
       "word": "RADIOLOGIA",
       "gloss": "la branca medica che usa raggi X per esaminare il corpo",
       "synonyms": [],
+      "example": "La radiologia aiuta i medici a vedere dentro il corpo senza operare.",
       "pos": "noun",
-      "ipa": "/radjoloˈd͡ʒia/",
+      "ipa": "/radjolo\u02c8d\u0361\u0292ia/",
       "family": [
         "radio",
         "radiografia"
@@ -3685,8 +3973,9 @@
       "synonyms": [
         "boxe"
       ],
+      "example": "Fa pugilato?",
       "pos": "noun",
-      "ipa": "/pud͡ʒiˈlato/",
+      "ipa": "/pud\u0361\u0292i\u02c8lato/",
       "family": [
         "pugile",
         "pugilistico",
@@ -3695,12 +3984,13 @@
     },
     {
       "word": "ARCO",
-      "gloss": "una curva che collega due punti o un’arma per lanciare frecce",
+      "gloss": "una curva che collega due punti o un\u2019arma per lanciare frecce",
       "synonyms": [
         "curva"
       ],
+      "example": "Sognai un arco.",
       "pos": "noun",
-      "ipa": "/ˈarko/",
+      "ipa": "/\u02c8arko/",
       "family": [
         "archeggiare",
         "architrave",
@@ -3713,8 +4003,9 @@
       "synonyms": [
         "deluso"
       ],
+      "example": "\u00c8 scontento.",
       "pos": "noun",
-      "ipa": "/skonˈtɛnto/",
+      "ipa": "/skon\u02c8t\u025bnto/",
       "family": [
         "scontentezza"
       ]
@@ -3723,11 +4014,12 @@
       "word": "MACERE",
       "gloss": "lasciare a lungo in un liquido",
       "synonyms": [],
+      "example": "Lascia la carne in frigo a macere per almeno quattro ore prima di cucinarla.",
       "pos": "verb",
+      "ipa": "/ma\u02c8t\u0283ere/",
       "family": [
         "macerie"
-      ],
-      "ipa": "/maˈtʃere/"
+      ]
     },
     {
       "word": "ALLARMANTE",
@@ -3735,8 +4027,9 @@
       "synonyms": [
         "preoccupante"
       ],
+      "example": "La prognosi \u00e8 allarmante.",
       "pos": "adjective",
-      "ipa": "/allarˈmante/",
+      "ipa": "/allar\u02c8mante/",
       "family": [
         "allarme",
         "allarmare"
@@ -3748,8 +4041,9 @@
       "synonyms": [
         "continuo"
       ],
+      "example": "Il ritmo della sua performance \u00e8 stato sostenuto dal vivo senza cali per tutto il concerto.",
       "pos": "adjective",
-      "ipa": "/sosteˈnuto/",
+      "ipa": "/soste\u02c8nuto/",
       "family": [
         "sostenere",
         "sostegno"
@@ -3761,8 +4055,9 @@
       "synonyms": [
         "gioia"
       ],
+      "example": "I sentimenti di euforia possono essere provati in momenti di grande gioia e felicit\u00e0.",
       "pos": "noun",
-      "ipa": "/ewfoˈria/",
+      "ipa": "/ewfo\u02c8ria/",
       "family": [
         "euforico",
         "furore",
@@ -3775,11 +4070,12 @@
       "synonyms": [
         "cattivi"
       ],
+      "example": "Gli spiriti maligni ci hanno lasciati soli.",
       "pos": "noun",
-      "ipa": "/maˈliɲɲi/",
+      "ipa": "/ma\u02c8li\u0272\u0272i/",
       "family": [
         "maligno",
-        "malignità"
+        "malignit\u00e0"
       ]
     },
     {
@@ -3788,8 +4084,9 @@
       "synonyms": [
         "coraggio"
       ],
+      "example": "Tutti lodarono il suo eroismo.",
       "pos": "noun",
-      "ipa": "/eroˈizmo/",
+      "ipa": "/ero\u02c8izmo/",
       "family": [
         "eroe",
         "eroico"
@@ -3801,8 +4098,9 @@
       "synonyms": [
         "dolcetto"
       ],
+      "example": "Vuoi una tortina?",
       "pos": "noun",
-      "ipa": "/torˈtina/",
+      "ipa": "/tor\u02c8tina/",
       "family": [
         "torta",
         "tortino"
@@ -3810,13 +4108,14 @@
     },
     {
       "word": "APOSTOLO",
-      "gloss": "uno dei dodici discepoli inviati da Gesù a predicare",
+      "gloss": "uno dei dodici discepoli inviati da Ges\u00f9 a predicare",
       "synonyms": [
         "discepolo",
         "seguace"
       ],
+      "example": "Venne dagli irlandesi con tutti i segni di un apostolo, e quando la gente gli chiese di spiegare la Santissima Trinit\u00e0, si chin\u00f2 a terra e prese un trifoglio.",
       "pos": "noun",
-      "ipa": "/aˈpɔstolo/",
+      "ipa": "/a\u02c8p\u0254stolo/",
       "family": [
         "apostolato",
         "apostolico"
@@ -3829,6 +4128,7 @@
         "suicida",
         "martire"
       ],
+      "example": "Durante la seconda guerra mondiale alcuni piloti giapponesi divennero famosi per le loro missioni kamikaze.",
       "pos": "noun",
       "ipa": "/kamikaze/",
       "family": [
@@ -3844,8 +4144,9 @@
         "soccorso",
         "aiuto"
       ],
+      "example": "Sta inviando un SOS.",
       "pos": "noun",
-      "ipa": "/ˌɛsseˌɔˈɛsse/"
+      "ipa": "/\u02cc\u025bsse\u02cc\u0254\u02c8\u025bsse/"
     },
     {
       "word": "MONETINA",
@@ -3853,18 +4154,20 @@
       "synonyms": [
         "spicciolo"
       ],
+      "example": "Lanciamo una monetina.",
       "pos": "noun",
-      "ipa": "/moneˈtina/",
+      "ipa": "/mone\u02c8tina/",
       "family": [
         "moneta"
       ]
     },
     {
       "word": "VOLT",
-      "gloss": "unità di misura della differenza di potenziale elettrico",
+      "gloss": "unit\u00e0 di misura della differenza di potenziale elettrico",
       "synonyms": [],
+      "example": "La tensione nella batteria dell'auto \u00e8 di dodici volt.",
       "pos": "noun",
-      "ipa": "/ˈvɔlt/",
+      "ipa": "/\u02c8v\u0254lt/",
       "family": [
         "elettronvolt",
         "microvolt",
@@ -3875,8 +4178,9 @@
       "word": "FOCACCINA",
       "gloss": "piccolo pane morbido e piatto, all'olio",
       "synonyms": [],
+      "example": "Sta mangiando una focaccina.",
       "pos": "noun",
-      "ipa": "/fokatˈtʃina/",
+      "ipa": "/fokat\u02c8t\u0283ina/",
       "family": [
         "focaccia"
       ]
@@ -3888,8 +4192,9 @@
         "svaligiare",
         "forzare"
       ],
+      "example": "I ladri hanno provato a scassinare la cassaforte, ma senza successo.",
       "pos": "verb",
-      "ipa": "/skassiˈnare/",
+      "ipa": "/skassi\u02c8nare/",
       "family": [
         "scassinamento"
       ]
@@ -3900,8 +4205,9 @@
       "synonyms": [
         "intesa"
       ],
+      "example": "Avevamo un feeling cos\u00ec bello.",
       "pos": "noun",
-      "ipa": "/ˈfilinɡ/"
+      "ipa": "/\u02c8filin\u0261/"
     },
     {
       "word": "OFFSHORE",
@@ -3909,8 +4215,9 @@
       "synonyms": [
         "marittimo"
       ],
+      "example": "L'azienda ha aperto una nuova piattaforma offshore per sfruttare i venti pi\u00f9 forti in mare.",
       "pos": "noun",
-      "ipa": "/ˈɔffʃor/"
+      "ipa": "/\u02c8\u0254ff\u0283or/"
     },
     {
       "word": "SPUTO",
@@ -3919,24 +4226,26 @@
         "saliva",
         "bava"
       ],
+      "example": "A momenti sputo tutta la cena sul muro.",
       "pos": "noun",
-      "ipa": "/ˈsputo/",
+      "ipa": "/\u02c8sputo/",
       "family": [
         "saliva"
       ]
     },
     {
       "word": "INTELLETTO",
-      "gloss": "facoltà di comprendere e ragionare",
+      "gloss": "facolt\u00e0 di comprendere e ragionare",
       "synonyms": [
         "mente"
       ],
+      "example": "L'intelletto non \u00e8 saggezza.",
       "pos": "noun",
-      "ipa": "/intelˈlɛtto/",
+      "ipa": "/intel\u02c8l\u025btto/",
       "family": [
         "intellettivo",
         "intellettuale",
-        "stupidità"
+        "stupidit\u00e0"
       ]
     },
     {
@@ -3946,8 +4255,9 @@
         "spinale",
         "dorsale"
       ],
+      "example": "Raddrizza la colonna vertebrale.",
       "pos": "adjective",
-      "ipa": "/verteˈbrale/",
+      "ipa": "/verte\u02c8brale/",
       "family": [
         "vertebra",
         "vertebrato"
@@ -3960,8 +4270,9 @@
         "ospite",
         "convitato"
       ],
+      "example": "\u00c8 invitato.",
       "pos": "adjective",
-      "ipa": "/inviˈtato/",
+      "ipa": "/invi\u02c8tato/",
       "family": [
         "invitare"
       ]
@@ -3973,8 +4284,9 @@
         "spray",
         "aerosol"
       ],
+      "example": "Che tipo di inalatore usi?",
       "pos": "noun",
-      "ipa": "/inalaˈtore/",
+      "ipa": "/inala\u02c8tore/",
       "family": [
         "inalare",
         "inalazione"
@@ -3987,8 +4299,9 @@
         "nasetto",
         "fossa"
       ],
+      "example": "C'\u00e8 un pisello nella mia narice destra.",
       "pos": "noun",
-      "ipa": "/naˈrit͡ʃe/",
+      "ipa": "/na\u02c8rit\u0361\u0283e/",
       "family": [
         "trinariciuto"
       ]
@@ -3999,21 +4312,23 @@
       "synonyms": [
         "lodevole"
       ],
+      "example": "Questo \u00e8 un libro meritevole.",
       "pos": "adjective",
-      "ipa": "/meriˈtevole/",
+      "ipa": "/meri\u02c8tevole/",
       "family": [
         "passibile"
       ]
     },
     {
-      "word": "MALVAGITÀ",
-      "gloss": "la qualità di chi è incline al male",
+      "word": "MALVAGIT\u00c0",
+      "gloss": "la qualit\u00e0 di chi \u00e8 incline al male",
       "synonyms": [
         "cattiveria",
         "perfidia"
       ],
+      "example": "Solo l'uomo \u00e8 capace di tali malvagit\u00e0.",
       "pos": "noun",
-      "ipa": "/malvad͡ʒiˈta/",
+      "ipa": "/malvad\u0361\u0292i\u02c8ta/",
       "family": [
         "malvagio"
       ]
@@ -4024,20 +4339,22 @@
       "synonyms": [
         "paniere"
       ],
+      "example": "Il gatto \u00e8 nella sua cesta.",
       "pos": "noun",
-      "ipa": "/ˈt͡ʃesta/",
+      "ipa": "/\u02c8t\u0361\u0283esta/",
       "family": [
         "cestina"
       ]
     },
     {
       "word": "COMMANDO",
-      "gloss": "un’unità militare addestrata per operazioni speciali",
+      "gloss": "un\u2019unit\u00e0 militare addestrata per operazioni speciali",
       "synonyms": [
         "incursione"
       ],
+      "example": "I commando sono addestrati per missioni ad alto rischio in territori ostili.",
       "pos": "noun",
-      "ipa": "/komˈmando/",
+      "ipa": "/kom\u02c8mando/",
       "family": [
         "comando",
         "comandante"
@@ -4049,21 +4366,23 @@
       "synonyms": [
         "rossignolo"
       ],
+      "example": "Sentii un usignolo giapponese.",
       "pos": "noun",
-      "ipa": "/uziɲˈɲɔlo/",
+      "ipa": "/uzi\u0272\u02c8\u0272\u0254lo/",
       "family": [
         "rosignolo"
       ]
     },
     {
       "word": "PROGREDIRE",
-      "gloss": "avanzare verso uno stadio migliore o più avanzato",
+      "gloss": "avanzare verso uno stadio migliore o pi\u00f9 avanzato",
       "synonyms": [
         "avanzare",
         "procedere"
       ],
+      "example": "\u00c8 ora di progredire!",
       "pos": "verb",
-      "ipa": "/proɡreˈdire/",
+      "ipa": "/pro\u0261re\u02c8dire/",
       "family": [
         "progresso",
         "progressivo",
@@ -4072,13 +4391,13 @@
     },
     {
       "word": "SVALIGIARE",
-      "gloss": "derubare un luogo portando via tutto ciò che ha valore",
+      "gloss": "derubare un luogo portando via tutto ci\u00f2 che ha valore",
       "synonyms": [
         "derubare",
         "saccheggiare"
       ],
       "pos": "verb",
-      "ipa": "/zvaliˈd͡ʒare/",
+      "ipa": "/zvali\u02c8d\u0361\u0292are/",
       "family": [
         "svaligiamento",
         "svaligiatore"
@@ -4091,8 +4410,9 @@
         "agitato",
         "inquieto"
       ],
+      "example": "\u00c8 irrequieto.",
       "pos": "adjective",
-      "ipa": "/irreˈkwjɛto/",
+      "ipa": "/irre\u02c8kwj\u025bto/",
       "family": [
         "irrequietezza",
         "irrequietudine",
@@ -4101,13 +4421,14 @@
     },
     {
       "word": "QUERELANTE",
-      "gloss": "chi presenta un’accusa formale contro qualcuno",
+      "gloss": "chi presenta un\u2019accusa formale contro qualcuno",
       "synonyms": [
         "denunciante",
         "ricorrente"
       ],
+      "example": "Sono il querelante in quel processo.",
       "pos": "adjective",
-      "ipa": "/kwereˈlante/",
+      "ipa": "/kwere\u02c8lante/",
       "family": [
         "querela",
         "querelare",
@@ -4120,8 +4441,9 @@
       "synonyms": [
         "minibus"
       ],
+      "example": "Il pulmino aziendale ci port\u00f2 tutti al convegno fuori citt\u00e0.",
       "pos": "noun",
-      "ipa": "/pulˈmiːno/",
+      "ipa": "/pul\u02c8mi\u02d0no/",
       "family": [
         "pullman"
       ]
@@ -4132,17 +4454,19 @@
       "synonyms": [
         "grumo"
       ],
+      "example": "L'embol\u00eca polmonare pu\u00f2 verificarsi quando un coagulo di sangue blocca un'arteria nei polmoni.",
       "pos": "adjective",
-      "ipa": "/koˈaɡulo/",
+      "ipa": "/ko\u02c8a\u0261ulo/",
       "family": [
         "coagulazione"
       ]
     },
     {
       "word": "MOTOSCAFO",
-      "gloss": "un’imbarcazione veloce a propulsione meccanica",
+      "gloss": "un\u2019imbarcazione veloce a propulsione meccanica",
+      "example": "Ecco il motoscafo.",
       "pos": "noun",
-      "ipa": "/motoˈskafo/",
+      "ipa": "/moto\u02c8skafo/",
       "family": [
         "motocannoniera",
         "offshore"
@@ -4150,12 +4474,13 @@
     },
     {
       "word": "BALESTRA",
-      "gloss": "un’arma antica che scaglia dardi con una corda tesa",
+      "gloss": "un\u2019arma antica che scaglia dardi con una corda tesa",
       "synonyms": [
         "arco"
       ],
+      "example": "Come si usa una balestra?",
       "pos": "noun",
-      "ipa": "/baˈlɛstra/",
+      "ipa": "/ba\u02c8l\u025bstra/",
       "family": [
         "balestreria",
         "sbalestrare"
@@ -4163,12 +4488,13 @@
     },
     {
       "word": "GEISHA",
-      "gloss": "un’artista giapponese esperta di canto, danza e intrattenimento",
+      "gloss": "un\u2019artista giapponese esperta di canto, danza e intrattenimento",
       "synonyms": [
         "cortigiana"
       ],
+      "example": "\u00c8 una geisha.",
       "pos": "noun",
-      "ipa": "/ˈɡeiza/"
+      "ipa": "/\u02c8\u0261eiza/"
     },
     {
       "word": "SCHEDARE",
@@ -4177,8 +4503,9 @@
         "catalogare",
         "registrare"
       ],
+      "example": "L'ufficio ha provveduto a schedare i dati del nuovo dipendente.",
       "pos": "verb",
-      "ipa": "/skeˈdare/",
+      "ipa": "/ske\u02c8dare/",
       "family": [
         "schedato",
         "schedatore",
@@ -4192,8 +4519,9 @@
         "retrocedere",
         "abbassare"
       ],
+      "example": "L'insegnante non volle degradare lo studente per un semplice errore.",
       "pos": "verb",
-      "ipa": "/deɡraˈdare/",
+      "ipa": "/de\u0261ra\u02c8dare/",
       "family": [
         "degradarsi",
         "degradamento"
@@ -4206,8 +4534,9 @@
         "deciso",
         "determinato"
       ],
+      "example": "\u00c8 risoluto.",
       "pos": "adjective",
-      "ipa": "/risoˈluto/",
+      "ipa": "/riso\u02c8luto/",
       "family": [
         "risolutamente"
       ]
@@ -4218,8 +4547,9 @@
       "synonyms": [
         "solitario"
       ],
+      "example": "\u00c8 un eremita.",
       "pos": "noun",
-      "ipa": "/ereˈmita/",
+      "ipa": "/ere\u02c8mita/",
       "family": [
         "eremitaggio",
         "stilita",
@@ -4233,8 +4563,9 @@
         "sospettare",
         "accusare"
       ],
+      "example": "L\u2019investigatore cominci\u00f2 a indiziare il vicino per il continuo aumento delle sue ricchezze inspiegabili.",
       "pos": "verb",
-      "ipa": "/inditˈtsjare/",
+      "ipa": "/indit\u02c8tsjare/",
       "family": [
         "indizio",
         "indiziato"
@@ -4246,8 +4577,9 @@
       "synonyms": [
         "discorso"
       ],
+      "example": "Hai mai visto un comizio?",
       "pos": "noun",
-      "ipa": "/koˈmittsjo/",
+      "ipa": "/ko\u02c8mittsjo/",
       "family": [
         "comiziante"
       ]
@@ -4258,8 +4590,9 @@
       "synonyms": [
         "ansioso"
       ],
+      "example": "\u00c8 nevrotico.",
       "pos": "adjective",
-      "ipa": "/neˈvrɔtiko/",
+      "ipa": "/ne\u02c8vr\u0254tiko/",
       "family": [
         "nevrosi"
       ]
@@ -4270,8 +4603,9 @@
       "synonyms": [
         "severo"
       ],
+      "example": "\u00c8 rigoroso.",
       "pos": "adjective",
-      "ipa": "/riɡoˈroso/",
+      "ipa": "/ri\u0261o\u02c8roso/",
       "family": [
         "rigorosamente"
       ]
@@ -4282,8 +4616,9 @@
       "synonyms": [
         "evidente"
       ],
+      "example": "Il loro disagio si manifesta anche in questo!",
       "pos": "adjective",
-      "ipa": "/maˈniːfesta/",
+      "ipa": "/ma\u02c8ni\u02d0festa/",
       "family": [
         "manifestare",
         "manifestazione",
@@ -4292,12 +4627,13 @@
     },
     {
       "word": "MAGNUM",
-      "gloss": "una bottiglia di vino o liquore di grande capacità",
+      "gloss": "una bottiglia di vino o liquore di grande capacit\u00e0",
       "synonyms": [
         "grande"
       ],
+      "example": "Ho regalato una magnum di champagne per festeggiare il nostro anniversario.",
       "pos": "noun",
-      "ipa": "/ˈmaɲɲum/"
+      "ipa": "/\u02c8ma\u0272\u0272um/"
     },
     {
       "word": "FILETTO",
@@ -4305,12 +4641,13 @@
       "synonyms": [
         "bistecca"
       ],
+      "example": "Ora dobbiamo infarinare il filetto.",
       "pos": "noun",
+      "ipa": "/fi\u02c8letto/",
       "family": [
         "controfiletto",
         "filettino"
-      ],
-      "ipa": "/fiˈletto/"
+      ]
     },
     {
       "word": "PESTAGGIO",
@@ -4318,8 +4655,9 @@
       "synonyms": [
         "percosse"
       ],
+      "example": "Il pestaggio continuo del tappeto rimuove efficacemente la polvere incrostata.",
       "pos": "noun",
-      "ipa": "/pesˈtadd͡ʒo/",
+      "ipa": "/pes\u02c8tadd\u0361\u0292o/",
       "family": [
         "pestare",
         "pestato"
@@ -4331,8 +4669,9 @@
       "synonyms": [
         "fontanella"
       ],
+      "example": "L'autista ha parcheggiato troppo vicino all'idrante, rischiando una multa salata.",
       "pos": "noun",
-      "ipa": "/iˈdrante/",
+      "ipa": "/i\u02c8drante/",
       "family": [
         "idraulico",
         "idratare"
@@ -4342,8 +4681,9 @@
       "word": "NUMERICO",
       "gloss": "che riguarda le cifre",
       "synonyms": [],
+      "example": "Questo \u00e8 un dato numerico?",
       "pos": "adjective",
-      "ipa": "/nuˈmɛriko/",
+      "ipa": "/nu\u02c8m\u025briko/",
       "family": [
         "numericamente"
       ]
@@ -4354,8 +4694,9 @@
       "synonyms": [
         "amore"
       ],
+      "example": "Eros e Cupido sono due figure della stessa divinit\u00e0 nella mitologia; una greca e l'altra romana.",
       "pos": "noun",
-      "ipa": "/ˈɛros/"
+      "ipa": "/\u02c8\u025bros/"
     },
     {
       "word": "VANDALISMO",
@@ -4363,20 +4704,22 @@
       "synonyms": [
         "distruzione"
       ],
+      "example": "Lanciare le uova \u00e8 una forma di vandalismo.",
       "pos": "noun",
-      "ipa": "/vandaˈlizmo/",
+      "ipa": "/vanda\u02c8lizmo/",
       "family": [
         "vandalo"
       ]
     },
     {
-      "word": "BEBÈ",
+      "word": "BEB\u00c8",
       "gloss": "neonato o bambino molto piccolo",
       "synonyms": [
         "neonato"
       ],
+      "example": "Il beb\u00e8 dorme.",
       "pos": "noun",
-      "ipa": "/beˈbɛ/",
+      "ipa": "/be\u02c8b\u025b/",
       "family": [
         "chicco"
       ]
@@ -4385,8 +4728,9 @@
       "word": "OROLOGERIA",
       "gloss": "arte di costruire e riparare strumenti per misurare il tempo",
       "synonyms": [],
+      "example": "La passione per l'orologeria lo port\u00f2 a restaurare con precisione gli antichi orologi della sua collezione.",
       "pos": "noun",
-      "ipa": "/oroloˈdʒɛːrja/",
+      "ipa": "/orolo\u02c8d\u0292\u025b\u02d0rja/",
       "family": [
         "orologio",
         "orologiaio"
@@ -4398,8 +4742,9 @@
       "synonyms": [
         "tingere"
       ],
+      "example": "Per abbellire la stanza, abbiamo deciso di colorire le pareti con una tinta pastello.",
       "pos": "verb",
-      "ipa": "/koloˈrire/",
+      "ipa": "/kolo\u02c8rire/",
       "family": [
         "colorirsi",
         "coloritore",
@@ -4412,8 +4757,9 @@
       "synonyms": [
         "soffrire"
       ],
+      "example": "La sua indifferenza verso di me mi fa dolere profondamente.",
       "pos": "verb",
-      "ipa": "/doˈlere/",
+      "ipa": "/do\u02c8lere/",
       "family": [
         "dolersi",
         "doglia",
@@ -4426,8 +4772,9 @@
       "synonyms": [
         "armatura"
       ],
+      "example": "La corazza non protegge il ventre.",
       "pos": "noun",
-      "ipa": "/koˈrattsa/",
+      "ipa": "/ko\u02c8rattsa/",
       "family": [
         "corazziere",
         "corazzino"
@@ -4435,12 +4782,13 @@
     },
     {
       "word": "SOFFOCATA",
-      "gloss": "che è stata privata dell'aria fino a morire",
+      "gloss": "che \u00e8 stata privata dell'aria fino a morire",
       "synonyms": [
         "compressa"
       ],
+      "example": "Sono quasi soffocata.",
       "pos": "noun",
-      "ipa": "/soffoˈkaːta/",
+      "ipa": "/soffo\u02c8ka\u02d0ta/",
       "family": [
         "soffocare",
         "soffocamento",
@@ -4449,12 +4797,13 @@
     },
     {
       "word": "FAUSTO",
-      "gloss": "che porta fortuna o è di buon auspicio",
+      "gloss": "che porta fortuna o \u00e8 di buon auspicio",
       "synonyms": [
         "fortunato"
       ],
+      "example": "La cerimonia di laurea \u00e8 stata un evento fausto, celebrato con gioia e soddisfazione.",
       "pos": "adjective",
-      "ipa": "/ˈfausto/",
+      "ipa": "/\u02c8fausto/",
       "family": [
         "faustiano",
         "faustamente"
@@ -4466,11 +4815,12 @@
       "synonyms": [
         "spegnere"
       ],
+      "example": "Non lasci estinguere il fuoco.",
       "pos": "verb",
+      "ipa": "/e\u02c8sti\u014b\u0261were/",
       "family": [
         "estinguersi"
-      ],
-      "ipa": "/eˈstiŋɡwere/"
+      ]
     },
     {
       "word": "OCCULTARE",
@@ -4479,8 +4829,9 @@
         "nascondere",
         "celare"
       ],
+      "example": "Potremmo sempre aiutarti ad occultare le prove.",
       "pos": "verb",
-      "ipa": "/okkulˈtare/",
+      "ipa": "/okkul\u02c8tare/",
       "family": [
         "occultarsi"
       ]
@@ -4489,8 +4840,9 @@
       "word": "INNESTO",
       "gloss": "operazione di inserire una parte di pianta su un'altra",
       "synonyms": [],
+      "example": "L'innesto del melo sul pero richiede molta precisione per garantire una buona produzione di frutti.",
       "pos": "adjective",
-      "ipa": "/inˈnɛsto/",
+      "ipa": "/in\u02c8n\u025bsto/",
       "family": [
         "innestare",
         "innestato"
@@ -4502,8 +4854,9 @@
       "synonyms": [
         "contestare"
       ],
+      "example": "Devo obiettare.",
       "pos": "verb",
-      "ipa": "/objetˈtare/",
+      "ipa": "/objet\u02c8tare/",
       "family": [
         "obiettato",
         "obiettore",
@@ -4516,23 +4869,25 @@
       "synonyms": [
         "cavallo"
       ],
+      "example": "Cookie \u00e8 un puledro o una puledra?",
       "pos": "noun",
-      "ipa": "/puˈledro/",
+      "ipa": "/pu\u02c8ledro/",
       "family": [
         "puledrina"
       ]
     },
     {
       "word": "HANDICAP",
-      "gloss": "condizione che limita le capacità fisiche o mentali",
+      "gloss": "condizione che limita le capacit\u00e0 fisiche o mentali",
       "synonyms": [
         "svantaggio"
       ],
+      "example": "Ho un handicap.",
       "pos": "noun",
+      "ipa": "/\u02c8andikap/",
       "family": [
         "handicappare"
-      ],
-      "ipa": "/ˈandikap/"
+      ]
     },
     {
       "word": "INNING",
@@ -4540,17 +4895,18 @@
       "synonyms": [
         "turno"
       ],
+      "example": "Basi piene, due fuori nel nono inning.",
       "pos": "noun",
-      "ipa": "/ˈinning/"
+      "ipa": "/\u02c8inning/"
     },
     {
       "word": "SBALLATO",
-      "gloss": "che è sotto l'effetto di sostanze eccitanti o allucinogene",
+      "gloss": "che \u00e8 sotto l'effetto di sostanze eccitanti o allucinogene",
       "synonyms": [
         "stordito"
       ],
       "pos": "adjective",
-      "ipa": "/zbalˈlato/",
+      "ipa": "/zbal\u02c8lato/",
       "family": [
         "sballare",
         "sballo"
@@ -4562,8 +4918,9 @@
       "synonyms": [
         "pungere"
       ],
+      "example": "Non si far\u00e0 pizzicare.",
       "pos": "noun",
-      "ipa": "/pittsiˈkare/",
+      "ipa": "/pittsi\u02c8kare/",
       "family": [
         "pizzicagnolo",
         "pizzicamento",
@@ -4576,8 +4933,9 @@
       "synonyms": [
         "classificare"
       ],
+      "example": "Sereni \u00e8 un poeta che si fatica a catalogare in categorie esistenti.",
       "pos": "verb",
-      "ipa": "/kataloˈɡare/",
+      "ipa": "/katalo\u02c8\u0261are/",
       "family": [
         "catalogatore",
         "catalogazione"
@@ -4586,26 +4944,29 @@
     {
       "word": "BUDDISTA",
       "gloss": "seguace della dottrina religiosa nata in India con Siddharta",
+      "example": "\u00c8 buddista.",
       "pos": "noun",
-      "ipa": "/budˈdista/",
+      "ipa": "/bud\u02c8dista/",
       "family": [
         "buddismo",
         "buddhismo"
       ]
     },
     {
-      "word": "BERRÒ",
-      "gloss": "io manderò giù da bere in futuro",
+      "word": "BERR\u00d2",
+      "gloss": "io mander\u00f2 gi\u00f9 da bere in futuro",
       "synonyms": [],
+      "example": "Berr\u00f2 il t\u00e8.",
       "pos": "noun",
-      "ipa": "/berˈrɔ/"
+      "ipa": "/ber\u02c8r\u0254/"
     },
     {
       "word": "SCALPARE",
       "gloss": "togliere la pelle della testa a un nemico",
       "synonyms": [],
+      "example": "Gli antichi guerrieri usavano scalpare i nemici vinti per mostrare la loro forza.",
       "pos": "noun",
-      "ipa": "/skalˈpaːre/",
+      "ipa": "/skal\u02c8pa\u02d0re/",
       "family": [
         "scalpo",
         "scalpello",
@@ -4618,11 +4979,12 @@
       "synonyms": [
         "odontoiatrico"
       ],
+      "example": "Il tartaro \u00e8 una forma di placca dentale indurita.",
       "pos": "noun",
+      "ipa": "/den\u02c8ta\u02d0le/",
       "family": [
         "interdentale"
-      ],
-      "ipa": "/denˈtaːle/"
+      ]
     },
     {
       "word": "OVAIA",
@@ -4630,8 +4992,9 @@
       "synonyms": [
         "gonade"
       ],
+      "example": "L'ovaia \u00e8 fondamentale per la riproduzione femminile.",
       "pos": "noun",
-      "ipa": "/oˈvaja/",
+      "ipa": "/o\u02c8vaja/",
       "family": [
         "ovarico",
         "ovariectomia",
@@ -4640,12 +5003,13 @@
     },
     {
       "word": "STRISCIONE",
-      "gloss": "bandiera lunga e stretta usata per messaggi o pubblicità",
+      "gloss": "bandiera lunga e stretta usata per messaggi o pubblicit\u00e0",
       "synonyms": [
         "bandiera"
       ],
+      "example": "Facemmo uno striscione.",
       "pos": "noun",
-      "ipa": "/striʃˈʃoːne/",
+      "ipa": "/stri\u0283\u02c8\u0283o\u02d0ne/",
       "family": [
         "striscia",
         "strisciato",
@@ -4655,8 +5019,9 @@
     {
       "word": "SURFISTA",
       "gloss": "persona che pratica lo sport di cavalcare le onde",
+      "example": "Lui \u00e8 un surfista.",
       "pos": "noun",
-      "ipa": "/serˈfista/",
+      "ipa": "/ser\u02c8fista/",
       "family": [
         "surf"
       ]
@@ -4667,8 +5032,9 @@
       "synonyms": [
         "spaventare"
       ],
+      "example": "Non volevo allarmare gli studenti.",
       "pos": "verb",
-      "ipa": "/allarˈmare/",
+      "ipa": "/allar\u02c8mare/",
       "family": [
         "allarmante",
         "allarmarsi",
@@ -4679,15 +5045,17 @@
       "word": "YETI",
       "gloss": "creatura leggendaria delle nevi dell'Himalaya",
       "synonyms": [],
+      "example": "C'\u00e8 un equivalente nordafricano di uno yeti?",
       "pos": "noun",
-      "ipa": "/ˈjɛti/"
+      "ipa": "/\u02c8j\u025bti/"
     },
     {
       "word": "BROCCARE",
       "gloss": "ricamare un tessuto con disegni in rilievo",
       "synonyms": [],
+      "example": "In laboratorio si impara a broccare la stoffa con fili dorati per creare un ricamo in rilievo.",
       "pos": "verb",
-      "ipa": "/brokˈkare/",
+      "ipa": "/brok\u02c8kare/",
       "family": [
         "broccato"
       ]
@@ -4698,13 +5066,14 @@
       "synonyms": [
         "seme"
       ],
+      "example": "Se semino questo sassolino, crescer\u00e0 una montagna?",
       "pos": "noun",
+      "ipa": "/se\u02c8mino/",
       "family": [
         "seminatrice",
         "seminata",
         "seminativo"
-      ],
-      "ipa": "/seˈmino/"
+      ]
     },
     {
       "word": "MASSO",
@@ -4712,8 +5081,9 @@
       "synonyms": [
         "roccia"
       ],
+      "example": "Quel masso gigante sembrava un\u2019enorme palla da demolizione abbandonata nel bosco.",
       "pos": "noun",
-      "ipa": "/ˈmasso/",
+      "ipa": "/\u02c8masso/",
       "family": [
         "massiccio",
         "massone"
@@ -4725,20 +5095,22 @@
       "synonyms": [
         "aggredire"
       ],
+      "example": "\u00c8 tempo di assaltare il cielo.",
       "pos": "verb",
-      "ipa": "/assalˈtare/",
+      "ipa": "/assal\u02c8tare/",
       "family": [
         "assalto"
       ]
     },
     {
       "word": "VIVIDO",
-      "gloss": "che è molto intenso e luminoso nei colori",
+      "gloss": "che \u00e8 molto intenso e luminoso nei colori",
       "synonyms": [
         "vivo"
       ],
+      "example": "Nulla \u00e8 pi\u00f9 vivido di una foto.",
       "pos": "adjective",
-      "ipa": "/ˈvivido/",
+      "ipa": "/\u02c8vivido/",
       "family": [
         "vividezza",
         "vividamente"
@@ -4748,8 +5120,9 @@
       "word": "PENSIERINO",
       "gloss": "piccolo regalo o breve riflessione",
       "synonyms": [],
+      "example": "Ci far\u00f2 un pensierino.",
       "pos": "noun",
-      "ipa": "/pensjeˈrino/",
+      "ipa": "/pensje\u02c8rino/",
       "family": [
         "pensiero",
         "pensieroso"
@@ -4759,8 +5132,9 @@
       "word": "TITANIO",
       "gloss": "metallo leggero e resistente usato in leghe",
       "synonyms": [],
+      "example": "Il titanio \u00e8 un elemento chimico il cui simbolo \u00e8 Ti.",
       "pos": "noun",
-      "ipa": "/tiˈtanjo/",
+      "ipa": "/ti\u02c8tanjo/",
       "family": [
         "scandio",
         "vanadio"
@@ -4772,8 +5146,9 @@
       "synonyms": [
         "aspetto"
       ],
+      "example": "La somiglianza nella sua sembianza era cos\u00ec marcata che tutti credevano fossero parenti.",
       "pos": "noun",
-      "ipa": "/semˈbjantsa/",
+      "ipa": "/sem\u02c8bjantsa/",
       "family": [
         "sembrare"
       ]
@@ -4785,11 +5160,12 @@
         "natura",
         "temperamento"
       ],
+      "example": "Ha un'indole solare.",
       "pos": "noun",
-      "ipa": "/ˈindole/",
+      "ipa": "/\u02c8indole/",
       "family": [
         "attitudine",
-        "peculiarità"
+        "peculiarit\u00e0"
       ]
     },
     {
@@ -4798,21 +5174,23 @@
       "synonyms": [
         "fessura"
       ],
+      "example": "Ho visto uno spiraglio di sole.",
       "pos": "noun",
-      "ipa": "/spiˈraʎo/",
+      "ipa": "/spi\u02c8ra\u028eo/",
       "family": [
         "spirare"
       ]
     },
     {
       "word": "ESIGUO",
-      "gloss": "molto scarso, di poca entità",
+      "gloss": "molto scarso, di poca entit\u00e0",
       "synonyms": [
         "scarso",
         "modesto"
       ],
+      "example": "Il mio stipendio mensile \u00e8 esiguo, quindi devo fare attenzione alle spese.",
       "pos": "adjective",
-      "ipa": "/eˈziɡuo/",
+      "ipa": "/e\u02c8zi\u0261uo/",
       "family": [
         "esiguamente"
       ]
@@ -4823,11 +5201,12 @@
       "synonyms": [
         "tardo"
       ],
+      "example": "\u00c8 troppo ottuso per farlo.",
       "pos": "noun",
-      "ipa": "/otˈtuzo/",
+      "ipa": "/ot\u02c8tuzo/",
       "family": [
         "ottusamente",
-        "ottusità",
+        "ottusit\u00e0",
         "ottusangolo"
       ]
     },
@@ -4837,8 +5216,9 @@
       "synonyms": [
         "zelante"
       ],
+      "example": "L'infermiera solerte ha aiutato il paziente con grande attenzione e rapidit\u00e0.",
       "pos": "adjective",
-      "ipa": "/soˈlɛrte/",
+      "ipa": "/so\u02c8l\u025brte/",
       "family": [
         "solertemente",
         "solerzia"
@@ -4850,8 +5230,9 @@
       "synonyms": [
         "noia"
       ],
+      "example": "Il tedio della domenica pomeriggio senza amici mi spinge a cercare nuove passioni.",
       "pos": "noun",
-      "ipa": "/ˈtɛdjo/",
+      "ipa": "/\u02c8t\u025bdjo/",
       "family": [
         "tedioso"
       ]
@@ -4863,8 +5244,9 @@
         "spiritoso",
         "acuto"
       ],
+      "example": "Sei arguto.",
       "pos": "adjective",
-      "ipa": "/arˈɡuto/",
+      "ipa": "/ar\u02c8\u0261uto/",
       "family": [
         "argutamente",
         "argutezza"
@@ -4876,11 +5258,12 @@
       "synonyms": [
         "pretesto"
       ],
+      "example": "Usa un cavillo per evitare di pagare la multa, ma la legge non si fa ingannare.",
       "pos": "noun",
-      "ipa": "/kaˈvillo/",
+      "ipa": "/ka\u02c8villo/",
       "family": [
         "cavillatore",
-        "cavillosità",
+        "cavillosit\u00e0",
         "cavilloso"
       ]
     },
@@ -4891,11 +5274,12 @@
         "astio",
         "asprezza"
       ],
-      "ipa": "/akriˈmɔnja/",
+      "example": "La sua acrimonia nelle discussioni tradisce sempre il rancore che nutre.",
+      "pos": "noun",
+      "ipa": "/akri\u02c8m\u0254nja/",
       "family": [
         "acrimonioso"
-      ],
-      "pos": "noun"
+      ]
     },
     {
       "word": "INDUGIARE",
@@ -4904,13 +5288,14 @@
         "tardare",
         "esitare"
       ],
+      "example": "Non dovresti indugiare troppo prima di prendere una decisione importante.",
       "pos": "verb",
+      "ipa": "/indu\u02c8d\u0292are/",
       "family": [
         "indugiarsi",
         "indugiato",
         "dubbio"
-      ],
-      "ipa": "/induˈdʒare/"
+      ]
     },
     {
       "word": "PERVICACE",
@@ -4918,11 +5303,12 @@
       "synonyms": [
         "caparbio"
       ],
-      "ipa": "/perviˈkat͡ʃe/",
+      "example": "La sua ostinazione pervicace lo port\u00f2 a rifiutare ogni consiglio utile.",
+      "pos": "adjective",
+      "ipa": "/pervi\u02c8kat\u0361\u0283e/",
       "family": [
         "pervicacia"
-      ],
-      "pos": "adjective"
+      ]
     },
     {
       "word": "CAPZIOSO",
@@ -4930,12 +5316,13 @@
       "synonyms": [
         "cavilloso"
       ],
-      "ipa": "/kapˈtsjoso/",
+      "example": "Quel politico usa un ragionamento capzioso per confondere i cittadini.",
+      "pos": "adjective",
+      "ipa": "/kap\u02c8tsjoso/",
       "family": [
         "specioso",
         "arzigogolato"
-      ],
-      "pos": "adjective"
+      ]
     },
     {
       "word": "BLANDIRE",
@@ -4943,8 +5330,9 @@
       "synonyms": [
         "lusingare"
       ],
+      "example": "Ha provato a blandire il capo con lusinghe per ottenere una promozione.",
       "pos": "verb",
-      "ipa": "/blanˈdire/",
+      "ipa": "/blan\u02c8dire/",
       "family": [
         "blando",
         "blandizie"
@@ -4956,8 +5344,9 @@
       "synonyms": [
         "diligente"
       ],
+      "example": "\u00c8 zelante.",
       "pos": "adjective",
-      "ipa": "/dzeˈlante/",
+      "ipa": "/dze\u02c8lante/",
       "family": [
         "zelantemente"
       ]
@@ -4968,8 +5357,9 @@
       "synonyms": [
         "intimorito"
       ],
-      "ipa": "/spauˈrito/",
+      "example": "Il cucciolo, spaurito, si nascose sotto il letto al rumore dei tuoni.",
       "pos": "adjective",
+      "ipa": "/spau\u02c8rito/",
       "family": [
         "spaurire",
         "spavento"

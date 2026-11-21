@@ -1,13 +1,14 @@
 {
-  "version": 12,
+  "version": 13,
   "lang": "en",
   "cefr": "c2",
-  "license": "CC-BY-SA-4.0 (lemmas from Octanove Vocabulary Profile C1/C2; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (lemmas from Octanove Vocabulary Profile C1/C2; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
   "attribution": [
-    "Hiato EN C2 learner pack — original glosses and synonym chips (2026).",
+    "Hiato EN C2 learner pack \u2014 original glosses and synonym chips (2026).",
     "English C1/C2 lemmas selected from the Octanove Vocabulary Profile (CC-BY-SA-4.0) as a tagged add-on above CEFR-J.",
     "Creator: Octanove Labs. Source: https://github.com/openlanguageprofiles/olp-en-cefrj",
-    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy. (2026)."
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy. (2026).",
+    "Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR."
   ],
   "lemmas": [
     {
@@ -18,8 +19,9 @@
         "radiate",
         "ooze"
       ],
+      "example": "I normally exude confidence from every pore.",
       "pos": "verb",
-      "ipa": "/ɪɡˈzjuːd/",
+      "ipa": "/\u026a\u0261\u02c8zju\u02d0d/",
       "family": [
         "exudation"
       ]
@@ -32,8 +34,9 @@
         "foresee",
         "visualize"
       ],
+      "example": "They envisage using the eagles against drones that fly into restricted air space, or above a public event.",
       "pos": "verb",
-      "ipa": "/ɪnˈvɪzɪd͡ʒ/",
+      "ipa": "/\u026an\u02c8v\u026az\u026ad\u0361\u0292/",
       "family": [
         "envision",
         "evidence",
@@ -48,8 +51,9 @@
         "demeanor",
         "air"
       ],
+      "example": "His avuncular mien endears him to small children.",
       "pos": "noun",
-      "ipa": "/miːn/"
+      "ipa": "/mi\u02d0n/"
     },
     {
       "word": "TIMIDITY",
@@ -59,8 +63,9 @@
         "bashfulness",
         "diffidence"
       ],
+      "example": "Her timidity prevented her from speaking up during the meeting, though she had valuable ideas.",
       "pos": "noun",
-      "ipa": "/tɪˈmɪdɪti/",
+      "ipa": "/t\u026a\u02c8m\u026ad\u026ati/",
       "family": [
         "timid",
         "timidly",
@@ -75,8 +80,9 @@
         "solve",
         "decode"
       ],
+      "example": "Everything started to unravel.",
       "pos": "verb",
-      "ipa": "/ˌʌnˈɹævəl/",
+      "ipa": "/\u02cc\u028cn\u02c8\u0279\u00e6v\u0259l/",
       "family": [
         "unraveled",
         "unraveling"
@@ -90,8 +96,9 @@
         "abound",
         "overflow"
       ],
+      "example": "Coral reefs teem with life.",
       "pos": "verb",
-      "ipa": "/tiːm/",
+      "ipa": "/ti\u02d0m/",
       "family": [
         "teeming"
       ]
@@ -100,8 +107,9 @@
       "word": "OUTPATIENT",
       "gloss": "a person treated at a hospital who does not stay overnight",
       "synonyms": [],
+      "example": "I work in an outpatient clinic.",
       "pos": "noun",
-      "ipa": "/ˈaʊtˌpeɪʃənt/",
+      "ipa": "/\u02c8a\u028at\u02ccpe\u026a\u0283\u0259nt/",
       "family": [
         "patient",
         "out"
@@ -115,8 +123,9 @@
         "learner",
         "novice"
       ],
+      "example": "I'm an apprentice.",
       "pos": "verb",
-      "ipa": "/əˈpɹɛntɪs/",
+      "ipa": "/\u0259\u02c8p\u0279\u025bnt\u026as/",
       "family": [
         "apprenticeship",
         "journeyman",
@@ -131,13 +140,14 @@
         "angry",
         "incensed"
       ],
+      "example": "I'm indignant.",
       "pos": "adjective",
+      "ipa": "/\u026an\u02c8d\u026a\u0261.n\u0259nt/",
       "family": [
         "indignantly",
         "indignation",
         "indignity"
-      ],
-      "ipa": "/ɪnˈdɪɡ.nənt/"
+      ]
     },
     {
       "word": "LOCOMOTIVE",
@@ -146,8 +156,9 @@
         "engine",
         "mover"
       ],
+      "example": "He works as a locomotive conductor.",
       "pos": "noun",
-      "ipa": "/ˌləʊkəˈməʊtɪv/",
+      "ipa": "/\u02ccl\u0259\u028ak\u0259\u02c8m\u0259\u028at\u026av/",
       "family": [
         "loci"
       ]
@@ -159,11 +170,12 @@
         "movement",
         "travel"
       ],
+      "example": "A car is a means of locomotion.",
       "pos": "noun",
+      "ipa": "/l\u0259\u028a.k\u0259\u02c8m\u0259\u028a.\u0283\u0259n/",
       "family": [
         "locomotive"
-      ],
-      "ipa": "/ləʊ.kəˈməʊ.ʃən/"
+      ]
     },
     {
       "word": "ENTHUSE",
@@ -173,6 +185,7 @@
         "inspire",
         "animate"
       ],
+      "example": "The crowd will enthuse when the final goal is scored in the championship match.",
       "pos": "verb",
       "family": [
         "enthused",
@@ -188,8 +201,9 @@
         "fortitude",
         "endurance"
       ],
+      "example": "Through years of training, her stoicism allowed her to face every challenge with calm resolve.",
       "pos": "noun",
-      "ipa": "/ˈstəʊɪsɪzəm/",
+      "ipa": "/\u02c8st\u0259\u028a\u026as\u026az\u0259m/",
       "family": [
         "stoic",
         "stoical",
@@ -204,8 +218,9 @@
         "solitary",
         "loner"
       ],
+      "example": "I became a recluse.",
       "pos": "noun",
-      "ipa": "/ɹɪˈkluːs/",
+      "ipa": "/\u0279\u026a\u02c8klu\u02d0s/",
       "family": [
         "reclusive",
         "loner",
@@ -220,8 +235,9 @@
         "withdrawn",
         "secluded"
       ],
+      "example": "Ivan became reclusive.",
       "pos": "adjective",
-      "ipa": "/ɹɪˈkluːsɪv/",
+      "ipa": "/\u0279\u026a\u02c8klu\u02d0s\u026av/",
       "family": [
         "recluse"
       ]
@@ -234,8 +250,9 @@
         "indirect",
         "angled"
       ],
+      "example": "The artist's oblique brushstrokes added a sense of mystery to the landscape.",
       "pos": "adjective",
-      "ipa": "/əˈbliːk/",
+      "ipa": "/\u0259\u02c8bli\u02d0k/",
       "family": [
         "obliquely",
         "obliqueness",
@@ -250,8 +267,9 @@
         "copy",
         "duplicate"
       ],
+      "example": "Could you send me a map by facsimile?",
       "pos": "noun",
-      "ipa": "/fækˈsɪm.ə.li/",
+      "ipa": "/f\u00e6k\u02c8s\u026am.\u0259.li/",
       "family": [
         "fax"
       ]
@@ -264,8 +282,9 @@
         "lumber",
         "stumble"
       ],
+      "example": "After the long hike, they could only shamble back to camp, exhausted and covered in dust.",
       "pos": "verb",
-      "ipa": "/ˈʃæmbəl/",
+      "ipa": "/\u02c8\u0283\u00e6mb\u0259l/",
       "family": [
         "shambles",
         "stumble",
@@ -279,8 +298,9 @@
         "buzz",
         "hum"
       ],
+      "example": "The scientist noted the microphone picked up a gust of wind, along with a gentle \u201cwhir\u201d sound from the rover itself.",
       "pos": "verb",
-      "ipa": "/wɜː/",
+      "ipa": "/w\u025c\u02d0/",
       "family": [
         "whirring",
         "whirl"
@@ -294,8 +314,9 @@
         "curse",
         "bane"
       ],
+      "example": "The sugar cane blight ruined the harvest.",
       "pos": "noun",
-      "ipa": "/blaɪt/",
+      "ipa": "/bla\u026at/",
       "family": [
         "blighted",
         "blighter",
@@ -310,8 +331,9 @@
         "progeny",
         "young"
       ],
+      "example": "She sat by the window, watching the rain, and began to brood over her unresolved dilemma.",
       "pos": "noun",
-      "ipa": "/bɹuːd/",
+      "ipa": "/b\u0279u\u02d0d/",
       "family": [
         "flock",
         "litter",
@@ -326,13 +348,14 @@
         "contemptuous",
         "derisive"
       ],
+      "example": "She pooh-poohed the idea with a disdainful wave of her hand.",
       "pos": "adjective",
+      "ipa": "/d\u026as\u02c8de\u026an.f\u0259l/",
       "family": [
         "disdainfully",
         "abusive",
         "condescending"
-      ],
-      "ipa": "/dɪsˈdeɪn.fəl/"
+      ]
     },
     {
       "word": "ZOOLOGIST",
@@ -342,8 +365,9 @@
         "fauna expert",
         "wildlife biologist"
       ],
+      "example": "She's a zoologist.",
       "pos": "noun",
-      "ipa": "/zəʊˈɒləd͡ʒɪst/",
+      "ipa": "/z\u0259\u028a\u02c8\u0252l\u0259d\u0361\u0292\u026ast/",
       "family": [
         "zoology",
         "zoological",
@@ -358,8 +382,9 @@
         "fauna study",
         "wildlife biology"
       ],
+      "example": "He likes zoology.",
       "pos": "noun",
-      "ipa": "/zəʊˈɒlədʒi/",
+      "ipa": "/z\u0259\u028a\u02c8\u0252l\u0259d\u0292i/",
       "family": [
         "zoological",
         "zoologically",
@@ -374,13 +399,14 @@
         "hinder",
         "impede"
       ],
+      "example": "The heavy backpack began to encumber his long hike up the steep trail.",
       "pos": "verb",
+      "ipa": "/\u026an\u02c8k\u028cmb\u0259/",
       "family": [
         "encumbrance",
         "cumber",
         "cumbersome"
-      ],
-      "ipa": "/ɪnˈkʌmbə/"
+      ]
     },
     {
       "word": "HYPOTHESIS",
@@ -390,6 +416,7 @@
         "conjecture",
         "supposition"
       ],
+      "example": "I favored the hypothesis.",
       "pos": "noun",
       "family": [
         "hypothesize",
@@ -405,12 +432,13 @@
         "freeloading",
         "dependent"
       ],
+      "example": "These are parasitic wasps.",
       "pos": "adjective",
+      "ipa": "/\u02ccp\u00e6\u0279.\u0259\u02c8s\u026at.\u026ak/",
       "family": [
         "parasitical",
         "parasitically"
-      ],
-      "ipa": "/ˌpæɹ.əˈsɪt.ɪk/"
+      ]
     },
     {
       "word": "PLUMAGE",
@@ -420,8 +448,9 @@
         "feathering",
         "down"
       ],
+      "example": "Siskins have a yellow plumage.",
       "pos": "noun",
-      "ipa": "/ˈpluːmɪd͡ʒ/",
+      "ipa": "/\u02c8plu\u02d0m\u026ad\u0361\u0292/",
       "family": [
         "plume",
         "plumy"
@@ -435,12 +464,13 @@
         "employ",
         "apply"
       ],
+      "example": "Pietro decided to utilize the opportunity.",
       "pos": "verb",
+      "ipa": "/\u02c8ju\u02d0.t\u026a.la\u026az/",
       "family": [
         "utilizable",
         "utilization"
-      ],
-      "ipa": "/ˈjuː.tɪ.laɪz/"
+      ]
     },
     {
       "word": "UTILITY",
@@ -450,8 +480,9 @@
         "service",
         "benefit"
       ],
+      "example": "This antique brazier no longer has any real utility.",
       "pos": "noun",
-      "ipa": "/juːˈtɪlɪti/",
+      "ipa": "/ju\u02d0\u02c8t\u026al\u026ati/",
       "family": [
         "utilitarian"
       ]
@@ -464,8 +495,9 @@
         "exonerate",
         "absolve"
       ],
+      "example": "History will vindicate him.",
       "pos": "verb",
-      "ipa": "/ˈvɪndɪˌkeɪ̯t/",
+      "ipa": "/\u02c8v\u026and\u026a\u02ccke\u026a\u032ft/",
       "family": [
         "vindication",
         "vindicator",
@@ -480,8 +512,9 @@
         "fable",
         "moral tale"
       ],
+      "example": "I'll explain by way of a parable.",
       "pos": "noun",
-      "ipa": "/ˈpaɹəbəl/",
+      "ipa": "/\u02c8pa\u0279\u0259b\u0259l/",
       "family": [
         "palaver",
         "parabola",
@@ -496,8 +529,9 @@
         "abbey church",
         "great church"
       ],
+      "example": "The historic minster, with its towering spire, dominated the skyline of the old town.",
       "pos": "verb",
-      "ipa": "/ˈmɪnstə/",
+      "ipa": "/\u02c8m\u026anst\u0259/",
       "family": [
         "Westminster"
       ]
@@ -510,8 +544,9 @@
         "ruin",
         "destruction"
       ],
+      "example": "The endless arguments began to wrack her nerves, leaving her exhausted and unable to focus.",
       "pos": "verb",
-      "ipa": "/ɹæk/",
+      "ipa": "/\u0279\u00e6k/",
       "family": [
         "wreck",
         "wracked",
@@ -526,12 +561,13 @@
         "satirical",
         "wry"
       ],
+      "example": "It's ironic.",
       "pos": "adjective",
+      "ipa": "/a\u026a\u02c8\u0279\u0252n.\u026ak/",
       "family": [
         "ironical",
         "ironically"
-      ],
-      "ipa": "/aɪˈɹɒn.ɪk/"
+      ]
     },
     {
       "word": "CALLOUS",
@@ -541,13 +577,14 @@
         "hardened",
         "insensitive"
       ],
+      "example": "He's callous.",
       "pos": "adjective",
+      "ipa": "/\u02c8k\u00e6l\u0259s/",
       "family": [
         "callosity",
         "callously",
         "callousness"
-      ],
-      "ipa": "/ˈkæləs/"
+      ]
     },
     {
       "word": "CALLOUSLY",
@@ -557,8 +594,9 @@
         "heartlessly",
         "coldly"
       ],
+      "example": "His callously utilitarian outlook doesn't earn him many friends.",
       "pos": "adverb",
-      "ipa": "/ˈkæləsli/",
+      "ipa": "/\u02c8k\u00e6l\u0259sli/",
       "family": [
         "callous",
         "callousness",
@@ -573,13 +611,14 @@
         "dilapidated",
         "neglected"
       ],
+      "example": "The old mosque was derelict and rotting.",
       "pos": "noun",
+      "ipa": "/\u02c8d\u025br.\u0259.l\u026akt/",
       "family": [
         "dereliction",
         "relic",
         "relinquish"
-      ],
-      "ipa": "/ˈdɛr.ə.lɪkt/"
+      ]
     },
     {
       "word": "FEROCITY",
@@ -588,8 +627,9 @@
         "fierceness",
         "savagery"
       ],
+      "example": "His expression is full of ferocity and astonishment at the same time.",
       "pos": "noun",
-      "ipa": "/fəˈɹɑsɪti/",
+      "ipa": "/f\u0259\u02c8\u0279\u0251s\u026ati/",
       "family": [
         "feral",
         "fierce"
@@ -603,8 +643,9 @@
         "absolute",
         "total"
       ],
+      "example": "I didn't utter a word.",
       "pos": "verb",
-      "ipa": "/ˈʌtə/",
+      "ipa": "/\u02c8\u028ct\u0259/",
       "family": [
         "outer",
         "utterly",
@@ -618,8 +659,9 @@
         "reading",
         "delivery"
       ],
+      "example": "The teacher noted several mistakes in my recitation.",
       "pos": "noun",
-      "ipa": "/ˌɹɛsɪˈteɪʃən/",
+      "ipa": "/\u02cc\u0279\u025bs\u026a\u02c8te\u026a\u0283\u0259n/",
       "family": [
         "recite",
         "recital",
@@ -634,12 +676,13 @@
         "steady",
         "calm"
       ],
+      "example": "It's lucky that his parents are so equable.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u025bk.w\u0259.b\u0259l/",
       "family": [
         "equability",
         "equably"
-      ],
-      "ipa": "/ˈɛk.wə.bəl/"
+      ]
     },
     {
       "word": "EXTANT",
@@ -649,8 +692,9 @@
         "existing",
         "remaining"
       ],
+      "example": "The hippopotamus is the heaviest extant artiodactyl.",
       "pos": "adjective",
-      "ipa": "/ˈɛk.stənt/",
+      "ipa": "/\u02c8\u025bk.st\u0259nt/",
       "family": [
         "exist",
         "existence"
@@ -664,8 +708,9 @@
         "censure",
         "decry"
       ],
+      "example": "We need to denounce this.",
       "pos": "verb",
-      "ipa": "/diˈnaʊns/",
+      "ipa": "/di\u02c8na\u028ans/",
       "family": [
         "denouncement",
         "denunciation",
@@ -680,8 +725,9 @@
         "satisfy",
         "yield to"
       ],
+      "example": "Mind if I indulge?",
       "pos": "verb",
-      "ipa": "/ɪnˈdʌld͡ʒ/",
+      "ipa": "/\u026an\u02c8d\u028cld\u0361\u0292/",
       "family": [
         "overindulge",
         "indulgence",
@@ -696,13 +742,14 @@
         "tolerance",
         "gratification"
       ],
+      "example": "It's an indulgence.",
       "pos": "noun",
+      "ipa": "/\u026an\u02c8d\u028cl.d\u0361\u0292\u0259ns/",
       "family": [
         "overindulgence",
         "indulge",
         "indulgent"
-      ],
-      "ipa": "/ɪnˈdʌl.d͡ʒəns/"
+      ]
     },
     {
       "word": "LAUDATORY",
@@ -712,8 +759,9 @@
         "complimentary",
         "approving"
       ],
+      "example": "The critics gave a laudatory review of the chef's innovative dish.",
       "pos": "adjective",
-      "ipa": "/ˈlɔːdətɹi/",
+      "ipa": "/\u02c8l\u0254\u02d0d\u0259t\u0279i/",
       "family": [
         "laud",
         "laudable"
@@ -727,8 +775,9 @@
         "extol",
         "commend"
       ],
+      "example": "The critics laud the chef\u2019s innovative fusion of traditional flavors with modern techniques.",
       "pos": "verb",
-      "ipa": "/lɔːd/",
+      "ipa": "/l\u0254\u02d0d/",
       "family": [
         "laudable",
         "lied",
@@ -743,8 +792,9 @@
         "ostentation",
         "showiness"
       ],
+      "example": "Being a movie star, she was used to a life of glitz and glamour.",
       "pos": "noun",
-      "ipa": "/ɡlɪts/",
+      "ipa": "/\u0261l\u026ats/",
       "family": [
         "glitzy"
       ]
@@ -757,8 +807,9 @@
         "showy",
         "ostentatious"
       ],
+      "example": "Aren't they a little too glitzy for you?",
       "pos": "adjective",
-      "ipa": "/ˈɡlɪtsi/",
+      "ipa": "/\u02c8\u0261l\u026atsi/",
       "family": [
         "glitz"
       ]
@@ -771,8 +822,9 @@
         "computerize",
         "robotize"
       ],
+      "example": "I've written several Python scripts to help me automate things.",
       "pos": "verb",
-      "ipa": "/ˈɔːtəmeɪt/",
+      "ipa": "/\u02c8\u0254\u02d0t\u0259me\u026at/",
       "family": [
         "automatic",
         "automation",
@@ -787,8 +839,9 @@
         "seize",
         "capture"
       ],
+      "example": "Are you coming willingly, or do I have to apprehend you?",
       "pos": "verb",
-      "ipa": "/ˌæpɹɪˈhɛnd/",
+      "ipa": "/\u02cc\u00e6p\u0279\u026a\u02c8h\u025bnd/",
       "family": [
         "apprehended",
         "apprehending",
@@ -803,8 +856,9 @@
         "discourage",
         "deter"
       ],
+      "example": "I won't let any personal defeat daunt me.",
       "pos": "verb",
-      "ipa": "/dɔːnt/",
+      "ipa": "/d\u0254\u02d0nt/",
       "family": [
         "daunted",
         "daunting",
@@ -819,13 +873,14 @@
         "discouraging",
         "formidable"
       ],
+      "example": "The work is daunting.",
       "pos": "adjective",
+      "ipa": "/\u02c8d\u0254\u02d0nt\u026a\u014b/",
       "family": [
         "dauntingly",
         "daunt",
         "dauntless"
-      ],
-      "ipa": "/ˈdɔːntɪŋ/"
+      ]
     },
     {
       "word": "ACREAGE",
@@ -834,8 +889,9 @@
         "land area",
         "plot size"
       ],
+      "example": "What is the acreage of your ranch?",
       "pos": "noun",
-      "ipa": "/ˈeɪkərɪdʒ/",
+      "ipa": "/\u02c8e\u026ak\u0259r\u026ad\u0292/",
       "family": [
         "acre",
         "acres"
@@ -849,11 +905,12 @@
         "levy",
         "obligation"
       ],
+      "example": "I wouldn't want to be an imposition.",
       "pos": "noun",
+      "ipa": "/\u02cc\u026am.p\u0259\u02c8z\u026a\u0283.\u0259n/",
       "family": [
         "superimposition"
-      ],
-      "ipa": "/ˌɪm.pəˈzɪʃ.ən/"
+      ]
     },
     {
       "word": "STIPULATE",
@@ -863,8 +920,9 @@
         "require",
         "demand"
       ],
+      "example": "Why wouldn't you stipulate that in the contract?",
       "pos": "verb",
-      "ipa": "/ˈstɪpjuˌleɪt/",
+      "ipa": "/\u02c8st\u026apju\u02ccle\u026at/",
       "family": [
         "stipulated",
         "stipulation"
@@ -877,8 +935,9 @@
         "portion",
         "share"
       ],
+      "example": "The allotment is inadequate.",
       "pos": "noun",
-      "ipa": "/əˈlɔt.mɛnt/",
+      "ipa": "/\u0259\u02c8l\u0254t.m\u025bnt/",
       "family": [
         "allot"
       ]
@@ -891,8 +950,9 @@
         "loss",
         "seizure"
       ],
+      "example": "Forfeiture of your assets is the last thing you should be worried about.",
       "pos": "noun",
-      "ipa": "/ˈfɔːfɪtʃə/",
+      "ipa": "/\u02c8f\u0254\u02d0f\u026at\u0283\u0259/",
       "family": [
         "forfeit"
       ]
@@ -904,8 +964,9 @@
         "ancient",
         "prehistoric"
       ],
+      "example": "That region is nothing but primeval forest.",
       "pos": "adjective",
-      "ipa": "/pɹaɪ̯ˈmiː.vəl/",
+      "ipa": "/p\u0279a\u026a\u032f\u02c8mi\u02d0.v\u0259l/",
       "family": [
         "prime",
         "primordial"
@@ -919,12 +980,13 @@
         "determination",
         "resolve"
       ],
+      "example": "I admire your tenacity.",
       "pos": "noun",
+      "ipa": "/t\u0259\u02c8n\u00e6s.\u026a.ti/",
       "family": [
         "tenacious",
         "tenaciously"
-      ],
-      "ipa": "/təˈnæs.ɪ.ti/"
+      ]
     },
     {
       "word": "TENACIOUS",
@@ -934,8 +996,9 @@
         "determined",
         "resolute"
       ],
+      "example": "I can be very tenacious.",
       "pos": "adjective",
-      "ipa": "/təˈneɪʃəs/",
+      "ipa": "/t\u0259\u02c8ne\u026a\u0283\u0259s/",
       "family": [
         "tenaciously",
         "tenaciousness",
@@ -950,13 +1013,14 @@
         "accurate",
         "correct"
       ],
+      "example": "The lawyer will exact full compensation from the negligent contractor.",
       "pos": "verb",
+      "ipa": "/\u026a\u0261\u02c8z\u00e6kt/",
       "family": [
         "exactly",
         "exactness",
         "exacter"
-      ],
-      "ipa": "/ɪɡˈzækt/"
+      ]
     },
     {
       "word": "CAPACIOUS",
@@ -966,8 +1030,9 @@
         "roomy",
         "ample"
       ],
+      "example": "She rummaged in her capacious handbag.",
       "pos": "adjective",
-      "ipa": "/kəˈpeɪʃəs/",
+      "ipa": "/k\u0259\u02c8pe\u026a\u0283\u0259s/",
       "family": [
         "capaciously",
         "capaciousness",
@@ -982,8 +1047,9 @@
         "prosper",
         "prevail"
       ],
+      "example": "We'll succeed.",
       "pos": "verb",
-      "ipa": "/səkˈsiːd/",
+      "ipa": "/s\u0259k\u02c8si\u02d0d/",
       "family": [
         "success",
         "succession",
@@ -998,8 +1064,9 @@
         "collaborate",
         "communicate"
       ],
+      "example": "Your job will be to liaise with our clients.",
       "pos": "verb",
-      "ipa": "/liːˈeɪz/",
+      "ipa": "/li\u02d0\u02c8e\u026az/",
       "family": [
         "liaison",
         "liaising"
@@ -1013,13 +1080,14 @@
         "miserable",
         "degraded"
       ],
+      "example": "These people live in abject poverty.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u00e6bd\u0361\u0292\u025bkt/",
       "family": [
         "abjectly",
         "abjectness",
         "abjection"
-      ],
-      "ipa": "/ˈæbd͡ʒɛkt/"
+      ]
     },
     {
       "word": "SHEAF",
@@ -1029,8 +1097,9 @@
         "stack",
         "bunch"
       ],
+      "example": "Anne came out of the fragrant twilight of the orchard with a sheaf of white narcissi in her hands.",
       "pos": "noun",
-      "ipa": "/ʃiːf/",
+      "ipa": "/\u0283i\u02d0f/",
       "family": [
         "sheaves"
       ]
@@ -1043,13 +1112,14 @@
         "fake",
         "bogus"
       ],
+      "example": "His books were filled with spurious arguments.",
       "pos": "adjective",
+      "ipa": "/\u02c8spj\u028a\u0259.\u0279i.\u0259s/",
       "family": [
         "spuriously",
         "spuriousness",
         "specious"
-      ],
-      "ipa": "/ˈspjʊə.ɹi.əs/"
+      ]
     },
     {
       "word": "SPURIOUSLY",
@@ -1059,8 +1129,9 @@
         "fraudulently",
         "deceptively"
       ],
+      "example": "The company was accused of spuriously inflating its profits to attract investors.",
       "pos": "adverb",
-      "ipa": "/ˈspjʊəriəsli/",
+      "ipa": "/\u02c8spj\u028a\u0259ri\u0259sli/",
       "family": [
         "spurious",
         "spuriousness"
@@ -1073,8 +1144,9 @@
         "heat-producing",
         "energy-rich"
       ],
+      "example": "I love cured cheeses even though I know they're very calorific.",
       "pos": "adjective",
-      "ipa": "/ˌkæləˈɹɪf.ɪk/",
+      "ipa": "/\u02cck\u00e6l\u0259\u02c8\u0279\u026af.\u026ak/",
       "family": [
         "calorie",
         "caloric"
@@ -1087,8 +1159,9 @@
         "greed",
         "rapacity"
       ],
+      "example": "The children's voracity for the new storybook was evident as they snatched copies from the shelf.",
       "pos": "noun",
-      "ipa": "/vəˈɹæ.sɪ.ti/",
+      "ipa": "/v\u0259\u02c8\u0279\u00e6.s\u026a.ti/",
       "family": [
         "voracious",
         "voraciously"
@@ -1101,11 +1174,12 @@
         "wave",
         "flourish"
       ],
+      "example": "You dare brandish your weapons in front of your king?",
       "pos": "verb",
+      "ipa": "/\u02c8b\u0279\u00e6nd\u026a\u0283/",
       "family": [
         "assault"
-      ],
-      "ipa": "/ˈbɹændɪʃ/"
+      ]
     },
     {
       "word": "REPOSE",
@@ -1114,8 +1188,9 @@
         "rest",
         "calm"
       ],
+      "example": "His brief repose was interrupted by her arrival.",
       "pos": "noun",
-      "ipa": "/ɹɪˈpəʊz/",
+      "ipa": "/\u0279\u026a\u02c8p\u0259\u028az/",
       "family": [
         "reposed",
         "reposeful",
@@ -1129,8 +1204,9 @@
         "clowning",
         "antics"
       ],
+      "example": "The mime's buffoonery entertained passers-by.",
       "pos": "noun",
-      "ipa": "/bəˈfuːnəɹi/",
+      "ipa": "/b\u0259\u02c8fu\u02d0n\u0259\u0279i/",
       "family": [
         "buffoon",
         "buffoonish"
@@ -1143,8 +1219,9 @@
         "awkward",
         "clumsy"
       ],
+      "example": "His gauche remark about the host\u2019s cooking made the dinner awkward.",
       "pos": "adjective",
-      "ipa": "/ɡəʊʃ/",
+      "ipa": "/\u0261\u0259\u028a\u0283/",
       "family": [
         "gauchely",
         "gaucheness"
@@ -1157,8 +1234,9 @@
         "accumulate",
         "amass"
       ],
+      "example": "Interest will begin to accrue after the first year.",
       "pos": "verb",
-      "ipa": "/əˈkɹuː/",
+      "ipa": "/\u0259\u02c8k\u0279u\u02d0/",
       "family": [
         "accrual",
         "accretion",
@@ -1172,8 +1250,9 @@
         "courage",
         "guts"
       ],
+      "example": "She gave a pluck at my elbow.",
       "pos": "noun",
-      "ipa": "/plʌk/",
+      "ipa": "/pl\u028ck/",
       "family": [
         "plucking",
         "plucky"
@@ -1186,8 +1265,9 @@
         "char",
         "burn"
       ],
+      "example": "The intense heat from the industrial furnace began to carbonize the wood, turning it into charcoal.",
       "pos": "verb",
-      "ipa": "/ˈkɑːbən.aɪz/",
+      "ipa": "/\u02c8k\u0251\u02d0b\u0259n.a\u026az/",
       "family": [
         "carbon",
         "carbonation"
@@ -1200,13 +1280,14 @@
         "ascetic",
         "austere"
       ],
+      "example": "The monastic life is no life for me.",
       "pos": "adjective",
+      "ipa": "/m\u0259\u02c8n\u00e6st\u026ak/",
       "family": [
         "monastically",
         "monastery",
         "monasticism"
-      ],
-      "ipa": "/məˈnæstɪk/"
+      ]
     },
     {
       "word": "GRAFT",
@@ -1215,8 +1296,9 @@
         "transplant",
         "implant"
       ],
+      "example": "The graft was successful.",
       "pos": "noun",
-      "ipa": "/ɡɹɑːft/",
+      "ipa": "/\u0261\u0279\u0251\u02d0ft/",
       "family": [
         "grafter"
       ]
@@ -1227,8 +1309,9 @@
       "synonyms": [
         "obstetrics"
       ],
+      "example": "Midwifery requires extensive training to safely assist during labor and deliver babies.",
       "pos": "noun",
-      "ipa": "/mɪdˈwɪfəɹi/",
+      "ipa": "/m\u026ad\u02c8w\u026af\u0259\u0279i/",
       "family": [
         "midwife",
         "midwives"
@@ -1241,8 +1324,9 @@
         "decoration",
         "ornament"
       ],
+      "example": "It now became manifest that beauty is enhanced by adornment.",
       "pos": "noun",
-      "ipa": "/əˈdɔːrnmənt/",
+      "ipa": "/\u0259\u02c8d\u0254\u02d0rnm\u0259nt/",
       "family": [
         "adorn",
         "adorned"
@@ -1255,8 +1339,9 @@
         "inactive",
         "lazy"
       ],
+      "example": "He tends to be idle.",
       "pos": "verb",
-      "ipa": "/ˈʌɪdəl/",
+      "ipa": "/\u02c8\u028c\u026ad\u0259l/",
       "family": [
         "idleness",
         "idling",
@@ -1270,8 +1355,9 @@
         "guess",
         "speculate"
       ],
+      "example": "That's pure conjecture.",
       "pos": "noun",
-      "ipa": "/kənˈd͡ʒɛkt͡ʃə/",
+      "ipa": "/k\u0259n\u02c8d\u0361\u0292\u025bkt\u0361\u0283\u0259/",
       "family": [
         "conjectural"
       ]
@@ -1283,11 +1369,12 @@
         "pliable",
         "flexible"
       ],
+      "example": "Are all metals malleable?",
       "pos": "adjective",
+      "ipa": "/\u02c8m\u00e6l.i\u02d0.\u0259.b\u0259l/",
       "family": [
         "malleability"
-      ],
-      "ipa": "/ˈmæl.iː.ə.bəl/"
+      ]
     },
     {
       "word": "PROMENADE",
@@ -1296,8 +1383,9 @@
         "stroll",
         "walk"
       ],
+      "example": "It is a lovely riverside promenade.",
       "pos": "noun",
-      "ipa": "/ˈpɹɒm.əˌnɑːd/",
+      "ipa": "/\u02c8p\u0279\u0252m.\u0259\u02ccn\u0251\u02d0d/",
       "family": [
         "promenading"
       ]
@@ -1309,13 +1397,14 @@
         "purify",
         "extract"
       ],
+      "example": "Now we will distill this water.",
       "pos": "verb",
+      "ipa": "/d\u026a\u02c8st\u026al/",
       "family": [
         "distillate",
         "distiller",
         "distillery"
-      ],
-      "ipa": "/dɪˈstɪl/"
+      ]
     },
     {
       "word": "INFORMANT",
@@ -1324,8 +1413,9 @@
         "source",
         "tipster"
       ],
+      "example": "He's an informant.",
       "pos": "noun",
-      "ipa": "/ɪnˈfɔːmənt/",
+      "ipa": "/\u026an\u02c8f\u0254\u02d0m\u0259nt/",
       "family": [
         "gossiper"
       ]
@@ -1337,8 +1427,9 @@
         "cover",
         "superpose"
       ],
+      "example": "Reels employs Instagram\u2019s preexisting augmented reality effects, which let users overlay images and filters onto their videos.",
       "pos": "verb",
-      "ipa": "/ˌəʊ.vəˈleɪ/",
+      "ipa": "/\u02cc\u0259\u028a.v\u0259\u02c8le\u026a/",
       "family": [
         "laminate",
         "layer",
@@ -1352,13 +1443,14 @@
         "longing",
         "yearning"
       ],
+      "example": "I feel nostalgia for Yugoslavia.",
       "pos": "noun",
+      "ipa": "/n\u0252\u02c8st\u00e6ld\u0361\u0292\u0259/",
       "family": [
         "nostalgic",
         "nostalgically",
         "reminiscence"
-      ],
-      "ipa": "/nɒˈstæld͡ʒə/"
+      ]
     },
     {
       "word": "NOSTALGIC",
@@ -1367,11 +1459,12 @@
         "wistful",
         "sentimental"
       ],
+      "example": "I'm feeling nostalgic.",
       "pos": "adjective",
+      "ipa": "/n\u0252\u02c8st\u00e6ld\u0292\u026ak/",
       "family": [
         "nostalgically"
-      ],
-      "ipa": "/nɒˈstældʒɪk/"
+      ]
     },
     {
       "word": "GRIEVANCE",
@@ -1380,8 +1473,9 @@
         "complaint",
         "wrong"
       ],
+      "example": "What's your grievance?",
       "pos": "noun",
-      "ipa": "/ˈɡɹiː.vəns/",
+      "ipa": "/\u02c8\u0261\u0279i\u02d0.v\u0259ns/",
       "family": [
         "grieve",
         "grievous"
@@ -1394,8 +1488,9 @@
         "remainder",
         "remnant"
       ],
+      "example": "Check the ovenware for any stuck-on residue.",
       "pos": "noun",
-      "ipa": "/ˈɹɛzɪdjuː/",
+      "ipa": "/\u02c8\u0279\u025bz\u026adju\u02d0/",
       "family": [
         "residual",
         "residuum"
@@ -1408,12 +1503,13 @@
         "leftover",
         "remaining"
       ],
+      "example": "Now clean up any residual dust.",
       "pos": "adjective",
+      "ipa": "/\u0279\u026a\u02c8z\u026ad\u0361\u0292.\u028a\u0259l/",
       "family": [
         "nonresidual",
         "remainder"
-      ],
-      "ipa": "/ɹɪˈzɪd͡ʒ.ʊəl/"
+      ]
     },
     {
       "word": "HABITATION",
@@ -1422,8 +1518,9 @@
         "dwelling",
         "residence"
       ],
+      "example": "This house was declared unfit for human habitation.",
       "pos": "noun",
-      "ipa": "/ˌhæb.ɪˈteɪ.ʃən/",
+      "ipa": "/\u02cch\u00e6b.\u026a\u02c8te\u026a.\u0283\u0259n/",
       "family": [
         "habit",
         "habitat",
@@ -1437,8 +1534,9 @@
         "uncreative",
         "crude"
       ],
+      "example": "His inartistic approach to painting ignored color theory entirely.",
       "pos": "adjective",
-      "ipa": "/ˌɪnɑːˈtɪstɪk/",
+      "ipa": "/\u02cc\u026an\u0251\u02d0\u02c8t\u026ast\u026ak/",
       "family": [
         "art",
         "artist"
@@ -1451,8 +1549,9 @@
         "elaborate",
         "fancy"
       ],
+      "example": "The painting is in an ornate frame.",
       "pos": "adjective",
-      "ipa": "/ɔɹˈneɪt/",
+      "ipa": "/\u0254\u0279\u02c8ne\u026at/",
       "family": [
         "ornateness",
         "ornament"
@@ -1465,12 +1564,13 @@
         "contemporary",
         "new"
       ],
+      "example": "Postmodernism is different from modernism.",
       "pos": "noun",
+      "ipa": "/\u02c8m\u0252d\u0259rn\u026az\u0259m/",
       "family": [
         "modernist",
         "postmodernism"
-      ],
-      "ipa": "/ˈmɒdərnɪzəm/"
+      ]
     },
     {
       "word": "PRESUPPOSE",
@@ -1479,8 +1579,9 @@
         "assume",
         "imply"
       ],
+      "example": "We must presuppose that the wage paid is economically just.",
       "pos": "verb",
-      "ipa": "/ˌpɹiːsəˈpəʊz/",
+      "ipa": "/\u02ccp\u0279i\u02d0s\u0259\u02c8p\u0259\u028az/",
       "family": [
         "suppose",
         "presupposition"
@@ -1493,13 +1594,14 @@
         "situational",
         "relative"
       ],
+      "example": "Language is contextual.",
       "pos": "adjective",
+      "ipa": "/k\u0252n\u02c8t\u025bkst\u0283u\u0259l/",
       "family": [
         "contextualization",
         "contextualize",
         "contextually"
-      ],
-      "ipa": "/kɒnˈtɛkstʃuəl/"
+      ]
     },
     {
       "word": "REGULATORY",
@@ -1508,8 +1610,9 @@
         "controlling",
         "supervisory"
       ],
+      "example": "Cryptocurrencies have no regulatory authority.",
       "pos": "adjective",
-      "ipa": "/ˌɹɛɡ.jʊˈleɪ.tə.ri/",
+      "ipa": "/\u02cc\u0279\u025b\u0261.j\u028a\u02c8le\u026a.t\u0259.ri/",
       "family": [
         "regulate",
         "regulation",
@@ -1523,12 +1626,13 @@
         "historical",
         "documentary"
       ],
+      "example": "In an archival interview, he was careful not to overrate his success or appear arrogant.",
       "pos": "adjective",
+      "ipa": "/\u0251\u0279\u02c8ka\u026av\u0259l/",
       "family": [
         "archive",
         "archivist"
-      ],
-      "ipa": "/ɑɹˈkaɪvəl/"
+      ]
     },
     {
       "word": "DIFFUSE",
@@ -1537,8 +1641,9 @@
         "spread",
         "scatter"
       ],
+      "example": "She gave a diffuse answer.",
       "pos": "verb",
-      "ipa": "/dɪˈfjuːz/",
+      "ipa": "/d\u026a\u02c8fju\u02d0z/",
       "family": [
         "diffuseness",
         "diffusely",
@@ -1552,11 +1657,12 @@
         "retrospect",
         "afterthought"
       ],
+      "example": "Hindsight is 20/20.",
       "pos": "noun",
+      "ipa": "/\u02c8ha\u026andsa\u026at/",
       "family": [
         "retrospect"
-      ],
-      "ipa": "/ˈhaɪndsaɪt/"
+      ]
     },
     {
       "word": "DISPERSE",
@@ -1565,8 +1671,9 @@
         "scatter",
         "dissipate"
       ],
+      "example": "Fungi disperse spores.",
       "pos": "verb",
-      "ipa": "/dɪˈspɜːs/",
+      "ipa": "/d\u026a\u02c8sp\u025c\u02d0s/",
       "family": [
         "dispersal",
         "dispersion"
@@ -1579,8 +1686,9 @@
         "scattering",
         "distribution"
       ],
+      "example": "The dispersal of the crowd after the concert was orderly and swift.",
       "pos": "noun",
-      "ipa": "/dɪˈspɜɹsəl/",
+      "ipa": "/d\u026a\u02c8sp\u025c\u0279s\u0259l/",
       "family": [
         "disperse",
         "dispersion"
@@ -1593,8 +1701,9 @@
         "steady",
         "balance"
       ],
+      "example": "We need to stabilize the pressure.",
       "pos": "verb",
-      "ipa": "/ˈsteɪ.bəˌlaɪz/",
+      "ipa": "/\u02c8ste\u026a.b\u0259\u02ccla\u026az/",
       "family": [
         "destabilize",
         "stabilizer",
@@ -1608,12 +1717,13 @@
         "widespread",
         "ubiquitous"
       ],
+      "example": "This delusion is pervasive.",
       "pos": "adjective",
+      "ipa": "/p\u0259\u02c8ve\u026a.s\u026av/",
       "family": [
         "pervasively",
         "pervasiveness"
-      ],
-      "ipa": "/pəˈveɪ.sɪv/"
+      ]
     },
     {
       "word": "SECURE",
@@ -1622,8 +1732,9 @@
         "safe",
         "firm"
       ],
+      "example": "I feel secure now.",
       "pos": "verb",
-      "ipa": "/səˈkjʊɹ/",
+      "ipa": "/s\u0259\u02c8kj\u028a\u0279/",
       "family": [
         "securely",
         "security"
@@ -1636,8 +1747,9 @@
         "independent",
         "self-governing"
       ],
+      "example": "It's an autonomous car.",
       "pos": "adjective",
-      "ipa": "/ɔːˈtɒnəməs/",
+      "ipa": "/\u0254\u02d0\u02c8t\u0252n\u0259m\u0259s/",
       "family": [
         "autonomously",
         "autonomic",
@@ -1651,8 +1763,9 @@
         "obsolete",
         "dated"
       ],
+      "example": "Those views are outmoded and repugnant.",
       "pos": "adjective",
-      "ipa": "/aʊtˈmoʊdɪd/",
+      "ipa": "/a\u028at\u02c8mo\u028ad\u026ad/",
       "family": [
         "mode",
         "modern"
@@ -1665,8 +1778,9 @@
         "stage",
         "period"
       ],
+      "example": "Phase one is complete.",
       "pos": "noun",
-      "ipa": "/feɪz/",
+      "ipa": "/fe\u026az/",
       "family": [
         "phased",
         "phasing",
@@ -1680,8 +1794,9 @@
         "fame",
         "infamy"
       ],
+      "example": "In 2019, Suga gained notoriety as well as the nickname \u201cUncle Reiwa,\u201d after unveiling the name of Japan\u2019s new imperial era.",
       "pos": "noun",
-      "ipa": "/nəʊ.təˈɹaɪ.ə.ti/",
+      "ipa": "/n\u0259\u028a.t\u0259\u02c8\u0279a\u026a.\u0259.ti/",
       "family": [
         "notorious",
         "notoriously"
@@ -1694,13 +1809,14 @@
         "lowly",
         "servile"
       ],
+      "example": "The job was boring and menial.",
       "pos": "adjective",
+      "ipa": "/\u02c8mi\u02d0ni.\u0259l/",
       "family": [
         "menially",
         "mansion",
         "maisonette"
-      ],
-      "ipa": "/ˈmiːni.əl/"
+      ]
     },
     {
       "word": "INSULAR",
@@ -1709,8 +1825,9 @@
         "narrow",
         "isolated"
       ],
+      "example": "The community is insular but harmless.",
       "pos": "adjective",
-      "ipa": "/ˈɪnsjələ/",
+      "ipa": "/\u02c8\u026ansj\u0259l\u0259/",
       "family": [
         "insularity",
         "insulate",
@@ -1724,8 +1841,9 @@
         "remedy",
         "cure"
       ],
+      "example": "There's no antidote.",
       "pos": "noun",
-      "ipa": "/ˈæn.tɪ.doʊt/",
+      "ipa": "/\u02c8\u00e6n.t\u026a.do\u028at/",
       "family": [
         "antidotes"
       ]
@@ -1737,8 +1855,9 @@
         "bodily",
         "stance"
       ],
+      "example": "You'd be surprised what strengthening your core and doing postural corrective exercises can do for your body.",
       "pos": "adjective",
-      "ipa": "/ˈpɒstʃəɹəl/",
+      "ipa": "/\u02c8p\u0252st\u0283\u0259\u0279\u0259l/",
       "family": [
         "posture",
         "posturing",
@@ -1752,8 +1871,9 @@
         "posing",
         "affectation"
       ],
+      "example": "It's not so much his bragging as his posturing that bothers me.",
       "pos": "noun",
-      "ipa": "/ˈpɑstʃərɪŋ/",
+      "ipa": "/\u02c8p\u0251st\u0283\u0259r\u026a\u014b/",
       "family": [
         "posture",
         "postural",
@@ -1766,11 +1886,12 @@
       "synonyms": [
         "disclosing"
       ],
+      "example": "The scientist's speech was revelatory, uncovering the mysteries of the ancient civilization.",
       "pos": "adjective",
+      "ipa": "/\u0279\u025bv\u0259\u02c8l\u025bjt\u0259\u0279i/",
       "family": [
         "Revelation"
-      ],
-      "ipa": "/ɹɛvəˈlɛjtəɹi/"
+      ]
     },
     {
       "word": "PROSTRATE",
@@ -1779,8 +1900,9 @@
         "prone",
         "flat"
       ],
+      "example": "The worshippers lay prostrate on the mosque floor, foreheads to the ground in silent prayer.",
       "pos": "verb",
-      "ipa": "/ˈpɹɒstɹeɪt/",
+      "ipa": "/\u02c8p\u0279\u0252st\u0279e\u026at/",
       "family": [
         "prostration",
         "kowtow"
@@ -1793,12 +1915,13 @@
         "random",
         "careless"
       ],
+      "example": "She made a haphazard attempt at cleaning.",
       "pos": "adjective",
+      "ipa": "/\u02cch\u00e6p\u02c8h\u00e6z\u025ad/",
       "family": [
         "haphazardly",
         "haphazardness"
-      ],
-      "ipa": "/ˌhæpˈhæzɚd/"
+      ]
     },
     {
       "word": "DEFICIENT",
@@ -1807,8 +1930,9 @@
         "lacking",
         "short"
       ],
+      "example": "My diet is deficient in protein.",
       "pos": "adjective",
-      "ipa": "/dɪˈfɪʃənt/",
+      "ipa": "/d\u026a\u02c8f\u026a\u0283\u0259nt/",
       "family": [
         "immunodeficient",
         "defect",
@@ -1822,8 +1946,9 @@
         "plunge",
         "drop"
       ],
+      "example": "Puffins dive.",
       "pos": "noun",
-      "ipa": "/daɪv/",
+      "ipa": "/da\u026av/",
       "family": [
         "diver",
         "nosedive",
@@ -1837,8 +1962,9 @@
         "move",
         "tactic"
       ],
+      "example": "This maneuver was improvised.",
       "pos": "noun",
-      "ipa": "/məˈnuvɚ/",
+      "ipa": "/m\u0259\u02c8nuv\u025a/",
       "family": [
         "maneuverability",
         "maneuverable",
@@ -1852,8 +1978,9 @@
         "propose",
         "assert"
       ],
+      "example": "The well-preserved bones led its early 20th-century excavators to posit that the site marked a burial ground created by a predecessor to early modern humans.",
       "pos": "verb",
-      "ipa": "/ˈpɒzɪt/",
+      "ipa": "/\u02c8p\u0252z\u026at/",
       "family": [
         "position",
         "positive",
@@ -1868,8 +1995,9 @@
         "pupa",
         "shell"
       ],
+      "example": "I saw a cocoon on the tree.",
       "pos": "verb",
-      "ipa": "/kəˈkuːn/",
+      "ipa": "/k\u0259\u02c8ku\u02d0n/",
       "family": [
         "cocooning",
         "cocooned",
@@ -1884,8 +2012,9 @@
         "pupa",
         "shell"
       ],
+      "example": "What's the difference between a cocoon and a chrysalis?",
       "pos": "noun",
-      "ipa": "/ˈkɹɪsəlɪs/",
+      "ipa": "/\u02c8k\u0279\u026as\u0259l\u026as/",
       "family": [
         "chrysalises"
       ]
@@ -1898,8 +2027,9 @@
         "blissful",
         "elated"
       ],
+      "example": "I'm euphoric.",
       "pos": "adjective",
-      "ipa": "/juːˈfɒɹɪk/",
+      "ipa": "/ju\u02d0\u02c8f\u0252\u0279\u026ak/",
       "family": [
         "euphorically"
       ]
@@ -1913,7 +2043,7 @@
         "banish"
       ],
       "pos": "verb",
-      "ipa": "/ˈɹɛlɪˌɡeɪt/",
+      "ipa": "/\u02c8\u0279\u025bl\u026a\u02cc\u0261e\u026at/",
       "family": [
         "relegated",
         "relegating",
@@ -1928,8 +2058,9 @@
         "submit",
         "capitulate"
       ],
+      "example": "Don't succumb to pressure!",
       "pos": "verb",
-      "ipa": "/səˈkʌm/",
+      "ipa": "/s\u0259\u02c8k\u028cm/",
       "family": [
         "succumbing",
         "succumbed"
@@ -1943,8 +2074,9 @@
         "perfidy",
         "disloyalty"
       ],
+      "example": "He is capable of treachery.",
       "pos": "noun",
-      "ipa": "/ˈtɹɛt͡ʃəɹi/",
+      "ipa": "/\u02c8t\u0279\u025bt\u0361\u0283\u0259\u0279i/",
       "family": [
         "treacherous",
         "trick",
@@ -1959,8 +2091,9 @@
         "grub",
         "worm"
       ],
+      "example": "Scientists at Swansea University are investigating the possibility that maggot secretions may have some potent bug-fighting abilities.",
       "pos": "noun",
-      "ipa": "/ˈmæɡət/",
+      "ipa": "/\u02c8m\u00e6\u0261\u0259t/",
       "family": [
         "maggoty",
         "mawkish"
@@ -1974,8 +2107,9 @@
         "appetite",
         "roof"
       ],
+      "example": "This wine is pleasing to the palate.",
       "pos": "noun",
-      "ipa": "/ˈpæl.ət/",
+      "ipa": "/\u02c8p\u00e6l.\u0259t/",
       "family": [
         "palatal",
         "palatine",
@@ -1990,11 +2124,12 @@
         "edible",
         "acceptable"
       ],
+      "example": "Salt is added to a number of foodstuffs, such as bread, to enhance the flavour and to make the texture more palatable.",
       "pos": "adjective",
+      "ipa": "/\u02c8p\u00e6l.\u0259.t\u0259.b\u0259l/",
       "family": [
         "palate"
-      ],
-      "ipa": "/ˈpæl.ə.tə.bəl/"
+      ]
     },
     {
       "word": "HERMETIC",
@@ -2004,12 +2139,13 @@
         "airtight",
         "closed"
       ],
+      "example": "I don't allow others to enter my hermetic world.",
       "pos": "adjective",
+      "ipa": "/h\u025d\u02c8m\u025bt\u026ak/",
       "family": [
         "hermetical",
         "hermetically"
-      ],
-      "ipa": "/hɝˈmɛtɪk/"
+      ]
     },
     {
       "word": "MARINER",
@@ -2019,8 +2155,9 @@
         "seafarer",
         "navigator"
       ],
+      "example": "The old mariner guided his ship through the stormy seas with unwavering skill and experience.",
       "pos": "noun",
-      "ipa": "/ˈmæɹɪnə/",
+      "ipa": "/\u02c8m\u00e6\u0279\u026an\u0259/",
       "family": [
         "marine",
         "maritime"
@@ -2034,8 +2171,9 @@
         "gap",
         "breach"
       ],
+      "example": "A deep rift opened up between them.",
       "pos": "noun",
-      "ipa": "/ɹɪft/",
+      "ipa": "/\u0279\u026aft/",
       "family": [
         "rifted",
         "rifting"
@@ -2049,8 +2187,9 @@
         "just",
         "simple"
       ],
+      "example": "He's a mere child.",
       "pos": "adjective",
-      "ipa": "/mɪə̯/",
+      "ipa": "/m\u026a\u0259\u032f/",
       "family": [
         "merely",
         "mermaid",
@@ -2065,8 +2204,9 @@
         "tiller",
         "steering"
       ],
+      "example": "Without thinking twice, I grabbed the helm.",
       "pos": "noun",
-      "ipa": "/hɛlm/",
+      "ipa": "/h\u025blm/",
       "family": [
         "helmsman"
       ]
@@ -2075,8 +2215,9 @@
       "word": "AUTOPILOT",
       "gloss": "a device that steers a plane or ship without a human",
       "synonyms": [],
+      "example": "Can you enable the autopilot?",
       "pos": "noun",
-      "ipa": "/ˈɔːtəʊˌpaɪlət/",
+      "ipa": "/\u02c8\u0254\u02d0t\u0259\u028a\u02ccpa\u026al\u0259t/",
       "family": [
         "automatic"
       ]
@@ -2089,8 +2230,9 @@
         "prestige",
         "renown"
       ],
+      "example": "He won eminence as a scientist.",
       "pos": "noun",
-      "ipa": "/ˈɛmɪnəns/",
+      "ipa": "/\u02c8\u025bm\u026an\u0259ns/",
       "family": [
         "preeminence"
       ]
@@ -2103,8 +2245,9 @@
         "renowned",
         "notable"
       ],
+      "example": "Picasso is an eminent painter.",
       "pos": "adjective",
-      "ipa": "/ˈɛmɪnənt/",
+      "ipa": "/\u02c8\u025bm\u026an\u0259nt/",
       "family": [
         "eminence",
         "eminently",
@@ -2119,8 +2262,9 @@
         "supreme",
         "leading"
       ],
+      "example": "That impish man is a preeminent economist.",
       "pos": "adjective",
-      "ipa": "/pɹiːˈɛmɪnənt/",
+      "ipa": "/p\u0279i\u02d0\u02c8\u025bm\u026an\u0259nt/",
       "family": [
         "preeminence",
         "preeminently"
@@ -2134,8 +2278,9 @@
         "form",
         "cast"
       ],
+      "example": "The statue was cast in a mold.",
       "pos": "verb",
-      "ipa": "/məʊld/",
+      "ipa": "/m\u0259\u028ald/",
       "family": [
         "remold",
         "moldy",
@@ -2150,8 +2295,9 @@
         "immobilize",
         "numb"
       ],
+      "example": "Decisions once easy now paralyze me with indecision.",
       "pos": "verb",
-      "ipa": "/ˈpæɹəlaɪz/",
+      "ipa": "/\u02c8p\u00e6\u0279\u0259la\u026az/",
       "family": [
         "paralysis",
         "paralyzed",
@@ -2166,13 +2312,14 @@
         "immobility",
         "stasis"
       ],
+      "example": "They have paralysis.",
       "pos": "noun",
+      "ipa": "/p\u0259\u02c8\u0279\u00e6l\u0259s\u0259s/",
       "family": [
         "paralyze",
         "paralytic",
         "paresis"
-      ],
-      "ipa": "/pəˈɹæləsəs/"
+      ]
     },
     {
       "word": "PREOCCUPY",
@@ -2182,8 +2329,9 @@
         "engage",
         "obsess"
       ],
+      "example": "His passion for space exploration began to preoccupy his thoughts entirely.",
       "pos": "verb",
-      "ipa": "/pɹɪˈɒkjupaɪ/",
+      "ipa": "/p\u0279\u026a\u02c8\u0252kjupa\u026a/",
       "family": [
         "preoccupation"
       ]
@@ -2196,11 +2344,12 @@
         "lengthen",
         "stretch"
       ],
+      "example": "Wealth doesn't prolong life.",
       "pos": "verb",
+      "ipa": "/p\u0279\u0259\u028a\u02c8l\u0252\u014b/",
       "family": [
         "prolongation"
-      ],
-      "ipa": "/pɹəʊˈlɒŋ/"
+      ]
     },
     {
       "word": "DRUDGERY",
@@ -2210,8 +2359,9 @@
         "grind",
         "labor"
       ],
+      "example": "The drudgery of housework never ends.",
       "pos": "noun",
-      "ipa": "/ˈdɹʌd͡ʒəɹi/",
+      "ipa": "/\u02c8d\u0279\u028cd\u0361\u0292\u0259\u0279i/",
       "family": [
         "drudge",
         "wearisome"
@@ -2224,8 +2374,9 @@
         "force",
         "coerce"
       ],
+      "example": "The plane's cabin began to pressurize.",
       "pos": "verb",
-      "ipa": "/ˈpɹɛʃəɹaɪz/",
+      "ipa": "/\u02c8p\u0279\u025b\u0283\u0259\u0279a\u026az/",
       "family": [
         "pressurizer"
       ]
@@ -2238,8 +2389,9 @@
         "host",
         "proprietor"
       ],
+      "example": "The visionary hotelier expanded his boutique chain across three continents in just five years.",
       "pos": "noun",
-      "ipa": "/həʊˈtɛl.i.ə/",
+      "ipa": "/h\u0259\u028a\u02c8t\u025bl.i.\u0259/",
       "family": [
         "hotel",
         "hoteliers"
@@ -2253,8 +2405,9 @@
         "indicate",
         "mean"
       ],
+      "example": "The tilde is used in math to denote equivalence.",
       "pos": "verb",
-      "ipa": "/dɪˈnəʊt/",
+      "ipa": "/d\u026a\u02c8n\u0259\u028at/",
       "family": [
         "denotation",
         "denotative",
@@ -2269,12 +2422,13 @@
         "signification",
         "reference"
       ],
+      "example": "The denotation of \"serendipity\" is simply the occurrence of happy or beneficial events by chance.",
       "pos": "noun",
+      "ipa": "/\u02ccdi\u02d0.no\u028a\u02c8te\u026a.\u0283\u0259n/",
       "family": [
         "denotative",
         "connotation"
-      ],
-      "ipa": "/ˌdiː.noʊˈteɪ.ʃən/"
+      ]
     },
     {
       "word": "JARGON",
@@ -2284,11 +2438,12 @@
         "lingo",
         "terminology"
       ],
+      "example": "Is that Wall Street jargon?",
       "pos": "noun",
+      "ipa": "/\u02c8d\u0292\u0251\u02d0.\u0261\u0259n/",
       "family": [
         "nonsense"
-      ],
-      "ipa": "/ˈdʒɑː.ɡən/"
+      ]
     },
     {
       "word": "VOCATIONAL",
@@ -2298,8 +2453,9 @@
         "professional",
         "career"
       ],
+      "example": "I attend a vocational school.",
       "pos": "adjective",
-      "ipa": "/vəʊˈkeɪʃənəl/",
+      "ipa": "/v\u0259\u028a\u02c8ke\u026a\u0283\u0259n\u0259l/",
       "family": [
         "nonvocational",
         "vocationally"
@@ -2313,12 +2469,13 @@
         "geometric",
         "positional"
       ],
+      "example": "I lack spatial awareness.",
       "pos": "adjective",
+      "ipa": "/\u02c8spe\u026a.\u0283\u0259l/",
       "family": [
         "spatially",
         "cubic"
-      ],
-      "ipa": "/ˈspeɪ.ʃəl/"
+      ]
     },
     {
       "word": "SPATIALLY",
@@ -2328,8 +2485,9 @@
         "geometrically",
         "positionally"
       ],
+      "example": "The architect arranged the rooms spatially to maximize natural light throughout the day.",
       "pos": "adverb",
-      "ipa": "/ˈspeɪʃəli/",
+      "ipa": "/\u02c8spe\u026a\u0283\u0259li/",
       "family": [
         "spatial",
         "spacetime"
@@ -2343,13 +2501,14 @@
         "timely",
         "on-time"
       ],
+      "example": "I'm punctual.",
       "pos": "adjective",
+      "ipa": "/\u02c8p\u028c\u014bktj\u028a\u0259l/",
       "family": [
         "punctuality",
         "punctually",
         "point"
-      ],
-      "ipa": "/ˈpʌŋktjʊəl/"
+      ]
     },
     {
       "word": "CURRICULUM",
@@ -2359,12 +2518,13 @@
         "program",
         "course"
       ],
+      "example": "The curriculum is attached.",
       "pos": "noun",
+      "ipa": "/k\u0259\u02c8\u0279\u026ak.j\u028a.l\u0259m/",
       "family": [
         "curricular",
         "extracurricular"
-      ],
-      "ipa": "/kəˈɹɪk.jʊ.ləm/"
+      ]
     },
     {
       "word": "ENCOMPASS",
@@ -2374,8 +2534,9 @@
         "cover",
         "embrace"
       ],
+      "example": "Writing cannot express all words, words cannot encompass all ideas.",
       "pos": "verb",
-      "ipa": "/ɪnˈkʌmpəs/",
+      "ipa": "/\u026an\u02c8k\u028cmp\u0259s/",
       "family": [
         "encompassing",
         "encompassed"
@@ -2389,8 +2550,9 @@
         "romp",
         "gambol"
       ],
+      "example": "I want to go for a frolic in the rain.",
       "pos": "verb",
-      "ipa": "/ˈfɹɒlɪk/",
+      "ipa": "/\u02c8f\u0279\u0252l\u026ak/",
       "family": [
         "rollick",
         "frolicker",
@@ -2405,8 +2567,9 @@
         "danger",
         "trap"
       ],
+      "example": "Can a hovercraft safely cross a minefield?",
       "pos": "noun",
-      "ipa": "/ˈmaɪnˌfild/",
+      "ipa": "/\u02c8ma\u026an\u02ccfild/",
       "family": [
         "mine",
         "mined",
@@ -2421,8 +2584,9 @@
         "amply",
         "richly"
       ],
+      "example": "It's abundantly clear.",
       "pos": "adverb",
-      "ipa": "/əˈbʌn.dn̩t.li/",
+      "ipa": "/\u0259\u02c8b\u028cn.dn\u0329t.li/",
       "family": [
         "abundant",
         "abundance"
@@ -2436,11 +2600,12 @@
         "chaotic",
         "disorderly"
       ],
+      "example": "Where is the line between free and anarchic?",
       "pos": "adjective",
+      "ipa": "/\u0259\u02c8n\u0251\u02d0.k\u026ak/",
       "family": [
         "anarchically"
-      ],
-      "ipa": "/əˈnɑː.kɪk/"
+      ]
     },
     {
       "word": "SLAB",
@@ -2450,8 +2615,9 @@
         "plate",
         "panel"
       ],
+      "example": "The slab is reinforced concrete.",
       "pos": "noun",
-      "ipa": "/slæb/",
+      "ipa": "/sl\u00e6b/",
       "family": [
         "slabs",
         "slabbed"
@@ -2465,8 +2631,9 @@
         "review",
         "reflection"
       ],
+      "example": "This is embarrassing in retrospect.",
       "pos": "noun",
-      "ipa": "/ˈɹɛtɹəˌspɛkt/",
+      "ipa": "/\u02c8\u0279\u025bt\u0279\u0259\u02ccsp\u025bkt/",
       "family": [
         "retrospection",
         "retrospective",
@@ -2480,8 +2647,9 @@
         "text",
         "verbiage"
       ],
+      "example": "Her essay's wordage was concise yet thorough.",
       "pos": "noun",
-      "ipa": "/ˈwɜːrdeɪdʒ/",
+      "ipa": "/\u02c8w\u025c\u02d0rde\u026ad\u0292/",
       "family": [
         "word",
         "wordy"
@@ -2495,8 +2663,9 @@
         "shortness",
         "terseness"
       ],
+      "example": "Brevity is the soul of wit.",
       "pos": "noun",
-      "ipa": "/ˈbɹɛvɪti/",
+      "ipa": "/\u02c8b\u0279\u025bv\u026ati/",
       "family": [
         "breve",
         "brief"
@@ -2510,11 +2679,12 @@
         "strange",
         "weird"
       ],
+      "example": "The resemblance is uncanny.",
       "pos": "adjective",
+      "ipa": "/\u028cn\u02c8k\u00e6ni/",
       "family": [
         "uncannily"
-      ],
-      "ipa": "/ʌnˈkæni/"
+      ]
     },
     {
       "word": "TACTIC",
@@ -2524,8 +2694,9 @@
         "maneuver",
         "plan"
       ],
+      "example": "The tactic worked.",
       "pos": "noun",
-      "ipa": "/ˈtæktɪk/",
+      "ipa": "/\u02c8t\u00e6kt\u026ak/",
       "family": [
         "tactical",
         "tactically"
@@ -2539,11 +2710,12 @@
         "planned",
         "maneuvering"
       ],
+      "example": "Russia has both strategic and tactical nuclear arms.",
       "pos": "adjective",
+      "ipa": "/\u02c8t\u00e6kt\u026ak\u0259l/",
       "family": [
         "tactically"
-      ],
-      "ipa": "/ˈtæktɪkəl/"
+      ]
     },
     {
       "word": "TACTICALLY",
@@ -2553,11 +2725,12 @@
         "plan-wise",
         "maneuver-wise"
       ],
+      "example": "They've lost strategically, operationally, and tactically.",
       "pos": "adverb",
+      "ipa": "/\u02c8t\u00e6kt\u026akli/",
       "family": [
         "strategically"
-      ],
-      "ipa": "/ˈtæktɪkli/"
+      ]
     },
     {
       "word": "TACTILE",
@@ -2567,13 +2740,14 @@
         "tangible",
         "haptic"
       ],
+      "example": "Cats are highly tactile.",
       "pos": "adjective",
+      "ipa": "/\u02c8t\u00e6kta\u026al/",
       "family": [
         "tactility",
         "haptic",
         "palpable"
-      ],
-      "ipa": "/ˈtæktaɪl/"
+      ]
     },
     {
       "word": "BABBLE",
@@ -2583,11 +2757,12 @@
         "jabber",
         "chatter"
       ],
+      "example": "I do tend to babble at times.",
       "pos": "verb",
+      "ipa": "/\u02c8b\u00e6b\u0259l/",
       "family": [
         "babbler"
-      ],
-      "ipa": "/ˈbæbəl/"
+      ]
     },
     {
       "word": "BAUBLE",
@@ -2598,7 +2773,7 @@
         "knickknack"
       ],
       "pos": "noun",
-      "ipa": "/ˈbɔːbəɫ/",
+      "ipa": "/\u02c8b\u0254\u02d0b\u0259\u026b/",
       "family": [
         "baubles"
       ]
@@ -2611,8 +2786,9 @@
         "connect",
         "associate"
       ],
+      "example": "Some of the work in the workbook doesn't correlate with the readings in the textbook.",
       "pos": "noun",
-      "ipa": "/ˈkɒɹəleɪt/",
+      "ipa": "/\u02c8k\u0252\u0279\u0259le\u026at/",
       "family": [
         "correlation",
         "correlative"
@@ -2626,13 +2802,14 @@
         "ignition",
         "explosion"
       ],
+      "example": "Combustion liberates heat.",
       "pos": "noun",
+      "ipa": "/k\u0259m\u02c8b\u028cs.t\u0361\u0283\u0259n/",
       "family": [
         "combust",
         "combustible",
         "combustive"
-      ],
-      "ipa": "/kəmˈbʌs.t͡ʃən/"
+      ]
     },
     {
       "word": "MESH",
@@ -2642,8 +2819,9 @@
         "web",
         "grid"
       ],
+      "example": "Their comedic styles mesh well with each others'.",
       "pos": "verb",
-      "ipa": "/mɛʃ/",
+      "ipa": "/m\u025b\u0283/",
       "family": [
         "enmesh"
       ]
@@ -2656,8 +2834,9 @@
         "supporter",
         "helper"
       ],
+      "example": "Technology acts as an enabler for remote teams to collaborate seamlessly across continents.",
       "pos": "noun",
-      "ipa": "/ɪˈneɪblər/",
+      "ipa": "/\u026a\u02c8ne\u026abl\u0259r/",
       "family": [
         "enable",
         "enabled"
@@ -2671,11 +2850,12 @@
         "oscillate",
         "waver"
       ],
+      "example": "Vegetable prices fluctuate according to the season.",
       "pos": "verb",
+      "ipa": "/\u02c8fl\u028ckt\u0361\u0283u.e\u026at/",
       "family": [
         "fluctuation"
-      ],
-      "ipa": "/ˈflʌkt͡ʃu.eɪt/"
+      ]
     },
     {
       "word": "LYRICIST",
@@ -2685,8 +2865,9 @@
         "poet",
         "versifier"
       ],
+      "example": "Who's your favorite lyricist?",
       "pos": "noun",
-      "ipa": "/ˈlɪɹ.ɪsɪst/",
+      "ipa": "/\u02c8l\u026a\u0279.\u026as\u026ast/",
       "family": [
         "lyric",
         "lyrics"
@@ -2699,13 +2880,14 @@
         "melodically",
         "poetically"
       ],
+      "example": "The sunset was described so lyrically that it almost felt like a poem.",
       "pos": "adverb",
+      "ipa": "/\u02c8l\u026ar\u026akli/",
       "family": [
         "lyre",
         "lyric",
         "lyrical"
-      ],
-      "ipa": "/ˈlɪrɪkli/"
+      ]
     },
     {
       "word": "MORIBUND",
@@ -2713,8 +2895,9 @@
       "synonyms": [
         "failing"
       ],
+      "example": "A moribund love is not resuscitated.",
       "pos": "adjective",
-      "ipa": "/ˈmɔːɹɪbʌnd/",
+      "ipa": "/\u02c8m\u0254\u02d0\u0279\u026ab\u028cnd/",
       "family": [
         "mortal",
         "mortality",
@@ -2728,8 +2911,9 @@
         "roost",
         "sit"
       ],
+      "example": "Did you see him on his perch?",
       "pos": "noun",
-      "ipa": "/pɜːtʃ/",
+      "ipa": "/p\u025c\u02d0t\u0283/",
       "family": [
         "perched",
         "perching"
@@ -2742,8 +2926,9 @@
         "request",
         "seek"
       ],
+      "example": "Executive departments and agencies should solicit public input on how we can increase and improve opportunities for public participation in Government.",
       "pos": "verb",
-      "ipa": "/səˈlɪsɪt/",
+      "ipa": "/s\u0259\u02c8l\u026as\u026at/",
       "family": [
         "unsolicited",
         "solicitation",
@@ -2757,8 +2942,9 @@
         "singer",
         "crooner"
       ],
+      "example": "He's the lead vocalist, isn't he?",
       "pos": "noun",
-      "ipa": "/ˈvoʊkəlɪst/",
+      "ipa": "/\u02c8vo\u028ak\u0259l\u026ast/",
       "family": [
         "vocal",
         "vocalize"
@@ -2771,8 +2957,9 @@
         "advanced",
         "gifted"
       ],
+      "example": "I was a precocious child.",
       "pos": "adjective",
-      "ipa": "/pɹəˈkəʊʃəs/",
+      "ipa": "/p\u0279\u0259\u02c8k\u0259\u028a\u0283\u0259s/",
       "family": [
         "precociously",
         "precociousness",
@@ -2786,6 +2973,7 @@
         "writer",
         "author"
       ],
+      "example": "He's an eloquent wordsmith.",
       "pos": "noun",
       "family": [
         "writer"
@@ -2798,8 +2986,9 @@
         "imply",
         "suggest"
       ],
+      "example": "The soft lighting in the room helped the vintage furniture connote a sense of timeless elegance.",
       "pos": "verb",
-      "ipa": "/kəˈnəʊt/",
+      "ipa": "/k\u0259\u02c8n\u0259\u028at/",
       "family": [
         "connotation",
         "connotative",
@@ -2813,8 +3002,9 @@
         "hint",
         "insinuation"
       ],
+      "example": "I've had enough of your salacious innuendo.",
       "pos": "noun",
-      "ipa": "/ˌɪnjuˈɛndəʊ/",
+      "ipa": "/\u02cc\u026anju\u02c8\u025bnd\u0259\u028a/",
       "family": [
         "innuendos"
       ]
@@ -2826,8 +3016,9 @@
         "cause",
         "prompt"
       ],
+      "example": "Nothing could induce him to change his mind.",
       "pos": "verb",
-      "ipa": "/ɪnˈduːs/",
+      "ipa": "/\u026an\u02c8du\u02d0s/",
       "family": [
         "inducement",
         "inducer",
@@ -2841,8 +3032,9 @@
         "incentive",
         "spur"
       ],
+      "example": "The lavish gift was a clever inducement to convince them to sign the contract.",
       "pos": "noun",
-      "ipa": "/ɪnˈdjuːsmənt/",
+      "ipa": "/\u026an\u02c8dju\u02d0sm\u0259nt/",
       "family": [
         "induce"
       ]
@@ -2854,6 +3046,7 @@
         "collection",
         "compilation"
       ],
+      "example": "This is an anthology of poems.",
       "pos": "noun",
       "family": [
         "anthologist",
@@ -2868,8 +3061,9 @@
         "mourn",
         "grieve"
       ],
+      "example": "All day long, he did nothing but lament.",
       "pos": "verb",
-      "ipa": "/ləˈmɛnt/",
+      "ipa": "/l\u0259\u02c8m\u025bnt/",
       "family": [
         "lamentable",
         "lamentation",
@@ -2883,8 +3077,9 @@
         "channel",
         "pipe"
       ],
+      "example": "This ancient stone conduit channels mountain spring water straight into the village fountain.",
       "pos": "noun",
-      "ipa": "/ˈkɒndʒʊɪt/",
+      "ipa": "/\u02c8k\u0252nd\u0292\u028a\u026at/",
       "family": [
         "conduits"
       ]
@@ -2896,13 +3091,14 @@
         "timeline",
         "sequence"
       ],
+      "example": "I took the most important events from the chronology of information science and wrote a few words about each one.",
       "pos": "noun",
+      "ipa": "/k\u0279\u0259\u02c8n\u0252l.\u0259.d\u0361\u0292i/",
       "family": [
         "chronological",
         "chronologically",
         "chronologist"
-      ],
-      "ipa": "/kɹəˈnɒl.ə.d͡ʒi/"
+      ]
     },
     {
       "word": "REBOUND",
@@ -2911,8 +3107,9 @@
         "bounce",
         "recover"
       ],
+      "example": "Algeria's economy will rebound next year.",
       "pos": "noun",
-      "ipa": "/ɹiˈbaʊnd/",
+      "ipa": "/\u0279i\u02c8ba\u028and/",
       "family": [
         "bound"
       ]
@@ -2924,11 +3121,12 @@
         "waning",
         "fading"
       ],
+      "example": "The flagging economy worried investors.",
       "pos": "adjective",
+      "ipa": "/\u02c8fl\u00e6\u0261\u026a\u014b/",
       "family": [
         "unflagging"
-      ],
-      "ipa": "/ˈflæɡɪŋ/"
+      ]
     },
     {
       "word": "ELECTRODE",
@@ -2937,12 +3135,13 @@
         "terminal",
         "contact"
       ],
+      "example": "The positive electrode is called the cathode.",
       "pos": "noun",
+      "ipa": "/\u0259\u02c8l\u025bk.t\u0279\u0259\u028ad/",
       "family": [
         "cathode",
         "anode"
-      ],
-      "ipa": "/əˈlɛk.tɹəʊd/"
+      ]
     },
     {
       "word": "COSMIC",
@@ -2951,13 +3150,14 @@
         "universal",
         "vast"
       ],
+      "example": "What is the cosmic web?",
       "pos": "adjective",
+      "ipa": "/\u02c8k\u0252z.m\u026ak/",
       "family": [
         "cosmically",
         "astronautical",
         "astronomical"
-      ],
-      "ipa": "/ˈkɒz.mɪk/"
+      ]
     },
     {
       "word": "INTERLUDE",
@@ -2966,13 +3166,14 @@
         "pause",
         "break"
       ],
+      "example": "Democracy will only have been a short interlude in the history of humanity.",
       "pos": "noun",
+      "ipa": "/\u02c8\u026ant\u0259rlu\u02d0d/",
       "family": [
         "Quaalude",
         "intermezzo",
         "intermission"
-      ],
-      "ipa": "/ˈɪntərluːd/"
+      ]
     },
     {
       "word": "RECUPERATE",
@@ -2981,11 +3182,12 @@
         "recover",
         "heal"
       ],
+      "example": "After her surgery, she spent two weeks in the mountains to recuperate and regain her energy.",
       "pos": "verb",
+      "ipa": "/r\u026a\u02c8ku\u02d0p\u0259re\u026at/",
       "family": [
         "recuperation"
-      ],
-      "ipa": "/rɪˈkuːpəreɪt/"
+      ]
     },
     {
       "word": "SEISMIC",
@@ -2994,8 +3196,9 @@
         "earth-shaking",
         "massive"
       ],
+      "example": "The geologists conducted seismic tests to analyze the stability of the bedrock beneath the surface.",
       "pos": "adjective",
-      "ipa": "/ˈsaɪzmɪk/",
+      "ipa": "/\u02c8sa\u026azm\u026ak/",
       "family": [
         "seismically",
         "seismograph",
@@ -3009,8 +3212,9 @@
         "slide",
         "glide"
       ],
+      "example": "The snake began to slither.",
       "pos": "verb",
-      "ipa": "/ˈslɪðə/",
+      "ipa": "/\u02c8sl\u026a\u00f0\u0259/",
       "family": [
         "slithery",
         "sliver"
@@ -3023,8 +3227,9 @@
         "rattle",
         "shake"
       ],
+      "example": "His calm demeanor began to unnerve me during the high-stakes negotiation.",
       "pos": "verb",
-      "ipa": "/ʌnˈnɜːrv/",
+      "ipa": "/\u028cn\u02c8n\u025c\u02d0rv/",
       "family": [
         "unnerving",
         "unnerved"
@@ -3036,11 +3241,12 @@
       "synonyms": [
         "disconcerting"
       ],
+      "example": "It was unnerving to be there.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u028cn\u02c8n\u025c\u02d0v\u026a\u014b/",
       "family": [
         "unnervingly"
-      ],
-      "ipa": "/ˈʌnˈnɜːvɪŋ/"
+      ]
     },
     {
       "word": "PROTRUDE",
@@ -3049,8 +3255,9 @@
         "jut",
         "stick out"
       ],
+      "example": "In this type of break, the bone will actually protrude from the skin.",
       "pos": "verb",
-      "ipa": "/pɹəˈtɹuːd/",
+      "ipa": "/p\u0279\u0259\u02c8t\u0279u\u02d0d/",
       "family": [
         "protuberance",
         "protuberant"
@@ -3063,8 +3270,9 @@
         "bulge",
         "projection"
       ],
+      "example": "I noticed a large protrusion from the wall.",
       "pos": "noun",
-      "ipa": "/pɹəˈtɹuːʒən/",
+      "ipa": "/p\u0279\u0259\u02c8t\u0279u\u02d0\u0292\u0259n/",
       "family": [
         "protuberance",
         "hernia"
@@ -3077,11 +3285,12 @@
         "step-by-step",
         "formal"
       ],
+      "example": "The cases were dismissed on procedural grounds before trial.",
       "pos": "noun",
+      "ipa": "/pro\u028a\u02c8si\u02d0d\u0292\u0259r\u0259l/",
       "family": [
         "processable"
-      ],
-      "ipa": "/proʊˈsiːdʒərəl/"
+      ]
     },
     {
       "word": "DEMYSTIFY",
@@ -3090,8 +3299,9 @@
         "clarify",
         "explain"
       ],
+      "example": "Healthy discussions can demystify many topics.",
       "pos": "verb",
-      "ipa": "/diːˈmɪstɪfaɪ/",
+      "ipa": "/di\u02d0\u02c8m\u026ast\u026afa\u026a/",
       "family": [
         "demystification"
       ]
@@ -3103,8 +3313,9 @@
         "equivalent",
         "equal"
       ],
+      "example": "His request was tantamount to a threat.",
       "pos": "adjective",
-      "ipa": "/ˈtæntəˌmaʊnt/"
+      "ipa": "/\u02c8t\u00e6nt\u0259\u02ccma\u028ant/"
     },
     {
       "word": "FLOODGATES",
@@ -3113,8 +3324,9 @@
         "barriers",
         "restraints"
       ],
+      "example": "This discovery opened up the floodgates to research and led to the establishment of the discipline as a legitimate field of inquiry.",
       "pos": "noun",
-      "ipa": "/ˈflʌdɡeɪts/",
+      "ipa": "/\u02c8fl\u028cd\u0261e\u026ats/",
       "family": [
         "floodgate"
       ]
@@ -3126,13 +3338,14 @@
         "unlucky",
         "ill-fated"
       ],
+      "example": "The black hole pulls the hapless star into its maw.",
       "pos": "adjective",
+      "ipa": "/\u02c8h\u00e6pl\u026as/",
       "family": [
         "haplessly",
         "haplessness",
         "happen"
-      ],
-      "ipa": "/ˈhæplɪs/"
+      ]
     },
     {
       "word": "WAYWARD",
@@ -3141,12 +3354,13 @@
         "errant",
         "stray"
       ],
+      "example": "She has a wayward streak that worries her parents.",
       "pos": "adjective",
+      "ipa": "/\u02c8we\u026aw\u0259rd/",
       "family": [
         "waywardly",
         "waywardness"
-      ],
-      "ipa": "/ˈweɪwərd/"
+      ]
     },
     {
       "word": "BLURB",
@@ -3154,8 +3368,9 @@
       "synonyms": [
         "summary"
       ],
+      "example": "The book's blurb was very short.",
       "pos": "noun",
-      "ipa": "/blɜːrb/",
+      "ipa": "/bl\u025c\u02d0rb/",
       "family": [
         "blurbs"
       ]
@@ -3167,11 +3382,12 @@
         "local",
         "regional"
       ],
+      "example": "He is not provincial.",
       "pos": "adjective",
+      "ipa": "/pr\u0259\u02c8v\u026an\u0283\u0259l/",
       "family": [
         "provincially"
-      ],
-      "ipa": "/prəˈvɪnʃəl/"
+      ]
     },
     {
       "word": "INDOLENT",
@@ -3180,12 +3396,13 @@
         "lazy",
         "idle"
       ],
+      "example": "Indolent youth creates a begging old age.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u026an.d\u0259.l\u0259nt/",
       "family": [
         "indolently",
         "indolence"
-      ],
-      "ipa": "/ˈɪn.də.lənt/"
+      ]
     },
     {
       "word": "INDOLENTLY",
@@ -3194,8 +3411,9 @@
         "lazily",
         "idly"
       ],
+      "example": "She stretched out on the sofa, scrolling through her phone indolently.",
       "pos": "adverb",
-      "ipa": "/ˈɪndələntli/",
+      "ipa": "/\u02c8\u026and\u0259l\u0259ntli/",
       "family": [
         "indolent",
         "indolence"
@@ -3208,8 +3426,9 @@
         "laziness",
         "idleness"
       ],
+      "example": "I defeated my own indolence.",
       "pos": "noun",
-      "ipa": "/ˈɪndl̩əns/",
+      "ipa": "/\u02c8\u026andl\u0329\u0259ns/",
       "family": [
         "indolent",
         "indolently"
@@ -3222,8 +3441,9 @@
         "aberrant",
         "abnormal"
       ],
+      "example": "His deviant behavior made others uncomfortable.",
       "pos": "noun",
-      "ipa": "/ˈdiː.vi.ənt/",
+      "ipa": "/\u02c8di\u02d0.vi.\u0259nt/",
       "family": [
         "deviate",
         "deviation"
@@ -3236,8 +3456,9 @@
         "generate",
         "produce"
       ],
+      "example": "The novel's themes of hope and resilience engender a sense of optimism in readers.",
       "pos": "verb",
-      "ipa": "/ɪnˈdʒɛn.də/",
+      "ipa": "/\u026an\u02c8d\u0292\u025bn.d\u0259/",
       "family": [
         "gender"
       ]
@@ -3249,8 +3470,9 @@
         "salary",
         "pay"
       ],
+      "example": "Those who have been once intoxicated with power, and have derived any kind of emolument from it, even though but for one year, never can willingly abandon it.",
       "pos": "noun",
-      "ipa": "/ɪˈmɒljʊmənt/"
+      "ipa": "/\u026a\u02c8m\u0252lj\u028am\u0259nt/"
     },
     {
       "word": "POSTERITY",
@@ -3259,8 +3481,9 @@
         "future",
         "descendants"
       ],
+      "example": "He died without posterity.",
       "pos": "noun",
-      "ipa": "/pɒˈstɛɹɪti/",
+      "ipa": "/p\u0252\u02c8st\u025b\u0279\u026ati/",
       "family": [
         "poster"
       ]
@@ -3272,8 +3495,9 @@
         "poisonous",
         "toxic"
       ],
+      "example": "Was it a venomous snake?",
       "pos": "adjective",
-      "ipa": "/ˈvɛnəməs/",
+      "ipa": "/\u02c8v\u025bn\u0259m\u0259s/",
       "family": [
         "nonvenomous",
         "venomously",
@@ -3287,8 +3511,9 @@
         "poisonously",
         "toxically"
       ],
+      "example": "The critic attacked the novel venomously, dismissing it as a waste of time.",
       "pos": "adverb",
-      "ipa": "/ˈvɛnəməsli/",
+      "ipa": "/\u02c8v\u025bn\u0259m\u0259sli/",
       "family": [
         "venom",
         "venomous"
@@ -3301,8 +3526,9 @@
         "prototype",
         "model"
       ],
+      "example": "My characters all have something of the hero archetype about them, in that they are largely stripped of context.",
       "pos": "noun",
-      "ipa": "/ˈɑːkɪtaɪp/",
+      "ipa": "/\u02c8\u0251\u02d0k\u026ata\u026ap/",
       "family": [
         "archetypal"
       ]
@@ -3314,8 +3540,9 @@
         "classic",
         "typical"
       ],
+      "example": "The village is the archetypal setting for a story about simple, honest living.",
       "pos": "adjective",
-      "ipa": "/ˈɑːkɪtaɪpəl/",
+      "ipa": "/\u02c8\u0251\u02d0k\u026ata\u026ap\u0259l/",
       "family": [
         "archetype"
       ]
@@ -3327,8 +3554,9 @@
         "disagreement",
         "discord"
       ],
+      "example": "On the religious side, the decision caused serious dissension among followers.",
       "pos": "noun",
-      "ipa": "/dɪˈsɛnʃən/",
+      "ipa": "/d\u026a\u02c8s\u025bn\u0283\u0259n/",
       "family": [
         "dissent"
       ]
@@ -3340,8 +3568,9 @@
         "elevated",
         "noble"
       ],
+      "example": "Whoever degrades himself will be exalted.",
       "pos": "adjective",
-      "ipa": "/ɪɡˈzɔːltɪd/",
+      "ipa": "/\u026a\u0261\u02c8z\u0254\u02d0lt\u026ad/",
       "family": [
         "exalt",
         "exaltation"
@@ -3354,8 +3583,9 @@
         "skilled",
         "proficient"
       ],
+      "example": "He's an adept swimmer.",
       "pos": "noun",
-      "ipa": "/əˈdɛpt/",
+      "ipa": "/\u0259\u02c8d\u025bpt/",
       "family": [
         "adeptly",
         "adeptness",
@@ -3369,8 +3599,9 @@
         "inactive",
         "motionless"
       ],
+      "example": "Nitrous oxide is inert at room temperature.",
       "pos": "adjective",
-      "ipa": "/ɪnˈɜːt/",
+      "ipa": "/\u026an\u02c8\u025c\u02d0t/",
       "family": [
         "inertly",
         "inertness",
@@ -3384,13 +3615,14 @@
         "previously",
         "so far"
       ],
+      "example": "She had hitherto avoided public speaking, but this challenge inspired her to try.",
       "pos": "adverb",
+      "ipa": "/\u02cch\u026a\u00f0\u0259\u02c8tu\u02d0/",
       "family": [
         "hereabout",
         "thereabout",
         "hereabouts"
-      ],
-      "ipa": "/ˌhɪðəˈtuː/"
+      ]
     },
     {
       "word": "ANGST",
@@ -3399,8 +3631,9 @@
         "anxiety",
         "dread"
       ],
+      "example": "He was angst-ridden.",
       "pos": "noun",
-      "ipa": "/æŋst/"
+      "ipa": "/\u00e6\u014bst/"
     },
     {
       "word": "DRABNESS",
@@ -3409,8 +3642,9 @@
         "dullness",
         "dreariness"
       ],
+      "example": "The drabness of the winter sky matched the monotony of his daily routine.",
       "pos": "noun",
-      "ipa": "/ˈdræbnəs/",
+      "ipa": "/\u02c8dr\u00e6bn\u0259s/",
       "family": [
         "drab",
         "drably"
@@ -3423,12 +3657,13 @@
         "tuneful",
         "harmonious"
       ],
+      "example": "The song of this bird is very melodious.",
       "pos": "adjective",
+      "ipa": "/m\u0259\u02c8l\u0259\u028adi.\u0259s/",
       "family": [
         "melodiously",
         "melodiousness"
-      ],
-      "ipa": "/məˈləʊdi.əs/"
+      ]
     },
     {
       "word": "MAGPIE",
@@ -3437,8 +3672,9 @@
         "chatterer",
         "collector"
       ],
+      "example": "I hear a magpie cawing.",
       "pos": "noun",
-      "ipa": "/ˈmæɡˌpaɪ/",
+      "ipa": "/\u02c8m\u00e6\u0261\u02ccpa\u026a/",
       "family": [
         "mag",
         "pied"
@@ -3451,8 +3687,9 @@
         "gloom",
         "sadness"
       ],
+      "example": "I feel melancholy.",
       "pos": "noun",
-      "ipa": "/ˈmɛlənkəli/",
+      "ipa": "/\u02c8m\u025bl\u0259nk\u0259li/",
       "family": [
         "melancholic",
         "sadness",
@@ -3466,8 +3703,9 @@
         "linger",
         "dawdle"
       ],
+      "example": "They don't work, they just loiter in the streets.",
       "pos": "verb",
-      "ipa": "/ˈlɔɪtɚ/",
+      "ipa": "/\u02c8l\u0254\u026at\u025a/",
       "family": [
         "loiterer",
         "loitering",
@@ -3481,8 +3719,9 @@
         "overturn",
         "collapse"
       ],
+      "example": "The people are determined to topple the regime at any cost.",
       "pos": "verb",
-      "ipa": "/ˈtɑpl̩/"
+      "ipa": "/\u02c8t\u0251pl\u0329/"
     },
     {
       "word": "INTRINSIC",
@@ -3491,13 +3730,14 @@
         "inherent",
         "innate"
       ],
+      "example": "I question the intrinsic value of nihilism.",
       "pos": "adjective",
+      "ipa": "/\u026an\u02c8t\u0279\u026an.z\u026ak/",
       "family": [
         "intrinsically",
         "birthright",
         "installed"
-      ],
-      "ipa": "/ɪnˈtɹɪn.zɪk/"
+      ]
     },
     {
       "word": "CLINCH",
@@ -3506,8 +3746,9 @@
         "secure",
         "settle"
       ],
+      "example": "Now is the time to clinch the deal.",
       "pos": "verb",
-      "ipa": "/klɪnt͡ʃ/",
+      "ipa": "/kl\u026ant\u0361\u0283/",
       "family": [
         "clench",
         "clincher"
@@ -3520,13 +3761,14 @@
         "namelessness",
         "incognito"
       ],
+      "example": "The donor requested anonymity.",
       "pos": "noun",
+      "ipa": "/\u00e6n\u0259\u02c8n\u026am\u026ati/",
       "family": [
         "anon",
         "anonymous",
         "anonymously"
-      ],
-      "ipa": "/ænəˈnɪmɪti/"
+      ]
     },
     {
       "word": "SPLINTER",
@@ -3535,12 +3777,13 @@
         "shard",
         "fragment"
       ],
+      "example": "The splinter was very small.",
       "pos": "verb",
+      "ipa": "/\u02c8spl\u026an.t\u0259/",
       "family": [
         "splintery",
         "splint"
-      ],
-      "ipa": "/ˈsplɪn.tə/"
+      ]
     },
     {
       "word": "REPROACH",
@@ -3549,8 +3792,9 @@
         "blame",
         "censure"
       ],
+      "example": "That reproach is unfair.",
       "pos": "verb",
-      "ipa": "/ɹɪˈpɹəʊtʃ/",
+      "ipa": "/\u0279\u026a\u02c8p\u0279\u0259\u028at\u0283/",
       "family": [
         "reproachful",
         "reproachable"
@@ -3563,8 +3807,9 @@
         "feign",
         "pretend"
       ],
+      "example": "She tried to dissemble her disappointment with a smile, but her eyes betrayed her true feelings.",
       "pos": "verb",
-      "ipa": "/dɪˈsɛmbəl/",
+      "ipa": "/d\u026a\u02c8s\u025bmb\u0259l/",
       "family": [
         "dissembler"
       ]
@@ -3576,8 +3821,9 @@
         "maim",
         "crush"
       ],
+      "example": "The faulty machine would mangle the fabric beyond repair if left unattended.",
       "pos": "verb",
-      "ipa": "/ˈmæŋɡəl/",
+      "ipa": "/\u02c8m\u00e6\u014b\u0261\u0259l/",
       "family": [
         "mangled",
         "mangler"
@@ -3590,8 +3836,9 @@
         "deprived",
         "stripped"
       ],
+      "example": "He was bereft of all hope.",
       "pos": "adjective",
-      "ipa": "/bəˈɹɛft/",
+      "ipa": "/b\u0259\u02c8\u0279\u025bft/",
       "family": [
         "bereave",
         "bereavement"
@@ -3604,8 +3851,9 @@
         "monologue",
         "aside"
       ],
+      "example": "He thinks he's giving a soliloquy.",
       "pos": "noun",
-      "ipa": "/səˈlɪləkwi/",
+      "ipa": "/s\u0259\u02c8l\u026al\u0259kwi/",
       "family": [
         "soliloquize",
         "solo",
@@ -3619,8 +3867,9 @@
         "selfism",
         "egoism"
       ],
+      "example": "I took a class on solipsism, but I was the only one there.",
       "pos": "noun",
-      "ipa": "/ˈsɒlɪpsɪzəm/",
+      "ipa": "/\u02c8s\u0252l\u026aps\u026az\u0259m/",
       "family": [
         "solipsistic"
       ]
@@ -3632,8 +3881,9 @@
         "rebellious",
         "insurgent"
       ],
+      "example": "The crew grew mutinous when denied shore leave after months at sea.",
       "pos": "adjective",
-      "ipa": "/ˈmjuːtɪnəs/",
+      "ipa": "/\u02c8mju\u02d0t\u026an\u0259s/",
       "family": [
         "mutinously"
       ]
@@ -3645,8 +3895,9 @@
         "rebelliously",
         "defiantly"
       ],
+      "example": "The crew mutinously refused to follow the captain's orders.",
       "pos": "adverb",
-      "ipa": "/ˈmjuːtɪnəsli/",
+      "ipa": "/\u02c8mju\u02d0t\u026an\u0259sli/",
       "family": [
         "mutiny",
         "mutinous"
@@ -3659,8 +3910,9 @@
         "snake-like",
         "cold-blooded"
       ],
+      "example": "Physically, the Yautja are imposing and muscular humanoid beings with reptilian-like skin.",
       "pos": "adjective",
-      "ipa": "/ɹɛpˈtɪliən/",
+      "ipa": "/\u0279\u025bp\u02c8t\u026ali\u0259n/",
       "family": [
         "reptile"
       ]
@@ -3672,8 +3924,9 @@
         "lessen",
         "shrink"
       ],
+      "example": "The passions diminish.",
       "pos": "verb",
-      "ipa": "/dɪˈmɪnɪʃ/",
+      "ipa": "/d\u026a\u02c8m\u026an\u026a\u0283/",
       "family": [
         "diminution"
       ]
@@ -3685,8 +3938,9 @@
         "infection",
         "spread"
       ],
+      "example": "The contagion is damaging the Italian economy and its important tourism industry.",
       "pos": "noun",
-      "ipa": "/kənˈteɪd͡ʒən/",
+      "ipa": "/k\u0259n\u02c8te\u026ad\u0361\u0292\u0259n/",
       "family": [
         "contagious",
         "quarantine"
@@ -3699,8 +3953,9 @@
         "farmstead",
         "holding"
       ],
+      "example": "The old homestead stood proudly at the edge of the valley, its fields stretching out beneath the morning sun.",
       "pos": "noun",
-      "ipa": "/ˈhoʊmˌstɛd/",
+      "ipa": "/\u02c8ho\u028am\u02ccst\u025bd/",
       "family": [
         "homesteader",
         "croft",
@@ -3714,8 +3969,9 @@
         "officeholder",
         "occupant"
       ],
+      "example": "It is incumbent on you to do so.",
       "pos": "noun",
-      "ipa": "/ɪnˈkʌmbənt/",
+      "ipa": "/\u026an\u02c8k\u028cmb\u0259nt/",
       "family": [
         "incumbency"
       ]
@@ -3727,13 +3983,14 @@
         "reclining",
         "lying"
       ],
+      "example": "The artist remained recumbent on the grass, sketching the clouds overhead.",
       "pos": "adjective",
+      "ipa": "/r\u026a\u02c8k\u028cmb\u0259nt/",
       "family": [
         "resting",
         "sleep",
         "prone"
-      ],
-      "ipa": "/rɪˈkʌmbənt/"
+      ]
     },
     {
       "word": "NONCHALANT",
@@ -3742,12 +3999,13 @@
         "casual",
         "unconcerned"
       ],
+      "example": "Matthew was acting as nonchalant as he could.",
       "pos": "adjective",
+      "ipa": "/\u02c8n\u0252n.\u0283\u0259l.\u0259nt/",
       "family": [
         "nonchalantly",
         "nonchalance"
-      ],
-      "ipa": "/ˈnɒn.ʃəl.ənt/"
+      ]
     },
     {
       "word": "MESMERIC",
@@ -3756,8 +4014,9 @@
         "hypnotic",
         "spellbinding"
       ],
+      "example": "The magician\u2019s mesmeric performance left the audience utterly spellbound.",
       "pos": "adjective",
-      "ipa": "/mɛzˈmɛɹɪk/",
+      "ipa": "/m\u025bz\u02c8m\u025b\u0279\u026ak/",
       "family": [
         "mesmerizing"
       ]
@@ -3769,8 +4028,9 @@
         "stupefy",
         "dull"
       ],
+      "example": "The endless meetings stultify creativity and drain motivation.",
       "pos": "verb",
-      "ipa": "/ˈstʌltɪfaɪ/",
+      "ipa": "/\u02c8st\u028clt\u026afa\u026a/",
       "family": [
         "stolid"
       ]
@@ -3782,8 +4042,9 @@
         "flounder",
         "luxuriate"
       ],
+      "example": "A pig will wallow in the mud in order to cool down.",
       "pos": "verb",
-      "ipa": "/ˈwɒ.ləʊ/"
+      "ipa": "/\u02c8w\u0252.l\u0259\u028a/"
     },
     {
       "word": "PONDEROUS",
@@ -3792,12 +4053,13 @@
         "heavy",
         "cumbersome"
       ],
+      "example": "The old professor's lectures are long-winded and ponderous.",
       "pos": "adjective",
+      "ipa": "/\u02c8p\u0252n.d\u0259\u0279.\u0259s/",
       "family": [
         "ponderously",
         "ponderousness"
-      ],
-      "ipa": "/ˈpɒn.dəɹ.əs/"
+      ]
     },
     {
       "word": "LASSITUDE",
@@ -3806,8 +4068,9 @@
         "weariness",
         "fatigue"
       ],
+      "example": "A strange lassitude fell upon me.",
       "pos": "noun",
-      "ipa": "/ˈlæsɪˌtjuːd/"
+      "ipa": "/\u02c8l\u00e6s\u026a\u02cctju\u02d0d/"
     },
     {
       "word": "VICINITY",
@@ -3816,8 +4079,9 @@
         "neighborhood",
         "area"
       ],
+      "example": "You should stay out of his vicinity.",
       "pos": "noun",
-      "ipa": "/vɪˈsɪnɪti/"
+      "ipa": "/v\u026a\u02c8s\u026an\u026ati/"
     },
     {
       "word": "WAX",
@@ -3826,6 +4090,7 @@
         "grow",
         "increase"
       ],
+      "example": "The moon's glow will wax until it fully illuminates the night sky.",
       "pos": "verb",
       "ipa": "/waks/",
       "family": [
@@ -3841,13 +4106,14 @@
         "apparent",
         "seeming"
       ],
+      "example": "The ostensible reason for the delay was bad weather, though the real cause was logistical oversights.",
       "pos": "adjective",
+      "ipa": "/\u0252\u02c8st\u025bns.\u026a.b\u0259l/",
       "family": [
         "ostensibly",
         "ostentation",
         "ostentatious"
-      ],
-      "ipa": "/ɒˈstɛns.ɪ.bəl/"
+      ]
     },
     {
       "word": "OSTENSIBLY",
@@ -3856,11 +4122,12 @@
         "apparently",
         "seemingly"
       ],
+      "example": "He invited her up to his room, ostensibly to look at his stamp collection.",
       "pos": "adverb",
+      "ipa": "/\u0252\u02c8st\u025bn.s\u026a.bli/",
       "family": [
         "ostensible"
-      ],
-      "ipa": "/ɒˈstɛn.sɪ.bli/"
+      ]
     },
     {
       "word": "PLANE",
@@ -3869,8 +4136,9 @@
         "level",
         "flat"
       ],
+      "example": "I saw a plane.",
       "pos": "noun",
-      "ipa": "/pleɪn/",
+      "ipa": "/ple\u026an/",
       "family": [
         "aquaplane",
         "biplane",
@@ -3884,8 +4152,9 @@
         "threat",
         "danger"
       ],
+      "example": "He's a menace.",
       "pos": "noun",
-      "ipa": "/ˈmɛnɪs/",
+      "ipa": "/\u02c8m\u025bn\u026as/",
       "family": [
         "menacing"
       ]
@@ -3897,11 +4166,12 @@
         "threatening",
         "ominous"
       ],
+      "example": "The sea looks menacing.",
       "pos": "adjective",
+      "ipa": "/\u02c8m\u025bn\u026as\u026a\u014b/",
       "family": [
         "menacingly"
-      ],
-      "ipa": "/ˈmɛnɪsɪŋ/"
+      ]
     },
     {
       "word": "MENACINGLY",
@@ -3910,8 +4180,9 @@
         "threateningly",
         "ominously"
       ],
+      "example": "Gustavo was smiling menacingly.",
       "pos": "adverb",
-      "ipa": "/ˈmɛnɪsɪŋli/",
+      "ipa": "/\u02c8m\u025bn\u026as\u026a\u014bli/",
       "family": [
         "menace",
         "menacing"
@@ -3924,12 +4195,13 @@
         "disastrous",
         "catastrophic"
       ],
+      "example": "The calamitous storm destroyed homes and left the town without power for weeks.",
       "pos": "adjective",
+      "ipa": "/k\u0259\u02c8l\u00e6m\u026at\u0259s/",
       "family": [
         "calamitously",
         "calamity"
-      ],
-      "ipa": "/kəˈlæmɪtəs/"
+      ]
     },
     {
       "word": "NIGH",
@@ -3938,8 +4210,9 @@
         "near",
         "close"
       ],
+      "example": "The end is nigh.",
       "pos": "adverb",
-      "ipa": "/naɪ/",
+      "ipa": "/na\u026a/",
       "family": [
         "near",
         "neighbor",
@@ -3953,8 +4226,9 @@
         "stern",
         "severe"
       ],
+      "example": "Austere economic policies have significantly affected economic performance.",
       "pos": "adjective",
-      "ipa": "/ɔˈstiɹ/",
+      "ipa": "/\u0254\u02c8sti\u0279/",
       "family": [
         "austerely",
         "austerity"
@@ -3967,8 +4241,9 @@
         "sternly",
         "severely"
       ],
+      "example": "The monastery\u2019s monks lived austerely, shunning comforts and embracing discipline.",
       "pos": "adverb",
-      "ipa": "/ɔˈstiɹli/",
+      "ipa": "/\u0254\u02c8sti\u0279li/",
       "family": [
         "austere",
         "austerity"
@@ -3981,8 +4256,9 @@
         "severity",
         "rigor"
       ],
+      "example": "The Spanish government has announced a severe austerity budget.",
       "pos": "noun",
-      "ipa": "/ɔˈstɛɹɪti/",
+      "ipa": "/\u0254\u02c8st\u025b\u0279\u026ati/",
       "family": [
         "austere",
         "austerely"
@@ -3995,12 +4271,13 @@
         "colloquial",
         "vernacular"
       ],
+      "example": "Is this an idiomatic sentence?",
       "pos": "adjective",
+      "ipa": "/\u02cc\u026ad.i\u02d0.\u0259\u02c8mat.\u026ak/",
       "family": [
         "idiomatically",
         "idiom"
-      ],
-      "ipa": "/ˌɪd.iː.əˈmat.ɪk/"
+      ]
     },
     {
       "word": "KINETIC",
@@ -4009,8 +4286,9 @@
         "dynamic",
         "active"
       ],
+      "example": "As an atom approaches the barycenter of a forming star, it trades potential for kinetic energy: the stuff of heat.",
       "pos": "adjective",
-      "ipa": "/kɪˈnɛtɪk/",
+      "ipa": "/k\u026a\u02c8n\u025bt\u026ak/",
       "family": [
         "kinetically",
         "psychokinetic",
@@ -4024,8 +4302,9 @@
         "direct",
         "immediate"
       ],
+      "example": "The main feature of the process is the presence of unmediated and mutual political will.",
       "pos": "adjective",
-      "ipa": "/ˌʌnˈmiː.di.eɪ.tɪd/",
+      "ipa": "/\u02cc\u028cn\u02c8mi\u02d0.di.e\u026a.t\u026ad/",
       "family": [
         "mediate",
         "mediation",
@@ -4039,8 +4318,9 @@
         "arbitrate",
         "intercede"
       ],
+      "example": "Interpreters mediate between different cultures.",
       "pos": "verb",
-      "ipa": "/ˈmidieɪt/",
+      "ipa": "/\u02c8midie\u026at/",
       "family": [
         "unmediated",
         "intermediate",
@@ -4054,8 +4334,9 @@
         "arbitration",
         "intercession"
       ],
+      "example": "Her mediation put an end to our quarrel.",
       "pos": "noun",
-      "ipa": "/ˌmiːdiˈeɪʃən/",
+      "ipa": "/\u02ccmi\u02d0di\u02c8e\u026a\u0283\u0259n/",
       "family": [
         "mediate",
         "mediator",
@@ -4069,8 +4350,9 @@
         "metaphorical",
         "symbolic"
       ],
+      "example": "This is modern figurative art.",
       "pos": "adjective",
-      "ipa": "/ˈfɪɡəɹətɪv/",
+      "ipa": "/\u02c8f\u026a\u0261\u0259\u0279\u0259t\u026av/",
       "family": [
         "figuratively",
         "figure"
@@ -4083,12 +4365,13 @@
         "banishment",
         "expulsion"
       ],
+      "example": "The exorcism doesn't seem to have worked.",
       "pos": "noun",
+      "ipa": "/\u02c8\u025bk.s\u0254\u02d0.s\u026a.z\u0259m/",
       "family": [
         "exorcise",
         "exorcist"
-      ],
-      "ipa": "/ˈɛk.sɔː.sɪ.zəm/"
+      ]
     },
     {
       "word": "EXORCIST",
@@ -4097,11 +4380,12 @@
         "spirit-hunter",
         "spirit-caster"
       ],
+      "example": "He's an exorcist.",
       "pos": "noun",
+      "ipa": "/\u02c8\u025bk.s\u0254\u02d0.s\u026ast/",
       "family": [
         "exorcise"
-      ],
-      "ipa": "/ˈɛk.sɔː.sɪst/"
+      ]
     },
     {
       "word": "MEDIOCRITY",
@@ -4110,13 +4394,14 @@
         "averageness",
         "middlingness"
       ],
+      "example": "I detest mediocrity.",
       "pos": "noun",
+      "ipa": "/mi\u02d0.d\u026a\u02c8\u0252k.\u0279\u026a.ti/",
       "family": [
         "mean",
         "median",
         "mediate"
-      ],
-      "ipa": "/miː.dɪˈɒk.ɹɪ.ti/"
+      ]
     },
     {
       "word": "DUBIOUSLY",
@@ -4125,8 +4410,9 @@
         "skeptically",
         "questionably"
       ],
+      "example": "He peered dubiously at the instructions, unsure if they were meant to be taken literally.",
       "pos": "adverb",
-      "ipa": "/ˈdub.i.əs.li/",
+      "ipa": "/\u02c8dub.i.\u0259s.li/",
       "family": [
         "dubious",
         "doubt",
@@ -4140,8 +4426,9 @@
         "select",
         "compile"
       ],
+      "example": "They curate exhibitions for new artists.",
       "pos": "verb",
-      "ipa": "/ˈkjʊəɹət/",
+      "ipa": "/\u02c8kj\u028a\u0259\u0279\u0259t/",
       "family": [
         "curacy",
         "sinecure",
@@ -4155,8 +4442,9 @@
         "keeper",
         "custodian"
       ],
+      "example": "Elena is the curator of a modern art gallery.",
       "pos": "noun",
-      "ipa": "/kjʊəˈɹeɪtɚ/",
+      "ipa": "/kj\u028a\u0259\u02c8\u0279e\u026at\u025a/",
       "family": [
         "curatorial",
         "curate",
@@ -4170,6 +4458,7 @@
         "opposite",
         "contrast"
       ],
+      "example": "Death is the antithesis of life.",
       "pos": "noun",
       "family": [
         "antithetic",
@@ -4184,13 +4473,14 @@
         "variable",
         "limit"
       ],
+      "example": "You need a parameter to capture the stiffness of the metal.",
       "pos": "noun",
+      "ipa": "/p\u0259\u02c8\u0279\u00e6m.\u026a.t\u0259/",
       "family": [
         "parameterize",
         "parametric",
         "variable"
-      ],
-      "ipa": "/pəˈɹæm.ɪ.tə/"
+      ]
     },
     {
       "word": "DETRACT",
@@ -4199,12 +4489,13 @@
         "belittle",
         "disparage"
       ],
+      "example": "I hope that her success doesn't detract from theirs.",
       "pos": "verb",
+      "ipa": "/d\u026a\u02c8t\u0279\u00e6kt/",
       "family": [
         "detraction",
         "detractor"
-      ],
-      "ipa": "/dɪˈtɹækt/"
+      ]
     },
     {
       "word": "PERVERSE",
@@ -4213,8 +4504,9 @@
         "contrary",
         "wayward"
       ],
+      "example": "He's perverse.",
       "pos": "adjective",
-      "ipa": "/pɚˈvɝs/",
+      "ipa": "/p\u025a\u02c8v\u025ds/",
       "family": [
         "perversely",
         "perverseness",
@@ -4228,8 +4520,9 @@
         "contrariness",
         "waywardness"
       ],
+      "example": "In the sphere of thought, absurdity and perversity remain the masters of the world, and their dominion is suspended only for brief periods.",
       "pos": "noun",
-      "ipa": "/pɚˈvɝː.sə.ti/",
+      "ipa": "/p\u025a\u02c8v\u025d\u02d0.s\u0259.ti/",
       "family": [
         "perverse",
         "pervert",
@@ -4243,8 +4536,9 @@
         "cloudy",
         "murky"
       ],
+      "example": "The water is opaque.",
       "pos": "adjective",
-      "ipa": "/əʊˈpeɪk/",
+      "ipa": "/\u0259\u028a\u02c8pe\u026ak/",
       "family": [
         "opaquely",
         "opaqueness",
@@ -4258,8 +4552,9 @@
         "cloudiness",
         "murkiness"
       ],
+      "example": "The opacity of his explanation left the audience more confused than before.",
       "pos": "noun",
-      "ipa": "/oʊˈpæsɪti/",
+      "ipa": "/o\u028a\u02c8p\u00e6s\u026ati/",
       "family": [
         "opaque"
       ]
@@ -4271,8 +4566,9 @@
         "send",
         "transfer"
       ],
+      "example": "I won't be able to remit the balance until the first of the month.",
       "pos": "verb",
-      "ipa": "/ɹɪˈmɪt/",
+      "ipa": "/\u0279\u026a\u02c8m\u026at/",
       "family": [
         "remittance",
         "unremitting",
@@ -4286,8 +4582,9 @@
         "payment",
         "transfer"
       ],
+      "example": "With reference to the invoice No.56789 which was due last month, we have not yet received your remittance.",
       "pos": "noun",
-      "ipa": "/ɹɪˈmɪtəns/",
+      "ipa": "/\u0279\u026a\u02c8m\u026at\u0259ns/",
       "family": [
         "remit"
       ]
@@ -4299,8 +4596,9 @@
         "option",
         "resort"
       ],
+      "example": "They had no other recourse but to apologize.",
       "pos": "noun",
-      "ipa": "/ɹɪˈkɔːs/",
+      "ipa": "/\u0279\u026a\u02c8k\u0254\u02d0s/",
       "family": [
         "recur",
         "recursion",
@@ -4314,8 +4612,9 @@
         "stand",
         "base"
       ],
+      "example": "Daniel put the sculpture on the pedestal.",
       "pos": "noun",
-      "ipa": "/ˈpɛdɪstəl/",
+      "ipa": "/\u02c8p\u025bd\u026ast\u0259l/",
       "family": [
         "place",
         "set"
@@ -4328,8 +4627,9 @@
         "walker",
         "foot-traveler"
       ],
+      "example": "The professor's pedestrian lecture left the students yawning in the dimly lit auditorium.",
       "pos": "adjective",
-      "ipa": "/pəˈdɛstɹiən/",
+      "ipa": "/p\u0259\u02c8d\u025bst\u0279i\u0259n/",
       "family": [
         "pedestrianization",
         "pedestrianize"
@@ -4342,8 +4642,9 @@
         "sensational",
         "shocking"
       ],
+      "example": "The article has a lurid title.",
       "pos": "adjective",
-      "ipa": "/ˈlɔːɹɪd/",
+      "ipa": "/\u02c8l\u0254\u02d0\u0279\u026ad/",
       "family": [
         "luridly",
         "luridness"
@@ -4356,8 +4657,9 @@
         "sensationalistically",
         "shockingly"
       ],
+      "example": "The tabloid headlines screamed luridly about the celebrity's extravagant, over-the-top fashion choices.",
       "pos": "adverb",
-      "ipa": "/ˈlʊr.ɪd.li/",
+      "ipa": "/\u02c8l\u028ar.\u026ad.li/",
       "family": [
         "lurid",
         "luridness"
@@ -4370,13 +4672,14 @@
         "error",
         "misconception"
       ],
+      "example": "This is a fallacy.",
       "pos": "noun",
+      "ipa": "/\u02c8f\u00e6l.\u0259.si/",
       "family": [
         "fallacious",
         "fail",
         "fallible"
-      ],
-      "ipa": "/ˈfæl.ə.si/"
+      ]
     },
     {
       "word": "RIFE",
@@ -4385,8 +4688,9 @@
         "widespread",
         "abundant"
       ],
+      "example": "Government corruption is rife in Ukraine.",
       "pos": "adjective",
-      "ipa": "/ɹaɪf/"
+      "ipa": "/\u0279a\u026af/"
     },
     {
       "word": "MERCENARY",
@@ -4395,11 +4699,12 @@
         "hired",
         "paid-soldier"
       ],
+      "example": "He became a mercenary.",
       "pos": "noun",
+      "ipa": "/\u02c8m\u025c\u02d0.s\u0259.n\u0259.\u0279i/",
       "family": [
         "soldier"
-      ],
-      "ipa": "/ˈmɜː.sə.nə.ɹi/"
+      ]
     },
     {
       "word": "SYLLABIC",
@@ -4407,8 +4712,9 @@
       "synonyms": [
         "sound-based"
       ],
+      "example": "I opine that languages with ambiguous syllabic shapes are not really good for haiku.",
       "pos": "adjective",
-      "ipa": "/sɪˈlæb.ɪk/",
+      "ipa": "/s\u026a\u02c8l\u00e6b.\u026ak/",
       "family": [
         "disyllabic",
         "monosyllabic",
@@ -4422,8 +4728,9 @@
         "fragment",
         "bit"
       ],
+      "example": "She gave me a snippet of information which is top secret.",
       "pos": "noun",
-      "ipa": "/ˈsnɪpɪt/",
+      "ipa": "/\u02c8sn\u026ap\u026at/",
       "family": [
         "snip"
       ]
@@ -4435,13 +4742,14 @@
         "fleeting",
         "transient"
       ],
+      "example": "Life is ephemeral.",
       "pos": "adjective",
+      "ipa": "/\u025b\u02c8f\u025b.m\u0259.\u0279\u0259l/",
       "family": [
         "ephemerally",
         "ephemera",
         "intermittent"
-      ],
-      "ipa": "/ɛˈfɛ.mə.ɹəl/"
+      ]
     },
     {
       "word": "EPHEMERA",
@@ -4450,8 +4758,9 @@
         "transients",
         "short-livings"
       ],
+      "example": "The museum displayed vintage concert tickets and old postcards as fascinating ephemera from the past.",
       "pos": "noun",
-      "ipa": "/ɪˈfɛməɹə/",
+      "ipa": "/\u026a\u02c8f\u025bm\u0259\u0279\u0259/",
       "family": [
         "ephemeral",
         "ephemerally"
@@ -4464,8 +4773,9 @@
         "briefly",
         "concisely"
       ],
+      "example": "The demand was summarily rejected.",
       "pos": "adverb",
-      "ipa": "/səˈmɛɹɪli/",
+      "ipa": "/s\u0259\u02c8m\u025b\u0279\u026ali/",
       "family": [
         "summary",
         "summarize"
@@ -4479,7 +4789,7 @@
         "scan"
       ],
       "pos": "verb",
-      "ipa": "/skɪm/",
+      "ipa": "/sk\u026am/",
       "family": [
         "skimmer"
       ]
@@ -4491,8 +4801,9 @@
         "unerringly",
         "faultlessly"
       ],
+      "example": "The judge's infallibly fair rulings earned the town's complete trust.",
       "pos": "adverb",
-      "ipa": "/ɪnˈfæl.ɪ.bli/",
+      "ipa": "/\u026an\u02c8f\u00e6l.\u026a.bli/",
       "family": [
         "infallible",
         "infallibility",
@@ -4506,12 +4817,13 @@
         "unerring",
         "faultless"
       ],
+      "example": "I'm not infallible.",
       "pos": "adjective",
+      "ipa": "/\u026an\u02c8f\u00e6l\u026ab\u0259l/",
       "family": [
         "infallibility",
         "infallibly"
-      ],
-      "ipa": "/ɪnˈfælɪbəl/"
+      ]
     },
     {
       "word": "DEPRAVITY",
@@ -4520,8 +4832,9 @@
         "corruption",
         "wickedness"
       ],
+      "example": "The attack on the hotel, once again, shows the depravity of terrorists who seek to sow chaos.",
       "pos": "noun",
-      "ipa": "/dəˈpɹævɪti/",
+      "ipa": "/d\u0259\u02c8p\u0279\u00e6v\u026ati/",
       "family": [
         "depraved",
         "deprave"
@@ -4534,8 +4847,9 @@
         "corrupt",
         "wicked"
       ],
+      "example": "He's depraved.",
       "pos": "adjective",
-      "ipa": "/dɪˈpɹeɪvd/",
+      "ipa": "/d\u026a\u02c8p\u0279e\u026avd/",
       "family": [
         "deprave",
         "depravity"
@@ -4548,8 +4862,9 @@
         "disapprove",
         "belittle"
       ],
+      "example": "The committee decided to deprecate the outdated policy to encourage more modern and inclusive practices.",
       "pos": "verb",
-      "ipa": "/ˈdɛpɹɪkeɪt/",
+      "ipa": "/\u02c8d\u025bp\u0279\u026ake\u026at/",
       "family": [
         "deprecatory",
         "deprecation",
@@ -4563,8 +4878,9 @@
         "abuse",
         "insult"
       ],
+      "example": "Love me or revile me, but do not ignore me.",
       "pos": "verb",
-      "ipa": "/ɹəˈvaɪl/",
+      "ipa": "/\u0279\u0259\u02c8va\u026al/",
       "family": [
         "revilement",
         "reviler",
@@ -4578,8 +4894,9 @@
         "disgust",
         "repugnance"
       ],
+      "example": "His revulsion was obvious.",
       "pos": "noun",
-      "ipa": "/ɹɪˈvʌlʃən/"
+      "ipa": "/\u0279\u026a\u02c8v\u028cl\u0283\u0259n/"
     },
     {
       "word": "MEAGER",
@@ -4588,8 +4905,9 @@
         "scanty",
         "sparse"
       ],
+      "example": "The pay is meager.",
       "pos": "adjective",
-      "ipa": "/ˈmiɡɚ/",
+      "ipa": "/\u02c8mi\u0261\u025a/",
       "family": [
         "meagerly",
         "meagerness"
@@ -4602,8 +4920,9 @@
         "obscure",
         "esoteric"
       ],
+      "example": "Nowadays, the fourteenth century's debate about the Eucharist sounds completely arcane.",
       "pos": "adjective",
-      "ipa": "/ɑɹˈkeɪn/"
+      "ipa": "/\u0251\u0279\u02c8ke\u026an/"
     },
     {
       "word": "DIVINATION",
@@ -4612,8 +4931,9 @@
         "prophecy",
         "foretelling"
       ],
+      "example": "Augury is divination based on the behavior of birds.",
       "pos": "noun",
-      "ipa": "/ˌdɪvɪˈneɪʃən/",
+      "ipa": "/\u02ccd\u026av\u026a\u02c8ne\u026a\u0283\u0259n/",
       "family": [
         "divine"
       ]
@@ -4625,8 +4945,9 @@
         "dart",
         "flutter"
       ],
+      "example": "The fairy would gracefully flit from flower to flower, gathering nectar and dewdrops for her magic.",
       "pos": "verb",
-      "ipa": "/flɪt/",
+      "ipa": "/fl\u026at/",
       "family": [
         "dart",
         "dash",
@@ -4640,8 +4961,9 @@
         "snag",
         "catch"
       ],
+      "example": "There was a hitch.",
       "pos": "verb",
-      "ipa": "/hɪt͡ʃ/",
+      "ipa": "/h\u026at\u0361\u0283/",
       "family": [
         "hitcher",
         "hitchhike",
@@ -4655,8 +4977,9 @@
         "inclined",
         "susceptible"
       ],
+      "example": "He was prone to anger.",
       "pos": "adjective",
-      "ipa": "/pɹəʊn/",
+      "ipa": "/p\u0279\u0259\u028an/",
       "family": [
         "proneness"
       ]
@@ -4668,8 +4991,9 @@
         "forager",
         "scrounger"
       ],
+      "example": "Scavenging is both a carnivorous and herbivorous feeding behavior in which the scavenger feeds on dead and decaying organic matter present in its habitat.",
       "pos": "noun",
-      "ipa": "/ˈskæv.ɪn.dʒɚ/",
+      "ipa": "/\u02c8sk\u00e6v.\u026an.d\u0292\u025a/",
       "family": [
         "scavenge",
         "scavenged",
@@ -4683,8 +5007,9 @@
         "pests",
         "rodents"
       ],
+      "example": "Garbage harbors vermin.",
       "pos": "noun",
-      "ipa": "/ˈvɜːmɪn/",
+      "ipa": "/\u02c8v\u025c\u02d0m\u026an/",
       "family": [
         "verminous",
         "varmint"
@@ -4697,8 +5022,9 @@
         "symbolic",
         "emblematic"
       ],
+      "example": "Many Brexit supporters saw regaining control of the country\u2019s sovereign waters as totemic.",
       "pos": "adjective",
-      "ipa": "/təʊˈtɛmɪk/",
+      "ipa": "/t\u0259\u028a\u02c8t\u025bm\u026ak/",
       "family": [
         "emblematic"
       ]
@@ -4710,13 +5036,14 @@
         "imitate",
         "copy"
       ],
+      "example": "Every child needs someone to admire and emulate.",
       "pos": "verb",
+      "ipa": "/\u02c8\u025bm.j\u028a.le\u026at/",
       "family": [
         "emulation",
         "emulative",
         "emulator"
-      ],
-      "ipa": "/ˈɛm.jʊ.leɪt/"
+      ]
     },
     {
       "word": "EMULATION",
@@ -4725,13 +5052,14 @@
         "imitation",
         "copying"
       ],
+      "example": "The athlete\u2019s relentless emulation of her rival\u2019s technique led her to break the world record.",
       "pos": "noun",
+      "ipa": "/\u02cc\u025bm.j\u028a\u02c8le\u026a\u032f.\u0283\u0259n/",
       "family": [
         "emulate",
         "emulative",
         "emulator"
-      ],
-      "ipa": "/ˌɛm.jʊˈleɪ̯.ʃən/"
+      ]
     },
     {
       "word": "VESTIGIAL",
@@ -4740,8 +5068,9 @@
         "residual",
         "leftover"
       ],
+      "example": "The coccyx is a vestigial trait.",
       "pos": "adjective",
-      "ipa": "/vɛˈstɪd͡ʒɪəl/",
+      "ipa": "/v\u025b\u02c8st\u026ad\u0361\u0292\u026a\u0259l/",
       "family": [
         "vestigially",
         "vestige"
@@ -4754,8 +5083,9 @@
         "uproar",
         "commotion"
       ],
+      "example": "The surprise announcement caused a huge brouhaha among the already excited crowd.",
       "pos": "noun",
-      "ipa": "/ˈbɹuː.hɑː.hɑː/",
+      "ipa": "/\u02c8b\u0279u\u02d0.h\u0251\u02d0.h\u0251\u02d0/",
       "family": [
         "brouhahas"
       ]
@@ -4767,8 +5097,9 @@
         "tycoon",
         "mogul"
       ],
+      "example": "He is a magnate.",
       "pos": "noun",
-      "ipa": "/ˈmæɡneɪt/"
+      "ipa": "/\u02c8m\u00e6\u0261ne\u026at/"
     },
     {
       "word": "WHIRLWIND",
@@ -4777,8 +5108,9 @@
         "tornado",
         "cyclone"
       ],
+      "example": "It's like a whirlwind inside my mind.",
       "pos": "noun",
-      "ipa": "/ˈwɜːlwɪnd/",
+      "ipa": "/\u02c8w\u025c\u02d0lw\u026and/",
       "family": [
         "whirl",
         "whirlpool"
@@ -4792,7 +5124,7 @@
         "passage"
       ],
       "pos": "noun",
-      "ipa": "/stɹeɪt/",
+      "ipa": "/st\u0279e\u026at/",
       "family": [
         "straitjacket"
       ]
@@ -4804,8 +5136,9 @@
         "worldly",
         "nonreligious"
       ],
+      "example": "I'm secular.",
       "pos": "adjective",
-      "ipa": "/ˈsɛkjʊlə/",
+      "ipa": "/\u02c8s\u025bkj\u028al\u0259/",
       "family": [
         "secularism",
         "secularist",
@@ -4819,8 +5152,9 @@
         "softening",
         "mild-term"
       ],
+      "example": "Is that a euphemism for something?",
       "pos": "noun",
-      "ipa": "/ˈjuː.fəˌmɪz.əm/",
+      "ipa": "/\u02c8ju\u02d0.f\u0259\u02ccm\u026az.\u0259m/",
       "family": [
         "euphemistic",
         "pseudonym"
@@ -4833,13 +5167,14 @@
         "superfluous",
         "excess"
       ],
+      "example": "It's redundant.",
       "pos": "adjective",
+      "ipa": "/\u0279\u026a\u02c8d\u028cn.d\u0259nt/",
       "family": [
         "redundantly",
         "redound",
         "redundancy"
-      ],
-      "ipa": "/ɹɪˈdʌn.dənt/"
+      ]
     },
     {
       "word": "REDUNDANCY",
@@ -4848,8 +5183,9 @@
         "superfluity",
         "excess"
       ],
+      "example": "She was threatened with redundancy.",
       "pos": "noun",
-      "ipa": "/rɪˈdʌn.dən.si/",
+      "ipa": "/r\u026a\u02c8d\u028cn.d\u0259n.si/",
       "family": [
         "redundant",
         "redundantly"
@@ -4863,13 +5199,14 @@
         "conversational",
         "vernacular"
       ],
+      "example": "Is there a colloquial form of that word?",
       "pos": "adjective",
+      "ipa": "/k\u0259\u02c8l\u0259\u028a.kwi.\u0259l/",
       "family": [
         "colloquialism",
         "colloquially",
         "colloquium"
-      ],
-      "ipa": "/kəˈləʊ.kwi.əl/"
+      ]
     },
     {
       "word": "COLLOQUIUM",
@@ -4879,8 +5216,9 @@
         "conference",
         "symposium"
       ],
+      "example": "The university hosted a colloquium where scholars presented cutting-edge research in renewable energy.",
       "pos": "noun",
-      "ipa": "/kəˈləʊkwiəm/",
+      "ipa": "/k\u0259\u02c8l\u0259\u028akwi\u0259m/",
       "family": [
         "colloquy"
       ]
@@ -4893,11 +5231,12 @@
         "hint",
         "mention"
       ],
+      "example": "I understand the allusion.",
       "pos": "noun",
+      "ipa": "/\u0259\u02c8lu.\u0292\u0259n/",
       "family": [
         "allude"
-      ],
-      "ipa": "/əˈlu.ʒən/"
+      ]
     },
     {
       "word": "ALLUDE",
@@ -4907,8 +5246,9 @@
         "hint",
         "suggest"
       ],
+      "example": "In the early part of my study, I allude to work that had already been done on the psychology of crowd-control.",
       "pos": "verb",
-      "ipa": "/əˈljuːd/",
+      "ipa": "/\u0259\u02c8lju\u02d0d/",
       "family": [
         "allusion",
         "allusive",
@@ -4923,8 +5263,9 @@
         "deride",
         "mock"
       ],
+      "example": "Do not disparage that man.",
       "pos": "verb",
-      "ipa": "/dɪsˈpæɹɪd͡ʒ/",
+      "ipa": "/d\u026as\u02c8p\u00e6\u0279\u026ad\u0361\u0292/",
       "family": [
         "disparagement",
         "disparaging"
@@ -4938,8 +5279,9 @@
         "gather",
         "crowd"
       ],
+      "example": "The gazelles congregated in a small huddle.",
       "pos": "noun",
-      "ipa": "/ˈhʌdəl/",
+      "ipa": "/\u02c8h\u028cd\u0259l/",
       "family": [
         "huddled",
         "huddling"
@@ -4953,8 +5295,9 @@
         "landscape",
         "relief"
       ],
+      "example": "Kansas has a flat topography.",
       "pos": "noun",
-      "ipa": "/təˈpɒɡɹəfi/",
+      "ipa": "/t\u0259\u02c8p\u0252\u0261\u0279\u0259fi/",
       "family": [
         "topographer",
         "topographic",
@@ -4969,8 +5312,9 @@
         "bizarre",
         "fantastic"
       ],
+      "example": "I like surrealist paintings.",
       "pos": "noun",
-      "ipa": "/səˈɹiː.ə.lɪst/",
+      "ipa": "/s\u0259\u02c8\u0279i\u02d0.\u0259.l\u026ast/",
       "family": [
         "surreal",
         "surrealism",
@@ -4985,12 +5329,13 @@
         "fantastic style",
         "absurdism"
       ],
+      "example": "I like surrealism.",
       "pos": "noun",
+      "ipa": "/s\u0259\u02c8\u0279i\u02d0.\u0259.l\u026az.\u0259m/",
       "family": [
         "surreal",
         "surrealist"
-      ],
-      "ipa": "/səˈɹiː.ə.lɪz.əm/"
+      ]
     },
     {
       "word": "CONTRIVE",
@@ -5001,7 +5346,7 @@
         "engineer"
       ],
       "pos": "verb",
-      "ipa": "/kənˈtɹaɪv/",
+      "ipa": "/k\u0259n\u02c8t\u0279a\u026av/",
       "family": [
         "contrivance",
         "contrived",
@@ -5016,12 +5361,13 @@
         "ill will",
         "rancor"
       ],
+      "example": "I bear him no malice.",
       "pos": "noun",
+      "ipa": "/\u02c8m\u00e6l\u026as/",
       "family": [
         "malicious",
         "malady"
-      ],
-      "ipa": "/ˈmælɪs/"
+      ]
     },
     {
       "word": "MALICIOUS",
@@ -5031,8 +5377,9 @@
         "vindictive",
         "hostile"
       ],
+      "example": "You're being malicious.",
       "pos": "adjective",
-      "ipa": "/məˈlɪʃəs/",
+      "ipa": "/m\u0259\u02c8l\u026a\u0283\u0259s/",
       "family": [
         "maliciously",
         "maliciousness",
@@ -5047,8 +5394,9 @@
         "industrious",
         "conscientious"
       ],
+      "example": "He's diligent.",
       "pos": "adjective",
-      "ipa": "/ˈdɪlɪdʒənt/",
+      "ipa": "/\u02c8d\u026al\u026ad\u0292\u0259nt/",
       "family": [
         "diligently",
         "diligence"
@@ -5062,8 +5410,9 @@
         "industry",
         "perseverance"
       ],
+      "example": "Diligence trumps talent.",
       "pos": "noun",
-      "ipa": "/ˈdɪlɪd͡ʒəns/",
+      "ipa": "/\u02c8d\u026al\u026ad\u0361\u0292\u0259ns/",
       "family": [
         "gumption",
         "vigilance"
@@ -5077,8 +5426,9 @@
         "industriously",
         "conscientiously"
       ],
+      "example": "She studies diligently.",
       "pos": "adverb",
-      "ipa": "/ˈdɪl.ɪ.dʒənt.li/",
+      "ipa": "/\u02c8d\u026al.\u026a.d\u0292\u0259nt.li/",
       "family": [
         "diligent",
         "diligence"
@@ -5092,8 +5442,9 @@
         "steeple",
         "spire"
       ],
+      "example": "He pointed towards the turret.",
       "pos": "noun",
-      "ipa": "/ˈtʌɹɪt/",
+      "ipa": "/\u02c8t\u028c\u0279\u026at/",
       "family": [
         "turreted"
       ]
@@ -5107,7 +5458,7 @@
         "pretension"
       ],
       "pos": "noun",
-      "ipa": "/ˈsnɔbəɹɪj/",
+      "ipa": "/\u02c8sn\u0254b\u0259\u0279\u026aj/",
       "family": [
         "snob",
         "snobbish",
@@ -5122,8 +5473,9 @@
         "insular",
         "provincial"
       ],
+      "example": "His parents wanted him to have a Catholic education so they sent him to parochial school.",
       "pos": "adjective",
-      "ipa": "/pəˈɹəʊkɪəl/",
+      "ipa": "/p\u0259\u02c8\u0279\u0259\u028ak\u026a\u0259l/",
       "family": [
         "parochialism",
         "parochially",
@@ -5138,11 +5490,12 @@
         "drift",
         "lean"
       ],
+      "example": "Women gravitate towards confident men.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0261\u0279\u00e6v\u026ate\u026at/",
       "family": [
         "gravitation"
-      ],
-      "ipa": "/ˈɡɹævɪteɪt/"
+      ]
     },
     {
       "word": "HAUGHTY",
@@ -5152,8 +5505,9 @@
         "proud",
         "disdainful"
       ],
+      "example": "What a haughty fellow he is!",
       "pos": "adjective",
-      "ipa": "/ˈhɔːti/",
+      "ipa": "/\u02c8h\u0254\u02d0ti/",
       "family": [
         "haughtily",
         "haughtiness",
@@ -5168,8 +5522,9 @@
         "proudly",
         "disdainfully"
       ],
+      "example": "She accepted the award haughtily, completely ignoring the applause around her.",
       "pos": "adverb",
-      "ipa": "/ˈhɔːt.ɪ.li/",
+      "ipa": "/\u02c8h\u0254\u02d0t.\u026a.li/",
       "family": [
         "haughty",
         "haughtiness"
@@ -5183,11 +5538,12 @@
         "obvious",
         "undeniable"
       ],
+      "example": "It may be true, but it's hardly axiomatic.",
       "pos": "adjective",
+      "ipa": "/\u02cc\u00e6k.si.\u0259\u02c8m\u00e6t.\u026ak/",
       "family": [
         "axiomatically"
-      ],
-      "ipa": "/ˌæk.si.əˈmæt.ɪk/"
+      ]
     },
     {
       "word": "ATTRITION",
@@ -5197,8 +5553,9 @@
         "wear",
         "reduction"
       ],
+      "example": "We're fighting a war of attrition.",
       "pos": "noun",
-      "ipa": "/əˈtɹɪʃən/",
+      "ipa": "/\u0259\u02c8t\u0279\u026a\u0283\u0259n/",
       "family": [
         "contrition"
       ]
@@ -5210,8 +5567,9 @@
         "reprint",
         "re-release"
       ],
+      "example": "This is a reissue.",
       "pos": "verb",
-      "ipa": "/ˌriːˈɪʃuː/",
+      "ipa": "/\u02ccri\u02d0\u02c8\u026a\u0283u\u02d0/",
       "family": [
         "issue"
       ]
@@ -5224,11 +5582,12 @@
         "specter",
         "apparition"
       ],
+      "example": "I saw a phantom cat.",
       "pos": "noun",
+      "ipa": "/\u02c8f\u00e6nt\u0259m/",
       "family": [
         "fantasy"
-      ],
-      "ipa": "/ˈfæntəm/"
+      ]
     },
     {
       "word": "MOOR",
@@ -5236,8 +5595,9 @@
       "synonyms": [
         "tether"
       ],
+      "example": "Moor the ship at the pier.",
       "pos": "noun",
-      "ipa": "/mʊə/",
+      "ipa": "/m\u028a\u0259/",
       "family": [
         "Dartmoor",
         "moorhen",
@@ -5252,8 +5612,9 @@
         "lonely",
         "isolated"
       ],
+      "example": "Some bees are solitary.",
       "pos": "noun",
-      "ipa": "/ˈsɑlɪˌtɛɹi/",
+      "ipa": "/\u02c8s\u0251l\u026a\u02cct\u025b\u0279i/",
       "family": [
         "solitariness"
       ]
@@ -5266,8 +5627,9 @@
         "loneliness",
         "seclusion"
       ],
+      "example": "Seek solitude.",
       "pos": "noun",
-      "ipa": "/ˈsɒlɪˌtjuːd/",
+      "ipa": "/\u02c8s\u0252l\u026a\u02cctju\u02d0d/",
       "family": [
         "sole",
         "soliloquy",
@@ -5282,8 +5644,9 @@
         "cling",
         "bond"
       ],
+      "example": "Wet clothes adhere to the skin.",
       "pos": "verb",
-      "ipa": "/ædˈhɪə/",
+      "ipa": "/\u00e6d\u02c8h\u026a\u0259/",
       "family": [
         "adherence",
         "adherent",
@@ -5298,11 +5661,12 @@
         "attachment",
         "bond"
       ],
+      "example": "The adhesion of the sticker to the surface was strong enough to withstand the breeze.",
       "pos": "noun",
+      "ipa": "/\u02cc\u00e6d\u02c8hi\u02d0.\u0292\u0259n/",
       "family": [
         "adhesive"
-      ],
-      "ipa": "/ˌædˈhiː.ʒən/"
+      ]
     },
     {
       "word": "PROSCRIBE",
@@ -5312,8 +5676,9 @@
         "ban",
         "outlaw"
       ],
+      "example": "The school board voted to proscribe the use of mobile phones during classes.",
       "pos": "verb",
-      "ipa": "/pɹəˈskɹaɪb/",
+      "ipa": "/p\u0279\u0259\u02c8sk\u0279a\u026ab/",
       "family": [
         "proscription"
       ]
@@ -5326,8 +5691,9 @@
         "associate",
         "companion"
       ],
+      "example": "The CEO always trusted his crony\u2019s advice more than the board\u2019s suggestions.",
       "pos": "noun",
-      "ipa": "/ˈkɹoʊni/",
+      "ipa": "/\u02c8k\u0279o\u028ani/",
       "family": [
         "cronyism"
       ]
@@ -5340,8 +5706,9 @@
         "drip",
         "drool"
       ],
+      "example": "After the heavy rain, water began to dribble from the rusty pipe under the roof.",
       "pos": "noun",
-      "ipa": "/ˈdɹɪ.bəl/",
+      "ipa": "/\u02c8d\u0279\u026a.b\u0259l/",
       "family": [
         "dribbler",
         "dribbling"
@@ -5355,8 +5722,9 @@
         "thankless one",
         "unappreciative"
       ],
+      "example": "She called him an ingrate for never thanking anyone for their help.",
       "pos": "noun",
-      "ipa": "/ˈɪnɡɹeɪt/",
+      "ipa": "/\u02c8\u026an\u0261\u0279e\u026at/",
       "family": [
         "ingratitude",
         "ingratiate"
@@ -5370,8 +5738,9 @@
         "unsteady",
         "wobbly"
       ],
+      "example": "The bridge is rickety.",
       "pos": "adjective",
-      "ipa": "/ˈɹɪk.ɪ.ti/",
+      "ipa": "/\u02c8\u0279\u026ak.\u026a.ti/",
       "family": [
         "rickets"
       ]
@@ -5384,8 +5753,9 @@
         "assign",
         "deliver"
       ],
+      "example": "The antique collector will consign the rare vase to the auction house for appraisal.",
       "pos": "verb",
-      "ipa": "/kənˈsaɪn/",
+      "ipa": "/k\u0259n\u02c8sa\u026an/",
       "family": [
         "consignee",
         "consignment",
@@ -5400,8 +5770,9 @@
         "gala",
         "celebration"
       ],
+      "example": "Every village, however small, has its annual fete.",
       "pos": "noun",
-      "ipa": "/feɪt/",
+      "ipa": "/fe\u026at/",
       "family": [
         "festival"
       ]
@@ -5414,8 +5785,9 @@
         "wealthy",
         "lavish"
       ],
+      "example": "Boston is a relatively opulent city.",
       "pos": "adjective",
-      "ipa": "/ˈɒpjʊlənt/",
+      "ipa": "/\u02c8\u0252pj\u028al\u0259nt/",
       "family": [
         "opulently",
         "opulence"
@@ -5429,11 +5801,12 @@
         "luxury",
         "affluence"
       ],
+      "example": "Rich people live in opulence.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0252p.j\u028al.\u0259ns/",
       "family": [
         "opulent"
-      ],
-      "ipa": "/ˈɒp.jʊl.əns/"
+      ]
     },
     {
       "word": "OPULENTLY",
@@ -5443,8 +5816,9 @@
         "lavishly",
         "richly"
       ],
+      "example": "The billionaire's penthouse was decorated opulently with gold fixtures and velvet drapes.",
       "pos": "adverb",
-      "ipa": "/ˈɒpjələntli/",
+      "ipa": "/\u02c8\u0252pj\u0259l\u0259ntli/",
       "family": [
         "opulent",
         "opulence"
@@ -5458,12 +5832,13 @@
         "tycoon",
         "magnate"
       ],
+      "example": "The plutocrat is a person whose power comes from their wealth.",
       "pos": "noun",
+      "ipa": "/\u02c8plu\u02d0t\u0259k\u0279\u00e6t/",
       "family": [
         "plutocracy",
         "plutocratic"
-      ],
-      "ipa": "/ˈpluːtəkɹæt/"
+      ]
     },
     {
       "word": "AVERSE",
@@ -5473,13 +5848,14 @@
         "opposed",
         "disinclined"
       ],
+      "example": "I'm not averse to a good night out.",
       "pos": "adjective",
+      "ipa": "/\u0259\u02c8v\u025c\u02d0s/",
       "family": [
         "avert",
         "aversion",
         "adverse"
-      ],
-      "ipa": "/əˈvɜːs/"
+      ]
     },
     {
       "word": "EDIFY",
@@ -5489,8 +5865,9 @@
         "instruct",
         "uplift"
       ],
+      "example": "His speech was meant to edify, not to attack.",
       "pos": "verb",
-      "ipa": "/ˈɛdɪfaɪ/",
+      "ipa": "/\u02c8\u025bd\u026afa\u026a/",
       "family": [
         "edification",
         "edifice",
@@ -5505,8 +5882,9 @@
         "infertility",
         "aridity"
       ],
+      "example": "A bilateral salpingectomy, which is the surgical removal of both Fallopian tubes, will result in sterility.",
       "pos": "noun",
-      "ipa": "/stɛˈɹɪlɪti/",
+      "ipa": "/st\u025b\u02c8\u0279\u026al\u026ati/",
       "family": [
         "sterile",
         "sterilize"
@@ -5520,8 +5898,9 @@
         "eloquence",
         "discourse"
       ],
+      "example": "This argument is pure rhetoric.",
       "pos": "noun",
-      "ipa": "/ˈɹɛtəɹɪk/",
+      "ipa": "/\u02c8\u0279\u025bt\u0259\u0279\u026ak/",
       "family": [
         "rhetorical",
         "rhetorician"
@@ -5535,8 +5914,9 @@
         "persuasive",
         "declamatory"
       ],
+      "example": "The question was rhetorical.",
       "pos": "adjective",
-      "ipa": "/ɹɪˈtɒɹ.ɪ.kəl/",
+      "ipa": "/\u0279\u026a\u02c8t\u0252\u0279.\u026a.k\u0259l/",
       "family": [
         "rhetorically",
         "rhetoric"
@@ -5550,8 +5930,9 @@
         "capricious",
         "erratic"
       ],
+      "example": "People have told me I'm flighty.",
       "pos": "adjective",
-      "ipa": "/ˈflaɪti/",
+      "ipa": "/\u02c8fla\u026ati/",
       "family": [
         "flightiness"
       ]
@@ -5562,8 +5943,9 @@
       "synonyms": [
         "sulfur"
       ],
+      "example": "The volcano spewed smoke that smelled faintly of brimstone.",
       "pos": "noun",
-      "ipa": "/ˈbɹɪmstəʊn/",
+      "ipa": "/\u02c8b\u0279\u026amst\u0259\u028an/",
       "family": [
         "sulfur"
       ]
@@ -5576,8 +5958,9 @@
         "faultless",
         "unblemished"
       ],
+      "example": "He's an impeccable host.",
       "pos": "adjective",
-      "ipa": "/ɪmˈpɛkəbəl/",
+      "ipa": "/\u026am\u02c8p\u025bk\u0259b\u0259l/",
       "family": [
         "impeccability",
         "impeccably"
@@ -5591,12 +5974,13 @@
         "faultlessly",
         "perfectly"
       ],
+      "example": "He is impeccably dressed.",
       "pos": "adverb",
+      "ipa": "/\u026am\u02c8p\u025bk.\u0259.bli/",
       "family": [
         "impeccability",
         "impeccable"
-      ],
-      "ipa": "/ɪmˈpɛk.ə.bli/"
+      ]
     },
     {
       "word": "ROMP",
@@ -5606,8 +5990,9 @@
         "gambol",
         "play"
       ],
+      "example": "Our romp really wore me out.",
       "pos": "verb",
-      "ipa": "/ɹɒmp/",
+      "ipa": "/\u0279\u0252mp/",
       "family": [
         "romper",
         "rompers",
@@ -5622,8 +6007,9 @@
         "jumpsuit",
         "onesie"
       ],
+      "example": "The toddler giggled as they kicked their legs in the colorful romper, ready for a day at the park.",
       "pos": "noun",
-      "ipa": "/ˈɹɒmpə/",
+      "ipa": "/\u02c8\u0279\u0252mp\u0259/",
       "family": [
         "rompers",
         "romp"
@@ -5637,13 +6023,14 @@
         "scrupulous",
         "precise"
       ],
+      "example": "I'm meticulous.",
       "pos": "adjective",
+      "ipa": "/m\u0259\u02c8t\u026a.kj\u0259.l\u0259s/",
       "family": [
         "meticulously",
         "meticulousness",
         "bureaucratic"
-      ],
-      "ipa": "/məˈtɪ.kjə.ləs/"
+      ]
     },
     {
       "word": "INGRATIATE",
@@ -5653,12 +6040,13 @@
         "curry-favor",
         "charm"
       ],
+      "example": "He was a sycophant, always trying to ingratiate himself with the wealthy.",
       "pos": "verb",
+      "ipa": "/\u026an\u02c8\u0261\u0279e\u026a.\u0283i.e\u026at/",
       "family": [
         "ingratiating",
         "ingratiation"
-      ],
-      "ipa": "/ɪnˈɡɹeɪ.ʃi.eɪt/"
+      ]
     },
     {
       "word": "SHIMMER",
@@ -5668,13 +6056,14 @@
         "glimmer",
         "sparkle"
       ],
+      "example": "The ocean waves shimmer in the sunlight.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0283\u026am.\u025a/",
       "family": [
         "shimmery",
         "shimming",
         "skimmer"
-      ],
-      "ipa": "/ˈʃɪm.ɚ/"
+      ]
     },
     {
       "word": "HULL",
@@ -5684,8 +6073,9 @@
         "casing",
         "frame"
       ],
+      "example": "The ship's hull is damaged.",
       "pos": "noun",
-      "ipa": "/hʌl/",
+      "ipa": "/h\u028cl/",
       "family": [
         "hulled"
       ]
@@ -5698,8 +6088,9 @@
         "pick",
         "weed-out"
       ],
+      "example": "There is no reason to cull pigs right now.",
       "pos": "verb",
-      "ipa": "/kʌl/",
+      "ipa": "/k\u028cl/",
       "family": [
         "culling"
       ]
@@ -5712,8 +6103,9 @@
         "rotate",
         "turn"
       ],
+      "example": "He leaned back in his swivel chair.",
       "pos": "verb",
-      "ipa": "/ˈswɪvəl/",
+      "ipa": "/\u02c8sw\u026av\u0259l/",
       "family": [
         "swiveled"
       ]
@@ -5726,8 +6118,9 @@
         "shiver",
         "shake"
       ],
+      "example": "The autumn leaves quiver in the crisp morning breeze.",
       "pos": "noun",
-      "ipa": "/ˈkwɪvə/",
+      "ipa": "/\u02c8kw\u026av\u0259/",
       "family": [
         "quivering",
         "quivery"
@@ -5741,8 +6134,9 @@
         "wedged",
         "interposed"
       ],
+      "example": "I like my hamburger sandwiched between two pieces of waffles.",
       "pos": "adjective",
-      "ipa": "/ˈsænwɪtʃt/",
+      "ipa": "/\u02c8s\u00e6nw\u026at\u0283t/",
       "family": [
         "sandwich",
         "sandwiching"
@@ -5756,11 +6150,12 @@
         "dappled",
         "speckled"
       ],
+      "example": "Bronzing bracken and mottled bramble gleamed in the light of the sinking sun.",
       "pos": "adjective",
+      "ipa": "/\u02c8m\u0252t\u0259ld/",
       "family": [
         "motley"
-      ],
-      "ipa": "/ˈmɒtəld/"
+      ]
     }
   ]
 }

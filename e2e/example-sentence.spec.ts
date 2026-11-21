@@ -94,3 +94,62 @@ test('finished round shows exactly one example sentence; replay shows it too (#2
   await expect(replay).toHaveCount(1)
   await expect(replay).toHaveText(lemma.example!)
 })
+
+/**
+ * #317 / ADR 0056: the 12 C1/C2 packs ship examples too, with the same
+ * EndCard-only timing rule. The C1 daily for the pinned day gets a fixture
+ * example injected via window.fetch (C1 packs ship none until the keyed
+ * #317 data run lands; when they do, the shipped example is used instead).
+ */
+const C1_FIXTURE_EXAMPLE = 'This is a sophisticated argument.'
+
+function c1DailyLemma(): Lemma {
+  const pack = JSON.parse(
+    readFileSync(new URL('../public/packs/en/c1.json', import.meta.url), 'utf8'),
+  ) as { lemmas: Lemma[] }
+  return pack.lemmas[hashString(`${DATE_KEY}|en|c1`) % pack.lemmas.length]!
+}
+
+test('C1 EndCard shows the example only after the round finishes (#317)', async ({ page }) => {
+  const lemma = c1DailyLemma()
+  const example = lemma.example ?? C1_FIXTURE_EXAMPLE
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.clock.setFixedTime(new Date(ISO))
+  await page.addInitScript((code) => {
+    localStorage.setItem('hiato.prefs', JSON.stringify({ lang: code, cefr: 'c1' }))
+  }, 'en')
+  await page.addInitScript(
+    ({ word, example }: { word: string; example: string }) => {
+      const orig = window.fetch.bind(window)
+      window.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+        const res = await orig(input, init)
+        const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url
+        if (url.includes('/packs/en/c1.json') && res.ok) {
+          const pack = (await res.json()) as { lemmas: Record<string, unknown>[] }
+          for (const l of pack.lemmas) {
+            if (l.word === word) l.example = example
+          }
+          return new Response(JSON.stringify(pack), {
+            status: 200,
+            headers: { 'content-type': 'application/json' },
+          })
+        }
+        return res
+      }) as typeof window.fetch
+    },
+    { word: lemma.word, example },
+  )
+  await page.goto('/play?mode=daily')
+  await page.locator('[data-letter-pad]:visible').first().waitFor()
+  // In-round: no EndCard, sentence text nowhere on the page.
+  await expect(page.locator('[data-endcard-example]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-teach]')).toHaveCount(0)
+  expect(await page.locator('body').innerText()).not.toContain(example)
+
+  await loseRound(page, lemma.word)
+  const el = page.locator('[data-endcard-example]')
+  await expect(el).toHaveCount(1)
+  await expect(el).toBeVisible()
+  await expect(el).toHaveText(example)
+  await expect(el).toHaveAttribute('lang', 'en')
+})

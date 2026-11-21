@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 /**
- * Example-sentence pipeline (ADR 0048/0049, #225/#247). Pilot: EN + DE A1–B1.
+ * Example-sentence pipeline (ADR 0048/0049, #225/#247). All 36 packs (A1–C2) since
+ * #317 / ADR 0056; before that the pilot covered EN+DE A1–B1, then the 24 A1–B2 packs.
  *
  * Source 1: Tatoeba per-language sentence dump (CC-BY 2.0 FR) — one sentence per
  * lemma: whole-Unicode-word match, shortest/cleanest, denylist + person-name
@@ -22,7 +23,14 @@
  */
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { EXAMPLE_SENTENCE_MAX, type PackCefr, type PackLang, type WordPack } from '../src/packs/schema'
+import {
+  EXAMPLE_SENTENCE_MAX,
+  PACK_CEFR_LEVELS,
+  PACK_LANGS,
+  type PackCefr,
+  type PackLang,
+  type WordPack,
+} from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
@@ -428,7 +436,7 @@ type Cli = {
   noTatoeba: boolean
 }
 
-function parseCli(argv: string[]): Cli {
+export function parseCli(argv: string[]): Cli {
   const langs: PackLang[] = []
   const levels: PackCefr[] = []
   let dryRun = false
@@ -441,7 +449,7 @@ function parseCli(argv: string[]): Cli {
     else if (a === '--no-tatoeba') noTatoeba = true
     else if (a.startsWith('--lang=')) {
       for (const v of a.slice(7).split(',')) {
-        if (v === 'all') langs.push('en', 'de', 'es', 'pt', 'fr', 'it')
+        if (v === 'all') langs.push(...PACK_LANGS)
         else langs.push(v as PackLang)
       }
     } else if (a.startsWith('--levels=')) {
@@ -451,8 +459,8 @@ function parseCli(argv: string[]): Cli {
     } else throw new Error(`unknown arg ${a}`)
   }
   return {
-    langs: langs.length ? langs : ['en', 'de'],
-    levels: levels.length ? levels : ['a1', 'a2', 'b1'],
+    langs: langs.length ? langs : [...PACK_LANGS],
+    levels: levels.length ? levels : [...PACK_CEFR_LEVELS],
     dryRun,
     force,
     sentencesFile,
