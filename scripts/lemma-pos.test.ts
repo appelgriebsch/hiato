@@ -4,12 +4,17 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import type { WordPack } from '../src/packs/schema'
 import {
+  POS_GATE_VERSION,
   UPOS_TO_PACK_POS,
   checkLemmaPos,
   enCsvPosToPackPos,
+  isCurrentPosPass,
   loadPosExemptions,
+  loadPosGateLog,
   pickPos,
+  posGateKey,
   posSourceInfo,
+  type PosGateLog,
 } from './lemma-pos'
 
 describe('lemma-pos mapping (ADR 0055, #315)', () => {
@@ -99,5 +104,81 @@ describe('loadPosExemptions', () => {
     const file = path.join(dir, 'pos-exempt.txt')
     writeFileSync(file, '# header\n\npt|CASA\tno pos column\nen|ICH\tPRON not content\n')
     expect([...loadPosExemptions(file)].sort()).toEqual(['en|ICH', 'pt|CASA'])
+  })
+})
+
+describe('pos gate log (ADR 0055 amended, #339 Mistral fallback)', () => {
+  test('posGateKey matches the lemma-extras-gate.json key shape', () => {
+    expect(posGateKey('pt', 'Casa')).toBe('pt|CASA|pos')
+    expect(posGateKey('de', 'Haus')).toBe('de|HAUS|pos')
+  })
+
+  test('isCurrentPosPass requires verdict pass + current gate version', () => {
+    const entry = {
+      value: 'noun' as const,
+      source: 'mistral' as const,
+      verdict: 'pass' as const,
+      gate: POS_GATE_VERSION,
+      at: '2026-11-20',
+    }
+    expect(isCurrentPosPass(entry)).toBe(true)
+    expect(isCurrentPosPass({ ...entry, verdict: 'reject' })).toBe(false)
+    expect(isCurrentPosPass({ ...entry, gate: 0 })).toBe(false)
+    expect(isCurrentPosPass(undefined)).toBe(false)
+  })
+
+  test('loadPosGateLog keeps only |pos keys with a PackPos value', () => {
+    const dir = mkdtempSync(path.join(tmpdir(), 'pos-gate-'))
+    const file = path.join(dir, 'lemma-extras-gate.json')
+    writeFileSync(
+      file,
+      JSON.stringify({
+        'pt|CASA|pos': { value: 'noun', source: 'mistral', verdict: 'pass', gate: 1, at: 'x' },
+        'pt|CASA|ipa': { value: '/x/', source: 'wiktextract', verdict: 'pass', gate: 1, at: 'x' },
+        'pt|CASA|family': { value: ['casinha'], source: 'wiktextract', verdict: 'pass', gate: 1, at: 'x' },
+        'pt|BAD|pos': { value: 'pronoun', source: 'mistral', verdict: 'pass', gate: 1, at: 'x' },
+      }),
+    )
+    const log = loadPosGateLog(file)
+    expect(Object.keys(log)).toEqual(['pt|CASA|pos'])
+    expect(log['pt|CASA|pos']!.value).toBe('noun')
+  })
+
+  test('checkLemmaPos accepts a gate-logged pos; rejects stale, mismatched, or absent gate entries', () => {
+    const gate: PosGateLog = {
+      'pt|CASA|pos': {
+        value: 'noun',
+        source: 'mistral',
+        verdict: 'pass',
+        gate: POS_GATE_VERSION,
+        at: '2026-11-20',
+      },
+    }
+    const pack = (pos: 'noun' | 'verb'): WordPack => ({
+      version: 1,
+      lang: 'pt',
+      cefr: 'a1',
+      license: 'x',
+      attribution: [],
+      lemmas: [{ word: 'CASA', gloss: 'house', pos }],
+    })
+    // current passing gate entry + matching pack value → ok (no source, not exempt)
+    expect(checkLemmaPos('pt/a1.json', pack('noun'), {}, new Set(), gate)).toEqual([])
+    // without the gate log the same pos fails
+    const noGate = checkLemmaPos('pt/a1.json', pack('noun'), {}, new Set())
+    expect(noGate.length).toBe(1)
+    expect(noGate[0]).toContain('no source entry')
+    // pack value differs from the gate entry → tamper guard fails
+    const mismatch = checkLemmaPos('pt/a1.json', pack('verb'), {}, new Set(), gate)
+    expect(mismatch.length).toBe(1)
+    // stale gate version fails
+    const stale: PosGateLog = {
+      'pt|CASA|pos': { ...gate['pt|CASA|pos']!, gate: 0 },
+    }
+    expect(checkLemmaPos('pt/a1.json', pack('noun'), {}, new Set(), stale).length).toBe(1)
+    // a source-map contradiction still fails even with a gate entry present
+    const map = { pt: { CASA: 'verb' as const } }
+    const contra = checkLemmaPos('pt/a1.json', pack('noun'), map, new Set(), gate)
+    expect(contra.some((e) => e.includes('contradicts'))).toBe(true)
   })
 })

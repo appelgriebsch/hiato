@@ -11,7 +11,9 @@
  * `packs:check` validates against (Hiato generated from the licensed sources,
  * like hunspell-verdicts.json). Rebuild it with `bun run scripts/build-lemma-pos.ts`
  * after a source refresh; apply it to the shipped packs with
- * `bun run scripts/apply-lemma-pos.ts`.
+ * `bun run scripts/apply-lemma-pos.ts`. Lemmas with no licensed pos source (the
+ * pos-exempt.txt list) can additionally be filled by a gated Mistral fallback:
+ * `bun run scripts/apply-lemma-pos.ts --fill-exempt` (local, MISTRAL_API_KEY, #339).
  */
 import { Database } from 'bun:sqlite'
 import { existsSync, readFileSync } from 'node:fs'
@@ -188,14 +190,59 @@ export function loadPosExemptions(file = POS_EXEMPT_PATH): Set<string> {
 }
 
 /**
- * ADR 0055 / #315: every shipped lemma carries a source-consistent `pos`, or is
- * explicitly exempt. A `pos` that contradicts scripts/data/lemma-pos.json fails.
+ * ADR 0055 amended (#339): lemmas without a licensed pos source (all PT, plus
+ * de/es/it stragglers — `scripts/data/pos-exempt.txt`) can be filled by a gated
+ * Mistral fallback (`bun run packs:pos --fill-exempt`, local only). Filled tags
+ * are original Hiato copy (no external credit) and are recorded as `pos` entries
+ * in scripts/data/lemma-extras-gate.json — the same committed gate log the
+ * ipa/family extras use — keyed `lang|NFCUPPER(word)|pos`.
+ */
+export const EXTRAS_GATE_LOG_PATH = path.join(DATA_DIR, 'lemma-extras-gate.json')
+export const POS_GATE_VERSION = 1
+
+export type PosGateEntry = {
+  value: PackPos
+  source: 'mistral'
+  verdict: 'pass' | 'reject'
+  gate: number
+  at: string
+}
+
+export type PosGateLog = Record<string, PosGateEntry>
+
+export function posGateKey(lang: string, word: string): string {
+  return `${lang}|${nfcUpper(word)}|pos`
+}
+
+export function isCurrentPosPass(entry: PosGateEntry | null | undefined): boolean {
+  return entry?.verdict === 'pass' && entry.gate === POS_GATE_VERSION
+}
+
+/** The `pos` entries of lemma-extras-gate.json (pos values only; ipa/family keys are ignored). */
+export function loadPosGateLog(file = EXTRAS_GATE_LOG_PATH): PosGateLog {
+  if (!existsSync(file)) return {}
+  const raw = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>
+  const out: PosGateLog = {}
+  for (const [k, v] of Object.entries(raw)) {
+    if (!k.endsWith('|pos')) continue
+    const e = v as PosGateEntry
+    if (e && isPackPos(e.value)) out[k] = e
+  }
+  return out
+}
+
+/**
+ * ADR 0055 / #315, amended #339: every shipped lemma carries a source-consistent
+ * `pos`, a passing `pos` gate entry (Mistral fallback), or is explicitly exempt.
+ * A `pos` that contradicts scripts/data/lemma-pos.json fails; a `pos` with neither
+ * a source entry nor a current passing gate entry fails.
  */
 export function checkLemmaPos(
   rel: string,
   pack: WordPack,
   posMap: LemmaPosMap,
   exempt: ReadonlySet<string>,
+  posGate?: PosGateLog,
 ): string[] {
   const errors: string[] = []
   const langWords = posMap[pack.lang] ?? {}
@@ -204,9 +251,12 @@ export function checkLemmaPos(
     const src = langWords[word]
     if (L.pos !== undefined) {
       if (!src) {
-        errors.push(
-          `${rel}: pos "${L.pos}" on "${L.word}" has no source entry (scripts/data/lemma-pos.json) — run scripts/build-lemma-pos.ts`,
-        )
+        const entry = posGate?.[posGateKey(pack.lang, L.word)]
+        if (!entry || !isCurrentPosPass(entry) || entry.value !== L.pos) {
+          errors.push(
+            `${rel}: pos "${L.pos}" on "${L.word}" has no source entry (scripts/data/lemma-pos.json) and no matching passing pos gate entry (scripts/data/lemma-extras-gate.json) — run scripts/build-lemma-pos.ts or bun run packs:pos --fill-exempt`,
+          )
+        }
       } else if (src !== L.pos) {
         errors.push(
           `${rel}: pos "${L.pos}" for "${L.word}" contradicts the source ("${src}")`,
