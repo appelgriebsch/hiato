@@ -5,13 +5,18 @@
  */
 import {
   EXAMPLE_SENTENCE_MAX,
+  FAMILY_MAX,
+  IPA_MAX,
   PACK_CEFR_LEVELS,
   PACK_CEFRS,
   PACK_LANGS,
+  PACK_POS,
   isPackCefr,
   isPackLang,
+  isPackPos,
   type PackCefr,
   type PackLang,
+  type PackPos,
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
@@ -38,6 +43,16 @@ import {
 } from './hint-ceiling'
 
 export { GATE_VERSION, isCurrentPass }
+
+/**
+ * ADR 0055: one `/…/` IPA transcription. Allowlist = ASCII letters, IPA
+ * Extensions (U+0250–02AF), Spacing Modifier Letters (U+02B0–02FF, covers
+ * stress / length / aspiration marks), Combining Diacritical Marks
+ * (any Unicode mark, \p{M}, covers U+0300–036F and the double tie U+0361),
+ * undertie (U+203F). No spaces — one word.
+ */
+export const IPA_FORM_RE =
+  /^\/[A-Za-z\u0250-\u02AF\u02B0-\u02FF\p{M}\u203F]+\/$/u
 
 /** Hunspell, or a committed verdict cache that can answer without loading it. */
 function membershipActive(): boolean {
@@ -475,7 +490,84 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
     }
 
-    return { word, gloss, synonyms, example }
+    // ADR 0055: optional pos / ipa / family extras (EndCard-only, anti-spoiler).
+    let pos: PackPos | undefined
+    if (e.pos !== undefined) {
+      if (!isPackPos(e.pos)) {
+        throw new Error(
+          `${file}: lemmas[${i}].pos must be ${PACK_POS.join('|')} — "${String(e.pos)}"`,
+        )
+      }
+      pos = e.pos
+    }
+
+    let ipa: string | undefined
+    if (e.ipa !== undefined) {
+      ipa = assertString(e.ipa, `${file}: lemmas[${i}].ipa`).normalize('NFC')
+      if (!IPA_FORM_RE.test(ipa)) {
+        throw new Error(
+          `${file}: lemmas[${i}] ipa must be one /…/ transcription in the IPA allowlist — "${word}" / "${ipa}"`,
+        )
+      }
+      if (ipa.length > IPA_MAX) {
+        throw new Error(
+          `${file}: lemmas[${i}] ipa length ${ipa.length} exceeds cap ${IPA_MAX} — "${word}"`,
+        )
+      }
+    }
+
+    let family: string[] | undefined
+    if (e.family !== undefined) {
+      if (!Array.isArray(e.family)) {
+        throw new Error(`${file}: lemmas[${i}].family must be an array`)
+      }
+      if (e.family.length > FAMILY_MAX) {
+        throw new Error(
+          `${file}: lemmas[${i}] family length ${e.family.length} exceeds cap ${FAMILY_MAX} — "${word}"`,
+        )
+      }
+      const seenFamily = new Set<string>()
+      family = e.family.map((f, j) => {
+        const raw = assertString(f, `${file}: lemmas[${i}].family[${j}]`).normalize('NFC')
+        if (nfcUpper(raw) === nfcUpper(word)) {
+          throw new Error(
+            `${file}: lemmas[${i}] family[${j}] must differ from the lemma — "${raw}"`,
+          )
+        }
+        if (spoilerContains(raw, word)) {
+          throw new Error(
+            `${file}: lemmas[${i}] spoiler — family[${j}] contains lemma "${word}" — "${raw}"`,
+          )
+        }
+        if (isDeniedLemma(raw, DENY, o.lang as string)) {
+          throw new Error(`${file}: lemmas[${i}] denylist — family[${j}] "${raw}"`)
+        }
+        // Same token pass as synonym chips, so hyphen/slash-joined denied
+        // tokens inside an entry are caught too.
+        for (const tok of letterTokens(raw)) {
+          if (isDeniedLemma(tok, DENY, o.lang as string)) {
+            throw new Error(
+              `${file}: lemmas[${i}] denylist — family[${j}] token "${tok}" — "${raw}"`,
+            )
+          }
+        }
+        if (membershipActive() && !isWordOfLang(o.lang as PackLang, raw)) {
+          throw new Error(
+            `${file}: lemmas[${i}] family[${j}] not a word of ${o.lang} — "${raw}"`,
+          )
+        }
+        const key = nfcUpper(raw)
+        if (seenFamily.has(key)) {
+          throw new Error(
+            `${file}: lemmas[${i}] family[${j}] duplicate — "${raw}"`,
+          )
+        }
+        seenFamily.add(key)
+        return raw
+      })
+    }
+
+    return { word, gloss, synonyms, example, pos, ipa, family }
   })
 
   return {
