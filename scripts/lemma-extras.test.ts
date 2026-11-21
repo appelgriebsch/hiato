@@ -55,11 +55,56 @@ describe('lemma-extras mistralFallback', () => {
     expect(filled.get(nfcUpper('hotel'))?.ipa).toBe('/h\u0259\u028a\u02c8t\u025bl/')
   })
 
-  test('drops ipa that fails the slash-form gate', async () => {
-    stubMistralReply(JSON.stringify({ house: { ipa: 'ha\u028as' } }))
+  test('drops ipa that fails the slash-form gate even when wrapped', async () => {
+    stubMistralReply(JSON.stringify({ house: { ipa: 'not ipa at all!' } }))
     const filled = await mistralFallback('test-key', 'en', [
       { word: 'house', wantIpa: true, wantFamily: false },
     ])
     expect(filled.get(nfcUpper('house'))?.ipa).toBeUndefined()
+  })
+
+  test('wraps a bare (slash-less) ipa transcription before the gate', async () => {
+    stubMistralReply(JSON.stringify({ house: { ipa: 'ha\u028as' } }))
+    const filled = await mistralFallback('test-key', 'en', [
+      { word: 'house', wantIpa: true, wantFamily: false },
+    ])
+    expect(filled.get(nfcUpper('house'))?.ipa).toBe('/ha\u028as/')
+  })
+
+  test('parses a top-level array of {word, ipa, family} objects', async () => {
+    stubMistralReply(
+      JSON.stringify([
+        { word: 'house', ipa: '/ha\u028as/', family: ['world', 'hello'] },
+        { word: 'hotel', ipa: '/h\u0259\u028a\u02c8t\u025bl/' },
+      ]),
+    )
+    const filled = await mistralFallback('test-key', 'en', [
+      { word: 'house', wantIpa: true, wantFamily: true },
+      { word: 'hotel', wantIpa: true, wantFamily: false },
+    ])
+    expect(filled.get(nfcUpper('house'))?.ipa).toBe('/ha\u028as/')
+    expect(filled.get(nfcUpper('house'))?.family).toEqual(['world', 'hello'])
+    expect(filled.get(nfcUpper('hotel'))?.ipa).toBe('/h\u0259\u028a\u02c8t\u025bl/')
+  })
+
+  test('parses a {"words": [...]} wrapper, markdown fences, prose, and a string family', async () => {
+    stubMistralReply(
+      '```json\nHere you go:\n' +
+        JSON.stringify({ words: [{ word: 'house', ipa: '/ha\u028as/', family: 'hello' }] }) +
+        '\n```',
+    )
+    const filled = await mistralFallback('test-key', 'en', [
+      { word: 'house', wantIpa: true, wantFamily: true },
+    ])
+    expect(filled.get(nfcUpper('house'))?.ipa).toBe('/ha\u028as/')
+    expect(filled.get(nfcUpper('house'))?.family).toEqual(['hello'])
+  })
+
+  test('unparseable reply yields no fills and does not throw', async () => {
+    stubMistralReply('Sorry, I cannot help with that.')
+    const filled = await mistralFallback('test-key', 'en', [
+      { word: 'house', wantIpa: true, wantFamily: true },
+    ])
+    expect(filled.size).toBe(0)
   })
 })

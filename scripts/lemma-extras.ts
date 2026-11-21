@@ -237,6 +237,59 @@ function pickFamily(lemma: string, candidates: readonly string[], lang: PackLang
   return out
 }
 
+type FallbackEntry = { ipa?: unknown; family?: unknown }
+
+/** Normalize a parsed reply into nfcUpper(word) -> entry. Accepts a map keyed by word, an array of {word, ...} objects, or a {"words": ...} wrapper around either. Returns null when nothing usable. */
+function normalizeFallbackReply(parsed: unknown): Map<string, FallbackEntry> | null {
+  const out = new Map<string, FallbackEntry>()
+  const add = (k: unknown, v: unknown): void => {
+    if (!v || typeof v !== 'object') return
+    const e = v as Record<string, unknown>
+    const key = typeof e.word === 'string' && e.word ? e.word : k
+    if (typeof key !== 'string' || !key) return
+    out.set(nfcUpper(key), { ipa: e.ipa, family: e.family })
+  }
+  if (Array.isArray(parsed)) {
+    for (const item of parsed) add('', item)
+  } else if (parsed && typeof parsed === 'object') {
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if ((k === 'words' || k === 'results') && v && typeof v === 'object') {
+        const inner = normalizeFallbackReply(v)
+        if (inner) for (const [ik, iv] of inner) out.set(ik, iv)
+      } else {
+        add(k, v)
+      }
+    }
+  }
+  return out.size ? out : null
+}
+
+/**
+ * Extract the JSON payload from a model reply: whole text first, then the
+ * outermost `{...}` / `[...]` span — tolerates markdown fences and prose.
+ * Models answer "for each word …" with a bare array of {word, …} as often as
+ * with the word-keyed map the prompt asks for, so all shapes must parse.
+ */
+function parseFallbackJson(text: string): Map<string, FallbackEntry> | null {
+  const cleaned = text.replace(/```(?:json)?/gi, '').trim()
+  const candidates = [cleaned]
+  const brace = /\{[\s\S]*\}/.exec(cleaned)
+  if (brace) candidates.push(brace[0])
+  const bracket = /\[[\s\S]*\]/.exec(cleaned)
+  if (bracket) candidates.push(bracket[0])
+  for (const c of candidates) {
+    let parsed: unknown
+    try {
+      parsed = JSON.parse(c)
+    } catch {
+      continue
+    }
+    const byWord = normalizeFallbackReply(parsed)
+    if (byWord) return byWord
+  }
+  return null
+}
+
 /** Mistral fallback (local only, MISTRAL_API_KEY): batched JSON ipa/family for gaps. Returned map is keyed by nfcUpper(word) so main() merges into its nfcUpper-keyed result. */
 export async function mistralFallback(
   key: string,
@@ -247,8 +300,7 @@ export async function mistralFallback(
   const BATCH = 25
   for (let i = 0; i < gaps.length; i += BATCH) {
     const batch = gaps.slice(i, i + BATCH)
-    const prompt = `For each ${lang} word below, return JSON only: {"${'word'}"
-: {"ipa": "/<one IPA transcription in ${lang}, slashes included>/", "family": ["<up to 3 related or derived ${lang} words>"]}}.
+    const prompt = `For each ${lang} word below, return ONE JSON object, no prose and no markdown fences, with one key per input word — keys exactly as given in the Words list: {"<word>": {"ipa": "/<one IPA transcription in ${lang}, slashes included>/", "family": ["<up to 3 related or derived ${lang} words>"]}}.
 Omit fields you cannot answer. Words: ${JSON.stringify(batch.map((g) => ({ word: g.word, gloss: g.gloss ?? '' })))}`
     const text = await mistralChat(
       key,
@@ -256,27 +308,33 @@ Omit fields you cannot answer. Words: ${JSON.stringify(batch.map((g) => ({ word:
       prompt,
       0,
     )
-    const m = /\{[\s\S]*\}/.exec(text)
-    if (!m) continue
-    let parsed: Record<string, { ipa?: string; family?: string[] }>
-    try {
-      parsed = JSON.parse(m[0])
-    } catch {
+    const byWord = parseFallbackJson(text)
+    if (!byWord) {
+      console.warn(`  Mistral batch ${i / BATCH + 1}: unparseable response: ${JSON.stringify(text.slice(0, 200))}`)
       continue
     }
-    const byWord = new Map<string, { ipa?: string; family?: string[] }>()
-    for (const [k, v] of Object.entries(parsed)) byWord.set(nfcUpper(k), v)
+    let matched = 0
+    let filled = 0
     for (const g of batch) {
       const key = nfcUpper(g.word)
       const r = byWord.get(key)
       if (!r) continue
+      matched += 1
       const cur = out.get(key) ?? {}
-      if (g.wantIpa && r.ipa && gateIpa(r.ipa)) cur.ipa = toSlashIpa(r.ipa)
-      if (g.wantFamily && Array.isArray(r.family)) {
-        cur.family = pickFamily(g.word, r.family, lang)
+      if (g.wantIpa && typeof r.ipa === 'string') {
+        // Tolerate a bare transcription (no slashes/brackets) by wrapping it before the gate.
+        const ipa = gateIpa(r.ipa) ? toSlashIpa(r.ipa) : gateIpa(`/${r.ipa}/`) ? `/${r.ipa}/` : null
+        if (ipa) cur.ipa = ipa
       }
+      if (g.wantFamily) {
+        const fam = Array.isArray(r.family) ? r.family : typeof r.family === 'string' ? [r.family] : []
+        const picked = pickFamily(g.word, fam, lang)
+        if (picked.length) cur.family = picked
+      }
+      if (cur.ipa || cur.family?.length) filled += 1
       out.set(key, cur)
     }
+    console.log(`  Mistral batch ${i / BATCH + 1}/${Math.ceil(gaps.length / BATCH)}: matched ${matched}/${batch.length}, filled ${filled}`)
   }
   return out
 }
