@@ -237,8 +237,8 @@ function pickFamily(lemma: string, candidates: readonly string[], lang: PackLang
   return out
 }
 
-/** Mistral fallback (local only, MISTRAL_API_KEY): batched JSON ipa/family for gaps. */
-async function mistralFallback(
+/** Mistral fallback (local only, MISTRAL_API_KEY): batched JSON ipa/family for gaps. Returned map is keyed by nfcUpper(word) so main() merges into its nfcUpper-keyed result. */
+export async function mistralFallback(
   key: string,
   lang: PackLang,
   gaps: { word: string; gloss?: string; wantIpa: boolean; wantFamily: boolean }[],
@@ -264,15 +264,18 @@ Omit fields you cannot answer. Words: ${JSON.stringify(batch.map((g) => ({ word:
     } catch {
       continue
     }
+    const byWord = new Map<string, { ipa?: string; family?: string[] }>()
+    for (const [k, v] of Object.entries(parsed)) byWord.set(nfcUpper(k), v)
     for (const g of batch) {
-      const r = parsed[g.word]
+      const key = nfcUpper(g.word)
+      const r = byWord.get(key)
       if (!r) continue
-      const cur = out.get(g.word) ?? {}
+      const cur = out.get(key) ?? {}
       if (g.wantIpa && r.ipa && gateIpa(r.ipa)) cur.ipa = toSlashIpa(r.ipa)
       if (g.wantFamily && Array.isArray(r.family)) {
         cur.family = pickFamily(g.word, r.family, lang)
       }
-      out.set(g.word, cur)
+      out.set(key, cur)
     }
   }
   return out
