@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "lang": "fr",
   "cefr": "c1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
@@ -29,7 +29,12 @@
         "imagination",
         "inventivité"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "créer",
+        "créatif",
+        "création"
+      ]
     },
     {
       "word": "PADDY",
@@ -37,7 +42,11 @@
       "synonyms": [
         "riz"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "riz",
+        "rizière"
+      ]
     },
     {
       "word": "DÉLÉGATION",
@@ -74,7 +83,11 @@
         "dégoûtant",
         "horrible"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "répugner",
+        "répugnance"
+      ]
     },
     {
       "word": "CYANURE",
@@ -82,7 +95,10 @@
       "synonyms": [
         "poison"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "cyan"
+      ]
     },
     {
       "word": "ÉTOFFE",
@@ -91,7 +107,11 @@
         "tissu"
       ],
       "pos": "noun",
-      "ipa": "/e.tɔf/"
+      "ipa": "/e.tɔf/",
+      "family": [
+        "étoffer",
+        "étoffé"
+      ]
     },
     {
       "word": "CROQUER",
@@ -143,7 +163,12 @@
         "couvrir"
       ],
       "pos": "verb",
-      "ipa": "/vɛ.tiʁ/"
+      "ipa": "/vɛ.tiʁ/",
+      "family": [
+        "vêtement",
+        "vêtu",
+        "habillement"
+      ]
     },
     {
       "word": "EMPESTER",
@@ -153,7 +178,11 @@
         "empuantir"
       ],
       "pos": "verb",
-      "ipa": "/ɑ̃.pɛs.te/"
+      "ipa": "/ɑ̃.pɛs.te/",
+      "family": [
+        "peste",
+        "empesté"
+      ]
     },
     {
       "word": "GÊNANT",
@@ -162,7 +191,11 @@
         "embarrassant",
         "dérangeant"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "gêner",
+        "gêne"
+      ]
     },
     {
       "word": "DÉTAILLER",
@@ -191,7 +224,10 @@
       "synonyms": [
         "musicien"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "guitare"
+      ]
     },
     {
       "word": "DIVA",
@@ -273,7 +309,12 @@
         "navire",
         "bateau"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kʁwa.zœʁ/",
+      "family": [
+        "croiser",
+        "croisière"
+      ]
     },
     {
       "word": "GRINCER",
@@ -325,7 +366,8 @@
         "ménageable",
         "ménagement",
         "économiser"
-      ]
+      ],
+      "ipa": "/me.na.ʒe/"
     },
     {
       "word": "GAZEUX",
@@ -335,7 +377,11 @@
         "effervescent"
       ],
       "pos": "adjective",
-      "ipa": "/ɡa.ɮ͡zø/"
+      "ipa": "/ɡa.ɮ͡zø/",
+      "family": [
+        "gaz",
+        "gazéifier"
+      ]
     },
     {
       "word": "TÉLÉPATHE",
@@ -344,7 +390,12 @@
         "médium",
         "voyant"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/te.le.pat/",
+      "family": [
+        "télépathie",
+        "télépathique"
+      ]
     },
     {
       "word": "MACARONI",
@@ -353,7 +404,12 @@
         "pâte",
         "nouille"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ma.ka.ʁɔ.ni/",
+      "family": [
+        "macaron",
+        "macaronique"
+      ]
     },
     {
       "word": "DÉBARRAS",
@@ -362,7 +418,11 @@
         "grenier",
         "remise"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/de.ba.ʁa/",
+      "family": [
+        "débarrasser"
+      ]
     },
     {
       "word": "CACTUS",
@@ -386,7 +446,8 @@
         "ciliaire",
         "cilié",
         "sourcil"
-      ]
+      ],
+      "ipa": "/sil/"
     },
     {
       "word": "ANGUILLE",
@@ -406,7 +467,12 @@
         "hâle",
         "teint"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bʁɔ̃.zaʒ/",
+      "family": [
+        "bronzer",
+        "bronzé"
+      ]
     },
     {
       "word": "RAVIN",
@@ -444,7 +510,12 @@
         "reprendre",
         "récupérer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁə.se.ziʁ/",
+      "family": [
+        "saisir",
+        "ressaisissement"
+      ]
     },
     {
       "word": "SQUATTER",
@@ -457,7 +528,8 @@
       "family": [
         "squattériser",
         "squatteur"
-      ]
+      ],
+      "ipa": "/skwa.te/"
     },
     {
       "word": "DEVIN",
@@ -466,7 +538,12 @@
         "mage",
         "oracle"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/də.vɛ̃/",
+      "family": [
+        "deviner",
+        "devinette"
+      ]
     },
     {
       "word": "CODER",
@@ -480,7 +557,8 @@
         "codage",
         "codeur",
         "codeuse"
-      ]
+      ],
+      "ipa": "/kɔ.de/"
     },
     {
       "word": "PROTHÈSE",
@@ -504,7 +582,12 @@
         "groupe",
         "ensemble"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁi.jo/",
+      "family": [
+        "triade",
+        "triolet"
+      ]
     },
     {
       "word": "BAMBOU",
@@ -527,7 +610,8 @@
         "clonage",
         "clonal",
         "clonalité"
-      ]
+      ],
+      "ipa": "/klɔn/"
     },
     {
       "word": "ADHÉSIF",
@@ -581,7 +665,11 @@
         "impuissance",
         "faiblesse"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛ̃.ka.pa.si.te/",
+      "family": [
+        "incapable"
+      ]
     },
     {
       "word": "EUPHÉMISME",
@@ -606,7 +694,11 @@
         "effrayer"
       ],
       "pos": "verb",
-      "ipa": "/a.laʁ.me/"
+      "ipa": "/a.laʁ.me/",
+      "family": [
+        "alerte",
+        "alarmiste"
+      ]
     },
     {
       "word": "PATSY",
@@ -627,7 +719,8 @@
       "pos": "adjective",
       "family": [
         "lustrerie"
-      ]
+      ],
+      "ipa": "/lystʁ/"
     },
     {
       "word": "COMMUNION",
@@ -664,7 +757,8 @@
         "secte",
         "adepte",
         "mentor"
-      ]
+      ],
+      "ipa": "/ɡu.ʁu/"
     },
     {
       "word": "BRANCARD",
@@ -678,7 +772,8 @@
         "brancardage",
         "brancarder",
         "brancardier"
-      ]
+      ],
+      "ipa": "/bʁɑ̃.kaʁ/"
     },
     {
       "word": "FUNÉRAIRE",
@@ -686,7 +781,11 @@
       "synonyms": [
         "mortuaire"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/fy.ne.ʁɛʁ/",
+      "family": [
+        "funérailles"
+      ]
     },
     {
       "word": "FOSSILE",
@@ -700,7 +799,8 @@
         "fossilifère",
         "fossilisation",
         "fossilisé"
-      ]
+      ],
+      "ipa": "/fɔ.sil/"
     },
     {
       "word": "PUISER",
@@ -740,7 +840,11 @@
         "obstiné"
       ],
       "pos": "adjective",
-      "ipa": "/t̪ə.n̪as/"
+      "ipa": "/t̪ə.n̪as/",
+      "family": [
+        "ténacité",
+        "tenacement"
+      ]
     },
     {
       "word": "LUXUEUX",
@@ -766,7 +870,8 @@
       "pos": "noun",
       "family": [
         "neurorécepteur"
-      ]
+      ],
+      "ipa": "/ʁe.sɛp.tœʁ/"
     },
     {
       "word": "ENTUBER",
@@ -775,7 +880,13 @@
         "tromper",
         "duper"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɑ̃.ty.be/",
+      "family": [
+        "tuyau",
+        "tubage",
+        "tubulaire"
+      ]
     },
     {
       "word": "TERRER",
@@ -784,7 +895,13 @@
         "cacher",
         "enfouir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/te.ʁe/",
+      "family": [
+        "terre",
+        "terrier",
+        "enterrer"
+      ]
     },
     {
       "word": "RECYCLER",
@@ -798,7 +915,8 @@
         "recyclable",
         "recyclage",
         "recyclerie"
-      ]
+      ],
+      "ipa": "/ʁə.si.kle/"
     },
     {
       "word": "GALACTIQUE",
@@ -812,7 +930,8 @@
         "extragalactique",
         "intergalactique",
         "galaxie"
-      ]
+      ],
+      "ipa": "/ɡa.lak.tik/"
     },
     {
       "word": "CORAIL",
@@ -837,7 +956,8 @@
         "pucelle",
         "pucelage",
         "dépuceler"
-      ]
+      ],
+      "ipa": "/py.so/"
     },
     {
       "word": "SACOCHE",
@@ -847,7 +967,11 @@
         "besace"
       ],
       "pos": "noun",
-      "ipa": "/sa.kɔʃ/"
+      "ipa": "/sa.kɔʃ/",
+      "family": [
+        "sac",
+        "saccade"
+      ]
     },
     {
       "word": "ALPHABET",
@@ -875,7 +999,8 @@
       "pos": "noun",
       "family": [
         "imprimer"
-      ]
+      ],
+      "ipa": "/ɛ̃.pʁi.mɑ̃t/"
     },
     {
       "word": "FUGUER",
@@ -884,7 +1009,13 @@
         "fuir",
         "partir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fy.ɡe/",
+      "family": [
+        "fugue",
+        "fugitif",
+        "fugace"
+      ]
     },
     {
       "word": "MOINEAU",
@@ -893,7 +1024,12 @@
         "passereau"
       ],
       "pos": "noun",
-      "ipa": "/mwa.no/"
+      "ipa": "/mwa.no/",
+      "family": [
+        "moine",
+        "moinerie",
+        "moinillon"
+      ]
     },
     {
       "word": "GLADIATEUR",
@@ -901,7 +1037,11 @@
       "synonyms": [
         "combattant"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡla.dja.tœʁ/",
+      "family": [
+        "gladiature"
+      ]
     },
     {
       "word": "SANGLOTER",
@@ -912,7 +1052,8 @@
       "pos": "verb",
       "family": [
         "sanglotement"
-      ]
+      ],
+      "ipa": "/sɑ̃.ɡlo.te/"
     },
     {
       "word": "ILLICO",
@@ -920,7 +1061,8 @@
       "synonyms": [
         "aussitôt"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/i.li.ko/"
     },
     {
       "word": "POLLUTION",
@@ -943,7 +1085,11 @@
         "coiffeur"
       ],
       "pos": "noun",
-      "ipa": "/baʁ.bje/"
+      "ipa": "/baʁ.bje/",
+      "family": [
+        "barbe",
+        "barbifier"
+      ]
     },
     {
       "word": "ADOUCIR",
@@ -969,7 +1115,8 @@
       "family": [
         "furtivement",
         "furtivité"
-      ]
+      ],
+      "ipa": "/fyʁ.tif/"
     },
     {
       "word": "COMPRIMER",
@@ -982,7 +1129,8 @@
         "comprimable",
         "décomprimer",
         "surcomprimer"
-      ]
+      ],
+      "ipa": "/kɔ̃.pʁi.me/"
     },
     {
       "word": "BRIOCHE",
@@ -1003,7 +1151,12 @@
       "synonyms": [
         "partir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/de.kɑ̃.pe/",
+      "family": [
+        "camp",
+        "camper"
+      ]
     },
     {
       "word": "TITANIC",
@@ -1011,7 +1164,13 @@
       "synonyms": [
         "énorme"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ti.ta.nik/",
+      "family": [
+        "titanesque",
+        "titan",
+        "titane"
+      ]
     },
     {
       "word": "ISRAÉLIEN",
@@ -1019,7 +1178,8 @@
       "pos": "noun",
       "family": [
         "Palestinien"
-      ]
+      ],
+      "ipa": "/is.ʁa.e.ljɛ̃/"
     },
     {
       "word": "CHAUDIÈRE",
@@ -1039,7 +1199,8 @@
       "pos": "noun",
       "family": [
         "moisi"
-      ]
+      ],
+      "ipa": "/mwa.si.syʁ/"
     },
     {
       "word": "ACTRICE",
@@ -1066,7 +1227,8 @@
         "camoufler",
         "camouflet",
         "camoufleur"
-      ]
+      ],
+      "ipa": "/ka.mu.flaʒ/"
     },
     {
       "word": "DRAPER",
@@ -1074,7 +1236,13 @@
       "synonyms": [
         "voiler"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dʁa.pe/",
+      "family": [
+        "drap",
+        "drapé",
+        "draperie"
+      ]
     },
     {
       "word": "BALANÇOIRE",
@@ -1102,7 +1270,8 @@
         "cratériforme",
         "craterelle",
         "caldeira"
-      ]
+      ],
+      "ipa": "/kʁa.tɛʁ/"
     },
     {
       "word": "EMPOCHER",
@@ -1110,7 +1279,12 @@
       "synonyms": [
         "gagner"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɑ̃.pɔ.ʃe/",
+      "family": [
+        "poche",
+        "pochetron"
+      ]
     },
     {
       "word": "ABANDONNÉE",
@@ -1118,7 +1292,13 @@
       "synonyms": [
         "délaissée"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/a.bɑ̃.dɔ.ne/",
+      "family": [
+        "abandon",
+        "abandonner",
+        "abandonné"
+      ]
     },
     {
       "word": "DÉGUERPIR",
@@ -1129,7 +1309,8 @@
       "pos": "verb",
       "family": [
         "déguerpissement"
-      ]
+      ],
+      "ipa": "/de.ɡɛʁ.piʁ/"
     },
     {
       "word": "CRASSE",
@@ -1142,7 +1323,8 @@
         "crasseux",
         "crasseuse",
         "crassier"
-      ]
+      ],
+      "ipa": "/kʁas/"
     },
     {
       "word": "DOMINATION",
@@ -1164,7 +1346,12 @@
       "synonyms": [
         "pauvre"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/mi.tø/",
+      "family": [
+        "mite",
+        "mité"
+      ]
     },
     {
       "word": "EMBARRASSÉ",
@@ -1172,7 +1359,13 @@
       "synonyms": [
         "gêné"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɑ̃.ba.ʁa.se/",
+      "family": [
+        "embarras",
+        "embarrasser",
+        "barre"
+      ]
     },
     {
       "word": "MADE",
@@ -1180,7 +1373,13 @@
       "synonyms": [
         "fabriqué"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mad/",
+      "family": [
+        "maison",
+        "maçon",
+        "maçonnerie"
+      ]
     },
     {
       "word": "RAINER",
@@ -1191,7 +1390,8 @@
       "pos": "verb",
       "family": [
         "rainage"
-      ]
+      ],
+      "ipa": "/ʁe.ne/"
     },
     {
       "word": "REPLONGER",
@@ -1199,7 +1399,12 @@
       "synonyms": [
         "retomber"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁə.plɔ̃.ʒe/",
+      "family": [
+        "plonger",
+        "plongée"
+      ]
     },
     {
       "word": "VIEILLESSE",
@@ -1226,7 +1431,8 @@
         "anaérocombustion",
         "oxycombustion",
         "postcombustion"
-      ]
+      ],
+      "ipa": "/kɔ̃.bys.tjɔ̃/"
     },
     {
       "word": "MORBIDE",
@@ -1239,7 +1445,8 @@
         "morbidement",
         "morbidesse",
         "morbidité"
-      ]
+      ],
+      "ipa": "/mɔʁ.bid/"
     },
     {
       "word": "CHIMISTE",
@@ -1248,7 +1455,11 @@
         "scientifique"
       ],
       "pos": "noun",
-      "ipa": "/ʃi.mist/"
+      "ipa": "/ʃi.mist/",
+      "family": [
+        "chimie",
+        "chimique"
+      ]
     },
     {
       "word": "DÉROBER",
@@ -1259,7 +1470,8 @@
       "pos": "verb",
       "family": [
         "dérobé"
-      ]
+      ],
+      "ipa": "/de.ʁɔ.be/"
     },
     {
       "word": "CLAQUEMENT",
@@ -1267,7 +1479,12 @@
       "synonyms": [
         "bruit"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/klak.mɑ̃/",
+      "family": [
+        "claquer",
+        "claque"
+      ]
     },
     {
       "word": "MARTIEN",
@@ -1280,7 +1497,8 @@
         "Marcel",
         "Marcus",
         "mardi"
-      ]
+      ],
+      "ipa": "/maʁ.sjɛ̃/"
     },
     {
       "word": "LATÉRAL",
@@ -1302,7 +1520,12 @@
       "synonyms": [
         "protection"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sov.ɡaʁd/",
+      "family": [
+        "sauver",
+        "sécurité"
+      ]
     },
     {
       "word": "KIOSQUE",
@@ -1323,7 +1546,12 @@
       "synonyms": [
         "cacher"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/e.klip.se/",
+      "family": [
+        "clipse",
+        "éclipse"
+      ]
     },
     {
       "word": "RÂLE",
@@ -1331,7 +1559,13 @@
       "synonyms": [
         "gémir"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁɑl/",
+      "family": [
+        "râler",
+        "râlement",
+        "râleur"
+      ]
     },
     {
       "word": "ENNUYANT",
@@ -1339,7 +1573,13 @@
       "synonyms": [
         "lassant"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɑ̃.nɥi.jɑ̃/",
+      "family": [
+        "ennui",
+        "ennuyer",
+        "ennuyeux"
+      ]
     },
     {
       "word": "BANNIÈRE",
@@ -1350,7 +1590,8 @@
       "pos": "noun",
       "family": [
         "banneret"
-      ]
+      ],
+      "ipa": "/ba.njɛʁ/"
     },
     {
       "word": "SENSUEL",
@@ -1363,7 +1604,8 @@
         "sens",
         "sensation",
         "sensationnalisme"
-      ]
+      ],
+      "ipa": "/sɑ̃.sɥɛl/"
     },
     {
       "word": "PARCELLE",
@@ -1376,7 +1618,8 @@
         "parcellaire",
         "parcellement",
         "parceller"
-      ]
+      ],
+      "ipa": "/paʁ.sɛl/"
     },
     {
       "word": "FERTILE",
@@ -1389,7 +1632,8 @@
         "fertilement",
         "fertiliser",
         "fertilité"
-      ]
+      ],
+      "ipa": "/fɛʁ.til/"
     },
     {
       "word": "FATIGANT",
@@ -1412,7 +1656,11 @@
         "tremblement"
       ],
       "pos": "noun",
-      "ipa": "/sə.kus/"
+      "ipa": "/sə.kus/",
+      "family": [
+        "secouer",
+        "secousses"
+      ]
     },
     {
       "word": "TRIMER",
@@ -1420,7 +1668,13 @@
       "synonyms": [
         "travailler"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tʁi.me/",
+      "family": [
+        "travail",
+        "trimard",
+        "trimestre"
+      ]
     },
     {
       "word": "FAR",
@@ -1429,7 +1683,12 @@
         "farine"
       ],
       "pos": "noun",
-      "ipa": "/faʁ/"
+      "ipa": "/faʁ/",
+      "family": [
+        "farine",
+        "farcir",
+        "farci"
+      ]
     },
     {
       "word": "TRANSIT",
@@ -1437,7 +1696,13 @@
       "synonyms": [
         "passage"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁɑ̃.zi/",
+      "family": [
+        "transiter",
+        "transitaire",
+        "transitivité"
+      ]
     },
     {
       "word": "TRACEUR",
@@ -1445,7 +1710,13 @@
       "synonyms": [
         "marqueur"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁa.sœʁ/",
+      "family": [
+        "tracer",
+        "trace",
+        "traçage"
+      ]
     },
     {
       "word": "CONJURER",
@@ -1458,7 +1729,8 @@
         "conjuratoire",
         "conjuré",
         "conjurateur"
-      ]
+      ],
+      "ipa": "/kɔ̃.ʒy.ʁe/"
     },
     {
       "word": "PARTITION",
@@ -1484,7 +1756,8 @@
       "pos": "adjective",
       "family": [
         "insouciance"
-      ]
+      ],
+      "ipa": "/ɛ̃.su.sjɑ̃/"
     },
     {
       "word": "ROLLER",
@@ -1506,7 +1779,12 @@
         "gagner"
       ],
       "pos": "verb",
-      "ipa": "/tʁijɔ̃fe/"
+      "ipa": "/tʁijɔ̃fe/",
+      "family": [
+        "triomphe",
+        "triomphal",
+        "triomphateur"
+      ]
     },
     {
       "word": "SHAMPOING",
@@ -1528,7 +1806,12 @@
       "synonyms": [
         "bruit"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁu.lə.mɑ̃/",
+      "family": [
+        "rouler",
+        "rouleau"
+      ]
     },
     {
       "word": "LACÉRATION",
@@ -1536,7 +1819,11 @@
       "synonyms": [
         "blessure"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/la.se.ʁa.sjɔ̃/",
+      "family": [
+        "lacéré"
+      ]
     },
     {
       "word": "PERFUSION",
@@ -1549,7 +1836,8 @@
         "baxter",
         "diffuseur",
         "anoxie"
-      ]
+      ],
+      "ipa": "/pɛʁ.fy.zjɔ̃/"
     },
     {
       "word": "TORRIDE",
@@ -1557,7 +1845,8 @@
       "synonyms": [
         "brûlant"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/tɔ.ʁid/"
     },
     {
       "word": "ÉMU",
@@ -1566,7 +1855,11 @@
         "touché"
       ],
       "pos": "adjective",
-      "ipa": "/e.mu/"
+      "ipa": "/e.mu/",
+      "family": [
+        "émouvoir",
+        "émotion"
+      ]
     },
     {
       "word": "MUETTE",
@@ -1575,7 +1868,12 @@
         "silencieuse"
       ],
       "pos": "verb",
-      "ipa": "/mɥɛt/"
+      "ipa": "/mɥɛt/",
+      "family": [
+        "muet",
+        "mutisme",
+        "muettement"
+      ]
     },
     {
       "word": "TOMA",
@@ -1583,7 +1881,8 @@
       "synonyms": [
         "fromage"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tɔ.ma/"
     },
     {
       "word": "RÉPARATEUR",
@@ -1592,7 +1891,12 @@
         "guérisseur"
       ],
       "pos": "noun",
-      "ipa": "/ʁe.pa.ʁa.tœʁ/"
+      "ipa": "/ʁe.pa.ʁa.tœʁ/",
+      "family": [
+        "réparer",
+        "réparation",
+        "réparabilité"
+      ]
     },
     {
       "word": "RECEVEUR",
@@ -1601,7 +1905,12 @@
         "bénéficiaire"
       ],
       "pos": "noun",
-      "ipa": "/ʁə.sə.vœʁ/"
+      "ipa": "/ʁə.sə.vœʁ/",
+      "family": [
+        "recevoir",
+        "réception",
+        "recevable"
+      ]
     },
     {
       "word": "APÉRITIF",
@@ -1637,7 +1946,13 @@
       "synonyms": [
         "pédagogique"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/e.dy.ka.tif/",
+      "family": [
+        "éduquer",
+        "éducation",
+        "éducateur"
+      ]
     },
     {
       "word": "KLAXONNER",
@@ -1645,7 +1960,11 @@
       "synonyms": [
         "corner"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/klak.sɔ.ne/",
+      "family": [
+        "klaxon"
+      ]
     },
     {
       "word": "DELL",
@@ -1653,7 +1972,8 @@
       "synonyms": [
         "ordinateur"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɛl/"
     },
     {
       "word": "PIPE",
@@ -1721,7 +2041,8 @@
         "intrépidement",
         "intrépidité",
         "téméraire"
-      ]
+      ],
+      "ipa": "/ɛ̃.tʁe.pid/"
     },
     {
       "word": "JUVÉNILE",
@@ -1734,7 +2055,8 @@
         "juvénilement",
         "juvénilité",
         "juvénat"
-      ]
+      ],
+      "ipa": "/ʒy.ve.nil/"
     },
     {
       "word": "PÉTALE",
@@ -1757,7 +2079,11 @@
         "dégât"
       ],
       "pos": "noun",
-      "ipa": "/ʁa.vaʒ/"
+      "ipa": "/ʁa.vaʒ/",
+      "family": [
+        "ravager",
+        "ravageur"
+      ]
     },
     {
       "word": "NOSTALGIE",
@@ -1779,7 +2105,11 @@
       "synonyms": [
         "tante"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ta.si/",
+      "family": [
+        "tante"
+      ]
     },
     {
       "word": "DÉTENDU",
@@ -1787,7 +2117,12 @@
       "synonyms": [
         "relaxé"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/de.tɑ̃.dy/",
+      "family": [
+        "détendre",
+        "détente"
+      ]
     },
     {
       "word": "VOYEUR",
@@ -1800,7 +2135,8 @@
         "voyeurisme",
         "voyeuriste",
         "exhibitionniste"
-      ]
+      ],
+      "ipa": "/vwa.jœʁ/"
     },
     {
       "word": "COLLATÉRAL",
@@ -1813,7 +2149,8 @@
         "collatéralement",
         "collatéraliser",
         "collatéralisation"
-      ]
+      ],
+      "ipa": "/kɔ.la.te.ʁal/"
     },
     {
       "word": "ÉCORCHER",
@@ -1826,7 +2163,8 @@
         "écorchage",
         "écorchant",
         "écorché"
-      ]
+      ],
+      "ipa": "/e.kɔʁ.ʃe/"
     },
     {
       "word": "AJUSTEMENT",
@@ -1835,7 +2173,11 @@
         "réglage"
       ],
       "pos": "noun",
-      "ipa": "/a.ʒys.tə.mɑ̃/"
+      "ipa": "/a.ʒys.tə.mɑ̃/",
+      "family": [
+        "ajuster",
+        "ajustage"
+      ]
     },
     {
       "word": "AIGUISER",
@@ -1858,7 +2200,11 @@
         "contrat"
       ],
       "pos": "noun",
-      "ipa": "/a.bɔn.mɑ̃/"
+      "ipa": "/a.bɔn.mɑ̃/",
+      "family": [
+        "abonner",
+        "abonné"
+      ]
     },
     {
       "word": "GOURMAND",
@@ -1892,7 +2238,12 @@
       "synonyms": [
         "femme"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/me.na.ʒɛʁ/",
+      "family": [
+        "ménage",
+        "ménager"
+      ]
     },
     {
       "word": "ENCLIN",
@@ -1901,7 +2252,11 @@
         "porté"
       ],
       "pos": "adjective",
-      "ipa": "/ɑ̃.klɛ̃/"
+      "ipa": "/ɑ̃.klɛ̃/",
+      "family": [
+        "incliner",
+        "inclinaison"
+      ]
     },
     {
       "word": "PSYCHO",
@@ -1909,7 +2264,13 @@
       "synonyms": [
         "mental"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/psi.ko/",
+      "family": [
+        "psychologie",
+        "psychique",
+        "psychanalyste"
+      ]
     },
     {
       "word": "CONSIGNE",
@@ -1917,7 +2278,13 @@
       "synonyms": [
         "instruction"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɔ̃.siɲ/",
+      "family": [
+        "consigner",
+        "consignataire",
+        "consignation"
+      ]
     },
     {
       "word": "AGAÇANT",
@@ -1926,7 +2293,11 @@
         "énervant"
       ],
       "pos": "noun",
-      "ipa": "/a.ɡa.sɑ̃/"
+      "ipa": "/a.ɡa.sɑ̃/",
+      "family": [
+        "agacer",
+        "agacement"
+      ]
     },
     {
       "word": "JOUJOU",
@@ -1935,13 +2306,20 @@
         "jouet"
       ],
       "pos": "noun",
-      "ipa": "/ʒu.ʒu/"
+      "ipa": "/ʒu.ʒu/",
+      "family": [
+        "jouet"
+      ]
     },
     {
       "word": "COQUILLAGE",
       "gloss": "Enveloppe dure qui protège certains mollusques marins.",
       "pos": "noun",
-      "ipa": "/kɔ.ki.jaʒ/"
+      "ipa": "/kɔ.ki.jaʒ/",
+      "family": [
+        "coquille",
+        "coquillier"
+      ]
     },
     {
       "word": "VÊTU",
@@ -1949,7 +2327,12 @@
       "synonyms": [
         "habillé"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ve.ty/",
+      "family": [
+        "vêtir",
+        "vêtement"
+      ]
     },
     {
       "word": "TRANCHANT",
@@ -1957,7 +2340,13 @@
       "synonyms": [
         "coupant"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁɑ̃.ʃɑ̃/",
+      "family": [
+        "trancher",
+        "tranche",
+        "tranchage"
+      ]
     },
     {
       "word": "FERTILITÉ",
@@ -1965,7 +2354,12 @@
       "synonyms": [
         "fécondité"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɛʁ.ti.li.te/",
+      "family": [
+        "fertile",
+        "fertiliser"
+      ]
     },
     {
       "word": "HAZEL",
@@ -1973,7 +2367,8 @@
       "synonyms": [
         "noisetier"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛl.zel/"
     },
     {
       "word": "SANDALE",
@@ -2020,7 +2415,8 @@
       "synonyms": [
         "bistrot"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/snak/"
     },
     {
       "word": "PARISIEN",
@@ -2045,7 +2441,8 @@
         "validement",
         "validisme",
         "validiste"
-      ]
+      ],
+      "ipa": "/va.lid/"
     },
     {
       "word": "AVENTURER",
@@ -2053,7 +2450,12 @@
       "synonyms": [
         "risquer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.vɑ̃.ty.ʁe/",
+      "family": [
+        "aventure",
+        "aventureux"
+      ]
     },
     {
       "word": "LUBRIFIER",
@@ -2066,7 +2468,8 @@
         "lubrifiant",
         "lubrification",
         "tribologie"
-      ]
+      ],
+      "ipa": "/ly.bʁi.fje/"
     },
     {
       "word": "MILITANT",
@@ -2079,7 +2482,8 @@
         "partisan",
         "prosélyte",
         "militantisme"
-      ]
+      ],
+      "ipa": "/mi.li.tɑ̃/"
     },
     {
       "word": "CADENAS",
@@ -2091,7 +2495,8 @@
       "family": [
         "cadenasser",
         "cadenassable"
-      ]
+      ],
+      "ipa": "/kad.na/"
     },
     {
       "word": "COMPRIMÉ",
@@ -2099,12 +2504,22 @@
       "synonyms": [
         "pilule"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɔ̃.pʁi.me/",
+      "family": [
+        "comprimer",
+        "compression"
+      ]
     },
     {
       "word": "RECOUVERT",
       "gloss": "Caché sous une couche.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʁə.ku.vɛʁ/",
+      "family": [
+        "recouvrir",
+        "recouvrement"
+      ]
     },
     {
       "word": "LISSE",
@@ -2127,7 +2542,11 @@
         "peureux",
         "poltron"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁu.jaʁ/",
+      "family": [
+        "trouille"
+      ]
     },
     {
       "word": "BASQUE",
@@ -2136,7 +2555,10 @@
         "béret"
       ],
       "pos": "adjective",
-      "ipa": "/bask/"
+      "ipa": "/bask/",
+      "family": [
+        "euskara"
+      ]
     },
     {
       "word": "ASSAILLIR",
@@ -2157,7 +2579,8 @@
         "obstacle",
         "problème"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ik/"
     },
     {
       "word": "BLED",
@@ -2171,7 +2594,8 @@
         "bledard",
         "blédard",
         "blé"
-      ]
+      ],
+      "ipa": "/blɛd/"
     },
     {
       "word": "CHAMBOULER",
@@ -2183,7 +2607,8 @@
       "family": [
         "chamboule-tout",
         "chamboulement"
-      ]
+      ],
+      "ipa": "/ʃɑ̃.bu.le/"
     },
     {
       "word": "SCOLARITÉ",
@@ -2196,7 +2621,8 @@
       "family": [
         "scolaire",
         "scolastique"
-      ]
+      ],
+      "ipa": "/skɔ.la.ʁi.te/"
     },
     {
       "word": "MARÉCAGE",
@@ -2223,7 +2649,8 @@
         "reptilien",
         "reptation",
         "herpétologie"
-      ]
+      ],
+      "ipa": "/ʁɛp.til/"
     },
     {
       "word": "AGRIPPER",
@@ -2242,7 +2669,11 @@
       "word": "RÉCITAL",
       "gloss": "Concert d'un seul musicien ou d'un poète.",
       "pos": "noun",
-      "ipa": "/ʁe.si.tal/"
+      "ipa": "/ʁe.si.tal/",
+      "family": [
+        "réciter",
+        "récitation"
+      ]
     },
     {
       "word": "DUPE",
@@ -2254,7 +2685,8 @@
       "pos": "adverb",
       "family": [
         "duper"
-      ]
+      ],
+      "ipa": "/dyp/"
     },
     {
       "word": "FERRÉ",
@@ -2263,7 +2695,13 @@
         "clouté",
         "blindé"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/fe.ʁe/",
+      "family": [
+        "ferrer",
+        "ferrage",
+        "ferreur"
+      ]
     },
     {
       "word": "SOUTIRER",
@@ -2276,7 +2714,8 @@
       "family": [
         "soutirage",
         "soutireuse"
-      ]
+      ],
+      "ipa": "/su.ti.ʁe/"
     },
     {
       "word": "ÉRADIQUER",
@@ -2285,7 +2724,13 @@
         "supprimer",
         "éliminer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/e.ʁa.di.ke/",
+      "family": [
+        "éradication",
+        "radical",
+        "radicaliser"
+      ]
     },
     {
       "word": "EXTRÉMISTE",
@@ -2294,7 +2739,13 @@
         "radical",
         "fanatique"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɛk.stʁe.mist/",
+      "family": [
+        "extrémisme",
+        "extrême",
+        "extrémité"
+      ]
     },
     {
       "word": "AÉRER",
@@ -2335,7 +2786,8 @@
       "family": [
         "indécemment",
         "indécence"
-      ]
+      ],
+      "ipa": "/ɛ̃.de.sɑ̃/"
     },
     {
       "word": "TOPER",
@@ -2344,7 +2796,11 @@
         "toucher",
         "frapper"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tɔ.pe/",
+      "family": [
+        "topette"
+      ]
     },
     {
       "word": "PERSÉCUTER",
@@ -2353,7 +2809,13 @@
         "harceler",
         "tourmenter"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɛʁ.se.ky.te/",
+      "family": [
+        "persécution",
+        "persécuteur",
+        "persécuté"
+      ]
     },
     {
       "word": "OGRE",
@@ -2378,7 +2840,8 @@
       "pos": "adjective",
       "family": [
         "originellement"
-      ]
+      ],
+      "ipa": "/ɔ.ʁi.ʒi.nɛl/"
     },
     {
       "word": "BOTTÉ",
@@ -2387,7 +2850,13 @@
         "chaussé",
         "équipé"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɔ.te/",
+      "family": [
+        "botte",
+        "botter",
+        "bottier"
+      ]
     },
     {
       "word": "ANGOISSER",
@@ -2399,7 +2868,8 @@
       "pos": "verb",
       "family": [
         "angoissant"
-      ]
+      ],
+      "ipa": "/ɑ̃.ɡwa.se/"
     },
     {
       "word": "AMIR",
@@ -2407,7 +2877,13 @@
       "synonyms": [
         "prénom"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/a.miʁ/",
+      "family": [
+        "émir",
+        "amiral",
+        "amirauté"
+      ]
     },
     {
       "word": "ARNAQUEUR",
@@ -2416,7 +2892,12 @@
         "escroc",
         "filou"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aʁ.na.kœʁ/",
+      "family": [
+        "arnaque",
+        "arnaquer"
+      ]
     },
     {
       "word": "CONCOMBRE",
@@ -2439,7 +2920,8 @@
         "foulage",
         "foulant",
         "foulement"
-      ]
+      ],
+      "ipa": "/fu.le/"
     },
     {
       "word": "NEUVIÈME",
@@ -2447,7 +2929,12 @@
       "synonyms": [
         "rang"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/nœ.vjɛm/",
+      "family": [
+        "neuf",
+        "neuvaine"
+      ]
     },
     {
       "word": "APITOYER",
@@ -2493,7 +2980,12 @@
     {
       "word": "NOCTURNE",
       "gloss": "qui se produit ou agit la nuit.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/nɔk.tyʁn/",
+      "family": [
+        "nuit",
+        "noctambule"
+      ]
     },
     {
       "word": "BILE",
@@ -2506,7 +2998,8 @@
       "family": [
         "biliaire",
         "bilié"
-      ]
+      ],
+      "ipa": "/bil/"
     },
     {
       "word": "DÉSAMORCER",
@@ -2518,7 +3011,8 @@
       "family": [
         "démineur",
         "déminer"
-      ]
+      ],
+      "ipa": "/de.za.mɔʁ.se/"
     },
     {
       "word": "MAIGRICHON",
@@ -2532,7 +3026,8 @@
         "amaigrir",
         "amaigrissant",
         "amaigrissement"
-      ]
+      ],
+      "ipa": "/mɛ.ɡʁi.ʃɔ̃/"
     },
     {
       "word": "ALLÉGER",
@@ -2546,7 +3041,8 @@
         "allégement",
         "ralléger",
         "allégeance"
-      ]
+      ],
+      "ipa": "/a.le.ʒe/"
     },
     {
       "word": "ZOOMER",
@@ -2556,7 +3052,11 @@
         "grossir"
       ],
       "pos": "verb",
-      "ipa": "/zu.me/"
+      "ipa": "/zu.me/",
+      "family": [
+        "zoom",
+        "dézoomer"
+      ]
     },
     {
       "word": "FUR",
@@ -2564,7 +3064,8 @@
       "synonyms": [
         "fourrure"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fyʁ/"
     },
     {
       "word": "SODIUM",
@@ -2587,7 +3088,8 @@
       "pos": "noun",
       "family": [
         "leucémique"
-      ]
+      ],
+      "ipa": "/lø.se.mi/"
     },
     {
       "word": "DARWIN",
@@ -2600,7 +3102,8 @@
         "darwinien",
         "darwinisme",
         "darwiniste"
-      ]
+      ],
+      "ipa": "/daʁ.wɛ̃/"
     },
     {
       "word": "RIDE",
@@ -2624,7 +3127,11 @@
         "groupe",
         "parti"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fak.sjɔ̃/",
+      "family": [
+        "factionnaire"
+      ]
     },
     {
       "word": "DISJONCTER",
@@ -2652,7 +3159,8 @@
         "sculpté",
         "sculpteur",
         "sculpture"
-      ]
+      ],
+      "ipa": "/skyl.te/"
     },
     {
       "word": "LIBERTY",
@@ -2663,7 +3171,8 @@
       "pos": "verb",
       "family": [
         "liberté"
-      ]
+      ],
+      "ipa": "/li.bɛʁ.ti/"
     },
     {
       "word": "LOURDEMENT",
@@ -2676,7 +3185,8 @@
       "family": [
         "lourdaud",
         "lourdeur"
-      ]
+      ],
+      "ipa": "/luʁ.də.mɑ̃/"
     },
     {
       "word": "TRÈFLE",
@@ -2699,7 +3209,12 @@
         "sédatif",
         "tranquillisant"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kal.mɑ̃/",
+      "family": [
+        "calme",
+        "calmer"
+      ]
     },
     {
       "word": "MALPOLI",
@@ -2708,7 +3223,12 @@
         "impoli",
         "grossier"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mal.pɔ.li/",
+      "family": [
+        "politesse",
+        "impoli"
+      ]
     },
     {
       "word": "FUGU",
@@ -2719,7 +3239,8 @@
       "pos": "verb",
       "family": [
         "tétrodotoxine"
-      ]
+      ],
+      "ipa": "/fy.ɡy/"
     },
     {
       "word": "MUSE",
@@ -2746,7 +3267,8 @@
       "family": [
         "serein",
         "sérénissime"
-      ]
+      ],
+      "ipa": "/se.ʁe.ni.te/"
     },
     {
       "word": "GONG",
@@ -2757,7 +3279,8 @@
       "pos": "noun",
       "family": [
         "gongonner"
-      ]
+      ],
+      "ipa": "/ɡɔŋ/"
     },
     {
       "word": "PRÉ",
@@ -2795,7 +3318,8 @@
       "family": [
         "étreinte",
         "rétreindre"
-      ]
+      ],
+      "ipa": "/e.tʁɛ̃dʁ/"
     },
     {
       "word": "RAPPEUR",
@@ -2803,7 +3327,12 @@
       "synonyms": [
         "chanteur"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁa.pœʁ/",
+      "family": [
+        "rap",
+        "rapper"
+      ]
     },
     {
       "word": "RÉCIF",
@@ -2842,12 +3371,14 @@
         "indexation",
         "indexer",
         "indice"
-      ]
+      ],
+      "ipa": "/ɛ̃.dɛks/"
     },
     {
       "word": "CAPPUCCINO",
       "gloss": "boisson italienne à base de café et de lait mousseux.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kap.pu.tʃi.no/"
     },
     {
       "word": "DÉCOLLETER",
@@ -2860,7 +3391,8 @@
         "décolletage",
         "décolleté",
         "décolleteur"
-      ]
+      ],
+      "ipa": "/de.kɔl.te/"
     },
     {
       "word": "COMPATIR",
@@ -2896,7 +3428,8 @@
       "synonyms": [
         "plaint"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɔ̃.pa.ti/"
     },
     {
       "word": "GRANDEMENT",
@@ -2909,12 +3442,14 @@
         "grandeur",
         "grandir",
         "grandissant"
-      ]
+      ],
+      "ipa": "/ɡʁɑ̃d.mɑ̃/"
     },
     {
       "word": "ORION",
       "gloss": "constellation visible dans l’hémisphère nord.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɔ.ʁjɔ̃/"
     },
     {
       "word": "MILORD",
@@ -2922,7 +3457,8 @@
       "synonyms": [
         "noble"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mi.lɔʁ/"
     },
     {
       "word": "LIÈVRE",
@@ -2944,7 +3480,8 @@
       "pos": "verb",
       "family": [
         "rénovation"
-      ]
+      ],
+      "ipa": "/ʁe.nɔ.ve/"
     },
     {
       "word": "MAGNER",
@@ -2952,7 +3489,8 @@
       "synonyms": [
         "agir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ma.ɲe/"
     },
     {
       "word": "VISUALISER",
@@ -2964,7 +3502,8 @@
       "family": [
         "visualisable",
         "visualisation"
-      ]
+      ],
+      "ipa": "/vi.sɥa.li.ze/"
     },
     {
       "word": "FAIBLIR",
@@ -2975,7 +3514,8 @@
       "pos": "verb",
       "family": [
         "affaiblir"
-      ]
+      ],
+      "ipa": "/fɛ.bliʁ/"
     },
     {
       "word": "DÉCOUVERT",
@@ -2986,7 +3526,8 @@
       "pos": "noun",
       "family": [
         "découverte"
-      ]
+      ],
+      "ipa": "/de.ku.vɛʁ/"
     },
     {
       "word": "ROMANTISME",
@@ -2998,7 +3539,8 @@
       "family": [
         "néoromantisme",
         "préromantisme"
-      ]
+      ],
+      "ipa": "/ʁɔ.mɑ̃.tism/"
     },
     {
       "word": "GONFLABLE",
@@ -3006,7 +3548,13 @@
       "synonyms": [
         "pneumatique"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɡɔ̃.flabl/",
+      "family": [
+        "gonfler",
+        "gonflement",
+        "gonflage"
+      ]
     },
     {
       "word": "DISSOUDRE",
@@ -3014,7 +3562,13 @@
       "synonyms": [
         "fondre"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/di.sudʁ/",
+      "family": [
+        "dissolution",
+        "dissous",
+        "dissoute"
+      ]
     },
     {
       "word": "DUNE",
@@ -3116,7 +3670,8 @@
       "pos": "adjective",
       "family": [
         "minutieusement"
-      ]
+      ],
+      "ipa": "/mi.ny.sjø/"
     },
     {
       "word": "ACCROÎTRE",
@@ -3125,7 +3680,12 @@
         "augmenter"
       ],
       "pos": "verb",
-      "ipa": "/a.kʁwatʁ/"
+      "ipa": "/a.kʁwatʁ/",
+      "family": [
+        "accroissement",
+        "accru",
+        "accro"
+      ]
     },
     {
       "word": "MONDAIN",
@@ -3134,7 +3694,8 @@
       "family": [
         "mondainement",
         "demi-mondaine"
-      ]
+      ],
+      "ipa": "/mɔ̃.dɛ̃/"
     },
     {
       "word": "ACHARNER",
@@ -3159,7 +3720,8 @@
         "évaporation",
         "évaporatoire",
         "évaporé"
-      ]
+      ],
+      "ipa": "/e.va.pɔ.ʁe/"
     },
     {
       "word": "POLAIRE",
@@ -3172,7 +3734,8 @@
         "apolaire",
         "bipolaire",
         "dipolaire"
-      ]
+      ],
+      "ipa": "/pɔ.lɛʁ/"
     },
     {
       "word": "ULTIMATUM",
@@ -3180,7 +3743,12 @@
       "synonyms": [
         "menace"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/yl.ti.ma.tɔm/",
+      "family": [
+        "ultime",
+        "ultimement"
+      ]
     },
     {
       "word": "DÉTONATION",
@@ -3203,7 +3771,8 @@
       "pos": "noun",
       "family": [
         "régenter"
-      ]
+      ],
+      "ipa": "/ʁe.ʒɑ̃/"
     },
     {
       "word": "CARTONNER",
@@ -3215,7 +3784,8 @@
       "family": [
         "cartonnage",
         "encartonner"
-      ]
+      ],
+      "ipa": "/kaʁ.tɔ.ne/"
     },
     {
       "word": "RABAIS",
@@ -3224,7 +3794,10 @@
         "réduction"
       ],
       "pos": "noun",
-      "ipa": "/ʁa.bɛ/"
+      "ipa": "/ʁa.bɛ/",
+      "family": [
+        "rabattre"
+      ]
     },
     {
       "word": "AUXILIAIRE",
@@ -3244,7 +3817,12 @@
       "synonyms": [
         "couteau"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kœ.te/",
+      "family": [
+        "couteau",
+        "couper"
+      ]
     },
     {
       "word": "LOTION",
@@ -3255,7 +3833,8 @@
       "pos": "noun",
       "family": [
         "lotionner"
-      ]
+      ],
+      "ipa": "/lɔ.sjɔ̃/"
     },
     {
       "word": "IMPORTUNER",
@@ -3263,7 +3842,12 @@
       "synonyms": [
         "gêner"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɑ̃.pɔʁ.ty.ne/",
+      "family": [
+        "importun",
+        "importunité"
+      ]
     },
     {
       "word": "VICTORIEUX",
@@ -3274,7 +3858,8 @@
       "pos": "adjective",
       "family": [
         "victorieusement"
-      ]
+      ],
+      "ipa": "/vik.tɔ.ʁjø/"
     },
     {
       "word": "JONGLER",
@@ -3298,7 +3883,8 @@
         "déverbal",
         "paraverbal",
         "verbalement"
-      ]
+      ],
+      "ipa": "/vɛʁ.bal/"
     },
     {
       "word": "MAFIEUX",
@@ -3306,7 +3892,11 @@
       "synonyms": [
         "truand"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ma.fjø/",
+      "family": [
+        "mafia"
+      ]
     },
     {
       "word": "EMBROUILLE",
@@ -3314,7 +3904,12 @@
       "synonyms": [
         "confusion"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɑ̃.bʁu.j/",
+      "family": [
+        "embrouiller",
+        "embrouillé"
+      ]
     },
     {
       "word": "TOMBÉE",
@@ -3325,7 +3920,8 @@
       "pos": "noun",
       "family": [
         "retombée"
-      ]
+      ],
+      "ipa": "/tɔ̃.be/"
     },
     {
       "word": "PONCTUEL",
@@ -3338,7 +3934,8 @@
         "ponctualité",
         "ponctuellement",
         "point"
-      ]
+      ],
+      "ipa": "/pɔ̃k.tɥɛl/"
     },
     {
       "word": "CRASHER",
@@ -3346,7 +3943,12 @@
       "synonyms": [
         "planter"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kʁa.ʃe/",
+      "family": [
+        "crash",
+        "crashe"
+      ]
     },
     {
       "word": "ATTIRANCE",
@@ -3354,7 +3956,13 @@
       "synonyms": [
         "attrait"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/a.ti.ʁɑ̃s/",
+      "family": [
+        "attirer",
+        "attirant",
+        "attirable"
+      ]
     },
     {
       "word": "RETRAITÉ",
@@ -3362,7 +3970,12 @@
       "synonyms": [
         "ancien"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁə.tʁe.te/",
+      "family": [
+        "retraite",
+        "retrait"
+      ]
     },
     {
       "word": "MICHE",
@@ -3373,7 +3986,8 @@
       "pos": "noun",
       "family": [
         "miette"
-      ]
+      ],
+      "ipa": "/miʃ/"
     },
     {
       "word": "TRIADE",
@@ -3387,7 +4001,8 @@
       "family": [
         "triadique",
         "tétrade"
-      ]
+      ],
+      "ipa": "/tʁi.jad/"
     },
     {
       "word": "NAVET",
@@ -3398,7 +4013,10 @@
         "tubercule"
       ],
       "pos": "noun",
-      "ipa": "/na.vɛ/"
+      "ipa": "/na.vɛ/",
+      "family": [
+        "navette"
+      ]
     },
     {
       "word": "CUBAIN",
@@ -3408,7 +4026,11 @@
         "caribéen",
         "insulaire"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ky.bɛ̃/",
+      "family": [
+        "cubaine"
+      ]
     },
     {
       "word": "FROUSSE",
@@ -3422,7 +4044,8 @@
       "family": [
         "froussard",
         "froussarde"
-      ]
+      ],
+      "ipa": "/fʁus/"
     },
     {
       "word": "PSYCHOSE",
@@ -3452,7 +4075,8 @@
       "family": [
         "crucifixion",
         "crucifix"
-      ]
+      ],
+      "ipa": "/kʁy.si.fje/"
     },
     {
       "word": "ABONDANCE",
@@ -3479,7 +4103,11 @@
         "continental"
       ],
       "pos": "noun",
-      "ipa": "/ɔs.tʁa.ljɛ̃/"
+      "ipa": "/ɔs.tʁa.ljɛ̃/",
+      "family": [
+        "Australie",
+        "austral"
+      ]
     },
     {
       "word": "BLINDÉ",
@@ -3493,7 +4121,8 @@
       "family": [
         "blinder",
         "blindage"
-      ]
+      ],
+      "ipa": "/blɛ̃.de/"
     },
     {
       "word": "FRUSTRÉ",
@@ -3503,7 +4132,13 @@
         "mécontent",
         "insatisfait"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/fʁys.tʁe/",
+      "family": [
+        "frustration",
+        "frustrer",
+        "frustrant"
+      ]
     },
     {
       "word": "MAYONNAISE",
@@ -3514,7 +4149,10 @@
         "crème"
       ],
       "pos": "noun",
-      "ipa": "/ma.jɔ.ˈnɛz/"
+      "ipa": "/ma.jɔ.ˈnɛz/",
+      "family": [
+        "mayo"
+      ]
     },
     {
       "word": "TOURMENTE",
@@ -3525,7 +4163,11 @@
         "bourrasque"
       ],
       "pos": "noun",
-      "ipa": "/tuʁ.mɑ̃t/"
+      "ipa": "/tuʁ.mɑ̃t/",
+      "family": [
+        "tourment",
+        "tourmenter"
+      ]
     },
     {
       "word": "COMPÉTITIF",
@@ -3538,7 +4180,8 @@
       "pos": "adjective",
       "family": [
         "compétitivité"
-      ]
+      ],
+      "ipa": "/kɔ̃.pe.ti.tif/"
     },
     {
       "word": "ERRONÉ",
@@ -3573,7 +4216,13 @@
     {
       "word": "MÉCANO",
       "gloss": "un jeu de construction avec des pièces métalliques.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/me.ka.no/",
+      "family": [
+        "mécanique",
+        "mécaniser",
+        "mécanisme"
+      ]
     },
     {
       "word": "LUCIOLE",
@@ -3583,7 +4232,11 @@
         "ver",
         "luisante"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ly.sjɔl/",
+      "family": [
+        "lucioles"
+      ]
     },
     {
       "word": "GUETTER",
@@ -3594,7 +4247,11 @@
         "épier"
       ],
       "pos": "verb",
-      "ipa": "/ge.te/"
+      "ipa": "/ge.te/",
+      "family": [
+        "guet",
+        "guetteur"
+      ]
     },
     {
       "word": "SÉDUCTION",
@@ -3605,7 +4262,12 @@
         "attirance"
       ],
       "pos": "noun",
-      "ipa": "/se.dyk.sjɔ̃/"
+      "ipa": "/se.dyk.sjɔ̃/",
+      "family": [
+        "séduire",
+        "séducteur",
+        "séduisant"
+      ]
     },
     {
       "word": "PANTIN",
@@ -3626,7 +4288,8 @@
         "gouttière",
         "égout"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ka.ni.vo/"
     },
     {
       "word": "PERF",
@@ -3634,7 +4297,12 @@
       "synonyms": [
         "exploit"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "performant",
+        "performance",
+        "performer"
+      ]
     },
     {
       "word": "INFIDÉLITÉ",
@@ -3644,7 +4312,12 @@
         "adultère",
         "déloyauté"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛ̃.fi.de.li.te/",
+      "family": [
+        "infidèle",
+        "infidèlement"
+      ]
     },
     {
       "word": "BRAQUE",
@@ -3655,7 +4328,11 @@
         "race"
       ],
       "pos": "adjective",
-      "ipa": "/bʁak/"
+      "ipa": "/bʁak/",
+      "family": [
+        "braquage",
+        "braquer"
+      ]
     },
     {
       "word": "FRACTION",
@@ -3728,7 +4405,8 @@
       "pos": "verb",
       "family": [
         "fredonnement"
-      ]
+      ],
+      "ipa": "/fʁə.dɔ.ne/"
     },
     {
       "word": "RAJEUNIR",
@@ -3740,7 +4418,8 @@
       "pos": "verb",
       "family": [
         "rajeunissement"
-      ]
+      ],
+      "ipa": "/ʁa.ʒœ.niʁ/"
     },
     {
       "word": "MASCARADE",
@@ -3750,7 +4429,8 @@
         "simulacre",
         "parodie"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mas.ka.ʁad/"
     },
     {
       "word": "ASSISE",
@@ -3763,7 +4443,8 @@
       "pos": "noun",
       "family": [
         "assis"
-      ]
+      ],
+      "ipa": "/a.siz/"
     },
     {
       "word": "FORAGE",
@@ -3773,7 +4454,12 @@
         "creusage",
         "sondage"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɔ.ʁaʒ/",
+      "family": [
+        "forer",
+        "foret"
+      ]
     },
     {
       "word": "PAPARAZZI",
@@ -3783,7 +4469,8 @@
         "reporter",
         "presse"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pa.pa.ʁa.dzi/"
     },
     {
       "word": "PALETTE",
@@ -3796,7 +4483,8 @@
       "pos": "noun",
       "family": [
         "paletter"
-      ]
+      ],
+      "ipa": "/pa.lɛt/"
     },
     {
       "word": "TACT",
@@ -3822,7 +4510,11 @@
         "découvreur",
         "détecteur"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/suʁ.sje/",
+      "family": [
+        "source"
+      ]
     },
     {
       "word": "AVENTURIER",
@@ -3832,7 +4524,13 @@
         "voyageur",
         "pionnier"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/avɑ̃.ty.ʁje/",
+      "family": [
+        "aventure",
+        "aventurer",
+        "aventureux"
+      ]
     },
     {
       "word": "CAMELOTE",
@@ -3846,7 +4544,8 @@
       "family": [
         "came",
         "camelot"
-      ]
+      ],
+      "ipa": "/kam.lɔt/"
     },
     {
       "word": "BÉNÉVOLAT",
@@ -3859,7 +4558,8 @@
       "pos": "noun",
       "family": [
         "volontariat"
-      ]
+      ],
+      "ipa": "/be.ne.vɔ.la/"
     },
     {
       "word": "ENGRAIS",
@@ -3870,7 +4570,11 @@
         "nourrissant"
       ],
       "pos": "noun",
-      "ipa": "/ɑ̃.ɡʁɛ/"
+      "ipa": "/ɑ̃.ɡʁɛ/",
+      "family": [
+        "engraisser",
+        "engraissage"
+      ]
     },
     {
       "word": "RÉPERTOIRE",
@@ -3883,7 +4587,8 @@
       "pos": "noun",
       "family": [
         "répertorier"
-      ]
+      ],
+      "ipa": "/ʁe.pɛʁ.twaʁ/"
     },
     {
       "word": "ABSTENIR",
@@ -3894,7 +4599,11 @@
         "contrôler"
       ],
       "pos": "verb",
-      "ipa": "/s‿ap.stə.niʁ/"
+      "ipa": "/s‿ap.stə.niʁ/",
+      "family": [
+        "abstention",
+        "abstinent"
+      ]
     },
     {
       "word": "FAXER",
@@ -3904,7 +4613,11 @@
         "transmettre",
         "communiquer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fak.se/",
+      "family": [
+        "fax"
+      ]
     },
     {
       "word": "IDEM",
@@ -3914,7 +4627,8 @@
         "identique",
         "semblable"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/i.dɛm/"
     },
     {
       "word": "SALEMENT",
@@ -3924,7 +4638,12 @@
         "beaucoup",
         "très"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/sal.mɑ̃/",
+      "family": [
+        "sale",
+        "salir"
+      ]
     },
     {
       "word": "CAISSON",
@@ -3937,7 +4656,8 @@
       "pos": "noun",
       "family": [
         "caissonné"
-      ]
+      ],
+      "ipa": "/kɛ.sɔ̃/"
     },
     {
       "word": "AQUATIQUE",
@@ -3997,7 +4717,8 @@
         "multicomposants",
         "composante",
         "composer"
-      ]
+      ],
+      "ipa": "/kɔ̃.po.zɑ̃/"
     },
     {
       "word": "PACHA",
@@ -4021,7 +4742,8 @@
         "célébration",
         "réjouissance"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fjɛs.ta/"
     },
     {
       "word": "BANQUETTE",
@@ -4032,7 +4754,11 @@
         "place"
       ],
       "pos": "noun",
-      "ipa": "/bɑ̃.kɛt/"
+      "ipa": "/bɑ̃.kɛt/",
+      "family": [
+        "banquet",
+        "banqueter"
+      ]
     },
     {
       "word": "EXORCISME",
@@ -4047,7 +4773,8 @@
         "exorcisation",
         "exorcisé",
         "exorciser"
-      ]
+      ],
+      "ipa": "/ɛɡ.zɔʁ.sism/"
     },
     {
       "word": "INFIME",
@@ -4069,7 +4796,11 @@
         "insister"
       ],
       "pos": "verb",
-      "ipa": "/pɛʁ.se.ve.ʁe/"
+      "ipa": "/pɛʁ.se.ve.ʁe/",
+      "family": [
+        "persévérance",
+        "persévérant"
+      ]
     },
     {
       "word": "IMPUR",
@@ -4084,7 +4815,8 @@
         "impureté",
         "pur-sang",
         "purement"
-      ]
+      ],
+      "ipa": "/ɛ̃.pyʁ/"
     },
     {
       "word": "CALER",
@@ -4098,7 +4830,8 @@
       "family": [
         "recaler",
         "décaler"
-      ]
+      ],
+      "ipa": "/ka.le/"
     },
     {
       "word": "FERRER",
@@ -4125,7 +4858,8 @@
         "déchoir",
         "échoir",
         "chute"
-      ]
+      ],
+      "ipa": "/ʃwaʁ/"
     },
     {
       "word": "OPTIMISME",
@@ -4145,7 +4879,11 @@
       "synonyms": [
         "dissident"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/e.ʁe.tik/",
+      "family": [
+        "hérésie"
+      ]
     },
     {
       "word": "CUPIDITÉ",
@@ -4165,7 +4903,12 @@
       "synonyms": [
         "perte"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡaspijaʒ/",
+      "family": [
+        "gaspiller",
+        "gaspilleur"
+      ]
     },
     {
       "word": "EXTASE",
@@ -4178,12 +4921,14 @@
         "s’extasier",
         "extatique",
         "ecstasy"
-      ]
+      ],
+      "ipa": "/ɛkstaz/"
     },
     {
       "word": "MOSSAD",
       "gloss": "un service de renseignement israélien.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɔsad/"
     },
     {
       "word": "SATISFAIT",
@@ -4192,7 +4937,12 @@
         "content"
       ],
       "pos": "noun",
-      "ipa": "/sa.tis.fɛ/"
+      "ipa": "/sa.tis.fɛ/",
+      "family": [
+        "satisfaire",
+        "satisfaction",
+        "insatisfait"
+      ]
     },
     {
       "word": "DÉCOUPE",
@@ -4200,7 +4950,13 @@
       "synonyms": [
         "tranche"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/dekup/",
+      "family": [
+        "découper",
+        "découpeuse",
+        "découpage"
+      ]
     },
     {
       "word": "DÉPANNER",
@@ -4212,7 +4968,8 @@
       "family": [
         "dépanneur",
         "dépanneuse"
-      ]
+      ],
+      "ipa": "/depane/"
     },
     {
       "word": "TORCHE",
@@ -4235,7 +4992,12 @@
         "casque"
       ],
       "pos": "noun",
-      "ipa": "/e.ku.tœʁ/"
+      "ipa": "/e.ku.tœʁ/",
+      "family": [
+        "écouter",
+        "écoute",
+        "écoutille"
+      ]
     },
     {
       "word": "PROSPECTUS",
@@ -4244,7 +5006,12 @@
         "tract"
       ],
       "pos": "noun",
-      "ipa": "/pʁɔs.pɛk.tys/"
+      "ipa": "/pʁɔs.pɛk.tys/",
+      "family": [
+        "prospecter",
+        "prospection",
+        "prospecteur"
+      ]
     },
     {
       "word": "CHOCHOTTE",
@@ -4252,7 +5019,8 @@
       "synonyms": [
         "efféminé"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃoʃɔt/"
     },
     {
       "word": "CHÔMEUR",
@@ -4264,7 +5032,8 @@
       "family": [
         "chômage",
         "chômer"
-      ]
+      ],
+      "ipa": "/ʃomeʁ/"
     },
     {
       "word": "ENFANTIN",
@@ -4287,18 +5056,28 @@
       "pos": "verb",
       "family": [
         "accablement"
-      ]
+      ],
+      "ipa": "/akable/"
     },
     {
       "word": "GLACIÈRE",
       "gloss": "un contenant isolé qui garde les aliments frais.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡlasjɛʁ/",
+      "family": [
+        "glace",
+        "glacial",
+        "glacer"
+      ]
     },
     {
       "word": "SOPRANO",
       "gloss": "une voix féminine la plus aiguë.",
       "pos": "noun",
-      "ipa": "/sɔpʁano/"
+      "ipa": "/sɔpʁano/",
+      "family": [
+        "sopraniste"
+      ]
     },
     {
       "word": "CARPE",
@@ -4325,12 +5104,18 @@
       "word": "RÉGALER",
       "gloss": "un plat ou une boisson qui procure du plaisir gustatif",
       "pos": "verb",
-      "ipa": "/ʁe.ɡa.le/"
+      "ipa": "/ʁe.ɡa.le/",
+      "family": [
+        "régal",
+        "régalien",
+        "régale"
+      ]
     },
     {
       "word": "CORONER",
       "gloss": "un fonctionnaire qui enquête sur les décès suspects",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɔʁɔneʁ/"
     },
     {
       "word": "TASER",
@@ -4345,7 +5130,8 @@
       "family": [
         "tombe",
         "tombeau"
-      ]
+      ],
+      "ipa": "/tɔ̃bal/"
     },
     {
       "word": "TOURNURE",
@@ -4354,7 +5140,13 @@
         "expression",
         "évolution"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tuʁnyʁ/",
+      "family": [
+        "tourner",
+        "tournoyer",
+        "tournant"
+      ]
     },
     {
       "word": "COQUIN",
@@ -4367,7 +5159,8 @@
       "family": [
         "acoquiner",
         "coquinerie"
-      ]
+      ],
+      "ipa": "/kɔkɛ̃/"
     },
     {
       "word": "DÉDICACER",
@@ -4380,7 +5173,8 @@
         "dédicace",
         "dédicataire",
         "dédicatoire"
-      ]
+      ],
+      "ipa": "/dedikase/"
     },
     {
       "word": "ENTÉRINER",
@@ -4392,7 +5186,8 @@
       "pos": "verb",
       "family": [
         "entérinement"
-      ]
+      ],
+      "ipa": "/ɑ̃teʁine/"
     },
     {
       "word": "RIVALISER",
@@ -4402,7 +5197,11 @@
         "lutter"
       ],
       "pos": "verb",
-      "ipa": "/ʁi.va.li.ze/"
+      "ipa": "/ʁi.va.li.ze/",
+      "family": [
+        "rival",
+        "rivalité"
+      ]
     },
     {
       "word": "EXPULSION",
@@ -4415,7 +5214,8 @@
       "family": [
         "expulsable",
         "expulser"
-      ]
+      ],
+      "ipa": "/ɛkspylsjɔ̃/"
     },
     {
       "word": "PRÉVISION",
@@ -4428,7 +5228,8 @@
       "family": [
         "prévisionnel",
         "prévisionniste"
-      ]
+      ],
+      "ipa": "/pʁevizjɔ̃/"
     },
     {
       "word": "BIOPSIE",
@@ -4461,7 +5262,8 @@
         "débarquer",
         "revenir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁaplike/"
     }
   ]
 }

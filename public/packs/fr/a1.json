@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "lang": "fr",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -119,7 +119,11 @@
       ],
       "example": "Tu es sûr de vouloir ?",
       "pos": "verb",
-      "ipa": "/vu.lwaʁ/"
+      "ipa": "/vu.lwaʁ/",
+      "family": [
+        "voulez",
+        "voulu"
+      ]
     },
     {
       "word": "SAVOIR",
@@ -280,7 +284,11 @@
       "gloss": "mot qui demande la cause",
       "example": "Pourquoi ?",
       "pos": "adverb",
-      "ipa": "/puʁ.kwa/"
+      "ipa": "/puʁ.kwa/",
+      "family": [
+        "pour",
+        "quoi"
+      ]
     },
     {
       "word": "CHOSE",
@@ -387,7 +395,11 @@
       ],
       "example": "Comment vas-tu ?",
       "pos": "adverb",
-      "ipa": "/kɔ.mɑ̃/"
+      "ipa": "/kɔ.mɑ̃/",
+      "family": [
+        "commentaire",
+        "commenter"
+      ]
     },
     {
       "word": "PASSER",
@@ -471,7 +483,8 @@
         "introuvable",
         "retrouver",
         "trouvable"
-      ]
+      ],
+      "ipa": "/tʁu.ve/"
     },
     {
       "word": "TRÈS",
@@ -504,7 +517,10 @@
       ],
       "example": "Moi aussi.",
       "pos": "adverb",
-      "ipa": "/o.si/"
+      "ipa": "/o.si/",
+      "family": [
+        "aussitôt"
+      ]
     },
     {
       "word": "VRAIMENT",
@@ -525,7 +541,10 @@
       ],
       "example": "Ils ont le même âge.",
       "pos": "adjective",
-      "ipa": "/mɛmə̆/"
+      "ipa": "/mɛmə̆/",
+      "family": [
+        "mêmement"
+      ]
     },
     {
       "word": "MAINTENANT",
@@ -535,14 +554,20 @@
       ],
       "example": "Et maintenant ?",
       "pos": "adverb",
-      "ipa": "/mɛ̃.tø.nɑ̃/"
+      "ipa": "/mɛ̃.tø.nɑ̃/",
+      "family": [
+        "maintenance"
+      ]
     },
     {
       "word": "FALLOIR",
       "gloss": "un verbe pour dire qu’il faut une chose",
       "example": "Il va falloir agir.",
       "pos": "verb",
-      "ipa": "/fa.lwaʁ/"
+      "ipa": "/fa.lwaʁ/",
+      "family": [
+        "fallu"
+      ]
     },
     {
       "word": "ATTENDRE",
@@ -598,7 +623,10 @@
       ],
       "example": "Encore un peu ?",
       "pos": "noun",
-      "ipa": "/pø/"
+      "ipa": "/pø/",
+      "family": [
+        "peupler"
+      ]
     },
     {
       "word": "TEMPS",
@@ -843,7 +871,8 @@
       "family": [
         "étayer",
         "étançon"
-      ]
+      ],
+      "ipa": "/e.tɛ/"
     },
     {
       "word": "FILLE",
@@ -871,7 +900,8 @@
       "family": [
         "troupe",
         "troupeau"
-      ]
+      ],
+      "ipa": "/tʁo/"
     },
     {
       "word": "SORTIR",
@@ -1125,7 +1155,11 @@
       ],
       "example": "Il va mieux.",
       "pos": "adverb",
-      "ipa": "/mjø/"
+      "ipa": "/mjø/",
+      "family": [
+        "meilleur",
+        "améliorer"
+      ]
     },
     {
       "word": "ENFANT",
@@ -1226,7 +1260,11 @@
       ],
       "example": "Venez m'aider.",
       "pos": "verb",
-      "ipa": "/e.de/"
+      "ipa": "/e.de/",
+      "family": [
+        "aide",
+        "aidant"
+      ]
     },
     {
       "word": "DÉSOLÉ",
@@ -1236,7 +1274,11 @@
       ],
       "example": "Oh, je suis désolé.",
       "pos": "noun",
-      "ipa": "/de.zɔ.le/"
+      "ipa": "/de.zɔ.le/",
+      "family": [
+        "désolation",
+        "désoler"
+      ]
     },
     {
       "word": "MAISON",
@@ -1277,7 +1319,8 @@
       "pos": "verb",
       "family": [
         "revenez-y"
-      ]
+      ],
+      "ipa": "/ʁə.və.niʁ/"
     },
     {
       "word": "VOILÀ",
@@ -1361,7 +1404,8 @@
         "premièrement",
         "unième",
         "rez-de-chaussée"
-      ]
+      ],
+      "ipa": "/pʁə.mje/"
     },
     {
       "word": "NOM",
@@ -1517,7 +1561,11 @@
       ],
       "example": "Le vieux chien va mourir bientôt.",
       "pos": "verb",
-      "ipa": "/mu.ʁiʁ/"
+      "ipa": "/mu.ʁiʁ/",
+      "family": [
+        "mort",
+        "mourant"
+      ]
     },
     {
       "word": "PLAIRE",
@@ -1544,7 +1592,8 @@
       "pos": "adverb",
       "family": [
         "plus"
-      ]
+      ],
+      "ipa": "/mwɛ̃/"
     },
     {
       "word": "MAMAN",
@@ -1622,7 +1671,8 @@
         "familial",
         "familiariser",
         "familier"
-      ]
+      ],
+      "ipa": "/famij/"
     },
     {
       "word": "MAIN",
@@ -2200,7 +2250,11 @@
       ],
       "example": "Merci, chéri.",
       "pos": "noun",
-      "ipa": "/ʃe.ʁi/"
+      "ipa": "/ʃe.ʁi/",
+      "family": [
+        "chérir",
+        "cher"
+      ]
     },
     {
       "word": "SUPER",
@@ -2300,7 +2354,8 @@
       "pos": "verb",
       "family": [
         "revoyure"
-      ]
+      ],
+      "ipa": "/ʁəvwaʁ/"
     },
     {
       "word": "GROS",
@@ -2345,7 +2400,8 @@
         "consanguin",
         "consanguinité",
         "ensanglantement"
-      ]
+      ],
+      "ipa": "/sɑ̃/"
     },
     {
       "word": "PAYER",
@@ -2375,7 +2431,8 @@
         "désolant",
         "désolé",
         "désolation"
-      ]
+      ],
+      "ipa": "/dezɔle/"
     },
     {
       "word": "MEILLEUR",
@@ -2650,7 +2707,8 @@
         "côte",
         "coteau",
         "côtelé"
-      ]
+      ],
+      "ipa": "/kote/"
     },
     {
       "word": "ENDROIT",
@@ -2660,7 +2718,11 @@
       ],
       "example": "Chic endroit !",
       "pos": "noun",
-      "ipa": "/ɑ̃.dʁwa/"
+      "ipa": "/ɑ̃.dʁwa/",
+      "family": [
+        "droit",
+        "droite"
+      ]
     },
     {
       "word": "ÉCOUTE",
@@ -2730,7 +2792,8 @@
       "pos": "noun",
       "family": [
         "protéger"
-      ]
+      ],
+      "ipa": "/paʁti/"
     },
     {
       "word": "SENTIR",
@@ -2822,7 +2885,8 @@
       "pos": "noun",
       "family": [
         "duper"
-      ]
+      ],
+      "ipa": "/pɛʁdy/"
     },
     {
       "word": "COMPRIS",
@@ -2832,7 +2896,8 @@
         "savoir"
       ],
       "example": "J'ai compris.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kɔ̃pʁi/"
     },
     {
       "word": "DROIT",
@@ -2846,7 +2911,8 @@
         "adroit",
         "adroitement",
         "droite"
-      ]
+      ],
+      "ipa": "/dʁwa/"
     },
     {
       "word": "BEL",
@@ -2947,7 +3013,8 @@
         "bicorps",
         "corporalité",
         "corporatisme"
-      ]
+      ],
+      "ipa": "/kɔʁ/"
     },
     {
       "word": "VOICI",
@@ -3153,7 +3220,8 @@
         "à toi"
       ],
       "example": "C'est le tien.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tjɛ̃/"
     },
     {
       "word": "ÉCOUTER",
@@ -3178,7 +3246,11 @@
       ],
       "example": "Tu vas adorer.",
       "pos": "verb",
-      "ipa": "/a.dɔ.ʁe/"
+      "ipa": "/a.dɔ.ʁe/",
+      "family": [
+        "adoration",
+        "adorable"
+      ]
     },
     {
       "word": "EAU",
@@ -3230,7 +3302,11 @@
       ],
       "example": "Oh, pardon !",
       "pos": "noun",
-      "ipa": "/paʁ.dɔ̃/"
+      "ipa": "/paʁ.dɔ̃/",
+      "family": [
+        "pardonner",
+        "pardonnable"
+      ]
     },
     {
       "word": "SUITE",
@@ -3285,7 +3361,11 @@
       ],
       "example": "Tu peux le rencontrer.",
       "pos": "verb",
-      "ipa": "/ʁɑ̃.kɔ̃.tʁe/"
+      "ipa": "/ʁɑ̃.kɔ̃.tʁe/",
+      "family": [
+        "rencontre",
+        "rencontré"
+      ]
     },
     {
       "word": "BOIRE",
@@ -3447,7 +3527,12 @@
       ],
       "example": "Merci de me recevoir.",
       "pos": "verb",
-      "ipa": "/ʁə.sə.vwaʁ/"
+      "ipa": "/ʁə.sə.vwaʁ/",
+      "family": [
+        "réception",
+        "receveur",
+        "reçu"
+      ]
     },
     {
       "word": "BOULOT",
@@ -3458,7 +3543,10 @@
       ],
       "example": "Au boulot !",
       "pos": "noun",
-      "ipa": "/bu.lo/"
+      "ipa": "/bu.lo/",
+      "family": [
+        "boulotter"
+      ]
     },
     {
       "word": "POSSIBLE",
@@ -3536,7 +3624,8 @@
       "family": [
         "Mʳ",
         "Mlle"
-      ]
+      ],
+      "ipa": "/mam/"
     },
     {
       "word": "RÉPONDRE",
@@ -3547,7 +3636,11 @@
       ],
       "example": "Veuillez répondre.",
       "pos": "verb",
-      "ipa": "/ʁe.pɔ̃dʁ/"
+      "ipa": "/ʁe.pɔ̃dʁ/",
+      "family": [
+        "réponse",
+        "répondant"
+      ]
     },
     {
       "word": "DOCTEUR",
@@ -3601,7 +3694,11 @@
       ],
       "example": "Tu es prêt.",
       "pos": "noun",
-      "ipa": "/pʁ̥e/"
+      "ipa": "/pʁ̥e/",
+      "family": [
+        "prêter",
+        "prêté"
+      ]
     },
     {
       "word": "CHEF",
@@ -3710,7 +3807,8 @@
         "contrevérité",
         "avérer",
         "véridicité"
-      ]
+      ],
+      "ipa": "/ve.ʁi.te/"
     },
     {
       "word": "CONFIANCE",
@@ -3748,7 +3846,13 @@
       "word": "JOURNÉE",
       "gloss": "le temps entre le matin et le soir",
       "example": "Bonne journée !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʒuʁ.ne/",
+      "family": [
+        "jour",
+        "journal",
+        "journalier"
+      ]
     },
     {
       "word": "GÉNIAL",
@@ -3806,7 +3910,12 @@
       ],
       "example": "À propos de quoi ?",
       "pos": "noun",
-      "ipa": "/pʁɔ.po/"
+      "ipa": "/pʁɔ.po/",
+      "family": [
+        "proposer",
+        "proposition",
+        "proposé"
+      ]
     },
     {
       "word": "IMAGINER",
@@ -3911,7 +4020,8 @@
       "family": [
         "auprès",
         "presque"
-      ]
+      ],
+      "ipa": "/pʁɛ/"
     },
     {
       "word": "CHER",
@@ -4050,7 +4160,8 @@
         "inquiétant",
         "inquiéter",
         "inquiétude"
-      ]
+      ],
+      "ipa": "/ɛ̃.kjɛ/"
     },
     {
       "word": "LIVRE",
@@ -4108,7 +4219,11 @@
       ],
       "example": "Tu dois choisir.",
       "pos": "verb",
-      "ipa": "/ʃwa.ziʁ/"
+      "ipa": "/ʃwa.ziʁ/",
+      "family": [
+        "choix",
+        "choisi"
+      ]
     },
     {
       "word": "NUMÉRO",
@@ -4276,7 +4391,12 @@
       "gloss": "une fille que l'on aime bien",
       "example": "Amène ton amie.",
       "pos": "noun",
-      "ipa": "/yn‿a.mi/"
+      "ipa": "/yn‿a.mi/",
+      "family": [
+        "ami",
+        "amitié",
+        "amical"
+      ]
     },
     {
       "word": "FOU",
@@ -4489,7 +4609,8 @@
         "garder",
         "gardeur",
         "gardeuse"
-      ]
+      ],
+      "ipa": "/ɡaʁd/"
     },
     {
       "word": "COURS",
@@ -4564,7 +4685,8 @@
         "touraillage",
         "touraille",
         "tourelle"
-      ]
+      ],
+      "ipa": "/tuʁ/"
     },
     {
       "word": "BIENTÔT",
@@ -4584,7 +4706,12 @@
       ],
       "example": "Je vais ignorer ça.",
       "pos": "verb",
-      "ipa": "/i.ɲɔ.ʁe/"
+      "ipa": "/i.ɲɔ.ʁe/",
+      "family": [
+        "ignorance",
+        "ignorant",
+        "ignoré"
+      ]
     },
     {
       "word": "TOURNER",
@@ -4643,7 +4770,8 @@
         "désemprisonner",
         "emprisonner",
         "emprisonnement"
-      ]
+      ],
+      "ipa": "/pʁi.zɔ̃/"
     },
     {
       "word": "PARFAIRE",
@@ -4656,7 +4784,8 @@
       "family": [
         "imparfait",
         "parfait"
-      ]
+      ],
+      "ipa": "/paʁ.fɛʁ/"
     },
     {
       "word": "RETOUR",
@@ -4667,7 +4796,12 @@
       ],
       "example": "Tu es de retour.",
       "pos": "noun",
-      "ipa": "/ʁə.tuʁ/"
+      "ipa": "/ʁə.tuʁ/",
+      "family": [
+        "retourner",
+        "retournement",
+        "retourné"
+      ]
     },
     {
       "word": "SÉRIEUX",
@@ -4730,7 +4864,8 @@
         "aussi"
       ],
       "example": "Il t'aime autant que moi.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/o.tɑ̃/"
     },
     {
       "word": "CARTE",
@@ -4859,7 +4994,12 @@
         "haïr"
       ],
       "pos": "verb",
-      "ipa": "/de.tes.te/"
+      "ipa": "/de.tes.te/",
+      "family": [
+        "détestation",
+        "détestable",
+        "détesté"
+      ]
     },
     {
       "word": "ARME",
@@ -4880,7 +5020,12 @@
         "assassinat"
       ],
       "example": "Le meurtre est un crime.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "meurtrier",
+        "meurtrir",
+        "meurtrissure"
+      ]
     },
     {
       "word": "PERMETTRE",
@@ -4919,7 +5064,10 @@
       ],
       "example": "Tu peux me ramener ?",
       "pos": "verb",
-      "ipa": "/ʁam.ne/"
+      "ipa": "/ʁam.ne/",
+      "family": [
+        "ramené"
+      ]
     },
     {
       "word": "ROUTE",
@@ -5014,7 +5162,8 @@
         "plaire",
         "plaisamment",
         "plaisant"
-      ]
+      ],
+      "ipa": "/plɛziʁ/"
     },
     {
       "word": "LIT",
@@ -5142,7 +5291,12 @@
       ],
       "example": "Vas-y d'abord.",
       "pos": "noun",
-      "ipa": "/a.bɔʁ/"
+      "ipa": "/a.bɔʁ/",
+      "family": [
+        "aborder",
+        "abordable",
+        "abordage"
+      ]
     },
     {
       "word": "SUJET",
@@ -5278,7 +5432,11 @@
       ],
       "example": "Et ensuite ?",
       "pos": "adverb",
-      "ipa": "/ɑ̃.sɥit/"
+      "ipa": "/ɑ̃.sɥit/",
+      "family": [
+        "ensuivre",
+        "ensuivi"
+      ]
     },
     {
       "word": "CONDUIRE",
@@ -5335,7 +5493,12 @@
       ],
       "example": "Je peux remettre.",
       "pos": "verb",
-      "ipa": "/ʁə.mɛtʁ/"
+      "ipa": "/ʁə.mɛtʁ/",
+      "family": [
+        "remise",
+        "remettant",
+        "remettage"
+      ]
     },
     {
       "word": "MARCHER",
@@ -5389,7 +5552,11 @@
       ],
       "example": "C'est une erreur.",
       "pos": "noun",
-      "ipa": "/ɛ.ʁœʁ/"
+      "ipa": "/ɛ.ʁœʁ/",
+      "family": [
+        "erroné",
+        "errer"
+      ]
     },
     {
       "word": "RAPPORT",
@@ -5399,7 +5566,11 @@
       ],
       "example": "Rédige un rapport.",
       "pos": "noun",
-      "ipa": "/ʁa.pɔʁ/"
+      "ipa": "/ʁa.pɔʁ/",
+      "family": [
+        "rapporter",
+        "rapportage"
+      ]
     },
     {
       "word": "PRÉFÉRER",
@@ -5507,7 +5678,11 @@
         "témoignage"
       ],
       "example": "J'ai une preuve.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "prouver",
+        "prouvable"
+      ]
     },
     {
       "word": "DRÔLE",
@@ -5548,7 +5723,13 @@
         "certaine"
       ],
       "example": "T'es sûre ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/syʁ/",
+      "family": [
+        "sûreté",
+        "sûrement",
+        "assurer"
+      ]
     },
     {
       "word": "AVOCAT",
