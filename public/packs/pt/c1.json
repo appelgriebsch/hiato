@@ -1,25 +1,27 @@
 {
-  "version": 112,
+  "version": 113,
   "lang": "pt",
   "cefr": "c1",
-  "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
   "attribution": [
-    "Hiato PT C1 learner pack — original glosses and synonym chips (2026).",
+    "Hiato PT C1 learner pack \u2014 original glosses and synonym chips (2026).",
     "Portuguese lemmas, including the original v0 packs and later bands, come from hermitdave/FrequencyWords content/2018/pt/pt_50k.txt (OpenSubtitles frequency). Content CC-BY-SA-4.0; the FrequencyWords code is MIT. Not a Wiktionary dump.",
     "Creator: Hermit Dave. Source: https://github.com/hermitdave/FrequencyWords",
     "C-levels are frequency-rank slices, not CAPLE lists (ADR 0029).",
-    "Glosses and synonym chips are original Hiato learner copy (2026)."
+    "Glosses and synonym chips are original Hiato learner copy (2026).",
+    "Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR."
   ],
   "lemmas": [
     {
-      "word": "ALFÂNDEGA",
-      "gloss": "serviço que controla as mercadorias nas fronteiras",
+      "word": "ALF\u00c2NDEGA",
+      "gloss": "servi\u00e7o que controla as mercadorias nas fronteiras",
+      "example": "Onde \u00e9 mesmo a alf\u00e2ndega?",
+      "pos": "noun",
+      "ipa": "/a\u026b.\u02c8f\u0250\u0303.d\u0268.\u0261\u0250/",
       "family": [
         "alfandegar",
-        "alfandegário"
-      ],
-      "ipa": "/aɫ.ˈfɐ̃.dɨ.ɡɐ/",
-      "pos": "noun"
+        "alfandeg\u00e1rio"
+      ]
     },
     {
       "word": "DANIFICADO",
@@ -28,8 +30,9 @@
         "estragado",
         "avariado"
       ],
+      "example": "Foi danificado?",
       "pos": "adjective",
-      "ipa": "/dɐ.ni.fiˈka.du/",
+      "ipa": "/d\u0250.ni.fi\u02c8ka.du/",
       "family": [
         "danificar",
         "dano"
@@ -37,13 +40,14 @@
     },
     {
       "word": "ENGANEI",
-      "gloss": "induzir alguém em erro ou ilusão",
+      "gloss": "induzir algu\u00e9m em erro ou ilus\u00e3o",
       "synonyms": [
         "iludi",
         "logrei"
       ],
+      "example": "Enganei-me.",
       "pos": "verb",
-      "ipa": "/ẽˈgɐ.nej/",
+      "ipa": "/\u1ebd\u02c8g\u0250.nej/",
       "family": [
         "enganar",
         "engano"
@@ -56,6 +60,7 @@
         "apunhalado",
         "ferido"
       ],
+      "example": "Fui esfaqueado tr\u00eas vezes.",
       "pos": "adjective",
       "family": [
         "faca",
@@ -69,19 +74,21 @@
         "computar",
         "estimar"
       ],
+      "example": "Eu gosto de calcular.",
       "pos": "verb",
-      "ipa": "/kal.kuˈlaɾ/",
+      "ipa": "/kal.ku\u02c8la\u027e/",
       "family": [
-        "cálculo"
+        "c\u00e1lculo"
       ]
     },
     {
       "word": "OUVIREM",
-      "gloss": "perceber sons com o sentido da audição",
+      "gloss": "perceber sons com o sentido da audi\u00e7\u00e3o",
       "synonyms": [
         "escutarem",
         "perceberem"
       ],
+      "example": "Tive de gritar para me ouvirem.",
       "pos": "verb",
       "family": [
         "ouvir",
@@ -90,13 +97,14 @@
     },
     {
       "word": "REBOQUE",
-      "gloss": "veículo que puxa outro avariado",
+      "gloss": "ve\u00edculo que puxa outro avariado",
       "synonyms": [
         "guincho",
         "arrasto"
       ],
-      "ipa": "/Rɨ.ˈbɔ.kɨ/",
+      "example": "Estamos esperando um reboque.",
       "pos": "noun",
+      "ipa": "/R\u0268.\u02c8b\u0254.k\u0268/",
       "family": [
         "rebocar",
         "reboqueiro"
@@ -104,90 +112,96 @@
     },
     {
       "word": "TRATEM",
-      "gloss": "cuidar ou lidar com alguém ou algo",
+      "gloss": "cuidar ou lidar com algu\u00e9m ou algo",
       "synonyms": [
         "cuidem",
         "assistam"
       ],
+      "example": "Tratem-na bem.",
       "pos": "verb",
-      "ipa": "/ˈtɾa.tẽj̃/",
+      "ipa": "/\u02c8t\u027ea.t\u1ebdj\u0303/",
       "family": [
         "tratar",
         "tratamento"
       ]
     },
     {
-      "word": "SUPERVISÃO",
+      "word": "SUPERVIS\u00c3O",
       "gloss": "acompanhamento e controlo de atividades",
       "synonyms": [
-        "fiscalização",
+        "fiscaliza\u00e7\u00e3o",
         "controle"
       ],
-      "ipa": "/su.pɛɾ.vi.ˈzɐ̃w̃/",
+      "example": "Voc\u00ea precisa de supervis\u00e3o.",
       "pos": "noun",
+      "ipa": "/su.p\u025b\u027e.vi.\u02c8z\u0250\u0303w\u0303/",
       "family": [
         "supervisionar",
         "supervisor"
       ]
     },
     {
-      "word": "ESPANHÓIS",
-      "gloss": "pessoas naturais do país cuja capital é Madrid",
+      "word": "ESPANH\u00d3IS",
+      "gloss": "pessoas naturais do pa\u00eds cuja capital \u00e9 Madrid",
       "synonyms": [],
-      "ipa": "/ɪʃ.pɐ̃.ˈȷ̃ɔjʃ/",
+      "example": "Eles eram espanh\u00f3is.",
       "pos": "noun",
+      "ipa": "/\u026a\u0283.p\u0250\u0303.\u02c8\u0237\u0303\u0254j\u0283/",
       "family": [
         "Espanha",
         "espanhol"
       ]
     },
     {
-      "word": "LÊS",
+      "word": "L\u00caS",
       "gloss": "ler texto escrito em voz alta ou silenciosa",
       "synonyms": [
         "decifras"
       ],
+      "example": "Tu l\u00eas a B\u00edblia?",
       "pos": "verb",
-      "ipa": "/ˈlɛʃ/",
+      "ipa": "/\u02c8l\u025b\u0283/",
       "family": [
         "ler",
         "leitura"
       ]
     },
     {
-      "word": "PÍLULA",
-      "gloss": "medicamento sólido de formato pequeno",
+      "word": "P\u00cdLULA",
+      "gloss": "medicamento s\u00f3lido de formato pequeno",
       "synonyms": [
         "comprimido",
-        "cápsula"
+        "c\u00e1psula"
       ],
-      "ipa": "/ˈpi.lu.lɐ/",
+      "example": "Tome sua p\u00edlula.",
       "pos": "noun",
+      "ipa": "/\u02c8pi.lu.l\u0250/",
       "family": [
-        "pílulas"
+        "p\u00edlulas"
       ]
     },
     {
       "word": "ARMES",
       "gloss": "fornecer armas ou preparar para combate",
       "synonyms": [
-        "munição"
+        "muni\u00e7\u00e3o"
       ],
       "pos": "verb",
-      "ipa": "/ˈaɾ.mɨʃ/",
+      "ipa": "/\u02c8a\u027e.m\u0268\u0283/",
       "family": [
         "armamento"
       ]
     },
     {
       "word": "LENTES",
-      "gloss": "peças de vidro ou plástico para visão",
+      "gloss": "pe\u00e7as de vidro ou pl\u00e1stico para vis\u00e3o",
       "synonyms": [
-        "óculos",
+        "\u00f3culos",
         "graus"
       ],
+      "example": "Quebrei minhas lentes.",
       "pos": "noun",
-      "ipa": "/ˈlẽ.tɨʃ/",
+      "ipa": "/\u02c8l\u1ebd.t\u0268\u0283/",
       "family": [
         "lente"
       ]
@@ -196,39 +210,42 @@
       "word": "ACELERADOR",
       "gloss": "dispositivo que aumenta a velocidade",
       "synonyms": [
-        "gás",
+        "g\u00e1s",
         "pedal"
       ],
-      "ipa": "/ɐ.sɨ.lɨ.ɾɐ.ˈdoɾ/",
+      "example": "Pisei no acelerador com cuidado.",
       "pos": "noun",
+      "ipa": "/\u0250.s\u0268.l\u0268.\u027e\u0250.\u02c8do\u027e/",
       "family": [
         "acelerar",
-        "aceleração"
+        "acelera\u00e7\u00e3o"
       ]
     },
     {
       "word": "SUJEITOS",
-      "gloss": "pessoas ou indivíduos em contexto",
+      "gloss": "pessoas ou indiv\u00edduos em contexto",
       "synonyms": [
-        "indivíduos",
+        "indiv\u00edduos",
         "pessoas"
       ],
+      "example": "Todos est\u00e3o sujeitos \u00e0 lei.",
       "pos": "noun",
-      "ipa": "/suˈʒɐj.tuʃ/",
+      "ipa": "/su\u02c8\u0292\u0250j.tu\u0283/",
       "family": [
         "sujeito",
-        "sujeição"
+        "sujei\u00e7\u00e3o"
       ]
     },
     {
       "word": "PALESTRA",
-      "gloss": "conferência ou exposição oral sobre tema",
+      "gloss": "confer\u00eancia ou exposi\u00e7\u00e3o oral sobre tema",
       "synonyms": [
-        "conferência",
-        "seminário"
+        "confer\u00eancia",
+        "semin\u00e1rio"
       ],
+      "example": "Ele terminou a palestra.",
       "pos": "noun",
-      "ipa": "/pɐˈlɛʃ.tɾɐ/",
+      "ipa": "/p\u0250\u02c8l\u025b\u0283.t\u027e\u0250/",
       "family": [
         "palestrante",
         "palestrar"
@@ -236,13 +253,14 @@
     },
     {
       "word": "ACOMPANHE",
-      "gloss": "ir junto com alguém ou algo",
+      "gloss": "ir junto com algu\u00e9m ou algo",
       "synonyms": [
         "siga",
         "esteja"
       ],
+      "example": "Acompanhe-os at\u00e9 a sa\u00edda.",
       "pos": "verb",
-      "ipa": "/ɐ.kõ.pɐˈɲɛ/",
+      "ipa": "/\u0250.k\u00f5.p\u0250\u02c8\u0272\u025b/",
       "family": [
         "acompanhar",
         "acompanhamento"
@@ -254,11 +272,12 @@
       "synonyms": [
         "colocava"
       ],
+      "example": "A cada momento a bruxa punha mais coisas no caldeir\u00e3o.",
       "pos": "verb",
-      "ipa": "/ˈpu.ɲɐ/",
+      "ipa": "/\u02c8pu.\u0272\u0250/",
       "family": [
-        "pôr",
-        "punição"
+        "p\u00f4r",
+        "puni\u00e7\u00e3o"
       ]
     },
     {
@@ -268,31 +287,34 @@
         "desejassem",
         "pretendessem"
       ],
-      "ipa": "/kiˈsɛ.sẽj̃/",
+      "example": "Eu disse-lhes que podiam fazer o que quisessem.",
+      "ipa": "/ki\u02c8s\u025b.s\u1ebdj\u0303/",
       "family": [
         "querer",
         "quiser"
       ]
     },
     {
-      "word": "CAÇADORA",
+      "word": "CA\u00c7ADORA",
       "gloss": "mulher que persegue animais para os capturar",
       "synonyms": [
         "predadora"
       ],
+      "example": "A ca\u00e7adora o seguiu em dire\u00e7\u00e3o ao bosque.",
       "pos": "noun",
-      "ipa": "/kɐ.sɐˈdo.ɾɐ/",
+      "ipa": "/k\u0250.s\u0250\u02c8do.\u027e\u0250/",
       "family": [
-        "caçar",
-        "caçador"
+        "ca\u00e7ar",
+        "ca\u00e7ador"
       ]
     },
     {
       "word": "RETIRA",
       "gloss": "afasta ou remove algo de um lugar",
       "synonyms": [],
+      "example": "O funcion\u00e1rio retira os livros antigos da prateleira para organizar melhor a estante.",
       "pos": "verb",
-      "ipa": "/ʁɨˈti.ɾɐ/",
+      "ipa": "/\u0281\u0268\u02c8ti.\u027e\u0250/",
       "family": [
         "retirar",
         "retirada"
@@ -300,13 +322,14 @@
     },
     {
       "word": "GENERAIS",
-      "gloss": "oficiais de alta patente nas forças armadas",
+      "gloss": "oficiais de alta patente nas for\u00e7as armadas",
       "synonyms": [
         "comandantes",
         "oficiais"
       ],
+      "example": "O ex\u00e9rcito perdeu um de seus melhores e mais capazes generais.",
       "pos": "noun",
-      "ipa": "/ʒɨ.nɨˈɾajʃ/",
+      "ipa": "/\u0292\u0268.n\u0268\u02c8\u027eaj\u0283/",
       "family": [
         "geral",
         "generalizar"
@@ -319,24 +342,26 @@
         "progrediu",
         "evoluiu"
       ],
+      "example": "Ela melhorou!",
       "pos": "verb",
-      "ipa": "/mɨˈʎo.ɾo/",
+      "ipa": "/m\u0268\u02c8\u028eo.\u027eo/",
       "family": [
         "melhor",
         "melhorar"
       ]
     },
     {
-      "word": "ÓRGÃO",
-      "gloss": "parte do corpo com função específica",
+      "word": "\u00d3RG\u00c3O",
+      "gloss": "parte do corpo com fun\u00e7\u00e3o espec\u00edfica",
       "synonyms": [
-        "instituição",
+        "institui\u00e7\u00e3o",
         "entidade"
       ],
-      "ipa": "/ˈɔrgɜ̃ũ/",
+      "example": "Toco \u00f3rg\u00e3o.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0254rg\u025c\u0303\u0169/",
       "family": [
-        "orgânico",
+        "org\u00e2nico",
         "organismo"
       ]
     },
@@ -345,22 +370,24 @@
       "gloss": "proximidade afetiva entre pessoas",
       "synonyms": [
         "proximidade",
-        "confiança"
+        "confian\u00e7a"
       ],
-      "ipa": "/ĩ.ti.mi.ˈda.dɨ/",
+      "example": "Voc\u00ea tem intimidade com aquele homem?",
       "pos": "noun",
+      "ipa": "/\u0129.ti.mi.\u02c8da.d\u0268/",
       "family": [
-        "íntimo",
+        "\u00edntimo",
         "intimar"
       ]
     },
     {
       "word": "ESCOLHES",
-      "gloss": "decides por uma opção entre várias",
+      "gloss": "decides por uma op\u00e7\u00e3o entre v\u00e1rias",
       "synonyms": [
         "seleciona",
         "opta"
       ],
+      "example": "Escolhes sempre a op\u00e7\u00e3o que mais se alinha com os teus valores pessoais.",
       "pos": "verb",
       "family": [
         "escolher",
@@ -369,13 +396,14 @@
     },
     {
       "word": "APELO",
-      "gloss": "pedido urgente ou súplica",
+      "gloss": "pedido urgente ou s\u00faplica",
       "synonyms": [
         "pedido",
         "chamado"
       ],
-      "ipa": "/ɐ.ˈpe.lu/",
+      "example": "Ou\u00e7a o apelo do povo.",
       "pos": "noun",
+      "ipa": "/\u0250.\u02c8pe.lu/",
       "family": [
         "apelar",
         "apelativo"
@@ -387,36 +415,39 @@
       "synonyms": [
         "recipiente"
       ],
-      "ipa": "/ti.ˈʒɛ.lɐ/",
+      "example": "A tigela estava vazia.",
       "pos": "noun",
+      "ipa": "/ti.\u02c8\u0292\u025b.l\u0250/",
       "family": [
         "tigelada"
       ]
     },
     {
-      "word": "METÁFORA",
-      "gloss": "expressão que compara duas coisas sem usar 'como'",
+      "word": "MET\u00c1FORA",
+      "gloss": "express\u00e3o que compara duas coisas sem usar 'como'",
       "synonyms": [
         "figura",
-        "comparação"
+        "compara\u00e7\u00e3o"
       ],
+      "example": "Esta \u00e9 uma met\u00e1fora.",
+      "pos": "noun",
+      "ipa": "/me.\u02c8ta.fo.\u027e\u0250/",
       "family": [
-        "metafórico",
+        "metaf\u00f3rico",
         "metaforismo",
         "metaforista"
-      ],
-      "ipa": "/me.ˈta.fo.ɾɐ/",
-      "pos": "noun"
+      ]
     },
     {
-      "word": "TESTÍCULOS",
-      "gloss": "glândulas masculinas do corpo",
+      "word": "TEST\u00cdCULOS",
+      "gloss": "gl\u00e2ndulas masculinas do corpo",
       "synonyms": [
-        "gônadas",
-        "órgãos"
+        "g\u00f4nadas",
+        "\u00f3rg\u00e3os"
       ],
+      "example": "Ele tem c\u00e2ncer nos test\u00edculos.",
       "pos": "noun",
-      "ipa": "/tɨʃˈti.ku.luʃ/",
+      "ipa": "/t\u0268\u0283\u02c8ti.ku.lu\u0283/",
       "family": [
         "testicular",
         "testosterona"
@@ -424,13 +455,14 @@
     },
     {
       "word": "AMAVAS",
-      "gloss": "sentias afeto por alguém no passado",
+      "gloss": "sentias afeto por algu\u00e9m no passado",
       "synonyms": [
         "querias",
         "gostavas"
       ],
+      "example": "Tamb\u00e9m a amavas?",
       "pos": "verb",
-      "ipa": "/ɐˈma.vɐʃ/",
+      "ipa": "/\u0250\u02c8ma.v\u0250\u0283/",
       "family": [
         "amar",
         "amado"
@@ -443,8 +475,9 @@
         "falsos",
         "enganadores"
       ],
+      "example": "\u00c9ramos mentirosos.",
       "pos": "noun",
-      "ipa": "/mẽ.t͡ʃiˈɾo.zus/",
+      "ipa": "/m\u1ebd.t\u0361\u0283i\u02c8\u027eo.zus/",
       "family": [
         "mentira",
         "mentiroso",
@@ -452,16 +485,17 @@
       ]
     },
     {
-      "word": "PÉROLAS",
+      "word": "P\u00c9ROLAS",
       "gloss": "esferas brilhantes formadas dentro de ostras",
       "synonyms": [
-        "jóias",
+        "j\u00f3ias",
         "contas"
       ],
+      "example": "Jogar p\u00e9rolas aos porcos.",
       "pos": "noun",
-      "ipa": "/ˈpɛ.ɾo.lɐs/",
+      "ipa": "/\u02c8p\u025b.\u027eo.l\u0250s/",
       "family": [
-        "pérola",
+        "p\u00e9rola",
         "perolado",
         "perolaria"
       ]
@@ -473,12 +507,13 @@
         "acidentes",
         "eventos"
       ],
+      "example": "N\u00e3o tivemos incidentes inesperados durante a nossa viagem.",
       "pos": "noun",
-      "ipa": "/ĩ.siˈdẽ.t͡ʃis/",
+      "ipa": "/\u0129.si\u02c8d\u1ebd.t\u0361\u0283is/",
       "family": [
         "incidente",
         "incidir",
-        "incidência"
+        "incid\u00eancia"
       ]
     },
     {
@@ -488,8 +523,9 @@
         "manchar",
         "poluir"
       ],
-      "ipa": "/su.ˈʒaɾ/",
+      "example": "N\u00e3o quero sujar as m\u00e3os.",
       "pos": "verb",
+      "ipa": "/su.\u02c8\u0292a\u027e/",
       "family": [
         "sujo",
         "sujeira",
@@ -498,13 +534,14 @@
     },
     {
       "word": "PRESTE",
-      "gloss": "dê atenção ou faça algo com cuidado",
+      "gloss": "d\u00ea aten\u00e7\u00e3o ou fa\u00e7a algo com cuidado",
       "synonyms": [
         "atenda",
         "sirva"
       ],
+      "example": "Preste aten\u00e7\u00e3o!",
       "pos": "verb",
-      "ipa": "/ˈpɾes.t͡ʃi/",
+      "ipa": "/\u02c8p\u027ees.t\u0361\u0283i/",
       "family": [
         "prestar",
         "presteza",
@@ -518,11 +555,12 @@
         "retorne",
         "volte"
       ],
-      "ipa": "/ʁeˈɡɾe.si/",
+      "example": "Dou-lhe licen\u00e7a de se ausentar, sob a condi\u00e7\u00e3o de que voc\u00ea regresse depois de amanh\u00e3.",
+      "ipa": "/\u0281e\u02c8\u0261\u027ee.si/",
       "family": [
         "regressar",
         "regresso",
-        "regressão"
+        "regress\u00e3o"
       ]
     },
     {
@@ -532,38 +570,41 @@
         "completo",
         "total"
       ],
+      "example": "N\u00e3o estou de pleno acordo.",
       "pos": "adjective",
-      "ipa": "/ˈplẽ.nu/",
+      "ipa": "/\u02c8pl\u1ebd.nu/",
       "family": [
         "plenitude",
-        "plenário",
+        "plen\u00e1rio",
         "plenamente"
       ]
     },
     {
       "word": "RESPEITADO",
-      "gloss": "considerado com estima ou consideração",
+      "gloss": "considerado com estima ou considera\u00e7\u00e3o",
       "synonyms": [
         "honrado",
         "considerado"
       ],
-      "ipa": "/Rɨʃ.pɐj.ˈta.du/",
+      "example": "Ele \u00e9 muito respeitado.",
       "pos": "adjective",
+      "ipa": "/R\u0268\u0283.p\u0250j.\u02c8ta.du/",
       "family": [
         "respeitar",
         "respeito",
-        "respeitável"
+        "respeit\u00e1vel"
       ]
     },
     {
       "word": "CRUZADA",
-      "gloss": "campanha ou movimento para alcançar um objetivo",
+      "gloss": "campanha ou movimento para alcan\u00e7ar um objetivo",
       "synonyms": [
         "campanha",
-        "missão"
+        "miss\u00e3o"
       ],
+      "example": "E agora voc\u00eas querem desdentar os m\u00e9dia s\u00f3 para fazer uma cruzada pelo governo e pelas pol\u00edticas governamentais?",
       "pos": "noun",
-      "ipa": "/kɾuˈza.dɐ/",
+      "ipa": "/k\u027eu\u02c8za.d\u0250/",
       "family": [
         "cruz",
         "cruzar",
@@ -572,43 +613,46 @@
     },
     {
       "word": "FOGOS",
-      "gloss": "chamas ou explosões luminosas",
+      "gloss": "chamas ou explos\u00f5es luminosas",
       "synonyms": [
-        "incêndios",
+        "inc\u00eandios",
         "chamas"
       ],
+      "example": "Quando come\u00e7am os fogos?",
       "pos": "noun",
-      "ipa": "/ˈfo.ɡus/",
+      "ipa": "/\u02c8fo.\u0261us/",
       "family": [
         "fogo",
         "fogoso",
-        "fogaréu"
+        "fogar\u00e9u"
       ]
     },
     {
       "word": "DEPRIMIDA",
-      "gloss": "sentindo tristeza profunda ou desânimo",
+      "gloss": "sentindo tristeza profunda ou des\u00e2nimo",
       "synonyms": [
         "triste",
         "abatida"
       ],
+      "example": "Estou deprimida.",
       "pos": "adjective",
-      "ipa": "/de.pɾiˈmi.dɐ/",
+      "ipa": "/de.p\u027ei\u02c8mi.d\u0250/",
       "family": [
         "deprimir",
-        "depressão",
+        "depress\u00e3o",
         "deprimente"
       ]
     },
     {
-      "word": "ABDÓMEN",
+      "word": "ABD\u00d3MEN",
       "gloss": "parte do corpo entre o peito e a cintura",
       "synonyms": [
         "ventre",
         "barriga"
       ],
-      "ipa": "/ɐb.ˈdɔ.mɛn/",
+      "example": "As cigarras macho est\u00e3o a fazer esta barulheira toda \u2014 um chamado de acasalamento produzido por membranas vibrantes no abd\u00f3men.",
       "pos": "noun",
+      "ipa": "/\u0250b.\u02c8d\u0254.m\u025bn/",
       "family": [
         "abdominal",
         "abdome",
@@ -616,13 +660,14 @@
       ]
     },
     {
-      "word": "ARROGÂNCIA",
+      "word": "ARROG\u00c2NCIA",
       "gloss": "atitude de quem se acha melhor que os outros.",
       "synonyms": [
         "soberba"
       ],
-      "ipa": "/ɐ.Ru.ˈɡɐ̃.sjɐ/",
+      "example": "Quanta arrog\u00e2ncia!",
       "pos": "noun",
+      "ipa": "/\u0250.Ru.\u02c8\u0261\u0250\u0303.sj\u0250/",
       "family": [
         "arrogante",
         "arrogar"
@@ -634,23 +679,25 @@
       "synonyms": [
         "editado"
       ],
+      "example": "Foi publicado em 1969.",
       "pos": "adjective",
-      "ipa": "/pu.bliˈka.du/",
+      "ipa": "/pu.bli\u02c8ka.du/",
       "family": [
         "publicar",
-        "publicação",
-        "público"
+        "publica\u00e7\u00e3o",
+        "p\u00fablico"
       ]
     },
     {
       "word": "GRAVEMENTE",
-      "gloss": "de forma séria",
+      "gloss": "de forma s\u00e9ria",
       "synonyms": [
         "seriamente",
         "severamente"
       ],
+      "example": "Estou gravemente ferido.",
       "pos": "adverb",
-      "ipa": "/ɡɾa.veˈmẽ.t͡ʃi/",
+      "ipa": "/\u0261\u027ea.ve\u02c8m\u1ebd.t\u0361\u0283i/",
       "family": [
         "grave",
         "gravidade",
@@ -659,17 +706,18 @@
     },
     {
       "word": "MULTAS",
-      "gloss": "penalidades financeiras por infração",
+      "gloss": "penalidades financeiras por infra\u00e7\u00e3o",
       "synonyms": [
         "penalidades",
-        "sanções"
+        "san\u00e7\u00f5es"
       ],
+      "example": "Eu paguei essas multas.",
       "pos": "noun",
-      "ipa": "/ˈmuw.tɐs/",
+      "ipa": "/\u02c8muw.t\u0250s/",
       "family": [
         "multar",
         "multado",
-        "multável"
+        "mult\u00e1vel"
       ]
     },
     {
@@ -679,8 +727,9 @@
         "desfrute",
         "use"
       ],
+      "example": "Aproveite!",
       "pos": "verb",
-      "ipa": "/a.pɾoˈvej.t͡ʃi/",
+      "ipa": "/a.p\u027eo\u02c8vej.t\u0361\u0283i/",
       "family": [
         "aproveitar",
         "aproveitamento",
@@ -688,54 +737,58 @@
       ]
     },
     {
-      "word": "DEPÓSITOS",
+      "word": "DEP\u00d3SITOS",
       "gloss": "locais onde se guardam bens ou dinheiro",
       "synonyms": [
         "contas",
         "reservas"
       ],
+      "example": "Ele fiscalizava os cochos e os dep\u00f3sitos d\u2019\u00e1gua.",
       "pos": "noun",
-      "ipa": "/deˈpɔ.zi.tus/",
+      "ipa": "/de\u02c8p\u0254.zi.tus/",
       "family": [
         "depositar",
-        "depósito",
-        "depositário"
+        "dep\u00f3sito",
+        "deposit\u00e1rio"
       ]
     },
     {
       "word": "VEREADOR",
-      "gloss": "membro eleito de uma câmara municipal",
+      "gloss": "membro eleito de uma c\u00e2mara municipal",
       "synonyms": [
         "conselheiro",
         "edile"
       ],
+      "example": "Ele foi eleito vereador da cidade.",
       "pos": "noun",
-      "ipa": "/ve.ɾe.aˈdoɾ/",
+      "ipa": "/ve.\u027ee.a\u02c8do\u027e/",
       "family": [
-        "vereança",
-        "vereável"
+        "verean\u00e7a",
+        "vere\u00e1vel"
       ]
     },
     {
       "word": "RESISTENTE",
-      "gloss": "capaz de suportar pressão ou desgaste",
+      "gloss": "capaz de suportar press\u00e3o ou desgaste",
       "synonyms": [
         "robusto",
-        "durável"
+        "dur\u00e1vel"
       ],
+      "example": "A corda \u00e9 resistente.",
       "pos": "adjective",
-      "ipa": "/ʁe.zisˈtẽ.t͡ʃi/",
+      "ipa": "/\u0281e.zis\u02c8t\u1ebd.t\u0361\u0283i/",
       "family": [
         "resistir",
-        "resistência",
-        "resistível"
+        "resist\u00eancia",
+        "resist\u00edvel"
       ]
     },
     {
       "word": "KGB",
-      "gloss": "antigo serviço secreto soviético de espionagem",
+      "gloss": "antigo servi\u00e7o secreto sovi\u00e9tico de espionagem",
+      "example": "\u00c0s vezes, a vov\u00f3 \u00e9 mais perigosa que a KGB.",
       "pos": "noun",
-      "ipa": "/ka.ʒeˈbe/"
+      "ipa": "/ka.\u0292e\u02c8be/"
     },
     {
       "word": "GLOBO",
@@ -744,8 +797,9 @@
         "esfera",
         "planeta"
       ],
-      "ipa": "/ˈɡlo.bu/",
+      "example": "O equador divide o globo em dois hemisf\u00e9rios.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0261lo.bu/",
       "family": [
         "global",
         "globular"
@@ -753,27 +807,29 @@
     },
     {
       "word": "ARRASTADO",
-      "gloss": "puxado ao longo de uma superfície",
+      "gloss": "puxado ao longo de uma superf\u00edcie",
       "synonyms": [
         "puxado"
       ],
+      "example": "Ele foi arrastado pela correnteza.",
       "pos": "adjective",
-      "ipa": "/a.ʁasˈta.du/",
+      "ipa": "/a.\u0281as\u02c8ta.du/",
       "family": [
         "arrastar",
         "arrasto",
-        "arrastão"
+        "arrast\u00e3o"
       ]
     },
     {
       "word": "APOIA",
-      "gloss": "dá suporte ou ajuda a alguém",
+      "gloss": "d\u00e1 suporte ou ajuda a algu\u00e9m",
       "synonyms": [
         "sustenta",
         "respaldia"
       ],
+      "example": "Ele sempre me apoia.",
       "pos": "verb",
-      "ipa": "/aˈpoj.ɐ/",
+      "ipa": "/a\u02c8poj.\u0250/",
       "family": [
         "apoiar",
         "apoio",
@@ -782,13 +838,14 @@
     },
     {
       "word": "ENFARTE",
-      "gloss": "paragem súbita do coração",
+      "gloss": "paragem s\u00fabita do cora\u00e7\u00e3o",
       "synonyms": [
         "infarto",
         "ataque"
       ],
+      "example": "Um ataque card\u00edaco, tamb\u00e9m denominado enfarte do mioc\u00e1rdio, ocorre quando uma parte do m\u00fasculo card\u00edaco n\u00e3o recebe sangue suficiente.",
       "pos": "noun",
-      "ipa": "/ẽˈfaɾ.t͡ʃi/",
+      "ipa": "/\u1ebd\u02c8fa\u027e.t\u0361\u0283i/",
       "family": [
         "infarto",
         "infartar",
@@ -800,14 +857,15 @@
       "gloss": "movimento sem rumo definido",
       "synonyms": [
         "desvio",
-        "flutuação"
+        "flutua\u00e7\u00e3o"
       ],
-      "ipa": "/dɨ.ˈɾi.vɐ/",
+      "example": "O barco deles est\u00e1 \u00e0 deriva.",
       "pos": "noun",
+      "ipa": "/d\u0268.\u02c8\u027ei.v\u0250/",
       "family": [
         "derivar",
         "derivado",
-        "derivação"
+        "deriva\u00e7\u00e3o"
       ]
     },
     {
@@ -815,10 +873,11 @@
       "gloss": "produzes texto com letras ou palavras",
       "synonyms": [
         "redige",
-        "compõe"
+        "comp\u00f5e"
       ],
+      "example": "N\u00e3o escreves?",
       "pos": "verb",
-      "ipa": "/iʃˈkɾevɨʃ/",
+      "ipa": "/i\u0283\u02c8k\u027eev\u0268\u0283/",
       "family": [
         "escrever",
         "escrito",
@@ -826,14 +885,15 @@
       ]
     },
     {
-      "word": "AGITAÇÃO",
+      "word": "AGITA\u00c7\u00c3O",
       "gloss": "estado de nervosismo ou movimento intenso",
       "synonyms": [
-        "inquietação",
+        "inquieta\u00e7\u00e3o",
         "nervosismo"
       ],
-      "ipa": "/ɐ.ʒi.tɐ.ˈsɐ̃w̃/",
+      "example": "A agita\u00e7\u00e3o era geral.",
       "pos": "noun",
+      "ipa": "/\u0250.\u0292i.t\u0250.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "agitar",
         "agitado",
@@ -847,8 +907,9 @@
         "sino",
         "badalo"
       ],
+      "example": "Visitamos a antiga campa no cemit\u00e9rio, coberta de musgo e flores secas.",
       "pos": "noun",
-      "ipa": "/ˈkɐ̃pɐ/",
+      "ipa": "/\u02c8k\u0250\u0303p\u0250/",
       "family": [
         "campo",
         "campal",
@@ -857,11 +918,12 @@
     },
     {
       "word": "BLUES",
-      "gloss": "estilo musical lento e melancólico",
+      "gloss": "estilo musical lento e melanc\u00f3lico",
       "synonyms": [
         "tristeza",
         "melancolia"
       ],
+      "example": "Eu gosto de tocar blues.",
       "pos": "noun",
       "ipa": "/bluz/"
     },
@@ -872,8 +934,9 @@
         "curva",
         "vinco"
       ],
+      "example": "Dobra a toalha.",
       "pos": "noun",
-      "ipa": "/ˈdobɾɐ/",
+      "ipa": "/\u02c8dob\u027e\u0250/",
       "family": [
         "dobrar",
         "dobrado",
@@ -881,18 +944,19 @@
       ]
     },
     {
-      "word": "RECEBERÁ",
-      "gloss": "obterá algo que lhe é enviado",
+      "word": "RECEBER\u00c1",
+      "gloss": "obter\u00e1 algo que lhe \u00e9 enviado",
       "synonyms": [
-        "obterá",
-        "ganhará"
+        "obter\u00e1",
+        "ganhar\u00e1"
       ],
+      "example": "Voc\u00ea receber\u00e1 um.",
       "pos": "verb",
-      "ipa": "/ʁɨsɨbɨˈɾa/",
+      "ipa": "/\u0281\u0268s\u0268b\u0268\u02c8\u027ea/",
       "family": [
         "receber",
         "recebido",
-        "recepção"
+        "recep\u00e7\u00e3o"
       ]
     },
     {
@@ -902,8 +966,9 @@
         "esfriar",
         "gelar"
       ],
-      "ipa": "/ɐ.Rɨ.fɛ.ˈseɾ/",
+      "example": "Deixa a tua comida arrefecer um pouco; n\u00e3o a comas enquanto estiver quente.",
       "pos": "verb",
+      "ipa": "/\u0250.R\u0268.f\u025b.\u02c8se\u027e/",
       "family": [
         "refrescar",
         "refresco",
@@ -912,76 +977,82 @@
     },
     {
       "word": "OBRIGUES",
-      "gloss": "forças alguém a fazer algo",
+      "gloss": "for\u00e7as algu\u00e9m a fazer algo",
       "synonyms": [
-        "forçar",
+        "for\u00e7ar",
         "impor"
       ],
+      "example": "N\u00e3o obrigues teu filho a comer.",
       "pos": "verb",
-      "ipa": "/oˈbɾiɡɨʃ/",
+      "ipa": "/o\u02c8b\u027ei\u0261\u0268\u0283/",
       "family": [
         "obrigar",
         "obrigado",
-        "obrigação"
+        "obriga\u00e7\u00e3o"
       ]
     },
     {
-      "word": "DIÁRIOS",
+      "word": "DI\u00c1RIOS",
       "gloss": "registos escritos de cada jornada",
       "synonyms": [
         "jornais",
-        "periódicos"
+        "peri\u00f3dicos"
       ],
+      "example": "A prop\u00f3sito, quantos de voc\u00eas t\u00eam di\u00e1rios?",
       "pos": "noun",
-      "ipa": "/diˈaɾiuʃ/",
+      "ipa": "/di\u02c8a\u027eiu\u0283/",
       "family": [
         "dia",
-        "diário",
+        "di\u00e1rio",
         "diariamente"
       ]
     },
     {
       "word": "CARANGUEJO",
-      "gloss": "crustáceo com casca dura e pinças",
+      "gloss": "crust\u00e1ceo com casca dura e pin\u00e7as",
       "synonyms": [],
-      "ipa": "/kɐ.ɾɐ̃.ˈɡɐj.ʒu/",
-      "pos": "noun"
+      "example": "Voc\u00ea sabe cozinhar caranguejo?",
+      "pos": "noun",
+      "ipa": "/k\u0250.\u027e\u0250\u0303.\u02c8\u0261\u0250j.\u0292u/"
     },
     {
       "word": "ARGUMENTOS",
-      "gloss": "razões apresentadas para defender uma ideia",
+      "gloss": "raz\u00f5es apresentadas para defender uma ideia",
       "synonyms": [
-        "razões",
+        "raz\u00f5es",
         "motivos"
       ],
+      "example": "N\u00e3o t\u00eam argumentos?",
       "pos": "noun",
-      "ipa": "/aɾɡuˈmẽtuʃ/",
+      "ipa": "/a\u027e\u0261u\u02c8m\u1ebdtu\u0283/",
       "family": [
         "argumentar",
         "argumentativo",
-        "argumentação"
+        "argumenta\u00e7\u00e3o"
       ]
     },
     {
-      "word": "POÇA",
-      "gloss": "pequena acumulação de líquido no chão",
+      "word": "PO\u00c7A",
+      "gloss": "pequena acumula\u00e7\u00e3o de l\u00edquido no ch\u00e3o",
       "synonyms": [
         "lagoa",
         "charco"
       ],
+      "example": "Mant\u00e9m a crian\u00e7a longe da po\u00e7a.",
+      "pos": "noun",
+      "ipa": "/\u02c8po.s\u0250/",
       "family": [
         "pocinheira"
-      ],
-      "ipa": "/ˈpo.sɐ/",
-      "pos": "noun"
+      ]
     },
     {
       "word": "ATIVIDADE",
-      "gloss": "ação ou ocupação em curso",
+      "gloss": "a\u00e7\u00e3o ou ocupa\u00e7\u00e3o em curso",
       "synonyms": [
-        "ação",
+        "a\u00e7\u00e3o",
         "tarefa"
       ],
+      "example": "Ler \u00e9 uma boa atividade.",
       "pos": "noun",
       "family": [
         "ativo",
@@ -990,42 +1061,45 @@
       ]
     },
     {
-      "word": "ERUPÇÃO",
-      "gloss": "expulsão súbita de material vulcânico",
+      "word": "ERUP\u00c7\u00c3O",
+      "gloss": "expuls\u00e3o s\u00fabita de material vulc\u00e2nico",
       "synonyms": [
-        "explosão",
+        "explos\u00e3o",
         "surto"
       ],
-      "ipa": "/i.ɾu.ˈpsɐ̃w̃/",
+      "example": "O vulc\u00e3o est\u00e1 em erup\u00e7\u00e3o.",
       "pos": "noun",
+      "ipa": "/i.\u027eu.\u02c8ps\u0250\u0303w\u0303/",
       "family": [
         "eruptivo",
-        "vulcão"
+        "vulc\u00e3o"
       ]
     },
     {
       "word": "ENCHE",
-      "gloss": "ocupa completamente um espaço",
+      "gloss": "ocupa completamente um espa\u00e7o",
       "synonyms": [
         "lotar"
       ],
+      "example": "Enche a ta\u00e7a at\u00e9 \u00e0 borda.",
       "pos": "verb",
-      "ipa": "/ˈẽʃɨ/",
+      "ipa": "/\u02c8\u1ebd\u0283\u0268/",
       "family": [
         "encher",
-        "encheção",
+        "enche\u00e7\u00e3o",
         "enchedeira"
       ]
     },
     {
-      "word": "ILUMINAÇÃO",
-      "gloss": "luz que torna algo visível",
+      "word": "ILUMINA\u00c7\u00c3O",
+      "gloss": "luz que torna algo vis\u00edvel",
       "synonyms": [
         "luz",
         "claridade"
       ],
-      "ipa": "/i.lu.mi.nɐ.ˈsɐ̃w̃/",
+      "example": "Isto \u00e9 um poste de ilumina\u00e7\u00e3o.",
       "pos": "noun",
+      "ipa": "/i.lu.mi.n\u0250.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "iluminar",
         "iluminado",
@@ -1034,17 +1108,18 @@
     },
     {
       "word": "TEMAS",
-      "gloss": "assuntos ou tópicos principais",
+      "gloss": "assuntos ou t\u00f3picos principais",
       "synonyms": [
         "assuntos",
-        "tópicos"
+        "t\u00f3picos"
       ],
+      "example": "Falaram de v\u00e1rios temas.",
       "pos": "noun",
-      "ipa": "/ˈtɛmɐʃ/",
+      "ipa": "/\u02c8t\u025bm\u0250\u0283/",
       "family": [
         "tema",
         "tematizar",
-        "tematização"
+        "tematiza\u00e7\u00e3o"
       ]
     },
     {
@@ -1054,23 +1129,25 @@
         "sujada",
         "suja"
       ],
+      "example": "Ela est\u00e1 lixada.",
       "pos": "adjective",
-      "ipa": "/liˈʃadɐ/",
+      "ipa": "/li\u02c8\u0283ad\u0250/",
       "family": [
         "lixar",
         "lixo",
-        "lixívia"
+        "lix\u00edvia"
       ]
     },
     {
       "word": "JOGADAS",
-      "gloss": "ações feitas numa partida",
+      "gloss": "a\u00e7\u00f5es feitas numa partida",
       "synonyms": [
         "lances",
         "movimentos"
       ],
+      "example": "As damas s\u00e3o jogadas apenas nas casas pretas.",
       "pos": "noun",
-      "ipa": "/ʒoˈɡadɐʃ/",
+      "ipa": "/\u0292o\u02c8\u0261ad\u0250\u0283/",
       "family": [
         "jogar",
         "jogador",
@@ -1084,21 +1161,23 @@
         "digital",
         "online"
       ],
+      "example": "Realidade virtual \u00e9 o futuro.",
       "pos": "adjective",
-      "ipa": "/viɾˈtwaɫ/"
+      "ipa": "/vi\u027e\u02c8twa\u026b/"
     },
     {
       "word": "PUXOU",
-      "gloss": "trouxe algo na sua direção",
+      "gloss": "trouxe algo na sua dire\u00e7\u00e3o",
       "synonyms": [
         "arrastou",
         "trouxe"
       ],
+      "example": "Ela puxou a m\u00e3e.",
       "pos": "verb",
-      "ipa": "/puˈʃo/",
+      "ipa": "/pu\u02c8\u0283o/",
       "family": [
         "puxar",
-        "puxão",
+        "pux\u00e3o",
         "puxador"
       ]
     },
@@ -1109,37 +1188,40 @@
         "entendi",
         "captei"
       ],
+      "example": "J\u00e1 compreendi tudo.",
       "pos": "verb",
-      "ipa": "/kõpɾɨˈẽdi/",
+      "ipa": "/k\u00f5p\u027e\u0268\u02c8\u1ebddi/",
       "family": [
         "compreender",
-        "compreensão",
-        "compreensível"
+        "compreens\u00e3o",
+        "compreens\u00edvel"
       ]
     },
     {
       "word": "SINTAM",
-      "gloss": "percebam uma sensação ou emoção",
+      "gloss": "percebam uma sensa\u00e7\u00e3o ou emo\u00e7\u00e3o",
       "synonyms": [
         "percebam"
       ],
+      "example": "N\u00e3o quero que voc\u00eas se sintam pressionadas.",
       "pos": "verb",
-      "ipa": "/ˈsĩtɐ̃w̃/",
+      "ipa": "/\u02c8s\u0129t\u0250\u0303w\u0303/",
       "family": [
         "sentir",
         "sentimento",
-        "sensação"
+        "sensa\u00e7\u00e3o"
       ]
     },
     {
       "word": "CONFLITOS",
-      "gloss": "situações de choque ou discordância",
+      "gloss": "situa\u00e7\u00f5es de choque ou discord\u00e2ncia",
       "synonyms": [
         "disputas",
         "lutas"
       ],
+      "example": "Eu tenho medo de conflitos.",
       "pos": "noun",
-      "ipa": "/kõˈfɫituʃ/",
+      "ipa": "/k\u00f5\u02c8f\u026bitu\u0283/",
       "family": [
         "conflituoso",
         "conflituar",
@@ -1147,29 +1229,31 @@
       ]
     },
     {
-      "word": "MÚLTIPLAS",
-      "gloss": "mais de uma; várias",
+      "word": "M\u00daLTIPLAS",
+      "gloss": "mais de uma; v\u00e1rias",
       "synonyms": [
-        "várias",
+        "v\u00e1rias",
         "diversas"
       ],
+      "example": "Houve m\u00faltiplas batidas na autoestrada.",
       "pos": "adjective",
-      "ipa": "/ˈmuɫtiplɐʃ/",
+      "ipa": "/\u02c8mu\u026btipl\u0250\u0283/",
       "family": [
-        "múltiplo",
+        "m\u00faltiplo",
         "multiplicar",
         "multiplicidade"
       ]
     },
     {
-      "word": "BONITÃO",
+      "word": "BONIT\u00c3O",
       "gloss": "homem considerado atraente",
       "synonyms": [
-        "galã",
+        "gal\u00e3",
         "gato"
       ],
+      "example": "Ele \u00e9 um cara bonit\u00e3o.",
       "pos": "adjective",
-      "ipa": "/bo.ni.ˈtɐ̃w̃/",
+      "ipa": "/bo.ni.\u02c8t\u0250\u0303w\u0303/",
       "family": [
         "bonito",
         "bonitinho"
@@ -1177,16 +1261,17 @@
     },
     {
       "word": "BARRACA",
-      "gloss": "tenda portátil para acampar",
+      "gloss": "tenda port\u00e1til para acampar",
       "synonyms": [
         "tenda",
         "acampamento"
       ],
-      "ipa": "/bɐ.ˈRa.kɐ/",
+      "example": "Isto \u00e9 uma barraca.",
       "pos": "noun",
+      "ipa": "/b\u0250.\u02c8Ra.k\u0250/",
       "family": [
         "barraco",
-        "barracão"
+        "barrac\u00e3o"
       ]
     },
     {
@@ -1196,8 +1281,9 @@
         "consertem",
         "arrumem"
       ],
+      "example": "Reparem como a luz muda de tom ao entardecer!",
       "pos": "verb",
-      "ipa": "/ʁe.ˈpa.ɾẽj̃/",
+      "ipa": "/\u0281e.\u02c8pa.\u027e\u1ebdj\u0303/",
       "family": [
         "repare",
         "reparar"
@@ -1210,8 +1296,9 @@
         "indicada",
         "mostrada"
       ],
+      "example": "A professora apontada pela dire\u00e7\u00e3o foi recebida com entusiasmo pelos alunos.",
       "pos": "verb",
-      "ipa": "/a.põ.ˈta.dɐ/",
+      "ipa": "/a.p\u00f5.\u02c8ta.d\u0250/",
       "family": [
         "apontar",
         "apontamento"
@@ -1223,8 +1310,9 @@
       "synonyms": [
         "combate"
       ],
+      "example": "Ele enfrenta muitos obst\u00e1culos.",
       "pos": "verb",
-      "ipa": "/ẽ.ˈfɾẽ.tɐ/",
+      "ipa": "/\u1ebd.\u02c8f\u027e\u1ebd.t\u0250/",
       "family": [
         "enfrentar",
         "enfrentamento"
@@ -1237,8 +1325,9 @@
         "coloco",
         "colocar"
       ],
+      "example": "Meto a roupa suja no cesto antes de lav\u00e1-la.",
       "pos": "verb",
-      "ipa": "/ˈmɛ.tu/",
+      "ipa": "/\u02c8m\u025b.tu/",
       "family": [
         "meter",
         "metido"
@@ -1251,22 +1340,24 @@
         "tranquilamente",
         "serenamente"
       ],
+      "example": "Ele calmamente disse adeus.",
       "pos": "adverb",
-      "ipa": "/kaw̃.ma.ˈmẽ.tʃi/",
+      "ipa": "/kaw\u0303.ma.\u02c8m\u1ebd.t\u0283i/",
       "family": [
         "calmo",
         "calma"
       ]
     },
     {
-      "word": "COMPOSIÇÃO",
+      "word": "COMPOSI\u00c7\u00c3O",
       "gloss": "ato de criar uma obra musical ou escrita",
       "synonyms": [
-        "formação",
+        "forma\u00e7\u00e3o",
         "estrutura"
       ],
-      "ipa": "/kõ.pu.zi.ˈsɐ̃w̃/",
+      "example": "Ela \u00e9 excelente em composi\u00e7\u00e3o.",
       "pos": "noun",
+      "ipa": "/k\u00f5.pu.zi.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "compor",
         "compositor"
@@ -1274,27 +1365,29 @@
     },
     {
       "word": "SEQUESTRO",
-      "gloss": "ato de prender alguém contra a vontade",
+      "gloss": "ato de prender algu\u00e9m contra a vontade",
       "synonyms": [
         "rapto",
-        "abdução"
+        "abdu\u00e7\u00e3o"
       ],
-      "ipa": "/sɨ.ˈkɛʃ.tɾu/",
+      "example": "A hip\u00f3tese de sequestro n\u00e3o fazia sentido.",
       "pos": "noun",
+      "ipa": "/s\u0268.\u02c8k\u025b\u0283.t\u027eu/",
       "family": [
         "sequestrar",
         "sequestrador"
       ]
     },
     {
-      "word": "COLISÃO",
+      "word": "COLIS\u00c3O",
       "gloss": "choque entre dois corpos em movimento",
       "synonyms": [
         "choque",
         "batida"
       ],
-      "ipa": "/ku.li.ˈzɐ̃w̃/",
+      "example": "O que causou a colis\u00e3o?",
       "pos": "noun",
+      "ipa": "/ku.li.\u02c8z\u0250\u0303w\u0303/",
       "family": [
         "colidir",
         "colisor"
@@ -1307,8 +1400,9 @@
         "apoiar",
         "tocar"
       ],
-      "ipa": "/ẽ.kuʃ.ˈtaɾ/",
+      "example": "Tive que encostar o carro.",
       "pos": "verb",
+      "ipa": "/\u1ebd.ku\u0283.\u02c8ta\u027e/",
       "family": [
         "encosto"
       ]
@@ -1317,8 +1411,9 @@
       "word": "ESPERTINHO",
       "gloss": "pessoa astuta de forma irritante",
       "synonyms": [],
+      "example": "Esse espertinho sempre acha um jeito de se safar das tarefas chatas!",
       "pos": "adjective",
-      "ipa": "/is.peɾ.ˈtĩ.ɲu/",
+      "ipa": "/is.pe\u027e.\u02c8t\u0129.\u0272u/",
       "family": [
         "esperto",
         "esperteza"
@@ -1326,26 +1421,28 @@
     },
     {
       "word": "IMIGRANTES",
-      "gloss": "pessoas que se mudam para outro país",
+      "gloss": "pessoas que se mudam para outro pa\u00eds",
       "synonyms": [
         "estrangeiros"
       ],
+      "example": "Eles eram imigrantes.",
       "pos": "noun",
-      "ipa": "/i.mi.ˈɡɾɐ̃.tʃis/",
+      "ipa": "/i.mi.\u02c8\u0261\u027e\u0250\u0303.t\u0283is/",
       "family": [
         "imigrar",
-        "imigração"
+        "imigra\u00e7\u00e3o"
       ]
     },
     {
-      "word": "DURÃO",
-      "gloss": "pessoa resistente ou difícil de abalar",
+      "word": "DUR\u00c3O",
+      "gloss": "pessoa resistente ou dif\u00edcil de abalar",
       "synonyms": [
         "resistente",
         "forte"
       ],
+      "example": "Quem \u00e9 esse cara dur\u00e3o?",
       "pos": "adjective",
-      "ipa": "/du.ˈɾɐ̃w̃/",
+      "ipa": "/du.\u02c8\u027e\u0250\u0303w\u0303/",
       "family": [
         "duro"
       ]
@@ -1357,22 +1454,24 @@
         "obstinada",
         "porfiosa"
       ],
+      "example": "Ela \u00e9 teimosa.",
       "pos": "adjective",
-      "ipa": "/tej.ˈmo.zɐ/",
+      "ipa": "/tej.\u02c8mo.z\u0250/",
       "family": [
         "teimar",
         "teimosia"
       ]
     },
     {
-      "word": "JÚPITER",
+      "word": "J\u00daPITER",
       "gloss": "planeta gigante do sistema solar",
       "synonyms": [
         "planeta",
         "gigante"
       ],
+      "example": "J\u00fapiter tem 16 luas.",
       "pos": "noun",
-      "ipa": "/ˈʒu.pi.teɾ/"
+      "ipa": "/\u02c8\u0292u.pi.te\u027e/"
     },
     {
       "word": "TRILHO",
@@ -1381,11 +1480,12 @@
         "carril",
         "linha"
       ],
+      "example": "Os caminhantes foram avisados a ter cuidado porque o trilho era acidentado e havia ra\u00edzes de \u00e1rvores a crescer por ele.",
+      "pos": "noun",
+      "ipa": "/\u02c8t\u027ei.\u028eu/",
       "family": [
         "monotrilho"
-      ],
-      "pos": "noun",
-      "ipa": "/ˈtɾi.ʎu/"
+      ]
     },
     {
       "word": "OPERADO",
@@ -1394,8 +1494,9 @@
         "cirurgiado",
         "tratado"
       ],
+      "example": "Ele decidiu ser operado.",
       "pos": "adjective",
-      "ipa": "/o.pe.ˈɾa.du/",
+      "ipa": "/o.pe.\u02c8\u027ea.du/",
       "family": [
         "operar",
         "operador"
@@ -1403,13 +1504,14 @@
     },
     {
       "word": "FUGIMOS",
-      "gloss": "saímos rapidamente para escapar",
+      "gloss": "sa\u00edmos rapidamente para escapar",
       "synonyms": [
         "escapamos",
         "evadimos"
       ],
+      "example": "N\u00f3s n\u00e3o fugimos.",
       "pos": "verb",
-      "ipa": "/fu.ˈʒi.mus/",
+      "ipa": "/fu.\u02c8\u0292i.mus/",
       "family": [
         "fugir",
         "fuga"
@@ -1422,8 +1524,9 @@
         "delgada",
         "esguia"
       ],
+      "example": "Voc\u00ea \u00e9 magra.",
       "pos": "adjective",
-      "ipa": "/ˈmaɡ.ɾɐ/",
+      "ipa": "/\u02c8ma\u0261.\u027e\u0250/",
       "family": [
         "magreza",
         "magro"
@@ -1435,8 +1538,9 @@
       "synonyms": [
         "bloco"
       ],
+      "example": "Isto \u00e9 um tijolo.",
       "pos": "noun",
-      "ipa": "/tʃi.ˈʒɔ.lu/",
+      "ipa": "/t\u0283i.\u02c8\u0292\u0254.lu/",
       "family": [
         "tijolar",
         "tijoleira"
@@ -1449,8 +1553,9 @@
         "aluno",
         "militar"
       ],
-      "ipa": "/kɐ.ˈde.tɨ/",
-      "pos": "noun"
+      "example": "O cadete demonstrou disciplina exemplar durante a formatura militar.",
+      "pos": "noun",
+      "ipa": "/k\u0250.\u02c8de.t\u0268/"
     },
     {
       "word": "DISSESSES",
@@ -1459,19 +1564,21 @@
         "falasses",
         "contasses"
       ],
+      "example": "Se n\u00e3o o que dissesses fosse claro, ningu\u00e9m te entenderia.",
       "pos": "verb",
-      "ipa": "/dʒi.ˈsɛ.sis/",
+      "ipa": "/d\u0292i.\u02c8s\u025b.sis/",
       "family": [
         "dizer",
         "dissesse"
       ]
     },
     {
-      "word": "DÉCIMO",
-      "gloss": "posição que vem depois do nono",
+      "word": "D\u00c9CIMO",
+      "gloss": "posi\u00e7\u00e3o que vem depois do nono",
       "synonyms": [],
-      "ipa": "/ˈdɛ.si.mu/",
+      "example": "Dez \u00e9 um d\u00e9cimo de cem.",
       "pos": "adjective",
+      "ipa": "/\u02c8d\u025b.si.mu/",
       "family": [
         "dez"
       ]
@@ -1482,8 +1589,9 @@
       "synonyms": [
         "propostas"
       ],
+      "example": "H\u00e1 muitas ofertas.",
       "pos": "noun",
-      "ipa": "/o.ˈfɛɾ.tɐs/",
+      "ipa": "/o.\u02c8f\u025b\u027e.t\u0250s/",
       "family": [
         "ofertar",
         "oferta"
@@ -1491,28 +1599,30 @@
     },
     {
       "word": "REALIZADO",
-      "gloss": "feito ou concluído com sucesso",
+      "gloss": "feito ou conclu\u00eddo com sucesso",
       "synonyms": [
         "feito",
-        "concluído"
+        "conclu\u00eddo"
       ],
+      "example": "Um inqu\u00e9rito ser\u00e1 realizado.",
       "pos": "adjective",
-      "ipa": "/ʁe.a.liˈza.du/",
+      "ipa": "/\u0281e.a.li\u02c8za.du/",
       "family": [
         "realizar",
-        "realização",
+        "realiza\u00e7\u00e3o",
         "real"
       ]
     },
     {
       "word": "GOVERNOS",
-      "gloss": "conjunto de pessoas que dirige um país",
+      "gloss": "conjunto de pessoas que dirige um pa\u00eds",
       "synonyms": [
-        "administrações",
+        "administra\u00e7\u00f5es",
         "estados"
       ],
+      "example": "Eles eram membros dos governos locais.",
       "pos": "noun",
-      "ipa": "/ɡoˈveɾ.nus/",
+      "ipa": "/\u0261o\u02c8ve\u027e.nus/",
       "family": [
         "governar",
         "governo",
@@ -1521,22 +1631,24 @@
     },
     {
       "word": "GRANADAS",
-      "gloss": "projéteis explosivos de mão",
+      "gloss": "proj\u00e9teis explosivos de m\u00e3o",
+      "example": "A pol\u00edcia respondeu com granadas de atordoamento.",
       "pos": "noun",
-      "ipa": "/ɡɾaˈna.dɐs/",
+      "ipa": "/\u0261\u027ea\u02c8na.d\u0250s/",
       "family": [
         "granada",
         "granadeiro"
       ]
     },
     {
-      "word": "CONTENÇÃO",
+      "word": "CONTEN\u00c7\u00c3O",
       "gloss": "ato de segurar ou limitar algo",
       "synonyms": [
         "freio"
       ],
-      "ipa": "/kõ.tẽ.ˈsɐ̃w̃/",
+      "example": "\u00c9 uma praga de f\u00e1cil conten\u00e7\u00e3o.",
       "pos": "noun",
+      "ipa": "/k\u00f5.t\u1ebd.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "conter"
       ]
@@ -1548,8 +1660,9 @@
         "asfixiar",
         "abafar"
       ],
-      "ipa": "/su.fu.ˈkaɾ/",
+      "example": "Estou a sufocar.",
       "pos": "verb",
+      "ipa": "/su.fu.\u02c8ka\u027e/",
       "family": [
         "sufoco",
         "sufocado",
@@ -1558,56 +1671,60 @@
     },
     {
       "word": "FISCAL",
-      "gloss": "responsável por verificar normas",
+      "gloss": "respons\u00e1vel por verificar normas",
       "synonyms": [
         "inspector",
         "auditor"
       ],
-      "ipa": "/fiʃ.ˈkaɫ/",
+      "example": "Exija nota fiscal.",
       "pos": "noun",
+      "ipa": "/fi\u0283.\u02c8ka\u026b/",
       "family": [
         "fiscalizar",
-        "fiscalização",
+        "fiscaliza\u00e7\u00e3o",
         "fisco"
       ]
     },
     {
       "word": "TERMINADA",
-      "gloss": "que já chegou ao fim",
+      "gloss": "que j\u00e1 chegou ao fim",
       "synonyms": [
         "acabada",
         "finalizada"
       ],
+      "example": "Est\u00e1 terminada.",
       "pos": "adjective",
-      "ipa": "/teɾ.miˈna.dɐ/",
+      "ipa": "/te\u027e.mi\u02c8na.d\u0250/",
       "family": [
         "terminar",
-        "terminação",
+        "termina\u00e7\u00e3o",
         "terminal"
       ]
     },
     {
       "word": "ECO",
-      "gloss": "som repetido por reflexão",
+      "gloss": "som repetido por reflex\u00e3o",
       "synonyms": [
-        "ressonância"
+        "resson\u00e2ncia"
       ],
-      "ipa": "/ˈɛ.ku/",
+      "example": "Tal voz, tal eco.",
       "pos": "noun",
+      "ipa": "/\u02c8\u025b.ku/",
       "family": [
         "ecoar",
         "ecoado",
-        "ecolocalização"
+        "ecolocaliza\u00e7\u00e3o"
       ]
     },
     {
       "word": "PLANEEI",
-      "gloss": "tracei estratégias",
+      "gloss": "tracei estrat\u00e9gias",
       "synonyms": [
         "programei"
       ],
+      "example": "Planeei minhas f\u00e9rias com meses de anteced\u00eancia para aproveitar ao m\u00e1ximo.",
       "pos": "verb",
-      "ipa": "/pla.neˈi/",
+      "ipa": "/pla.ne\u02c8i/",
       "family": [
         "planejar",
         "plano",
@@ -1620,8 +1737,9 @@
       "synonyms": [
         "dormiu"
       ],
+      "example": "Ele adormeceu.",
       "pos": "verb",
-      "ipa": "/a.doɾ.meˈsew/",
+      "ipa": "/a.do\u027e.me\u02c8sew/",
       "family": [
         "dormir",
         "adormecer",
@@ -1630,10 +1748,11 @@
     },
     {
       "word": "ADORMECI",
-      "gloss": "caí no sono",
+      "gloss": "ca\u00ed no sono",
       "synonyms": [],
+      "example": "Eu adormeci.",
       "pos": "verb",
-      "ipa": "/a.doɾ.meˈsi/",
+      "ipa": "/a.do\u027e.me\u02c8si/",
       "family": [
         "dormir",
         "adormecer",
@@ -1647,38 +1766,41 @@
         "diversidade",
         "pluralidade"
       ],
+      "example": "A variedade \u00e9 o tempero da vida.",
       "pos": "noun",
-      "ipa": "/va.ɾi.eˈda.dʒi/",
+      "ipa": "/va.\u027ei.e\u02c8da.d\u0292i/",
       "family": [
         "variar",
         "variado",
-        "variável"
+        "vari\u00e1vel"
       ]
     },
     {
       "word": "ALMOFADAS",
-      "gloss": "coxins macios para apoiar a cabeça",
+      "gloss": "coxins macios para apoiar a cabe\u00e7a",
       "synonyms": [
         "coxins",
         "enchimentos"
       ],
+      "example": "Vou comprar duas almofadas.",
       "pos": "noun",
-      "ipa": "/aw.moˈfa.dɐs/",
+      "ipa": "/aw.mo\u02c8fa.d\u0250s/",
       "family": [
         "almofada",
         "almofadado",
-        "almofadão"
+        "almofad\u00e3o"
       ]
     },
     {
       "word": "PENHASCO",
-      "gloss": "rocha alta e íngreme",
+      "gloss": "rocha alta e \u00edngreme",
       "synonyms": [
         "escarpa",
-        "precipício"
+        "precip\u00edcio"
       ],
+      "example": "Eu quase ca\u00ed do penhasco.",
       "pos": "noun",
-      "ipa": "/peˈɲas.ku/",
+      "ipa": "/pe\u02c8\u0272as.ku/",
       "family": [
         "penhascoso",
         "penha"
@@ -1686,28 +1808,30 @@
     },
     {
       "word": "DISCORDO",
-      "gloss": "tenho opinião diferente",
+      "gloss": "tenho opini\u00e3o diferente",
       "synonyms": [
         "diverjo",
         "opino diferente"
       ],
+      "example": "Eu discordo.",
       "pos": "verb",
-      "ipa": "/dʒisˈkoɾ.du/",
+      "ipa": "/d\u0292is\u02c8ko\u027e.du/",
       "family": [
         "discordar",
-        "discórdia",
+        "disc\u00f3rdia",
         "discordante"
       ]
     },
     {
-      "word": "ÓRFÃOS",
-      "gloss": "crianças sem pais vivos",
+      "word": "\u00d3RF\u00c3OS",
+      "gloss": "crian\u00e7as sem pais vivos",
       "synonyms": [
         "desamparados",
         "pupilos"
       ],
+      "example": "Eles s\u00e3o \u00f3rf\u00e3os.",
       "pos": "noun",
-      "ipa": "/ˈɔɾ.fɐ̃w̃s/",
+      "ipa": "/\u02c8\u0254\u027e.f\u0250\u0303w\u0303s/",
       "family": [
         "orfandade",
         "orfanato"
@@ -1720,8 +1844,9 @@
         "diletantes",
         "leigos"
       ],
+      "example": "Eles s\u00e3o amadores.",
       "pos": "noun",
-      "ipa": "/a.maˈdo.ɾis/",
+      "ipa": "/a.ma\u02c8do.\u027eis/",
       "family": [
         "amador",
         "amadorismo",
@@ -1735,8 +1860,9 @@
         "enviamos",
         "despachamos"
       ],
+      "example": "Mandamos restaurar os m\u00f3veis antigos.",
       "pos": "verb",
-      "ipa": "/mɐ̃ˈdɐ̃.mus/",
+      "ipa": "/m\u0250\u0303\u02c8d\u0250\u0303.mus/",
       "family": [
         "mandar",
         "mandado",
@@ -1750,12 +1876,13 @@
         "alteramos",
         "transformamos"
       ],
+      "example": "Mudamos de ideia.",
       "pos": "verb",
-      "ipa": "/muˈdɐ̃.mus/",
+      "ipa": "/mu\u02c8d\u0250\u0303.mus/",
       "family": [
         "mudar",
-        "mudança",
-        "mudável"
+        "mudan\u00e7a",
+        "mud\u00e1vel"
       ]
     },
     {
@@ -1765,8 +1892,9 @@
         "cobrir",
         "encobrir"
       ],
-      "ipa": "/tɐ.ˈpaɾ/",
+      "example": "Vamos tapar o buraco.",
       "pos": "verb",
+      "ipa": "/t\u0250.\u02c8pa\u027e/",
       "family": [
         "tampa",
         "tapado"
@@ -1774,12 +1902,13 @@
     },
     {
       "word": "ARRANCOU",
-      "gloss": "tirou com força",
+      "gloss": "tirou com for\u00e7a",
       "synonyms": [
         "extraiu"
       ],
+      "example": "Ele arrancou a camisa.",
       "pos": "verb",
-      "ipa": "/a.ʁɐ̃ˈko/",
+      "ipa": "/a.\u0281\u0250\u0303\u02c8ko/",
       "family": [
         "arrancar",
         "arranco",
@@ -1788,12 +1917,13 @@
     },
     {
       "word": "AMENDOINS",
-      "gloss": "sementes comestíveis de legume",
+      "gloss": "sementes comest\u00edveis de legume",
       "synonyms": [
-        "grãos"
+        "gr\u00e3os"
       ],
+      "example": "Vou comprar amendoins.",
       "pos": "noun",
-      "ipa": "/a.mẽˈdõj̃s/",
+      "ipa": "/a.m\u1ebd\u02c8d\u00f5j\u0303s/",
       "family": [
         "amendoim",
         "amendoeira",
@@ -1802,27 +1932,29 @@
     },
     {
       "word": "EXPULSA",
-      "gloss": "retirada à força de um lugar",
+      "gloss": "retirada \u00e0 for\u00e7a de um lugar",
+      "example": "Eu fui expulsa.",
       "pos": "noun",
-      "ipa": "/isˈpuw.sɐ/",
+      "ipa": "/is\u02c8puw.s\u0250/",
       "family": [
         "expulsar",
-        "expulsão",
+        "expuls\u00e3o",
         "expulso"
       ]
     },
     {
       "word": "INFORMADOS",
-      "gloss": "que receberam notícia ou dado",
+      "gloss": "que receberam not\u00edcia ou dado",
       "synonyms": [
         "avisados",
         "notificados"
       ],
+      "example": "Mantenha-nos informados.",
       "pos": "adjective",
-      "ipa": "/ĩ.foɾˈma.dus/",
+      "ipa": "/\u0129.fo\u027e\u02c8ma.dus/",
       "family": [
         "informar",
-        "informação",
+        "informa\u00e7\u00e3o",
         "informado"
       ]
     },
@@ -1833,20 +1965,22 @@
         "determina",
         "estabelece"
       ],
+      "example": "Como voc\u00ea define filosofia?",
       "pos": "verb",
-      "ipa": "/deˈfi.ni/",
+      "ipa": "/de\u02c8fi.ni/",
       "family": [
         "definir",
-        "definição",
+        "defini\u00e7\u00e3o",
         "definido"
       ]
     },
     {
       "word": "CONTACTOU",
-      "gloss": "entrou em comunicação com alguém",
+      "gloss": "entrou em comunica\u00e7\u00e3o com algu\u00e9m",
       "synonyms": [
         "ligou"
       ],
+      "example": "O coordenador contactou os participantes para confirmar os detalhes do evento.",
       "pos": "verb",
       "family": [
         "contato",
@@ -1855,41 +1989,44 @@
     },
     {
       "word": "DESPREZO",
-      "gloss": "falta de consideração ou estima",
+      "gloss": "falta de considera\u00e7\u00e3o ou estima",
       "synonyms": [
-        "desdém",
+        "desd\u00e9m",
         "menosprezo"
       ],
+      "example": "Havia desprezo em seu olhar.",
       "pos": "noun",
-      "ipa": "/dɨʃˈpɾe.zu/",
+      "ipa": "/d\u0268\u0283\u02c8p\u027ee.zu/",
       "family": [
         "desprezar",
-        "desprezível"
+        "desprez\u00edvel"
       ]
     },
     {
-      "word": "PRÉDIOS",
-      "gloss": "construções de vários andares",
+      "word": "PR\u00c9DIOS",
+      "gloss": "constru\u00e7\u00f5es de v\u00e1rios andares",
       "synonyms": [
-        "edifícios",
-        "construções"
+        "edif\u00edcios",
+        "constru\u00e7\u00f5es"
       ],
+      "example": "Terremotos destroem pr\u00e9dios.",
       "pos": "noun",
-      "ipa": "/ˈpɾɛ.djuʃ/",
+      "ipa": "/\u02c8p\u027e\u025b.dju\u0283/",
       "family": [
-        "prédio",
-        "edifício"
+        "pr\u00e9dio",
+        "edif\u00edcio"
       ]
     },
     {
       "word": "IGUALDADE",
-      "gloss": "condição de não haver diferença entre pessoas",
+      "gloss": "condi\u00e7\u00e3o de n\u00e3o haver diferen\u00e7a entre pessoas",
       "synonyms": [
         "equidade",
         "paridade"
       ],
-      "ipa": "/i.ɡwaɫ.ˈda.dɨ/",
+      "example": "A palavra-chave \u00e9 igualdade.",
       "pos": "noun",
+      "ipa": "/i.\u0261wa\u026b.\u02c8da.d\u0268/",
       "family": [
         "igual",
         "igualar"
@@ -1897,13 +2034,14 @@
     },
     {
       "word": "GRANDIOSO",
-      "gloss": "de enorme tamanho ou imponência",
+      "gloss": "de enorme tamanho ou impon\u00eancia",
       "synonyms": [
         "majestoso",
         "imponente"
       ],
-      "ipa": "/ɡɾɐ̃.ˈdjo.zu/",
+      "example": "Os adultos, na verdade, devem ajudar as crian\u00e7as a descobrir o grandioso mundo da m\u00fasica.",
       "pos": "adjective",
+      "ipa": "/\u0261\u027e\u0250\u0303.\u02c8djo.zu/",
       "family": [
         "grande",
         "grandiosidade"
@@ -1916,24 +2054,26 @@
         "separar",
         "segregar"
       ],
-      "ipa": "/i.zu.ˈlaɾ/",
+      "example": "N\u00e3o esque\u00e7a de isolar os fios depois de lig\u00e1-los.",
       "pos": "verb",
+      "ipa": "/i.zu.\u02c8la\u027e/",
       "family": [
         "isolado",
         "isolamento"
       ]
     },
     {
-      "word": "HORÁRIOS",
+      "word": "HOR\u00c1RIOS",
       "gloss": "tabela que marca o momento de cada atividade",
       "synonyms": [
         "cronogramas",
         "tabelas"
       ],
+      "example": "Respeitem os hor\u00e1rios.",
       "pos": "noun",
-      "ipa": "/oˈɾa.ɾiuʃ/",
+      "ipa": "/o\u02c8\u027ea.\u027eiu\u0283/",
       "family": [
-        "horário",
+        "hor\u00e1rio",
         "horas"
       ]
     },
@@ -1944,8 +2084,9 @@
         "planos",
         "diagramas"
       ],
+      "example": "Esquemas de pir\u00e2mide s\u00e3o fraudulentos.",
       "pos": "noun",
-      "ipa": "/iʃˈke.mɐʃ/",
+      "ipa": "/i\u0283\u02c8ke.m\u0250\u0283/",
       "family": [
         "esquema",
         "esquematizar"
@@ -1958,8 +2099,9 @@
         "selecionada",
         "eleita"
       ],
+      "example": "Ela \u00e9 a escolhida.",
       "pos": "adjective",
-      "ipa": "/iʃ.koʎˈi.ðɐ/",
+      "ipa": "/i\u0283.ko\u028e\u02c8i.\u00f0\u0250/",
       "family": [
         "escolher",
         "escolha"
@@ -1967,9 +2109,10 @@
     },
     {
       "word": "SORRIA",
-      "gloss": "curvar os lábios em sinal de alegria.",
+      "gloss": "curvar os l\u00e1bios em sinal de alegria.",
+      "example": "N\u00e3o sorria.",
       "pos": "verb",
-      "ipa": "/soˈʁi.ɐ/",
+      "ipa": "/so\u02c8\u0281i.\u0250/",
       "family": [
         "sorrir",
         "sorriso"
@@ -1977,41 +2120,44 @@
     },
     {
       "word": "TORPEDOS",
-      "gloss": "projéteis lançados debaixo d’água.",
+      "gloss": "proj\u00e9teis lan\u00e7ados debaixo d\u2019\u00e1gua.",
       "synonyms": [
-        "mísseis",
-        "projéteis"
+        "m\u00edsseis",
+        "proj\u00e9teis"
       ],
+      "example": "Os submarinos modernos podem lan\u00e7ar torpedos com grande precis\u00e3o.",
       "pos": "noun",
-      "ipa": "/toɾˈpe.duʃ/",
+      "ipa": "/to\u027e\u02c8pe.du\u0283/",
       "family": [
         "torpedear",
         "torpedeiro"
       ]
     },
     {
-      "word": "PÍLULAS",
+      "word": "P\u00cdLULAS",
       "gloss": "medicamento em forma de comprimido pequeno.",
       "synonyms": [
         "comprimidos",
         "tabletes"
       ],
+      "example": "Para que servem essas p\u00edlulas?",
       "pos": "noun",
-      "ipa": "/ˈpi.lu.lɐʃ/",
+      "ipa": "/\u02c8pi.lu.l\u0250\u0283/",
       "family": [
-        "pílula",
+        "p\u00edlula",
         "comprimido"
       ]
     },
     {
       "word": "DURAS",
-      "gloss": "que oferecem resistência ao toque.",
+      "gloss": "que oferecem resist\u00eancia ao toque.",
       "synonyms": [
-        "rígidas",
-        "ásperas"
+        "r\u00edgidas",
+        "\u00e1speras"
       ],
+      "example": "N\u00e3o coma coisas duras, por favor.",
       "pos": "adjective",
-      "ipa": "/ˈdu.ɾɐʃ/",
+      "ipa": "/\u02c8du.\u027e\u0250\u0283/",
       "family": [
         "duro",
         "dureza"
@@ -2019,9 +2165,10 @@
     },
     {
       "word": "ACESA",
-      "gloss": "que está com fogo ou luz ligada.",
+      "gloss": "que est\u00e1 com fogo ou luz ligada.",
+      "example": "A luz est\u00e1 acesa.",
       "pos": "adjective",
-      "ipa": "/ɐˈse.zɐ/",
+      "ipa": "/\u0250\u02c8se.z\u0250/",
       "family": [
         "aceso",
         "acender"
@@ -2030,18 +2177,20 @@
     {
       "word": "RATAZANA",
       "gloss": "roedor grande, maior que o comum",
-      "ipa": "/xa.ta.ˈzã.nə/",
+      "example": "Uma ratazana cruzou a estrada.",
       "pos": "noun",
+      "ipa": "/xa.ta.\u02c8z\u00e3.n\u0259/",
       "family": [
         "rato",
-        "ratão"
+        "rat\u00e3o"
       ]
     },
     {
       "word": "PUNHOS",
       "gloss": "parte da camisa que envolve o pulso.",
+      "example": "As palavras machucam mais do que os punhos.",
       "pos": "noun",
-      "ipa": "/ˈpu.ɲuʃ/",
+      "ipa": "/\u02c8pu.\u0272u\u0283/",
       "family": [
         "punho",
         "pulso"
@@ -2050,8 +2199,9 @@
     {
       "word": "APERTADA",
       "gloss": "vestida ou ajustada de forma justa.",
+      "example": "Est\u00e1 muito apertada.",
       "pos": "adjective",
-      "ipa": "/ɐ.pɨɾˈta.ðɐ/",
+      "ipa": "/\u0250.p\u0268\u027e\u02c8ta.\u00f0\u0250/",
       "family": [
         "apertar",
         "apertado"
@@ -2059,9 +2209,10 @@
     },
     {
       "word": "TENTASSE",
-      "gloss": "fizesse esforço para conseguir algo.",
+      "gloss": "fizesse esfor\u00e7o para conseguir algo.",
+      "example": "Eu poderia fazer isso se tentasse.",
       "pos": "verb",
-      "ipa": "/tẽˈta.sɨ/",
+      "ipa": "/t\u1ebd\u02c8ta.s\u0268/",
       "family": [
         "tentar",
         "tentativa"
@@ -2069,29 +2220,32 @@
     },
     {
       "word": "RABINO",
-      "gloss": "líder religioso na tradição judaica.",
+      "gloss": "l\u00edder religioso na tradi\u00e7\u00e3o judaica.",
+      "example": "Sou rabino.",
+      "pos": "noun",
+      "ipa": "/R\u0250.\u02c8bi.nu/",
       "family": [
-        "rabínico",
+        "rab\u00ednico",
         "rabinismo"
-      ],
-      "ipa": "/Rɐ.ˈbi.nu/",
-      "pos": "noun"
+      ]
     },
     {
-      "word": "MUDARÁ",
-      "gloss": "sofrerá alteração no futuro.",
+      "word": "MUDAR\u00c1",
+      "gloss": "sofrer\u00e1 altera\u00e7\u00e3o no futuro.",
+      "example": "Nada mudar\u00e1.",
       "pos": "verb",
-      "ipa": "/mu.dɐˈɾa/",
+      "ipa": "/mu.d\u0250\u02c8\u027ea/",
       "family": [
         "mudar",
-        "mudança"
+        "mudan\u00e7a"
       ]
     },
     {
       "word": "APOIADO",
-      "gloss": "sustentado por alguém ou algo.",
-      "ipa": "/ɐ.poj.ˈa.du/",
+      "gloss": "sustentado por algu\u00e9m ou algo.",
+      "example": "Ele estava apoiado contra a parede.",
       "pos": "adjective",
+      "ipa": "/\u0250.poj.\u02c8a.du/",
       "family": [
         "apoiar",
         "apoio"
@@ -2099,9 +2253,10 @@
     },
     {
       "word": "ROMPER",
-      "gloss": "quebrar ou separar com força.",
-      "ipa": "/Rõ.ˈpeɾ/",
+      "gloss": "quebrar ou separar com for\u00e7a.",
+      "example": "A corda podia romper-se a qualquer momento.",
       "pos": "verb",
+      "ipa": "/R\u00f5.\u02c8pe\u027e/",
       "family": [
         "rompimento",
         "rombo"
@@ -2109,19 +2264,21 @@
     },
     {
       "word": "ALTERADO",
-      "gloss": "modificado em relação ao original.",
-      "ipa": "/aɫ.tɨ.ˈɾa.du/",
+      "gloss": "modificado em rela\u00e7\u00e3o ao original.",
+      "example": "N\u00e3o precisa ser alterado.",
       "pos": "adjective",
+      "ipa": "/a\u026b.t\u0268.\u02c8\u027ea.du/",
       "family": [
         "alterar",
-        "alteração"
+        "altera\u00e7\u00e3o"
       ]
     },
     {
       "word": "POPULARES",
       "gloss": "aceitos ou conhecidos por muita gente.",
+      "example": "Somos populares.",
       "pos": "adjective",
-      "ipa": "/po.puˈla.ɾɨʃ/",
+      "ipa": "/po.pu\u02c8la.\u027e\u0268\u0283/",
       "family": [
         "povo",
         "popular"
@@ -2129,18 +2286,20 @@
     },
     {
       "word": "AGARREI",
-      "gloss": "segurei com força usando a mão.",
+      "gloss": "segurei com for\u00e7a usando a m\u00e3o.",
+      "example": "Agarrei-me \u00e0 barra de ferro.",
       "pos": "verb",
-      "ipa": "/ɐ.ɡɐˈʁɐj/",
+      "ipa": "/\u0250.\u0261\u0250\u02c8\u0281\u0250j/",
       "family": [
         "agarrar"
       ]
     },
     {
       "word": "CONCERTOS",
-      "gloss": "apresentações musicais ao vivo.",
+      "gloss": "apresenta\u00e7\u00f5es musicais ao vivo.",
+      "example": "Sylvia adorava concertos.",
       "pos": "noun",
-      "ipa": "/kõˈseɾ.tuʃ/",
+      "ipa": "/k\u00f5\u02c8se\u027e.tu\u0283/",
       "family": [
         "concertar"
       ]
@@ -2148,8 +2307,9 @@
     {
       "word": "NORMAS",
       "gloss": "regras que orientam o comportamento.",
+      "example": "Isso \u00e9 contra as normas.",
       "pos": "noun",
-      "ipa": "/ˈnoɾmɐs/",
+      "ipa": "/\u02c8no\u027em\u0250s/",
       "family": [
         "normal",
         "normativo",
@@ -2158,29 +2318,32 @@
     },
     {
       "word": "ADJUNTO",
-      "gloss": "que está ligado ou acrescentado a algo.",
-      "ipa": "/ɐ.dˈʒũ.tu/",
+      "gloss": "que est\u00e1 ligado ou acrescentado a algo.",
+      "example": "Antes de trabalhar como professor adjunto, ele tinha trabalhado num laborat\u00f3rio que, at\u00e9 ficar sem financiamento, patrocinava o visto de trabalho dele.",
       "pos": "adjective",
+      "ipa": "/\u0250.d\u02c8\u0292\u0169.tu/",
       "family": [
         "adjuntar"
       ]
     },
     {
       "word": "FOTOGRAFAR",
-      "gloss": "registrar imagem com câmera.",
-      "ipa": "/fu.tu.ɡɾɐ.ˈfaɾ/",
+      "gloss": "registrar imagem com c\u00e2mera.",
+      "example": "N\u00e3o \u00e9 permitido fotografar no tribunal.",
       "pos": "verb",
+      "ipa": "/fu.tu.\u0261\u027e\u0250.\u02c8fa\u027e/",
       "family": [
         "fotografia",
-        "fotógrafo",
-        "fotográfico"
+        "fot\u00f3grafo",
+        "fotogr\u00e1fico"
       ]
     },
     {
       "word": "BONECOS",
       "gloss": "figuras de brinquedo com forma humana.",
+      "example": "Passamos a tarde brincando de fazer bonecos de argila.",
       "pos": "noun",
-      "ipa": "/boˈne.kus/",
+      "ipa": "/bo\u02c8ne.kus/",
       "family": [
         "boneca",
         "boneco",
@@ -2190,27 +2353,30 @@
     {
       "word": "VIDROS",
       "gloss": "material transparente usado em janelas.",
+      "example": "Cuidado com os vidros!",
       "pos": "noun",
-      "ipa": "/ˈvi.dɾus/",
+      "ipa": "/\u02c8vi.d\u027eus/",
       "family": [
         "vidro",
-        "envidraçar",
-        "envidraçado"
+        "envidra\u00e7ar",
+        "envidra\u00e7ado"
       ]
     },
     {
       "word": "GESTAPO",
-      "gloss": "polícia secreta do regime nazista.",
+      "gloss": "pol\u00edcia secreta do regime nazista.",
+      "example": "Durante a Segunda Guerra Mundial, muitos cidad\u00e3os alem\u00e3es temiam a GESTAPO, que vigiava e reprimia qualquer oposi\u00e7\u00e3o ao regime nazista.",
       "pos": "noun",
-      "ipa": "/ʒesˈta.po/"
+      "ipa": "/\u0292es\u02c8ta.po/"
     },
     {
       "word": "NACIONAIS",
-      "gloss": "de todo um país",
+      "gloss": "de todo um pa\u00eds",
+      "example": "Bandeiras s\u00e3o s\u00edmbolos nacionais.",
       "pos": "adjective",
-      "ipa": "/na.si.oˈnajs/",
+      "ipa": "/na.si.o\u02c8najs/",
       "family": [
-        "nação",
+        "na\u00e7\u00e3o",
         "nacional",
         "nacionalizar"
       ]
@@ -2218,19 +2384,21 @@
     {
       "word": "APRECIA",
       "gloss": "gosta ou valoriza algo.",
+      "example": "Voc\u00ea aprecia a m\u00fasica?",
       "pos": "verb",
-      "ipa": "/aˈpɾe.si.ɐ/",
+      "ipa": "/a\u02c8p\u027ee.si.\u0250/",
       "family": [
         "apreciar",
-        "apreciação",
+        "aprecia\u00e7\u00e3o",
         "apreciativo"
       ]
     },
     {
       "word": "MELHORA",
-      "gloss": "torna-se mais satisfatório",
-      "ipa": "/mɨ.ˈʎɔ.ɾɐ/",
+      "gloss": "torna-se mais satisfat\u00f3rio",
+      "example": "Ele melhora.",
       "pos": "verb",
+      "ipa": "/m\u0268.\u02c8\u028e\u0254.\u027e\u0250/",
       "family": [
         "melhor",
         "melhorar",
@@ -2240,28 +2408,31 @@
     {
       "word": "FINANCIAR",
       "gloss": "fornecer dinheiro para um projeto.",
-      "ipa": "/fi.nɐ̃.ˈsjaɾ/",
+      "example": "Quem vai financiar o empreendimento?",
       "pos": "verb",
+      "ipa": "/fi.n\u0250\u0303.\u02c8sja\u027e/",
       "family": [
-        "finança",
+        "finan\u00e7a",
         "financeiro",
         "financiamento"
       ]
     },
     {
-      "word": "SANDUÍCHES",
-      "gloss": "alimento feito com pão e recheio.",
+      "word": "SANDU\u00cdCHES",
+      "gloss": "alimento feito com p\u00e3o e recheio.",
+      "example": "Trarei sandu\u00edches.",
       "pos": "noun",
-      "ipa": "/sɐ̃ˈdu.i.ʃis/",
+      "ipa": "/s\u0250\u0303\u02c8du.i.\u0283is/",
       "family": [
-        "sanduíche",
+        "sandu\u00edche",
         "sanduichinho"
       ]
     },
     {
       "word": "SOLTEIROS",
-      "gloss": "pessoas que não são casadas.",
-      "ipa": "/soɫˈteiɾus/",
+      "gloss": "pessoas que n\u00e3o s\u00e3o casadas.",
+      "example": "Ambos s\u00e3o solteiros.",
+      "ipa": "/so\u026b\u02c8tei\u027eus/",
       "family": [
         "solteiro",
         "solteirice",
@@ -2271,10 +2442,11 @@
     {
       "word": "ALDEIAS",
       "gloss": "povoados pequenos no campo.",
+      "example": "Sugiro que visitem algumas aldeias nas montanhas.",
       "pos": "noun",
-      "ipa": "/awˈdɐj.ɐs/",
+      "ipa": "/aw\u02c8d\u0250j.\u0250s/",
       "family": [
-        "aldeão",
+        "alde\u00e3o",
         "aldeamento",
         "aldeia"
       ]
@@ -2282,8 +2454,9 @@
     {
       "word": "CHARUTOS",
       "gloss": "rolos de tabaco para fumar.",
+      "example": "Voc\u00ea fuma charutos?",
       "pos": "noun",
-      "ipa": "/ʃaˈɾu.tus/",
+      "ipa": "/\u0283a\u02c8\u027eu.tus/",
       "family": [
         "charuto",
         "charutaria",
@@ -2291,10 +2464,11 @@
       ]
     },
     {
-      "word": "DOAÇÃO",
+      "word": "DOA\u00c7\u00c3O",
       "gloss": "ato de entregar algo sem cobrar.",
-      "ipa": "/du.ɐ.ˈsɐ̃w̃/",
+      "example": "Obrigada pela doa\u00e7\u00e3o.",
       "pos": "noun",
+      "ipa": "/du.\u0250.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "doar",
         "doador"
@@ -2302,30 +2476,33 @@
     },
     {
       "word": "BAILARINA",
-      "gloss": "mulher que dança profissionalmente.",
+      "gloss": "mulher que dan\u00e7a profissionalmente.",
+      "example": "Ela quer ser bailarina.",
       "pos": "noun",
-      "ipa": "/baj.laˈɾi.nɐ/",
+      "ipa": "/baj.la\u02c8\u027ei.n\u0250/",
       "family": [
         "bailar",
-        "balé",
+        "bal\u00e9",
         "bailado"
       ]
     },
     {
       "word": "AGRESSIVA",
-      "gloss": "que age com violência ou hostilidade.",
+      "gloss": "que age com viol\u00eancia ou hostilidade.",
+      "example": "Ela \u00e9 agressiva.",
       "pos": "adjective",
-      "ipa": "/a.gɾeˈsi.vɐ/",
+      "ipa": "/a.g\u027ee\u02c8si.v\u0250/",
       "family": [
-        "agressão",
+        "agress\u00e3o",
         "agressor",
         "agressividade"
       ]
     },
     {
       "word": "NOUTROS",
-      "gloss": "em lugares ou situações diferentes.",
-      "ipa": "/ˈnou̯.tɾo̝ⁱʃ/",
+      "gloss": "em lugares ou situa\u00e7\u00f5es diferentes.",
+      "example": "Em portugu\u00eas, o artigo usa-se nuns casos e omite-se noutros.",
+      "ipa": "/\u02c8nou\u032f.t\u027eo\u031d\u2071\u0283/",
       "family": [
         "outro",
         "outrem",
@@ -2335,8 +2512,9 @@
     {
       "word": "BOLSAS",
       "gloss": "recipientes de tecido para carregar objetos.",
+      "example": "Tem bolsas nesta loja?",
       "pos": "noun",
-      "ipa": "/ˈboɫ.sɐs/",
+      "ipa": "/\u02c8bo\u026b.s\u0250s/",
       "family": [
         "bolso",
         "bolseiro",
@@ -2345,11 +2523,12 @@
     },
     {
       "word": "VAGO",
-      "gloss": "sem ocupação ou conteúdo definido.",
-      "ipa": "/ˈva.ɡu/",
+      "gloss": "sem ocupa\u00e7\u00e3o ou conte\u00fado definido.",
+      "example": "Isso \u00e9 meio vago.",
       "pos": "adjective",
+      "ipa": "/\u02c8va.\u0261u/",
       "family": [
-        "vagão",
+        "vag\u00e3o",
         "vaguear"
       ]
     },
@@ -2360,23 +2539,25 @@
         "reproduzir",
         "duplicar"
       ],
-      "ipa": "/ku.ˈpjaɾ/",
+      "example": "Posso copiar tuas respostas?",
       "pos": "verb",
+      "ipa": "/ku.\u02c8pja\u027e/",
       "family": [
-        "cópia",
+        "c\u00f3pia",
         "copiador",
         "copiadora"
       ]
     },
     {
       "word": "ACENDE",
-      "gloss": "faz começar a queimar ou iluminar.",
+      "gloss": "faz come\u00e7ar a queimar ou iluminar.",
       "synonyms": [
         "ilumina",
         "ascende"
       ],
+      "example": "Acende a vela.",
       "pos": "verb",
-      "ipa": "/aˈsẽ.dʒi/",
+      "ipa": "/a\u02c8s\u1ebd.d\u0292i/",
       "family": [
         "acender",
         "acendedor",
@@ -2384,27 +2565,29 @@
       ]
     },
     {
-      "word": "FARAÓ",
+      "word": "FARA\u00d3",
       "gloss": "antigo rei do Egito",
       "synonyms": [
         "soberano",
         "monarca"
       ],
+      "example": "Rams\u00e9s II foi um fara\u00f3 eg\u00edpcio.",
       "pos": "noun",
-      "ipa": "/fa.ɾaˈɔ/",
+      "ipa": "/fa.\u027ea\u02c8\u0254/",
       "family": [
-        "faraônico",
+        "fara\u00f4nico",
         "faraonismo"
       ]
     },
     {
       "word": "PEDIRES",
-      "gloss": "se tu quiseres que alguém te dê algo",
+      "gloss": "se tu quiseres que algu\u00e9m te d\u00ea algo",
       "synonyms": [
         "rogues"
       ],
+      "example": "Podes contar comigo se pedires ajuda com os exerc\u00edcios.",
       "pos": "verb",
-      "ipa": "/peˈdiɾis/",
+      "ipa": "/pe\u02c8di\u027eis/",
       "family": [
         "pedir",
         "pedinte",
@@ -2413,38 +2596,41 @@
     },
     {
       "word": "CONCORDAM",
-      "gloss": "têm a mesma opinião sobre algo.",
+      "gloss": "t\u00eam a mesma opini\u00e3o sobre algo.",
       "synonyms": [
         "coincidem",
         "aceitam"
       ],
+      "example": "Eles concordam.",
       "pos": "verb",
-      "ipa": "/kõ.koɾˈdɐ̃w/",
+      "ipa": "/k\u00f5.ko\u027e\u02c8d\u0250\u0303w/",
       "family": [
         "concordar",
-        "concordância"
+        "concord\u00e2ncia"
       ]
     },
     {
-      "word": "AUTOMÓVEIS",
-      "gloss": "veículos movidos por motor próprio.",
+      "word": "AUTOM\u00d3VEIS",
+      "gloss": "ve\u00edculos movidos por motor pr\u00f3prio.",
       "synonyms": [
         "carros",
-        "veículos"
+        "ve\u00edculos"
       ],
+      "example": "Gosto de autom\u00f3veis cl\u00e1ssicos.",
       "pos": "noun",
-      "ipa": "/aw.toˈmɔ.vejs/",
+      "ipa": "/aw.to\u02c8m\u0254.vejs/",
       "family": [
-        "automóvel",
+        "autom\u00f3vel",
         "automotivo",
-        "veículo"
+        "ve\u00edculo"
       ]
     },
     {
       "word": "CAPUZ",
-      "gloss": "parte da roupa que cobre a cabeça.",
+      "gloss": "parte da roupa que cobre a cabe\u00e7a.",
+      "example": "O capuz n\u00e3o faz o monge.",
       "pos": "noun",
-      "ipa": "/kaˈpuj/",
+      "ipa": "/ka\u02c8puj/",
       "family": [
         "encapuzar",
         "capucha"
@@ -2452,13 +2638,14 @@
     },
     {
       "word": "PATRULHAS",
-      "gloss": "grupos que vigiam determinada área.",
+      "gloss": "grupos que vigiam determinada \u00e1rea.",
       "synonyms": [
         "rondas",
         "vigias"
       ],
+      "example": "As ag\u00eancias governamentais refor\u00e7aram as patrulhas para apanhar os que est\u00e3o por detr\u00e1s dos crimes.",
       "pos": "noun",
-      "ipa": "/paˈtɾu.ʎɐs/",
+      "ipa": "/pa\u02c8t\u027eu.\u028e\u0250s/",
       "family": [
         "patrulhar",
         "patrulheiro",
@@ -2467,13 +2654,14 @@
     },
     {
       "word": "PRETAS",
-      "gloss": "da cor mais escura possível.",
+      "gloss": "da cor mais escura poss\u00edvel.",
       "synonyms": [
         "escuras",
         "negras"
       ],
+      "example": "Eu jogo com as pretas.",
       "pos": "adjective",
-      "ipa": "/ˈpɾɛ.tɐs/",
+      "ipa": "/\u02c8p\u027e\u025b.t\u0250s/",
       "family": [
         "preto",
         "enegrecer",
@@ -2482,13 +2670,14 @@
     },
     {
       "word": "RAPTORES",
-      "gloss": "pássaros de rapina que caçam presas.",
+      "gloss": "p\u00e1ssaros de rapina que ca\u00e7am presas.",
       "synonyms": [
         "sequestradores",
         "agressores"
       ],
+      "example": "Os rapaces, como os gavi\u00f5es e falc\u00f5es, s\u00e3o chamados de \"raptores\" devido \u00e0 sua habilidade de ca\u00e7ar presas.",
       "pos": "noun",
-      "ipa": "/ʁapˈto.ɾis/",
+      "ipa": "/\u0281ap\u02c8to.\u027eis/",
       "family": [
         "raptar",
         "rapto",
@@ -2497,12 +2686,13 @@
     },
     {
       "word": "FALTOU",
-      "gloss": "não compareceu ou esteve ausente.",
+      "gloss": "n\u00e3o compareceu ou esteve ausente.",
       "synonyms": [
         "ausentou"
       ],
+      "example": "Ele faltou \u00e0 aula.",
       "pos": "verb",
-      "ipa": "/fawˈto/",
+      "ipa": "/faw\u02c8to/",
       "family": [
         "falta",
         "faltar",
@@ -2515,8 +2705,9 @@
       "synonyms": [
         "garra"
       ],
+      "example": "Quebrei uma unha.",
       "pos": "noun",
-      "ipa": "/ˈu.ɲɐ/",
+      "ipa": "/\u02c8u.\u0272\u0250/",
       "family": [
         "unheiro",
         "unhas",
@@ -2525,17 +2716,18 @@
     },
     {
       "word": "IMPROVISAR",
-      "gloss": "criar algo sem preparação anterior.",
+      "gloss": "criar algo sem prepara\u00e7\u00e3o anterior.",
       "synonyms": [
         "inventar",
         "criar"
       ],
-      "ipa": "/ĩ.pɾu.vi.ˈzaɾ/",
+      "example": "Vamos improvisar.",
       "pos": "verb",
+      "ipa": "/\u0129.p\u027eu.vi.\u02c8za\u027e/",
       "family": [
         "improviso",
         "improvisado",
-        "improvisação"
+        "improvisa\u00e7\u00e3o"
       ]
     },
     {
@@ -2544,8 +2736,9 @@
       "synonyms": [
         "imagina"
       ],
-      "ipa": "/ˈso.ɲə/",
+      "example": "Todo mundo sonha.",
       "pos": "verb",
+      "ipa": "/\u02c8so.\u0272\u0259/",
       "family": [
         "sonho",
         "sonhar",
@@ -2554,15 +2747,16 @@
     },
     {
       "word": "ALIVIADO",
-      "gloss": "sentindo menos peso ou preocupação.",
+      "gloss": "sentindo menos peso ou preocupa\u00e7\u00e3o.",
       "synonyms": [
         "tranquilo",
         "sereno"
       ],
+      "example": "Estou aliviado.",
       "pos": "adjective",
-      "ipa": "/a.li.viˈa.du/",
+      "ipa": "/a.li.vi\u02c8a.du/",
       "family": [
-        "alívio",
+        "al\u00edvio",
         "aliviar"
       ]
     },
@@ -2572,8 +2766,9 @@
       "synonyms": [
         "quitava"
       ],
+      "example": "O terceiro Estado franc\u00eas era o \u00fanico que pagava impostos.",
       "pos": "verb",
-      "ipa": "/paˈɡa.vɐ/",
+      "ipa": "/pa\u02c8\u0261a.v\u0250/",
       "family": [
         "pagar",
         "pagamento",
@@ -2581,18 +2776,19 @@
       ]
     },
     {
-      "word": "DEDICAÇÃO",
-      "gloss": "entrega constante de tempo e esforço.",
+      "word": "DEDICA\u00c7\u00c3O",
+      "gloss": "entrega constante de tempo e esfor\u00e7o.",
       "synonyms": [
         "entrega",
         "compromisso"
       ],
-      "ipa": "/dɨ.di.kɐ.ˈsɐ̃w̃/",
+      "example": "Parab\u00e9ns pela sua dedica\u00e7\u00e3o!",
       "pos": "noun",
+      "ipa": "/d\u0268.di.k\u0250.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "dedicar",
         "dedicado",
-        "dedicatória"
+        "dedicat\u00f3ria"
       ]
     },
     {
@@ -2602,42 +2798,45 @@
         "ofertar",
         "ceder"
       ],
+      "example": "Eu fui doar sangue hoje.",
       "pos": "verb",
-      "ipa": "/doˈaɾ/",
+      "ipa": "/do\u02c8a\u027e/",
       "family": [
-        "doação",
+        "doa\u00e7\u00e3o",
         "doador",
         "doado"
       ]
     },
     {
       "word": "OBSERVADOR",
-      "gloss": "que presta atenção ao que vê.",
+      "gloss": "que presta aten\u00e7\u00e3o ao que v\u00ea.",
       "synonyms": [
         "espectador",
         "testemunha"
       ],
+      "example": "Ele \u00e9 muito observador.",
       "pos": "noun",
-      "ipa": "/ob.seɾ.vaˈdoɾ/",
+      "ipa": "/ob.se\u027e.va\u02c8do\u027e/",
       "family": [
         "observar",
-        "observação",
-        "observatório"
+        "observa\u00e7\u00e3o",
+        "observat\u00f3rio"
       ]
     },
     {
       "word": "ANALISTA",
-      "gloss": "profissional que examina dados ou situações.",
+      "gloss": "profissional que examina dados ou situa\u00e7\u00f5es.",
       "synonyms": [
         "especialista",
         "avaliador"
       ],
-      "ipa": "/ɐ.nɐ.ˈliʃ.tɐ/",
+      "example": "Sou analista de sistemas.",
       "pos": "noun",
+      "ipa": "/\u0250.n\u0250.\u02c8li\u0283.t\u0250/",
       "family": [
-        "análise",
+        "an\u00e1lise",
         "analisar",
-        "analítico"
+        "anal\u00edtico"
       ]
     },
     {
@@ -2647,28 +2846,30 @@
         "reprovar",
         "julgar"
       ],
-      "ipa": "/kõ.dɨ.ˈnaɾ/",
+      "example": "N\u00e3o devemos condenar o que n\u00e3o compreendemos.",
       "pos": "verb",
+      "ipa": "/k\u00f5.d\u0268.\u02c8na\u027e/",
       "family": [
-        "condenação",
+        "condena\u00e7\u00e3o",
         "condenado",
-        "condenável"
+        "conden\u00e1vel"
       ]
     },
     {
       "word": "TESE",
-      "gloss": "texto escrito para defender uma ideia ou opinião",
+      "gloss": "texto escrito para defender uma ideia ou opini\u00e3o",
       "synonyms": [
-        "dissertação",
+        "disserta\u00e7\u00e3o",
         "argumento"
       ],
+      "example": "Plagiou a sua tese.",
+      "pos": "noun",
+      "ipa": "/\u02c8t\u025b.zi/",
       "family": [
-        "antítese",
-        "hipótese",
-        "síntese"
-      ],
-      "ipa": "/ˈtɛ.zi/",
-      "pos": "noun"
+        "ant\u00edtese",
+        "hip\u00f3tese",
+        "s\u00edntese"
+      ]
     },
     {
       "word": "CESSAR",
@@ -2677,26 +2878,28 @@
         "parar",
         "terminar"
       ],
-      "ipa": "/sɨ.ˈsaɾ/",
+      "example": "Ore sem cessar.",
       "pos": "verb",
+      "ipa": "/s\u0268.\u02c8sa\u027e/",
       "family": [
-        "cessação",
+        "cessa\u00e7\u00e3o",
         "cessado"
       ]
     },
     {
-      "word": "ESPAÇOS",
-      "gloss": "áreas vazias entre objetos ou lugares",
+      "word": "ESPA\u00c7OS",
+      "gloss": "\u00e1reas vazias entre objetos ou lugares",
       "synonyms": [
         "vazios",
-        "áreas"
+        "\u00e1reas"
       ],
+      "example": "Preencha os espa\u00e7os em branco.",
       "pos": "noun",
-      "ipa": "/isˈpa.sus/",
+      "ipa": "/is\u02c8pa.sus/",
       "family": [
-        "espaço",
+        "espa\u00e7o",
         "espacial",
-        "espaçoso"
+        "espa\u00e7oso"
       ]
     },
     {
@@ -2706,8 +2909,9 @@
         "monarquia",
         "nobreza"
       ],
-      "ipa": "/Rjɐ.ˈle.zɐ/",
+      "example": "Nos tempos que correm, n\u00e3o h\u00e1 assim tantas vantagens em ser \"realeza\" como h\u00e1 cerca de um s\u00e9culo atr\u00e1s.",
       "pos": "noun",
+      "ipa": "/Rj\u0250.\u02c8le.z\u0250/",
       "family": [
         "real",
         "rei",
@@ -2720,8 +2924,9 @@
       "synonyms": [
         "afortunada"
       ],
+      "example": "Voc\u00ea \u00e9 sortuda.",
       "pos": "adjective",
-      "ipa": "/soɾˈtu.dɐ/",
+      "ipa": "/so\u027e\u02c8tu.d\u0250/",
       "family": [
         "sorte",
         "sortudo"
@@ -2734,8 +2939,9 @@
         "caixa",
         "bombo"
       ],
-      "ipa": "/tɐ̃.ˈboɾ/",
+      "example": "Isto \u00e9 um tambor.",
       "pos": "noun",
+      "ipa": "/t\u0250\u0303.\u02c8bo\u027e/",
       "family": [
         "tamborilar",
         "tamborim"
@@ -2746,13 +2952,14 @@
       "gloss": "ter algo como propriedade",
       "synonyms": [
         "ter",
-        "detém"
+        "det\u00e9m"
       ],
+      "example": "\u00c9 pr\u00e1tico possuir um carro.",
       "pos": "verb",
-      "ipa": "/poˈswej/",
+      "ipa": "/po\u02c8swej/",
       "family": [
         "posse",
-        "possuído"
+        "possu\u00eddo"
       ]
     },
     {
@@ -2760,39 +2967,42 @@
       "gloss": "expelir saliva pela boca",
       "synonyms": [
         "expelir",
-        "lançar"
+        "lan\u00e7ar"
       ],
+      "example": "Ele tem o h\u00e1bito de cuspir no ch\u00e3o.",
+      "pos": "verb",
+      "ipa": "/ku\u0283.\u02c8pi\u027e/",
       "family": [
         "cuspidouro"
-      ],
-      "ipa": "/kuʃ.ˈpiɾ/",
-      "pos": "verb"
+      ]
     },
     {
       "word": "COLOQUEM",
       "gloss": "que ponham algo em certo lugar",
       "synonyms": [],
+      "example": "Coloquem seus pijamas.",
       "pos": "verb",
-      "ipa": "/koˈlo.kẽj/",
+      "ipa": "/ko\u02c8lo.k\u1ebdj/",
       "family": [
         "colocar",
-        "colocação",
+        "coloca\u00e7\u00e3o",
         "colocado"
       ]
     },
     {
       "word": "LIXEIRA",
-      "gloss": "recipiente onde se deitam os resíduos",
+      "gloss": "recipiente onde se deitam os res\u00edduos",
       "synonyms": [
         "caixote",
         "recipiente"
       ],
-      "ipa": "/li.ˈʃɐj.ɾɐ/",
+      "example": "Coloque o lixo na lixeira agora.",
       "pos": "noun",
+      "ipa": "/li.\u02c8\u0283\u0250j.\u027e\u0250/",
       "family": [
         "lixo",
         "lixar",
-        "lixívia"
+        "lix\u00edvia"
       ]
     },
     {
@@ -2801,8 +3011,9 @@
       "synonyms": [
         "poesias"
       ],
+      "example": "Eu amo os poemas.",
       "pos": "noun",
-      "ipa": "/poˈẽ.mɐs/",
+      "ipa": "/po\u02c8\u1ebd.m\u0250s/",
       "family": [
         "poema",
         "poesia",
@@ -2816,37 +3027,40 @@
         "recordado",
         "evocado"
       ],
+      "example": "Voc\u00ea est\u00e1 lembrado?",
       "pos": "adjective",
-      "ipa": "/lẽˈbɾa.du/",
+      "ipa": "/l\u1ebd\u02c8b\u027ea.du/",
       "family": [
         "lembrar",
-        "lembrança",
+        "lembran\u00e7a",
         "deslembrado"
       ]
     },
     {
       "word": "FOGUETES",
-      "gloss": "objetos que sobem com chamas e explodem no céu",
+      "gloss": "objetos que sobem com chamas e explodem no c\u00e9u",
       "synonyms": [
-        "mísseis"
+        "m\u00edsseis"
       ],
+      "example": "Detesto foguetes.",
       "pos": "noun",
-      "ipa": "/foˈɡɛ.t͡ʃis/",
+      "ipa": "/fo\u02c8\u0261\u025b.t\u0361\u0283is/",
       "family": [
         "foguete",
         "foguetaria",
-        "foguetão"
+        "foguet\u00e3o"
       ]
     },
     {
-      "word": "TRADIÇÕES",
-      "gloss": "costumes passados de geração em geração",
+      "word": "TRADI\u00c7\u00d5ES",
+      "gloss": "costumes passados de gera\u00e7\u00e3o em gera\u00e7\u00e3o",
       "synonyms": [
         "costumes",
-        "hábitos"
+        "h\u00e1bitos"
       ],
+      "example": "H\u00e1 tradi\u00e7\u00f5es que n\u00e3o se podem perder.",
       "pos": "noun",
-      "ipa": "/tɾa.diˈsõj̃s/",
+      "ipa": "/t\u027ea.di\u02c8s\u00f5j\u0303s/",
       "family": [
         "tradicional",
         "traduzir",
@@ -2860,18 +3074,20 @@
         "molho",
         "condimento"
       ],
-      "ipa": "/kɛtˈ.ʃɐp/",
-      "pos": "noun"
+      "example": "Tem ketchup?",
+      "pos": "noun",
+      "ipa": "/k\u025bt\u02c8.\u0283\u0250p/"
     },
     {
       "word": "AVISE",
-      "gloss": "dar notícia ou informação a alguém",
+      "gloss": "dar not\u00edcia ou informa\u00e7\u00e3o a algu\u00e9m",
       "synonyms": [
         "informe",
         "notifique"
       ],
+      "example": "Avise a eles.",
       "pos": "verb",
-      "ipa": "/aˈvi.zi/",
+      "ipa": "/a\u02c8vi.zi/",
       "family": [
         "aviso",
         "avisar",
@@ -2880,68 +3096,73 @@
     },
     {
       "word": "DESORDEM",
-      "gloss": "falta de organização ou arrumação",
+      "gloss": "falta de organiza\u00e7\u00e3o ou arruma\u00e7\u00e3o",
       "synonyms": [
-        "bagunça",
-        "confusão"
+        "bagun\u00e7a",
+        "confus\u00e3o"
       ],
-      "ipa": "/dɨ.ˈzɔɾ.dɐ̃j̃/",
+      "example": "Seu quarto est\u00e1 em desordem.",
       "pos": "noun",
+      "ipa": "/d\u0268.\u02c8z\u0254\u027e.d\u0250\u0303j\u0303/",
       "family": [
         "desordenado",
         "ordenar"
       ]
     },
     {
-      "word": "CONFIÁVEL",
+      "word": "CONFI\u00c1VEL",
       "gloss": "em quem se pode acreditar",
       "synonyms": [
         "seguro",
         "fidedigno"
       ],
+      "example": "\u00c9 confi\u00e1vel?",
       "pos": "adjective",
-      "ipa": "/kõ.fiˈa.vew/",
+      "ipa": "/k\u00f5.fi\u02c8a.vew/",
       "family": [
         "confiar",
-        "confiança",
+        "confian\u00e7a",
         "desconfiar"
       ]
     },
     {
       "word": "EXAGERO",
-      "gloss": "fazer algo maior do que realmente é",
+      "gloss": "fazer algo maior do que realmente \u00e9",
       "synonyms": [
         "excesso",
         "hiperbole"
       ],
+      "example": "Que exagero!",
       "pos": "noun",
-      "ipa": "/e.zaˈʒɛ.ɾu/",
+      "ipa": "/e.za\u02c8\u0292\u025b.\u027eu/",
       "family": [
         "exagerar",
         "exagerado",
-        "exageração"
+        "exagera\u00e7\u00e3o"
       ]
     },
     {
       "word": "EXIGENTE",
-      "gloss": "que pede muito ou é difícil de satisfazer",
+      "gloss": "que pede muito ou \u00e9 dif\u00edcil de satisfazer",
       "synonyms": [
         "rigoroso",
         "demanding"
       ],
-      "ipa": "/i.zi.ˈʒẽ.tɨ/",
+      "example": "Sou exigente.",
       "pos": "adjective",
+      "ipa": "/i.zi.\u02c8\u0292\u1ebd.t\u0268/",
       "family": [
         "exigir",
-        "exigência"
+        "exig\u00eancia"
       ]
     },
     {
       "word": "LIVREMENTE",
-      "gloss": "sem restrições ou impedimentos",
+      "gloss": "sem restri\u00e7\u00f5es ou impedimentos",
       "synonyms": [],
-      "ipa": "/li.vɾɨ.ˈmẽ.tɨ/",
+      "example": "A \u00e1guia voa livremente.",
       "pos": "adverb",
+      "ipa": "/li.v\u027e\u0268.\u02c8m\u1ebd.t\u0268/",
       "family": [
         "livre",
         "liberdade",
@@ -2954,8 +3175,9 @@
       "synonyms": [
         "atingiste"
       ],
+      "example": "Acertaste!",
       "pos": "verb",
-      "ipa": "/a.seʁˈta.st͡ʃi/",
+      "ipa": "/a.se\u0281\u02c8ta.st\u0361\u0283i/",
       "family": [
         "acertar",
         "acerto"
@@ -2963,41 +3185,44 @@
     },
     {
       "word": "VITAMINAS",
-      "gloss": "substâncias necessárias para a saúde",
+      "gloss": "subst\u00e2ncias necess\u00e1rias para a sa\u00fade",
       "synonyms": [
         "suplementos"
       ],
+      "example": "Tomo vitaminas.",
       "pos": "noun",
-      "ipa": "/vi.taˈmi.nɐs/",
+      "ipa": "/vi.ta\u02c8mi.n\u0250s/",
       "family": [
         "vitamina",
-        "vitamínico",
+        "vitam\u00ednico",
         "avitaminose"
       ]
     },
     {
       "word": "SEPARADAS",
-      "gloss": "que estão afastadas uma da outra",
+      "gloss": "que est\u00e3o afastadas uma da outra",
       "synonyms": [
         "divididas",
         "distintas"
       ],
+      "example": "Eles dormem em camas separadas.",
       "pos": "adjective",
-      "ipa": "/se.paˈɾa.dɐs/",
+      "ipa": "/se.pa\u02c8\u027ea.d\u0250s/",
       "family": [
         "separar",
-        "separação",
+        "separa\u00e7\u00e3o",
         "separado"
       ]
     },
     {
       "word": "CURTAS",
-      "gloss": "de pequena extensão ou duração",
+      "gloss": "de pequena extens\u00e3o ou dura\u00e7\u00e3o",
       "synonyms": [
         "breves"
       ],
+      "example": "Ela gosta de saias curtas.",
       "pos": "adjective",
-      "ipa": "/ˈkuʁ.tɐs/",
+      "ipa": "/\u02c8ku\u0281.t\u0250s/",
       "family": [
         "curto",
         "encurtar",
@@ -3011,8 +3236,9 @@
         "encontres",
         "descubras"
       ],
+      "example": "Faz o que achares que \u00e9 necess\u00e1rio.",
       "pos": "verb",
-      "ipa": "/aˈʃa.ɾis/",
+      "ipa": "/a\u02c8\u0283a.\u027eis/",
       "family": [
         "achar",
         "achado",
@@ -3021,28 +3247,30 @@
     },
     {
       "word": "ALIMENTA",
-      "gloss": "dar comida a alguém ou algo",
+      "gloss": "dar comida a algu\u00e9m ou algo",
       "synonyms": [
         "nutre",
         "sustenta"
       ],
+      "example": "Voc\u00ea se alimenta bem?",
       "pos": "verb",
-      "ipa": "/a.liˈmẽ.tɐ/",
+      "ipa": "/a.li\u02c8m\u1ebd.t\u0250/",
       "family": [
         "alimento",
         "alimentar",
-        "alimentação"
+        "alimenta\u00e7\u00e3o"
       ]
     },
     {
       "word": "JOGUE",
-      "gloss": "lançar ou atirar algo",
+      "gloss": "lan\u00e7ar ou atirar algo",
       "synonyms": [
         "lance",
         "arremesse"
       ],
+      "example": "N\u00e3o o jogue!",
       "pos": "verb",
-      "ipa": "/ˈʒo.ɡi/",
+      "ipa": "/\u02c8\u0292o.\u0261i/",
       "family": [
         "jogar",
         "jogo",
@@ -3056,20 +3284,22 @@
         "fixar",
         "estabelecer"
       ],
+      "example": "Ele disse que as estradas ser\u00e3o regadas com \u00e1gua para assentar a poeira que \u00e9 um enorme contribuinte para o ar t\u00f3xico da cidade.",
+      "pos": "verb",
+      "ipa": "/\u0250.s\u1ebd.\u02c8ta\u027e/",
       "family": [
         "assentador"
-      ],
-      "ipa": "/ɐ.sẽ.ˈtaɾ/",
-      "pos": "verb"
+      ]
     },
     {
       "word": "CRESCIDA",
-      "gloss": "que já se desenvolveu bastante",
+      "gloss": "que j\u00e1 se desenvolveu bastante",
       "synonyms": [
         "desenvolvida"
       ],
+      "example": "A planta j\u00e1 estava crescida, pronta para ser transplantada para um vaso maior.",
       "pos": "adjective",
-      "ipa": "/kɾeʃˈsi.dɐ/",
+      "ipa": "/k\u027ee\u0283\u02c8si.d\u0250/",
       "family": [
         "crescer",
         "crescimento",
@@ -3083,8 +3313,9 @@
         "trechos",
         "bilhetes"
       ],
-      "ipa": "/pɐ.ˈsa.gẽs/",
+      "example": "Comprei as passagens.",
       "pos": "noun",
+      "ipa": "/p\u0250.\u02c8sa.g\u1ebds/",
       "family": [
         "passar",
         "passagem",
@@ -3093,28 +3324,30 @@
     },
     {
       "word": "MENCIONEI",
-      "gloss": "fazer referência a algo ou alguém",
+      "gloss": "fazer refer\u00eancia a algo ou algu\u00e9m",
       "synonyms": [
         "citei",
         "referi"
       ],
+      "example": "N\u00e3o mencionei nomes.",
       "pos": "verb",
-      "ipa": "/mẽ.si.oˈnej/",
+      "ipa": "/m\u1ebd.si.o\u02c8nej/",
       "family": [
         "mencionar",
-        "menção",
+        "men\u00e7\u00e3o",
         "mencionado"
       ]
     },
     {
       "word": "GANHAVA",
-      "gloss": "receber algo como prémio ou vitória",
+      "gloss": "receber algo como pr\u00e9mio ou vit\u00f3ria",
       "synonyms": [
         "vencia",
         "obtinha"
       ],
+      "example": "Naquela \u00e9poca eu n\u00e3o ganhava o suficiente para sustentar minha fam\u00edlia.",
       "pos": "verb",
-      "ipa": "/ɡɐ̃ˈɲa.vɐ/",
+      "ipa": "/\u0261\u0250\u0303\u02c8\u0272a.v\u0250/",
       "family": [
         "ganhar",
         "ganho",
@@ -3126,25 +3359,27 @@
       "gloss": "pessoas ou coisas aborrecidas",
       "synonyms": [
         "aborrecidos",
-        "monótonos"
+        "mon\u00f3tonos"
       ],
+      "example": "Voc\u00eas s\u00e3o t\u00e3o chatos.",
       "pos": "adjective",
-      "ipa": "/ˈʃa.tus/",
+      "ipa": "/\u02c8\u0283a.tus/",
       "family": [
         "chato",
         "chatear",
-        "chateação"
+        "chatea\u00e7\u00e3o"
       ]
     },
     {
       "word": "LEVARMOS",
-      "gloss": "transportar algo ou alguém",
+      "gloss": "transportar algo ou algu\u00e9m",
       "synonyms": [
         "levemos",
         "transportemos"
       ],
+      "example": "Para levarmos o plano a cabo, necessitaremos do apoio de todos.",
       "pos": "verb",
-      "ipa": "/leˈvaʁ.mus/",
+      "ipa": "/le\u02c8va\u0281.mus/",
       "family": [
         "levar",
         "levado",
@@ -3157,12 +3392,13 @@
       "synonyms": [
         "literata"
       ],
+      "example": "Sou escritora.",
       "pos": "noun",
-      "ipa": "/is.kɾiˈto.ɾɐ/",
+      "ipa": "/is.k\u027ei\u02c8to.\u027e\u0250/",
       "family": [
         "escrever",
         "escritor",
-        "escritório"
+        "escrit\u00f3rio"
       ]
     },
     {
@@ -3171,8 +3407,9 @@
       "synonyms": [
         "permanecias"
       ],
+      "example": "Ficavas horas na varanda a observar o p\u00f4r do sol.",
       "pos": "verb",
-      "ipa": "/fiˈka.vɐs/",
+      "ipa": "/fi\u02c8ka.v\u0250s/",
       "family": [
         "ficar",
         "ficado",
@@ -3180,16 +3417,17 @@
       ]
     },
     {
-      "word": "INJUSTIÇA",
+      "word": "INJUSTI\u00c7A",
       "gloss": "tratamento desigual ou sem equidade",
       "synonyms": [
         "iniquidade",
         "desigualdade"
       ],
+      "example": "Isso \u00e9 uma injusti\u00e7a!",
       "pos": "noun",
-      "ipa": "/ĩʒusˈtʃisɐ/",
+      "ipa": "/\u0129\u0292us\u02c8t\u0283is\u0250/",
       "family": [
-        "justiça",
+        "justi\u00e7a",
         "injusto",
         "injustamente"
       ]
@@ -3202,8 +3440,9 @@
         "posta",
         "arrumada"
       ],
+      "example": "A escada foi colocada contra a parede.",
       "pos": "adjective",
-      "ipa": "/koluˈkadɐ/",
+      "ipa": "/kolu\u02c8kad\u0250/",
       "family": [
         "colocar",
         "colocado",
@@ -3211,34 +3450,36 @@
       ]
     },
     {
-      "word": "SUGESTÕES",
+      "word": "SUGEST\u00d5ES",
       "gloss": "ideias ou propostas apresentadas",
       "synonyms": [
         "propostas",
         "ideias",
-        "indicações"
+        "indica\u00e7\u00f5es"
       ],
+      "example": "H\u00e1 sugest\u00f5es?",
       "pos": "noun",
-      "ipa": "/suʒesˈtõjs/",
+      "ipa": "/su\u0292es\u02c8t\u00f5js/",
       "family": [
         "sugerir",
-        "sugestão",
+        "sugest\u00e3o",
         "sugestivo"
       ]
     },
     {
       "word": "ALEIJADO",
-      "gloss": "pessoa com deficiência física",
+      "gloss": "pessoa com defici\u00eancia f\u00edsica",
       "synonyms": [
         "mutilado",
         "deficiente",
         "lesado"
       ],
-      "ipa": "/a.lej.ˈʒa.du/",
+      "example": "Ele ficou aleijado depois da queda.",
       "pos": "noun",
+      "ipa": "/a.lej.\u02c8\u0292a.du/",
       "family": [
         "aleijar",
-        "aleijão",
+        "aleij\u00e3o",
         "aleijamento"
       ]
     },
@@ -3250,8 +3491,9 @@
         "alertas",
         "sinais"
       ],
+      "example": "Todas as casas estavam balan\u00e7ando e alarmes tocavam em toda parte.",
       "pos": "noun",
-      "ipa": "/aˈlaɾmis/",
+      "ipa": "/a\u02c8la\u027emis/",
       "family": [
         "alarme",
         "alarmar",
@@ -3262,12 +3504,13 @@
       "word": "IDE",
       "gloss": "ir a algum lugar",
       "synonyms": [
-        "vá",
+        "v\u00e1",
         "parta",
         "siga"
       ],
+      "example": "Ide cedo amanh\u00e3 para evitar o tr\u00e2nsito na estrada.",
       "pos": "verb",
-      "ipa": "/ˈidɐ/",
+      "ipa": "/\u02c8id\u0250/",
       "family": [
         "ir",
         "ida",
@@ -3275,15 +3518,16 @@
       ]
     },
     {
-      "word": "ANDÁVAMOS",
-      "gloss": "caminhar ou mover-se a pé",
+      "word": "AND\u00c1VAMOS",
+      "gloss": "caminhar ou mover-se a p\u00e9",
       "synonyms": [
-        "caminhávamos",
-        "percorríamos",
-        "marchávamos"
+        "caminh\u00e1vamos",
+        "percorr\u00edamos",
+        "march\u00e1vamos"
       ],
+      "example": "And\u00e1vamos pela praia ao p\u00f4r do sol, sentindo a brisa fresca no rosto.",
       "pos": "verb",
-      "ipa": "/ɐ̃ˈdavɐmus/",
+      "ipa": "/\u0250\u0303\u02c8dav\u0250mus/",
       "family": [
         "andar",
         "andado",
@@ -3292,31 +3536,33 @@
     },
     {
       "word": "LEMBRES",
-      "gloss": "recordar algo ou alguém",
+      "gloss": "recordar algo ou algu\u00e9m",
       "synonyms": [
         "recordes",
         "memorizes",
         "retenhas"
       ],
+      "example": "Quero que te lembres disso.",
       "pos": "verb",
-      "ipa": "/ˈlẽbɾis/",
+      "ipa": "/\u02c8l\u1ebdb\u027eis/",
       "family": [
         "lembrar",
-        "lembrança",
+        "lembran\u00e7a",
         "lembrete"
       ]
     },
     {
-      "word": "SELECÇÃO",
+      "word": "SELEC\u00c7\u00c3O",
       "gloss": "escolha de pessoas ou coisas",
       "synonyms": [
         "triagem"
       ],
+      "example": "A selec\u00e7\u00e3o dos candidatos foi feita com base nas suas qualifica\u00e7\u00f5es e experi\u00eancia.",
       "pos": "noun",
-      "ipa": "/selɛkˈsɐ̃w/",
+      "ipa": "/sel\u025bk\u02c8s\u0250\u0303w/",
       "family": [
         "selecionar",
-        "seleção",
+        "sele\u00e7\u00e3o",
         "seletivo"
       ]
     },
@@ -3327,10 +3573,11 @@
         "motorista",
         "condutor"
       ],
-      "ipa": "/tak.ˈsis.ta/",
+      "example": "Sou taxista.",
       "pos": "noun",
+      "ipa": "/tak.\u02c8sis.ta/",
       "family": [
-        "táxi",
+        "t\u00e1xi",
         "taxiar"
       ]
     },
@@ -3342,8 +3589,9 @@
         "rodar",
         "voltar"
       ],
-      "ipa": "/Ru.ˈlaɾ/",
+      "example": "Vamos fazer a bola rolar.",
       "pos": "verb",
+      "ipa": "/Ru.\u02c8la\u027e/",
       "family": [
         "rola",
         "rolamento",
@@ -3352,14 +3600,15 @@
     },
     {
       "word": "TRIUNFO",
-      "gloss": "vitória ou sucesso grande",
+      "gloss": "vit\u00f3ria ou sucesso grande",
       "synonyms": [
-        "vitória",
-        "êxito",
+        "vit\u00f3ria",
+        "\u00eaxito",
         "sucesso"
       ],
-      "ipa": "/tɾi.ˈũ.fu/",
+      "example": "Parabenizo voc\u00ea pelo seu triunfo.",
       "pos": "noun",
+      "ipa": "/t\u027ei.\u02c8\u0169.fu/",
       "family": [
         "triunfar",
         "triunfante",
@@ -3367,19 +3616,20 @@
       ]
     },
     {
-      "word": "ALÉRGICA",
-      "gloss": "que tem reação a certas substâncias",
+      "word": "AL\u00c9RGICA",
+      "gloss": "que tem rea\u00e7\u00e3o a certas subst\u00e2ncias",
       "synonyms": [
-        "sensível",
+        "sens\u00edvel",
         "intolerante",
         "reativa"
       ],
+      "example": "Sou al\u00e9rgica ao p\u00f3.",
       "pos": "adjective",
-      "ipa": "/aˈlɛɾʒikɐ/",
+      "ipa": "/a\u02c8l\u025b\u027e\u0292ik\u0250/",
       "family": [
         "alergia",
-        "alérgeno",
-        "alergênico"
+        "al\u00e9rgeno",
+        "alerg\u00eanico"
       ]
     },
     {
@@ -3387,11 +3637,12 @@
       "gloss": "sofrimento intenso ou dor forte",
       "synonyms": [
         "sofrimento",
-        "angústia",
+        "ang\u00fastia",
         "dor"
       ],
+      "example": "O tratamento prolongou a agonia.",
       "pos": "noun",
-      "ipa": "/ɐˈɡoniɐ/",
+      "ipa": "/\u0250\u02c8\u0261oni\u0250/",
       "family": [
         "agonizar",
         "agonizante",
@@ -3400,14 +3651,15 @@
     },
     {
       "word": "AJUDANDO",
-      "gloss": "prestando apoio a alguém",
+      "gloss": "prestando apoio a algu\u00e9m",
       "synonyms": [
         "auxiliando",
         "socorrendo",
         "colaborando"
       ],
+      "example": "Eu estava ajudando.",
       "pos": "verb",
-      "ipa": "/aʒuˈdɐ̃du/",
+      "ipa": "/a\u0292u\u02c8d\u0250\u0303du/",
       "family": [
         "ajudar",
         "ajuda",
@@ -3415,15 +3667,16 @@
       ]
     },
     {
-      "word": "EQUAÇÃO",
+      "word": "EQUA\u00c7\u00c3O",
       "gloss": "uma conta com sinal de igual",
       "synonyms": [
-        "fórmula",
-        "expressão",
-        "cálculo"
+        "f\u00f3rmula",
+        "express\u00e3o",
+        "c\u00e1lculo"
       ],
-      "ipa": "/i.kwɐ.ˈsɐ̃w̃/",
+      "example": "Isso \u00e9 mesmo uma equa\u00e7\u00e3o?",
       "pos": "noun",
+      "ipa": "/i.kw\u0250.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "igual",
         "equacionar"
@@ -3436,24 +3689,26 @@
         "empreendedor",
         "ousado"
       ],
-      "ipa": "/ɐ̃.bi.ˈsjo.zu/",
+      "example": "Voc\u00ea \u00e9 ambicioso.",
       "pos": "adjective",
+      "ipa": "/\u0250\u0303.bi.\u02c8sjo.zu/",
       "family": [
-        "ambição",
+        "ambi\u00e7\u00e3o",
         "ambiciosamente",
         "ambiciosidade"
       ]
     },
     {
       "word": "MERECEMOS",
-      "gloss": "ter direito a algo por mérito",
+      "gloss": "ter direito a algo por m\u00e9rito",
       "synonyms": [
         "fazemos jus",
         "temos direito",
         "somos dignos"
       ],
+      "example": "\u00c9 o que n\u00f3s merecemos.",
       "pos": "verb",
-      "ipa": "/meɾeˈsemuʃ/",
+      "ipa": "/me\u027ee\u02c8semu\u0283/",
       "family": [
         "merecer",
         "merecimento",
@@ -3464,12 +3719,13 @@
       "word": "CHICOTE",
       "gloss": "corda usada para bater",
       "synonyms": [
-        "açoite",
+        "a\u00e7oite",
         "flagelo",
-        "látigo"
+        "l\u00e1tigo"
       ],
-      "ipa": "/ʃi.ˈkɔ.tɨ/",
+      "example": "\u00c9 poss\u00edvel motivar as pessoas com \"doces e o chicote\"?",
       "pos": "noun",
+      "ipa": "/\u0283i.\u02c8k\u0254.t\u0268/",
       "family": [
         "chicotear",
         "chicoteada",
@@ -3478,24 +3734,26 @@
     },
     {
       "word": "RETAGUARDA",
-      "gloss": "parte de trás de um grupo ou exército",
+      "gloss": "parte de tr\u00e1s de um grupo ou ex\u00e9rcito",
       "synonyms": [
         "traseira",
         "cauda"
       ],
-      "ipa": "/Rɛ.tɐ.ˈɡwaɾ.dɐ/",
-      "pos": "noun"
+      "example": "Vigie a retaguarda.",
+      "pos": "noun",
+      "ipa": "/R\u025b.t\u0250.\u02c8\u0261wa\u027e.d\u0250/"
     },
     {
       "word": "OLHAMOS",
-      "gloss": "observamos algo com atenção",
+      "gloss": "observamos algo com aten\u00e7\u00e3o",
       "synonyms": [
         "vemos",
         "contemplamos",
         "observamos"
       ],
+      "example": "Olhamos uma para a outra.",
       "pos": "verb",
-      "ipa": "/oˈʎɐ̃mus/",
+      "ipa": "/o\u02c8\u028e\u0250\u0303mus/",
       "family": [
         "olhar",
         "olhada",
@@ -3506,27 +3764,29 @@
       "word": "ATINGIDOS",
       "gloss": "recebemos um impacto direto",
       "synonyms": [
-        "alcançados",
+        "alcan\u00e7ados",
         "acertados",
         "feridos"
       ],
+      "example": "A porta e o muro foram atingidos pelo raio.",
       "pos": "adjective",
-      "ipa": "/ɐtĩˈʒiduʃ/",
+      "ipa": "/\u0250t\u0129\u02c8\u0292idu\u0283/",
       "family": [
         "atingir",
         "atingimento",
-        "atingível"
+        "ating\u00edvel"
       ]
     },
     {
       "word": "DESGOSTO",
-      "gloss": "sentimento de insatisfação ou repulsa",
+      "gloss": "sentimento de insatisfa\u00e7\u00e3o ou repulsa",
       "synonyms": [
         "desprazer",
         "repulsa"
       ],
-      "ipa": "/dɨʒ.ˈɡoʃ.tu/",
+      "example": "N\u00e3o h\u00e1 gosto sem desgosto.",
       "pos": "noun",
+      "ipa": "/d\u0268\u0292.\u02c8\u0261o\u0283.tu/",
       "family": [
         "gosto",
         "desgostar",
@@ -3540,8 +3800,9 @@
         "desligou",
         "cancelou"
       ],
+      "example": "Ele apagou.",
       "pos": "verb",
-      "ipa": "/apɐˈɡo/",
+      "ipa": "/ap\u0250\u02c8\u0261o/",
       "family": [
         "apagar",
         "apagamento",
@@ -3550,12 +3811,13 @@
     },
     {
       "word": "IMPULSOS",
-      "gloss": "forças que levam a agir rapidamente",
+      "gloss": "for\u00e7as que levam a agir rapidamente",
       "synonyms": [
-        "estímulos"
+        "est\u00edmulos"
       ],
+      "example": "Contenha seus impulsos.",
       "pos": "noun",
-      "ipa": "/ĩˈpuwsuʃ/",
+      "ipa": "/\u0129\u02c8puwsu\u0283/",
       "family": [
         "impulso",
         "impulsionar",
@@ -3566,53 +3828,58 @@
       "word": "DEZOITO",
       "gloss": "a idade em que se fica maior de idade em Portugal",
       "synonyms": [],
-      "ipa": "/dɨ.ˈzɔj.tu/",
-      "pos": "noun"
+      "example": "Tenho dezoito anos.",
+      "pos": "noun",
+      "ipa": "/d\u0268.\u02c8z\u0254j.tu/"
     },
     {
       "word": "COMAS",
       "gloss": "que tu ingiras alimentos",
       "synonyms": [],
+      "example": "Deixa a tua comida arrefecer um pouco; n\u00e3o a comas enquanto estiver quente.",
       "pos": "verb",
-      "ipa": "/ˈkomɐʃ/",
+      "ipa": "/\u02c8kom\u0250\u0283/",
       "family": [
         "comer",
         "comida"
       ]
     },
     {
-      "word": "PERÍCIA",
-      "gloss": "grande habilidade e experiência numa tarefa",
+      "word": "PER\u00cdCIA",
+      "gloss": "grande habilidade e experi\u00eancia numa tarefa",
+      "example": "O cirurgi\u00e3o demonstrou tamanha per\u00edcia que finalizou a opera\u00e7\u00e3o em menos de uma hora.",
+      "pos": "noun",
+      "ipa": "/p\u0268.\u02c8\u027ei.sj\u0250/",
       "family": [
         "pericial"
-      ],
-      "ipa": "/pɨ.ˈɾi.sjɐ/",
-      "pos": "noun"
+      ]
     },
     {
       "word": "REJEITADO",
-      "gloss": "foi recusado ou não aceito",
+      "gloss": "foi recusado ou n\u00e3o aceito",
       "synonyms": [
         "recusado",
         "negado",
         "desprezado"
       ],
+      "example": "D\u00f3i ser rejeitado.",
       "pos": "adjective",
-      "ipa": "/ʁeʒejˈtadu/",
+      "ipa": "/\u0281e\u0292ej\u02c8tadu/",
       "family": [
         "rejeitar",
-        "rejeição"
+        "rejei\u00e7\u00e3o"
       ]
     },
     {
       "word": "MOSTEIRO",
-      "gloss": "edifício onde vivem monges em comunidade",
+      "gloss": "edif\u00edcio onde vivem monges em comunidade",
       "synonyms": [
         "convento",
         "abadia"
       ],
-      "ipa": "/muʃ.ˈtɐj.ɾu/",
+      "example": "O mundo, caro anjinho, n\u00e3o \u00e9 um mosteiro.",
       "pos": "noun",
+      "ipa": "/mu\u0283.\u02c8t\u0250j.\u027eu/",
       "family": [
         "monge",
         "monasticismo"
@@ -3620,24 +3887,26 @@
     },
     {
       "word": "SUDESTE",
-      "gloss": "direção entre sul e leste",
-      "ipa": "/su.ˈdɛʃ.tɨ/",
+      "gloss": "dire\u00e7\u00e3o entre sul e leste",
+      "example": "Logo o vento veio do sudeste.",
       "pos": "noun",
+      "ipa": "/su.\u02c8d\u025b\u0283.t\u0268/",
       "family": [
         "sul",
         "leste"
       ]
     },
     {
-      "word": "CONEXÃO",
-      "gloss": "ligação entre dois ou mais pontos",
+      "word": "CONEX\u00c3O",
+      "gloss": "liga\u00e7\u00e3o entre dois ou mais pontos",
       "synonyms": [
-        "ligação",
+        "liga\u00e7\u00e3o",
         "elo",
         "nexo"
       ],
+      "example": "A conex\u00e3o caiu.",
       "pos": "noun",
-      "ipa": "/kuˈneksɐ̃w/",
+      "ipa": "/ku\u02c8neks\u0250\u0303w/",
       "family": [
         "conectar",
         "conexo"
@@ -3645,17 +3914,18 @@
     },
     {
       "word": "LIGAMOS",
-      "gloss": "estabelecemos uma conexão ou contacto",
+      "gloss": "estabelecemos uma conex\u00e3o ou contacto",
       "synonyms": [
         "conectamos",
         "unimos",
         "juntamos"
       ],
+      "example": "N\u00f3s ligamos.",
       "pos": "verb",
-      "ipa": "/liˈɡɐ̃muʃ/",
+      "ipa": "/li\u02c8\u0261\u0250\u0303mu\u0283/",
       "family": [
         "ligar",
-        "ligação"
+        "liga\u00e7\u00e3o"
       ]
     },
     {
@@ -3665,8 +3935,9 @@
         "voante",
         "alado"
       ],
-      "ipa": "/vwɐ.ˈdoɾ/",
+      "example": "Carro voador.",
       "pos": "adjective",
+      "ipa": "/vw\u0250.\u02c8do\u027e/",
       "family": [
         "voar",
         "voo"
@@ -3675,8 +3946,9 @@
     {
       "word": "VISITOU",
       "gloss": "esteve em um lugar para conhecer",
+      "example": "Ele nos visitou.",
       "pos": "verb",
-      "ipa": "/viˈzitou/",
+      "ipa": "/vi\u02c8zitou/",
       "family": [
         "visitar",
         "visita"
@@ -3684,19 +3956,21 @@
     },
     {
       "word": "CONSULADO",
-      "gloss": "escritório oficial que protege cidadãos no exterior",
-      "ipa": "/kõ.suˈla.du/",
+      "gloss": "escrit\u00f3rio oficial que protege cidad\u00e3os no exterior",
+      "example": "Trabalho no consulado.",
       "pos": "noun",
+      "ipa": "/k\u00f5.su\u02c8la.du/",
       "family": [
-        "cônsul",
+        "c\u00f4nsul",
         "consular"
       ]
     },
     {
       "word": "DISPAREI",
       "gloss": "dei um tiro",
+      "example": "Eu apontei para o tigre e disparei, mas eu o perdi.",
       "pos": "verb",
-      "ipa": "/dʃiʃpɐˈɾɛj/",
+      "ipa": "/d\u0283i\u0283p\u0250\u02c8\u027e\u025bj/",
       "family": [
         "disparar",
         "tiro"
@@ -3705,8 +3979,9 @@
     {
       "word": "IMPORTES",
       "gloss": "quantias de dinheiro a pagar",
+      "example": "Os importes das faturas devem ser pagos at\u00e9 ao dia 15 de cada m\u00eas.",
       "pos": "noun",
-      "ipa": "/ĩˈpoɾtɨʃ/",
+      "ipa": "/\u0129\u02c8po\u027et\u0268\u0283/",
       "family": [
         "importar",
         "importe"
@@ -3714,16 +3989,17 @@
     },
     {
       "word": "COMOVENTE",
-      "gloss": "que desperta emoção profunda",
+      "gloss": "que desperta emo\u00e7\u00e3o profunda",
       "synonyms": [
         "emocionante",
         "tocante",
-        "sensível"
+        "sens\u00edvel"
       ],
+      "example": "Que hist\u00f3ria comovente!",
       "pos": "adjective",
-      "ipa": "/komuˈvẽtɨ/",
+      "ipa": "/komu\u02c8v\u1ebdt\u0268/",
       "family": [
-        "comoção",
+        "como\u00e7\u00e3o",
         "emocionar"
       ]
     },
@@ -3734,22 +4010,24 @@
         "rurais",
         "lavradores"
       ],
+      "example": "Os camponeses pobres comiam batatas.",
       "pos": "noun",
-      "ipa": "/kɐ̃puˈnezɨʃ/",
+      "ipa": "/k\u0250\u0303pu\u02c8nez\u0268\u0283/",
       "family": [
         "campo",
-        "camponês"
+        "campon\u00eas"
       ]
     },
     {
       "word": "APLAUSO",
-      "gloss": "batida de palmas para demonstrar aprovação",
+      "gloss": "batida de palmas para demonstrar aprova\u00e7\u00e3o",
       "synonyms": [
         "palmas",
-        "aclamação"
+        "aclama\u00e7\u00e3o"
       ],
-      "ipa": "/ɐ.ˈplaw.zu/",
+      "example": "Ele s\u00f3 quer aplauso, louvor e elogios.",
       "pos": "noun",
+      "ipa": "/\u0250.\u02c8plaw.zu/",
       "family": [
         "aplaudir",
         "palmas"
@@ -3758,8 +4036,9 @@
     {
       "word": "PERDERIA",
       "gloss": "deixaria de ter ou de ganhar",
+      "example": "Eu n\u00e3o perderia por nada.",
       "pos": "verb",
-      "ipa": "/pɨɾdɨˈɾiɐ/",
+      "ipa": "/p\u0268\u027ed\u0268\u02c8\u027ei\u0250/",
       "family": [
         "perder",
         "perda"
@@ -3772,33 +4051,36 @@
         "bravos",
         "destemidos"
       ],
+      "example": "A sorte favorece os corajosos.",
       "pos": "adjective",
-      "ipa": "/kuɾɐˈʒozuʃ/",
+      "ipa": "/ku\u027e\u0250\u02c8\u0292ozu\u0283/",
       "family": [
         "coragem",
         "corajoso"
       ]
     },
     {
-      "word": "FORÇADOS",
+      "word": "FOR\u00c7ADOS",
       "gloss": "obrigados a fazer algo contra a vontade",
       "synonyms": [
         "obrigados",
         "coagidos",
         "impostos"
       ],
+      "example": "N\u00f3s fomos for\u00e7ados a trabalhar duro.",
       "pos": "adjective",
-      "ipa": "/foɾˈsaduʃ/",
+      "ipa": "/fo\u027e\u02c8sadu\u0283/",
       "family": [
-        "forçar",
-        "forçado"
+        "for\u00e7ar",
+        "for\u00e7ado"
       ]
     },
     {
       "word": "ASSINEI",
       "gloss": "pus o meu nome escrito num documento",
+      "example": "Eu assinei o cheque.",
       "pos": "verb",
-      "ipa": "/ɐsiˈnɐj/",
+      "ipa": "/\u0250si\u02c8n\u0250j/",
       "family": [
         "assinatura",
         "assinar"
@@ -3806,9 +4088,10 @@
     },
     {
       "word": "CONTARAM",
-      "gloss": "narraram uma história ou fato",
+      "gloss": "narraram uma hist\u00f3ria ou fato",
+      "example": "N\u00e3o me contaram.",
       "pos": "verb",
-      "ipa": "/kõˈtaɾɐ̃w/",
+      "ipa": "/k\u00f5\u02c8ta\u027e\u0250\u0303w/",
       "family": [
         "contar",
         "conto"
@@ -3817,18 +4100,20 @@
     {
       "word": "CRIANDO",
       "gloss": "dando origem a algo novo",
+      "example": "Estou criando um site para mim.",
       "pos": "verb",
-      "ipa": "/kɾiˈɐ̃du/",
+      "ipa": "/k\u027ei\u02c8\u0250\u0303du/",
       "family": [
         "criar",
-        "criação"
+        "cria\u00e7\u00e3o"
       ]
     },
     {
       "word": "RETOMAR",
       "gloss": "voltar a ter ou a fazer",
+      "example": "Pensava que seria boa ideia retomar contato com a cultura e hist\u00f3ria japonesas.",
       "pos": "verb",
-      "ipa": "/ʁɨtuˈmaɾ/",
+      "ipa": "/\u0281\u0268tu\u02c8ma\u027e/",
       "family": [
         "tomar",
         "retomada"
@@ -3836,45 +4121,50 @@
     },
     {
       "word": "RECORDA",
-      "gloss": "traz à memória algo passado",
+      "gloss": "traz \u00e0 mem\u00f3ria algo passado",
+      "example": "Ningu\u00e9m recorda.",
       "pos": "verb",
-      "ipa": "/ʁɨˈkoɾdɐ/",
+      "ipa": "/\u0281\u0268\u02c8ko\u027ed\u0250/",
       "family": [
         "recordar",
-        "recordação"
+        "recorda\u00e7\u00e3o"
       ]
     },
     {
       "word": "ESCOTILHA",
-      "gloss": "abertura com tampa no convés de um navio",
-      "ipa": "/iʃ.ku.ˈti.ʎɐ/",
-      "pos": "noun"
+      "gloss": "abertura com tampa no conv\u00e9s de um navio",
+      "example": "Feche a escotilha.",
+      "pos": "noun",
+      "ipa": "/i\u0283.ku.\u02c8ti.\u028e\u0250/"
     },
     {
       "word": "DONZELA",
       "gloss": "jovem solteira",
-      "ipa": "/dõ.ˈzɛ.lɐ/",
+      "example": "A loura donzela tinha feito um pacto com o sol e a lua.",
       "pos": "noun",
+      "ipa": "/d\u00f5.\u02c8z\u025b.l\u0250/",
       "family": [
         "donzel"
       ]
     },
     {
-      "word": "COLEÇÃO",
-      "gloss": "conjunto de objetos reunidos por critério",
-      "ipa": "/ko.le.ˈsɐ͂w/",
+      "word": "COLE\u00c7\u00c3O",
+      "gloss": "conjunto de objetos reunidos por crit\u00e9rio",
+      "example": "Que cole\u00e7\u00e3o!",
       "pos": "noun",
+      "ipa": "/ko.le.\u02c8s\u0250\u0342w/",
       "family": [
         "colecionar",
         "colecionador",
-        "coletânea"
+        "colet\u00e2nea"
       ]
     },
     {
       "word": "ARRANJARAM",
       "gloss": "conseguiram ou organizaram algo",
+      "example": "Onde \u00e9 que eles arranjaram o dinheiro?",
       "pos": "verb",
-      "ipa": "/a.ʁɐ̃ˈʒa.ɾɐ̃w̃/",
+      "ipa": "/a.\u0281\u0250\u0303\u02c8\u0292a.\u027e\u0250\u0303w\u0303/",
       "family": [
         "arranjar",
         "arranjo",
@@ -3884,8 +4174,9 @@
     {
       "word": "PENSAREM",
       "gloss": "reflitam sobre um assunto",
+      "example": "N\u00e3o \u00e9 preciso pensarem nisso agora.",
       "pos": "verb",
-      "ipa": "/pẽˈsa.ɾẽj̃/",
+      "ipa": "/p\u1ebd\u02c8sa.\u027e\u1ebdj\u0303/",
       "family": [
         "pensar",
         "pensamento",
@@ -3894,9 +4185,10 @@
     },
     {
       "word": "EXTERNA",
-      "gloss": "que pertence ou está do lado de fora",
+      "gloss": "que pertence ou est\u00e1 do lado de fora",
+      "example": "As pessoas precisam de alguma forma de atividade externa, porque internamente s\u00e3o inativas.",
       "pos": "adjective",
-      "ipa": "/esˈtɛʁ.nɐ/",
+      "ipa": "/es\u02c8t\u025b\u0281.n\u0250/",
       "family": [
         "externo",
         "exterior",
@@ -3906,8 +4198,9 @@
     {
       "word": "TELEFONADO",
       "gloss": "feito uma chamada",
+      "example": "Ele tem telefonado muito.",
       "pos": "adjective",
-      "ipa": "/te.le.foˈna.du/",
+      "ipa": "/te.le.fo\u02c8na.du/",
       "family": [
         "telefonar",
         "telefone",
@@ -3917,8 +4210,9 @@
     {
       "word": "AVARIOU",
       "gloss": "deixou de funcionar por defeito",
+      "example": "O rel\u00f3gio avariou.",
       "pos": "verb",
-      "ipa": "/a.va.ɾiˈo/",
+      "ipa": "/a.va.\u027ei\u02c8o/",
       "family": [
         "avariar",
         "avaria",
@@ -3928,17 +4222,19 @@
     {
       "word": "DEVOLVA",
       "gloss": "entregue de volta o que recebeu",
+      "example": "Devolva-o!",
       "pos": "verb",
-      "ipa": "/deˈvoɫ.vɐ/",
+      "ipa": "/de\u02c8vo\u026b.v\u0250/",
       "family": [
         "devolver",
-        "devolução",
+        "devolu\u00e7\u00e3o",
         "devolvido"
       ]
     },
     {
       "word": "LIMPOU",
       "gloss": "removeu sujeira ou desordem",
+      "example": "Quem limpou?",
       "pos": "verb",
       "family": [
         "limpar",
@@ -3948,36 +4244,39 @@
     },
     {
       "word": "LEMBREI",
-      "gloss": "trouxe algo à memória",
+      "gloss": "trouxe algo \u00e0 mem\u00f3ria",
+      "example": "Me lembrei.",
       "pos": "verb",
-      "ipa": "/lẽˈbɾej/",
+      "ipa": "/l\u1ebd\u02c8b\u027eej/",
       "family": [
         "lembrar",
-        "lembrança",
+        "lembran\u00e7a",
         "lembrete"
       ]
     },
     {
-      "word": "MACARRÃO",
-      "gloss": "massa alimentícia em forma de tubos",
+      "word": "MACARR\u00c3O",
+      "gloss": "massa aliment\u00edcia em forma de tubos",
       "synonyms": [
         "espaguete",
         "massa"
       ],
-      "ipa": "/mɐ.kɐ.ˈRɐ̃w̃/",
+      "example": "Eu fiz macarr\u00e3o.",
       "pos": "noun",
+      "ipa": "/m\u0250.k\u0250.\u02c8R\u0250\u0303w\u0303/",
       "family": [
         "macarronada",
-        "macarrônico",
+        "macarr\u00f4nico",
         "macarronete"
       ]
     },
     {
-      "word": "CONHEÇAM",
-      "gloss": "que saibam quem é ou como é algo",
+      "word": "CONHE\u00c7AM",
+      "gloss": "que saibam quem \u00e9 ou como \u00e9 algo",
       "synonyms": [],
+      "example": "Quero que conhe\u00e7am meu primo.",
       "pos": "verb",
-      "ipa": "/koˈɲe.sɐ̃w̃/",
+      "ipa": "/ko\u02c8\u0272e.s\u0250\u0303w\u0303/",
       "family": [
         "conhecer",
         "conhecimento",
@@ -3986,42 +4285,45 @@
     },
     {
       "word": "TRADUZIR",
-      "gloss": "passar texto de uma língua para outra",
+      "gloss": "passar texto de uma l\u00edngua para outra",
       "synonyms": [
         "verter",
         "interpretar"
       ],
-      "ipa": "/tɾɐ.du.ˈziɾ/",
+      "example": "Podes traduzir?",
       "pos": "verb",
+      "ipa": "/t\u027e\u0250.du.\u02c8zi\u027e/",
       "family": [
-        "tradução",
+        "tradu\u00e7\u00e3o",
         "tradutor",
-        "traduzível"
+        "traduz\u00edvel"
       ]
     },
     {
-      "word": "SERVIRÁ",
-      "gloss": "será útil",
+      "word": "SERVIR\u00c1",
+      "gloss": "ser\u00e1 \u00fatil",
       "synonyms": [
-        "atenderá",
-        "ajudará"
+        "atender\u00e1",
+        "ajudar\u00e1"
       ],
+      "example": "Este livro servir\u00e1.",
       "pos": "verb",
-      "ipa": "/seɾ.viˈɾa/",
+      "ipa": "/se\u027e.vi\u02c8\u027ea/",
       "family": [
         "servir",
-        "serviço",
+        "servi\u00e7o",
         "servente"
       ]
     },
     {
       "word": "ATENDA",
-      "gloss": "preste assistência ou responda",
+      "gloss": "preste assist\u00eancia ou responda",
       "synonyms": [
         "auxilie"
       ],
+      "example": "Atenda o telefone.",
       "pos": "verb",
-      "ipa": "/aˈtẽ.dɐ/",
+      "ipa": "/a\u02c8t\u1ebd.d\u0250/",
       "family": [
         "atender",
         "atendimento",
@@ -4035,6 +4337,7 @@
         "denotou",
         "representou"
       ],
+      "example": "O sil\u00eancio dela significou uma rejei\u00e7\u00e3o clara ao convite.",
       "pos": "verb",
       "family": [
         "significar",
@@ -4044,13 +4347,14 @@
     },
     {
       "word": "MEDALHAS",
-      "gloss": "peças metálicas concedidas como prêmio",
+      "gloss": "pe\u00e7as met\u00e1licas concedidas como pr\u00eamio",
       "synonyms": [
-        "condecorações",
-        "distinções"
+        "condecora\u00e7\u00f5es",
+        "distin\u00e7\u00f5es"
       ],
+      "example": "Medalhas possuem dois lados.",
       "pos": "noun",
-      "ipa": "/meˈda.ʎɐs/",
+      "ipa": "/me\u02c8da.\u028e\u0250s/",
       "family": [
         "medalha",
         "medalheiro",
@@ -4064,10 +4368,11 @@
         "agradecidos",
         "reconhecidos"
       ],
+      "example": "Eles eram gratos.",
       "pos": "adjective",
-      "ipa": "/ˈɡɾa.tus/",
+      "ipa": "/\u02c8\u0261\u027ea.tus/",
       "family": [
-        "gratidão",
+        "gratid\u00e3o",
         "grato"
       ]
     },
@@ -4078,12 +4383,13 @@
         "renunciar",
         "desistir"
       ],
-      "ipa": "/ɐb.di.ˈkaɾ/",
+      "example": "O prefeito anunciar\u00e1 dentro de pouco tempo sua decis\u00e3o de abdicar.",
       "pos": "verb",
+      "ipa": "/\u0250b.di.\u02c8ka\u027e/",
       "family": [
-        "abdicação",
+        "abdica\u00e7\u00e3o",
         "abdicante",
-        "abdicável"
+        "abdic\u00e1vel"
       ]
     },
     {
@@ -4093,8 +4399,9 @@
         "despertaste",
         "levantaste"
       ],
+      "example": "Acordaste cedo para aproveitar o nascer do sol na praia.",
       "pos": "verb",
-      "ipa": "/a.koʁˈdaʃ.tʃi/",
+      "ipa": "/a.ko\u0281\u02c8da\u0283.t\u0283i/",
       "family": [
         "acordar",
         "acordado",
@@ -4108,26 +4415,28 @@
         "presos",
         "retidos"
       ],
+      "example": "Por que eles n\u00e3o podem ser detidos?",
       "pos": "noun",
-      "ipa": "/deˈtʃi.dus/",
+      "ipa": "/de\u02c8t\u0283i.dus/",
       "family": [
         "deter",
-        "detenção",
+        "deten\u00e7\u00e3o",
         "detido"
       ]
     },
     {
       "word": "ESPERAVAM",
-      "gloss": "aguardavam a chegada ou ocorrência",
+      "gloss": "aguardavam a chegada ou ocorr\u00eancia",
       "synonyms": [
         "aguardavam",
         "contavam"
       ],
+      "example": "Que esperavam voc\u00eas?",
       "pos": "verb",
-      "ipa": "/es.peˈɾa.vɐ̃w̃/",
+      "ipa": "/es.pe\u02c8\u027ea.v\u0250\u0303w\u0303/",
       "family": [
         "esperar",
-        "esperança",
+        "esperan\u00e7a",
         "esperado"
       ]
     },
@@ -4135,37 +4444,40 @@
       "word": "VISSES",
       "gloss": "observasses com os olhos",
       "synonyms": [],
-      "ipa": "/ˈvi.sis/",
+      "example": "Se n\u00e3o visses o p\u00f4r do sol daquela montanha, perderias um espet\u00e1culo incr\u00edvel.",
+      "ipa": "/\u02c8vi.sis/",
       "family": [
         "ver",
-        "visão",
-        "visível"
+        "vis\u00e3o",
+        "vis\u00edvel"
       ]
     },
     {
       "word": "ABISMO",
-      "gloss": "grande depressão profunda no terreno",
+      "gloss": "grande depress\u00e3o profunda no terreno",
       "synonyms": [
-        "precipício",
+        "precip\u00edcio",
         "despenhadeiro"
       ],
+      "example": "Ela caiu em um abismo.",
+      "pos": "noun",
+      "ipa": "/\u0250.\u02c8bi\u0292.mu/",
       "family": [
         "abismado",
         "abismador",
         "abismal"
-      ],
-      "ipa": "/ɐ.ˈbiʒ.mu/",
-      "pos": "noun"
+      ]
     },
     {
       "word": "JURADOS",
       "gloss": "pessoas que julgam em tribunal popular",
       "synonyms": [
-        "juízes",
-        "árbitros"
+        "ju\u00edzes",
+        "\u00e1rbitros"
       ],
+      "example": "Os jurados ouviram cuidadosamente o encarregado.",
       "pos": "noun",
-      "ipa": "/ʒuˈɾa.dus/",
+      "ipa": "/\u0292u\u02c8\u027ea.dus/",
       "family": [
         "jurar",
         "juramento",
@@ -4179,8 +4491,9 @@
         "biscoito",
         "cracker"
       ],
-      "ipa": "/bu.ˈla.ʃɐ/",
+      "example": "Quer uma bolacha?",
       "pos": "noun",
+      "ipa": "/bu.\u02c8la.\u0283\u0250/",
       "family": [
         "bolo",
         "bolacharia"
@@ -4190,14 +4503,15 @@
       "word": "ACUSADOS",
       "gloss": "pessoas contra quem se apresenta queixa",
       "synonyms": [
-        "réus",
+        "r\u00e9us",
         "inculpados"
       ],
+      "example": "Voc\u00eas foram acusados de roubo.",
       "pos": "noun",
-      "ipa": "/a.kuˈza.dus/",
+      "ipa": "/a.ku\u02c8za.dus/",
       "family": [
         "acusar",
-        "acusação",
+        "acusa\u00e7\u00e3o",
         "acusador"
       ]
     },
@@ -4208,10 +4522,11 @@
         "citado",
         "referido"
       ],
+      "example": "Isso foi mencionado.",
       "pos": "adjective",
-      "ipa": "/mẽ.si.oˈna.du/",
+      "ipa": "/m\u1ebd.si.o\u02c8na.du/",
       "family": [
-        "menção",
+        "men\u00e7\u00e3o",
         "mencionar"
       ]
     },
@@ -4222,8 +4537,9 @@
         "comercializava",
         "negociava"
       ],
+      "example": "Jo\u00e3o vendia livros.",
       "pos": "verb",
-      "ipa": "/vẽˈdʒi.a/",
+      "ipa": "/v\u1ebd\u02c8d\u0292i.a/",
       "family": [
         "vender",
         "venda",
@@ -4232,12 +4548,13 @@
     },
     {
       "word": "BLOCOS",
-      "gloss": "peças maciças de material de construção",
+      "gloss": "pe\u00e7as maci\u00e7as de material de constru\u00e7\u00e3o",
       "synonyms": [
         "cubos"
       ],
+      "example": "Grandes blocos de gelo se liquefaziam.",
       "pos": "noun",
-      "ipa": "/ˈblo.kus/",
+      "ipa": "/\u02c8blo.kus/",
       "family": [
         "bloco",
         "bloquear",
@@ -4246,28 +4563,30 @@
     },
     {
       "word": "EXPOSTA",
-      "gloss": "uma pessoa ou coisa que está visível ou sem proteção.",
+      "gloss": "uma pessoa ou coisa que est\u00e1 vis\u00edvel ou sem prote\u00e7\u00e3o.",
       "synonyms": [
         "exibida",
         "apresentada"
       ],
+      "example": "A crian\u00e7a foi exposta a radioatividade.",
       "pos": "adjective",
-      "ipa": "/esˈpo.stɐ/",
+      "ipa": "/es\u02c8po.st\u0250/",
       "family": [
         "expor",
-        "exposição",
+        "exposi\u00e7\u00e3o",
         "exposto"
       ]
     },
     {
       "word": "INTERESSAR",
-      "gloss": "despertar atenção ou curiosidade em alguém.",
+      "gloss": "despertar aten\u00e7\u00e3o ou curiosidade em algu\u00e9m.",
       "synonyms": [
         "atrair",
         "cativar"
       ],
+      "example": "Voc\u00ea n\u00e3o vai se interessar.",
       "pos": "verb",
-      "ipa": "/ĩ.te.ɾeˈsaʁ/",
+      "ipa": "/\u0129.te.\u027ee\u02c8sa\u0281/",
       "family": [
         "interesse",
         "interessado",
@@ -4276,9 +4595,9 @@
     },
     {
       "word": "ATE",
-      "gloss": "que ele ou ela prenda com um nó",
-      "ipa": "/ˈa.ʧɪ/",
+      "gloss": "que ele ou ela prenda com um n\u00f3",
       "pos": "verb",
+      "ipa": "/\u02c8a.\u02a7\u026a/",
       "family": [
         "atar",
         "atadura",
@@ -4287,43 +4606,46 @@
     },
     {
       "word": "AGUENTEM",
-      "gloss": "suportar peso, pressão ou dificuldade.",
+      "gloss": "suportar peso, press\u00e3o ou dificuldade.",
       "synonyms": [
         "suportem",
         "resistem"
       ],
+      "example": "Calma, aguentem firme.",
       "pos": "verb",
-      "ipa": "/aˈɡwẽ.tẽj̃/",
+      "ipa": "/a\u02c8\u0261w\u1ebd.t\u1ebdj\u0303/",
       "family": [
         "aguentar",
         "aguentei",
-        "aguentável"
+        "aguent\u00e1vel"
       ]
     },
     {
-      "word": "BÚSSOLA",
-      "gloss": "instrumento que indica direção usando o campo magnético.",
+      "word": "B\u00daSSOLA",
+      "gloss": "instrumento que indica dire\u00e7\u00e3o usando o campo magn\u00e9tico.",
       "synonyms": [
         "compasso",
         "norteador"
       ],
-      "ipa": "/ˈbu.su.lɐ/",
+      "example": "Traga-me a b\u00fassola.",
       "pos": "noun",
+      "ipa": "/\u02c8bu.su.l\u0250/",
       "family": [
         "bussolar"
       ]
     },
     {
-      "word": "PLÁSTICA",
-      "gloss": "ligado a material flexível ou a operação estética",
+      "word": "PL\u00c1STICA",
+      "gloss": "ligado a material flex\u00edvel ou a opera\u00e7\u00e3o est\u00e9tica",
       "synonyms": [
         "cirurgia",
-        "estética"
+        "est\u00e9tica"
       ],
+      "example": "Vou comprar tinta pl\u00e1stica.",
       "pos": "adjective",
-      "ipa": "/ˈplas.tʃi.kɐ/",
+      "ipa": "/\u02c8plas.t\u0283i.k\u0250/",
       "family": [
-        "plástico",
+        "pl\u00e1stico",
         "plasticidade",
         "plastificar"
       ]
@@ -4335,8 +4657,9 @@
         "padecido",
         "suportado"
       ],
+      "example": "Bob deve ter sofrido um acidente.",
       "pos": "adjective",
-      "ipa": "/soˈfɾi.du/",
+      "ipa": "/so\u02c8f\u027ei.du/",
       "family": [
         "sofrer",
         "sofrimento",
@@ -4350,19 +4673,21 @@
         "restaurado",
         "recobrado"
       ],
+      "example": "Estou feliz que tenha se recuperado.",
       "pos": "adjective",
-      "ipa": "/ʁe.ku.peˈɾa.du/",
+      "ipa": "/\u0281e.ku.pe\u02c8\u027ea.du/",
       "family": [
         "recuperar",
-        "recuperação",
-        "recuperável"
+        "recupera\u00e7\u00e3o",
+        "recuper\u00e1vel"
       ]
     },
     {
       "word": "PESADAS",
-      "gloss": "difíceis de carregar por terem muitos quilos",
+      "gloss": "dif\u00edceis de carregar por terem muitos quilos",
+      "example": "Estas s\u00e3o pesadas.",
       "pos": "adjective",
-      "ipa": "/peˈza.dɐs/",
+      "ipa": "/pe\u02c8za.d\u0250s/",
       "family": [
         "pesado",
         "pesar",
@@ -4371,38 +4696,40 @@
     },
     {
       "word": "ZOOM",
-      "gloss": "aproximação ou afastamento de uma imagem.",
+      "gloss": "aproxima\u00e7\u00e3o ou afastamento de uma imagem.",
       "synonyms": [
-        "aproximação",
+        "aproxima\u00e7\u00e3o",
         "foco"
       ],
+      "example": "O Zoom \u00e9 melhor que o Skype?",
       "pos": "noun",
-      "ipa": "/ˈzũ/"
+      "ipa": "/\u02c8z\u0169/"
     },
     {
       "word": "CONDUZIU",
-      "gloss": "dirigir ou guiar algo ou alguém.",
+      "gloss": "dirigir ou guiar algo ou algu\u00e9m.",
       "synonyms": [
         "dirigiu",
         "guiou"
       ],
+      "example": "O guia nos conduziu ao hotel.",
       "pos": "verb",
-      "ipa": "/kõ.duˈziw/",
+      "ipa": "/k\u00f5.du\u02c8ziw/",
       "family": [
         "conduzir",
         "condutor",
-        "condução"
+        "condu\u00e7\u00e3o"
       ]
     },
     {
       "word": "PRELIMINAR",
-      "gloss": "que serve de preparação ou introdução.",
+      "gloss": "que serve de prepara\u00e7\u00e3o ou introdu\u00e7\u00e3o.",
       "synonyms": [
         "inicial",
-        "preparatório"
+        "preparat\u00f3rio"
       ],
-      "ipa": "/pɾɨ.li.mi.ˈnaɾ/",
       "pos": "adjective",
+      "ipa": "/p\u027e\u0268.li.mi.\u02c8na\u027e/",
       "family": [
         "preliminarmente",
         "preliminares"
@@ -4415,11 +4742,12 @@
         "haviam",
         "ocorriam"
       ],
+      "example": "Existiam muitos feridos.",
       "pos": "verb",
-      "ipa": "/e.zisˈtʃi.ɐ̃w̃/",
+      "ipa": "/e.zis\u02c8t\u0283i.\u0250\u0303w\u0303/",
       "family": [
         "existir",
-        "existência",
+        "exist\u00eancia",
         "existente"
       ]
     },
@@ -4430,6 +4758,7 @@
         "prometeu",
         "afirmou"
       ],
+      "example": "Ele jurou.",
       "pos": "verb",
       "family": [
         "jurar",
@@ -4439,31 +4768,33 @@
     },
     {
       "word": "COMERES",
-      "gloss": "ingerir alimentos sólidos ou líquidos.",
+      "gloss": "ingerir alimentos s\u00f3lidos ou l\u00edquidos.",
       "synonyms": [
         "ingiras",
         "consumas"
       ],
+      "example": "Se n\u00e3o comeres nada, nenhuma energia ter\u00e1s.",
       "pos": "verb",
-      "ipa": "/koˈme.ɾis/",
+      "ipa": "/ko\u02c8me.\u027eis/",
       "family": [
         "comer",
-        "comestível",
-        "comilão"
+        "comest\u00edvel",
+        "comil\u00e3o"
       ]
     },
     {
       "word": "CIRURGIAS",
-      "gloss": "operações médicas com cortes",
+      "gloss": "opera\u00e7\u00f5es m\u00e9dicas com cortes",
       "synonyms": [
-        "operações",
-        "intervenções"
+        "opera\u00e7\u00f5es",
+        "interven\u00e7\u00f5es"
       ],
+      "example": "Nesse hospital clandestino fazem-se cirurgias ilegais.",
       "pos": "noun",
-      "ipa": "/si.ɾuɾˈʒi.ɐs/",
+      "ipa": "/si.\u027eu\u027e\u02c8\u0292i.\u0250s/",
       "family": [
-        "cirurgião",
-        "cirúrgico",
+        "cirurgi\u00e3o",
+        "cir\u00fargico",
         "cirurgia"
       ]
     },
@@ -4474,34 +4805,37 @@
         "descubra",
         "imagine"
       ],
+      "example": "Adivinhe voc\u00ea mesmo!",
       "pos": "verb",
-      "ipa": "/a.dʒiˈvi.ɲi/",
+      "ipa": "/a.d\u0292i\u02c8vi.\u0272i/",
       "family": [
         "adivinhar",
         "adivinho",
-        "adivinhação"
+        "adivinha\u00e7\u00e3o"
       ]
     },
     {
       "word": "PINGUINS",
-      "gloss": "aves marinhas que não voam e vivem em climas frios.",
+      "gloss": "aves marinhas que n\u00e3o voam e vivem em climas frios.",
+      "example": "Havia pegadas de pinguins na areia.",
       "pos": "noun",
-      "ipa": "/pĩˈɡĩjs/",
+      "ipa": "/p\u0129\u02c8\u0261\u0129js/",
       "family": [
         "pinguim"
       ]
     },
     {
-      "word": "EXTRACÇÃO",
+      "word": "EXTRAC\u00c7\u00c3O",
       "gloss": "ato de retirar algo de dentro de outro.",
       "synonyms": [
         "retirada"
       ],
+      "example": "A extrac\u00e7\u00e3o do \u00f3leo da semente \u00e9 um processo cuidadoso e demorado.",
       "pos": "noun",
-      "ipa": "/es.tɾaˈsɐ̃w̃/",
+      "ipa": "/es.t\u027ea\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "extrair",
-        "extração",
+        "extra\u00e7\u00e3o",
         "extrato"
       ]
     },
@@ -4509,8 +4843,9 @@
       "word": "ACERTA",
       "gloss": "atingir o alvo ou fazer corretamente.",
       "synonyms": [],
-      "ipa": "/ɐ.ˈsɛɹ.tɐ/",
+      "example": "Quem mira o c\u00e9u n\u00e3o acerta o alvo.",
       "pos": "verb",
+      "ipa": "/\u0250.\u02c8s\u025b\u0279.t\u0250/",
       "family": [
         "acertar",
         "acerto",
@@ -4519,12 +4854,13 @@
     },
     {
       "word": "OLHASTE",
-      "gloss": "dirigir os olhos para algo ou alguém.",
+      "gloss": "dirigir os olhos para algo ou algu\u00e9m.",
       "synonyms": [
         "viste"
       ],
+      "example": "Olhaste para mim.",
       "pos": "verb",
-      "ipa": "/oˈʎas.tʃi/",
+      "ipa": "/o\u02c8\u028eas.t\u0283i/",
       "family": [
         "olhar",
         "olho",
@@ -4533,28 +4869,30 @@
     },
     {
       "word": "ATINGE",
-      "gloss": "chegar a um ponto ou alcançar algo.",
+      "gloss": "chegar a um ponto ou alcan\u00e7ar algo.",
       "synonyms": [
-        "alcança",
+        "alcan\u00e7a",
         "chega"
       ],
+      "example": "O d\u00e9ficit atinge um milh\u00e3o de d\u00f3lares.",
       "pos": "verb",
-      "ipa": "/aˈtʃĩ.ʒi/",
+      "ipa": "/a\u02c8t\u0283\u0129.\u0292i/",
       "family": [
         "atingir",
         "atingimento",
-        "atingível"
+        "ating\u00edvel"
       ]
     },
     {
       "word": "ACERTADO",
-      "gloss": "que foi feito corretamente ou com precisão.",
+      "gloss": "que foi feito corretamente ou com precis\u00e3o.",
       "synonyms": [
         "correto",
         "exato"
       ],
+      "example": "Ainda h\u00e1 muito que ser discutido, mas tudo est\u00e1 quase acertado.",
       "pos": "adjective",
-      "ipa": "/ɐ.sɨɾˈta.ðu/",
+      "ipa": "/\u0250.s\u0268\u027e\u02c8ta.\u00f0u/",
       "family": [
         "certo",
         "acertar",
@@ -4567,23 +4905,24 @@
       "synonyms": [
         "conectares"
       ],
+      "example": "Para conectares os cabos, precisas de ligares as pontas met\u00e1licas com fita isoladora.",
       "pos": "verb",
-      "ipa": "/liˈga.ɾɨʃ/",
+      "ipa": "/li\u02c8ga.\u027e\u0268\u0283/",
       "family": [
         "liga",
         "ligar",
-        "ligação"
+        "liga\u00e7\u00e3o"
       ]
     },
     {
       "word": "CHATEIES",
-      "gloss": "causar aborrecimento ou irritação.",
+      "gloss": "causar aborrecimento ou irrita\u00e7\u00e3o.",
       "synonyms": [
         "aborrecas",
         "irrites"
       ],
       "pos": "verb",
-      "ipa": "/ʃɐ.tɨ.ˈi.ɨʃ/",
+      "ipa": "/\u0283\u0250.t\u0268.\u02c8i.\u0268\u0283/",
       "family": [
         "chato",
         "chatear",
@@ -4592,12 +4931,13 @@
     },
     {
       "word": "TIJOLOS",
-      "gloss": "blocos retangulares usados na construção.",
+      "gloss": "blocos retangulares usados na constru\u00e7\u00e3o.",
       "synonyms": [
         "blocos"
       ],
+      "example": "Onde que eu posso comprar tijolos?",
       "pos": "noun",
-      "ipa": "/ti.ˈʒɔ.luʃ/",
+      "ipa": "/ti.\u02c8\u0292\u0254.lu\u0283/",
       "family": [
         "tijolo",
         "tijoleira",
@@ -4606,28 +4946,30 @@
     },
     {
       "word": "CIUMENTO",
-      "gloss": "que sente inveja da atenção dada a outra pessoa.",
+      "gloss": "que sente inveja da aten\u00e7\u00e3o dada a outra pessoa.",
       "synonyms": [
         "invejoso",
         "possessivo"
       ],
+      "example": "Ele \u00e9 ciumento.",
       "pos": "adjective",
-      "ipa": "/sju.ˈmẽ.tu/",
+      "ipa": "/sju.\u02c8m\u1ebd.tu/",
       "family": [
-        "ciúme",
+        "ci\u00fame",
         "ciumenta",
         "inveja"
       ]
     },
     {
       "word": "RESUMO",
-      "gloss": "versão curta que contém as ideias principais.",
+      "gloss": "vers\u00e3o curta que cont\u00e9m as ideias principais.",
       "synonyms": [
-        "síntese",
-        "sumário"
+        "s\u00edntese",
+        "sum\u00e1rio"
       ],
-      "ipa": "/Rɨ.ˈzu.mu/",
+      "example": "Leia o resumo.",
       "pos": "noun",
+      "ipa": "/R\u0268.\u02c8zu.mu/",
       "family": [
         "resumir",
         "resumidamente"
@@ -4635,27 +4977,29 @@
     },
     {
       "word": "DARMOS",
-      "gloss": "entregar ou conceder algo a alguém.",
+      "gloss": "entregar ou conceder algo a algu\u00e9m.",
       "synonyms": [
         "oferecermos",
         "entregarmos"
       ],
+      "example": "Que tal darmos um ovo pintado de presente de P\u00e1scoa?",
       "pos": "verb",
-      "ipa": "/ˈdaɾ.muʃ/",
+      "ipa": "/\u02c8da\u027e.mu\u0283/",
       "family": [
         "dar",
         "dado",
-        "doação"
+        "doa\u00e7\u00e3o"
       ]
     },
     {
-      "word": "ESTÁBULO",
-      "gloss": "local onde se guardam animais de criação.",
+      "word": "EST\u00c1BULO",
+      "gloss": "local onde se guardam animais de cria\u00e7\u00e3o.",
       "synonyms": [
         "curral"
       ],
-      "ipa": "/iʃ.ˈta.bu.lu/",
+      "example": "Voc\u00ea nasceu no est\u00e1bulo?",
       "pos": "noun",
+      "ipa": "/i\u0283.\u02c8ta.bu.lu/",
       "family": [
         "estabular",
         "estabulado",
@@ -4664,13 +5008,14 @@
     },
     {
       "word": "INFERIORES",
-      "gloss": "que estão em posição mais baixa ou têm menor qualidade.",
+      "gloss": "que est\u00e3o em posi\u00e7\u00e3o mais baixa ou t\u00eam menor qualidade.",
       "synonyms": [
         "menores",
-        "secundários"
+        "secund\u00e1rios"
       ],
+      "example": "Para aqueles nos degraus inferiores da escada econ\u00f3mica, viverem amontoados \u00e9 a dura realidade e manter uma dist\u00e2ncia de dois metros n\u00e3o \u00e9 op\u00e7\u00e3o.",
       "pos": "adjective",
-      "ipa": "/ĩ.fɨ.ɾi.ˈo.ɾɨʃ/",
+      "ipa": "/\u0129.f\u0268.\u027ei.\u02c8o.\u027e\u0268\u0283/",
       "family": [
         "inferior",
         "inferioridade",
@@ -4678,16 +5023,17 @@
       ]
     },
     {
-      "word": "CAÍSTE",
-      "gloss": "perdeste o equilíbrio e foste ao chão",
+      "word": "CA\u00cdSTE",
+      "gloss": "perdeste o equil\u00edbrio e foste ao ch\u00e3o",
       "synonyms": [
         "despencaste"
       ],
+      "example": "Ent\u00e3o ca\u00edste do c\u00e9u?",
       "pos": "verb",
-      "ipa": "/kɐ.ˈiʃ.tɨ/",
+      "ipa": "/k\u0250.\u02c8i\u0283.t\u0268/",
       "family": [
         "cair",
-        "caído",
+        "ca\u00eddo",
         "queda"
       ]
     },
@@ -4697,8 +5043,9 @@
       "synonyms": [
         "conter"
       ],
-      "ipa": "/kõ.puɾ.ˈtaɾ/",
+      "example": "Eles t\u00eam que se comportar.",
       "pos": "verb",
+      "ipa": "/k\u00f5.pu\u027e.\u02c8ta\u027e/",
       "family": [
         "comportamento",
         "comportado",
@@ -4707,13 +5054,14 @@
     },
     {
       "word": "COMANDOS",
-      "gloss": "ordens dadas para executar uma ação.",
+      "gloss": "ordens dadas para executar uma a\u00e7\u00e3o.",
       "synonyms": [
         "ordens",
-        "instruções"
+        "instru\u00e7\u00f5es"
       ],
+      "example": "Ele construiu um rob\u00f4 que pode seguir comandos de voz.",
       "pos": "noun",
-      "ipa": "/ku.ˈmɐ̃.duʃ/",
+      "ipa": "/ku.\u02c8m\u0250\u0303.du\u0283/",
       "family": [
         "comandar",
         "comandante",
@@ -4722,12 +5070,13 @@
     },
     {
       "word": "CHAMAVAM",
-      "gloss": "davam um nome a alguém",
+      "gloss": "davam um nome a algu\u00e9m",
       "synonyms": [
         "apelidavam"
       ],
+      "example": "Chamavam-no.",
       "pos": "verb",
-      "ipa": "/ʃɐ.ˈma.vɐ̃w/",
+      "ipa": "/\u0283\u0250.\u02c8ma.v\u0250\u0303w/",
       "family": [
         "chamar",
         "chamado",
@@ -4736,10 +5085,11 @@
     },
     {
       "word": "ARQUITECTO",
-      "gloss": "profissional que projeta e planeja construções.",
+      "gloss": "profissional que projeta e planeja constru\u00e7\u00f5es.",
       "synonyms": [],
+      "example": "O arquitecto projetou um edif\u00edcio moderno com espa\u00e7os abertos e muita luz natural.",
       "pos": "noun",
-      "ipa": "/ɐɾ.ki.ˈtɛk.tu/",
+      "ipa": "/\u0250\u027e.ki.\u02c8t\u025bk.tu/",
       "family": [
         "arquitetura",
         "arquitetar",
@@ -4747,46 +5097,49 @@
       ]
     },
     {
-      "word": "SUBÚRBIOS",
-      "gloss": "áreas residenciais fora do centro da cidade.",
+      "word": "SUB\u00daRBIOS",
+      "gloss": "\u00e1reas residenciais fora do centro da cidade.",
       "synonyms": [
         "periferia",
         "arrabaldes"
       ],
+      "example": "Est\u00e1 calmo nos sub\u00farbios.",
       "pos": "noun",
-      "ipa": "/su.ˈbuɾ.bjuʃ/",
+      "ipa": "/su.\u02c8bu\u027e.bju\u0283/",
       "family": [
-        "subúrbio",
+        "sub\u00farbio",
         "suburbanizar",
         "periferia"
       ]
     },
     {
       "word": "TARTARUGAS",
-      "gloss": "répteis de carapaça dura que se movem lentamente.",
+      "gloss": "r\u00e9pteis de carapa\u00e7a dura que se movem lentamente.",
       "synonyms": [
-        "quelônios"
+        "quel\u00f4nios"
       ],
+      "example": "Eu amo tartarugas.",
       "pos": "noun",
-      "ipa": "/tɐɾ.tɐ.ˈɾu.gɐʃ/",
+      "ipa": "/t\u0250\u027e.t\u0250.\u02c8\u027eu.g\u0250\u0283/",
       "family": [
         "tartaruga",
         "tartarugada",
-        "réptil"
+        "r\u00e9ptil"
       ]
     },
     {
       "word": "EDUCADA",
-      "gloss": "que recebeu boa formação ou tem bons modos.",
+      "gloss": "que recebeu boa forma\u00e7\u00e3o ou tem bons modos.",
       "synonyms": [
-        "cortês",
+        "cort\u00eas",
         "refinada"
       ],
+      "example": "Voc\u00ea \u00e9 educada.",
       "pos": "adjective",
-      "ipa": "/i.du.ˈka.dɐ/",
+      "ipa": "/i.du.\u02c8ka.d\u0250/",
       "family": [
         "educar",
-        "educação",
+        "educa\u00e7\u00e3o",
         "educado"
       ]
     },
@@ -4798,8 +5151,9 @@
         "cortem",
         "parem"
       ],
+      "example": "Desliguem isso.",
       "pos": "verb",
-      "ipa": "/dɨʒ.ˈli.gɨ̃j/",
+      "ipa": "/d\u0268\u0292.\u02c8li.g\u0268\u0303j/",
       "family": [
         "desligar",
         "desligado",
@@ -4807,12 +5161,13 @@
       ]
     },
     {
-      "word": "EXTORSÃO",
-      "gloss": "obter algo de alguém por meio de ameaças.",
+      "word": "EXTORS\u00c3O",
+      "gloss": "obter algo de algu\u00e9m por meio de amea\u00e7as.",
       "synonyms": [
         "chantagem",
-        "coação"
+        "coa\u00e7\u00e3o"
       ],
+      "example": "A pol\u00edcia investigou o caso de extors\u00e3o em que a v\u00edtima foi obrigada a pagar para manter segredo.",
       "pos": "noun",
       "family": [
         "extorquir",
@@ -4821,29 +5176,31 @@
       ]
     },
     {
-      "word": "ADMISSÃO",
-      "gloss": "ato de permitir a entrada ou aceitação.",
+      "word": "ADMISS\u00c3O",
+      "gloss": "ato de permitir a entrada ou aceita\u00e7\u00e3o.",
       "synonyms": [
         "ingresso",
         "entrada"
       ],
-      "ipa": "/ɐd.mi.ˈsɐ̃w̃/",
+      "example": "O sil\u00eancio \u00e9 uma admiss\u00e3o de culpa.",
       "pos": "noun",
+      "ipa": "/\u0250d.mi.\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "admitir",
-        "admissível",
-        "aceitação"
+        "admiss\u00edvel",
+        "aceita\u00e7\u00e3o"
       ]
     },
     {
       "word": "REGISTROS",
-      "gloss": "anotações ou documentos que guardam informações.",
+      "gloss": "anota\u00e7\u00f5es ou documentos que guardam informa\u00e7\u00f5es.",
       "synonyms": [
-        "anotações",
+        "anota\u00e7\u00f5es",
         "arquivos"
       ],
+      "example": "Mantemos registros.",
       "pos": "noun",
-      "ipa": "/ʁɨ.ʒiʃ.ˈtɾuʃ/",
+      "ipa": "/\u0281\u0268.\u0292i\u0283.\u02c8t\u027eu\u0283/",
       "family": [
         "registrar",
         "registro",
@@ -4857,8 +5214,9 @@
         "despendeu",
         "consumiu"
       ],
+      "example": "Quanto voc\u00ea gastou?",
       "pos": "verb",
-      "ipa": "/gɐʃ.ˈto/",
+      "ipa": "/g\u0250\u0283.\u02c8to/",
       "family": [
         "gastar",
         "gasto",
@@ -4866,16 +5224,17 @@
       ]
     },
     {
-      "word": "ANOTAÇÕES",
+      "word": "ANOTA\u00c7\u00d5ES",
       "gloss": "escritas breves feitas para lembrar algo.",
       "synonyms": [
         "apontamentos"
       ],
+      "example": "Consulte as anota\u00e7\u00f5es.",
       "pos": "noun",
-      "ipa": "/ɐ.nu.ˈtɐ.sɐ̃j̃/",
+      "ipa": "/\u0250.nu.\u02c8t\u0250.s\u0250\u0303j\u0303/",
       "family": [
         "anotar",
-        "anotação",
+        "anota\u00e7\u00e3o",
         "anotado"
       ]
     },
@@ -4886,12 +5245,13 @@
         "reuniu",
         "agregou"
       ],
+      "example": "Juntou diversos exemplos.",
       "pos": "verb",
-      "ipa": "/ʒũ.ˈto/",
+      "ipa": "/\u0292\u0169.\u02c8to/",
       "family": [
         "juntar",
         "junto",
-        "união"
+        "uni\u00e3o"
       ]
     },
     {
@@ -4901,18 +5261,20 @@
         "investigar",
         "examinar"
       ],
-      "ipa": "/ɐ.vɨ.ɾi.ˈɡwaɾ/",
+      "example": "Vamos averiguar.",
       "pos": "verb",
+      "ipa": "/\u0250.v\u0268.\u027ei.\u02c8\u0261wa\u027e/",
       "family": [
-        "averiguação",
+        "averigua\u00e7\u00e3o",
         "investigar"
       ]
     },
     {
       "word": "CUMPRI",
       "gloss": "Fiz o que tinha prometido.",
+      "example": "Cumpri a promessa que lhe fiz.",
       "pos": "verb",
-      "ipa": "/ˈkũ.pɾi/",
+      "ipa": "/\u02c8k\u0169.p\u027ei/",
       "family": [
         "cumprir",
         "cumprimento",
@@ -4925,73 +5287,79 @@
       "synonyms": [
         "lastima"
       ],
+      "example": "Ele s\u00f3 se lamenta.",
       "pos": "verb",
-      "ipa": "/laˈmẽ.tɐ/",
+      "ipa": "/la\u02c8m\u1ebd.t\u0250/",
       "family": [
         "lamentar",
         "lamento",
-        "lamentável"
+        "lament\u00e1vel"
       ]
     },
     {
       "word": "MEDULA",
       "gloss": "tecido mole que fica dentro dos ossos",
+      "example": "Ele \u00e9 americano at\u00e9 a medula.",
+      "pos": "noun",
+      "ipa": "/m\u0268.\u02c8du.l\u0250/",
       "family": [
         "medular"
-      ],
-      "ipa": "/mɨ.ˈdu.lɐ/",
-      "pos": "noun"
+      ]
     },
     {
       "word": "AUGE",
       "gloss": "ponto mais alto ou momento de maior intensidade.",
       "synonyms": [
         "pico",
-        "clímax"
+        "cl\u00edmax"
       ],
+      "example": "A emo\u00e7\u00e3o chegou ao seu auge.",
       "pos": "noun",
-      "ipa": "/ˈa.ʒi/",
+      "ipa": "/\u02c8a.\u0292i/",
       "family": [
         "augurar",
-        "augúrio"
+        "aug\u00fario"
       ]
     },
     {
       "word": "IOGA",
-      "gloss": "prática física e mental de origem indiana.",
+      "gloss": "pr\u00e1tica f\u00edsica e mental de origem indiana.",
       "synonyms": [
         "yoga"
       ],
+      "example": "Ele ensina ioga.",
+      "pos": "noun",
+      "ipa": "/\u02c8jo.\u0261\u0250/",
       "family": [
         "iogue"
-      ],
-      "pos": "noun",
-      "ipa": "/ˈjo.ɡɐ/"
+      ]
     },
     {
-      "word": "FUNERÁRIA",
-      "gloss": "empresa que organiza enterros e cremações.",
+      "word": "FUNER\u00c1RIA",
+      "gloss": "empresa que organiza enterros e crema\u00e7\u00f5es.",
       "synonyms": [
-        "mortuária",
-        "necrotério"
+        "mortu\u00e1ria",
+        "necrot\u00e9rio"
       ],
+      "example": "A funer\u00e1ria j\u00e1 est\u00e1 trazendo o corpo.",
       "pos": "noun",
-      "ipa": "/fu.neˈɾa.ɾi.ɐ/",
+      "ipa": "/fu.ne\u02c8\u027ea.\u027ei.\u0250/",
       "family": [
         "funeral",
-        "funerário"
+        "funer\u00e1rio"
       ]
     },
     {
       "word": "INTERVIR",
-      "gloss": "participar ou atuar em uma situação.",
+      "gloss": "participar ou atuar em uma situa\u00e7\u00e3o.",
       "synonyms": [
         "mediar"
       ],
+      "example": "O ex\u00e9rcito teve de intervir.",
       "pos": "verb",
-      "ipa": "/ĩ.teɾˈviɾ/",
+      "ipa": "/\u0129.te\u027e\u02c8vi\u027e/",
       "family": [
-        "intervenção",
+        "interven\u00e7\u00e3o",
         "interventor"
       ]
     },
@@ -5002,8 +5370,9 @@
         "despertem",
         "levantem"
       ],
+      "example": "Me acordem.",
       "pos": "verb",
-      "ipa": "/ɐˈkoɾ.dẽj̃/",
+      "ipa": "/\u0250\u02c8ko\u027e.d\u1ebdj\u0303/",
       "family": [
         "acordar",
         "acordo",
@@ -5017,39 +5386,42 @@
         "absolvido",
         "reabilitado"
       ],
+      "example": "Isso n\u00e3o ser\u00e1 perdoado.",
       "pos": "adjective",
-      "ipa": "/peɾ.duˈa.du/",
+      "ipa": "/pe\u027e.du\u02c8a.du/",
       "family": [
         "perdoar",
-        "perdão",
-        "perdoável"
+        "perd\u00e3o",
+        "perdo\u00e1vel"
       ]
     },
     {
-      "word": "TRENÓ",
-      "gloss": "veículo usado para deslizar sobre neve ou gelo.",
+      "word": "TREN\u00d3",
+      "gloss": "ve\u00edculo usado para deslizar sobre neve ou gelo.",
       "synonyms": [
         "sledge",
         "traineira"
       ],
-      "ipa": "/tɾɨ.ˈnɔ/",
+      "example": "Meu tren\u00f3 \u00e9 branco.",
       "pos": "noun",
+      "ipa": "/t\u027e\u0268.\u02c8n\u0254/",
       "family": [
         "trenagem"
       ]
     },
     {
       "word": "ODOR",
-      "gloss": "cheiro característico de algo.",
+      "gloss": "cheiro caracter\u00edstico de algo.",
       "synonyms": [
         "cheiro",
         "aroma"
       ],
-      "ipa": "/ɔ.ˈdoɾ/",
+      "example": "O odor era espantoso.",
       "pos": "noun",
+      "ipa": "/\u0254.\u02c8do\u027e/",
       "family": [
         "odorante",
-        "odorífero"
+        "odor\u00edfero"
       ]
     },
     {
@@ -5059,24 +5431,26 @@
         "pipo",
         "pipe"
       ],
-      "ipa": "/kɐ.ˈʃĩ.bu/",
+      "example": "Apague o cachimbo.",
       "pos": "noun",
+      "ipa": "/k\u0250.\u02c8\u0283\u0129.bu/",
       "family": [
         "cachimbar",
         "cachimbeiro"
       ]
     },
     {
-      "word": "EMINÊNCIA",
-      "gloss": "posição de grande destaque ou influência",
+      "word": "EMIN\u00caNCIA",
+      "gloss": "posi\u00e7\u00e3o de grande destaque ou influ\u00eancia",
       "synonyms": [],
+      "example": "No per\u00edodo em causa havia dois homens assim, C\u00edmon e P\u00e9ricles, homens de tal emin\u00eancia que n\u00e3o podemos deixar de os analisar.",
+      "pos": "noun",
+      "ipa": "/e.mi.\u02c8n\u1ebd.sj\u0250/",
       "family": [
         "eminencial",
         "eminenciar",
-        "preeminência"
-      ],
-      "ipa": "/e.mi.ˈnẽ.sjɐ/",
-      "pos": "noun"
+        "preemin\u00eancia"
+      ]
     },
     {
       "word": "IOGURTE",
@@ -5085,18 +5459,20 @@
         "coalhada",
         "yogurte"
       ],
+      "example": "Detesto iogurte.",
+      "pos": "noun",
+      "ipa": "/jo\u02c8\u0261u\u027e.t\u0268/",
       "family": [
         "iogurteira"
-      ],
-      "pos": "noun",
-      "ipa": "/joˈɡuɾ.tɨ/"
+      ]
     },
     {
       "word": "CONVITES",
       "gloss": "pedidos formais para comparecer a um evento",
       "synonyms": [],
+      "example": "Eu aceitei os convites.",
       "pos": "noun",
-      "ipa": "/kõˈvi.tɨʃ/",
+      "ipa": "/k\u00f5\u02c8vi.t\u0268\u0283/",
       "family": [
         "convidar",
         "convidado",
@@ -5105,13 +5481,14 @@
     },
     {
       "word": "GROSSA",
-      "gloss": "de espessura ou diâmetro considerável",
+      "gloss": "de espessura ou di\u00e2metro consider\u00e1vel",
       "synonyms": [
         "espessa",
         "densa"
       ],
+      "example": "Esta caneta \u00e9 grossa.",
       "pos": "adjective",
-      "ipa": "/ˈɡɾo.sɐ/",
+      "ipa": "/\u02c8\u0261\u027eo.s\u0250/",
       "family": [
         "grossura",
         "engrossar",
@@ -5120,13 +5497,14 @@
     },
     {
       "word": "JOGANDO",
-      "gloss": "participando numa partida ou lançando algo",
+      "gloss": "participando numa partida ou lan\u00e7ando algo",
       "synonyms": [
         "arremessando",
-        "lançando"
+        "lan\u00e7ando"
       ],
+      "example": "Estou jogando.",
       "pos": "verb",
-      "ipa": "/ʒoˈɡɐ̃.du/",
+      "ipa": "/\u0292o\u02c8\u0261\u0250\u0303.du/",
       "family": [
         "jogar",
         "jogador",
@@ -5139,37 +5517,39 @@
       "synonyms": [
         "esfomeado"
       ],
-      "ipa": "/fɐ.ˈmĩ.tu/",
+      "example": "Estou faminto!",
       "pos": "adjective",
+      "ipa": "/f\u0250.\u02c8m\u0129.tu/",
       "family": [
         "fome",
-        "famélico"
+        "fam\u00e9lico"
       ]
     },
     {
-      "word": "TÁCTICAS",
-      "gloss": "maneiras planeadas de alcançar um objetivo",
+      "word": "T\u00c1CTICAS",
+      "gloss": "maneiras planeadas de alcan\u00e7ar um objetivo",
       "synonyms": [
-        "estratégias",
+        "estrat\u00e9gias",
         "manobras"
       ],
       "pos": "noun",
-      "ipa": "/ˈtak.ti.kɐʃ/",
+      "ipa": "/\u02c8tak.ti.k\u0250\u0283/",
       "family": [
-        "tático",
+        "t\u00e1tico",
         "taticamente",
-        "tática"
+        "t\u00e1tica"
       ]
     },
     {
       "word": "ATACAM",
-      "gloss": "lançar-se contra alguém ou algo",
+      "gloss": "lan\u00e7ar-se contra algu\u00e9m ou algo",
       "synonyms": [
         "assaltam",
         "agressam"
       ],
+      "example": "Lobos normalmente n\u00e3o atacam pessoas.",
       "pos": "verb",
-      "ipa": "/ɐˈta.kɐ̃j̃/",
+      "ipa": "/\u0250\u02c8ta.k\u0250\u0303j\u0303/",
       "family": [
         "ataque",
         "atacante",
@@ -5178,12 +5558,13 @@
     },
     {
       "word": "DEITOU",
-      "gloss": "colocar alguém ou algo na posição horizontal",
+      "gloss": "colocar algu\u00e9m ou algo na posi\u00e7\u00e3o horizontal",
       "synonyms": [
         "reclinou"
       ],
+      "example": "Ele se deitou.",
       "pos": "verb",
-      "ipa": "/dejˈto/",
+      "ipa": "/dej\u02c8to/",
       "family": [
         "deitar",
         "deitado",
@@ -5192,40 +5573,43 @@
     },
     {
       "word": "IMPOSTO",
-      "gloss": "quantia obrigatória paga ao Estado",
+      "gloss": "quantia obrigat\u00f3ria paga ao Estado",
       "synonyms": [
         "tributo",
         "taxa"
       ],
-      "ipa": "/ĩˈpoʃtu/",
+      "example": "Que \u00e9 um imposto?",
       "pos": "noun",
+      "ipa": "/\u0129\u02c8po\u0283tu/",
       "family": [
-        "impostação",
+        "imposta\u00e7\u00e3o",
         "impostar"
       ]
     },
     {
-      "word": "CITAÇÃO",
-      "gloss": "referência a trecho de texto ou autor",
+      "word": "CITA\u00c7\u00c3O",
+      "gloss": "refer\u00eancia a trecho de texto ou autor",
       "synonyms": [
-        "referência"
+        "refer\u00eancia"
       ],
+      "example": "\u00c9 uma cita\u00e7\u00e3o do livro.",
       "pos": "noun",
-      "ipa": "/si.tɐˈsɐ̃w̃/",
+      "ipa": "/si.t\u0250\u02c8s\u0250\u0303w\u0303/",
       "family": [
         "citar",
-        "citável"
+        "cit\u00e1vel"
       ]
     },
     {
       "word": "APRENDIZ",
-      "gloss": "pessoa que ainda está a estudar um ofício",
+      "gloss": "pessoa que ainda est\u00e1 a estudar um of\u00edcio",
       "synonyms": [
-        "estagiário",
+        "estagi\u00e1rio",
         "novato"
       ],
+      "example": "\u00c9 bom ser um eterno aprendiz.",
       "pos": "noun",
-      "ipa": "/ɐˈpɾẽ.diʃ/",
+      "ipa": "/\u0250\u02c8p\u027e\u1ebd.di\u0283/",
       "family": [
         "aprender",
         "aprendizado",
@@ -5233,16 +5617,17 @@
       ]
     },
     {
-      "word": "FÍSICOS",
-      "gloss": "do corpo ou da matéria",
+      "word": "F\u00cdSICOS",
+      "gloss": "do corpo ou da mat\u00e9ria",
       "synonyms": [
         "materiais",
         "do corpo"
       ],
+      "example": "Estou fazendo exerc\u00edcios f\u00edsicos.",
       "pos": "adjective",
-      "ipa": "/ˈfi.zi.kuʃ/",
+      "ipa": "/\u02c8fi.zi.ku\u0283/",
       "family": [
-        "física",
+        "f\u00edsica",
         "fisicalidade",
         "fisiculturismo"
       ]
@@ -5254,8 +5639,9 @@
         "fardos",
         "pesos"
       ],
+      "example": "\u00c9 preciso descarregar as cargas.",
       "pos": "noun",
-      "ipa": "/ˈkaɾ.ɣɐʃ/",
+      "ipa": "/\u02c8ka\u027e.\u0263\u0250\u0283/",
       "family": [
         "carregar",
         "carregador",
@@ -5264,37 +5650,40 @@
     },
     {
       "word": "MUTANTES",
-      "gloss": "seres que sofreram alteração genética",
+      "gloss": "seres que sofreram altera\u00e7\u00e3o gen\u00e9tica",
       "synonyms": [
         "alterados"
       ],
+      "example": "Os cientistas estudam mutantes para entender doen\u00e7as gen\u00e9ticas.",
       "pos": "noun",
-      "ipa": "/muˈtɐ̃.tɨʃ/",
+      "ipa": "/mu\u02c8t\u0250\u0303.t\u0268\u0283/",
       "family": [
-        "mutação",
+        "muta\u00e7\u00e3o",
         "mutante"
       ]
     },
     {
-      "word": "AUTOMÁTICA",
-      "gloss": "que funciona sem intervenção manual",
+      "word": "AUTOM\u00c1TICA",
+      "gloss": "que funciona sem interven\u00e7\u00e3o manual",
       "synonyms": [
-        "mecânica"
+        "mec\u00e2nica"
       ],
+      "example": "Esta \u00e9 uma porta autom\u00e1tica.",
       "pos": "adjective",
-      "ipa": "/aw.toˈma.tʃi.kɐ/",
+      "ipa": "/aw.to\u02c8ma.t\u0283i.k\u0250/",
       "family": [
         "automatizar",
-        "automação",
-        "automático"
+        "automa\u00e7\u00e3o",
+        "autom\u00e1tico"
       ]
     },
     {
       "word": "CROMO",
       "gloss": "metal brilhante usado em revestimentos",
       "synonyms": [],
+      "example": "O cromo \u00e9 um elemento qu\u00edmico de s\u00edmbolo Cr.",
       "pos": "noun",
-      "ipa": "/ˈkɾo.mu/",
+      "ipa": "/\u02c8k\u027eo.mu/",
       "family": [
         "cromado",
         "cromagem",
@@ -5303,12 +5692,13 @@
     },
     {
       "word": "CRIADAS",
-      "gloss": "mulheres que trabalham em serviço doméstico",
+      "gloss": "mulheres que trabalham em servi\u00e7o dom\u00e9stico",
       "synonyms": [
-        "serviçais"
+        "servi\u00e7ais"
       ],
+      "example": "As criadas mantinham a casa impec\u00e1vel enquanto a fam\u00edlia viajava.",
       "pos": "noun",
-      "ipa": "/kɾiˈa.dɐʃ/",
+      "ipa": "/k\u027ei\u02c8a.d\u0250\u0283/",
       "family": [
         "criado",
         "criador",
@@ -5322,8 +5712,9 @@
         "manchado",
         "pintado"
       ],
+      "example": "O tecido que comprei estava marado, com v\u00e1rias manchas espalhadas.",
       "pos": "adjective",
-      "ipa": "/maˈɾa.du/",
+      "ipa": "/ma\u02c8\u027ea.du/",
       "family": [
         "manchar",
         "mancha",
@@ -5331,41 +5722,44 @@
       ]
     },
     {
-      "word": "VOVÓ",
-      "gloss": "mãe do pai ou da mãe de alguém",
+      "word": "VOV\u00d3",
+      "gloss": "m\u00e3e do pai ou da m\u00e3e de algu\u00e9m",
       "synonyms": [
-        "avó"
+        "av\u00f3"
       ],
-      "ipa": "/vɔ.ˈvɔ/",
+      "example": "A vov\u00f3 faleceu.",
       "pos": "noun",
+      "ipa": "/v\u0254.\u02c8v\u0254/",
       "family": [
-        "avó",
-        "avô",
+        "av\u00f3",
+        "av\u00f4",
         "avozinho"
       ]
     },
     {
       "word": "FRALDA",
-      "gloss": "peça de pano ou descartável usada pelos bebés",
+      "gloss": "pe\u00e7a de pano ou descart\u00e1vel usada pelos beb\u00e9s",
       "synonyms": [
         "cueiro"
       ],
+      "example": "Ele sujou a fralda...",
       "pos": "noun",
-      "ipa": "/ˈfɾaw.dɐ/",
+      "ipa": "/\u02c8f\u027eaw.d\u0250/",
       "family": [
-        "fraldário",
+        "frald\u00e1rio",
         "fraldinha",
         "fraldar"
       ]
     },
     {
       "word": "COBERTORES",
-      "gloss": "peças grossas de tecido para aquecer na cama",
+      "gloss": "pe\u00e7as grossas de tecido para aquecer na cama",
       "synonyms": [
         "mantas"
       ],
+      "example": "N\u00e3o havia mais cobertores.",
       "pos": "noun",
-      "ipa": "/ko.bɨɾˈto.ɾɨʃ/",
+      "ipa": "/ko.b\u0268\u027e\u02c8to.\u027e\u0268\u0283/",
       "family": [
         "cobrir",
         "coberto",
@@ -5373,13 +5767,14 @@
       ]
     },
     {
-      "word": "TROVÃO",
-      "gloss": "som forte que se ouve depois de um relâmpago",
-      "ipa": "/tɾu.ˈvɐ̃w̃/",
+      "word": "TROV\u00c3O",
+      "gloss": "som forte que se ouve depois de um rel\u00e2mpago",
+      "example": "Eu ouvi um trov\u00e3o.",
       "pos": "noun",
+      "ipa": "/t\u027eu.\u02c8v\u0250\u0303w\u0303/",
       "family": [
         "trovejar",
-        "trovãozinho",
+        "trov\u00e3ozinho",
         "trovoada"
       ]
     },
@@ -5387,12 +5782,13 @@
       "word": "POTENCIAIS",
       "gloss": "que podem acontecer",
       "synonyms": [
-        "possíveis"
+        "poss\u00edveis"
       ],
+      "example": "Mas uma nova aplica\u00e7\u00e3o m\u00f3vel poder\u00e1 ajudar a diagnosticar quaisquer potenciais problemas no campo.",
       "pos": "adjective",
-      "ipa": "/pu.tẽˈsi.ɐjʃ/",
+      "ipa": "/pu.t\u1ebd\u02c8si.\u0250j\u0283/",
       "family": [
-        "potência",
+        "pot\u00eancia",
         "potencial",
         "potenciar"
       ]

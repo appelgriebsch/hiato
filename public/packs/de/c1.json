@@ -1,37 +1,40 @@
 {
-  "version": 15,
+  "version": 16,
   "lang": "de",
   "cefr": "c1",
-  "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
+  "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
   "attribution": [
-    "Hiato DE C1 learner pack — original glosses and synonym chips (2026).",
-    "DE B2–C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0). German CEFR labels in that dataset are calibrated against Goethe-Institut lists, not copied from them (ADR 0029).",
+    "Hiato DE C1 learner pack \u2014 original glosses and synonym chips (2026).",
+    "DE B2\u2013C2 lemmas are frequency-rank bands from wordhoard v0.1.0 (CC-BY-SA-4.0). German CEFR labels in that dataset are calibrated against Goethe-Institut lists, not copied from them (ADR 0029).",
     "Creator: natema. Source: https://github.com/natema/wordhoard. Also credit Wiktionary contributors and OpenSubtitles via hermitdave/FrequencyWords, as the wordhoard NOTICE requires.",
-    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy."
+    "Share-alike applies to the redistributed lemma list. Glosses and synonym chips are original Hiato learner copy.",
+    "Example sentences selected from Tatoeba (https://tatoeba.org), licensed CC-BY 2.0 FR."
   ],
   "lemmas": [
     {
       "word": "POSTAMT",
       "gloss": "Einrichtung, wo man Briefe und Pakete aufgibt.",
       "synonyms": [],
+      "example": "Wo ist das Postamt?",
       "pos": "noun",
+      "ipa": "/\u02c8p\u0254st\u02cc\u0294amt/",
       "family": [
         "postamtlich"
-      ],
-      "ipa": "/ˈpɔstˌʔamt/"
+      ]
     },
     {
       "word": "VERDENKEN",
-      "gloss": "jemandem etwas übel nehmen",
+      "gloss": "jemandem etwas \u00fcbel nehmen",
       "synonyms": [
-        "übelnehmen",
-        "verübeln"
+        "\u00fcbelnehmen",
+        "ver\u00fcbeln"
       ],
+      "example": "Wer kann es ihnen verdenken?",
       "pos": "verb",
+      "ipa": "/f\u025b\u0250\u032f\u02c8d\u025b\u014bkn\u0329/",
       "family": [
         "Verdacht"
-      ],
-      "ipa": "/fɛɐ̯ˈdɛŋkn̩/"
+      ]
     },
     {
       "word": "OPTIMAL",
@@ -39,46 +42,50 @@
       "synonyms": [
         "ideal"
       ],
+      "example": "Er hat die verbleibende Zeit optimal ausgenutzt.",
       "pos": "adjective",
+      "ipa": "/\u0254pti\u02c8ma\u02d0l/",
       "family": [
         "optimalerweise",
         "Optimalfall",
-        "Optimalität"
-      ],
-      "ipa": "/ɔptiˈmaːl/"
+        "Optimalit\u00e4t"
+      ]
     },
     {
-      "word": "BETÄUBUNG",
+      "word": "BET\u00c4UBUNG",
       "gloss": "Zustand ohne Schmerzempfinden.",
       "synonyms": [
         "Narkose"
       ],
+      "example": "Ich gebe dir eine Bet\u00e4ubung.",
       "pos": "noun",
+      "ipa": "/b\u0259\u02c8t\u0254\u026a\u032fb\u028a\u014b/",
       "family": [
-        "Betäubungsgewehr",
-        "Betäubungsmethode",
-        "Betäubungsmittel"
-      ],
-      "ipa": "/bəˈtɔɪ̯bʊŋ/"
+        "Bet\u00e4ubungsgewehr",
+        "Bet\u00e4ubungsmethode",
+        "Bet\u00e4ubungsmittel"
+      ]
     },
     {
       "word": "GYMNASIUM",
-      "gloss": "Schule mit höherer Bildung",
+      "gloss": "Schule mit h\u00f6herer Bildung",
       "synonyms": [
         "Oberschule"
       ],
+      "example": "Ich vermisse das Gymnasium.",
       "pos": "noun",
+      "ipa": "/\u0261\u028fm\u02c8na\u02d0zi\u032f\u028am/",
       "family": [
         "Gymnasiumszeit"
-      ],
-      "ipa": "/ɡʏmˈnaːzi̯ʊm/"
+      ]
     },
     {
       "word": "WARTELISTE",
       "gloss": "Verzeichnis von Personen, die auf einen Platz hoffen.",
       "synonyms": [],
+      "example": "Es gibt eine Warteliste.",
       "pos": "noun",
-      "ipa": "/ˈvaʁtəˌlɪstə/",
+      "ipa": "/\u02c8va\u0281t\u0259\u02ccl\u026ast\u0259/",
       "family": [
         "Warten",
         "Liste"
@@ -86,10 +93,11 @@
     },
     {
       "word": "WASSERHAHN",
-      "gloss": "Vorrichtung in Küche oder Bad, aus der man Trinkbares zapft.",
+      "gloss": "Vorrichtung in K\u00fcche oder Bad, aus der man Trinkbares zapft.",
       "synonyms": [],
+      "example": "Der Wasserhahn tropft.",
       "pos": "noun",
-      "ipa": "/ˈvasɐˌhaːn/",
+      "ipa": "/\u02c8vas\u0250\u02ccha\u02d0n/",
       "family": [
         "Wasser",
         "Hahn"
@@ -97,12 +105,13 @@
     },
     {
       "word": "GEMEINHEIT",
-      "gloss": "Bösartiges, fieses Verhalten.",
+      "gloss": "B\u00f6sartiges, fieses Verhalten.",
       "synonyms": [
         "Niedertracht"
       ],
+      "example": "Das ist eine Gemeinheit.",
       "pos": "noun",
-      "ipa": "/ɡəˈmaɪ̯nhaɪ̯t/",
+      "ipa": "/\u0261\u0259\u02c8ma\u026a\u032fnha\u026a\u032ft/",
       "family": [
         "gemein"
       ]
@@ -114,11 +123,11 @@
         "verunstalten"
       ],
       "pos": "verb",
+      "ipa": "/\u025bnt\u02c8\u0283t\u025bl\u0259n/",
       "family": [
         "entstellt",
         "Entstellung"
-      ],
-      "ipa": "/ɛntˈʃtɛlən/"
+      ]
     },
     {
       "word": "WORTSPIEL",
@@ -126,20 +135,21 @@
       "synonyms": [
         "Kalauer"
       ],
+      "example": "Das ist ein Wortspiel.",
       "pos": "noun",
+      "ipa": "/\u02c8v\u0254\u0281t\u02cc\u0283pi\u02d0l/",
       "family": [
         "Wortspielerei"
-      ],
-      "ipa": "/ˈvɔʁtˌʃpiːl/"
+      ]
     },
     {
       "word": "ERDROSSELN",
-      "gloss": "durch Druck am Hals töten",
+      "gloss": "durch Druck am Hals t\u00f6ten",
       "synonyms": [
-        "erwürgen"
+        "erw\u00fcrgen"
       ],
       "pos": "verb",
-      "ipa": "/ɛɐ̯ˈdʁɔsl̩n/",
+      "ipa": "/\u025b\u0250\u032f\u02c8d\u0281\u0254sl\u0329n/",
       "family": [
         "Drossel"
       ]
@@ -150,25 +160,27 @@
       "synonyms": [
         "hoffnungslos"
       ],
+      "example": "Das ist unheilbar.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u028an\u02ccha\u026a\u032flba\u02d0\u0250\u032f/",
       "family": [
         "Unheilbarkeit"
-      ],
-      "ipa": "/ˈʊnˌhaɪ̯lbaːɐ̯/"
+      ]
     },
     {
       "word": "BALLERN",
-      "gloss": "laut und heftig schießen",
+      "gloss": "laut und heftig schie\u00dfen",
       "synonyms": [
-        "schießen"
+        "schie\u00dfen"
       ],
+      "example": "In der \u00dcbung durfte die Gruppe auf dem Schie\u00dfstand mit der alten Panzerfaust ordentlich ballern.",
       "pos": "verb",
+      "ipa": "/\u02c8bal\u0250n/",
       "family": [
         "Ballerfilm",
         "Ballermann",
         "Ballerspiel"
-      ],
-      "ipa": "/ˈbalɐn/"
+      ]
     },
     {
       "word": "ZUMAL",
@@ -176,65 +188,69 @@
       "synonyms": [
         "besonders"
       ],
+      "example": "Wir m\u00fcssen die Dinge lustiger nehmen, als sie es verdienen, zumal wir sie lange Zeit ernster genommen haben, als sie es verdienen.",
       "pos": "adverb",
-      "ipa": "/t͡suˈmaːl/",
+      "ipa": "/t\u0361su\u02c8ma\u02d0l/",
       "family": [
         "besonders"
       ]
     },
     {
-      "word": "BLOßSTELL",
-      "gloss": "Jemanden öffentlich lächerlich machen.",
+      "word": "BLO\u00dfSTELL",
+      "gloss": "Jemanden \u00f6ffentlich l\u00e4cherlich machen.",
       "synonyms": [
         "entlarven"
       ],
       "pos": "noun",
-      "ipa": "/ˈblɔsˌʃtɛl/",
+      "ipa": "/\u02c8bl\u0254s\u02cc\u0283t\u025bl/",
       "family": [
-        "bloßstellen",
-        "bloß"
+        "blo\u00dfstellen",
+        "blo\u00df"
       ]
     },
     {
       "word": "PFAND",
-      "gloss": "Sicherheit oder Einsatz für etwas",
+      "gloss": "Sicherheit oder Einsatz f\u00fcr etwas",
       "synonyms": [
         "Kaution"
       ],
+      "example": "Ist da Pfand drauf?",
       "pos": "noun",
+      "ipa": "/p\u0361fant/",
       "family": [
-        "pfänden",
-        "verpfänden",
+        "pf\u00e4nden",
+        "verpf\u00e4nden",
         "Pfandausgleich"
-      ],
-      "ipa": "/p͡fant/"
+      ]
     },
     {
       "word": "MISST",
-      "gloss": "etwas mit einem Maßband oder Gerät in seiner Größe feststellen",
+      "gloss": "etwas mit einem Ma\u00dfband oder Ger\u00e4t in seiner Gr\u00f6\u00dfe feststellen",
       "synonyms": [
         "messen"
       ],
+      "example": "Er misst den Tisch aus.",
       "pos": "verb",
-      "ipa": "/mɪst/",
+      "ipa": "/m\u026ast/",
       "family": [
         "messen",
-        "Maß"
+        "Ma\u00df"
       ]
     },
     {
       "word": "GARNISON",
-      "gloss": "militärische Einheit oder Standort",
+      "gloss": "milit\u00e4rische Einheit oder Standort",
       "synonyms": [
         "Kaserne"
       ],
+      "example": "Die Garnison wurde zum Aufgeben gezwungen.",
       "pos": "noun",
+      "ipa": "/\u0261a\u0281ni\u02c8zo\u02d0n/",
       "family": [
-        "Garnisonältester",
+        "Garnison\u00e4ltester",
         "Garnisondienst",
         "Garnisonkirche"
-      ],
-      "ipa": "/ɡaʁniˈzoːn/"
+      ]
     },
     {
       "word": "LAWINE",
@@ -242,13 +258,14 @@
       "synonyms": [
         "Schneemasse"
       ],
+      "example": "Er wurde von einer Lawine begraben.",
       "pos": "noun",
+      "ipa": "/la\u02c8vi\u02d0n\u0259/",
       "family": [
         "lawinenartig",
         "Abfalllawine",
         "Blechlawine"
-      ],
-      "ipa": "/laˈviːnə/"
+      ]
     },
     {
       "word": "PANTOFFEL",
@@ -256,35 +273,38 @@
       "synonyms": [
         "Hausschuh"
       ],
+      "example": "Er steht unter ihrem Pantoffel.",
       "pos": "noun",
+      "ipa": "/pan\u02c8t\u0254fl\u0329/",
       "family": [
         "Pantoffelheld",
         "Pantoffeltierchen"
-      ],
-      "ipa": "/panˈtɔfl̩/"
+      ]
     },
     {
       "word": "ETABLIEREN",
-      "gloss": "etwas gründen oder einrichten",
+      "gloss": "etwas gr\u00fcnden oder einrichten",
       "synonyms": [
-        "gründen"
+        "gr\u00fcnden"
       ],
+      "example": "Wir brauchen alle Zeit der Welt, um Esperanto weitl\u00e4ufig zu etablieren.",
       "pos": "verb",
+      "ipa": "/eta\u02c8bli\u02d0\u0281\u0259n/",
       "family": [
         "etablierend",
         "etabliert",
         "Etablierung"
-      ],
-      "ipa": "/etaˈbliːʁən/"
+      ]
     },
     {
-      "word": "FLÖHE",
+      "word": "FL\u00d6HE",
       "gloss": "ein kleines Insekt, das bei Tieren und Menschen juckende Bisse verursacht",
       "synonyms": [
         "Parasiten"
       ],
+      "example": "Mein Hund hat Fl\u00f6he.",
       "pos": "noun",
-      "ipa": "/ˈfløːə/",
+      "ipa": "/\u02c8fl\u00f8\u02d0\u0259/",
       "family": [
         "Floh",
         "Flohmarkt"
@@ -296,70 +316,76 @@
       "synonyms": [
         "Blockade"
       ],
+      "example": "Seine Hemmung, vor Publikum zu sprechen, verschwand nach einigen Proben.",
       "pos": "noun",
+      "ipa": "/\u02c8h\u025bm\u028a\u014b/",
       "family": [
         "hemmungslos"
-      ],
-      "ipa": "/ˈhɛmʊŋ/"
+      ]
     },
     {
       "word": "WEGLEGEN",
-      "gloss": "Etwas zur Seite tun, damit es nicht stört.",
+      "gloss": "Etwas zur Seite tun, damit es nicht st\u00f6rt.",
       "synonyms": [
         "ablegen"
       ],
+      "example": "K\u00f6nntest du bitte das Telefon weglegen?",
       "pos": "verb",
-      "ipa": "/ˈvɛkˌleːɡn̩/",
+      "ipa": "/\u02c8v\u025bk\u02ccle\u02d0\u0261n\u0329/",
       "family": [
         "legen",
         "weg"
       ]
     },
     {
-      "word": "SCHNÜFFLER",
+      "word": "SCHN\u00dcFFLER",
       "gloss": "Eine Person, die neugierig in fremden Angelegenheiten sucht.",
       "synonyms": [
         "Spion"
       ],
+      "example": "Hunde sind die perfekten Schn\u00fcffler.",
       "pos": "noun",
-      "ipa": "/ˈʃnʏflɐ/",
+      "ipa": "/\u02c8\u0283n\u028ffl\u0250/",
       "family": [
-        "schnüffeln",
-        "Schnüffelnase"
+        "schn\u00fcffeln",
+        "Schn\u00fcffelnase"
       ]
     },
     {
-      "word": "AUFSPIEßEN",
+      "word": "AUFSPIE\u00dfEN",
       "gloss": "etwas mit einer spitzen Stange oder einem Messer durchbohren",
       "synonyms": [
         "durchbohren"
       ],
+      "example": "Jede Zutat, die sich aufspie\u00dfen l\u00e4sst, kann verwendet werden.",
       "pos": "verb",
-      "ipa": "/ˈaʊ̯fˌʃpiːsn̩/",
+      "ipa": "/\u02c8a\u028a\u032ff\u02cc\u0283pi\u02d0sn\u0329/",
       "family": [
-        "spießen"
+        "spie\u00dfen"
       ]
     },
     {
       "word": "SADIST",
-      "gloss": "eine Person, die Freude daran hat, anderen Schmerz zuzufügen",
+      "gloss": "eine Person, die Freude daran hat, anderen Schmerz zuzuf\u00fcgen",
       "synonyms": [
-        "Quäler"
+        "Qu\u00e4ler"
       ],
+      "example": "Der Nachbar ist ein Sadist, weil er Katzen mit Wasser bespritzt, nur um ihr Geschrei zu h\u00f6ren.",
       "pos": "noun",
+      "ipa": "/za\u02c8d\u026ast/",
       "family": [
         "sadistisch"
-      ],
-      "ipa": "/zaˈdɪst/"
+      ]
     },
     {
-      "word": "HOCHNÄSIG",
-      "gloss": "eine Person, die sich anderen gegenüber überlegen fühlt",
+      "word": "HOCHN\u00c4SIG",
+      "gloss": "eine Person, die sich anderen gegen\u00fcber \u00fcberlegen f\u00fchlt",
       "synonyms": [
         "arrogant"
       ],
+      "example": "Warum bist du so hochn\u00e4sig?",
       "pos": "adjective",
-      "ipa": "/ˈhoːxˌnɛːzɪç/",
+      "ipa": "/\u02c8ho\u02d0x\u02ccn\u025b\u02d0z\u026a\u00e7/",
       "family": [
         "hoch",
         "nase"
@@ -367,12 +393,12 @@
     },
     {
       "word": "ANFALLEN",
-      "gloss": "plötzlich auf jemanden oder etwas losgehen und angreifen",
+      "gloss": "pl\u00f6tzlich auf jemanden oder etwas losgehen und angreifen",
       "synonyms": [
         "angreifen"
       ],
       "pos": "verb",
-      "ipa": "/ˈanˌfalən/",
+      "ipa": "/\u02c8an\u02ccfal\u0259n/",
       "family": [
         "Anfall"
       ]
@@ -383,34 +409,37 @@
       "synonyms": [
         "befestigen"
       ],
+      "example": "Woran willst du das festmachen?",
       "pos": "verb",
-      "ipa": "/ˈfɛstˌmaxn̩/",
+      "ipa": "/\u02c8f\u025bst\u02ccmaxn\u0329/",
       "family": [
         "fest",
         "machen"
       ]
     },
     {
-      "word": "ZERDRÜCKEN",
+      "word": "ZERDR\u00dcCKEN",
       "gloss": "Etwas mit Kraft platt machen.",
       "synonyms": [
         "quetschen"
       ],
+      "example": "Die schwere Maschine wird die Dosen einfach zerdr\u00fccken.",
       "pos": "verb",
-      "ipa": "/t͡sɛɐ̯ˈdʁʏkn̩/",
+      "ipa": "/t\u0361s\u025b\u0250\u032f\u02c8d\u0281\u028fkn\u0329/",
       "family": [
-        "drücken",
-        "zerdrückt"
+        "dr\u00fccken",
+        "zerdr\u00fcckt"
       ]
     },
     {
       "word": "ABGEFAHREN",
-      "gloss": "eine Person, die ungewöhnlich oder verrückt wirkt",
+      "gloss": "eine Person, die ungew\u00f6hnlich oder verr\u00fcckt wirkt",
       "synonyms": [
-        "verrückt"
+        "verr\u00fcckt"
       ],
+      "example": "Das ist ja so abgefahren!",
       "pos": "adjective",
-      "ipa": "/ˈapɡəˌfaːʁən/",
+      "ipa": "/\u02c8ap\u0261\u0259\u02ccfa\u02d0\u0281\u0259n/",
       "family": [
         "abfahren"
       ]
@@ -421,8 +450,9 @@
       "synonyms": [
         "Freiraum"
       ],
+      "example": "Gib mir diesmal bitte etwas Spielraum!",
       "pos": "noun",
-      "ipa": "/ˈʃpiːlˌʁaʊ̯m/",
+      "ipa": "/\u02c8\u0283pi\u02d0l\u02cc\u0281a\u028a\u032fm/",
       "family": [
         "Spiel",
         "Raum"
@@ -430,12 +460,13 @@
     },
     {
       "word": "MEMOIREN",
-      "gloss": "eine schriftliche Erzählung über eigene Erlebnisse",
+      "gloss": "eine schriftliche Erz\u00e4hlung \u00fcber eigene Erlebnisse",
       "synonyms": [
         "Erinnerungen"
       ],
+      "example": "Er verfasste seine Memoiren.",
       "pos": "noun",
-      "ipa": "/meˈmo̯aːʁən/"
+      "ipa": "/me\u02c8mo\u032fa\u02d0\u0281\u0259n/"
     },
     {
       "word": "ABSTAMMUNG",
@@ -443,20 +474,22 @@
       "synonyms": [
         "Herkunft"
       ],
+      "example": "Er ist ein US-B\u00fcrger asiatischer Abstammung.",
       "pos": "noun",
+      "ipa": "/\u02c8ap\u02cc\u0283tam\u028a\u014b/",
       "family": [
         "Abstammungsgutachten",
         "Abstammungslehre",
         "Abstammungsnachweis"
-      ],
-      "ipa": "/ˈapˌʃtamʊŋ/"
+      ]
     },
     {
       "word": "RECHTES",
       "gloss": "Eine politische Haltung mit konservativen oder nationalistischen Werten.",
       "synonyms": [],
+      "example": "Die Partei vertritt ein stark rechtes Gedankengut und setzt sich f\u00fcr traditionelle Werte ein.",
       "pos": "adjective",
-      "ipa": "/ˈʁɛçtəs/",
+      "ipa": "/\u02c8\u0281\u025b\u00e7t\u0259s/",
       "family": [
         "Recht",
         "Rechts"
@@ -464,10 +497,11 @@
     },
     {
       "word": "KOREANER",
-      "gloss": "Eine Person aus dem Land mit der Hauptstadt Seoul oder aus dem Norden mit Pjöngjang.",
+      "gloss": "Eine Person aus dem Land mit der Hauptstadt Seoul oder aus dem Norden mit Pj\u00f6ngjang.",
       "synonyms": [],
+      "example": "Er ist Koreaner.",
       "pos": "noun",
-      "ipa": "/koʁeˈaːnɐ/",
+      "ipa": "/ko\u0281e\u02c8a\u02d0n\u0250/",
       "family": [
         "Korea",
         "Koreanisch"
@@ -479,20 +513,22 @@
       "synonyms": [
         "Mitbesitzer"
       ],
+      "example": "Ich habe meinem Teilhaber vertraut.",
       "pos": "noun",
-      "ipa": "/ˈtaɪ̯lˌhaːbɐ/",
+      "ipa": "/\u02c8ta\u026a\u032fl\u02ccha\u02d0b\u0250/",
       "family": [
         "Teil"
       ]
     },
     {
       "word": "HERFALLEN",
-      "gloss": "plötzlich und heftig auf jemanden losgehen",
+      "gloss": "pl\u00f6tzlich und heftig auf jemanden losgehen",
       "synonyms": [
         "angreifen"
       ],
+      "example": "Wenn du versuchst allen zu gefallen, werden bald alle \u00fcber dich herfallen.",
       "pos": "verb",
-      "ipa": "/ˈheːɐ̯ˌfalən/",
+      "ipa": "/\u02c8he\u02d0\u0250\u032f\u02ccfal\u0259n/",
       "family": [
         "fallen",
         "her"
@@ -504,54 +540,59 @@
       "synonyms": [
         "Barriere"
       ],
+      "example": "Wie hast du es durch die Absperrung geschafft?",
       "pos": "noun",
+      "ipa": "/\u02c8ap\u02cc\u0283p\u025b\u0281\u028a\u014b/",
       "family": [
         "Absperrgitter"
-      ],
-      "ipa": "/ˈapˌʃpɛʁʊŋ/"
+      ]
     },
     {
-      "word": "BETRÜGE",
-      "gloss": "Handlungen, bei denen jemand absichtlich getäuscht wird.",
+      "word": "BETR\u00dcGE",
+      "gloss": "Handlungen, bei denen jemand absichtlich get\u00e4uscht wird.",
       "synonyms": [],
+      "example": "Er deckte die Betr\u00fcge des Finanzberaters auf und warnte die Kunden rechtzeitig.",
       "pos": "verb",
-      "ipa": "/bəˈtʁyːɡə/",
+      "ipa": "/b\u0259\u02c8t\u0281y\u02d0\u0261\u0259/",
       "family": [
-        "betrügen",
+        "betr\u00fcgen",
         "Betrug"
       ]
     },
     {
       "word": "REDENSART",
-      "gloss": "eine feste Wendung mit übertragener Bedeutung",
+      "gloss": "eine feste Wendung mit \u00fcbertragener Bedeutung",
       "synonyms": [
         "Sprichwort"
       ],
+      "example": "Das ist eine Redensart.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0281e\u02d0dn\u0329s\u02cc\u0294a\u02d0\u0250\u032ft/",
       "family": [
         "redensartlich"
-      ],
-      "ipa": "/ˈʁeːdn̩sˌʔaːɐ̯t/"
+      ]
     },
     {
       "word": "SALBE",
-      "gloss": "eine weiche, streichfähige Masse zur Pflege oder Heilung der Haut",
+      "gloss": "eine weiche, streichf\u00e4hige Masse zur Pflege oder Heilung der Haut",
       "synonyms": [
         "Creme"
       ],
+      "example": "Ich brauchte diese Salbe.",
       "pos": "verb",
+      "ipa": "/\u02c8zalb\u0259/",
       "family": [
         "ansalben",
         "einsalben"
-      ],
-      "ipa": "/ˈzalbə/"
+      ]
     },
     {
       "word": "NULLEN",
-      "gloss": "Mehrere Ziffern, die für nichts stehen, wie hinten in 1000.",
+      "gloss": "Mehrere Ziffern, die f\u00fcr nichts stehen, wie hinten in 1000.",
       "synonyms": [],
+      "example": "Da sind zu viele Nullen.",
       "pos": "verb",
-      "ipa": "/ˈnʊlən/",
+      "ipa": "/\u02c8n\u028al\u0259n/",
       "family": [
         "Null"
       ]
@@ -560,8 +601,9 @@
       "word": "ATOMWAFFE",
       "gloss": "Eine Bombe, die durch Kernspaltung enorme Energie freisetzt.",
       "synonyms": [],
+      "example": "Wer wei\u00df, wie nahe dieses Land der Entwicklung einer Atomwaffe ist?",
       "pos": "noun",
-      "ipa": "/aˈtoːmˌvafə/",
+      "ipa": "/a\u02c8to\u02d0m\u02ccvaf\u0259/",
       "family": [
         "Atom"
       ]
@@ -570,10 +612,10 @@
       "word": "ERDENKLICH",
       "gloss": "alles, was man sich vorstellen oder denken kann",
       "synonyms": [
-        "möglich"
+        "m\u00f6glich"
       ],
       "pos": "adjective",
-      "ipa": "/ɛɐ̯ˈdɛŋklɪç/",
+      "ipa": "/\u025b\u0250\u032f\u02c8d\u025b\u014bkl\u026a\u00e7/",
       "family": [
         "erdenken",
         "denkbar"
@@ -581,12 +623,13 @@
     },
     {
       "word": "VORLAUT",
-      "gloss": "eine Person, die unpassend oder zu früh etwas sagt",
+      "gloss": "eine Person, die unpassend oder zu fr\u00fch etwas sagt",
       "synonyms": [
         "frech"
       ],
+      "example": "Er war sehr vorlaut.",
       "pos": "adjective",
-      "ipa": "/ˈfoːɐ̯ˌlaʊ̯t/",
+      "ipa": "/\u02c8fo\u02d0\u0250\u032f\u02ccla\u028a\u032ft/",
       "family": [
         "laut",
         "vor"
@@ -594,12 +637,13 @@
     },
     {
       "word": "NEUROTISCH",
-      "gloss": "eine Person, die übermäßig ängstlich oder nervös ist",
+      "gloss": "eine Person, die \u00fcberm\u00e4\u00dfig \u00e4ngstlich oder nerv\u00f6s ist",
       "synonyms": [
-        "nervös"
+        "nerv\u00f6s"
       ],
+      "example": "Seine Werke spiegeln eine neurotisch gewordene Gesellschaft.",
       "pos": "adjective",
-      "ipa": "/nɔɪ̯ˈʁoːtɪʃ/",
+      "ipa": "/n\u0254\u026a\u032f\u02c8\u0281o\u02d0t\u026a\u0283/",
       "family": [
         "Nerv",
         "Neurose"
@@ -607,17 +651,18 @@
     },
     {
       "word": "BEKEHREN",
-      "gloss": "jemanden dazu bringen, einen anderen Glauben oder eine andere Überzeugung anzunehmen",
+      "gloss": "jemanden dazu bringen, einen anderen Glauben oder eine andere \u00dcberzeugung anzunehmen",
       "synonyms": [
-        "überzeugen"
+        "\u00fcberzeugen"
       ],
+      "example": "Je weiter der Mensch fortschreitet, desto weniger Dinge wird er finden, zu denen er sich bekehren kann.",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8ke\u02d0\u0281\u0259n/",
       "family": [
         "bekehrend",
         "bekehrt",
         "Bekehrer"
-      ],
-      "ipa": "/bəˈkeːʁən/"
+      ]
     },
     {
       "word": "GRAUENVOLL",
@@ -625,34 +670,37 @@
       "synonyms": [
         "schrecklich"
       ],
+      "example": "Wenn es geschieht, ist es grauenvoll f\u00fcr mich.",
       "pos": "adjective",
-      "ipa": "/ˈɡʁaʊ̯ənˌfɔl/",
+      "ipa": "/\u02c8\u0261\u0281a\u028a\u032f\u0259n\u02ccf\u0254l/",
       "family": [
         "Grauen"
       ]
     },
     {
       "word": "GEMACHT",
-      "gloss": "etwas, das künstlich hergestellt wurde",
+      "gloss": "etwas, das k\u00fcnstlich hergestellt wurde",
       "synonyms": [
         "hergestellt"
       ],
+      "example": "Der Pullover ist aus synthetischen Fasern gemacht.",
       "pos": "verb",
-      "ipa": "/ɡəˈmaxt/",
+      "ipa": "/\u0261\u0259\u02c8maxt/",
       "family": [
         "machen",
         "Gemach"
       ]
     },
     {
-      "word": "JÄHRIG",
+      "word": "J\u00c4HRIG",
       "gloss": "Ein bestimmtes Alter habend.",
       "synonyms": [],
+      "example": "84-j\u00e4hrig, tr\u00e4umte ich von einer fl\u00fcchtigen Liebe.",
       "pos": "adjective",
+      "ipa": "/\u02c8j\u025b\u02d0\u0281\u026a\u00e7/",
       "family": [
-        "jährigen"
-      ],
-      "ipa": "/ˈjɛːʁɪç/"
+        "j\u00e4hrigen"
+      ]
     },
     {
       "word": "DELIKAT",
@@ -660,11 +708,12 @@
       "synonyms": [
         "fein"
       ],
+      "example": "Dieses Gericht ist delikat.",
       "pos": "adjective",
+      "ipa": "/deli\u02c8ka\u02d0t/",
       "family": [
         "Delikatesse"
-      ],
-      "ipa": "/deliˈkaːt/"
+      ]
     },
     {
       "word": "OFFLINE",
@@ -672,60 +721,64 @@
       "synonyms": [
         "nicht online"
       ],
+      "example": "Der Server ist offline.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u0254fla\u026a\u032fn/",
       "family": [
         "Offlinebetrieb",
         "Offlinemedium",
         "Offlinemodus"
-      ],
-      "ipa": "/ˈɔflaɪ̯n/"
-    },
-    {
-      "word": "MOB",
-      "gloss": "eine aufgeregte, gewalttätige Menschenmenge",
-      "synonyms": [
-        "Pöbel"
-      ],
-      "pos": "noun",
-      "family": [
-        "mobben"
-      ],
-      "ipa": "/mɔp/"
-    },
-    {
-      "word": "GLIEDMAßE",
-      "gloss": "ein Körperteil wie Arm oder Bein, der sich bewegen lässt",
-      "synonyms": [
-        "Extremität"
-      ],
-      "pos": "noun",
-      "ipa": "/ˈɡliːtˌmaːsə/",
-      "family": [
-        "Glied",
-        "Maß"
       ]
     },
     {
-      "word": "FLIEßEND",
+      "word": "MOB",
+      "gloss": "eine aufgeregte, gewaltt\u00e4tige Menschenmenge",
+      "synonyms": [
+        "P\u00f6bel"
+      ],
+      "example": "In Amsterdam w\u00fctet der Mob.",
+      "pos": "noun",
+      "ipa": "/m\u0254p/",
+      "family": [
+        "mobben"
+      ]
+    },
+    {
+      "word": "GLIEDMA\u00dfE",
+      "gloss": "ein K\u00f6rperteil wie Arm oder Bein, der sich bewegen l\u00e4sst",
+      "synonyms": [
+        "Extremit\u00e4t"
+      ],
+      "pos": "noun",
+      "ipa": "/\u02c8\u0261li\u02d0t\u02ccma\u02d0s\u0259/",
+      "family": [
+        "Glied",
+        "Ma\u00df"
+      ]
+    },
+    {
+      "word": "FLIE\u00dfEND",
       "gloss": "eine Sprache ohne Stocken oder Unterbrechung sprechen",
       "synonyms": [
-        "flüssig"
+        "fl\u00fcssig"
       ],
+      "example": "Er spricht flie\u00dfend.",
       "pos": "adjective",
-      "ipa": "/ˈfliːsn̩t/",
+      "ipa": "/\u02c8fli\u02d0sn\u0329t/",
       "family": [
-        "fließen",
-        "flüssig"
+        "flie\u00dfen",
+        "fl\u00fcssig"
       ]
     },
     {
       "word": "OPTIMISMUS",
-      "gloss": "eine grundsätzlich positive und hoffnungsvolle Haltung",
+      "gloss": "eine grunds\u00e4tzlich positive und hoffnungsvolle Haltung",
       "synonyms": [
         "Zuversicht"
       ],
+      "example": "Mut gebiert Optimismus.",
       "pos": "noun",
-      "ipa": "/ɔptiˈmɪsmʊs/",
+      "ipa": "/\u0254pti\u02c8m\u026asm\u028as/",
       "family": [
         "optimistisch",
         "Optimum"
@@ -733,54 +786,58 @@
     },
     {
       "word": "OCHSEN",
-      "gloss": "ein kastriertes männliches Rind",
+      "gloss": "ein kastriertes m\u00e4nnliches Rind",
       "synonyms": [
         "Rind"
       ],
+      "example": "Spann die Ochsen vor den Pflug.",
       "pos": "noun",
-      "ipa": "/ˈɔksn̩/",
+      "ipa": "/\u02c8\u0254ksn\u0329/",
       "family": [
         "Ochse"
       ]
     },
     {
       "word": "PROMI",
-      "gloss": "Eine bekannte Person aus Medien oder Öffentlichkeit.",
+      "gloss": "Eine bekannte Person aus Medien oder \u00d6ffentlichkeit.",
       "synonyms": [
         "Star"
       ],
+      "example": "Er ist so etwas wie ein Promi.",
       "pos": "noun",
+      "ipa": "/\u02c8p\u0281\u0254mi/",
       "family": [
         "Promianwalt"
-      ],
-      "ipa": "/ˈpʁɔmi/"
+      ]
     },
     {
       "word": "SALUTIEREN",
-      "gloss": "eine militärische oder förmliche Grußbewegung ausführen",
+      "gloss": "eine milit\u00e4rische oder f\u00f6rmliche Gru\u00dfbewegung ausf\u00fchren",
       "synonyms": [
-        "grüßen",
+        "gr\u00fc\u00dfen",
         "winken"
       ],
+      "example": "Die Soldaten salutieren vor dem hohen Offizier.",
       "pos": "verb",
-      "ipa": "/zaluˈtiːʁən/",
+      "ipa": "/zalu\u02c8ti\u02d0\u0281\u0259n/",
       "family": [
         "Salut"
       ]
     },
     {
       "word": "ZUDECKEN",
-      "gloss": "Mit einem Tuch über etwas legen.",
+      "gloss": "Mit einem Tuch \u00fcber etwas legen.",
       "synonyms": [
-        "verhüllen"
+        "verh\u00fcllen"
       ],
+      "example": "Einen Fluss kann man \u00fcberbr\u00fccken, einen Brunnen zudecken, ein Feuer l\u00f6schen, wer aber verm\u00f6chte den Mund eines Volkes zum Schweigen zu bringen?",
       "pos": "verb",
+      "ipa": "/\u02c8t\u0361su\u02d0\u02ccd\u025bkn\u0329/",
       "family": [
         "zudeckend",
         "zugedeckt",
         "Zudecke"
-      ],
-      "ipa": "/ˈt͡suːˌdɛkn̩/"
+      ]
     },
     {
       "word": "GEHILFE",
@@ -789,20 +846,21 @@
         "Assistent"
       ],
       "pos": "noun",
+      "ipa": "/\u0261\u0259\u02c8h\u026alf\u0259/",
       "family": [
-        "Gehilfenprüfung"
-      ],
-      "ipa": "/ɡəˈhɪlfə/"
+        "Gehilfenpr\u00fcfung"
+      ]
     },
     {
       "word": "BRUSTKORB",
-      "gloss": "der knöcherne Teil des Körpers, der Herz und Lunge schützt",
+      "gloss": "der kn\u00f6cherne Teil des K\u00f6rpers, der Herz und Lunge sch\u00fctzt",
       "synonyms": [
         "Rippenkorb",
         "Thorax"
       ],
+      "example": "Ich musste so sehr lachen, dass mir der Brustkorb schmerzte.",
       "pos": "noun",
-      "ipa": "/ˈbʁʊstˌkɔʁp/",
+      "ipa": "/\u02c8b\u0281\u028ast\u02cck\u0254\u0281p/",
       "family": [
         "Brust",
         "Korb"
@@ -810,105 +868,114 @@
     },
     {
       "word": "VOLT",
-      "gloss": "eine Einheit für elektrische Spannung",
+      "gloss": "eine Einheit f\u00fcr elektrische Spannung",
       "synonyms": [
         "Einheit"
       ],
+      "example": "Die Batterie hat eine Spannung von f\u00fcnfzehn Volt.",
       "pos": "noun",
+      "ipa": "/v\u0254lt/",
       "family": [
         "Voltampere",
         "Voltmeter"
-      ],
-      "ipa": "/vɔlt/"
+      ]
     },
     {
       "word": "AUSSCHNITT",
-      "gloss": "ein Teil eines größeren Ganzen, der herausgenommen wurde",
+      "gloss": "ein Teil eines gr\u00f6\u00dferen Ganzen, der herausgenommen wurde",
       "synonyms": [
-        "Dekolleté"
+        "Dekollet\u00e9"
       ],
+      "example": "Er las einen Shakespeare-Ausschnitt.",
       "pos": "noun",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cc\u0283n\u026at/",
       "family": [
         "ausschnittsweise",
-        "Ausschnittvergrößerung"
-      ],
-      "ipa": "/ˈaʊ̯sˌʃnɪt/"
+        "Ausschnittvergr\u00f6\u00dferung"
+      ]
     },
     {
       "word": "MAYONNAISE",
-      "gloss": "Eine dickflüssige, cremige Soße aus Eigelb und Öl.",
+      "gloss": "Eine dickfl\u00fcssige, cremige So\u00dfe aus Eigelb und \u00d6l.",
       "synonyms": [],
+      "example": "Magst du das mit Mayonnaise?",
       "pos": "noun",
-      "ipa": "/majɔˈnɛːzə/"
+      "ipa": "/maj\u0254\u02c8n\u025b\u02d0z\u0259/"
     },
     {
-      "word": "GEBÜHR",
-      "gloss": "ein festgelegter Betrag, der für eine Leistung oder Nutzung gezahlt wird",
+      "word": "GEB\u00dcHR",
+      "gloss": "ein festgelegter Betrag, der f\u00fcr eine Leistung oder Nutzung gezahlt wird",
       "synonyms": [
         "Entgelt",
         "Kosten"
       ],
+      "example": "Gibt es eine Geb\u00fchr?",
       "pos": "noun",
+      "ipa": "/\u0261\u0259\u02c8by\u02d0\u0250\u032f/",
       "family": [
-        "gebührenfrei",
-        "gebührenpflichtig",
-        "gebührlich"
-      ],
-      "ipa": "/ɡəˈbyːɐ̯/"
+        "geb\u00fchrenfrei",
+        "geb\u00fchrenpflichtig",
+        "geb\u00fchrlich"
+      ]
     },
     {
       "word": "UNZUCHT",
-      "gloss": "sexuelle Handlungen, die gegen gesellschaftliche oder rechtliche Normen verstoßen",
+      "gloss": "sexuelle Handlungen, die gegen gesellschaftliche oder rechtliche Normen versto\u00dfen",
       "synonyms": [
         "Vergehen"
       ],
+      "example": "Die Tatbest\u00e4nde der Unzucht sind im Strafgesetzbuch klar definiert, um gesellschaftliche Werte zu sch\u00fctzen.",
       "pos": "noun",
+      "ipa": "/\u02c8\u028an\u02cct\u0361s\u028axt/",
       "family": [
-        "unzüchtig"
-      ],
-      "ipa": "/ˈʊnˌt͡sʊxt/"
+        "unz\u00fcchtig"
+      ]
     },
     {
-      "word": "ÜBERSETZER",
+      "word": "\u00dcBERSETZER",
       "gloss": "Eine Person, die Texte von einer Sprache in eine andere bringt.",
       "synonyms": [
         "Dolmetscher"
       ],
+      "example": "Ich bin \u00dcbersetzer.",
       "pos": "noun",
+      "ipa": "/\u02ccy\u02d0b\u0250\u02c8z\u025bt\u0361s\u0250/",
       "family": [
-        "Übersetzerausbildung",
-        "Übersetzerstudium",
-        "Übersetzerbauer"
-      ],
-      "ipa": "/ˌyːbɐˈzɛt͡sɐ/"
+        "\u00dcbersetzerausbildung",
+        "\u00dcbersetzerstudium",
+        "\u00dcbersetzerbauer"
+      ]
     },
     {
-      "word": "EUROPÄER",
+      "word": "EUROP\u00c4ER",
       "gloss": "Eine Person, die vom Kontinent mit Paris und Berlin stammt.",
       "synonyms": [],
+      "example": "Ich bin Europ\u00e4er.",
       "pos": "noun",
+      "ipa": "/\u02cc\u0254\u026a\u032f\u0281o\u02c8p\u025b\u02d0\u0250/",
       "family": [
-        "Inseleuropäer",
-        "Kontinentaleuropäer",
-        "Mitteleuropäer"
-      ],
-      "ipa": "/ˌɔɪ̯ʁoˈpɛːɐ/"
+        "Inseleurop\u00e4er",
+        "Kontinentaleurop\u00e4er",
+        "Mitteleurop\u00e4er"
+      ]
     },
     {
       "word": "RUPFEN",
-      "gloss": "Federn oder Haare ausreißen",
+      "gloss": "Federn oder Haare ausrei\u00dfen",
       "synonyms": [
         "zupfen"
       ],
+      "example": "Man soll die Schafe scheren, aber nicht rupfen.",
       "pos": "verb",
-      "ipa": "/ˈʁʊp͡fn̩/"
+      "ipa": "/\u02c8\u0281\u028ap\u0361fn\u0329/"
     },
     {
       "word": "ZWANZIGER",
       "gloss": "Ein Schein oder eine Sache mit dem Wert 20.",
       "synonyms": [],
+      "example": "Ich brauchte einen Zwanziger, um den Kaffee an der Ecke zu bezahlen.",
       "pos": "noun",
-      "ipa": "/ˈt͡svant͡sɪɡɐ/",
+      "ipa": "/\u02c8t\u0361svant\u0361s\u026a\u0261\u0250/",
       "family": [
         "zwanzig",
         "Zahl"
@@ -920,8 +987,9 @@
       "synonyms": [
         "Pilot"
       ],
+      "example": "Was sagte der Rennfahrer?",
       "pos": "noun",
-      "ipa": "/ˈʁɛnˌfaːʁɐ/",
+      "ipa": "/\u02c8\u0281\u025bn\u02ccfa\u02d0\u0281\u0250/",
       "family": [
         "rennen",
         "Fahrer"
@@ -929,58 +997,63 @@
     },
     {
       "word": "SHOGUN",
-      "gloss": "ein ehemaliger japanischer Militärherrscher",
+      "gloss": "ein ehemaliger japanischer Milit\u00e4rherrscher",
       "synonyms": [
         "Herrscher"
       ],
+      "example": "Jener Shogun verbrachte nach seinem R\u00fccktritt seinen Lebensabend in \u00e4u\u00dferster Stille.",
       "pos": "noun",
-      "ipa": "/ʃoːɡuːn/"
+      "ipa": "/\u0283o\u02d0\u0261u\u02d0n/"
     },
     {
       "word": "EHRFURCHT",
-      "gloss": "ein Gefühl tiefer Achtung und Respekt",
+      "gloss": "ein Gef\u00fchl tiefer Achtung und Respekt",
       "synonyms": [
         "Respekt"
       ],
+      "example": "Die Ehrfurcht schien mir Schweigen zu gebieten.",
       "pos": "noun",
+      "ipa": "/\u02c8e\u02d0\u0250\u032f\u02ccf\u028a\u0281\u00e7t/",
       "family": [
         "ehrfurchtsvoll"
-      ],
-      "ipa": "/ˈeːɐ̯ˌfʊʁçt/"
+      ]
     },
     {
-      "word": "UNGÜLTIG",
+      "word": "UNG\u00dcLTIG",
       "gloss": "etwas, das rechtlich oder formal nicht anerkannt wird",
       "synonyms": [
         "nichtig"
       ],
+      "example": "Diese Klausel ist ung\u00fcltig.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u028an\u02cc\u0261\u028flt\u026a\u00e7/",
       "family": [
-        "Ungültigkeit"
-      ],
-      "ipa": "/ˈʊnˌɡʏltɪç/"
+        "Ung\u00fcltigkeit"
+      ]
     },
     {
       "word": "VERKLINGEN",
-      "gloss": "allmählich leiser werden und schließlich verstummen",
+      "gloss": "allm\u00e4hlich leiser werden und schlie\u00dflich verstummen",
       "synonyms": [
         "verhallen"
       ],
+      "example": "Die Musik begann zu verklingen, als die letzte Note durch den Saal hallte.",
       "pos": "verb",
+      "ipa": "/f\u025b\u0250\u032f\u02c8kl\u026a\u014b\u0259n/",
       "family": [
         "verklingend",
         "verklungen"
-      ],
-      "ipa": "/fɛɐ̯ˈklɪŋən/"
+      ]
     },
     {
       "word": "CHIRURGIN",
-      "gloss": "eine Ärztin, die Operationen durchführt",
+      "gloss": "eine \u00c4rztin, die Operationen durchf\u00fchrt",
       "synonyms": [
-        "Ärztin"
+        "\u00c4rztin"
       ],
+      "example": "Ich will Chirurgin werden.",
       "pos": "noun",
-      "ipa": "/çiˈʁʊʁɡɪn/",
+      "ipa": "/\u00e7i\u02c8\u0281\u028a\u0281\u0261\u026an/",
       "family": [
         "Chirurg",
         "Chirurgie",
@@ -991,8 +1064,9 @@
       "word": "HALBBRUDER",
       "gloss": "Ein Junge oder Mann, mit dem man nur die Mutter oder nur den Vater gemeinsam hat.",
       "synonyms": [],
+      "example": "Er ist mein Halbbruder.",
       "pos": "noun",
-      "ipa": "/ˈhalpˌbʁuːdɐ/",
+      "ipa": "/\u02c8halp\u02ccb\u0281u\u02d0d\u0250/",
       "family": [
         "Halbschwester",
         "Halbgeschwister"
@@ -1000,12 +1074,13 @@
     },
     {
       "word": "BIO",
-      "gloss": "etwas, das ohne chemische Zusätze oder künstliche Düngemittel hergestellt wurde",
+      "gloss": "etwas, das ohne chemische Zus\u00e4tze oder k\u00fcnstliche D\u00fcngemittel hergestellt wurde",
       "synonyms": [
-        "ökologisch"
+        "\u00f6kologisch"
       ],
+      "example": "Alle Zutaten sind bio.",
       "pos": "noun",
-      "ipa": "/ˈbiːo/"
+      "ipa": "/\u02c8bi\u02d0o/"
     },
     {
       "word": "ENTZIFFERN",
@@ -1013,33 +1088,36 @@
       "synonyms": [
         "deuten"
       ],
+      "example": "Kannst du das entziffern?",
       "pos": "verb",
+      "ipa": "/\u025bnt\u02c8t\u0361s\u026af\u0250n/",
       "family": [
         "entzifferbar",
         "entziffernd",
         "entziffert"
-      ],
-      "ipa": "/ɛntˈt͡sɪfɐn/"
+      ]
     },
     {
-      "word": "PFÜTZE",
+      "word": "PF\u00dcTZE",
       "gloss": "kleine Ansammlung von Wasser auf dem Boden",
       "synonyms": [
         "Lache"
       ],
+      "example": "Er sprang \u00fcber die Pf\u00fctze.",
       "pos": "noun",
-      "ipa": "/ˈp͡fʏt͡sə/",
+      "ipa": "/\u02c8p\u0361f\u028ft\u0361s\u0259/",
       "family": [
-        "Pfützen",
-        "Pfützenbildung"
+        "Pf\u00fctzen",
+        "Pf\u00fctzenbildung"
       ]
     },
     {
       "word": "ISRAELI",
       "gloss": "Person aus dem Staat mit der Hauptstadt Jerusalem.",
       "synonyms": [],
+      "example": "Ich konnte mich nicht entsinnen, geh\u00f6rt zu haben, da\u00df er Israeli war.",
       "pos": "noun",
-      "ipa": "/ˌɪsʁaˈeːli/",
+      "ipa": "/\u02cc\u026as\u0281a\u02c8e\u02d0li/",
       "family": [
         "Israel",
         "israelisch"
@@ -1052,84 +1130,89 @@
         "anziehen"
       ],
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8kla\u026a\u032fdn\u0329/",
       "family": [
         "bekleidend",
         "bekleidet",
         "Bekleidung"
-      ],
-      "ipa": "/bəˈklaɪ̯dn̩/"
+      ]
     },
     {
-      "word": "BESTÄNDIG",
-      "gloss": "lange anhaltend oder unverändert bleibend",
+      "word": "BEST\u00c4NDIG",
+      "gloss": "lange anhaltend oder unver\u00e4ndert bleibend",
       "synonyms": [
         "stabil"
       ],
+      "example": "Er ging best\u00e4ndig auf und ab.",
       "pos": "adjective",
+      "ipa": "/b\u0259\u02c8\u0283t\u025bnd\u026a\u00e7/",
       "family": [
-        "Beständigkeit"
-      ],
-      "ipa": "/bəˈʃtɛndɪç/"
+        "Best\u00e4ndigkeit"
+      ]
     },
     {
       "word": "AKUT",
-      "gloss": "plötzlich und dringend auftretend",
+      "gloss": "pl\u00f6tzlich und dringend auftretend",
       "synonyms": [
         "dringend"
       ],
+      "example": "Das Problem wurde wieder akut.",
       "pos": "verb",
+      "ipa": "/a\u02c8ku\u02d0t/",
       "family": [
         "Akutbett",
         "Akutdienst",
         "Akutklinik"
-      ],
-      "ipa": "/aˈkuːt/"
+      ]
     },
     {
       "word": "ZOCKEN",
-      "gloss": "Geld beim Spiel oder an der Börse riskieren",
+      "gloss": "Geld beim Spiel oder an der B\u00f6rse riskieren",
       "synonyms": [
         "spielen"
       ],
+      "example": "Ich h\u00e4tte meine Hausaufgaben machen sollen, anstatt zu zocken.",
       "pos": "verb",
+      "ipa": "/\u02c8t\u0361s\u0254kn\u0329/",
       "family": [
         "verzocken",
         "durchzocken"
-      ],
-      "ipa": "/ˈt͡sɔkn̩/"
+      ]
     },
     {
       "word": "UNGEBOREN",
       "gloss": "Noch im Mutterleib.",
       "synonyms": [],
       "pos": "adjective",
+      "ipa": "/\u02c8\u028an\u0261\u0259\u02ccbo\u02d0\u0281\u0259n/",
       "family": [
         "Ungeborenes"
-      ],
-      "ipa": "/ˈʊnɡəˌboːʁən/"
+      ]
     },
     {
       "word": "SCHLITZ",
-      "gloss": "langer, schmaler Einschnitt oder Öffnung",
+      "gloss": "langer, schmaler Einschnitt oder \u00d6ffnung",
       "synonyms": [
         "Spalt"
       ],
+      "example": "Die Urnen haben einen Schlitz an der Oberseite.",
       "pos": "noun",
+      "ipa": "/\u0283l\u026at\u0361s/",
       "family": [
         "Schlitzauge",
-        "schlitzförmig",
-        "Schlitzlüftung"
-      ],
-      "ipa": "/ʃlɪt͡s/"
+        "schlitzf\u00f6rmig",
+        "Schlitzl\u00fcftung"
+      ]
     },
     {
       "word": "COMEBACK",
-      "gloss": "Rückkehr nach einer längeren Abwesenheit",
+      "gloss": "R\u00fcckkehr nach einer l\u00e4ngeren Abwesenheit",
       "synonyms": [
-        "Rückkehr"
+        "R\u00fcckkehr"
       ],
+      "example": "Dem Spieler gelang ein gl\u00e4nzendes Comeback.",
       "pos": "noun",
-      "ipa": "/ˌkamˈbɛk/",
+      "ipa": "/\u02cckam\u02c8b\u025bk/",
       "family": [
         "Comebacksong",
         "Comebacktour",
@@ -1142,13 +1225,14 @@
       "synonyms": [
         "Duldung"
       ],
+      "example": "Ich danke dir f\u00fcr deine Toleranz.",
       "pos": "noun",
+      "ipa": "/tol\u0259\u02c8\u0281ant\u0361s/",
       "family": [
         "Toleranzabzug",
         "Toleranzbereich",
         "Toleranzgrenze"
-      ],
-      "ipa": "/toləˈʁant͡s/"
+      ]
     },
     {
       "word": "VIELERLEI",
@@ -1156,8 +1240,9 @@
       "synonyms": [
         "allerlei"
       ],
+      "example": "Ich habe vielerlei B\u00fccher gelesen.",
       "pos": "adjective",
-      "ipa": "/ˈfiːlɐlaɪ̯/",
+      "ipa": "/\u02c8fi\u02d0l\u0250la\u026a\u032f/",
       "family": [
         "allerlei",
         "mancherlei"
@@ -1169,12 +1254,13 @@
       "synonyms": [
         "Besitzer"
       ],
+      "example": "Albert ist Inhaber eines T\u00e4towierstudios.",
       "pos": "noun",
+      "ipa": "/\u02c8\u026an\u02ccha\u02d0b\u0250/",
       "family": [
         "Inhaberschaft",
         "Inhaberwechsel"
-      ],
-      "ipa": "/ˈɪnˌhaːbɐ/"
+      ]
     },
     {
       "word": "EINSCHLAG",
@@ -1182,25 +1268,27 @@
       "synonyms": [
         "Treffer"
       ],
+      "example": "Wir bereiteten uns innerlich auf den Einschlag vor.",
       "pos": "noun",
+      "ipa": "/\u02c8a\u026a\u032fn\u02cc\u0283la\u02d0k/",
       "family": [
-        "einschlägig",
+        "einschl\u00e4gig",
         "Einschlagloch",
         "Einschlagskrater"
-      ],
-      "ipa": "/ˈaɪ̯nˌʃlaːk/"
+      ]
     },
     {
-      "word": "EINRÄUMEN",
+      "word": "EINR\u00c4UMEN",
       "gloss": "Platz schaffen oder etwas zugestehen",
       "synonyms": [
         "zugeben"
       ],
+      "example": "Du kannst diese B\u00fccher einr\u00e4umen.",
       "pos": "verb",
-      "ipa": "/ˈaɪ̯nˌʁɔɪ̯mən/",
+      "ipa": "/\u02c8a\u026a\u032fn\u02cc\u0281\u0254\u026a\u032fm\u0259n/",
       "family": [
-        "Einräumung",
-        "Räumung"
+        "Einr\u00e4umung",
+        "R\u00e4umung"
       ]
     },
     {
@@ -1209,8 +1297,9 @@
       "synonyms": [
         "gar"
       ],
+      "example": "Was hast du gekocht?",
       "pos": "verb",
-      "ipa": "/ɡəˈkɔxt/",
+      "ipa": "/\u0261\u0259\u02c8k\u0254xt/",
       "family": [
         "kochen",
         "Koch",
@@ -1223,8 +1312,9 @@
       "synonyms": [
         "grausam"
       ],
+      "example": "Sein sarkastischer Humor wirkte oft sadistisch, weil er die Schw\u00e4chen anderer ohne Mitgef\u00fchl blo\u00dfstellte.",
       "pos": "adjective",
-      "ipa": "/zaˈdɪstɪʃ/",
+      "ipa": "/za\u02c8d\u026ast\u026a\u0283/",
       "family": [
         "Sadismus",
         "Sadist"
@@ -1232,26 +1322,28 @@
     },
     {
       "word": "REGISTER",
-      "gloss": "Verzeichnis oder Liste von Einträgen",
+      "gloss": "Verzeichnis oder Liste von Eintr\u00e4gen",
       "synonyms": [
         "Verzeichnis"
       ],
+      "example": "Die Soziolinguistik stellt fest, dass jemand, je nach Beschaffenheit der sozialen Situation, in seiner Muttersprache unterschiedliche Register verwenden kann.",
       "pos": "noun",
+      "ipa": "/\u0281e\u02c8\u0261\u026ast\u0250/",
       "family": [
         "Registerauszug",
         "Registerband",
-        "Registergebühr"
-      ],
-      "ipa": "/ʁeˈɡɪstɐ/"
+        "Registergeb\u00fchr"
+      ]
     },
     {
       "word": "EHRENMANN",
-      "gloss": "Jemand, der sich integer und ehrlich verhält.",
+      "gloss": "Jemand, der sich integer und ehrlich verh\u00e4lt.",
       "synonyms": [
         "Gentleman"
       ],
+      "example": "Er war ein Ehrenmann.",
       "pos": "noun",
-      "ipa": "/ˈeːʁənˌman/",
+      "ipa": "/\u02c8e\u02d0\u0281\u0259n\u02ccman/",
       "family": [
         "Ehrenfrau",
         "Ehrenplatz",
@@ -1260,15 +1352,16 @@
     },
     {
       "word": "LAHMLEGEN",
-      "gloss": "etwas funktionsunfähig machen oder stoppen",
+      "gloss": "etwas funktionsunf\u00e4hig machen oder stoppen",
       "synonyms": [
         "blockieren"
       ],
+      "example": "Selbst ein kurzer Stromausfall kann den Betrieb stundenlang lahmlegen.",
       "pos": "verb",
+      "ipa": "/\u02c8la\u02d0m\u02ccle\u02d0\u0261n\u0329/",
       "family": [
         "Lahmlegung"
-      ],
-      "ipa": "/ˈlaːmˌleːɡn̩/"
+      ]
     },
     {
       "word": "EINBILDEN",
@@ -1276,8 +1369,9 @@
       "synonyms": [
         "vorstellen"
       ],
+      "example": "Es gibt Atheisten, die sich einbilden, Gott zu sein.",
       "pos": "verb",
-      "ipa": "/ˈaɪ̯nˌbɪldn̩/",
+      "ipa": "/\u02c8a\u026a\u032fn\u02ccb\u026aldn\u0329/",
       "family": [
         "Einbildung",
         "Bild"
@@ -1287,77 +1381,83 @@
       "word": "WITWER",
       "gloss": "Jemand, dessen Ehefrau gestorben ist.",
       "synonyms": [],
+      "example": "Er ist Witwer.",
       "pos": "adverb",
+      "ipa": "/\u02c8v\u026atv\u0250/",
       "family": [
         "Witwerrente",
         "Witwerschaft"
-      ],
-      "ipa": "/ˈvɪtvɐ/"
-    },
-    {
-      "word": "VEILCHEN",
-      "gloss": "eine kleine, violette Blume im Frühling",
-      "synonyms": [
-        "Blume"
-      ],
-      "pos": "noun",
-      "family": [
-        "veilchenblau",
-        "Veilchenblüte",
-        "Veilchenduft"
-      ],
-      "ipa": "/ˈfaɪ̯lçən/"
-    },
-    {
-      "word": "MÄNTEL",
-      "gloss": "lange Oberbekleidung zum Schutz vor Kälte",
-      "synonyms": [
-        "Umhänge"
-      ],
-      "pos": "adverb",
-      "ipa": "/ˈmɛntl̩/",
-      "family": [
-        "Mantel",
-        "Mäntelchen",
-        "Übermantel"
       ]
     },
     {
-      "word": "AUFWÄRTS",
-      "gloss": "in Richtung nach oben oder höher",
+      "word": "VEILCHEN",
+      "gloss": "eine kleine, violette Blume im Fr\u00fchling",
+      "synonyms": [
+        "Blume"
+      ],
+      "example": "Das Veilchen ist violett.",
+      "pos": "noun",
+      "ipa": "/\u02c8fa\u026a\u032fl\u00e7\u0259n/",
+      "family": [
+        "veilchenblau",
+        "Veilchenbl\u00fcte",
+        "Veilchenduft"
+      ]
+    },
+    {
+      "word": "M\u00c4NTEL",
+      "gloss": "lange Oberbekleidung zum Schutz vor K\u00e4lte",
+      "synonyms": [
+        "Umh\u00e4nge"
+      ],
+      "example": "Wie viele M\u00e4ntel hast du?",
+      "pos": "adverb",
+      "ipa": "/\u02c8m\u025bntl\u0329/",
+      "family": [
+        "Mantel",
+        "M\u00e4ntelchen",
+        "\u00dcbermantel"
+      ]
+    },
+    {
+      "word": "AUFW\u00c4RTS",
+      "gloss": "in Richtung nach oben oder h\u00f6her",
       "synonyms": [
         "hinauf"
       ],
+      "example": "Die Stra\u00dfe windet sich aufw\u00e4rts.",
       "pos": "adverb",
+      "ipa": "/\u02c8a\u028a\u032ffv\u025b\u0281t\u0361s/",
       "family": [
-        "Aufwärtsbewegung",
-        "Aufwärtstrend",
-        "hügelaufwärts"
-      ],
-      "ipa": "/ˈaʊ̯fvɛʁt͡s/"
+        "Aufw\u00e4rtsbewegung",
+        "Aufw\u00e4rtstrend",
+        "h\u00fcgelaufw\u00e4rts"
+      ]
     },
     {
       "word": "UMFANG",
-      "gloss": "Gesamtgröße oder Ausdehnung eines Gegenstands",
+      "gloss": "Gesamtgr\u00f6\u00dfe oder Ausdehnung eines Gegenstands",
       "synonyms": [
-        "Ausmaß"
+        "Ausma\u00df"
       ],
+      "example": "Ich unterst\u00fctze dich in vollem Umfang.",
       "pos": "noun",
+      "ipa": "/\u02c8\u028amfa\u014b/",
       "family": [
         "Lieferumfang",
         "umfangreich",
         "Umfangsberechnung"
-      ],
-      "ipa": "/ˈʊmfaŋ/"
+      ]
     },
     {
       "word": "VOLLGAS",
-      "gloss": "höchste Geschwindigkeit oder maximale Leistung",
+      "gloss": "h\u00f6chste Geschwindigkeit oder maximale Leistung",
       "synonyms": [
         "Tempo"
       ],
+      "example": "Das Land gibt Vollgas.",
       "pos": "noun",
-      "ipa": "/ˈfɔlˌɡaːs/",
+      "ipa": "/\u02c8f\u0254l\u02cc\u0261a\u02d0s/",
       "family": [
         "Gas",
         "Gaspedal"
@@ -1365,9 +1465,10 @@
     },
     {
       "word": "ZAHNFEE",
-      "gloss": "fantastische Figur, die Milchzähne einsammelt",
+      "gloss": "fantastische Figur, die Milchz\u00e4hne einsammelt",
+      "example": "Wenn die Menschen nicht mehr an die Zahnfee oder den Weihnachtsmann glauben, fangen sie an, an Politiker zu glauben.",
       "pos": "noun",
-      "ipa": "/ˈt͡saːnˌfeː/",
+      "ipa": "/\u02c8t\u0361sa\u02d0n\u02ccfe\u02d0/",
       "family": [
         "Zahn",
         "Fee"
@@ -1379,27 +1480,29 @@
       "synonyms": [
         "Ratgeber"
       ],
+      "example": "Ich arbeite als Berater.",
       "pos": "noun",
+      "ipa": "/b\u0259\u02c8\u0281a\u02d0t\u0250/",
       "family": [
         "Beraterhaftung",
         "Beraterhonorar",
         "Beraterstab"
-      ],
-      "ipa": "/bəˈʁaːtɐ/"
+      ]
     },
     {
       "word": "REPTIL",
-      "gloss": "Kriechtier mit Schuppen und Kaltblüter",
+      "gloss": "Kriechtier mit Schuppen und Kaltbl\u00fcter",
       "synonyms": [
         "Echse"
       ],
+      "example": "Das Krokodil ist ein Reptil.",
       "pos": "noun",
+      "ipa": "/\u0281\u025bp\u02c8ti\u02d0l/",
       "family": [
-        "reptilienähnlich",
+        "reptilien\u00e4hnlich",
         "reptilienhaft",
         "Reptilienfonds"
-      ],
-      "ipa": "/ʁɛpˈtiːl/"
+      ]
     },
     {
       "word": "AUSTREIBEN",
@@ -1407,44 +1510,46 @@
       "synonyms": [
         "vertreiben"
       ],
+      "example": "Das werden wir ihm austreiben.",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cct\u0281a\u026a\u032fbn\u0329/",
       "family": [
         "ausgetrieben",
         "austreibend",
         "Austreibung"
-      ],
-      "ipa": "/ˈaʊ̯sˌtʁaɪ̯bn̩/"
+      ]
     },
     {
-      "word": "ABFÜLLEN",
-      "gloss": "Flüssigkeit in Flaschen geben.",
+      "word": "ABF\u00dcLLEN",
+      "gloss": "Fl\u00fcssigkeit in Flaschen geben.",
       "synonyms": [],
+      "example": "Wir m\u00fcssen die Milch in Flaschen abf\u00fcllen, bevor sie verderben kann.",
       "pos": "verb",
+      "ipa": "/\u02c8ap\u02ccf\u028fl\u0259n/",
       "family": [
-        "abfüllbar",
-        "abfüllend",
-        "abgefüllt"
-      ],
-      "ipa": "/ˈapˌfʏlən/"
+        "abf\u00fcllbar",
+        "abf\u00fcllend",
+        "abgef\u00fcllt"
+      ]
     },
     {
       "word": "FUMMELN",
-      "gloss": "ungeschickt oder suchend mit den Händen hantieren",
+      "gloss": "ungeschickt oder suchend mit den H\u00e4nden hantieren",
       "synonyms": [
         "tasten"
       ],
       "pos": "verb",
+      "ipa": "/\u02c8f\u028aml\u0329n/",
       "family": [
         "Fummelei"
-      ],
-      "ipa": "/ˈfʊml̩n/"
+      ]
     },
     {
       "word": "AUFMISCHEN",
-      "gloss": "Etwas gründlich durcheinanderbringen.",
+      "gloss": "Etwas gr\u00fcndlich durcheinanderbringen.",
       "synonyms": [],
       "pos": "verb",
-      "ipa": "/ˈaʊ̯fˌmɪʃn̩/",
+      "ipa": "/\u02c8a\u028a\u032ff\u02ccm\u026a\u0283n\u0329/",
       "family": [
         "Aufmischung",
         "mischen"
@@ -1452,24 +1557,26 @@
     },
     {
       "word": "ERHELLEN",
-      "gloss": "Licht spenden oder etwas verständlich machen",
+      "gloss": "Licht spenden oder etwas verst\u00e4ndlich machen",
       "synonyms": [
         "beleuchten"
       ],
+      "example": "W\u00e4hrend des Gottesdienstes erhellen Kerzen den Altar.",
       "pos": "verb",
+      "ipa": "/\u025b\u0250\u032f\u02c8h\u025bl\u0259n/",
       "family": [
         "Erhellung"
-      ],
-      "ipa": "/ɛɐ̯ˈhɛlən/"
+      ]
     },
     {
       "word": "JUMPER",
-      "gloss": "pulloverartiges Kleidungsstück ohne Kragen",
+      "gloss": "pulloverartiges Kleidungsst\u00fcck ohne Kragen",
       "synonyms": [
         "Pullover"
       ],
+      "example": "Der neue Jumper passt perfekt zu meiner Lieblingsjeans und den bequemen Sneakern.",
       "pos": "adverb",
-      "ipa": "/ˈd͡ʒampɐ/",
+      "ipa": "/\u02c8d\u0361\u0292amp\u0250/",
       "family": [
         "Jumperkleid",
         "Jumperdesign"
@@ -1477,12 +1584,13 @@
     },
     {
       "word": "GEYSIR",
-      "gloss": "heiße Quelle, die periodisch Wasserfontänen ausstößt",
+      "gloss": "hei\u00dfe Quelle, die periodisch Wasserfont\u00e4nen ausst\u00f6\u00dft",
       "synonyms": [
         "Quelle"
       ],
+      "example": "Touristen standen um den Geysir herum und gafften.",
       "pos": "noun",
-      "ipa": "/ˈɡaɪ̯ziːɐ̯/",
+      "ipa": "/\u02c8\u0261a\u026a\u032fzi\u02d0\u0250\u032f/",
       "family": [
         "Geysirfeld",
         "Geysirausbruch"
@@ -1494,8 +1602,9 @@
       "synonyms": [
         "Sticker"
       ],
+      "example": "Die Kiste hat einen Aufkleber, auf dem \u201ezerbrechlich\u201c steht.",
       "pos": "noun",
-      "ipa": "/ˈaʊ̯fˌkleːbɐ/",
+      "ipa": "/\u02c8a\u028a\u032ff\u02cckle\u02d0b\u0250/",
       "family": [
         "Kleber",
         "aufkleben"
@@ -1508,26 +1617,28 @@
         "Zusammenhang",
         "Umfeld"
       ],
+      "example": "Was ist der Kontext?",
       "pos": "noun",
+      "ipa": "/\u02c8k\u0254n\u02cct\u025bkst/",
       "family": [
-        "kontextabhängig",
+        "kontextabh\u00e4ngig",
         "kontextfrei",
         "kontextintensiv"
-      ],
-      "ipa": "/ˈkɔnˌtɛkst/"
+      ]
     },
     {
-      "word": "STÜRME",
+      "word": "ST\u00dcRME",
       "gloss": "heftige Winde oder heftige Unwetter",
       "synonyms": [
         "Unwetter",
         "Orkane"
       ],
+      "example": "St\u00fcrme sind gef\u00e4hrlich.",
       "pos": "noun",
-      "ipa": "/ˈʃtʏʁmə/",
+      "ipa": "/\u02c8\u0283t\u028f\u0281m\u0259/",
       "family": [
         "Sturm",
-        "Stürmisch",
+        "St\u00fcrmisch",
         "Sturmflut"
       ]
     },
@@ -1535,32 +1646,35 @@
       "word": "EINZELKIND",
       "gloss": "Ein Sohn oder eine Tochter ohne Geschwister.",
       "synonyms": [],
+      "example": "Ich bin Einzelkind.",
       "pos": "noun",
-      "ipa": "/ˈaɪ̯nt͡sl̩ˌkɪnt/"
+      "ipa": "/\u02c8a\u026a\u032fnt\u0361sl\u0329\u02cck\u026ant/"
     },
     {
       "word": "FLOHMARKT",
-      "gloss": "Ort, wo man gebrauchte Waren und Trödel kauft.",
+      "gloss": "Ort, wo man gebrauchte Waren und Tr\u00f6del kauft.",
       "synonyms": [],
+      "example": "Wo wird der Flohmarkt sein?",
       "pos": "noun",
+      "ipa": "/\u02c8flo\u02d0\u02ccma\u0281kt/",
       "family": [
         "Flohmarktartikel",
         "Flohmarktbesucher",
-        "Flohmarkthändler"
-      ],
-      "ipa": "/ˈfloːˌmaʁkt/"
+        "Flohmarkth\u00e4ndler"
+      ]
     },
     {
       "word": "KOKOSNUSS",
-      "gloss": "Große, harte, tropische Frucht mit weißem Fleisch.",
+      "gloss": "Gro\u00dfe, harte, tropische Frucht mit wei\u00dfem Fleisch.",
       "synonyms": [],
+      "example": "Das ist eine Kokosnuss.",
       "pos": "noun",
+      "ipa": "/\u02c8ko\u02d0k\u0254s\u02ccn\u028as/",
       "family": [
         "Kokosnussart",
         "Kokosnussanbau",
         "Kokosnussbaum"
-      ],
-      "ipa": "/ˈkoːkɔsˌnʊs/"
+      ]
     },
     {
       "word": "INSTINKTIV",
@@ -1569,8 +1683,9 @@
         "angeboren",
         "triebhaft"
       ],
+      "example": "Er handelt instinktiv.",
       "pos": "adjective",
-      "ipa": "/ɪnstɪŋkˈtiːf/",
+      "ipa": "/\u026anst\u026a\u014bk\u02c8ti\u02d0f/",
       "family": [
         "Instinkt",
         "Instinkthandlung"
@@ -1578,23 +1693,25 @@
     },
     {
       "word": "OBERTEIL",
-      "gloss": "Kleidungsstück für Brust und Arme.",
+      "gloss": "Kleidungsst\u00fcck f\u00fcr Brust und Arme.",
       "synonyms": [],
+      "example": "Dieses Oberteil ist so s\u00fc\u00df!",
       "pos": "noun",
-      "ipa": "/ˈoːbɐˌtaɪ̯l/"
+      "ipa": "/\u02c8o\u02d0b\u0250\u02ccta\u026a\u032fl/"
     },
     {
       "word": "ZOFE",
-      "gloss": "Dienstmagd oder Zimmermädchen",
+      "gloss": "Dienstmagd oder Zimmerm\u00e4dchen",
       "synonyms": [
         "Kammerfrau",
-        "Dienstmädchen"
+        "Dienstm\u00e4dchen"
       ],
+      "example": "Die Zofe brachte frische Handt\u00fccher ins Schlafzimmer.",
       "pos": "noun",
+      "ipa": "/\u02c8t\u0361so\u02d0f\u0259/",
       "family": [
         "Zofendienst"
-      ],
-      "ipa": "/ˈt͡soːfə/"
+      ]
     },
     {
       "word": "VERKOMMEN",
@@ -1603,34 +1720,37 @@
         "verwahrlost",
         "verlottert"
       ],
+      "example": "Dieser Verbrecher ist sittlich verkommen.",
       "pos": "verb",
-      "ipa": "/fɛɐ̯ˈkɔmən/",
+      "ipa": "/f\u025b\u0250\u032f\u02c8k\u0254m\u0259n/",
       "family": [
         "Verkommenheit"
       ]
     },
     {
       "word": "UNEHRLICH",
-      "gloss": "nicht aufrichtig oder betrügerisch",
+      "gloss": "nicht aufrichtig oder betr\u00fcgerisch",
       "synonyms": [
         "unredlich",
         "falsch"
       ],
+      "example": "Ich bin nicht unehrlich.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u028an\u02cc\u0294e\u02d0\u0250\u032fl\u026a\u00e7/",
       "family": [
         "Unehrlichkeit"
-      ],
-      "ipa": "/ˈʊnˌʔeːɐ̯lɪç/"
+      ]
     },
     {
-      "word": "ÄGYPTISCH",
+      "word": "\u00c4GYPTISCH",
       "gloss": "Aus dem Land der Pyramiden stammend.",
       "synonyms": [],
+      "example": "Ich lerne \u00c4gyptisch.",
       "pos": "adjective",
-      "ipa": "/ɛˈɡʏptɪʃ/",
+      "ipa": "/\u025b\u02c8\u0261\u028fpt\u026a\u0283/",
       "family": [
-        "Ägypter",
-        "Ägypten"
+        "\u00c4gypter",
+        "\u00c4gypten"
       ]
     },
     {
@@ -1640,8 +1760,9 @@
         "uneben",
         "buckelig"
       ],
+      "example": "Die Stra\u00dfe ist ziemlich holprig.",
       "pos": "adjective",
-      "ipa": "/ˈhɔlpʁɪç/",
+      "ipa": "/\u02c8h\u0254lp\u0281\u026a\u00e7/",
       "family": [
         "holpern",
         "Holper"
@@ -1651,69 +1772,75 @@
       "word": "ENTMUTIGEN",
       "gloss": "jemandem den Mut oder die Zuversicht nehmen",
       "synonyms": [
-        "entkräften"
+        "entkr\u00e4ften"
       ],
+      "example": "Entmutigen wir ihn nicht!",
       "pos": "verb",
+      "ipa": "/\u025bnt\u02c8mu\u02d0t\u026a\u0261n\u0329/",
       "family": [
         "Entmutigung"
-      ],
-      "ipa": "/ɛntˈmuːtɪɡn̩/"
+      ]
     },
     {
       "word": "MICKRIG",
       "gloss": "sehr klein oder unbedeutend",
       "synonyms": [
         "winzig",
-        "dürftig"
+        "d\u00fcrftig"
       ],
+      "example": "Sein Gehalt war mickrig, aber die Arbeit machte ihm Spa\u00df.",
       "pos": "adjective",
-      "ipa": "/ˈmɪkʁɪç/"
+      "ipa": "/\u02c8m\u026ak\u0281\u026a\u00e7/"
     },
     {
-      "word": "BRÜHE",
-      "gloss": "heiße Flüssigkeit zum Essen.",
+      "word": "BR\u00dcHE",
+      "gloss": "hei\u00dfe Fl\u00fcssigkeit zum Essen.",
       "synonyms": [
         "Suppe"
       ],
+      "example": "Die Br\u00fche ist hei\u00df.",
       "pos": "noun",
-      "ipa": "/ˈbʁyːə/",
+      "ipa": "/\u02c8b\u0281y\u02d0\u0259/",
       "family": [
-        "brühen"
+        "br\u00fchen"
       ]
     },
     {
       "word": "VERZUG",
-      "gloss": "Verspätung.",
+      "gloss": "Versp\u00e4tung.",
       "synonyms": [
         "Aufschub"
       ],
+      "example": "Es ist Gefahr im Verzug.",
       "pos": "noun",
+      "ipa": "/f\u025b\u0250\u032f\u02c8t\u0361su\u02d0k/",
       "family": [
         "Verzugszins"
-      ],
-      "ipa": "/fɛɐ̯ˈt͡suːk/"
+      ]
     },
     {
       "word": "PUNSCH",
-      "gloss": "heißes alkoholisches Getränk mit Fruchtsaft",
+      "gloss": "hei\u00dfes alkoholisches Getr\u00e4nk mit Fruchtsaft",
       "synonyms": [
         "Grog",
-        "Glühwein"
+        "Gl\u00fchwein"
       ],
+      "example": "Hast du den Punsch probiert?",
       "pos": "noun",
+      "ipa": "/p\u028an\u0283/",
       "family": [
         "Punschbude",
         "Punschessenz",
         "Punschextrakt"
-      ],
-      "ipa": "/pʊnʃ/"
+      ]
     },
     {
       "word": "LEBENSZEIT",
       "gloss": "Die Jahre von Geburt bis Tod.",
       "synonyms": [],
+      "example": "Mir bleibt nur wenig Lebenszeit.",
       "pos": "noun",
-      "ipa": "/ˈleːbn̩sˌt͡saɪ̯t/",
+      "ipa": "/\u02c8le\u02d0bn\u0329s\u02cct\u0361sa\u026a\u032ft/",
       "family": [
         "Lebensdauer",
         "Lebensspanne"
@@ -1723,8 +1850,9 @@
       "word": "HAUPTFACH",
       "gloss": "Wichtigstes Studienfach.",
       "synonyms": [],
+      "example": "Was war dein Hauptfach?",
       "pos": "noun",
-      "ipa": "/ˈhaʊ̯ptˌfax/",
+      "ipa": "/\u02c8ha\u028a\u032fpt\u02ccfax/",
       "family": [
         "Nebenfach",
         "Fachgebiet"
@@ -1732,27 +1860,29 @@
     },
     {
       "word": "ABNEIGUNG",
-      "gloss": "starkes Gefühl der Ablehnung oder des Widerwillens",
+      "gloss": "starkes Gef\u00fchl der Ablehnung oder des Widerwillens",
       "synonyms": [
         "Widerwille"
       ],
+      "example": "Das l\u00f6st bei mir Abneigung aus.",
       "pos": "noun",
+      "ipa": "/\u02c8ap\u02ccna\u026a\u032f\u0261\u028a\u014b/",
       "family": [
         "Geruchsabneigung",
         "Geschmacksabneigung",
         "Wasserabneigung"
-      ],
-      "ipa": "/ˈapˌnaɪ̯ɡʊŋ/"
+      ]
     },
     {
       "word": "LOCKVOGEL",
       "gloss": "Person oder Gegenstand, der andere anlockt",
       "synonyms": [
-        "Köder",
+        "K\u00f6der",
         "Scheinziele"
       ],
+      "example": "Die bunten Schilder waren ein Lockvogel f\u00fcr viele Touristen, die die Attraktion besuchen wollten.",
       "pos": "noun",
-      "ipa": "/ˈlɔkˌfoːɡl̩/",
+      "ipa": "/\u02c8l\u0254k\u02ccfo\u02d0\u0261l\u0329/",
       "family": [
         "locken",
         "Lockmittel"
@@ -1760,28 +1890,30 @@
     },
     {
       "word": "ROBE",
-      "gloss": "ein langes, weites Kleidungsstück, das meist über anderen Sachen getragen wird",
+      "gloss": "ein langes, weites Kleidungsst\u00fcck, das meist \u00fcber anderen Sachen getragen wird",
       "synonyms": [
         "Talar",
         "Gewand"
       ],
+      "example": "Die Robe allein macht noch nicht den Priester.",
       "pos": "noun",
-      "ipa": "/ˈʁoːbə/",
+      "ipa": "/\u02c8\u0281o\u02d0b\u0259/",
       "family": [
-        "Robenträger",
+        "Robentr\u00e4ger",
         "roben"
       ]
     },
     {
-      "word": "WÜRDEVOLL",
+      "word": "W\u00dcRDEVOLL",
       "gloss": "eine Haltung oder ein Verhalten, das Respekt und Ernst ausstrahlt",
       "synonyms": [
         "ehrerbietig"
       ],
+      "example": "Du siehst sehr w\u00fcrdevoll aus.",
       "pos": "adjective",
-      "ipa": "/ˈvʏʁdəfɔl/",
+      "ipa": "/\u02c8v\u028f\u0281d\u0259f\u0254l/",
       "family": [
-        "Würde"
+        "W\u00fcrde"
       ]
     },
     {
@@ -1790,8 +1922,9 @@
       "synonyms": [
         "anziehend"
       ],
+      "example": "Ich finde es ganz reizvoll.",
       "pos": "adjective",
-      "ipa": "/ˈʁaɪ̯t͡sˌfɔl/",
+      "ipa": "/\u02c8\u0281a\u026a\u032ft\u0361s\u02ccf\u0254l/",
       "family": [
         "Reiz",
         "reizen"
@@ -1799,23 +1932,25 @@
     },
     {
       "word": "DURCHLESEN",
-      "gloss": "Einen Text vollständig und aufmerksam anschauen.",
+      "gloss": "Einen Text vollst\u00e4ndig und aufmerksam anschauen.",
       "synonyms": [],
+      "example": "Du musst das Ganze nicht von Anfang bis Ende durchlesen.",
       "pos": "verb",
-      "ipa": "/ˈdʊʁçˌleːzn̩/",
+      "ipa": "/\u02c8d\u028a\u0281\u00e7\u02ccle\u02d0zn\u0329/",
       "family": [
         "Lesen",
-        "durchblättern"
+        "durchbl\u00e4ttern"
       ]
     },
     {
       "word": "BEREISEN",
-      "gloss": "verschiedene Orte oder Länder besuchen und erkunden",
+      "gloss": "verschiedene Orte oder L\u00e4nder besuchen und erkunden",
       "synonyms": [
         "durchqueren"
       ],
+      "example": "Wirst du andere L\u00e4nder bereisen?",
       "pos": "verb",
-      "ipa": "/bəˈʁaɪ̯zn̩/",
+      "ipa": "/b\u0259\u02c8\u0281a\u026a\u032fzn\u0329/",
       "family": [
         "Reise",
         "Reisender"
@@ -1823,32 +1958,34 @@
     },
     {
       "word": "TAUFE",
-      "gloss": "eine religiöse Handlung, bei der Wasser über jemanden gegossen wird",
+      "gloss": "eine religi\u00f6se Handlung, bei der Wasser \u00fcber jemanden gegossen wird",
       "synonyms": [
         "Namensweihe"
       ],
+      "example": "Heute ist ihre Taufe.",
       "pos": "verb",
+      "ipa": "/\u02c8ta\u028a\u032ff\u0259/",
       "family": [
         "Taufbecken",
         "Taufkerze",
         "Taufname"
-      ],
-      "ipa": "/ˈtaʊ̯fə/"
+      ]
     },
     {
       "word": "NARKOSE",
-      "gloss": "ein künstlich herbeigeführter Schlafzustand für eine Operation",
+      "gloss": "ein k\u00fcnstlich herbeigef\u00fchrter Schlafzustand f\u00fcr eine Operation",
       "synonyms": [
-        "Betäubung",
-        "Anästhesie"
+        "Bet\u00e4ubung",
+        "An\u00e4sthesie"
       ],
+      "example": "Die Narkose lie\u00df nach.",
       "pos": "noun",
+      "ipa": "/na\u0281\u02c8ko\u02d0z\u0259/",
       "family": [
         "narkotisieren",
         "narkotisiert",
         "Narkoseapparat"
-      ],
-      "ipa": "/naʁˈkoːzə/"
+      ]
     },
     {
       "word": "ZIELOBJEKT",
@@ -1856,33 +1993,36 @@
       "synonyms": [
         "Angriffsziel"
       ],
+      "example": "In dem Projekt ist das ZIELobjeKT der neue Roboterarm.",
       "pos": "adverb",
-      "ipa": "/ˈt͡siːlˌɔpˌjɛkt/",
+      "ipa": "/\u02c8t\u0361si\u02d0l\u02cc\u0254p\u02ccj\u025bkt/",
       "family": [
         "Ziel",
         "Objekt"
       ]
     },
     {
-      "word": "UNTÄTIG",
+      "word": "UNT\u00c4TIG",
       "gloss": "ohne etwas zu tun oder zu handeln",
       "synonyms": [
         "passiv"
       ],
+      "example": "Ich kann nicht unt\u00e4tig sein.",
       "pos": "adjective",
+      "ipa": "/\u02c8\u028ant\u025b\u02d0t\u026a\u00e7/",
       "family": [
-        "Untätigkeit"
-      ],
-      "ipa": "/ˈʊntɛːtɪç/"
+        "Unt\u00e4tigkeit"
+      ]
     },
     {
       "word": "GETUE",
-      "gloss": "übertriebenes oder unnötiges Verhalten",
+      "gloss": "\u00fcbertriebenes oder unn\u00f6tiges Verhalten",
       "synonyms": [
         "Aufwand"
       ],
+      "example": "Leute, kein Getue!",
       "pos": "noun",
-      "ipa": "/ɡəˈtuːə/",
+      "ipa": "/\u0261\u0259\u02c8tu\u02d0\u0259/",
       "family": [
         "tun"
       ]
@@ -1893,22 +2033,24 @@
       "synonyms": [
         "Sprecher"
       ],
+      "example": "Er ist ein guter Redner.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0281e\u02d0dn\u0250/",
       "family": [
         "rednerisch",
-        "Rednerbühne",
+        "Rednerb\u00fchne",
         "Rednerliste"
-      ],
-      "ipa": "/ˈʁeːdnɐ/"
+      ]
     },
     {
       "word": "BETREFFEND",
       "gloss": "etwas, das sich auf ein bestimmtes Thema bezieht",
       "synonyms": [
-        "bezüglich"
+        "bez\u00fcglich"
       ],
+      "example": "Ich war mit ihm, den Plan betreffend, einer Meinung.",
       "pos": "adjective",
-      "ipa": "/bəˈtʁɛfn̩t/",
+      "ipa": "/b\u0259\u02c8t\u0281\u025bfn\u0329t/",
       "family": [
         "betreffen",
         "Betreff"
@@ -1920,11 +2062,12 @@
       "synonyms": [
         "Ausdrucksweise"
       ],
+      "example": "Was f\u00fcr eine interessante Wortwahl!",
       "pos": "noun",
-      "ipa": "/ˈvɔʁtˌvaːl/",
+      "ipa": "/\u02c8v\u0254\u0281t\u02ccva\u02d0l/",
       "family": [
         "Wort",
-        "wählen"
+        "w\u00e4hlen"
       ]
     },
     {
@@ -1933,21 +2076,23 @@
       "synonyms": [
         "Gesichtsausdruck"
       ],
+      "example": "Seine Miene hellte sich auf.",
       "pos": "noun",
+      "ipa": "/\u02c8mi\u02d0n\u0259/",
       "family": [
         "Mienenspiel",
         "Mienensprache"
-      ],
-      "ipa": "/ˈmiːnə/"
+      ]
     },
     {
       "word": "SCHAUPLATZ",
       "gloss": "der Ort, an dem etwas geschieht oder stattfindet",
       "synonyms": [
-        "Bühne"
+        "B\u00fchne"
       ],
+      "example": "Das erste Kapitel stellt die Charaktere und den Schauplatz vor.",
       "pos": "noun",
-      "ipa": "/ˈʃaʊ̯ˌplat͡s/",
+      "ipa": "/\u02c8\u0283a\u028a\u032f\u02ccplat\u0361s/",
       "family": [
         "Schau",
         "Platz"
@@ -1955,14 +2100,15 @@
     },
     {
       "word": "RAUNEN",
-      "gloss": "leise und flüsternd etwas sagen",
+      "gloss": "leise und fl\u00fcsternd etwas sagen",
       "synonyms": [
-        "flüstern"
+        "fl\u00fcstern"
       ],
+      "example": "Ein aufgeregtes Raunen ging durch die Menge.",
       "pos": "verb",
-      "ipa": "/ˈʁaʊ̯nən/",
+      "ipa": "/\u02c8\u0281a\u028a\u032fn\u0259n/",
       "family": [
-        "geflüster"
+        "gefl\u00fcster"
       ]
     },
     {
@@ -1971,49 +2117,53 @@
       "synonyms": [
         "Viereck"
       ],
+      "example": "5 zum Quadrat ist 25.",
       "pos": "noun",
+      "ipa": "/kva\u02c8d\u0281a\u02d0t/",
       "family": [
         "quadratisch",
         "Quadratelle",
         "Quadratfaden"
-      ],
-      "ipa": "/kvaˈdʁaːt/"
+      ]
     },
     {
       "word": "IRRSINNIG",
-      "gloss": "sehr stark oder extrem in einer Weise, die unvernünftig erscheint",
+      "gloss": "sehr stark oder extrem in einer Weise, die unvern\u00fcnftig erscheint",
       "synonyms": [
         "wahnsinnig"
       ],
+      "example": "Es ist irrsinnig teuer.",
       "pos": "adjective",
-      "ipa": "/ˈɪʁˌzɪnɪç/",
+      "ipa": "/\u02c8\u026a\u0281\u02ccz\u026an\u026a\u00e7/",
       "family": [
         "Irrsinn",
         "Wahnsinn"
       ]
     },
     {
-      "word": "KÖDERN",
+      "word": "K\u00d6DERN",
       "gloss": "Jemanden mit einem Lockmittel anlocken.",
       "synonyms": [],
+      "example": "Lasst euch nicht k\u00f6dern!",
       "pos": "verb",
-      "ipa": "/ˈkøːdɐn/",
+      "ipa": "/\u02c8k\u00f8\u02d0d\u0250n/",
       "family": [
-        "Köder",
+        "K\u00f6der",
         "locken"
       ]
     },
     {
-      "word": "BLÜHEND",
-      "gloss": "in voller Blüte stehend oder kräftig wachsend",
+      "word": "BL\u00dcHEND",
+      "gloss": "in voller Bl\u00fcte stehend oder kr\u00e4ftig wachsend",
       "synonyms": [
         "florierend"
       ],
+      "example": "Der Fr\u00fchling zeigt sich in all seiner Pracht: die Wiesen sind bl\u00fchend und die B\u00e4ume voller Knospen.",
       "pos": "adjective",
-      "ipa": "/ˈblyːənt/",
+      "ipa": "/\u02c8bly\u02d0\u0259nt/",
       "family": [
-        "blühen",
-        "Blüte"
+        "bl\u00fchen",
+        "Bl\u00fcte"
       ]
     },
     {
@@ -2022,8 +2172,9 @@
       "synonyms": [
         "besteigen"
       ],
+      "example": "Es hat die ganze Nacht gedauert, den Fuji zu erklimmen.",
       "pos": "verb",
-      "ipa": "/ɛɐ̯ˈklɪmən/",
+      "ipa": "/\u025b\u0250\u032f\u02c8kl\u026am\u0259n/",
       "family": [
         "erklettern",
         "Klettern"
@@ -2031,26 +2182,28 @@
     },
     {
       "word": "ABSTRAKT",
-      "gloss": "nicht gegenständlich oder schwer fassbar",
+      "gloss": "nicht gegenst\u00e4ndlich oder schwer fassbar",
       "synonyms": [
         "theoretisch"
       ],
+      "example": "Die Theorie ist mir zu abstrakt.",
       "pos": "adjective",
+      "ipa": "/ap\u02c8st\u0281akt/",
       "family": [
         "abstrahieren",
         "Abstraktion",
         "Abstraktum"
-      ],
-      "ipa": "/apˈstʁakt/"
+      ]
     },
     {
       "word": "ARTUS",
-      "gloss": "ein runder Tisch, an dem Ritter saßen",
+      "gloss": "ein runder Tisch, an dem Ritter sa\u00dfen",
       "synonyms": [
         "Arthur"
       ],
+      "example": "Mordred verriet K\u00f6nig Artus.",
       "pos": "adverb",
-      "ipa": "/ˈaʁtʊs/",
+      "ipa": "/\u02c8a\u0281t\u028as/",
       "family": [
         "Artusrunde",
         "Ritter"
@@ -2058,17 +2211,18 @@
     },
     {
       "word": "ZAHM",
-      "gloss": "nicht wild, ruhig und fügsam",
+      "gloss": "nicht wild, ruhig und f\u00fcgsam",
       "synonyms": [
         "friedlich"
       ],
+      "example": "Dieser L\u00f6we ist sehr zahm.",
       "pos": "adjective",
+      "ipa": "/t\u0361sa\u02d0m/",
       "family": [
         "Zahmes",
-        "zähmen",
+        "z\u00e4hmen",
         "handzahm"
-      ],
-      "ipa": "/t͡saːm/"
+      ]
     },
     {
       "word": "AUSBLUTEN",
@@ -2077,40 +2231,43 @@
         "verbluten"
       ],
       "pos": "verb",
-      "ipa": "/ˈaʊ̯sˌbluːtn̩/",
+      "ipa": "/\u02c8a\u028a\u032fs\u02ccblu\u02d0tn\u0329/",
       "family": [
         "Blutung"
       ]
     },
     {
-      "word": "BEGNÜGEN",
+      "word": "BEGN\u00dcGEN",
       "gloss": "mit etwas zufrieden sein und nichts weiter verlangen",
       "synonyms": [
         "zufriedenstellen"
       ],
+      "example": "Wir m\u00fcssen uns wohl eine Weile mit dem alten begn\u00fcgen.",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8\u0261ny\u02d0\u0261n\u0329/",
       "family": [
-        "begnügend"
-      ],
-      "ipa": "/bəˈɡnyːɡn̩/"
+        "begn\u00fcgend"
+      ]
     },
     {
-      "word": "ÜBERBIETEN",
-      "gloss": "Ein höheres Angebot machen als jemand anderes.",
+      "word": "\u00dcBERBIETEN",
+      "gloss": "Ein h\u00f6heres Angebot machen als jemand anderes.",
       "synonyms": [],
+      "example": "Nichts kann das \u00fcberbieten.",
       "pos": "verb",
+      "ipa": "/\u02ccy\u02d0b\u0250\u02c8bi\u02d0tn\u0329/",
       "family": [
-        "überbietend",
-        "überboten"
-      ],
-      "ipa": "/ˌyːbɐˈbiːtn̩/"
+        "\u00fcberbietend",
+        "\u00fcberboten"
+      ]
     },
     {
       "word": "STAUBIG",
       "gloss": "Voll mit feinem Dreck.",
       "synonyms": [],
+      "example": "Es ist staubig.",
       "pos": "adjective",
-      "ipa": "/ˈʃtaʊ̯bɪç/",
+      "ipa": "/\u02c8\u0283ta\u028a\u032fb\u026a\u00e7/",
       "family": [
         "Staub",
         "Staubkorn"
@@ -2118,26 +2275,28 @@
     },
     {
       "word": "PEDAL",
-      "gloss": "ein Teil eines Fahrzeugs oder Instruments, das mit dem Fuß bedient wird",
+      "gloss": "ein Teil eines Fahrzeugs oder Instruments, das mit dem Fu\u00df bedient wird",
       "synonyms": [
         "Tritt"
       ],
+      "example": "Dieses Pedal ist schwerg\u00e4ngig.",
       "pos": "noun",
+      "ipa": "/pe\u02c8da\u02d0l/",
       "family": [
         "Pedalharfe",
         "Pedalschalter",
         "Pedalweg"
-      ],
-      "ipa": "/peˈdaːl/"
+      ]
     },
     {
       "word": "LUFTRAUM",
-      "gloss": "der Bereich über der Erde, in dem Flugzeuge fliegen",
+      "gloss": "der Bereich \u00fcber der Erde, in dem Flugzeuge fliegen",
       "synonyms": [
         "Flugraum"
       ],
+      "example": "Der Luftraum um den Flughafen wurde vor\u00fcbergehend gesperrt.",
       "pos": "noun",
-      "ipa": "/ˈlʊftˌʁaʊ̯m/",
+      "ipa": "/\u02c8l\u028aft\u02cc\u0281a\u028a\u032fm/",
       "family": [
         "Luft",
         "Raum"
@@ -2145,23 +2304,25 @@
     },
     {
       "word": "ASIAT",
-      "gloss": "Eine Person aus dem größten Kontinent der Erde.",
+      "gloss": "Eine Person aus dem gr\u00f6\u00dften Kontinent der Erde.",
       "synonyms": [],
+      "example": "Der neue Student in unserer Klasse stammt aus Asien, er ist ein sehr freundlicher Asiat.",
       "pos": "noun",
+      "ipa": "/a\u02c8zi\u032fa\u02d0t/",
       "family": [
         "asiatisch",
         "Asiatenfleck"
-      ],
-      "ipa": "/aˈzi̯aːt/"
+      ]
     },
     {
       "word": "FEUERKRAFT",
-      "gloss": "die Stärke oder Wirkung von Geschützen oder Waffen",
+      "gloss": "die St\u00e4rke oder Wirkung von Gesch\u00fctzen oder Waffen",
       "synonyms": [
         "Schlagkraft"
       ],
+      "example": "Die Feuerkraft moderner Gesch\u00fctze beeindruckt selbst erfahrene Milit\u00e4rs.",
       "pos": "noun",
-      "ipa": "/ˈfɔɪ̯ɐˌkʁaft/",
+      "ipa": "/\u02c8f\u0254\u026a\u032f\u0250\u02cck\u0281aft/",
       "family": [
         "Feuer",
         "Kraft"
@@ -2173,38 +2334,41 @@
       "synonyms": [
         "Aufmerksamkeit"
       ],
+      "example": "Schenke dem keine Beachtung.",
       "pos": "noun",
+      "ipa": "/b\u0259\u02c8\u0294axt\u028a\u014b/",
       "family": [
         "Nichtbeachtung"
-      ],
-      "ipa": "/bəˈʔaxtʊŋ/"
+      ]
     },
     {
-      "word": "MÜHSAM",
-      "gloss": "mit großer Anstrengung verbunden",
+      "word": "M\u00dcHSAM",
+      "gloss": "mit gro\u00dfer Anstrengung verbunden",
       "synonyms": [
         "anstrengend"
       ],
+      "example": "Das ist so m\u00fchsam f\u00fcr ihn.",
       "pos": "adjective",
-      "ipa": "/ˈmyːzaːm/",
+      "ipa": "/\u02c8my\u02d0za\u02d0m/",
       "family": [
-        "Mühe",
-        "mühen"
+        "M\u00fche",
+        "m\u00fchen"
       ]
     },
     {
       "word": "SPOTT",
-      "gloss": "höhnische oder verächtliche Äußerungen",
+      "gloss": "h\u00f6hnische oder ver\u00e4chtliche \u00c4u\u00dferungen",
       "synonyms": [
         "Hohn"
       ],
+      "example": "Spott ist die Speise der Narren.",
       "pos": "noun",
+      "ipa": "/\u0283p\u0254t/",
       "family": [
-        "Gespött",
+        "Gesp\u00f6tt",
         "spottbillig",
-        "spöttisch"
-      ],
-      "ipa": "/ʃpɔt/"
+        "sp\u00f6ttisch"
+      ]
     },
     {
       "word": "ANREIZ",
@@ -2212,23 +2376,25 @@
       "synonyms": [
         "Ansporn"
       ],
+      "example": "Wettbewerb kann ein Anreiz zu h\u00f6herer Leistung sein.",
       "pos": "noun",
+      "ipa": "/\u02c8an\u02cc\u0281a\u026a\u032ft\u0361s/",
       "family": [
         "Anreizsystem"
-      ],
-      "ipa": "/ˈanˌʁaɪ̯t͡s/"
+      ]
     },
     {
       "word": "UMKLEIDEN",
       "gloss": "Andere Sachen anziehen.",
       "synonyms": [],
+      "example": "Ich muss mich schnell umkleiden, bevor die G\u00e4ste kommen.",
       "pos": "verb",
+      "ipa": "/\u02c8\u028amkla\u026a\u032fdn\u0329/",
       "family": [
         "Umkleide",
         "Umkleidekabine",
         "Umkleideraum"
-      ],
-      "ipa": "/ˈʊmklaɪ̯dn̩/"
+      ]
     },
     {
       "word": "RASTEN",
@@ -2236,32 +2402,35 @@
       "synonyms": [
         "ruhen"
       ],
+      "example": "Wir wollen rasten.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0281astn\u0329/",
       "family": [
         "ausrasten",
         "einrasten",
         "Rasthaus"
-      ],
-      "ipa": "/ˈʁastn̩/"
+      ]
     },
     {
-      "word": "BEWÄHREN",
-      "gloss": "sich als zuverlässig oder geeignet erweisen",
+      "word": "BEW\u00c4HREN",
+      "gloss": "sich als zuverl\u00e4ssig oder geeignet erweisen",
       "synonyms": [
         "erproben"
       ],
+      "example": "In der Theorie klingt es gut, doch wird es sich auch in der Praxis bew\u00e4hren?",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8v\u025b\u02d0\u0281\u0259n/",
       "family": [
-        "bewährt",
-        "Bewährung"
-      ],
-      "ipa": "/bəˈvɛːʁən/"
+        "bew\u00e4hrt",
+        "Bew\u00e4hrung"
+      ]
     },
     {
       "word": "EINZAHLEN",
       "gloss": "Geld auf ein Konto oder in eine Kasse geben",
+      "example": "Ich m\u00f6chte Geld einzahlen.",
       "pos": "verb",
-      "ipa": "/ˈaɪ̯nˌt͡saːlən/",
+      "ipa": "/\u02c8a\u026a\u032fn\u02cct\u0361sa\u02d0l\u0259n/",
       "family": [
         "ein",
         "zahlen"
@@ -2269,64 +2438,70 @@
     },
     {
       "word": "BELIEFERN",
-      "gloss": "Jemandem regelmäßig Waren bringen.",
+      "gloss": "Jemandem regelm\u00e4\u00dfig Waren bringen.",
       "synonyms": [],
+      "example": "Der Plan, auch Antarktika zu beliefern, wurde vorerst auf Eis gelegt.",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8li\u02d0f\u0250n/",
       "family": [
         "Belieferung"
-      ],
-      "ipa": "/bəˈliːfɐn/"
+      ]
     },
     {
       "word": "KONDITION",
-      "gloss": "die körperliche Fitness oder Ausdauer",
+      "gloss": "die k\u00f6rperliche Fitness oder Ausdauer",
+      "example": "Er ist aktiv und hat eine gute Kondition.",
       "pos": "noun",
+      "ipa": "/k\u0254ndi\u02c8t\u0361si\u032fo\u02d0n/",
       "family": [
         "konditional",
         "konditionell",
         "konditionsschwach"
-      ],
-      "ipa": "/kɔndiˈt͡si̯oːn/"
+      ]
     },
     {
-      "word": "SÄEN",
+      "word": "S\u00c4EN",
       "gloss": "Samen in die Erde bringen, damit Pflanzen wachsen",
+      "example": "Wir s\u00e4en Samen.",
       "pos": "verb",
+      "ipa": "/\u02c8z\u025b\u02d0\u0259n/",
       "family": [
-        "aussäen",
-        "aussäend",
-        "ausgesät"
-      ],
-      "ipa": "/ˈzɛːən/"
+        "auss\u00e4en",
+        "auss\u00e4end",
+        "ausges\u00e4t"
+      ]
     },
     {
-      "word": "LÄSTERN",
-      "gloss": "über jemanden abfällig oder boshaft sprechen",
+      "word": "L\u00c4STERN",
+      "gloss": "\u00fcber jemanden abf\u00e4llig oder boshaft sprechen",
+      "example": "Du darfst Gott nicht l\u00e4stern.",
       "pos": "verb",
+      "ipa": "/\u02c8l\u025bst\u0250n/",
       "family": [
-        "lästernd",
-        "Gotteslästerung",
-        "Lästermaul"
-      ],
-      "ipa": "/ˈlɛstɐn/"
+        "l\u00e4sternd",
+        "Gottesl\u00e4sterung",
+        "L\u00e4stermaul"
+      ]
     },
     {
       "word": "MUNDE",
-      "gloss": "Alte Form für das Körperteil, mit dem man spricht und isst, etwa in: in aller ___.",
+      "gloss": "Alte Form f\u00fcr das K\u00f6rperteil, mit dem man spricht und isst, etwa in: in aller ___.",
       "synonyms": [],
+      "example": "Das Video war bald in aller Munde.",
       "pos": "noun",
-      "ipa": "/ˈmʊndə/",
+      "ipa": "/\u02c8m\u028and\u0259/",
       "family": [
         "Mund",
-        "mündig"
+        "m\u00fcndig"
       ]
     },
     {
       "word": "STEINBRUCH",
       "gloss": "Ein Ort, an dem man Fels abbaut.",
       "synonyms": [],
+      "example": "Das Leben vor uns ist wie ein Steinbruch vor dem Baumeister.",
       "pos": "noun",
-      "ipa": "/ˈʃtaɪ̯nˌbʁʊx/",
+      "ipa": "/\u02c8\u0283ta\u026a\u032fn\u02ccb\u0281\u028ax/",
       "family": [
         "Stein",
         "brechen"
@@ -2335,19 +2510,21 @@
     {
       "word": "RENTNER",
       "gloss": "eine Person, die im Ruhestand ist",
+      "example": "Er ist Rentner.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0281\u025bntn\u0250/",
       "family": [
         "Rentnerdasein",
         "Rentnerporsche",
         "Rentnerschwemme"
-      ],
-      "ipa": "/ˈʁɛntnɐ/"
+      ]
     },
     {
       "word": "SPEISESAAL",
       "gloss": "ein Raum, in dem gemeinsam gegessen wird",
+      "example": "Wo ist der Speisesaal?",
       "pos": "noun",
-      "ipa": "/ˈʃpaɪ̯zəˌzaːl/",
+      "ipa": "/\u02c8\u0283pa\u026a\u032fz\u0259\u02ccza\u02d0l/",
       "family": [
         "Speise",
         "Saal"
@@ -2356,95 +2533,104 @@
     {
       "word": "VERDAMMNIS",
       "gloss": "die ewige Strafe oder Verurteilung",
+      "example": "Die Vorstellung von ewiger Verdammnis pr\u00e4gte viele mittelalterliche Gem\u00e4lde und Erz\u00e4hlungen.",
       "pos": "noun",
+      "ipa": "/f\u025b\u0250\u032f\u02c8damn\u026as/",
       "family": [
         "Verdammniswalzer",
         "Verdammniszeit"
-      ],
-      "ipa": "/fɛɐ̯ˈdamnɪs/"
+      ]
     },
     {
       "word": "BROSCHE",
-      "gloss": "eine dekorative Anstecknadel für Kleidung",
+      "gloss": "eine dekorative Anstecknadel f\u00fcr Kleidung",
+      "example": "Sie tr\u00e4gt eine Brosche.",
       "pos": "noun",
-      "ipa": "/ˈbʁɔʃə/"
+      "ipa": "/\u02c8b\u0281\u0254\u0283\u0259/"
     },
     {
       "word": "WALKEN",
       "gloss": "Stoff oder Material durch Druck und Bewegung bearbeiten",
+      "example": "Die Handwerker walken das Leder, um es geschmeidig und widerstandsf\u00e4hig zu machen.",
       "pos": "verb",
+      "ipa": "/\u02c8valkn\u0329/",
       "family": [
         "Walkfass",
         "Walke",
         "Walkerde"
-      ],
-      "ipa": "/ˈvalkn̩/"
+      ]
     },
     {
       "word": "ANLASSEN",
       "gloss": "einen Motor oder eine Maschine starten",
+      "example": "Wenn ich den Motor abstelle, kann ich ihn nur schwer wieder anlassen, weil der Anlasser nicht richtig funktioniert.",
       "pos": "verb",
+      "ipa": "/\u02c8an\u02cclasn\u0329/",
       "family": [
         "angelassen",
         "anlassend",
         "Anlass"
-      ],
-      "ipa": "/ˈanˌlasn̩/"
+      ]
     },
     {
-      "word": "HÄMISCH",
+      "word": "H\u00c4MISCH",
       "gloss": "boshaft oder schadenfroh",
+      "example": "Er freute sich h\u00e4misch.",
       "pos": "adjective",
+      "ipa": "/\u02c8h\u025b\u02d0m\u026a\u0283/",
       "family": [
-        "Häme"
-      ],
-      "ipa": "/ˈhɛːmɪʃ/"
+        "H\u00e4me"
+      ]
     },
     {
       "word": "STILLLEGEN",
-      "gloss": "etwas vorübergehend oder dauerhaft außer Betrieb setzen",
+      "gloss": "etwas vor\u00fcbergehend oder dauerhaft au\u00dfer Betrieb setzen",
+      "example": "Nach dem Unfall musste die Beh\u00f6rde die Baustelle vor\u00fcbergehend stilllegen.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0283t\u026al\u02ccle\u02d0\u0261n\u0329/",
       "family": [
         "stillgelegt",
         "Stilllegung"
-      ],
-      "ipa": "/ˈʃtɪlˌleːɡn̩/"
+      ]
     },
     {
       "word": "ALLEINIG",
       "gloss": "nur eine Person oder Sache betreffend",
       "pos": "adjective",
-      "ipa": "/aˈlaɪ̯nɪç/",
+      "ipa": "/a\u02c8la\u026a\u032fn\u026a\u00e7/",
       "family": [
         "allein"
       ]
     },
     {
-      "word": "ERGÄNZEN",
-      "gloss": "etwas hinzufügen, um es vollständig zu machen",
+      "word": "ERG\u00c4NZEN",
+      "gloss": "etwas hinzuf\u00fcgen, um es vollst\u00e4ndig zu machen",
+      "example": "Sie erg\u00e4nzen sich perfekt.",
       "pos": "verb",
+      "ipa": "/\u025b\u0250\u032f\u02c8\u0261\u025bnt\u0361sn\u0329/",
       "family": [
-        "Ergänzung"
-      ],
-      "ipa": "/ɛɐ̯ˈɡɛnt͡sn̩/"
+        "Erg\u00e4nzung"
+      ]
     },
     {
       "word": "TULPE",
-      "gloss": "eine Blume mit einer kelchförmigen Blüte",
+      "gloss": "eine Blume mit einer kelchf\u00f6rmigen Bl\u00fcte",
+      "example": "Hans sieht sich die Tulpe an.",
       "pos": "noun",
+      "ipa": "/\u02c8t\u028alp\u0259/",
       "family": [
-        "tulpenförmig",
+        "tulpenf\u00f6rmig",
         "Tulpenbaum",
         "Tulpenbeet"
-      ],
-      "ipa": "/ˈtʊlpə/"
+      ]
     },
     {
       "word": "ANZIEHEND",
       "gloss": "Attraktiv, interessant.",
       "synonyms": [],
+      "example": "Findest du Brusthaare anziehend?",
       "pos": "adjective",
-      "ipa": "/ˈanˌt͡siːənt/",
+      "ipa": "/\u02c8an\u02cct\u0361si\u02d0\u0259nt/",
       "family": [
         "anziehen",
         "-end"
@@ -2454,37 +2640,41 @@
       "word": "PAUSENLOS",
       "gloss": "Ohne Unterbrechung.",
       "synonyms": [],
+      "example": "Es regnete pausenlos.",
       "pos": "adjective",
-      "ipa": "/ˈpaʊ̯zn̩ˌloːs/",
+      "ipa": "/\u02c8pa\u028a\u032fzn\u0329\u02cclo\u02d0s/",
       "family": [
         "Pause",
         "los"
       ]
     },
     {
-      "word": "NORMALITÄT",
-      "gloss": "der Zustand, der als gewöhnlich oder üblich gilt",
+      "word": "NORMALIT\u00c4T",
+      "gloss": "der Zustand, der als gew\u00f6hnlich oder \u00fcblich gilt",
+      "example": "Was ist die Normalit\u00e4t?",
       "pos": "noun",
-      "ipa": "/nɔʁmaliˈtɛːt/",
+      "ipa": "/n\u0254\u0281mali\u02c8t\u025b\u02d0t/",
       "family": [
         "normal"
       ]
     },
     {
       "word": "KOMFORT",
-      "gloss": "ein angenehmes Gefühl von Bequemlichkeit und Wohlbefinden",
+      "gloss": "ein angenehmes Gef\u00fchl von Bequemlichkeit und Wohlbefinden",
+      "example": "Dieser Wagen bietet Raum und Komfort.",
       "pos": "noun",
+      "ipa": "/k\u0254m\u02c8fo\u02d0\u0250\u032f/",
       "family": [
         "komfortabel",
         "Komforttelefon"
-      ],
-      "ipa": "/kɔmˈfoːɐ̯/"
+      ]
     },
     {
-      "word": "ANWÄRTER",
+      "word": "ANW\u00c4RTER",
       "gloss": "eine Person, die sich um eine Stelle oder Position bewirbt",
+      "example": "Anw\u00e4rter f\u00fcr die politische B\u00fchne sollten \u00fcber Familienwerte debattieren.",
       "pos": "noun",
-      "ipa": "/ˈanˌvɛʁtɐ/",
+      "ipa": "/\u02c8an\u02ccv\u025b\u0281t\u0250/",
       "family": [
         "Wart"
       ]
@@ -2492,19 +2682,21 @@
     {
       "word": "MOPED",
       "gloss": "ein kleines motorisiertes Zweirad mit geringer Geschwindigkeit",
+      "example": "Ich spare auf ein Moped.",
       "pos": "noun",
+      "ipa": "/\u02c8mo\u02d0p\u025bt/",
       "family": [
         "Fichtenmoped",
         "Mopedfahrer",
         "Mopedlenker"
-      ],
-      "ipa": "/ˈmoːpɛt/"
+      ]
     },
     {
       "word": "DETONATION",
-      "gloss": "eine plötzliche und heftige Explosion mit starker Druckwelle",
+      "gloss": "eine pl\u00f6tzliche und heftige Explosion mit starker Druckwelle",
+      "example": "Zwei Personen sagen, sie h\u00e4tten eine Detonation geh\u00f6rt.",
       "pos": "noun",
-      "ipa": "/detonaˈt͡si̯oːn/",
+      "ipa": "/detona\u02c8t\u0361si\u032fo\u02d0n/",
       "family": [
         "detonieren",
         "Explosion"
@@ -2513,125 +2705,138 @@
     {
       "word": "UMSCHALTEN",
       "gloss": "von einem Modus oder einer Funktion in eine andere wechseln",
+      "example": "Kann ich umschalten?",
       "pos": "verb",
+      "ipa": "/\u02c8\u028am\u02cc\u0283altn\u0329/",
       "family": [
         "Umschaltung",
         "Umschaltspiel"
-      ],
-      "ipa": "/ˈʊmˌʃaltn̩/"
+      ]
     },
     {
       "word": "KAPPA",
       "gloss": "der zehnte Buchstabe des griechischen Alphabets",
+      "example": "Im Griechischen wird \"K\" als Kappa bezeichnet.",
       "pos": "noun",
-      "ipa": "/ˈkapa/"
+      "ipa": "/\u02c8kapa/"
     },
     {
       "word": "AUFERLEGEN",
       "gloss": "jemandem eine Pflicht oder Last zuteilen",
+      "example": "So eine gro\u00dfe Verantwortung mag ich dir nicht auferlegen.",
       "pos": "verb",
-      "ipa": "/ˈaʊ̯fʔɛɐ̯ˌleːɡn̩/",
+      "ipa": "/\u02c8a\u028a\u032ff\u0294\u025b\u0250\u032f\u02ccle\u02d0\u0261n\u0329/",
       "family": [
         "legen",
         "auf"
       ]
     },
     {
-      "word": "ENTBLÖßEN",
-      "gloss": "etwas verdecktes sichtbar machen oder enthüllen",
+      "word": "ENTBL\u00d6\u00dfEN",
+      "gloss": "etwas verdecktes sichtbar machen oder enth\u00fcllen",
+      "example": "Er tr\u00e4gt immer einen Hut, um seine Glatze nicht zu entbl\u00f6\u00dfen.",
       "pos": "verb",
-      "ipa": "/ɛntˈbløːsn̩/",
+      "ipa": "/\u025bnt\u02c8bl\u00f8\u02d0sn\u0329/",
       "family": [
-        "bloß"
+        "blo\u00df"
       ]
     },
     {
       "word": "VERLAGERN",
       "gloss": "etwas von einem Ort an einen anderen bewegen",
+      "example": "Die Stadt will die Hauptstra\u00dfe verlagern, um den Verkehr zu entlasten.",
       "pos": "verb",
+      "ipa": "/f\u025b\u0250\u032f\u02c8la\u02d0\u0261\u0250n/",
       "family": [
         "Verlagerung"
-      ],
-      "ipa": "/fɛɐ̯ˈlaːɡɐn/"
+      ]
     },
     {
       "word": "MOGELN",
       "gloss": "unfair oder unehrlich handeln, um Vorteile zu erlangen",
+      "example": "Sie mogeln.",
       "pos": "verb",
+      "ipa": "/\u02c8mo\u02d0\u0261l\u0329n/",
       "family": [
         "Mogelpackung",
         "Mogelschinken",
         "Mogelspiel"
-      ],
-      "ipa": "/ˈmoːɡl̩n/"
+      ]
     },
     {
       "word": "MALARIA",
-      "gloss": "eine durch Mücken übertragene tropische Infektionskrankheit",
+      "gloss": "eine durch M\u00fccken \u00fcbertragene tropische Infektionskrankheit",
+      "example": "Malaria wird von Moskitos \u00fcbertragen.",
       "pos": "noun",
+      "ipa": "/ma\u02c8la\u02d0\u0281ia/",
       "family": [
         "Malariaanfall",
         "Malariaerreger",
         "Malariaforschung"
-      ],
-      "ipa": "/maˈlaːʁia/"
+      ]
     },
     {
       "word": "ANGEBISSEN",
-      "gloss": "Mit den Zähnen schon teilweise gegessen.",
+      "gloss": "Mit den Z\u00e4hnen schon teilweise gegessen.",
       "synonyms": [],
+      "example": "Er hatte angebissen.",
       "pos": "verb",
-      "ipa": "/ˈanɡəˌbɪsn̩/",
+      "ipa": "/\u02c8an\u0261\u0259\u02ccb\u026asn\u0329/",
       "family": [
-        "anbeißen",
-        "beißen"
+        "anbei\u00dfen",
+        "bei\u00dfen"
       ]
     },
     {
       "word": "ARSENAL",
-      "gloss": "eine Sammlung von Waffen oder militärischem Gerät",
+      "gloss": "eine Sammlung von Waffen oder milit\u00e4rischem Ger\u00e4t",
+      "example": "Das Museum zeigte ein historisches Arsenal alter Kanonen und R\u00fcstungen.",
       "pos": "noun",
-      "ipa": "/aʁzeˈnaːl/"
+      "ipa": "/a\u0281ze\u02c8na\u02d0l/"
     },
     {
       "word": "GROTESK",
-      "gloss": "seltsam und übertrieben in Form oder Erscheinung",
+      "gloss": "seltsam und \u00fcbertrieben in Form oder Erscheinung",
+      "example": "Er ist h\u00e4sslich und grotesk.",
       "pos": "adjective",
+      "ipa": "/\u0261\u0281o\u02c8t\u025bsk/",
       "family": [
         "Groteske",
         "Groteskfilm",
         "Groteskschrift"
-      ],
-      "ipa": "/ɡʁoˈtɛsk/"
+      ]
     },
     {
       "word": "BAUMELN",
       "gloss": "lose und frei hin und her schwingen",
+      "example": "Wo kann ich meine Seele baumeln lassen?",
       "pos": "verb",
+      "ipa": "/\u02c8ba\u028a\u032fml\u0329n/",
       "family": [
         "baumelnd",
         "aufbaumeln",
         "herabbaumeln"
-      ],
-      "ipa": "/ˈbaʊ̯ml̩n/"
+      ]
     },
     {
       "word": "ZERKRATZEN",
-      "gloss": "eine Oberfläche durch Reiben oder Schaben beschädigen",
+      "gloss": "eine Oberfl\u00e4che durch Reiben oder Schaben besch\u00e4digen",
       "synonyms": [
         "zkratzen"
       ],
+      "example": "Tausende von Dornen werden deine Haut zerkratzen und dein Vorankommen im Dschungel verlangsamen.",
       "pos": "verb",
-      "ipa": "/t͡sɛɐ̯ˈkʁat͡sn̩/",
+      "ipa": "/t\u0361s\u025b\u0250\u032f\u02c8k\u0281at\u0361sn\u0329/",
       "family": [
         "kratzen"
       ]
     },
     {
       "word": "WUTANFALL",
-      "gloss": "ein plötzlicher und heftiger Ausbruch von Zorn",
+      "gloss": "ein pl\u00f6tzlicher und heftiger Ausbruch von Zorn",
+      "example": "Er bekam einen Wutanfall.",
       "pos": "noun",
-      "ipa": "/ˈvuːtʔanˌfal/",
+      "ipa": "/\u02c8vu\u02d0t\u0294an\u02ccfal/",
       "family": [
         "Wut",
         "Anfall"
@@ -2639,9 +2844,10 @@
     },
     {
       "word": "DERWEIL",
-      "gloss": "währenddessen oder in der Zwischenzeit",
+      "gloss": "w\u00e4hrenddessen oder in der Zwischenzeit",
+      "example": "Was soll ich derweil tun?",
       "pos": "adverb",
-      "ipa": "/ˈdeːɐ̯ˈvaɪ̯l/",
+      "ipa": "/\u02c8de\u02d0\u0250\u032f\u02c8va\u026a\u032fl/",
       "family": [
         "der",
         "weil"
@@ -2649,78 +2855,85 @@
     },
     {
       "word": "MEDITATION",
-      "gloss": "eine ruhige Übung der geistigen Konzentration und Entspannung",
+      "gloss": "eine ruhige \u00dcbung der geistigen Konzentration und Entspannung",
+      "example": "Er ist in tiefer Meditation.",
       "pos": "noun",
-      "ipa": "/ˌmeditaˈt͡si̯oːn/",
+      "ipa": "/\u02ccmedita\u02c8t\u0361si\u032fo\u02d0n/",
       "family": [
         "meditieren"
       ]
     },
     {
       "word": "BLASSEN",
-      "gloss": "an Farbe oder Intensität verlieren",
+      "gloss": "an Farbe oder Intensit\u00e4t verlieren",
       "pos": "verb",
+      "ipa": "/\u02c8blasn\u0329/",
       "family": [
         "blassend"
-      ],
-      "ipa": "/ˈblasn̩/"
+      ]
     },
     {
       "word": "KUR",
-      "gloss": "eine planmäßige Behandlung zur Wiederherstellung der Gesundheit",
+      "gloss": "eine planm\u00e4\u00dfige Behandlung zur Wiederherstellung der Gesundheit",
+      "example": "Die Kur hat dir gut getan.",
       "pos": "noun",
+      "ipa": "/ku\u02d0\u0250\u032f/",
       "family": [
         "Kuranlagen",
         "Kuranwendung",
         "Kuraufenthalt"
-      ],
-      "ipa": "/kuːɐ̯/"
+      ]
     },
     {
       "word": "HEUHAUFEN",
       "gloss": "eine aufgeschichtete Menge getrockneten Grases",
+      "example": "Das ist, wie eine Nadel im Heuhaufen zu suchen.",
       "pos": "noun",
-      "ipa": "/ˈhɔɪ̯ˌhaʊ̯fn̩/",
+      "ipa": "/\u02c8h\u0254\u026a\u032f\u02ccha\u028a\u032ffn\u0329/",
       "family": [
         "Heu",
         "Haufen"
       ]
     },
     {
-      "word": "BÜROKRATIE",
-      "gloss": "ein System von Verwaltungsregeln und Behörden",
+      "word": "B\u00dcROKRATIE",
+      "gloss": "ein System von Verwaltungsregeln und Beh\u00f6rden",
+      "example": "Ich hasse B\u00fcrokratie.",
       "pos": "noun",
+      "ipa": "/by\u0281ok\u0281a\u02c8ti\u02d0/",
       "family": [
-        "Bürokrat",
-        "Bürokratieabbau",
-        "Bürokratismus"
-      ],
-      "ipa": "/byʁokʁaˈtiː/"
+        "B\u00fcrokrat",
+        "B\u00fcrokratieabbau",
+        "B\u00fcrokratismus"
+      ]
     },
     {
       "word": "BEWUNDERER",
-      "gloss": "eine Person, die etwas oder jemanden sehr schätzt",
+      "gloss": "eine Person, die etwas oder jemanden sehr sch\u00e4tzt",
+      "example": "Ich bin Ihr Bewunderer.",
       "pos": "noun",
-      "ipa": "/bəˈvʊndəʁɐ/",
+      "ipa": "/b\u0259\u02c8v\u028and\u0259\u0281\u0250/",
       "family": [
         "bewundern"
       ]
     },
     {
       "word": "REPORTAGE",
-      "gloss": "ein journalistischer Bericht über ein aktuelles Ereignis",
+      "gloss": "ein journalistischer Bericht \u00fcber ein aktuelles Ereignis",
+      "example": "Die Leute halten diese Reportage f\u00fcr wahr.",
       "pos": "noun",
+      "ipa": "/\u0281ep\u0254\u0281\u02c8ta\u02d0\u0292\u0259/",
       "family": [
         "Reportageauftrag",
         "Reportageserie"
-      ],
-      "ipa": "/ʁepɔʁˈtaːʒə/"
+      ]
     },
     {
       "word": "SKATEBOARD",
       "gloss": "ein Brett mit Rollen zum Fahren und Tricksen",
+      "example": "Er f\u00e4hrt Skateboard.",
       "pos": "noun",
-      "ipa": "/ˈskɛɪ̯tboːɐ̯t/",
+      "ipa": "/\u02c8sk\u025b\u026a\u032ftbo\u02d0\u0250\u032ft/",
       "family": [
         "Skateboardfahren"
       ]
@@ -2728,20 +2941,22 @@
     {
       "word": "RAUPE",
       "gloss": "das Larvenstadium eines Schmetterlings oder einer Motte",
+      "example": "Die Raupe fra\u00df alle Bl\u00e4tter.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0281a\u028a\u032fp\u0259/",
       "family": [
         "Raupenart",
         "Raupenfliegen",
         "Raupennester"
-      ],
-      "ipa": "/ˈʁaʊ̯pə/"
+      ]
     },
     {
       "word": "KINDLICH",
       "gloss": "Wie ein kleiner Mensch, jung und naiv.",
       "synonyms": [],
+      "example": "Diese Leute sind kindlich naiv.",
       "pos": "adjective",
-      "ipa": "/ˈkɪntlɪç/",
+      "ipa": "/\u02c8k\u026antl\u026a\u00e7/",
       "family": [
         "Kind",
         "Kindheit"
@@ -2750,8 +2965,9 @@
     {
       "word": "GESEHEN",
       "gloss": "wahrgenommen durch den Sehsinn",
+      "example": "Hast du es gesehen?",
       "pos": "verb",
-      "ipa": "/ɡəˈzeːən/",
+      "ipa": "/\u0261\u0259\u02c8ze\u02d0\u0259n/",
       "family": [
         "sehen",
         "Gesicht"
@@ -2760,94 +2976,104 @@
     {
       "word": "ERREGUNG",
       "gloss": "ein Zustand gesteigerter innerer Spannung oder Aufregung",
+      "example": "Markku versuchte, seine Erregung zu unterdr\u00fccken.",
       "pos": "noun",
+      "ipa": "/\u025b\u0250\u032f\u02c8\u0281e\u02d0\u0261\u028a\u014b/",
       "family": [
         "Erregungsherd",
         "Erregungsimpuls",
         "Erregungskurve"
-      ],
-      "ipa": "/ɛɐ̯ˈʁeːɡʊŋ/"
+      ]
     },
     {
       "word": "MONARCHIE",
       "gloss": "eine Staatsform mit einem erblichen Herrscher an der Spitze",
+      "example": "Ist Nordkorea eine Monarchie?",
       "pos": "noun",
+      "ipa": "/mona\u0281\u02c8\u00e7i\u02d0/",
       "family": [
         "Monarch",
         "Monarchin",
         "monarchisch"
-      ],
-      "ipa": "/monaʁˈçiː/"
+      ]
     },
     {
       "word": "ANSTELLUNG",
-      "gloss": "eine formelle Beschäftigung bei einem Arbeitgeber",
+      "gloss": "eine formelle Besch\u00e4ftigung bei einem Arbeitgeber",
+      "example": "Ich habe keine Anstellung.",
       "pos": "noun",
+      "ipa": "/\u02c8an\u02cc\u0283t\u025bl\u028a\u014b/",
       "family": [
         "Anstellungsurkunde",
         "Anstellungsvertrag"
-      ],
-      "ipa": "/ˈanˌʃtɛlʊŋ/"
+      ]
     },
     {
       "word": "PLASMA",
-      "gloss": "ein ionisierter gasförmiger Zustand der Materie",
+      "gloss": "ein ionisierter gasf\u00f6rmiger Zustand der Materie",
+      "example": "Das Plasma ist der vierte Aggregatzustand.",
       "pos": "noun",
+      "ipa": "/\u02c8plasma/",
       "family": [
         "plasmatisch",
         "Plasmaantrieb",
         "Plasmabildschirm"
-      ],
-      "ipa": "/ˈplasma/"
+      ]
     },
     {
       "word": "ABITUR",
       "gloss": "die allgemeine Hochschulreife nach der gymnasialen Oberstufe",
+      "example": "Ich habe noch kein Abitur.",
       "pos": "noun",
+      "ipa": "/\u02ccabi\u02c8tu\u02d0\u0250\u032f/",
       "family": [
         "Abiturfach",
         "Abiturfeier",
         "Abiturient"
-      ],
-      "ipa": "/ˌabiˈtuːɐ̯/"
+      ]
     },
     {
       "word": "HALBZEIT",
       "gloss": "die Mitte einer Spielzeit oder Veranstaltung",
+      "example": "Kroatien hatte eine gute erste Halbzeit.",
       "pos": "noun",
-      "ipa": "/ˈhalpˌt͡saɪ̯t/"
+      "ipa": "/\u02c8halp\u02cct\u0361sa\u026a\u032ft/"
     },
     {
       "word": "VERBUNDEN",
-      "gloss": "miteinander verknüpft oder in Beziehung stehend",
+      "gloss": "miteinander verkn\u00fcpft oder in Beziehung stehend",
+      "example": "Ich bin Ihnen sehr verbunden.",
       "pos": "adjective",
+      "ipa": "/f\u025b\u0250\u032f\u02c8b\u028andn\u0329/",
       "family": [
         "Verbundenheit"
-      ],
-      "ipa": "/fɛɐ̯ˈbʊndn̩/"
+      ]
     },
     {
       "word": "QUALLE",
-      "gloss": "ein frei schwimmendes Nesseltier mit gallertartigem Körper",
+      "gloss": "ein frei schwimmendes Nesseltier mit gallertartigem K\u00f6rper",
+      "example": "Eine Qualle war auf seinem R\u00fccken.",
       "pos": "noun",
+      "ipa": "/\u02c8kval\u0259/",
       "family": [
         "Quallenart",
         "Quallenbaum",
         "Quallengattung"
-      ],
-      "ipa": "/ˈkvalə/"
+      ]
     },
     {
       "word": "BALLAST",
-      "gloss": "zusätzliches Gewicht, das Stabilität oder Ausgleich dient",
+      "gloss": "zus\u00e4tzliches Gewicht, das Stabilit\u00e4t oder Ausgleich dient",
+      "example": "Werfe Ballast ab!",
       "pos": "noun",
-      "ipa": "/ˈbalast/"
+      "ipa": "/\u02c8balast/"
     },
     {
       "word": "STEUERMANN",
       "gloss": "die Person, die ein Schiff oder Boot lenkt",
+      "example": "Ich w\u00fcnsche den Steuermann zu sehen.",
       "pos": "noun",
-      "ipa": "/ˈʃtɔɪ̯ɐˌman/",
+      "ipa": "/\u02c8\u0283t\u0254\u026a\u032f\u0250\u02ccman/",
       "family": [
         "Steuer",
         "Steuerrad"
@@ -2855,65 +3081,69 @@
     },
     {
       "word": "FRACK",
-      "gloss": "Ein formeller Abendanzug mit langen Schößen.",
+      "gloss": "Ein formeller Abendanzug mit langen Sch\u00f6\u00dfen.",
       "synonyms": [],
+      "example": "Esprit ist Intelligenz im Frack.",
       "pos": "noun",
+      "ipa": "/f\u0281ak/",
       "family": [
         "befrackt",
         "Frackhemd",
         "Frackhose"
-      ],
-      "ipa": "/fʁak/"
+      ]
     },
     {
       "word": "AUFPASSER",
-      "gloss": "eine Person, die über etwas oder jemanden wacht",
+      "gloss": "eine Person, die \u00fcber etwas oder jemanden wacht",
       "synonyms": [
-        "Wächter",
+        "W\u00e4chter",
         "Aufseher"
       ],
+      "example": "Das junge Paar wurde von einem Aufpasser begleitet.",
       "pos": "noun",
-      "ipa": "/ˈaʊ̯fˌpasɐ/",
+      "ipa": "/\u02c8a\u028a\u032ff\u02ccpas\u0250/",
       "family": [
         "aufpassen",
         "Aufpasserin"
       ]
     },
     {
-      "word": "ANBEIßEN",
-      "gloss": "einen Köder oder ein Angebot annehmen",
+      "word": "ANBEI\u00dfEN",
+      "gloss": "einen K\u00f6der oder ein Angebot annehmen",
       "synonyms": [
-        "zubeißen",
+        "zubei\u00dfen",
         "happen"
       ],
       "pos": "verb",
+      "ipa": "/\u02c8an\u02ccba\u026a\u032fsn\u0329/",
       "family": [
         "Anbiss"
-      ],
-      "ipa": "/ˈanˌbaɪ̯sn̩/"
+      ]
     },
     {
-      "word": "EINÄSCHERN",
+      "word": "EIN\u00c4SCHERN",
       "gloss": "Einen Toten durch Feuer verbrennen.",
       "synonyms": [
         "kremieren"
       ],
+      "example": "Ich denke daran, mich einmal ein\u00e4schern zu lassen.",
       "pos": "verb",
-      "ipa": "/ˈaɪ̯nˌʔɛʃɐn/"
+      "ipa": "/\u02c8a\u026a\u032fn\u02cc\u0294\u025b\u0283\u0250n/"
     },
     {
-      "word": "AUSREIßEN",
+      "word": "AUSREI\u00dfEN",
       "gloss": "Weglaufen, fliehen, oder mit der Wurzel herausziehen.",
       "synonyms": [
         "entwurzeln"
       ],
+      "example": "Ich k\u00f6nnte B\u00e4ume ausrei\u00dfen.",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cc\u0281a\u026a\u032fsn\u0329/",
       "family": [
         "ausgerissen",
-        "ausreißend",
-        "Ausreißer"
-      ],
-      "ipa": "/ˈaʊ̯sˌʁaɪ̯sn̩/"
+        "ausrei\u00dfend",
+        "Ausrei\u00dfer"
+      ]
     },
     {
       "word": "ERWIRKEN",
@@ -2922,8 +3152,9 @@
         "erzielen",
         "bewirken"
       ],
+      "example": "Durch hartn\u00e4ckiges Verhandeln konnte sie eine Gehaltserh\u00f6hung erwirken.",
       "pos": "verb",
-      "ipa": "/ɛɐ̯ˈvɪʁkn̩/",
+      "ipa": "/\u025b\u0250\u032f\u02c8v\u026a\u0281kn\u0329/",
       "family": [
         "wirken",
         "Wirkung"
@@ -2931,39 +3162,42 @@
     },
     {
       "word": "DOMINIEREN",
-      "gloss": "über etwas oder jemanden die Kontrolle ausüben",
+      "gloss": "\u00fcber etwas oder jemanden die Kontrolle aus\u00fcben",
       "synonyms": [
         "beherrschen",
-        "überragen"
+        "\u00fcberragen"
       ],
+      "example": "Wo Kompromisse fehlen, dominieren die Faustregeln.",
       "pos": "verb",
+      "ipa": "/domi\u02c8ni\u02d0\u0281\u0259n/",
       "family": [
         "dominant",
         "dominierend",
         "dominiert"
-      ],
-      "ipa": "/domiˈniːʁən/"
+      ]
     },
     {
       "word": "ERBRINGEN",
-      "gloss": "eine Leistung oder einen Nachweis erfüllen",
+      "gloss": "eine Leistung oder einen Nachweis erf\u00fcllen",
       "synonyms": [
         "leisten",
         "liefern"
       ],
+      "example": "Ich allein kann diesen Beweis nicht erbringen.",
       "pos": "verb",
+      "ipa": "/\u025b\u0250\u032f\u02c8b\u0281\u026a\u014b\u0259n/",
       "family": [
         "erbracht",
         "erbringend"
-      ],
-      "ipa": "/ɛɐ̯ˈbʁɪŋən/"
+      ]
     },
     {
       "word": "ANGELANGT",
       "gloss": "An einem Ziel eingetroffen.",
       "synonyms": [],
+      "example": "Wir sind am Ende angelangt.",
       "pos": "verb",
-      "ipa": "/ˈanɡəˌlaŋt/",
+      "ipa": "/\u02c8an\u0261\u0259\u02ccla\u014bt/",
       "family": [
         "ankommen",
         "Ankunft"
@@ -2971,13 +3205,14 @@
     },
     {
       "word": "UMFASST",
-      "gloss": "einschließen oder enthalten",
+      "gloss": "einschlie\u00dfen oder enthalten",
       "synonyms": [
-        "enthält",
+        "enth\u00e4lt",
         "beinhaltet"
       ],
+      "example": "Das Quiz umfasst zehn Runden.",
       "pos": "adverb",
-      "ipa": "/ˌʊmˈfast/",
+      "ipa": "/\u02cc\u028am\u02c8fast/",
       "family": [
         "umfassen",
         "Umfassung"
@@ -2985,13 +3220,14 @@
     },
     {
       "word": "OFFICE",
-      "gloss": "ein Raum oder Bereich für administrative Arbeit",
+      "gloss": "ein Raum oder Bereich f\u00fcr administrative Arbeit",
       "synonyms": [
-        "Büro",
+        "B\u00fcro",
         "Arbeitsraum"
       ],
+      "example": "Bewerber sollten mit den g\u00e4ngigen Office-Anwendungen vertraut sein.",
       "pos": "noun",
-      "ipa": "/ˈɔfɪs/"
+      "ipa": "/\u02c8\u0254f\u026as/"
     },
     {
       "word": "SCHLIPS",
@@ -3000,60 +3236,65 @@
         "Krawatte",
         "Binder"
       ],
+      "example": "Ein toller Schlips!",
       "pos": "noun",
+      "ipa": "/\u0283l\u026aps/",
       "family": [
         "Schlipshalter",
         "Schlipsknoten",
         "Schlipsnadel"
-      ],
-      "ipa": "/ʃlɪps/"
+      ]
     },
     {
-      "word": "MÜDIGKEIT",
-      "gloss": "ein Gefühl von Erschöpfung und fehlender Energie",
+      "word": "M\u00dcDIGKEIT",
+      "gloss": "ein Gef\u00fchl von Ersch\u00f6pfung und fehlender Energie",
       "synonyms": [
-        "Erschöpfung",
+        "Ersch\u00f6pfung",
         "Abgespanntheit"
       ],
+      "example": "Mich \u00fcberkam die M\u00fcdigkeit.",
       "pos": "noun",
-      "ipa": "/ˈmyːdɪçkaɪ̯t/",
+      "ipa": "/\u02c8my\u02d0d\u026a\u00e7ka\u026a\u032ft/",
       "family": [
-        "müde"
+        "m\u00fcde"
       ]
     },
     {
       "word": "CORNFLAKES",
-      "gloss": "knusprige Frühstücksflocken aus Mais",
+      "gloss": "knusprige Fr\u00fchst\u00fccksflocken aus Mais",
       "synonyms": [
         "Maisflocken",
-        "Frühstücksflocken"
+        "Fr\u00fchst\u00fccksflocken"
       ],
+      "example": "Ich esse Cornflakes zum Fr\u00fchst\u00fcck.",
       "pos": "noun",
-      "ipa": "/ˈkoːɐ̯nfleːks/"
+      "ipa": "/\u02c8ko\u02d0\u0250\u032fnfle\u02d0ks/"
     },
     {
       "word": "HIRTE",
       "gloss": "eine Person, die eine Herde von Tieren betreut",
       "synonyms": [
-        "Schäfer",
-        "Hüter"
+        "Sch\u00e4fer",
+        "H\u00fcter"
       ],
+      "example": "Ich war nicht nur irgendein Hirte.",
       "pos": "noun",
+      "ipa": "/\u02c8h\u026a\u0281t\u0259/",
       "family": [
         "Hirtendichtung",
-        "Hirtenflöte",
+        "Hirtenfl\u00f6te",
         "Hirtengedicht"
-      ],
-      "ipa": "/ˈhɪʁtə/"
+      ]
     },
     {
       "word": "FALSCHGELD",
       "gloss": "Unechte Scheine, die als Zahlungsmittel missbraucht werden.",
       "synonyms": [
-        "Blüte"
+        "Bl\u00fcte"
       ],
+      "example": "Gibt es Falschgeld?",
       "pos": "noun",
-      "ipa": "/ˈfalʃˌɡɛlt/",
+      "ipa": "/\u02c8fal\u0283\u02cc\u0261\u025blt/",
       "family": [
         "falsch",
         "Geld"
@@ -3063,46 +3304,50 @@
       "word": "FREIMACHEN",
       "gloss": "Von Hindernissen oder Lasten befreien.",
       "synonyms": [],
+      "example": "Ich habe dir bereits milliardenmal gesagt, dass du dich von deinem Drang zur \u00dcbertreibung freimachen sollst.",
       "pos": "verb",
-      "ipa": "/ˈfʁaɪ̯ˌmaxn̩/",
+      "ipa": "/\u02c8f\u0281a\u026a\u032f\u02ccmaxn\u0329/",
       "family": [
         "frei"
       ]
     },
     {
       "word": "KNIRSCHEN",
-      "gloss": "ein knarrendes oder reibendes Geräusch erzeugen",
+      "gloss": "ein knarrendes oder reibendes Ger\u00e4usch erzeugen",
       "synonyms": [
         "knarren",
         "knacken"
       ],
+      "example": "Er fing an, mit den Z\u00e4hnen zu knirschen.",
       "pos": "verb",
+      "ipa": "/\u02c8kn\u026a\u0281\u0283n\u0329/",
       "family": [
         "zerknirscht"
-      ],
-      "ipa": "/ˈknɪʁʃn̩/"
+      ]
     },
     {
       "word": "EDELMANN",
-      "gloss": "ein Angehöriger des historischen Adels",
+      "gloss": "ein Angeh\u00f6riger des historischen Adels",
       "synonyms": [
         "Aristokrat"
       ],
+      "example": "Er ist der erste Edelmann von seinem Geschlecht.",
       "pos": "noun",
-      "ipa": "/ˈeːdl̩ˌman/",
+      "ipa": "/\u02c8e\u02d0dl\u0329\u02ccman/",
       "family": [
         "Adel"
       ]
     },
     {
-      "word": "KUNSTSTÜCK",
-      "gloss": "eine geschickte oder überraschende Leistung",
+      "word": "KUNSTST\u00dcCK",
+      "gloss": "eine geschickte oder \u00fcberraschende Leistung",
       "synonyms": [
         "Trick",
         "Akrobatik"
       ],
+      "example": "Willst du ein Kunstst\u00fcck sehen?",
       "pos": "noun",
-      "ipa": "/ˈkʊnstˌʃtʏk/",
+      "ipa": "/\u02c8k\u028anst\u02cc\u0283t\u028fk/",
       "family": [
         "Kunst",
         "Kunstwerk"
@@ -3110,12 +3355,13 @@
     },
     {
       "word": "SINGEND",
-      "gloss": "mit der Stimme Melodien oder Töne erzeugend",
+      "gloss": "mit der Stimme Melodien oder T\u00f6ne erzeugend",
       "synonyms": [
         "melodisch"
       ],
+      "example": "Ich gehe singend auf Griechisch.",
       "pos": "verb",
-      "ipa": "/ˈzɪŋənt/",
+      "ipa": "/\u02c8z\u026a\u014b\u0259nt/",
       "family": [
         "singen",
         "Gesang"
@@ -3126,52 +3372,53 @@
       "gloss": "Kurz und vorsichtig riechen.",
       "synonyms": [],
       "pos": "verb",
+      "ipa": "/\u02c8\u0283n\u028ap\u0250n/",
       "family": [
         "herumschnuppern",
         "Schnupperkurs",
         "Schnupperlehre"
-      ],
-      "ipa": "/ˈʃnʊpɐn/"
+      ]
     },
     {
       "word": "ARG",
       "gloss": "eine heftige Auseinandersetzung",
       "synonyms": [
         "schlimm",
-        "übel"
+        "\u00fcbel"
       ],
       "pos": "adjective",
+      "ipa": "/a\u0281k/",
       "family": [
         "arglistig",
         "arglos",
         "Argwohn"
-      ],
-      "ipa": "/aʁk/"
+      ]
     },
     {
       "word": "ANHALTEND",
-      "gloss": "über längere Zeit andauernd",
+      "gloss": "\u00fcber l\u00e4ngere Zeit andauernd",
       "synonyms": [
         "dauerhaft",
-        "fortwährend"
+        "fortw\u00e4hrend"
       ],
       "pos": "adjective",
-      "ipa": "/ˈanˌhaltn̩t/",
+      "ipa": "/\u02c8an\u02cchaltn\u0329t/",
       "family": [
         "anhalten"
       ]
     },
     {
-      "word": "ÜBERFÜLLT",
+      "word": "\u00dcBERF\u00dcLLT",
       "gloss": "Mit zu vielen Personen oder Dingen besetzt.",
       "synonyms": [
         "vollgestopft"
       ],
+      "example": "Der Zug war \u00fcberf\u00fcllt.",
       "pos": "adverb",
-      "ipa": "/yːbɐˈfʏlt/",
+      "ipa": "/y\u02d0b\u0250\u02c8f\u028flt/",
       "family": [
-        "überfüllen",
-        "Überfüllung"
+        "\u00fcberf\u00fcllen",
+        "\u00dcberf\u00fcllung"
       ]
     },
     {
@@ -3181,57 +3428,61 @@
         "welche",
         "jenen"
       ],
+      "example": "Was ist los mit denen?",
       "pos": "verb",
-      "ipa": "/ˈdeːnən/",
+      "ipa": "/\u02c8de\u02d0n\u0259n/",
       "family": [
         "der"
       ]
     },
     {
-      "word": "TÜRME",
+      "word": "T\u00dcRME",
       "gloss": "hohe, schlanke Bauwerke",
       "synonyms": [
         "Hochbauten"
       ],
+      "example": "Der Eiffelturm ist h\u00f6her als die T\u00fcrme des K\u00f6lner Doms.",
       "pos": "noun",
-      "ipa": "/ˈtʏʁmə/",
+      "ipa": "/\u02c8t\u028f\u0281m\u0259/",
       "family": [
         "Turm",
-        "Türmchen"
+        "T\u00fcrmchen"
       ]
     },
     {
-      "word": "BRUTALITÄT",
+      "word": "BRUTALIT\u00c4T",
       "gloss": "grausames und rohes Verhalten",
       "synonyms": [
         "Grausamkeit"
       ],
+      "example": "Ich halte seine Brutalit\u00e4t nicht mehr aus.",
       "pos": "noun",
-      "ipa": "/ˌbʁutaliˈtɛːt/",
+      "ipa": "/\u02ccb\u0281utali\u02c8t\u025b\u02d0t/",
       "family": [
         "brutal"
       ]
     },
     {
       "word": "KAPERN",
-      "gloss": "ein Schiff oder Fahrzeug gewaltsam übernehmen",
+      "gloss": "ein Schiff oder Fahrzeug gewaltsam \u00fcbernehmen",
       "synonyms": [
         "entern",
-        "übernehmen"
+        "\u00fcbernehmen"
       ],
       "pos": "verb",
+      "ipa": "/\u02c8ka\u02d0p\u0250n/",
       "family": [
         "Kaperfahrt",
         "Kaperung"
-      ],
-      "ipa": "/ˈkaːpɐn/"
+      ]
     },
     {
       "word": "HINHAUEN",
       "gloss": "Gelingen, klappen; oder mit Schwung schlagen.",
       "synonyms": [],
+      "example": "Das k\u00f6nnte hinhauen!",
       "pos": "verb",
-      "ipa": "/ˈhɪnˌhaʊ̯ən/"
+      "ipa": "/\u02c8h\u026an\u02ccha\u028a\u032f\u0259n/"
     },
     {
       "word": "RATION",
@@ -3240,8 +3491,9 @@
         "Portion",
         "Anteil"
       ],
+      "example": "Der Soldat erhielt seine t\u00e4gliche Ration an Wasser und Proviant.",
       "pos": "noun",
-      "ipa": "/ˌʁaˈt͡si̯oːn/",
+      "ipa": "/\u02cc\u0281a\u02c8t\u0361si\u032fo\u02d0n/",
       "family": [
         "Rationierung"
       ]
@@ -3253,8 +3505,9 @@
         "beeindrucken",
         "faszinieren"
       ],
+      "example": "Alles, was uns imponieren soll, mu\u00df Charakter haben.",
       "pos": "verb",
-      "ipa": "/ɪmpoˈniːʁən/",
+      "ipa": "/\u026ampo\u02c8ni\u02d0\u0281\u0259n/",
       "family": [
         "imponierend",
         "imponiert"
@@ -3262,13 +3515,14 @@
     },
     {
       "word": "CHRONISCH",
-      "gloss": "über lange Zeit bestehend oder wiederkehrend",
+      "gloss": "\u00fcber lange Zeit bestehend oder wiederkehrend",
       "synonyms": [
         "dauerhaft",
         "langanhaltend"
       ],
+      "example": "Meine Schmerzen sind chronisch.",
       "pos": "adjective",
-      "ipa": "/ˈkʁoːnɪʃ/",
+      "ipa": "/\u02c8k\u0281o\u02d0n\u026a\u0283/",
       "family": [
         "Chronologie"
       ]
@@ -3279,72 +3533,78 @@
       "synonyms": [
         "keuchen"
       ],
+      "example": "Sie schlafen nicht alle, die mit der Nase schnaufen.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0283na\u028a\u032ffn\u0329/",
       "family": [
         "schnaufend",
         "Schnaufer",
         "aufschnaufen"
-      ],
-      "ipa": "/ˈʃnaʊ̯fn̩/"
+      ]
     },
     {
-      "word": "BEGLÜCKEN",
-      "gloss": "Jemandem große Freude machen.",
+      "word": "BEGL\u00dcCKEN",
+      "gloss": "Jemandem gro\u00dfe Freude machen.",
       "synonyms": [
         "erfreuen"
       ],
+      "example": "L\u00e4cheln kann begl\u00fccken.",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8\u0261l\u028fkn\u0329/",
       "family": [
-        "beglückend",
-        "zwangsbeglücken"
-      ],
-      "ipa": "/bəˈɡlʏkn̩/"
+        "begl\u00fcckend",
+        "zwangsbegl\u00fccken"
+      ]
     },
     {
       "word": "AUSDEHNEN",
-      "gloss": "etwas räumlich oder zeitlich größer machen",
+      "gloss": "etwas r\u00e4umlich oder zeitlich gr\u00f6\u00dfer machen",
       "synonyms": [
-        "vergrößern",
+        "vergr\u00f6\u00dfern",
         "ausweiten"
       ],
+      "example": "Wir sollten die Frist bis zum Projektende ausdehnen, um mehr Zeit f\u00fcr die Qualit\u00e4tssicherung zu haben.",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02ccde\u02d0n\u0259n/",
       "family": [
         "ausdehnbar",
         "ausdehnend",
         "ausgedehnt"
-      ],
-      "ipa": "/ˈaʊ̯sˌdeːnən/"
+      ]
     },
     {
       "word": "ASTERIX",
-      "gloss": "ein kleiner, kühner Krieger aus einer Comicreihe",
+      "gloss": "ein kleiner, k\u00fchner Krieger aus einer Comicreihe",
       "synonyms": [
         "Comicfigur"
       ],
+      "example": "Asterix, der kleine Gallier mit dem Zaubertrank, bleibt immer mutig und clever.",
       "pos": "verb",
-      "ipa": "/ˈasteʁɪks/"
+      "ipa": "/\u02c8aste\u0281\u026aks/"
     },
     {
       "word": "ELEKTRONIK",
-      "gloss": "Geräte und Bauteile, die mit Strom arbeiten.",
+      "gloss": "Ger\u00e4te und Bauteile, die mit Strom arbeiten.",
       "synonyms": [],
+      "example": "Er versteht nichts von Elektronik.",
       "pos": "noun",
+      "ipa": "/el\u025bk\u02c8t\u0281o\u02d0n\u026ak/",
       "family": [
         "elektronisch",
         "Elektroniker",
         "Elektronikfertigung"
-      ],
-      "ipa": "/elɛkˈtʁoːnɪk/"
+      ]
     },
     {
       "word": "FUNKSTILLE",
-      "gloss": "Zeit, in der man nichts voneinander hört.",
+      "gloss": "Zeit, in der man nichts voneinander h\u00f6rt.",
       "synonyms": [],
+      "example": "Nach dem Urlaub herrschte wochenlang Funkstille zwischen den Freunden.",
       "pos": "noun",
-      "ipa": "/ˈfʊŋkˌʃtɪlə/",
+      "ipa": "/\u02c8f\u028a\u014bk\u02cc\u0283t\u026al\u0259/",
       "family": [
         "Funk",
-        "Funkgerät",
+        "Funkger\u00e4t",
         "Funkverkehr"
       ]
     },
@@ -3352,58 +3612,63 @@
       "word": "HAARFARBE",
       "gloss": "Wie blond, braun oder schwarz jemand auf dem Kopf ist.",
       "synonyms": [],
+      "example": "Welche Haarfarbe hast du?",
       "pos": "noun",
-      "ipa": "/ˈhaːɐ̯ˌfaʁbə/",
+      "ipa": "/\u02c8ha\u02d0\u0250\u032f\u02ccfa\u0281b\u0259/",
       "family": [
         "Haar",
         "Farbe",
-        "Haarfärbemittel"
+        "Haarf\u00e4rbemittel"
       ]
     },
     {
       "word": "ZIMT",
-      "gloss": "ein aromatisches Gewürz aus Rinde",
+      "gloss": "ein aromatisches Gew\u00fcrz aus Rinde",
       "synonyms": [
-        "Gewürz"
+        "Gew\u00fcrz"
       ],
+      "example": "Zimt ist eigentlich Baumrinde.",
       "pos": "noun",
+      "ipa": "/t\u0361s\u026amt/",
       "family": [
         "zimtbraun",
         "zimtfarben",
         "zimtfarbig"
-      ],
-      "ipa": "/t͡sɪmt/"
+      ]
     },
     {
       "word": "KADAVER",
-      "gloss": "der tote Körper eines Tieres",
+      "gloss": "der tote K\u00f6rper eines Tieres",
       "synonyms": [
         "Tierleiche"
       ],
+      "example": "Wo ein Kadaver ist, sind Geier da.",
       "pos": "noun",
+      "ipa": "/ka\u02c8da\u02d0v\u0250/",
       "family": [
         "Kadavergehorsam"
-      ],
-      "ipa": "/kaˈdaːvɐ/"
+      ]
     },
     {
-      "word": "KETTENSÄGE",
-      "gloss": "Eine motorbetriebene Maschine zum Fällen von Bäumen.",
+      "word": "KETTENS\u00c4GE",
+      "gloss": "Eine motorbetriebene Maschine zum F\u00e4llen von B\u00e4umen.",
       "synonyms": [],
+      "example": "Wo ist meine Kettens\u00e4ge?",
       "pos": "noun",
-      "ipa": "/ˈkɛtn̩ˌzɛːɡə/",
+      "ipa": "/\u02c8k\u025btn\u0329\u02ccz\u025b\u02d0\u0261\u0259/",
       "family": [
         "Kette",
-        "Säge",
-        "Motorsäge"
+        "S\u00e4ge",
+        "Motors\u00e4ge"
       ]
     },
     {
       "word": "LIEBESPAAR",
       "gloss": "Zwei Menschen, die verliebt sind.",
       "synonyms": [],
+      "example": "Sie wurden ein Liebespaar.",
       "pos": "noun",
-      "ipa": "/ˈliːbəsˌpaːɐ̯/",
+      "ipa": "/\u02c8li\u02d0b\u0259s\u02ccpa\u02d0\u0250\u032f/",
       "family": [
         "Liebe",
         "Paar",
@@ -3416,8 +3681,9 @@
       "synonyms": [
         "amtlich"
       ],
+      "example": "Ich komme dienstlich.",
       "pos": "adjective",
-      "ipa": "/ˈdiːnstlɪç/",
+      "ipa": "/\u02c8di\u02d0nstl\u026a\u00e7/",
       "family": [
         "Dienst",
         "Dienstweg"
@@ -3429,8 +3695,9 @@
       "synonyms": [
         "legen"
       ],
+      "example": "Wo soll ich\u2019s hintun?",
       "pos": "verb",
-      "ipa": "/ˈhɪnˌtuːn/",
+      "ipa": "/\u02c8h\u026an\u02cctu\u02d0n/",
       "family": [
         "hinlegen",
         "hinstellen",
@@ -3439,18 +3706,19 @@
     },
     {
       "word": "KAPPEN",
-      "gloss": "etwas kürzen oder abschneiden",
+      "gloss": "etwas k\u00fcrzen oder abschneiden",
       "synonyms": [
-        "kürzen",
+        "k\u00fcrzen",
         "stutzen"
       ],
+      "example": "Der G\u00e4rtner wollte die \u00c4ste kappen, damit sie nicht \u00fcber den Zaun h\u00e4ngen.",
       "pos": "verb",
+      "ipa": "/\u02c8kapn\u0329/",
       "family": [
         "gekappt",
         "kappend",
         "Kappbeil"
-      ],
-      "ipa": "/ˈkapn̩/"
+      ]
     },
     {
       "word": "AUSHECKEN",
@@ -3459,98 +3727,105 @@
         "planen"
       ],
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cch\u025bkn\u0329/",
       "family": [
         "ausgeheckt",
         "ausheckend"
-      ],
-      "ipa": "/ˈaʊ̯sˌhɛkn̩/"
+      ]
     },
     {
       "word": "AUSSTECHEN",
-      "gloss": "Einen Rivalen besiegen oder Plätzchenformen in Teig drücken.",
+      "gloss": "Einen Rivalen besiegen oder Pl\u00e4tzchenformen in Teig dr\u00fccken.",
       "synonyms": [
-        "übertreffen"
+        "\u00fcbertreffen"
       ],
+      "example": "Er wollte im Wettbewerb seine Konkurrenten ausstechen und Pl\u00e4tzchen ausstechen.",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cc\u0283t\u025b\u00e7n\u0329/",
       "family": [
         "ausgestochen",
         "ausstechend",
         "Ausstich"
-      ],
-      "ipa": "/ˈaʊ̯sˌʃtɛçn̩/"
+      ]
     },
     {
       "word": "FRITTIEREN",
-      "gloss": "in heißem Fett goldbraun backen",
+      "gloss": "in hei\u00dfem Fett goldbraun backen",
       "synonyms": [
         "ausbacken"
       ],
+      "example": "Ihre Arbeit besteht darin, Kartoffeln zu frittieren.",
       "pos": "verb",
+      "ipa": "/f\u0281\u026a\u02c8ti\u02d0\u0281\u0259n/",
       "family": [
         "Fritteuse"
-      ],
-      "ipa": "/fʁɪˈtiːʁən/"
+      ]
     },
     {
-      "word": "PRÄZISION",
-      "gloss": "große Genauigkeit bei einer Tätigkeit",
+      "word": "PR\u00c4ZISION",
+      "gloss": "gro\u00dfe Genauigkeit bei einer T\u00e4tigkeit",
       "synonyms": [
         "Genauigkeit"
       ],
+      "example": "Strenge tut not, ganz besonders in Fragen sprachlicher Pr\u00e4zision.",
       "pos": "noun",
+      "ipa": "/p\u0281\u025bt\u0361si\u02c8zi\u032fo\u02d0n/",
       "family": [
-        "Präzisionsarbeit",
-        "Präzisionsbombe",
-        "Präzisionsgewehr"
-      ],
-      "ipa": "/pʁɛt͡siˈzi̯oːn/"
+        "Pr\u00e4zisionsarbeit",
+        "Pr\u00e4zisionsbombe",
+        "Pr\u00e4zisionsgewehr"
+      ]
     },
     {
       "word": "KLOTZ",
-      "gloss": "ein großes, schweres Stück Holz oder Stein",
+      "gloss": "ein gro\u00dfes, schweres St\u00fcck Holz oder Stein",
       "synonyms": [
         "Block"
       ],
+      "example": "Er schl\u00e4ft wie ein Klotz.",
       "pos": "adverb",
+      "ipa": "/kl\u0254t\u0361s/",
       "family": [
         "Klotzkopf",
         "klotzig"
-      ],
-      "ipa": "/klɔt͡s/"
+      ]
     },
     {
-      "word": "TRÄNENGAS",
-      "gloss": "Ein Reizstoff, der die Augen weinen lässt.",
+      "word": "TR\u00c4NENGAS",
+      "gloss": "Ein Reizstoff, der die Augen weinen l\u00e4sst.",
       "synonyms": [],
+      "example": "Elisabeth war Tr\u00e4nengas ausgesetzt.",
       "pos": "noun",
-      "ipa": "/ˈtʁɛːnənˌɡaːs/",
+      "ipa": "/\u02c8t\u0281\u025b\u02d0n\u0259n\u02cc\u0261a\u02d0s/",
       "family": [
-        "Träne",
+        "Tr\u00e4ne",
         "Gas",
         "Reizgas"
       ]
     },
     {
       "word": "OBERHAND",
-      "gloss": "die überlegene Position in einer Situation",
+      "gloss": "die \u00fcberlegene Position in einer Situation",
       "synonyms": [
         "Vorteil"
       ],
+      "example": "Wer hat gegenw\u00e4rtig die Oberhand?",
       "pos": "noun",
-      "ipa": "/ˈoːbɐˌhant/",
+      "ipa": "/\u02c8o\u02d0b\u0250\u02cchant/",
       "family": [
         "Hand",
-        "überhandnehmen"
+        "\u00fcberhandnehmen"
       ]
     },
     {
-      "word": "MÄTRESSE",
+      "word": "M\u00c4TRESSE",
       "gloss": "eine Frau, die mit einem verheirateten Mann liiert ist",
       "synonyms": [
         "Geliebte"
       ],
+      "example": "Madame de Pompadour war eine M\u00e4tresse Ludwigs XV.",
       "pos": "noun",
-      "ipa": "/mɛˈtʁɛsə/",
+      "ipa": "/m\u025b\u02c8t\u0281\u025bs\u0259/",
       "family": [
         "Geliebte",
         "Beziehung"
@@ -3558,12 +3833,13 @@
     },
     {
       "word": "VORKOMMNIS",
-      "gloss": "ein bemerkenswertes oder ungewöhnliches Ereignis",
+      "gloss": "ein bemerkenswertes oder ungew\u00f6hnliches Ereignis",
       "synonyms": [
         "Ereignis"
       ],
+      "example": "Ich kann das Vorkommnis nur bedauern.",
       "pos": "noun",
-      "ipa": "/ˈfoːɐ̯ˌkɔmnɪs/",
+      "ipa": "/\u02c8fo\u02d0\u0250\u032f\u02cck\u0254mn\u026as/",
       "family": [
         "vorkommen",
         "Ereignis"
@@ -3571,64 +3847,68 @@
     },
     {
       "word": "VERFANGEN",
-      "gloss": "in etwas festsitzen oder hängen bleiben",
+      "gloss": "in etwas festsitzen oder h\u00e4ngen bleiben",
       "synonyms": [
-        "hängenbleiben"
+        "h\u00e4ngenbleiben"
       ],
+      "example": "Wie k\u00f6nnen nur solche Parolen verfangen?",
       "pos": "verb",
+      "ipa": "/f\u025b\u0250\u032f\u02c8fa\u014b\u0259n/",
       "family": [
-        "unverfänglich",
-        "verfänglich"
-      ],
-      "ipa": "/fɛɐ̯ˈfaŋən/"
+        "unverf\u00e4nglich",
+        "verf\u00e4nglich"
+      ]
     },
     {
-      "word": "BESCHÄMEN",
+      "word": "BESCH\u00c4MEN",
       "gloss": "jemanden in Verlegenheit bringen",
       "synonyms": [
-        "demütigen"
+        "dem\u00fctigen"
       ],
+      "example": "Ich wollte dich nicht besch\u00e4men.",
       "pos": "verb",
+      "ipa": "/b\u0259\u02c8\u0283\u025b\u02d0m\u0259n/",
       "family": [
-        "Beschämung"
-      ],
-      "ipa": "/bəˈʃɛːmən/"
+        "Besch\u00e4mung"
+      ]
     },
     {
       "word": "HOCHHAUS",
-      "gloss": "ein sehr hohes Wohn- oder Geschäftsgebäude",
+      "gloss": "ein sehr hohes Wohn- oder Gesch\u00e4ftsgeb\u00e4ude",
       "synonyms": [
         "Wolkenkratzer"
       ],
+      "example": "Das Hochhaus brennt.",
       "pos": "noun",
-      "ipa": "/ˈhoːxˌhaʊ̯s/",
+      "ipa": "/\u02c8ho\u02d0x\u02ccha\u028a\u032fs/",
       "family": [
         "Wolkenkratzer",
-        "Gebäude"
+        "Geb\u00e4ude"
       ]
     },
     {
       "word": "VEREITELN",
-      "gloss": "die Ausführung eines Plans verhindern",
+      "gloss": "die Ausf\u00fchrung eines Plans verhindern",
       "synonyms": [
         "verhindern"
       ],
+      "example": "Das w\u00fcrde das Vorhaben vereiteln.",
       "pos": "verb",
+      "ipa": "/f\u025b\u0250\u032f\u02c8\u0294a\u026a\u032ftl\u0329n/",
       "family": [
         "vereitelnd",
         "vereitelt",
         "Vereitelung"
-      ],
-      "ipa": "/fɛɐ̯ˈʔaɪ̯tl̩n/"
+      ]
     },
     {
       "word": "ATOMAR",
-      "gloss": "Mit Kernenergie oder Kernwaffen zusammenhängend.",
+      "gloss": "Mit Kernenergie oder Kernwaffen zusammenh\u00e4ngend.",
       "synonyms": [
         "nuklear"
       ],
       "pos": "adjective",
-      "ipa": "/atoˈmaːɐ̯/",
+      "ipa": "/ato\u02c8ma\u02d0\u0250\u032f/",
       "family": [
         "Atom",
         "Atomkraft",
@@ -3642,8 +3922,9 @@
         "feierlich",
         "feiernd"
       ],
+      "example": "Es sieht so festlich aus.",
       "pos": "adjective",
-      "ipa": "/ˈfɛstlɪç/",
+      "ipa": "/\u02c8f\u025bstl\u026a\u00e7/",
       "family": [
         "Fest",
         "Feier"
@@ -3656,55 +3937,60 @@
         "per Anhalter",
         "hitchhiken"
       ],
+      "example": "Ich mag das Trampen nicht.",
       "pos": "verb",
+      "ipa": "/\u02c8t\u0281\u025bmpn\u0329/",
       "family": [
         "Tramper"
-      ],
-      "ipa": "/ˈtʁɛmpn̩/"
+      ]
     },
     {
       "word": "BEKLEMMEND",
-      "gloss": "Bedrückend, Angst machend.",
+      "gloss": "Bedr\u00fcckend, Angst machend.",
       "synonyms": [],
+      "example": "Das lange Schweigen war beklemmend.",
       "pos": "adjective",
+      "ipa": "/b\u0259\u02c8kl\u025bm\u0259nt/",
       "family": [
         "herzbeklemmend"
-      ],
-      "ipa": "/bəˈklɛmənt/"
+      ]
     },
     {
       "word": "KUPPLUNG",
       "gloss": "Eine mechanische Verbindung zwischen Motor und Getriebe.",
       "synonyms": [],
+      "example": "Mir ist die Kupplung kaputtgegangen.",
       "pos": "noun",
+      "ipa": "/\u02c8k\u028apl\u028a\u014b/",
       "family": [
         "Kupplungshebel",
         "Kupplungspedal",
         "Kupplungsscheibe"
-      ],
-      "ipa": "/ˈkʊplʊŋ/"
+      ]
     },
     {
       "word": "KETZER",
       "gloss": "jemand, der von der offiziellen Lehre abweicht",
       "synonyms": [
-        "Häretiker",
-        "Abtrünniger"
+        "H\u00e4retiker",
+        "Abtr\u00fcnniger"
       ],
+      "example": "Ich bin ein Ketzer.",
       "pos": "noun",
+      "ipa": "/\u02c8k\u025bt\u0361s\u0250/",
       "family": [
         "Ketzerei",
         "Ketzerbart",
         "Ketzerbuch"
-      ],
-      "ipa": "/ˈkɛt͡sɐ/"
+      ]
     },
     {
       "word": "STRANDHAUS",
-      "gloss": "Ein Gebäude direkt am Meer.",
+      "gloss": "Ein Geb\u00e4ude direkt am Meer.",
       "synonyms": [],
+      "example": "Ich habe ein Strandhaus.",
       "pos": "noun",
-      "ipa": "/ˈʃtʁantˌhaʊ̯s/",
+      "ipa": "/\u02c8\u0283t\u0281ant\u02ccha\u028a\u032fs/",
       "family": [
         "Strand",
         "Haus",
@@ -3712,39 +3998,42 @@
       ]
     },
     {
-      "word": "PÖBEL",
+      "word": "P\u00d6BEL",
       "gloss": "eine als roh geltende Menschenmenge",
       "synonyms": [
         "Mob",
         "Masse"
       ],
+      "example": "Er k\u00e4mpfte sich aus dem P\u00f6bel heraus.",
       "pos": "noun",
+      "ipa": "/\u02c8p\u00f8\u02d0bl\u0329/",
       "family": [
-        "pöbelhaft",
-        "Pöbelhaufen",
-        "Pöbelherrschaft"
-      ],
-      "ipa": "/ˈpøːbl̩/"
+        "p\u00f6belhaft",
+        "P\u00f6belhaufen",
+        "P\u00f6belherrschaft"
+      ]
     },
     {
       "word": "PELLE",
-      "gloss": "die äußere Schale von Obst oder Gemüse",
+      "gloss": "die \u00e4u\u00dfere Schale von Obst oder Gem\u00fcse",
       "synonyms": [
         "Schale",
         "Haut"
       ],
+      "example": "Ich sch\u00e4lte die Kartoffeln, wobei ich darauf achtete, die Pelle nicht zu verletzen.",
       "pos": "noun",
+      "ipa": "/\u02c8p\u025bl\u0259/",
       "family": [
         "Wurstpelle"
-      ],
-      "ipa": "/ˈpɛlə/"
+      ]
     },
     {
       "word": "LEBENSJAHR",
-      "gloss": "Zwölf vollendete Monate im Alter einer Person.",
+      "gloss": "Zw\u00f6lf vollendete Monate im Alter einer Person.",
       "synonyms": [],
+      "example": "Ich habe bis zu meinem zehnten Lebensjahr eingen\u00e4sst.",
       "pos": "noun",
-      "ipa": "/ˈleːbn̩sˌjaːɐ̯/",
+      "ipa": "/\u02c8le\u02d0bn\u0329s\u02ccja\u02d0\u0250\u032f/",
       "family": [
         "Leben",
         "Jahr",
@@ -3753,25 +4042,27 @@
     },
     {
       "word": "METEOR",
-      "gloss": "ein kleiner Himmelskörper, der in die Erdatmosphäre eindringt",
+      "gloss": "ein kleiner Himmelsk\u00f6rper, der in die Erdatmosph\u00e4re eindringt",
       "synonyms": [
         "Sternschnuppe",
         "Feuerball"
       ],
+      "example": "Was ist ein Meteor?",
       "pos": "noun",
+      "ipa": "/mete\u02c8o\u02d0\u0250\u032f/",
       "family": [
         "Meteorologe",
         "Meteorologie",
         "Meteorologin"
-      ],
-      "ipa": "/meteˈoːɐ̯/"
+      ]
     },
     {
       "word": "SPRENGSATZ",
       "gloss": "Eine explosive Vorrichtung.",
       "synonyms": [],
+      "example": "Die Polizei entdeckte im alten Schuppen einen verd\u00e4chtigen **Sprengsatz**.",
       "pos": "noun",
-      "ipa": "/ˈʃpʁɛŋˌzat͡s/",
+      "ipa": "/\u02c8\u0283p\u0281\u025b\u014b\u02cczat\u0361s/",
       "family": [
         "Sprengstoff",
         "Explosion"
@@ -3782,29 +4073,30 @@
       "gloss": "etwas an eine Adresse liefern",
       "synonyms": [
         "liefern",
-        "aushändigen"
+        "aush\u00e4ndigen"
       ],
+      "example": "Die Lieferfirma wird die Pakete morgen an die richtige Adresse zustellen.",
       "pos": "verb",
+      "ipa": "/\u02c8t\u0361su\u02d0\u02cc\u0283t\u025bl\u0259n/",
       "family": [
         "zustellbar",
         "Zustellbasis",
         "Zustellbezirk"
-      ],
-      "ipa": "/ˈt͡suːˌʃtɛlən/"
+      ]
     },
     {
       "word": "ROTHAUT",
-      "gloss": "veraltete Bezeichnung für einen nordamerikanischen Ureinwohner",
+      "gloss": "veraltete Bezeichnung f\u00fcr einen nordamerikanischen Ureinwohner",
       "synonyms": [
         "Indianer",
         "Ureinwohner"
       ],
       "pos": "noun",
-      "ipa": "/ˈʁoːtˌhaʊ̯t/",
+      "ipa": "/\u02c8\u0281o\u02d0t\u02ccha\u028a\u032ft/",
       "family": [
         "rot",
         "Haut",
-        "indigene Völker"
+        "indigene V\u00f6lker"
       ]
     },
     {
@@ -3814,78 +4106,84 @@
         "vertraut",
         "verbunden"
       ],
+      "example": "Die ihr nahestehen, sagen, sie sei verzagt gewesen.",
       "pos": "verb",
-      "ipa": "/ˈnaːəˌʃteːən/",
+      "ipa": "/\u02c8na\u02d0\u0259\u02cc\u0283te\u02d0\u0259n/",
       "family": [
         "nahe",
         "stehen",
-        "Nähe"
+        "N\u00e4he"
       ]
     },
     {
       "word": "FAXEN",
-      "gloss": "Mit einem Fernkopierer übermitteln.",
+      "gloss": "Mit einem Fernkopierer \u00fcbermitteln.",
       "synonyms": [],
+      "example": "Ich m\u00f6chte dies nach Japan faxen.",
       "pos": "noun",
+      "ipa": "/\u02c8faksn\u0329/",
       "family": [
         "durchfaxen"
-      ],
-      "ipa": "/ˈfaksn̩/"
-    },
-    {
-      "word": "VOLLJÄHRIG",
-      "gloss": "das gesetzlich festgelegte Mindestalter erreicht habend",
-      "synonyms": [
-        "mündig",
-        "erwachsen"
-      ],
-      "pos": "adjective",
-      "ipa": "/ˈfɔlˌjɛːʁɪç/",
-      "family": [
-        "Mündigkeit"
       ]
     },
     {
-      "word": "WOHLTÄTER",
-      "gloss": "jemand, der anderen uneigennützig hilft",
+      "word": "VOLLJ\u00c4HRIG",
+      "gloss": "das gesetzlich festgelegte Mindestalter erreicht habend",
       "synonyms": [
-        "Gönner",
-        "Förderer"
+        "m\u00fcndig",
+        "erwachsen"
       ],
+      "example": "Bist du vollj\u00e4hrig?",
+      "pos": "adjective",
+      "ipa": "/\u02c8f\u0254l\u02ccj\u025b\u02d0\u0281\u026a\u00e7/",
+      "family": [
+        "M\u00fcndigkeit"
+      ]
+    },
+    {
+      "word": "WOHLT\u00c4TER",
+      "gloss": "jemand, der anderen uneigenn\u00fctzig hilft",
+      "synonyms": [
+        "G\u00f6nner",
+        "F\u00f6rderer"
+      ],
+      "example": "Sie schauten zu ihm auf wie zu ihrem Wohlt\u00e4ter.",
       "pos": "noun",
-      "ipa": "/ˈvoːlˌtɛːtɐ/",
+      "ipa": "/\u02c8vo\u02d0l\u02cct\u025b\u02d0t\u0250/",
       "family": [
         "Wohl",
-        "tätig",
-        "Wohltätigkeit"
+        "t\u00e4tig",
+        "Wohlt\u00e4tigkeit"
       ]
     },
     {
       "word": "PUDER",
-      "gloss": "fein gemahlenes, streufähiges Pulver",
+      "gloss": "fein gemahlenes, streuf\u00e4higes Pulver",
       "synonyms": [
         "Pulver",
         "Mehl"
       ],
+      "example": "F\u00fcr die Backzutaten brauchte sie etwas Puder und Mehl in separaten Sch\u00e4lchen.",
       "pos": "adjective",
+      "ipa": "/\u02c8pu\u02d0d\u0250/",
       "family": [
         "pudern",
         "Puderdose",
         "Puderzucker"
-      ],
-      "ipa": "/ˈpuːdɐ/"
+      ]
     },
     {
       "word": "BOSHEIT",
-      "gloss": "schadenfrohes oder böses Verhalten",
+      "gloss": "schadenfrohes oder b\u00f6ses Verhalten",
       "synonyms": [
         "Arglist"
       ],
+      "example": "Bosheit ist bald gelernt.",
       "pos": "noun",
-      "ipa": "/ˈboːshaɪ̯t/",
+      "ipa": "/\u02c8bo\u02d0sha\u026a\u032ft/",
       "family": [
         "boshaft",
-        "Bösartigkeit"
+        "B\u00f6sartigkeit"
       ]
     },
     {
@@ -3895,8 +4193,9 @@
         "Anbetung",
         "Bewunderung"
       ],
+      "example": "Verehrung ist tiefgek\u00fchlte Liebe.",
       "pos": "noun",
-      "ipa": "/fɛɐ̯ˈʔeːʁʊŋ/",
+      "ipa": "/f\u025b\u0250\u032f\u02c8\u0294e\u02d0\u0281\u028a\u014b/",
       "family": [
         "verehren",
         "verehrenswert",
@@ -3904,27 +4203,29 @@
       ]
     },
     {
-      "word": "ERWÜNSCHT",
-      "gloss": "wird von jemandem gewünscht oder erhofft",
+      "word": "ERW\u00dcNSCHT",
+      "gloss": "wird von jemandem gew\u00fcnscht oder erhofft",
       "synonyms": [
-        "gewünscht",
+        "gew\u00fcnscht",
         "erbeten"
       ],
+      "example": "Jungen sind nicht erw\u00fcnscht.",
       "pos": "adverb",
-      "ipa": "/ɛɐ̯ˈvʏnʃt/",
+      "ipa": "/\u025b\u0250\u032f\u02c8v\u028fn\u0283t/",
       "family": [
-        "wünschen",
+        "w\u00fcnschen",
         "Wunsch"
       ]
     },
     {
       "word": "BRUCHBUDE",
-      "gloss": "eine alte, baufällige Hütte",
+      "gloss": "eine alte, bauf\u00e4llige H\u00fctte",
       "synonyms": [
         "Ruine"
       ],
+      "example": "Wie lange wird diese alte Bruchbude noch hier an der Stra\u00dfe stehen?",
       "pos": "noun",
-      "ipa": "/ˈbʁʊxˌbuːdə/",
+      "ipa": "/\u02c8b\u0281\u028ax\u02ccbu\u02d0d\u0259/",
       "family": [
         "Bruch",
         "Bude",
@@ -3933,16 +4234,17 @@
     },
     {
       "word": "BALLERINA",
-      "gloss": "eine Tänzerin, die auf Zehenspitzen tanzt",
+      "gloss": "eine T\u00e4nzerin, die auf Zehenspitzen tanzt",
       "synonyms": [
-        "Tänzerin"
+        "T\u00e4nzerin"
       ],
+      "example": "Die Ballerina tanzte voll Anmut.",
       "pos": "noun",
-      "ipa": "/baləˈʁiːna/",
+      "ipa": "/bal\u0259\u02c8\u0281i\u02d0na/",
       "family": [
         "Ballett",
-        "Tänzerin",
-        "Balletttänzerin"
+        "T\u00e4nzerin",
+        "Ballettt\u00e4nzerin"
       ]
     },
     {
@@ -3952,34 +4254,37 @@
         "Osten",
         "Morgenland"
       ],
+      "example": "In Sarajevo treffen Orient und Okzident aufeinander.",
       "pos": "noun",
+      "ipa": "/\u02c8o\u02d0\u0281i\u025bnt/",
       "family": [
         "Orientbeule",
         "Orientreise"
-      ],
-      "ipa": "/ˈoːʁiɛnt/"
+      ]
     },
     {
       "word": "GEWINNER",
-      "gloss": "Eine Person, die einen Wettbewerb für sich entscheidet.",
+      "gloss": "Eine Person, die einen Wettbewerb f\u00fcr sich entscheidet.",
       "synonyms": [
         "Sieger"
       ],
+      "example": "Wir sind Gewinner.",
       "pos": "noun",
+      "ipa": "/\u0261\u0259\u02c8v\u026an\u0250/",
       "family": [
         "Gewinnerseite",
         "Gewinnertyp"
-      ],
-      "ipa": "/ɡəˈvɪnɐ/"
+      ]
     },
     {
       "word": "WITZFIGUR",
-      "gloss": "Eine lächerliche Person.",
+      "gloss": "Eine l\u00e4cherliche Person.",
       "synonyms": [
         "Narr"
       ],
+      "example": "Er wurde zur Witzfigur, als er im Meeting \u00fcber seine peinliche Kleidung lachte.",
       "pos": "noun",
-      "ipa": "/ˈvɪt͡sfɪˌɡuːɐ̯/",
+      "ipa": "/\u02c8v\u026at\u0361sf\u026a\u02cc\u0261u\u02d0\u0250\u032f/",
       "family": [
         "Witz",
         "Figur",
@@ -3989,11 +4294,12 @@
     {
       "word": "AUSLADEN",
       "gloss": "etwas von einem Lastwagen herunternehmen",
+      "example": "Wir m\u00fcssen den Lkw ausladen.",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02ccla\u02d0dn\u0329/",
       "family": [
         "Ausladung"
-      ],
-      "ipa": "/ˈaʊ̯sˌlaːdn̩/"
+      ]
     },
     {
       "word": "BEILEGEN",
@@ -4001,20 +4307,22 @@
       "synonyms": [
         "schlichten"
       ],
+      "example": "Lasst uns diesen Streit endlich beilegen!",
       "pos": "verb",
+      "ipa": "/\u02c8ba\u026a\u032f\u02ccle\u02d0\u0261n\u0329/",
       "family": [
         "Beilage"
-      ],
-      "ipa": "/ˈbaɪ̯ˌleːɡn̩/"
+      ]
     },
     {
       "word": "BLINDDARM",
-      "gloss": "Ein kleines, am Ende geschlossenes Stück der Verdauungsorgane.",
+      "gloss": "Ein kleines, am Ende geschlossenes St\u00fcck der Verdauungsorgane.",
       "synonyms": [
         "Appendix"
       ],
+      "example": "Ich werde den Blinddarm entfernen.",
       "pos": "noun",
-      "ipa": "/ˈblɪntˌdaʁm/",
+      "ipa": "/\u02c8bl\u026ant\u02ccda\u0281m/",
       "family": [
         "Darm",
         "Darmverschluss"
@@ -4022,15 +4330,16 @@
     },
     {
       "word": "SEEKRANK",
-      "gloss": "wird auf einem Schiff übel",
+      "gloss": "wird auf einem Schiff \u00fcbel",
       "synonyms": [
-        "übel"
+        "\u00fcbel"
       ],
+      "example": "Ich bin seekrank.",
       "pos": "adjective",
+      "ipa": "/\u02c8ze\u02d0\u02cck\u0281a\u014bk/",
       "family": [
         "Seekrankheit"
-      ],
-      "ipa": "/ˈzeːˌkʁaŋk/"
+      ]
     },
     {
       "word": "PROZESSES",
@@ -4038,22 +4347,24 @@
       "synonyms": [
         "Verfahrens"
       ],
+      "example": "Meine Freunde standen mir bei w\u00e4hrend des Prozesses.",
       "pos": "adjective",
-      "ipa": "/pʁoˈt͡sɛsəs/",
+      "ipa": "/p\u0281o\u02c8t\u0361s\u025bs\u0259s/",
       "family": [
         "Prozess",
         "Prozessieren",
-        "Prozessführung"
+        "Prozessf\u00fchrung"
       ]
     },
     {
       "word": "UNGEMEIN",
       "gloss": "Sehr stark, ganz besonders.",
       "synonyms": [
-        "außerordentlich"
+        "au\u00dferordentlich"
       ],
+      "example": "Sie redet ungemein vulg\u00e4r.",
       "pos": "adjective",
-      "ipa": "/ˈʊnɡəˌmaɪ̯n/",
+      "ipa": "/\u02c8\u028an\u0261\u0259\u02ccma\u026a\u032fn/",
       "family": [
         "gemein",
         "Gemeinheit"
@@ -4061,62 +4372,66 @@
     },
     {
       "word": "ORDNER",
-      "gloss": "eine Mappe für lose Blätter",
+      "gloss": "eine Mappe f\u00fcr lose Bl\u00e4tter",
       "synonyms": [
         "Aktenmappe"
       ],
+      "example": "Der Ordner ist leer.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0254\u0281dn\u0250/",
       "family": [
         "Ordnereigenschaft",
         "Ordnerhierarchie"
-      ],
-      "ipa": "/ˈɔʁdnɐ/"
+      ]
     },
     {
       "word": "HUMAN",
-      "gloss": "mitfühlend und menschenfreundlich",
+      "gloss": "mitf\u00fchlend und menschenfreundlich",
       "synonyms": [
         "menschlich"
       ],
       "pos": "adjective",
+      "ipa": "/hu\u02c8ma\u02d0n/",
       "family": [
         "Humananatomie",
         "Humanbiologie",
         "Humanethologie"
-      ],
-      "ipa": "/huˈmaːn/"
+      ]
     },
     {
-      "word": "EISBÄR",
-      "gloss": "ein großes weißes Raubtier der Arktis",
+      "word": "EISB\u00c4R",
+      "gloss": "ein gro\u00dfes wei\u00dfes Raubtier der Arktis",
+      "example": "Ein Highlight des heutigen Programmes ist ein tanzender Eisb\u00e4r.",
       "pos": "noun",
-      "ipa": "/ˈaɪ̯sˌbɛːɐ̯/",
+      "ipa": "/\u02c8a\u026a\u032fs\u02ccb\u025b\u02d0\u0250\u032f/",
       "family": [
         "Eis",
-        "Bär",
-        "Eisbären"
+        "B\u00e4r",
+        "Eisb\u00e4ren"
       ]
     },
     {
       "word": "AKKORD",
-      "gloss": "ein Zusammenklang mehrerer Töne",
+      "gloss": "ein Zusammenklang mehrerer T\u00f6ne",
       "synonyms": [
         "Zusammenklang"
       ],
+      "example": "Welcher Akkord ist es?",
       "pos": "noun",
+      "ipa": "/a\u02c8k\u0254\u0281t/",
       "family": [
         "Akkordeon",
         "Akkordfolge",
         "Akkordlohn"
-      ],
-      "ipa": "/aˈkɔʁt/"
+      ]
     },
     {
       "word": "HAUSHERR",
-      "gloss": "Der Mann, dem ein Gebäude gehört oder der es leitet.",
+      "gloss": "Der Mann, dem ein Geb\u00e4ude geh\u00f6rt oder der es leitet.",
       "synonyms": [],
+      "example": "Der Hausherr wies mich an, einzutreten.",
       "pos": "noun",
-      "ipa": "/ˈhaʊ̯sˌhɛʁ/",
+      "ipa": "/\u02c8ha\u028a\u032fs\u02cch\u025b\u0281/",
       "family": [
         "Haus",
         "Herr",
@@ -4125,14 +4440,15 @@
     },
     {
       "word": "DERWISCH",
-      "gloss": "ein tanzender islamischer Mönch",
+      "gloss": "ein tanzender islamischer M\u00f6nch",
       "synonyms": [
-        "Tänzer"
+        "T\u00e4nzer"
       ],
+      "example": "Er singt wie eine Nachtigall und tanzt wie ein Derwisch.",
       "pos": "noun",
-      "ipa": "/ˈdɛʁvɪʃ/",
+      "ipa": "/\u02c8d\u025b\u0281v\u026a\u0283/",
       "family": [
-        "Mönch"
+        "M\u00f6nch"
       ]
     },
     {
@@ -4142,24 +4458,26 @@
         "Cousine",
         "Base"
       ],
+      "example": "Der Hund meiner Kusine ist ungest\u00fcm.",
       "pos": "noun",
-      "ipa": "/kuˈziːnə/",
+      "ipa": "/ku\u02c8zi\u02d0n\u0259/",
       "family": [
         "Cousine",
         "Vetter"
       ]
     },
     {
-      "word": "BLÄHUNG",
+      "word": "BL\u00c4HUNG",
       "gloss": "eine Ansammlung von Gas im Darm",
       "synonyms": [
         "Flatulenz"
       ],
+      "example": "Ich habe gedacht, es sei nur eine Bl\u00e4hung, aber es ist Durchfall.",
       "pos": "noun",
-      "ipa": "/ˈblɛːʊŋ/",
+      "ipa": "/\u02c8bl\u025b\u02d0\u028a\u014b/",
       "family": [
-        "blähen",
-        "Blähungen"
+        "bl\u00e4hen",
+        "Bl\u00e4hungen"
       ]
     },
     {
@@ -4168,48 +4486,51 @@
       "synonyms": [
         "Geschichtsforscher"
       ],
+      "example": "Er ist Historiker.",
       "pos": "noun",
+      "ipa": "/h\u026as\u02c8to\u02d0\u0281\u026ak\u0250/",
       "family": [
         "Historikerdebatte",
         "Historikerkommission",
         "Historikerstreit"
-      ],
-      "ipa": "/hɪsˈtoːʁɪkɐ/"
+      ]
     },
     {
-      "word": "AUSREIßER",
-      "gloss": "eine Person, die wegläuft",
+      "word": "AUSREI\u00dfER",
+      "gloss": "eine Person, die wegl\u00e4uft",
       "synonyms": [
-        "Flüchtling"
+        "Fl\u00fcchtling"
       ],
+      "example": "Es findet eine Jagd auf den Ausrei\u00dfer statt.",
       "pos": "noun",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cc\u0281a\u026a\u032fs\u0250/",
       "family": [
-        "Ausreißergruppe"
-      ],
-      "ipa": "/ˈaʊ̯sˌʁaɪ̯sɐ/"
+        "Ausrei\u00dfergruppe"
+      ]
     },
     {
-      "word": "AUSSTOßEN",
-      "gloss": "etwas plötzlich nach außen drücken",
+      "word": "AUSSTO\u00dfEN",
+      "gloss": "etwas pl\u00f6tzlich nach au\u00dfen dr\u00fccken",
       "synonyms": [
         "vertreiben"
       ],
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032fs\u02cc\u0283to\u02d0sn\u0329/",
       "family": [
-        "Ausstoß",
-        "Ausgestoßene",
-        "Ausgestoßener"
-      ],
-      "ipa": "/ˈaʊ̯sˌʃtoːsn̩/"
+        "Aussto\u00df",
+        "Ausgesto\u00dfene",
+        "Ausgesto\u00dfener"
+      ]
     },
     {
       "word": "ANMUTIG",
-      "gloss": "mit leichter, schöner Bewegung",
+      "gloss": "mit leichter, sch\u00f6ner Bewegung",
       "synonyms": [
-        "graziös"
+        "grazi\u00f6s"
       ],
+      "example": "Rola tanzte anmutig.",
       "pos": "adjective",
-      "ipa": "/ˈanmuːtɪç/",
+      "ipa": "/\u02c8anmu\u02d0t\u026a\u00e7/",
       "family": [
         "Anmut"
       ]
@@ -4220,38 +4541,41 @@
       "synonyms": [
         "unbeschwert"
       ],
+      "example": "Ich war sorglos.",
       "pos": "adjective",
+      "ipa": "/\u02c8z\u0254\u0281klo\u02d0s/",
       "family": [
         "Sorglosigkeit"
-      ],
-      "ipa": "/ˈzɔʁkloːs/"
+      ]
     },
     {
       "word": "NASHORN",
-      "gloss": "Ein großes, graues Tier aus Afrika mit spitzem Auswuchs im Gesicht.",
+      "gloss": "Ein gro\u00dfes, graues Tier aus Afrika mit spitzem Auswuchs im Gesicht.",
       "synonyms": [
         "Rhinozeros"
       ],
+      "example": "Das hier ist ein Nashorn.",
       "pos": "noun",
+      "ipa": "/\u02c8na\u02d0s\u02cch\u0254\u0281n/",
       "family": [
         "Nashornbulle",
         "Nashornkalb",
         "Nashornkuh"
-      ],
-      "ipa": "/ˈnaːsˌhɔʁn/"
+      ]
     },
     {
       "word": "ERHITZEN",
-      "gloss": "etwas wärmer machen",
+      "gloss": "etwas w\u00e4rmer machen",
       "synonyms": [
-        "aufwärmen"
+        "aufw\u00e4rmen"
       ],
+      "example": "Etwas Wasser erhitzen.",
       "pos": "verb",
+      "ipa": "/\u025b\u0250\u032f\u02c8h\u026at\u0361sn\u0329/",
       "family": [
         "Erhitzer",
         "hocherhitzt"
-      ],
-      "ipa": "/ɛɐ̯ˈhɪt͡sn̩/"
+      ]
     },
     {
       "word": "SILBE",
@@ -4259,13 +4583,14 @@
       "synonyms": [
         "Lautgruppe"
       ],
+      "example": "Gl\u00fcck hat eine Silbe.",
       "pos": "noun",
+      "ipa": "/\u02c8z\u026alb\u0259/",
       "family": [
         "Silbenanlaut",
         "Silbenauslaut",
         "Silbenbau"
-      ],
-      "ipa": "/ˈzɪlbə/"
+      ]
     },
     {
       "word": "ANMALEN",
@@ -4273,8 +4598,9 @@
       "synonyms": [
         "bemalen"
       ],
+      "example": "Ich muss es anmalen.",
       "pos": "verb",
-      "ipa": "/ˈanˌmaːlən/",
+      "ipa": "/\u02c8an\u02ccma\u02d0l\u0259n/",
       "family": [
         "malen",
         "Bemalen"
@@ -4285,7 +4611,7 @@
       "gloss": "Kinostreifen herstellen.",
       "synonyms": [],
       "pos": "adverb",
-      "ipa": "/ˈfɪlməˌmax/",
+      "ipa": "/\u02c8f\u026alm\u0259\u02ccmax/",
       "family": [
         "Film",
         "machen",
@@ -4294,43 +4620,47 @@
     },
     {
       "word": "KOMBI",
-      "gloss": "Ein Auto mit großem Laderaum.",
+      "gloss": "Ein Auto mit gro\u00dfem Laderaum.",
       "synonyms": [],
+      "example": "Kaufst du lieber einen Kombi oder eine Limousine f\u00fcr unsere Familienausfl\u00fcge?",
       "pos": "noun",
+      "ipa": "/\u02c8k\u0254mbi/",
       "family": [
         "Kombilohn"
-      ],
-      "ipa": "/ˈkɔmbi/"
+      ]
     },
     {
       "word": "MARSHALS",
       "gloss": "Hohe Polizeibeamte in den USA.",
       "synonyms": [],
+      "example": "Die Marshals sind f\u00fcr die Sicherheit in US-Bundesgeb\u00e4uden zust\u00e4ndig.",
       "pos": "adverb",
-      "ipa": "/ˈmaʁʃl̩s/",
+      "ipa": "/\u02c8ma\u0281\u0283l\u0329s/",
       "family": [
         "Hohebeamter"
       ]
     },
     {
-      "word": "ZÄUNE",
+      "word": "Z\u00c4UNE",
       "gloss": "Abgrenzungen aus Holz oder Metall.",
       "synonyms": [],
+      "example": "Gute Z\u00e4une machen gute Nachbarn.",
       "pos": "adverb",
-      "ipa": "/ˈt͡sɔɪ̯nə/",
+      "ipa": "/\u02c8t\u0361s\u0254\u026a\u032fn\u0259/",
       "family": [
         "Zaun",
-        "einzäunen"
+        "einz\u00e4unen"
       ]
     },
     {
       "word": "FEIGER",
       "gloss": "Ohne Mut oder Tapferkeit.",
       "synonyms": [
-        "ängstlich"
+        "\u00e4ngstlich"
       ],
+      "example": "Ich bin von mir selber entt\u00e4uscht; ich bin ein feiger Hund.",
       "pos": "noun",
-      "ipa": "/ˈfaɪ̯ɡɐ/",
+      "ipa": "/\u02c8fa\u026a\u032f\u0261\u0250/",
       "family": [
         "Feigling",
         "Feigheit",
@@ -4339,34 +4669,37 @@
     },
     {
       "word": "WICHT",
-      "gloss": "eine kleine, oft böse Gestalt",
+      "gloss": "eine kleine, oft b\u00f6se Gestalt",
       "synonyms": [
         "Kobold"
       ],
+      "example": "Der listige Wicht versteckte die Schl\u00fcssel in seinem winzigen Haus.",
       "pos": "adverb",
+      "ipa": "/v\u026a\u00e7t/",
       "family": [
-        "Bösewicht"
-      ],
-      "ipa": "/vɪçt/"
+        "B\u00f6sewicht"
+      ]
     },
     {
       "word": "MYTHOLOGIE",
-      "gloss": "die Lehre von alten Göttergeschichten",
+      "gloss": "die Lehre von alten G\u00f6ttergeschichten",
       "synonyms": [
-        "Götterlehre"
+        "G\u00f6tterlehre"
       ],
+      "example": "Ich interessiere mich auch f\u00fcr griechische Mythologie.",
       "pos": "noun",
+      "ipa": "/mytolo\u02c8\u0261i\u02d0/",
       "family": [
         "mythologisch"
-      ],
-      "ipa": "/mytoloˈɡiː/"
+      ]
     },
     {
       "word": "GASTSTAR",
       "gloss": "Eine bekannte Person, die einmal in einer Sendung auftritt.",
       "synonyms": [],
+      "example": "Der Moderator freut sich sehr, dass der ber\u00fchmte Schauspieler als Gaststar in der Show auftreten wird.",
       "pos": "noun",
-      "ipa": "/ˈɡastˌstaːɐ̯/",
+      "ipa": "/\u02c8\u0261ast\u02ccsta\u02d0\u0250\u032f/",
       "family": [
         "Gast",
         "Star",
@@ -4375,16 +4708,17 @@
     },
     {
       "word": "RAR",
-      "gloss": "sehr selten oder ungewöhnlich",
+      "gloss": "sehr selten oder ungew\u00f6hnlich",
       "synonyms": [
         "selten"
       ],
+      "example": "Er machte sich rar.",
       "pos": "adjective",
+      "ipa": "/\u0281a\u02d0\u0250\u032f/",
       "family": [
-        "Rarität",
+        "Rarit\u00e4t",
         "rarmachen"
-      ],
-      "ipa": "/ʁaːɐ̯/"
+      ]
     },
     {
       "word": "VIBRATION",
@@ -4392,35 +4726,37 @@
       "synonyms": [
         "Schwingung"
       ],
+      "example": "Die st\u00e4ndige Vibration des Motors verursachte ein unangenehmes Summen.",
       "pos": "noun",
+      "ipa": "/vib\u0281a\u02c8t\u0361si\u032fo\u02d0n/",
       "family": [
         "vibrationsarm",
         "vibrationsfrei",
         "Vibrationsalarm"
-      ],
-      "ipa": "/vibʁaˈt͡si̯oːn/"
+      ]
     },
     {
       "word": "ERARBEITEN",
-      "gloss": "Durch Fleiß erlangen.",
+      "gloss": "Durch Flei\u00df erlangen.",
       "synonyms": [
         "erzielen"
       ],
+      "example": "Die Leute erarbeiten das gemeinsam im Team.",
       "pos": "verb",
+      "ipa": "/\u025b\u0250\u032f\u02c8\u0294a\u0281ba\u026a\u032ftn\u0329/",
       "family": [
         "Erarbeitung"
-      ],
-      "ipa": "/ɛɐ̯ˈʔaʁbaɪ̯tn̩/"
+      ]
     },
     {
       "word": "AMTIEREND",
       "gloss": "gerade im Dienst, in einer Funktion",
       "synonyms": [
-        "tätig",
-        "ausübend"
+        "t\u00e4tig",
+        "aus\u00fcbend"
       ],
       "pos": "adjective",
-      "ipa": "/amˈtiːʁənt/",
+      "ipa": "/am\u02c8ti\u02d0\u0281\u0259nt/",
       "family": [
         "Amt",
         "amtieren"
@@ -4431,10 +4767,11 @@
       "gloss": "sehr oft oder wiederholt",
       "synonyms": [
         "oft",
-        "häufig"
+        "h\u00e4ufig"
       ],
+      "example": "Das habe ich schon hundertmal gemacht.",
       "pos": "adverb",
-      "ipa": "/ˈhʊndɐtmaːl/",
+      "ipa": "/\u02c8h\u028and\u0250tma\u02d0l/",
       "family": [
         "hundert",
         "Mal"
@@ -4442,18 +4779,19 @@
     },
     {
       "word": "SPINAT",
-      "gloss": "ein grünes Blattgemüse",
+      "gloss": "ein gr\u00fcnes Blattgem\u00fcse",
       "synonyms": [
-        "Gemüse",
-        "Blattgemüse"
+        "Gem\u00fcse",
+        "Blattgem\u00fcse"
       ],
+      "example": "Ich mag Spinat.",
       "pos": "noun",
+      "ipa": "/\u0283pi\u02c8na\u02d0t/",
       "family": [
-        "spinatgrün",
+        "spinatgr\u00fcn",
         "Spinatauflauf",
         "Spinatbeet"
-      ],
-      "ipa": "/ʃpiˈnaːt/"
+      ]
     },
     {
       "word": "KOST",
@@ -4462,13 +4800,14 @@
         "Verpflegung",
         "Nahrung"
       ],
+      "example": "Einfachere Kost gen\u00fcgt mir auch.",
       "pos": "noun",
+      "ipa": "/ko\u02d0st/",
       "family": [
-        "beköstigen",
-        "köstlich",
-        "Kostverächter"
-      ],
-      "ipa": "/koːst/"
+        "bek\u00f6stigen",
+        "k\u00f6stlich",
+        "Kostver\u00e4chter"
+      ]
     },
     {
       "word": "GOLDFISCH",
@@ -4476,8 +4815,9 @@
       "synonyms": [
         "Zierfisch"
       ],
+      "example": "Der Goldfisch lebt.",
       "pos": "noun",
-      "ipa": "/ˈɡɔltˌfɪʃ/",
+      "ipa": "/\u02c8\u0261\u0254lt\u02ccf\u026a\u0283/",
       "family": [
         "Gold",
         "Fisch",
@@ -4486,41 +4826,44 @@
     },
     {
       "word": "STRUDEL",
-      "gloss": "ein wirbelndes Wasser oder Gebäck",
+      "gloss": "ein wirbelndes Wasser oder Geb\u00e4ck",
       "synonyms": [
         "Wirbel",
         "Vortex"
       ],
+      "example": "Unser Boot wurde in einen Strudel gesaugt.",
       "pos": "noun",
+      "ipa": "/\u02c8\u0283t\u0281u\u02d0dl\u0329/",
       "family": [
         "Strudelteig"
-      ],
-      "ipa": "/ˈʃtʁuːdl̩/"
+      ]
     },
     {
-      "word": "FÜNFER",
+      "word": "F\u00dcNFER",
       "gloss": "Eine schlechte Schulnote, eins unter der Vier.",
       "synonyms": [],
+      "example": "Diese T\u00fcte hat mich einen F\u00fcnfer gekostet.",
       "pos": "noun",
+      "ipa": "/\u02c8f\u028fnf\u0250/",
       "family": [
-        "Fünfergruppe",
-        "Fünferkette",
-        "Fünferreihe"
-      ],
-      "ipa": "/ˈfʏnfɐ/"
+        "F\u00fcnfergruppe",
+        "F\u00fcnferkette",
+        "F\u00fcnferreihe"
+      ]
     },
     {
       "word": "VORSEHUNG",
-      "gloss": "eine göttliche Fügung",
+      "gloss": "eine g\u00f6ttliche F\u00fcgung",
       "synonyms": [
         "Schicksal",
-        "Fügung"
+        "F\u00fcgung"
       ],
+      "example": "Die Vorsehung f\u00fchrte mich zu ihr.",
       "pos": "noun",
-      "ipa": "/ˈfoːɐ̯ˌzeːʊŋ/",
+      "ipa": "/\u02c8fo\u02d0\u0250\u032f\u02ccze\u02d0\u028a\u014b/",
       "family": [
         "vorsehen",
-        "göttlich"
+        "g\u00f6ttlich"
       ]
     },
     {
@@ -4530,13 +4873,14 @@
         "Axt",
         "Hacke"
       ],
+      "example": "Dem \u00e4rgsten Zimmermann das beste Beil.",
       "pos": "noun",
+      "ipa": "/ba\u026a\u032fl/",
       "family": [
         "beilfest",
         "Beilhieb",
         "Beilklinge"
-      ],
-      "ipa": "/baɪ̯l/"
+      ]
     },
     {
       "word": "VERSESSEN",
@@ -4545,8 +4889,9 @@
         "besessen",
         "fixiert"
       ],
+      "example": "Sie ist versessen auf S\u00fc\u00dfes.",
       "pos": "verb",
-      "ipa": "/fɛɐ̯ˈzɛsn̩/",
+      "ipa": "/f\u025b\u0250\u032f\u02c8z\u025bsn\u0329/",
       "family": [
         "besessen"
       ]
@@ -4558,8 +4903,9 @@
         "daher",
         "somit"
       ],
+      "example": "Folglich ist diese Person nie eingezogen.",
       "pos": "adverb",
-      "ipa": "/ˈfɔlklɪç/",
+      "ipa": "/\u02c8f\u0254lkl\u026a\u00e7/",
       "family": [
         "Folge",
         "folgen"
@@ -4571,8 +4917,9 @@
       "synonyms": [
         "Minimum"
       ],
+      "example": "Das ist eher ein Tiefpunkt.",
       "pos": "noun",
-      "ipa": "/ˈtiːfˌpʊnkt/",
+      "ipa": "/\u02c8ti\u02d0f\u02ccp\u028ankt/",
       "family": [
         "tief",
         "Punkt"
@@ -4585,11 +4932,12 @@
         "Flotte",
         "Verband"
       ],
+      "example": "Ein Geschwader Marineflugzeuge startete zur \u00dcbung \u00fcber der K\u00fcste.",
       "pos": "noun",
+      "ipa": "/\u0261\u0259\u02c8\u0283va\u02d0d\u0250/",
       "family": [
         "Geschwaderkommandant"
-      ],
-      "ipa": "/ɡəˈʃvaːdɐ/"
+      ]
     },
     {
       "word": "CLIQUE",
@@ -4598,13 +4946,14 @@
         "Gruppe",
         "Zirkel"
       ],
+      "example": "Diese Clique ist hervorragend.",
       "pos": "noun",
+      "ipa": "/\u02c8kl\u026ak\u0259/",
       "family": [
         "Cliquenbildung",
         "Cliquenwesen",
         "Cliquenwirtschaft"
-      ],
-      "ipa": "/ˈklɪkə/"
+      ]
     },
     {
       "word": "AROMA",
@@ -4612,13 +4961,14 @@
       "synonyms": [
         "Geruch"
       ],
+      "example": "Der Kaffee hat ein gutes Aroma.",
       "pos": "noun",
+      "ipa": "/a\u02c8\u0281o\u02d0ma/",
       "family": [
         "aromatisch",
         "Aromaeigenschaft",
         "Aromaextrakt"
-      ],
-      "ipa": "/aˈʁoːma/"
+      ]
     },
     {
       "word": "STAMMELN",
@@ -4627,19 +4977,21 @@
         "stottern",
         "lallen"
       ],
+      "example": "Manche stammeln Worte, um herauszufinden, wor\u00fcber sie reden.",
       "pos": "verb",
-      "ipa": "/ˈʃtaml̩n/"
+      "ipa": "/\u02c8\u0283taml\u0329n/"
     },
     {
-      "word": "ÜBERMÄßIG",
-      "gloss": "Mehr als nötig oder angemessen.",
+      "word": "\u00dcBERM\u00c4\u00dfIG",
+      "gloss": "Mehr als n\u00f6tig oder angemessen.",
       "synonyms": [
         "exzessiv"
       ],
+      "example": "Die Belastung war \u00fcberm\u00e4\u00dfig.",
       "pos": "adjective",
-      "ipa": "/ˈyːbɐˌmɛːsɪç/",
+      "ipa": "/\u02c8y\u02d0b\u0250\u02ccm\u025b\u02d0s\u026a\u00e7/",
       "family": [
-        "Maß",
+        "Ma\u00df",
         "messen"
       ]
     },
@@ -4649,8 +5001,9 @@
       "synonyms": [
         "Richtschnur"
       ],
+      "example": "Eine Grundregel des fairen Diskutierens ist es, den anderen ausreden zu lassen.",
       "pos": "noun",
-      "ipa": "/ˈɡʁʊntˌʁeːɡl̩/",
+      "ipa": "/\u02c8\u0261\u0281\u028ant\u02cc\u0281e\u02d0\u0261l\u0329/",
       "family": [
         "Grund",
         "Regel"
@@ -4662,8 +5015,9 @@
       "synonyms": [
         "bilden"
       ],
+      "example": "Alle Goldhamster Europas k\u00f6nnten sich zu einer Pyramide formieren, die von der Erde bis zum Mond reicht, wenn sie nur nicht so dumm w\u00e4ren.",
       "pos": "verb",
-      "ipa": "/fɔʁˈmiːʁən/",
+      "ipa": "/f\u0254\u0281\u02c8mi\u02d0\u0281\u0259n/",
       "family": [
         "Form"
       ]
@@ -4675,22 +5029,24 @@
         "Lehrer",
         "Professor"
       ],
+      "example": "Unser Dozent scherzte.",
       "pos": "noun",
+      "ipa": "/do\u02c8t\u0361s\u025bnt/",
       "family": [
         "Dozentenstelle",
-        "Dozententätigkeit"
-      ],
-      "ipa": "/doˈt͡sɛnt/"
+        "Dozentent\u00e4tigkeit"
+      ]
     },
     {
       "word": "VORWEISEN",
       "gloss": "ein Dokument oder einen Nachweis vorlegen",
       "synonyms": [
         "zeigen",
-        "präsentieren"
+        "pr\u00e4sentieren"
       ],
+      "example": "Man muss den Reisepass vorweisen.",
       "pos": "verb",
-      "ipa": "/ˈfoːɐ̯ˌvaɪ̯zn̩/",
+      "ipa": "/\u02c8fo\u02d0\u0250\u032f\u02ccva\u026a\u032fzn\u0329/",
       "family": [
         "weisen",
         "vor"
@@ -4698,13 +5054,14 @@
     },
     {
       "word": "BEKNACKT",
-      "gloss": "ein wenig verrückt oder närrisch",
+      "gloss": "ein wenig verr\u00fcckt oder n\u00e4rrisch",
       "synonyms": [
-        "verrückt",
+        "verr\u00fcckt",
         "verwirrt"
       ],
+      "example": "Das ist beknackt.",
       "pos": "adjective",
-      "ipa": "/bəˈknakt/",
+      "ipa": "/b\u0259\u02c8knakt/",
       "family": [
         "knacken"
       ]
@@ -4715,20 +5072,21 @@
       "synonyms": [
         "schrill"
       ],
+      "example": "Die Sonne ist grell.",
       "pos": "adjective",
+      "ipa": "/\u0261\u0281\u025bl/",
       "family": [
         "grellgelb",
-        "grellgrün",
+        "grellgr\u00fcn",
         "grellorange"
-      ],
-      "ipa": "/ɡʁɛl/"
+      ]
     },
     {
       "word": "NACHTTISCH",
-      "gloss": "Kleines Möbelstück neben dem Bett.",
+      "gloss": "Kleines M\u00f6belst\u00fcck neben dem Bett.",
       "synonyms": [],
       "pos": "noun",
-      "ipa": "/ˈnaxtˌtɪʃ/",
+      "ipa": "/\u02c8naxt\u02cct\u026a\u0283/",
       "family": [
         "Nacht",
         "Tisch"
@@ -4741,25 +5099,27 @@
         "Gemeinschaft",
         "Gruppe"
       ],
+      "example": "Das Kollektiv sichert mich ab.",
       "pos": "noun",
+      "ipa": "/\u02cck\u0254l\u025bk\u02c8ti\u02d0f/",
       "family": [
         "Kollektivbewusstsein",
         "Kollektivbildung",
         "Kollektivmord"
-      ],
-      "ipa": "/ˌkɔlɛkˈtiːf/"
+      ]
     },
     {
-      "word": "KRÄHEN",
+      "word": "KR\u00c4HEN",
       "gloss": "laut und rau schreien",
       "synonyms": [
         "rufen",
         "schreien"
       ],
+      "example": "Warum kr\u00e4hen H\u00e4hne?",
       "pos": "verb",
-      "ipa": "/ˈkʁɛːən/",
+      "ipa": "/\u02c8k\u0281\u025b\u02d0\u0259n/",
       "family": [
-        "Krähe"
+        "Kr\u00e4he"
       ]
     },
     {
@@ -4769,18 +5129,20 @@
         "Narbe",
         "Wunde"
       ],
+      "example": "Der Boxer hatte einen alten Schmiss auf der Wange, der von seinem ersten Kampf erz\u00e4hlte.",
       "pos": "verb",
+      "ipa": "/\u0283m\u026as/",
       "family": [
         "Schmissziehen"
-      ],
-      "ipa": "/ʃmɪs/"
+      ]
     },
     {
       "word": "BLUTBILD",
-      "gloss": "Laborergebnis über die Zellen in den Adern.",
+      "gloss": "Laborergebnis \u00fcber die Zellen in den Adern.",
       "synonyms": [],
+      "example": "Der Arzt bat mich, mein aktuelles Blutbild mitzubringen.",
       "pos": "noun",
-      "ipa": "/ˈbluːtˌbɪlt/",
+      "ipa": "/\u02c8blu\u02d0t\u02ccb\u026alt/",
       "family": [
         "Bild"
       ]
@@ -4792,62 +5154,67 @@
         "Disziplin",
         "Spezialgebiet"
       ],
+      "example": "Das ist nicht mein Fachgebiet.",
       "pos": "noun",
-      "ipa": "/ˈfaxɡəˌbiːt/",
+      "ipa": "/\u02c8fax\u0261\u0259\u02ccbi\u02d0t/",
       "family": [
         "Fach",
         "Gebiet"
       ]
     },
     {
-      "word": "FÜLLUNG",
-      "gloss": "etwas, das Hohlräume ausfüllt",
+      "word": "F\u00dcLLUNG",
+      "gloss": "etwas, das Hohlr\u00e4ume ausf\u00fcllt",
       "synonyms": [
         "Inhalt",
         "Masse"
       ],
+      "example": "Ich habe meine F\u00fcllung verloren.",
       "pos": "noun",
+      "ipa": "/\u02c8f\u028fl\u028a\u014b/",
       "family": [
-        "Füllungmaterial"
-      ],
-      "ipa": "/ˈfʏlʊŋ/"
+        "F\u00fcllungmaterial"
+      ]
     },
     {
       "word": "JONGLIEREN",
-      "gloss": "mehrere Gegenstände in der Luft werfen und fangen",
+      "gloss": "mehrere Gegenst\u00e4nde in der Luft werfen und fangen",
       "synonyms": [
         "werfen"
       ],
+      "example": "Kannst du jonglieren?",
       "pos": "verb",
+      "ipa": "/\u0292\u0254\u0303\u02c8\u0261li\u02d0\u0281\u0259n/",
       "family": [
         "Jongleur"
-      ],
-      "ipa": "/ʒɔ̃ˈɡliːʁən/"
+      ]
     },
     {
-      "word": "SKANDALÖS",
-      "gloss": "Anstoß erregend oder empörend",
+      "word": "SKANDAL\u00d6S",
+      "gloss": "Ansto\u00df erregend oder emp\u00f6rend",
       "synonyms": [
-        "anstößig"
+        "anst\u00f6\u00dfig"
       ],
+      "example": "Dein Verhalten war skandal\u00f6s.",
       "pos": "adjective",
-      "ipa": "/skandaˈløːs/",
+      "ipa": "/skanda\u02c8l\u00f8\u02d0s/",
       "family": [
         "Skandal"
       ]
     },
     {
       "word": "AUFBLASEN",
-      "gloss": "Mit Luft füllen.",
+      "gloss": "Mit Luft f\u00fcllen.",
       "synonyms": [
         "aufpumpen"
       ],
+      "example": "La\u00df uns das Planschbecken aufblasen!",
       "pos": "verb",
+      "ipa": "/\u02c8a\u028a\u032ff\u02ccbla\u02d0zn\u0329/",
       "family": [
         "aufblasbar",
         "aufgeblasen"
-      ],
-      "ipa": "/ˈaʊ̯fˌblaːzn̩/"
+      ]
     },
     {
       "word": "HIERZU",
@@ -4855,8 +5222,9 @@
       "synonyms": [
         "dazu"
       ],
+      "example": "Mehr hierzu folgt.",
       "pos": "adverb",
-      "ipa": "/ˈhiːɐ̯ˈt͡suː/",
+      "ipa": "/\u02c8hi\u02d0\u0250\u032f\u02c8t\u0361su\u02d0/",
       "family": [
         "hier",
         "zu"
@@ -4864,12 +5232,13 @@
     },
     {
       "word": "VERBLASST",
-      "gloss": "Mit schwächer gewordener Farbe.",
+      "gloss": "Mit schw\u00e4cher gewordener Farbe.",
       "synonyms": [
         "ausgebleicht"
       ],
+      "example": "Der Stoff ist stark verblasst.",
       "pos": "verb",
-      "ipa": "/fɛɐ̯ˈblast/",
+      "ipa": "/f\u025b\u0250\u032f\u02c8blast/",
       "family": [
         "verblassen",
         "blass"
@@ -4877,18 +5246,19 @@
     },
     {
       "word": "TEILCHEN",
-      "gloss": "sehr kleines Stück oder Partikel",
+      "gloss": "sehr kleines St\u00fcck oder Partikel",
       "synonyms": [
         "Partikel",
-        "Stück"
+        "St\u00fcck"
       ],
+      "example": "Wir sind ein Teilchen des Universums.",
       "pos": "noun",
+      "ipa": "/\u02c8ta\u026a\u032fl\u00e7\u0259n/",
       "family": [
         "Teilchenbeschleuniger",
         "Teilcheneigenschaft",
         "Teilchenforschung"
-      ],
-      "ipa": "/ˈtaɪ̯lçən/"
+      ]
     },
     {
       "word": "PAARMAL",
@@ -4897,8 +5267,9 @@
         "manchmal",
         "gelegentlich"
       ],
+      "example": "Er hat es ein paarmal gemacht.",
       "pos": "adverb",
-      "ipa": "/ˈpaːɐ̯ˌmaːl/",
+      "ipa": "/\u02c8pa\u02d0\u0250\u032f\u02ccma\u02d0l/",
       "family": [
         "paar",
         "Mal"
@@ -4910,42 +5281,45 @@
       "synonyms": [
         "Wagen"
       ],
+      "example": "Das Automobil ist blau.",
       "pos": "adverb",
+      "ipa": "/a\u028a\u032ftomo\u02c8bi\u02d0l/",
       "family": [
         "Automobilausstellung",
         "Automobilbau",
         "Automobilclub"
-      ],
-      "ipa": "/aʊ̯tomoˈbiːl/"
+      ]
     },
     {
       "word": "ORGEL",
-      "gloss": "großes Tasteninstrument mit Pfeifen",
+      "gloss": "gro\u00dfes Tasteninstrument mit Pfeifen",
       "synonyms": [
         "Instrument",
         "Klavier"
       ],
+      "example": "Kannst du Orgel spielen?",
       "pos": "noun",
+      "ipa": "/\u02c8\u0254\u0281\u0261l\u0329/",
       "family": [
         "Barockorgel",
         "Bierorgel",
         "Chororgel"
-      ],
-      "ipa": "/ˈɔʁɡl̩/"
+      ]
     },
     {
-      "word": "GRÜBELN",
-      "gloss": "lange und sorgenvoll über etwas nachdenken",
+      "word": "GR\u00dcBELN",
+      "gloss": "lange und sorgenvoll \u00fcber etwas nachdenken",
       "synonyms": [
         "sinnieren"
       ],
+      "example": "Gr\u00fcbeln l\u00f6st Stress aus.",
       "pos": "verb",
+      "ipa": "/\u02c8\u0261\u0281y\u02d0bl\u0329n/",
       "family": [
-        "ausgrübeln",
-        "Grübelei",
-        "Grübelzwang"
-      ],
-      "ipa": "/ˈɡʁyːbl̩n/"
+        "ausgr\u00fcbeln",
+        "Gr\u00fcbelei",
+        "Gr\u00fcbelzwang"
+      ]
     }
   ]
 }
