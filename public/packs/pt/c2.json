@@ -1,5 +1,5 @@
 {
-  "version": 109,
+  "version": 111,
   "lang": "pt",
   "cefr": "c2",
   "license": "CC-BY-SA-4.0 (FrequencyWords pt_50k; glosses original to Hiato)",
@@ -14,7 +14,12 @@
     {
       "word": "CEGUEIRA",
       "gloss": "falta total ou parcial de visão",
-      "pos": "noun"
+      "ipa": "/se.ˈgej.ɾə/",
+      "pos": "noun",
+      "family": [
+        "cego",
+        "cegar"
+      ]
     },
     {
       "word": "ENCOMENDOU",
@@ -23,13 +28,25 @@
         "pediu",
         "solicitou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.ko.mẽˈdo/",
+      "family": [
+        "encomenda",
+        "encomendar",
+        "encomendado"
+      ]
     },
     {
       "word": "ECONOMIAS",
       "gloss": "poupanças ou gestão eficiente de recursos",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/i.ko.noˈmi.ɐʃ/",
+      "family": [
+        "economia",
+        "econômico",
+        "economizar"
+      ]
     },
     {
       "word": "PROCURASTE",
@@ -37,23 +54,47 @@
       "synonyms": [
         "buscaste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɾu.kuˈɾaʃ.tɨ/",
+      "family": [
+        "procurar",
+        "procura",
+        "procurador"
+      ]
     },
     {
       "word": "ENTRAREI",
       "gloss": "passar para o interior de um lugar",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.tɾɐˈɾej/",
+      "family": [
+        "entrar",
+        "entrada",
+        "entrante"
+      ]
     },
     {
       "word": "BARBAS",
       "gloss": "pelos que crescem no rosto dos homens",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaɾ.bɐʃ/",
+      "family": [
+        "barbeiro",
+        "barbear",
+        "barbudo"
+      ]
     },
     {
       "word": "MARISCO",
       "gloss": "animais do oceano com concha comestíveis",
+      "family": [
+        "mariscada",
+        "mariscagem",
+        "mariscar"
+      ],
+      "ipa": "/maˈɾiʃ.ku/",
       "pos": "noun"
     },
     {
@@ -62,7 +103,13 @@
       "synonyms": [
         "conforta"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõˈso.lɐ/",
+      "family": [
+        "consolar",
+        "consolo",
+        "consolador"
+      ]
     },
     {
       "word": "OXIGÊNIO",
@@ -70,13 +117,24 @@
       "synonyms": [
         "O₂"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ok.siˈʒe.ni.u/",
+      "family": [
+        "oxigenar",
+        "oxigenado"
+      ]
     },
     {
       "word": "PENDURADOS",
       "gloss": "suspensos por um ponto de apoio",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pẽ.duˈɾa.duʃ/",
+      "family": [
+        "pendurar",
+        "pendurado",
+        "pendural"
+      ]
     },
     {
       "word": "FACES",
@@ -85,7 +143,13 @@
         "rostos",
         "caras"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfa.sɨʃ/",
+      "family": [
+        "facial",
+        "facetado",
+        "facetar"
+      ]
     },
     {
       "word": "FEDE",
@@ -94,7 +158,13 @@
         "cheira mal",
         "exala mau odor"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈfe.dɨ/",
+      "family": [
+        "fedor",
+        "fedorento",
+        "feder"
+      ]
     },
     {
       "word": "RECAÍDA",
@@ -102,7 +172,13 @@
       "synonyms": [
         "retrocesso"
       ],
-      "pos": "noun"
+      "ipa": "/Rɨ.kɐ.ˈi.dɐ/",
+      "pos": "noun",
+      "family": [
+        "cair",
+        "recair",
+        "caído"
+      ]
     },
     {
       "word": "MENTIRAM",
@@ -111,7 +187,13 @@
         "enganaram",
         "falsearam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mẽˈti.ɾɐ̃w/",
+      "family": [
+        "mentira",
+        "mentiroso",
+        "mentir"
+      ]
     },
     {
       "word": "ORADOR",
@@ -120,7 +202,13 @@
         "falante",
         "discursante"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/o.ɾɐˈdoɾ/",
+      "family": [
+        "oratória",
+        "orar",
+        "oratório"
+      ]
     },
     {
       "word": "VIÚVAS",
@@ -128,7 +216,13 @@
       "synonyms": [
         "enlutadas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/viˈu.vɐʃ/",
+      "family": [
+        "viúvo",
+        "viuvez",
+        "viuvado"
+      ]
     },
     {
       "word": "MICROFONES",
@@ -136,7 +230,12 @@
       "synonyms": [
         "captadores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mi.kɾoˈfo.nɨʃ/",
+      "family": [
+        "microfone",
+        "microfonia"
+      ]
     },
     {
       "word": "TERNURA",
@@ -145,7 +244,11 @@
         "carinho",
         "doçura"
       ],
-      "pos": "noun"
+      "ipa": "/tɨɾ.ˈnu.ɾɐ/",
+      "pos": "noun",
+      "family": [
+        "terno"
+      ]
     },
     {
       "word": "COMUNISMO",
@@ -153,7 +256,12 @@
       "synonyms": [
         "marxismo"
       ],
-      "pos": "noun"
+      "ipa": "/ko.muˈniz.mʊ/",
+      "pos": "noun",
+      "family": [
+        "comuna",
+        "comunista"
+      ]
     },
     {
       "word": "LEVAVAM",
@@ -161,7 +269,12 @@
       "synonyms": [
         "transportavam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/leˈva.vɐ̃w̃/",
+      "family": [
+        "levar",
+        "levado"
+      ]
     },
     {
       "word": "ACHAIS",
@@ -170,7 +283,12 @@
         "considerais",
         "julgais"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈʃajʃ/",
+      "family": [
+        "achar",
+        "achado"
+      ]
     },
     {
       "word": "ESTENDE",
@@ -179,7 +297,12 @@
         "alarga",
         "prolonga"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/esˈtẽ.dʒi/",
+      "family": [
+        "estender",
+        "extensão"
+      ]
     },
     {
       "word": "SEGUIRES",
@@ -187,7 +310,12 @@
       "synonyms": [
         "acompanhar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/seˈɡi.ɾiʃ/",
+      "family": [
+        "seguir",
+        "seguinte"
+      ]
     },
     {
       "word": "PREMATURO",
@@ -196,7 +324,11 @@
         "precoce",
         "antecipado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾe.maˈtu.ɾu/",
+      "family": [
+        "maturar"
+      ]
     },
     {
       "word": "IMORTAIS",
@@ -205,7 +337,11 @@
         "eternos",
         "perenes"
       ],
-      "pos": "adjective"
+      "ipa": "/ɪ.moɹ.ˈtajs/",
+      "pos": "adjective",
+      "family": [
+        "imortalizar"
+      ]
     },
     {
       "word": "VESTI",
@@ -214,7 +350,12 @@
         "coloquei",
         "usei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈveʃ.tʃi/",
+      "family": [
+        "vestir",
+        "vestido"
+      ]
     },
     {
       "word": "DESCRITO",
@@ -223,7 +364,12 @@
         "narrado",
         "exposto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/desˈkɾi.tu/",
+      "family": [
+        "descrever",
+        "descrição"
+      ]
     },
     {
       "word": "BIOPSIA",
@@ -232,7 +378,12 @@
         "exame",
         "análise"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/biˈɔp.si.ɐ/",
+      "family": [
+        "bio",
+        "biópsia"
+      ]
     },
     {
       "word": "NUNS",
@@ -240,6 +391,11 @@
       "synonyms": [
         "em alguns",
         "em certos"
+      ],
+      "ipa": "/nũjʃ/",
+      "family": [
+        "alguns",
+        "nenhum"
       ]
     },
     {
@@ -249,7 +405,12 @@
         "alternativos",
         "contraculturais"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈi.pi.sis/",
+      "family": [
+        "hippie",
+        "hipismo"
+      ]
     },
     {
       "word": "BAGAS",
@@ -258,7 +419,12 @@
         "frutos",
         "frutinhos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈba.ɡɐs/",
+      "family": [
+        "baga",
+        "bagagem"
+      ]
     },
     {
       "word": "ROUBE",
@@ -267,7 +433,11 @@
         "furtar",
         "subtrair"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "roubar",
+        "roubo"
+      ]
     },
     {
       "word": "CAUSADOS",
@@ -276,7 +446,12 @@
         "provocados",
         "originados"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kawˈza.duʃ/",
+      "family": [
+        "causa",
+        "causar"
+      ]
     },
     {
       "word": "SIRENE",
@@ -285,7 +460,8 @@
         "alarme",
         "aviso"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/siˈɾɛ.ni/"
     },
     {
       "word": "TRASTE",
@@ -294,7 +470,11 @@
         "objeto",
         "utensílio"
       ],
-      "pos": "noun"
+      "ipa": "/ˈtɾaʃ.tɨ/",
+      "pos": "noun",
+      "family": [
+        "trastes"
+      ]
     },
     {
       "word": "CURTOS",
@@ -303,7 +483,12 @@
         "breves",
         "sumários"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkuʁ.tus/",
+      "family": [
+        "curto",
+        "encurtar"
+      ]
     },
     {
       "word": "TERRAMOTOS",
@@ -312,12 +497,21 @@
         "sismos",
         "abalos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/teˈʁɐ.mo.tus/",
+      "family": [
+        "terra",
+        "terremoto"
+      ]
     },
     {
       "word": "ADAGA",
       "gloss": "faca de lâmina curta e pontiaguda usada para combate",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈda.ɡɐ/",
+      "family": [
+        "adagial"
+      ]
     },
     {
       "word": "JURÍDICO",
@@ -326,6 +520,10 @@
         "legal",
         "forense"
       ],
+      "family": [
+        "juridicamente"
+      ],
+      "ipa": "/ʒu.ˈɾi.di.ku/",
       "pos": "adjective"
     },
     {
@@ -335,7 +533,12 @@
         "mandámos",
         "remetemos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽˈvja.mus/",
+      "family": [
+        "enviar",
+        "envio"
+      ]
     },
     {
       "word": "ENERGÉTICA",
@@ -343,7 +546,12 @@
       "synonyms": [
         "elétrica"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/e.neʁˈʒɛ.tʃi.kɐ/",
+      "family": [
+        "energia",
+        "energético"
+      ]
     },
     {
       "word": "TONS",
@@ -352,7 +560,12 @@
         "cores",
         "matizes"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tõjʃ/",
+      "family": [
+        "tom",
+        "atonal"
+      ]
     },
     {
       "word": "DURARÁ",
@@ -360,7 +573,12 @@
       "synonyms": [
         "persistirá"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/du.ɾaˈɾa/",
+      "family": [
+        "durar",
+        "duradouro"
+      ]
     },
     {
       "word": "VITELA",
@@ -369,7 +587,12 @@
         "bezerro",
         "tenro"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/viˈtɛ.lɐ/",
+      "family": [
+        "bezerro",
+        "vitelo"
+      ]
     },
     {
       "word": "MESQUINHO",
@@ -378,6 +601,10 @@
         "avaro",
         "pouco"
       ],
+      "family": [
+        "mesquinhez"
+      ],
+      "ipa": "/mɨʃ.ˈki.ɲu/",
       "pos": "adjective"
     },
     {
@@ -387,7 +614,12 @@
         "abrangen",
         "incluindo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.voˈlẽ.do/",
+      "family": [
+        "envolver",
+        "envolto"
+      ]
     },
     {
       "word": "DAMASCO",
@@ -395,7 +627,12 @@
       "synonyms": [
         "abricó"
       ],
-      "pos": "noun"
+      "ipa": "/daˈmas.ku/",
+      "pos": "noun",
+      "family": [
+        "damasqueiro",
+        "damasceno"
+      ]
     },
     {
       "word": "ENDEREÇOS",
@@ -404,7 +641,12 @@
         "moradas",
         "localizações"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽ.deˈɾe.sus/",
+      "family": [
+        "endereçar",
+        "endereço"
+      ]
     },
     {
       "word": "SIRENES",
@@ -413,7 +655,12 @@
         "alarmes",
         "avisos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/siˈɾɛ.nis/",
+      "family": [
+        "sereia",
+        "sirene"
+      ]
     },
     {
       "word": "DEMÊNCIA",
@@ -422,7 +669,12 @@
         "loucura",
         "insanidade"
       ],
-      "pos": "noun"
+      "ipa": "/dɨ.ˈmẽ.sjɐ/",
+      "pos": "noun",
+      "family": [
+        "demente",
+        "demencial"
+      ]
     },
     {
       "word": "PRODUZEM",
@@ -431,7 +683,12 @@
         "geram",
         "fabricam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɾoˈdu.zẽj̃/",
+      "family": [
+        "produzir",
+        "produto"
+      ]
     },
     {
       "word": "PESSIMISTA",
@@ -439,13 +696,21 @@
       "synonyms": [
         "desanimado"
       ],
-      "pos": "noun"
+      "ipa": "/pɛ.si.ˈmiʃ.tɐ/",
+      "pos": "noun",
+      "family": [
+        "pessimismo"
+      ]
     },
     {
       "word": "ESCADARIA",
       "gloss": "conjunto de degraus que liga pisos diferentes.",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/iʃ.kɐ.dɐ.ˈɾi.ɐ/",
+      "pos": "noun",
+      "family": [
+        "escada"
+      ]
     },
     {
       "word": "INCERTEZA",
@@ -454,7 +719,11 @@
         "dúvida",
         "hesitação"
       ],
-      "pos": "noun"
+      "ipa": "/ĩ.sɨɾ.ˈte.zɐ/",
+      "pos": "noun",
+      "family": [
+        "incerto"
+      ]
     },
     {
       "word": "SUBSÍDIO",
@@ -463,7 +732,12 @@
         "ajuda",
         "apoio"
       ],
-      "pos": "noun"
+      "ipa": "/sub'sidʒjʊ/",
+      "pos": "noun",
+      "family": [
+        "subsidiar",
+        "subsidiário"
+      ]
     },
     {
       "word": "AMPLIAR",
@@ -472,7 +746,12 @@
         "alargar",
         "expandir"
       ],
-      "pos": "verb"
+      "ipa": "/ɐ̃.pli.ˈaɾ/",
+      "pos": "verb",
+      "family": [
+        "amplo",
+        "ampliação"
+      ]
     },
     {
       "word": "TRAPOS",
@@ -481,7 +760,12 @@
         "pano",
         "farrapo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtɾa.pus/",
+      "family": [
+        "trapo",
+        "trapalhada"
+      ]
     },
     {
       "word": "DEIXASSEM",
@@ -490,7 +774,12 @@
         "permitissem",
         "consentissem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dejˈʃa.sẽj̃/",
+      "family": [
+        "deixar",
+        "deixado"
+      ]
     },
     {
       "word": "INDEFESA",
@@ -499,12 +788,22 @@
         "desprotegida",
         "vulnerável"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ĩ.deˈfe.zɐ/",
+      "family": [
+        "defesa",
+        "indefeso"
+      ]
     },
     {
       "word": "CDC",
       "gloss": "órgão que controla doenças e promove saúde pública.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/se.deˈse/",
+      "family": [
+        "saúde",
+        "doença"
+      ]
     },
     {
       "word": "ANTECIPAR",
@@ -513,7 +812,12 @@
         "prever",
         "adiantar"
       ],
-      "pos": "verb"
+      "ipa": "/ɐ̃.tɨ.si.ˈpaɾ/",
+      "pos": "verb",
+      "family": [
+        "antecipação",
+        "antecipado"
+      ]
     },
     {
       "word": "BANCÁRIOS",
@@ -521,7 +825,12 @@
       "synonyms": [
         "financeiros"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɐ̃ˈka.ɾi.us/",
+      "family": [
+        "banco",
+        "bancário"
+      ]
     },
     {
       "word": "FORTALECER",
@@ -530,7 +839,12 @@
         "reforçar",
         "robustecer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/foɾ.ta.leˈseɾ/",
+      "family": [
+        "forte",
+        "fortaleza"
+      ]
     },
     {
       "word": "CÓMODA",
@@ -539,7 +853,12 @@
         "confortável",
         "prática"
       ],
-      "pos": "noun"
+      "ipa": "/ˈkɔ.mu.dɐ/",
+      "pos": "noun",
+      "family": [
+        "comoda",
+        "comodidade"
+      ]
     },
     {
       "word": "ASSISTIU",
@@ -548,7 +867,12 @@
         "presenciou",
         "viu"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈsis.tʃiw/",
+      "family": [
+        "assistir",
+        "assistência"
+      ]
     },
     {
       "word": "INFRINGIR",
@@ -556,7 +880,13 @@
       "synonyms": [
         "transgredir"
       ],
-      "pos": "verb"
+      "family": [
+        "infração",
+        "infrator",
+        "infringido"
+      ],
+      "pos": "verb",
+      "ipa": "/ĩ.fɾĩˈʒiɾ/"
     },
     {
       "word": "CONSERVAR",
@@ -565,7 +895,12 @@
         "guardar",
         "manter"
       ],
-      "pos": "verb"
+      "ipa": "/kõ.sɨɾ.ˈvaɾ/",
+      "pos": "verb",
+      "family": [
+        "conservação",
+        "conservado"
+      ]
     },
     {
       "word": "JUNTAREM",
@@ -574,7 +909,12 @@
         "unirem",
         "agruparem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʒũˈta.ɾẽj̃/",
+      "family": [
+        "juntar",
+        "junto"
+      ]
     },
     {
       "word": "SANDÁLIAS",
@@ -583,7 +923,11 @@
         "chinelos",
         "alpercatas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sɐ̃ˈda.li.ɐs/",
+      "family": [
+        "sandália"
+      ]
     },
     {
       "word": "ANZOL",
@@ -592,12 +936,21 @@
         "gancho",
         "isca"
       ],
-      "pos": "noun"
+      "family": [
+        "anzolar"
+      ],
+      "pos": "noun",
+      "ipa": "/ɐ̃ˈzoɫ/"
     },
     {
       "word": "SALGADO",
       "gloss": "com muito cloreto de sódio",
-      "pos": "adjective"
+      "ipa": "/saɫ.ˈɡa.du/",
+      "pos": "adjective",
+      "family": [
+        "salgar",
+        "salga"
+      ]
     },
     {
       "word": "JATO",
@@ -605,7 +958,11 @@
       "synonyms": [
         "avião"
       ],
-      "pos": "noun"
+      "ipa": "/ˈʒa.tu/",
+      "pos": "noun",
+      "family": [
+        "jatos"
+      ]
     },
     {
       "word": "ALARIDO",
@@ -614,13 +971,21 @@
         "barulho",
         "ruído"
       ],
-      "pos": "noun"
+      "ipa": "/ɐ.lɐ.ˈɾi.du/",
+      "pos": "noun",
+      "family": [
+        "alaridos"
+      ]
     },
     {
       "word": "DÉCIMA",
       "gloss": "posição que corresponde ao número dez.",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈdɛsimɐ/",
+      "family": [
+        "décimo"
+      ]
     },
     {
       "word": "SINDICATOS",
@@ -629,7 +994,12 @@
         "uniões",
         "associações"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sĩdiˈkatuʃ/",
+      "family": [
+        "sindical",
+        "sindicalizar"
+      ]
     },
     {
       "word": "SÁBIOS",
@@ -637,7 +1007,12 @@
       "synonyms": [
         "eruditos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsabjuʃ/",
+      "family": [
+        "sábio",
+        "sabedoria"
+      ]
     },
     {
       "word": "ATENDAS",
@@ -646,7 +1021,12 @@
         "sirvas",
         "respondas"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɐˈtẽdɐʃ/",
+      "family": [
+        "atender",
+        "atendimento"
+      ]
     },
     {
       "word": "DESMORONAR",
@@ -655,7 +1035,11 @@
         "ruir",
         "desabar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɨzmuɾuˈnaɾ/",
+      "family": [
+        "desmoronamento"
+      ]
     },
     {
       "word": "AFUNDOU",
@@ -663,7 +1047,12 @@
       "synonyms": [
         "submergiu"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɐfũˈdo/",
+      "family": [
+        "afundar",
+        "afundamento"
+      ]
     },
     {
       "word": "PEGASTE",
@@ -672,12 +1061,22 @@
         "apanhaste",
         "agarraste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɨˈɡaʃtɨ/",
+      "family": [
+        "pegar",
+        "pegada"
+      ]
     },
     {
       "word": "MORALES",
       "gloss": "conjunto de princípios éticos.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muˈɾalɨʃ/",
+      "family": [
+        "moral",
+        "moralidade"
+      ]
     },
     {
       "word": "DIRIGIA",
@@ -686,7 +1085,12 @@
         "comandava",
         "liderava"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/diɾiˈʒiɐ/",
+      "family": [
+        "dirigir",
+        "direção"
+      ]
     },
     {
       "word": "RESPONDIDO",
@@ -694,7 +1098,12 @@
       "synonyms": [
         "replicado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʁɨʃpõˈdiðu/",
+      "family": [
+        "responder",
+        "resposta"
+      ]
     },
     {
       "word": "RAZOÁVEIS",
@@ -703,7 +1112,12 @@
         "sensatos",
         "aceitáveis"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʁɐzuˈavejʃ/",
+      "family": [
+        "razoável",
+        "razão"
+      ]
     },
     {
       "word": "RESERVEI",
@@ -712,7 +1126,12 @@
         "guardei",
         "bloqueei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁɨzɨɾˈvɐj/",
+      "family": [
+        "reservar",
+        "reserva"
+      ]
     },
     {
       "word": "GRAVA",
@@ -721,7 +1140,12 @@
         "regista",
         "filma"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈɡɾavɐ/",
+      "family": [
+        "gravar",
+        "gravador"
+      ]
     },
     {
       "word": "LUCRAR",
@@ -729,7 +1153,12 @@
       "synonyms": [
         "ganhar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/luˈkɾaɾ/",
+      "family": [
+        "lucro",
+        "lucrativo"
+      ]
     },
     {
       "word": "BUZINA",
@@ -738,7 +1167,12 @@
         "cláxon",
         "apito"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/buˈzinɐ/",
+      "family": [
+        "buzinar",
+        "buzinada"
+      ]
     },
     {
       "word": "HISTÓRICOS",
@@ -747,7 +1181,12 @@
         "antigos",
         "passados"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iʃˈtɔɾikus/",
+      "family": [
+        "história",
+        "historiar"
+      ]
     },
     {
       "word": "APAVORADO",
@@ -755,7 +1194,12 @@
       "synonyms": [
         "aterrado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɐpɐvuˈɾaðu/",
+      "family": [
+        "pavor",
+        "apavorar"
+      ]
     },
     {
       "word": "PISOS",
@@ -764,7 +1208,12 @@
         "andares",
         "chãos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpizuʃ/",
+      "family": [
+        "piso",
+        "pisar"
+      ]
     },
     {
       "word": "PASTELARIA",
@@ -773,7 +1222,12 @@
         "confeitaria",
         "padaria"
       ],
-      "pos": "noun"
+      "ipa": "/pɐʃ.tɨ.lɐ.ˈɾi.ɐ/",
+      "pos": "noun",
+      "family": [
+        "pastel",
+        "pastelão"
+      ]
     },
     {
       "word": "BETÃO",
@@ -782,7 +1236,12 @@
         "concreto",
         "cimento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɨˈtɐ̃w̃/",
+      "family": [
+        "betonar",
+        "betoneira"
+      ]
     },
     {
       "word": "VELHOTES",
@@ -791,7 +1250,12 @@
         "idosos",
         "anciãos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vɛʎˈɔtɨʃ/",
+      "family": [
+        "velho",
+        "velhice"
+      ]
     },
     {
       "word": "MATRICULA",
@@ -799,11 +1263,18 @@
       "synonyms": [
         "inscrição",
         "registo"
+      ],
+      "ipa": "/maˈtɾiku.lɐ/",
+      "family": [
+        "matricular",
+        "matrícula",
+        "matriculado"
       ]
     },
     {
       "word": "SÍFILIS",
       "gloss": "doença infecciosa transmitida sexualmente.",
+      "ipa": "/ˈsi.fi.liʃ/",
       "pos": "noun"
     },
     {
@@ -813,7 +1284,13 @@
         "recusou",
         "negou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁe.ʒejˈto/",
+      "family": [
+        "rejeitar",
+        "rejeição",
+        "rejeitado"
+      ]
     },
     {
       "word": "AVANÇOU",
@@ -821,7 +1298,13 @@
       "synonyms": [
         "progrediu"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.vɐ̃ˈso/",
+      "family": [
+        "avançar",
+        "avanço",
+        "avançado"
+      ]
     },
     {
       "word": "NEGATIVAS",
@@ -830,7 +1313,13 @@
         "adversas",
         "contrárias"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ne.ɡaˈt͡ʃi.vɐʃ/",
+      "family": [
+        "negativo",
+        "negar",
+        "negação"
+      ]
     },
     {
       "word": "APRESENTAM",
@@ -839,7 +1328,13 @@
         "mostram",
         "exibem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.pɾeˈzẽ.tɐ̃w̃/",
+      "family": [
+        "apresentar",
+        "apresentação",
+        "apresentado"
+      ]
     },
     {
       "word": "DECORAÇÕES",
@@ -848,7 +1343,13 @@
         "ornamentos",
         "enfeites"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/de.ko.ɾaˈsõj̃s/",
+      "family": [
+        "decorar",
+        "decoração",
+        "decorado"
+      ]
     },
     {
       "word": "CONSTANTES",
@@ -857,7 +1358,13 @@
         "contínuas",
         "permanentes"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kõʃˈtɐ̃.tɨʃ/",
+      "family": [
+        "constante",
+        "constância",
+        "constar"
+      ]
     },
     {
       "word": "MINHOCAS",
@@ -866,7 +1373,12 @@
         "lombrigas",
         "vermes"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈɲo.kɐʃ/",
+      "family": [
+        "minhoca",
+        "minhocal"
+      ]
     },
     {
       "word": "TRIO",
@@ -874,7 +1386,13 @@
       "synonyms": [
         "grupo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtɾi.u/",
+      "family": [
+        "três",
+        "tríade",
+        "triângulo"
+      ]
     },
     {
       "word": "PSÍQUICA",
@@ -883,7 +1401,13 @@
         "mental",
         "psicológica"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈpsi.ki.kɐ/",
+      "family": [
+        "psique",
+        "psicologia",
+        "psíquico"
+      ]
     },
     {
       "word": "CORPORAIS",
@@ -891,7 +1415,13 @@
       "synonyms": [
         "físicos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/koʁ.poˈɾajʃ/",
+      "family": [
+        "corpo",
+        "corporal",
+        "incorporar"
+      ]
     },
     {
       "word": "AUMENTANDO",
@@ -900,7 +1430,13 @@
         "crescendo",
         "elevando"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aw.mẽˈtɐ̃.du/",
+      "family": [
+        "aumentar",
+        "aumento",
+        "aumentado"
+      ]
     },
     {
       "word": "CUIDANDO",
@@ -909,7 +1445,13 @@
         "zelando",
         "atendendo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kujˈdɐ̃.du/",
+      "family": [
+        "cuidar",
+        "cuidado",
+        "cuidadoso"
+      ]
     },
     {
       "word": "CAVA",
@@ -917,7 +1459,13 @@
       "synonyms": [
         "fura"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈka.vɐ/",
+      "family": [
+        "cavar",
+        "cavado",
+        "cavouco"
+      ]
     },
     {
       "word": "MARADA",
@@ -926,7 +1474,13 @@
         "ferida",
         "cicatriz"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈɾa.dɐ/",
+      "family": [
+        "marca",
+        "marcado",
+        "marcar"
+      ]
     },
     {
       "word": "ADMITES",
@@ -935,7 +1489,13 @@
         "confessas",
         "reconheces"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/adˈmi.tɨʃ/",
+      "family": [
+        "admitir",
+        "admissão",
+        "admitido"
+      ]
     },
     {
       "word": "EGOÍSMO",
@@ -944,19 +1504,37 @@
         "egocentrismo",
         "individualismo"
       ],
-      "pos": "noun"
+      "ipa": "/i.ˈɡwiʒ.mu/",
+      "pos": "noun",
+      "family": [
+        "ego",
+        "egoísta",
+        "egocentrismo"
+      ]
     },
     {
       "word": "TRAZEREM",
       "gloss": "fazer com que algo ou alguém venha até um lugar",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tɾaˈze.ɾɐ̃j̃/",
+      "family": [
+        "trazer",
+        "trazido",
+        "trazível"
+      ]
     },
     {
       "word": "ÍNDICE",
       "gloss": "lista ordenada de capítulos e páginas",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/ˈin.ʤi.si/",
+      "pos": "noun",
+      "family": [
+        "indicar",
+        "indicação",
+        "indicativo"
+      ]
     },
     {
       "word": "PAGAREM",
@@ -964,7 +1542,13 @@
       "synonyms": [
         "liquidar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɐˈɡa.ɾɐ̃j̃/",
+      "family": [
+        "pagar",
+        "pagamento",
+        "pago"
+      ]
     },
     {
       "word": "LARGADO",
@@ -973,7 +1557,12 @@
         "abandonado",
         "desamparado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/laʁˈɡa.du/",
+      "family": [
+        "largar",
+        "largura"
+      ]
     },
     {
       "word": "DIREMOS",
@@ -981,7 +1570,13 @@
       "synonyms": [
         "falaremos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/diˈɾe.muʃ/",
+      "family": [
+        "dizer",
+        "dito",
+        "dizeres"
+      ]
     },
     {
       "word": "CIMEIRA",
@@ -990,7 +1585,13 @@
         "cúpula",
         "encontro"
       ],
-      "pos": "noun"
+      "ipa": "/si.ˈmɐj.ɾɐ/",
+      "pos": "noun",
+      "family": [
+        "cimeiro",
+        "cimo",
+        "cimalha"
+      ]
     },
     {
       "word": "CUMPRO",
@@ -998,7 +1599,13 @@
       "synonyms": [
         "executo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkũ.pɾu/",
+      "family": [
+        "cumprir",
+        "cumprimento",
+        "cumprido"
+      ]
     },
     {
       "word": "PERMANECEU",
@@ -1007,7 +1614,12 @@
         "ficou",
         "continuou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peɾ.mɐ̃ˈsew/",
+      "family": [
+        "permanecer",
+        "permanência"
+      ]
     },
     {
       "word": "TORNAMOS",
@@ -1015,7 +1627,12 @@
       "synonyms": [
         "ficamos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/toɾˈnɐ̃.muʃ/",
+      "family": [
+        "tornar",
+        "tornado"
+      ]
     },
     {
       "word": "BISAVÔ",
@@ -1024,7 +1641,12 @@
         "tetravô",
         "antepassado"
       ],
-      "pos": "noun"
+      "ipa": "/bi.zɐ.ˈvo/",
+      "pos": "noun",
+      "family": [
+        "bisavó",
+        "bisneto"
+      ]
     },
     {
       "word": "PRIMÁRIAS",
@@ -1033,7 +1655,12 @@
         "elementares",
         "básicas"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾiˈma.ɾi.ɐʃ/",
+      "family": [
+        "primário",
+        "primar"
+      ]
     },
     {
       "word": "ENCHEU",
@@ -1041,7 +1668,12 @@
       "synonyms": [
         "lotou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽˈʃew/",
+      "family": [
+        "enche",
+        "enchimento"
+      ]
     },
     {
       "word": "INSEGURA",
@@ -1050,13 +1682,23 @@
         "incerta",
         "frágil"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ĩ.seˈɡu.ɾɐ/",
+      "family": [
+        "seguro",
+        "insegurança"
+      ]
     },
     {
       "word": "ISLÃO",
       "gloss": "religião monoteísta revelada ao profeta Maomé.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/izˈlɐ̃w/",
+      "family": [
+        "islâmico",
+        "muçulmano"
+      ]
     },
     {
       "word": "ATRASES",
@@ -1064,7 +1706,12 @@
       "synonyms": [
         "demoras"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈtɾa.zis/",
+      "family": [
+        "atrasar",
+        "atrasado"
+      ]
     },
     {
       "word": "LUTADORA",
@@ -1073,7 +1720,12 @@
         "combatente",
         "guerreira"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/lu.tɐˈdo.ɾɐ/",
+      "family": [
+        "lutar",
+        "lutador"
+      ]
     },
     {
       "word": "ÍRIS",
@@ -1081,7 +1733,11 @@
       "synonyms": [
         "pupila"
       ],
-      "pos": "noun"
+      "ipa": "/ˈi.ɾiʃ/",
+      "pos": "noun",
+      "family": [
+        "iridiano"
+      ]
     },
     {
       "word": "MARCADAS",
@@ -1089,7 +1745,12 @@
       "synonyms": [
         "definidas"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/maɾˈka.dɐʃ/",
+      "family": [
+        "marcar",
+        "marcado"
+      ]
     },
     {
       "word": "RIPOSTAR",
@@ -1098,7 +1759,12 @@
         "replicar",
         "rebater"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁi.posˈtaɾ/",
+      "family": [
+        "riposta",
+        "resposta"
+      ]
     },
     {
       "word": "RAFEIRO",
@@ -1107,13 +1773,22 @@
         "cão",
         "vira-lata"
       ],
-      "pos": "noun"
+      "ipa": "/Rɐ.ˈfɐj.ɾu/",
+      "pos": "noun",
+      "family": [
+        "cão"
+      ]
     },
     {
       "word": "OITAVA",
       "gloss": "intervalo musical entre uma nota e a mesma nota mais aguda",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/oj.ˈta.vɐ/",
+      "pos": "noun",
+      "family": [
+        "oitavo",
+        "oitavado"
+      ]
     },
     {
       "word": "GANCHOS",
@@ -1121,7 +1796,12 @@
       "synonyms": [
         "garras"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡɐ̃.ʃuʃ/",
+      "family": [
+        "gancho",
+        "gancheira"
+      ]
     },
     {
       "word": "PERSEGUEM",
@@ -1129,7 +1809,12 @@
       "synonyms": [
         "caçam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peɾˈse.ɡẽj̃/",
+      "family": [
+        "perseguir",
+        "perseguidor"
+      ]
     },
     {
       "word": "PAIXÕES",
@@ -1137,7 +1822,11 @@
       "synonyms": [
         "amores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pajˈʃõj̃s/",
+      "family": [
+        "apaixonar"
+      ]
     },
     {
       "word": "COÁGULO",
@@ -1145,13 +1834,23 @@
       "synonyms": [
         "trombo"
       ],
-      "pos": "noun"
+      "ipa": "/ˈkwa.ɡu.lu/",
+      "pos": "noun",
+      "family": [
+        "coagular",
+        "coagulação"
+      ]
     },
     {
       "word": "LUTAVA",
       "gloss": "combatia ou esforçava-se contra algo ou alguém",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/luˈta.vɐ/",
+      "family": [
+        "lutar",
+        "luta"
+      ]
     },
     {
       "word": "LANÇARAM",
@@ -1159,7 +1858,12 @@
       "synonyms": [
         "atiraram"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/lɐ̃ˈsa.ɾɐ̃w/",
+      "family": [
+        "lançar",
+        "lançamento"
+      ]
     },
     {
       "word": "COMETAS",
@@ -1168,7 +1872,11 @@
         "aeróstatos",
         "meteoros"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈme.tɐʃ/",
+      "family": [
+        "cometário"
+      ]
     },
     {
       "word": "PERSPICAZ",
@@ -1176,7 +1884,12 @@
       "synonyms": [
         "atento"
       ],
-      "pos": "adjective"
+      "ipa": "/pɨɾʃ.pi.ˈkaʃ/",
+      "pos": "adjective",
+      "family": [
+        "perspicácia",
+        "perspicuidade"
+      ]
     },
     {
       "word": "PROTETOR",
@@ -1185,7 +1898,11 @@
         "guardião",
         "defensor"
       ],
-      "pos": "noun"
+      "family": [
+        "superprotetor"
+      ],
+      "pos": "noun",
+      "ipa": "/pɾo.teˈtoɾ/"
     },
     {
       "word": "ROBE",
@@ -1194,7 +1911,12 @@
         "túnica",
         "manto"
       ],
-      "pos": "noun"
+      "ipa": "/ˈRɔ.bɨ/",
+      "pos": "noun",
+      "family": [
+        "roupão",
+        "roupa"
+      ]
     },
     {
       "word": "AORTA",
@@ -1203,7 +1925,12 @@
         "artéria",
         "vaso"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈoɾ.tɐ/",
+      "family": [
+        "aórtico",
+        "arterial"
+      ]
     },
     {
       "word": "VOLTASSES",
@@ -1211,7 +1938,8 @@
       "synonyms": [
         "regressasses",
         "retornasses"
-      ]
+      ],
+      "ipa": "/voɫˈtasɨs/"
     },
     {
       "word": "INCLINAÇÃO",
@@ -1220,7 +1948,12 @@
         "tendência",
         "propensão"
       ],
-      "pos": "noun"
+      "ipa": "/ĩ.kli.nɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "inclinar",
+        "inclinado"
+      ]
     },
     {
       "word": "ESTANTE",
@@ -1229,6 +1962,7 @@
         "prateleira",
         "suporte"
       ],
+      "ipa": "/iʃ.ˈtɐ̃.tɨ/",
       "pos": "noun"
     },
     {
@@ -1237,7 +1971,13 @@
       "synonyms": [
         "desajustado"
       ],
-      "pos": "adjective"
+      "ipa": "/dɨʒ.lu.ˈka.du/",
+      "pos": "adjective",
+      "family": [
+        "deslocar",
+        "deslocamento",
+        "locação"
+      ]
     },
     {
       "word": "MEDITAR",
@@ -1246,7 +1986,13 @@
         "ponderar",
         "refletir"
       ],
-      "pos": "verb"
+      "ipa": "/mɨ.di.ˈtaɾ/",
+      "pos": "verb",
+      "family": [
+        "meditação",
+        "meditativo",
+        "meditador"
+      ]
     },
     {
       "word": "PASSAREMOS",
@@ -1254,7 +2000,8 @@
       "synonyms": [
         "atravessaremos",
         "percorreremos"
-      ]
+      ],
+      "ipa": "/pɐˈsaɾemuʃ/"
     },
     {
       "word": "ESTILISTA",
@@ -1263,7 +2010,13 @@
         "modista",
         "designer"
       ],
-      "pos": "noun"
+      "ipa": "/iʃ.ti.ˈliʃ.tɐ/",
+      "pos": "noun",
+      "family": [
+        "estilo",
+        "estilizar",
+        "estilístico"
+      ]
     },
     {
       "word": "PROGRAMADA",
@@ -1272,7 +2025,13 @@
         "planejada",
         "agendada"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾoɡɾɐˈmaðɐ/",
+      "family": [
+        "programa",
+        "programar",
+        "programador"
+      ]
     },
     {
       "word": "PROIBIDOS",
@@ -1281,7 +2040,13 @@
         "vedados",
         "impedidos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾojˈbiðuʃ/",
+      "family": [
+        "proibir",
+        "proibição",
+        "proibitivo"
+      ]
     },
     {
       "word": "INTELECTO",
@@ -1290,7 +2055,12 @@
         "mente",
         "razão"
       ],
-      "pos": "noun"
+      "ipa": "/ĩ.tɨ.ˈlɛk.tu/",
+      "pos": "noun",
+      "family": [
+        "intelectual",
+        "intelectualidade"
+      ]
     },
     {
       "word": "MARIONETAS",
@@ -1299,7 +2069,13 @@
         "fantoches",
         "bonecos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maɾjuˈnɛtɐʃ/",
+      "family": [
+        "marionete",
+        "marionetismo",
+        "marionetista"
+      ]
     },
     {
       "word": "CUIDAMOS",
@@ -1308,7 +2084,13 @@
         "zelamos",
         "protegemos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kujˈdɐ̃muʃ/",
+      "family": [
+        "cuidar",
+        "cuidado",
+        "cuidadoso"
+      ]
     },
     {
       "word": "RECLAMAÇÃO",
@@ -1317,7 +2099,13 @@
         "queixa",
         "protesto"
       ],
-      "pos": "noun"
+      "ipa": "/Rɨ.klɐ.mɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "reclamar",
+        "reclamante",
+        "reclamatório"
+      ]
     },
     {
       "word": "LIDEI",
@@ -1326,7 +2114,8 @@
         "enfrentei",
         "gerenciei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/liˈdej/"
     },
     {
       "word": "RÓTULO",
@@ -1335,7 +2124,13 @@
         "etiqueta",
         "designação"
       ],
-      "pos": "noun"
+      "ipa": "/ˈRɔ.tu.lu/",
+      "pos": "noun",
+      "family": [
+        "rotular",
+        "rotulagem",
+        "rotulado"
+      ]
     },
     {
       "word": "DEVASTADOR",
@@ -1344,7 +2139,13 @@
         "destrutivo",
         "arruinador"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/dɨvaʃtɐˈdoɾ/",
+      "family": [
+        "devastar",
+        "devastação",
+        "devastado"
+      ]
     },
     {
       "word": "VIBRAR",
@@ -1353,7 +2154,13 @@
         "tremer",
         "oscilar"
       ],
-      "pos": "verb"
+      "ipa": "/vi.ˈbɾaɾ/",
+      "pos": "verb",
+      "family": [
+        "vibração",
+        "vibratório",
+        "vibrante"
+      ]
     },
     {
       "word": "GATE",
@@ -1362,7 +2169,8 @@
         "portão",
         "entrada"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡatɨ/"
     },
     {
       "word": "TOTALIDADE",
@@ -1371,7 +2179,13 @@
         "integralidade",
         "conjunto"
       ],
-      "pos": "noun"
+      "ipa": "/tu.tɐ.li.ˈda.dɨ/",
+      "pos": "noun",
+      "family": [
+        "total",
+        "totalizar",
+        "totalitário"
+      ]
     },
     {
       "word": "VARÍOLA",
@@ -1380,6 +2194,7 @@
         "doença",
         "peste"
       ],
+      "ipa": "/vɐ.ˈɾi.u.lɐ/",
       "pos": "noun"
     },
     {
@@ -1389,6 +2204,10 @@
         "comum",
         "vulgar"
       ],
+      "family": [
+        "transordinário"
+      ],
+      "ipa": "/ɔɾ.di.ˈna.ɾju/",
       "pos": "adjective"
     },
     {
@@ -1398,6 +2217,7 @@
         "moleque",
         "menino"
       ],
+      "ipa": "/fɨ.ˈdɐj.ʎu/",
       "pos": "noun"
     },
     {
@@ -1406,7 +2226,8 @@
       "synonyms": [
         "aniquilam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɨʃˈtɾojɐ̃j̃/"
     },
     {
       "word": "GENUÍNA",
@@ -1415,7 +2236,8 @@
         "autêntica",
         "verdadeira"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʒɨnuˈinɐ/"
     },
     {
       "word": "CANOA",
@@ -1424,6 +2246,7 @@
         "barco",
         "embarcação"
       ],
+      "ipa": "/kɜˈnoɜ/",
       "pos": "noun"
     },
     {
@@ -1433,7 +2256,8 @@
         "vingança",
         "revide"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/dɨʃˈfoʁɐ/"
     },
     {
       "word": "OCULTA",
@@ -1442,7 +2266,13 @@
         "escondida",
         "encoberta"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/oˈkuw.tɐ/",
+      "family": [
+        "ocultar",
+        "oculto",
+        "ocultismo"
+      ]
     },
     {
       "word": "AQUECEDOR",
@@ -1450,7 +2280,13 @@
       "synonyms": [
         "calefator"
       ],
-      "pos": "noun"
+      "ipa": "/ɐ.kɛ.sɨ.ˈdoɾ/",
+      "pos": "noun",
+      "family": [
+        "aquecer",
+        "quente",
+        "aquecimento"
+      ]
     },
     {
       "word": "RECEIA",
@@ -1458,7 +2294,13 @@
       "synonyms": [
         "teme"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁeˈsej.ɐ/",
+      "family": [
+        "recear",
+        "receio",
+        "receoso"
+      ]
     },
     {
       "word": "DANÇANDO",
@@ -1467,7 +2309,13 @@
         "bailando",
         "rodopiando"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dɐ̃ˈsɐ̃.do/",
+      "family": [
+        "dançar",
+        "dança",
+        "dançarino"
+      ]
     },
     {
       "word": "VESPA",
@@ -1476,7 +2324,12 @@
         "inseto",
         "himenóptero"
       ],
-      "pos": "noun"
+      "ipa": "/ˈveʃ.pɐ/",
+      "pos": "noun",
+      "family": [
+        "vespeiro",
+        "vespiforme"
+      ]
     },
     {
       "word": "CONCURSOS",
@@ -1485,7 +2338,13 @@
         "provas",
         "certames"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõˈkuʁ.sus/",
+      "family": [
+        "concorrer",
+        "concurso",
+        "concursado"
+      ]
     },
     {
       "word": "CHIMPANZÉ",
@@ -1494,7 +2353,8 @@
         "primata",
         "macaco"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃĩ.pɐ̃ˈzɛ/"
     },
     {
       "word": "SEGUISTE",
@@ -1502,7 +2362,13 @@
       "synonyms": [
         "acompanhaste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/seˈɡis.tʃi/",
+      "family": [
+        "seguir",
+        "seguinte",
+        "seguimento"
+      ]
     },
     {
       "word": "TORMENTO",
@@ -1511,7 +2377,11 @@
         "sofrimento",
         "angústia"
       ],
-      "pos": "noun"
+      "ipa": "/tuɾ.ˈmẽ.tu/",
+      "pos": "noun",
+      "family": [
+        "tormentoso"
+      ]
     },
     {
       "word": "DECLÍNIO",
@@ -1520,7 +2390,12 @@
         "queda",
         "decadência"
       ],
-      "pos": "noun"
+      "ipa": "/dɨ.ˈkli.nju/",
+      "pos": "noun",
+      "family": [
+        "declinar",
+        "declinante"
+      ]
     },
     {
       "word": "VERSOS",
@@ -1529,7 +2404,13 @@
         "estrofes",
         "linhas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈvɛʁ.sus/",
+      "family": [
+        "verso",
+        "versificar",
+        "versatilidade"
+      ]
     },
     {
       "word": "PEGAM",
@@ -1538,7 +2419,13 @@
         "agarram",
         "capturam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈpe.ɡɐ̃w/",
+      "family": [
+        "pegar",
+        "pego",
+        "pegada"
+      ]
     },
     {
       "word": "PERMANEÇA",
@@ -1547,7 +2434,13 @@
         "fique",
         "continue"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peʁ.mɐˈne.sɐ/",
+      "family": [
+        "permanecer",
+        "permanência",
+        "permanente"
+      ]
     },
     {
       "word": "BALOIÇO",
@@ -1556,13 +2449,25 @@
         "balanço",
         "gangorra"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baˈloj.su/",
+      "family": [
+        "baloiçar",
+        "balanço",
+        "balouçar"
+      ]
     },
     {
       "word": "CINZEIRO",
       "gloss": "recipiente para os restos de cigarro",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/sĩ.ˈzej.ɾu/",
+      "pos": "noun",
+      "family": [
+        "cinza",
+        "cinzento",
+        "incinerar"
+      ]
     },
     {
       "word": "ATRASOS",
@@ -1570,19 +2475,36 @@
       "synonyms": [
         "demoras"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈtɾa.zus/",
+      "family": [
+        "atrasar",
+        "atrasado",
+        "atraso"
+      ]
     },
     {
       "word": "FUMAVA",
       "gloss": "inalava tabaco a arder",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fuˈma.vɐ/",
+      "family": [
+        "fumar",
+        "fumaça",
+        "fumante"
+      ]
     },
     {
       "word": "VIRAGEM",
       "gloss": "mudança de direção ou rumo",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/viˈɾa.ʒẽj/",
+      "family": [
+        "virar",
+        "viravolta"
+      ]
     },
     {
       "word": "EXPRESSÕES",
@@ -1591,7 +2513,13 @@
         "frases",
         "locuções"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/es.pɾeˈsõj.zus/",
+      "family": [
+        "expressar",
+        "expressão",
+        "expressivo"
+      ]
     },
     {
       "word": "JUNTAM",
@@ -1600,7 +2528,13 @@
         "reúnem",
         "agrupam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈʒũ.tɐ̃w/",
+      "family": [
+        "juntar",
+        "junto",
+        "juntura"
+      ]
     },
     {
       "word": "COITADINHA",
@@ -1609,7 +2543,13 @@
         "pobrezinha",
         "desafortunada"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koj.taˈdĩ.ɲɐ/",
+      "family": [
+        "coitado",
+        "coitadinho",
+        "coitadão"
+      ]
     },
     {
       "word": "CORTAM",
@@ -1618,7 +2558,13 @@
         "cindem",
         "seccionam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkoʁ.tɐ̃w/",
+      "family": [
+        "cortar",
+        "corte",
+        "cortante"
+      ]
     },
     {
       "word": "CAUSARAM",
@@ -1627,7 +2573,13 @@
         "provocaram",
         "geraram"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kawˈza.ɾɐ̃w/",
+      "family": [
+        "causar",
+        "causa",
+        "causal"
+      ]
     },
     {
       "word": "EMITIU",
@@ -1636,7 +2588,13 @@
         "expediu",
         "lançou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/eˈmi.tʃiw/",
+      "family": [
+        "emitir",
+        "emissão",
+        "emissor"
+      ]
     },
     {
       "word": "ENVOLVEM",
@@ -1645,7 +2603,13 @@
         "abrangem",
         "compreendem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽˈvoɫ.vẽj/",
+      "family": [
+        "envolver",
+        "envolvimento",
+        "envolto"
+      ]
     },
     {
       "word": "CONTADOS",
@@ -1654,7 +2618,13 @@
         "enumerados",
         "relatados"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kõˈta.dus/",
+      "family": [
+        "contar",
+        "contagem",
+        "contável"
+      ]
     },
     {
       "word": "ENVENENOU",
@@ -1662,7 +2632,13 @@
       "synonyms": [
         "intoxicou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.ve.neˈno/",
+      "family": [
+        "veneno",
+        "envenenar",
+        "envenenamento"
+      ]
     },
     {
       "word": "OLHARAM",
@@ -1671,7 +2647,13 @@
         "observaram",
         "viram"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/oˈʎa.ɾɐ̃w̃/",
+      "family": [
+        "olhar",
+        "olho",
+        "olhadela"
+      ]
     },
     {
       "word": "ACOLHEDOR",
@@ -1680,7 +2662,13 @@
         "hospitaleiro",
         "receptivo"
       ],
-      "pos": "adjective"
+      "ipa": "/ɐ.ku.ʎɨ.ˈdoɾ/",
+      "pos": "adjective",
+      "family": [
+        "acolher",
+        "acolhimento",
+        "acolhedora"
+      ]
     },
     {
       "word": "PARECENDO",
@@ -1689,7 +2677,13 @@
         "aparentando",
         "sugerindo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pa.ɾeˈsẽ.du/",
+      "family": [
+        "parecer",
+        "parecido",
+        "aparência"
+      ]
     },
     {
       "word": "PUBERDADE",
@@ -1697,7 +2691,13 @@
       "synonyms": [
         "adolescência"
       ],
-      "pos": "noun"
+      "ipa": "/pu.bɨɾ.ˈda.dɨ/",
+      "pos": "noun",
+      "family": [
+        "púbere",
+        "pubescente",
+        "puberal"
+      ]
     },
     {
       "word": "MITOS",
@@ -1706,7 +2706,13 @@
         "lendas",
         "fábulas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmi.tus/",
+      "family": [
+        "mítico",
+        "mitologia",
+        "mitificar"
+      ]
     },
     {
       "word": "DESILUDIDA",
@@ -1715,7 +2721,13 @@
         "desapontada",
         "frustrada"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/de.zi.luˈdʒi.da/",
+      "family": [
+        "desiludir",
+        "desilusão",
+        "desiludido"
+      ]
     },
     {
       "word": "TALHANTE",
@@ -1724,7 +2736,13 @@
         "cortante",
         "afiado"
       ],
-      "pos": "noun"
+      "ipa": "/tɜˈʎɜ̃tɨ/",
+      "pos": "noun",
+      "family": [
+        "talhar",
+        "talho",
+        "talhador"
+      ]
     },
     {
       "word": "MERAMENTE",
@@ -1733,7 +2751,11 @@
         "simplesmente",
         "apenas"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/me.ɾaˈmẽ.tʃi/",
+      "family": [
+        "mero"
+      ]
     },
     {
       "word": "ENTENDENDO",
@@ -1742,7 +2764,13 @@
         "compreendendo",
         "percebendo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.tẽˈdẽ.du/",
+      "family": [
+        "entender",
+        "entendido",
+        "entendimento"
+      ]
     },
     {
       "word": "CONQUISTOU",
@@ -1751,7 +2779,13 @@
         "obteve",
         "alcançou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõˈkis.to/",
+      "family": [
+        "conquistar",
+        "conquista",
+        "conquistador"
+      ]
     },
     {
       "word": "ACHARIA",
@@ -1760,7 +2794,13 @@
         "pensaria",
         "suporia"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.ʃaˈɾi.ɐ/",
+      "family": [
+        "achar",
+        "achado",
+        "achamento"
+      ]
     },
     {
       "word": "PUROS",
@@ -1768,7 +2808,13 @@
       "synonyms": [
         "limpos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈpu.ɾus/",
+      "family": [
+        "puro",
+        "pureza",
+        "purificar"
+      ]
     },
     {
       "word": "INCOMODOU",
@@ -1777,7 +2823,13 @@
         "perturbou",
         "aborrecou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ĩ.ko.moˈdo/",
+      "family": [
+        "incômodo",
+        "incomodar",
+        "incomodativo"
+      ]
     },
     {
       "word": "RAIVOSO",
@@ -1786,7 +2838,12 @@
         "irado",
         "furioso"
       ],
-      "pos": "adjective"
+      "ipa": "/Raj.ˈvo.zu/",
+      "pos": "adjective",
+      "family": [
+        "raiva",
+        "raivosamente"
+      ]
     },
     {
       "word": "FORMADA",
@@ -1795,7 +2852,13 @@
         "constituída",
         "composta"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/foɾˈma.da/",
+      "family": [
+        "formar",
+        "formado",
+        "formação"
+      ]
     },
     {
       "word": "PILARES",
@@ -1804,7 +2867,12 @@
         "bases",
         "fundamentos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/piˈla.ɾis/",
+      "family": [
+        "pilar",
+        "pilastra"
+      ]
     },
     {
       "word": "ESFAQUEOU",
@@ -1813,7 +2881,13 @@
         "apunhalou",
         "feriu"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/is.fa.keˈo/",
+      "family": [
+        "esfaquear",
+        "faca",
+        "esfaqueamento"
+      ]
     },
     {
       "word": "ACHARMOS",
@@ -1822,7 +2896,13 @@
         "encontrarmos",
         "localizarmos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.ʃaɾˈmɔs/",
+      "family": [
+        "achar",
+        "achado",
+        "achamento"
+      ]
     },
     {
       "word": "INICIA",
@@ -1830,7 +2910,13 @@
       "synonyms": [
         "começa"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/iˈni.si.ɐ/",
+      "family": [
+        "início",
+        "iniciar",
+        "inicial"
+      ]
     },
     {
       "word": "INÓCUO",
@@ -1838,37 +2924,75 @@
       "synonyms": [
         "inofensivo"
       ],
-      "pos": "adjective"
+      "ipa": "/i.ˈnɔ.kwu/",
+      "pos": "adjective",
+      "family": [
+        "nocivo",
+        "nocividade",
+        "inocuidade"
+      ]
     },
     {
       "word": "ESPANTALHO",
       "gloss": "boneco para afastar aves",
-      "pos": "noun"
+      "ipa": "/iʃ.pɐ̃.ˈta.ʎu/",
+      "pos": "noun",
+      "family": [
+        "espantar",
+        "espanto",
+        "espantado"
+      ]
     },
     {
       "word": "VIAJADO",
       "gloss": "que fez muitas viagens",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/vi.aˈʒa.du/",
+      "family": [
+        "viajar",
+        "viagem",
+        "viajante"
+      ]
     },
     {
       "word": "CONCESSÃO",
       "gloss": "ato de permitir algo a alguém.",
-      "pos": "noun"
+      "ipa": "/kõ.sɨ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "conceder",
+        "concessivo",
+        "concessionário"
+      ]
     },
     {
       "word": "TRAREI",
       "gloss": "forma do verbo trazer no futuro.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tɾaˈɾej/",
+      "family": [
+        "trazer",
+        "traria"
+      ]
     },
     {
       "word": "BRINCALHÃO",
       "gloss": "pessoa que gosta de divertir-se e fazer graças",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɾĩkaˈʎɐ̃w̃/",
+      "family": [
+        "brincar",
+        "brincalhona"
+      ]
     },
     {
       "word": "CAPTUROU",
       "gloss": "apoderou-se de algo ou alguém.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kapˈtuɾo/",
+      "family": [
+        "capturar"
+      ]
     },
     {
       "word": "GAME",
@@ -1877,7 +3001,8 @@
         "jogo",
         "partida"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡejm/"
     },
     {
       "word": "BOFETADA",
@@ -1885,171 +3010,341 @@
       "synonyms": [
         "tapa"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bofeˈtadɐ/",
+      "family": [
+        "bofetão",
+        "bofetear"
+      ]
     },
     {
       "word": "RELÂMPAGOS",
       "gloss": "descargas elétricas no céu.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁeˈlɐ̃paɡus/",
+      "family": [
+        "relâmpago",
+        "relampejar"
+      ]
     },
     {
       "word": "LEGISLAÇÃO",
       "gloss": "conjunto de leis de um país.",
-      "pos": "noun"
+      "ipa": "/lɨ.ʒiʒ.lɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "lei",
+        "legislar"
+      ]
     },
     {
       "word": "RENOVAÇÃO",
       "gloss": "ato de tornar algo novo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁenovaˈsɐ̃w̃/",
+      "family": [
+        "renovar",
+        "nova"
+      ]
     },
     {
       "word": "CALCULADO",
       "gloss": "feito com planejamento prévio.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kawkuˈladu/",
+      "family": [
+        "calcular",
+        "cálculo"
+      ]
     },
     {
       "word": "PONDERAR",
       "gloss": "avaliar com cuidado e atenção.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/põdeˈɾaɾ/",
+      "family": [
+        "ponderação",
+        "ponderado"
+      ]
     },
     {
       "word": "EXPRIMIR",
       "gloss": "dar forma a um pensamento.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/esˈpɾimiɾ/",
+      "family": [
+        "expressão",
+        "expressar"
+      ]
     },
     {
       "word": "IGNORANTES",
       "gloss": "pessoas sem conhecimento ou instrução.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iɡnoˈɾɐ̃tɨʃ/",
+      "family": [
+        "ignorar",
+        "ignorância"
+      ]
     },
     {
       "word": "INOFENSIVA",
       "gloss": "que não causa dano algum.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/inofẽˈsivɐ/",
+      "family": [
+        "ofensa",
+        "ofensivo"
+      ]
     },
     {
       "word": "MUDASSE",
       "gloss": "alterasse de lugar ou estado.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/muˈdasɨ/",
+      "family": [
+        "mudar",
+        "mudança"
+      ]
     },
     {
       "word": "PAUZINHOS",
       "gloss": "pequenos pedaços de madeira.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pawˈzĩɲus/",
+      "family": [
+        "pau",
+        "pauzito"
+      ]
     },
     {
       "word": "ESTOURAR",
       "gloss": "romper-se com força ou ruído.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/iʃtoˈɾaɾ/",
+      "family": [
+        "estouro",
+        "estourado"
+      ]
     },
     {
       "word": "CIENTES",
       "gloss": "pessoas que têm conhecimento de algo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/siˈẽtɨʃ/",
+      "family": [
+        "ciente",
+        "conhecer"
+      ]
     },
     {
       "word": "PAVILHÃO",
       "gloss": "grande construção para eventos.",
+      "ipa": "/pɐ.vi.ˈʎɐ̃w̃/",
       "pos": "noun"
     },
     {
       "word": "COMETIDOS",
       "gloss": "feitos ou realizados por alguém.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/komiˈtidus/",
+      "family": [
+        "cometer",
+        "cometimento"
+      ]
     },
     {
       "word": "CAPACETES",
       "gloss": "proteções para a cabeça.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kapɐˈsetɨʃ/",
+      "family": [
+        "capacete",
+        "capacitar"
+      ]
     },
     {
       "word": "COMEÇASSE",
       "gloss": "iniciasse uma ação ou processo.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/komiˈsasɨ/",
+      "family": [
+        "começar",
+        "começo"
+      ]
     },
     {
       "word": "POUPE",
       "gloss": "economize ou guarde recursos.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈpowpɨ/",
+      "family": [
+        "poupar",
+        "poupança"
+      ]
     },
     {
       "word": "ENGANAM",
       "gloss": "levam alguém a acreditar em algo falso.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽˈɡɐ̃nɐ̃w̃/",
+      "family": [
+        "enganar",
+        "engano"
+      ]
     },
     {
       "word": "BRILHAM",
       "gloss": "emitem luz intensa",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈbɾiʎɐ̃w̃/",
+      "family": [
+        "brilhar",
+        "brilho"
+      ]
     },
     {
       "word": "ILUSTRE",
       "gloss": "pessoa de grande prestígio.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iˈluʃtɾɨ/",
+      "family": [
+        "ilustrar"
+      ]
     },
     {
       "word": "SLOGAN",
       "gloss": "frase curta usada em propaganda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈslo.ɡɐ̃/"
     },
     {
       "word": "LIBERDADES",
       "gloss": "direitos de agir sem restrições.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/li.bɨɾˈda.dɨʃ/",
+      "family": [
+        "liberdade",
+        "libertar",
+        "liberal"
+      ]
     },
     {
       "word": "MOLHADAS",
       "gloss": "cobertas ou cheias de líquido.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/moˈʎa.dɐʃ/",
+      "family": [
+        "molhar",
+        "molhado",
+        "molhagem"
+      ]
     },
     {
       "word": "SONHASTE",
       "gloss": "tiveste visões durante o sono",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/suˈɲaʃ.tɨ/",
+      "family": [
+        "sonhar",
+        "sonho",
+        "sonhador"
+      ]
     },
     {
       "word": "BANAL",
-      "gloss": "comum e sem originalidade."
+      "gloss": "comum e sem originalidade.",
+      "family": [
+        "banalidade",
+        "banalização",
+        "banalizado"
+      ],
+      "ipa": "/bɐ.ˈnaɫ/"
     },
     {
       "word": "OPOSTA",
       "gloss": "que está em posição contrária.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɔˈpɔʃ.tɐ/",
+      "family": [
+        "oposto",
+        "opor",
+        "oposição"
+      ]
     },
     {
       "word": "SATURAÇÃO",
       "gloss": "estado de estar completamente cheio.",
-      "pos": "noun"
+      "ipa": "/sɐ.tu.ɾɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "saturar",
+        "saturado",
+        "satura"
+      ]
     },
     {
       "word": "PARVAS",
       "gloss": "pessoas tolas ou sem juízo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaɾ.vɐʃ/",
+      "family": [
+        "parvo",
+        "parvoíce",
+        "parvalhão"
+      ]
     },
     {
       "word": "TALHO",
       "gloss": "corte feito com instrumento afiado.",
-      "pos": "noun"
+      "ipa": "/ˈta.ʎu/",
+      "pos": "noun",
+      "family": [
+        "talhar",
+        "talhador",
+        "entalhe"
+      ]
     },
     {
       "word": "MESADA",
       "gloss": "quantia dada periodicamente a alguém.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɨˈza.dɐ/",
+      "family": [
+        "mês",
+        "mesário"
+      ]
     },
     {
       "word": "SUPONHA",
       "gloss": "considere algo como verdadeiro.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/suˈpõ.ɐ/",
+      "family": [
+        "supor",
+        "suposição",
+        "suposto"
+      ]
     },
     {
       "word": "CLIQUE",
       "gloss": "som ou ação de apertar um botão.",
-      "pos": "noun"
+      "ipa": "/ˈkli.kɨ/",
+      "pos": "noun",
+      "family": [
+        "clicar",
+        "clicável"
+      ]
     },
     {
       "word": "DESPACHADO",
       "gloss": "enviado ou resolvido rapidamente.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/dɨʃ.pɐˈʃa.du/",
+      "family": [
+        "despachar",
+        "despacho"
+      ]
     },
     {
       "word": "CONTINUES",
@@ -2058,7 +3353,13 @@
         "prossegue",
         "prosseguir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõ.tiˈnu.ɨʃ/",
+      "family": [
+        "continuar",
+        "continuidade",
+        "contínuo"
+      ]
     },
     {
       "word": "EXPLORADOR",
@@ -2067,7 +3368,13 @@
         "viajante",
         "descobridor"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɨʃ.plu.ɾɐˈdoɾ/",
+      "family": [
+        "explorar",
+        "exploração",
+        "explorado"
+      ]
     },
     {
       "word": "MOTIVADO",
@@ -2076,13 +3383,25 @@
         "estimulado",
         "incentivado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/mu.tiˈva.du/",
+      "family": [
+        "motivar",
+        "motivação",
+        "motivo"
+      ]
     },
     {
       "word": "SENTO",
       "gloss": "ponho-me numa cadeira",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈsẽ.tu/",
+      "family": [
+        "sentar",
+        "sentado",
+        "assento"
+      ]
     },
     {
       "word": "INVESTIDO",
@@ -2091,7 +3410,12 @@
         "aplicado",
         "colocado"
       ],
-      "pos": "adjective"
+      "ipa": "/ĩ.vɨʃ.ˈti.du/",
+      "pos": "adjective",
+      "family": [
+        "investir",
+        "investimento"
+      ]
     },
     {
       "word": "ELFOS",
@@ -2100,7 +3424,11 @@
         "fadas",
         "seres"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɛɫ.fuʃ/",
+      "family": [
+        "elfo"
+      ]
     },
     {
       "word": "DOTE",
@@ -2109,7 +3437,12 @@
         "talento",
         "dom"
       ],
-      "pos": "noun"
+      "ipa": "/ˈdɔ.tɨ/",
+      "pos": "noun",
+      "family": [
+        "dotar",
+        "dotação"
+      ]
     },
     {
       "word": "PRESSÕES",
@@ -2118,13 +3451,25 @@
         "tensões",
         "estresses"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾɨˈsõj̃ʃ/",
+      "family": [
+        "pressionar",
+        "pressão",
+        "pressionado"
+      ]
     },
     {
       "word": "ELÉTRICO",
       "gloss": "relativo à corrente que alimenta aparelhos",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iˈlɛ.tɾi.ku/",
+      "family": [
+        "eletricidade",
+        "eletrificar",
+        "eletricista"
+      ]
     },
     {
       "word": "OPRESSÃO",
@@ -2132,13 +3477,25 @@
       "synonyms": [
         "domínio"
       ],
-      "pos": "noun"
+      "ipa": "/ɔ.pɾɨ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "oprimir",
+        "opressor",
+        "opressivo"
+      ]
     },
     {
       "word": "TIROTEIOS",
       "gloss": "disparos trocados entre pessoas",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ti.ɾuˈtɐj.uʃ/",
+      "family": [
+        "tiro",
+        "atirar",
+        "tirotear"
+      ]
     },
     {
       "word": "FIAMBRE",
@@ -2147,7 +3504,11 @@
         "presunto",
         "frio"
       ],
-      "pos": "noun"
+      "ipa": "/ˈfjɐ̃.bɾɨ/",
+      "pos": "noun",
+      "family": [
+        "fiambreira"
+      ]
     },
     {
       "word": "FÓRUM",
@@ -2156,7 +3517,11 @@
         "debate",
         "discussão"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfɔ.ɾũ/",
+      "family": [
+        "forense"
+      ]
     },
     {
       "word": "ENTENDAM",
@@ -2165,7 +3530,12 @@
         "compreendam",
         "percebam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽˈtẽ.dɐ̃/",
+      "family": [
+        "entender",
+        "entendimento"
+      ]
     },
     {
       "word": "MATEMÁTICO",
@@ -2174,7 +3544,11 @@
         "numérico",
         "cálculo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ma.teˈma.tʃi.ku/",
+      "family": [
+        "matemática"
+      ]
     },
     {
       "word": "GANHAREM",
@@ -2183,7 +3557,12 @@
         "vencerem",
         "obterem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɡɐ̃ˈɲa.ɾẽj̃/",
+      "family": [
+        "ganhar",
+        "ganho"
+      ]
     },
     {
       "word": "CIRÚRGICA",
@@ -2192,7 +3571,12 @@
         "precisa",
         "exata"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/siˈɾuɾ.ʒi.kɐ/",
+      "family": [
+        "cirurgia",
+        "cirurgião"
+      ]
     },
     {
       "word": "PICHA",
@@ -2201,7 +3585,12 @@
         "pintura",
         "desenho"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpi.ʃɐ/",
+      "family": [
+        "pichar",
+        "pichação"
+      ]
     },
     {
       "word": "ESQUECENDO",
@@ -2210,7 +3599,12 @@
         "omitindo",
         "ignorando"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/es.keˈsẽ.du/",
+      "family": [
+        "esquecer",
+        "esquecimento"
+      ]
     },
     {
       "word": "DIVERTINDO",
@@ -2219,13 +3613,23 @@
         "animando",
         "entretenendo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/di.veɾˈtĩ.du/",
+      "family": [
+        "divertir",
+        "diversão"
+      ]
     },
     {
       "word": "PARTIREMOS",
       "gloss": "vamos embora ou iniciaremos uma viagem",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/paʁ.tiˈɾẽ.mus/",
+      "family": [
+        "partir",
+        "partida"
+      ]
     },
     {
       "word": "VENCESTE",
@@ -2234,13 +3638,23 @@
         "ganhaste",
         "superaste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vẽˈses.tʃi/",
+      "family": [
+        "vencer",
+        "vitória"
+      ]
     },
     {
       "word": "NAMORA",
       "gloss": "relaciona-se amorosamente com alguém",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/naˈmo.ɾɐ/",
+      "family": [
+        "namorar",
+        "namorado"
+      ]
     },
     {
       "word": "DEFENDEU",
@@ -2249,7 +3663,12 @@
         "protegido",
         "amparado"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/deˈfẽ.dew/",
+      "family": [
+        "defender",
+        "defesa"
+      ]
     },
     {
       "word": "PRIMITIVA",
@@ -2258,7 +3677,12 @@
         "antiga",
         "rudimentar"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾiˈmi.tʃi.vɐ/",
+      "family": [
+        "primitivo",
+        "primo"
+      ]
     },
     {
       "word": "ATENDESTE",
@@ -2267,7 +3691,12 @@
         "ouviste",
         "escutaste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.tẽˈdes.tʃi/",
+      "family": [
+        "atender",
+        "atendimento"
+      ]
     },
     {
       "word": "SOLICITAR",
@@ -2276,7 +3705,12 @@
         "pedir",
         "requerer"
       ],
-      "pos": "verb"
+      "ipa": "/su.li.si.ˈtaɾ/",
+      "pos": "verb",
+      "family": [
+        "solicitação",
+        "solicitante"
+      ]
     },
     {
       "word": "PATRIOTAS",
@@ -2285,13 +3719,23 @@
         "nacionais",
         "leais"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pa.tɾiˈo.tɐs/",
+      "family": [
+        "pátria",
+        "patriotismo"
+      ]
     },
     {
       "word": "CANDIDATAR",
       "gloss": "apresentar-se para concorrer a um cargo",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɐ̃.dʒi.daˈtaɾ/",
+      "family": [
+        "candidato",
+        "candidatura"
+      ]
     },
     {
       "word": "CATETER",
@@ -2300,6 +3744,12 @@
         "sonda",
         "tubo"
       ],
+      "family": [
+        "cateterismo",
+        "cateterização",
+        "cateterizar"
+      ],
+      "ipa": "/kate'tɛɾ/",
       "pos": "noun"
     },
     {
@@ -2309,7 +3759,12 @@
         "refeições",
         "lanches"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/awˈmo.sus/",
+      "family": [
+        "almoçar",
+        "almoço"
+      ]
     },
     {
       "word": "OBJEÇÃO",
@@ -2318,7 +3773,12 @@
         "oposição",
         "discordância"
       ],
-      "pos": "noun"
+      "ipa": "/ɔb.ʒɛ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "objetar",
+        "objetivo"
+      ]
     },
     {
       "word": "RELATIVO",
@@ -2326,6 +3786,12 @@
       "synonyms": [
         "comparado"
       ],
+      "family": [
+        "relatividade",
+        "relativismo",
+        "relativista"
+      ],
+      "ipa": "/Rɨ.lɐ.ˈti.vu/",
       "pos": "adjective"
     },
     {
@@ -2334,7 +3800,12 @@
       "synonyms": [
         "pilotos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈa.zis/",
+      "family": [
+        "ás",
+        "as"
+      ]
     },
     {
       "word": "CAÍSSE",
@@ -2342,7 +3813,12 @@
       "synonyms": [
         "tombasse"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kaˈi.si/",
+      "family": [
+        "cair",
+        "caída"
+      ]
     },
     {
       "word": "TOMARMOS",
@@ -2351,7 +3827,12 @@
         "pegar",
         "adquirir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/toˈmaɾ.mus/",
+      "family": [
+        "tomar",
+        "tomada"
+      ]
     },
     {
       "word": "FUNGOS",
@@ -2360,13 +3841,23 @@
         "cogumelos",
         "bolores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfũ.ɡus/",
+      "family": [
+        "fungo",
+        "fungicida"
+      ]
     },
     {
       "word": "FILHINHA",
       "gloss": "menina pequena de alguém, dito com carinho",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fiˈli.ɲɐ/",
+      "family": [
+        "filha",
+        "filhinho"
+      ]
     },
     {
       "word": "EXPLOSIVA",
@@ -2374,7 +3865,12 @@
       "synonyms": [
         "volátil"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/es.ploˈzi.vɐ/",
+      "family": [
+        "explodir",
+        "explosão"
+      ]
     },
     {
       "word": "ESTRONDO",
@@ -2383,13 +3879,23 @@
         "barulho",
         "ruído"
       ],
-      "pos": "noun"
+      "ipa": "/es.ˈtrõ.du/",
+      "pos": "noun",
+      "family": [
+        "estrondoso",
+        "estrondar"
+      ]
     },
     {
       "word": "BURRITO",
       "gloss": "pequeno asno ou comida mexicana enrolada",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/buˈʁi.tu/",
+      "family": [
+        "burro",
+        "burricada"
+      ]
     },
     {
       "word": "DERRETIDO",
@@ -2398,13 +3904,23 @@
         "liquefeito",
         "fundido"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/de.ʁeˈtʃi.du/",
+      "family": [
+        "derreter",
+        "derretimento"
+      ]
     },
     {
       "word": "ARRISCO",
       "gloss": "ponho-me em situação perigosa",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈʁis.ku/",
+      "family": [
+        "risco",
+        "arriscar"
+      ]
     },
     {
       "word": "AMASTE",
@@ -2412,7 +3928,12 @@
       "synonyms": [
         "quereste"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.ˈmas.tʃi/",
+      "family": [
+        "amar",
+        "amado"
+      ]
     },
     {
       "word": "SERVIRIA",
@@ -2421,7 +3942,12 @@
         "ajudaria",
         "atenderia"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/seʁ.viˈɾi.a/",
+      "family": [
+        "servir",
+        "serviço"
+      ]
     },
     {
       "word": "CAMINHANDO",
@@ -2430,7 +3956,12 @@
         "andando",
         "marchando"
       ],
-      "pos": "verb"
+      "ipa": "/kɐ.mɪ.ˈɲãⁿ.dʊ/",
+      "pos": "verb",
+      "family": [
+        "caminhar",
+        "caminho"
+      ]
     },
     {
       "word": "VEGETAÇÃO",
@@ -2439,7 +3970,12 @@
         "plantas",
         "folhagem"
       ],
-      "pos": "noun"
+      "ipa": "/vɨ.ʒɨ.tɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "vegetal",
+        "vegetar"
+      ]
     },
     {
       "word": "CÁLCIO",
@@ -2448,7 +3984,11 @@
         "mineral",
         "osso"
       ],
-      "pos": "noun"
+      "ipa": "/ˈkałsju/",
+      "pos": "noun",
+      "family": [
+        "calcário"
+      ]
     },
     {
       "word": "SEDUÇÃO",
@@ -2457,7 +3997,12 @@
         "atração",
         "encanto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/se.duˈsɐ̃w/",
+      "family": [
+        "seduzir",
+        "sedutor"
+      ]
     },
     {
       "word": "CASULO",
@@ -2466,6 +4011,7 @@
         "envoltório",
         "cápsula"
       ],
+      "ipa": "/kɐ.ˈzu.lu/",
       "pos": "noun"
     },
     {
@@ -2474,7 +4020,12 @@
       "synonyms": [
         "partiam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/saˈi.ɐ̃w/",
+      "family": [
+        "sair",
+        "saída"
+      ]
     },
     {
       "word": "REMOS",
@@ -2482,7 +4033,12 @@
       "synonyms": [
         "pás"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈʁe.mus/",
+      "family": [
+        "remar",
+        "remoção"
+      ]
     },
     {
       "word": "DIFICULTAR",
@@ -2491,7 +4047,12 @@
         "complicar",
         "obstruir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/dʒi.fi.kuwˈtaʁ/",
+      "family": [
+        "difícil",
+        "dificuldade"
+      ]
     },
     {
       "word": "NECESSITAR",
@@ -2500,7 +4061,12 @@
         "precisar",
         "requerer"
       ],
-      "pos": "verb"
+      "ipa": "/nɨ.sɨ.si.ˈtaɾ/",
+      "pos": "verb",
+      "family": [
+        "necessário",
+        "necessidade"
+      ]
     },
     {
       "word": "CHORÃO",
@@ -2508,7 +4074,12 @@
       "synonyms": [
         "lamentoso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʃoˈɾɐ̃w/",
+      "family": [
+        "chorar",
+        "choro"
+      ]
     },
     {
       "word": "INVENÇÕES",
@@ -2517,7 +4088,12 @@
         "criações",
         "descobertas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩ.vẽˈsõj̃s/",
+      "family": [
+        "inventar",
+        "inventivo"
+      ]
     },
     {
       "word": "BELICHE",
@@ -2525,7 +4101,11 @@
       "synonyms": [
         "cama"
       ],
-      "pos": "noun"
+      "ipa": "/bɨ.ˈli.ʃɨ/",
+      "pos": "noun",
+      "family": [
+        "belicheiro"
+      ]
     },
     {
       "word": "PROJETOS",
@@ -2534,7 +4114,12 @@
         "planos",
         "ideias"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾoˈʒɛ.tus/",
+      "family": [
+        "projetar",
+        "projeção"
+      ]
     },
     {
       "word": "SABERIAM",
@@ -2543,7 +4128,12 @@
         "conheceriam",
         "entenderiam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/sa.beˈɾi.ɐ̃w/",
+      "family": [
+        "saber",
+        "sabedoria"
+      ]
     },
     {
       "word": "DESTRUAM",
@@ -2551,7 +4141,12 @@
       "synonyms": [
         "arruínem"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/desˈtɾu.ɐ̃w/",
+      "family": [
+        "destruir",
+        "destruição"
+      ]
     },
     {
       "word": "CHAPA",
@@ -2560,7 +4155,12 @@
         "lâmina",
         "placa"
       ],
-      "pos": "noun"
+      "ipa": "/ˈʃa.pɐ/",
+      "pos": "noun",
+      "family": [
+        "chapado",
+        "achatar"
+      ]
     },
     {
       "word": "AMBIENTAIS",
@@ -2568,7 +4168,12 @@
       "synonyms": [
         "ecológicos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɐ̃.bi.ẽˈtaj̃s/",
+      "family": [
+        "ambiente",
+        "ambiental"
+      ]
     },
     {
       "word": "MUDARMOS",
@@ -2577,7 +4182,12 @@
         "alterarmos",
         "transformarmos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/muˈdaʁ.mus/",
+      "family": [
+        "mudar",
+        "mudança"
+      ]
     },
     {
       "word": "CIUMENTA",
@@ -2585,12 +4195,21 @@
       "synonyms": [
         "possessiva"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/sjuˈmẽ.tɐ/",
+      "family": [
+        "ciúme",
+        "ciumentamente"
+      ]
     },
     {
       "word": "TRÉGUA",
       "gloss": "pausa combinada nos combates de uma guerra",
-      "pos": "noun"
+      "ipa": "/ˈtɾɛ.ɡwɐ/",
+      "pos": "noun",
+      "family": [
+        "tréguas"
+      ]
     },
     {
       "word": "EXTREMAS",
@@ -2599,7 +4218,13 @@
         "intensas",
         "severas"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɨʃˈtɾe.mɐʃ/",
+      "family": [
+        "extremo",
+        "extremidade",
+        "extremismo"
+      ]
     },
     {
       "word": "RÍGIDA",
@@ -2608,7 +4233,13 @@
         "dura",
         "estrita"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈʁi.ʒi.dɐ/",
+      "family": [
+        "rigidez",
+        "rigor",
+        "rigoroso"
+      ]
     },
     {
       "word": "PLANEÁMOS",
@@ -2616,7 +4247,13 @@
       "synonyms": [
         "projetamos"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/plɐˈne.ɐ.muʃ/",
+      "family": [
+        "plano",
+        "planeamento",
+        "planejar"
+      ]
     },
     {
       "word": "PAGANDO",
@@ -2625,7 +4262,13 @@
         "quitando",
         "liquidando"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɐˈɡɐ̃.du/",
+      "family": [
+        "pagar",
+        "pagamento",
+        "pagador"
+      ]
     },
     {
       "word": "DISTINTOS",
@@ -2634,7 +4277,13 @@
         "diferentes",
         "diversos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/diʃˈtĩ.tuʃ/",
+      "family": [
+        "distinto",
+        "distinguir",
+        "distinção"
+      ]
     },
     {
       "word": "PEQUEI",
@@ -2643,7 +4292,13 @@
         "tropecei",
         "escorreguei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɨˈke/",
+      "family": [
+        "pecar",
+        "pecado",
+        "pecador"
+      ]
     },
     {
       "word": "ALARGAR",
@@ -2652,7 +4307,13 @@
         "ampliar",
         "estender"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɐ.lɐɾˈɡaɾ/",
+      "family": [
+        "largo",
+        "alargamento",
+        "alargado"
+      ]
     },
     {
       "word": "GRÁFICOS",
@@ -2660,7 +4321,13 @@
       "synonyms": [
         "diagramas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡɾa.fi.kuʃ/",
+      "family": [
+        "gráfico",
+        "grafismo",
+        "grafite"
+      ]
     },
     {
       "word": "DISTÂNCIAS",
@@ -2669,18 +4336,31 @@
         "intervalos",
         "espaços"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/diʃˈtɐ̃.siɐʃ/",
+      "family": [
+        "distância",
+        "distanciar",
+        "distante"
+      ]
     },
     {
       "word": "NBA",
       "gloss": "liga profissional de basquetebol",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛn.beˈa/"
     },
     {
       "word": "FABRICO",
       "gloss": "produção industrial de mercadorias",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/fɐ.ˈbɾi.ku/",
+      "pos": "noun",
+      "family": [
+        "fábrica",
+        "fabricação",
+        "fabricante"
+      ]
     },
     {
       "word": "HOSPEDADO",
@@ -2688,12 +4368,19 @@
       "synonyms": [
         "alojado"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/uʃ.pɨˈða.du/",
+      "family": [
+        "hospedar",
+        "hospedagem",
+        "hóspede"
+      ]
     },
     {
       "word": "PAGER",
       "gloss": "aparelho que recebe mensagens curtas",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpeɪ̯.ʒɛɾ/"
     },
     {
       "word": "FACTORES",
@@ -2702,7 +4389,13 @@
         "elementos",
         "fatores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɐkˈto.ɾɨʃ/",
+      "family": [
+        "fator",
+        "fatorial",
+        "fatorar"
+      ]
     },
     {
       "word": "MODERNAS",
@@ -2711,7 +4404,13 @@
         "atuais",
         "contemporâneas"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/muˈdɛɾ.nɐʃ/",
+      "family": [
+        "moderno",
+        "modernizar",
+        "modernidade"
+      ]
     },
     {
       "word": "TRATARES",
@@ -2720,7 +4419,13 @@
         "lidares",
         "cuidas"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tɾɐˈta.ɾɨʃ/",
+      "family": [
+        "tratar",
+        "tratamento",
+        "tratador"
+      ]
     },
     {
       "word": "MÍDIA",
@@ -2728,7 +4433,12 @@
       "synonyms": [
         "meios"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmi.di.ɐ/",
+      "family": [
+        "midiatizar",
+        "midiatização"
+      ]
     },
     {
       "word": "NUTRIENTES",
@@ -2736,7 +4446,13 @@
       "synonyms": [
         "vitaminas"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/nu.tɾiˈẽ.tɨʃ/",
+      "family": [
+        "nutriente",
+        "nutrir",
+        "nutrição"
+      ]
     },
     {
       "word": "QUEIMANDO",
@@ -2744,7 +4460,13 @@
       "synonyms": [
         "ardendo"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɐjˈmɐ̃.du/",
+      "family": [
+        "queimar",
+        "queimadura",
+        "queimado"
+      ]
     },
     {
       "word": "LIGADURA",
@@ -2752,7 +4474,13 @@
       "synonyms": [
         "atadura"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/li.ɡɐˈdu.ɾɐ/",
+      "family": [
+        "ligar",
+        "ligação",
+        "ligado"
+      ]
     },
     {
       "word": "NEGADA",
@@ -2760,7 +4488,13 @@
       "synonyms": [
         "recusada"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/nɨˈɡa.dɐ/",
+      "family": [
+        "negar",
+        "negação",
+        "negador"
+      ]
     },
     {
       "word": "ENCOMENDEI",
@@ -2769,7 +4503,13 @@
         "pedi",
         "solicitei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽ.ko.mẽˈde/",
+      "family": [
+        "encomendar",
+        "encomenda",
+        "encomendado"
+      ]
     },
     {
       "word": "CANCELE",
@@ -2777,7 +4517,13 @@
       "synonyms": [
         "anule"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kɐ̃ˈsɛ.lɨ/",
+      "family": [
+        "cancelar",
+        "cancelamento",
+        "cancelado"
+      ]
     },
     {
       "word": "BIQUÍNI",
@@ -2785,11 +4531,13 @@
       "synonyms": [
         "maiô"
       ],
+      "ipa": "/bi.ˈki.ni/",
       "pos": "noun"
     },
     {
       "word": "TOURNÉE",
       "gloss": "turnê ou série de apresentações em vários locais.",
+      "ipa": "/tuɾ.ˈne/",
       "pos": "noun"
     },
     {
@@ -2798,7 +4546,13 @@
       "synonyms": [
         "ardí"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kejˈmej/",
+      "family": [
+        "queimar",
+        "queimado",
+        "queimadura"
+      ]
     },
     {
       "word": "DARIAM",
@@ -2806,13 +4560,25 @@
       "synonyms": [
         "ofereceriam"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/daˈɾiɐ̃w/",
+      "family": [
+        "dar",
+        "dado",
+        "doação"
+      ]
     },
     {
       "word": "ESPÉCIME",
       "gloss": "exemplar ou amostra",
       "synonyms": [],
-      "pos": "noun"
+      "ipa": "/iʃ.ˈpɛ.si.mɨ/",
+      "pos": "noun",
+      "family": [
+        "espécie",
+        "especial",
+        "especificar"
+      ]
     },
     {
       "word": "EXÓTICO",
@@ -2820,7 +4586,11 @@
       "synonyms": [
         "estrangeiro"
       ],
-      "pos": "adjective"
+      "ipa": "/i.ˈzɔ.ti.ku/",
+      "pos": "adjective",
+      "family": [
+        "exotismo"
+      ]
     },
     {
       "word": "VOMITEI",
@@ -2828,7 +4598,13 @@
       "synonyms": [
         "regurgitei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vomiˈtej/",
+      "family": [
+        "vomitar",
+        "vômito",
+        "vomitivo"
+      ]
     },
     {
       "word": "PENSAREI",
@@ -2836,7 +4612,13 @@
       "synonyms": [
         "considerarei"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pẽsaˈɾej/",
+      "family": [
+        "pensar",
+        "pensamento",
+        "pensador"
+      ]
     },
     {
       "word": "COLOCARIA",
@@ -2844,13 +4626,25 @@
       "synonyms": [
         "poria"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kolukaˈɾiɐ/",
+      "family": [
+        "colocar",
+        "colocação",
+        "colocado"
+      ]
     },
     {
       "word": "RETIRARAM",
       "gloss": "removeram algo",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁetiˈɾɐ̃w/",
+      "family": [
+        "retirar",
+        "retirada",
+        "retirante"
+      ]
     },
     {
       "word": "RIEM",
@@ -2858,23 +4652,41 @@
       "synonyms": [
         "sorrêm"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈʁiẽj/",
+      "family": [
+        "rir",
+        "riso"
+      ]
     },
     {
       "word": "ESTALEIRO",
       "gloss": "lugar onde se constroem e reparam navios",
-      "pos": "noun"
+      "ipa": "/iʃ.tɐ.ˈlɐj.ɾu/",
+      "pos": "noun",
+      "family": [
+        "estalar",
+        "estalagem",
+        "estalido"
+      ]
     },
     {
       "word": "ZULU",
       "gloss": "povo africano e sua língua.",
+      "ipa": "/zu.ˈlu/",
       "pos": "noun"
     },
     {
       "word": "LATINOS",
       "gloss": "pessoas da América Central e do Sul",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/laˈtʃinus/",
+      "family": [
+        "latino",
+        "latim",
+        "latino-americano"
+      ]
     },
     {
       "word": "REANIMAÇÃO",
@@ -2882,7 +4694,12 @@
       "synonyms": [
         "ressuscitação"
       ],
-      "pos": "noun"
+      "ipa": "/Rjɐ.ni.mɐ.ˈsɐ̃w̃/",
+      "pos": "noun",
+      "family": [
+        "reanimar",
+        "reanimado"
+      ]
     },
     {
       "word": "PASSADEIRA",
@@ -2890,7 +4707,12 @@
       "synonyms": [
         "esteira"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pasaˈdejɾɐ/",
+      "family": [
+        "passar",
+        "passagem"
+      ]
     },
     {
       "word": "BENDITO",
@@ -2899,7 +4721,12 @@
         "abençoado",
         "sagrado"
       ],
-      "pos": "adjective"
+      "ipa": "/bẽ.ˈdi.tu/",
+      "pos": "adjective",
+      "family": [
+        "bênção",
+        "bendizer"
+      ]
     },
     {
       "word": "EXISTES",
@@ -2907,7 +4734,13 @@
       "synonyms": [
         "vives"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/eˈziʃtʃis/",
+      "family": [
+        "existir",
+        "existência",
+        "existente"
+      ]
     },
     {
       "word": "AREIAS",
@@ -2915,7 +4748,13 @@
       "synonyms": [
         "praias"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈɾejɐs/",
+      "family": [
+        "areia",
+        "areal",
+        "arenoso"
+      ]
     },
     {
       "word": "CONCLUÍDA",
@@ -2923,7 +4762,13 @@
       "synonyms": [
         "terminada"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kõkluˈidɐ/",
+      "family": [
+        "concluir",
+        "conclusão",
+        "conclusivo"
+      ]
     },
     {
       "word": "VIRO",
@@ -2931,7 +4776,13 @@
       "synonyms": [
         "transformo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈviɾu/",
+      "family": [
+        "virar",
+        "viragem",
+        "virada"
+      ]
     },
     {
       "word": "RECOMENDOU",
@@ -2939,7 +4790,13 @@
       "synonyms": [
         "sugeriu"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁekomenˈdow/",
+      "family": [
+        "recomendar",
+        "recomendação",
+        "recomendável"
+      ]
     },
     {
       "word": "INVESTIGOU",
@@ -2947,12 +4804,24 @@
       "synonyms": [
         "pesquisou"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ĩveʃtiˈɡow/",
+      "family": [
+        "investigar",
+        "investigação",
+        "investigador"
+      ]
     },
     {
       "word": "ASSOCIADA",
       "gloss": "Que faz parte de um grupo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/asosjaˈdɐ/",
+      "family": [
+        "associar",
+        "associação",
+        "associado"
+      ]
     },
     {
       "word": "SUTURA",
@@ -2960,7 +4829,13 @@
       "synonyms": [
         "costura"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/suˈtuɾɐ/",
+      "family": [
+        "suturar",
+        "suturado",
+        "suturante"
+      ]
     },
     {
       "word": "DECISIVO",
@@ -2968,7 +4843,12 @@
       "synonyms": [
         "crucial"
       ],
-      "pos": "adjective"
+      "ipa": "/dɨ.si.ˈzi.vu/",
+      "pos": "adjective",
+      "family": [
+        "decisão",
+        "decidir"
+      ]
     },
     {
       "word": "DEVORAR",
@@ -2976,7 +4856,12 @@
       "synonyms": [
         "consumir"
       ],
-      "pos": "verb"
+      "ipa": "/dɨ.vu.ˈɾaɾ/",
+      "pos": "verb",
+      "family": [
+        "devorador",
+        "devoração"
+      ]
     },
     {
       "word": "BALDES",
@@ -2984,7 +4869,11 @@
       "synonyms": [
         "recipientes"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaw.dʒis/",
+      "family": [
+        "balde"
+      ]
     },
     {
       "word": "VOMITADO",
@@ -2992,7 +4881,12 @@
       "synonyms": [
         "regurgitado"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vo.miˈta.du/",
+      "family": [
+        "vômito",
+        "vomitar"
+      ]
     },
     {
       "word": "CAMPANHAS",
@@ -3000,7 +4894,12 @@
       "synonyms": [
         "promoções"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɐ̃ˈpɐ.ɲɐ̃s/",
+      "family": [
+        "campanha",
+        "campanário"
+      ]
     },
     {
       "word": "ENFIADA",
@@ -3008,12 +4907,22 @@
       "synonyms": [
         "inserida"
       ],
-      "pos": "noun"
+      "ipa": "/ẽ.ˈfja.dɐ/",
+      "pos": "noun",
+      "family": [
+        "enfiar",
+        "fio"
+      ]
     },
     {
       "word": "APAGUEM",
       "gloss": "ação de extinguir ou eliminar algo.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/aˈpa.ɡẽj̃/",
+      "family": [
+        "apagar",
+        "página"
+      ]
     },
     {
       "word": "COMPARADA",
@@ -3022,6 +4931,11 @@
         "similar",
         "análoga",
         "equivalente"
+      ],
+      "ipa": "/kõ̞.paˈɾa.dɐ/",
+      "family": [
+        "comparar",
+        "par"
       ]
     },
     {
@@ -3032,7 +4946,12 @@
         "instituições culturais",
         "acervos"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muˈzews/",
+      "family": [
+        "museu",
+        "museologia"
+      ]
     },
     {
       "word": "CERIMÓNIAS",
@@ -3042,7 +4961,12 @@
         "solenidades",
         "festividades"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/se.ɾiˈmõ.ni.ɐs/",
+      "family": [
+        "cerimônia",
+        "cerimonial"
+      ]
     },
     {
       "word": "SUSPENSE",
@@ -3052,12 +4976,21 @@
         "expectativa",
         "intriga"
       ],
-      "pos": "noun"
+      "ipa": "/suʃ.ˈpsɨ/",
+      "pos": "noun",
+      "family": [
+        "suspenso",
+        "suspender"
+      ]
     },
     {
       "word": "BÚFALOS",
       "gloss": "mamíferos ruminantes de grande porte.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbu.fa.lus/",
+      "family": [
+        "búfalo"
+      ]
     },
     {
       "word": "BERMUDAS",
@@ -3066,7 +4999,12 @@
         "calções",
         "shorts"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/beʁˈmu.dɐs/",
+      "family": [
+        "bermuda",
+        "shorts"
+      ]
     },
     {
       "word": "SÚBDITOS",
@@ -3076,7 +5014,12 @@
         "súditos",
         "dependentes"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsub.dʒi.tus/",
+      "family": [
+        "súdito",
+        "submissão"
+      ]
     },
     {
       "word": "MILIGRAMAS",
@@ -3084,7 +5027,12 @@
       "synonyms": [
         "mg"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mi.liˈɡɾɐ̃.mɐs/",
+      "family": [
+        "miligrama",
+        "grama"
+      ]
     },
     {
       "word": "ZELADOR",
@@ -3094,7 +5042,12 @@
         "cuidador",
         "porteiro"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ze.laˈdoʁ/",
+      "family": [
+        "zelar",
+        "zeladoria"
+      ]
     },
     {
       "word": "CARTUCHO",
@@ -3103,7 +5056,11 @@
         "munição",
         "cápsula"
       ],
-      "pos": "noun"
+      "ipa": "/kɐɾ.ˈtu.ʃu/",
+      "pos": "noun",
+      "family": [
+        "cartucheira"
+      ]
     },
     {
       "word": "AUTORES",
@@ -3113,7 +5070,12 @@
         "criadores",
         "compositores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/awˈto.ɾis/",
+      "family": [
+        "autor",
+        "autoria"
+      ]
     },
     {
       "word": "MECÂNICOS",
@@ -3122,7 +5084,12 @@
         "técnicos",
         "operadores"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/meˈkɐ̃.ni.kus/",
+      "family": [
+        "mecânico",
+        "mecânica"
+      ]
     },
     {
       "word": "NARCISISTA",
@@ -3132,7 +5099,12 @@
         "vaidoso",
         "auto-centrado"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/naʁ.siˈsis.tɐ/",
+      "family": [
+        "narciso",
+        "narcisismo"
+      ]
     },
     {
       "word": "GOVERNANTE",
@@ -3141,7 +5113,12 @@
         "regente",
         "líder"
       ],
-      "pos": "noun"
+      "ipa": "/ɡu.vɨɾ.ˈnɐ̃.tɨ/",
+      "pos": "noun",
+      "family": [
+        "governar",
+        "governo"
+      ]
     },
     {
       "word": "RABINHO",
@@ -3149,13 +5126,22 @@
       "synonyms": [
         "cauda curta"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁaˈbi.ɲu/",
+      "family": [
+        "rabo"
+      ]
     },
     {
       "word": "CASARIA",
       "gloss": "uniria a vida a alguém em matrimónio",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kaˈza.ɾi.ɐ/",
+      "family": [
+        "casar",
+        "casamento"
+      ]
     },
     {
       "word": "URGENTES",
@@ -3165,7 +5151,12 @@
         "imperativos",
         "críticos"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/uʁˈʒẽ.tʃis/",
+      "family": [
+        "urgente",
+        "urgência"
+      ]
     },
     {
       "word": "FINALIDADE",
@@ -3175,6 +5166,10 @@
         "propósito",
         "meta"
       ],
+      "family": [
+        "equifinalidade"
+      ],
+      "ipa": "/fi.nɐ.li.ˈda.dɨ/",
       "pos": "noun"
     },
     {
@@ -3185,7 +5180,12 @@
         "aristocrata",
         "titular"
       ],
-      "pos": "noun"
+      "ipa": "/bɐ.ɾu.ˈne.zɐ/",
+      "pos": "noun",
+      "family": [
+        "barão",
+        "nobreza"
+      ]
     },
     {
       "word": "BRACELETE",
@@ -3193,7 +5193,11 @@
       "synonyms": [
         "pulseira"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɾa.seˈle.tʃi/",
+      "family": [
+        "braço"
+      ]
     },
     {
       "word": "SUPLENTE",
@@ -3201,7 +5205,11 @@
       "synonyms": [
         "reserva"
       ],
-      "pos": "noun"
+      "ipa": "/su.ˈplẽ.tɨ/",
+      "pos": "noun",
+      "family": [
+        "suplemento"
+      ]
     },
     {
       "word": "ESTALAR",
@@ -3209,7 +5217,12 @@
       "synonyms": [
         "quebrar"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/iʃ.taˈlaɾ/",
+      "family": [
+        "estalido",
+        "estaladiço"
+      ]
     }
   ]
 }

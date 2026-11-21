@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 12,
   "lang": "it",
   "cefr": "c2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato)",
@@ -16,7 +16,8 @@
       "synonyms": [
         "triste"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈluɡubre/"
     },
     {
       "word": "ACCUSATORE",
@@ -24,7 +25,12 @@
       "synonyms": [
         "denunciante"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/akkuzaˈtore/",
+      "family": [
+        "accusa",
+        "accusare"
+      ]
     },
     {
       "word": "ORTAGGIO",
@@ -32,37 +38,65 @@
       "synonyms": [
         "verdura"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/orˈtadd͡ʒo/",
+      "family": [
+        "orto",
+        "orticoltura"
+      ]
     },
     {
       "word": "CATAPULTA",
       "gloss": "una macchina antica che lancia proiettili a distanza",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kataˈpulta/",
+      "family": [
+        "catapultare"
+      ]
     },
     {
       "word": "PULITORE",
       "gloss": "persona o dispositivo che rimuove sporco e impurità",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/puliˈtore/",
+      "family": [
+        "pulire",
+        "pulizia"
+      ]
     },
     {
       "word": "COLLETTORE",
       "gloss": "un tubo o un canale che raccoglie liquidi o gas",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kolletˈtore/",
+      "family": [
+        "colletta"
+      ]
     },
     {
       "word": "METODISTA",
       "gloss": "seguace di una chiesa protestante nata nel Settecento",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/metoˈdista/",
+      "family": [
+        "metodo",
+        "metodico"
+      ]
     },
     {
       "word": "FOTONICO",
       "gloss": "relativo alle particelle di luce",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/foˈtɔniko/",
+      "family": [
+        "fotone",
+        "fotografia"
+      ]
     },
     {
       "word": "PERVADERE",
@@ -70,19 +104,32 @@
       "synonyms": [
         "inondare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/perˈvadere/",
+      "family": [
+        "pervasivo"
+      ]
     },
     {
       "word": "POLLAME",
       "gloss": "insieme di galline e altri volatili da cortile",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/polˈlame/",
+      "family": [
+        "pollo"
+      ]
     },
     {
       "word": "CONSOLLE",
       "gloss": "un mobile basso che ospita apparecchi elettronici",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/konˈsɔlle/",
+      "family": [
+        "console",
+        "consolare"
+      ]
     },
     {
       "word": "SOBRIETÀ",
@@ -90,7 +137,8 @@
       "synonyms": [
         "moderazione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sobrjeˈta/"
     },
     {
       "word": "CONCERNERE",
@@ -98,13 +146,23 @@
       "synonyms": [
         "riguardare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/konˈt͡ʃɛrnere/",
+      "family": [
+        "concernente"
+      ]
     },
     {
       "word": "CAPPUCCINO",
       "gloss": "bevanda calda a base di caffè e schiuma di latte",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kapputˈt͡ʃino/",
+      "family": [
+        "agostiniano",
+        "barnabita",
+        "basiliano"
+      ]
     },
     {
       "word": "PASSABILE",
@@ -112,7 +170,12 @@
       "synonyms": [
         "accettabile"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pasˈsabile/",
+      "family": [
+        "passare",
+        "passaggio"
+      ]
     },
     {
       "word": "SETTO",
@@ -120,7 +183,8 @@
       "synonyms": [
         "divisorio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsɛtto/"
     },
     {
       "word": "CABALA",
@@ -129,7 +193,13 @@
         "intrigo",
         "complotto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkabala/",
+      "family": [
+        "cabalistica",
+        "cabalistico",
+        "abracadabra"
+      ]
     },
     {
       "word": "TRAINING",
@@ -137,7 +207,8 @@
       "synonyms": [
         "allenamento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtrɛininɡ/"
     },
     {
       "word": "ZARINA",
@@ -146,7 +217,12 @@
         "imperatrice",
         "regina"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tsaˈrina/",
+      "family": [
+        "zar",
+        "zarevic"
+      ]
     },
     {
       "word": "GROSSOLANO",
@@ -154,7 +230,11 @@
       "synonyms": [
         "rozzo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɡrossoˈlano/",
+      "family": [
+        "grossolanamente"
+      ]
     },
     {
       "word": "SEZIONARE",
@@ -162,7 +242,11 @@
       "synonyms": [
         "dividere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/settsjoˈnare/",
+      "family": [
+        "sezione"
+      ]
     },
     {
       "word": "TRAINARE",
@@ -170,7 +254,12 @@
       "synonyms": [
         "tirare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/trajˈnare/",
+      "family": [
+        "trainante",
+        "traino"
+      ]
     },
     {
       "word": "ARGUZIA",
@@ -178,7 +267,11 @@
       "synonyms": [
         "acume"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/arˈɡutsja/",
+      "family": [
+        "argutezza"
+      ]
     },
     {
       "word": "INCUTERE",
@@ -186,7 +279,8 @@
       "synonyms": [
         "ispirare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/inˈkutere/"
     },
     {
       "word": "INCIAMPO",
@@ -195,7 +289,12 @@
         "ostacolo",
         "impedimento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/inˈt͡ʃampo/",
+      "family": [
+        "inciampare",
+        "inciampato"
+      ]
     },
     {
       "word": "PIGNORARE",
@@ -203,7 +302,12 @@
       "synonyms": [
         "sequestrare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/piɲɲoˈrare/",
+      "family": [
+        "pignoramento",
+        "pignorabile"
+      ]
     },
     {
       "word": "ANGUSTO",
@@ -211,7 +315,11 @@
       "synonyms": [
         "stretto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "angustiare"
+      ],
+      "ipa": "/aŋˈɡusto/"
     },
     {
       "word": "SLANG",
@@ -219,19 +327,25 @@
       "synonyms": [
         "gergo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈzlɛng/"
     },
     {
       "word": "RIVOLTELLA",
       "gloss": "una pistola a tamburo portatile",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/rivolˈtɛlla/",
+      "family": [
+        "rivoltellata"
+      ]
     },
     {
       "word": "ACCA",
       "gloss": "la lettera che rappresenta il suono aspirato",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈakka/"
     },
     {
       "word": "SPRINT",
@@ -239,7 +353,11 @@
       "synonyms": [
         "scatto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsprint/",
+      "family": [
+        "sprinter"
+      ]
     },
     {
       "word": "FIL",
@@ -247,7 +365,12 @@
       "synonyms": [
         "filo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fil/",
+      "family": [
+        "filo",
+        "filare"
+      ]
     },
     {
       "word": "PRESIDIO",
@@ -256,7 +379,13 @@
         "guarnigione",
         "fortezza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/preˈzidjo/",
+      "family": [
+        "presidiare",
+        "presidiale",
+        "fermo"
+      ]
     },
     {
       "word": "SPALANCATO",
@@ -264,7 +393,11 @@
       "synonyms": [
         "aperto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/spalanˈkato/",
+      "family": [
+        "spalancare"
+      ]
     },
     {
       "word": "CAPOBANDA",
@@ -272,7 +405,12 @@
       "synonyms": [
         "boss"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˌkapoˈbanda/",
+      "family": [
+        "capo",
+        "banda"
+      ]
     },
     {
       "word": "ALPACA",
@@ -280,7 +418,13 @@
       "synonyms": [
         "lama"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈalpaka/",
+      "family": [
+        "cammello",
+        "dromedario",
+        "vigogna"
+      ]
     },
     {
       "word": "SFILZA",
@@ -288,7 +432,11 @@
       "synonyms": [
         "fila"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsfiltsa/",
+      "family": [
+        "sfilare"
+      ]
     },
     {
       "word": "MALIZIA",
@@ -296,7 +444,13 @@
       "synonyms": [
         "astuzia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈlitsja/",
+      "family": [
+        "ammaliziare",
+        "ammaliziato",
+        "ammalizzire"
+      ]
     },
     {
       "word": "STIRATO",
@@ -304,13 +458,23 @@
       "synonyms": [
         "liscio"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/stiˈrato/",
+      "family": [
+        "stirare",
+        "stiratrice"
+      ]
     },
     {
       "word": "STELLINA",
       "gloss": "piccolo astro o simbolo a cinque punte",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/stelˈlina/",
+      "family": [
+        "stella",
+        "stelletta"
+      ]
     },
     {
       "word": "MOLLALA",
@@ -318,13 +482,19 @@
       "synonyms": [
         "lasciala"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/molˈlaːla/",
+      "family": [
+        "mollare",
+        "molla"
+      ]
     },
     {
       "word": "VISIERA",
       "gloss": "parte dell'elmo o del berretto che ripara gli occhi",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/viˈzjɛra/"
     },
     {
       "word": "PROFANO",
@@ -332,7 +502,12 @@
       "synonyms": [
         "laico"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "profanare",
+        "profanazione"
+      ],
+      "ipa": "/proˈfano/"
     },
     {
       "word": "BRUCIATELO",
@@ -340,7 +515,12 @@
       "synonyms": [
         "incendiatelo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/brutʃaˈtelo/",
+      "family": [
+        "bruciare",
+        "bruciato"
+      ]
     },
     {
       "word": "PROMISCUO",
@@ -348,7 +528,12 @@
       "synonyms": [
         "misto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/proˈmiskwo/",
+      "family": [
+        "promiscuamente",
+        "promiscuità"
+      ]
     },
     {
       "word": "AMBO",
@@ -356,7 +541,8 @@
       "synonyms": [
         "entrambi"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈambo/"
     },
     {
       "word": "FACCIONE",
@@ -364,7 +550,11 @@
       "synonyms": [
         "viso grande"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fatˈtʃone/",
+      "family": [
+        "faccia"
+      ]
     },
     {
       "word": "INTERINALE",
@@ -372,7 +562,11 @@
       "synonyms": [
         "provvisorio"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/interiˈnale/",
+      "family": [
+        "interinalmente"
+      ]
     },
     {
       "word": "PETTEGOLO",
@@ -380,7 +574,12 @@
       "synonyms": [
         "chiacchierone"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/petˈteɡolo/",
+      "family": [
+        "pettegolare",
+        "pettegolezzo"
+      ]
     },
     {
       "word": "TINTE",
@@ -388,13 +587,22 @@
       "synonyms": [
         "colori"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtinte/",
+      "family": [
+        "tinta",
+        "tinteggiare"
+      ]
     },
     {
       "word": "SPAZZANEVE",
       "gloss": "mezzo che toglie i fiocchi caduti dalle strade d'inverno",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/spattsaˈneve/",
+      "family": [
+        "spazzare"
+      ]
     },
     {
       "word": "CONCITARE",
@@ -403,7 +611,12 @@
         "eccitare",
         "agitare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kontʃiˈtare/",
+      "family": [
+        "concitato",
+        "concitazione"
+      ]
     },
     {
       "word": "INFUSIONE",
@@ -411,7 +624,12 @@
       "synonyms": [
         "tisana"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/infuˈzjone/",
+      "family": [
+        "infondere",
+        "infuso"
+      ]
     },
     {
       "word": "REUMATISMO",
@@ -419,7 +637,11 @@
       "synonyms": [
         "artrite"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reumaˈtizmo/",
+      "family": [
+        "reumatico"
+      ]
     },
     {
       "word": "STRIGLIATO",
@@ -427,7 +649,12 @@
       "synonyms": [
         "spazzolato"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/striʎˈʎato/",
+      "family": [
+        "strigliare",
+        "strigliata"
+      ]
     },
     {
       "word": "COLATA",
@@ -435,19 +662,33 @@
       "synonyms": [
         "versata"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈlata/",
+      "family": [
+        "colare",
+        "colato"
+      ]
     },
     {
       "word": "PERISCOPIO",
       "gloss": "uno strumento che permette di vedere sopra un ostacolo",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈriskopjo/",
+      "family": [
+        "periscopico"
+      ]
     },
     {
       "word": "TRIFOGLIO",
       "gloss": "pianta dei prati, portafortuna se ne ha quattro",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/triˈfɔʎʎo/",
+      "family": [
+        "trifogliato",
+        "trifogliaio"
+      ]
     },
     {
       "word": "CARICATURA",
@@ -455,7 +696,11 @@
       "synonyms": [
         "ritratto esagerato"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/karikaˈtura/",
+      "family": [
+        "caricaturale"
+      ]
     },
     {
       "word": "FIACCOLA",
@@ -463,7 +708,11 @@
       "synonyms": [
         "torcia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "fiaccolata"
+      ],
+      "ipa": "/ˈfjakkola/"
     },
     {
       "word": "PERPETRARE",
@@ -471,7 +720,12 @@
       "synonyms": [
         "commettere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/perpeˈtrare/",
+      "family": [
+        "perpetrato",
+        "perpetrazione"
+      ]
     },
     {
       "word": "BOVINO",
@@ -479,7 +733,13 @@
       "synonyms": [
         "mucca"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/boˈvino/",
+      "family": [
+        "bue",
+        "bovina",
+        "bovini"
+      ]
     },
     {
       "word": "SFARZOSO",
@@ -487,12 +747,21 @@
       "synonyms": [
         "vistoso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/sfarˈtsoso/",
+      "family": [
+        "sfarzo",
+        "sfarzosa"
+      ]
     },
     {
       "word": "ANTIQUARIO",
       "gloss": "chi vende oggetti d’epoca",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/antiˈkwarjo/",
+      "family": [
+        "antiquariato"
+      ]
     },
     {
       "word": "SLOW",
@@ -500,7 +769,8 @@
       "synonyms": [
         "lento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sloː/"
     },
     {
       "word": "RECINTO",
@@ -508,13 +778,18 @@
       "synonyms": [
         "steccato"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈt͡ʃinto/",
+      "family": [
+        "recintare"
+      ]
     },
     {
       "word": "CODEINA",
       "gloss": "un medicinale calmante derivato dall'oppio",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈdeːina/"
     },
     {
       "word": "PARAPETTO",
@@ -522,7 +797,12 @@
       "synonyms": [
         "ringhiera"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paraˈpɛtto/",
+      "family": [
+        "parapettato",
+        "parapettino"
+      ]
     },
     {
       "word": "MONTANTE",
@@ -530,7 +810,12 @@
       "synonyms": [
         "colonna"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/monˈtante/",
+      "family": [
+        "montare",
+        "montatura"
+      ]
     },
     {
       "word": "MUTILATO",
@@ -538,7 +823,12 @@
       "synonyms": [
         "invalido"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mutilˈlaːto/",
+      "family": [
+        "mutilare",
+        "mutilazione"
+      ]
     },
     {
       "word": "NEVROSI",
@@ -546,13 +836,25 @@
       "synonyms": [
         "ansia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/neˈvrɔzi/",
+      "family": [
+        "neurotico",
+        "nevrotico",
+        "nevrotizzare"
+      ]
     },
     {
       "word": "SCOLA",
       "gloss": "fa gocciolare via un liquido",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈskɔːla/",
+      "family": [
+        "sgocciolare",
+        "sgocciolato",
+        "sgocciolatura"
+      ]
     },
     {
       "word": "ESPERTE",
@@ -560,7 +862,12 @@
       "synonyms": [
         "competenti"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈspɛrte/",
+      "family": [
+        "esperto",
+        "esperienza"
+      ]
     },
     {
       "word": "MILITANTE",
@@ -568,7 +875,12 @@
       "synonyms": [
         "attivista"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miliˈtante/",
+      "family": [
+        "militare",
+        "militanza"
+      ]
     },
     {
       "word": "BISBETICO",
@@ -576,7 +888,12 @@
       "synonyms": [
         "irascibile"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/biˈzbɛtiko/",
+      "family": [
+        "bisbeticamente",
+        "insolito"
+      ]
     },
     {
       "word": "BREVETTARE",
@@ -584,7 +901,11 @@
       "synonyms": [
         "registrare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "brevettato"
+      ],
+      "ipa": "/brevetˈtaːre/"
     },
     {
       "word": "MUTEVOLE",
@@ -592,7 +913,11 @@
       "synonyms": [
         "variabile"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/muˈtevole/",
+      "family": [
+        "mutevolezza"
+      ]
     },
     {
       "word": "PENARE",
@@ -600,7 +925,11 @@
       "synonyms": [
         "soffrire"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peˈnare/",
+      "family": [
+        "penante"
+      ]
     },
     {
       "word": "SUBENTRO",
@@ -608,7 +937,13 @@
       "synonyms": [
         "sostituzione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/suˈbɛntro/",
+      "family": [
+        "subentrare",
+        "subentrante",
+        "subentrato"
+      ]
     },
     {
       "word": "BIONICO",
@@ -616,7 +951,11 @@
       "synonyms": [
         "robotico"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/biˈɔniko/",
+      "family": [
+        "bionica"
+      ]
     },
     {
       "word": "NAUFRAGO",
@@ -624,13 +963,23 @@
       "synonyms": [
         "sopravvissuto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnaufraɡo/",
+      "family": [
+        "naufragio",
+        "affondamento"
+      ]
     },
     {
       "word": "SALTELLO",
       "gloss": "piccolo balzo leggero",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/salˈtɛllo/",
+      "family": [
+        "saltare",
+        "saltellare"
+      ]
     },
     {
       "word": "PRODEZZA",
@@ -638,7 +987,11 @@
       "synonyms": [
         "impresa"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/proˈdɛttsa/",
+      "family": [
+        "prode"
+      ]
     },
     {
       "word": "UDITIVO",
@@ -646,7 +999,12 @@
       "synonyms": [
         "acustico"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/udiˈtivo/",
+      "family": [
+        "udire",
+        "udito"
+      ]
     },
     {
       "word": "PUNITIVO",
@@ -654,7 +1012,12 @@
       "synonyms": [
         "repressivo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/puniˈtiːvo/",
+      "family": [
+        "punire",
+        "punizione"
+      ]
     },
     {
       "word": "LUCERNARIO",
@@ -664,7 +1027,11 @@
         "finestra",
         "apertura"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/luʧerˈnaːrjo/",
+      "family": [
+        "lucerna"
+      ]
     },
     {
       "word": "DIVORZIATO",
@@ -674,7 +1041,12 @@
         "sciolto",
         "diviso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/divorˈtsjato/",
+      "family": [
+        "divorziare",
+        "divorzio"
+      ]
     },
     {
       "word": "FERMACARTE",
@@ -683,7 +1055,12 @@
         "pesapagine",
         "zavorra"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fermaˈkarte/",
+      "family": [
+        "fermare",
+        "carta"
+      ]
     },
     {
       "word": "SBIADIRE",
@@ -691,7 +1068,12 @@
       "synonyms": [
         "scolorire"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/zbjaˈdire/",
+      "family": [
+        "sbiadirsi",
+        "sbiadito"
+      ]
     },
     {
       "word": "SCHIAVETTO",
@@ -701,7 +1083,12 @@
         "lacchè",
         "sottoposto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/skjaˈvetto/",
+      "family": [
+        "schiavo",
+        "schiavitù"
+      ]
     },
     {
       "word": "RESPONSO",
@@ -709,7 +1096,13 @@
       "synonyms": [
         "verdetto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/resˈpɔnso/",
+      "family": [
+        "rispondere",
+        "risposta",
+        "responsivo"
+      ]
     },
     {
       "word": "PASCIÀ",
@@ -719,7 +1112,11 @@
         "visir",
         "satrapo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paʃˈʃa/",
+      "family": [
+        "pascialato"
+      ]
     },
     {
       "word": "CROCEVIA",
@@ -727,19 +1124,30 @@
       "synonyms": [
         "incrocio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/krot͡ʃeˈvia/",
+      "family": [
+        "croce",
+        "via"
+      ]
     },
     {
       "word": "CROQUET",
       "gloss": "gioco su prato in cui si spingono palle con mazze sotto archetti",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kroˈkɛ/"
     },
     {
       "word": "VENTENNE",
       "gloss": "persona che ha due decenni di età",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/venˈtɛnne/",
+      "family": [
+        "venti",
+        "ventennio"
+      ]
     },
     {
       "word": "MOTOCROSS",
@@ -747,19 +1155,33 @@
       "synonyms": [
         "fuoristrada"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "enduro"
+      ],
+      "ipa": "/ˌmɔtoˈkrɔs/"
     },
     {
       "word": "VENE",
       "gloss": "vasi che portano il sangue al cuore",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈvɛːne/",
+      "family": [
+        "vena",
+        "venoso",
+        "venatura"
+      ]
     },
     {
       "word": "MUSERUOLA",
       "gloss": "gabbietta messa sul muso del cane perché non morda",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muzeˈrwɔla/",
+      "family": [
+        "muso"
+      ]
     },
     {
       "word": "OUTSIDER",
@@ -767,7 +1189,8 @@
       "synonyms": [
         "estraneo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/awtˈsaɪdər/"
     },
     {
       "word": "APPIANARE",
@@ -775,7 +1198,13 @@
       "synonyms": [
         "livellare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/appjaˈnare/",
+      "family": [
+        "appianamento",
+        "appianatoia",
+        "appianatura"
+      ]
     },
     {
       "word": "MALMENARE",
@@ -783,7 +1212,11 @@
       "synonyms": [
         "picchiare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/malmeˈnare/",
+      "family": [
+        "malmenarsi"
+      ]
     },
     {
       "word": "LORDO",
@@ -791,7 +1224,11 @@
       "synonyms": [
         "sporco"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlordo/",
+      "family": [
+        "lordume"
+      ]
     },
     {
       "word": "ALTERNO",
@@ -799,7 +1236,13 @@
       "synonyms": [
         "intermittente"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/alˈtɛrno/",
+      "family": [
+        "alternare",
+        "subalterno",
+        "alternativa"
+      ]
     },
     {
       "word": "INFEROCITO",
@@ -807,7 +1250,11 @@
       "synonyms": [
         "furioso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iŋferoˈt͡ʃito/",
+      "family": [
+        "feroce"
+      ]
     },
     {
       "word": "VESSILLO",
@@ -815,13 +1262,23 @@
       "synonyms": [
         "bandiera"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vesˈsillo/",
+      "family": [
+        "vessillifero",
+        "vessillologo",
+        "vessillologia"
+      ]
     },
     {
       "word": "CARTONCINO",
       "gloss": "foglio rigido e spesso",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kartonˈt͡ʃino/",
+      "family": [
+        "cartone"
+      ]
     },
     {
       "word": "LUCRO",
@@ -829,7 +1286,12 @@
       "synonyms": [
         "guadagno"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈlukro/",
+      "family": [
+        "lucrosamente",
+        "lucroso"
+      ]
     },
     {
       "word": "CLOU",
@@ -837,7 +1299,8 @@
       "synonyms": [
         "culmine"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/klu/"
     },
     {
       "word": "PISTOLINO",
@@ -845,7 +1308,11 @@
       "synonyms": [
         "rivoltella"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pistoˈliːno/",
+      "family": [
+        "pistolotto"
+      ]
     },
     {
       "word": "BILIARDINO",
@@ -854,7 +1321,11 @@
         "calcetto",
         "subbuteo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/biljarˈdiːno/",
+      "family": [
+        "biliardo"
+      ]
     },
     {
       "word": "ERRARE",
@@ -862,7 +1333,12 @@
       "synonyms": [
         "sbagliare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/erˈrare/",
+      "family": [
+        "errabondo",
+        "erro"
+      ]
     },
     {
       "word": "FINEZZA",
@@ -870,7 +1346,13 @@
       "synonyms": [
         "eleganza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fiˈnettsa/",
+      "family": [
+        "leggiadria",
+        "buonsenso",
+        "apparenza"
+      ]
     },
     {
       "word": "AMPIEZZA",
@@ -878,7 +1360,12 @@
       "synonyms": [
         "larghezza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/amˈpjettsa/",
+      "family": [
+        "ampio",
+        "ampiamente"
+      ]
     },
     {
       "word": "CAPELLUTO",
@@ -886,7 +1373,12 @@
       "synonyms": [
         "chiomato"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kapelˈluto/",
+      "family": [
+        "capello",
+        "capigliatura"
+      ]
     },
     {
       "word": "CATTIVONE",
@@ -894,7 +1386,12 @@
       "synonyms": [
         "birbante"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kattiˈvoːne/",
+      "family": [
+        "cattivo",
+        "cattiveria"
+      ]
     },
     {
       "word": "RITORTO",
@@ -903,7 +1400,11 @@
         "contorto",
         "attorto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/riˈtorto/",
+      "family": [
+        "ritorcere"
+      ]
     },
     {
       "word": "INFO",
@@ -911,7 +1412,8 @@
       "synonyms": [
         "notizia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈinfo/"
     },
     {
       "word": "ECZEMA",
@@ -921,7 +1423,11 @@
         "eruzione",
         "infiammazione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "eczematoso"
+      ],
+      "ipa": "/ˈɛdzdema/"
     },
     {
       "word": "DECADE",
@@ -929,13 +1435,24 @@
       "synonyms": [
         "decennio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdɛkade/",
+      "family": [
+        "decennio",
+        "decadente"
+      ]
     },
     {
       "word": "RELATIVITÀ",
       "gloss": "teoria fisica su spazio, tempo e velocità della luce",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/relativiˈta/",
+      "family": [
+        "energia",
+        "massa",
+        "potenza"
+      ]
     },
     {
       "word": "PANETTIERE",
@@ -943,7 +1460,12 @@
       "synonyms": [
         "fornaio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/panetˈtjɛre/",
+      "family": [
+        "pane",
+        "panificio"
+      ]
     },
     {
       "word": "AGIATO",
@@ -951,7 +1473,11 @@
       "synonyms": [
         "ricco"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/aˈd͡ʒato/",
+      "family": [
+        "agiatezza"
+      ]
     },
     {
       "word": "DISTILLARE",
@@ -961,7 +1487,11 @@
         "purificare",
         "raffinare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/distilˈlare/",
+      "family": [
+        "distillarsi"
+      ]
     },
     {
       "word": "STRASCICO",
@@ -969,7 +1499,11 @@
       "synonyms": [
         "coda"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈstraʃʃiko/",
+      "family": [
+        "strascicare"
+      ]
     },
     {
       "word": "FILISTEO",
@@ -977,7 +1511,8 @@
       "synonyms": [
         "borghese"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/filiˈstɛo/"
     },
     {
       "word": "STELO",
@@ -986,13 +1521,18 @@
         "fusto",
         "gambo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈstɛlo/",
+      "family": [
+        "steli"
+      ]
     },
     {
       "word": "MOTOSLITTA",
       "gloss": "veicolo meccanico per la neve",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/motoˈzlitta/"
     },
     {
       "word": "ADESIONE",
@@ -1001,7 +1541,11 @@
         "appoggio",
         "sostegno"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/adeˈzjone/",
+      "family": [
+        "termoadesione"
+      ]
     },
     {
       "word": "TOPINO",
@@ -1010,7 +1554,11 @@
         "topolino",
         "sorcio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/toˈpino/",
+      "family": [
+        "topo"
+      ]
     },
     {
       "word": "IMPARTIRE",
@@ -1018,7 +1566,11 @@
       "synonyms": [
         "dare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/imparˈtiːre/",
+      "family": [
+        "parte"
+      ]
     },
     {
       "word": "MONSONE",
@@ -1027,7 +1579,11 @@
         "vento",
         "pioggia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/monˈsone/",
+      "family": [
+        "monsonico"
+      ]
     },
     {
       "word": "AGITATORE",
@@ -1036,7 +1592,12 @@
         "sobillatore",
         "incitatore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ad͡ʒitaˈtore/",
+      "family": [
+        "agitare",
+        "agitazione"
+      ]
     },
     {
       "word": "INIBIRE",
@@ -1044,7 +1605,12 @@
       "synonyms": [
         "bloccare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/iniˈbire/",
+      "family": [
+        "inibitorio",
+        "inibitore"
+      ]
     },
     {
       "word": "MICETTO",
@@ -1053,7 +1619,11 @@
         "gattino",
         "micio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈtʃetto/",
+      "family": [
+        "micio"
+      ]
     },
     {
       "word": "PERDIZIONE",
@@ -1061,7 +1631,11 @@
       "synonyms": [
         "rovina"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/perditˈt͡sjone/",
+      "family": [
+        "perdere"
+      ]
     },
     {
       "word": "FEDERARE",
@@ -1069,7 +1643,11 @@
       "synonyms": [
         "unire"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "federarsi"
+      ],
+      "ipa": "/fedeˈraːre/"
     },
     {
       "word": "DEGRADO",
@@ -1078,7 +1656,12 @@
         "decadenza",
         "deterioramento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/deˈɡraːdo/",
+      "family": [
+        "grado",
+        "degradare"
+      ]
     },
     {
       "word": "FORMICAIO",
@@ -1087,7 +1670,11 @@
         "nido",
         "colonia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/formiˈkajo/",
+      "family": [
+        "alveare"
+      ]
     },
     {
       "word": "BENEFIT",
@@ -1095,7 +1682,13 @@
       "synonyms": [
         "vantaggio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbɛnefit/",
+      "family": [
+        "benefico",
+        "benefattore",
+        "beneficiare"
+      ]
     },
     {
       "word": "DIOCESI",
@@ -1104,7 +1697,11 @@
         "vescovado",
         "episcopato"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/diˈɔt͡ʃez/",
+      "family": [
+        "diocesano"
+      ]
     },
     {
       "word": "HUMOUR",
@@ -1112,13 +1709,25 @@
       "synonyms": [
         "umorismo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈjumur/",
+      "family": [
+        "umorismo",
+        "umoristico",
+        "umorista"
+      ]
     },
     {
       "word": "MIGLIORIA",
       "gloss": "opera che rende più bello o utile un bene",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miʎʎoˈria/",
+      "family": [
+        "migliorare",
+        "migliore",
+        "miglioramento"
+      ]
     },
     {
       "word": "SERVILE",
@@ -1127,7 +1736,13 @@
         "ossequioso",
         "subalterno"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "servilismo",
+        "servilmente",
+        "servilità"
+      ],
+      "ipa": "/serˈvile/"
     },
     {
       "word": "INOLTRO",
@@ -1135,13 +1750,24 @@
       "synonyms": [
         "invio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/iˈnoltro/",
+      "family": [
+        "inoltrare",
+        "inoltrato"
+      ]
     },
     {
       "word": "IMBUSTARE",
       "gloss": "mettere una lettera in un involucro di carta",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/imbusˈtare/",
+      "family": [
+        "busta",
+        "imbustamento",
+        "imbustatrice"
+      ]
     },
     {
       "word": "GOCCIOLA",
@@ -1149,7 +1775,13 @@
       "synonyms": [
         "stilla"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡott͡ʃola/",
+      "family": [
+        "goccia",
+        "sgocciolare",
+        "sgocciolamento"
+      ]
     },
     {
       "word": "REDENTORE",
@@ -1158,7 +1790,12 @@
         "salvatore",
         "liberatore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/redenˈtore/",
+      "family": [
+        "redimere",
+        "redenzione"
+      ]
     },
     {
       "word": "EMERITO",
@@ -1167,7 +1804,12 @@
         "onorario",
         "distinto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/eˈmɛrito/",
+      "family": [
+        "merito",
+        "meritare"
+      ]
     },
     {
       "word": "QUADRIGLIA",
@@ -1176,13 +1818,24 @@
         "ballo",
         "danza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kwaˈdriʎʎa/",
+      "family": [
+        "quadro",
+        "quadrato"
+      ]
     },
     {
       "word": "ASPIRATORE",
       "gloss": "apparecchio che risucchia polvere o aria",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aspraˈtore/",
+      "family": [
+        "aspirare",
+        "aspirazione",
+        "aspirato"
+      ]
     },
     {
       "word": "MELOGRANO",
@@ -1190,7 +1843,11 @@
       "synonyms": [
         "melagrana"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/meloˈɡrano/",
+      "family": [
+        "melagrano"
+      ]
     },
     {
       "word": "EROSIONE",
@@ -1198,13 +1855,19 @@
       "synonyms": [
         "corrosione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eroˈzjone/",
+      "family": [
+        "erodere",
+        "erosivo"
+      ]
     },
     {
       "word": "SKINHEAD",
       "gloss": "giovane con testa rasata e stile aggressivo",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈskinɛd/"
     },
     {
       "word": "SEROTONINA",
@@ -1212,7 +1875,8 @@
       "synonyms": [
         "ormone"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/serotoˈnina/"
     },
     {
       "word": "LEGALITÀ",
@@ -1220,7 +1884,13 @@
       "synonyms": [
         "legge"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/leɡaliˈta/",
+      "family": [
+        "legale",
+        "legalitario",
+        "legalizzare"
+      ]
     },
     {
       "word": "VALIGETTA",
@@ -1228,7 +1898,11 @@
       "synonyms": [
         "ventiquattrore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/valiˈdʒetta/",
+      "family": [
+        "valigia"
+      ]
     },
     {
       "word": "RETTALE",
@@ -1236,7 +1910,12 @@
       "synonyms": [
         "anale"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/retˈtale/",
+      "family": [
+        "retto",
+        "rettilinea"
+      ]
     },
     {
       "word": "CICERONE",
@@ -1244,7 +1923,11 @@
       "synonyms": [
         "guida"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ciceroniano"
+      ],
+      "ipa": "/tʃitʃeˈrone/"
     },
     {
       "word": "UDENTE",
@@ -1252,7 +1935,13 @@
       "synonyms": [
         "ascoltatore"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/uˈdɛnte/",
+      "family": [
+        "udire",
+        "udito",
+        "udienza"
+      ]
     },
     {
       "word": "GRADASSO",
@@ -1260,13 +1949,22 @@
       "synonyms": [
         "spaccone"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡraˈdasso/",
+      "family": [
+        "gradassata"
+      ]
     },
     {
       "word": "QUINDICINA",
       "gloss": "circa due settimane; circa 15 unità",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kwindiˈt͡ʃina/",
+      "family": [
+        "quindici",
+        "quindicesimo"
+      ]
     },
     {
       "word": "LOMBO",
@@ -1274,7 +1972,12 @@
       "synonyms": [
         "fianco"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlombo/",
+      "family": [
+        "lombare",
+        "lombaggine"
+      ]
     },
     {
       "word": "RIDONDANTE",
@@ -1282,7 +1985,11 @@
       "synonyms": [
         "ripetitivo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ridonˈdante/",
+      "family": [
+        "ridondantemente"
+      ]
     },
     {
       "word": "CONIARE",
@@ -1290,7 +1997,13 @@
       "synonyms": [
         "battere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/koˈnjare/",
+      "family": [
+        "coniatore",
+        "traccia",
+        "fondare"
+      ]
     },
     {
       "word": "STATISTICO",
@@ -1298,7 +2011,13 @@
       "synonyms": [
         "numerico"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/staˈtistiko/",
+      "family": [
+        "lessicostatistico",
+        "statisticamente",
+        "attuario"
+      ]
     },
     {
       "word": "SETTICO",
@@ -1306,7 +2025,11 @@
       "synonyms": [
         "infetto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈsɛttiko/",
+      "family": [
+        "setticemia"
+      ]
     },
     {
       "word": "GOTO",
@@ -1314,7 +2037,12 @@
       "synonyms": [
         "bicchiere"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡɔto/",
+      "family": [
+        "ostrogoto",
+        "visigoto"
+      ]
     },
     {
       "word": "BASTIONE",
@@ -1322,7 +2050,11 @@
       "synonyms": [
         "muro"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/basˈtjone/",
+      "family": [
+        "bastionare"
+      ]
     },
     {
       "word": "ANIMALESCO",
@@ -1330,7 +2062,13 @@
       "synonyms": [
         "bestiale"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/animaˈlesko/",
+      "family": [
+        "animale",
+        "animalità",
+        "animalismo"
+      ]
     },
     {
       "word": "ASSEDIARE",
@@ -1338,7 +2076,12 @@
       "synonyms": [
         "circondare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/asseˈdjare/",
+      "family": [
+        "assedio",
+        "assediato"
+      ]
     },
     {
       "word": "AVVITARE",
@@ -1347,7 +2090,11 @@
         "stringere",
         "fissare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "avvitarsi"
+      ],
+      "ipa": "/avviˈtare/"
     },
     {
       "word": "SQUADRARE",
@@ -1355,7 +2102,11 @@
       "synonyms": [
         "scrutare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/skwaˈdrare/",
+      "family": [
+        "squadrato"
+      ]
     },
     {
       "word": "INANIMATO",
@@ -1363,7 +2114,13 @@
       "synonyms": [
         "morto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/inaniˈmaːto/",
+      "family": [
+        "anima",
+        "animato",
+        "animazione"
+      ]
     },
     {
       "word": "INDOSSALO",
@@ -1372,7 +2129,12 @@
         "mettilo",
         "portalo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/inˈdɔsːalo/",
+      "family": [
+        "indossare",
+        "indossato"
+      ]
     },
     {
       "word": "AMIDO",
@@ -1380,7 +2142,11 @@
       "synonyms": [
         "fecola"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈamido/",
+      "family": [
+        "inamidare"
+      ]
     },
     {
       "word": "SUBITA",
@@ -1388,7 +2154,12 @@
       "synonyms": [
         "patita"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/suˈbita/",
+      "family": [
+        "subire",
+        "sopportare"
+      ]
     },
     {
       "word": "LENE",
@@ -1396,7 +2167,12 @@
       "synonyms": [
         "dolce"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈlɛːne/",
+      "family": [
+        "lenire",
+        "lenitivo"
+      ]
     },
     {
       "word": "BISTRO",
@@ -1404,7 +2180,8 @@
       "synonyms": [
         "locale"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/bisˈtrɔ/"
     },
     {
       "word": "ACETONE",
@@ -1412,25 +2189,44 @@
       "synonyms": [
         "solvente"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/at͡ʃeˈtone/",
+      "family": [
+        "fenolo",
+        "solvente",
+        "smalto"
+      ]
     },
     {
       "word": "VIOLETTO",
       "gloss": "di colore tra blu e rosso",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/vjoˈletto/",
+      "family": [
+        "ultravioletto"
+      ]
     },
     {
       "word": "PARAOCCHIO",
       "gloss": "schermo laterale che limita la vista del cavallo",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paraˈɔkkjo/",
+      "family": [
+        "occhio",
+        "parare"
+      ]
     },
     {
       "word": "DEGNARE",
       "gloss": "ritenere meritevole di attenzione",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "degnarsi"
+      ],
+      "ipa": "/deɲˈɲare/"
     },
     {
       "word": "GUGLIA",
@@ -1438,7 +2234,11 @@
       "synonyms": [
         "punta"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "aguglia"
+      ],
+      "ipa": "/ˈɡuʎʎa/"
     },
     {
       "word": "OPTIONAL",
@@ -1446,13 +2246,18 @@
       "synonyms": [
         "accessorio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/opˈt͡sjonaɭ/"
     },
     {
       "word": "BRANCHIA",
       "gloss": "organo con cui i pesci respirano nell'acqua",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbrankja/",
+      "family": [
+        "branchiale"
+      ]
     },
     {
       "word": "TRIATHLON",
@@ -1460,13 +2265,23 @@
       "synonyms": [
         "gara"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtriatlon/",
+      "family": [
+        "pentathlon",
+        "decathlon"
+      ]
     },
     {
       "word": "BRONCHITE",
       "gloss": "infiammazione delle vie respiratorie",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bronchitico",
+        "tracheobronchite"
+      ],
+      "ipa": "/broŋˈkite/"
     },
     {
       "word": "CRINIERA",
@@ -1474,7 +2289,11 @@
       "synonyms": [
         "chioma"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kriˈnjɛra/",
+      "family": [
+        "crine"
+      ]
     },
     {
       "word": "CHARME",
@@ -1482,7 +2301,8 @@
       "synonyms": [
         "fascino"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈʃarm/"
     },
     {
       "word": "TESTUALE",
@@ -1490,7 +2310,11 @@
       "synonyms": [
         "letterale"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/testuˈale/",
+      "family": [
+        "testo"
+      ]
     },
     {
       "word": "TIPOGRAFO",
@@ -1498,7 +2322,12 @@
       "synonyms": [
         "stampatore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tiˈpɔɡrafo/",
+      "family": [
+        "tipografia",
+        "tipografico"
+      ]
     },
     {
       "word": "MACIGNO",
@@ -1506,7 +2335,8 @@
       "synonyms": [
         "pietra"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈt͡ʃiɲɲo/"
     },
     {
       "word": "GIUMENTA",
@@ -1514,13 +2344,22 @@
       "synonyms": [
         "cavalla"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d͡ʒuˈmenta/",
+      "family": [
+        "giumento"
+      ]
     },
     {
       "word": "VELLUTARE",
       "gloss": "dare un aspetto morbido e soffice",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/velluˈtare/",
+      "family": [
+        "velluto",
+        "vellutato"
+      ]
     },
     {
       "word": "CIMINIERA",
@@ -1528,7 +2367,8 @@
       "synonyms": [
         "camino"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t͡ʃimiˈnjɛra/"
     },
     {
       "word": "IMBRATTARE",
@@ -1536,7 +2376,11 @@
       "synonyms": [
         "sporcare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/imbratˈtare/",
+      "family": [
+        "imbrattarsi"
+      ]
     },
     {
       "word": "AFFIATARE",
@@ -1544,7 +2388,12 @@
       "synonyms": [
         "armonizzare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/affjaˈtare/",
+      "family": [
+        "affiatato",
+        "affiatamento"
+      ]
     },
     {
       "word": "SOCIETARIO",
@@ -1552,7 +2401,11 @@
       "synonyms": [
         "aziendale"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/sot͡ʃeˈtarjo/",
+      "family": [
+        "società"
+      ]
     },
     {
       "word": "FLUTTO",
@@ -1560,7 +2413,12 @@
       "synonyms": [
         "onda"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈflutto/",
+      "family": [
+        "fluttuare",
+        "fluttuante"
+      ]
     },
     {
       "word": "ANNODARE",
@@ -1568,7 +2426,12 @@
       "synonyms": [
         "legare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/annoˈdare/",
+      "family": [
+        "annodarsi",
+        "annodatura"
+      ]
     },
     {
       "word": "INDUZIONE",
@@ -1576,7 +2439,11 @@
       "synonyms": [
         "stimolo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/induˈtsjone/",
+      "family": [
+        "autoinduzione"
+      ]
     },
     {
       "word": "MALORE",
@@ -1584,7 +2451,11 @@
       "synonyms": [
         "svenimento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈlore/",
+      "family": [
+        "male"
+      ]
     },
     {
       "word": "SBOLLIRE",
@@ -1592,7 +2463,12 @@
       "synonyms": [
         "calmare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/zboˈlːire/",
+      "family": [
+        "bollire",
+        "bollente"
+      ]
     },
     {
       "word": "SUGGERITA",
@@ -1600,7 +2476,12 @@
       "synonyms": [
         "proposta"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sudd͡ʒeˈrita/",
+      "family": [
+        "suggerire",
+        "suggerimento"
+      ]
     },
     {
       "word": "AMMASSO",
@@ -1608,7 +2489,11 @@
       "synonyms": [
         "mucchio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/amˈmasso/",
+      "family": [
+        "ammassato"
+      ]
     },
     {
       "word": "APPUNTITO",
@@ -1616,13 +2501,22 @@
       "synonyms": [
         "aguzzo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/appunˈtito/",
+      "family": [
+        "appuntare"
+      ]
     },
     {
       "word": "SALAMOIA",
       "gloss": "acqua con molto sale per conservare cibi",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/salaˈmɔja/",
+      "family": [
+        "sale",
+        "salamoiare"
+      ]
     },
     {
       "word": "EMOGLOBINA",
@@ -1631,7 +2525,12 @@
         "proteina",
         "pigmento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛmoɡloˈbina/",
+      "family": [
+        "globulo",
+        "globulina"
+      ]
     },
     {
       "word": "QUARZO",
@@ -1640,7 +2539,13 @@
         "minerale",
         "cristallo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwartso/",
+      "family": [
+        "quarzifero",
+        "quarzite",
+        "quarzoso"
+      ]
     },
     {
       "word": "ZOTICO",
@@ -1649,7 +2554,13 @@
         "rozzo",
         "villano"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdzɔtiko/",
+      "family": [
+        "zotichezza",
+        "zoticaggine",
+        "zoticone"
+      ]
     },
     {
       "word": "ESULTANZA",
@@ -1658,7 +2569,11 @@
         "gioia",
         "allegria"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ezulˈtantsa/",
+      "family": [
+        "esultare"
+      ]
     },
     {
       "word": "PIÈ",
@@ -1666,7 +2581,8 @@
       "synonyms": [
         "piede"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpje/"
     },
     {
       "word": "PAPILLA",
@@ -1675,7 +2591,11 @@
         "rilievo",
         "protuberanza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈpilla/",
+      "family": [
+        "papilloso"
+      ]
     },
     {
       "word": "URLANTE",
@@ -1683,19 +2603,34 @@
       "synonyms": [
         "ululante"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/urˈlante/",
+      "family": [
+        "urlare",
+        "urlatore"
+      ]
     },
     {
       "word": "DURISSIMO",
       "gloss": "estremamente resistente",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/duˈrissimo/",
+      "family": [
+        "duro",
+        "durezza"
+      ]
     },
     {
       "word": "MUSONE",
       "gloss": "persona di cattivo umore",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/muˈzone/",
+      "family": [
+        "immusonirsi",
+        "muso"
+      ]
     },
     {
       "word": "RISANARE",
@@ -1704,7 +2639,12 @@
         "guarire",
         "curare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/risaˈnare/",
+      "family": [
+        "sanare",
+        "risanamento"
+      ]
     },
     {
       "word": "GRETTO",
@@ -1713,24 +2653,47 @@
         "avaro",
         "tirchio"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈɡretto/",
+      "family": [
+        "gretteria",
+        "grettezza",
+        "sgradevole"
+      ]
     },
     {
       "word": "ADULATORE",
       "gloss": "che loda in modo eccessivo",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/adulaˈtore/",
+      "family": [
+        "adulazione",
+        "adulare",
+        "adulabile"
+      ]
     },
     {
       "word": "CARRARMATO",
       "gloss": "veicolo corazzato da combattimento",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/karraˈmato/",
+      "family": [
+        "carro",
+        "armato"
+      ]
     },
     {
       "word": "RUFFIANO",
       "gloss": "un individuo che cerca di ingraziarsi qualcuno per ottenere favori.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/rufˈfjano/",
+      "family": [
+        "arruffianare",
+        "ruffianesco",
+        "ruffianeria"
+      ]
     },
     {
       "word": "CIBARE",
@@ -1739,55 +2702,98 @@
         "nutrire",
         "sfamare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t͡ʃiˈbare/",
+      "family": [
+        "cibarsi"
+      ]
     },
     {
       "word": "STANZIARE",
       "gloss": "destinare una somma di denaro a un uso specifico.",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/stanˈtsjare/",
+      "family": [
+        "stanziarsi",
+        "stanziamento"
+      ]
     },
     {
       "word": "ACERRIMO",
       "gloss": "molto intenso e implacabile.",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/aˈt͡ʃɛrrimo/",
+      "family": [
+        "acerrimamente"
+      ]
     },
     {
       "word": "SIMULTANEO",
       "gloss": "che avviene nello stesso momento.",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/simulˈtaneo/",
+      "family": [
+        "simultaneamente",
+        "simultaneità"
+      ]
     },
     {
       "word": "ANATOMICO",
       "gloss": "relativo alla struttura del corpo.",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/anaˈtɔmiko/",
+      "family": [
+        "anatomicamente",
+        "anatomia",
+        "anatomista"
+      ]
     },
     {
       "word": "VISITATO",
       "gloss": "che è stato visto o esaminato da qualcuno.",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/viziˈtato/",
+      "family": [
+        "visitare",
+        "visitatore"
+      ]
     },
     {
       "word": "FANALINO",
       "gloss": "piccola luce posta sul retro di un veicolo.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fanaˈlino/",
+      "family": [
+        "fanale",
+        "fanaleria"
+      ]
     },
     {
       "word": "BOROTALCO",
       "gloss": "polvere fine usata per lenire la pelle.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/boroˈtalko/",
+      "family": [
+        "borace",
+        "talco"
+      ]
     },
     {
       "word": "CALLA",
       "gloss": "fiore bianco a forma di tromba.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/calle/",
+      "family": [
+        "calice"
+      ]
     },
     {
       "word": "NETTAMENTE",
@@ -1796,7 +2802,11 @@
         "chiaramente",
         "evidentemente"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/nettaˈmente/",
+      "family": [
+        "netto"
+      ]
     },
     {
       "word": "INFIERIRE",
@@ -1805,7 +2815,11 @@
         "infuriare",
         "scatenarsi"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/infjeˈrire/",
+      "family": [
+        "fiero"
+      ]
     },
     {
       "word": "FRAC",
@@ -1814,7 +2828,8 @@
         "marsina",
         "tight"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/frak/"
     },
     {
       "word": "SUPPLIZIO",
@@ -1823,7 +2838,11 @@
         "martirio",
         "tormento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/supˈplitsjo/",
+      "family": [
+        "suppliziare"
+      ]
     },
     {
       "word": "LEASING",
@@ -1832,7 +2851,8 @@
         "locazione",
         "affitto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlizinɡ/"
     },
     {
       "word": "WORKSHOP",
@@ -1841,13 +2861,15 @@
         "laboratorio",
         "seminario"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈwɔrkʃɔp/"
     },
     {
       "word": "TAPIOCA",
       "gloss": "amido ricavato dalla manioca.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/taˈpjoka/"
     },
     {
       "word": "SBLOCCO",
@@ -1855,7 +2877,12 @@
       "synonyms": [
         "liberazione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ottimizzazione",
+        "ricostruzione"
+      ],
+      "ipa": "/ˈzblokko/"
     },
     {
       "word": "OSTENTARE",
@@ -1864,7 +2891,12 @@
         "mostrare",
         "sfoggiare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ostenˈtare/",
+      "family": [
+        "ostentazione",
+        "ostentato"
+      ]
     },
     {
       "word": "CUFFIETTA",
@@ -1872,7 +2904,11 @@
       "synonyms": [
         "cappellino"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kufˈfjetta/",
+      "family": [
+        "cuffia"
+      ]
     },
     {
       "word": "MESSAGGINO",
@@ -1881,7 +2917,12 @@
         "sms",
         "notifica"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/messadˈdʒino/",
+      "family": [
+        "messaggio",
+        "messaggistica"
+      ]
     },
     {
       "word": "SPOCCHIOSO",
@@ -1890,7 +2931,11 @@
         "arrogante",
         "borioso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/spokˈkjozo/",
+      "family": [
+        "esuberante"
+      ]
     },
     {
       "word": "PROFESSARE",
@@ -1899,7 +2944,11 @@
         "dichiarare",
         "affermare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/profesˈsare/",
+      "family": [
+        "professarsi"
+      ]
     },
     {
       "word": "SGUSCIARE",
@@ -1907,7 +2956,12 @@
       "synonyms": [
         "scivolare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/zɡuʃˈʃare/",
+      "family": [
+        "sguscio",
+        "sgusciatura"
+      ]
     },
     {
       "word": "MARITARE",
@@ -1916,7 +2970,13 @@
         "sposare",
         "unire"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mariˈtare/",
+      "family": [
+        "maritarsi",
+        "maritato",
+        "rimaritare"
+      ]
     },
     {
       "word": "AGGUERRITO",
@@ -1925,7 +2985,12 @@
         "preparato",
         "forte"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/aɡɡwerˈrito/",
+      "family": [
+        "guerra",
+        "agguato"
+      ]
     },
     {
       "word": "BRUNO",
@@ -1934,13 +2999,24 @@
         "scuro",
         "nero"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbruno/",
+      "family": [
+        "brunito",
+        "brunastro",
+        "brunetto"
+      ]
     },
     {
       "word": "SALMONELLA",
       "gloss": "batterio che causa infezioni intestinali.",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/salmoˈnɛlla/",
+      "family": [
+        "salmo",
+        "salmonellosi"
+      ]
     },
     {
       "word": "VENTATA",
@@ -1949,7 +3025,12 @@
         "raffica",
         "folata"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/venˈtata/",
+      "family": [
+        "vento",
+        "ventilare"
+      ]
     },
     {
       "word": "MAGMA",
@@ -1958,7 +3039,8 @@
         "lava",
         "materiale"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmaɡma/"
     },
     {
       "word": "BALLETTO",
@@ -1967,7 +3049,11 @@
         "danza",
         "coreografia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/balˈletto/",
+      "family": [
+        "ballettistico"
+      ]
     },
     {
       "word": "PENALISTA",
@@ -1976,7 +3062,13 @@
         "avvocato",
         "difensore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pe.naˈli.sta/",
+      "family": [
+        "penale",
+        "penalità",
+        "penalizzare"
+      ]
     },
     {
       "word": "ONTA",
@@ -1985,7 +3077,12 @@
         "vergogna",
         "disonore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈonta/",
+      "family": [
+        "ontoso",
+        "imbarazzo"
+      ]
     },
     {
       "word": "OCCUPANTE",
@@ -1994,13 +3091,25 @@
         "inquilino",
         "abitante"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/okkuˈpante/",
+      "family": [
+        "occupare",
+        "occupazione",
+        "occupato"
+      ]
     },
     {
       "word": "TAGLIOLINO",
       "gloss": "pasta sottile a strisce",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/taʎ.ʎoˈli.no/",
+      "family": [
+        "tagliare",
+        "tagliatelle",
+        "taglio"
+      ]
     },
     {
       "word": "TUGURIO",
@@ -2009,7 +3118,8 @@
         "capanna",
         "baracca"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tuˈɡurjo/"
     },
     {
       "word": "MALACCIO",
@@ -2017,7 +3127,13 @@
       "synonyms": [
         "disturbo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maˈlat.tʃo/",
+      "family": [
+        "male",
+        "malato",
+        "malessere"
+      ]
     },
     {
       "word": "DUOMO",
@@ -2026,7 +3142,13 @@
         "cattedrale",
         "tempio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdwɔmo/",
+      "family": [
+        "cattedrale",
+        "cattedra",
+        "mentre"
+      ]
     },
     {
       "word": "PIERROT",
@@ -2035,7 +3157,8 @@
         "pagliaccio",
         "maschera"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pjɛrˈro/"
     },
     {
       "word": "PARVENZA",
@@ -2044,7 +3167,13 @@
         "apparenza",
         "sembianza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/parˈvɛntsa/",
+      "family": [
+        "parere",
+        "apparenza",
+        "sembianza"
+      ]
     },
     {
       "word": "BRICCONE",
@@ -2053,7 +3182,12 @@
         "mascalzone",
         "furbo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/brikˈkone/",
+      "family": [
+        "briccona",
+        "bricconcello"
+      ]
     },
     {
       "word": "RUDERE",
@@ -2062,7 +3196,11 @@
         "rovina",
         "relitto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrudere/",
+      "family": [
+        "rovinare"
+      ]
     },
     {
       "word": "INDISCUSSO",
@@ -2071,7 +3209,12 @@
         "incontestato",
         "certo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/indisˈkusso/",
+      "family": [
+        "discutere",
+        "indiscutibile"
+      ]
     },
     {
       "word": "TRAVIARE",
@@ -2080,7 +3223,12 @@
         "deviare",
         "corrompere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/traˈvjare/",
+      "family": [
+        "traviarsi",
+        "traviatore"
+      ]
     },
     {
       "word": "TEGAME",
@@ -2089,7 +3237,8 @@
         "padella",
         "casseruola"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/teˈɡame/"
     },
     {
       "word": "SPULCIARE",
@@ -2098,7 +3247,12 @@
         "pulire",
         "ripulire"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/spulˈtʃa.re/",
+      "family": [
+        "pulce",
+        "spulciatura"
+      ]
     },
     {
       "word": "AZZERARE",
@@ -2106,7 +3260,12 @@
       "synonyms": [
         "annullare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/addzeˈrare/",
+      "family": [
+        "azzeramento",
+        "resettare"
+      ]
     },
     {
       "word": "UNCINO",
@@ -2115,7 +3274,11 @@
         "gancio",
         "amo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/unˈt͡ʃino/",
+      "family": [
+        "adunco"
+      ]
     },
     {
       "word": "SCIATTARE",
@@ -2124,7 +3287,13 @@
         "trascurare",
         "trasandare"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʃatˈta.re/",
+      "family": [
+        "sciatto",
+        "sciatteria",
+        "sciattamente"
+      ]
     },
     {
       "word": "FUORVIANTE",
@@ -2133,7 +3302,12 @@
         "ingannevole",
         "falso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "erroneo",
+        "forviante"
+      ],
+      "ipa": "/fwo.rviˈan.te/"
     },
     {
       "word": "ABILMENTE",
@@ -2141,7 +3315,12 @@
       "synonyms": [
         "con destrezza"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/aˈbil.ˈmen.te/",
+      "family": [
+        "abile",
+        "abilità"
+      ]
     },
     {
       "word": "NADIR",
@@ -2150,13 +3329,19 @@
         "punto più basso",
         "minimo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/naˈdir/"
     },
     {
       "word": "RASATURA",
       "gloss": "il togliere barba o peli con il rasoio",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/raˈza.tu.ra/",
+      "family": [
+        "rasoio",
+        "rasare"
+      ]
     },
     {
       "word": "PREMILO",
@@ -2164,7 +3349,13 @@
       "synonyms": [
         "schiaccialo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/preˈmi.lo/",
+      "family": [
+        "premere",
+        "premuto",
+        "premitura"
+      ]
     },
     {
       "word": "TRILOGIA",
@@ -2172,7 +3363,11 @@
       "synonyms": [
         "serie di tre"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/triloˈd͡ʒia/",
+      "family": [
+        "tetralogia"
+      ]
     },
     {
       "word": "INFERIRE",
@@ -2181,7 +3376,12 @@
         "dedurre",
         "concludere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/infeˈrire/",
+      "family": [
+        "inferenza",
+        "infierire"
+      ]
     },
     {
       "word": "PUNTAMENTO",
@@ -2189,13 +3389,22 @@
       "synonyms": [
         "mirare"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pun.taˈmen.to/",
+      "family": [
+        "punto",
+        "puntare"
+      ]
     },
     {
       "word": "TAMBURELLO",
       "gloss": "strumento a percussione con membrana tesa su un telaio circolare",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tambuˈrɛllo/",
+      "family": [
+        "tamburellare"
+      ]
     },
     {
       "word": "BOREALE",
@@ -2204,7 +3413,11 @@
         "settentrionale",
         "del nord"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/boreˈale/",
+      "family": [
+        "borea"
+      ]
     },
     {
       "word": "BANALITÀ",
@@ -2212,7 +3425,12 @@
       "synonyms": [
         "ovvietà"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/banaliˈta/",
+      "family": [
+        "banale",
+        "ordinarietà"
+      ]
     },
     {
       "word": "DIAGONALE",
@@ -2220,7 +3438,11 @@
       "synonyms": [
         "obliquo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/di.aˈɡo.na.le/",
+      "family": [
+        "diagonalmente"
+      ]
     },
     {
       "word": "TORMENTONE",
@@ -2228,7 +3450,13 @@
       "synonyms": [
         "canzone famosa"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tor.menˈto.ne/",
+      "family": [
+        "tormento",
+        "tormentare",
+        "tormentoso"
+      ]
     },
     {
       "word": "AFFINITÀ",
@@ -2236,13 +3464,18 @@
       "synonyms": [
         "somiglianza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/affiniˈta/",
+      "family": [
+        "elettroaffinità"
+      ]
     },
     {
       "word": "RAD",
       "gloss": "unità di misura della radiazione assorbita",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/rad/"
     },
     {
       "word": "PUERILE",
@@ -2250,7 +3483,11 @@
       "synonyms": [
         "infantile"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pweˈrile/",
+      "family": [
+        "puerilità"
+      ]
     },
     {
       "word": "INSORGERE",
@@ -2258,7 +3495,13 @@
       "synonyms": [
         "ribellarsi"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/inˈsord͡ʒere/",
+      "family": [
+        "insorto",
+        "insorgente",
+        "insorgenza"
+      ]
     },
     {
       "word": "CAPOCCIONE",
@@ -2267,7 +3510,12 @@
         "testone",
         "testardo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ka.potˈtʃo.ne/",
+      "family": [
+        "capo",
+        "cocciuto"
+      ]
     },
     {
       "word": "SFORARE",
@@ -2275,7 +3523,12 @@
       "synonyms": [
         "sconfinare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/sfoˈrare/",
+      "family": [
+        "fuori",
+        "sforamento"
+      ]
     },
     {
       "word": "SORTILEGIO",
@@ -2283,7 +3536,8 @@
       "synonyms": [
         "incantesimo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sor.ti.ˈlɛː.d͡ʒo/"
     },
     {
       "word": "INGRANARE",
@@ -2291,7 +3545,12 @@
       "synonyms": [
         "innestare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/inɡraˈnare/",
+      "family": [
+        "ingranaggio",
+        "ingranamento"
+      ]
     },
     {
       "word": "SPEZZONE",
@@ -2299,7 +3558,13 @@
       "synonyms": [
         "frammento"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/spetˈtsone/",
+      "family": [
+        "spezzare",
+        "spezzato",
+        "spezzatura"
+      ]
     },
     {
       "word": "AZALEA",
@@ -2307,7 +3572,8 @@
       "synonyms": [
         "pianta"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/addzaˈlɛa/"
     },
     {
       "word": "CURVARE",
@@ -2315,7 +3581,13 @@
       "synonyms": [
         "piegare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kurˈvaːre/",
+      "family": [
+        "curvatrice",
+        "ricurvare",
+        "curvarsi"
+      ]
     },
     {
       "word": "RICEVENTE",
@@ -2323,13 +3595,21 @@
       "synonyms": [
         "destinatario"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "radioricevente"
+      ],
+      "ipa": "/ritʃeˈvente/"
     },
     {
       "word": "MAIUSCOLO",
       "gloss": "detto di lettera grande, come quella all'inizio della frase",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/maˈjuskolo/",
+      "family": [
+        "minuscolo"
+      ]
     },
     {
       "word": "TRIONFANTE",
@@ -2337,7 +3617,13 @@
       "synonyms": [
         "vittorioso"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/trionˈfante/",
+      "family": [
+        "trionfo",
+        "trionfare",
+        "trionfale"
+      ]
     },
     {
       "word": "CANCELLALO",
@@ -2345,25 +3631,46 @@
       "synonyms": [
         "elimina"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kantʃelˈlaːlo/",
+      "family": [
+        "cancellare",
+        "cancellazione",
+        "cancelleria"
+      ]
     },
     {
       "word": "BRODAGLIA",
       "gloss": "cibo liquido e poco denso, poco appetitoso",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/broˈdaʎʎa/",
+      "family": [
+        "brodo",
+        "brodetto"
+      ]
     },
     {
       "word": "CARTIERA",
       "gloss": "stabilimento dove si producono fogli",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/karˈtjɛra/",
+      "family": [
+        "carta"
+      ]
     },
     {
       "word": "GUARDIOLA",
       "gloss": "piccolo locale del portiere",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡwarˈdjoːla/",
+      "family": [
+        "guardia",
+        "guardiano",
+        "guardare"
+      ]
     },
     {
       "word": "TRAPUNTARE",
@@ -2371,7 +3678,13 @@
       "synonyms": [
         "imbottire"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/trapunˈtaːre/",
+      "family": [
+        "trapunta",
+        "trapuntato",
+        "trapuntatura"
+      ]
     },
     {
       "word": "ATEO",
@@ -2379,7 +3692,13 @@
       "synonyms": [
         "senza dio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈateo/",
+      "family": [
+        "ateista",
+        "ateismo",
+        "negare"
+      ]
     },
     {
       "word": "VENTURA",
@@ -2387,7 +3706,12 @@
       "synonyms": [
         "fortuna"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/venˈtura/",
+      "family": [
+        "avventura",
+        "avventuroso"
+      ]
     },
     {
       "word": "UNANIMITÀ",
@@ -2395,7 +3719,12 @@
       "synonyms": [
         "accordo totale"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/unanimiˈta/",
+      "family": [
+        "parti",
+        "onnicomprensivo"
+      ]
     },
     {
       "word": "REPERIRE",
@@ -2403,7 +3732,12 @@
       "synonyms": [
         "trovare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/repeˈrire/",
+      "family": [
+        "reperibile",
+        "reperimento"
+      ]
     },
     {
       "word": "RADIALE",
@@ -2411,7 +3745,12 @@
       "synonyms": [
         "a raggio"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/raˈdjale/",
+      "family": [
+        "raggio",
+        "radiare"
+      ]
     },
     {
       "word": "CAUSTICO",
@@ -2419,7 +3758,13 @@
       "synonyms": [
         "mordace"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈkaustiko/",
+      "family": [
+        "causticamente",
+        "causticità",
+        "malevolo"
+      ]
     },
     {
       "word": "BRACA",
@@ -2427,7 +3772,13 @@
       "synonyms": [
         "pantalone"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbraːka/",
+      "family": [
+        "brache",
+        "braghe",
+        "braghette"
+      ]
     },
     {
       "word": "INCONSUETO",
@@ -2435,7 +3786,13 @@
       "synonyms": [
         "insolito"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/iŋkonsuˈɛto/",
+      "family": [
+        "consueto",
+        "consuetudine",
+        "abituato"
+      ]
     },
     {
       "word": "BESTIOLA",
@@ -2443,7 +3800,12 @@
       "synonyms": [
         "piccolo animale"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/besˈtjɔla/",
+      "family": [
+        "bestia",
+        "bestiale"
+      ]
     },
     {
       "word": "DECIMARE",
@@ -2451,7 +3813,12 @@
       "synonyms": [
         "ridurre molto"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/det͡ʃiˈmare/",
+      "family": [
+        "decimarsi",
+        "decimazione"
+      ]
     },
     {
       "word": "BATUFFOLO",
@@ -2459,7 +3826,11 @@
       "synonyms": [
         "pallina"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baˈtuffolo/",
+      "family": [
+        "batuffoletto"
+      ]
     },
     {
       "word": "VAMPATA",
@@ -2467,7 +3838,11 @@
       "synonyms": [
         "ondata di calore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vamˈpata/",
+      "family": [
+        "vampa"
+      ]
     },
     {
       "word": "MALFATTORE",
@@ -2475,7 +3850,12 @@
       "synonyms": [
         "criminale"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/malfatˈtore/",
+      "family": [
+        "malefatta",
+        "malfatto"
+      ]
     },
     {
       "word": "MIETERE",
@@ -2483,7 +3863,13 @@
       "synonyms": [
         "raccogliere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈmjɛtere/",
+      "family": [
+        "mietitura",
+        "mietitore",
+        "mietitrice"
+      ]
     },
     {
       "word": "TRAMUTARE",
@@ -2491,13 +3877,24 @@
       "synonyms": [
         "trasformare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/tramuˈtare/",
+      "family": [
+        "tramutazione",
+        "tramutamento"
+      ]
     },
     {
       "word": "CAVOLETTO",
       "gloss": "piccola verdura verde a forma di palla, usata in cucina",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kavoˈletto/",
+      "family": [
+        "cavolo",
+        "cavolfiore",
+        "cavolata"
+      ]
     },
     {
       "word": "ANTIPATIA",
@@ -2505,7 +3902,11 @@
       "synonyms": [
         "avversione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/antipaˈtia/",
+      "family": [
+        "antipatico"
+      ]
     },
     {
       "word": "TELEMETRIA",
@@ -2513,7 +3914,13 @@
       "synonyms": [
         "misurazione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/telemeˈtria/",
+      "family": [
+        "telemetro",
+        "telemetrico",
+        "telemetrare"
+      ]
     },
     {
       "word": "ANTIFONA",
@@ -2521,7 +3928,11 @@
       "synonyms": [
         "versetto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/anˈtifona/",
+      "family": [
+        "antifonario"
+      ]
     },
     {
       "word": "NONCURANZA",
@@ -2529,7 +3940,11 @@
       "synonyms": [
         "indifferenza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "trasandatezza"
+      ],
+      "ipa": "/nonkuˈrantsa/"
     },
     {
       "word": "PALESTRA",
@@ -2537,7 +3952,11 @@
       "synonyms": [
         "palazzetto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈlɛstra/",
+      "family": [
+        "palestrato"
+      ]
     },
     {
       "word": "POPOLATO",
@@ -2545,7 +3964,13 @@
       "synonyms": [
         "abitato"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/popoˈlaːto/",
+      "family": [
+        "popolo",
+        "popolazione",
+        "popolare"
+      ]
     },
     {
       "word": "POPÒ",
@@ -2553,7 +3978,11 @@
       "synonyms": [
         "feci"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "poppò"
+      ],
+      "ipa": "/poˈpɔ/"
     },
     {
       "word": "EROTISMO",
@@ -2561,7 +3990,11 @@
       "synonyms": [
         "sensualità"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eroˈtizmo/",
+      "family": [
+        "autoerotismo"
+      ]
     },
     {
       "word": "GRADINATA",
@@ -2569,7 +4002,11 @@
       "synonyms": [
         "scalinata"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡradiˈnata/",
+      "family": [
+        "gradino"
+      ]
     },
     {
       "word": "RECITA",
@@ -2577,7 +4014,13 @@
       "synonyms": [
         "spettacolo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrɛt͡ʃita/",
+      "family": [
+        "recitare",
+        "recitazione",
+        "recitativo"
+      ]
     },
     {
       "word": "RISERBO",
@@ -2585,7 +4028,13 @@
       "synonyms": [
         "discrezione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/riˈsɛrbo/",
+      "family": [
+        "riservare",
+        "riservato",
+        "riservatezza"
+      ]
     },
     {
       "word": "CHOC",
@@ -2593,7 +4042,11 @@
       "synonyms": [
         "sorpresa"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈʃɔk/",
+      "family": [
+        "shock"
+      ]
     },
     {
       "word": "FLUTTUANTE",
@@ -2601,7 +4054,12 @@
       "synonyms": [
         "incerto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/flutˈtwan.te/",
+      "family": [
+        "fluttuare",
+        "fluttuazione"
+      ]
     },
     {
       "word": "BASSOTTO",
@@ -2609,7 +4067,11 @@
       "synonyms": [
         "cane"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/basˈsɔtto/",
+      "family": [
+        "basso"
+      ]
     },
     {
       "word": "ANNAFFIARE",
@@ -2617,7 +4079,13 @@
       "synonyms": [
         "innaffiare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/annafˈfjare/",
+      "family": [
+        "annaffiatoio",
+        "annaffiata",
+        "innaffiare"
+      ]
     },
     {
       "word": "DIAVOLERIA",
@@ -2625,13 +4093,22 @@
       "synonyms": [
         "bricconata"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/djavoleˈria/",
+      "family": [
+        "diavolo",
+        "diavolerie"
+      ]
     },
     {
       "word": "MORSETTO",
       "gloss": "piccolo attrezzo per stringere o fissare oggetti",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/morˈsetto/",
+      "family": [
+        "morsettiera"
+      ]
     },
     {
       "word": "CANTERINO",
@@ -2639,7 +4116,13 @@
       "synonyms": [
         "canoro"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kan.teˈri.no/",
+      "family": [
+        "cantare",
+        "cantante",
+        "canzone"
+      ]
     },
     {
       "word": "MISFATTO",
@@ -2647,7 +4130,11 @@
       "synonyms": [
         "delitto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈsfatto/",
+      "family": [
+        "fatto"
+      ]
     },
     {
       "word": "RAPIDITÀ",
@@ -2655,7 +4142,12 @@
       "synonyms": [
         "velocità"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/rapidiˈta/",
+      "family": [
+        "rapido",
+        "rapidamente"
+      ]
     },
     {
       "word": "IMPACCIARE",
@@ -2663,7 +4155,12 @@
       "synonyms": [
         "ingombrare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/im.patˈtʃa.re/",
+      "family": [
+        "impaccio",
+        "impacciato"
+      ]
     },
     {
       "word": "GHINGHERI",
@@ -2671,12 +4168,19 @@
       "synonyms": [
         "abiti"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈɡin.ɡe.ri/"
     },
     {
       "word": "SOLFARE",
       "gloss": "trattare con lo zolfo",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/solˈfa.re/",
+      "family": [
+        "zolfo",
+        "solfato",
+        "solfuro"
+      ]
     },
     {
       "word": "COMITIVA",
@@ -2684,7 +4188,8 @@
       "synonyms": [
         "gruppo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/komiˈtiva/"
     },
     {
       "word": "RITEGNO",
@@ -2692,7 +4197,13 @@
       "synonyms": [
         "controllo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/riˈteɲɲo/",
+      "family": [
+        "ritenere",
+        "ritenuto",
+        "ritenzione"
+      ]
     },
     {
       "word": "AMMIRAGLIA",
@@ -2700,7 +4211,12 @@
       "synonyms": [
         "nave"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ammiˈraʎʎa/",
+      "family": [
+        "ammiraglio",
+        "ammiragliato"
+      ]
     },
     {
       "word": "MICROFILM",
@@ -2708,7 +4224,11 @@
       "synonyms": [
         "pellicola"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mikroˈfilm/",
+      "family": [
+        "microfilmare"
+      ]
     },
     {
       "word": "TEMPRA",
@@ -2716,7 +4236,11 @@
       "synonyms": [
         "carattere"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtɛmpra/",
+      "family": [
+        "temprare"
+      ]
     },
     {
       "word": "RETRIBUIRE",
@@ -2724,19 +4248,36 @@
       "synonyms": [
         "pagare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/retribuˈire/",
+      "family": [
+        "retribuzione",
+        "retributivo"
+      ]
     },
     {
       "word": "IGIENISTA",
       "gloss": "esperto di pulizia e prevenzione sanitaria",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/i.dʒeˈni.sta/",
+      "family": [
+        "igiene",
+        "igienico",
+        "igienizzare"
+      ]
     },
     {
       "word": "CORRETTORE",
       "gloss": "fluido usato per coprire errori di scrittura",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kor.reˈto.re/",
+      "family": [
+        "correggere",
+        "corretto",
+        "correzione"
+      ]
     },
     {
       "word": "MANIERO",
@@ -2744,7 +4285,12 @@
       "synonyms": [
         "castello"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/maˈnjɛro/",
+      "family": [
+        "manieroso",
+        "manierismo"
+      ]
     },
     {
       "word": "DOMO",
@@ -2753,13 +4299,23 @@
         "sottomesso",
         "ammansito"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdomo/",
+      "family": [
+        "domare",
+        "domato",
+        "dominare"
+      ]
     },
     {
       "word": "MACH",
       "gloss": "unità di misura della velocità rispetto al suono",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mak/",
+      "family": [
+        "machmetro"
+      ]
     },
     {
       "word": "FORFAIT",
@@ -2768,19 +4324,25 @@
         "abbonamento",
         "pacchetto"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/forˈfɛ/"
     },
     {
       "word": "PREPUZIO",
       "gloss": "piega cutanea che ricopre il glande",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/preˈputtsjo/",
+      "family": [
+        "prepuziale"
+      ]
     },
     {
       "word": "SALOPETTE",
       "gloss": "tuta da lavoro con bretelle",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sa.loˈpɛt.te/"
     },
     {
       "word": "SORCIO",
@@ -2788,7 +4350,8 @@
       "synonyms": [
         "topo"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsort͡ʃo/"
     },
     {
       "word": "VERGOGNATO",
@@ -2796,7 +4359,13 @@
       "synonyms": [
         "imbarazzato"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ver.ɡoɲˈɲa.to/",
+      "family": [
+        "vergogna",
+        "vergognarsi",
+        "vergognoso"
+      ]
     },
     {
       "word": "RECETTORE",
@@ -2804,19 +4373,36 @@
       "synonyms": [
         "ricevitore"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈtʃɛt.to.re/",
+      "family": [
+        "ricevere",
+        "ricevitore",
+        "ricezione"
+      ]
     },
     {
       "word": "BOTULINO",
       "gloss": "tossina usata in medicina estetica",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/botuˈlino/",
+      "family": [
+        "botulismo",
+        "botulinico"
+      ]
     },
     {
       "word": "MOTIVETTO",
       "gloss": "breve frase musicale ripetuta",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mo.tiˈvet.to/",
+      "family": [
+        "motivo",
+        "motivare",
+        "motivazione"
+      ]
     },
     {
       "word": "TAGLIERINO",
@@ -2824,7 +4410,12 @@
       "synonyms": [
         "cutter"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/taʎʎeˈrino/",
+      "family": [
+        "tagliare",
+        "tagliere"
+      ]
     },
     {
       "word": "CIONDOLARE",
@@ -2832,7 +4423,11 @@
       "synonyms": [
         "dondolare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/t͡ʃondoˈlare/",
+      "family": [
+        "ciondolante"
+      ]
     },
     {
       "word": "NOMINALE",
@@ -2840,13 +4435,23 @@
       "synonyms": [
         "intestato"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "denominale",
+        "nominalizzare",
+        "plurinominale"
+      ],
+      "ipa": "/no.mi.ˈna.le/"
     },
     {
       "word": "ASTROLOGO",
       "gloss": "chi studia le influenze delle stelle",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/asˈtrɔloɡo/",
+      "family": [
+        "astrologare"
+      ]
     },
     {
       "word": "VOGLIOSO",
@@ -2854,13 +4459,21 @@
       "synonyms": [
         "desideroso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/voʎˈʎozo/",
+      "family": [
+        "voglia"
+      ]
     },
     {
       "word": "GROSSISTA",
       "gloss": "commerciante che vende in grandi quantità ai negozi",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡrosˈsista/",
+      "family": [
+        "grosso"
+      ]
     },
     {
       "word": "CORRODERE",
@@ -2868,7 +4481,12 @@
       "synonyms": [
         "erodere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/korˈrodere/",
+      "family": [
+        "corrodersi",
+        "corroso"
+      ]
     },
     {
       "word": "RINCASARE",
@@ -2876,19 +4494,33 @@
       "synonyms": [
         "rientrare"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/rinkaˈzare/",
+      "family": [
+        "casa"
+      ]
     },
     {
       "word": "STIPARE",
       "gloss": "riempire completamente uno spazio",
       "synonyms": [],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/stiˈpare/",
+      "family": [
+        "stipato"
+      ]
     },
     {
       "word": "OPACO",
       "gloss": "che non lascia passare la luce",
       "synonyms": [],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/oˈpako/",
+      "family": [
+        "opacizzante",
+        "opacizzare",
+        "opacizzazione"
+      ]
     },
     {
       "word": "SFIZIO",
@@ -2897,13 +4529,22 @@
         "voglia",
         "capriccio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsfittsjo/",
+      "family": [
+        "sfizioso"
+      ]
     },
     {
       "word": "ORECCHIONE",
       "gloss": "chi ha padiglioni auricolari grandi",
       "synonyms": [],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/orekˈkjoːne/",
+      "family": [
+        "orecchio",
+        "orecchiare"
+      ]
     },
     {
       "word": "DONDOLA",
@@ -2911,7 +4552,12 @@
       "synonyms": [
         "oscilla"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈdondola/",
+      "family": [
+        "dondolare",
+        "dondolio"
+      ]
     },
     {
       "word": "ASSALE",
@@ -2919,7 +4565,11 @@
       "synonyms": [
         "asse"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/asˈsale/",
+      "family": [
+        "asse"
+      ]
     },
     {
       "word": "CHIARE",
@@ -2928,7 +4578,12 @@
         "limpide",
         "trasparenti"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈkjaːre/",
+      "family": [
+        "chiaro",
+        "chiarire"
+      ]
     },
     {
       "word": "FRANGENTE",
@@ -2936,7 +4591,12 @@
       "synonyms": [
         "circostanza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/franˈd͡ʒɛnte/",
+      "family": [
+        "frangere",
+        "frangibile"
+      ]
     },
     {
       "word": "BAZZECOLA",
@@ -2945,7 +4605,11 @@
         "inezia",
         "quisquilia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/badˈdzekola/",
+      "family": [
+        "bazzicare"
+      ]
     },
     {
       "word": "PROTERVO",
@@ -2953,6 +4617,10 @@
       "synonyms": [
         "arrogante",
         "insolente"
+      ],
+      "ipa": "/proˈtɛrvo/",
+      "family": [
+        "protervia"
       ],
       "pos": "adjective"
     },
@@ -2963,13 +4631,21 @@
         "viltà",
         "inerzia"
       ],
-      "pos": "noun"
+      "ipa": "/iɲˈɲavja/",
+      "pos": "noun",
+      "family": [
+        "ignavo"
+      ]
     },
     {
       "word": "SAPIDO",
       "gloss": "saporito, ricco di gusto",
       "synonyms": [
         "saporito"
+      ],
+      "ipa": "/ˈsapido/",
+      "family": [
+        "sapidità"
       ],
       "pos": "adjective"
     },
@@ -2980,7 +4656,11 @@
         "vanesio",
         "vacuo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈfatwo/",
+      "family": [
+        "fatuità"
+      ]
     },
     {
       "word": "ESOSO",
@@ -2988,6 +4668,12 @@
       "synonyms": [
         "avido",
         "caro"
+      ],
+      "ipa": "/eˈzɔzo/",
+      "family": [
+        "esosamente",
+        "esosità",
+        "odioso"
       ],
       "pos": "adjective"
     },
@@ -2998,7 +4684,11 @@
         "flebile",
         "tenue"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈfjɔko/",
+      "family": [
+        "affiochire"
+      ]
     },
     {
       "word": "TRACOTANTE",
@@ -3006,6 +4696,10 @@
       "synonyms": [
         "arrogante",
         "borioso"
+      ],
+      "ipa": "/trakoˈtante/",
+      "family": [
+        "tracotanza"
       ],
       "pos": "adjective"
     },
@@ -3015,7 +4709,11 @@
       "synonyms": [
         "evasivo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/retiˈt͡ʃɛnte/",
+      "family": [
+        "reticenza"
+      ]
     },
     {
       "word": "PROLISSO",
@@ -3023,7 +4721,12 @@
       "synonyms": [
         "verboso"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/proˈlisso/",
+      "family": [
+        "prolissità",
+        "prolissamente"
+      ]
     },
     {
       "word": "ARCIGNO",
@@ -3032,7 +4735,11 @@
         "burbero",
         "torvo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/arˈt͡ʃiɲɲo/",
+      "family": [
+        "arco"
+      ]
     },
     {
       "word": "OBLIO",
@@ -3040,7 +4747,13 @@
       "synonyms": [
         "dimenticanza"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/oˈblio/",
+      "family": [
+        "oblioso",
+        "sonno",
+        "soprappensiero"
+      ]
     },
     {
       "word": "SGOMENTO",
@@ -3048,7 +4761,11 @@
       "synonyms": [
         "costernazione"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/zɡoˈmento/",
+      "family": [
+        "sgomentare"
+      ]
     },
     {
       "word": "SREGOLATO",
@@ -3056,7 +4773,11 @@
       "synonyms": [
         "dissoluto"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/zreɡoˈlato/",
+      "family": [
+        "sregolatezza"
+      ]
     },
     {
       "word": "PROCELLA",
@@ -3065,13 +4786,21 @@
         "tempesta",
         "bufera"
       ],
-      "pos": "noun"
+      "ipa": "/proˈt͡ʃɛlla/",
+      "pos": "noun",
+      "family": [
+        "procelloso"
+      ]
     },
     {
       "word": "IATTURA",
       "gloss": "grave sventura",
       "synonyms": [
         "sventura"
+      ],
+      "ipa": "/jatˈtura/",
+      "family": [
+        "iettatore"
       ],
       "pos": "noun"
     },
@@ -3082,6 +4811,7 @@
         "letale",
         "funesto"
       ],
+      "ipa": "/eziˈtsjale/",
       "pos": "adjective"
     },
     {
@@ -3091,6 +4821,10 @@
         "avvisaglia",
         "sintomo"
       ],
+      "ipa": "/ˈprɔdromo/",
+      "family": [
+        "prodromico"
+      ],
       "pos": "noun"
     },
     {
@@ -3098,6 +4832,11 @@
       "gloss": "pungente e un po' osceno",
       "synonyms": [
         "mordace"
+      ],
+      "ipa": "/saˈlat͡ʃe/",
+      "family": [
+        "salacità",
+        "salacemente"
       ],
       "pos": "adjective"
     },
@@ -3108,6 +4847,10 @@
         "fetido",
         "pestilenziale"
       ],
+      "ipa": "/meˈfitiko/",
+      "family": [
+        "mefite"
+      ],
       "pos": "adjective"
     },
     {
@@ -3115,6 +4858,11 @@
       "gloss": "parola o espressione superflua",
       "synonyms": [
         "ridondanza"
+      ],
+      "ipa": "/pleoˈnazmo/",
+      "family": [
+        "pleonasticamente",
+        "pleonastico"
       ],
       "pos": "noun"
     },
@@ -3125,6 +4873,10 @@
         "smorto",
         "insipido"
       ],
+      "ipa": "/ʃˈʃalbo/",
+      "family": [
+        "scialbore"
+      ],
       "pos": "adjective"
     },
     {
@@ -3133,7 +4885,12 @@
       "synonyms": [
         "inerzia"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/atˈt͡ʃidja/",
+      "family": [
+        "accidioso",
+        "accidiosamente"
+      ]
     },
     {
       "word": "LUBRICO",
@@ -3142,7 +4899,11 @@
         "viscido",
         "lascivo"
       ],
-      "pos": "adjective"
+      "ipa": "/ˈlubriko/",
+      "pos": "adjective",
+      "family": [
+        "lubrificare"
+      ]
     },
     {
       "word": "ESANGUE",
@@ -3150,7 +4911,8 @@
       "synonyms": [
         "cereo"
       ],
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/eˈzaŋɡwe/"
     }
   ]
 }

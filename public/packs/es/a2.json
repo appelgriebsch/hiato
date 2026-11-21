@@ -1,5 +1,5 @@
 {
-  "version": 24,
+  "version": 28,
   "lang": "es",
   "cefr": "a2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -16,7 +16,10 @@
       "gloss": "madre del padre o de la madre.",
       "synonyms": [],
       "example": "Amo a mi abuela.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "abuelo"
+      ]
     },
     {
       "word": "SALA",
@@ -26,7 +29,11 @@
         "cuarto"
       ],
       "example": "Anda a la sala.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "salón"
+      ],
+      "ipa": "/ˈsala/"
     },
     {
       "word": "CLUB",
@@ -36,7 +43,8 @@
         "grupo"
       ],
       "example": "Bienvenido al club.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/klub/"
     },
     {
       "word": "CONTACTO",
@@ -45,7 +53,11 @@
         "toque"
       ],
       "example": "Estaré en contacto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõn̪ˈt̪akt̪o/",
+      "family": [
+        "contactar"
+      ]
     },
     {
       "word": "CONSEJO",
@@ -55,7 +67,13 @@
         "recomendación"
       ],
       "example": "Dale un consejo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "advertencia",
+        "exhortación",
+        "recomendación"
+      ],
+      "ipa": "/kõnˈsexo/"
     },
     {
       "word": "DON",
@@ -64,7 +82,12 @@
         "regalo",
         "obsequio"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪õn/",
+      "family": [
+        "doña",
+        "donaire"
+      ]
     },
     {
       "word": "ACCIÓN",
@@ -74,7 +97,13 @@
         "hecho"
       ],
       "example": "Necesitamos acción.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/akˈsjõn/",
+      "family": [
+        "actuar",
+        "actor",
+        "activar"
+      ]
     },
     {
       "word": "TREN",
@@ -84,7 +113,11 @@
         "convoy"
       ],
       "example": "¿Irás en tren?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "metro"
+      ],
+      "ipa": "/ˈt̪ɾẽn/"
     },
     {
       "word": "PRISA",
@@ -94,7 +127,13 @@
         "apresuramiento"
       ],
       "example": "Daos prisa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpɾisa/",
+      "family": [
+        "apresurar",
+        "apresurado",
+        "apresuramiento"
+      ]
     },
     {
       "word": "CUMPLEAÑOS",
@@ -104,7 +143,13 @@
         "celebración"
       ],
       "example": "Feliz cumpleaños.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kũmpleˈaɲos/",
+      "family": [
+        "cumplir",
+        "cumpleañero",
+        "cumple"
+      ]
     },
     {
       "word": "VENTANA",
@@ -114,7 +159,13 @@
         "vano"
       ],
       "example": "Abre la ventana.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bẽn̪ˈt̪ana/",
+      "family": [
+        "ventanal",
+        "ventanilla",
+        "ventear"
+      ]
     },
     {
       "word": "SUELO",
@@ -124,7 +175,12 @@
         "tierra"
       ],
       "example": "¡Al suelo!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈswelo/",
+      "family": [
+        "ensuciar",
+        "sucio"
+      ]
     },
     {
       "word": "CÁRCEL",
@@ -134,7 +190,13 @@
         "penitenciaría"
       ],
       "example": "Está en la cárcel.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaɾsel/",
+      "family": [
+        "carcelero",
+        "encarcelar",
+        "carcelario"
+      ]
     },
     {
       "word": "ENEMIGO",
@@ -144,7 +206,13 @@
         "rival"
       ],
       "example": "Es mi enemigo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eneˈmiɣ̞o/",
+      "family": [
+        "enemistad",
+        "enemistar",
+        "enemistarse"
+      ]
     },
     {
       "word": "GOBIERNO",
@@ -153,7 +221,13 @@
         "poder"
       ],
       "example": "Aún no hay gobierno.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡoˈbjeɾ.no/",
+      "family": [
+        "gobernar",
+        "gobernante",
+        "gobernabilidad"
+      ]
     },
     {
       "word": "NOTA",
@@ -163,7 +237,13 @@
         "puntuación"
       ],
       "example": "Toma nota.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnot̪a/",
+      "family": [
+        "notar",
+        "notable",
+        "notación"
+      ]
     },
     {
       "word": "NAVIDAD",
@@ -173,13 +253,22 @@
         "celebración"
       ],
       "example": "Es navidad.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "navideño",
+        "natividad"
+      ]
     },
     {
       "word": "EMBARGO",
       "gloss": "retención judicial de bienes.",
       "example": "La juez decretó el embargo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽmˈbaɾɣ̞o/",
+      "family": [
+        "embargar",
+        "embargable"
+      ]
     },
     {
       "word": "MAESTRO",
@@ -189,7 +278,13 @@
         "docente"
       ],
       "example": "Soy maestro.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "excelente",
+        "meritorio",
+        "relevante"
+      ],
+      "ipa": "/maˈest̪ɾo/"
     },
     {
       "word": "TEMA",
@@ -199,7 +294,12 @@
         "materia"
       ],
       "example": "¡Cíñete al tema!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪ema/",
+      "family": [
+        "temática",
+        "temario"
+      ]
     },
     {
       "word": "ESCENA",
@@ -208,7 +308,13 @@
         "lugar"
       ],
       "example": "¡Qué escena linda!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈsena/",
+      "family": [
+        "escenario",
+        "escénico",
+        "escenificar"
+      ]
     },
     {
       "word": "SORPRESA",
@@ -217,7 +323,12 @@
         "asombro"
       ],
       "example": "¡Sorpresa!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/soɾˈpɾesa/",
+      "family": [
+        "sorprender",
+        "sorpresivamente"
+      ]
     },
     {
       "word": "EJÉRCITO",
@@ -227,14 +338,22 @@
         "fuerzas"
       ],
       "example": "El ejército llegó.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "armada"
+      ],
+      "ipa": "/eˈxeɾsit̪o/"
     },
     {
       "word": "MALDICIÓN",
       "gloss": "deseo de que a alguien le pase algo terrible",
       "synonyms": [],
       "example": "Es una maldición.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mal̪d̪iˈsjõn/",
+      "family": [
+        "maldecir"
+      ]
     },
     {
       "word": "MENTIRA",
@@ -244,7 +363,12 @@
         "engaño"
       ],
       "example": "Era mentira.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mẽn̪ˈt̪iɾa/",
+      "family": [
+        "mentiroso",
+        "mentir"
+      ]
     },
     {
       "word": "REGLA",
@@ -254,7 +378,13 @@
         "ley"
       ],
       "example": "Rompiste la regla.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈreɣ̞la/",
+      "family": [
+        "reglamento",
+        "regular",
+        "reglamentar"
+      ]
     },
     {
       "word": "SILENCIO",
@@ -264,7 +394,11 @@
         "quietud"
       ],
       "example": "¡Silencio!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "quietud"
+      ],
+      "ipa": "/siˈlẽnsjo/"
     },
     {
       "word": "EDIFICIO",
@@ -274,7 +408,12 @@
         "construcción"
       ],
       "example": "¿Ese edificio gris?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eð̞iˈfisjo/",
+      "family": [
+        "edificar",
+        "edificación"
+      ]
     },
     {
       "word": "PISO",
@@ -284,7 +423,11 @@
         "planta"
       ],
       "example": "Buscas piso.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "nivel"
+      ],
+      "ipa": "/ˈpiso/"
     },
     {
       "word": "FONDO",
@@ -293,7 +436,12 @@
         "base"
       ],
       "example": "¡Hasta el fondo!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfõn̪d̪o/",
+      "family": [
+        "fundar",
+        "fundación"
+      ]
     },
     {
       "word": "TESTIGO",
@@ -302,13 +450,25 @@
         "observador"
       ],
       "example": "Soy testigo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪esˈt̪iɣ̞o/",
+      "family": [
+        "testificar",
+        "testimonial",
+        "atestiguar"
+      ]
     },
     {
       "word": "CORTE",
       "gloss": "acción de dividir algo con un cuchillo o unas tijeras",
       "example": "Me he hecho un corte.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkoɾt̪e/",
+      "family": [
+        "cortar",
+        "corteza",
+        "cortés"
+      ]
     },
     {
       "word": "GUARDIA",
@@ -318,7 +478,13 @@
         "policía"
       ],
       "example": "Hago guardia.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgwaɾð̞ja/",
+      "family": [
+        "guardar",
+        "guardapolvo",
+        "guardería"
+      ]
     },
     {
       "word": "ESPALDA",
@@ -327,7 +493,13 @@
         "dorso"
       ],
       "example": "Cubre mi espalda.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈpal̪d̪a/",
+      "family": [
+        "espaldar",
+        "espaldarazo",
+        "espaldilla"
+      ]
     },
     {
       "word": "LOCURA",
@@ -336,7 +508,12 @@
         "demencia"
       ],
       "example": "¡Qué locura!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/loˈkuɾa/",
+      "family": [
+        "loco",
+        "enloquecer"
+      ]
     },
     {
       "word": "MATRIMONIO",
@@ -346,7 +523,12 @@
         "casamiento"
       ],
       "example": "Son matrimonio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mat̪ɾiˈmonjo/",
+      "family": [
+        "matrimonial",
+        "matrimoniar"
+      ]
     },
     {
       "word": "PELIGRO",
@@ -355,7 +537,13 @@
         "riesgo"
       ],
       "example": "¡Qué peligro!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈliɣ̞ɾo/",
+      "family": [
+        "peligroso",
+        "peligrar",
+        "peligrosidad"
+      ]
     },
     {
       "word": "CERVEZA",
@@ -364,7 +552,12 @@
         "bebida"
       ],
       "example": "Tengo cerveza.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cervecero",
+        "cervecería",
+        "cervecita"
+      ]
     },
     {
       "word": "JURO",
@@ -373,7 +566,13 @@
         "promesa"
       ],
       "example": "¡Ah, te lo juro!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxuɾo/",
+      "family": [
+        "juramento",
+        "jurar",
+        "jurado"
+      ]
     },
     {
       "word": "CEREBRO",
@@ -382,7 +581,11 @@
         "mente"
       ],
       "example": "Me duele el cerebro.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cerebral",
+        "encefálico"
+      ]
     },
     {
       "word": "TENIENTE",
@@ -391,7 +594,12 @@
         "oficial"
       ],
       "example": "El teniente llegó a tiempo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪eˈnjẽn̪t̪e/",
+      "family": [
+        "tenencia",
+        "tenientazgo"
+      ]
     },
     {
       "word": "BANCO",
@@ -400,7 +608,13 @@
         "asiento"
       ],
       "example": "Voy al banco.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbãŋko/",
+      "family": [
+        "banca",
+        "bancario",
+        "bancarrota"
+      ]
     },
     {
       "word": "ESPACIO",
@@ -410,7 +624,13 @@
         "área"
       ],
       "example": "Danos espacio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈpasjo/",
+      "family": [
+        "espacial",
+        "espacioso",
+        "espaciado"
+      ]
     },
     {
       "word": "PERMISO",
@@ -419,7 +639,13 @@
         "autorización"
       ],
       "example": "¿Tengo permiso?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peɾˈmiso/",
+      "family": [
+        "permitir",
+        "permisivo",
+        "permisividad"
+      ]
     },
     {
       "word": "BASURA",
@@ -429,7 +655,11 @@
         "residuo"
       ],
       "example": "¡Es basura!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baˈsuɾa/",
+      "family": [
+        "basurero"
+      ]
     },
     {
       "word": "COLOR",
@@ -439,7 +669,13 @@
         "matiz"
       ],
       "example": "¡Es tu color!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈloɾ/",
+      "family": [
+        "colorido",
+        "colorante",
+        "multicolor"
+      ]
     },
     {
       "word": "BAR",
@@ -448,7 +684,8 @@
         "taberna"
       ],
       "example": "Voy al bar.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbaɾ/"
     },
     {
       "word": "LIBERTAD",
@@ -457,13 +694,23 @@
         "independencia"
       ],
       "example": "Habla de libertad.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "liberar",
+        "libertario",
+        "liberación"
+      ]
     },
     {
       "word": "PERTENECER",
       "gloss": "Ser de una persona o de un grupo.",
       "example": "Islandia solía pertenecer a Dinamarca.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/peɾt̪eneˈseɾ/",
+      "family": [
+        "pertenencia",
+        "perteneciente"
+      ]
     },
     {
       "word": "MAR",
@@ -472,7 +719,13 @@
         "océano"
       ],
       "example": "El mar es azul.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmaɾ/",
+      "family": [
+        "marino",
+        "marítimo",
+        "marejada"
+      ]
     },
     {
       "word": "INTENTO",
@@ -481,7 +734,11 @@
         "prueba"
       ],
       "example": "Lo intento.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "intentona"
+      ],
+      "ipa": "/ĩn̪ˈt̪ẽn̪t̪o/"
     },
     {
       "word": "PISTA",
@@ -491,7 +748,12 @@
         "indicio"
       ],
       "example": "Dame una pista.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpist̪a/",
+      "family": [
+        "pistón",
+        "pistacho"
+      ]
     },
     {
       "word": "HONOR",
@@ -501,7 +763,13 @@
         "dignidad"
       ],
       "example": "Fue un honor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/oˈnoɾ/",
+      "family": [
+        "honorable",
+        "honorífico",
+        "deshonor"
+      ]
     },
     {
       "word": "ABUELO",
@@ -510,7 +778,10 @@
         "anciano"
       ],
       "example": "Hola, abuelo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "abuelastro"
+      ]
     },
     {
       "word": "OPCIÓN",
@@ -520,7 +791,12 @@
         "alternativa"
       ],
       "example": "No hay opción.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/opˈsjõn/",
+      "family": [
+        "opcional",
+        "optar"
+      ]
     },
     {
       "word": "GOLPE",
@@ -530,7 +806,13 @@
         "choque"
       ],
       "example": "Tuve un golpe.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgolpe/",
+      "family": [
+        "golpear",
+        "golpista",
+        "golpeteo"
+      ]
     },
     {
       "word": "MISIÓN",
@@ -540,7 +822,13 @@
         "encargo"
       ],
       "example": "Misión superada.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈsjõn/",
+      "family": [
+        "misionero",
+        "misional",
+        "misionar"
+      ]
     },
     {
       "word": "DEDO",
@@ -549,7 +837,11 @@
         "falange"
       ],
       "example": "Su dedo sangra.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪eð̞o/",
+      "family": [
+        "dedal"
+      ]
     },
     {
       "word": "ORO",
@@ -558,7 +850,13 @@
         "metal"
       ],
       "example": "Vales oro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈoɾo/",
+      "family": [
+        "dorado",
+        "oropel",
+        "orificar"
+      ]
     },
     {
       "word": "OPINIÓN",
@@ -569,7 +867,13 @@
         "juicio"
       ],
       "example": "Quiero tu opinión.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "desopinar",
+        "inopinado",
+        "opinar"
+      ],
+      "ipa": "/opiˈnjõn/"
     },
     {
       "word": "ÁNGEL",
@@ -578,7 +882,13 @@
         "ser"
       ],
       "example": "Es un ángel.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈãŋxel/",
+      "family": [
+        "angelical",
+        "angelito",
+        "angelicalmente"
+      ]
     },
     {
       "word": "COCINA",
@@ -588,7 +898,13 @@
         "office"
       ],
       "example": "Limpia la cocina.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈsina/",
+      "family": [
+        "cocinar",
+        "cocinero",
+        "cocido"
+      ]
     },
     {
       "word": "SALUD",
@@ -598,7 +914,12 @@
         "vitalidad"
       ],
       "example": "¡A tu salud!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/saˈluð̞/",
+      "family": [
+        "saludable",
+        "saludar"
+      ]
     },
     {
       "word": "INFORME",
@@ -607,7 +928,13 @@
         "reporte"
       ],
       "example": "Leí el informe.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩɱˈfoɾme/",
+      "family": [
+        "informar",
+        "informativo",
+        "informante"
+      ]
     },
     {
       "word": "GATO",
@@ -616,7 +943,11 @@
         "animal"
       ],
       "example": "Pobre gato.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgat̪o/",
+      "family": [
+        "gatera"
+      ]
     },
     {
       "word": "PARTIDO",
@@ -625,7 +956,13 @@
         "juego"
       ],
       "example": "Gané el partido.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paɾˈt̪ið̞o/",
+      "family": [
+        "partir",
+        "partidario",
+        "partida"
+      ]
     },
     {
       "word": "FRÍO",
@@ -634,7 +971,12 @@
         "helado"
       ],
       "example": "Hace frío.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfɾio/",
+      "family": [
+        "frigorífico",
+        "enfriar"
+      ]
     },
     {
       "word": "BOLSA",
@@ -643,7 +985,13 @@
         "saco"
       ],
       "example": "Abra su bolsa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbolsa/",
+      "family": [
+        "bolso",
+        "bolsillo",
+        "bolsista"
+      ]
     },
     {
       "word": "ZONA",
@@ -653,7 +1001,11 @@
         "región"
       ],
       "example": "Él me mostró la zona.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsona/",
+      "family": [
+        "zonificación"
+      ]
     },
     {
       "word": "LUNA",
@@ -662,7 +1014,13 @@
         "astro nocturno"
       ],
       "example": "Se ve la luna.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈluna/",
+      "family": [
+        "lunar",
+        "lunático",
+        "alunizar"
+      ]
     },
     {
       "word": "BASE",
@@ -671,7 +1029,12 @@
         "fundamento"
       ],
       "example": "Todo empieza desde la base.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cimiento",
+        "estación"
+      ],
+      "ipa": "/ˈbase/"
     },
     {
       "word": "ÁRBOL",
@@ -681,7 +1044,11 @@
         "tronco"
       ],
       "example": "Eso es un árbol.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ramal",
+        "enlace"
+      ]
     },
     {
       "word": "CAUSA",
@@ -691,7 +1058,13 @@
         "razón"
       ],
       "example": "¿Qué lo causa?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkawsa/",
+      "family": [
+        "causar",
+        "causal",
+        "causante"
+      ]
     },
     {
       "word": "FLOR",
@@ -700,14 +1073,23 @@
         "pétalo"
       ],
       "example": "¿Ves mi flor?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "coqueteo"
+      ],
+      "ipa": "/ˈfloɾ/"
     },
     {
       "word": "MAYORÍA",
       "gloss": "parte más grande de un grupo",
       "synonyms": [],
       "example": "Eran en su mayoría jóvenes.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maʝoˈɾia/",
+      "family": [
+        "mayor",
+        "mayorazgo"
+      ]
     },
     {
       "word": "ENERGÍA",
@@ -717,13 +1099,25 @@
         "poder"
       ],
       "example": "Usa energía solar.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eneɾˈxia/",
+      "family": [
+        "energético",
+        "energizar",
+        "energúmeno"
+      ]
     },
     {
       "word": "CARNE",
       "gloss": "Tejido muscular de los animales.",
       "example": "¿Comés carne?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaɾne/",
+      "family": [
+        "carnal",
+        "carnívoro",
+        "carnicería"
+      ]
     },
     {
       "word": "POSICIÓN",
@@ -732,7 +1126,13 @@
         "lugar"
       ],
       "example": "Mantén tu posición.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/posiˈsjõn/",
+      "family": [
+        "posicionar",
+        "posicional",
+        "posicionamiento"
+      ]
     },
     {
       "word": "LLAMA",
@@ -741,7 +1141,13 @@
         "fuego"
       ],
       "example": "¿Es una llama?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈʝama/",
+      "family": [
+        "llamar",
+        "llamarada",
+        "llameante"
+      ]
     },
     {
       "word": "ENTRADA",
@@ -750,7 +1156,12 @@
         "puerta"
       ],
       "example": "Entrada libre.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "arbitrio",
+        "facultad"
+      ],
+      "ipa": "/ẽn̪ˈt̪ɾað̞a/"
     },
     {
       "word": "OBRA",
@@ -759,7 +1170,13 @@
         "trabajo"
       ],
       "example": "¡Manos a la obra!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈo.bɾa/",
+      "family": [
+        "obrar",
+        "obrero",
+        "obrador"
+      ]
     },
     {
       "word": "NIVEL",
@@ -768,7 +1185,10 @@
         "grado"
       ],
       "example": "Bienvenido al nivel 3.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "plomada"
+      ]
     },
     {
       "word": "JUEZ",
@@ -777,7 +1197,13 @@
         "magistrado"
       ],
       "example": "El juez es injusto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxwes/",
+      "family": [
+        "juicio",
+        "juzgado",
+        "juzgar"
+      ]
     },
     {
       "word": "VERA",
@@ -786,7 +1212,13 @@
         "orilla"
       ],
       "example": "Su casa está a la vera del río.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeɾa/",
+      "family": [
+        "ribera",
+        "rivera",
+        "vereda"
+      ]
     },
     {
       "word": "ESPERANZA",
@@ -795,7 +1227,13 @@
         "ilusión"
       ],
       "example": "Hay esperanza.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/espeˈɾãnsa/",
+      "family": [
+        "esperar",
+        "esperanzar",
+        "esperanzador"
+      ]
     },
     {
       "word": "ENFERMO",
@@ -804,7 +1242,13 @@
         "malo"
       ],
       "example": "Estoy enfermo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽɱˈfeɾmo/",
+      "family": [
+        "enfermar",
+        "enfermería",
+        "enfermedad"
+      ]
     },
     {
       "word": "ZAPATO",
@@ -813,7 +1257,12 @@
         "calzado"
       ],
       "example": "Átate ese zapato.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cordonera",
+        "sandalia"
+      ],
+      "ipa": "/saˈpat̪o/"
     },
     {
       "word": "RESULTADO",
@@ -823,7 +1272,12 @@
         "efecto"
       ],
       "example": "El resultado es este.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/resul̪ˈt̪að̞o/",
+      "family": [
+        "resultar",
+        "resultante"
+      ]
     },
     {
       "word": "PLANETA",
@@ -832,7 +1286,12 @@
         "mundo"
       ],
       "example": "No hay planeta B.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/plaˈnet̪a/",
+      "family": [
+        "planetario",
+        "interplanetario"
+      ]
     },
     {
       "word": "NENE",
@@ -841,7 +1300,11 @@
         "niño"
       ],
       "example": "Nene, ¿y tu mamá?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈnene/",
+      "family": [
+        "nenúfar"
+      ]
     },
     {
       "word": "ESPECIE",
@@ -850,7 +1313,12 @@
         "tipo"
       ],
       "example": "Es una especie de naranja.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈpesje/",
+      "family": [
+        "específico",
+        "especial"
+      ]
     },
     {
       "word": "REINA",
@@ -859,7 +1327,13 @@
         "monarca"
       ],
       "example": "Veo una reina.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrejna/",
+      "family": [
+        "reinar",
+        "reinado",
+        "reino"
+      ]
     },
     {
       "word": "TARJETA",
@@ -868,7 +1342,12 @@
         "carta"
       ],
       "example": "Pago con tarjeta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪aɾˈxet̪a/",
+      "family": [
+        "tarjetero",
+        "tarjetear"
+      ]
     },
     {
       "word": "MÁQUINA",
@@ -877,7 +1356,11 @@
         "aparato"
       ],
       "example": "La máquina se usa así.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "motor"
+      ],
+      "ipa": "/ˈmakina/"
     },
     {
       "word": "ESTUDIO",
@@ -886,7 +1369,13 @@
         "aula"
       ],
       "example": "Voy al estudio para practicar inglés con mis compañeros.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈt̪uð̞jo/",
+      "family": [
+        "estudiante",
+        "estudiar",
+        "estudiantil"
+      ]
     },
     {
       "word": "IMAGEN",
@@ -895,7 +1384,13 @@
         "foto"
       ],
       "example": "Vi la imagen.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/iˈmaxẽn/",
+      "family": [
+        "imaginar",
+        "imaginación",
+        "imaginario"
+      ]
     },
     {
       "word": "VUESTRO",
@@ -904,7 +1399,13 @@
         "tu"
       ],
       "example": "¿Es vuestro?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbwest̪ɾo/",
+      "family": [
+        "vuestros",
+        "vuestras",
+        "vuestra"
+      ]
     },
     {
       "word": "PRISIÓN",
@@ -913,7 +1414,13 @@
         "cárcel"
       ],
       "example": "Él está en prisión.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾiˈsjõn/",
+      "family": [
+        "prisionero",
+        "prisionera",
+        "carcelario"
+      ]
     },
     {
       "word": "ENCUENTRO",
@@ -922,7 +1429,13 @@
         "reunión"
       ],
       "example": "El encuentro de los amigos en el parque fue muy divertido.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽŋˈkwẽn̪t̪ɾo/",
+      "family": [
+        "encontrar",
+        "encontrado",
+        "encontronazo"
+      ]
     },
     {
       "word": "BANDA",
@@ -931,7 +1444,11 @@
         "grupo"
       ],
       "example": "Toco en una banda.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "orquesta"
+      ],
+      "ipa": "/ˈbãn̪d̪a/"
     },
     {
       "word": "HOGAR",
@@ -940,7 +1457,11 @@
         "casa"
       ],
       "example": "¿Tienes hogar?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "hoguera"
+      ],
+      "ipa": "/oˈɣ̞aɾ/"
     },
     {
       "word": "ESTACIÓN",
@@ -950,7 +1471,11 @@
         "terminal"
       ],
       "example": "Fui a la estación.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "estacional"
+      ],
+      "ipa": "/est̪aˈsjõn/"
     },
     {
       "word": "ARTE",
@@ -959,7 +1484,13 @@
         "pintura"
       ],
       "example": "Vendo arte.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈaɾt̪e/",
+      "family": [
+        "artista",
+        "artístico",
+        "artesano"
+      ]
     },
     {
       "word": "DESTINO",
@@ -968,7 +1499,12 @@
         "lugar"
       ],
       "example": "Es mi destino.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪esˈt̪ino/",
+      "family": [
+        "destinar",
+        "destinatario"
+      ]
     },
     {
       "word": "VISITA",
@@ -977,7 +1513,13 @@
         "viaje"
       ],
       "example": "Tenemos visita.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/biˈsit̪a/",
+      "family": [
+        "visitar",
+        "visitante",
+        "visitado"
+      ]
     },
     {
       "word": "MOTIVO",
@@ -986,7 +1528,12 @@
         "razón"
       ],
       "example": "¿Por qué motivo?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "motivar",
+        "motivación",
+        "motivado"
+      ]
     },
     {
       "word": "OPERACIÓN",
@@ -995,7 +1542,13 @@
         "trabajo"
       ],
       "example": "¿Necesito una operación?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/opeɾaˈsjõn/",
+      "family": [
+        "operar",
+        "operario",
+        "operativo"
+      ]
     },
     {
       "word": "JUICIO",
@@ -1004,7 +1557,13 @@
         "opinión"
       ],
       "example": "Hubo un juicio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈxwisjo/",
+      "family": [
+        "juzgar",
+        "juzgado",
+        "juicioso"
+      ]
     },
     {
       "word": "MIEMBRO",
@@ -1013,20 +1572,36 @@
         "parte"
       ],
       "example": "No soy miembro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmjẽmbɾo/",
+      "family": [
+        "miembros",
+        "membresía",
+        "membranoso"
+      ]
     },
     {
       "word": "CUÁNTO",
       "gloss": "qué cantidad de algo",
       "synonyms": [],
       "example": "¿Cuánto es?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwãn̪t̪o/",
+      "family": [
+        "cuán",
+        "cuántos",
+        "cuánta"
+      ]
     },
     {
       "word": "METRO",
       "gloss": "Unidad de longitud.",
       "example": "Un metro mide cien centímetros.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmet̪ɾo/",
+      "family": [
+        "métrico"
+      ]
     },
     {
       "word": "SARGENTO",
@@ -1035,7 +1610,11 @@
         "soldado"
       ],
       "example": "Él ascendió al rango de sargento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/saɾˈxẽn̪t̪o/",
+      "family": [
+        "sargentear"
+      ]
     },
     {
       "word": "PORQUÉ",
@@ -1044,7 +1623,11 @@
         "razón"
       ],
       "example": "Entiendo el porqué.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/poɾˈke/",
+      "family": [
+        "porque"
+      ]
     },
     {
       "word": "MOVIMIENTO",
@@ -1053,7 +1636,11 @@
         "acción"
       ],
       "example": "Aquí hay mucho movimiento.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "mover",
+        "movible"
+      ]
     },
     {
       "word": "PAREJA",
@@ -1062,7 +1649,12 @@
         "compañero"
       ],
       "example": "Son una pareja.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈɾexa/",
+      "family": [
+        "parejo",
+        "aparejar"
+      ]
     },
     {
       "word": "ÉXITO",
@@ -1072,13 +1664,24 @@
         "logro"
       ],
       "example": "¡Mucho éxito!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈeksit̪o/",
+      "family": [
+        "exitoso",
+        "exitosamente"
+      ]
     },
     {
       "word": "FELICIDAD",
       "gloss": "sentir bien por algo bueno",
       "example": "Eres mi felicidad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/felisiˈð̞að̞/",
+      "family": [
+        "feliz",
+        "felicitar",
+        "felicitación"
+      ]
     },
     {
       "word": "PRECIO",
@@ -1087,7 +1690,13 @@
         "costo"
       ],
       "example": "Mira el precio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpɾesjo/",
+      "family": [
+        "precioso",
+        "apreciar",
+        "preciosidad"
+      ]
     },
     {
       "word": "SALIDA",
@@ -1096,7 +1705,12 @@
         "puerta"
       ],
       "example": "No hay salida.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/saˈlið̞a/",
+      "family": [
+        "salir",
+        "saliente"
+      ]
     },
     {
       "word": "RADIO",
@@ -1105,7 +1719,13 @@
         "emisora"
       ],
       "example": "El radio de este círculo es de cinco centímetros.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrað̞jo/",
+      "family": [
+        "radial",
+        "radiar",
+        "radiografía"
+      ]
     },
     {
       "word": "EJEMPLO",
@@ -1114,7 +1734,13 @@
         "caso"
       ],
       "example": "Dame un ejemplo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈxẽmplo/",
+      "family": [
+        "ejemplar",
+        "ejemplificar",
+        "ejemplificación"
+      ]
     },
     {
       "word": "PELEA",
@@ -1123,7 +1749,13 @@
         "lucha"
       ],
       "example": "Vi una pelea.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈlea/",
+      "family": [
+        "pelear",
+        "peleador",
+        "pelearse"
+      ]
     },
     {
       "word": "VALOR",
@@ -1132,7 +1764,13 @@
         "precio"
       ],
       "example": "Admiro su valor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baˈloɾ/",
+      "family": [
+        "valiente",
+        "valorar",
+        "desvalorizar"
+      ]
     },
     {
       "word": "NORTE",
@@ -1141,7 +1779,13 @@
         "arriba"
       ],
       "example": "Vivo en el norte.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bóreas",
+        "boreal",
+        "tramontano"
+      ],
+      "ipa": "/ˈnoɾt̪e/"
     },
     {
       "word": "OBJETIVO",
@@ -1150,7 +1794,11 @@
         "meta"
       ],
       "example": "Logré el objetivo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "prisma",
+        "lente"
+      ]
     },
     {
       "word": "ELECCIÓN",
@@ -1159,7 +1807,12 @@
         "opción"
       ],
       "example": "Haz tu elección.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/elekˈsjõn/",
+      "family": [
+        "elegir",
+        "electo"
+      ]
     },
     {
       "word": "PARED",
@@ -1168,7 +1821,12 @@
         "muro"
       ],
       "example": "Rozan la pared.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paˈɾeð̞/",
+      "family": [
+        "paredón",
+        "emparedar"
+      ]
     },
     {
       "word": "TOQUE",
@@ -1177,7 +1835,13 @@
         "golpe"
       ],
       "example": "¡No lo toque!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪oke/",
+      "family": [
+        "tocar",
+        "tacto",
+        "toca"
+      ]
     },
     {
       "word": "TONTERÍA",
@@ -1186,7 +1850,12 @@
         "bobería"
       ],
       "example": "¡Qué tontería!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪õn̪t̪eˈɾia/",
+      "family": [
+        "tonto",
+        "atontar"
+      ]
     },
     {
       "word": "CALMA",
@@ -1195,7 +1864,13 @@
         "paz"
       ],
       "example": "Mantén la calma.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkalma/",
+      "family": [
+        "calmar",
+        "calmante",
+        "acalmar"
+      ]
     },
     {
       "word": "CUESTIÓN",
@@ -1204,7 +1879,12 @@
         "tema"
       ],
       "example": "Es cuestión de gustos.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kwesˈt̪jõn/",
+      "family": [
+        "cuestionar",
+        "cuestionario"
+      ]
     },
     {
       "word": "BESO",
@@ -1213,7 +1893,13 @@
         "abrazo"
       ],
       "example": "Dame un beso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbeso/",
+      "family": [
+        "besar",
+        "besuquear",
+        "besamanos"
+      ]
     },
     {
       "word": "RÍO",
@@ -1222,7 +1908,11 @@
         "agua"
       ],
       "example": "Un río fluye.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "fluvial"
+      ],
+      "ipa": "/ˈrio/"
     },
     {
       "word": "RESPECTO",
@@ -1231,7 +1921,13 @@
         "sobre"
       ],
       "example": "Él bromeó al respecto.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "respectar",
+        "referente",
+        "perteneciente"
+      ],
+      "ipa": "/resˈpekt̪o/"
     },
     {
       "word": "REGRESO",
@@ -1240,7 +1936,13 @@
         "vuelta"
       ],
       "example": "Voy de regreso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈɣ̞ɾeso/",
+      "family": [
+        "regresar",
+        "regresivo",
+        "regresión"
+      ]
     },
     {
       "word": "HÉROE",
@@ -1249,7 +1951,12 @@
         "valiente"
       ],
       "example": "Es mi héroe.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈeɾoe/",
+      "family": [
+        "heroico",
+        "heroísmo"
+      ]
     },
     {
       "word": "COLEGA",
@@ -1258,7 +1965,13 @@
         "compañero"
       ],
       "example": "Él es mi colega.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈleɣ̞a/",
+      "family": [
+        "colegial",
+        "colegiatura",
+        "colegir"
+      ]
     },
     {
       "word": "HUEVO",
@@ -1267,7 +1980,10 @@
         "comida"
       ],
       "example": "Comí un huevo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "huevada"
+      ]
     },
     {
       "word": "ESPÍRITU",
@@ -1276,7 +1992,13 @@
         "alma"
       ],
       "example": "¿Qué es un espíritu?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈpiɾit̪u/",
+      "family": [
+        "espiritual",
+        "espiritismo",
+        "espiritista"
+      ]
     },
     {
       "word": "VUELO",
@@ -1285,7 +2007,12 @@
         "viaje"
       ],
       "example": "Buen vuelo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbwelo/",
+      "family": [
+        "volar",
+        "volador"
+      ]
     },
     {
       "word": "UNIDAD",
@@ -1294,7 +2021,12 @@
         "parte"
       ],
       "example": "¡La unidad es nuestra fuerza!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "singularidad",
+        "unicidad"
+      ],
+      "ipa": "/uniˈð̞að̞/"
     },
     {
       "word": "EMPRESA",
@@ -1303,7 +2035,13 @@
         "compañía"
       ],
       "example": "Adoro esta empresa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽmˈpɾesa/",
+      "family": [
+        "empresario",
+        "emprender",
+        "empresarial"
+      ]
     },
     {
       "word": "INGLÉS",
@@ -1312,7 +2050,11 @@
         "idioma"
       ],
       "example": "Hablo inglés.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩŋˈgles/",
+      "family": [
+        "anglicismo"
+      ]
     },
     {
       "word": "DETALLE",
@@ -1321,7 +2063,13 @@
         "parte"
       ],
       "example": "Es un detalle.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪eˈt̪aʝe/",
+      "family": [
+        "detallar",
+        "detallista",
+        "detallado"
+      ]
     },
     {
       "word": "VISTAZO",
@@ -1330,7 +2078,13 @@
         "mirada"
       ],
       "example": "Da un vistazo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bisˈt̪aso/",
+      "family": [
+        "visión",
+        "visitar",
+        "visor"
+      ]
     },
     {
       "word": "MARCHA",
@@ -1339,7 +2093,12 @@
         "paso"
       ],
       "example": "¡En marcha!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmaɾt͡ʃa/",
+      "family": [
+        "marchar",
+        "marchoso"
+      ]
     },
     {
       "word": "COMANDANTE",
@@ -1348,7 +2107,13 @@
         "jefe"
       ],
       "example": "¡Hasta siempre, Comandante!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/komãn̪ˈd̪ãn̪t̪e/",
+      "family": [
+        "comandar",
+        "comando",
+        "mandar"
+      ]
     },
     {
       "word": "MARCA",
@@ -1357,7 +2122,13 @@
         "señal"
       ],
       "example": "Adoro esa marca.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmaɾka/",
+      "family": [
+        "marcar",
+        "marcado",
+        "marcador"
+      ]
     },
     {
       "word": "ESTUDIANTE",
@@ -1366,7 +2137,13 @@
         "alumno"
       ],
       "example": "Soy estudiante.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/est̪uˈð̞jãn̪t̪e/",
+      "family": [
+        "estudiar",
+        "estudio",
+        "estudiantil"
+      ]
     },
     {
       "word": "BATALLA",
@@ -1375,7 +2152,13 @@
         "lucha"
       ],
       "example": "¡A la batalla!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/baˈt̪aʝa/",
+      "family": [
+        "batallar",
+        "batallador",
+        "batallón"
+      ]
     },
     {
       "word": "SUR",
@@ -1384,7 +2167,13 @@
         "abajo"
       ],
       "example": "Ve al sur.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsuɾ/",
+      "family": [
+        "austral",
+        "sureste",
+        "suroeste"
+      ]
     },
     {
       "word": "TRAGO",
@@ -1393,7 +2182,12 @@
         "bebida"
       ],
       "example": "Tomé otro trago.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪ɾaɣ̞o/",
+      "family": [
+        "tragar",
+        "tragón"
+      ]
     },
     {
       "word": "PIEL",
@@ -1402,7 +2196,13 @@
         "cuero"
       ],
       "example": "Su piel es lisa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpjel/",
+      "family": [
+        "pielero",
+        "empalmar",
+        "empalme"
+      ]
     },
     {
       "word": "SANTO",
@@ -1412,7 +2212,13 @@
         "bendito"
       ],
       "example": "No soy un santo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsãn̪t̪o/",
+      "family": [
+        "santidad",
+        "santificar",
+        "santurrón"
+      ]
     },
     {
       "word": "GANA",
@@ -1422,7 +2228,13 @@
         "apetito"
       ],
       "example": "Hoy no me gana hacer ejercicio, prefiero descansar.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈgana/",
+      "family": [
+        "ganar",
+        "ganador",
+        "ganancia"
+      ]
     },
     {
       "word": "RIESGO",
@@ -1431,7 +2243,12 @@
         "peligro"
       ],
       "example": "Es un riesgo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrjesɣ̞o/",
+      "family": [
+        "arriesgar",
+        "arriesgado"
+      ]
     },
     {
       "word": "ESTILO",
@@ -1441,7 +2258,11 @@
         "manera"
       ],
       "example": "No es mi estilo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "estilita"
+      ],
+      "ipa": "/esˈt̪ilo/"
     },
     {
       "word": "ASIENTO",
@@ -1451,13 +2272,25 @@
         "banco"
       ],
       "example": "Toma asiento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈsjẽn̪t̪o/",
+      "family": [
+        "sentar",
+        "sentado",
+        "asentar"
+      ]
     },
     {
       "word": "TRAMPA",
       "gloss": "una cosa que hace que algo caiga",
       "example": "La trampa hizo caer la fruta del árbol.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪ɾãmpa/",
+      "family": [
+        "tramposo",
+        "trampear",
+        "trampeo"
+      ]
     },
     {
       "word": "FANTASMA",
@@ -1467,7 +2300,13 @@
         "alma"
       ],
       "example": "Es un fantasma.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fãn̪ˈt̪asma/",
+      "family": [
+        "fantasmagórico",
+        "fantasmal",
+        "fantasear"
+      ]
     },
     {
       "word": "CAMIÓN",
@@ -1476,7 +2315,13 @@
         "coche"
       ],
       "example": "El camión pasó.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaˈmjõn/",
+      "family": [
+        "camionero",
+        "camioneta",
+        "camionaje"
+      ]
     },
     {
       "word": "MONSTRUO",
@@ -1486,7 +2331,12 @@
         "criatura"
       ],
       "example": "¡Monstruo!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmõnst̪ɾwo/",
+      "family": [
+        "monstruoso",
+        "monstruosidad"
+      ]
     },
     {
       "word": "PIEDRA",
@@ -1495,7 +2345,12 @@
         "roca"
       ],
       "example": "Cogió una piedra.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpjeð̞ɾa/",
+      "family": [
+        "apedrear",
+        "empedrar"
+      ]
     },
     {
       "word": "ESTADO",
@@ -1505,7 +2360,12 @@
         "condición"
       ],
       "example": "El estado del puente es bueno después de la reparación.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "provincia",
+        "región"
+      ],
+      "ipa": "/esˈt̪að̞o/"
     },
     {
       "word": "REGISTRO",
@@ -1515,7 +2375,12 @@
         "apunte"
       ],
       "example": "Pasé antes por el registro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈxist̪ɾo/",
+      "family": [
+        "registrar",
+        "registrador"
+      ]
     },
     {
       "word": "MAJESTAD",
@@ -1525,7 +2390,12 @@
         "señoría"
       ],
       "example": "Su Majestad está esperando.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maxesˈt̪að̞/",
+      "family": [
+        "majestuoso",
+        "majestuosidad"
+      ]
     },
     {
       "word": "MONTAÑA",
@@ -1535,7 +2405,12 @@
         "pico"
       ],
       "example": "Va a la montaña.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mõn̪ˈt̪aɲa/",
+      "family": [
+        "montañés",
+        "montañero"
+      ]
     },
     {
       "word": "EXACTO",
@@ -1545,7 +2420,12 @@
         "justo"
       ],
       "example": "Es exacto.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cortador",
+        "navaja"
+      ],
+      "ipa": "/ekˈsakt̪o/"
     },
     {
       "word": "VERANO",
@@ -1555,7 +2435,13 @@
         "calor"
       ],
       "example": "El verano terminó.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/beˈɾano/",
+      "family": [
+        "veraniego",
+        "veranear",
+        "veranillo"
+      ]
     },
     {
       "word": "ANILLO",
@@ -1565,7 +2451,12 @@
         "sortija"
       ],
       "example": "Llevaba mi anillo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈniʝo/",
+      "family": [
+        "anillar",
+        "anillado"
+      ]
     },
     {
       "word": "HUELLA",
@@ -1574,7 +2465,11 @@
         "marca"
       ],
       "example": "Desapareció sin dejar huella.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "desecho"
+      ],
+      "ipa": "/ˈwe.ʎa/"
     },
     {
       "word": "DIENTE",
@@ -1583,7 +2478,13 @@
         "muela"
       ],
       "example": "Me duele el diente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪jẽn̪t̪e/",
+      "family": [
+        "dentadura",
+        "dentista",
+        "dentición"
+      ]
     },
     {
       "word": "CUELLO",
@@ -1593,7 +2494,12 @@
         "pescuezo"
       ],
       "example": "Lávate el cuello.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkweʝo/",
+      "family": [
+        "cuelga",
+        "cuelgue"
+      ]
     },
     {
       "word": "ENFERMEDAD",
@@ -1603,7 +2509,13 @@
         "afección"
       ],
       "example": "No es una enfermedad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽɱfeɾmeˈð̞að̞/",
+      "family": [
+        "enfermar",
+        "enfermero",
+        "enfermizo"
+      ]
     },
     {
       "word": "EFECTO",
@@ -1613,7 +2525,13 @@
         "consecuencia"
       ],
       "example": "No tuvo efecto en él.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈfekt̪o/",
+      "family": [
+        "efectivo",
+        "efectuar",
+        "efectivamente"
+      ]
     },
     {
       "word": "HUMANO",
@@ -1623,7 +2541,13 @@
         "ser"
       ],
       "example": "Soy humano.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/uˈmano/",
+      "family": [
+        "humanidad",
+        "humanizar",
+        "inhumano"
+      ]
     },
     {
       "word": "PANTALÓN",
@@ -1632,7 +2556,11 @@
         "ropa"
       ],
       "example": "Súbete el pantalón.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pãn̪t̪aˈlõn/",
+      "family": [
+        "pantalonero"
+      ]
     },
     {
       "word": "BOTELLA",
@@ -1642,7 +2570,13 @@
         "envase"
       ],
       "example": "Es una botella.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/boˈt̪eʝa/",
+      "family": [
+        "botellero",
+        "embotellar",
+        "botellón"
+      ]
     },
     {
       "word": "REPENTE",
@@ -1652,7 +2586,12 @@
         "sorpresa"
       ],
       "example": "Pasó de repente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈpẽn̪t̪e/",
+      "family": [
+        "repentino",
+        "repentinamente"
+      ]
     },
     {
       "word": "ANIMAL",
@@ -1662,7 +2601,12 @@
         "bicho"
       ],
       "example": "El animal come.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aniˈmal/",
+      "family": [
+        "animales",
+        "animalario"
+      ]
     },
     {
       "word": "SONIDO",
@@ -1672,7 +2616,13 @@
         "tono"
       ],
       "example": "El sonido cesó.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/soˈnið̞o/",
+      "family": [
+        "sonidos",
+        "sonoro",
+        "sonorizar"
+      ]
     },
     {
       "word": "DEFENSA",
@@ -1681,7 +2631,13 @@
         "cuidado"
       ],
       "example": "Atacar es la mejor defensa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪eˈfẽnsa/",
+      "family": [
+        "defender",
+        "defensivo",
+        "defensor"
+      ]
     },
     {
       "word": "PRESIÓN",
@@ -1691,7 +2647,13 @@
         "fuerza"
       ],
       "example": "Tengo presión alta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾeˈsjõn/",
+      "family": [
+        "presionar",
+        "compresión",
+        "represión"
+      ]
     },
     {
       "word": "RED",
@@ -1701,7 +2663,13 @@
         "tejido"
       ],
       "example": "Mi abuela teje un bonito mantel con una red de lana para la mesa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈreð̞/",
+      "family": [
+        "redes",
+        "redondo",
+        "enredar"
+      ]
     },
     {
       "word": "TURNO",
@@ -1711,7 +2679,13 @@
         "orden"
       ],
       "example": "Es tu turno.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪uɾno/",
+      "family": [
+        "turnos",
+        "turnar",
+        "entretener"
+      ]
     },
     {
       "word": "RUIDO",
@@ -1721,7 +2695,11 @@
         "estruendo"
       ],
       "example": "¡Haz ruido!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ruidoso"
+      ],
+      "ipa": "/ˈrwið̞o/"
     },
     {
       "word": "DUEÑO",
@@ -1731,7 +2709,12 @@
         "amo"
       ],
       "example": "No soy el dueño.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪weɲo/",
+      "family": [
+        "dueños",
+        "adueñarse"
+      ]
     },
     {
       "word": "SILLA",
@@ -1741,7 +2724,12 @@
         "banco"
       ],
       "example": "Es una silla.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "asiento",
+        "taburete"
+      ],
+      "ipa": "/ˈsiʝa/"
     },
     {
       "word": "RAYO",
@@ -1750,7 +2738,13 @@
         "luz"
       ],
       "example": "Vi un rayo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "centella",
+        "chispa",
+        "relámpago"
+      ],
+      "ipa": "/ˈraʝo/"
     },
     {
       "word": "NARIZ",
@@ -1760,7 +2754,13 @@
         "trompa"
       ],
       "example": "Tócate la nariz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/naˈɾis/",
+      "family": [
+        "narices",
+        "nasal",
+        "nasalizar"
+      ]
     },
     {
       "word": "CÓDIGO",
@@ -1769,7 +2769,13 @@
         "regla"
       ],
       "example": "Ingrese el código.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkoð̞iɣ̞o/",
+      "family": [
+        "códigos",
+        "codificar",
+        "codificación"
+      ]
     },
     {
       "word": "EMERGENCIA",
@@ -1779,7 +2785,11 @@
         "crisis"
       ],
       "example": "Es una emergencia.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "urgencia"
+      ],
+      "ipa": "/emeɾˈxẽnsja/"
     },
     {
       "word": "COMPRA",
@@ -1788,13 +2798,24 @@
         "adquisición"
       ],
       "example": "Compra pan.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkõmpɾa/",
+      "family": [
+        "comprar",
+        "comprador",
+        "comprensión"
+      ]
     },
     {
       "word": "JUSTICIA",
       "gloss": "acción de dar a cada uno lo que le corresponde.",
       "example": "Quiero justicia.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/xusˈt̪isja/",
+      "family": [
+        "justo",
+        "justificar"
+      ]
     },
     {
       "word": "CONDICIÓN",
@@ -1804,7 +2825,13 @@
         "situación"
       ],
       "example": "Puso una condición.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõn̪d̪iˈsjõn/",
+      "family": [
+        "condicionar",
+        "condicional",
+        "incondicional"
+      ]
     },
     {
       "word": "DISPARO",
@@ -1814,7 +2841,13 @@
         "balazo"
       ],
       "example": "Un disparo sonó.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪isˈpaɾo/",
+      "family": [
+        "disparar",
+        "disparador",
+        "disparidad"
+      ]
     },
     {
       "word": "INTERÉS",
@@ -1824,7 +2857,13 @@
         "curiosidad"
       ],
       "example": "Perdí el interés.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩn̪t̪eˈɾes/",
+      "family": [
+        "interesar",
+        "interesante",
+        "desinterés"
+      ]
     },
     {
       "word": "CALOR",
@@ -1834,7 +2873,13 @@
         "ardor"
       ],
       "example": "Hace calor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaˈloɾ/",
+      "family": [
+        "caliente",
+        "calentar",
+        "calidez"
+      ]
     },
     {
       "word": "PROYECTO",
@@ -1844,7 +2889,13 @@
         "idea"
       ],
       "example": "¡Buen proyecto!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "croquis",
+        "plan",
+        "programa"
+      ],
+      "ipa": "/pɾoˈʝekt̪o/"
     },
     {
       "word": "RELOJ",
@@ -1853,7 +2904,13 @@
         "cronómetro"
       ],
       "example": "Perdí el reloj.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/reˈlox/",
+      "family": [
+        "relojes",
+        "relojero",
+        "relojería"
+      ]
     },
     {
       "word": "CINE",
@@ -1863,7 +2920,12 @@
         "pantalla"
       ],
       "example": "Voy al cine.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsine/",
+      "family": [
+        "cinema",
+        "cinematógrafo"
+      ]
     },
     {
       "word": "MEMORIA",
@@ -1874,7 +2936,13 @@
         "retentiva"
       ],
       "example": "¡Qué memoria!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "retentiva",
+        "recuerdo",
+        "inventario"
+      ],
+      "ipa": "/meˈmoɾja/"
     },
     {
       "word": "INTENCIÓN",
@@ -1884,7 +2952,13 @@
         "meta"
       ],
       "example": "Era mi intención.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩn̪t̪ẽnˈsjõn/",
+      "family": [
+        "intentar",
+        "intencional",
+        "intencionado"
+      ]
     },
     {
       "word": "PROPÓSITO",
@@ -1894,7 +2968,12 @@
         "objetivo"
       ],
       "example": "Fallé a propósito.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾoˈposit̪o/",
+      "family": [
+        "proponer",
+        "propositivo"
+      ]
     },
     {
       "word": "VACACIÓN",
@@ -1904,7 +2983,11 @@
         "fiesta"
       ],
       "example": "Podemos pasar toda la vacación en cama.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bakaˈsjõn/",
+      "family": [
+        "vacacional"
+      ]
     },
     {
       "word": "TAXI",
@@ -1914,7 +2997,12 @@
         "auto"
       ],
       "example": "Iré en taxi.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪aksi/",
+      "family": [
+        "taxis",
+        "taxista"
+      ]
     },
     {
       "word": "PESAR",
@@ -1924,7 +3012,13 @@
         "pena"
       ],
       "example": "Tu pesar es mi pesar.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "contrapesar",
+        "medir",
+        "ponderar"
+      ],
+      "ipa": "/peˈsaɾ/"
     },
     {
       "word": "CONFIANZA",
@@ -1934,7 +3028,13 @@
         "seguridad"
       ],
       "example": "Ten confianza.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõɱˈfjãnsa/",
+      "family": [
+        "confiar",
+        "confiado",
+        "desconfianza"
+      ]
     },
     {
       "word": "TIRO",
@@ -1944,7 +3044,13 @@
         "balazo"
       ],
       "example": "¡Buen tiro!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪iɾo/",
+      "family": [
+        "tirar",
+        "tirador",
+        "tiroteo"
+      ]
     },
     {
       "word": "LUCHA",
@@ -1953,14 +3059,26 @@
         "pelea"
       ],
       "example": "Ganamos la lucha.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "confrontación",
+        "discordia",
+        "discusión"
+      ],
+      "ipa": "/ˈlut͡ʃa/"
     },
     {
       "word": "CUCHILLO",
       "gloss": "cosa con filo que la gente usa en la cocina y en la mesa",
       "synonyms": [],
       "example": "Es un cuchillo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "daga",
+        "escalpelo",
+        "espada"
+      ],
+      "ipa": "/kuˈt͡ʃiʝo/"
     },
     {
       "word": "VICTORIA",
@@ -1970,7 +3088,12 @@
         "éxito"
       ],
       "example": "Esa es tu victoria.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bikˈt̪oɾja/",
+      "family": [
+        "victorioso",
+        "victoriosamente"
+      ]
     },
     {
       "word": "LÍDER",
@@ -1980,7 +3103,13 @@
         "guía"
       ],
       "example": "Eres el líder.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlið̞eɾ/",
+      "family": [
+        "liderar",
+        "liderazgo",
+        "liderato"
+      ]
     },
     {
       "word": "CABO",
@@ -1990,7 +3119,11 @@
         "punta"
       ],
       "example": "El cabo del lápiz está roto.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cabecera",
+        "cabotaje"
+      ]
     },
     {
       "word": "CANTIDAD",
@@ -1999,7 +3132,12 @@
         "número"
       ],
       "example": "Hay una cantidad limitada.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kãn̪t̪iˈð̞að̞/",
+      "family": [
+        "cantidades",
+        "cantonal"
+      ]
     },
     {
       "word": "NECESIDAD",
@@ -2009,7 +3147,13 @@
         "precisión"
       ],
       "example": "Fui allí por necesidad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/nesesiˈð̞að̞/",
+      "family": [
+        "necesitar",
+        "necesario",
+        "necesidades"
+      ]
     },
     {
       "word": "AMENAZA",
@@ -2019,7 +3163,13 @@
         "riesgo"
       ],
       "example": "Amenaza a la paz.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ameˈnasa/",
+      "family": [
+        "amenazar",
+        "amenazante",
+        "amenazas"
+      ]
     },
     {
       "word": "PLATO",
@@ -2028,7 +3178,13 @@
         "comida"
       ],
       "example": "Usé este plato.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈplat̪o/",
+      "family": [
+        "plata",
+        "platero",
+        "platería"
+      ]
     },
     {
       "word": "VIENTO",
@@ -2037,14 +3193,25 @@
         "aire"
       ],
       "example": "Hay viento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbjẽn̪t̪o/",
+      "family": [
+        "ventoso",
+        "ventilador",
+        "ventear"
+      ]
     },
     {
       "word": "CUÁNTA",
       "gloss": "pregunta por la cantidad de algo",
       "synonyms": [],
       "example": "¡Cuánta agua!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwan.ta/",
+      "family": [
+        "cuánto",
+        "cuántos"
+      ]
     },
     {
       "word": "LECHE",
@@ -2054,7 +3221,12 @@
         "bebida"
       ],
       "example": "Tomé leche.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈlet͡ʃe/",
+      "family": [
+        "lechero",
+        "lechoso"
+      ]
     },
     {
       "word": "PIEZA",
@@ -2063,7 +3235,11 @@
         "habitación"
       ],
       "example": "Limpia la pieza.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpjesa/",
+      "family": [
+        "piezas"
+      ]
     },
     {
       "word": "ÁREA",
@@ -2072,7 +3248,11 @@
         "zona"
       ],
       "example": "¿Tú eres del área?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈaɾea/",
+      "family": [
+        "áreas"
+      ]
     },
     {
       "word": "INSPECTOR",
@@ -2081,7 +3261,13 @@
         "vigilante"
       ],
       "example": "Retenlos un par de minutos hasta que llegue el inspector.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ĩnspekˈt̪oɾ/",
+      "family": [
+        "inspección",
+        "inspeccionar",
+        "inspectora"
+      ]
     },
     {
       "word": "PAN",
@@ -2091,7 +3277,13 @@
         "pieza"
       ],
       "example": "Tengo pan.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpãn/",
+      "family": [
+        "panadería",
+        "panadero",
+        "empanar"
+      ]
     },
     {
       "word": "COLEGIO",
@@ -2100,7 +3292,13 @@
         "escuela"
       ],
       "example": "Fui al colegio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koˈlexjo/",
+      "family": [
+        "colegial",
+        "colegiala",
+        "colegiatura"
+      ]
     },
     {
       "word": "PASTEL",
@@ -2109,7 +3307,11 @@
         "tarta"
       ],
       "example": "¿Quiere pastel?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "tarta"
+      ],
+      "ipa": "/pasˈt̪el/"
     },
     {
       "word": "MEDICINA",
@@ -2119,7 +3321,13 @@
         "remedio"
       ],
       "example": "Toma la medicina.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/með̞iˈsina/",
+      "family": [
+        "médico",
+        "medicamento",
+        "medicinal"
+      ]
     },
     {
       "word": "PRÍNCIPE",
@@ -2128,7 +3336,12 @@
         "rey"
       ],
       "example": "Él es mi príncipe azul.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "principar",
+        "principado"
+      ],
+      "ipa": "/ˈpɾĩnsipe/"
     },
     {
       "word": "DESASTRE",
@@ -2137,7 +3350,12 @@
         "daño"
       ],
       "example": "¡Qué desastre!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪eˈsast̪ɾe/",
+      "family": [
+        "desastroso",
+        "desastrado"
+      ]
     },
     {
       "word": "CUENTA",
@@ -2146,7 +3364,13 @@
         "factura"
       ],
       "example": "Pagué la cuenta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwẽn̪t̪a/",
+      "family": [
+        "contar",
+        "cuento",
+        "cuentista"
+      ]
     },
     {
       "word": "CONTRATO",
@@ -2155,7 +3379,13 @@
         "acuerdo"
       ],
       "example": "Firma el contrato.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kõn̪ˈt̪ɾat̪o/",
+      "family": [
+        "contratar",
+        "contratista",
+        "contratación"
+      ]
     },
     {
       "word": "AGUJERO",
@@ -2164,7 +3394,13 @@
         "hueco"
       ],
       "example": "Él tapó el agujero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aɣ̞uˈxeɾo/",
+      "family": [
+        "agujerear",
+        "agujerado",
+        "agujereado"
+      ]
     },
     {
       "word": "ACTO",
@@ -2173,13 +3409,23 @@
         "acción"
       ],
       "example": "Lo hizo en el acto.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈakt̪o/",
+      "family": [
+        "acción",
+        "actuar",
+        "actor"
+      ]
     },
     {
       "word": "CABELLO",
       "gloss": "el pelo de las personas",
       "example": "Él tocó su cabello.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cabelludo",
+        "encabellar"
+      ]
     },
     {
       "word": "ESCALERA",
@@ -2188,7 +3434,12 @@
         "peldaños"
       ],
       "example": "Subió la escalera.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eskaˈleɾa/",
+      "family": [
+        "escalar",
+        "escalón"
+      ]
     },
     {
       "word": "PLAYA",
@@ -2198,7 +3449,12 @@
         "orilla"
       ],
       "example": "Amo la playa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈplaʝa/",
+      "family": [
+        "playero",
+        "playazo"
+      ]
     },
     {
       "word": "EXAMEN",
@@ -2207,7 +3463,12 @@
         "prueba"
       ],
       "example": "Era un examen.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ekˈsamẽn/",
+      "family": [
+        "examinar",
+        "examinador"
+      ]
     },
     {
       "word": "CINTA",
@@ -2216,7 +3477,13 @@
         "tira"
       ],
       "example": "Desaté la cinta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsĩn̪t̪a/",
+      "family": [
+        "cinturón",
+        "cintar",
+        "cintado"
+      ]
     },
     {
       "word": "PECHO",
@@ -2225,7 +3492,12 @@
         "torso"
       ],
       "example": "Me duele el pecho.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpet͡ʃo/",
+      "family": [
+        "pechera",
+        "pechuga"
+      ]
     },
     {
       "word": "FUENTE",
@@ -2234,7 +3506,11 @@
         "manantial"
       ],
       "example": "Conozco la fuente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfwẽn̪t̪e/",
+      "family": [
+        "fontanar"
+      ]
     },
     {
       "word": "SOCIO",
@@ -2243,7 +3519,13 @@
         "compañero"
       ],
       "example": "Soy tu socio.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsosjo/",
+      "family": [
+        "sociable",
+        "asociar",
+        "asociación"
+      ]
     },
     {
       "word": "SHOW",
@@ -2252,7 +3534,8 @@
         "espectáculo"
       ],
       "example": "No veo ese show.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈʃow/"
     },
     {
       "word": "AUTOBÚS",
@@ -2268,7 +3551,13 @@
         "historia"
       ],
       "example": "Es solo un cuento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkwẽn̪t̪o/",
+      "family": [
+        "contar",
+        "cuenta",
+        "cuentista"
+      ]
     },
     {
       "word": "AMANTE",
@@ -2277,7 +3566,12 @@
         "novio"
       ],
       "example": "Mi amante vive lejos.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈmãn̪t̪e/",
+      "family": [
+        "amar",
+        "amatorio"
+      ]
     },
     {
       "word": "PARQUE",
@@ -2286,7 +3580,8 @@
         "jardín"
       ],
       "example": "Ve al parque.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaɾke/"
     },
     {
       "word": "HUESO",
@@ -2295,7 +3590,13 @@
         "osamenta"
       ],
       "example": "Esto es un hueso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈwe.so/",
+      "family": [
+        "huesudo",
+        "huesera",
+        "huesoso"
+      ]
     },
     {
       "word": "HIELO",
@@ -2304,7 +3605,12 @@
         "frío"
       ],
       "example": "Té sin hielo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈjelo/",
+      "family": [
+        "helado",
+        "helar"
+      ]
     },
     {
       "word": "VOTO",
@@ -2313,7 +3619,13 @@
         "sufragio"
       ],
       "example": "Su voto fue nulo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbot̪o/",
+      "family": [
+        "votar",
+        "votación",
+        "votante"
+      ]
     },
     {
       "word": "PRENSA",
@@ -2322,7 +3634,11 @@
         "papel"
       ],
       "example": "No hables con la prensa.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "periodismo"
+      ],
+      "ipa": "/ˈpɾẽnsa/"
     },
     {
       "word": "DATO",
@@ -2331,7 +3647,12 @@
         "información"
       ],
       "example": "El dato es alentador.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪at̪o/",
+      "family": [
+        "datar",
+        "datación"
+      ]
     },
     {
       "word": "PUENTE",
@@ -2340,7 +3661,11 @@
         "pasarela"
       ],
       "example": "Cruza el puente.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpwẽn̪t̪e/",
+      "family": [
+        "puentear"
+      ]
     },
     {
       "word": "PEZ",
@@ -2349,7 +3674,13 @@
         "animal"
       ],
       "example": "Es un pez.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpes/",
+      "family": [
+        "pecera",
+        "pececillo",
+        "peces"
+      ]
     },
     {
       "word": "VECINO",
@@ -2358,14 +3689,25 @@
         "compañero"
       ],
       "example": "Soy tu vecino.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/beˈsino/",
+      "family": [
+        "vecindad",
+        "vecindario",
+        "avecindar"
+      ]
     },
     {
       "word": "TELEVISIÓN",
       "gloss": "una pantalla que muestra imágenes y sonido",
       "synonyms": [],
       "example": "Veo la televisión.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "televisar",
+        "televisivo",
+        "televidente"
+      ]
     },
     {
       "word": "SERIE",
@@ -2374,7 +3716,12 @@
         "programa"
       ],
       "example": "¿Esta serie está en Netflix?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈseɾje/",
+      "family": [
+        "serial",
+        "seriado"
+      ]
     },
     {
       "word": "SIGLO",
@@ -2383,7 +3730,11 @@
         "época"
       ],
       "example": "Un siglo es cien años.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "secular"
+      ],
+      "ipa": "/ˈsiɣ̞lo/"
     },
     {
       "word": "CARGA",
@@ -2392,7 +3743,13 @@
         "peso"
       ],
       "example": "Es un barco de carga.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkaɾɣ̞a/",
+      "family": [
+        "cargar",
+        "cargamento",
+        "carguero"
+      ]
     },
     {
       "word": "VIDEO",
@@ -2401,7 +3758,8 @@
         "película"
       ],
       "example": "Vea este video.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/biˈð̞eo/"
     },
     {
       "word": "VELOCIDAD",
@@ -2410,7 +3768,13 @@
         "paso"
       ],
       "example": "¡Más velocidad!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/belosiˈð̞að̞/",
+      "family": [
+        "veloz",
+        "acelerar",
+        "aceleración"
+      ]
     },
     {
       "word": "OFERTA",
@@ -2419,7 +3783,13 @@
         "regalo"
       ],
       "example": "Acepto la oferta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/oˈfeɾt̪a/",
+      "family": [
+        "ofertar",
+        "ofertante",
+        "ofertorio"
+      ]
     },
     {
       "word": "PROPIEDAD",
@@ -2428,7 +3798,13 @@
         "posesión"
       ],
       "example": "La propiedad es mía.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾopjeˈð̞að̞/",
+      "family": [
+        "propio",
+        "propietario",
+        "apropiar"
+      ]
     },
     {
       "word": "NATURALEZA",
@@ -2437,7 +3813,13 @@
         "entorno"
       ],
       "example": "Amo la naturaleza.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/nat̪uɾaˈlesa/",
+      "family": [
+        "natural",
+        "naturalizar",
+        "naturalista"
+      ]
     },
     {
       "word": "SEÑORÍA",
@@ -2446,7 +3828,13 @@
         "título"
       ],
       "example": "Señoría, ¿puedo presentar mi solicitud ahora?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/seɲoˈɾia/",
+      "family": [
+        "señor",
+        "señorial",
+        "señorío"
+      ]
     },
     {
       "word": "PAPI",
@@ -2455,7 +3843,11 @@
         "padre"
       ],
       "example": "¡Te quiero papi!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpapi/",
+      "family": [
+        "papá"
+      ]
     },
     {
       "word": "PELOTA",
@@ -2464,7 +3856,13 @@
         "balón"
       ],
       "example": "Dame la pelota.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/peˈlot̪a/",
+      "family": [
+        "pelotazo",
+        "pelotero",
+        "pelotear"
+      ]
     },
     {
       "word": "DISCO",
@@ -2473,7 +3871,12 @@
         "círculo"
       ],
       "example": "Cambia el disco, ¡aburre!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪isko/",
+      "family": [
+        "discoteca",
+        "discográfico"
+      ]
     },
     {
       "word": "DISTANCIA",
@@ -2482,7 +3885,12 @@
         "espacio"
       ],
       "example": "¿A qué distancia?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d̪isˈt̪ãnsja/",
+      "family": [
+        "distante",
+        "distanciar"
+      ]
     },
     {
       "word": "ÉPOCA",
@@ -2491,13 +3899,24 @@
         "tiempo"
       ],
       "example": "En esa época era joven.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈepoka/",
+      "family": [
+        "épico",
+        "contemporáneo",
+        "coetáneo"
+      ]
     },
     {
       "word": "ESPADA",
       "gloss": "Arma blanca larga y afilada.",
       "example": "Dame mi espada.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈpað̞a/",
+      "family": [
+        "espadachín",
+        "espadilla"
+      ]
     },
     {
       "word": "ARTISTA",
@@ -2506,7 +3925,13 @@
         "pintor"
       ],
       "example": "Soy un artista.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aɾˈt̪ist̪a/",
+      "family": [
+        "arte",
+        "artístico",
+        "artesano"
+      ]
     },
     {
       "word": "MANDO",
@@ -2515,7 +3940,12 @@
         "control"
       ],
       "example": "Tomas el mando.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmãn̪d̪o/",
+      "family": [
+        "mandar",
+        "mandamiento"
+      ]
     },
     {
       "word": "MODELO",
@@ -2524,7 +3954,13 @@
         "ejemplo"
       ],
       "example": "Me gusta este modelo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/moˈð̞elo/",
+      "family": [
+        "modelar",
+        "modelado",
+        "modelismo"
+      ]
     },
     {
       "word": "PRINCESA",
@@ -2533,7 +3969,13 @@
         "reina"
       ],
       "example": "Sos mi princesa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾĩnˈsesa/",
+      "family": [
+        "príncipe",
+        "principado",
+        "principesco"
+      ]
     },
     {
       "word": "MINISTRO",
@@ -2542,7 +3984,13 @@
         "gobernante"
       ],
       "example": "El Primer Ministro dimitió.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈnist̪ɾo/",
+      "family": [
+        "ministerio",
+        "administrar",
+        "administración"
+      ]
     },
     {
       "word": "PESO",
@@ -2551,7 +3999,13 @@
         "masa"
       ],
       "example": "Pierde peso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpeso/",
+      "family": [
+        "pesar",
+        "pesado",
+        "pesaje"
+      ]
     },
     {
       "word": "PLANTA",
@@ -2560,7 +4014,11 @@
         "flor"
       ],
       "example": "Es una planta.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "plano"
+      ],
+      "ipa": "/ˈplãn̪t̪a/"
     },
     {
       "word": "SOMBRERO",
@@ -2569,7 +4027,12 @@
         "gorra"
       ],
       "example": "Trae mi sombrero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sõmˈbɾeɾo/",
+      "family": [
+        "sombra",
+        "sombrilla"
+      ]
     },
     {
       "word": "UNIVERSO",
@@ -2578,7 +4041,12 @@
         "cosmos"
       ],
       "example": "Dios creó el universo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "universal",
+        "universidad",
+        "universitario"
+      ]
     },
     {
       "word": "BELLEZA",
@@ -2587,7 +4055,12 @@
         "encanto"
       ],
       "example": "¡Qué belleza!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/beˈʝesa/",
+      "family": [
+        "bello",
+        "embellecer"
+      ]
     },
     {
       "word": "POLLO",
@@ -2596,7 +4069,12 @@
         "ave"
       ],
       "example": "Sabe a pollo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpoʝo/",
+      "family": [
+        "polluelo",
+        "empollar"
+      ]
     },
     {
       "word": "MIRADA",
@@ -2605,7 +4083,13 @@
         "vista"
       ],
       "example": "Bajó la mirada.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/miˈɾað̞a/",
+      "family": [
+        "mirar",
+        "mirador",
+        "miramiento"
+      ]
     },
     {
       "word": "JARDÍN",
@@ -2616,7 +4100,13 @@
         "patio"
       ],
       "example": "No en mi jardín.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/xaɾˈð̞ĩn/",
+      "family": [
+        "jardinero",
+        "jardinera",
+        "jardinería"
+      ]
     },
     {
       "word": "DESCANSO",
@@ -2625,7 +4115,13 @@
         "pausa"
       ],
       "example": "¡Descanso!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "pausa",
+        "reposo",
+        "quietud"
+      ],
+      "ipa": "/d̪esˈkãnso/"
     },
     {
       "word": "APOYO",
@@ -2634,7 +4130,12 @@
         "ayuda"
       ],
       "example": "Yo lo apoyo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈpoʝo/",
+      "family": [
+        "apoyar",
+        "apoyatura"
+      ]
     },
     {
       "word": "MERCADO",
@@ -2643,7 +4144,13 @@
         "tienda"
       ],
       "example": "¿Cuál mercado?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "supermercado",
+        "hipermercado",
+        "mercadillo"
+      ],
+      "ipa": "/meɾˈkað̞o/"
     },
     {
       "word": "TEORÍA",
@@ -2652,7 +4159,12 @@
         "idea"
       ],
       "example": "Esa es mi teoría.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪eoˈɾia/",
+      "family": [
+        "teórico",
+        "teorizar"
+      ]
     },
     {
       "word": "PREMIO",
@@ -2661,7 +4173,12 @@
         "regalo"
       ],
       "example": "Qué premio ganó?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpɾemjo/",
+      "family": [
+        "premiar",
+        "premiado"
+      ]
     },
     {
       "word": "SOCIEDAD",
@@ -2670,7 +4187,13 @@
         "gente"
       ],
       "example": "Somos la sociedad.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sosjeˈð̞að̞/",
+      "family": [
+        "social",
+        "sociable",
+        "asociar"
+      ]
     },
     {
       "word": "TAREA",
@@ -2679,7 +4202,8 @@
         "trabajo"
       ],
       "example": "Tengo tarea.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪aˈɾea/"
     },
     {
       "word": "PAGO",
@@ -2688,7 +4212,13 @@
         "dinero"
       ],
       "example": "¿Dónde pago?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaɣ̞o/",
+      "family": [
+        "pagar",
+        "pagado",
+        "pagador"
+      ]
     },
     {
       "word": "DOMINGO",
@@ -2697,7 +4227,12 @@
         "día"
       ],
       "example": "Hoy es domingo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "calendario",
+        "dominical"
+      ],
+      "ipa": "/d̪oˈmĩŋgo/"
     },
     {
       "word": "ASPECTO",
@@ -2706,7 +4241,13 @@
         "forma"
       ],
       "example": "Tenía mal aspecto.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "tiempo",
+        "modo",
+        "número"
+      ],
+      "ipa": "/asˈpekt̪o/"
     },
     {
       "word": "TONTA",
@@ -2715,7 +4256,13 @@
         "boba"
       ],
       "example": "No soy tonta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈt̪õn̪t̪a/",
+      "family": [
+        "tonto",
+        "tontería",
+        "atontar"
+      ]
     },
     {
       "word": "MAGIA",
@@ -2724,7 +4271,12 @@
         "hechizo"
       ],
       "example": "Eso es magia.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈmaxja/",
+      "family": [
+        "mágico",
+        "magiar"
+      ]
     },
     {
       "word": "VERGÜENZA",
@@ -2733,7 +4285,13 @@
         "pena"
       ],
       "example": "¡Qué vergüenza!",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "avergonzar",
+        "vergonzante",
+        "vergonzoso"
+      ],
+      "ipa": "/beɾˈɣ̞wẽnsa/"
     },
     {
       "word": "PRISIONERO",
@@ -2742,13 +4300,24 @@
         "preso"
       ],
       "example": "Soy un prisionero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɾisjoˈneɾo/",
+      "family": [
+        "prisión",
+        "encarcelar"
+      ]
     },
     {
       "word": "USO",
       "gloss": "Acción de emplear algo.",
       "example": "Yo lo uso.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈuso/",
+      "family": [
+        "usar",
+        "usado",
+        "usuario"
+      ]
     },
     {
       "word": "PÁJARO",
@@ -2758,7 +4327,12 @@
         "volador"
       ],
       "example": "Es un pájaro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaxaɾo/",
+      "family": [
+        "pajarería",
+        "pajarito"
+      ]
     },
     {
       "word": "CARRETERA",
@@ -2767,13 +4341,21 @@
         "camino"
       ],
       "example": "Nevaba en la carretera.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "calzada"
+      ],
+      "ipa": "/kareˈt̪eɾa/"
     },
     {
       "word": "PÁGINA",
       "gloss": "una parte de un texto",
       "example": "¿Qué página?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpaxina/",
+      "family": [
+        "paginar"
+      ]
     },
     {
       "word": "CRIATURA",
@@ -2782,7 +4364,12 @@
         "animal"
       ],
       "example": "La criatura se fue.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɾjaˈt̪uɾa/",
+      "family": [
+        "criar",
+        "criadero"
+      ]
     },
     {
       "word": "VIERNES",
@@ -2791,13 +4378,20 @@
         "día"
       ],
       "example": "Hoy es viernes.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbjeɾnes/"
     },
     {
       "word": "ENFRENTAR",
       "gloss": "Oponerse a un problema o a alguien.",
       "example": "Debes enfrentar la realidad.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽɱfɾẽn̪ˈt̪aɾ/",
+      "family": [
+        "enfrentamiento",
+        "enfrentado",
+        "enfrente"
+      ]
     },
     {
       "word": "BRUJA",
@@ -2806,7 +4400,12 @@
         "hechicera"
       ],
       "example": "Era bruja.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "hechicera",
+        "meiga"
+      ],
+      "ipa": "/ˈbɾuxa/"
     },
     {
       "word": "CIENCIA",
@@ -2815,7 +4414,13 @@
         "estudio"
       ],
       "example": "¿Qué es la ciencia?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈsjẽnsja/",
+      "family": [
+        "científico",
+        "científicamente",
+        "cientifismo"
+      ]
     },
     {
       "word": "HABILIDAD",
@@ -2824,7 +4429,10 @@
         "destreza"
       ],
       "example": "Tengo habilidad.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "enredo"
+      ]
     },
     {
       "word": "TALENTO",
@@ -2833,14 +4441,25 @@
         "don"
       ],
       "example": "Tienes talento.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪aˈlẽn̪t̪o/",
+      "family": [
+        "talentoso",
+        "talentudo"
+      ]
     },
     {
       "word": "ENFERMERO",
       "gloss": "persona que cuida a la gente en un hospital",
       "synonyms": [],
       "example": "Soy enfermero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ẽɱfeɾˈmeɾo/",
+      "family": [
+        "enfermería",
+        "enfermar",
+        "enfermo"
+      ]
     },
     {
       "word": "DATE",
@@ -2848,7 +4467,12 @@
       "synonyms": [
         "día"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈd̪at̪e/",
+      "family": [
+        "datación",
+        "datar"
+      ]
     },
     {
       "word": "META",
@@ -2857,7 +4481,11 @@
         "objetivo"
       ],
       "example": "Ésa no es la meta.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "portería"
+      ],
+      "ipa": "/ˈmet̪a/"
     },
     {
       "word": "OESTE",
@@ -2866,7 +4494,12 @@
         "lado"
       ],
       "example": "Vamos al oeste.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/oˈest̪e/",
+      "family": [
+        "occidental",
+        "occidente"
+      ]
     },
     {
       "word": "VENTA",
@@ -2875,19 +4508,36 @@
         "compra"
       ],
       "example": "Estaba en venta.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈbẽn̪t̪a/",
+      "family": [
+        "vender",
+        "vendedor",
+        "vendible"
+      ]
     },
     {
       "word": "ARTÍCULO",
       "gloss": "texto de la prensa",
       "example": "Lee el artículo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aɾˈt̪ikulo/",
+      "family": [
+        "articular",
+        "articulación",
+        "articulado"
+      ]
     },
     {
       "word": "EXCELENTE",
       "gloss": "Muy bueno, de la mejor calidad.",
       "example": "Excelente.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ekseˈlẽn̪t̪e/",
+      "family": [
+        "excelencia",
+        "excelentemente"
+      ]
     },
     {
       "word": "MOTOR",
@@ -2896,7 +4546,13 @@
         "máquina"
       ],
       "example": "Apaga el motor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/moˈt̪oɾ/",
+      "family": [
+        "motriz",
+        "motorizado",
+        "motricidad"
+      ]
     },
     {
       "word": "PÉRDIDA",
@@ -2905,13 +4561,23 @@
         "daño"
       ],
       "example": "¡Qué pérdida!",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpeɾð̞ið̞a/",
+      "family": [
+        "perder",
+        "perdido",
+        "perdedor"
+      ]
     },
     {
       "word": "KILÓMETRO",
       "gloss": "unidad de distancia: a pie se recorren unos cinco en una hora",
       "example": "Mil metros son un kilómetro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kiˈlomet̪ɾo/",
+      "family": [
+        "kilométrico"
+      ]
     },
     {
       "word": "JUGADOR",
@@ -2920,7 +4586,11 @@
         "atleta"
       ],
       "example": "Él parece un jugador.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "tahúr"
+      ],
+      "ipa": "/xuɣ̞aˈð̞oɾ/"
     },
     {
       "word": "HUMOR",
@@ -2929,7 +4599,12 @@
         "broma"
       ],
       "example": "No estoy de humor.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/uˈmoɾ/",
+      "family": [
+        "humorístico",
+        "humorista"
+      ]
     },
     {
       "word": "PINTURA",
@@ -2938,7 +4613,13 @@
         "color"
       ],
       "example": "Necesito pintura.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pĩn̪ˈt̪uɾa/",
+      "family": [
+        "pintar",
+        "pintor",
+        "pintoresco"
+      ]
     },
     {
       "word": "COPIA",
@@ -2947,7 +4628,13 @@
         "duplicado"
       ],
       "example": "Es una copia.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkopja/",
+      "family": [
+        "copiar",
+        "copista",
+        "copiador"
+      ]
     },
     {
       "word": "DEJADO",
@@ -2956,7 +4643,12 @@
         "abandonado"
       ],
       "example": "El reloj de mi abuela está dejado en el desván.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/d̪eˈxað̞o/",
+      "family": [
+        "dejar",
+        "dejadez"
+      ]
     },
     {
       "word": "TRASERO",
@@ -2965,7 +4657,11 @@
         "parte de atrás"
       ],
       "example": "Hay alguien en el patio trasero.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪ɾaˈseɾo/",
+      "family": [
+        "trasera"
+      ]
     },
     {
       "word": "DIVERTIR",
@@ -2974,7 +4670,12 @@
         "entretener"
       ],
       "example": "¿Te quieres divertir?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "diversión",
+        "divertido",
+        "divertimento"
+      ]
     },
     {
       "word": "ENGAÑAR",
@@ -2983,7 +4684,13 @@
         "mentir"
       ],
       "example": "Me dejé engañar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽŋgaˈɲaɾ/",
+      "family": [
+        "engaño",
+        "engañador",
+        "engañifa"
+      ]
     },
     {
       "word": "IZQUIERDO",
@@ -2992,7 +4699,12 @@
         "lado"
       ],
       "example": "Me duele el pie izquierdo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/isˈkjeɾð̞o/",
+      "family": [
+        "izquierda",
+        "izquierdista"
+      ]
     },
     {
       "word": "COSTAR",
@@ -3001,7 +4713,12 @@
         "valer"
       ],
       "example": "¿Cuánto va a costar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kosˈt̪aɾ/",
+      "family": [
+        "coste",
+        "costoso"
+      ]
     },
     {
       "word": "OLER",
@@ -3010,7 +4727,12 @@
         "husmear"
       ],
       "example": "Puedo oler el mar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/oˈleɾ/",
+      "family": [
+        "olor",
+        "olerse"
+      ]
     },
     {
       "word": "ACORDAR",
@@ -3019,7 +4741,12 @@
         "decidir"
       ],
       "example": "Hay que acordar el precio.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/akoɾˈð̞aɾ/",
+      "family": [
+        "acuerdo",
+        "acordarse"
+      ]
     },
     {
       "word": "CONTROLAR",
@@ -3028,7 +4755,12 @@
         "dirigir"
       ],
       "example": "No me puedo controlar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõn̪t̪ɾoˈlaɾ/",
+      "family": [
+        "control",
+        "controlador"
+      ]
     },
     {
       "word": "MANEJAR",
@@ -3037,7 +4769,12 @@
         "conducir"
       ],
       "example": "Ya sé manejar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/maneˈxaɾ/",
+      "family": [
+        "manejo",
+        "manejable"
+      ]
     },
     {
       "word": "ALEJAR",
@@ -3046,7 +4783,12 @@
         "apartar"
       ],
       "example": "No lo puedes alejar de mí.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "apartar",
+        "desviar"
+      ],
+      "ipa": "/aleˈxaɾ/"
     },
     {
       "word": "UTILIZAR",
@@ -3055,13 +4797,22 @@
         "usar"
       ],
       "example": "¿Cuál vas a utilizar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ut̪iliˈsaɾ/",
+      "family": [
+        "utilidad",
+        "utilizable"
+      ]
     },
     {
       "word": "BESAR",
       "gloss": "tocar a alguien con la boca con cariño",
       "example": "Te voy a besar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/beˈsaɾ/",
+      "family": [
+        "beso"
+      ]
     },
     {
       "word": "RECONOCER",
@@ -3070,7 +4821,13 @@
         "aceptar"
       ],
       "example": "¿Puedes reconocer esto?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "escrutar",
+        "explorar",
+        "inspeccionar"
+      ],
+      "ipa": "/rekonoˈseɾ/"
     },
     {
       "word": "LIMPIAR",
@@ -3079,7 +4836,12 @@
         "asear"
       ],
       "example": "Quiero limpiar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/lĩmˈpjaɾ/",
+      "family": [
+        "limpieza",
+        "limpio"
+      ]
     },
     {
       "word": "CENAR",
@@ -3088,13 +4850,23 @@
         "comer"
       ],
       "example": "Voy a cenar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/seˈnaɾ/",
+      "family": [
+        "cena",
+        "cenador"
+      ]
     },
     {
       "word": "SAL",
       "gloss": "Condimento blanco y cristalino.",
       "example": "Ponle sal.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈsal/",
+      "family": [
+        "salado",
+        "salero"
+      ]
     },
     {
       "word": "ABANDONAR",
@@ -3103,7 +4875,11 @@
         "dejar"
       ],
       "example": "¿Quieres abandonar?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "abandono",
+        "abandonado"
+      ]
     },
     {
       "word": "BAJO",
@@ -3112,7 +4888,12 @@
         "pequeño"
       ],
       "example": "No soy bajo.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈbaxo/",
+      "family": [
+        "bajón",
+        "bajista"
+      ]
     },
     {
       "word": "HERIDO",
@@ -3121,7 +4902,12 @@
         "lastimado"
       ],
       "example": "Estoy herido.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/eˈɾið̞o/",
+      "family": [
+        "herir",
+        "herida"
+      ]
     },
     {
       "word": "RESPIRAR",
@@ -3130,7 +4916,12 @@
         "vivir"
       ],
       "example": "¿Podés respirar?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/respiˈɾaɾ/",
+      "family": [
+        "respiración",
+        "respirador"
+      ]
     },
     {
       "word": "REUNIR",
@@ -3139,7 +4930,12 @@
         "juntar"
       ],
       "example": "Nos vamos a reunir el domingo.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/reuˈniɾ/",
+      "family": [
+        "reunión",
+        "reunido"
+      ]
     },
     {
       "word": "UNIR",
@@ -3148,7 +4944,12 @@
         "juntar"
       ],
       "example": "¿A qué grupo te quieres unir?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/uˈniɾ/",
+      "family": [
+        "unión",
+        "unido"
+      ]
     },
     {
       "word": "TRISTE",
@@ -3157,7 +4958,12 @@
         "penoso"
       ],
       "example": "Es triste.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈt̪ɾist̪e/",
+      "family": [
+        "tristeza",
+        "entristecer"
+      ]
     },
     {
       "word": "CANSADO",
@@ -3167,7 +4973,12 @@
         "fatigado"
       ],
       "example": "Estoy cansado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kãnˈsað̞o/",
+      "family": [
+        "cansancio",
+        "cansar"
+      ]
     },
     {
       "word": "DOLER",
@@ -3176,7 +4987,12 @@
         "lastimar"
       ],
       "example": "No va a doler.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪oˈleɾ/",
+      "family": [
+        "dolor",
+        "doliente"
+      ]
     },
     {
       "word": "ENTREGAR",
@@ -3185,7 +5001,12 @@
         "dar"
       ],
       "example": "Podemos entregar en una semana.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽn̪t̪ɾeˈɣ̞aɾ/",
+      "family": [
+        "entrega",
+        "entregado"
+      ]
     },
     {
       "word": "ENCARGAR",
@@ -3194,7 +5015,12 @@
         "pedir"
       ],
       "example": "¿Por qué no encargar pizzas?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ẽŋkaɾˈɣ̞aɾ/",
+      "family": [
+        "encargo",
+        "encargado"
+      ]
     },
     {
       "word": "DULCE",
@@ -3203,7 +5029,12 @@
         "azucarado"
       ],
       "example": "¿Es dulce?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈd̪ulse/",
+      "family": [
+        "dulzura",
+        "endulzar"
+      ]
     },
     {
       "word": "PARTIR",
@@ -3212,7 +5043,12 @@
         "dividir"
       ],
       "example": "Hay que partir el pastel en trozos.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "irse",
+        "salir"
+      ],
+      "ipa": "/paɾˈt̪iɾ/"
     },
     {
       "word": "INTERESAR",
@@ -3221,7 +5057,12 @@
         "gustar"
       ],
       "example": "Pensaba que eso te podría interesar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ĩn̪t̪eɾeˈsaɾ/",
+      "family": [
+        "interés",
+        "interesado"
+      ]
     },
     {
       "word": "UNIDO",
@@ -3230,7 +5071,12 @@
         "junto"
       ],
       "example": "Estoy unido a ti.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/uˈnið̞o/",
+      "family": [
+        "unión",
+        "unir"
+      ]
     },
     {
       "word": "SUFRIR",
@@ -3239,7 +5085,13 @@
         "padecer"
       ],
       "example": "No quiero sufrir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/suˈfɾiɾ/",
+      "family": [
+        "sufrimiento",
+        "sufrido",
+        "sufrible"
+      ]
     },
     {
       "word": "AGARRAR",
@@ -3248,7 +5100,13 @@
         "coger"
       ],
       "example": "Lo voy a agarrar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "asir",
+        "coger",
+        "empuñar"
+      ],
+      "ipa": "/aɣ̞aˈraɾ/"
     },
     {
       "word": "NACER",
@@ -3257,7 +5115,11 @@
         "salir"
       ],
       "example": "Nadie pide nacer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "desabotonar"
+      ],
+      "ipa": "/naˈseɾ/"
     },
     {
       "word": "HUIR",
@@ -3266,7 +5128,13 @@
         "escapar"
       ],
       "example": "Lo vi huir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/uˈiɾ/",
+      "family": [
+        "huida",
+        "huido",
+        "rehuir"
+      ]
     },
     {
       "word": "CERRADO",
@@ -3275,7 +5143,13 @@
         "tapado"
       ],
       "example": "Caso cerrado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/seˈrað̞o/",
+      "family": [
+        "cerrar",
+        "cerrojo",
+        "encerrar"
+      ]
     },
     {
       "word": "PRECIOSO",
@@ -3284,7 +5158,13 @@
         "bonito"
       ],
       "example": "El día está precioso.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pɾeˈsjoso/",
+      "family": [
+        "precio",
+        "preciosidad",
+        "preciar"
+      ]
     },
     {
       "word": "DELANTE",
@@ -3293,7 +5173,13 @@
         "frente"
       ],
       "example": "Ve delante.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/d̪eˈlãn̪t̪e/",
+      "family": [
+        "delantero",
+        "adelante",
+        "delantal"
+      ]
     },
     {
       "word": "DISCUTIR",
@@ -3302,7 +5188,13 @@
         "pelear"
       ],
       "example": "Deja de discutir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪iskuˈt̪iɾ/",
+      "family": [
+        "discusión",
+        "discutible",
+        "discutidor"
+      ]
     },
     {
       "word": "SIMPLE",
@@ -3311,14 +5203,23 @@
         "fácil"
       ],
       "example": "Es simple.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈsĩmple/",
+      "family": [
+        "simplicidad",
+        "simplificar",
+        "simpleza"
+      ]
     },
     {
       "word": "SOBREVIVIR",
       "gloss": "seguir con vida tras un peligro",
       "synonyms": [],
       "example": "Voy a sobrevivir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "supervivencia"
+      ]
     },
     {
       "word": "DESCANSAR",
@@ -3327,7 +5228,13 @@
         "reposar"
       ],
       "example": "Debo descansar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪eskãnˈsaɾ/",
+      "family": [
+        "descanso",
+        "descansado",
+        "descansillo"
+      ]
     },
     {
       "word": "ACOSTAR",
@@ -3336,7 +5243,13 @@
         "tumbar"
       ],
       "example": "Me voy a acostar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/akosˈt̪aɾ/",
+      "family": [
+        "acostado",
+        "acostumbrar",
+        "acostamiento"
+      ]
     },
     {
       "word": "COMPARTIR",
@@ -3345,7 +5258,13 @@
         "repartir"
       ],
       "example": "Puedo compartir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõmpaɾˈt̪iɾ/",
+      "family": [
+        "compartido",
+        "compartimiento",
+        "compartible"
+      ]
     },
     {
       "word": "ESTUDIAR",
@@ -3354,7 +5273,13 @@
         "aprender"
       ],
       "example": "Odio estudiar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/est̪uˈð̞jaɾ/",
+      "family": [
+        "estudio",
+        "estudiante",
+        "estudiantil"
+      ]
     },
     {
       "word": "ESPOSO",
@@ -3363,7 +5288,13 @@
         "marido"
       ],
       "example": "Él es su esposo.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/esˈposo/",
+      "family": [
+        "esposa",
+        "esponsales",
+        "desposar"
+      ]
     },
     {
       "word": "NERVIOSO",
@@ -3373,7 +5304,12 @@
         "tenso"
       ],
       "example": "Eres nervioso.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/neɾˈbjo.so/",
+      "family": [
+        "nervio",
+        "nerviosismo"
+      ]
     },
     {
       "word": "DEMOSTRAR",
@@ -3382,7 +5318,13 @@
         "probar"
       ],
       "example": "No podéis demostrar nada.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/d̪emosˈt̪ɾaɾ/",
+      "family": [
+        "demostración",
+        "demostrable",
+        "demostrativo"
+      ]
     },
     {
       "word": "CONSTRUIR",
@@ -3391,19 +5333,36 @@
         "hacer"
       ],
       "example": "¿Qué deberían construir?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kõnsˈt̪ɾwiɾ/",
+      "family": [
+        "construcción",
+        "constructor",
+        "construido"
+      ]
     },
     {
       "word": "SENTADO",
       "gloss": "Que está en una silla.",
       "example": "¡Siga sentado!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/sẽn̪ˈt̪að̞o/",
+      "family": [
+        "sentar",
+        "sentada"
+      ]
     },
     {
       "word": "DALE",
       "gloss": "dar algo a una persona",
       "example": "Dale el libro.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ˈd̪ale/",
+      "family": [
+        "dar",
+        "dado",
+        "dador"
+      ]
     },
     {
       "word": "ACOMPAÑAR",
@@ -3412,7 +5371,11 @@
         "ir"
       ],
       "example": "¿Te puedo acompañar?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "escoltar"
+      ],
+      "ipa": "/akõmpaˈɲaɾ/"
     },
     {
       "word": "AGRADABLE",
@@ -3421,7 +5384,12 @@
         "amable"
       ],
       "example": "Es agradable.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "agradar",
+        "agrado",
+        "agradablemente"
+      ]
     },
     {
       "word": "CUMPLIR",
@@ -3430,7 +5398,13 @@
         "hacer"
       ],
       "example": "¡Sabremos cumplir!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kũmˈpliɾ/",
+      "family": [
+        "cumplimiento",
+        "cumpleaños",
+        "cumplido"
+      ]
     },
     {
       "word": "RATO",
@@ -3439,7 +5413,13 @@
         "tiempo"
       ],
       "example": "Esperé un rato.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈrat̪o/",
+      "family": [
+        "ratito",
+        "ratón",
+        "ratonera"
+      ]
     },
     {
       "word": "CALLAR",
@@ -3448,7 +5428,12 @@
         "silenciar"
       ],
       "example": "¡A callar!",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kaˈʝaɾ/",
+      "family": [
+        "callado",
+        "callamiento"
+      ]
     },
     {
       "word": "AUN",
@@ -3456,7 +5441,13 @@
       "synonyms": [
         "todavía"
       ],
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈãwn/",
+      "family": [
+        "aún",
+        "aunque",
+        "aunar"
+      ]
     },
     {
       "word": "ORGULLOSO",
@@ -3465,7 +5456,12 @@
         "vanidoso"
       ],
       "example": "Estoy orgulloso.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/oɾɣ̞uˈʝoso/",
+      "family": [
+        "orgullo",
+        "orgullosamente"
+      ]
     },
     {
       "word": "EQUIVOCAR",
@@ -3474,7 +5470,12 @@
         "errar"
       ],
       "example": "No te vayas a equivocar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "equivocación",
+        "equivocado",
+        "equivocarse"
+      ]
     },
     {
       "word": "FALSO",
@@ -3483,7 +5484,12 @@
         "mentiroso"
       ],
       "example": "No es falso.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈfalso/",
+      "family": [
+        "falsedad",
+        "falsificar"
+      ]
     },
     {
       "word": "ENCANTADO",
@@ -3492,7 +5498,13 @@
         "muy feliz"
       ],
       "example": "Encantado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ẽŋkãn̪ˈt̪að̞o/",
+      "family": [
+        "encantar",
+        "encanto",
+        "encantador"
+      ]
     },
     {
       "word": "GUAPO",
@@ -3501,7 +5513,12 @@
         "bonito"
       ],
       "example": "Soy guapo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "guapear",
+        "guapeza"
+      ],
+      "ipa": "/ˈgwapo/"
     },
     {
       "word": "ARRUINAR",
@@ -3510,14 +5527,26 @@
         "estropear"
       ],
       "example": "Me vais a arruinar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/arwiˈnaɾ/",
+      "family": [
+        "ruina",
+        "ruinoso",
+        "arruinado"
+      ]
     },
     {
       "word": "ENAMORADO",
       "gloss": "que siente un cariño muy fuerte por otra persona",
       "synonyms": [],
       "example": "Está enamorado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ẽnamoˈɾað̞o/",
+      "family": [
+        "amor",
+        "enamorar",
+        "enamoramiento"
+      ]
     },
     {
       "word": "VIAJAR",
@@ -3526,7 +5555,12 @@
         "ir"
       ],
       "example": "Odio viajar.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bjaˈxaɾ/",
+      "family": [
+        "viaje",
+        "viajero"
+      ]
     },
     {
       "word": "POLÍTICO",
@@ -3535,14 +5569,25 @@
         "persona"
       ],
       "example": "Todo es político.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/poˈlit̪iko/",
+      "family": [
+        "política",
+        "politizar"
+      ]
     },
     {
       "word": "ADENTRO",
       "gloss": "Hacia el interior de un lugar.",
       "synonyms": [],
       "example": "Ve adentro.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aˈð̞ẽn̪t̪ɾo/",
+      "family": [
+        "dentro",
+        "interior",
+        "adentrar"
+      ]
     },
     {
       "word": "ENSEGUIDA",
@@ -3551,7 +5596,13 @@
         "pronto"
       ],
       "example": "Ve enseguida.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ẽnseˈɣ̞ið̞a/",
+      "family": [
+        "seguir",
+        "seguida",
+        "consecutivo"
+      ]
     },
     {
       "word": "MENCIONAR",
@@ -3560,7 +5611,12 @@
         "decir"
       ],
       "example": "No volveré a mencionar eso.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mẽnsjoˈnaɾ/",
+      "family": [
+        "mención",
+        "mencionado"
+      ]
     },
     {
       "word": "ENTERAR",
@@ -3569,7 +5625,12 @@
         "saber"
       ],
       "example": "Me acabo de enterar.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "informar",
+        "instruir"
+      ],
+      "ipa": "/ẽn̪t̪eˈɾaɾ/"
     },
     {
       "word": "PRIVADO",
@@ -3578,7 +5639,11 @@
         "personal"
       ],
       "example": "¿Es privado?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "descontrolado",
+        "enajenado"
+      ]
     },
     {
       "word": "TEMPRANO",
@@ -3587,7 +5652,13 @@
         "pronto"
       ],
       "example": "Es temprano.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/t̪ẽmˈpɾano/",
+      "family": [
+        "tarde",
+        "tempranero",
+        "tempestad"
+      ]
     },
     {
       "word": "CAMBIADO",
@@ -3596,7 +5667,13 @@
         "distinto"
       ],
       "example": "Ha cambiado.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kãmˈbjað̞o/",
+      "family": [
+        "cambiar",
+        "cambio",
+        "cambiable"
+      ]
     },
     {
       "word": "AMERICANO",
@@ -3605,7 +5682,12 @@
         "estadounidense"
       ],
       "example": "Es americano.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ameɾiˈkano/",
+      "family": [
+        "América",
+        "americanizar"
+      ]
     },
     {
       "word": "RESOLVER",
@@ -3614,7 +5696,12 @@
         "solucionar"
       ],
       "example": "Voy a resolver esto.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "resolución",
+        "resuelto",
+        "resoluble"
+      ]
     },
     {
       "word": "LIMPIO",
@@ -3623,7 +5710,13 @@
         "claro"
       ],
       "example": "¡Qué limpio!",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ˈlĩmpjo/",
+      "family": [
+        "limpieza",
+        "limpiar",
+        "limpiador"
+      ]
     }
   ]
 }

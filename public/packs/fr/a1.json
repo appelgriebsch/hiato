@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 13,
   "lang": "fr",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -18,7 +18,13 @@
         "point"
       ],
       "example": "Je ne sais pas.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/pa/",
+      "family": [
+        "compas",
+        "passage",
+        "passe"
+      ]
     },
     {
       "word": "AVOIR",
@@ -27,7 +33,11 @@
         "posséder"
       ],
       "example": "Je peux avoir ce livre ?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ravoir"
+      ],
+      "ipa": "/a.vwaʁ/"
     },
     {
       "word": "ALLER",
@@ -36,7 +46,12 @@
         "se rendre"
       ],
       "example": "Je vais y aller.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "allant",
+        "va-t-en-guerre"
+      ],
+      "ipa": "/sɑ̃.na.le/"
     },
     {
       "word": "FAIRE",
@@ -45,7 +60,13 @@
         "réaliser"
       ],
       "example": "Je vais te faire du thé.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fɛʁ̞/",
+      "family": [
+        "bienfaisant",
+        "contrefaire",
+        "défaire"
+      ]
     },
     {
       "word": "POUVOIR",
@@ -54,7 +75,13 @@
         "savoir"
       ],
       "example": "J'espère pouvoir la voir.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "peut-être",
+        "sauve-qui-peut",
+        "despotisme"
+      ],
+      "ipa": "/pu.vwaʁ/"
     },
     {
       "word": "DIRE",
@@ -63,7 +90,13 @@
         "exprimer"
       ],
       "example": "Que veux-tu dire ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/d͡zɪʁ/",
+      "family": [
+        "dédire",
+        "disant",
+        "contredire"
+      ]
     },
     {
       "word": "ÊTRE",
@@ -72,7 +105,11 @@
         "exister"
       ],
       "example": "Il voulait être riche.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛtʀ̥/",
+      "family": [
+        "n’était"
+      ]
     },
     {
       "word": "VOULOIR",
@@ -81,7 +118,12 @@
         "désirer"
       ],
       "example": "Tu es sûr de vouloir ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vu.lwaʁ/",
+      "family": [
+        "voulez",
+        "voulu"
+      ]
     },
     {
       "word": "SAVOIR",
@@ -90,7 +132,11 @@
         "connaître"
       ],
       "example": "Je dois le savoir.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "Sapiens"
+      ],
+      "ipa": "/sa.vwaʁ/"
     },
     {
       "word": "BIEN",
@@ -99,7 +145,13 @@
         "correctement"
       ],
       "example": "Bien sûr !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bjɛ̃/",
+      "family": [
+        "bienheureux",
+        "bienheureuse",
+        "bientôt"
+      ]
     },
     {
       "word": "NON",
@@ -108,7 +160,11 @@
         "négatif"
       ],
       "example": "Non, merci.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/nõ/",
+      "family": [
+        "mu"
+      ]
     },
     {
       "word": "TOUT",
@@ -117,7 +173,13 @@
         "entièrement"
       ],
       "example": "C'est tout.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tu/",
+      "family": [
+        "toute-puissance",
+        "toutefois",
+        "t’"
+      ]
     },
     {
       "word": "PLUS",
@@ -126,7 +188,11 @@
         "davantage"
       ],
       "example": "Un peu plus fort.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/py/",
+      "family": [
+        "plussoyer"
+      ]
     },
     {
       "word": "VOIR",
@@ -135,7 +201,13 @@
         "regarder"
       ],
       "example": "Viens me voir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vwaːʁ/",
+      "family": [
+        "déjà-vu",
+        "entrevoir",
+        "m’as-tu-vu"
+      ]
     },
     {
       "word": "DEVOIR",
@@ -144,7 +216,13 @@
         "falloir"
       ],
       "example": "C’est ton devoir.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "dû",
+        "redevoir",
+        "DM"
+      ],
+      "ipa": "/dø.vwaʁ/"
     },
     {
       "word": "OUI",
@@ -153,7 +231,13 @@
         "affirmatif"
       ],
       "example": "Oui, deux.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/wi/",
+      "family": [
+        "ouais",
+        "mouais",
+        "ouin"
+      ]
     },
     {
       "word": "BON",
@@ -162,7 +246,13 @@
         "satisfaisant"
       ],
       "example": "Bon voyage !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/bøɔ̃/",
+      "family": [
+        "abonnir",
+        "BA",
+        "BCBG"
+      ]
     },
     {
       "word": "VENIR",
@@ -171,7 +261,13 @@
         "arriver"
       ],
       "example": "Il peut venir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "advenir",
+        "avenir",
+        "parvenir"
+      ],
+      "ipa": "/vø.niʁ/"
     },
     {
       "word": "ICI",
@@ -180,13 +276,19 @@
         "là"
       ],
       "example": "Viens ici.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/i.si/"
     },
     {
       "word": "POURQUOI",
       "gloss": "mot qui demande la cause",
       "example": "Pourquoi ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/puʁ.kwa/",
+      "family": [
+        "pour",
+        "quoi"
+      ]
     },
     {
       "word": "CHOSE",
@@ -195,7 +297,13 @@
         "objet"
       ],
       "example": "Autre chose ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃoz/",
+      "family": [
+        "choser",
+        "chosification",
+        "chosifier"
+      ]
     },
     {
       "word": "PARLER",
@@ -204,7 +312,13 @@
         "discuter"
       ],
       "example": "Arrête de parler.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "déparler",
+        "haut-parleur",
+        "parlable"
+      ],
+      "ipa": "/paʁ.le/"
     },
     {
       "word": "PENSER",
@@ -213,13 +327,25 @@
         "réfléchir"
       ],
       "example": "Essaie d'y penser.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "bien-pensant",
+        "impensable",
+        "libre-pensée"
+      ],
+      "ipa": "/pɑ̃.se/"
     },
     {
       "word": "PRENDRE",
       "gloss": "un verbe pour avoir une chose",
       "example": "Peux-tu le prendre ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pʁɑ̃dʁ/",
+      "family": [
+        "apprendre",
+        "comprendre",
+        "déprendre"
+      ]
     },
     {
       "word": "AUTRE",
@@ -228,7 +354,13 @@
         "différent"
       ],
       "example": "Autre chose ?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/oːtʁ/",
+      "family": [
+        "autrement",
+        "d’autres",
+        "autrui"
+      ]
     },
     {
       "word": "ALORS",
@@ -237,7 +369,8 @@
         "donc"
       ],
       "example": "Et alors ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/a.lɔʁ/"
     },
     {
       "word": "TON",
@@ -246,7 +379,13 @@
         "votre"
       ],
       "example": "Bois ton lait.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tɔ̃/",
+      "family": [
+        "atonal",
+        "atonalité",
+        "tonal"
+      ]
     },
     {
       "word": "COMMENT",
@@ -255,7 +394,12 @@
         "de quelle façon"
       ],
       "example": "Comment vas-tu ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/kɔ.mɑ̃/",
+      "family": [
+        "commentaire",
+        "commenter"
+      ]
     },
     {
       "word": "PASSER",
@@ -264,7 +408,13 @@
         "aller"
       ],
       "example": "Ça va passer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "compasser",
+        "dépasser",
+        "outrepasser"
+      ],
+      "ipa": "/pa.se/"
     },
     {
       "word": "AIMER",
@@ -273,7 +423,13 @@
         "apprécier"
       ],
       "example": "Je peux aimer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "aimable",
+        "aimablement",
+        "aimant"
+      ],
+      "ipa": "/e.me/"
     },
     {
       "word": "CROIRE",
@@ -282,13 +438,23 @@
         "penser"
       ],
       "example": "Je veux croire.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/kʁwɑʁ/",
+      "family": [
+        "croyance",
+        "mécroire"
+      ]
     },
     {
       "word": "MERCI",
       "gloss": "ce qu’on dit à quelqu’un qui t’aide ou te donne quelque chose",
       "example": "Non, merci.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "remercier",
+        "remerciement"
+      ],
+      "ipa": "/mɛʁ.si/"
     },
     {
       "word": "JUSTE",
@@ -297,7 +463,13 @@
         "équitable"
       ],
       "example": "C'est juste.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʒyst/",
+      "family": [
+        "ajuster",
+        "justement",
+        "justesse"
+      ]
     },
     {
       "word": "TROUVER",
@@ -306,7 +478,13 @@
         "découvrir"
       ],
       "example": "Je dois le trouver.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "introuvable",
+        "retrouver",
+        "trouvable"
+      ],
+      "ipa": "/tʁu.ve/"
     },
     {
       "word": "TRÈS",
@@ -315,7 +493,8 @@
         "extrêmement"
       ],
       "example": "J'ai très soif.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/tʁ̥ɛ/"
     },
     {
       "word": "JAMAIS",
@@ -324,7 +503,11 @@
         "à aucun moment"
       ],
       "example": "Il ne ment jamais.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "désormais"
+      ],
+      "ipa": "/ʒa.mɛ/"
     },
     {
       "word": "AUSSI",
@@ -333,13 +516,22 @@
         "de même"
       ],
       "example": "Moi aussi.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/o.si/",
+      "family": [
+        "aussitôt"
+      ]
     },
     {
       "word": "VRAIMENT",
       "gloss": "un mot pour dire que c’est sûr",
       "example": "Vraiment ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "vrai",
+        "vérité"
+      ],
+      "ipa": "/vʁɛ.mɑ̃/"
     },
     {
       "word": "MÊME",
@@ -348,7 +540,11 @@
         "identique"
       ],
       "example": "Ils ont le même âge.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/mɛmə̆/",
+      "family": [
+        "mêmement"
+      ]
     },
     {
       "word": "MAINTENANT",
@@ -357,13 +553,21 @@
         "actuellement"
       ],
       "example": "Et maintenant ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/mɛ̃.tø.nɑ̃/",
+      "family": [
+        "maintenance"
+      ]
     },
     {
       "word": "FALLOIR",
       "gloss": "un verbe pour dire qu’il faut une chose",
       "example": "Il va falloir agir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fa.lwaʁ/",
+      "family": [
+        "fallu"
+      ]
     },
     {
       "word": "ATTENDRE",
@@ -372,7 +576,13 @@
         "patienter"
       ],
       "example": "Fais-le attendre !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "attendu",
+        "attente",
+        "attentisme"
+      ],
+      "ipa": "/a.tɑ̃dʁ/"
     },
     {
       "word": "ARRIVER",
@@ -381,7 +591,13 @@
         "venir"
       ],
       "example": "Ça peut arriver.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "arrivage",
+        "arrivant",
+        "arrivée"
+      ],
+      "ipa": "/a.ʁi.ve/"
     },
     {
       "word": "PETIT",
@@ -390,7 +606,13 @@
         "minuscule"
       ],
       "example": "C’est trop petit.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pə.ti/",
+      "family": [
+        "petiot",
+        "petite-fille",
+        "petite-maîtresse"
+      ]
     },
     {
       "word": "PEU",
@@ -400,7 +622,11 @@
         "faiblement"
       ],
       "example": "Encore un peu ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pø/",
+      "family": [
+        "peupler"
+      ]
     },
     {
       "word": "TEMPS",
@@ -409,7 +635,13 @@
         "moment"
       ],
       "example": "Prends ton temps.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tɑ̃/",
+      "family": [
+        "contretemps",
+        "contemporain",
+        "contemporanéité"
+      ]
     },
     {
       "word": "TOUJOURS",
@@ -418,7 +650,8 @@
         "constamment"
       ],
       "example": "J'ai toujours soif.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/tu.ʒuʁ/"
     },
     {
       "word": "ENCORE",
@@ -427,7 +660,8 @@
         "de nouveau"
       ],
       "example": "Encore vous ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ɑ̃.kɔʁ/"
     },
     {
       "word": "BESOIN",
@@ -436,7 +670,11 @@
         "nécessité"
       ],
       "example": "Il en a besoin.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "besogneux"
+      ],
+      "ipa": "/bə.zwɛ̃/"
     },
     {
       "word": "HOMME",
@@ -445,7 +683,13 @@
         "personne"
       ],
       "example": "Voici l'homme.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʔɔm/",
+      "family": [
+        "bonhomie",
+        "bonhomme",
+        "bonshommes"
+      ]
     },
     {
       "word": "VIE",
@@ -454,7 +698,11 @@
         "existence"
       ],
       "example": "C'est la vie !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "survie"
+      ],
+      "ipa": "/la.vi/"
     },
     {
       "word": "ACCORD",
@@ -463,7 +711,12 @@
         "entente"
       ],
       "example": "D'accord ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛ̃.n‿a.kɔʁ/",
+      "family": [
+        "désaccord",
+        "inaccord"
+      ]
     },
     {
       "word": "ARRÊTER",
@@ -472,7 +725,13 @@
         "cesser"
       ],
       "example": "Je dois arrêter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "arrestation",
+        "arrêtable",
+        "arrête-bœuf"
+      ],
+      "ipa": "/a.ʁe.te/"
     },
     {
       "word": "REGARDER",
@@ -481,7 +740,13 @@
         "voir"
       ],
       "example": "Je veux regarder ça.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "regardable",
+        "regardant",
+        "regardeur"
+      ],
+      "ipa": "/ʁə.ɡaʁ.de/"
     },
     {
       "word": "SEUL",
@@ -490,7 +755,13 @@
         "unique"
       ],
       "example": "Es-tu seul ?",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "seulement",
+        "solitaire",
+        "solitude"
+      ],
+      "ipa": "/sœl/"
     },
     {
       "word": "FEMME",
@@ -499,7 +770,13 @@
         "personne"
       ],
       "example": "J'aime ma femme.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfa.mə/",
+      "family": [
+        "femmelette",
+        "antiféminisme",
+        "antiféministe"
+      ]
     },
     {
       "word": "APPELER",
@@ -508,7 +785,13 @@
         "dire le nom"
       ],
       "example": "Je veux appeler...",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "rappeler",
+        "appel",
+        "appellation"
+      ],
+      "ipa": "/a.pə.le/"
     },
     {
       "word": "FOIS",
@@ -517,13 +800,25 @@
         "moment"
       ],
       "example": "J'y ai été une fois.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fwa/",
+      "family": [
+        "quelquefois",
+        "moins",
+        "plus"
+      ]
     },
     {
       "word": "JOUR",
       "gloss": "un temps de vingt-quatre heures",
       "example": "Le jour se lève.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʒuʁ/",
+      "family": [
+        "ajour",
+        "ajourer",
+        "ajournement"
+      ]
     },
     {
       "word": "DONC",
@@ -532,7 +827,8 @@
         "alors"
       ],
       "example": "Il pleut, donc nous restons à la maison.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ⁿdɔ̃k/"
     },
     {
       "word": "MONDE",
@@ -541,7 +837,13 @@
         "terre"
       ],
       "example": "Dieu créa le monde.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɔ̃d/",
+      "family": [
+        "immonde",
+        "inframonde",
+        "mondain"
+      ]
     },
     {
       "word": "SÛR",
@@ -550,7 +852,13 @@
         "certain"
       ],
       "example": "Bien sûr !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/syʁ/",
+      "family": [
+        "assurément",
+        "sûrement",
+        "sûreté"
+      ]
     },
     {
       "word": "ÉTAI",
@@ -559,7 +867,12 @@
         "poutre"
       ],
       "example": "L'étage est solide grâce à un grand étai en bois.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "étayer",
+        "étançon"
+      ],
+      "ipa": "/e.tɛ/"
     },
     {
       "word": "FILLE",
@@ -568,7 +881,13 @@
         "jeune"
       ],
       "example": "J'ai une fille.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈfi.jə/",
+      "family": [
+        "fifille",
+        "fillasse",
+        "fillette"
+      ]
     },
     {
       "word": "TROP",
@@ -577,7 +896,12 @@
         "excessif"
       ],
       "example": "Trop tard.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "troupe",
+        "troupeau"
+      ],
+      "ipa": "/tʁo/"
     },
     {
       "word": "SORTIR",
@@ -586,13 +910,23 @@
         "partir"
       ],
       "example": "Je dois sortir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "insortable",
+        "ressortir",
+        "sortable"
+      ],
+      "ipa": "/sɔʁ.tiʁ/"
     },
     {
       "word": "ESSAYER",
       "gloss": "un verbe pour faire une chose",
       "example": "Il va essayer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "essayage"
+      ],
+      "ipa": "/e.se.je/"
     },
     {
       "word": "TUER",
@@ -602,7 +936,13 @@
         "ôter la vie"
       ],
       "example": "Fumer peut tuer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ty.e/",
+      "family": [
+        "tuable",
+        "tuage",
+        "tuant"
+      ]
     },
     {
       "word": "NOUVEAU",
@@ -611,7 +951,13 @@
         "récent"
       ],
       "example": "C'est nouveau.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "nouveauté",
+        "nouvellement",
+        "Nouvelles-Hébrides"
+      ],
+      "ipa": "/nu.vo/"
     },
     {
       "word": "DIEU",
@@ -620,7 +966,13 @@
         "divinité"
       ],
       "example": "Dieu merci.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bondieusard",
+        "bondieuserie",
+        "dieudonné"
+      ],
+      "ipa": "/djø/"
     },
     {
       "word": "MORT",
@@ -629,7 +981,13 @@
         "décès"
       ],
       "example": "Le chien est mort.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɔʁ/",
+      "family": [
+        "immortalité",
+        "immortel",
+        "malemort"
+      ]
     },
     {
       "word": "METTRE",
@@ -638,7 +996,13 @@
         "poser"
       ],
       "example": "Où vas-tu mettre ça ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mɛtʁ/",
+      "family": [
+        "démettre",
+        "mise",
+        "remettre"
+      ]
     },
     {
       "word": "ENTENDRE",
@@ -647,7 +1011,13 @@
         "écouter"
       ],
       "example": "Peux-tu m'entendre ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "entendant",
+        "entendement",
+        "entendeur"
+      ],
+      "ipa": "/ɑ̃.tɑ̃dʁ/"
     },
     {
       "word": "DONNER",
@@ -656,7 +1026,13 @@
         "offrir"
       ],
       "example": "Je n'ai rien à donner.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "abandonner",
+        "adonner",
+        "donateur"
+      ],
+      "ipa": "/do.ne/"
     },
     {
       "word": "LAISSER",
@@ -665,7 +1041,13 @@
         "abandonner"
       ],
       "example": "Je veux laisser tomber.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "délaisser",
+        "lais",
+        "laisse"
+      ],
+      "ipa": "/le.se/"
     },
     {
       "word": "MAL",
@@ -674,7 +1056,13 @@
         "souffrance"
       ],
       "example": "J'ai mal ici.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mal/",
+      "family": [
+        "malignité",
+        "mauvais",
+        "mauvaiseté"
+      ]
     },
     {
       "word": "AMI",
@@ -683,7 +1071,13 @@
         "compagnon"
       ],
       "example": "C’est mon ami.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛ̃n‿a.mi/",
+      "family": [
+        "amiable",
+        "amical",
+        "amicale"
+      ]
     },
     {
       "word": "DÉJÀ",
@@ -692,7 +1086,8 @@
         "avant"
       ],
       "example": "Déjà si tard ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/de.ʒa/"
     },
     {
       "word": "BEAUCOUP",
@@ -701,7 +1096,11 @@
         "fort"
       ],
       "example": "Elle parle beaucoup.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "très"
+      ],
+      "ipa": "/bo.ku/"
     },
     {
       "word": "GRAND",
@@ -710,7 +1109,13 @@
         "immense"
       ],
       "example": "Je suis grand.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɡʁɑ̃/",
+      "family": [
+        "agrandir",
+        "agrandissement",
+        "agrandisseur"
+      ]
     },
     {
       "word": "MÈRE",
@@ -719,7 +1124,13 @@
         "maman"
       ],
       "example": "C'est ma mère.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɛʁ/",
+      "family": [
+        "mémé",
+        "mémérage",
+        "mémère"
+      ]
     },
     {
       "word": "COMPRENDRE",
@@ -728,7 +1139,13 @@
         "voir le sens"
       ],
       "example": "Je pense comprendre.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "compréhension",
+        "incompréhension",
+        "comprenette"
+      ],
+      "ipa": "/kɔ̃.pʁɑ̃dʁ/"
     },
     {
       "word": "MIEUX",
@@ -737,7 +1154,12 @@
         "supérieur"
       ],
       "example": "Il va mieux.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/mjø/",
+      "family": [
+        "meilleur",
+        "améliorer"
+      ]
     },
     {
       "word": "ENFANT",
@@ -747,7 +1169,13 @@
         "jeune"
       ],
       "example": "L'enfant est sale.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "enfantin",
+        "enfance",
+        "enfanter"
+      ],
+      "ipa": "/œ̃.n‿ɑ̃.fɑ̃/"
     },
     {
       "word": "CHERCHER",
@@ -756,7 +1184,13 @@
         "essayer de trouver"
       ],
       "example": "Va le chercher !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "cherchant",
+        "chercheur",
+        "recherche"
+      ],
+      "ipa": "/ʃɛʁ.ʃe/"
     },
     {
       "word": "MONSIEUR",
@@ -765,7 +1199,13 @@
         "homme"
       ],
       "example": "Oui, monsieur.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "seigneur",
+        "monseigneur",
+        "sire"
+      ],
+      "ipa": "/mə.sjø/"
     },
     {
       "word": "DEMANDER",
@@ -774,7 +1214,13 @@
         "poser une question"
       ],
       "example": "J'aimerais demander.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "demande",
+        "demandeur",
+        "demandeuse"
+      ],
+      "ipa": "/də.mɑ̃.de/"
     },
     {
       "word": "GENS",
@@ -783,7 +1229,13 @@
         "personnes"
       ],
       "example": "Ce sont des gens.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʒɑ̃/",
+      "family": [
+        "gendarme",
+        "gente",
+        "gentil"
+      ]
     },
     {
       "word": "HEURE",
@@ -792,7 +1244,13 @@
         "moment"
       ],
       "example": "Il est une heure.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/l‿œːʁ/",
+      "family": [
+        "heures",
+        "quatre-heures",
+        "horaire"
+      ]
     },
     {
       "word": "AIDER",
@@ -801,7 +1259,12 @@
         "secourir"
       ],
       "example": "Venez m'aider.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/e.de/",
+      "family": [
+        "aide",
+        "aidant"
+      ]
     },
     {
       "word": "DÉSOLÉ",
@@ -810,7 +1273,12 @@
         "navré"
       ],
       "example": "Oh, je suis désolé.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/de.zɔ.le/",
+      "family": [
+        "désolation",
+        "désoler"
+      ]
     },
     {
       "word": "MAISON",
@@ -819,7 +1287,12 @@
         "logis"
       ],
       "example": "Viens à la maison.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɛː.zõ/",
+      "family": [
+        "maisonnée",
+        "maisonnette"
+      ]
     },
     {
       "word": "PARTIR",
@@ -828,7 +1301,13 @@
         "quitter"
       ],
       "example": "Tu vas partir ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "départir",
+        "répartir",
+        "repartir"
+      ],
+      "ipa": "/paʁ.tiʁ/"
     },
     {
       "word": "REVENIR",
@@ -837,7 +1316,11 @@
         "retourner"
       ],
       "example": "Tu dois revenir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "revenez-y"
+      ],
+      "ipa": "/ʁə.və.niʁ/"
     },
     {
       "word": "VOILÀ",
@@ -846,7 +1329,12 @@
         "voici"
       ],
       "example": "Les voilà.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "revoilà",
+        "voici"
+      ],
+      "ipa": "/vwa.lɑ/"
     },
     {
       "word": "DERNIER",
@@ -855,7 +1343,11 @@
         "final"
       ],
       "example": "Dernier appel !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "dernièrement"
+      ],
+      "ipa": "/dɛʁ.nje/"
     },
     {
       "word": "RESTER",
@@ -864,7 +1356,11 @@
         "demeurer"
       ],
       "example": "Puis-je rester ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "restant"
+      ],
+      "ipa": "/ʁɛs.te/"
     },
     {
       "word": "PROBLÈME",
@@ -873,7 +1369,13 @@
         "difficulté"
       ],
       "example": "Aucun problème.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "problématique",
+        "problématisation",
+        "problématiser"
+      ],
+      "ipa": "/pʁɔ.blɛ̃ːm/"
     },
     {
       "word": "SOIR",
@@ -882,7 +1384,13 @@
         "nuit"
       ],
       "example": "Il pleuvra ce soir.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/swaʁ/",
+      "family": [
+        "bonsoir",
+        "soirée",
+        "vespéral"
+      ]
     },
     {
       "word": "PREMIER",
@@ -891,7 +1399,13 @@
         "initial"
       ],
       "example": "J'irai en premier.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "premièrement",
+        "unième",
+        "rez-de-chaussée"
+      ],
+      "ipa": "/pʁə.mje/"
     },
     {
       "word": "NOM",
@@ -900,7 +1414,13 @@
         "appellation"
       ],
       "example": "Sous quel nom ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/nɔ̃ŋ/",
+      "family": [
+        "nominal",
+        "nominalement",
+        "nominalisation"
+      ]
     },
     {
       "word": "RAISON",
@@ -909,7 +1429,12 @@
         "motif"
       ],
       "example": "Tu as raison.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁɛ.zɔ̃/",
+      "family": [
+        "déraison",
+        "raisonner"
+      ]
     },
     {
       "word": "NUIT",
@@ -918,7 +1443,13 @@
         "soir"
       ],
       "example": "Bonne nuit !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/nɥi/",
+      "family": [
+        "minuit",
+        "nuitamment",
+        "nuitard"
+      ]
     },
     {
       "word": "FINIR",
@@ -927,7 +1458,13 @@
         "achever"
       ],
       "example": "Il doit finir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "finition",
+        "infinissable",
+        "définir"
+      ],
+      "ipa": "/fi.niʁ/"
     },
     {
       "word": "SALUT",
@@ -936,7 +1473,13 @@
         "bonjour"
       ],
       "example": "Salut, toi.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "salutaire",
+        "salutation",
+        "salutiste"
+      ],
+      "ipa": "/sa.ly/"
     },
     {
       "word": "COMMENCER",
@@ -946,7 +1489,12 @@
         "entamer"
       ],
       "example": "Il va commencer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "commencement",
+        "recommencer"
+      ],
+      "ipa": "/kɔ.mɑ̃.se/"
     },
     {
       "word": "MOMENT",
@@ -955,7 +1503,12 @@
         "instant"
       ],
       "example": "Hé, un moment !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "momentané",
+        "momentanément"
+      ],
+      "ipa": "/mɔ.mɑ̃/"
     },
     {
       "word": "ARGENT",
@@ -964,7 +1517,13 @@
         "monnaie"
       ],
       "example": "J'ai de l'argent.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "argentage",
+        "argentation",
+        "argenter"
+      ],
+      "ipa": "/aʁ.ʒɑ̃/"
     },
     {
       "word": "TRUC",
@@ -973,7 +1532,12 @@
         "objet"
       ],
       "example": "Voilà le truc.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/t̪ʁyk/",
+      "family": [
+        "trucage",
+        "trucmuche"
+      ]
     },
     {
       "word": "BONJOUR",
@@ -982,7 +1546,12 @@
         "salut"
       ],
       "example": "Dis bonjour.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "rebonjour",
+        "bonsoir"
+      ],
+      "ipa": "/ˈbõ.ʒuːʁ/"
     },
     {
       "word": "MOURIR",
@@ -991,7 +1560,12 @@
         "décéder"
       ],
       "example": "Le vieux chien va mourir bientôt.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/mu.ʁiʁ/",
+      "family": [
+        "mort",
+        "mourant"
+      ]
     },
     {
       "word": "PLAIRE",
@@ -1000,7 +1574,13 @@
         "séduire"
       ],
       "example": "Ça va te plaire.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/plɛʁ/",
+      "family": [
+        "complaire",
+        "complaisant",
+        "déplaire"
+      ]
     },
     {
       "word": "MOINS",
@@ -1009,7 +1589,11 @@
         "inférieur"
       ],
       "example": "Mon père va moins bien.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "plus"
+      ],
+      "ipa": "/mwɛ̃/"
     },
     {
       "word": "MAMAN",
@@ -1018,7 +1602,8 @@
         "mère"
       ],
       "example": "Oui, maman.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ma.mɑ̃/"
     },
     {
       "word": "AIR",
@@ -1027,7 +1612,13 @@
         "atmosphère"
       ],
       "example": "J'aime respirer l'air frais le matin.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "airer",
+        "aérage",
+        "aérant"
+      ],
+      "ipa": "/ɛ̃.n‿ɛʁ/"
     },
     {
       "word": "PAPA",
@@ -1036,7 +1627,8 @@
         "père"
       ],
       "example": "Oui, papa.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpa.pa/"
     },
     {
       "word": "TRAVAILLER",
@@ -1045,7 +1637,12 @@
         "œuvrer"
       ],
       "example": "Je vais travailler.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "retravailler",
+        "télétravailler"
+      ],
+      "ipa": "/tʁa.va.je/"
     },
     {
       "word": "AFFAIRE",
@@ -1054,7 +1651,13 @@
         "dossier"
       ],
       "example": "Ça fera l'affaire.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "affairé",
+        "affairement",
+        "affairements"
+      ],
+      "ipa": "/y.n‿a.fɛʁ/"
     },
     {
       "word": "FAMILLE",
@@ -1063,7 +1666,13 @@
         "parenté"
       ],
       "example": "J'ai une famille.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "familial",
+        "familiariser",
+        "familier"
+      ],
+      "ipa": "/famij/"
     },
     {
       "word": "MAIN",
@@ -1072,7 +1681,13 @@
         "paume"
       ],
       "example": "Lève la main.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɛ̃/",
+      "family": [
+        "baisemain",
+        "chauffe-mains",
+        "lave-mains"
+      ]
     },
     {
       "word": "PEUR",
@@ -1082,7 +1697,12 @@
         "effroi"
       ],
       "example": "J'ai peur.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pœːʁ/",
+      "family": [
+        "peureusement",
+        "peureux"
+      ]
     },
     {
       "word": "RENTRER",
@@ -1092,7 +1712,13 @@
         "retourner"
       ],
       "example": "Je dois rentrer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "rentrant",
+        "rentre-dedans",
+        "rentrée"
+      ],
+      "ipa": "/ʁɑ̃.tʁe/"
     },
     {
       "word": "QUESTION",
@@ -1102,7 +1728,13 @@
         "demande"
       ],
       "example": "Bonne question.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "questionnaire",
+        "questionner",
+        "questionnement"
+      ],
+      "ipa": "/kɛs.tjɔ̃/"
     },
     {
       "word": "RENDRE",
@@ -1112,7 +1744,12 @@
         "remettre"
       ],
       "example": "Je dois rendre le livre à la bibliothèque avant demain.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁɑ̃dʁ/",
+      "family": [
+        "rendez-vous",
+        "rendu"
+      ]
     },
     {
       "word": "IDÉE",
@@ -1122,7 +1759,13 @@
         "pensée"
       ],
       "example": "Aucune idée.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "idéalisé",
+        "idéaliser",
+        "idéaliste"
+      ],
+      "ipa": "/i.de/"
     },
     {
       "word": "MEC",
@@ -1131,7 +1774,11 @@
         "type",
         "individu"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɛk/",
+      "family": [
+        "keum"
+      ]
     },
     {
       "word": "OUBLIER",
@@ -1141,7 +1788,12 @@
         "ne plus penser"
       ],
       "example": "Je veux oublier.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "oublie",
+        "oubliette"
+      ],
+      "ipa": "/u.bli.je/"
     },
     {
       "word": "VOITURE",
@@ -1150,7 +1802,13 @@
         "auto"
       ],
       "example": "J'ai une voiture.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "voiturage",
+        "remise",
+        "voiturer"
+      ],
+      "ipa": "/vwa.t͡sʏʁ/"
     },
     {
       "word": "GARS",
@@ -1160,7 +1818,11 @@
         "individu"
       ],
       "example": "Mon gars !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ga/",
+      "family": [
+        "garcette"
+      ]
     },
     {
       "word": "TRAVAIL",
@@ -1169,7 +1831,13 @@
         "boulot"
       ],
       "example": "Allons au travail.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cotravail",
+        "retravailler",
+        "surtravail"
+      ],
+      "ipa": "/tʁa.vaj/"
     },
     {
       "word": "SOMME",
@@ -1179,7 +1847,13 @@
         "montant"
       ],
       "example": "La somme est de cent.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/yn.sɔm/",
+      "family": [
+        "sommer",
+        "sommaire",
+        "sommairement"
+      ]
     },
     {
       "word": "TÊTE",
@@ -1189,7 +1863,13 @@
         "chef"
       ],
       "example": "La tête haute !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈtɛ.tə/",
+      "family": [
+        "entêter",
+        "étêtage",
+        "étêtement"
+      ]
     },
     {
       "word": "CONNAÎTRE",
@@ -1199,7 +1879,13 @@
         "maîtriser"
       ],
       "example": "Il semble me connaître.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "connaissable",
+        "connaissance",
+        "connaissant"
+      ],
+      "ipa": "/kɔ.naɛ̯tʁ/"
     },
     {
       "word": "FILS",
@@ -1209,7 +1895,13 @@
         "enfant"
       ],
       "example": "Il a sept fils.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fis/",
+      "family": [
+        "fille",
+        "père",
+        "mère"
+      ]
     },
     {
       "word": "ASSEZ",
@@ -1219,19 +1911,32 @@
         "passablement"
       ],
       "example": "J'en ai assez !",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/a.se/"
     },
     {
       "word": "CHANCE",
       "gloss": "ce qui arrive de bon",
       "example": "Bonne chance.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃɑ̃s/",
+      "family": [
+        "chanceuse",
+        "chanceux",
+        "malchance"
+      ]
     },
     {
       "word": "COUP",
       "gloss": "un mouvement bref de la main",
       "example": "D'un coup, il fait un signe de la main.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ku/",
+      "family": [
+        "beaucoup",
+        "contrecoup",
+        "couper"
+      ]
     },
     {
       "word": "MINUTE",
@@ -1241,7 +1946,13 @@
         "moment"
       ],
       "example": "Une minute.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "compte-minutes",
+        "minutage",
+        "minutaire"
+      ],
+      "ipa": "/mi.nyt/"
     },
     {
       "word": "JOUER",
@@ -1251,7 +1962,13 @@
         "pratiquer"
       ],
       "example": "Fini de jouer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʒwe/",
+      "family": [
+        "injouable",
+        "jouable",
+        "jouailler"
+      ]
     },
     {
       "word": "MANGER",
@@ -1261,13 +1978,20 @@
         "consommer"
       ],
       "example": "On va manger ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "mange-tout",
+        "mangeable",
+        "mangeaille"
+      ],
+      "ipa": "/mɑ̃ː.ˈʒe/"
     },
     {
       "word": "FAIT",
       "gloss": "une chose qui arrive",
       "example": "Un fait important s'est passé hier.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɛ/"
     },
     {
       "word": "VITE",
@@ -1277,7 +2001,13 @@
         "promptement"
       ],
       "example": "Fais vite !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/vit/",
+      "family": [
+        "vitement",
+        "vitesse",
+        "allez"
+      ]
     },
     {
       "word": "PART",
@@ -1286,7 +2016,13 @@
         "portion"
       ],
       "example": "Je mange une part de gâteau.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pɑːʀ/",
+      "family": [
+        "partage",
+        "partager",
+        "partageur"
+      ]
     },
     {
       "word": "DEVENIR",
@@ -1295,7 +2031,11 @@
         "se transformer"
       ],
       "example": "Ça va devenir juste.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "destin",
+        "redevenir"
+      ]
     },
     {
       "word": "ENVOYER",
@@ -1305,13 +2045,23 @@
         "transmettre"
       ],
       "example": "Peux-tu me l'envoyer ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ɑ̃vwaje/",
+      "family": [
+        "renvoyer"
+      ]
     },
     {
       "word": "OCCUPER",
       "gloss": "prendre une place",
       "example": "Il va s'en occuper.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "désoccuper",
+        "occupant",
+        "occupation"
+      ],
+      "ipa": "/o.ky.pe/"
     },
     {
       "word": "TENIR",
@@ -1320,7 +2070,13 @@
         "garder"
       ],
       "example": "Je veux tenir ta main.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "abstenir",
+        "contenir",
+        "détenir"
+      ],
+      "ipa": "/tə.niʁ/"
     },
     {
       "word": "DEMAIN",
@@ -1329,7 +2085,11 @@
         "le jour suivant"
       ],
       "example": "Revenez demain.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "lendemain"
+      ],
+      "ipa": "/dø.mæ̃/"
     },
     {
       "word": "VIVRE",
@@ -1339,13 +2099,25 @@
         "subsister"
       ],
       "example": "Je veux vivre.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vivʁ/",
+      "family": [
+        "qui-vive",
+        "survivre",
+        "vécu"
+      ]
     },
     {
       "word": "TARD",
       "gloss": "après l’heure habituelle",
       "example": "Trop tard.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/taːʁ̥/",
+      "family": [
+        "attarder",
+        "tarder",
+        "tardif"
+      ]
     },
     {
       "word": "HISTOIRE",
@@ -1355,7 +2127,13 @@
         "conte"
       ],
       "example": "J'aime l'histoire.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ethnohistoire",
+        "géohistoire",
+        "historiographie"
+      ],
+      "ipa": "/l‿is.twaʁ/"
     },
     {
       "word": "ANNÉE",
@@ -1364,7 +2142,13 @@
         "douze mois"
       ],
       "example": "Bonne année !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "années",
+        "anniversaire",
+        "annuaire"
+      ],
+      "ipa": "/l‿a.ne/"
     },
     {
       "word": "TANT",
@@ -1373,7 +2157,13 @@
         "tellement"
       ],
       "example": "Je t'aime tant !",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/t̪ɑ̃/",
+      "family": [
+        "autant",
+        "pourtant",
+        "tantième"
+      ]
     },
     {
       "word": "CHANGER",
@@ -1383,7 +2173,13 @@
         "transformer"
       ],
       "example": "Va te changer.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "change",
+        "changé",
+        "inchangé"
+      ],
+      "ipa": "/ʃɑ̃.ʒe/"
     },
     {
       "word": "COMBIEN",
@@ -1392,7 +2188,11 @@
         "quelle quantité"
       ],
       "example": "Ça coûte combien ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "combientième"
+      ],
+      "ipa": "/kɔ̃.bjɛ̃/"
     },
     {
       "word": "SENS",
@@ -1402,7 +2202,13 @@
         "direction"
       ],
       "example": "Dans quel sens est la porte?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sɑ̃s/",
+      "family": [
+        "contresens",
+        "perception",
+        "sémantique"
+      ]
     },
     {
       "word": "VIEUX",
@@ -1412,7 +2218,13 @@
         "âgé"
       ],
       "example": "Il est vieux.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vjø/",
+      "family": [
+        "vieillard",
+        "vieillir",
+        "vieillot"
+      ]
     },
     {
       "word": "FRÈRE",
@@ -1421,7 +2233,13 @@
         "frangin"
       ],
       "example": "J'ai un frère.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fʁɛʁ/",
+      "family": [
+        "confrère",
+        "beauf",
+        "beaufitude"
+      ]
     },
     {
       "word": "CHÉRI",
@@ -1431,7 +2249,12 @@
         "adoré"
       ],
       "example": "Merci, chéri.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃe.ʁi/",
+      "family": [
+        "chérir",
+        "cher"
+      ]
     },
     {
       "word": "SUPER",
@@ -1440,7 +2263,12 @@
         "très bien"
       ],
       "example": "Ah, super !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "supérette",
+        "hyper"
+      ],
+      "ipa": "/sy.paɛ̯ʁ/"
     },
     {
       "word": "APPRENDRE",
@@ -1449,7 +2277,13 @@
         "acquérir des connaissances"
       ],
       "example": "Peux-tu m'apprendre ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "apprentissage",
+        "désapprendre",
+        "malappris"
+      ],
+      "ipa": "/a.pʁɑ̃dʁ/"
     },
     {
       "word": "ESPÉRER",
@@ -1458,7 +2292,13 @@
         "désirer"
       ],
       "example": "Je sais quoi espérer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "désespérance",
+        "désespérant",
+        "espérance"
+      ],
+      "ipa": "/ɛs.pe.ʁe/"
     },
     {
       "word": "ENSEMBLE",
@@ -1468,7 +2308,11 @@
         "commun"
       ],
       "example": "On joue ensemble ?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ensemblier"
+      ],
+      "ipa": "/ɑ̃.sɑ̃bl/"
     },
     {
       "word": "IMPORTER",
@@ -1477,7 +2321,13 @@
         "compter",
         "valoir"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "importable",
+        "importateur",
+        "importation"
+      ],
+      "ipa": "/ɛ̃.pɔʁ.te/"
     },
     {
       "word": "SEMAINE",
@@ -1487,7 +2337,12 @@
         "sept jours"
       ],
       "example": "Bonne fin de semaine.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "semainier",
+        "hebdomadaire"
+      ],
+      "ipa": "/sə.mɛn/"
     },
     {
       "word": "REVOIR",
@@ -1496,7 +2351,11 @@
         "revisiter"
       ],
       "example": "Je vais revoir ce joli film demain.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "revoyure"
+      ],
+      "ipa": "/ʁəvwaʁ/"
     },
     {
       "word": "GROS",
@@ -1505,7 +2364,13 @@
         "grand"
       ],
       "example": "C'est gros.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡʁo/",
+      "family": [
+        "dégrosser",
+        "dégrossir",
+        "dégrossissage"
+      ]
     },
     {
       "word": "AMOUR",
@@ -1515,7 +2380,13 @@
         "passion"
       ],
       "example": "Crois à l'amour !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "s’amouracher",
+        "amourer",
+        "amourette"
+      ],
+      "ipa": "/l‿a.muʁ/"
     },
     {
       "word": "SANG",
@@ -1524,7 +2395,13 @@
         "fluide vital"
       ],
       "example": "Le sang coule.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "consanguin",
+        "consanguinité",
+        "ensanglantement"
+      ],
+      "ipa": "/sɑ̃/"
     },
     {
       "word": "PAYER",
@@ -1534,7 +2411,13 @@
         "débourser"
       ],
       "example": "Qui va payer ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "impayé",
+        "paie",
+        "paiement"
+      ],
+      "ipa": "/pe.je/"
     },
     {
       "word": "DÉSOLER",
@@ -1543,7 +2426,13 @@
         "attrister",
         "peiner"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "désolant",
+        "désolé",
+        "désolation"
+      ],
+      "ipa": "/dezɔle/"
     },
     {
       "word": "MEILLEUR",
@@ -1553,7 +2442,13 @@
         "supérieur"
       ],
       "example": "T'es le meilleur !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "améliorer",
+        "amélioration",
+        "améliorant"
+      ],
+      "ipa": "/mɛ.ˈjœːʁ/"
     },
     {
       "word": "CAS",
@@ -1563,7 +2458,11 @@
         "circonstance"
       ],
       "example": "Cas résolu !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ka/",
+      "family": [
+        "casuistique"
+      ]
     },
     {
       "word": "SEMBLER",
@@ -1572,7 +2471,12 @@
         "avoir l’air"
       ],
       "example": "Ça peut sembler étrange.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "semblant",
+        "semblance"
+      ],
+      "ipa": "/sɑ̃.ble/"
     },
     {
       "word": "UTILISER",
@@ -1582,7 +2486,13 @@
         "faire"
       ],
       "example": "Puis-je utiliser ceci ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "inutilisation",
+        "réutilisable",
+        "réutilisation"
+      ],
+      "ipa": "/y.ti.li.ze/"
     },
     {
       "word": "SOUVENIR",
@@ -1591,7 +2501,10 @@
         "se rappeler"
       ],
       "example": "Essaie de te souvenir.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ressouvenir"
+      ]
     },
     {
       "word": "PARTIE",
@@ -1600,7 +2513,13 @@
         "bout"
       ],
       "example": "J'adore cette partie.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "partiel",
+        "partiellement",
+        "parti"
+      ],
+      "ipa": "/paʁ.ti/"
     },
     {
       "word": "MAUVAIS",
@@ -1610,7 +2529,13 @@
         "défavorable"
       ],
       "example": "C'est mauvais.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "mauvaisement",
+        "mauvaiseté",
+        "mal"
+      ],
+      "ipa": "/mo.vɛ/"
     },
     {
       "word": "ENTRER",
@@ -1620,7 +2545,13 @@
         "accéder"
       ],
       "example": "Tu peux entrer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "entrant",
+        "entrée",
+        "entrisme"
+      ],
+      "ipa": "/ɑ̃.tʁe/"
     },
     {
       "word": "CONTINUER",
@@ -1630,7 +2561,13 @@
         "suivre"
       ],
       "example": "Je dois continuer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "discontinuer",
+        "continu",
+        "continuisme"
+      ],
+      "ipa": "/kɔ̃.ti.nɥe/"
     },
     {
       "word": "TYPE",
@@ -1639,7 +2576,13 @@
         "genre"
       ],
       "example": "Ce type de pomme est très sucré.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tip/",
+      "family": [
+        "allotype",
+        "archétype",
+        "atypie"
+      ]
     },
     {
       "word": "POLICE",
@@ -1648,7 +2591,13 @@
         "gendarmerie"
       ],
       "example": "La police enquête.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "cyberpolice",
+        "PJ",
+        "policer"
+      ],
+      "ipa": "/pɔˈli.sə/"
     },
     {
       "word": "SEULEMENT",
@@ -1657,7 +2606,8 @@
         "uniquement"
       ],
       "example": "Non, seulement un.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/sœl.mɑ̃/"
     },
     {
       "word": "BÉBÉ",
@@ -1666,7 +2616,8 @@
         "nourrisson"
       ],
       "example": "Le bébé dort.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/be.be/"
     },
     {
       "word": "POINT",
@@ -1675,7 +2626,13 @@
         "endroit"
       ],
       "example": "J'ai dessiné un petit point rouge sur la feuille.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "appointer",
+        "contrepoint",
+        "désappointer"
+      ],
+      "ipa": "/pwœ̃/"
     },
     {
       "word": "VILLE",
@@ -1684,7 +2641,13 @@
         "agglomération"
       ],
       "example": "Je vis en ville.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vɪl/",
+      "family": [
+        "agroville",
+        "bidonville",
+        "Villeneuve"
+      ]
     },
     {
       "word": "MOIS",
@@ -1694,7 +2657,13 @@
         "jour"
       ],
       "example": "Quel mois es-tu né ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mwɔ/",
+      "family": [
+        "bimensuel",
+        "mensualiser",
+        "mensualité"
+      ]
     },
     {
       "word": "JEUNE",
@@ -1703,7 +2672,13 @@
         "adolescent"
       ],
       "example": "Tu es jeune.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "jeunement",
+        "jeunesse",
+        "jeunet"
+      ],
+      "ipa": "/ʒœn/"
     },
     {
       "word": "PLACE",
@@ -1712,7 +2687,13 @@
         "espace"
       ],
       "example": "Prenez place.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/plas/",
+      "family": [
+        "déplacement",
+        "déplacer",
+        "emplacement"
+      ]
     },
     {
       "word": "CÔTÉ",
@@ -1721,7 +2702,13 @@
         "lieu"
       ],
       "example": "C’est juste à côté.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "côte",
+        "coteau",
+        "côtelé"
+      ],
+      "ipa": "/kote/"
     },
     {
       "word": "ENDROIT",
@@ -1730,7 +2717,12 @@
         "lieu"
       ],
       "example": "Chic endroit !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɑ̃.dʁwa/",
+      "family": [
+        "droit",
+        "droite"
+      ]
     },
     {
       "word": "ÉCOUTE",
@@ -1739,7 +2731,13 @@
         "attention"
       ],
       "example": "Écoute ça.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "écoutable",
+        "écouter",
+        "écouteur"
+      ],
+      "ipa": "/e.kut/"
     },
     {
       "word": "CHAQUE",
@@ -1748,7 +2746,11 @@
         "tout"
       ],
       "example": "J'y pense chaque jour.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃak/",
+      "family": [
+        "chacun"
+      ]
     },
     {
       "word": "TOMBER",
@@ -1757,7 +2759,13 @@
         "chuter"
       ],
       "example": "Tu vas tomber.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "retombée",
+        "retomber",
+        "tombant"
+      ],
+      "ipa": "/tɔ̃.be/"
     },
     {
       "word": "PERDRE",
@@ -1766,7 +2774,13 @@
         "égarer"
       ],
       "example": "Tu vas perdre.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/pɛʁdʁ/",
+      "family": [
+        "perdant",
+        "perdu",
+        "reperdre"
+      ]
     },
     {
       "word": "PARTI",
@@ -1775,19 +2789,30 @@
         "allé"
       ],
       "example": "Le parti a une nouvelle idée pour l'école.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "protéger"
+      ],
+      "ipa": "/paʁti/"
     },
     {
       "word": "SENTIR",
       "gloss": "connaître une chose par le corps",
       "example": "J'arrive à le sentir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "ressenti",
+        "ressentiment",
+        "ressentir"
+      ],
+      "ipa": "/sɑ̃.tiʁ/"
     },
     {
       "word": "LONGTEMPS",
       "gloss": "beaucoup de jours",
       "example": "Ça fait longtemps.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/lɔ̃.tɑ̃/"
     },
     {
       "word": "DORMIR",
@@ -1796,7 +2821,13 @@
         "sommeiller"
       ],
       "example": "Va dormir !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "dormance",
+        "dormant",
+        "dormeur"
+      ],
+      "ipa": "/dɔʁ.miʁ/"
     },
     {
       "word": "FAÇON",
@@ -1805,7 +2836,13 @@
         "moyen"
       ],
       "example": "À chacun sa façon !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "façonnage",
+        "façonner",
+        "façonnier"
+      ],
+      "ipa": "/fa.sɔ̃/"
     },
     {
       "word": "PLEIN",
@@ -1815,7 +2852,13 @@
         "trop"
       ],
       "example": "Il est plein.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/plɛ̃/",
+      "family": [
+        "pleinement",
+        "plénier",
+        "remplir"
+      ]
     },
     {
       "word": "COMPTE",
@@ -1824,7 +2867,13 @@
         "calcul"
       ],
       "example": "Ouvrez un compte !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kɔ̃t̪ə/",
+      "family": [
+        "acompte",
+        "comptabilisation",
+        "comptabiliser"
+      ]
     },
     {
       "word": "PERDU",
@@ -1833,7 +2882,11 @@
         "égaré"
       ],
       "example": "Es-tu perdu ?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "duper"
+      ],
+      "ipa": "/pɛʁdy/"
     },
     {
       "word": "COMPRIS",
@@ -1843,7 +2896,8 @@
         "savoir"
       ],
       "example": "J'ai compris.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/kɔ̃pʁi/"
     },
     {
       "word": "DROIT",
@@ -1852,7 +2906,13 @@
         "juste"
       ],
       "example": "C'est ton droit.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "adroit",
+        "adroitement",
+        "droite"
+      ],
+      "ipa": "/dʁwa/"
     },
     {
       "word": "BEL",
@@ -1861,7 +2921,13 @@
         "joli"
       ],
       "example": "Bel oiseau !",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bɛl/",
+      "family": [
+        "décibel",
+        "néper",
+        "Belfort"
+      ]
     },
     {
       "word": "TRAIN",
@@ -1871,7 +2937,13 @@
         "bus"
       ],
       "example": "Voilà le train.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tʁɛ̃/",
+      "family": [
+        "entrain",
+        "aérotrain",
+        "TGV"
+      ]
     },
     {
       "word": "ATTENTION",
@@ -1880,7 +2952,12 @@
         "vigilance"
       ],
       "example": "Fais attention !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "attentionné",
+        "attentionnel"
+      ],
+      "ipa": "/a.t̪ɑ̃.sjɔ̃/"
     },
     {
       "word": "DUR",
@@ -1889,7 +2966,13 @@
         "difficile"
       ],
       "example": "Il était dur.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/dyʁ/",
+      "family": [
+        "durcir",
+        "endurcir",
+        "dure"
+      ]
     },
     {
       "word": "MOT",
@@ -1898,7 +2981,12 @@
         "terme"
       ],
       "example": "Plus un mot !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/mɔ/",
+      "family": [
+        "motet",
+        "motus"
+      ]
     },
     {
       "word": "RETROUVER",
@@ -1907,7 +2995,11 @@
         "récupérer"
       ],
       "example": "Je peux les retrouver.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "retrouvaille"
+      ],
+      "ipa": "/ʁǝ.tʁu.ve/"
     },
     {
       "word": "CORPS",
@@ -1916,7 +3008,13 @@
         "organisme"
       ],
       "example": "Écoute ton corps.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "bicorps",
+        "corporalité",
+        "corporatisme"
+      ],
+      "ipa": "/kɔʁ/"
     },
     {
       "word": "VOICI",
@@ -1925,7 +3023,12 @@
         "voilà"
       ],
       "example": "Les voici.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "revoici",
+        "voilà"
+      ],
+      "ipa": "/vwa.si/"
     },
     {
       "word": "GARÇON",
@@ -1934,7 +3037,13 @@
         "enfant"
       ],
       "example": "Le garçon saute.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "garçonne",
+        "garçonnet",
+        "garçonnier"
+      ],
+      "ipa": "/ɡæʀ.søɔ̃/"
     },
     {
       "word": "ÉCRIRE",
@@ -1943,7 +3052,13 @@
         "noter"
       ],
       "example": "Je dois écrire.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "écrit",
+        "écriteau",
+        "écritoire"
+      ],
+      "ipa": "/e.kʁiʁ/"
     },
     {
       "word": "IMPORTANT",
@@ -1952,13 +3067,23 @@
         "essentiel"
       ],
       "example": "Tu es important.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "importance",
+        "importer",
+        "VIP"
+      ],
+      "ipa": "/ɛ̃.pɔʁ.tɑ̃/"
     },
     {
       "word": "MADAME",
       "gloss": "femme adulte",
       "example": "Merci madame.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "mademoiselle"
+      ],
+      "ipa": "/ma.dam/"
     },
     {
       "word": "MATIN",
@@ -1967,7 +3092,13 @@
         "aube"
       ],
       "example": "Venez demain matin.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "matinal",
+        "matinale",
+        "matinalier"
+      ],
+      "ipa": "/ma.tɛ̃/"
     },
     {
       "word": "CHAMBRE",
@@ -1976,7 +3107,13 @@
         "pièce"
       ],
       "example": "Chambre à louer.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃɑ̃bʁ/",
+      "family": [
+        "antichambre",
+        "chambrer",
+        "chambriste"
+      ]
     },
     {
       "word": "GARDER",
@@ -1985,7 +3122,13 @@
         "conserver"
       ],
       "example": "Il faut le garder.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "garde",
+        "garderie",
+        "gardien"
+      ],
+      "ipa": "/ɡaʁ.de/"
     },
     {
       "word": "TERRE",
@@ -1994,7 +3137,13 @@
         "lieu"
       ],
       "example": "Je laboure la terre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tɛːʁ/",
+      "family": [
+        "Angleterre",
+        "atterrir",
+        "atterrissage"
+      ]
     },
     {
       "word": "TELLEMENT",
@@ -2003,7 +3152,8 @@
         "tant"
       ],
       "example": "J'ai tellement faim.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/tɛl.mɑ̃/"
     },
     {
       "word": "HEUREUX",
@@ -2012,7 +3162,12 @@
         "content"
       ],
       "example": "Sois heureux !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "heureusement",
+        "malheureux"
+      ],
+      "ipa": "/ø.ʁø/"
     },
     {
       "word": "RETOURNER",
@@ -2021,7 +3176,12 @@
         "revenir"
       ],
       "example": "J'ai dû retourner.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "retournable",
+        "retournement"
+      ],
+      "ipa": "/ʁə.tuʁ.ne/"
     },
     {
       "word": "ACHETER",
@@ -2030,7 +3190,13 @@
         "acquérir"
       ],
       "example": "Je veux acheter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "achetable",
+        "acheteur",
+        "téléachat"
+      ],
+      "ipa": "/a.ʃø.te/"
     },
     {
       "word": "BEAU",
@@ -2039,7 +3205,13 @@
         "joli"
       ],
       "example": "Tu es beau.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bo/",
+      "family": [
+        "BCBG",
+        "beaux-fils",
+        "beaux-frères"
+      ]
     },
     {
       "word": "TIEN",
@@ -2048,7 +3220,8 @@
         "à toi"
       ],
       "example": "C'est le tien.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/tjɛ̃/"
     },
     {
       "word": "ÉCOUTER",
@@ -2057,7 +3230,13 @@
         "entendre"
       ],
       "example": "Tu vas écouter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "écoutable",
+        "écouteur",
+        "écouteuse"
+      ],
+      "ipa": "/e.ku.te/"
     },
     {
       "word": "ADORER",
@@ -2066,13 +3245,24 @@
         "aimer"
       ],
       "example": "Tu vas adorer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/a.dɔ.ʁe/",
+      "family": [
+        "adoration",
+        "adorable"
+      ]
     },
     {
       "word": "EAU",
       "gloss": "une chose que l’on boit",
       "example": "L'eau est bonne.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/o/",
+      "family": [
+        "Morteau",
+        "Saint-Amand-les-Eaux",
+        "Verseau"
+      ]
     },
     {
       "word": "RAPPELER",
@@ -2082,7 +3272,12 @@
         "penser"
       ],
       "example": "Je dois te rappeler.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "rappel",
+        "rappelable"
+      ],
+      "ipa": "/ʁa.pə.le/"
     },
     {
       "word": "OUVRIR",
@@ -2091,7 +3286,13 @@
         "déverrouiller"
       ],
       "example": "Va ouvrir la porte.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "entrouvert",
+        "entrouvrir",
+        "ouvert"
+      ],
+      "ipa": "/u.vʁiʁ/"
     },
     {
       "word": "PARDON",
@@ -2100,7 +3301,12 @@
         "excuse"
       ],
       "example": "Oh, pardon !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/paʁ.dɔ̃/",
+      "family": [
+        "pardonner",
+        "pardonnable"
+      ]
     },
     {
       "word": "SUITE",
@@ -2109,7 +3315,13 @@
         "continuation"
       ],
       "example": "À tout de suite.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/sɥit/",
+      "family": [
+        "ensuite",
+        "poursuite",
+        "suitée"
+      ]
     },
     {
       "word": "CAUSE",
@@ -2118,7 +3330,12 @@
         "raison"
       ],
       "example": "Quelle est la cause ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/koːz/",
+      "family": [
+        "causal",
+        "causalité"
+      ]
     },
     {
       "word": "VOLER",
@@ -2127,7 +3344,13 @@
         "décoller"
       ],
       "example": "Je peux voler.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "revoler",
+        "survol",
+        "survoler"
+      ],
+      "ipa": "/vɔ.le/"
     },
     {
       "word": "RENCONTRER",
@@ -2137,7 +3360,12 @@
         "trouver"
       ],
       "example": "Tu peux le rencontrer.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁɑ̃.kɔ̃.tʁe/",
+      "family": [
+        "rencontre",
+        "rencontré"
+      ]
     },
     {
       "word": "BOIRE",
@@ -2146,7 +3374,13 @@
         "ingurgiter"
       ],
       "example": "Que boire ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/bwaːʁ/",
+      "family": [
+        "boit-sans-soif",
+        "buvard",
+        "déboire"
+      ]
     },
     {
       "word": "PORTER",
@@ -2156,7 +3390,13 @@
         "avoir"
       ],
       "example": "Je vais porter ça.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "apporteur",
+        "apporter",
+        "déportation"
+      ],
+      "ipa": "/pɔʁ.te/"
     },
     {
       "word": "SUIVRE",
@@ -2166,7 +3406,13 @@
         "venir"
       ],
       "example": "Il faut suivre.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/sɥivʁ/",
+      "family": [
+        "poursuivre",
+        "suite",
+        "suivant"
+      ]
     },
     {
       "word": "ENFIN",
@@ -2176,7 +3422,8 @@
         "alors"
       ],
       "example": "Ah, enfin !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ɑ̃.fɛ̃/"
     },
     {
       "word": "SERVIR",
@@ -2186,7 +3433,13 @@
         "donner"
       ],
       "example": "À toi de servir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "asservir",
+        "asservissement",
+        "desservir"
+      ],
+      "ipa": "/sɛʁ.viʁ/"
     },
     {
       "word": "MARI",
@@ -2196,7 +3449,13 @@
         "conjoint"
       ],
       "example": "J'ai un mari.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "mariage",
+        "marier",
+        "épouse"
+      ],
+      "ipa": "/ma.ʁi/"
     },
     {
       "word": "PHOTO",
@@ -2205,7 +3464,11 @@
         "carte"
       ],
       "example": "C’est sa photo.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "orthophoto"
+      ],
+      "ipa": "/fo.to/"
     },
     {
       "word": "BUREAU",
@@ -2215,7 +3478,13 @@
         "maison"
       ],
       "example": "C'est un bureau.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "buraliste",
+        "bureaucrate",
+        "bureaucratie"
+      ],
+      "ipa": "/by.ʁo/"
     },
     {
       "word": "PRIER",
@@ -2225,7 +3494,13 @@
         "dire"
       ],
       "example": "Veux-tu prier ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "priant",
+        "prière",
+        "prie-Dieu"
+      ],
+      "ipa": "/pʁi.je/"
     },
     {
       "word": "LOIN",
@@ -2235,7 +3510,13 @@
         "distant"
       ],
       "example": "Loin de là !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/lwɛ̃/",
+      "family": [
+        "lointain",
+        "éloigner",
+        "éloignement"
+      ]
     },
     {
       "word": "RECEVOIR",
@@ -2245,7 +3526,13 @@
         "avoir"
       ],
       "example": "Merci de me recevoir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁə.sə.vwaʁ/",
+      "family": [
+        "réception",
+        "receveur",
+        "reçu"
+      ]
     },
     {
       "word": "BOULOT",
@@ -2255,7 +3542,11 @@
         "chose"
       ],
       "example": "Au boulot !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bu.lo/",
+      "family": [
+        "boulotter"
+      ]
     },
     {
       "word": "POSSIBLE",
@@ -2265,7 +3556,13 @@
         "réalisable"
       ],
       "example": "C'est possible.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "compossible",
+        "impossible",
+        "possibilité"
+      ],
+      "ipa": "/po.sibl/"
     },
     {
       "word": "FIN",
@@ -2275,7 +3572,13 @@
         "conclusion"
       ],
       "example": "C'est la fin.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɛ̃/",
+      "family": [
+        "confinement",
+        "confiner",
+        "confins"
+      ]
     },
     {
       "word": "COURIR",
@@ -2285,7 +3588,13 @@
         "sprint"
       ],
       "example": "J'aime courir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "accourir",
+        "coureur",
+        "coureuse"
+      ],
+      "ipa": "/ku.ʁiʁ/"
     },
     {
       "word": "MONTRER",
@@ -2295,7 +3604,13 @@
         "désigner"
       ],
       "example": "Il va te montrer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "montrable",
+        "montre",
+        "montreur"
+      ],
+      "ipa": "/mɔ̃.tʁe/"
     },
     {
       "word": "MME",
@@ -2305,7 +3620,12 @@
         "personne"
       ],
       "example": "Mme Sato poussait son fils à travailler dur.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "Mʳ",
+        "Mlle"
+      ],
+      "ipa": "/mam/"
     },
     {
       "word": "RÉPONDRE",
@@ -2315,7 +3635,12 @@
         "parler"
       ],
       "example": "Veuillez répondre.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁe.pɔ̃dʁ/",
+      "family": [
+        "réponse",
+        "répondant"
+      ]
     },
     {
       "word": "DOCTEUR",
@@ -2325,7 +3650,13 @@
         "praticien"
       ],
       "example": "Merci, docteur.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "doc",
+        "docteure",
+        "doctorant"
+      ],
+      "ipa": "/dok.ˈtœʁ̥/"
     },
     {
       "word": "PLUTÔT",
@@ -2335,7 +3666,8 @@
         "préférablement"
       ],
       "example": "Il est plutôt bon.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ply.tɔ/"
     },
     {
       "word": "SAUVER",
@@ -2345,7 +3677,13 @@
         "protéger"
       ],
       "example": "Il vint me sauver.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "insauvable",
+        "sauvable",
+        "sauve-qui-peut"
+      ],
+      "ipa": "/so.ve/"
     },
     {
       "word": "PRÊT",
@@ -2355,7 +3693,12 @@
         "préparé"
       ],
       "example": "Tu es prêt.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pʁ̥e/",
+      "family": [
+        "prêter",
+        "prêté"
+      ]
     },
     {
       "word": "CHEF",
@@ -2365,7 +3708,13 @@
         "personne"
       ],
       "example": "Oui, chef !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/œ̃.ʃɛf/",
+      "family": [
+        "derechef",
+        "chefaillon",
+        "cheffe"
+      ]
     },
     {
       "word": "ÉCOLE",
@@ -2375,7 +3724,13 @@
         "lycée"
       ],
       "example": "Va à l'école.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "écolage",
+        "écolâtre",
+        "écolier"
+      ],
+      "ipa": "/e.kɔl/"
     },
     {
       "word": "JEU",
@@ -2385,7 +3740,12 @@
         "jouer"
       ],
       "example": "J'aime ce jeu.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ajustement",
+        "tolérance"
+      ],
+      "ipa": "/ʒø/"
     },
     {
       "word": "FEU",
@@ -2394,7 +3754,13 @@
         "chose"
       ],
       "example": "Le feu brûle.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "boutefeu",
+        "carburant",
+        "combustible"
+      ],
+      "ipa": "/fø/"
     },
     {
       "word": "MENTIR",
@@ -2404,7 +3770,13 @@
         "parler"
       ],
       "example": "Il peut mentir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "démenti",
+        "démentir",
+        "menteur"
+      ],
+      "ipa": "/mɑ̃.tiʁ/"
     },
     {
       "word": "PROCHAIN",
@@ -2414,7 +3786,13 @@
         "suivant"
       ],
       "example": "Tu es le prochain.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "pro",
+        "prochainement",
+        "proche"
+      ],
+      "ipa": "/pʁɔ.ʃɛ̃/"
     },
     {
       "word": "VÉRITÉ",
@@ -2424,7 +3802,13 @@
         "fait"
       ],
       "example": "La vérité ?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "contrevérité",
+        "avérer",
+        "véridicité"
+      ],
+      "ipa": "/ve.ʁi.te/"
     },
     {
       "word": "CONFIANCE",
@@ -2434,7 +3818,13 @@
         "ami"
       ],
       "example": "Fais-moi confiance.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "confiancer",
+        "confier",
+        "confidence"
+      ],
+      "ipa": "/kɔ̃.fjɑ̃s/"
     },
     {
       "word": "TÉLÉPHONE",
@@ -2444,13 +3834,25 @@
         "appareil"
       ],
       "example": "Téléphone pour toi !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "téléphoner",
+        "téléphonie",
+        "téléphonique"
+      ],
+      "ipa": "/te.le.fɔn/"
     },
     {
       "word": "JOURNÉE",
       "gloss": "le temps entre le matin et le soir",
       "example": "Bonne journée !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʒuʁ.ne/",
+      "family": [
+        "jour",
+        "journal",
+        "journalier"
+      ]
     },
     {
       "word": "GÉNIAL",
@@ -2460,7 +3862,13 @@
         "super"
       ],
       "example": "Ah, génial !",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "génialement",
+        "génialissime",
+        "génialité"
+      ],
+      "ipa": "/ʒe.njal/"
     },
     {
       "word": "FILM",
@@ -2470,7 +3878,13 @@
         "bande"
       ],
       "example": "J'aime ce film.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɪlm/",
+      "family": [
+        "filmage",
+        "filmer",
+        "filmique"
+      ]
     },
     {
       "word": "ÉQUIPE",
@@ -2480,7 +3894,12 @@
         "formation"
       ],
       "example": "Quelle équipe !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "équipage",
+        "équipier"
+      ],
+      "ipa": "/e.kip/"
     },
     {
       "word": "PROPOS",
@@ -2490,7 +3909,13 @@
         "chose"
       ],
       "example": "À propos de quoi ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pʁɔ.po/",
+      "family": [
+        "proposer",
+        "proposition",
+        "proposé"
+      ]
     },
     {
       "word": "IMAGINER",
@@ -2500,7 +3925,11 @@
         "penser"
       ],
       "example": "Je ne peux l'imaginer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "imagination"
+      ],
+      "ipa": "/i.ma.ʒi.ne/"
     },
     {
       "word": "JOLI",
@@ -2510,7 +3939,13 @@
         "bon"
       ],
       "example": "C'est joli.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "enjolivement",
+        "enjoliver",
+        "enjoliveur"
+      ],
+      "ipa": "/ʒo.li/"
     },
     {
       "word": "PROPRE",
@@ -2519,7 +3954,13 @@
         "net"
       ],
       "example": "C'est propre.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/pʁ̥ɔpʁ̥/",
+      "family": [
+        "impropre",
+        "improprement",
+        "malpropre"
+      ]
     },
     {
       "word": "GUERRE",
@@ -2528,7 +3969,13 @@
         "chose"
       ],
       "example": "Qui aime la guerre ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɡaɛ̯ʀ/",
+      "family": [
+        "aguerri",
+        "aguerrir",
+        "cyberguerre"
+      ]
     },
     {
       "word": "VENDRE",
@@ -2538,7 +3985,13 @@
         "liquider"
       ],
       "example": "C'est à vendre ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/vɑ̃dʁ/",
+      "family": [
+        "invendable",
+        "invendu",
+        "mévendre"
+      ]
     },
     {
       "word": "EMMENER",
@@ -2548,7 +4001,13 @@
         "transporter"
       ],
       "example": "Je vais t'y emmener.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "remmener",
+        "amener",
+        "mener"
+      ],
+      "ipa": "/ɑ̃.mə.ne/"
     },
     {
       "word": "PRÈS",
@@ -2557,7 +4016,12 @@
         "ici"
       ],
       "example": "Regarde de près !",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "auprès",
+        "presque"
+      ],
+      "ipa": "/pʁɛ/"
     },
     {
       "word": "CHER",
@@ -2566,7 +4030,13 @@
         "bon"
       ],
       "example": "C'est cher.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ʃɛʁ/",
+      "family": [
+        "chèrement",
+        "chéri",
+        "chérie"
+      ]
     },
     {
       "word": "QUITTER",
@@ -2576,7 +4046,13 @@
         "abandonner"
       ],
       "example": "Je dois te quitter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "requitter",
+        "acquittement",
+        "acquitter"
+      ],
+      "ipa": "/ki.te/"
     },
     {
       "word": "AGENT",
@@ -2586,7 +4062,13 @@
         "fonctionnaire"
       ],
       "example": "Je suis agent.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "AC",
+        "agence",
+        "agencement"
+      ],
+      "ipa": "/a.ʒɑ̃/"
     },
     {
       "word": "DESSUS",
@@ -2595,7 +4077,11 @@
         "sur"
       ],
       "example": "Il y a un livre sur la table et un chat dort dessus.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/də.sy/",
+      "family": [
+        "pardessus"
+      ]
     },
     {
       "word": "MARIAGE",
@@ -2605,7 +4091,13 @@
         "noces"
       ],
       "example": "À quand le mariage ?",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "démariage",
+        "formariage",
+        "intermariage"
+      ],
+      "ipa": "/ma.ʁjaʒ/"
     },
     {
       "word": "SUFFIRE",
@@ -2615,7 +4107,13 @@
         "assouvir"
       ],
       "example": "Ça devrait suffire.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "autosuffisance",
+        "insuffisance",
+        "insuffisant"
+      ],
+      "ipa": "/sy.fiʁ/"
     },
     {
       "word": "OFFRIR",
@@ -2625,7 +4123,13 @@
         "faire"
       ],
       "example": "J'ai tant à offrir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "offrant",
+        "offre",
+        "offreur"
+      ],
+      "ipa": "/ɔ.fʁiʁ/"
     },
     {
       "word": "DÉCIDER",
@@ -2635,7 +4139,13 @@
         "prendre"
       ],
       "example": "À toi de décider.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "décidabilité",
+        "décidable",
+        "décidé"
+      ],
+      "ipa": "/de.si.de/"
     },
     {
       "word": "INQUIET",
@@ -2645,7 +4155,13 @@
         "soucieux"
       ],
       "example": "Tu es inquiet.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "inquiétant",
+        "inquiéter",
+        "inquiétude"
+      ],
+      "ipa": "/ɛ̃.kjɛ/"
     },
     {
       "word": "LIVRE",
@@ -2655,7 +4171,13 @@
         "volume"
       ],
       "example": "Lis ce livre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/l̪ivʁ/",
+      "family": [
+        "audiolivre",
+        "livresque",
+        "livret"
+      ]
     },
     {
       "word": "MARCHE",
@@ -2665,7 +4187,13 @@
         "allure"
       ],
       "example": "Il marche.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/maʁʃ/",
+      "family": [
+        "Danemark",
+        "margrave",
+        "marquis"
+      ]
     },
     {
       "word": "SÉCURITÉ",
@@ -2674,7 +4202,13 @@
         "sûr"
       ],
       "example": "Tu es en sécurité.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "ABS",
+        "BAES",
+        "CRS"
+      ],
+      "ipa": "/se.ky.ʁi.te/"
     },
     {
       "word": "CHOISIR",
@@ -2684,7 +4218,12 @@
         "opter"
       ],
       "example": "Tu dois choisir.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʃwa.ziʁ/",
+      "family": [
+        "choix",
+        "choisi"
+      ]
     },
     {
       "word": "NUMÉRO",
@@ -2693,7 +4232,13 @@
         "nombre"
       ],
       "example": "Voilà mon numéro.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "énumérer",
+        "numéraire",
+        "numéral"
+      ],
+      "ipa": "/ny.me.ʁo/"
     },
     {
       "word": "AGIR",
@@ -2703,7 +4248,12 @@
         "opérer"
       ],
       "example": "Il faut agir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "agissant",
+        "agissements"
+      ],
+      "ipa": "/a.ʒiʁ/"
     },
     {
       "word": "EXACTEMENT",
@@ -2713,7 +4263,12 @@
         "justement"
       ],
       "example": "Exactement.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "family": [
+        "exactitude",
+        "exact"
+      ],
+      "ipa": "/ɛɡ.zak.tə.mɑ̃/"
     },
     {
       "word": "FORT",
@@ -2722,7 +4277,13 @@
         "solide"
       ],
       "example": "J'étais fort.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/fɔːʁ/",
+      "family": [
+        "aquafortiste",
+        "eau-forte",
+        "fortement"
+      ]
     },
     {
       "word": "SERVICE",
@@ -2732,7 +4293,13 @@
         "prestation"
       ],
       "example": "À ton service.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "asservir",
+        "asservissement",
+        "HS"
+      ],
+      "ipa": "/sɛʁ.vɪs/"
     },
     {
       "word": "PRESQUE",
@@ -2741,7 +4308,11 @@
         "quasi"
       ],
       "example": "Presque trois.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/pʁɛsk/",
+      "family": [
+        "presqu’île"
+      ]
     },
     {
       "word": "PARENT",
@@ -2751,7 +4322,13 @@
         "mère"
       ],
       "example": "Sois un bon parent.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "apparenté",
+        "apparentement",
+        "apparenter"
+      ],
+      "ipa": "/ˈpa.ʁɑ̃/"
     },
     {
       "word": "BEN",
@@ -2761,7 +4338,8 @@
         "bien"
       ],
       "example": "Ben vas-y !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/bɛ̃/"
     },
     {
       "word": "CAPITAINE",
@@ -2770,7 +4348,13 @@
         "chef"
       ],
       "example": "Oui mon capitaine !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "capitainerie",
+        "capitanat",
+        "capitan"
+      ],
+      "ipa": "/ka.pi.tɛn/"
     },
     {
       "word": "LONG",
@@ -2779,7 +4363,13 @@
         "étendu"
       ],
       "example": "Cela est long.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/lɔ̃/",
+      "family": [
+        "allonger",
+        "longtemps",
+        "longue"
+      ]
     },
     {
       "word": "CHIEN",
@@ -2788,13 +4378,25 @@
         "cabot"
       ],
       "example": "J'ai un chien.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/œ̃.ʃjɛ̃/",
+      "family": [
+        "chienne",
+        "chienner",
+        "chiennerie"
+      ]
     },
     {
       "word": "AMIE",
       "gloss": "une fille que l'on aime bien",
       "example": "Amène ton amie.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/yn‿a.mi/",
+      "family": [
+        "ami",
+        "amitié",
+        "amical"
+      ]
     },
     {
       "word": "FOU",
@@ -2804,13 +4406,25 @@
         "drôle"
       ],
       "example": "C'est fou.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fu/",
+      "family": [
+        "follement",
+        "foufou",
+        "foutraque"
+      ]
     },
     {
       "word": "ENVIE",
       "gloss": "le fait de vouloir une chose",
       "example": "Comme je t’envie !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "envier",
+        "envieux",
+        "envieusement"
+      ],
+      "ipa": "/ɑ̃.vi/"
     },
     {
       "word": "TIRER",
@@ -2819,7 +4433,13 @@
         "décocher"
       ],
       "example": "À toi de tirer !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "attirant",
+        "attiré",
+        "attirer"
+      ],
+      "ipa": "/ti.ʁe/"
     },
     {
       "word": "ORDRE",
@@ -2828,7 +4448,12 @@
         "commandement"
       ],
       "example": "C'est un ordre.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɔʁdʁ/",
+      "family": [
+        "superordre",
+        "ordination"
+      ]
     },
     {
       "word": "VUE",
@@ -2837,7 +4462,13 @@
         "regard"
       ],
       "example": "Sa vue baisse.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vy/",
+      "family": [
+        "goût",
+        "odorat",
+        "ouïe"
+      ]
     },
     {
       "word": "LIEU",
@@ -2846,13 +4477,22 @@
         "endroit"
       ],
       "example": "Tu es en lieu sûr.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "lieutenant"
+      ],
+      "ipa": "/ljø/"
     },
     {
       "word": "VALOIR",
       "gloss": "avoir un bon prix",
       "example": "Ils doivent valoir au moins trois cents dollars.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/valwaʁ/",
+      "family": [
+        "revaloir",
+        "vaurien"
+      ]
     },
     {
       "word": "PROTÉGER",
@@ -2861,7 +4501,13 @@
         "garder"
       ],
       "example": "On va te protéger.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "déprotéger",
+        "protège-cahier",
+        "protège-dents"
+      ],
+      "ipa": "/pʁɔ.te.ʒe/"
     },
     {
       "word": "PIED",
@@ -2870,7 +4516,13 @@
         "patte"
       ],
       "example": "J'irai à pied.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/pje/",
+      "family": [
+        "bipied",
+        "casse-pieds",
+        "essuie-pieds"
+      ]
     },
     {
       "word": "FÊTE",
@@ -2879,7 +4531,12 @@
         "réjouissance"
       ],
       "example": "Bonne fête.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɛt/",
+      "family": [
+        "festif",
+        "festivité"
+      ]
     },
     {
       "word": "RESSEMBLER",
@@ -2888,7 +4545,12 @@
         "imiter"
       ],
       "example": "Je veux lui ressembler.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "ressemblance",
+        "ressemblant"
+      ],
+      "ipa": "/ʁə.sɑ̃.ble/"
     },
     {
       "word": "BATTRE",
@@ -2897,7 +4559,13 @@
         "vaincre"
       ],
       "example": "Qui va se battre ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/batʁ/",
+      "family": [
+        "abattre",
+        "batte",
+        "batterie"
+      ]
     },
     {
       "word": "GENTIL",
@@ -2906,7 +4574,13 @@
         "aimable"
       ],
       "example": "Sois gentil.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "gentilhomme",
+        "gentilhommerie",
+        "gentilhommière"
+      ],
+      "ipa": "/ʒɑ̃.ti/"
     },
     {
       "word": "PAYS",
@@ -2915,7 +4589,13 @@
         "nation"
       ],
       "example": "Elle vit dans le pays.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "dépaysement",
+        "dépayser",
+        "paysage"
+      ],
+      "ipa": "/pe.i/"
     },
     {
       "word": "GARDE",
@@ -2924,7 +4604,13 @@
         "surveillance"
       ],
       "example": "Un garde surveille l'entrée du musée.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "garder",
+        "gardeur",
+        "gardeuse"
+      ],
+      "ipa": "/ɡaʁd/"
     },
     {
       "word": "COURS",
@@ -2933,7 +4619,13 @@
         "leçon"
       ],
       "example": "J'ai cours demain.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kuʁ/",
+      "family": [
+        "discours",
+        "intercours",
+        "parcours"
+      ]
     },
     {
       "word": "ACCEPTER",
@@ -2943,7 +4635,12 @@
         "dire oui"
       ],
       "example": "Tu dois accepter !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "acceptation",
+        "accepteur"
+      ],
+      "ipa": "/ak.sɛp.te/"
     },
     {
       "word": "SUPPOSER",
@@ -2952,7 +4649,13 @@
         "imaginer"
       ],
       "example": "Je ne fais que supposer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "supposable",
+        "présupposer",
+        "supposé"
+      ],
+      "ipa": "/sy.po.ze/"
     },
     {
       "word": "BAS",
@@ -2962,7 +4665,13 @@
         "profond"
       ],
       "example": "Attrape le bas.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/ba/",
+      "family": [
+        "Basse-Côte-Nord",
+        "Basse-Normandie",
+        "Basse-Saxe"
+      ]
     },
     {
       "word": "TOUR",
@@ -2971,7 +4680,13 @@
         "rotation"
       ],
       "example": "C'est une tour.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "touraillage",
+        "touraille",
+        "tourelle"
+      ],
+      "ipa": "/tuʁ/"
     },
     {
       "word": "BIENTÔT",
@@ -2980,7 +4695,8 @@
         "prochainement"
       ],
       "example": "À bientôt !",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/bjɛ̃.to/"
     },
     {
       "word": "IGNORER",
@@ -2989,7 +4705,13 @@
         "méconnaître"
       ],
       "example": "Je vais ignorer ça.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/i.ɲɔ.ʁe/",
+      "family": [
+        "ignorance",
+        "ignorant",
+        "ignoré"
+      ]
     },
     {
       "word": "TOURNER",
@@ -2998,7 +4720,13 @@
         "pivoter"
       ],
       "example": "Arrête de tourner.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "contournement",
+        "contourner",
+        "détournement"
+      ],
+      "ipa": "/tuʁ.ne/"
     },
     {
       "word": "PEINE",
@@ -3007,7 +4735,13 @@
         "chagrin"
       ],
       "example": "Ça en vaut la peine.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpɛ.nə/",
+      "family": [
+        "dépénalisation",
+        "dépénaliser",
+        "peiner"
+      ]
     },
     {
       "word": "PERSONNE",
@@ -3016,7 +4750,13 @@
         "individu"
       ],
       "example": "Personne n'est venu.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "personnage",
+        "personnalité",
+        "personnel"
+      ],
+      "ipa": "/pɛʁ.sɔn/"
     },
     {
       "word": "PRISON",
@@ -3025,7 +4765,13 @@
         "geôle"
       ],
       "example": "Il est en prison.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "désemprisonner",
+        "emprisonner",
+        "emprisonnement"
+      ],
+      "ipa": "/pʁi.zɔ̃/"
     },
     {
       "word": "PARFAIRE",
@@ -3034,7 +4780,12 @@
         "achever"
       ],
       "example": "Ce dessin est presque parfait, il ne reste qu’à parfaire les couleurs.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "imparfait",
+        "parfait"
+      ],
+      "ipa": "/paʁ.fɛʁ/"
     },
     {
       "word": "RETOUR",
@@ -3044,7 +4795,13 @@
         "repli"
       ],
       "example": "Tu es de retour.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁə.tuʁ/",
+      "family": [
+        "retourner",
+        "retournement",
+        "retourné"
+      ]
     },
     {
       "word": "SÉRIEUX",
@@ -3053,7 +4810,12 @@
         "grave"
       ],
       "example": "Sois sérieux.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "sérieusement",
+        "demi"
+      ],
+      "ipa": "/sɛ.ʁjø/"
     },
     {
       "word": "AINSI",
@@ -3062,7 +4824,8 @@
         "donc"
       ],
       "example": "C'est ainsi.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ɛ̃.si/"
     },
     {
       "word": "DÉCOUVRIR",
@@ -3071,7 +4834,13 @@
         "trouver"
       ],
       "example": "Ils vont le découvrir !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "découvrement",
+        "découvreur",
+        "découvreuse"
+      ],
+      "ipa": "/de.ku.vʁiʁ/"
     },
     {
       "word": "RACONTER",
@@ -3080,7 +4849,13 @@
         "narrer"
       ],
       "example": "Je veux tout te raconter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "inracontable",
+        "irracontable",
+        "racontar"
+      ],
+      "ipa": "/ʁa.kɔ̃.te/"
     },
     {
       "word": "AUTANT",
@@ -3089,7 +4864,8 @@
         "aussi"
       ],
       "example": "Il t'aime autant que moi.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/o.tɑ̃/"
     },
     {
       "word": "CARTE",
@@ -3098,7 +4874,13 @@
         "plan"
       ],
       "example": "Voici la carte !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/kaʁt/",
+      "family": [
+        "carter",
+        "carterie",
+        "cartomancien"
+      ]
     },
     {
       "word": "PLAN",
@@ -3107,7 +4889,13 @@
         "idée"
       ],
       "example": "J'ai un plan.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/plɑ̃/",
+      "family": [
+        "planéité",
+        "biplan",
+        "planification"
+      ]
     },
     {
       "word": "EXPLIQUER",
@@ -3117,7 +4905,13 @@
         "montrer"
       ],
       "example": "Merci d'expliquer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "réexpliquer",
+        "explication",
+        "inexplicable"
+      ],
+      "ipa": "/ɛks.pli.ke/"
     },
     {
       "word": "INSTANT",
@@ -3126,7 +4920,13 @@
         "moment"
       ],
       "example": "Un instant.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "instamment",
+        "instance",
+        "instantané"
+      ],
+      "ipa": "/ɛ̃s.tɑ̃/"
     },
     {
       "word": "DIFFÉRENT",
@@ -3135,7 +4935,13 @@
         "autre"
       ],
       "example": "C'est différent.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "dédifférencier",
+        "différemment",
+        "différence"
+      ],
+      "ipa": "/di.fe.ʁɑ̃/"
     },
     {
       "word": "SECOND",
@@ -3144,7 +4950,13 @@
         "autre"
       ],
       "example": "Il est arrivé second.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "seconde",
+        "secondaire",
+        "secondairement"
+      ],
+      "ipa": "/sə.ɡɔ̃/"
     },
     {
       "word": "FACILE",
@@ -3153,7 +4965,12 @@
         "simple"
       ],
       "example": "C'est facile.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "facilement",
+        "facilité"
+      ],
+      "ipa": "/fa.sil/"
     },
     {
       "word": "DIFFICILE",
@@ -3162,7 +4979,13 @@
         "ardu"
       ],
       "example": "C'est difficile.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "difficilement",
+        "difficulté",
+        "difficultueux"
+      ],
+      "ipa": "/di.fi.sil/"
     },
     {
       "word": "DÉTESTER",
@@ -3170,13 +4993,25 @@
       "synonyms": [
         "haïr"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/de.tes.te/",
+      "family": [
+        "détestation",
+        "détestable",
+        "détesté"
+      ]
     },
     {
       "word": "ARME",
       "gloss": "un objet pour faire du mal",
       "example": "C'est une arme.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/aʁm/",
+      "family": [
+        "armoire",
+        "armoiries",
+        "armure"
+      ]
     },
     {
       "word": "MEURTRE",
@@ -3185,7 +5020,12 @@
         "assassinat"
       ],
       "example": "Le meurtre est un crime.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "meurtrier",
+        "meurtrir",
+        "meurtrissure"
+      ]
     },
     {
       "word": "PERMETTRE",
@@ -3194,7 +5034,12 @@
         "autoriser"
       ],
       "example": "Je refuse de permettre ça.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "permissif",
+        "permissivité"
+      ],
+      "ipa": "/pɛʁ.mɛtʁ/"
     },
     {
       "word": "CACHER",
@@ -3203,7 +5048,13 @@
         "mettre"
       ],
       "example": "Tu vas te cacher.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "cache",
+        "caché",
+        "cache-cache"
+      ],
+      "ipa": "/ka.ʃe/"
     },
     {
       "word": "RAMENER",
@@ -3212,7 +5063,11 @@
         "rapporter"
       ],
       "example": "Tu peux me ramener ?",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁam.ne/",
+      "family": [
+        "ramené"
+      ]
     },
     {
       "word": "ROUTE",
@@ -3221,7 +5076,13 @@
         "chemin"
       ],
       "example": "Et la route ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁut/",
+      "family": [
+        "autoroute",
+        "déroute",
+        "ferrouter"
+      ]
     },
     {
       "word": "PIRE",
@@ -3230,13 +5091,22 @@
         "plus mauvais"
       ],
       "example": "C'était pire.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/piʁ/",
+      "family": [
+        "empirer"
+      ]
     },
     {
       "word": "CHOIX",
       "gloss": "la chose que l'on prend",
       "example": "Bon choix !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʃwa/",
+      "family": [
+        "surchoix",
+        "choisir"
+      ]
     },
     {
       "word": "PIÈCE",
@@ -3245,13 +5115,25 @@
         "salle"
       ],
       "example": "Nettoie la pièce.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpjɛ.sə/",
+      "family": [
+        "dépecer",
+        "dépècement",
+        "dépeceur"
+      ]
     },
     {
       "word": "MARIER",
       "gloss": "unir deux personnes devant la loi",
       "example": "Il va se marier.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "démarier",
+        "immariable",
+        "mariable"
+      ],
+      "ipa": "/ma.ʁje/"
     },
     {
       "word": "APPORTER",
@@ -3260,7 +5142,13 @@
         "amener"
       ],
       "example": "Je peux l'apporter.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "apport",
+        "apporteur",
+        "rapporter"
+      ],
+      "ipa": "/a.pɔʁ.te/"
     },
     {
       "word": "PLAISIR",
@@ -3269,7 +5157,13 @@
         "joie"
       ],
       "example": "Avec plaisir.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "plaire",
+        "plaisamment",
+        "plaisant"
+      ],
+      "ipa": "/plɛziʁ/"
     },
     {
       "word": "LIT",
@@ -3278,7 +5172,13 @@
         "couche"
       ],
       "example": "Sors du lit !",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/li/",
+      "family": [
+        "alité",
+        "alitement",
+        "aliter"
+      ]
     },
     {
       "word": "PARFOIS",
@@ -3287,7 +5187,8 @@
         "quelquefois"
       ],
       "example": "Oui, parfois.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/paʁ.fwa/"
     },
     {
       "word": "NOIR",
@@ -3296,7 +5197,13 @@
         "foncé"
       ],
       "example": "C'était noir.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/nwaʁ/",
+      "family": [
+        "noirâtre",
+        "noiraud",
+        "noirceur"
+      ]
     },
     {
       "word": "ESPRIT",
@@ -3306,7 +5213,13 @@
         "pensée"
       ],
       "example": "L’esprit de l’enfant comprend vite de nouvelles idées.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "esprits",
+        "spirituel",
+        "spiritueux"
+      ],
+      "ipa": "/ɛs.pʁi/"
     },
     {
       "word": "FLIC",
@@ -3315,7 +5228,13 @@
         "agent"
       ],
       "example": "Voilà un flic.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/flik/",
+      "family": [
+        "flicage",
+        "flicard",
+        "fliquer"
+      ]
     },
     {
       "word": "GAGNER",
@@ -3325,7 +5244,13 @@
         "obtenir"
       ],
       "example": "Qui va gagner ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "gagnable",
+        "gagnant",
+        "gagne-pain"
+      ],
+      "ipa": "/ɡa.ɲe/"
     },
     {
       "word": "BIZARRE",
@@ -3334,7 +5259,13 @@
         "drôle"
       ],
       "example": "T'es bizarre.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "bizarrement",
+        "bizarrerie",
+        "bizarroïde"
+      ],
+      "ipa": "/bi.zaʁ/"
     },
     {
       "word": "DOLLAR",
@@ -3343,7 +5274,13 @@
         "argent"
       ],
       "example": "100 cents font un dollar.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "dollarisation",
+        "eurodollar",
+        "narcodollar"
+      ],
+      "ipa": "/dɔ.lɑɔ̯ʁ/"
     },
     {
       "word": "ABORD",
@@ -3353,7 +5290,13 @@
         "premier"
       ],
       "example": "Vas-y d'abord.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/a.bɔʁ/",
+      "family": [
+        "aborder",
+        "abordable",
+        "abordage"
+      ]
     },
     {
       "word": "SUJET",
@@ -3363,7 +5306,13 @@
         "matière"
       ],
       "example": "Changeons de sujet.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "assujettir",
+        "subjectif",
+        "subjectivement"
+      ],
+      "ipa": "/sy.ʒɛ/"
     },
     {
       "word": "FAUTE",
@@ -3373,7 +5322,13 @@
         "bévue"
       ],
       "example": "C'est sa faute.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fot/",
+      "family": [
+        "fauter",
+        "fauteur",
+        "fautif"
+      ]
     },
     {
       "word": "VERRE",
@@ -3383,7 +5338,13 @@
         "récipient"
       ],
       "example": "Un petit verre ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/vɛ̝ʁ/",
+      "family": [
+        "essuie-verres",
+        "verrée",
+        "verrerie"
+      ]
     },
     {
       "word": "ÉTAT",
@@ -3393,7 +5354,13 @@
         "situation"
       ],
       "example": "Je suis en état de choc.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "étatique",
+        "interétatique",
+        "étatiser"
+      ],
+      "ipa": "/l‿e.ta/"
     },
     {
       "word": "AVION",
@@ -3403,7 +5370,13 @@
         "aéronef"
       ],
       "example": "J'ai vu un avion.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "aviateur",
+        "aviation",
+        "aviatrice"
+      ],
+      "ipa": "/a.vjɔ̃/"
     },
     {
       "word": "PRÉPARER",
@@ -3413,7 +5386,12 @@
         "mettre"
       ],
       "example": "Je vais le préparer.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "préparant",
+        "préparation"
+      ],
+      "ipa": "/pʁe.pa.ʁe/"
     },
     {
       "word": "VÉRIFIER",
@@ -3422,7 +5400,13 @@
         "voir"
       ],
       "example": "Va vérifier.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "contre-vérification",
+        "vérifiable",
+        "invérifiable"
+      ],
+      "ipa": "/ve.ʁi.fje/"
     },
     {
       "word": "TOUCHER",
@@ -3431,7 +5415,13 @@
         "sentir"
       ],
       "example": "Ne pas toucher.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "attouchement",
+        "attoucher",
+        "touche"
+      ],
+      "ipa": "/tu.ʃe/"
     },
     {
       "word": "ENSUITE",
@@ -3441,7 +5431,12 @@
         "puis"
       ],
       "example": "Et ensuite ?",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ɑ̃.sɥit/",
+      "family": [
+        "ensuivre",
+        "ensuivi"
+      ]
     },
     {
       "word": "CONDUIRE",
@@ -3451,7 +5446,13 @@
         "aller"
       ],
       "example": "Je veux conduire.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "conduit",
+        "conduite",
+        "conductance"
+      ],
+      "ipa": "/kɔ̃.dɥiʁ/"
     },
     {
       "word": "POSER",
@@ -3460,7 +5461,13 @@
         "mettre"
       ],
       "example": "Tu peux poser ça là.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "antéposer",
+        "déposer",
+        "postposer"
+      ],
+      "ipa": "/po.ze/"
     },
     {
       "word": "ASSEOIR",
@@ -3469,7 +5476,13 @@
         "mettre"
       ],
       "example": "Viens t'asseoir.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "assiette",
+        "assiettes",
+        "assise"
+      ],
+      "ipa": "/a.swaʁ/"
     },
     {
       "word": "REMETTRE",
@@ -3479,7 +5492,13 @@
         "restituer"
       ],
       "example": "Je peux remettre.",
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/ʁə.mɛtʁ/",
+      "family": [
+        "remise",
+        "remettant",
+        "remettage"
+      ]
     },
     {
       "word": "MARCHER",
@@ -3488,7 +5507,13 @@
         "aller"
       ],
       "example": "Va marcher !",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "démarchage",
+        "démarcher",
+        "démarcheur"
+      ],
+      "ipa": "/maʁ.ʃe/"
     },
     {
       "word": "DOUTE",
@@ -3498,13 +5523,25 @@
         "hésitation"
       ],
       "example": "J'en doute.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/dut/",
+      "family": [
+        "douter",
+        "douteux",
+        "dubitatif"
+      ]
     },
     {
       "word": "DESCENDRE",
       "gloss": "aller plus bas",
       "example": "Je vais descendre.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "condescendance",
+        "condescendant",
+        "condescendre"
+      ],
+      "ipa": "/de.sɑ̃dʁ/"
     },
     {
       "word": "ERREUR",
@@ -3514,7 +5551,12 @@
         "bévue"
       ],
       "example": "C'est une erreur.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ɛ.ʁœʁ/",
+      "family": [
+        "erroné",
+        "errer"
+      ]
     },
     {
       "word": "RAPPORT",
@@ -3523,7 +5565,12 @@
         "relation"
       ],
       "example": "Rédige un rapport.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ʁa.pɔʁ/",
+      "family": [
+        "rapporter",
+        "rapportage"
+      ]
     },
     {
       "word": "PRÉFÉRER",
@@ -3532,13 +5579,24 @@
         "choisir",
         "aimer"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "préféré",
+        "préférence"
+      ],
+      "ipa": "/pʁe.fe.ʁe/"
     },
     {
       "word": "FORCE",
       "gloss": "ce qui rend une personne ou une chose forte",
       "example": "Sa force diminue.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/fɔʁs/",
+      "family": [
+        "forcé",
+        "forcément",
+        "forcer"
+      ]
     },
     {
       "word": "APPEL",
@@ -3547,7 +5605,13 @@
         "cri"
       ],
       "example": "J'ai un appel.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "appelé",
+        "appeler",
+        "appelant"
+      ],
+      "ipa": "/a.pɛl/"
     },
     {
       "word": "FERME",
@@ -3557,13 +5621,25 @@
         "robuste"
       ],
       "example": "Il y a une grande ferme près de la ville.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/fɛʁm/",
+      "family": [
+        "fermement",
+        "fermeté",
+        "affermer"
+      ]
     },
     {
       "word": "ENLEVER",
       "gloss": "prendre une chose pour la faire partir",
       "example": "Il va l'enlever.",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "enlevage",
+        "enlevant",
+        "enlèvement"
+      ],
+      "ipa": "/ɑ̃l.ve/"
     },
     {
       "word": "MESSAGE",
@@ -3572,7 +5648,12 @@
         "mot"
       ],
       "example": "Message reçu.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "messager",
+        "messagerie"
+      ],
+      "ipa": "/me.saʒ/"
     },
     {
       "word": "DÎNER",
@@ -3581,7 +5662,13 @@
         "manger"
       ],
       "example": "Allons dîner !",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "dînatoire",
+        "dînette",
+        "dîneur"
+      ],
+      "ipa": "/di.ne/"
     },
     {
       "word": "PREUVE",
@@ -3591,7 +5678,11 @@
         "témoignage"
       ],
       "example": "J'ai une preuve.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "prouver",
+        "prouvable"
+      ]
     },
     {
       "word": "DRÔLE",
@@ -3601,7 +5692,13 @@
         "comique"
       ],
       "example": "Très drôle.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/dʁol/",
+      "family": [
+        "drôlatique",
+        "drôlement",
+        "drôlerie"
+      ]
     },
     {
       "word": "IMPOSSIBLE",
@@ -3611,7 +5708,13 @@
         "inaccessible"
       ],
       "example": "Impossible.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "family": [
+        "impossibilité",
+        "impossiblement",
+        "aléthique"
+      ],
+      "ipa": "/ɛ̃.pɔ.sibl/"
     },
     {
       "word": "SÛRE",
@@ -3620,7 +5723,13 @@
         "certaine"
       ],
       "example": "T'es sûre ?",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/syʁ/",
+      "family": [
+        "sûreté",
+        "sûrement",
+        "assurer"
+      ]
     },
     {
       "word": "AVOCAT",
@@ -3630,7 +5739,13 @@
         "conseiller"
       ],
       "example": "Il est avocat.",
-      "pos": "noun"
+      "pos": "noun",
+      "family": [
+        "avocaillon",
+        "avocasser",
+        "avocasserie"
+      ],
+      "ipa": "/æ̃.ˈn‿a.vo.ka/"
     },
     {
       "word": "TEL",
@@ -3640,7 +5755,11 @@
         "pareil"
       ],
       "example": "Un nuage est tel un mouton dans le ciel.",
-      "pos": "adjective"
+      "pos": "adjective",
+      "ipa": "/tɛl/",
+      "family": [
+        "tellement"
+      ]
     },
     {
       "word": "RÉUSSIR",
@@ -3650,7 +5769,11 @@
         "parvenir"
       ],
       "example": "Vas-tu réussir ?",
-      "pos": "verb"
+      "pos": "verb",
+      "family": [
+        "réussite"
+      ],
+      "ipa": "/ʁe.y.siʁ/"
     }
   ]
 }

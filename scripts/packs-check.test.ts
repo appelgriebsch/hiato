@@ -20,8 +20,10 @@ import {
   validatePack,
   buildLemmaEasiestByLang,
   isHintCeilingEnforcedRel,
+  checkExtrasGate,
   type ExampleGateLog,
 } from './packs-check-lib'
+import { EXTRAS_GATE_VERSION, extrasGateKey, type ExtrasGateLog } from './extras-gate'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
   return {
@@ -486,6 +488,24 @@ describe('packs:check lemma extras pos/ipa/family (ADR 0055, #314)', () => {
     expect(p.lemmas[0]?.family).toEqual(['envisaged', 'envisaging'])
   })
 
+  test('accepts syllable break, secondary stress, and precomposed Latin vowels in ipa', () => {
+    const p = validatePack(
+      pack({
+        lang: 'pt',
+        cefr: 'a1',
+        lemmas: [
+          { word: 'ESTUDO', gloss: 'mat\u00e9ria escolar', ipa: '/e.\u02c8sEx.tu/' },
+          { word: 'CAF\u00c9', gloss: 'bebida quente', ipa: '/kaf\u00e9/' },
+          { word: 'A\u00c7\u00c3O', gloss: 'o ato em si', ipa: '/a.s\u00e3w\u02d2/' },
+        ],
+      }),
+      'pt/a1.json',
+    )
+    expect(p.lemmas[0]?.ipa).toBe('/e.\u02c8sEx.tu/')
+    expect(p.lemmas[1]?.ipa).toBe('/kaf\u00e9/')
+    expect(p.lemmas[2]?.ipa).toBe('/a.s\u00e3w\u02d2/')
+  })
+
   test('lemmas without the extras stay valid and carry no fields', () => {
     const p = validatePack(
       pack({
@@ -608,6 +628,61 @@ describe('packs:check lemma extras pos/ipa/family (ADR 0055, #314)', () => {
         'de/a1.json',
       ),
     ).toThrow(/family\[1\] duplicate/)
+  })
+})
+
+describe('packs:check lemma-extras gate (ADR 0055, #316)', () => {
+  const p = pack({
+    lang: 'en',
+    cefr: 'a1',
+    lemmas: [{ word: 'ACTION', gloss: 'something someone does', ipa: '/ˈækʃən/', family: ['actions', 'actor'] }],
+  })
+
+  test('passes when both entries are current and match the pack', () => {
+    const gate: ExtrasGateLog = {
+      [extrasGateKey('en', 'ACTION', 'ipa')]: {
+        value: '/ˈækʃən/',
+        source: 'wiktextract',
+        verdict: 'pass',
+        gate: EXTRAS_GATE_VERSION,
+        at: '2026-11-20',
+      },
+      [extrasGateKey('en', 'ACTION', 'family')]: {
+        value: ['actions', 'actor'],
+        source: 'wiktextract',
+        verdict: 'pass',
+        gate: EXTRAS_GATE_VERSION,
+        at: '2026-11-20',
+      },
+    }
+    expect(checkExtrasGate('en/a1.json', p, gate)).toEqual([])
+  })
+
+  test('fails on missing, stale, rejected, or mismatched entries', () => {
+    const mk = (over: Partial<ExtrasGateLog[string]>): ExtrasGateLog => ({
+      [extrasGateKey('en', 'ACTION', 'ipa')]: {
+        value: '/ˈækʃən/',
+        source: 'wiktextract',
+        verdict: 'pass',
+        gate: EXTRAS_GATE_VERSION,
+        at: '2026-11-20',
+        ...over,
+      },
+      [extrasGateKey('en', 'ACTION', 'family')]: {
+        value: ['actions', 'actor'],
+        source: 'wiktextract',
+        verdict: 'pass',
+        gate: EXTRAS_GATE_VERSION,
+        at: '2026-11-20',
+      },
+    })
+    expect(checkExtrasGate('en/a1.json', p, {}).length).toBe(2)
+    expect(checkExtrasGate('en/a1.json', p, mk({ gate: 0 }))[0]).toMatch(/stale gate entry/)
+    expect(checkExtrasGate('en/a1.json', p, mk({ verdict: 'reject' }))[0]).toMatch(/gated REJECT/)
+    expect(checkExtrasGate('en/a1.json', p, mk({ value: '/ˈækʃn/' }))[0]).toMatch(/differs from the gated value/)
+    const tampered = mk({})
+    tampered[extrasGateKey('en', 'ACTION', 'family')]!.value = ['actions']
+    expect(checkExtrasGate('en/a1.json', p, tampered)[0]).toMatch(/differs from the gated value/)
   })
 })
 
