@@ -1,4 +1,5 @@
 import { lemmaIdentity } from '../engine'
+import type { PackLemma } from '../packs/schema'
 import {
   addLocalDays,
   isDue,
@@ -101,5 +102,29 @@ export function dailyGateFor(
       rec && rec.dateKey === today && rec.completed
         ? { won: rec.won, word: rec.word }
         : null,
+  }
+}
+
+/**
+ * ADR 0055 / #318: round lemma for a pocket retry. Pocket storage stays
+ * word+gloss; the loaded pack is joined by `lemmaIdentity` so the retry
+ * EndCard shows the pack's synonyms/example/pos/ipa/family. The pocket word
+ * and gloss win (the round spells the stored word). No pack match leaves the
+ * extras undefined — same graceful degradation as a stale cached pack.
+ */
+export function pocketEntryLemma(
+  entry: Pick<PocketEntry, 'word' | 'gloss'>,
+  lemmas: ReadonlyArray<PackLemma>,
+): PackLemma {
+  const identity = lemmaIdentity(entry.word)
+  const packLemma = lemmas.find((l) => lemmaIdentity(l.word) === identity)
+  return {
+    word: entry.word,
+    gloss: entry.gloss,
+    synonyms: packLemma?.synonyms,
+    example: packLemma?.example,
+    pos: packLemma?.pos,
+    ipa: packLemma?.ipa,
+    family: packLemma?.family,
   }
 }

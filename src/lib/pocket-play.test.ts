@@ -5,10 +5,12 @@ import {
   findPocketEntryById,
   parsePocketEntryId,
   playableDueEntries,
+  pocketEntryLemma,
   pocketOutcomeOnFinish,
 } from './pocket-play'
 import type { PocketEntry } from './pocket'
 import { addLocalDays } from './pocket'
+import type { PackLemma } from '../packs/schema'
 
 describe('parsePocketEntryId (#84)', () => {
   test('trims and rejects empty', () => {
@@ -210,5 +212,52 @@ describe('pocket play streak boundary (ADR 0043 / #219)', () => {
   test('pocket-play never calls recordDailyWin', async () => {
     const src = await Bun.file(new URL('./pocket-play.ts', import.meta.url)).text()
     expect(src).not.toMatch(/recordDailyWin\s*\(/)
+  })
+})
+
+describe('pocketEntryLemma pack join (ADR 0055 / #318)', () => {
+  const lemmas: PackLemma[] = [
+    {
+      word: 'ACTION',
+      gloss: 'pack gloss',
+      synonyms: ['do', 'move'],
+      example: 'Take action.',
+      pos: 'noun',
+      ipa: '/\u02c8\u00e6k\u0283\u0259n/',
+      family: ['actions', 'actor'],
+    },
+    { word: 'RUN', gloss: 'move fast', pos: 'verb' },
+  ]
+
+  test('joins the pack by lemmaIdentity (case-folded) and keeps the pocket word+gloss', () => {
+    const lemma = pocketEntryLemma(
+      { word: 'action', gloss: 'pocket gloss' },
+      lemmas,
+    )
+    expect(lemma.word).toBe('action')
+    expect(lemma.gloss).toBe('pocket gloss')
+    expect(lemma.synonyms).toEqual(['do', 'move'])
+    expect(lemma.example).toBe('Take action.')
+    expect(lemma.pos).toBe('noun')
+    expect(lemma.ipa).toBe('/\u02c8\u00e6k\u0283\u0259n/')
+    expect(lemma.family).toEqual(['actions', 'actor'])
+  })
+
+  test('no pack match → extras undefined, word+gloss kept (stale-pack degradation)', () => {
+    const lemma = pocketEntryLemma({ word: 'GONE', gloss: 'pocket gloss' }, lemmas)
+    expect(lemma.word).toBe('GONE')
+    expect(lemma.gloss).toBe('pocket gloss')
+    expect(lemma.pos).toBeUndefined()
+    expect(lemma.ipa).toBeUndefined()
+    expect(lemma.family).toBeUndefined()
+    expect(lemma.example).toBeUndefined()
+    expect(lemma.synonyms).toBeUndefined()
+  })
+
+  test('gloss stays undefined when the pocket entry has none', () => {
+    const lemma = pocketEntryLemma({ word: 'RUN' }, lemmas)
+    expect(lemma.gloss).toBeUndefined()
+    expect(lemma.pos).toBe('verb')
+    expect(lemma.ipa).toBeUndefined()
   })
 })
