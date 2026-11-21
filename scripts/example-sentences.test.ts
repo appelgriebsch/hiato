@@ -9,6 +9,7 @@ import {
   CONTENT_RULE,
   gatePrompt,
   generatePrompt,
+  parseCli,
   parseGateVerdict,
   aunAsiMismatch,
   exampleSkipped,
@@ -28,7 +29,7 @@ import {
 import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { nfcUpper } from './lemma-denylist'
 import { checkExampleGate } from './packs-check-lib'
-import type { WordPack } from '../src/packs/schema'
+import { PACK_CEFR_LEVELS, PACK_LANGS, type WordPack } from '../src/packs/schema'
 
 describe('example-sentences cleanSentence (#247)', () => {
   test('trims and collapses whitespace, keeps one terminal mark', () => {
@@ -466,5 +467,30 @@ describe('packs:check example gate log (ADR 0048, #247)', () => {
     }
     const errors = checkExampleGate('en/a1.json', badPack, badGate)
     expect(errors[0]).toMatch(/Tatoeba stock name "Tom"/)
+  })
+})
+
+describe('example-sentences CLI defaults (#317 / ADR 0056: all 36 packs)', () => {
+  test('no args → all six languages × all six CEFR levels', () => {
+    const cli = parseCli([])
+    expect(cli.langs).toEqual([...PACK_LANGS])
+    expect(cli.levels).toEqual([...PACK_CEFR_LEVELS])
+    expect(cli.dryRun).toBe(false)
+    expect(cli.noTatoeba).toBe(false)
+  })
+
+  test('explicit --lang/--levels still narrow the run', () => {
+    const cli = parseCli(['--lang=pt', '--levels=c1,c2', '--dry-run'])
+    expect(cli.langs).toEqual(['pt'])
+    expect(cli.levels).toEqual(['c1', 'c2'])
+    expect(cli.dryRun).toBe(true)
+  })
+
+  test('--lang=all expands to every pack language', () => {
+    expect(parseCli(['--lang=all']).langs).toEqual([...PACK_LANGS])
+  })
+
+  test('unknown args throw', () => {
+    expect(() => parseCli(['--bogus'])).toThrow(/unknown arg/)
   })
 })
