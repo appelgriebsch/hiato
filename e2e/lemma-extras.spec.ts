@@ -146,12 +146,15 @@ test('after a loss the EndCard shows the meta row + family; replay shows them to
   // Synonyms keep their labeled group.
   await expect(page.locator('[data-endcard-synonyms]')).toBeVisible()
 
-  // Already-played replay: the DoneDaily EndCard carries the stored extras.
+  // Already-played replay: the DoneDaily EndCard carries the stored extras
+  // plus the stored example (#318 acceptance: replay shows pos/ipa/family/example).
+  expect(lemma.example, 'pinned daily word must ship an example').toBeTruthy()
   await page.goto('/play?mode=daily')
   await expect(page.locator('[data-endcard-teach]')).toBeVisible()
   await expect(page.locator('[data-endcard-pos]')).toHaveText('noun')
   await expect(page.locator('[data-endcard-ipa]')).toContainText('ækʃən')
   await expect(page.locator('[data-endcard-family]')).toContainText('actions')
+  await expect(page.locator('[data-endcard-example]')).toHaveText(lemma.example!)
 })
 
 test('after a win at 390x844 the extras show and the actions stay in view (#314)', async ({
@@ -168,4 +171,110 @@ test('after a win at 390x844 the extras show and the actions stay in view (#314)
   await expect(page.locator('[data-endcard-ipa]')).toContainText('ækʃən')
   await expect(page.locator('[data-endcard-family]')).toContainText('actor')
   await expect(page.locator('[data-endcard-actions]')).toBeInViewport()
+})
+
+/**
+ * #318 / ADR 0055: a pocket retry joins the loaded pack by lemmaIdentity, so the
+ * retry EndCard shows the pack's pos/ipa/family/example while the pocket entry
+ * itself stays word+gloss (no storage change). Uses a shipped EN A1 lemma that
+ * carries full extras and is not the pinned daily (ACTION), so the ADR 0018
+ * pocket gate allows the round without a completed daily.
+ */
+test('pocket retry EndCard shows the pack extras via the pack join; pocket storage stays word+gloss (#318)', async ({
+  page,
+}) => {
+  type PackLemmaFull = Lemma & {
+    synonyms?: string[]
+    pos?: string
+    ipa?: string
+    family?: string[]
+  }
+  const pack = JSON.parse(
+    readFileSync(new URL('../public/packs/en/a1.json', import.meta.url), 'utf8'),
+  ) as { lemmas: PackLemmaFull[] }
+  const daily = dailyLemma()
+  const target = pack.lemmas.find(
+    (l) =>
+      /^[A-Z]+$/.test(l.word) &&
+      l.word !== daily.word &&
+      l.pos &&
+      l.ipa &&
+      l.family &&
+      l.family.length > 0 &&
+      l.example,
+  )
+  expect(target, 'need a shipped lemma with full extras that is not the daily').toBeTruthy()
+
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.clock.setFixedTime(new Date(ISO))
+  const now = new Date(ISO).getTime()
+  const id = `en|a1|${target!.word}`
+  await page.addInitScript(
+    ({ prefs, pocket }: { prefs: unknown; pocket: unknown }) => {
+      localStorage.setItem('hiato.prefs', JSON.stringify(prefs))
+      localStorage.setItem('hiato.pocket', JSON.stringify(pocket))
+    },
+    {
+      prefs: { lang: 'en', cefr: 'a1' },
+      pocket: {
+        v: 2,
+        entries: [
+          {
+            id,
+            lang: 'en',
+            cefr: 'a1',
+            word: target!.word,
+            gloss: 'pocket gloss',
+            addedAt: now,
+            stage: 0,
+            dueAt: now + 2 * 86_400_000,
+          },
+        ],
+      },
+    },
+  )
+
+  await page.goto(`/play?mode=pocket&id=${encodeURIComponent(id)}`)
+  await page.locator('[data-letter-pad]:visible').first().waitFor()
+  // In-round: no EndCard mount, no extras anywhere.
+  await expect(page.locator('[data-endcard-teach]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-meta]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-pos]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-ipa]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-family]')).toHaveCount(0)
+  await expect(page.locator('[data-endcard-example]')).toHaveCount(0)
+
+  await loseRound(page, target!.word)
+
+  // EndCard: pocket word + gloss, pack extras via the join (EN labels = codes).
+  const teach = page.locator('[data-endcard-teach]')
+  await expect(teach).toContainText('pocket gloss')
+  await expect(teach).toContainText(target!.word)
+  await expect(page.locator('[data-endcard-pos]')).toHaveText(target!.pos!)
+  await expect(page.locator('[data-endcard-ipa]')).toContainText(
+    target!.ipa!.replace(/^\//, '').replace(/\/$/, ''),
+  )
+  const family = page.locator('[data-endcard-family]')
+  for (const chip of target!.family!) {
+    await expect(family).toContainText(chip)
+  }
+  await expect(page.locator('[data-endcard-example]')).toHaveText(target!.example!)
+
+  // Pocket storage format unchanged: the entry is still word+gloss, no extras.
+  const stored = await page.evaluate(() => {
+    const raw = localStorage.getItem('hiato.pocket')
+    return raw ? (JSON.parse(raw) as { entries: Array<Record<string, unknown>> }) : null
+  })
+  const entry = stored?.entries.find((e) => e.word === target!.word)
+  expect(entry).toBeDefined()
+  expect(Object.keys(entry!).sort()).toEqual([
+    'addedAt',
+    'cefr',
+    'dueAt',
+    'gloss',
+    'id',
+    'lang',
+    'stage',
+    'word',
+  ])
 })

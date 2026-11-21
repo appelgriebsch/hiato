@@ -70,6 +70,7 @@ import {
   findPocketEntryById,
   parsePocketEntryId,
   playableDueEntries,
+  pocketEntryLemma,
   pocketOutcomeOnFinish,
 } from '@/lib/pocket-play'
 import {
@@ -367,6 +368,7 @@ function PlayRound({
             setWordEntry({
               word: rec.word,
               gloss: rec.gloss,
+              synonyms: rec.synonyms,
               example: rec.example,
               pos: rec.pos,
               ipa: rec.ipa,
@@ -438,10 +440,9 @@ function PlayRound({
             setLoading(false)
             return
           }
-          const entry: PackLemma = {
-            word: pocketEntry.word,
-            gloss: pocketEntry.gloss,
-          }
+          // ADR 0055 / #318: pocket storage stays word+gloss — join the loaded
+          // pack by lemmaIdentity so the retry EndCard shows the pack extras.
+          const entry = pocketEntryLemma(pocketEntry, pack.lemmas)
           const initial = buildInitialCells(entry.word, cefr)
           setActivePocketId(pocketEntry.id)
           setPocketWasDue(isDue(pocketEntry, dateKey))
