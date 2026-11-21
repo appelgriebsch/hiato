@@ -177,6 +177,21 @@ async function fillExemptPos(): Promise<void> {
   const filled = new Set<string>()
   let filledCount = 0
 
+  // Persist after every language so a crash mid-run leaves packs, pin, gate log
+  // and pos-exempt.txt consistent (a re-run resumes from the remaining exemptions).
+  const persist = () => {
+    const remaining = readFileSync(EXEMPT_PATH, 'utf8')
+      .split('\n')
+      .filter((line) => {
+        const t = line.trim()
+        if (!t || t.startsWith('#')) return true
+        return !filled.has(t.split('\t')[0]!.trim())
+      })
+    writeFileSync(EXEMPT_PATH, remaining.join('\n'))
+    writeFileSync(PIN_PATH, JSON.stringify(pin, null, 2) + '\n')
+    writeFileSync(EXTRAS_GATE_LOG_PATH, JSON.stringify(gate, null, 2) + '\n')
+  }
+
   for (const [lang, items] of byLang) {
     const gloss = glosses.get(lang) ?? new Map<string, string>()
     const gaps = items.map((e) => ({ word: e.word, gloss: gloss.get(nfcUpper(e.word)) ?? '' }))
@@ -237,18 +252,10 @@ async function fillExemptPos(): Promise<void> {
         )
       }
     }
+    persist()
+    console.log(`${lang}: done — ${filled.size} filled so far`)
   }
 
-  const remaining = readFileSync(EXEMPT_PATH, 'utf8')
-    .split('\n')
-    .filter((line) => {
-      const t = line.trim()
-      if (!t || t.startsWith('#')) return true
-      return !filled.has(t.split('\t')[0]!.trim())
-    })
-  writeFileSync(EXEMPT_PATH, remaining.join('\n'))
-  writeFileSync(PIN_PATH, JSON.stringify(pin, null, 2) + '\n')
-  writeFileSync(EXTRAS_GATE_LOG_PATH, JSON.stringify(gate, null, 2) + '\n')
   console.log(
     `--fill-exempt: filled pos on ${filledCount} lemmas, ${exempt.length - filled.size} stay exempt`,
   )
