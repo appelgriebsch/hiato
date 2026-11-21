@@ -278,3 +278,70 @@ test('pocket retry EndCard shows the pack extras via the pack join; pocket stora
     'word',
   ])
 })
+
+/**
+ * #319 hardening: short-landscape (844x390) keeps the two-column EndCard with the
+ * extras visible, the teach card scrolls (short-land:overflow-y-auto), and the
+ * actions stay in view (existing scrollActionsIntoView, #209).
+ */
+test('short-landscape 844x390 EndCard shows the extras, teach card scrolls, actions in view (#319)', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 844, height: 390 })
+  const lemma = dailyLemma()
+  await seed(page)
+  await page.goto('/play?mode=daily')
+  await page.locator('[data-letter-pad]:visible').first().waitFor()
+  await loseRound(page, lemma.word)
+
+  await expect(page.locator('[data-endcard-pos]')).toBeVisible()
+  await expect(page.locator('[data-endcard-ipa]')).toBeVisible()
+  await expect(page.locator('[data-endcard-family]')).toBeVisible()
+  await expect(page.locator('[data-endcard-example]')).toBeVisible()
+  const teach = page.locator('[data-endcard-teach]')
+  const overflowY = await teach.evaluate((el) => getComputedStyle(el).overflowY)
+  expect(['auto', 'scroll']).toContain(overflowY)
+  await expect(page.locator('[data-endcard-actions]')).toBeInViewport()
+  expect(lemma.word).toBe('ACTION')
+})
+
+/**
+ * #319 hardening: dark mode renders the extras, and the POS chip re-passes the
+ * DOM contrast audit (docs/design/retro) at >= 4.5:1 with computed styles.
+ */
+test('dark mode EndCard extras render and the POS chip passes the DOM contrast audit (#319)', async ({
+  page,
+}) => {
+  const lemma = dailyLemma()
+  await seed(page)
+  await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' })
+  await page.goto('/play?mode=daily')
+  await page.locator('[data-letter-pad]:visible').first().waitFor()
+  expect(await page.evaluate(() => matchMedia('(prefers-color-scheme: dark)').matches)).toBe(true)
+  await loseRound(page, lemma.word)
+
+  const pos = page.locator('[data-endcard-pos]')
+  await expect(pos).toBeVisible()
+  await expect(pos).toHaveText('noun')
+  await expect(page.locator('[data-endcard-family]')).toBeVisible()
+  const ratio = await pos.evaluate((el) => {
+    const cs = getComputedStyle(el)
+    const parse = (c: string): [number, number, number] => {
+      const m = c.match(/rgba?\(([^)]+)\)/)
+      if (!m) throw new Error(`unparsable color: ${c}`)
+      const parts = m[1]!.split(',').map((x) => Number.parseFloat(x))
+      return [parts[0]!, parts[1]!, parts[2]!]
+    }
+    const lum = ([r, g, b]: [number, number, number]): number => {
+      const f = (v: number) => {
+        const s = v / 255
+        return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4
+      }
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+    }
+    const l1 = lum(parse(cs.color))
+    const l2 = lum(parse(cs.backgroundColor))
+    return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05)
+  })
+  expect(ratio).toBeGreaterThanOrEqual(4.5)
+})
