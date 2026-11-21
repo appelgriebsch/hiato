@@ -28,6 +28,8 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  renameSync,
+  rmSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
@@ -104,7 +106,16 @@ async function downloadWx(lang: PackLang): Promise<string> {
   console.log(`${lang}: downloading wiktextract extract (${src.url}) …`)
   const res = await fetch(src.url)
   if (!res.ok || !res.body) throw new Error(`wiktextract download failed for ${lang}: ${res.status}`)
-  await pipeline(Readable.fromWeb(res.body), createWriteStream(dest))
+  // Download to .part and rename: a crashed run must not leave a truncated
+  // extract that the existsSync cache check above would then trust.
+  const part = `${dest}.part`
+  try {
+    await pipeline(Readable.fromWeb(res.body), createWriteStream(part))
+    renameSync(part, dest)
+  } catch (e) {
+    rmSync(part, { force: true })
+    throw e
+  }
   return dest
 }
 
@@ -304,14 +315,30 @@ async function main() {
     const extracted = await extractLang(lang, wanted)
 
     const gaps: { word: string; gloss?: string; wantIpa: boolean; wantFamily: boolean }[] = []
-    const result = new Map<string, { ipa?: string; family?: string[]; source: 'wiktextract' | 'mistral' }>()
+    // Source is tracked per field: a lemma can have wiktextract ipa and a
+    // mistral-filled family, and the gate log must attribute each correctly.
+    type Entry = {
+      ipa?: string
+      ipaSource?: 'wiktextract' | 'mistral'
+      family?: string[]
+      familySource?: 'wiktextract' | 'mistral'
+    }
+    const result = new Map<string, Entry>()
     for (const l of lemmas) {
       const key = nfcUpper(l.word)
       const bucket = extracted.get(key) ?? { ipa: [], family: [] }
       const ipa = pickIpa(bucket.ipa)
       const family = pickFamily(l.word, bucket.family, lang)
-      if (ipa) result.set(key, { ipa, source: 'wiktextract', ...(family.length ? { family } : {}) })
-      else if (family.length) result.set(key, { family, source: 'wiktextract' })
+      const entry: Entry = {}
+      if (ipa) {
+        entry.ipa = ipa
+        entry.ipaSource = 'wiktextract'
+      }
+      if (family.length) {
+        entry.family = family
+        entry.familySource = 'wiktextract'
+      }
+      if (entry.ipa || entry.family) result.set(key, entry)
       if (!ipa || family.length === 0) {
         gaps.push({ word: l.word, gloss: l.gloss, wantIpa: !ipa, wantFamily: family.length === 0 })
       }
@@ -321,10 +348,15 @@ async function main() {
       console.log(`${lang}: Mistral fallback for ${gaps.length} gaps …`)
       const filled = await mistralFallback(apiKey, lang, gaps)
       for (const [key, v] of filled) {
-        const cur = result.get(key) ?? { source: 'mistral' as const }
-        if (v.ipa) cur.ipa = v.ipa
-        if (v.family?.length) cur.family = v.family
-        cur.source = 'mistral'
+        const cur = result.get(key) ?? {}
+        if (v.ipa) {
+          cur.ipa = v.ipa
+          cur.ipaSource = 'mistral'
+        }
+        if (v.family?.length) {
+          cur.family = v.family
+          cur.familySource = 'mistral'
+        }
         result.set(key, cur)
       }
     }
@@ -340,7 +372,7 @@ async function main() {
       if (r.ipa) {
         log[extrasGateKey(lang, l.word, 'ipa')] = {
           value: r.ipa,
-          source: r.source,
+          source: r.ipaSource ?? 'wiktextract',
           verdict: 'pass',
           gate: EXTRAS_GATE_VERSION,
           at,
@@ -350,14 +382,14 @@ async function main() {
       if (r.family?.length) {
         log[extrasGateKey(lang, l.word, 'family')] = {
           value: r.family,
-          source: r.source,
+          source: r.familySource ?? 'wiktextract',
           verdict: 'pass',
           gate: EXTRAS_GATE_VERSION,
           at,
         }
         familyCount += 1
       }
-      if (r.source === 'mistral') mistralCount += 1
+      if (r.ipaSource === 'mistral' || r.familySource === 'mistral') mistralCount += 1
     }
 
     if (!dryRun) {
@@ -395,8 +427,8 @@ async function main() {
     )
   }
 
-  if (!dryRun) await recordChecksums()
   console.log('summary:', JSON.stringify(summary))
+  if (!dryRun) await recordChecksums()
   if (dryRun) console.log('dry-run: no writes')
 }
 
