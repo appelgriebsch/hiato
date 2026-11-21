@@ -5,6 +5,7 @@
 | light | text | `ink` #1b1830 | `cream-dark` #e6dcc0 | 12.59:1 | 4.5:1 | Pass | synonym chips, hover key |
 | light | text | `ink-muted` #545068 | `cream` #f3ecd8 | 6.53:1 | 4.5:1 | Pass | secondary copy on page |
 | light | text | `ink-muted` #545068 | `raised` #fffaee | 7.40:1 | 4.5:1 | Pass | secondary copy in card / sheet |
+| light | text | `ink-faint` #545068 | `raised` #fffaee | 7.40:1 | 4.5:1 | Pass | EndCard Synonyms / Word family label (ADR 0057; ink-faint aliases ink-muted, #229) |
 | light | text | `ink-muted` #545068 | `cream-dark` #e6dcc0 | 5.64:1 | 4.5:1 | Pass | neutral badge, Offline chip |
 | light | text | `ink` #1b1830 | `wrong` #cfc8d8 | 10.58:1 | 4.5:1 | Pass | miss key letter |
 | light | text | `ink` #1b1830 | `accent-soft` #dcefd9 | 14.26:1 | 4.5:1 | Pass | revealed tile letter |
@@ -48,6 +49,7 @@
 | dark | text | `ink` #f3ecd8 | `cream-dark` #262142 | 12.91:1 | 4.5:1 | Pass | synonym chips, hover key |
 | dark | text | `ink-muted` #b9b2d2 | `cream` #0f0d1c | 9.47:1 | 4.5:1 | Pass | secondary copy on page |
 | dark | text | `ink-muted` #b9b2d2 | `raised` #1b1830 | 8.49:1 | 4.5:1 | Pass | secondary copy in card / sheet |
+| dark | text | `ink-faint` #b9b2d2 | `raised` #1b1830 | 8.49:1 | 4.5:1 | Pass | EndCard Synonyms / Word family label (ADR 0057; ink-faint aliases ink-muted, #229) |
 | dark | text | `ink-muted` #b9b2d2 | `cream-dark` #262142 | 7.52:1 | 4.5:1 | Pass | neutral badge, Offline chip |
 | dark | text | `ink` #f3ecd8 | `wrong` #3a3456 | 9.86:1 | 4.5:1 | Pass | miss key letter |
 | dark | text | `ink` #f3ecd8 | `accent-soft` #17331f | 11.64:1 | 4.5:1 | Pass | revealed tile letter |

@@ -62,6 +62,18 @@
  {
   "mode": "light",
   "kind": "text",
+  "fg": "ink-faint",
+  "bg": "raised",
+  "fgHex": "#545068",
+  "bgHex": "#fffaee",
+  "ratio": 7.4,
+  "min": 4.5,
+  "pass_": true,
+  "use": "EndCard Synonyms / Word family label (ADR 0057; ink-faint aliases ink-muted, #229)"
+ },
+ {
+  "mode": "light",
+  "kind": "text",
   "fg": "ink-muted",
   "bg": "cream-dark",
   "fgHex": "#545068",
@@ -586,6 +598,18 @@
   "min": 4.5,
   "pass_": true,
   "use": "secondary copy in card / sheet"
+ },
+ {
+  "mode": "dark",
+  "kind": "text",
+  "fg": "ink-faint",
+  "bg": "raised",
+  "fgHex": "#b9b2d2",
+  "bgHex": "#1b1830",
+  "ratio": 8.49,
+  "min": 4.5,
+  "pass_": true,
+  "use": "EndCard Synonyms / Word family label (ADR 0057; ink-faint aliases ink-muted, #229)"
  },
  {
   "mode": "dark",
