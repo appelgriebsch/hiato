@@ -828,9 +828,15 @@ function PlayRound({
 
       {!loading && !error && wordEntry && (
         <>
-          <div className={['my-5 short-land:my-0', finished ? 'short-land:hidden' : ''].join(' ')}>
+          <div
+            className={[
+              finished ? 'my-3' : 'my-5',
+              'short-land:my-0',
+              finished ? 'short-land:hidden' : '',
+            ].join(' ')}
+          >
             <LetterGrid cells={cells} lang={lang} />
-            {vowelHelp && cells.some((c) => c.helped && c.revealed) && (
+            {!finished && vowelHelp && cells.some((c) => c.helped && c.revealed) && (
               <p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">
                 Soft green = vowel help (A1–A2)
               </p>
@@ -1414,8 +1420,8 @@ function EndCard({
   }, [confirming])
 
   return (
-    <div className="motion-result-enter mb-3 space-y-3 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
-      <div className="relative min-w-0 space-y-3">
+    <div className="motion-result-enter mb-2 space-y-2.5 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
+      <div className="relative min-w-0 space-y-2.5">
       {won
         ? ([
             { top: -6, left: -6 },
@@ -1435,7 +1441,7 @@ function EndCard({
           ))
         : null}
       <div
-        className="px-frame bg-raised/80 px-4 py-3 text-center short-land:max-h-full short-land:overflow-y-auto"
+        className="px-frame bg-raised/80 px-4 py-2.5 text-center short-land:max-h-full short-land:overflow-y-auto"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
@@ -1466,7 +1472,7 @@ function EndCard({
       </div>
 
       <div inert={confirming ? true : undefined}>
-      <Card className="px-flat w-full text-left [--px-edge:var(--color-line)]">
+      <Card className="px-flat w-full p-3 text-left [--px-edge:var(--color-line)]">
         <div className="flex items-center justify-between text-sm">
           <span className="text-ink-muted">
             {LANG_CODES[lang]} · {CEFR_CODES[cefr]}

@@ -1,5 +1,5 @@
 {
-  "version": 13,
+  "version": 14,
   "lang": "it",
   "cefr": "a2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -17,14 +17,16 @@
       "synonyms": [
         "astro"
       ],
-      "example": "C'è il sole."
+      "example": "C'è il sole.",
+      "pos": "noun"
     },
     {
       "word": "BISOGNARE",
       "gloss": "essere necessario",
       "synonyms": [
         "occorrere"
-      ]
+      ],
+      "pos": "verb"
     },
     {
       "word": "CAMMINARE",
@@ -32,7 +34,8 @@
       "synonyms": [
         "deambulare"
       ],
-      "example": "Può camminare?"
+      "example": "Può camminare?",
+      "pos": "verb"
     },
     {
       "word": "SPESSO",
@@ -40,7 +43,8 @@
       "synonyms": [
         "frequentemente"
       ],
-      "example": "Leggo spesso."
+      "example": "Leggo spesso.",
+      "pos": "adjective"
     },
     {
       "word": "FREGARE",
@@ -49,7 +53,8 @@
         "ingannare",
         "imbrogliare"
       ],
-      "example": "Non farti fregare."
+      "example": "Non farti fregare.",
+      "pos": "verb"
     },
     {
       "word": "FALLO",
@@ -57,7 +62,8 @@
       "synonyms": [
         "scorrettezza"
       ],
-      "example": "Fallo ora!"
+      "example": "Fallo ora!",
+      "pos": "noun"
     },
     {
       "word": "MOSTRO",
@@ -65,7 +71,8 @@
       "synonyms": [
         "orco"
       ],
-      "example": "Che mostro!"
+      "example": "Che mostro!",
+      "pos": "noun"
     },
     {
       "word": "RISPETTO",
@@ -73,7 +80,8 @@
       "synonyms": [
         "stima"
       ],
-      "example": "Ti rispetto."
+      "example": "Ti rispetto.",
+      "pos": "noun"
     },
     {
       "word": "AEREO",
@@ -81,7 +89,8 @@
       "synonyms": [
         "velivolo"
       ],
-      "example": "Vidi un aereo."
+      "example": "Vidi un aereo.",
+      "pos": "noun"
     },
     {
       "word": "SEGNO",
@@ -89,7 +98,8 @@
       "synonyms": [
         "traccia"
       ],
-      "example": "È un segno."
+      "example": "È un segno.",
+      "pos": "noun"
     },
     {
       "word": "ZITTO",
@@ -97,7 +107,8 @@
       "synonyms": [
         "silenzioso"
       ],
-      "example": "Stai zitto!"
+      "example": "Stai zitto!",
+      "pos": "noun"
     },
     {
       "word": "BASE",
@@ -105,7 +116,8 @@
       "synonyms": [
         "fondamento"
       ],
-      "example": "Su che base?"
+      "example": "Su che base?",
+      "pos": "noun"
     },
     {
       "word": "BIGLIETTO",
@@ -113,7 +125,8 @@
       "synonyms": [
         "tagliando"
       ],
-      "example": "È il biglietto."
+      "example": "È il biglietto.",
+      "pos": "noun"
     },
     {
       "word": "ADDIO",
@@ -121,7 +134,8 @@
       "synonyms": [
         "commiato"
       ],
-      "example": "Digli addio."
+      "example": "Digli addio.",
+      "pos": "noun"
     },
     {
       "word": "LINEA",
@@ -129,13 +143,15 @@
       "synonyms": [
         "riga"
       ],
-      "example": "Tirate una linea qui."
+      "example": "Tirate una linea qui.",
+      "pos": "noun"
     },
     {
       "word": "TESTIMONE",
       "gloss": "persona che ha visto un fatto e lo racconta",
       "synonyms": [],
-      "example": "È un testimone."
+      "example": "È un testimone.",
+      "pos": "noun"
     },
     {
       "word": "SCHIFO",
@@ -143,7 +159,8 @@
       "synonyms": [
         "disgusto"
       ],
-      "example": "Fa schifo."
+      "example": "Fa schifo.",
+      "pos": "noun"
     },
     {
       "word": "DECISIONE",
@@ -151,13 +168,15 @@
       "synonyms": [
         "scelta"
       ],
-      "example": "È la tua decisione."
+      "example": "È la tua decisione.",
+      "pos": "noun"
     },
     {
       "word": "TERZO",
       "gloss": "che viene dopo il secondo",
       "synonyms": [],
-      "example": "Ero terzo."
+      "example": "Ero terzo.",
+      "pos": "adjective"
     },
     {
       "word": "CERVELLO",
@@ -165,7 +184,8 @@
       "synonyms": [
         "encefalo"
       ],
-      "example": "Usa il cervello."
+      "example": "Usa il cervello.",
+      "pos": "noun"
     },
     {
       "word": "SOLDATO",
@@ -173,19 +193,22 @@
       "synonyms": [
         "militare"
       ],
-      "example": "È un soldato."
+      "example": "È un soldato.",
+      "pos": "noun"
     },
     {
       "word": "INTERNO",
       "gloss": "che sta dentro",
       "synonyms": [],
-      "example": "Andò all'interno."
+      "example": "Andò all'interno.",
+      "pos": "adjective"
     },
     {
       "word": "PEGGIO",
       "gloss": "in modo più cattivo",
       "synonyms": [],
-      "example": "Cos'è peggio?"
+      "example": "Cos'è peggio?",
+      "pos": "noun"
     },
     {
       "word": "ADDOSSO",
@@ -193,7 +216,8 @@
       "synonyms": [
         "indosso"
       ],
-      "example": "Provatelo addosso."
+      "example": "Provatelo addosso.",
+      "pos": "adverb"
     },
     {
       "word": "ZONA",
@@ -201,7 +225,8 @@
       "synonyms": [
         "area"
       ],
-      "example": "Che zona è?"
+      "example": "Che zona è?",
+      "pos": "noun"
     },
     {
       "word": "CRIMINE",
@@ -210,7 +235,8 @@
         "reato",
         "delitto"
       ],
-      "example": "È un crimine."
+      "example": "È un crimine.",
+      "pos": "noun"
     },
     {
       "word": "NEGOZIO",
@@ -218,7 +244,8 @@
       "synonyms": [
         "bottega"
       ],
-      "example": "Che negozio è?"
+      "example": "Che negozio è?",
+      "pos": "noun"
     },
     {
       "word": "REALTÀ",
@@ -226,7 +253,8 @@
       "synonyms": [
         "verità"
       ],
-      "example": "È la realtà."
+      "example": "È la realtà.",
+      "pos": "noun"
     },
     {
       "word": "FAME",
@@ -234,7 +262,8 @@
       "synonyms": [
         "appetito"
       ],
-      "example": "Avrà fame."
+      "example": "Avrà fame.",
+      "pos": "noun"
     },
     {
       "word": "INSEGNARE",
@@ -242,7 +271,8 @@
       "synonyms": [
         "istruire"
       ],
-      "example": "Amo insegnare."
+      "example": "Amo insegnare.",
+      "pos": "verb"
     },
     {
       "word": "PROPOSITO",
@@ -251,7 +281,8 @@
         "intenzione",
         "scopo"
       ],
-      "example": "Il mio proposito per questo anno è imparare a cucinare."
+      "example": "Il mio proposito per questo anno è imparare a cucinare.",
+      "pos": "noun"
     },
     {
       "word": "BELLISSIMO",
@@ -259,7 +290,8 @@
       "synonyms": [
         "stupendo"
       ],
-      "example": "È bellissimo."
+      "example": "È bellissimo.",
+      "pos": "adjective"
     },
     {
       "word": "RITARDO",
@@ -267,7 +299,8 @@
       "synonyms": [
         "indugio"
       ],
-      "example": "C'è un ritardo di dieci minuti."
+      "example": "C'è un ritardo di dieci minuti.",
+      "pos": "noun"
     },
     {
       "word": "NECESSARIO",
@@ -275,7 +308,8 @@
       "synonyms": [
         "indispensabile"
       ],
-      "example": "È necessario."
+      "example": "È necessario.",
+      "pos": "adjective"
     },
     {
       "word": "ACCUSARE",
@@ -283,7 +317,8 @@
       "synonyms": [
         "incolpare"
       ],
-      "example": "Non accusare altri dei tuoi fallimenti."
+      "example": "Non accusare altri dei tuoi fallimenti.",
+      "pos": "verb"
     },
     {
       "word": "MENTIRE",
@@ -291,7 +326,8 @@
       "synonyms": [
         "ingannare"
       ],
-      "example": "Non mentire."
+      "example": "Non mentire.",
+      "pos": "verb"
     },
     {
       "word": "EPISODIO",
@@ -299,7 +335,8 @@
       "synonyms": [
         "puntata"
       ],
-      "example": "Amo quell'episodio."
+      "example": "Amo quell'episodio.",
+      "pos": "noun"
     },
     {
       "word": "SPARIRE",
@@ -307,7 +344,8 @@
       "synonyms": [
         "scomparire"
       ],
-      "example": "Non sparire!"
+      "example": "Non sparire!",
+      "pos": "verb"
     },
     {
       "word": "LUOGO",
@@ -315,7 +353,8 @@
       "synonyms": [
         "posto"
       ],
-      "example": "È un luogo reale?"
+      "example": "È un luogo reale?",
+      "pos": "noun"
     },
     {
       "word": "ASSICURARE",
@@ -323,7 +362,8 @@
       "synonyms": [
         "promettere"
       ],
-      "example": "Te lo posso assicurare."
+      "example": "Te lo posso assicurare.",
+      "pos": "verb"
     },
     {
       "word": "COSTRUIRE",
@@ -331,7 +371,8 @@
       "synonyms": [
         "edificare"
       ],
-      "example": "Vuoi costruire un regno?"
+      "example": "Vuoi costruire un regno?",
+      "pos": "verb"
     },
     {
       "word": "SVEGLIARE",
@@ -339,7 +380,8 @@
       "synonyms": [
         "destare"
       ],
-      "example": "Lo andrò a svegliare."
+      "example": "Lo andrò a svegliare.",
+      "pos": "noun"
     },
     {
       "word": "BAR",
@@ -347,7 +389,8 @@
       "synonyms": [
         "caffè"
       ],
-      "example": "Che bar è?"
+      "example": "Che bar è?",
+      "pos": "noun"
     },
     {
       "word": "LEZIONE",
@@ -355,7 +398,8 @@
       "synonyms": [
         "insegnamento"
       ],
-      "example": "Beh, ho lezione."
+      "example": "Beh, ho lezione.",
+      "pos": "noun"
     },
     {
       "word": "ANIMA",
@@ -363,7 +407,8 @@
       "synonyms": [
         "spirito"
       ],
-      "example": "Ho un'anima."
+      "example": "Ho un'anima.",
+      "pos": "noun"
     },
     {
       "word": "DANNO",
@@ -371,7 +416,8 @@
       "synonyms": [
         "nocumento"
       ],
-      "example": "Non è un danno."
+      "example": "Non è un danno.",
+      "pos": "noun"
     },
     {
       "word": "PRESENTE",
@@ -379,7 +425,8 @@
       "synonyms": [
         "odierno"
       ],
-      "example": "È presente."
+      "example": "È presente.",
+      "pos": "adjective"
     },
     {
       "word": "MANTENERE",
@@ -387,14 +434,16 @@
       "synonyms": [
         "conservare"
       ],
-      "example": "Sa mantenere un segreto?"
+      "example": "Sa mantenere un segreto?",
+      "pos": "verb"
     },
     {
       "word": "ATTACCO",
       "gloss": "azione violenta contro qualcuno",
       "synonyms": [
         "aggressione"
-      ]
+      ],
+      "pos": "noun"
     },
     {
       "word": "DURO",
@@ -402,7 +451,8 @@
       "synonyms": [
         "rigido"
       ],
-      "example": "Sarà duro."
+      "example": "Sarà duro.",
+      "pos": "adjective"
     },
     {
       "word": "CIOÈ",
@@ -410,7 +460,8 @@
       "synonyms": [
         "ossia"
       ],
-      "example": "Cioè, davvero, cosa si può dire?"
+      "example": "Cioè, davvero, cosa si può dire?",
+      "pos": "adverb"
     },
     {
       "word": "PRECEDENTE",
@@ -418,7 +469,8 @@
       "synonyms": [
         "anteriore"
       ],
-      "example": "È un precedente?"
+      "example": "È un precedente?",
+      "pos": "adjective"
     },
     {
       "word": "TAGLIARE",
@@ -426,30 +478,35 @@
       "synonyms": [
         "recidere"
       ],
-      "example": "Non tagliare la fila."
+      "example": "Non tagliare la fila.",
+      "pos": "verb"
     },
     {
       "word": "COMPLEANNO",
       "gloss": "giorno della nascita, che si festeggia ogni dodici mesi",
       "synonyms": [],
-      "example": "Buon compleanno!"
+      "example": "Buon compleanno!",
+      "pos": "noun"
     },
     {
       "word": "VISITA",
       "gloss": "l'andare a trovare qualcuno",
       "synonyms": [],
-      "example": "A volte mi visita."
+      "example": "A volte mi visita.",
+      "pos": "noun"
     },
     {
       "word": "SERATA",
       "gloss": "le ore dopo cena",
       "synonyms": [],
-      "example": "Che serata!"
+      "example": "Che serata!",
+      "pos": "noun"
     },
     {
       "word": "INTORNO",
       "gloss": "da ogni parte vicino a qualcosa",
-      "example": "È qui intorno."
+      "example": "È qui intorno.",
+      "pos": "adverb"
     },
     {
       "word": "CORSO",
@@ -457,7 +514,8 @@
       "synonyms": [
         "ciclo"
       ],
-      "example": "C'è un corso?"
+      "example": "C'è un corso?",
+      "pos": "noun"
     },
     {
       "word": "PULIRE",
@@ -465,12 +523,14 @@
       "synonyms": [
         "nettare"
       ],
-      "example": "Odio pulire."
+      "example": "Odio pulire.",
+      "pos": "verb"
     },
     {
       "word": "VIDEO",
       "gloss": "immagini che si muovono, da guardare su uno schermo",
-      "example": "È un video."
+      "example": "È un video.",
+      "pos": "noun"
     },
     {
       "word": "SPAZIO",
@@ -478,7 +538,8 @@
       "synonyms": [
         "posto"
       ],
-      "example": "Fai spazio!"
+      "example": "Fai spazio!",
+      "pos": "noun"
     },
     {
       "word": "POVERO",
@@ -486,14 +547,16 @@
       "synonyms": [
         "misero"
       ],
-      "example": "Povero me."
+      "example": "Povero me.",
+      "pos": "noun"
     },
     {
       "word": "ARRESTARE",
       "gloss": "portare in prigione",
       "synonyms": [
         "fermare"
-      ]
+      ],
+      "pos": "verb"
     },
     {
       "word": "DOCUMENTO",
@@ -501,7 +564,8 @@
       "synonyms": [
         "certificato"
       ],
-      "example": "Firmo un documento."
+      "example": "Firmo un documento.",
+      "pos": "noun"
     },
     {
       "word": "SANTO",
@@ -509,7 +573,8 @@
       "synonyms": [
         "beato"
       ],
-      "example": "È un santo."
+      "example": "È un santo.",
+      "pos": "noun"
     },
     {
       "word": "CORAGGIO",
@@ -517,7 +582,8 @@
       "synonyms": [
         "audacia"
       ],
-      "example": "Che coraggio!"
+      "example": "Che coraggio!",
+      "pos": "noun"
     },
     {
       "word": "ATTACCARE",
@@ -525,7 +591,8 @@
       "synonyms": [
         "assalire"
       ],
-      "example": "Devo attaccare il poster al muro con la colla."
+      "example": "Devo attaccare il poster al muro con la colla.",
+      "pos": "verb"
     },
     {
       "word": "BALLO",
@@ -533,7 +600,8 @@
       "synonyms": [
         "danza"
       ],
-      "example": "Io non ballo."
+      "example": "Io non ballo.",
+      "pos": "noun"
     },
     {
       "word": "SALA",
@@ -541,7 +609,8 @@
       "synonyms": [
         "salone"
       ],
-      "example": "È una sala."
+      "example": "È una sala.",
+      "pos": "noun"
     },
     {
       "word": "TRISTE",
@@ -549,7 +618,8 @@
       "synonyms": [
         "malinconico"
       ],
-      "example": "Sei triste?"
+      "example": "Sei triste?",
+      "pos": "adjective"
     },
     {
       "word": "REALE",
@@ -557,13 +627,15 @@
       "synonyms": [
         "vero"
       ],
-      "example": "Sei reale?"
+      "example": "Sei reale?",
+      "pos": "adjective"
     },
     {
       "word": "INGLESE",
       "gloss": "lingua parlata a Londra e negli Stati Uniti",
       "synonyms": [],
-      "example": "Era inglese."
+      "example": "Era inglese.",
+      "pos": "adjective"
     },
     {
       "word": "DENARO",
@@ -571,7 +643,8 @@
       "synonyms": [
         "soldi"
       ],
-      "example": "Ho il denaro."
+      "example": "Ho il denaro.",
+      "pos": "noun"
     },
     {
       "word": "NEMICO",
@@ -579,19 +652,22 @@
       "synonyms": [
         "avversario"
       ],
-      "example": "È il nemico."
+      "example": "È il nemico.",
+      "pos": "noun"
     },
     {
       "word": "BIRRA",
       "gloss": "bevanda gialla con le bollicine, fatta con l'orzo",
       "synonyms": [],
-      "example": "Bevi birra?"
+      "example": "Bevi birra?",
+      "pos": "noun"
     },
     {
       "word": "SECONDO",
       "gloss": "che viene subito dopo il primo",
       "synonyms": [],
-      "example": "Dammi un secondo."
+      "example": "Dammi un secondo.",
+      "pos": "noun"
     },
     {
       "word": "LIVELLO",
@@ -599,7 +675,8 @@
       "synonyms": [
         "grado"
       ],
-      "example": "Sei sceso al suo livello."
+      "example": "Sei sceso al suo livello.",
+      "pos": "noun"
     },
     {
       "word": "PRANZO",
@@ -607,7 +684,8 @@
       "synonyms": [
         "desinare"
       ],
-      "example": "Buon pranzo."
+      "example": "Buon pranzo.",
+      "pos": "noun"
     },
     {
       "word": "INVITARE",
@@ -615,7 +693,8 @@
       "synonyms": [
         "convitare"
       ],
-      "example": "Chi dobbiamo invitare?"
+      "example": "Chi dobbiamo invitare?",
+      "pos": "verb"
     },
     {
       "word": "PROFESSORE",
@@ -623,7 +702,8 @@
       "synonyms": [
         "docente"
       ],
-      "example": "Ero professore."
+      "example": "Ero professore.",
+      "pos": "noun"
     },
     {
       "word": "UNIRE",
@@ -631,7 +711,8 @@
       "synonyms": [
         "collegare"
       ],
-      "example": "Mi voglio unire a te."
+      "example": "Mi voglio unire a te.",
+      "pos": "verb"
     },
     {
       "word": "RISCHIO",
@@ -639,7 +720,8 @@
       "synonyms": [
         "pericolo"
       ],
-      "example": "È un rischio."
+      "example": "È un rischio.",
+      "pos": "noun"
     },
     {
       "word": "CELLULARE",
@@ -647,7 +729,8 @@
       "synonyms": [
         "telefonino"
       ],
-      "example": "È un cellulare."
+      "example": "È un cellulare.",
+      "pos": "adjective"
     },
     {
       "word": "PALLA",
@@ -655,7 +738,8 @@
       "synonyms": [
         "sfera"
       ],
-      "example": "Tirò la palla."
+      "example": "Tirò la palla.",
+      "pos": "noun"
     },
     {
       "word": "MISSIONE",
@@ -664,7 +748,8 @@
         "incarico",
         "compito"
       ],
-      "example": "Missione compiuta."
+      "example": "Missione compiuta.",
+      "pos": "noun"
     },
     {
       "word": "DESIDERARE",
@@ -672,7 +757,8 @@
       "synonyms": [
         "agognare"
       ],
-      "example": "Non potevo desiderare di meglio!"
+      "example": "Non potevo desiderare di meglio!",
+      "pos": "verb"
     },
     {
       "word": "BORSA",
@@ -680,7 +766,8 @@
       "synonyms": [
         "sacca"
       ],
-      "example": "Ha una borsa?"
+      "example": "Ha una borsa?",
+      "pos": "noun"
     },
     {
       "word": "BASSO",
@@ -688,7 +775,8 @@
       "synonyms": [
         "piccolo"
       ],
-      "example": "Sono basso."
+      "example": "Sono basso.",
+      "pos": "adjective"
     },
     {
       "word": "CAMBIO",
@@ -696,7 +784,8 @@
       "synonyms": [
         "sostituzione"
       ],
-      "example": "Non cambio."
+      "example": "Non cambio.",
+      "pos": "noun"
     },
     {
       "word": "FORMA",
@@ -704,13 +793,15 @@
       "synonyms": [
         "aspetto"
       ],
-      "example": "Tu sei in forma?"
+      "example": "Tu sei in forma?",
+      "pos": "noun"
     },
     {
       "word": "FRONTE",
       "gloss": "parte del viso sopra gli occhi",
       "synonyms": [],
-      "example": "Mi baciò in fronte."
+      "example": "Mi baciò in fronte.",
+      "pos": "noun"
     },
     {
       "word": "EVITARE",
@@ -718,7 +809,8 @@
       "synonyms": [
         "schivare"
       ],
-      "example": "Si poteva evitare?"
+      "example": "Si poteva evitare?",
+      "pos": "verb"
     },
     {
       "word": "COSTARE",
@@ -726,7 +818,8 @@
       "synonyms": [
         "valere"
       ],
-      "example": "Quanto può costare?"
+      "example": "Quanto può costare?",
+      "pos": "noun"
     },
     {
       "word": "PERICOLO",
@@ -734,7 +827,8 @@
       "synonyms": [
         "rischio"
       ],
-      "example": "È in pericolo?"
+      "example": "È in pericolo?",
+      "pos": "noun"
     },
     {
       "word": "AZIONE",
@@ -743,7 +837,8 @@
         "atto",
         "gesto"
       ],
-      "example": "Avanti, azione!"
+      "example": "Avanti, azione!",
+      "pos": "noun"
     },
     {
       "word": "OCCASIONE",
@@ -751,7 +846,8 @@
       "synonyms": [
         "opportunità"
       ],
-      "example": "È la tua occasione!"
+      "example": "È la tua occasione!",
+      "pos": "noun"
     },
     {
       "word": "RIPRENDERE",
@@ -759,7 +855,8 @@
       "synonyms": [
         "ricominciare"
       ],
-      "example": "Ho dovuto riprendere."
+      "example": "Ho dovuto riprendere.",
+      "pos": "noun"
     },
     {
       "word": "STELLA",
@@ -767,14 +864,16 @@
       "synonyms": [
         "astro"
       ],
-      "example": "È una stella."
+      "example": "È una stella.",
+      "pos": "noun"
     },
     {
       "word": "COMPORTARE",
       "gloss": "avere come risultato",
       "synonyms": [
         "implicare"
-      ]
+      ],
+      "pos": "verb"
     },
     {
       "word": "SILENZIO",
@@ -782,7 +881,8 @@
       "synonyms": [
         "quiete"
       ],
-      "example": "Oh, silenzio!"
+      "example": "Oh, silenzio!",
+      "pos": "noun"
     },
     {
       "word": "DIRETTORE",
@@ -790,7 +890,8 @@
       "synonyms": [
         "capo"
       ],
-      "example": "Sono direttore."
+      "example": "Sono direttore.",
+      "pos": "noun"
     },
     {
       "word": "CALMA",
@@ -799,14 +900,16 @@
         "quiete",
         "serenità"
       ],
-      "example": "Con calma!"
+      "example": "Con calma!",
+      "pos": "noun"
     },
     {
       "word": "PENA",
       "gloss": "punizione data dalla legge",
       "synonyms": [
         "castigo"
-      ]
+      ],
+      "pos": "noun"
     },
     {
       "word": "ASPETTATO",
@@ -815,7 +918,8 @@
         "atteso",
         "previsto"
       ],
-      "example": "L'ho aspettato."
+      "example": "L'ho aspettato.",
+      "pos": "verb"
     },
     {
       "word": "ALTRIMENTI",
@@ -823,7 +927,8 @@
       "synonyms": [
         "diversamente"
       ],
-      "example": "Altrimenti scade!"
+      "example": "Altrimenti scade!",
+      "pos": "adverb"
     },
     {
       "word": "ORDINARE",
@@ -831,7 +936,8 @@
       "synonyms": [
         "comandare"
       ],
-      "example": "Vorresti ordinare?"
+      "example": "Vorresti ordinare?",
+      "pos": "verb"
     },
     {
       "word": "FIRMARE",
@@ -839,7 +945,8 @@
       "synonyms": [
         "sottoscrivere"
       ],
-      "example": "Deve firmare."
+      "example": "Deve firmare.",
+      "pos": "noun"
     },
     {
       "word": "LEGARE",
@@ -847,7 +954,8 @@
       "synonyms": [
         "allacciare"
       ],
-      "example": "Gli devono legare le mani."
+      "example": "Gli devono legare le mani.",
+      "pos": "verb"
     },
     {
       "word": "ATTENDERE",
@@ -855,7 +963,8 @@
       "synonyms": [
         "aspettare"
       ],
-      "example": "Vuole attendere?"
+      "example": "Vuole attendere?",
+      "pos": "verb"
     },
     {
       "word": "BATTERE",
@@ -863,7 +972,8 @@
       "synonyms": [
         "colpire"
       ],
-      "example": "Lo posso battere!"
+      "example": "Lo posso battere!",
+      "pos": "verb"
     },
     {
       "word": "APERTO",
@@ -871,7 +981,8 @@
       "synonyms": [
         "dischiuso"
       ],
-      "example": "Ho aperto."
+      "example": "Ho aperto.",
+      "pos": "adjective"
     },
     {
       "word": "NOTARE",
@@ -879,7 +990,8 @@
       "synonyms": [
         "scorgere"
       ],
-      "example": "Ci siamo fatti notare!"
+      "example": "Ci siamo fatti notare!",
+      "pos": "verb"
     },
     {
       "word": "CORTO",
@@ -887,13 +999,15 @@
       "synonyms": [
         "breve"
       ],
-      "example": "È molto corto."
+      "example": "È molto corto.",
+      "pos": "adjective"
     },
     {
       "word": "STAMATTINA",
       "gloss": "oggi, prima di mezzogiorno",
       "synonyms": [],
-      "example": "Dov'eri stamattina?"
+      "example": "Dov'eri stamattina?",
+      "pos": "adverb"
     },
     {
       "word": "TEST",
@@ -902,13 +1016,15 @@
         "prova",
         "esame"
       ],
-      "example": "Era un test."
+      "example": "Era un test.",
+      "pos": "noun"
     },
     {
       "word": "ALBERO",
       "gloss": "pianta alta con il tronco",
       "synonyms": [],
-      "example": "Dov'è l'albero?"
+      "example": "Dov'è l'albero?",
+      "pos": "noun"
     },
     {
       "word": "PROGETTO",
@@ -916,7 +1032,8 @@
       "synonyms": [
         "piano"
       ],
-      "example": "Il progetto è chiaro."
+      "example": "Il progetto è chiaro.",
+      "pos": "noun"
     },
     {
       "word": "SALUTE",
@@ -924,13 +1041,15 @@
       "synonyms": [
         "benessere"
       ],
-      "example": "Sono in salute."
+      "example": "Sono in salute.",
+      "pos": "noun"
     },
     {
       "word": "METRO",
       "gloss": "misura di lunghezza, poco più di un passo",
       "synonyms": [],
-      "example": "Costa 25 euro al metro."
+      "example": "Costa 25 euro al metro.",
+      "pos": "noun"
     },
     {
       "word": "MERITARE",
@@ -938,7 +1057,8 @@
       "synonyms": [
         "guadagnarsi"
       ],
-      "example": "Me lo devo meritare?"
+      "example": "Me lo devo meritare?",
+      "pos": "verb"
     },
     {
       "word": "COMPUTER",
@@ -946,7 +1066,8 @@
       "synonyms": [
         "elaboratore"
       ],
-      "example": "Ho un computer."
+      "example": "Ho un computer.",
+      "pos": "noun"
     },
     {
       "word": "STUPIDA",
@@ -954,13 +1075,15 @@
       "synonyms": [
         "sciocca"
       ],
-      "example": "È stupida."
+      "example": "È stupida.",
+      "pos": "noun"
     },
     {
       "word": "GOVERNO",
       "gloss": "chi guida lo stato",
       "synonyms": [],
-      "example": "Odia il governo."
+      "example": "Odia il governo.",
+      "pos": "noun"
     },
     {
       "word": "CODICE",
@@ -968,7 +1091,8 @@
       "synonyms": [
         "cifrario"
       ],
-      "example": "Parlate in codice?"
+      "example": "Parlate in codice?",
+      "pos": "noun"
     },
     {
       "word": "TENTARE",
@@ -976,7 +1100,8 @@
       "synonyms": [
         "provare"
       ],
-      "example": "Non mi tentare."
+      "example": "Non mi tentare.",
+      "pos": "verb"
     },
     {
       "word": "MURO",
@@ -984,7 +1109,8 @@
       "synonyms": [
         "parete"
       ],
-      "example": "Ecco il muro."
+      "example": "Ecco il muro.",
+      "pos": "noun"
     },
     {
       "word": "MAGGIORE",
@@ -992,7 +1118,8 @@
       "synonyms": [
         "superiore"
       ],
-      "example": "È il maggiore dei due."
+      "example": "È il maggiore dei due.",
+      "pos": "adjective"
     },
     {
       "word": "LATO",
@@ -1000,13 +1127,15 @@
       "synonyms": [
         "fianco"
       ],
-      "example": "Mettiti di lato."
+      "example": "Mettiti di lato.",
+      "pos": "noun"
     },
     {
       "word": "DITO",
       "gloss": "ognuna delle cinque parti della mano",
       "synonyms": [],
-      "example": "Era il mio dito."
+      "example": "Era il mio dito.",
+      "pos": "noun"
     },
     {
       "word": "MARE",
@@ -1014,7 +1143,8 @@
       "synonyms": [
         "pelago"
       ],
-      "example": "Sono al mare."
+      "example": "Sono al mare.",
+      "pos": "noun"
     },
     {
       "word": "RISULTATO",
@@ -1022,7 +1152,8 @@
       "synonyms": [
         "esito"
       ],
-      "example": "Che risultato!"
+      "example": "Che risultato!",
+      "pos": "noun"
     },
     {
       "word": "SPETTACOLO",
@@ -1030,7 +1161,8 @@
       "synonyms": [
         "show"
       ],
-      "example": "Che spettacolo!"
+      "example": "Che spettacolo!",
+      "pos": "noun"
     },
     {
       "word": "TAVOLO",
@@ -1038,7 +1170,8 @@
       "synonyms": [
         "desco"
       ],
-      "example": "È un tavolo."
+      "example": "È un tavolo.",
+      "pos": "noun"
     },
     {
       "word": "SPERANZA",
@@ -1046,7 +1179,8 @@
       "synonyms": [
         "fiducia"
       ],
-      "example": "Ha speranza."
+      "example": "Ha speranza.",
+      "pos": "noun"
     },
     {
       "word": "DUNQUE",
@@ -1054,13 +1188,15 @@
       "synonyms": [
         "quindi"
       ],
-      "example": "Dunque, e tu?"
+      "example": "Dunque, e tu?",
+      "pos": "adverb"
     },
     {
       "word": "OPERAZIONE",
       "gloss": "lavoro del chirurgo, o calcolo",
       "synonyms": [],
-      "example": "L'operazione andò bene."
+      "example": "L'operazione andò bene.",
+      "pos": "noun"
     },
     {
       "word": "INFATTI",
@@ -1068,7 +1204,8 @@
       "synonyms": [
         "difatti"
       ],
-      "example": "Infatti ho riso!"
+      "example": "Infatti ho riso!",
+      "pos": "adverb"
     },
     {
       "word": "CACCIA",
@@ -1076,7 +1213,8 @@
       "synonyms": [
         "battuta"
       ],
-      "example": "Buona caccia."
+      "example": "Buona caccia.",
+      "pos": "noun"
     },
     {
       "word": "DIMOSTRARE",
@@ -1084,7 +1222,8 @@
       "synonyms": [
         "provare"
       ],
-      "example": "È tutto da dimostrare."
+      "example": "È tutto da dimostrare.",
+      "pos": "verb"
     },
     {
       "word": "CASINO",
@@ -1093,7 +1232,8 @@
         "caos",
         "confusione"
       ],
-      "example": "Che casino!"
+      "example": "Che casino!",
+      "pos": "noun"
     },
     {
       "word": "ESEMPIO",
@@ -1101,7 +1241,8 @@
       "synonyms": [
         "modello"
       ],
-      "example": "Ecco un esempio."
+      "example": "Ecco un esempio.",
+      "pos": "noun"
     },
     {
       "word": "DUBBIO",
@@ -1109,7 +1250,8 @@
       "synonyms": [
         "incertezza"
       ],
-      "example": "Ho il dubbio."
+      "example": "Ho il dubbio.",
+      "pos": "noun"
     },
     {
       "word": "STUDIARE",
@@ -1117,7 +1259,8 @@
       "synonyms": [
         "imparare"
       ],
-      "example": "Non studiare!"
+      "example": "Non studiare!",
+      "pos": "verb"
     },
     {
       "word": "CERTAMENTE",
@@ -1125,7 +1268,8 @@
       "synonyms": [
         "sicuramente"
       ],
-      "example": "Certamente."
+      "example": "Certamente.",
+      "pos": "adverb"
     },
     {
       "word": "REGOLA",
@@ -1133,7 +1277,8 @@
       "synonyms": [
         "norma"
       ],
-      "example": "È una regola."
+      "example": "È una regola.",
+      "pos": "noun"
     },
     {
       "word": "MINACCIARE",
@@ -1141,7 +1286,8 @@
       "synonyms": [
         "intimidire"
       ],
-      "example": "Non mi minacciare."
+      "example": "Non mi minacciare.",
+      "pos": "verb"
     },
     {
       "word": "BALLARE",
@@ -1149,7 +1295,8 @@
       "synonyms": [
         "danzare"
       ],
-      "example": "Sa ballare?"
+      "example": "Sa ballare?",
+      "pos": "verb"
     },
     {
       "word": "OVUNQUE",
@@ -1157,7 +1304,8 @@
       "synonyms": [
         "dappertutto"
       ],
-      "example": "Sei ovunque!"
+      "example": "Sei ovunque!",
+      "pos": "adverb"
     },
     {
       "word": "CLUB",
@@ -1165,13 +1313,15 @@
       "synonyms": [
         "associazione"
       ],
-      "example": "Unitevi al club."
+      "example": "Unitevi al club.",
+      "pos": "noun"
     },
     {
       "word": "VOLO",
       "gloss": "viaggio in aereo",
       "synonyms": [],
-      "example": "Buon volo."
+      "example": "Buon volo.",
+      "pos": "noun"
     },
     {
       "word": "TRACCIA",
@@ -1179,7 +1329,8 @@
       "synonyms": [
         "orma"
       ],
-      "example": "Ho perso traccia di loro."
+      "example": "Ho perso traccia di loro.",
+      "pos": "noun"
     },
     {
       "word": "PROCESSO",
@@ -1187,7 +1338,8 @@
       "synonyms": [
         "giudizio"
       ],
-      "example": "Ci fu un processo."
+      "example": "Ci fu un processo.",
+      "pos": "noun"
     },
     {
       "word": "PUNTARE",
@@ -1195,13 +1347,15 @@
       "synonyms": [
         "mirare"
       ],
-      "example": "Bisogna sempre puntare in alto."
+      "example": "Bisogna sempre puntare in alto.",
+      "pos": "verb"
     },
     {
       "word": "ORO",
       "gloss": "metallo giallo che vale molto",
       "synonyms": [],
-      "example": "Non è oro."
+      "example": "Non è oro.",
+      "pos": "noun"
     },
     {
       "word": "IMMAGINE",
@@ -1209,7 +1363,8 @@
       "synonyms": [
         "figura"
       ],
-      "example": "Cambia immagine."
+      "example": "Cambia immagine.",
+      "pos": "noun"
     },
     {
       "word": "GIUDICE",
@@ -1217,7 +1372,8 @@
       "synonyms": [
         "magistrato"
       ],
-      "example": "Dov'è il giudice?"
+      "example": "Dov'è il giudice?",
+      "pos": "noun"
     },
     {
       "word": "AMMAZZARE",
@@ -1225,13 +1381,15 @@
       "synonyms": [
         "uccidere"
       ],
-      "example": "Il cacciatore non vuole ammazzare il cervo, vuole solo osservarlo."
+      "example": "Il cacciatore non vuole ammazzare il cervo, vuole solo osservarlo.",
+      "pos": "verb"
     },
     {
       "word": "FINESTRA",
       "gloss": "apertura nel muro con il vetro",
       "synonyms": [],
-      "example": "Apri la finestra."
+      "example": "Apri la finestra.",
+      "pos": "noun"
     },
     {
       "word": "APPREZZARE",
@@ -1239,13 +1397,15 @@
       "synonyms": [
         "stimare"
       ],
-      "example": "Lo posso apprezzare."
+      "example": "Lo posso apprezzare.",
+      "pos": "verb"
     },
     {
       "word": "STANOTTE",
       "gloss": "oggi, tardi, quando tutti dormono",
       "synonyms": [],
-      "example": "Non stanotte."
+      "example": "Non stanotte.",
+      "pos": "adverb"
     },
     {
       "word": "COMPITO",
@@ -1254,7 +1414,8 @@
         "incarico",
         "mansione"
       ],
-      "example": "È compito tuo."
+      "example": "È compito tuo.",
+      "pos": "noun"
     },
     {
       "word": "USO",
@@ -1263,14 +1424,16 @@
         "impiego",
         "utilizzo"
       ],
-      "example": "Io lo uso."
+      "example": "Io lo uso.",
+      "pos": "noun"
     },
     {
       "word": "DROGARE",
       "gloss": "dare sostanze che cambiano la mente",
       "synonyms": [
         "narcotizzare"
-      ]
+      ],
+      "pos": "noun"
     },
     {
       "word": "CONSEGNARE",
@@ -1278,7 +1441,8 @@
       "synonyms": [
         "recapitare"
       ],
-      "example": "Lo posso consegnare a lui."
+      "example": "Lo posso consegnare a lui.",
+      "pos": "verb"
     },
     {
       "word": "SUPPORRE",
@@ -1287,7 +1451,8 @@
         "ipotizzare",
         "presumere"
       ],
-      "example": "Si può supporre che tutto sia a posto."
+      "example": "Si può supporre che tutto sia a posto.",
+      "pos": "verb"
     },
     {
       "word": "AFFATTO",
@@ -1295,13 +1460,15 @@
       "synonyms": [
         "per niente"
       ],
-      "example": "Non bevo affatto."
+      "example": "Non bevo affatto.",
+      "pos": "adverb"
     },
     {
       "word": "TENENTE",
       "gloss": "grado di ufficiale nell'esercito",
       "synonyms": [],
-      "example": "Vorrei diventare un tenente."
+      "example": "Vorrei diventare un tenente.",
+      "pos": "adjective"
     },
     {
       "word": "BARCA",
@@ -1309,7 +1476,8 @@
       "synonyms": [
         "battello"
       ],
-      "example": "È una barca."
+      "example": "È una barca.",
+      "pos": "noun"
     },
     {
       "word": "CLASSE",
@@ -1317,7 +1485,8 @@
       "synonyms": [
         "aula"
       ],
-      "example": "Vai in classe."
+      "example": "Vai in classe.",
+      "pos": "noun"
     },
     {
       "word": "DIFFERENZA",
@@ -1325,13 +1494,15 @@
       "synonyms": [
         "divario"
       ],
-      "example": "Fa la differenza?"
+      "example": "Fa la differenza?",
+      "pos": "noun"
     },
     {
       "word": "STAGIONE",
       "gloss": "ognuna delle quattro parti dell'anno",
       "synonyms": [],
-      "example": "Che stagione è?"
+      "example": "Che stagione è?",
+      "pos": "noun"
     },
     {
       "word": "AVVICINARE",
@@ -1339,7 +1510,8 @@
       "synonyms": [
         "accostare"
       ],
-      "example": "Non ti avvicinare!"
+      "example": "Non ti avvicinare!",
+      "pos": "verb"
     },
     {
       "word": "CHIESA",
@@ -1347,7 +1519,8 @@
       "synonyms": [
         "tempio"
       ],
-      "example": "È una chiesa."
+      "example": "È una chiesa.",
+      "pos": "noun"
     },
     {
       "word": "COMUNE",
@@ -1355,7 +1528,8 @@
       "synonyms": [
         "municipio"
       ],
-      "example": "È un nome comune?"
+      "example": "È un nome comune?",
+      "pos": "adjective"
     },
     {
       "word": "LOCALE",
@@ -1363,7 +1537,8 @@
       "synonyms": [
         "ambiente"
       ],
-      "example": "Il locale è suo?"
+      "example": "Il locale è suo?",
+      "pos": "adjective"
     },
     {
       "word": "COLLEGARE",
@@ -1372,7 +1547,8 @@
         "unire",
         "connettere"
       ],
-      "example": "Bisogna collegare le varie interviste."
+      "example": "Bisogna collegare le varie interviste.",
+      "pos": "verb"
     },
     {
       "word": "RICCO",
@@ -1380,7 +1556,8 @@
       "synonyms": [
         "benestante"
       ],
-      "example": "Sei ricco."
+      "example": "Sei ricco.",
+      "pos": "noun"
     },
     {
       "word": "VOLARE",
@@ -1388,7 +1565,8 @@
       "synonyms": [
         "librarsi"
       ],
-      "example": "So volare."
+      "example": "So volare.",
+      "pos": "verb"
     },
     {
       "word": "MASSIMO",
@@ -1396,7 +1574,8 @@
       "synonyms": [
         "supremo"
       ],
-      "example": "Massimo rispetto!"
+      "example": "Massimo rispetto!",
+      "pos": "adjective"
     },
     {
       "word": "AMMETTERE",
@@ -1404,7 +1583,8 @@
       "synonyms": [
         "riconoscere"
       ],
-      "example": "Non volevo ammettere."
+      "example": "Non volevo ammettere.",
+      "pos": "verb"
     },
     {
       "word": "SCARPA",
@@ -1412,7 +1592,8 @@
       "synonyms": [
         "calzatura"
       ],
-      "example": "Ho perso la scarpa."
+      "example": "Ho perso la scarpa.",
+      "pos": "noun"
     },
     {
       "word": "INCINTA",
@@ -1420,7 +1601,8 @@
       "synonyms": [
         "gravida"
       ],
-      "example": "È incinta."
+      "example": "È incinta.",
+      "pos": "adjective"
     },
     {
       "word": "PENSIERO",
@@ -1428,13 +1610,15 @@
       "synonyms": [
         "idea"
       ],
-      "example": "Che pensiero!"
+      "example": "Che pensiero!",
+      "pos": "noun"
     },
     {
       "word": "MENTITO",
       "gloss": "detto in modo non vero",
       "synonyms": [],
-      "example": "Ho mentito."
+      "example": "Ho mentito.",
+      "pos": "noun"
     },
     {
       "word": "DIRIGERE",
@@ -1442,7 +1626,8 @@
       "synonyms": [
         "guidare"
       ],
-      "example": "Ti piace farti dirigere?"
+      "example": "Ti piace farti dirigere?",
+      "pos": "verb"
     },
     {
       "word": "MICA",
@@ -1450,7 +1635,8 @@
       "synonyms": [
         "affatto"
       ],
-      "example": "Mica scemo!"
+      "example": "Mica scemo!",
+      "pos": "noun"
     },
     {
       "word": "SUPERARE",
@@ -1458,7 +1644,8 @@
       "synonyms": [
         "oltrepassare"
       ],
-      "example": "Spero di superare il test."
+      "example": "Spero di superare il test.",
+      "pos": "verb"
     },
     {
       "word": "TRENO",
@@ -1466,7 +1653,8 @@
       "synonyms": [
         "convoglio"
       ],
-      "example": "È sul treno."
+      "example": "È sul treno.",
+      "pos": "noun"
     },
     {
       "word": "SINISTRA",
@@ -1474,7 +1662,8 @@
       "synonyms": [
         "manca"
       ],
-      "example": "Qui a sinistra."
+      "example": "Qui a sinistra.",
+      "pos": "noun"
     },
     {
       "word": "ASSUMERE",
@@ -1482,7 +1671,8 @@
       "synonyms": [
         "ingaggiare"
       ],
-      "example": "Lo voglio assumere."
+      "example": "Lo voglio assumere.",
+      "pos": "verb"
     },
     {
       "word": "GESTIRE",
@@ -1490,7 +1680,8 @@
       "synonyms": [
         "amministrare"
       ],
-      "example": "So come gestire la cosa."
+      "example": "So come gestire la cosa.",
+      "pos": "verb"
     },
     {
       "word": "INNAMORARE",
@@ -1498,7 +1689,8 @@
       "synonyms": [
         "invaghire"
       ],
-      "example": "Mi voglio innamorare."
+      "example": "Mi voglio innamorare.",
+      "pos": "verb"
     },
     {
       "word": "ORRIBILE",
@@ -1507,13 +1699,15 @@
         "spaventoso",
         "terribile"
       ],
-      "example": "È orribile."
+      "example": "È orribile.",
+      "pos": "adjective"
     },
     {
       "word": "FIORE",
       "gloss": "parte colorata e profumata della pianta",
       "synonyms": [],
-      "example": "È un fiore."
+      "example": "È un fiore.",
+      "pos": "noun"
     },
     {
       "word": "RIPETERE",
@@ -1521,7 +1715,8 @@
       "synonyms": [
         "ridire"
       ],
-      "example": "Può ripetere?"
+      "example": "Può ripetere?",
+      "pos": "verb"
     },
     {
       "word": "ENORME",
@@ -1530,7 +1725,8 @@
         "gigantesco",
         "immenso"
       ],
-      "example": "Era enorme."
+      "example": "Era enorme.",
+      "pos": "adjective"
     },
     {
       "word": "RIPORTARE",
@@ -1538,7 +1734,8 @@
       "synonyms": [
         "ricondurre"
       ],
-      "example": "Devo riportare questo."
+      "example": "Devo riportare questo.",
+      "pos": "verb"
     },
     {
       "word": "SOFFRIRE",
@@ -1546,13 +1743,15 @@
       "synonyms": [
         "patire"
       ],
-      "example": "Sto per soffrire."
+      "example": "Sto per soffrire.",
+      "pos": "verb"
     },
     {
       "word": "VINO",
       "gloss": "bevanda fatta con l'uva",
       "synonyms": [],
-      "example": "Ha del vino."
+      "example": "Ha del vino.",
+      "pos": "noun"
     },
     {
       "word": "COMPAGNO",
@@ -1560,7 +1759,8 @@
       "synonyms": [
         "amico"
       ],
-      "example": "Adoro il mio compagno."
+      "example": "Adoro il mio compagno.",
+      "pos": "noun"
     },
     {
       "word": "DANNAZIONE",
@@ -1568,7 +1768,8 @@
       "synonyms": [
         "maledizione"
       ],
-      "example": "Dannazione!"
+      "example": "Dannazione!",
+      "pos": "noun"
     },
     {
       "word": "FERIRE",
@@ -1576,7 +1777,8 @@
       "synonyms": [
         "lesionare"
       ],
-      "example": "Non ci può ferire."
+      "example": "Non ci può ferire.",
+      "pos": "verb"
     },
     {
       "word": "ROMPERE",
@@ -1584,7 +1786,8 @@
       "synonyms": [
         "spaccare"
       ],
-      "example": "Ma non rompere!"
+      "example": "Ma non rompere!",
+      "pos": "verb"
     },
     {
       "word": "SEGNALE",
@@ -1592,13 +1795,15 @@
       "synonyms": [
         "indicazione"
       ],
-      "example": "Nessun segnale."
+      "example": "Nessun segnale.",
+      "pos": "noun"
     },
     {
       "word": "CARNE",
       "gloss": "parte degli animali che si mangia",
       "synonyms": [],
-      "example": "Mangi carne?"
+      "example": "Mangi carne?",
+      "pos": "noun"
     },
     {
       "word": "COLORE",
@@ -1606,7 +1811,8 @@
       "synonyms": [
         "tinta"
       ],
-      "example": "Che colore è?"
+      "example": "Che colore è?",
+      "pos": "noun"
     },
     {
       "word": "SCATOLA",
@@ -1614,7 +1820,8 @@
       "synonyms": [
         "contenitore"
       ],
-      "example": "Era una scatola."
+      "example": "Era una scatola.",
+      "pos": "noun"
     },
     {
       "word": "DISCORSO",
@@ -1622,7 +1829,8 @@
       "synonyms": [
         "orazione"
       ],
-      "example": "Fece un discorso."
+      "example": "Fece un discorso.",
+      "pos": "noun"
     },
     {
       "word": "SPOSO",
@@ -1630,7 +1838,8 @@
       "synonyms": [
         "marito"
       ],
-      "example": "È lo sposo."
+      "example": "È lo sposo.",
+      "pos": "adjective"
     },
     {
       "word": "ENERGIA",
@@ -1638,13 +1847,15 @@
       "synonyms": [
         "vigore"
       ],
-      "example": "Non ho energia."
+      "example": "Non ho energia.",
+      "pos": "noun"
     },
     {
       "word": "CHILOMETRO",
       "gloss": "misura per le strade lunghe, in auto o a piedi",
       "synonyms": [],
-      "example": "Ci sono mille metri in un chilometro."
+      "example": "Ci sono mille metri in un chilometro.",
+      "pos": "noun"
     },
     {
       "word": "PELLE",
@@ -1652,13 +1863,15 @@
       "synonyms": [
         "cute"
       ],
-      "example": "È fatto di pelle."
+      "example": "È fatto di pelle.",
+      "pos": "noun"
     },
     {
       "word": "PESCE",
       "gloss": "animale che vive nell'acqua e nuota",
       "synonyms": [],
-      "example": "È un pesce."
+      "example": "È un pesce.",
+      "pos": "noun"
     },
     {
       "word": "OFFERTA",
@@ -1666,13 +1879,15 @@
       "synonyms": [
         "dono"
       ],
-      "example": "C'è un'offerta!"
+      "example": "C'è un'offerta!",
+      "pos": "noun"
     },
     {
       "word": "LUNA",
       "gloss": "satellite che si vede di notte nel cielo",
       "synonyms": [],
-      "example": "La luna brilla."
+      "example": "La luna brilla.",
+      "pos": "noun"
     },
     {
       "word": "COMANDANTE",
@@ -1680,13 +1895,15 @@
       "synonyms": [
         "capo"
       ],
-      "example": "È il comandante."
+      "example": "È il comandante.",
+      "pos": "noun"
     },
     {
       "word": "ESPERIENZA",
       "gloss": "ciò che si impara vivendo",
       "synonyms": [],
-      "example": "Ha esperienza."
+      "example": "Ha esperienza.",
+      "pos": "noun"
     },
     {
       "word": "EROE",
@@ -1694,20 +1911,23 @@
       "synonyms": [
         "prode"
       ],
-      "example": "È un eroe?"
+      "example": "È un eroe?",
+      "pos": "noun"
     },
     {
       "word": "IMPEGNARE",
       "gloss": "occupare con un compito o un dovere",
       "synonyms": [
         "occupare"
-      ]
+      ],
+      "pos": "verb"
     },
     {
       "word": "PASSO",
       "gloss": "il mettere un piede davanti all'altro quando si cammina",
       "synonyms": [],
-      "example": "Il passo è breve!"
+      "example": "Il passo è breve!",
+      "pos": "noun"
     },
     {
       "word": "GATTO",
@@ -1715,7 +1935,8 @@
       "synonyms": [
         "micio"
       ],
-      "example": "Ho un gatto."
+      "example": "Ho un gatto.",
+      "pos": "noun"
     },
     {
       "word": "HOTEL",
@@ -1723,7 +1944,8 @@
       "synonyms": [
         "locanda"
       ],
-      "example": "È un hotel."
+      "example": "È un hotel.",
+      "pos": "noun"
     },
     {
       "word": "BRUCIARE",
@@ -1731,7 +1953,8 @@
       "synonyms": [
         "ardere"
       ],
-      "example": "Vi aiuterà a bruciare tutto!"
+      "example": "Vi aiuterà a bruciare tutto!",
+      "pos": "verb"
     },
     {
       "word": "SPIRITO",
@@ -1739,13 +1962,15 @@
       "synonyms": [
         "anima"
       ],
-      "example": "Cos'è uno spirito?"
+      "example": "Cos'è uno spirito?",
+      "pos": "noun"
     },
     {
       "word": "PIANETA",
       "gloss": "corpo del cielo che gira intorno a una stella",
       "synonyms": [],
-      "example": "Su che pianeta?"
+      "example": "Su che pianeta?",
+      "pos": "noun"
     },
     {
       "word": "VUOTO",
@@ -1753,7 +1978,8 @@
       "synonyms": [
         "vacuo"
       ],
-      "example": "Era vuoto."
+      "example": "Era vuoto.",
+      "pos": "noun"
     },
     {
       "word": "STAR",
@@ -1761,7 +1987,8 @@
       "synonyms": [
         "divo"
       ],
-      "example": "È una star."
+      "example": "È una star.",
+      "pos": "noun"
     },
     {
       "word": "CONVINTO",
@@ -1769,7 +1996,8 @@
       "synonyms": [
         "persuaso"
       ],
-      "example": "È convinto."
+      "example": "È convinto.",
+      "pos": "adjective"
     },
     {
       "word": "PRESSIONE",
@@ -1777,32 +2005,37 @@
       "synonyms": [
         "spinta"
       ],
-      "example": "E la pressione sale!"
+      "example": "E la pressione sale!",
+      "pos": "noun"
     },
     {
       "word": "CADAVERE",
       "gloss": "corpo di una persona morta",
       "synonyms": [
         "spoglia"
-      ]
+      ],
+      "pos": "noun"
     },
     {
       "word": "POMERIGGIO",
       "gloss": "parte del giorno dopo pranzo",
       "synonyms": [],
-      "example": "Buon pomeriggio."
+      "example": "Buon pomeriggio.",
+      "pos": "noun"
     },
     {
       "word": "FIGLIOLO",
       "gloss": "modo dolce di chiamare un ragazzo, come fa un papà",
       "synonyms": [],
-      "example": "Figliolo, provati la febbre."
+      "example": "Figliolo, provati la febbre.",
+      "pos": "noun"
     },
     {
       "word": "MERITO",
       "gloss": "ciò che si ha fatto di buono e che conta",
       "synonyms": [],
-      "example": "Lo merito."
+      "example": "Lo merito.",
+      "pos": "noun"
     },
     {
       "word": "INNOCENTE",
@@ -1810,7 +2043,8 @@
       "synonyms": [
         "incolpevole"
       ],
-      "example": "È innocente."
+      "example": "È innocente.",
+      "pos": "adjective"
     },
     {
       "word": "RESPIRARE",
@@ -1818,7 +2052,8 @@
       "synonyms": [
         "fiatare"
       ],
-      "example": "Riesci a respirare?"
+      "example": "Riesci a respirare?",
+      "pos": "verb"
     },
     {
       "word": "STUDENTE",
@@ -1826,13 +2061,15 @@
       "synonyms": [
         "alunno"
       ],
-      "example": "È uno studente."
+      "example": "È uno studente.",
+      "pos": "noun"
     },
     {
       "word": "RITORNO",
       "gloss": "il venire di nuovo indietro",
       "synonyms": [],
-      "example": "Ritorno il 10."
+      "example": "Ritorno il 10.",
+      "pos": "noun"
     },
     {
       "word": "GIORNALE",
@@ -1840,7 +2077,8 @@
       "synonyms": [
         "quotidiano"
       ],
-      "example": "Dov'è il giornale?"
+      "example": "Dov'è il giornale?",
+      "pos": "noun"
     },
     {
       "word": "IMPAZZIRE",
@@ -1848,7 +2086,8 @@
       "synonyms": [
         "ammattire"
       ],
-      "example": "È da impazzire!"
+      "example": "È da impazzire!",
+      "pos": "verb"
     },
     {
       "word": "PREZZO",
@@ -1856,13 +2095,15 @@
       "synonyms": [
         "costo"
       ],
-      "example": "Vale il prezzo."
+      "example": "Vale il prezzo.",
+      "pos": "noun"
     },
     {
       "word": "DESTRA",
       "gloss": "lato opposto alla sinistra",
       "synonyms": [],
-      "example": "Qui a destra."
+      "example": "Qui a destra.",
+      "pos": "noun"
     },
     {
       "word": "DISCUTERE",
@@ -1870,7 +2111,8 @@
       "synonyms": [
         "dibattere"
       ],
-      "example": "Preferisce discutere."
+      "example": "Preferisce discutere.",
+      "pos": "verb"
     },
     {
       "word": "CONDIZIONE",
@@ -1878,7 +2120,8 @@
       "synonyms": [
         "stato"
       ],
-      "example": "Temo un calo di condizione."
+      "example": "Temo un calo di condizione.",
+      "pos": "noun"
     },
     {
       "word": "EDIFICIO",
@@ -1886,7 +2129,8 @@
       "synonyms": [
         "fabbricato"
       ],
-      "example": "L'edificio è blu."
+      "example": "L'edificio è blu.",
+      "pos": "noun"
     },
     {
       "word": "MEMBRO",
@@ -1894,7 +2138,8 @@
       "synonyms": [
         "componente"
       ],
-      "example": "È un membro."
+      "example": "È un membro.",
+      "pos": "noun"
     },
     {
       "word": "COLPEVOLE",
@@ -1902,7 +2147,8 @@
       "synonyms": [
         "reo"
       ],
-      "example": "È colpevole."
+      "example": "È colpevole.",
+      "pos": "adjective"
     },
     {
       "word": "PERIODO",
@@ -1910,7 +2156,8 @@
       "synonyms": [
         "epoca"
       ],
-      "example": "Che periodo era?"
+      "example": "Che periodo era?",
+      "pos": "noun"
     },
     {
       "word": "CAFFÈ",
@@ -1918,13 +2165,15 @@
       "synonyms": [
         "espresso"
       ],
-      "example": "Caffè o tè?"
+      "example": "Caffè o tè?",
+      "pos": "noun"
     },
     {
       "word": "RITORNARE",
       "gloss": "venire di nuovo",
       "synonyms": [],
-      "example": "Non ritornare."
+      "example": "Non ritornare.",
+      "pos": "verb"
     },
     {
       "word": "GRAVE",
@@ -1932,7 +2181,8 @@
       "synonyms": [
         "serio"
       ],
-      "example": "Sarà grave?"
+      "example": "Sarà grave?",
+      "pos": "adjective"
     },
     {
       "word": "RILASSARE",
@@ -1940,7 +2190,8 @@
       "synonyms": [
         "distendere"
       ],
-      "example": "Lasciali rilassare."
+      "example": "Lasciali rilassare.",
+      "pos": "verb"
     },
     {
       "word": "LITIGARE",
@@ -1948,7 +2199,8 @@
       "synonyms": [
         "bisticciare"
       ],
-      "example": "Non litigare."
+      "example": "Non litigare.",
+      "pos": "verb"
     },
     {
       "word": "INDAGINE",
@@ -1956,7 +2208,8 @@
       "synonyms": [
         "inchiesta"
       ],
-      "example": "L'indagine è finita."
+      "example": "L'indagine è finita.",
+      "pos": "noun"
     },
     {
       "word": "INDIRIZZO",
@@ -1964,7 +2217,8 @@
       "synonyms": [
         "recapito"
       ],
-      "example": "Ha un indirizzo?"
+      "example": "Ha un indirizzo?",
+      "pos": "noun"
     },
     {
       "word": "NORD",
@@ -1972,7 +2226,8 @@
       "synonyms": [
         "settentrione"
       ],
-      "example": "Dov'è il nord?"
+      "example": "Dov'è il nord?",
+      "pos": "noun"
     },
     {
       "word": "RUMORE",
@@ -1980,7 +2235,8 @@
       "synonyms": [
         "fracasso"
       ],
-      "example": "Fa rumore."
+      "example": "Fa rumore.",
+      "pos": "noun"
     },
     {
       "word": "RIUNIONE",
@@ -1988,7 +2244,8 @@
       "synonyms": [
         "incontro"
       ],
-      "example": "Lei è in riunione."
+      "example": "Lei è in riunione.",
+      "pos": "noun"
     },
     {
       "word": "CAMPIONE",
@@ -1996,7 +2253,8 @@
       "synonyms": [
         "vincitore"
       ],
-      "example": "Ecco il campione!"
+      "example": "Ecco il campione!",
+      "pos": "noun"
     },
     {
       "word": "MAESTRO",
@@ -2004,7 +2262,8 @@
       "synonyms": [
         "insegnante"
       ],
-      "example": "È un maestro."
+      "example": "È un maestro.",
+      "pos": "noun"
     },
     {
       "word": "FANTASMA",
@@ -2012,7 +2271,8 @@
       "synonyms": [
         "spettro"
       ],
-      "example": "È un fantasma."
+      "example": "È un fantasma.",
+      "pos": "noun"
     },
     {
       "word": "RISTORANTE",
@@ -2020,7 +2280,8 @@
       "synonyms": [
         "trattoria"
       ],
-      "example": "Vado al ristorante."
+      "example": "Vado al ristorante.",
+      "pos": "noun"
     },
     {
       "word": "TELEFONARE",
@@ -2028,13 +2289,15 @@
       "synonyms": [
         "chiamare"
       ],
-      "example": "Devo telefonare."
+      "example": "Devo telefonare.",
+      "pos": "verb"
     },
     {
       "word": "RADIO",
       "gloss": "apparecchio per ascoltare musica e notizie",
       "synonyms": [],
-      "example": "Vende radio."
+      "example": "Vende radio.",
+      "pos": "noun"
     },
     {
       "word": "POLITICO",
@@ -2042,7 +2305,8 @@
       "synonyms": [
         "statista"
       ],
-      "example": "È un capo politico."
+      "example": "È un capo politico.",
+      "pos": "noun"
     },
     {
       "word": "INTERESSE",
@@ -2050,7 +2314,8 @@
       "synonyms": [
         "curiosità"
       ],
-      "example": "Persi interesse."
+      "example": "Persi interesse.",
+      "pos": "noun"
     },
     {
       "word": "LICENZIARE",
@@ -2058,7 +2323,8 @@
       "synonyms": [
         "congedare"
       ],
-      "example": "Non li licenziare."
+      "example": "Non li licenziare.",
+      "pos": "verb"
     },
     {
       "word": "SOPPORTARE",
@@ -2067,7 +2333,8 @@
         "reggere",
         "tollerare"
       ],
-      "example": "Posso sopportare tutto."
+      "example": "Posso sopportare tutto.",
+      "pos": "verb"
     },
     {
       "word": "CONFERMARE",
@@ -2075,13 +2342,15 @@
       "synonyms": [
         "convalidare"
       ],
-      "example": "Chiamerò per confermare."
+      "example": "Chiamerò per confermare.",
+      "pos": "verb"
     },
     {
       "word": "ANELLO",
       "gloss": "cerchio di metallo da portare al dito",
       "synonyms": [],
-      "example": "Bell'anello."
+      "example": "Bell'anello.",
+      "pos": "noun"
     },
     {
       "word": "TURNO",
@@ -2089,7 +2358,8 @@
       "synonyms": [
         "volta"
       ],
-      "example": "Sono di turno."
+      "example": "Sono di turno.",
+      "pos": "noun"
     },
     {
       "word": "ESAME",
@@ -2097,18 +2367,21 @@
       "synonyms": [
         "prova"
       ],
-      "example": "Com'è l'esame?"
+      "example": "Com'è l'esame?",
+      "pos": "noun"
     },
     {
       "word": "FRANCESE",
       "gloss": "lingua parlata a Parigi",
       "synonyms": [],
-      "example": "È francese."
+      "example": "È francese.",
+      "pos": "adjective"
     },
     {
       "word": "TRASFERIRE",
       "gloss": "portare in un altro posto",
-      "example": "Mi voglio trasferire."
+      "example": "Mi voglio trasferire.",
+      "pos": "verb"
     },
     {
       "word": "TRADIRE",
@@ -2116,7 +2389,8 @@
       "synonyms": [
         "ingannare"
       ],
-      "example": "Non mi tradire."
+      "example": "Non mi tradire.",
+      "pos": "verb"
     },
     {
       "word": "LIBERARE",
@@ -2124,7 +2398,8 @@
       "synonyms": [
         "affrancare"
       ],
-      "example": "Bisogna liberare i prigionieri."
+      "example": "Bisogna liberare i prigionieri.",
+      "pos": "verb"
     },
     {
       "word": "INUTILE",
@@ -2132,7 +2407,8 @@
       "synonyms": [
         "vano"
       ],
-      "example": "È inutile."
+      "example": "È inutile.",
+      "pos": "adjective"
     },
     {
       "word": "AFFRONTARE",
@@ -2140,7 +2416,8 @@
       "synonyms": [
         "sfidare"
       ],
-      "example": "La voleva affrontare."
+      "example": "La voleva affrontare.",
+      "pos": "verb"
     },
     {
       "word": "SPAVENTARE",
@@ -2148,7 +2425,8 @@
       "synonyms": [
         "impaurire"
       ],
-      "example": "Lo voleva spaventare."
+      "example": "Lo voleva spaventare.",
+      "pos": "noun"
     },
     {
       "word": "ACCENDERE",
@@ -2156,7 +2434,8 @@
       "synonyms": [
         "attivare"
       ],
-      "example": "Ha da accendere?"
+      "example": "Ha da accendere?",
+      "pos": "verb"
     },
     {
       "word": "LEGALE",
@@ -2164,7 +2443,8 @@
       "synonyms": [
         "lecito"
       ],
-      "example": "Ma è legale?"
+      "example": "Ma è legale?",
+      "pos": "adjective"
     },
     {
       "word": "RICHIEDERE",
@@ -2172,7 +2452,8 @@
       "synonyms": [
         "sollecitare"
       ],
-      "example": "Può richiedere tempo."
+      "example": "Può richiedere tempo.",
+      "pos": "verb"
     },
     {
       "word": "LINGUA",
@@ -2180,7 +2461,8 @@
       "synonyms": [
         "idioma"
       ],
-      "example": "Amo la mia lingua!"
+      "example": "Amo la mia lingua!",
+      "pos": "noun"
     },
     {
       "word": "NOTO",
@@ -2188,7 +2470,8 @@
       "synonyms": [
         "conosciuto"
       ],
-      "example": "Questo era già noto."
+      "example": "Questo era già noto.",
+      "pos": "adjective"
     },
     {
       "word": "MEDICINA",
@@ -2196,7 +2479,8 @@
       "synonyms": [
         "farmaco"
       ],
-      "example": "Bevi la medicina."
+      "example": "Bevi la medicina.",
+      "pos": "noun"
     },
     {
       "word": "PASSAGGIO",
@@ -2204,7 +2488,8 @@
       "synonyms": [
         "transito"
       ],
-      "example": "Cerco un passaggio."
+      "example": "Cerco un passaggio.",
+      "pos": "noun"
     },
     {
       "word": "CRIMINALE",
@@ -2212,19 +2497,22 @@
       "synonyms": [
         "delinquente"
       ],
-      "example": "È un criminale?"
+      "example": "È un criminale?",
+      "pos": "adjective"
     },
     {
       "word": "SENTIMENTO",
       "gloss": "ciò che si prova nel cuore",
       "synonyms": [],
-      "example": "Conosco il sentimento."
+      "example": "Conosco il sentimento.",
+      "pos": "noun"
     },
     {
       "word": "DIPENDERE",
       "gloss": "avere bisogno di qualcosa o qualcuno",
       "synonyms": [],
-      "example": "Non dipendere da altri."
+      "example": "Non dipendere da altri.",
+      "pos": "noun"
     },
     {
       "word": "UFFICIALE",
@@ -2232,13 +2520,15 @@
       "synonyms": [
         "formale"
       ],
-      "example": "È ufficiale."
+      "example": "È ufficiale.",
+      "pos": "noun"
     },
     {
       "word": "VERDE",
       "gloss": "colore delle foglie",
       "synonyms": [],
-      "example": "Era verde."
+      "example": "Era verde.",
+      "pos": "adjective"
     },
     {
       "word": "FAMOSO",
@@ -2246,13 +2536,15 @@
       "synonyms": [
         "celebre"
       ],
-      "example": "Sei famoso?"
+      "example": "Sei famoso?",
+      "pos": "adjective"
     },
     {
       "word": "COMMETTERE",
       "gloss": "fare una cosa sbagliata",
       "synonyms": [],
-      "example": "Non commettere errori."
+      "example": "Non commettere errori.",
+      "pos": "verb"
     },
     {
       "word": "CONTRARIO",
@@ -2260,7 +2552,8 @@
       "synonyms": [
         "opposto"
       ],
-      "example": "Sono contrario."
+      "example": "Sono contrario.",
+      "pos": "adjective"
     },
     {
       "word": "ARRESTO",
@@ -2268,13 +2561,15 @@
       "synonyms": [
         "cattura"
       ],
-      "example": "È in arresto."
+      "example": "È in arresto.",
+      "pos": "noun"
     },
     {
       "word": "GUIDA",
       "gloss": "persona che mostra la strada",
       "synonyms": [],
-      "example": "Chi guida?"
+      "example": "Chi guida?",
+      "pos": "noun"
     },
     {
       "word": "COMPLETO",
@@ -2282,7 +2577,8 @@
       "synonyms": [
         "intero"
       ],
-      "example": "È completo."
+      "example": "È completo.",
+      "pos": "noun"
     },
     {
       "word": "SEGUITO",
@@ -2290,7 +2586,8 @@
       "synonyms": [
         "continuazione"
       ],
-      "example": "È un seguito."
+      "example": "È un seguito.",
+      "pos": "noun"
     },
     {
       "word": "UBRIACO",
@@ -2298,7 +2595,8 @@
       "synonyms": [
         "sbronzo"
       ],
-      "example": "È ubriaco."
+      "example": "È ubriaco.",
+      "pos": "adjective"
     },
     {
       "word": "UTILE",
@@ -2306,18 +2604,21 @@
       "synonyms": [
         "giovevole"
       ],
-      "example": "Era utile."
+      "example": "Era utile.",
+      "pos": "adjective"
     },
     {
       "word": "BENVENUTO",
       "gloss": "parola per salutare chi arriva",
       "synonyms": [],
-      "example": "Benvenuto!"
+      "example": "Benvenuto!",
+      "pos": "noun"
     },
     {
       "word": "MALATTIA",
       "gloss": "stato di chi non sta bene",
-      "example": "È in malattia."
+      "example": "È in malattia.",
+      "pos": "noun"
     },
     {
       "word": "BATTAGLIA",
@@ -2325,7 +2626,8 @@
       "synonyms": [
         "combattimento"
       ],
-      "example": "Persero la battaglia."
+      "example": "Persero la battaglia.",
+      "pos": "noun"
     },
     {
       "word": "DETTAGLIO",
@@ -2333,7 +2635,8 @@
       "synonyms": [
         "particolare"
       ],
-      "example": "È un dettaglio."
+      "example": "È un dettaglio.",
+      "pos": "noun"
     },
     {
       "word": "OBIETTIVO",
@@ -2342,19 +2645,22 @@
         "meta",
         "scopo"
       ],
-      "example": "È l'obiettivo."
+      "example": "È l'obiettivo.",
+      "pos": "noun"
     },
     {
       "word": "STAZIONE",
       "gloss": "posto dove si fermano i treni",
       "synonyms": [],
-      "example": "Che stazione è?"
+      "example": "Che stazione è?",
+      "pos": "noun"
     },
     {
       "word": "EMERGENZA",
       "gloss": "situazione grave e improvvisa",
       "synonyms": [],
-      "example": "È un'emergenza."
+      "example": "È un'emergenza.",
+      "pos": "noun"
     },
     {
       "word": "OPERA",
@@ -2362,7 +2668,8 @@
       "synonyms": [
         "lavoro"
       ],
-      "example": "Non è opera mia!"
+      "example": "Non è opera mia!",
+      "pos": "noun"
     },
     {
       "word": "MATTO",
@@ -2370,7 +2677,8 @@
       "synonyms": [
         "pazzo"
       ],
-      "example": "Sei matto?"
+      "example": "Sei matto?",
+      "pos": "noun"
     },
     {
       "word": "ONESTO",
@@ -2378,7 +2686,8 @@
       "synonyms": [
         "probo"
       ],
-      "example": "Sei onesto."
+      "example": "Sei onesto.",
+      "pos": "verb"
     },
     {
       "word": "TELECAMERA",
@@ -2386,7 +2695,8 @@
       "synonyms": [
         "videocamera"
       ],
-      "example": "È una telecamera."
+      "example": "È una telecamera.",
+      "pos": "noun"
     },
     {
       "word": "DEBOLE",
@@ -2394,13 +2704,15 @@
       "synonyms": [
         "fragile"
       ],
-      "example": "Ero debole."
+      "example": "Ero debole.",
+      "pos": "adjective"
     },
     {
       "word": "PESO",
       "gloss": "quanto pesa una cosa",
       "synonyms": [],
-      "example": "Il peso della valigia è di sei chili."
+      "example": "Il peso della valigia è di sei chili.",
+      "pos": "noun"
     },
     {
       "word": "SPORCO",
@@ -2409,7 +2721,8 @@
         "lurido",
         "sozzo"
       ],
-      "example": "Sei sporco."
+      "example": "Sei sporco.",
+      "pos": "adjective"
     },
     {
       "word": "NERVOSO",
@@ -2418,7 +2731,8 @@
         "agitato",
         "irritato"
       ],
-      "example": "È nervoso."
+      "example": "È nervoso.",
+      "pos": "adjective"
     },
     {
       "word": "BECCARE",
@@ -2426,7 +2740,8 @@
       "synonyms": [
         "acchiappare"
       ],
-      "example": "Non farti beccare."
+      "example": "Non farti beccare.",
+      "pos": "verb"
     },
     {
       "word": "TIRO",
@@ -2434,7 +2749,8 @@
       "synonyms": [
         "colpo"
       ],
-      "example": "Aggiusto il tiro."
+      "example": "Aggiusto il tiro.",
+      "pos": "noun"
     },
     {
       "word": "SUD",
@@ -2442,7 +2758,8 @@
       "synonyms": [
         "meridione"
       ],
-      "example": "Verso sud."
+      "example": "Verso sud.",
+      "pos": "noun"
     },
     {
       "word": "INOLTRE",
@@ -2450,7 +2767,8 @@
       "synonyms": [
         "per di più"
       ],
-      "example": "E inoltre è stupido."
+      "example": "E inoltre è stupido.",
+      "pos": "adverb"
     },
     {
       "word": "MEDIO",
@@ -2458,7 +2776,8 @@
       "synonyms": [
         "centrale"
       ],
-      "example": "Il dito medio è il più lungo."
+      "example": "Il dito medio è il più lungo.",
+      "pos": "adjective"
     },
     {
       "word": "SERIE",
@@ -2466,19 +2785,22 @@
       "synonyms": [
         "sequenza"
       ],
-      "example": "La serie di libri che leggo è molto interessante."
+      "example": "La serie di libri che leggo è molto interessante.",
+      "pos": "noun"
     },
     {
       "word": "PROFONDO",
       "gloss": "che va molto in basso",
       "synonyms": [],
-      "example": "È profondo."
+      "example": "È profondo.",
+      "pos": "adjective"
     },
     {
       "word": "PRINCIPE",
       "gloss": "figlio del re",
       "synonyms": [],
-      "example": "È un principe."
+      "example": "È un principe.",
+      "pos": "noun"
     },
     {
       "word": "ODORE",
@@ -2486,7 +2808,8 @@
       "synonyms": [
         "sentore"
       ],
-      "example": "Che odore ha?"
+      "example": "Che odore ha?",
+      "pos": "noun"
     },
     {
       "word": "SCOPO",
@@ -2495,13 +2818,15 @@
         "fine",
         "meta"
       ],
-      "example": "A che scopo?"
+      "example": "A che scopo?",
+      "pos": "noun"
     },
     {
       "word": "ANIMALE",
       "gloss": "essere vivente che si muove, come il cane o il gatto",
       "synonyms": [],
-      "example": "Che animale!"
+      "example": "Che animale!",
+      "pos": "noun"
     },
     {
       "word": "RIFIUTARE",
@@ -2509,25 +2834,29 @@
       "synonyms": [
         "respingere"
       ],
-      "example": "Devo rifiutare."
+      "example": "Devo rifiutare.",
+      "pos": "verb"
     },
     {
       "word": "COLLO",
       "gloss": "parte del corpo tra la testa e le spalle",
       "synonyms": [],
-      "example": "Ho male al collo."
+      "example": "Ho male al collo.",
+      "pos": "noun"
     },
     {
       "word": "CUGINO",
       "gloss": "figlio dello zio o della zia",
       "synonyms": [],
-      "example": "È mio cugino?"
+      "example": "È mio cugino?",
+      "pos": "noun"
     },
     {
       "word": "COLAZIONE",
       "gloss": "pasto della mattina",
       "synonyms": [],
-      "example": "Fai colazione?"
+      "example": "Fai colazione?",
+      "pos": "noun"
     },
     {
       "word": "GRANDIOSO",
@@ -2536,7 +2865,8 @@
         "imponente",
         "maestoso"
       ],
-      "example": "Grandioso!"
+      "example": "Grandioso!",
+      "pos": "adjective"
     },
     {
       "word": "DIFENDERE",
@@ -2544,7 +2874,8 @@
       "synonyms": [
         "proteggere"
       ],
-      "example": "Cosa vuoi difendere?"
+      "example": "Cosa vuoi difendere?",
+      "pos": "noun"
     },
     {
       "word": "INVENTARE",
@@ -2552,7 +2883,8 @@
       "synonyms": [
         "ideare"
       ],
-      "example": "Non inventare scuse."
+      "example": "Non inventare scuse.",
+      "pos": "verb"
     },
     {
       "word": "RITROVARE",
@@ -2560,7 +2892,8 @@
       "synonyms": [
         "rinvenire"
       ],
-      "example": "Vi volete ritrovare come noi?"
+      "example": "Vi volete ritrovare come noi?",
+      "pos": "verb"
     },
     {
       "word": "DESTINO",
@@ -2569,25 +2902,29 @@
         "sorte",
         "fato"
       ],
-      "example": "È destino!"
+      "example": "È destino!",
+      "pos": "noun"
     },
     {
       "word": "CARRIERA",
       "gloss": "la strada fatta nel lavoro",
       "synonyms": [],
-      "example": "Lui è a fine carriera."
+      "example": "Lui è a fine carriera.",
+      "pos": "noun"
     },
     {
       "word": "SCALA",
       "gloss": "gradini per salire e scendere",
       "synonyms": [],
-      "example": "Caddi dalla scala."
+      "example": "Caddi dalla scala.",
+      "pos": "noun"
     },
     {
       "word": "DANNARE",
       "gloss": "mandare all'inferno",
       "synonyms": [],
-      "example": "Mi fa dannare!"
+      "example": "Mi fa dannare!",
+      "pos": "verb"
     },
     {
       "word": "RISCHIARE",
@@ -2595,7 +2932,8 @@
       "synonyms": [
         "azzardare"
       ],
-      "example": "Perché rischiare?"
+      "example": "Perché rischiare?",
+      "pos": "verb"
     },
     {
       "word": "REGISTRARE",
@@ -2603,7 +2941,8 @@
       "synonyms": [
         "annotare"
       ],
-      "example": "Puoi registrare file audio?"
+      "example": "Puoi registrare file audio?",
+      "pos": "verb"
     },
     {
       "word": "GUADAGNARE",
@@ -2611,7 +2950,8 @@
       "synonyms": [
         "ricavare"
       ],
-      "example": "Voglio guadagnare di più."
+      "example": "Voglio guadagnare di più.",
+      "pos": "verb"
     },
     {
       "word": "FIDUCIA",
@@ -2619,7 +2959,8 @@
       "synonyms": [
         "fede"
       ],
-      "example": "Ho fiducia in te."
+      "example": "Ho fiducia in te.",
+      "pos": "noun"
     },
     {
       "word": "AGIRE",
@@ -2627,7 +2968,8 @@
       "synonyms": [
         "operare"
       ],
-      "example": "Devi agire."
+      "example": "Devi agire.",
+      "pos": "verb"
     },
     {
       "word": "MAGNIFICO",
@@ -2636,7 +2978,8 @@
         "splendido",
         "superbo"
       ],
-      "example": "Magnifico!"
+      "example": "Magnifico!",
+      "pos": "adjective"
     },
     {
       "word": "COMANDO",
@@ -2644,13 +2987,15 @@
       "synonyms": [
         "ordine"
       ],
-      "example": "Ora comando io."
+      "example": "Ora comando io.",
+      "pos": "noun"
     },
     {
       "word": "ARTE",
       "gloss": "musica, disegni e cose belle create dall'uomo",
       "synonyms": [],
-      "example": "Amo l'arte."
+      "example": "Amo l'arte.",
+      "pos": "noun"
     },
     {
       "word": "RESISTERE",
@@ -2658,19 +3003,22 @@
       "synonyms": [
         "reggere"
       ],
-      "example": "Devo resistere."
+      "example": "Devo resistere.",
+      "pos": "verb"
     },
     {
       "word": "FURGONE",
       "gloss": "veicolo chiuso per portare merci",
       "synonyms": [],
-      "example": "È nel furgone."
+      "example": "È nel furgone.",
+      "pos": "noun"
     },
     {
       "word": "ISOLA",
       "gloss": "terra con il mare tutto intorno",
       "synonyms": [],
-      "example": "Creta è un'isola."
+      "example": "Creta è un'isola.",
+      "pos": "noun"
     },
     {
       "word": "MEMORIA",
@@ -2678,7 +3026,8 @@
       "synonyms": [
         "ricordo"
       ],
-      "example": "Che memoria!"
+      "example": "Che memoria!",
+      "pos": "noun"
     },
     {
       "word": "SUPERIORE",
@@ -2686,7 +3035,8 @@
       "synonyms": [
         "maggiore"
       ],
-      "example": "È il mio superiore."
+      "example": "È il mio superiore.",
+      "pos": "noun"
     },
     {
       "word": "BLU",
@@ -2694,7 +3044,8 @@
       "synonyms": [
         "azzurro"
       ],
-      "example": "Uno è blu."
+      "example": "Uno è blu.",
+      "pos": "adjective"
     },
     {
       "word": "MINIMO",
@@ -2702,7 +3053,8 @@
       "synonyms": [
         "infimo"
       ],
-      "example": "È il minimo."
+      "example": "È il minimo.",
+      "pos": "adjective"
     },
     {
       "word": "SENSAZIONE",
@@ -2710,13 +3062,15 @@
       "synonyms": [
         "impressione"
       ],
-      "example": "Ho questa sensazione."
+      "example": "Ho questa sensazione.",
+      "pos": "noun"
     },
     {
       "word": "COLTELLO",
       "gloss": "oggetto con la lama per tagliare",
       "synonyms": [],
-      "example": "Ho un coltello?"
+      "example": "Ho un coltello?",
+      "pos": "noun"
     },
     {
       "word": "PAUSA",
@@ -2724,7 +3078,8 @@
       "synonyms": [
         "sosta"
       ],
-      "example": "Ero in pausa."
+      "example": "Ero in pausa.",
+      "pos": "noun"
     },
     {
       "word": "URLARE",
@@ -2733,13 +3088,15 @@
         "gridare",
         "strillare"
       ],
-      "example": "Non urlare."
+      "example": "Non urlare.",
+      "pos": "noun"
     },
     {
       "word": "BOB",
       "gloss": "slitta per correre sulla neve in discesa",
       "synonyms": [],
-      "example": "In inverno, saliamo sulla collina con il bob per scivolare veloci sulla neve."
+      "example": "In inverno, saliamo sulla collina con il bob per scivolare veloci sulla neve.",
+      "pos": "noun"
     },
     {
       "word": "BATTUTA",
@@ -2747,13 +3104,15 @@
       "synonyms": [
         "spiritosaggine"
       ],
-      "example": "Che battuta!"
+      "example": "Che battuta!",
+      "pos": "noun"
     },
     {
       "word": "NIPOTE",
       "gloss": "figlio del figlio, o del fratello",
       "synonyms": [],
-      "example": "È suo nipote."
+      "example": "È suo nipote.",
+      "pos": "noun"
     },
     {
       "word": "DATO",
@@ -2761,13 +3120,15 @@
       "synonyms": [
         "informazione"
       ],
-      "example": "A chi l'ha dato?"
+      "example": "A chi l'ha dato?",
+      "pos": "noun"
     },
     {
       "word": "INFERMIERA",
       "gloss": "donna che cura chi sta male in ospedale",
       "synonyms": [],
-      "example": "È infermiera."
+      "example": "È infermiera.",
+      "pos": "noun"
     },
     {
       "word": "MILITARE",
@@ -2775,7 +3136,8 @@
       "synonyms": [
         "soldato"
       ],
-      "example": "Non è una militare."
+      "example": "Non è una militare.",
+      "pos": "verb"
     },
     {
       "word": "DICHIARARE",
@@ -2784,7 +3146,8 @@
         "affermare",
         "proclamare"
       ],
-      "example": "Non ho nulla da dichiarare."
+      "example": "Non ho nulla da dichiarare.",
+      "pos": "verb"
     },
     {
       "word": "GIUSTIZIA",
@@ -2792,7 +3155,8 @@
       "synonyms": [
         "equità"
       ],
-      "example": "È giustizia."
+      "example": "È giustizia.",
+      "pos": "noun"
     },
     {
       "word": "PAGINA",
@@ -2800,7 +3164,8 @@
       "synonyms": [
         "facciata"
       ],
-      "example": "Quale pagina?"
+      "example": "Quale pagina?",
+      "pos": "noun"
     },
     {
       "word": "BICCHIERE",
@@ -2808,7 +3173,8 @@
       "synonyms": [
         "calice"
       ],
-      "example": "Ecco il bicchiere."
+      "example": "Ecco il bicchiere.",
+      "pos": "noun"
     },
     {
       "word": "IMPROVVISO",
@@ -2816,7 +3182,8 @@
       "synonyms": [
         "repentino"
       ],
-      "example": "È stato improvviso."
+      "example": "È stato improvviso.",
+      "pos": "adjective"
     },
     {
       "word": "VACANZA",
@@ -2824,7 +3191,8 @@
       "synonyms": [
         "ferie"
       ],
-      "example": "Buona vacanza!"
+      "example": "Buona vacanza!",
+      "pos": "noun"
     },
     {
       "word": "RIVEDERE",
@@ -2832,7 +3200,8 @@
       "synonyms": [
         "ricontrollare"
       ],
-      "example": "La vuole rivedere."
+      "example": "La vuole rivedere.",
+      "pos": "verb"
     },
     {
       "word": "VALORE",
@@ -2840,7 +3209,8 @@
       "synonyms": [
         "pregio"
       ],
-      "example": "È di valore?"
+      "example": "È di valore?",
+      "pos": "noun"
     },
     {
       "word": "CHIAMATA",
@@ -2848,7 +3218,8 @@
       "synonyms": [
         "telefonata"
       ],
-      "example": "L'ho chiamata."
+      "example": "L'ho chiamata.",
+      "pos": "noun"
     },
     {
       "word": "OVVIO",
@@ -2856,7 +3227,8 @@
       "synonyms": [
         "evidente"
       ],
-      "example": "Era ovvio."
+      "example": "Era ovvio.",
+      "pos": "adjective"
     },
     {
       "word": "CAPACE",
@@ -2865,7 +3237,8 @@
         "abile",
         "bravo"
       ],
-      "example": "Sono capace."
+      "example": "Sono capace.",
+      "pos": "adjective"
     },
     {
       "word": "FIANCO",
@@ -2873,7 +3246,8 @@
       "synonyms": [
         "lato"
       ],
-      "example": "È al suo fianco."
+      "example": "È al suo fianco.",
+      "pos": "noun"
     },
     {
       "word": "PRINCIPALE",
@@ -2881,7 +3255,8 @@
       "synonyms": [
         "fondamentale"
       ],
-      "example": "È l'idea principale."
+      "example": "È l'idea principale.",
+      "pos": "adjective"
     },
     {
       "word": "RAZZA",
@@ -2889,7 +3264,8 @@
       "synonyms": [
         "specie"
       ],
-      "example": "Che razza è?"
+      "example": "Che razza è?",
+      "pos": "noun"
     },
     {
       "word": "VOTO",
@@ -2897,7 +3273,8 @@
       "synonyms": [
         "giudizio"
       ],
-      "example": "Io voto contro!"
+      "example": "Io voto contro!",
+      "pos": "noun"
     },
     {
       "word": "TERMINE",
@@ -2905,31 +3282,36 @@
       "synonyms": [
         "fine"
       ],
-      "example": "È un brutto termine!"
+      "example": "È un brutto termine!",
+      "pos": "noun"
     },
     {
       "word": "NASO",
       "gloss": "parte del viso con cui si sente l'odore",
       "synonyms": [],
-      "example": "Ti cola il naso!"
+      "example": "Ti cola il naso!",
+      "pos": "noun"
     },
     {
       "word": "OSSO",
       "gloss": "parte dura dentro il corpo",
       "synonyms": [],
-      "example": "L'osso è rotto."
+      "example": "L'osso è rotto.",
+      "pos": "noun"
     },
     {
       "word": "BOTTIGLIA",
       "gloss": "contenitore di vetro per l'acqua o il vino",
       "synonyms": [],
-      "example": "È una bottiglia."
+      "example": "È una bottiglia.",
+      "pos": "noun"
     },
     {
       "word": "TEDESCO",
       "gloss": "lingua parlata in Germania e in Austria",
       "synonyms": [],
-      "example": "Parla tedesco?"
+      "example": "Parla tedesco?",
+      "pos": "adjective"
     },
     {
       "word": "ACCANTO",
@@ -2937,7 +3319,8 @@
       "synonyms": [
         "vicino"
       ],
-      "example": "È accanto a me."
+      "example": "È accanto a me.",
+      "pos": "adverb"
     },
     {
       "word": "TRIBUNALE",
@@ -2945,7 +3328,8 @@
       "synonyms": [
         "corte"
       ],
-      "example": "Ci vediamo in tribunale!"
+      "example": "Ci vediamo in tribunale!",
+      "pos": "noun"
     },
     {
       "word": "CAUSARE",
@@ -2953,7 +3337,8 @@
       "synonyms": [
         "provocare"
       ],
-      "example": "Non volevo causare guai."
+      "example": "Non volevo causare guai.",
+      "pos": "verb"
     },
     {
       "word": "UCCELLO",
@@ -2961,7 +3346,8 @@
       "synonyms": [
         "volatile"
       ],
-      "example": "È un uccello?"
+      "example": "È un uccello?",
+      "pos": "noun"
     },
     {
       "word": "TAGLIO",
@@ -2969,7 +3355,8 @@
       "synonyms": [
         "incisione"
       ],
-      "example": "Ho trovato un piccolo taglio sulla mela mentre la sbucciavo."
+      "example": "Ho trovato un piccolo taglio sulla mela mentre la sbucciavo.",
+      "pos": "noun"
     },
     {
       "word": "ASSURDO",
@@ -2977,19 +3364,22 @@
       "synonyms": [
         "illogico"
       ],
-      "example": "È assurdo."
+      "example": "È assurdo.",
+      "pos": "noun"
     },
     {
       "word": "ATTORE",
       "gloss": "persona che fa una parte nei film",
       "synonyms": [],
-      "example": "È un attore."
+      "example": "È un attore.",
+      "pos": "noun"
     },
     {
       "word": "VESTITO",
       "gloss": "ciò che si mette addosso per coprire il corpo",
       "synonyms": [],
-      "example": "È vestito?"
+      "example": "È vestito?",
+      "pos": "verb"
     },
     {
       "word": "SALUTARE",
@@ -2997,7 +3387,8 @@
       "synonyms": [
         "ossequiare"
       ],
-      "example": "Vai a salutare."
+      "example": "Vai a salutare.",
+      "pos": "verb"
     },
     {
       "word": "FREDDO",
@@ -3005,7 +3396,8 @@
       "synonyms": [
         "gelido"
       ],
-      "example": "Fa freddo."
+      "example": "Fa freddo.",
+      "pos": "adjective"
     },
     {
       "word": "ROSSO",
@@ -3013,13 +3405,15 @@
       "synonyms": [
         "vermiglio"
       ],
-      "example": "Allarme rosso!"
+      "example": "Allarme rosso!",
+      "pos": "adjective"
     },
     {
       "word": "ZAINO",
       "gloss": "borsa da portare sulle spalle, per la scuola",
       "synonyms": [],
-      "example": "Ho uno zaino."
+      "example": "Ho uno zaino.",
+      "pos": "noun"
     },
     {
       "word": "MATITA",
@@ -3027,7 +3421,8 @@
       "synonyms": [
         "lapis"
       ],
-      "example": "È una matita."
+      "example": "È una matita.",
+      "pos": "noun"
     },
     {
       "word": "OMBRELLO",
@@ -3035,7 +3430,8 @@
       "synonyms": [
         "parapioggia"
       ],
-      "example": "Ha un ombrello?"
+      "example": "Ha un ombrello?",
+      "pos": "noun"
     },
     {
       "word": "CUSCINO",
@@ -3043,19 +3439,22 @@
       "synonyms": [
         "guanciale"
       ],
-      "example": "Ecco il cuscino."
+      "example": "Ecco il cuscino.",
+      "pos": "noun"
     },
     {
       "word": "FORNO",
       "gloss": "apparecchio caldo per cuocere torte e arrosti",
       "synonyms": [],
-      "example": "Va al forno?"
+      "example": "Va al forno?",
+      "pos": "noun"
     },
     {
       "word": "ARANCIA",
       "gloss": "frutto tondo tra giallo e rosso, da cui si fa il succo",
       "synonyms": [],
-      "example": "È un'arancia."
+      "example": "È un'arancia.",
+      "pos": "noun"
     },
     {
       "word": "CAPPELLO",
@@ -3063,7 +3462,8 @@
       "synonyms": [
         "copricapo"
       ],
-      "example": "Giù il cappello!"
+      "example": "Giù il cappello!",
+      "pos": "noun"
     }
   ]
 }
