@@ -16,6 +16,7 @@ import {
   checkExtrasGate,
   checkHintCeiling,
   checkLemmaFloor,
+  checkPackBudget,
   checkPackLicense,
   checkSynonymCoverage,
   failClosedOnHunspellMiss,
@@ -23,6 +24,7 @@ import {
   lemmaFloor,
   validatePack,
   type ExampleGateLog,
+  type PackByteSnapshot,
   type PackSnapshot,
 } from './packs-check-lib'
 import type { ExtrasGateLog as ExtrasLog } from './extras-gate'
@@ -76,6 +78,8 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
   const rels: string[] = []
   const errors: string[] = []
   const pinPacks: { rel: string; pack: PinPack }[] = []
+  const byteSnapshots: PackByteSnapshot[] = []
+  const langBytes = new Map<string, number>()
   let totalBytes = 0
 
   const STEM_BASELINE = JSON.parse(
@@ -139,19 +143,27 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     snapshots.push({ rel, pack })
     const floor = lemmaFloor(pack.cefr)
     const extra = pack.cefr === 'c2' ? ` (C2_MIN=${C2_MIN})` : ''
-    const kb = (Buffer.byteLength(text, 'utf8') / 1024).toFixed(1)
-    totalBytes += Buffer.byteLength(text, 'utf8')
+    const bytes = Buffer.byteLength(text, 'utf8')
+    const kb = (bytes / 1024).toFixed(1)
+    totalBytes += bytes
+    byteSnapshots.push({ rel, bytes })
+    langBytes.set(pack.lang, (langBytes.get(pack.lang) ?? 0) + bytes)
     out.log(
       `ok ${rel} — ${pack.lemmas.length} lemmas (${pack.lang}/${pack.cefr}, floor ${floor}${extra}, ${kb} KB)`,
     )
   }
 
-  // Pack-size sanity (ADR 0006/0026, #248): report the shipped total so the
-  // example-sentence widen run can diff it in the workflow log.
+  // Pack-size sanity (ADR 0006/0026, #248): report per-language and total so
+  // the --grow capacity run can diff it in the workflow log.
+  for (const [lang, bytes] of [...langBytes.entries()].sort()) {
+    out.log(`public/packs/${lang}: ${(bytes / 1024 / 1024).toFixed(2)} MB across 6 packs`)
+  }
   out.log(
     `public/packs total: ${(totalBytes / 1024 / 1024).toFixed(2)} MB across ${snapshots.length} packs`,
   )
 
+  // ADR 0058 budget guard, fail-closed.
+  errors.push(...checkPackBudget(byteSnapshots))
   errors.push(...collectPackPinErrors(pinPacks, loadPackPin()))
   errors.push(...checkCompleteness(rels))
   errors.push(...exclusiveConflicts(snapshots))

@@ -21,6 +21,34 @@ const IT_INFINITIVE = /(?:ARE|ERE|IRE|URRE|ORRE)$/
 
 export const FR_RANK_CEILING = { a1: 750, a2: 1500, b1: 3000 } as const
 
+/**
+ * Raised A1–B1 cefr_estimate rank cuts for the one-time `--grow` unfreeze
+ * (ADR 0040 addendum, ADR 0058). Boundaries stay the legacy ones, so each
+ * band only widens upwards and bands never overlap (ADR 0028).
+ */
+export const FR_RANK_CEILING_GROW = { a1: 1500, a2: 3000, b1: 6000 } as const
+
+/**
+ * In-band `--grow` candidates on the hangman-filtered list (ADR 0058): fixed
+ * windows, no dynamic raise. A1–B1 slice by rank ceiling, B2–C2 by the widened
+ * index windows. Fold-key subtraction against the shipped packs happens in
+ * the caller (planGrowBand).
+ */
+export function frItGrowBand(
+  filtered: readonly FrFiltered[],
+  cefr: FrCefr,
+  rankCeiling: { a1: number; a2: number; b1: number } = FR_RANK_CEILING_GROW,
+  indexBands: Record<NewCefr, readonly [number, number]> = DE_ES_BANDS,
+): string[] {
+  if (cefr === 'a1' || cefr === 'a2' || cefr === 'b1') {
+    const hi = rankCeiling[cefr]
+    const lo = cefr === 'a1' ? 0 : rankCeiling[cefr === 'a2' ? 'a1' : 'a2']
+    return filtered.filter((it) => it.rank > lo && it.rank <= hi).map((it) => it.word)
+  }
+  const [lo, hi] = indexBands[cefr]
+  return filtered.slice(lo, hi).map((it) => it.word)
+}
+
 export type FrCefr = 'a1' | 'a2' | 'b1' | NewCefr
 
 export type FrSourceRow = {

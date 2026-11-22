@@ -5,11 +5,14 @@ import type { WordPack } from '../src/packs/schema'
 import {
   C2_MIN,
   GATE_VERSION,
+  PACK_LANG_MAX_BYTES,
   PACK_MIN,
+  PACK_TOTAL_MAX_BYTES,
   checkCompleteness,
   checkExampleGate,
   checkHintCeiling,
   checkLemmaFloor,
+  checkPackBudget,
   checkPackLicense,
   checkSynonymCoverage,
   failClosedOnHunspellMiss,
@@ -36,27 +39,56 @@ function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): Wor
 }
 
 describe('packs:check floors', () => {
-  test('C2_MIN is 200; a1–c1 use 350', () => {
-    expect(C2_MIN).toBe(200)
+  test('C2_MIN is 350; every band uses floor 350 (ADR 0058 amends ADR 0028)', () => {
+    expect(C2_MIN).toBe(350)
     expect(PACK_MIN).toBe(350)
-    const c1 = pack({
-      lang: 'en',
-      cefr: 'c1',
-      lemmas: Array.from({ length: 349 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
-    })
+    const lemmas = (n: number) =>
+      Array.from({ length: n }, (_, i) => ({ word: `W${i}`, gloss: 'x' }))
+    const c1 = pack({ lang: 'en', cefr: 'c1', lemmas: lemmas(349) })
     expect(checkLemmaFloor('en/c1.json', c1)).toMatch(/below floor 350/)
-    const c2ok = pack({
-      lang: 'en',
-      cefr: 'c2',
-      lemmas: Array.from({ length: 200 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
-    })
+    const c2lo = pack({ lang: 'en', cefr: 'c2', lemmas: lemmas(349) })
+    expect(checkLemmaFloor('en/c2.json', c2lo)).toMatch(/below floor 350/)
+    const c2ok = pack({ lang: 'en', cefr: 'c2', lemmas: lemmas(350) })
     expect(checkLemmaFloor('en/c2.json', c2ok)).toBeNull()
-    const c2lo = pack({
-      lang: 'en',
-      cefr: 'c2',
-      lemmas: Array.from({ length: 199 }, (_, i) => ({ word: `W${i}`, gloss: 'x' })),
-    })
-    expect(checkLemmaFloor('en/c2.json', c2lo)).toMatch(/below floor 200/)
+  })
+})
+
+describe('packs:check budget guard (ADR 0058)', () => {
+  const CEFRS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']
+  const filesOf = (langBytes: Record<string, number>) =>
+    Object.entries(langBytes).flatMap(([lang, perPack]) =>
+      CEFRS.map((cefr) => ({ rel: `${lang}/${cefr}.json`, bytes: perPack })),
+    )
+
+  test('limits are 2.5 MB per language and 12 MB total', () => {
+    expect(PACK_LANG_MAX_BYTES).toBe(2.5 * 1024 * 1024)
+    expect(PACK_TOTAL_MAX_BYTES).toBe(12 * 1024 * 1024)
+  })
+
+  test('under budget passes (current packs: ~73 KB/file, ~0.44 MB/lang, 2.36 MB total)', () => {
+    const files = filesOf({ en: 74 * 1024, pt: 68 * 1024, de: 67 * 1024, es: 69 * 1024, fr: 70 * 1024, it: 67 * 1024 })
+    expect(checkPackBudget(files)).toEqual([])
+  })
+
+  test('per-language over budget fails, total still under passes', () => {
+    const files = filesOf({ en: 450 * 1024, pt: 300 * 1024, de: 300 * 1024, es: 300 * 1024, fr: 300 * 1024, it: 300 * 1024 })
+    const errors = checkPackBudget(files)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('public/packs/en')
+    expect(errors[0]).toContain('2.50 MB')
+  })
+
+  test('total over budget fails even when each language is fine', () => {
+    const files = filesOf({ en: 350 * 1024, pt: 350 * 1024, de: 350 * 1024, es: 350 * 1024, fr: 350 * 1024, it: 350 * 1024 })
+    const errors = checkPackBudget(files)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('total')
+    expect(errors[0]).toContain('12.00 MB')
+  })
+
+  test('exactly at the per-language limit passes', () => {
+    const perPack = Math.floor(PACK_LANG_MAX_BYTES / 6)
+    expect(checkPackBudget(filesOf({ en: perPack }))).toEqual([])
   })
 })
 

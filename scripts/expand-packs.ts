@@ -5,9 +5,12 @@
  * FrequencyWords PT. Same #24 gates as A1–B1: Hunspell membership, person-name
  * list skip, denylist, pack-language gloss (ADR 0030). --dry-run selects without
  * Mistral or writes. --repair-gloss rewrites English leaks in any shipped pack's gloss.
+ * --grow [--lang=X] [--levels=…] [--dry-run] (ADR 0058, #328) appends in-band
+ * candidates from the widened windows to all six packs of a language, keeping
+ * existing slots, and is the only mode that may write a1–b1 for en/pt/de/es.
  */
 import { Database } from 'bun:sqlite'
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 import { loadDenylist, nfcUpper } from './lemma-denylist'
@@ -18,30 +21,39 @@ import { ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
 import { mistralChat, readMistralKey } from './mistral-chat'
-import { selectFrBands, type FrCefr } from './fr-pack'
+import { filterFrRows, frItGrowBand, selectFrBands, type FrCefr, type FrFiltered, type WordhoardBandLang } from './fr-pack'
 import { posSourceInfo } from './lemma-pos'
 import {
   DE_ES_BANDS,
   EXISTING_CEFRS,
+  FLOOR_C2,
   NEW_CEFRS,
+  PACK_TARGET_CAP,
   PT_BANDS,
   TARGET,
+  type GrowBandPlan,
   type NewCefr,
   type SelectLang as Lang,
-  assignExclusiveBands,
+  assertGrowAppendOnly,
   assertPackWriteAllowed,
+  assignExclusiveBands,
   bandFloor,
+  bandWindow,
   foldKey,
   hangmanOk,
   isExistingCefr,
   isNewCefr,
   loadFoldKeysFromPackLemmas,
+  planGrowBand,
 } from './pack-select'
+import { checkPackBudget, type PackByteSnapshot } from './packs-check-lib'
+import { loadPackPin, packPinEntry } from './pack-pin'
 import { PACK_CEFR_LEVELS, type PackCefr, type PackPos } from '../src/packs/schema'
 
 const ROOT = path.join(import.meta.dir, '..')
 const DATA = path.join(ROOT, 'scripts/data')
 const LANGS = ['en', 'pt', 'de', 'es'] as const
+const ALL_LANGS = ['en', 'pt', 'de', 'es', 'fr', 'it'] as const
 
 type Lemma = { word: string; gloss?: string; synonyms?: string[]; pos?: PackPos }
 
@@ -182,11 +194,16 @@ async function ensureSources(): Promise<void> {
   await ensureCefrj()
 }
 
-function parseCefrjB2(): string[] {
+/** Full CEFR-J content-POS pool for one EN band (ADR 0058 grow source for A1–B2). */
+function parseCefrjLevel(cefr: 'a1' | 'a2' | 'b1' | 'b2'): string[] {
   if (!existsSync(CEFRJ_PATH)) return []
   const raw = JSON.parse(readFileSync(CEFRJ_PATH, 'utf8')) as Record<string, string[]>
-  const words = raw.B2 ?? raw.b2 ?? []
+  const words = raw[cefr.toUpperCase()] ?? raw[cefr] ?? []
   return uniqueOk('en', words)
+}
+
+function parseCefrjB2(): string[] {
+  return parseCefrjLevel('b2')
 }
 
 function parseOctanove(): Record<'c1' | 'c2', string[]> {
@@ -589,19 +606,23 @@ function parseArgs(argv: string[]) {
   let dryRun = false
   let repairGloss = false
   let forceGloss = false
+  let grow = false
   let levelsExplicit = false
+  let langExplicit = false
   let levels: PackCefr[] = [...NEW_CEFRS]
   let langs: Lang[] = [...LANGS]
   for (const a of argv) {
     if (a === '--dry-run') dryRun = true
     else if (a === '--repair-gloss') repairGloss = true
     else if (a === '--force-gloss') forceGloss = true
+    else if (a === '--grow') grow = true
     else if (a.startsWith('--lang=')) {
       const id = a.slice('--lang='.length).trim().toLowerCase()
       if (!['en', 'pt', 'de', 'es', 'fr', 'it'].includes(id)) {
         throw new Error(`invalid --lang=${id}`)
       }
       langs = [id as Lang]
+      langExplicit = true
     } else if (a.startsWith('--levels=')) {
       const parts = a
         .slice('--levels='.length)
@@ -618,7 +639,12 @@ function parseArgs(argv: string[]) {
       levels = parts as PackCefr[]
     }
   }
-  return { dryRun, repairGloss, forceGloss, levels, levelsExplicit, langs }
+  // --grow covers all 36 packs unless narrowed (ADR 0058).
+  if (grow) {
+    if (!langExplicit) langs = [...ALL_LANGS]
+    if (!levelsExplicit) levels = [...PACK_CEFR_LEVELS]
+  }
+  return { dryRun, repairGloss, forceGloss, grow, levels, levelsExplicit, langs }
 }
 
 function writePack(
@@ -696,8 +722,8 @@ function packsPresent(lang: 'fr' | 'it'): boolean {
   return false
 }
 
-function packFloor(cefr: PackCefr): number {
-  return cefr === 'c2' ? 200 : 350
+function packFloor(_cefr: PackCefr): number {
+  return FLOOR_C2
 }
 
 function loadWordhoardContent(lang: 'fr' | 'it'): {
@@ -828,11 +854,216 @@ async function runFrequencyLang(
   }
 }
 
+/* ---------- --grow pipeline mode (ADR 0058, #328) ---------- */
+
+/**
+ * Test seam: HIATO_GROW_CANDIDATES points at a JSON file mapping
+ * `lang/cefr` to candidate words, replacing the downloaded ADR 0029 sources
+ * so a fixture-based `--grow --dry-run` runs without network.
+ */
+function loadGrowCandidatesOverride(): Record<string, string[]> | null {
+  const file = process.env.HIATO_GROW_CANDIDATES
+  if (!file) return null
+  return JSON.parse(readFileSync(file, 'utf8')) as Record<string, string[]>
+}
+
+const growFreqListCache = new Map<string, string[]>()
+
+function growFreqList(lang: 'pt' | 'de' | 'es'): string[] {
+  const cached = growFreqListCache.get(lang)
+  if (cached) return cached
+  const all = lang === 'pt' ? parseFreqPt() : parseWordhoardRankList(lang)
+  growFreqListCache.set(lang, all)
+  return all
+}
+
+const growFrItCache = new Map<WordhoardBandLang, FrFiltered[]>()
+
+function growFrItFiltered(lang: 'fr' | 'it'): FrFiltered[] {
+  const cached = growFrItCache.get(lang)
+  if (cached) return cached
+  const { rows, inflected } = loadWordhoardContent(lang)
+  const filtered = filterFrRows(
+    rows,
+    inflected,
+    (word) => !EXTRA_STOP.has(word) && isWordOfLang(lang, word),
+    DENY,
+    lang,
+  )
+  growFrItCache.set(lang, filtered)
+  return filtered
+}
+
+/** In-band --grow candidates from the ADR 0029 sources, widened windows (ADR 0058). */
+function realGrowCandidates(lang: Lang, cefr: PackCefr): string[] {
+  if (lang === 'en') {
+    if (cefr === 'c1' || cefr === 'c2') return parseOctanove()[cefr]
+    return parseCefrjLevel(cefr)
+  }
+  if (lang === 'fr' || lang === 'it') {
+    return frItGrowBand(growFrItFiltered(lang), cefr)
+  }
+  const [lo, hi] = bandWindow(cefr)
+  return growFreqList(lang).slice(lo, hi)
+}
+
+function loadShippedPack(lang: Lang, cefr: PackCefr): ShippedPack {
+  const file = path.join(ROOT, 'public/packs', lang, `${cefr}.json`)
+  if (!existsSync(file)) {
+    throw new Error(`${lang}/${cefr}: missing shipped pack — --grow appends to existing packs only`)
+  }
+  return JSON.parse(readFileSync(file, 'utf8')) as ShippedPack
+}
+
+type GrownPack = {
+  rel: string
+  lang: Lang
+  cefr: PackCefr
+  before: ShippedPack
+  after: ShippedPack
+}
+
+/** Project the on-disk byte budget after a grow run; pure check via checkPackBudget. */
+function projectPackBudget(grown: readonly GrownPack[]): string[] {
+  const byRel = new Map(
+    grown.map((g) => [
+      g.rel,
+      Buffer.byteLength(JSON.stringify(g.after, null, 2) + '\n', 'utf8'),
+    ]),
+  )
+  const root = path.join(ROOT, 'public', 'packs')
+  const snaps: PackByteSnapshot[] = []
+  for (const lang of readdirSync(root)) {
+    for (const name of readdirSync(path.join(root, lang))) {
+      if (!name.endsWith('.json')) continue
+      const rel = `${lang}/${name}`
+      snaps.push({ rel, bytes: byRel.get(rel) ?? statSync(path.join(root, lang, name)).size })
+    }
+  }
+  return checkPackBudget(snaps)
+}
+
+/**
+ * `--grow [--lang=X] [--levels=…] [--dry-run]` (ADR 0058): load the shipped
+ * pack, keep existing lemma slots, treat all six packs' fold-keys as taken,
+ * append in-band candidates from the widened windows through the existing
+ * gates, generate Mistral glosses/synonyms for appended lemmas only, and
+ * write with version+1. Hard-refuses any rewrite of an existing slot and any
+ * budget overrun. The only mode allowed to write a1–b1 for en/pt/de/es.
+ */
+async function runGrow(opts: { dryRun: boolean; levels: PackCefr[]; langs: Lang[] }): Promise<void> {
+  const override = loadGrowCandidatesOverride()
+  if (!override) await ensureSources()
+
+  const plans: {
+    lang: Lang
+    packs: Record<string, ShippedPack>
+    bands: Record<string, GrowBandPlan>
+  }[] = []
+  for (const lang of opts.langs) {
+    const packs: Record<string, ShippedPack> = {}
+    for (const cefr of PACK_CEFR_LEVELS) packs[cefr] = loadShippedPack(lang, cefr)
+    const taken = loadFoldKeysFromPackLemmas(lang, Object.values(packs))
+    const bands: Record<string, GrowBandPlan> = {}
+    for (const cefr of opts.levels) {
+      const candidates = override
+        ? (override[`${lang}/${cefr}`] ?? [])
+        : realGrowCandidates(lang, cefr)
+      const plan = planGrowBand(
+        lang,
+        cefr,
+        packs[cefr]!.lemmas.map((l) => l.word),
+        candidates,
+        taken,
+        DENY,
+      )
+      bands[cefr] = plan
+      console.log(
+        `${lang}/${cefr}: existing ${plan.existing}, capacity ${plan.capacity}, target ${plan.target} (cap ${PACK_TARGET_CAP}), bandTarget ${plan.bandTarget}, room ${plan.room}, append ${plan.appended.length}`,
+      )
+    }
+    plans.push({ lang, packs, bands })
+  }
+
+  if (opts.dryRun) {
+    console.log('')
+    console.log('| pack | existing | capacity | target | bandTarget | append |')
+    console.log('| --- | --- | --- | --- | --- | --- |')
+    for (const { lang, bands } of plans) {
+      for (const cefr of opts.levels) {
+        const p = bands[cefr]!
+        console.log(
+          `| ${lang}/${cefr} | ${p.existing} | ${p.capacity} | ${p.target} | ${p.bandTarget} | ${p.appended.length} |`,
+        )
+      }
+    }
+    console.log('dry-run: skip gloss/synonym generation and pack writes')
+    return
+  }
+
+  // Plan every write in memory first; the budget guard runs fail-closed
+  // before any file is touched.
+  const grown: GrownPack[] = []
+  for (const { lang, packs, bands } of plans) {
+    const appendedWords = opts.levels.flatMap((cefr) => bands[cefr]!.appended)
+    if (appendedWords.length === 0) continue
+    const glossCache = loadGlossCache(lang)
+    const synCache = loadSynonymCache(lang)
+    await generateGlosses(lang, appendedWords, glossCache)
+    saveGlossCache(lang, glossCache)
+    await generateSynonyms(lang, appendedWords, synCache, DENY, (cache) =>
+      saveSynonymCache(lang, cache),
+    )
+    saveSynonymCache(lang, synCache)
+    for (const cefr of opts.levels) {
+      const band = bands[cefr]!
+      if (band.appended.length === 0) continue
+      const lemmas = buildLemmas(lang, cefr, band.appended, glossCache, synCache)
+      const before = packs[cefr]!
+      const after: ShippedPack = {
+        ...before,
+        version: before.version + 1,
+        lemmas: [...before.lemmas, ...lemmas],
+      }
+      assertGrowAppendOnly(`${lang}/${cefr}.json`, before.lemmas, after.lemmas)
+      grown.push({ rel: `${lang}/${cefr}.json`, lang, cefr, before, after })
+    }
+  }
+  if (grown.length === 0) {
+    console.log('grow: every selected pack is already at its bandTarget — nothing to write')
+    return
+  }
+
+  const budgetErrors = projectPackBudget(grown)
+  if (budgetErrors.length) {
+    throw new Error(`--grow budget guard failed, no packs written:\n${budgetErrors.join('\n')}`)
+  }
+
+  const pin = loadPackPin()
+  for (const g of grown) {
+    const outFile = path.join(ROOT, 'public/packs', g.lang, `${g.cefr}.json`)
+    assertPackWriteAllowed(outFile, g.cefr, { grow: true })
+    writeFileSync(outFile, JSON.stringify(g.after, null, 2) + '\n')
+    pin[g.rel] = packPinEntry(g.after)
+    console.log(
+      `${g.rel}: wrote ${g.after.lemmas.length} lemmas (version ${g.after.version}, +${g.after.lemmas.length - g.before.lemmas.length} appended)`,
+    )
+  }
+  writeFileSync(path.join(DATA, 'pack-pin.json'), JSON.stringify(pin, null, 2) + '\n')
+  console.log('updated scripts/data/pack-pin.json — commit it together with the grown packs')
+}
+
 async function main() {
-  const { dryRun, repairGloss, forceGloss, levels, levelsExplicit, langs } = parseArgs(
+  const { dryRun, repairGloss, forceGloss, grow, levels, levelsExplicit, langs } = parseArgs(
     process.argv.slice(2),
   )
   await ensureDicts()
+
+  if (grow) {
+    await runGrow({ dryRun, levels, langs })
+    return
+  }
+
   await ensureSources()
 
   if (repairGloss) {

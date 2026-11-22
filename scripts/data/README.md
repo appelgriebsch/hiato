@@ -1,4 +1,4 @@
-# Pack expansion source data (ADR 0026, 0029)
+# Pack expansion source data (ADR 0026, 0029, 0058)
 
 Downloaded on demand by `bun run packs:expand` (not committed). New dest paths so a stale `existsSync` cannot keep sample CSVs or CEFR-J without B2:
 
@@ -34,7 +34,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `lemma-extras-gate.json` | Hiato generated | One gate entry per shipped `ipa` / `family` (ADR 0055 / #316) and per Mistral-filled `pos` (#339), recording value, source (`wiktextract` or `mistral`), verdict and gate version. Written by `scripts/lemma-extras.ts` / `apply-lemma-pos.ts --fill-exempt`; `packs:check` fails on missing/stale/mismatched entries and CI drift-checks the file. |
 | `wiktextract/sha256.json` | Hiato generated | SHA-256 + source URL + byte size of each downloaded wiktextract extract (kaikki.org, CC-BY-SA-4.0). The `.gz` extracts themselves are gitignored. |
 | `accent-pair-allowlist.json` | Hiato curated | Accent-only lemma clusters that are different words (ADR 0005, ADR 0028 addendum). Each entry is `{ "words": ["PAIS", "PAÍS"], "reason": "…" }` with a one-line reason. `packs:check` fails any other accent-only pair and fails an entry that matches no shipped cluster. A repeated word set is an error. DE ß/SS and FR È/É are fold-key duplicates, not entries on this list. |
-| `pack-pin.json` | Hiato generated | One entry per `lang/cefr.json`. `order` is the SHA-256 of the 400 lemma words joined by newlines, in slot order. `body` is the SHA-256 of the pack JSON with `version` removed, so a gloss, chip, or attribution edit is a content change. A content change must bump `version` and replace that entry. On a pull request, and on a push to main, CI diffs slots against the base ref and fails when a word present on both sides has moved. A same-slot replacement still passes. |
+| `pack-pin.json` | Hiato generated | One entry per `lang/cefr.json`. `order` is the SHA-256 of the lemma words joined by newlines, in slot order. `body` is the SHA-256 of the pack JSON with `version` removed, so a gloss, chip, or attribution edit is a content change. A content change must bump `version` and replace that entry. The count check is the ADR 0058 range guard: the lemma count must sit in [350, `bandTarget(lang, cefr)`] (`BAND_TARGETS` in `scripts/pack-select.ts`, seeded by the `--grow --dry-run` capacity report) instead of exactly 400 — append-only growth passes, over-cap fails. On a pull request, and on a push to main, CI diffs slots against the base ref and fails when a word present on both sides has moved. A same-slot replacement still passes. |
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
@@ -50,6 +50,14 @@ Committed outputs of `bun run scripts/build-hint-ceiling-data.ts` (person-run on
 | `hint-stem-cache.json` | Surface → lemma stems for `en`/`de`/`es`/`pt`/`fr`/`it` | [wordhoard](https://github.com/natema/wordhoard) v0.1.0 `word_form`→`lemma` (CC-BY-SA-4.0) for en/de/es/fr/it, plus regular affix replay from the build-time Hunspell dictionaries. Does **not** store `cefr_estimate`. Stamp records dictionary package bytes and a wordhoard size/hash fingerprint. |
 
 Gitignored inputs (download like `packs:expand`): `cefrj-en-with-b2.json`, `octanove-vocabulary-profile-c1c2-1.0.csv`, `wordhoard-v0.1.0.db`.
+
+## `--grow` pipeline mode (ADR 0058, #328)
+
+`bun run packs:expand --grow [--lang=X] [--levels=a1,…] [--dry-run]` grows packs **append-only** towards the per-band `BAND_TARGETS` table in `scripts/pack-select.ts` (cap `PACK_TARGET_CAP = 1000`; target = min(dry-run source capacity, cap)). `--grow --dry-run` prints per-band `existing / capacity / target / bandTarget / append` for all 36 packs and writes nothing — that table is what sets `BAND_TARGETS`.
+
+Sources stay ADR 0029, widened (ADR 0058): full CEFR-J content-POS pool for EN A1–B2, full Octanove pool for EN C1/C2, widened frequency-rank windows (`LOW_BAND_WINDOWS` + `DE_ES_BANDS`/`PT_BANDS`) for DE/ES/PT A1–C2, raised `cefr_estimate` ceilings (`FR_RANK_CEILING_GROW`) plus the widened index windows for FR/IT. All six packs' fold-keys count as taken (exclusive bands, ADR 0028); appended lemmas pass the existing gates (hangman 3–10, denylist, Hunspell membership + loanword allowlist, name-gloss) and get Mistral glosses/synonyms from the committed caches for the appended lemmas only. Writes keep every existing slot (`assertGrowAppendOnly` hard-refuses a rewrite), bump `version` by 1, regenerate `pack-pin.json`, and run the budget guard before any write. `--grow` is the only mode allowed to write a1–b1 for en/pt/de/es (ADR 0040 addendum unfreeze-once).
+
+Guards around growth: `packs:check` fails closed on the byte budget (`PACK_LANG_MAX_BYTES` 2.5 MB per language, `PACK_TOTAL_MAX_BYTES` 12 MB total, `checkPackBudget`) and on the lemma floor (350 for every band incl. C2; `C2_MIN` was 200 under ADR 0028). Test seam: `HIATO_GROW_CANDIDATES=<json>` maps `lang/cefr` → candidate words so `scripts/expand-packs-grow.test.ts` can run `--grow --dry-run` without the downloaded sources.
 
 ## Example-sentence gate log (#225 / ADR 0048, #247)
 
