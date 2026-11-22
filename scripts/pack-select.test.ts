@@ -1,15 +1,22 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  BAND_TARGETS,
   CEFR_LEVEL_PARITY,
   DE_ES_BANDS,
   EXISTING_CEFRS,
+  LOW_BAND_WINDOWS,
   NEW_CEFRS,
+  PACK_TARGET_CAP,
   PT_BANDS,
   assignExclusiveBands,
+  assertGrowAppendOnly,
   assertPackWriteAllowed,
+  bandTarget,
+  bandWindow,
   foldKey,
   hangmanOk,
   loadFoldKeysFromPackLemmas,
+  planGrowBand,
   takeExclusive,
 } from './pack-select'
 import { PACK_CEFR_LEVELS } from '../src/packs/schema'
@@ -22,15 +29,100 @@ describe('pack-select CEFR split', () => {
     expect([...EXISTING_CEFRS, ...NEW_CEFRS]).toEqual([...PACK_CEFR_LEVELS])
   })
 
-  test('PT windows sit after current B1 slice and do not leak the 50k tail into C2', () => {
-    expect(PT_BANDS.b2).toEqual([4000, 7000])
-    expect(PT_BANDS.c1).toEqual([7000, 11000])
-    expect(PT_BANDS.c2).toEqual([11000, 16000])
+  test('PT windows are the widened ADR 0058 grow windows and stay inside the 50k tail', () => {
+    expect(PT_BANDS.b2).toEqual([4000, 9000])
+    expect(PT_BANDS.c1).toEqual([9000, 16000])
+    expect(PT_BANDS.c2).toEqual([16000, 26000])
     expect(PT_BANDS.c2[1]).toBeLessThan(50000)
   })
 
   test('DE/ES use the same frequency-rank windows as PT (not cefr_estimate)', () => {
     expect(DE_ES_BANDS).toEqual(PT_BANDS)
+  })
+
+  test('grow windows are contiguous and non-overlapping across all six bands', () => {
+    expect(LOW_BAND_WINDOWS).toEqual({
+      a1: [0, 1500],
+      a2: [1500, 3000],
+      b1: [3000, 4000],
+    })
+    for (const prev of ['a1', 'a2', 'b1', 'b2', 'c1'] as const) {
+      const next = PACK_CEFR_LEVELS[PACK_CEFR_LEVELS.indexOf(prev) + 1]!
+      expect(bandWindow(prev)[1]).toBe(bandWindow(next)[0])
+    }
+    expect(bandWindow('c2')[1]).toBeLessThan(50000)
+  })
+})
+
+describe('ADR 0058 band targets', () => {
+  test('PACK_TARGET_CAP is 1000; every bandTarget sits in [400, cap]', () => {
+    expect(PACK_TARGET_CAP).toBe(1000)
+    for (const lang of ['en', 'pt', 'de', 'es', 'fr', 'it'] as const) {
+      for (const cefr of PACK_CEFR_LEVELS) {
+        const t = bandTarget(lang, cefr)
+        expect(t).toBe(BAND_TARGETS[lang][cefr])
+        expect(t).toBeGreaterThanOrEqual(400)
+        expect(t).toBeLessThanOrEqual(PACK_TARGET_CAP)
+      }
+    }
+  })
+})
+
+describe('planGrowBand (ADR 0058 --grow selection)', () => {
+  test('append passes: appends exactly room lemmas in candidate order, skipping taken fold-keys', () => {
+    const existing = Array.from({ length: 400 }, (_, i) => `OLD${i}`)
+    const taken = new Set(existing)
+    const candidates = [...existing.slice(0, 10), 'NEWORD', 'BRIDGE', 'WINDOW', 'ORCHARD']
+    const plan = planGrowBand('en', 'b2', existing, candidates, taken)
+    expect(plan.existing).toBe(400)
+    expect(plan.capacity).toBe(4)
+    expect(plan.target).toBe(Math.min(400 + 4, PACK_TARGET_CAP))
+    expect(plan.room).toBeGreaterThan(0)
+    expect(plan.appended).toEqual(
+      ['NEWORD', 'BRIDGE', 'WINDOW', 'ORCHARD'].slice(0, plan.room),
+    )
+    expect(plan.appended.length).toBe(Math.min(plan.room, plan.capacity))
+    if (plan.room > 0) expect(taken.has('NEWORD')).toBe(true)
+  })
+
+  test('over-cap: room is 0 when the pack already sits at bandTarget', () => {
+    const atCap = Array.from({ length: bandTarget('en', 'b2') }, (_, i) => `W${i}`)
+    const taken = new Set(atCap)
+    const plan = planGrowBand('en', 'b2', atCap, ['NEWORD'], taken)
+    expect(plan.room).toBe(0)
+    expect(plan.appended).toEqual([])
+    expect(plan.target).toBe(Math.min(atCap.length + 1, PACK_TARGET_CAP))
+    expect(taken.has('NEWORD')).toBe(false)
+  })
+
+  test('fold-key duplicates inside the window count once and prefer the ß form for DE', () => {
+    const plan = planGrowBand('de', 'c2', ['HAUS'], ['STRASSE', 'STRAßE', 'WALD'], new Set(['HAUS']))
+    expect(plan.capacity).toBe(2)
+    expect(plan.appended).toContain('STRAßE')
+    expect(plan.appended).not.toContain('STRASSE')
+  })
+})
+
+describe('assertGrowAppendOnly (ADR 0058 hard refuse)', () => {
+  const before = [{ word: 'HOUSE' }, { word: 'WINDOW' }]
+  test('an exact prefix plus appends passes', () => {
+    expect(() =>
+      assertGrowAppendOnly('en/a1.json', before, [...before, { word: 'GARDEN' }]),
+    ).not.toThrow()
+    expect(() => assertGrowAppendOnly('en/a1.json', before, before)).not.toThrow()
+  })
+  test('a rewrite of an existing slot fails', () => {
+    expect(() =>
+      assertGrowAppendOnly('en/a1.json', before, [{ word: 'HOTEL' }, { word: 'WINDOW' }]),
+    ).toThrow(/refuses to rewrite slot 0/)
+  })
+  test('a reorder fails', () => {
+    expect(() =>
+      assertGrowAppendOnly('en/a1.json', before, [{ word: 'WINDOW' }, { word: 'HOUSE' }]),
+    ).toThrow(/slot 0/)
+  })
+  test('a removal fails', () => {
+    expect(() => assertGrowAppendOnly('en/a1.json', before, [before[0]!])).toThrow(/append-only/)
   })
 })
 
@@ -172,6 +264,26 @@ describe('write-guard', () => {
     expect(() => assertPackWriteAllowed('public/packs/en/b2.json', 'b2')).not.toThrow()
     expect(() => assertPackWriteAllowed('public/packs/es/c1.json', 'c1')).not.toThrow()
     expect(() => assertPackWriteAllowed('public/packs/de/c2.json', 'c2')).not.toThrow()
+  })
+
+  test('--grow may write a1–b1 for every language once; other modes still refuse', () => {
+    expect(() => assertPackWriteAllowed('public/packs/en/a1.json', 'a1', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/pt/b1.json', 'b1', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/de/a2.json', 'a2', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/es/a1.json', 'a1', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/fr/a1.json', 'a1', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/it/b1.json', 'b1', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/en/b2.json', 'b2', { grow: true })).not.toThrow()
+    expect(() => assertPackWriteAllowed('public/packs/en/a1.json', 'a1')).toThrow(/refuses to overwrite/)
+    expect(() => assertPackWriteAllowed('public/packs/en/a1.json', 'a1', { grow: false })).toThrow(
+      /refuses to overwrite/,
+    )
+    expect(() => assertPackWriteAllowed('public/packs/en/x9.json', 'x9', { grow: true })).toThrow(
+      /expand writes only/,
+    )
+    expect(() => assertPackWriteAllowed('public/packs/en/b2.json', 'a1', { grow: true })).toThrow(
+      /refuses to overwrite/,
+    )
   })
 
   test('fr/it bootstrap may create missing a1–b1 once; other langs stay frozen', () => {

@@ -28,13 +28,40 @@ export const CEFR_LEVEL_PARITY: CefrParity = true
 
 export const TARGET = 400
 export const FLOOR_B2_C1 = 350
-export const FLOOR_C2 = 200
+/** ADR 0058: the floor is 350 for every band including C2 (amends ADR 0028). */
+export const FLOOR_C2 = 350
 
-/** PT hangman-filtered list (after skip-200) rank windows. */
+/** Hard cap for any pack under `--grow` (ADR 0058). */
+export const PACK_TARGET_CAP = 1000
+
+/**
+ * Committed per-band growth targets (ADR 0058): min(--grow --dry-run source
+ * capacity, PACK_TARGET_CAP) per pack, seeded by the #328 capacity report and
+ * grown into by the per-language PRs (#329–#334). Every value stays ≥ the
+ * shipped 400 so the pin range guard passes before any growth.
+ */
+export const BAND_TARGETS: Record<SelectLang, Record<PackCefr, number>> = {
+  en: { a1: 740, a2: 955, b1: 1000, b2: 1000, c1: 675, c2: 593 },
+  pt: { a1: 1000, a2: 1000, b1: 1000, b2: 1000, c1: 1000, c2: 1000 },
+  de: { a1: 840, a2: 1000, b1: 1000, b2: 1000, c1: 1000, c2: 1000 },
+  es: { a1: 858, a2: 1000, b1: 1000, b2: 1000, c1: 1000, c2: 1000 },
+  fr: { a1: 810, a2: 1000, b1: 1000, b2: 1000, c1: 1000, c2: 1000 },
+  it: { a1: 671, a2: 935, b1: 1000, b2: 1000, c1: 1000, c2: 1000 },
+}
+
+export function bandTarget(lang: SelectLang, cefr: PackCefr): number {
+  return BAND_TARGETS[lang][cefr]
+}
+
+/**
+ * Widened B2–C2 index windows (ADR 0058) on the hangman-filtered frequency
+ * lists. The first TARGET=400 picks of the legacy path are unchanged because
+ * selection takes candidates in order; the wider tail only feeds `--grow`.
+ */
 export const PT_BANDS: Record<NewCefr, readonly [number, number]> = {
-  b2: [4000, 7000],
-  c1: [7000, 11000],
-  c2: [11000, 16000],
+  b2: [4000, 9000],
+  c1: [9000, 16000],
+  c2: [16000, 26000],
 }
 
 /**
@@ -42,9 +69,26 @@ export const PT_BANDS: Record<NewCefr, readonly [number, number]> = {
  * Same index windows as PT — frequency bands, not cefr_estimate (ADR 0029).
  */
 export const DE_ES_BANDS: Record<NewCefr, readonly [number, number]> = {
-  b2: [4000, 7000],
-  c1: [7000, 11000],
-  c2: [11000, 16000],
+  b2: [4000, 9000],
+  c1: [9000, 16000],
+  c2: [16000, 26000],
+}
+
+/**
+ * Widened A1–B1 index windows on the same filtered DE/ES/PT frequency lists
+ * for the one-time `--grow` unfreeze (ADR 0040 addendum, ADR 0058). PT's list
+ * is already skip-200. Windows stay contiguous and non-overlapping with
+ * B2–C2 (ADR 0028).
+ */
+export const LOW_BAND_WINDOWS: Record<ExistingCefr, readonly [number, number]> = {
+  a1: [0, 1500],
+  a2: [1500, 3000],
+  b1: [3000, 4000],
+}
+
+/** Frequency-list window for any band: widened low bands or B2–C2 bands. */
+export function bandWindow(cefr: PackCefr): readonly [number, number] {
+  return isNewCefr(cefr) ? DE_ES_BANDS[cefr] : LOW_BAND_WINDOWS[cefr]
 }
 
 /**
@@ -223,15 +267,86 @@ export function isNewCefr(cefr: string): cefr is NewCefr {
   return (NEW_CEFRS as readonly string[]).includes(cefr)
 }
 
+export type GrowBandPlan = {
+  cefr: PackCefr
+  /** Lemmas already shipped in this pack. */
+  existing: number
+  /** Gate-passing in-band candidates whose fold-key is not taken (uncapped). */
+  capacity: number
+  /** min(existing + capacity, PACK_TARGET_CAP) — the dry-run proposed target. */
+  target: number
+  /** Committed BAND_TARGETS value the pin range guard and --grow use. */
+  bandTarget: number
+  /** How many lemmas --grow may still append: min(bandTarget, target) - existing. */
+  room: number
+  /** The actual appends (mutates `taken`). */
+  appended: string[]
+}
+
+/**
+ * Plan one band of a `--grow` run (ADR 0058). `taken` must already hold the
+ * fold-keys of all six packs of the language; the append pass mutates it so
+ * later bands stay exclusive. Pure: no I/O.
+ */
+export function planGrowBand(
+  lang: SelectLang,
+  cefr: PackCefr,
+  existingWords: readonly string[],
+  candidates: string[],
+  taken: Set<string>,
+  denylist?: Set<string>,
+): GrowBandPlan {
+  const existing = existingWords.length
+  const capacity = takeExclusive(
+    lang,
+    candidates,
+    new Set(taken),
+    Number.MAX_SAFE_INTEGER,
+    denylist,
+  ).length
+  const target = Math.min(existing + capacity, PACK_TARGET_CAP)
+  const band = bandTarget(lang, cefr)
+  const room = Math.max(0, Math.min(band, target) - existing)
+  const appended = takeExclusive(lang, candidates, taken, room, denylist)
+  return { cefr, existing, capacity, target, bandTarget: band, room, appended }
+}
+
+/**
+ * Hard-refuse any rewrite of an existing slot under `--grow` (ADR 0058):
+ * the new lemma array must keep the old array as an exact word-prefix.
+ */
+export function assertGrowAppendOnly(
+  rel: string,
+  before: readonly { word: string }[],
+  after: readonly { word: string }[],
+): void {
+  if (after.length < before.length) {
+    throw new Error(
+      `${rel}: --grow is append-only; lemma count shrank ${before.length} -> ${after.length}`,
+    )
+  }
+  for (let i = 0; i < before.length; i++) {
+    const prev = nfcUpper(before[i]!.word)
+    const next = nfcUpper(after[i]!.word)
+    if (prev !== next) {
+      throw new Error(
+        `${rel}: --grow refuses to rewrite slot ${i} ("${before[i]!.word}" -> "${after[i]!.word}")`,
+      )
+    }
+  }
+}
+
 /**
  * Expand may only write b2|c1|c2 files.
  * `bootstrapLang` allows a one-time write of missing `{lang}/a1|a2|b1`
  * (ADR 0040). The caller sets it only when that language has no pack yet.
+ * `grow` is the one-time `--grow` unfreeze of a1–b1 for every language
+ * (ADR 0040 addendum, ADR 0058) — still only real `{lang}/{cefr}.json` paths.
  */
 export function assertPackWriteAllowed(
   filePath: string,
   cefr: string,
-  opts?: { bootstrapLang?: string },
+  opts?: { bootstrapLang?: string; grow?: boolean },
 ): void {
   const posix = filePath.replace(/\\/g, '/')
   const base = posix.split('/').pop()?.toLowerCase() ?? ''
@@ -240,12 +355,16 @@ export function assertPackWriteAllowed(
     (boot === 'fr' || boot === 'it') &&
     new RegExp(`/${boot}/(a1|a2|b1)\\.json$`).test(posix) &&
     (cefr === 'a1' || cefr === 'a2' || cefr === 'b1')
-  if (!lowOk && (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base))) {
+  const growOk =
+    opts?.grow === true &&
+    (PACK_CEFR_LEVELS as readonly string[]).includes(cefr) &&
+    base === `${cefr}.json`
+  if (!lowOk && !growOk && (isExistingCefr(cefr) || /^(a1|a2|b1)\.json$/.test(base))) {
     throw new Error(
       `refuses to overwrite ${base || cefr + '.json'}; expand writes only ${NEW_CEFRS.join('|')}`,
     )
   }
-  if (!lowOk && !isNewCefr(cefr)) {
+  if (!lowOk && !growOk && !isNewCefr(cefr)) {
     throw new Error(`expand writes only ${NEW_CEFRS.join('|')} (got ${cefr})`)
   }
 }
