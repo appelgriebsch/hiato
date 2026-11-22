@@ -116,7 +116,12 @@ function membershipActive(): boolean {
 }
 
 export const PACK_MIN = 350
-export const C2_MIN = 200
+/** ADR 0058 amends ADR 0028: the C2 floor is 350 like every other band. */
+export const C2_MIN = 350
+/** Fail-closed byte budget per language (6 packs), ADR 0058. */
+export const PACK_LANG_MAX_BYTES = 2.5 * 1024 * 1024
+/** Fail-closed byte budget across all shipped packs, ADR 0058. */
+export const PACK_TOTAL_MAX_BYTES = 12 * 1024 * 1024
 /** Warn (do not fail) when B2, C1, or C2 synonym coverage is under 70%. */
 export const SYNONYM_WARN = 0.7
 /** Fail C1/C2 only if synonym coverage is ~0 (pipeline broken). Not applied to B2. */
@@ -148,6 +153,40 @@ export function packPathPattern(): RegExp {
 
 export function lemmaFloor(cefr: PackCefr): number {
   return cefr === 'c2' ? C2_MIN : PACK_MIN
+}
+
+export type PackByteSnapshot = {
+  rel: string
+  bytes: number
+}
+
+/**
+ * ADR 0058 budget guard, pure so bun:test can cover it: ≤ PACK_LANG_MAX_BYTES
+ * per language and ≤ PACK_TOTAL_MAX_BYTES across all packs. Returns errors.
+ */
+export function checkPackBudget(files: readonly PackByteSnapshot[]): string[] {
+  const errors: string[] = []
+  const perLang = new Map<string, number>()
+  let total = 0
+  for (const { rel, bytes } of files) {
+    const lang = rel.split('/')[0] ?? rel
+    perLang.set(lang, (perLang.get(lang) ?? 0) + bytes)
+    total += bytes
+  }
+  const mb = (b: number) => (b / 1024 / 1024).toFixed(2)
+  for (const [lang, bytes] of [...perLang.entries()].sort()) {
+    if (bytes > PACK_LANG_MAX_BYTES) {
+      errors.push(
+        `public/packs/${lang}: ${mb(bytes)} MB exceeds the per-language budget ${mb(PACK_LANG_MAX_BYTES)} MB (ADR 0058)`,
+      )
+    }
+  }
+  if (total > PACK_TOTAL_MAX_BYTES) {
+    errors.push(
+      `public/packs total: ${mb(total)} MB exceeds the budget ${mb(PACK_TOTAL_MAX_BYTES)} MB (ADR 0058)`,
+    )
+  }
+  return errors
 }
 
 export function licenseBlob(pack: Pick<WordPack, 'license' | 'attribution'>): string {
