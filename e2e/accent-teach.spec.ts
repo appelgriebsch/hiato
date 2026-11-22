@@ -85,9 +85,9 @@ test('ES B1: accent miss explains the accent and costs a life', async ({ page })
 test('EN A1: plain miss shows no teach line and costs a life (English packs unchanged)', async ({ page }) => {
   const iso = '2026-11-27T12:00:00'
   await seed(page, 'en', 'a1', iso)
-  expect(dailyWord('en', 'a1', iso)).toBe('BYE')
+  expect(dailyWord('en', 'a1', iso)).toBe('NICE')
 
-  await pressKey(page, 'Q') // not in BYE
+  await pressKey(page, 'Q') // not in NICE
 
   await expect(teachLine(page)).toHaveCount(0)
   await expect(lives(page)).toHaveAttribute('aria-label', '5 lives remaining')
