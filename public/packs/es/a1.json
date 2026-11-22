@@ -1,5 +1,5 @@
 {
-  "version": 26,
+  "version": 28,
   "lang": "es",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -52,9 +52,10 @@
     },
     {
       "word": "HOMBRE",
-      "gloss": "persona adulta de sexo masculino",
+      "gloss": "persona mayor de sexo masculino",
       "synonyms": [
-        "varón"
+        "varón",
+        "chico"
       ],
       "example": "Soy un hombre.",
       "pos": "noun",
@@ -82,7 +83,7 @@
     },
     {
       "word": "VERDAD",
-      "gloss": "Hecho o afirmación que corresponde a la realidad.",
+      "gloss": "lo que es cierto",
       "synonyms": [
         "realidad"
       ],
@@ -115,7 +116,6 @@
       "word": "AÑO",
       "gloss": "Es un tiempo de doce meses.",
       "synonyms": [
-        "calendario",
         "ciclo"
       ],
       "example": "¿Qué año es?",
@@ -171,10 +171,7 @@
     },
     {
       "word": "VIDA",
-      "gloss": "Existencia de un ser vivo.",
-      "synonyms": [
-        "existencia"
-      ],
+      "gloss": "lo que hace que un ser esté vivo",
       "example": "La vida es así.",
       "pos": "noun",
       "ipa": "/ˈbið̞a/",
@@ -182,6 +179,9 @@
         "vidas",
         "vivir",
         "vital"
+      ],
+      "synonyms": [
+        "ser"
       ]
     },
     {
@@ -233,9 +233,6 @@
     {
       "word": "ACUERDO",
       "gloss": "Es cuando dos personas dicen lo mismo.",
-      "synonyms": [
-        "pacto"
-      ],
       "example": "De acuerdo.",
       "pos": "noun",
       "ipa": "/aˈkweɾð̞o/",
@@ -262,9 +259,10 @@
     },
     {
       "word": "HIJO",
-      "gloss": "niño de un padre o madre",
+      "gloss": "persona joven que tiene padres",
       "synonyms": [
-        "niño"
+        "niño",
+        "pequeño"
       ],
       "example": "Es tu hijo.",
       "pos": "noun",
@@ -277,7 +275,7 @@
     },
     {
       "word": "MUJER",
-      "gloss": "persona adulta de sexo femenino",
+      "gloss": "la persona que no es hombre",
       "synonyms": [
         "dama"
       ],
@@ -292,8 +290,9 @@
     },
     {
       "word": "TAL",
-      "gloss": "De esa clase o cualidad.",
+      "gloss": "de esa manera o tipo",
       "synonyms": [
+        "así",
         "semejante"
       ],
       "example": "No quiero tal cosa en mi casa.",
@@ -306,10 +305,7 @@
     },
     {
       "word": "MOMENTO",
-      "gloss": "Instante breve de tiempo.",
-      "synonyms": [
-        "instante"
-      ],
+      "gloss": "pequeño tiempo que pasa",
       "example": "Un momento...",
       "pos": "noun",
       "ipa": "/moˈmẽn̪t̪o/",
@@ -317,14 +313,14 @@
         "momentos",
         "momentáneo",
         "momentáneamente"
+      ],
+      "synonyms": [
+        "tiempo"
       ]
     },
     {
       "word": "PROBLEMA",
       "gloss": "Es algo malo que hay que arreglar.",
-      "synonyms": [
-        "dificultad"
-      ],
       "example": "Ningún problema.",
       "pos": "noun",
       "family": [
@@ -391,7 +387,7 @@
     },
     {
       "word": "TIPO",
-      "gloss": "Clase o categoría de algo.",
+      "gloss": "grupo con características iguales",
       "synonyms": [
         "clase"
       ],
@@ -407,9 +403,6 @@
     {
       "word": "PERSONA",
       "gloss": "un hombre, mujer o niño",
-      "synonyms": [
-        "individuo"
-      ],
       "example": "Soy una persona.",
       "pos": "noun",
       "ipa": "/peɾˈsona/",
@@ -436,15 +429,15 @@
     },
     {
       "word": "MAMÁ",
-      "gloss": "así llama un niño a su madre",
-      "synonyms": [
-        "madre"
-      ],
+      "gloss": "persona que cuida a un niño",
       "example": "Mamá lloró.",
       "pos": "noun",
       "ipa": "/maˈma/",
       "family": [
         "mamar"
+      ],
+      "synonyms": [
+        "progenitora"
       ]
     },
     {
@@ -474,11 +467,10 @@
     },
     {
       "word": "NIÑO",
-      "gloss": "Un varón joven que aún no es adulto.",
+      "gloss": "persona joven que no es grande",
       "synonyms": [
-        "chico",
         "pequeño",
-        "infante"
+        "chico"
       ],
       "example": "Veo al niño.",
       "pos": "noun",
@@ -493,8 +485,7 @@
       "word": "MANO",
       "gloss": "con ella la gente escribe",
       "synonyms": [
-        "palma",
-        "puño"
+        "palma"
       ],
       "example": "Le di la mano.",
       "pos": "noun",
@@ -563,9 +554,6 @@
     {
       "word": "MINUTO",
       "gloss": "Es un tiempo de sesenta segundos.",
-      "synonyms": [
-        "instante"
-      ],
       "example": "Un minuto.",
       "pos": "noun",
       "ipa": "/miˈnut̪o/",
@@ -577,9 +565,6 @@
     {
       "word": "HERMANO",
       "gloss": "Hijo de los mismos padres.",
-      "synonyms": [
-        "pariente"
-      ],
       "example": "Es mi hermano.",
       "pos": "noun",
       "ipa": "/eɾˈmano/",
@@ -608,9 +593,6 @@
     {
       "word": "AMOR",
       "gloss": "Es un sentimiento bueno hacia alguien.",
-      "synonyms": [
-        "pasión"
-      ],
       "example": "¡Qué amor!",
       "pos": "noun",
       "ipa": "/aˈmoɾ/",
@@ -707,9 +689,10 @@
     },
     {
       "word": "SEÑORA",
-      "gloss": "mujer adulta casada",
+      "gloss": "mujer que tiene años",
       "synonyms": [
-        "dama"
+        "dama",
+        "persona mayor"
       ],
       "example": "Sí, señora.",
       "pos": "noun",
@@ -796,9 +779,6 @@
     {
       "word": "AYUDA",
       "gloss": "lo que das a quien tiene un problema",
-      "synonyms": [
-        "auxilio"
-      ],
       "example": "¿Me ayuda?",
       "pos": "noun",
       "family": [
@@ -824,15 +804,15 @@
     },
     {
       "word": "TÍO",
-      "gloss": "Hermano del padre o de la madre.",
-      "synonyms": [
-        "pariente"
-      ],
+      "gloss": "familiar de la familia que no es padre ni hermano",
       "example": "Es mi tío.",
       "pos": "noun",
       "ipa": "/ˈt̪io/",
       "family": [
         "tía"
+      ],
+      "synonyms": [
+        "familiar"
       ]
     },
     {
@@ -879,9 +859,10 @@
     },
     {
       "word": "HIJA",
-      "gloss": "Descendiente femenino directo.",
+      "gloss": "persona joven que es niña",
       "synonyms": [
-        "niña"
+        "niña",
+        "pequeña"
       ],
       "example": "¿Es tu hija?",
       "pos": "noun",
@@ -968,8 +949,7 @@
       "word": "AGUA",
       "gloss": "Es un líquido que se bebe.",
       "synonyms": [
-        "líquido",
-        "fluido"
+        "líquido"
       ],
       "example": "Quiero agua.",
       "pos": "noun",
@@ -997,9 +977,10 @@
     },
     {
       "word": "CLASE",
-      "gloss": "Grupo de alumnos o categoría.",
+      "gloss": "grupo de personas que aprenden juntas",
       "synonyms": [
-        "tipo"
+        "aula",
+        "grupo"
       ],
       "example": "No fue a clase.",
       "pos": "noun",
@@ -1011,9 +992,9 @@
     },
     {
       "word": "CARA",
-      "gloss": "parte delantera de la cabeza",
+      "gloss": "parte de la cabeza con ojos y boca",
       "synonyms": [
-        "faz"
+        "fisonomía"
       ],
       "example": "Lávate la cara.",
       "pos": "noun",
@@ -1109,7 +1090,7 @@
     },
     {
       "word": "FIN",
-      "gloss": "Término o conclusión.",
+      "gloss": "último punto de algo",
       "synonyms": [
         "término"
       ],
@@ -1125,9 +1106,6 @@
     {
       "word": "CUERPO",
       "gloss": "Estructura física de un ser.",
-      "synonyms": [
-        "organismo"
-      ],
       "example": "Es tu cuerpo.",
       "pos": "noun",
       "ipa": "/ˈkweɾpo/",
@@ -1171,7 +1149,7 @@
     },
     {
       "word": "NÚMERO",
-      "gloss": "signo como 1, 2 o 3",
+      "gloss": "lo mismo que cifra",
       "synonyms": [
         "cifra"
       ],
@@ -1296,9 +1274,10 @@
     },
     {
       "word": "LUZ",
-      "gloss": "claridad que permite ver.",
+      "gloss": "algo que ilumina y permite ver",
       "synonyms": [
-        "lámpara"
+        "brillo",
+        "resplandor"
       ],
       "example": "Veo la luz.",
       "pos": "noun",
@@ -1536,7 +1515,7 @@
     },
     {
       "word": "PERRO",
-      "gloss": "bicho de casa que ladra",
+      "gloss": "el que ladra y guarda la casa",
       "synonyms": [
         "can",
         "cachorro"
@@ -1589,9 +1568,6 @@
     {
       "word": "SUEÑO",
       "gloss": "es lo que se ve cuando se duerme.",
-      "synonyms": [
-        "ilusión"
-      ],
       "example": "Yo no sueño.",
       "pos": "noun",
       "family": [
@@ -1629,7 +1605,7 @@
     },
     {
       "word": "NOTICIA",
-      "gloss": "información reciente.",
+      "gloss": "información que se cuenta a otros",
       "synonyms": [
         "información"
       ],
@@ -1702,10 +1678,7 @@
     },
     {
       "word": "SENTIDO",
-      "gloss": "capacidad de percibir.",
-      "synonyms": [
-        "significado"
-      ],
+      "gloss": "Forma de notar el mundo con el cuerpo.",
       "example": "Eso tiene sentido.",
       "pos": "noun",
       "family": [
@@ -1837,7 +1810,7 @@
     },
     {
       "word": "FUERZA",
-      "gloss": "capacidad de mover algo.",
+      "gloss": "lo que permite mover las cosas",
       "synonyms": [
         "poder"
       ],
@@ -1919,9 +1892,6 @@
     {
       "word": "VIAJE",
       "gloss": "desplazamiento a otro lugar.",
-      "synonyms": [
-        "excursión"
-      ],
       "example": "Buen viaje.",
       "pos": "noun",
       "ipa": "/ˈbjaxe/",
@@ -2108,9 +2078,6 @@
     {
       "word": "ORDEN",
       "gloss": "disposición correcta.",
-      "synonyms": [
-        "mandato"
-      ],
       "example": "Orden, por favor.",
       "pos": "noun",
       "ipa": "/ˈoɾð̞ẽn/",
@@ -2166,9 +2133,6 @@
     {
       "word": "ABOGADO",
       "gloss": "es la persona que ayuda con la ley",
-      "synonyms": [
-        "letrado"
-      ],
       "example": "Es abogado.",
       "pos": "noun",
       "family": [
@@ -2252,9 +2216,6 @@
     {
       "word": "CAMPO",
       "gloss": "el lugar de hierba y tierra",
-      "synonyms": [
-        "terreno"
-      ],
       "example": "Aró el campo.",
       "pos": "noun",
       "ipa": "/ˈkãmpo/",
@@ -2308,9 +2269,6 @@
     {
       "word": "ODIO",
       "gloss": "Sentimiento fuerte de rechazo hacia algo.",
-      "synonyms": [
-        "rencor"
-      ],
       "example": "Odio leer.",
       "pos": "noun",
       "ipa": "/ˈoð̞jo/",
@@ -2320,10 +2278,7 @@
     },
     {
       "word": "CAJA",
-      "gloss": "es un recipiente de madera o metal",
-      "synonyms": [
-        "recipiente"
-      ],
+      "gloss": "cosa cuadrada donde se guardan cosas",
       "example": "Abrí la caja.",
       "pos": "noun",
       "ipa": "/ˈkaxa/",
@@ -2331,6 +2286,9 @@
         "cajón",
         "encajar",
         "cajero"
+      ],
+      "synonyms": [
+        "estuche"
       ]
     },
     {
@@ -2375,9 +2333,6 @@
     {
       "word": "DOLOR",
       "gloss": "malestar en el cuerpo",
-      "synonyms": [
-        "molestia"
-      ],
       "example": "Qué dolor.",
       "pos": "noun",
       "ipa": "/d̪oˈloɾ/",
@@ -2496,9 +2451,9 @@
     },
     {
       "word": "MENTE",
-      "gloss": "Capacidad de pensar y razonar.",
+      "gloss": "Parte del cuerpo que piensa y recuerda.",
       "synonyms": [
-        "cabeza"
+        "intelecto"
       ],
       "example": "Abre tu mente.",
       "pos": "noun",
@@ -2510,7 +2465,7 @@
     },
     {
       "word": "CABALLO",
-      "gloss": "lo monta un jinete; tiene cuatro patas y crin",
+      "gloss": "la bestia grande que se monta",
       "synonyms": [
         "equino"
       ],
@@ -2533,10 +2488,7 @@
     },
     {
       "word": "SEA",
-      "gloss": "Océano o gran masa de agua salada.",
-      "synonyms": [
-        "océano"
-      ],
+      "gloss": "agua grande que cubre gran parte de la Tierra.",
       "pos": "noun",
       "ipa": "/ˈsea/",
       "family": [
@@ -2547,9 +2499,6 @@
     {
       "word": "AIRE",
       "gloss": "lo que hay en el cielo y entra en el cuerpo",
-      "synonyms": [
-        "aliento"
-      ],
       "example": "Hoy hace aire.",
       "pos": "noun",
       "ipa": "/ˈajɾe/",
@@ -2612,9 +2561,10 @@
     },
     {
       "word": "ESTRELLA",
-      "gloss": "Punto luminoso que se ve en el cielo nocturno.",
+      "gloss": "Punto brillante en el cielo de noche.",
       "synonyms": [
-        "astro"
+        "astro",
+        "luz"
       ],
       "example": "Veo una estrella.",
       "pos": "noun",
@@ -2694,9 +2644,6 @@
     {
       "word": "GUSTO",
       "gloss": "Preferencia o placer por algo.",
-      "synonyms": [
-        "sabor"
-      ],
       "example": "Me gusta el chocolate, es mi gusto favorito.",
       "pos": "noun",
       "family": [
@@ -2722,7 +2669,7 @@
     },
     {
       "word": "EDAD",
-      "gloss": "Tiempo vivido desde el nacimiento.",
+      "gloss": "los años que tiene alguien",
       "synonyms": [
         "años"
       ],
@@ -2762,24 +2709,21 @@
     },
     {
       "word": "LAMENTO",
-      "gloss": "Expresión de tristeza o queja.",
-      "synonyms": [
-        "queja"
-      ],
+      "gloss": "voz que expresa tristeza",
       "example": "Lo lamento.",
       "pos": "noun",
       "ipa": "/laˈmẽn̪t̪o/",
       "family": [
         "lamentar",
         "lamentable"
+      ],
+      "synonyms": [
+        "quejido"
       ]
     },
     {
       "word": "MONTÓN",
       "gloss": "un grupo grande de cosas",
-      "synonyms": [
-        "pila"
-      ],
       "example": "¡Qué montón!",
       "pos": "noun",
       "ipa": "/mõn̪ˈt̪õn/",
@@ -2834,7 +2778,7 @@
     },
     {
       "word": "TRAJE",
-      "gloss": "Conjunto de ropa formal.",
+      "gloss": "ropa elegante que se usa en fiestas o ceremonias.",
       "synonyms": [
         "vestido"
       ],
@@ -2856,17 +2800,16 @@
     },
     {
       "word": "MESA",
-      "gloss": "Mueble con tablero plano y patas.",
-      "synonyms": [
-        "tablero",
-        "superficie"
-      ],
+      "gloss": "mueble con patas donde se ponen cosas encima.",
       "example": "Veo mi mesa.",
       "pos": "noun",
       "ipa": "/ˈmesa/",
       "family": [
         "mesero",
         "mesada"
+      ],
+      "synonyms": [
+        "tabla"
       ]
     },
     {
@@ -2886,10 +2829,7 @@
     },
     {
       "word": "BODA",
-      "gloss": "Ceremonia en la que dos personas se casan.",
-      "synonyms": [
-        "fiesta"
-      ],
+      "gloss": "fiesta cuando dos personas se casan.",
       "example": "Su boda es mañana.",
       "pos": "noun",
       "ipa": "/ˈboð̞a/",
@@ -2927,10 +2867,7 @@
     },
     {
       "word": "DIRECCIÓN",
-      "gloss": "Camino o rumbo que se sigue.",
-      "synonyms": [
-        "rumbo"
-      ],
+      "gloss": "Lugar o camino hacia donde se va.",
       "example": "Dame tu dirección.",
       "pos": "noun",
       "ipa": "/d̪iɾekˈsjõn/",
@@ -2938,6 +2875,10 @@
         "dirigir",
         "director",
         "directivo"
+      ],
+      "synonyms": [
+        "vía",
+        "sendero"
       ]
     },
     {
@@ -3288,10 +3229,7 @@
     },
     {
       "word": "TENER",
-      "gloss": "poseer algo",
-      "synonyms": [
-        "poseer"
-      ],
+      "gloss": "Guardar algo en las manos o en un lugar.",
       "example": "Puedes tener el mío.",
       "pos": "verb",
       "ipa": "/t̪eˈneɾ/",
@@ -3299,6 +3237,9 @@
         "tenencia",
         "tenedor",
         "contener"
+      ],
+      "synonyms": [
+        "guardar"
       ]
     },
     {
@@ -3318,10 +3259,7 @@
     },
     {
       "word": "DECIR",
-      "gloss": "Expresar algo con palabras.",
-      "synonyms": [
-        "expresar"
-      ],
+      "gloss": "hablar de algo",
       "example": "No sé qué decir.",
       "pos": "verb",
       "ipa": "/d̪eˈsiɾ/",
@@ -3375,9 +3313,6 @@
     {
       "word": "PODER",
       "gloss": "la mujer puede ir a la tienda",
-      "synonyms": [
-        "capacidad"
-      ],
       "example": "Espero poder verla.",
       "pos": "noun",
       "ipa": "/poˈð̞eɾ/",
@@ -3402,8 +3337,9 @@
     },
     {
       "word": "VER",
-      "gloss": "percibir con los ojos",
+      "gloss": "Mirar con los ojos.",
       "synonyms": [
+        "mirar",
         "observar"
       ],
       "example": "Déjame ver.",
@@ -3433,9 +3369,6 @@
     {
       "word": "MÁS",
       "gloss": "el que es mayor en número",
-      "synonyms": [
-        "adicional"
-      ],
       "example": "¿Algo más?",
       "pos": "adverb",
       "ipa": "/ˈmas/",
@@ -3475,9 +3408,10 @@
     },
     {
       "word": "MUY",
-      "gloss": "En alto grado o intensidad.",
+      "gloss": "muestra que algo es grande o mucho",
       "synonyms": [
-        "bastante"
+        "mucho",
+        "demasiado"
       ],
       "example": "Es muy caro.",
       "pos": "adverb",
@@ -3515,9 +3449,6 @@
     {
       "word": "DAR",
       "gloss": "la mujer da la comida al niño",
-      "synonyms": [
-        "REGALAR"
-      ],
       "example": "¿Qué le vas a dar?",
       "pos": "verb",
       "ipa": "/ˈd̪aɾ/",
@@ -3601,7 +3532,6 @@
       "word": "ESPERAR",
       "gloss": "Quedarse hasta que ocurra algo.",
       "synonyms": [
-        "aguardar",
         "permanecer"
       ],
       "example": "Odio esperar.",
@@ -3644,9 +3574,6 @@
     {
       "word": "SENTIR",
       "gloss": "notar algo en el cuerpo",
-      "synonyms": [
-        "percibir"
-      ],
       "example": "Me hizo sentir mal.",
       "pos": "verb",
       "ipa": "/sẽn̪ˈt̪iɾ/",
@@ -3745,9 +3672,6 @@
     {
       "word": "LLAMAR",
       "gloss": "el hombre dice el nombre de la persona",
-      "synonyms": [
-        "nombrar"
-      ],
       "example": "Quiero llamar...",
       "pos": "verb",
       "ipa": "/ʝaˈmaɾ/",
@@ -3830,9 +3754,6 @@
     {
       "word": "TAMBIÉN",
       "gloss": "de igual modo",
-      "synonyms": [
-        "igualmente"
-      ],
       "example": "Yo también.",
       "pos": "adverb",
       "ipa": "/t̪ãmˈbjẽn/"
@@ -3910,9 +3831,6 @@
     {
       "word": "NUEVO",
       "gloss": "Que acaba de aparecer o crearse.",
-      "synonyms": [
-        "reciente"
-      ],
       "example": "¿Es nuevo?",
       "pos": "adjective",
       "family": [
@@ -4035,9 +3953,6 @@
     {
       "word": "POCO",
       "gloss": "no mucho",
-      "synonyms": [
-        "breve"
-      ],
       "example": "Le vi hace poco.",
       "pos": "adverb",
       "ipa": "/ˈpoko/",
@@ -4049,7 +3964,6 @@
       "word": "SEGURO",
       "gloss": "es algo que no hace daño",
       "synonyms": [
-        "confiado",
         "cierto"
       ],
       "example": "Es seguro.",
@@ -4064,8 +3978,7 @@
       "word": "AYUDAR",
       "gloss": "hacer algo bueno por otra persona cuando lo necesita",
       "synonyms": [
-        "auxiliar",
-        "colaborar"
+        "auxiliar"
       ],
       "example": "¿Puedo ayudar?",
       "pos": "verb",
@@ -4108,10 +4021,10 @@
     },
     {
       "word": "CONTAR",
-      "gloss": "Relatar algo sucedido.",
+      "gloss": "decir números o historias en orden",
       "synonyms": [
-        "relatar",
-        "narrar"
+        "numerar",
+        "explicar"
       ],
       "example": "Empieza a contar.",
       "pos": "verb",
@@ -4240,7 +4153,6 @@
       "word": "MAÑANA",
       "gloss": "Es el día que viene después de hoy.",
       "synonyms": [
-        "madrugada",
         "alba"
       ],
       "example": "Hasta mañana.",
@@ -4307,9 +4219,10 @@
     },
     {
       "word": "GRAN",
-      "gloss": "que es muy alto, ancho o importante",
+      "gloss": "que es muy importante",
       "synonyms": [
-        "enorme"
+        "enorme",
+        "principal"
       ],
       "example": "Es un gran poema.",
       "pos": "adjective",
@@ -4366,8 +4279,7 @@
       "word": "TRAER",
       "gloss": "Llevar algo consigo a un sitio.",
       "synonyms": [
-        "acarrear",
-        "portar"
+        "acarrear"
       ],
       "example": "Ve a traer café.",
       "pos": "verb",
@@ -4420,10 +4332,6 @@
     {
       "word": "ENTRAR",
       "gloss": "ir dentro de un lugar",
-      "synonyms": [
-        "acceder",
-        "penetrar"
-      ],
       "example": "Debo entrar.",
       "pos": "verb",
       "ipa": "/ẽn̪ˈt̪ɾaɾ/",
@@ -4450,10 +4358,6 @@
     {
       "word": "VIVIR",
       "gloss": "estar en un lugar con gente",
-      "synonyms": [
-        "habitar",
-        "residir"
-      ],
       "example": "Quiero vivir.",
       "pos": "verb",
       "family": [
@@ -4566,7 +4470,6 @@
       "word": "SERIO",
       "gloss": "que no se ríe",
       "synonyms": [
-        "formal",
         "grave"
       ],
       "example": "Es en serio.",
@@ -4620,9 +4523,6 @@
     {
       "word": "USAR",
       "gloss": "hacer uso de",
-      "synonyms": [
-        "emplear"
-      ],
       "example": "Debo usar botas.",
       "pos": "verb",
       "ipa": "/uˈsaɾ/",
@@ -4733,8 +4633,7 @@
       "word": "COMER",
       "gloss": "Ingerir alimentos.",
       "synonyms": [
-        "ingerir",
-        "devorar"
+        "ingerir"
       ],
       "example": "Quiero comer.",
       "pos": "verb",
@@ -4775,9 +4674,6 @@
     {
       "word": "DEMASIADO",
       "gloss": "más de lo bueno",
-      "synonyms": [
-        "sobrante"
-      ],
       "example": "Comí demasiado.",
       "pos": "adjective",
       "ipa": "/d̪emaˈsjað̞o/",
@@ -4787,10 +4683,9 @@
     },
     {
       "word": "OÍR",
-      "gloss": "percibir con el oído",
+      "gloss": "escuchar con el oído",
       "synonyms": [
-        "escuchar",
-        "percibir"
+        "escuchar"
       ],
       "example": "Lo puedo oír.",
       "pos": "verb",
@@ -4880,8 +4775,7 @@
       "word": "MALO",
       "gloss": "no bueno",
       "synonyms": [
-        "incorrecto",
-        "defectuoso"
+        "incorrecto"
       ],
       "example": "Eres malo.",
       "pos": "adjective",
@@ -4911,10 +4805,6 @@
     {
       "word": "CAMBIAR",
       "gloss": "hacer diferente",
-      "synonyms": [
-        "modificar",
-        "alterar"
-      ],
       "example": "Quiero cambiar.",
       "pos": "verb",
       "family": [
@@ -4951,10 +4841,10 @@
     },
     {
       "word": "MANTENER",
-      "gloss": "Conservar algo en su estado.",
+      "gloss": "No dejar que algo cambie o se dañe.",
       "synonyms": [
-        "conservar",
-        "guardar"
+        "guardar",
+        "cuidar"
       ],
       "example": "Debe mantener su promesa.",
       "pos": "verb",
@@ -5022,7 +4912,7 @@
     },
     {
       "word": "DORMIR",
-      "gloss": "Estar en estado de reposo.",
+      "gloss": "estar en la cama sin moverse y con los ojos sin abrir",
       "synonyms": [
         "reposar"
       ],
@@ -5081,8 +4971,7 @@
       "word": "LLAMADO",
       "gloss": "Que recibe un nombre.",
       "synonyms": [
-        "nombrado",
-        "denominado"
+        "nombrado"
       ],
       "example": "El animal llamado jirafa tiene un cuello muy largo.",
       "pos": "adjective",
@@ -5096,9 +4985,6 @@
     {
       "word": "FELIZ",
       "gloss": "que se siente muy bien",
-      "synonyms": [
-        "alegre"
-      ],
       "example": "Soy feliz.",
       "pos": "adjective",
       "ipa": "/feˈlis/",
@@ -5140,7 +5026,6 @@
       "word": "SUPUESTO",
       "gloss": "que se cree",
       "synonyms": [
-        "hipótesis",
         "presunción"
       ],
       "example": "Por supuesto.",
@@ -5156,8 +5041,7 @@
       "word": "MISMO",
       "gloss": "igual, no otro",
       "synonyms": [
-        "igual",
-        "idéntico"
+        "igual"
       ],
       "example": "Me da lo mismo.",
       "pos": "adjective",
@@ -5202,8 +5086,7 @@
       "word": "MOVER",
       "gloss": "cambiar de lugar",
       "synonyms": [
-        "desplazar",
-        "trasladar"
+        "desplazar"
       ],
       "example": "¿Se puede mover?",
       "pos": "verb",
@@ -5216,7 +5099,7 @@
     },
     {
       "word": "REGRESAR",
-      "gloss": "Volver al lugar de origen.",
+      "gloss": "Ir otra vez al sitio donde estabas antes.",
       "synonyms": [
         "volver",
         "retornar"
@@ -5231,7 +5114,7 @@
     },
     {
       "word": "SENTAR",
-      "gloss": "Colocar el cuerpo en reposo.",
+      "gloss": "colocarse encima de algo",
       "synonyms": [
         "colocar",
         "poner"
@@ -5309,8 +5192,7 @@
       "word": "QUERIDO",
       "gloss": "persona a la que se ama.",
       "synonyms": [
-        "amado",
-        "apreciado"
+        "amado"
       ],
       "example": "¡Querido mío!",
       "pos": "adjective",
@@ -5323,9 +5205,8 @@
     },
     {
       "word": "COMPRAR",
-      "gloss": "adquirir algo pagando.",
+      "gloss": "dar dinero a cambio de algo que quieres tener",
       "synonyms": [
-        "adquirir",
         "obtener"
       ],
       "example": "Iré a comprar pan.",
@@ -5368,9 +5249,10 @@
     },
     {
       "word": "PRONTO",
-      "gloss": "en breve, sin tardar.",
+      "gloss": "en un tiempo que llega muy rápido",
       "synonyms": [
-        "rápido"
+        "rápido",
+        "inmediato"
       ],
       "example": "Hasta pronto.",
       "pos": "adjective",
@@ -5447,7 +5329,6 @@
       "word": "ALTO",
       "gloss": "de gran estatura.",
       "synonyms": [
-        "elevado",
         "levantado"
       ],
       "example": "Él es alto.",
@@ -5461,10 +5342,9 @@
     },
     {
       "word": "LEER",
-      "gloss": "interpretar un texto escrito.",
+      "gloss": "Mirar las palabras de un libro o papel y entenderlas.",
       "synonyms": [
-        "interpretar",
-        "descifrar"
+        "mirar"
       ],
       "example": "Él sabe leer.",
       "pos": "verb",
@@ -5506,8 +5386,7 @@
       "word": "DESEAR",
       "gloss": "querer algo con ganas.",
       "synonyms": [
-        "querer",
-        "anhelar"
+        "querer"
       ],
       "pos": "verb",
       "family": [
@@ -5550,8 +5429,7 @@
       "word": "MOSTRAR",
       "gloss": "hacer ver algo.",
       "synonyms": [
-        "enseñar",
-        "exhibir"
+        "enseñar"
       ],
       "example": "Te voy a mostrar.",
       "pos": "verb",
@@ -5661,6 +5539,4167 @@
         "recibo",
         "receptáculo"
       ]
+    },
+    {
+      "word": "SÓLO",
+      "gloss": "de ningún otro modo",
+      "synonyms": [
+        "únicamente",
+        "exclusivamente"
+      ],
+      "pos": "adverb",
+      "example": "Sólo tú puedes ayudarme con este problema."
+    },
+    {
+      "word": "CERCA",
+      "gloss": "a un sitio o cosa que está muy próximo",
+      "synonyms": [
+        "junto",
+        "próximo"
+      ],
+      "pos": "noun",
+      "example": "Está cerca."
+    },
+    {
+      "word": "ESCRIBIR",
+      "gloss": "hacer signos en un papel",
+      "synonyms": [
+        "redactar"
+      ],
+      "pos": "verb",
+      "example": "Dejaré de escribir."
+    },
+    {
+      "word": "BASTANTE",
+      "gloss": "más de lo normal o necesario.",
+      "synonyms": [
+        "suficiente",
+        "mucho"
+      ],
+      "pos": "adjective",
+      "example": "Tenemos bastante."
+    },
+    {
+      "word": "METER",
+      "gloss": "poner dentro de algo",
+      "synonyms": [
+        "introducir",
+        "guardar"
+      ],
+      "pos": "verb",
+      "example": "Necesito meter la ropa en la maleta."
+    },
+    {
+      "word": "CUÁNDO",
+      "gloss": "en qué momento",
+      "synonyms": [
+        "en qué momento"
+      ],
+      "pos": "adverb",
+      "example": "¿Cuándo abre?"
+    },
+    {
+      "word": "PERDONAR",
+      "gloss": "no guardar enojo por un error de otro.",
+      "synonyms": [
+        "olvidar",
+        "disculpar"
+      ],
+      "pos": "verb",
+      "example": "No puedes perdonar."
+    },
+    {
+      "word": "COMENZAR",
+      "gloss": "Empezar a hacer algo desde el principio.",
+      "synonyms": [
+        "empezar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedo comenzar?"
+    },
+    {
+      "word": "ROBAR",
+      "gloss": "Tomar algo que no es tuyo sin pedirlo.",
+      "synonyms": [
+        "quitar",
+        "sustraer"
+      ],
+      "pos": "verb",
+      "example": "Robar es malo."
+    },
+    {
+      "word": "PERMITIR",
+      "gloss": "Decir que alguien puede hacer algo.",
+      "synonyms": [
+        "dejar"
+      ],
+      "pos": "verb",
+      "example": "Voy a permitir esto."
+    },
+    {
+      "word": "CASAR",
+      "gloss": "Hacer oficial la unión de dos personas.",
+      "synonyms": [
+        "juntar"
+      ],
+      "pos": "verb",
+      "example": "Me voy a casar."
+    },
+    {
+      "word": "FUERTE",
+      "gloss": "que tiene mucha resistencia",
+      "synonyms": [
+        "robusto",
+        "poderoso"
+      ],
+      "pos": "adjective",
+      "example": "¡Sé fuerte!"
+    },
+    {
+      "word": "INCLUSO",
+      "gloss": "También en ese caso o situación.",
+      "synonyms": [
+        "también",
+        "hasta"
+      ],
+      "pos": "adverb",
+      "example": "Incluso yo perdí."
+    },
+    {
+      "word": "ENCANTAR",
+      "gloss": "gustar mucho",
+      "synonyms": [
+        "gustar mucho"
+      ],
+      "pos": "verb",
+      "example": "Le va a encantar esto."
+    },
+    {
+      "word": "DETENER",
+      "gloss": "Hacer que algo deje de moverse o continuar.",
+      "synonyms": [
+        "parar"
+      ],
+      "pos": "verb",
+      "example": "Los voy a detener."
+    },
+    {
+      "word": "PRIMER",
+      "gloss": "que va antes que los demás",
+      "synonyms": [
+        "inicial",
+        "principal"
+      ],
+      "pos": "adjective",
+      "example": "Él es mi primer amor."
+    },
+    {
+      "word": "ALLÁ",
+      "gloss": "en ese lugar lejano",
+      "synonyms": [
+        "ahí"
+      ],
+      "pos": "adverb",
+      "example": "Nací allá."
+    },
+    {
+      "word": "ARRIBA",
+      "gloss": "en un lugar más alto",
+      "synonyms": [
+        "encima",
+        "superior"
+      ],
+      "pos": "adverb",
+      "example": "Está arriba."
+    },
+    {
+      "word": "SUBIR",
+      "gloss": "ir hacia un lugar más alto",
+      "synonyms": [
+        "ascender",
+        "elevar"
+      ],
+      "pos": "verb",
+      "example": "Debo subir."
+    },
+    {
+      "word": "IGUAL",
+      "gloss": "que no cambia",
+      "pos": "adjective",
+      "example": "Yo soy igual."
+    },
+    {
+      "word": "POSIBLE",
+      "gloss": "que se puede realizar",
+      "synonyms": [
+        "factible",
+        "viable"
+      ],
+      "pos": "adjective",
+      "example": "Es posible."
+    },
+    {
+      "word": "QUITAR",
+      "gloss": "sacar algo de un lugar",
+      "synonyms": [
+        "retirar"
+      ],
+      "pos": "verb",
+      "example": "¿Me la vais a quitar?"
+    },
+    {
+      "word": "VETAR",
+      "gloss": "prohibir oficialmente",
+      "synonyms": [
+        "prohibir"
+      ],
+      "pos": "verb",
+      "example": "El gobierno quiere vetar ese proyecto por ahora."
+    },
+    {
+      "word": "FINAL",
+      "gloss": "última parte de algo",
+      "synonyms": [
+        "último"
+      ],
+      "pos": "noun",
+      "example": "Esto es el final."
+    },
+    {
+      "word": "SONAR",
+      "gloss": "hacer que se escuche algo",
+      "synonyms": [
+        "tocar"
+      ],
+      "pos": "verb",
+      "example": "Oí el timbre sonar."
+    },
+    {
+      "word": "SALVAR",
+      "gloss": "Evitar que algo malo pase.",
+      "pos": "verb",
+      "synonyms": [
+        "proteger",
+        "guardar"
+      ],
+      "example": "Él te puede salvar la vida."
+    },
+    {
+      "word": "COGER",
+      "gloss": "tomar con la mano",
+      "synonyms": [
+        "tomar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes coger esto?"
+    },
+    {
+      "word": "FALTAR",
+      "gloss": "no estar presente",
+      "synonyms": [
+        "carecer",
+        "necesitar"
+      ],
+      "pos": "verb",
+      "example": "No puedo faltar."
+    },
+    {
+      "word": "DURO",
+      "gloss": "que no es blando",
+      "synonyms": [
+        "severo"
+      ],
+      "pos": "adjective",
+      "example": "Es muy duro."
+    },
+    {
+      "word": "FÁCIL",
+      "gloss": "Que no es difícil de hacer o entender.",
+      "pos": "adjective",
+      "example": "¡Es fácil!"
+    },
+    {
+      "word": "EXTRAÑO",
+      "gloss": "poco común",
+      "synonyms": [
+        "raro",
+        "desconocido"
+      ],
+      "pos": "adjective",
+      "example": "Es extraño."
+    },
+    {
+      "word": "ACEPTAR",
+      "gloss": "recibir algo de buen grado",
+      "synonyms": [
+        "admitir",
+        "aprobar"
+      ],
+      "pos": "verb",
+      "example": "No va a aceptar."
+    },
+    {
+      "word": "CORRECTO",
+      "gloss": "Que no tiene errores.",
+      "pos": "adjective",
+      "synonyms": [
+        "justo"
+      ],
+      "example": "¡Correcto!"
+    },
+    {
+      "word": "ABAJO",
+      "gloss": "en un sitio más hondo",
+      "synonyms": [
+        "debajo"
+      ],
+      "pos": "adverb",
+      "example": "Están abajo."
+    },
+    {
+      "word": "PROMETER",
+      "gloss": "asegurar que se hará algo",
+      "pos": "verb",
+      "example": "No basta con prometer."
+    },
+    {
+      "word": "BEBER",
+      "gloss": "ingerir un líquido",
+      "synonyms": [
+        "tomar",
+        "ingerir"
+      ],
+      "pos": "verb",
+      "example": "¿Para beber?"
+    },
+    {
+      "word": "CONFIAR",
+      "gloss": "tener seguridad en alguien",
+      "synonyms": [
+        "fiarse",
+        "creer"
+      ],
+      "pos": "verb",
+      "example": "Podés confiar en mí."
+    },
+    {
+      "word": "CUIDAR",
+      "gloss": "proteger y atender",
+      "synonyms": [
+        "proteger",
+        "vigilar"
+      ],
+      "pos": "verb",
+      "example": "Las vas a cuidar."
+    },
+    {
+      "word": "CONVERTIR",
+      "gloss": "hacer que algo sea distinto",
+      "synonyms": [
+        "transformar",
+        "cambiar"
+      ],
+      "pos": "verb",
+      "example": "Él cree en convertir la basura en combustible."
+    },
+    {
+      "word": "ATRÁS",
+      "gloss": "en el lugar de detrás",
+      "synonyms": [
+        "detrás",
+        "posteriormente"
+      ],
+      "pos": "adverb",
+      "example": "Mira atrás."
+    },
+    {
+      "word": "PERDIDO",
+      "gloss": "que no se encuentra",
+      "synonyms": [
+        "extraviado",
+        "desorientado"
+      ],
+      "pos": "adjective",
+      "example": "He perdido."
+    },
+    {
+      "word": "PRÓXIMO",
+      "gloss": "que está cerca en el tiempo",
+      "synonyms": [
+        "cercano",
+        "siguiente"
+      ],
+      "pos": "adjective",
+      "example": "Eres el próximo."
+    },
+    {
+      "word": "HERMOSO",
+      "gloss": "que gusta mucho al mirarlo",
+      "pos": "adjective",
+      "example": "Es hermoso."
+    },
+    {
+      "word": "APRENDER",
+      "gloss": "saber algo nuevo",
+      "synonyms": [
+        "saber"
+      ],
+      "pos": "verb",
+      "example": "Quiero aprender."
+    },
+    {
+      "word": "IMAGINAR",
+      "gloss": "pensar en cosas que no están",
+      "synonyms": [
+        "soñar",
+        "fantasear"
+      ],
+      "pos": "verb",
+      "example": "¿Te lo podés imaginar?"
+    },
+    {
+      "word": "MOLESTAR",
+      "gloss": "hacer que alguien sienta fastidio o no esté tranquilo",
+      "synonyms": [
+        "fastidiar"
+      ],
+      "pos": "verb",
+      "example": "No molestar."
+    },
+    {
+      "word": "BLANCO",
+      "gloss": "igual que el papel",
+      "pos": "adjective",
+      "example": "Es blanco."
+    },
+    {
+      "word": "BONITO",
+      "gloss": "que da gusto ver",
+      "pos": "noun",
+      "example": "Es bonito."
+    },
+    {
+      "word": "SERVIR",
+      "gloss": "hacer algo que ayuda a otros",
+      "synonyms": [
+        "ayudar"
+      ],
+      "pos": "verb",
+      "example": "Puede servir de guía."
+    },
+    {
+      "word": "LARGO",
+      "gloss": "que tiene mucha extensión",
+      "synonyms": [
+        "extenso",
+        "prolongado"
+      ],
+      "pos": "adjective",
+      "example": "Es muy largo."
+    },
+    {
+      "word": "DIFERENTE",
+      "gloss": "Que no es igual a otra cosa.",
+      "synonyms": [
+        "distinto",
+        "variado"
+      ],
+      "pos": "adjective",
+      "example": "Es diferente."
+    },
+    {
+      "word": "LEVANTAR",
+      "gloss": "poner algo hacia arriba",
+      "synonyms": [
+        "alzar",
+        "elevar"
+      ],
+      "pos": "verb",
+      "example": "Me voy a levantar."
+    },
+    {
+      "word": "VENDER",
+      "gloss": "dar algo a cambio de dinero",
+      "synonyms": [
+        "comercializar"
+      ],
+      "pos": "verb",
+      "example": "Lo puedes vender."
+    },
+    {
+      "word": "TAMPOCO",
+      "gloss": "no ocurre ni ocurrirá algo",
+      "synonyms": [
+        "ni",
+        "ni siquiera"
+      ],
+      "pos": "adverb",
+      "example": "Yo tampoco."
+    },
+    {
+      "word": "ANDAR",
+      "gloss": "moverse caminando",
+      "synonyms": [
+        "caminar",
+        "pasear"
+      ],
+      "pos": "noun",
+      "example": "¿Puedes andar?"
+    },
+    {
+      "word": "ROMPER",
+      "gloss": "hacer pedazos algo",
+      "synonyms": [
+        "quebrar"
+      ],
+      "pos": "verb",
+      "example": "Se puede romper."
+    },
+    {
+      "word": "ASEGURAR",
+      "gloss": "declarar algo como cierto",
+      "synonyms": [
+        "afirmar"
+      ],
+      "pos": "verb",
+      "example": "Me voy a asegurar de eso."
+    },
+    {
+      "word": "RARO",
+      "gloss": "que pasa pocas veces",
+      "synonyms": [
+        "extraño"
+      ],
+      "pos": "adjective",
+      "example": "¡Qué raro!"
+    },
+    {
+      "word": "PEOR",
+      "gloss": "no tan bueno",
+      "synonyms": [
+        "más malo",
+        "inferior"
+      ],
+      "pos": "adjective",
+      "example": "Peor es nada."
+    },
+    {
+      "word": "CERRAR",
+      "gloss": "dejar sin abrir",
+      "synonyms": [
+        "taparse",
+        "cubrir"
+      ],
+      "pos": "verb",
+      "example": "¿Debería cerrar?"
+    },
+    {
+      "word": "DECIDIR",
+      "gloss": "elegir qué hacer",
+      "synonyms": [
+        "optar"
+      ],
+      "pos": "verb",
+      "example": "Déjame decidir."
+    },
+    {
+      "word": "PREPARAR",
+      "gloss": "hacer los pasos previos",
+      "synonyms": [
+        "arreglar"
+      ],
+      "pos": "verb",
+      "example": "¿Qué vas a preparar?"
+    },
+    {
+      "word": "LEJOS",
+      "gloss": "a un lugar que está muy apartado",
+      "synonyms": [
+        "apartado"
+      ],
+      "pos": "adverb",
+      "example": "¿Está lejos?"
+    },
+    {
+      "word": "ENSEÑAR",
+      "gloss": "mostrar cómo hacer algo",
+      "synonyms": [
+        "instruir"
+      ],
+      "pos": "verb",
+      "example": "Adoro enseñar."
+    },
+    {
+      "word": "ALEGRAR",
+      "gloss": "hacer que alguien se sienta contento",
+      "pos": "verb",
+      "example": "Me acabas de alegrar el día."
+    },
+    {
+      "word": "TIRAR",
+      "gloss": "lanzar algo con fuerza",
+      "synonyms": [
+        "lanzar",
+        "arrojar"
+      ],
+      "pos": "verb",
+      "example": "¡Paren de tirar!"
+    },
+    {
+      "word": "ESPECIAL",
+      "gloss": "que es único o diferente",
+      "synonyms": [
+        "único",
+        "distinto"
+      ],
+      "pos": "adjective",
+      "example": "Nada especial."
+    },
+    {
+      "word": "BAJAR",
+      "gloss": "ir hacia abajo",
+      "synonyms": [
+        "descender"
+      ],
+      "pos": "verb",
+      "example": "¿Vas a bajar?"
+    },
+    {
+      "word": "DESPERTAR",
+      "gloss": "dejar de dormir",
+      "synonyms": [
+        "activar",
+        "reanimar"
+      ],
+      "pos": "verb",
+      "example": "Hora de despertar."
+    },
+    {
+      "word": "EXPLICAR",
+      "gloss": "hacer que algo sea comprensible",
+      "synonyms": [
+        "aclarar"
+      ],
+      "pos": "verb",
+      "example": "Déjame explicar."
+    },
+    {
+      "word": "BASTAR",
+      "gloss": "ser suficiente",
+      "synonyms": [
+        "alcanzar"
+      ],
+      "pos": "verb",
+      "example": "Eso debería bastar."
+    },
+    {
+      "word": "ADEMÁS",
+      "gloss": "y también",
+      "synonyms": [
+        "asimismo"
+      ],
+      "pos": "adverb",
+      "example": "Además, puedo volar."
+    },
+    {
+      "word": "OÍDO",
+      "gloss": "órgano que permite escuchar",
+      "pos": "noun",
+      "example": "Te he oído."
+    },
+    {
+      "word": "LIBRE",
+      "gloss": "que no tiene restricciones",
+      "synonyms": [
+        "suelto",
+        "independiente"
+      ],
+      "pos": "adjective",
+      "example": "¡Soy libre!"
+    },
+    {
+      "word": "ACERCA",
+      "gloss": "relacionado con algo o alguien",
+      "synonyms": [
+        "sobre"
+      ],
+      "pos": "adverb",
+      "example": "Oí acerca de eso."
+    },
+    {
+      "word": "REFERIR",
+      "gloss": "hablar de algo o alguien",
+      "synonyms": [
+        "comentar"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "PRESENTAR",
+      "gloss": "mostrar o introducir algo",
+      "synonyms": [
+        "mostrar",
+        "exponer"
+      ],
+      "pos": "verb",
+      "example": "Le voy a presentar a mi suegra."
+    },
+    {
+      "word": "DADO",
+      "gloss": "que ya está en manos de alguien",
+      "pos": "adjective",
+      "synonyms": [
+        "recibido"
+      ],
+      "example": "Me lo ha dado."
+    },
+    {
+      "word": "PUESTO",
+      "gloss": "lugar donde algo está colocado",
+      "synonyms": [
+        "colocado"
+      ],
+      "pos": "noun",
+      "example": "Está mal puesto."
+    },
+    {
+      "word": "ARREGLAR",
+      "gloss": "dejar algo en buen estado",
+      "pos": "verb",
+      "example": "La puedo arreglar."
+    },
+    {
+      "word": "TRANQUILO",
+      "gloss": "que está en paz",
+      "synonyms": [
+        "sereno"
+      ],
+      "pos": "adjective",
+      "example": "Tranquilo."
+    },
+    {
+      "word": "INCREÍBLE",
+      "gloss": "que no puede creerse",
+      "synonyms": [
+        "sorprendente"
+      ],
+      "pos": "adjective",
+      "example": "¡Increíble!"
+    },
+    {
+      "word": "ANOCHE",
+      "gloss": "el día antes de hoy",
+      "pos": "adverb",
+      "synonyms": [
+        "ayer"
+      ],
+      "example": "Heló anoche."
+    },
+    {
+      "word": "PROBAR",
+      "gloss": "sentir el gusto de algo",
+      "synonyms": [
+        "degustar"
+      ],
+      "pos": "verb",
+      "example": "Déjame probar."
+    },
+    {
+      "word": "CUARTO",
+      "gloss": "habitación donde se duerme o pasa el tiempo",
+      "synonyms": [
+        "habitación"
+      ],
+      "pos": "noun",
+      "example": "¿Tiene cuarto?"
+    },
+    {
+      "word": "DIVERTIDO",
+      "gloss": "algo que hace reír o pasarlo bien",
+      "synonyms": [
+        "gracioso",
+        "entretenido"
+      ],
+      "pos": "adjective",
+      "example": "Es divertido."
+    },
+    {
+      "word": "DESCUBRIR",
+      "gloss": "encontrar algo que no se veía",
+      "synonyms": [
+        "hallar"
+      ],
+      "pos": "verb",
+      "example": "Hay mucho más por descubrir."
+    },
+    {
+      "word": "VERDADERO",
+      "gloss": "que es real o auténtico",
+      "synonyms": [
+        "real",
+        "auténtico"
+      ],
+      "pos": "adjective",
+      "example": "¿Verdadero o falso?"
+    },
+    {
+      "word": "LLORAR",
+      "gloss": "sacar lágrimas de los ojos",
+      "pos": "verb",
+      "example": "Le vi llorar."
+    },
+    {
+      "word": "EXISTIR",
+      "gloss": "tener realidad",
+      "synonyms": [
+        "haber",
+        "permanecer"
+      ],
+      "pos": "verb",
+      "example": "Gracias por existir."
+    },
+    {
+      "word": "PROTEGER",
+      "gloss": "evitar que algo malo le pase a alguien o algo",
+      "synonyms": [
+        "cuidar",
+        "defender"
+      ],
+      "pos": "verb",
+      "example": "Los puedo proteger."
+    },
+    {
+      "word": "TEMER",
+      "gloss": "sentir miedo",
+      "synonyms": [
+        "asustarse",
+        "recelar"
+      ],
+      "pos": "verb",
+      "example": "No hay que temer."
+    },
+    {
+      "word": "PARAR",
+      "gloss": "dejar de moverse o hacer algo",
+      "synonyms": [
+        "detener",
+        "cesar"
+      ],
+      "pos": "verb",
+      "example": "No pude parar."
+    },
+    {
+      "word": "ENCONTRADO",
+      "gloss": "que ha sido hallado",
+      "synonyms": [
+        "hallado"
+      ],
+      "pos": "adjective",
+      "example": "Lo he encontrado."
+    },
+    {
+      "word": "ESCAPAR",
+      "gloss": "irse de un lugar sin que lo noten",
+      "synonyms": [
+        "marcharse"
+      ],
+      "pos": "verb",
+      "example": "Logré escapar."
+    },
+    {
+      "word": "AFUERO",
+      "gloss": "en un lugar diferente al normal",
+      "pos": "adjective",
+      "synonyms": [
+        "lejos"
+      ]
+    },
+    {
+      "word": "POBRE",
+      "gloss": "que tiene poco dinero",
+      "synonyms": [
+        "necesitado",
+        "indigente"
+      ],
+      "pos": "noun",
+      "example": "Soy pobre."
+    },
+    {
+      "word": "MENTIR",
+      "gloss": "decir cosas que no son verdaderas",
+      "synonyms": [
+        "fingir"
+      ],
+      "pos": "verb",
+      "example": "Dejá de mentir."
+    },
+    {
+      "word": "DETRÁS",
+      "gloss": "en la parte de atrás",
+      "pos": "adverb",
+      "synonyms": [
+        "atrás"
+      ],
+      "example": "¡Detrás de ti!"
+    },
+    {
+      "word": "OFICIAL",
+      "gloss": "que sigue las normas correctas.",
+      "synonyms": [
+        "aprobado",
+        "correcto"
+      ],
+      "pos": "adjective",
+      "example": "Es oficial."
+    },
+    {
+      "word": "RESPONDER",
+      "gloss": "decir algo cuando te preguntan",
+      "synonyms": [
+        "contestar",
+        "replicar"
+      ],
+      "pos": "verb",
+      "example": "No pude responder."
+    },
+    {
+      "word": "APARECER",
+      "gloss": "hacerse visible",
+      "synonyms": [
+        "manifestarse"
+      ],
+      "pos": "verb",
+      "example": "Vimos la colina aparecer."
+    },
+    {
+      "word": "LOGRAR",
+      "gloss": "hacer que algo pase o exista",
+      "synonyms": [
+        "conseguir",
+        "alcanzar"
+      ],
+      "pos": "verb",
+      "example": "Lo pueden lograr."
+    },
+    {
+      "word": "VOLAR",
+      "gloss": "moverse por el aire",
+      "synonyms": [
+        "planear",
+        "elevarse"
+      ],
+      "pos": "verb",
+      "example": "Odio volar."
+    },
+    {
+      "word": "LLENO",
+      "gloss": "que está ocupado por completo",
+      "synonyms": [
+        "completo",
+        "repleto"
+      ],
+      "pos": "adjective",
+      "example": "Está lleno."
+    },
+    {
+      "word": "CAMINAR",
+      "gloss": "moverse a pie",
+      "synonyms": [
+        "andar",
+        "pasear"
+      ],
+      "pos": "verb",
+      "example": "¡A caminar!"
+    },
+    {
+      "word": "SIGUIENTE",
+      "gloss": "que viene después",
+      "synonyms": [
+        "próximo"
+      ],
+      "pos": "adjective",
+      "example": "¡Siguiente!"
+    },
+    {
+      "word": "GOLPEAR",
+      "gloss": "tocar algo con fuerza usando las manos",
+      "synonyms": [
+        "pegar"
+      ],
+      "pos": "verb",
+      "example": "¡Deja de golpear la puerta!"
+    },
+    {
+      "word": "CONTINUAR",
+      "gloss": "seguir haciendo algo",
+      "synonyms": [
+        "seguir"
+      ],
+      "pos": "verb",
+      "example": "Debo continuar."
+    },
+    {
+      "word": "BAILAR",
+      "gloss": "mover el cuerpo al compás de la música",
+      "synonyms": [
+        "danzar",
+        "moverse"
+      ],
+      "pos": "verb",
+      "example": "Sé bailar."
+    },
+    {
+      "word": "AYER",
+      "gloss": "el día que pasó antes de hoy",
+      "pos": "adverb",
+      "synonyms": [
+        "antes"
+      ],
+      "example": "Ayer nevó."
+    },
+    {
+      "word": "CANTAR",
+      "gloss": "hacer música con la voz",
+      "synonyms": [
+        "entonar"
+      ],
+      "pos": "noun",
+      "example": "Sé cantar."
+    },
+    {
+      "word": "CONDUCIR",
+      "gloss": "mover un coche por calles",
+      "pos": "verb",
+      "example": "Sé conducir."
+    },
+    {
+      "word": "PREFERIR",
+      "gloss": "decidir que algo es mejor que otra cosa.",
+      "synonyms": [
+        "elegir",
+        "escoger"
+      ],
+      "pos": "verb",
+      "example": "Va a preferir agua al vino."
+    },
+    {
+      "word": "PERSONAL",
+      "gloss": "que es de alguien en especial",
+      "pos": "adjective",
+      "synonyms": [
+        "propio"
+      ],
+      "example": "Es personal."
+    },
+    {
+      "word": "ACERCAR",
+      "gloss": "hacer que algo esté más próximo",
+      "synonyms": [
+        "arrimar",
+        "juntar"
+      ],
+      "pos": "verb",
+      "example": "¿Te puedes acercar más?"
+    },
+    {
+      "word": "SOLER",
+      "gloss": "hacer algo muchas veces",
+      "synonyms": [
+        "acostumbrar"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "GUARDAR",
+      "gloss": "poner algo en un lugar seguro",
+      "pos": "verb",
+      "example": "Sé guardar un secreto."
+    },
+    {
+      "word": "ATRAPAR",
+      "gloss": "tomar algo que va veloz con las manos.",
+      "pos": "verb",
+      "synonyms": [
+        "coger",
+        "detener"
+      ],
+      "example": "No me van a atrapar."
+    },
+    {
+      "word": "ENCIMA",
+      "gloss": "en la parte superior",
+      "synonyms": [
+        "sobre",
+        "arriba"
+      ],
+      "pos": "adverb",
+      "example": "Ponlo encima."
+    },
+    {
+      "word": "ROJO",
+      "gloss": "como la sangre",
+      "pos": "adjective",
+      "example": "El sol es rojo."
+    },
+    {
+      "word": "JAMÁS",
+      "gloss": "en ningún momento",
+      "synonyms": [
+        "nunca"
+      ],
+      "pos": "adverb",
+      "example": "Él jamás se ríe."
+    },
+    {
+      "word": "AVERIGUAR",
+      "gloss": "buscar la verdad sobre algo.",
+      "synonyms": [
+        "descubrir",
+        "saber"
+      ],
+      "pos": "verb",
+      "example": "Tenemos que averiguar."
+    },
+    {
+      "word": "ACTUAR",
+      "gloss": "hacer algo con las manos o el cuerpo",
+      "synonyms": [
+        "moverse"
+      ],
+      "pos": "verb",
+      "example": "Voy a actuar en la obra de teatro de la escuela."
+    },
+    {
+      "word": "DEVOLVER",
+      "gloss": "dejar que alguien recupere algo que antes tenía.",
+      "synonyms": [
+        "retornar",
+        "restituir"
+      ],
+      "pos": "verb",
+      "example": "No te lo van a devolver."
+    },
+    {
+      "word": "OBTENER",
+      "gloss": "recibir algo que no se tenía",
+      "synonyms": [
+        "conseguir"
+      ],
+      "pos": "verb",
+      "example": "Quiero obtener más."
+    },
+    {
+      "word": "OFRECER",
+      "gloss": "dar algo a alguien sin pedir algo a cambio",
+      "pos": "verb",
+      "synonyms": [
+        "dar"
+      ],
+      "example": "¿Qué puedo ofrecer?"
+    },
+    {
+      "word": "COMPRENDER",
+      "gloss": "entender el significado o la razón de algo.",
+      "synonyms": [
+        "entender",
+        "captar"
+      ],
+      "pos": "verb",
+      "example": "Nos van a comprender."
+    },
+    {
+      "word": "LUCHAR",
+      "gloss": "esforzarse con ganas",
+      "synonyms": [
+        "pelear",
+        "batallar"
+      ],
+      "pos": "verb",
+      "example": "Quería luchar."
+    },
+    {
+      "word": "MERECER",
+      "gloss": "ser justo recibir algo bueno",
+      "synonyms": [
+        "ganar",
+        "valer"
+      ],
+      "pos": "verb",
+      "example": "¿Qué hice para merecer esto?"
+    },
+    {
+      "word": "EVITAR",
+      "gloss": "no dejar que pase algo malo",
+      "pos": "verb",
+      "example": "No se puede evitar."
+    },
+    {
+      "word": "OCUPADO",
+      "gloss": "que no tiene tiempo libre por estar haciendo algo.",
+      "synonyms": [
+        "liado"
+      ],
+      "pos": "adjective",
+      "example": "Está ocupado."
+    },
+    {
+      "word": "ODIAR",
+      "gloss": "sentir mucho enojo hacia alguien",
+      "synonyms": [
+        "detestar"
+      ],
+      "pos": "verb",
+      "example": "No te puedo odiar."
+    },
+    {
+      "word": "TERMINADO",
+      "gloss": "que ya no sigue, que está completo",
+      "synonyms": [
+        "acabado"
+      ],
+      "pos": "adjective",
+      "example": "Terminado."
+    },
+    {
+      "word": "PELEAR",
+      "gloss": "luchar con alguien usando fuerza",
+      "synonyms": [
+        "pegar"
+      ],
+      "pos": "verb",
+      "example": "Odio pelear."
+    },
+    {
+      "word": "ESCONDER",
+      "gloss": "poner algo en un lugar donde no pueda ser visto.",
+      "synonyms": [
+        "ocultar"
+      ],
+      "pos": "verb",
+      "example": "¿Te vas a esconder?"
+    },
+    {
+      "word": "CAPAZ",
+      "gloss": "que puede hacer algo sin problemas",
+      "synonyms": [
+        "hábil"
+      ],
+      "pos": "adjective",
+      "example": "No eres capaz."
+    },
+    {
+      "word": "ADÓNDE",
+      "gloss": "pregunta sobre el lugar hacia el cual se dirige alguien o algo.",
+      "pos": "adverb",
+      "example": "¿Adónde va?"
+    },
+    {
+      "word": "RECOGER",
+      "gloss": "tomar algo que está en un sitio alto o en las manos.",
+      "pos": "verb",
+      "synonyms": [
+        "levantar",
+        "tomar"
+      ],
+      "example": "¿Lo puedes recoger?"
+    },
+    {
+      "word": "EQUIVOCADO",
+      "gloss": "que tiene un fallo o no es verdad.",
+      "synonyms": [
+        "incorrecto"
+      ],
+      "pos": "adjective",
+      "example": "Equivocado."
+    },
+    {
+      "word": "PREPARADO",
+      "gloss": "que ya puede empezar",
+      "synonyms": [
+        "listo",
+        "dispuesto"
+      ],
+      "pos": "adjective",
+      "example": "Está preparado."
+    },
+    {
+      "word": "MARCHAR",
+      "gloss": "irse de un lugar, especialmente caminando.",
+      "synonyms": [
+        "irse"
+      ],
+      "pos": "verb",
+      "example": "¡Déjame marchar!"
+    },
+    {
+      "word": "ELEGIR",
+      "gloss": "decidir entre varias cosas",
+      "synonyms": [
+        "seleccionar",
+        "optar"
+      ],
+      "pos": "verb",
+      "example": "Debes elegir."
+    },
+    {
+      "word": "NECESARIO",
+      "gloss": "que es importante o imprescindible",
+      "synonyms": [
+        "imprescindible"
+      ],
+      "pos": "adjective",
+      "example": "Es necesario."
+    },
+    {
+      "word": "RECUPERAR",
+      "gloss": "volver a tener algo que se había perdido.",
+      "synonyms": [
+        "reintegrar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedo recuperar mi dinero?"
+    },
+    {
+      "word": "TUYO",
+      "gloss": "que pertenece a la persona con la que se habla.",
+      "synonyms": [
+        "de ti"
+      ],
+      "pos": "verb",
+      "example": "No es tuyo."
+    },
+    {
+      "word": "DESTRUIR",
+      "gloss": "hacer que algo deje de existir o quede inservible.",
+      "pos": "verb",
+      "example": "Crear es más difícil que destruir."
+    },
+    {
+      "word": "ABIERTO",
+      "gloss": "que no está tapado o permite entrar.",
+      "synonyms": [
+        "libre"
+      ],
+      "pos": "adjective",
+      "example": "Está abierto."
+    },
+    {
+      "word": "CASADO",
+      "gloss": "que vive con otra persona como familia",
+      "synonyms": [
+        "compañero"
+      ],
+      "pos": "adjective",
+      "example": "Soy casado."
+    },
+    {
+      "word": "SOLTAR",
+      "gloss": "dejar ir algo que se estaba sujetando.",
+      "synonyms": [
+        "liberar",
+        "dejar"
+      ],
+      "pos": "verb",
+      "example": "La cisterna no para de soltar agua."
+    },
+    {
+      "word": "PÚBLICO",
+      "gloss": "que todos pueden ver o usar.",
+      "synonyms": [
+        "común",
+        "abierto"
+      ],
+      "pos": "adjective",
+      "example": "El público se rió."
+    },
+    {
+      "word": "ALREDEDOR",
+      "gloss": "en los sitios que están cerca de un lugar.",
+      "synonyms": [
+        "cerca",
+        "junto"
+      ],
+      "pos": "noun",
+      "example": "Mire a su alrededor."
+    },
+    {
+      "word": "CORTAR",
+      "gloss": "separar algo en trozos con algo afilado.",
+      "pos": "verb",
+      "example": "Hay que cortar el pasto."
+    },
+    {
+      "word": "CONOCIDO",
+      "gloss": "que mucha gente sabe quién es.",
+      "synonyms": [
+        "famoso"
+      ],
+      "pos": "adjective",
+      "example": "Era conocido."
+    },
+    {
+      "word": "VESTIDO",
+      "gloss": "ropa que cubre el cuerpo",
+      "synonyms": [
+        "traje"
+      ],
+      "pos": "noun",
+      "example": "Lindo vestido."
+    },
+    {
+      "word": "RESPETAR",
+      "gloss": "tratar a alguien o algo con consideración y admiración.",
+      "pos": "verb",
+      "example": "Hay que respetar las reglas."
+    },
+    {
+      "word": "VISTE",
+      "gloss": "ropa que alguien lleva puesta ahora.",
+      "synonyms": [
+        "lleva",
+        "usa"
+      ],
+      "pos": "adjective",
+      "example": "¿Qué viste?"
+    },
+    {
+      "word": "REÍR",
+      "gloss": "mostrar que se está contento con la boca",
+      "pos": "verb",
+      "example": "Te vi reír."
+    },
+    {
+      "word": "HORRIBLE",
+      "gloss": "que da mucho miedo o es muy malo.",
+      "synonyms": [
+        "terrible",
+        "espantoso"
+      ],
+      "pos": "adjective",
+      "example": "¡Fue horrible!"
+    },
+    {
+      "word": "PELIGROSO",
+      "gloss": "que puede causar daño o perjuicio.",
+      "synonyms": [
+        "arriesgado"
+      ],
+      "pos": "adjective",
+      "example": "Es peligroso."
+    },
+    {
+      "word": "AGRADECER",
+      "gloss": "decir palabras amables por algo que hicieron por ti.",
+      "pos": "verb",
+      "synonyms": [
+        "apreciar"
+      ],
+      "example": "Me lo vas a agradecer."
+    },
+    {
+      "word": "CONSIDERAR",
+      "gloss": "pensar con atención sobre algo o alguien.",
+      "synonyms": [
+        "reflexionar",
+        "pensar"
+      ],
+      "pos": "verb",
+      "example": "Esto es algo a considerar."
+    },
+    {
+      "word": "BROMEAR",
+      "gloss": "decir algo gracioso sin querer molestar",
+      "synonyms": [
+        "chistear"
+      ],
+      "pos": "verb",
+      "example": "Deja de bromear."
+    },
+    {
+      "word": "DIRIGIR",
+      "gloss": "ser el responsable de un grupo o trabajo.",
+      "synonyms": [
+        "mandar",
+        "liderar"
+      ],
+      "pos": "verb",
+      "example": "¿Quién va a dirigir la película?"
+    },
+    {
+      "word": "CALMAR",
+      "gloss": "hacer que alguien esté tranquilo y sin miedo",
+      "synonyms": [
+        "tranquilizar",
+        "sosegar"
+      ],
+      "pos": "verb",
+      "example": "¿Te puedes calmar, por favor?"
+    },
+    {
+      "word": "OCUPAR",
+      "gloss": "llenar un lugar o momento con algo que se hace.",
+      "synonyms": [
+        "llenar",
+        "usar"
+      ],
+      "pos": "verb",
+      "example": "La puedes ocupar solo una vez."
+    },
+    {
+      "word": "ASUSTAR",
+      "gloss": "hacer que alguien sienta miedo de forma rápida",
+      "synonyms": [
+        "atemorizar"
+      ],
+      "pos": "verb",
+      "example": "¡Deja de asustar al niño!"
+    },
+    {
+      "word": "IMPOSIBLE",
+      "gloss": "que no se puede hacer ni lograr.",
+      "synonyms": [
+        "irrealizable",
+        "inalcanzable"
+      ],
+      "pos": "adjective",
+      "example": "Imposible."
+    },
+    {
+      "word": "ENTENDIDO",
+      "gloss": "que ha comprendido algo correctamente.",
+      "synonyms": [
+        "comprendido",
+        "asimilado"
+      ],
+      "pos": "adjective",
+      "example": "Entendido."
+    },
+    {
+      "word": "GRACIOSO",
+      "gloss": "que hace reír o sonreír a los demás.",
+      "synonyms": [
+        "divertido"
+      ],
+      "pos": "noun",
+      "example": "Es gracioso."
+    },
+    {
+      "word": "DISFRUTAR",
+      "gloss": "sentir placer o satisfacción por algo.",
+      "pos": "verb",
+      "example": "Quiero disfrutar."
+    },
+    {
+      "word": "REVISAR",
+      "gloss": "mirar con atención si algo está correcto.",
+      "synonyms": [
+        "comprobar"
+      ],
+      "pos": "verb",
+      "example": "Déjame revisar."
+    },
+    {
+      "word": "TERRIBLE",
+      "gloss": "muy malo o que da mucho miedo.",
+      "synonyms": [
+        "horrible",
+        "espantoso"
+      ],
+      "pos": "adjective",
+      "example": "Es terrible."
+    },
+    {
+      "word": "RESULTAR",
+      "gloss": "ser el final o consecuencia de lo que se hace",
+      "synonyms": [
+        "quedar",
+        "salir"
+      ],
+      "pos": "verb",
+      "example": "Un arma podría resultar útil."
+    },
+    {
+      "word": "COMPLETO",
+      "gloss": "que tiene todas sus partes o elementos.",
+      "synonyms": [
+        "total",
+        "íntegro"
+      ],
+      "pos": "adjective",
+      "example": "Se lo comió por completo."
+    },
+    {
+      "word": "CRECER",
+      "gloss": "hacerse más grande o más fuerte con el tiempo.",
+      "synonyms": [
+        "desarrollarse"
+      ],
+      "pos": "verb",
+      "example": "Volverá a crecer."
+    },
+    {
+      "word": "GRITAR",
+      "gloss": "hablar o expresarse con voz muy alta.",
+      "synonyms": [
+        "vociferar",
+        "chillar"
+      ],
+      "pos": "verb",
+      "example": "Quise gritar."
+    },
+    {
+      "word": "TOTALMENTE",
+      "gloss": "de manera completa o absoluta.",
+      "synonyms": [
+        "completamente",
+        "absolutamente"
+      ],
+      "pos": "adverb",
+      "example": "Te apoyo totalmente."
+    },
+    {
+      "word": "PREOCUPADO",
+      "gloss": "sentir intranquilidad por algo que puede pasar.",
+      "pos": "adjective",
+      "example": "Estaba preocupado."
+    },
+    {
+      "word": "ATACAR",
+      "gloss": "hacer daño a alguien o algo con fuerza.",
+      "synonyms": [
+        "agredir",
+        "golpear"
+      ],
+      "pos": "verb",
+      "example": "Intentan atacar."
+    },
+    {
+      "word": "AMABLE",
+      "gloss": "que trata a los demás con cariño y bondad.",
+      "synonyms": [
+        "bondadoso"
+      ],
+      "pos": "adjective",
+      "example": "Sé amable."
+    },
+    {
+      "word": "INVITAR",
+      "gloss": "pedir a alguien que venga o haga algo contigo.",
+      "synonyms": [
+        "convidar",
+        "llamar"
+      ],
+      "pos": "verb",
+      "example": "La voy a invitar."
+    },
+    {
+      "word": "ANTIGUO",
+      "gloss": "que existe desde hace mucho tiempo.",
+      "synonyms": [
+        "VIEJO",
+        "ANCIANO"
+      ],
+      "pos": "adjective",
+      "example": "El carro azul es antiguo."
+    },
+    {
+      "word": "DESPEDIR",
+      "gloss": "decir 'hasta luego' al terminar de ver a alguien",
+      "synonyms": [
+        "acabar",
+        "finalizar"
+      ],
+      "pos": "verb",
+      "example": "Me quiero despedir."
+    },
+    {
+      "word": "AGUANTAR",
+      "gloss": "soportar algo sin quejarse",
+      "synonyms": [
+        "SOPORTAR"
+      ],
+      "pos": "verb",
+      "example": "Puedo aguantar horas."
+    },
+    {
+      "word": "ADMITIR",
+      "gloss": "aceptar la verdad de algo",
+      "synonyms": [
+        "ACEPTAR",
+        "CONFESAR"
+      ],
+      "pos": "verb",
+      "example": "Debo admitir que ronco."
+    },
+    {
+      "word": "AVISAR",
+      "gloss": "informar a alguien con anticipación",
+      "synonyms": [
+        "ADVERTIR",
+        "ALERTAR"
+      ],
+      "pos": "verb",
+      "example": "Vino sin avisar."
+    },
+    {
+      "word": "PEGAR",
+      "gloss": "hacer que dos cosas queden juntas",
+      "synonyms": [
+        "adherir"
+      ],
+      "pos": "verb",
+      "example": "Esta etiqueta es fácil de pegar."
+    },
+    {
+      "word": "FINALMENTE",
+      "gloss": "algo que ocurre después de un tiempo",
+      "synonyms": [
+        "ALFIN",
+        "PORFIN"
+      ],
+      "pos": "adverb",
+      "example": "¡Finalmente!"
+    },
+    {
+      "word": "FANTÁSTICO",
+      "gloss": "algo muy bueno o extraordinario",
+      "pos": "adjective",
+      "example": "¡Fantástico!"
+    },
+    {
+      "word": "CUBRIR",
+      "gloss": "poner algo encima que oculte todo",
+      "synonyms": [
+        "ocultar"
+      ],
+      "pos": "verb",
+      "example": "Con humor, él pudo cubrir su tristeza."
+    },
+    {
+      "word": "SORPRENDER",
+      "gloss": "hacer que alguien no espere algo y se asombre.",
+      "synonyms": [
+        "desconcertar"
+      ],
+      "pos": "verb",
+      "example": "Lo voy a sorprender."
+    },
+    {
+      "word": "ENTERO",
+      "gloss": "que está completo, sin partes faltantes",
+      "synonyms": [
+        "COMPLETO",
+        "INTEGRO"
+      ],
+      "pos": "noun",
+      "example": "Leí el libro entero."
+    },
+    {
+      "word": "APENAS",
+      "gloss": "hacer algo cuando queda muy poco tiempo o muy poco",
+      "synonyms": [
+        "justo",
+        "recien"
+      ],
+      "pos": "adverb",
+      "example": "Apenas cené."
+    },
+    {
+      "word": "HABLADO",
+      "gloss": "que ha sido expresado con palabras",
+      "synonyms": [
+        "DIJO"
+      ],
+      "pos": "adjective",
+      "example": "¿Quién ha hablado?"
+    },
+    {
+      "word": "OSCURO",
+      "gloss": "que no tiene luz o es difícil de ver.",
+      "pos": "adjective",
+      "example": "Está oscuro."
+    },
+    {
+      "word": "VIGILAR",
+      "gloss": "cuidar mirando con atención",
+      "synonyms": [
+        "observar",
+        "supervisar"
+      ],
+      "pos": "verb",
+      "example": "¿Quién va a vigilar la parrilla?"
+    },
+    {
+      "word": "SOPORTAR",
+      "gloss": "aguantar algo difícil sin quejarse.",
+      "synonyms": [
+        "tolerar"
+      ],
+      "pos": "verb",
+      "example": "No lo puede soportar."
+    },
+    {
+      "word": "CALIENTE",
+      "gloss": "que tiene mucha temperatura o quema al tocar.",
+      "synonyms": [
+        "ardiente"
+      ],
+      "pos": "adjective",
+      "example": "Está caliente."
+    },
+    {
+      "word": "DEPENDER",
+      "gloss": "no poder funcionar sin otra cosa",
+      "synonyms": [
+        "condicionar"
+      ],
+      "pos": "verb",
+      "example": "Puedes depender de su ayuda."
+    },
+    {
+      "word": "VISITAR",
+      "gloss": "ir a ver a alguien o un lugar",
+      "synonyms": [
+        "RECORRER",
+        "INSPECCIONAR"
+      ],
+      "pos": "verb",
+      "example": "Debería visitar Kioto."
+    },
+    {
+      "word": "INVESTIGAR",
+      "gloss": "buscar información sobre algo con cuidado",
+      "synonyms": [
+        "buscar",
+        "averiguar"
+      ],
+      "pos": "verb",
+      "example": "Piensan investigar ese caso."
+    },
+    {
+      "word": "PRINCIPAL",
+      "gloss": "lo más importante de un grupo o cosa",
+      "synonyms": [
+        "importante",
+        "fundamental"
+      ],
+      "pos": "adjective",
+      "example": "Eso es lo principal."
+    },
+    {
+      "word": "SALTAR",
+      "gloss": "subir rápidamente con las piernas o los pies",
+      "pos": "verb",
+      "example": "Sabe saltar."
+    },
+    {
+      "word": "ORDENAR",
+      "gloss": "decir qué se debe hacer en un momento dado",
+      "synonyms": [
+        "mandar",
+        "decir"
+      ],
+      "pos": "verb",
+      "example": "Debería ordenar esa pieza."
+    },
+    {
+      "word": "CULPABLE",
+      "gloss": "que hizo algo malo, a veces sin querer.",
+      "synonyms": [
+        "responsable",
+        "involucrado"
+      ],
+      "pos": "adjective",
+      "example": "No soy culpable."
+    },
+    {
+      "word": "APAGAR",
+      "gloss": "hacer que algo deje de funcionar o emitir luz",
+      "synonyms": [
+        "CORTAR"
+      ],
+      "pos": "verb",
+      "example": "¿Puedo apagar la luz?"
+    },
+    {
+      "word": "RELAJAR",
+      "gloss": "hacer que el cuerpo o la mente estén más tranquilos",
+      "pos": "verb",
+      "synonyms": [
+        "tranquilizar"
+      ],
+      "example": "Voy al parque cuando me quiero relajar."
+    },
+    {
+      "word": "CORONEL",
+      "gloss": "persona con un puesto importante en un grupo.",
+      "pos": "noun",
+      "synonyms": [
+        "jefe"
+      ],
+      "example": "El coronel es inocente."
+    },
+    {
+      "word": "APUESTO",
+      "gloss": "que tiene buena presentación y ropa elegante.",
+      "synonyms": [
+        "elegante"
+      ],
+      "pos": "noun",
+      "example": "Él es muy apuesto."
+    },
+    {
+      "word": "ESTUPENDO",
+      "gloss": "algo muy bueno o que gusta mucho",
+      "synonyms": [
+        "fantástico",
+        "maravilloso"
+      ],
+      "pos": "adjective",
+      "example": "Estupendo."
+    },
+    {
+      "word": "CAUSAR",
+      "gloss": "hacer que algo pase o exista",
+      "synonyms": [
+        "originar"
+      ],
+      "pos": "verb",
+      "example": "No quiero causar pánico."
+    },
+    {
+      "word": "RETIRAR",
+      "gloss": "llevar algo o a alguien lejos de un lugar",
+      "synonyms": [
+        "sacar",
+        "quitar"
+      ],
+      "pos": "verb",
+      "example": "Debo ir a retirar dinero."
+    },
+    {
+      "word": "PASEAR",
+      "gloss": "caminar despacio por un sitio bonito",
+      "synonyms": [
+        "caminar",
+        "recorrer"
+      ],
+      "pos": "verb",
+      "example": "Apetece pasear."
+    },
+    {
+      "word": "SOSPECHOSO",
+      "gloss": "que hace dudar o no parece normal",
+      "synonyms": [
+        "dudoso",
+        "raro"
+      ],
+      "pos": "adjective",
+      "example": "Parece sospechoso."
+    },
+    {
+      "word": "VENGAR",
+      "gloss": "tomar represalia por un daño recibido",
+      "synonyms": [
+        "REHABILITAR"
+      ],
+      "pos": "verb",
+      "example": "¿Pero de qué te quieres vengar?"
+    },
+    {
+      "word": "ASUSTADO",
+      "gloss": "que siente miedo o temor",
+      "synonyms": [
+        "ATERRORIZADO",
+        "MIEDOSO"
+      ],
+      "pos": "adjective",
+      "example": "Estoy asustado."
+    },
+    {
+      "word": "MUDAR",
+      "gloss": "cambiar de casa o de ropa",
+      "synonyms": [
+        "cambiar"
+      ],
+      "pos": "verb",
+      "example": "Me voy a mudar."
+    },
+    {
+      "word": "DEBIDO",
+      "gloss": "que ocurre porque algo antes pasó",
+      "pos": "adjective",
+      "synonyms": [
+        "porque",
+        "consecuencia"
+      ],
+      "example": "Él se atrasó debido a la nieve."
+    },
+    {
+      "word": "HALLAR",
+      "gloss": "encontrar algo que se buscaba",
+      "synonyms": [
+        "ENCONTRAR"
+      ],
+      "pos": "verb",
+      "example": "No puedo hallar la dirección de mi hotel."
+    },
+    {
+      "word": "SUGERIR",
+      "gloss": "decir qué se podría hacer",
+      "pos": "verb",
+      "example": "Estaba a punto de sugerir lo mismo."
+    },
+    {
+      "word": "COMÚN",
+      "gloss": "algo que muchas personas hacen o conocen",
+      "synonyms": [
+        "habitual",
+        "normal"
+      ],
+      "pos": "adjective",
+      "example": "Es un error común."
+    },
+    {
+      "word": "SUCIO",
+      "gloss": "que tiene manchas o está lleno de tierra",
+      "synonyms": [
+        "desaseado"
+      ],
+      "pos": "adjective",
+      "example": "Está sucio."
+    },
+    {
+      "word": "COMETER",
+      "gloss": "hacer algo, sobre todo algo malo",
+      "synonyms": [
+        "hacer",
+        "realizar"
+      ],
+      "pos": "verb",
+      "example": "Es fácil cometer errores."
+    },
+    {
+      "word": "TOMADO",
+      "gloss": "que ha sido ingerido o consumido",
+      "synonyms": [
+        "CONSUMIDO"
+      ],
+      "pos": "adjective",
+      "example": "Has tomado todo."
+    },
+    {
+      "word": "DEBAJO",
+      "gloss": "en un lugar inferior a otro",
+      "synonyms": [
+        "ABAJO",
+        "INFERIOR"
+      ],
+      "pos": "adverb",
+      "example": "Estoy debajo del árbol."
+    },
+    {
+      "word": "BRILLANTE",
+      "gloss": "que emite o refleja mucha luz",
+      "synonyms": [
+        "RELUCIENTE"
+      ],
+      "pos": "adjective",
+      "example": "Es muy brillante."
+    },
+    {
+      "word": "REPETIR",
+      "gloss": "hacer algo otra vez",
+      "synonyms": [
+        "RECORDAR"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes repetir?"
+    },
+    {
+      "word": "CRUZAR",
+      "gloss": "pasar de un lado a otro",
+      "synonyms": [
+        "pasar"
+      ],
+      "pos": "verb",
+      "example": "No debes cruzar aquí."
+    },
+    {
+      "word": "FALLAR",
+      "gloss": "no lograr lo que se intenta",
+      "pos": "verb",
+      "example": "Acabas de fallar."
+    },
+    {
+      "word": "ENORME",
+      "gloss": "muy grande, más que lo normal.",
+      "pos": "adjective",
+      "example": "Es enorme."
+    },
+    {
+      "word": "APOSTAR",
+      "gloss": "dar dinero en un juego donde puede ganar o perder.",
+      "synonyms": [
+        "jugar",
+        "arriesgar"
+      ],
+      "pos": "verb",
+      "example": "Deja de apostar."
+    },
+    {
+      "word": "CONTESTAR",
+      "gloss": "decir algo cuando alguien pregunta",
+      "synonyms": [
+        "responder",
+        "replicar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes contestar?"
+    },
+    {
+      "word": "PERMANECER",
+      "gloss": "quedarse en un lugar o estado",
+      "synonyms": [
+        "QUEDAR",
+        "CONTINUAR"
+      ],
+      "pos": "verb",
+      "example": "Debemos permanecer aquí."
+    },
+    {
+      "word": "LARGAR",
+      "gloss": "soltar o dejar ir algo",
+      "synonyms": [
+        "SOLTAR",
+        "DEJAR"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "ATREVER",
+      "gloss": "hacer algo difícil sin miedo.",
+      "synonyms": [
+        "animarse"
+      ],
+      "pos": "verb",
+      "example": "¿Os vais a atrever a saltar desde aquí?"
+    },
+    {
+      "word": "CONVENCER",
+      "gloss": "lograr que alguien crea o acepte algo",
+      "pos": "verb",
+      "example": "No me vas a convencer."
+    },
+    {
+      "word": "HAYAS",
+      "gloss": "forma del verbo haber en presente de subjuntivo",
+      "synonyms": [
+        "EXISTAS",
+        "TENGAS"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "RIDÍCULO",
+      "gloss": "algo que parece tonto o muy extraño.",
+      "synonyms": [
+        "gracioso"
+      ],
+      "pos": "noun",
+      "example": "¡Ridículo!"
+    },
+    {
+      "word": "QUEMAR",
+      "gloss": "hacer que algo se dañe con fuego",
+      "pos": "verb",
+      "example": "Se va a quemar."
+    },
+    {
+      "word": "SEPARAR",
+      "gloss": "poner cosas en sitios distintos",
+      "pos": "verb",
+      "synonyms": [
+        "apartar"
+      ],
+      "example": "¿Las vas a separar?"
+    },
+    {
+      "word": "CONTRATAR",
+      "gloss": "pagar a alguien por hacer un servicio",
+      "pos": "verb",
+      "synonyms": [
+        "fichar"
+      ],
+      "example": "Te quiero contratar."
+    },
+    {
+      "word": "MATADO",
+      "gloss": "que ha sido asesinado",
+      "synonyms": [
+        "asesinado"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "OBSERVAR",
+      "gloss": "mirar con atención",
+      "synonyms": [
+        "mirar",
+        "vigilar"
+      ],
+      "pos": "verb",
+      "example": "Déjala observar."
+    },
+    {
+      "word": "ABSOLUTO",
+      "gloss": "que es total y no tiene dudas.",
+      "synonyms": [
+        "total",
+        "completo"
+      ],
+      "pos": "adjective",
+      "example": "No, en absoluto."
+    },
+    {
+      "word": "TARDAR",
+      "gloss": "usar mucho tiempo en hacer algo",
+      "synonyms": [
+        "demorar",
+        "retrasar"
+      ],
+      "pos": "verb",
+      "example": "No vamos a tardar."
+    },
+    {
+      "word": "MENUDO",
+      "gloss": "que es pequeño en forma.",
+      "synonyms": [
+        "pequeño",
+        "chico"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "LASTIMAR",
+      "gloss": "causar dolor físico o tristeza",
+      "pos": "verb",
+      "example": "Te vas a lastimar."
+    },
+    {
+      "word": "DISPUESTO",
+      "gloss": "que ya está listo",
+      "synonyms": [
+        "listo",
+        "preparado"
+      ],
+      "pos": "adjective",
+      "example": "Estoy dispuesto a todo."
+    },
+    {
+      "word": "ADIVINAR",
+      "gloss": "acertar algo sin saberlo con certeza.",
+      "synonyms": [
+        "suponer",
+        "intuir"
+      ],
+      "pos": "verb",
+      "example": "Déjame adivinar."
+    },
+    {
+      "word": "COMPROBAR",
+      "gloss": "mirar si algo está bien o es correcto",
+      "synonyms": [
+        "revisar"
+      ],
+      "pos": "verb",
+      "example": "Lo voy a comprobar."
+    },
+    {
+      "word": "PEDIDO",
+      "gloss": "lo que quieres comprar o recibir de un lugar.",
+      "synonyms": [
+        "compra",
+        "encargo"
+      ],
+      "pos": "adjective",
+      "example": "He pedido pan."
+    },
+    {
+      "word": "FIRMAR",
+      "gloss": "poner tu nombre en un papel.",
+      "synonyms": [
+        "suscribir"
+      ],
+      "pos": "verb",
+      "example": "¿Sabes firmar?"
+    },
+    {
+      "word": "PLANEAR",
+      "gloss": "pensar cómo hacer algo antes de hacerlo.",
+      "synonyms": [
+        "preparar",
+        "idear"
+      ],
+      "pos": "verb",
+      "example": "Prefiero planear mis actividades en horarios fijos para que pueda manejar mi tiempo."
+    },
+    {
+      "word": "INTERIOR",
+      "gloss": "parte que está dentro de algo.",
+      "synonyms": [
+        "dentro"
+      ],
+      "pos": "noun",
+      "example": "Se ríe en su interior."
+    },
+    {
+      "word": "ESTÁIS",
+      "gloss": "cómo se dice con vosotros",
+      "synonyms": [
+        "sois"
+      ],
+      "pos": "verb",
+      "example": "Ahí estáis."
+    },
+    {
+      "word": "DESHACER",
+      "gloss": "desarmar o desordenar lo que estaba hecho.",
+      "synonyms": [
+        "desarmar",
+        "destruir"
+      ],
+      "pos": "verb",
+      "example": "¿De qué me puedo deshacer?"
+    },
+    {
+      "word": "DEFENDER",
+      "gloss": "proteger a alguien o algo de un daño.",
+      "synonyms": [
+        "proteger",
+        "cuidar"
+      ],
+      "pos": "verb",
+      "example": "Lo acaba de defender."
+    },
+    {
+      "word": "FAMOSO",
+      "gloss": "que es muy conocido por muchas personas.",
+      "synonyms": [
+        "célebre",
+        "conocido"
+      ],
+      "pos": "adjective",
+      "example": "Soy famoso."
+    },
+    {
+      "word": "DUDAR",
+      "gloss": "no estar seguro de algo.",
+      "synonyms": [
+        "vacilar",
+        "titubear"
+      ],
+      "pos": "verb",
+      "example": "Perdóname por dudar."
+    },
+    {
+      "word": "SUPERAR",
+      "gloss": "lograr pasar algo que es difícil o complicado.",
+      "pos": "verb",
+      "synonyms": [
+        "pasar"
+      ],
+      "example": "Pueden superar su miedo."
+    },
+    {
+      "word": "ENFERMAR",
+      "gloss": "empezar a sentirse mal o con dolor en el cuerpo.",
+      "pos": "verb",
+      "example": "No quiero enfermar."
+    },
+    {
+      "word": "SACO",
+      "gloss": "cosa grande de tela donde se meten cosas",
+      "synonyms": [
+        "talega"
+      ],
+      "pos": "noun",
+      "example": "Quiero un saco de papas."
+    },
+    {
+      "word": "PROFUNDO",
+      "gloss": "que está muy lejos hacia abajo.",
+      "synonyms": [
+        "hondo",
+        "lejano"
+      ],
+      "pos": "adjective",
+      "example": "¿Qué tan profundo?"
+    },
+    {
+      "word": "ESCRITO",
+      "gloss": "que está expresado en papel o digitalmente.",
+      "synonyms": [
+        "redactado"
+      ],
+      "pos": "noun",
+      "example": "Ponlo por escrito."
+    },
+    {
+      "word": "LIBERAR",
+      "gloss": "dejar libre a alguien o algo que estaba preso.",
+      "synonyms": [
+        "soltar"
+      ],
+      "pos": "verb",
+      "example": "Se negaron a liberar a los rehenes."
+    },
+    {
+      "word": "EMBARAZADO",
+      "gloss": "que espera un hijo.",
+      "synonyms": [
+        "encinta",
+        "preñada"
+      ],
+      "pos": "adjective",
+      "example": "Estoy embarazado."
+    },
+    {
+      "word": "DOBLE",
+      "gloss": "que es dos veces mayor o que tiene dos partes iguales.",
+      "synonyms": [
+        "duplicado"
+      ],
+      "pos": "noun",
+      "example": "¿Doble o pasas?"
+    },
+    {
+      "word": "CELEBRAR",
+      "gloss": "hacer algo divertido en un día importante.",
+      "synonyms": [
+        "fiesta",
+        "conmemorar"
+      ],
+      "pos": "verb",
+      "example": "Ahora es hora de celebrar."
+    },
+    {
+      "word": "ACASO",
+      "gloss": "tal vez o quizá.",
+      "synonyms": [
+        "quizá",
+        "tal vez"
+      ],
+      "pos": "adverb",
+      "example": "¿Acaso es así?"
+    },
+    {
+      "word": "DORMIDO",
+      "gloss": "en estado de sueño.",
+      "synonyms": [
+        "durmiendo",
+        "soñoliento"
+      ],
+      "pos": "adjective",
+      "example": "Está dormido."
+    },
+    {
+      "word": "NOTAR",
+      "gloss": "darse cuenta de algo por los sentidos.",
+      "synonyms": [
+        "ver",
+        "observar"
+      ],
+      "pos": "verb",
+      "example": "Lo va a notar tarde o temprano."
+    },
+    {
+      "word": "ALCANZAR",
+      "gloss": "llegar a tocar o conseguir algo.",
+      "synonyms": [
+        "lograr",
+        "conseguir"
+      ],
+      "pos": "verb",
+      "example": "No lo puedo alcanzar."
+    },
+    {
+      "word": "LANZAR",
+      "gloss": "hacer que algo vuele lejos con la mano",
+      "synonyms": [
+        "tirar",
+        "arrojar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes lanzar una bola rápida?"
+    },
+    {
+      "word": "ARRESTAR",
+      "gloss": "llevar a alguien a un lugar seguro porque hizo algo incorrecto.",
+      "synonyms": [
+        "detener"
+      ],
+      "pos": "verb",
+      "example": "¿Me vas a arrestar?"
+    },
+    {
+      "word": "DIRECTO",
+      "gloss": "que va sin rodeos o intermediarios.",
+      "synonyms": [
+        "inmediato"
+      ],
+      "pos": "adjective",
+      "example": "Seré directo."
+    },
+    {
+      "word": "INFORMAR",
+      "gloss": "contar algo nuevo a otra persona",
+      "synonyms": [
+        "decir",
+        "avisar"
+      ],
+      "pos": "verb",
+      "example": "¿A quién debería informar?"
+    },
+    {
+      "word": "OLVIDADO",
+      "gloss": "que ya no se recuerda.",
+      "synonyms": [
+        "desatendido"
+      ],
+      "pos": "adjective",
+      "example": "La he olvidado."
+    },
+    {
+      "word": "CERDO",
+      "gloss": "roedor grande que gruñe y vive en el campo.",
+      "synonyms": [
+        "marrano"
+      ],
+      "pos": "noun",
+      "example": "El cerdo es rosa."
+    },
+    {
+      "word": "OBVIAMENTE",
+      "gloss": "de forma que todos lo entienden sin explicación.",
+      "synonyms": [
+        "evidentemente"
+      ],
+      "pos": "adverb",
+      "example": "Obviamente."
+    },
+    {
+      "word": "VACÍO",
+      "gloss": "lugar donde no hay cosas",
+      "synonyms": [
+        "desocupado",
+        "libre"
+      ],
+      "pos": "adjective",
+      "example": "Está vacío."
+    },
+    {
+      "word": "PERSEGUIR",
+      "gloss": "ir detrás de alguien o algo sin parar.",
+      "synonyms": [
+        "alcanzar",
+        "correr"
+      ],
+      "pos": "verb",
+      "example": "A mi perro le gusta perseguir ardillas."
+    },
+    {
+      "word": "SOÑAR",
+      "gloss": "ver cosas en la mente mientras duermes.",
+      "synonyms": [
+        "imaginar",
+        "fantasear"
+      ],
+      "pos": "verb",
+      "example": "Quiero soñar."
+    },
+    {
+      "word": "DECIDIDO",
+      "gloss": "que actúa con seguridad y sin dudar.",
+      "pos": "adjective",
+      "synonyms": [
+        "seguro"
+      ],
+      "example": "Eres decidido."
+    },
+    {
+      "word": "APOYAR",
+      "gloss": "ayudar o respaldar a alguien o algo.",
+      "synonyms": [
+        "respaldar"
+      ],
+      "pos": "verb",
+      "example": "¿A quién debo apoyar?"
+    },
+    {
+      "word": "CONTRARIO",
+      "gloss": "que es distinto o no igual.",
+      "synonyms": [
+        "distinto",
+        "diferente"
+      ],
+      "pos": "adjective",
+      "example": "Hizo lo contrario."
+    },
+    {
+      "word": "GRAVE",
+      "gloss": "que es serio o de mucha importancia.",
+      "synonyms": [
+        "serio",
+        "importante"
+      ],
+      "pos": "adjective",
+      "example": "¿Es grave?"
+    },
+    {
+      "word": "LOCAL",
+      "gloss": "que pertenece a un sitio cercano o conocido.",
+      "synonyms": [
+        "cercano",
+        "de aquí"
+      ],
+      "pos": "adjective",
+      "example": "El equipo local ganó."
+    },
+    {
+      "word": "SALIDO",
+      "gloss": "que ya no está en un lugar o situación.",
+      "synonyms": [
+        "ido",
+        "fuera"
+      ],
+      "pos": "adjective",
+      "example": "Han salido."
+    },
+    {
+      "word": "ASESINADO",
+      "gloss": "que ha sido matado intencionalmente.",
+      "synonyms": [
+        "matado"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "DISTINTO",
+      "gloss": "que es diferente.",
+      "synonyms": [
+        "diferente"
+      ],
+      "pos": "adjective",
+      "example": "Yo pienso distinto."
+    },
+    {
+      "word": "VUESTRA",
+      "gloss": "de ustedes, que pertenece a ellas",
+      "pos": "noun",
+      "example": "Veo vuestra casa."
+    },
+    {
+      "word": "MEJORAR",
+      "gloss": "hacer que algo quede más bueno",
+      "synonyms": [
+        "superar"
+      ],
+      "pos": "verb",
+      "example": "Vas a mejorar."
+    },
+    {
+      "word": "CAZAR",
+      "gloss": "buscar y atrapar seres vivos que se mueven.",
+      "synonyms": [
+        "perseguir"
+      ],
+      "pos": "verb",
+      "example": "Dejó de cazar."
+    },
+    {
+      "word": "FINGIR",
+      "gloss": "simular algo que no es real.",
+      "synonyms": [
+        "simular"
+      ],
+      "pos": "verb",
+      "example": "¿Para qué fingir?"
+    },
+    {
+      "word": "ROTO",
+      "gloss": "que está hecho pedazos o no funciona.",
+      "synonyms": [
+        "dañado"
+      ],
+      "pos": "adjective",
+      "example": "Está roto."
+    },
+    {
+      "word": "MENOR",
+      "gloss": "que tiene pocos años de vida.",
+      "synonyms": [
+        "pequeño",
+        "joven"
+      ],
+      "pos": "adjective",
+      "example": "Yo soy menor que él."
+    },
+    {
+      "word": "FRANCÉS",
+      "gloss": "persona o cosa de un país de Europa",
+      "synonyms": [
+        "gala",
+        "europeo"
+      ],
+      "pos": "noun",
+      "example": "Soy francés."
+    },
+    {
+      "word": "PRESENTE",
+      "gloss": "que está aquí ahora mismo.",
+      "pos": "adjective",
+      "synonyms": [
+        "aquí"
+      ],
+      "example": "Nadie estaba presente."
+    },
+    {
+      "word": "OCULTAR",
+      "gloss": "poner algo donde no se puede ver.",
+      "synonyms": [
+        "esconder",
+        "taparse"
+      ],
+      "pos": "verb",
+      "example": "¿Qué intentas ocultar?"
+    },
+    {
+      "word": "CONTENTO",
+      "gloss": "que está feliz y sin preocupaciones.",
+      "pos": "adjective",
+      "synonyms": [
+        "feliz"
+      ],
+      "example": "¿Contento?"
+    },
+    {
+      "word": "ROBADO",
+      "gloss": "que ha sido tomado ilegalmente.",
+      "synonyms": [
+        "sustraído"
+      ],
+      "pos": "adjective",
+      "example": "Nos ha robado."
+    },
+    {
+      "word": "ENCENDER",
+      "gloss": "hacer que algo empiece a funcionar o dé luz",
+      "synonyms": [
+        "activar",
+        "prender"
+      ],
+      "pos": "verb",
+      "example": "¿Puedo encender la luz?"
+    },
+    {
+      "word": "JUZGAR",
+      "gloss": "emitir un veredicto sobre algo o alguien.",
+      "pos": "verb",
+      "example": "No puedo juzgar."
+    },
+    {
+      "word": "INCLUIR",
+      "gloss": "hacer que algo forme parte de un conjunto.",
+      "synonyms": [
+        "incorporar",
+        "agregar"
+      ],
+      "pos": "verb",
+      "example": "¿Qué debe incluir un desayuno sano?"
+    },
+    {
+      "word": "PODEROSO",
+      "gloss": "que tiene mucha fuerza o control",
+      "synonyms": [
+        "fuerte",
+        "influente"
+      ],
+      "pos": "adjective",
+      "example": "Es rico y poderoso."
+    },
+    {
+      "word": "CULPAR",
+      "gloss": "atribuir responsabilidad por un error o daño",
+      "synonyms": [
+        "señalar"
+      ],
+      "pos": "verb",
+      "example": "No lo puedo culpar."
+    },
+    {
+      "word": "FORMAR",
+      "gloss": "crear o dar estructura a algo nuevo.",
+      "pos": "verb",
+      "example": "Quiero formar una familia."
+    },
+    {
+      "word": "ADORAR",
+      "gloss": "querer mucho a alguien o algo.",
+      "synonyms": [
+        "amar",
+        "querer"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "INTERESADO",
+      "gloss": "que busca su propio provecho.",
+      "synonyms": [
+        "egoísta",
+        "ventajista"
+      ],
+      "pos": "adjective",
+      "example": "No estoy interesado."
+    },
+    {
+      "word": "RENDIR",
+      "gloss": "dar algo a quien lo pide o manda.",
+      "pos": "verb",
+      "synonyms": [
+        "ceder"
+      ],
+      "example": "Tienes que rendir la tarea al profesor antes del viernes."
+    },
+    {
+      "word": "ENOJADO",
+      "gloss": "que siente mucha rabia",
+      "synonyms": [
+        "irritado"
+      ],
+      "pos": "adjective",
+      "example": "Estoy enojado."
+    },
+    {
+      "word": "SONREÍR",
+      "gloss": "hacer forma feliz con la boca",
+      "pos": "verb",
+      "example": "Me hizo sonreír."
+    },
+    {
+      "word": "APUNTAR",
+      "gloss": "señalar algo con la mano",
+      "synonyms": [
+        "mostrar"
+      ],
+      "pos": "verb",
+      "example": "¿Quién te enseñó a apuntar?"
+    },
+    {
+      "word": "OBLIGAR",
+      "gloss": "hacer que alguien haga algo que no quiere",
+      "synonyms": [
+        "mandar"
+      ],
+      "pos": "verb",
+      "example": "No me puedes obligar."
+    },
+    {
+      "word": "SOLAMENTE",
+      "gloss": "de manera exclusiva",
+      "synonyms": [
+        "únicamente"
+      ],
+      "pos": "adverb",
+      "example": "Uso externo solamente."
+    },
+    {
+      "word": "OIGA",
+      "gloss": "forma de llamar a otra persona",
+      "synonyms": [
+        "escucha",
+        "oye"
+      ],
+      "pos": "verb",
+      "example": "Oiga, venga aquí."
+    },
+    {
+      "word": "CUBIERTO",
+      "gloss": "tapado por algo encima",
+      "synonyms": [
+        "tapado"
+      ],
+      "pos": "adjective",
+      "example": "¡Ponte a cubierto!"
+    },
+    {
+      "word": "TERCERO",
+      "gloss": "que ocupa el lugar número tres",
+      "synonyms": [
+        "tres"
+      ],
+      "pos": "adjective",
+      "example": "Era el tercero de la cola."
+    },
+    {
+      "word": "FUMAR",
+      "gloss": "sacar aire de los pulmones por la boca con un cigarro encendido.",
+      "synonyms": [
+        "chupar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedo fumar?"
+    },
+    {
+      "word": "NACIONAL",
+      "gloss": "Que pertenece al país donde se vive.",
+      "synonyms": [
+        "local"
+      ],
+      "pos": "adjective",
+      "example": "Hoy es fiesta nacional."
+    },
+    {
+      "word": "DETENTE",
+      "gloss": "pide que alguien no siga haciendo algo.",
+      "synonyms": [
+        "alto",
+        "alto ahí"
+      ],
+      "pos": "adjective",
+      "example": "¡Sam, detente!"
+    },
+    {
+      "word": "PRESTAR",
+      "gloss": "dar algo temporalmente",
+      "synonyms": [
+        "dar",
+        "ceder"
+      ],
+      "pos": "verb",
+      "example": "Prestar dinero."
+    },
+    {
+      "word": "DÉBIL",
+      "gloss": "que tiene poca fuerza",
+      "synonyms": [
+        "frágil"
+      ],
+      "pos": "adjective",
+      "example": "Eres débil."
+    },
+    {
+      "word": "INMEDIATO",
+      "gloss": "que ocurre sin demora",
+      "synonyms": [
+        "instantáneo"
+      ],
+      "pos": "adjective",
+      "example": "Hazlo de inmediato."
+    },
+    {
+      "word": "ARRIESGAR",
+      "gloss": "hacer que algo pueda dañarse o perderse",
+      "synonyms": [
+        "aventurar",
+        "exponer"
+      ],
+      "pos": "verb",
+      "example": "No debes arriesgar."
+    },
+    {
+      "word": "FIJAR",
+      "gloss": "poner algo en un lugar seguro",
+      "synonyms": [
+        "colocar"
+      ],
+      "pos": "verb",
+      "example": "Prohibido fijar carteles."
+    },
+    {
+      "word": "VESTIR",
+      "gloss": "ponerse ropa",
+      "synonyms": [
+        "ponerse"
+      ],
+      "pos": "verb",
+      "example": "Deberías irte a vestir."
+    },
+    {
+      "word": "EMPUJAR",
+      "gloss": "mover con las manos aplicando fuerza",
+      "synonyms": [
+        "desplazar"
+      ],
+      "pos": "verb",
+      "example": "No empujar."
+    },
+    {
+      "word": "COMPLICADO",
+      "gloss": "que tiene muchas dificultades",
+      "synonyms": [
+        "difícil"
+      ],
+      "pos": "adjective",
+      "example": "Es complicado."
+    },
+    {
+      "word": "ASUMIR",
+      "gloss": "aceptar que algo es tu responsabilidad.",
+      "synonyms": [
+        "aceptar",
+        "cargar"
+      ],
+      "pos": "verb",
+      "example": "No puedo asumir el riesgo."
+    },
+    {
+      "word": "ABURRIDO",
+      "gloss": "que no es divertido",
+      "synonyms": [
+        "soso",
+        "tedioso"
+      ],
+      "pos": "adjective",
+      "example": "Es aburrido."
+    },
+    {
+      "word": "CONFIRMAR",
+      "gloss": "decir que algo es verdad",
+      "synonyms": [
+        "asegurar",
+        "afirmar"
+      ],
+      "pos": "verb",
+      "example": "Favor de confirmar."
+    },
+    {
+      "word": "PURO",
+      "gloss": "que no tiene otras cosas dentro",
+      "synonyms": [
+        "solo"
+      ],
+      "pos": "noun",
+      "example": "Es oro puro."
+    },
+    {
+      "word": "PAPO",
+      "gloss": "Parte blanda de la cara, cerca de la mandíbula.",
+      "synonyms": [
+        "cachete"
+      ],
+      "pos": "adjective",
+      "example": "Mi perro mueve el papo cuando ve su comida favorita."
+    },
+    {
+      "word": "BEBIDO",
+      "gloss": "que ha tomado demasiado líquido",
+      "synonyms": [
+        "tomado"
+      ],
+      "pos": "adjective",
+      "example": "¿Has bebido?"
+    },
+    {
+      "word": "CÓMODO",
+      "gloss": "que no da molestias",
+      "pos": "adjective",
+      "example": "Es cómodo."
+    },
+    {
+      "word": "ESCOGER",
+      "gloss": "elegir entre varias cosas",
+      "synonyms": [
+        "elegir",
+        "seleccionar"
+      ],
+      "pos": "verb",
+      "example": "No podías escoger."
+    },
+    {
+      "word": "MONTAR",
+      "gloss": "colocar algo en su lugar",
+      "synonyms": [
+        "subir",
+        "armar"
+      ],
+      "pos": "verb",
+      "example": "Voy a montar la estantería en la pared."
+    },
+    {
+      "word": "RENUNCIAR",
+      "gloss": "dejar de hacer algo que se hacía",
+      "synonyms": [
+        "dejar",
+        "soltar"
+      ],
+      "pos": "verb",
+      "example": "Voy a renunciar."
+    },
+    {
+      "word": "FAMILIAR",
+      "gloss": "que pertenece a las personas con las que se vive o se tiene relación cercana",
+      "synonyms": [
+        "casero"
+      ],
+      "pos": "noun",
+      "example": "¿Suena familiar?"
+    },
+    {
+      "word": "ENFADADO",
+      "gloss": "que siente enojo",
+      "synonyms": [
+        "enojado"
+      ],
+      "pos": "adjective",
+      "example": "Está enfadado."
+    },
+    {
+      "word": "EXPLOTAR",
+      "gloss": "usar algo de manera intensa o total.",
+      "pos": "verb",
+      "example": "Las calderas a vapor pueden explotar."
+    },
+    {
+      "word": "JURADO",
+      "gloss": "grupo que decide en competiciones o debates.",
+      "pos": "adjective",
+      "example": "El jurado fue imparcial."
+    },
+    {
+      "word": "TOTAL",
+      "gloss": "que incluye todo",
+      "synonyms": [
+        "completo",
+        "entero"
+      ],
+      "pos": "noun",
+      "example": "Son cinco en total."
+    },
+    {
+      "word": "SOCIAL",
+      "gloss": "que tiene que ver con la convivencia entre personas",
+      "synonyms": [
+        "colectivo",
+        "comunitario"
+      ],
+      "pos": "adjective",
+      "example": "Soy trabajador social."
+    },
+    {
+      "word": "CARGAR",
+      "gloss": "llevar mucho encima",
+      "synonyms": [
+        "llevar",
+        "transportar"
+      ],
+      "pos": "verb",
+      "example": "Déjame cargar tu maleta."
+    },
+    {
+      "word": "EVIDENCIAR",
+      "gloss": "hacer que algo sea muy claro y visible",
+      "synonyms": [
+        "mostrar"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "DURAR",
+      "gloss": "extenderse en el tiempo",
+      "synonyms": [
+        "permanecer",
+        "continuar"
+      ],
+      "pos": "verb",
+      "example": "No va a durar."
+    },
+    {
+      "word": "ATENDER",
+      "gloss": "prestar servicio o ayuda",
+      "synonyms": [
+        "cuidar"
+      ],
+      "pos": "verb",
+      "example": "¿No deberías atender?"
+    },
+    {
+      "word": "ATRAPADO",
+      "gloss": "que no puede escapar",
+      "synonyms": [
+        "preso"
+      ],
+      "pos": "adjective",
+      "example": "Estás atrapado."
+    },
+    {
+      "word": "GASTAR",
+      "gloss": "usar dinero o recursos",
+      "synonyms": [
+        "usar",
+        "consumir"
+      ],
+      "pos": "verb",
+      "example": "Quiero gastar."
+    },
+    {
+      "word": "ADVERTIR",
+      "gloss": "decir a alguien que algo malo puede pasar",
+      "synonyms": [
+        "avisar",
+        "alertar"
+      ],
+      "pos": "verb",
+      "example": "Hay que advertir a los demás."
+    },
+    {
+      "word": "DIARIO",
+      "gloss": "que ocurre siempre, sin falta",
+      "synonyms": [
+        "cotidiano"
+      ],
+      "pos": "noun",
+      "example": "Corro a diario."
+    },
+    {
+      "word": "FÍSICO",
+      "gloss": "que tiene que ver con el cuerpo de las personas",
+      "synonyms": [
+        "corporal"
+      ],
+      "pos": "adjective",
+      "example": "No soy apto para el trabajo físico."
+    },
+    {
+      "word": "DECLARAR",
+      "gloss": "decir algo de manera oficial o pública",
+      "pos": "verb",
+      "synonyms": [
+        "exponer"
+      ],
+      "example": "¿Tienes algo que declarar?"
+    },
+    {
+      "word": "PRETENDER",
+      "gloss": "intentar lograr algo",
+      "synonyms": [
+        "intentar",
+        "fingir"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "HELADO",
+      "gloss": "que se ha quedado congelado",
+      "synonyms": [
+        "congelado"
+      ],
+      "pos": "adjective",
+      "example": "Es un helado."
+    },
+    {
+      "word": "INÚTIL",
+      "gloss": "que no funciona bien o no sirve",
+      "synonyms": [
+        "inservible"
+      ],
+      "pos": "adjective",
+      "example": "Es inútil."
+    },
+    {
+      "word": "COLOCAR",
+      "gloss": "poner en un lugar específico",
+      "synonyms": [
+        "poner"
+      ],
+      "pos": "verb",
+      "example": "Colocar la ropa bien."
+    },
+    {
+      "word": "SOSPECHAR",
+      "gloss": "tener duda sobre algo",
+      "synonyms": [
+        "desconfiar",
+        "dudar"
+      ],
+      "pos": "verb",
+      "example": "¿Qué te hizo sospechar?"
+    },
+    {
+      "word": "RECHAZAR",
+      "gloss": "no aceptar algo",
+      "synonyms": [
+        "negar"
+      ],
+      "pos": "verb",
+      "example": "No te voy a rechazar."
+    },
+    {
+      "word": "FISCAL",
+      "gloss": "relacionado con el dinero que se paga al estado.",
+      "synonyms": [
+        "tributario"
+      ],
+      "pos": "adjective",
+      "example": "El año fiscal termina en diciembre."
+    },
+    {
+      "word": "COCINAR",
+      "gloss": "preparar comida usando fuego u horno",
+      "synonyms": [
+        "cocer"
+      ],
+      "pos": "verb",
+      "example": "Sé cocinar."
+    },
+    {
+      "word": "BORRACHO",
+      "gloss": "que ha bebido demasiado y no está en su estado normal",
+      "synonyms": [
+        "ebrio"
+      ],
+      "pos": "noun",
+      "example": "Estoy borracho."
+    },
+    {
+      "word": "VOTAR",
+      "gloss": "elegir entre varias posibilidades en un papel",
+      "synonyms": [
+        "decidir",
+        "señalar"
+      ],
+      "pos": "verb",
+      "example": "Queremos votar."
+    },
+    {
+      "word": "CONFESAR",
+      "gloss": "decir algo que antes no se decía",
+      "synonyms": [
+        "revelar",
+        "contar"
+      ],
+      "pos": "verb",
+      "example": "Quiero confesar."
+    },
+    {
+      "word": "GRABAR",
+      "gloss": "guardar voces o fotos en un aparato.",
+      "synonyms": [
+        "registrar",
+        "archivar"
+      ],
+      "pos": "verb",
+      "example": "¡Deja de grabar!"
+    },
+    {
+      "word": "ARRANCAR",
+      "gloss": "sacar algo con fuerza o hacer que algo empiece a funcionar",
+      "synonyms": [
+        "extraer"
+      ],
+      "pos": "verb",
+      "example": "Tenemos que arrancar."
+    },
+    {
+      "word": "LLENAR",
+      "gloss": "hacer que algo esté completo o cubierto.",
+      "synonyms": [
+        "completar",
+        "ocupar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes llenar esta bolsa?"
+    },
+    {
+      "word": "INSISTIR",
+      "gloss": "pedir o hacer algo muchas veces sin rendirse",
+      "pos": "verb",
+      "synonyms": [
+        "repetir"
+      ],
+      "example": "Debo insistir."
+    },
+    {
+      "word": "SALUDAR",
+      "gloss": "dirigir palabras de cortesía al llegar o despedirse.",
+      "synonyms": [
+        "INVITAR",
+        "RECIBIR"
+      ],
+      "pos": "verb",
+      "example": "Ella pasó de largo sin saludar."
+    },
+    {
+      "word": "CERCANO",
+      "gloss": "que está muy próximo o es muy allegado.",
+      "synonyms": [
+        "próximo",
+        "allegado"
+      ],
+      "pos": "adjective",
+      "example": "¿Es cercano o lejano a ti?"
+    },
+    {
+      "word": "APARTAR",
+      "gloss": "poner algo en un lugar diferente o moverlo lejos.",
+      "synonyms": [
+        "separar",
+        "mover"
+      ],
+      "pos": "verb",
+      "example": "Apartar la nieve es agotador."
+    },
+    {
+      "word": "EXTRAÑAR",
+      "gloss": "echar de menos a alguien o algo.",
+      "synonyms": [
+        "echar de menos",
+        "añorar"
+      ],
+      "pos": "verb",
+      "example": "Te voy a extrañar."
+    },
+    {
+      "word": "DESPACIO",
+      "gloss": "con lentitud o suavidad.",
+      "synonyms": [
+        "pausadamente"
+      ],
+      "pos": "adverb",
+      "example": "¡Despacio!"
+    },
+    {
+      "word": "METIDO",
+      "gloss": "que está introducido en un lugar.",
+      "synonyms": [
+        "involucrado",
+        "inmerso"
+      ],
+      "pos": "adjective",
+      "example": "¿Dónde te habías metido?"
+    },
+    {
+      "word": "ENAMORAR",
+      "gloss": "sentir un cariño muy fuerte por alguien.",
+      "synonyms": [
+        "querer",
+        "gustar mucho"
+      ],
+      "pos": "verb",
+      "example": "Te vas a enamorar de Brasil."
+    },
+    {
+      "word": "GRANDIOSO",
+      "gloss": "que es majestuoso o impresionante.",
+      "synonyms": [
+        "espléndido"
+      ],
+      "pos": "adjective",
+      "example": "Es grandioso."
+    },
+    {
+      "word": "REALIZAR",
+      "gloss": "hacer algo que se planeó o soñó.",
+      "synonyms": [
+        "hacer",
+        "lograr"
+      ],
+      "pos": "verb",
+      "example": "Debes realizar tus planes."
+    },
+    {
+      "word": "REGISTRAR",
+      "gloss": "guardar información o mirar con atención.",
+      "synonyms": [
+        "apuntar",
+        "observar"
+      ],
+      "pos": "verb",
+      "example": "¿Me tengo que registrar?"
+    },
+    {
+      "word": "HIERBA",
+      "gloss": "vegetación pequeña y verde que crece en terrenos abiertos.",
+      "pos": "noun",
+      "example": "Eso no es hierba."
+    },
+    {
+      "word": "MISTERIO",
+      "gloss": "algo que no se entiende o no se sabe.",
+      "synonyms": [
+        "secreto"
+      ],
+      "pos": "noun",
+      "example": "La vida es un misterio."
+    },
+    {
+      "word": "PARTICULAR",
+      "gloss": "que es específico o poco común.",
+      "synonyms": [
+        "específico"
+      ],
+      "pos": "adjective",
+      "example": "¿Deseas algo en particular?"
+    },
+    {
+      "word": "ALIZAR",
+      "gloss": "hacer que algo quede sin rugosidad.",
+      "synonyms": [
+        "pulir",
+        "alisar"
+      ],
+      "pos": "verb",
+      "example": "Tienes que alizar la sábana antes de tenderla en la cama."
+    },
+    {
+      "word": "COBARDE",
+      "gloss": "persona que siente mucho miedo y no enfrenta lo que le asusta.",
+      "synonyms": [
+        "miedoso"
+      ],
+      "pos": "noun",
+      "example": "Soy un cobarde."
+    },
+    {
+      "word": "MADERA",
+      "gloss": "lo duro de los bosques",
+      "synonyms": [
+        "leño"
+      ],
+      "pos": "noun",
+      "example": "Corto madera."
+    },
+    {
+      "word": "VOMITAR",
+      "gloss": "sacar de la boca lo que está dentro del cuerpo con fuerza.",
+      "synonyms": [
+        "devolver"
+      ],
+      "pos": "verb",
+      "example": "Voy a vomitar."
+    },
+    {
+      "word": "ARROJAR",
+      "gloss": "lanzar algo con fuerza.",
+      "synonyms": [
+        "lanzar",
+        "tirar"
+      ],
+      "pos": "verb",
+      "example": "Se prohíbe arrojar objetos por la ventanilla."
+    },
+    {
+      "word": "CAMPEÓN",
+      "gloss": "persona que gana en un juego o competencia.",
+      "synonyms": [
+        "vencedor"
+      ],
+      "pos": "noun",
+      "example": "Es el campeón."
+    },
+    {
+      "word": "JUGUETE",
+      "gloss": "cosa con la que juegan los niños",
+      "pos": "noun",
+      "example": "¡No es un juguete!"
+    },
+    {
+      "word": "BENDECIR",
+      "gloss": "desear o pedir que algo o alguien tenga buena suerte.",
+      "synonyms": [
+        "desear bien"
+      ],
+      "pos": "verb",
+      "example": "El sacerdote va a bendecir la nueva escuela."
+    },
+    {
+      "word": "CELULAR",
+      "gloss": "aparato pequeño que permite hablar con otros sin hilos.",
+      "synonyms": [
+        "teléfono"
+      ],
+      "pos": "noun",
+      "example": "¿Tenés celular?"
+    },
+    {
+      "word": "SAGRADO",
+      "gloss": "algo muy importante en las creencias de un pueblo.",
+      "pos": "adjective",
+      "synonyms": [
+        "especial"
+      ],
+      "example": "Esto es sagrado."
+    },
+    {
+      "word": "VEAN",
+      "gloss": "observar con atención.",
+      "synonyms": [
+        "miren",
+        "observen"
+      ],
+      "pos": "verb",
+      "example": "¡Vengan y vean!"
+    },
+    {
+      "word": "SOLUCIONAR",
+      "gloss": "encontrar cómo arreglar un problema o algo que no funciona.",
+      "synonyms": [
+        "arreglar",
+        "solventar"
+      ],
+      "pos": "verb",
+      "example": "No lo pudieron solucionar."
+    },
+    {
+      "word": "APRECIAR",
+      "gloss": "valorar algo o alguien positivamente.",
+      "synonyms": [
+        "valorar"
+      ],
+      "pos": "verb",
+      "example": "Él va a apreciar lo que tiene."
+    },
+    {
+      "word": "SECCIÓN",
+      "gloss": "parte diferenciada de un todo.",
+      "synonyms": [
+        "parte",
+        "segmento"
+      ],
+      "pos": "noun",
+      "example": "¿Tienen sección infantil?"
+    },
+    {
+      "word": "DIVORCIO",
+      "gloss": "cuando dos personas ya no quieren estar juntas por decisión propia.",
+      "pos": "noun",
+      "example": "Quiero el divorcio."
+    },
+    {
+      "word": "CIENTÍFICO",
+      "gloss": "persona que trabaja buscando respuestas con métodos especiales.",
+      "synonyms": [
+        "investigador"
+      ],
+      "pos": "noun",
+      "example": "Él es científico."
+    },
+    {
+      "word": "MALVADO",
+      "gloss": "que hace daño a otros sin razón.",
+      "pos": "adjective",
+      "synonyms": [
+        "pésimo"
+      ],
+      "example": "Es malvado."
+    },
+    {
+      "word": "PIENSE",
+      "gloss": "reflexionar o considerar algo.",
+      "synonyms": [
+        "reflexione",
+        "medite"
+      ],
+      "pos": "adjective",
+      "example": "Deje que lo piense."
+    },
+    {
+      "word": "ALERTA",
+      "gloss": "estar atento por si algo malo ocurre.",
+      "synonyms": [
+        "atento"
+      ],
+      "pos": "noun",
+      "example": "¡Alerta roja!"
+    },
+    {
+      "word": "TRABAJADOR",
+      "gloss": "persona que hace faenas por dinero",
+      "synonyms": [
+        "laborioso"
+      ],
+      "pos": "noun",
+      "example": "Es muy trabajador."
+    },
+    {
+      "word": "DUCHA",
+      "gloss": "baño con agua que cae sobre el cuerpo.",
+      "synonyms": [
+        "lavado",
+        "baño"
+      ],
+      "pos": "noun",
+      "example": "Ella se ducha."
+    },
+    {
+      "word": "PISCINA",
+      "gloss": "lugar lleno de agua donde se puede chapotear o jugar.",
+      "synonyms": [
+        "pileta",
+        "estanque"
+      ],
+      "pos": "noun",
+      "example": "¡A la piscina!"
+    },
+    {
+      "word": "PERIODISTA",
+      "gloss": "persona que cuenta lo que pasa en el mundo.",
+      "synonyms": [
+        "reportero"
+      ],
+      "pos": "noun",
+      "example": "Soy periodista."
+    },
+    {
+      "word": "PRÁCTICO",
+      "gloss": "que ayuda a hacer las cosas sin problemas.",
+      "synonyms": [
+        "funcional"
+      ],
+      "pos": "adjective",
+      "example": "Es muy práctico."
+    },
+    {
+      "word": "LLOVER",
+      "gloss": "caer agua del cielo.",
+      "synonyms": [
+        "CAER",
+        "DESCENDER"
+      ],
+      "pos": "verb",
+      "example": "Va a llover."
+    },
+    {
+      "word": "PALO",
+      "gloss": "cosa larga y dura hecha de madera",
+      "synonyms": [
+        "vara"
+      ],
+      "pos": "noun",
+      "example": "El perro olfateó el palo."
+    },
+    {
+      "word": "MENTAL",
+      "gloss": "que tiene que ver con lo que piensa la cabeza.",
+      "synonyms": [
+        "intelectual"
+      ],
+      "pos": "adjective",
+      "example": "Tomé una nota mental de eso."
+    },
+    {
+      "word": "TROPA",
+      "gloss": "conjunto de personas que trabajan o actúan juntas.",
+      "synonyms": [
+        "grupo",
+        "equipo"
+      ],
+      "pos": "noun",
+      "example": "La tropa aún está por llegar."
+    },
+    {
+      "word": "MÁGICO",
+      "gloss": "que parece increíble o muy especial.",
+      "synonyms": [
+        "fantástico",
+        "sorprendente"
+      ],
+      "pos": "adjective",
+      "example": "Fue mágico."
+    },
+    {
+      "word": "JUNTAR",
+      "gloss": "poner cosas o personas en el mismo lugar.",
+      "pos": "verb",
+      "synonyms": [
+        "agrupar"
+      ],
+      "example": "Va a juntar dinero."
+    },
+    {
+      "word": "APROBAR",
+      "gloss": "decir que algo está bien",
+      "synonyms": [
+        "aceptar"
+      ],
+      "pos": "verb",
+      "example": "Pudo aprobar el examen."
+    },
+    {
+      "word": "AVISO",
+      "gloss": "noticia o señal que informa sobre algo.",
+      "synonyms": [
+        "noticia",
+        "advertencia"
+      ],
+      "pos": "noun",
+      "example": "Gracias por tu aviso."
+    },
+    {
+      "word": "TRADUCCIÓN",
+      "gloss": "cambiar palabras de un modo de hablar a otro.",
+      "synonyms": [
+        "versión",
+        "equivalente"
+      ],
+      "pos": "noun",
+      "example": "Escribo una traducción."
+    },
+    {
+      "word": "DISPONIBLE",
+      "gloss": "que no está ocupado y se puede usar.",
+      "synonyms": [
+        "libre",
+        "accesible"
+      ],
+      "pos": "adjective",
+      "example": "No está disponible."
+    },
+    {
+      "word": "PAGADO",
+      "gloss": "que ha sido abonado o compensado.",
+      "synonyms": [
+        "abonar"
+      ],
+      "pos": "adjective",
+      "example": "¿Cuánto has pagado?"
+    },
+    {
+      "word": "EDUCACIÓN",
+      "gloss": "aprender cosas nuevas en la escuela o con libros.",
+      "synonyms": [
+        "aprendizaje",
+        "formación"
+      ],
+      "pos": "noun",
+      "example": "La educación es esencial."
+    },
+    {
+      "word": "VERSIÓN",
+      "gloss": "manera distinta de explicar lo mismo",
+      "synonyms": [
+        "variante",
+        "forma"
+      ],
+      "pos": "noun",
+      "example": "Su versión es cierta."
+    },
+    {
+      "word": "ATERRIZAR",
+      "gloss": "posarse un avión en tierra.",
+      "synonyms": [
+        "posarse",
+        "descender"
+      ],
+      "pos": "verb",
+      "example": "¿Cuándo vamos a aterrizar?"
+    },
+    {
+      "word": "GRADO",
+      "gloss": "paso o etapa en un orden",
+      "synonyms": [
+        "etapa",
+        "paso"
+      ],
+      "pos": "noun",
+      "example": "¿En qué grado estás?"
+    },
+    {
+      "word": "HUMANIDAD",
+      "gloss": "todos los hombres, mujeres y niños del mundo.",
+      "synonyms": [
+        "gente",
+        "población"
+      ],
+      "pos": "noun",
+      "example": "Dios ha creado la humanidad."
+    },
+    {
+      "word": "EPISODIO",
+      "gloss": "suceso que forma parte de algo más grande",
+      "synonyms": [
+        "acontecimiento",
+        "hecho"
+      ],
+      "pos": "noun",
+      "example": "El episodio acaba de empezar."
+    },
+    {
+      "word": "SÓTANO",
+      "gloss": "cuarto que está debajo de la casa",
+      "synonyms": [
+        "bodega"
+      ],
+      "pos": "noun",
+      "example": "¿Tienes sótano?"
+    },
+    {
+      "word": "GRITO",
+      "gloss": "voz muy alta y fuerte.",
+      "synonyms": [
+        "chillido"
+      ],
+      "pos": "noun",
+      "example": "Oí un grito."
+    },
+    {
+      "word": "VÍA",
+      "gloss": "camino por donde se transita",
+      "synonyms": [
+        "camino"
+      ],
+      "pos": "noun",
+      "example": "Llegó por vía marítima."
+    },
+    {
+      "word": "NACIDO",
+      "gloss": "que existe desde el primer momento.",
+      "synonyms": [
+        "existente",
+        "inicial"
+      ],
+      "pos": "adjective",
+      "example": "Yo he nacido aquí."
+    },
+    {
+      "word": "ACLARAR",
+      "gloss": "hacer algo más comprensible.",
+      "synonyms": [
+        "explicar"
+      ],
+      "pos": "verb",
+      "example": "¿Puedes aclarar eso?"
+    },
+    {
+      "word": "PLATA",
+      "gloss": "cosa brillante y cara que se usa como dinero",
+      "synonyms": [
+        "dinero"
+      ],
+      "pos": "noun",
+      "example": "Quiero plata."
+    },
+    {
+      "word": "CONEJO",
+      "gloss": "el de orejas largas que salta en el campo",
+      "synonyms": [
+        "liebre"
+      ],
+      "pos": "noun",
+      "example": "Era un conejo malo."
+    },
+    {
+      "word": "TÍTULO",
+      "gloss": "palabra que identifica algo importante.",
+      "synonyms": [
+        "nombre"
+      ],
+      "pos": "noun",
+      "example": "Lee el título."
+    },
+    {
+      "word": "CURIOSO",
+      "gloss": "Con ganas de saber o aprender más.",
+      "synonyms": [
+        "interesado"
+      ],
+      "pos": "noun",
+      "example": "¡Qué curioso!"
+    },
+    {
+      "word": "REVELAR",
+      "gloss": "hacer visible algo que no se veía antes.",
+      "synonyms": [
+        "descubrir",
+        "mostrar"
+      ],
+      "pos": "verb",
+      "example": "Lucia decidió revelar su amor."
+    },
+    {
+      "word": "SOPA",
+      "gloss": "comida caliente con trozos de comida dentro.",
+      "synonyms": [
+        "caldo",
+        "potaje"
+      ],
+      "pos": "noun",
+      "example": "Bebo sopa."
+    },
+    {
+      "word": "CAMARERO",
+      "gloss": "persona que sirve comida en un restaurante.",
+      "pos": "noun",
+      "example": "Soy camarero."
+    },
+    {
+      "word": "SEPARADO",
+      "gloss": "que no está junto a otra cosa.",
+      "synonyms": [
+        "apartado"
+      ],
+      "pos": "adjective",
+      "example": "¿Los has separado?"
+    },
+    {
+      "word": "SALVAJE",
+      "gloss": "que no ha sido domesticado.",
+      "synonyms": [
+        "fiero"
+      ],
+      "pos": "noun",
+      "example": "No soy salvaje."
+    },
+    {
+      "word": "FILMAR",
+      "gloss": "hacer fotos que se mueven.",
+      "synonyms": [
+        "grabar",
+        "registrar"
+      ],
+      "pos": "verb",
+      "example": "Filmar películas es un trabajo llamativo."
+    },
+    {
+      "word": "RESERVA",
+      "gloss": "guardar algo y usarlo más tarde",
+      "pos": "noun",
+      "example": "Tengo una reserva."
+    },
+    {
+      "word": "ESTABLECER",
+      "gloss": "crear algo que dura mucho tiempo.",
+      "synonyms": [
+        "crear"
+      ],
+      "pos": "verb",
+      "example": "Nunca me voy a establecer en un lugar."
+    },
+    {
+      "word": "PARADO",
+      "gloss": "que no se mueve del sitio.",
+      "pos": "noun",
+      "example": "Estoy parado."
+    },
+    {
+      "word": "ELEGANTE",
+      "gloss": "que tiene clase y distinción en su forma de vestir o actuar",
+      "synonyms": [
+        "distinguido",
+        "sofisticado"
+      ],
+      "pos": "adjective",
+      "example": "Es elegante."
+    },
+    {
+      "word": "MENTIROSO",
+      "gloss": "que no dice la verdad.",
+      "synonyms": [
+        "embustero"
+      ],
+      "pos": "noun",
+      "example": "¡Mentiroso!"
+    },
+    {
+      "word": "DESIERTO",
+      "gloss": "lugar con muy poca agua y vida.",
+      "pos": "noun",
+      "example": "Está desierto."
+    },
+    {
+      "word": "DEPORTE",
+      "gloss": "juego donde personas compiten siguiendo normas",
+      "synonyms": [
+        "competición",
+        "juego"
+      ],
+      "pos": "noun",
+      "example": "Haz deporte."
+    },
+    {
+      "word": "GENERACIÓN",
+      "gloss": "grupo de personas de la misma edad.",
+      "synonyms": [
+        "cohorte"
+      ],
+      "pos": "noun",
+      "example": "Tú eres de la próxima generación."
+    },
+    {
+      "word": "OREJA",
+      "gloss": "parte del cuerpo a los lados de la cabeza",
+      "pos": "noun",
+      "synonyms": [
+        "lóbulo"
+      ],
+      "example": "Me pica la oreja."
+    },
+    {
+      "word": "TRÁFICO",
+      "gloss": "muchos coches moviéndose por calles.",
+      "pos": "noun",
+      "example": "Hay mucho tráfico."
+    },
+    {
+      "word": "MORTAL",
+      "gloss": "que puede causar la muerte.",
+      "synonyms": [
+        "funesto"
+      ],
+      "pos": "adjective",
+      "example": "¡Es un veneno mortal!"
+    },
+    {
+      "word": "UNIFORME",
+      "gloss": "ropa igual que usan varias personas en un grupo",
+      "pos": "noun",
+      "example": "Ponte tu uniforme."
+    },
+    {
+      "word": "CONCIENCIA",
+      "gloss": "saber lo que pasa a tu alrededor.",
+      "pos": "noun",
+      "example": "Toma conciencia."
+    },
+    {
+      "word": "LEÓN",
+      "gloss": "bestia grande de la sabana con melena",
+      "pos": "noun",
+      "example": "Veo un león."
+    },
+    {
+      "word": "AUTÉNTICO",
+      "gloss": "que es verdadero y no imitado.",
+      "pos": "adjective",
+      "example": "Parecía auténtico."
+    },
+    {
+      "word": "TÉRMINO",
+      "gloss": "punto final de algo.",
+      "synonyms": [
+        "fin"
+      ],
+      "pos": "noun",
+      "example": "Este término ya no se usa más."
+    },
+    {
+      "word": "AZÚCAR",
+      "gloss": "Sustancia blanca que endulza los alimentos.",
+      "pos": "noun",
+      "synonyms": [
+        "endulzante"
+      ],
+      "example": "¿Es azúcar?"
+    },
+    {
+      "word": "PASTILLA",
+      "gloss": "medicamento en forma sólida y pequeña.",
+      "synonyms": [
+        "comprimido",
+        "tableta"
+      ],
+      "pos": "noun",
+      "example": "Toma tu pastilla."
     }
   ]
 }

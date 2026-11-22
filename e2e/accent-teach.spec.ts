@@ -4,9 +4,10 @@ import { expect, test, type Page } from '@playwright/test'
 /**
  * ADR 0053 / #75 AT-3: accent-miss teaching e2e.
  * The clock is pinned per test so the seeded daily word is deterministic:
- * - 2026-11-27 es/a1 = CAFÉ  → press E (base of hidden É): forgiven, life kept
- * - 2026-11-14 es/b1 = CRÉDITO → press E: counted, life lost
- * - 2026-11-27 en/a1 = BYE   → press Q: plain miss, no teach line (EN unchanged)
+ * - 2026-11-27 es/a1 = ATENCIÓN → press O (base of hidden Ó): forgiven, life kept
+ * - 2026-11-20 es/b1 = CAMPAÑA  → press N (base of hidden Ñ): counted, life lost
+ * - 2026-11-27 en/a1 = NICE     → press Q: plain miss, no teach line (EN unchanged)
+ * (ADR 0058: growing es packs shifts the hash%n daily pick per date — #331.)
  */
 
 type Lang = 'en' | 'es'
@@ -60,25 +61,25 @@ const lives = (page: Page) =>
 test('ES A1: accent miss explains the accent and keeps the life', async ({ page }) => {
   const iso = '2026-11-27T12:00:00'
   await seed(page, 'es', 'a1', iso)
-  expect(dailyWord('es', 'a1', iso)).toBe('CAFÉ')
+  expect(dailyWord('es', 'a1', iso)).toBe('ATENCIÓN')
 
-  await pressKey(page, 'E') // base of the hidden É
+  await pressKey(page, 'O') // base of the hidden Ó
 
   // #295: forgiven at A1 — the line carries the explicit life-kept cue
   await expect(teachLine(page)).toHaveText(
-    'É: E with an acute accent, sounds like "ay" — life kept',
+    'Ó: O with an acute accent, the stress is on this vowel — life kept',
   )
   await expect(lives(page)).toHaveAttribute('aria-label', '6 lives remaining')
 })
 
 test('ES B1: accent miss explains the accent and costs a life', async ({ page }) => {
-  const iso = '2026-11-14T12:00:00'
+  const iso = '2026-11-20T12:00:00'
   await seed(page, 'es', 'b1', iso)
-  expect(dailyWord('es', 'b1', iso)).toBe('CRÉDITO')
+  expect(dailyWord('es', 'b1', iso)).toBe('CAMPAÑA')
 
-  await pressKey(page, 'E')
+  await pressKey(page, 'N') // base of the hidden Ñ
 
-  await expect(teachLine(page)).toHaveText('É: E with an acute accent, sounds like "ay"')
+  await expect(teachLine(page)).toHaveText('Ñ: N with a tilde, sounds like "ny"')
   await expect(lives(page)).toHaveAttribute('aria-label', '5 lives remaining')
 })
 
@@ -96,15 +97,15 @@ test('EN A1: plain miss shows no teach line and costs a life (English packs unch
 test('ES B1 short-landscape: a final losing accent miss keeps the teach line perceivable in the EndCard (#295)', async ({ page }) => {
   // short-land = landscape with max-height 500px; 844x390 qualifies (#209)
   await page.setViewportSize({ width: 844, height: 390 })
-  const iso = '2026-11-14T12:00:00'
+  const iso = '2026-11-20T12:00:00'
   await seed(page, 'es', 'b1', iso)
-  expect(dailyWord('es', 'b1', iso)).toBe('CRÉDITO')
+  expect(dailyWord('es', 'b1', iso)).toBe('CAMPAÑA')
 
-  for (const letter of ['Q', 'W', 'A', 'S', 'F']) await pressKey(page, letter) // 5 plain misses: 6→1 lives
-  await pressKey(page, 'E') // accent miss at B1: counted, 1→0, round lost
+  for (const letter of ['Q', 'W', 'S', 'F', 'G']) await pressKey(page, letter) // 5 plain misses: 6→1 lives
+  await pressKey(page, 'N') // accent miss at B1: counted, 1→0, round lost
 
   // the grid wrapper is short-land:hidden on finish — the line must survive inside the EndCard
-  await expect(teachLine(page)).toHaveText('É: E with an acute accent, sounds like "ay"')
+  await expect(teachLine(page)).toHaveText('Ñ: N with a tilde, sounds like "ny"')
   await expect(teachLine(page)).toBeVisible()
   await expect(lives(page)).toHaveAttribute('aria-label', '0 lives remaining')
 })
