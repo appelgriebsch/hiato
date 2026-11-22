@@ -12,7 +12,7 @@ const VIEWPORTS = [
 
 type Lang = 'en' | 'pt'
 
-/** EN A1 daily is ART. Portrait snapshots are taken on this local day. */
+/** EN A1 daily is ADDRESS on the snapshot day (ART at 400 lemmas; ADR 0058 grow shifts the pick). */
 const SNAPSHOT_ISO = '2026-10-18T12:00:00'
 const LONG_EN_ISO = '2026-11-13T12:00:00'
 const LONG_PT_ISO = '2026-10-20T12:00:00'

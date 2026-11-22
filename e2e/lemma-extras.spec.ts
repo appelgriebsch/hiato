@@ -120,7 +120,7 @@ test('in-progress round never shows pos/ipa/family (#314)', async ({ page }) => 
   expect(body).not.toContain('ækʃən')
   expect(body).not.toContain('Word family')
   expect(body).not.toContain('actions')
-  expect(lemma.word).toBe('ACTION')
+  expect(lemma.word).toBe('BASKETBALL')
 })
 
 test('after a loss the EndCard shows the meta row + family; replay shows them too (#314)', async ({
@@ -302,7 +302,7 @@ test('short-landscape 844x390 EndCard shows the extras, teach card scrolls, acti
   const overflowY = await teach.evaluate((el) => getComputedStyle(el).overflowY)
   expect(['auto', 'scroll']).toContain(overflowY)
   await expect(page.locator('[data-endcard-actions]')).toBeInViewport()
-  expect(lemma.word).toBe('ACTION')
+  expect(lemma.word).toBe('BASKETBALL')
 })
 
 /**

@@ -12,6 +12,7 @@ import {
   staleAllowEntries,
   staleGlossExempt,
 } from './lemma-denylist'
+import { pinRange } from './pack-pin'
 import { foldKey, type SelectLang } from './pack-select'
 
 const ROOT = path.join(import.meta.dir, '..')
@@ -125,14 +126,17 @@ describe('profanity guard', () => {
     expect(isDeniedLemma('FIGA', undefined, 'it')).toBe(true)
   })
 
-  test('every pack has exactly 400 unique lemmas', () => {
+  test('every pack has a unique lemma count inside the ADR 0058 pin range', () => {
     const counts: Record<string, number> = {}
     for (const lang of LANGS) {
       for (const cefr of CEFRS) {
         const lemmas = readPack(lang, cefr).lemmas
         const rel = `${lang}/${cefr}`
         counts[rel] = lemmas.length
-        expect(`${rel} length ${lemmas.length}`).toBe(`${rel} length 400`)
+        const { floor, ceiling } = pinRange(rel)
+        if (lemmas.length < floor || lemmas.length > ceiling) {
+          throw new Error(`${rel} length ${lemmas.length} outside [${floor}, ${ceiling}]`)
+        }
         expect(lemmaUniquenessFaults(lang, lemmas.map((L) => L.word))).toEqual([])
       }
     }
