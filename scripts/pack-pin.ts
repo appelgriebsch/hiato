@@ -1,18 +1,33 @@
 /**
- * Pin every pack at 400 lemmas, in slot order, with a version bump when
- * content changes (ADR 0006). CI checks out the PR head at depth 1, so the
- * committed pin cannot see a reorder by itself. `stableSlotErrors` diffs
- * the head against `PACK_PIN_BASE` and fails when a word that exists in
- * both has changed index. A same-slot replacement still passes. An empty
- * base tree fails closed.
+ * Pin every pack's lemma count to the ADR 0058 range [PIN_FLOOR, bandTarget]
+ * (was: exactly 400), in slot order, with a version bump when content changes
+ * (ADR 0006). Append-only growth passes the range and keeps slots; reorder or
+ * removal still fails. CI checks out the PR head at depth 1, so the committed
+ * pin cannot see a reorder by itself. `stableSlotErrors` diffs the head against
+ * `PACK_PIN_BASE` and fails when a word that exists in both has changed index.
+ * A same-slot replacement still passes. An empty base tree fails closed.
  */
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { nfcUpper } from './lemma-denylist'
+import { bandTarget, PACK_TARGET_CAP, type SelectLang } from './pack-select'
+import { isPackCefr, isPackLang, type PackCefr } from '../src/packs/schema'
 
-export const PACK_LEMMA_COUNT = 400
+/** Lower bound of the pin range guard for every pack (ADR 0058). */
+export const PIN_FLOOR = 350
+
+/** Range guard for one pack rel (`lang/cefr.json`); unknown shapes get the cap only. */
+export function pinRange(rel: string): { floor: number; ceiling: number } {
+  const posix = rel.split('\\').join('/')
+  const [lang, file] = posix.split('/')
+  const cefr = (file ?? '').replace(/\.json$/, '')
+  if (lang && isPackLang(lang) && isPackCefr(cefr)) {
+    return { floor: PIN_FLOOR, ceiling: bandTarget(lang as SelectLang, cefr as PackCefr) }
+  }
+  return { floor: PIN_FLOOR, ceiling: PACK_TARGET_CAP }
+}
 
 export type PackPinEntry = {
   version: number
@@ -53,8 +68,11 @@ export function packPinEntry(pack: PinPack & object): PackPinEntry {
 
 export function packPinErrors(rel: string, pack: PinPack & object, pin: PackPinEntry | undefined): string[] {
   const errors: string[] = []
-  if (pack.lemmas.length !== PACK_LEMMA_COUNT) {
-    errors.push(`${rel}: expected 400 lemmas, found ${pack.lemmas.length}`)
+  const { floor, ceiling } = pinRange(rel)
+  if (pack.lemmas.length < floor || pack.lemmas.length > ceiling) {
+    errors.push(
+      `${rel}: lemma count ${pack.lemmas.length} outside [${floor}, ${ceiling}] (ADR 0058 range guard)`,
+    )
   }
   if (!pin) {
     errors.push(`${rel}: missing pack pin`)

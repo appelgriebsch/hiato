@@ -7,10 +7,12 @@ import {
   loadPackPin,
   packPinEntry,
   packPinErrors,
+  pinRange,
   stableSlotErrors,
   type PinPack,
   type SlotPack,
 } from './pack-pin'
+import { bandTarget } from './pack-select'
 
 function sample(n: number, gloss = 'una pista'): PinPack {
   return {
@@ -20,10 +22,42 @@ function sample(n: number, gloss = 'una pista'): PinPack {
 }
 
 describe('pack pin', () => {
-  test('a pack with fewer than 400 lemmas fails', () => {
-    const pack = sample(399)
-    const errors = packPinErrors('es/b1.json', pack, packPinEntry(pack))
-    expect(errors).toEqual(['es/b1.json: expected 400 lemmas, found 399'])
+  test('range guard: below floor fails, at floor and at bandTarget pass, over-cap fails (ADR 0058)', () => {
+    const ceiling = bandTarget('es', 'b1')
+    expect(pinRange('es/b1.json')).toEqual({ floor: 350, ceiling })
+
+    const low = sample(349)
+    expect(packPinErrors('es/b1.json', low, packPinEntry(low))).toEqual([
+      `es/b1.json: lemma count 349 outside [350, ${ceiling}] (ADR 0058 range guard)`,
+    ])
+
+    const atFloor = sample(350)
+    expect(packPinErrors('es/b1.json', atFloor, packPinEntry(atFloor))).toEqual([])
+
+    const atCap = sample(ceiling)
+    expect(packPinErrors('es/b1.json', atCap, packPinEntry(atCap))).toEqual([])
+
+    const over = sample(ceiling + 1)
+    const errors = packPinErrors('es/b1.json', over, packPinEntry(over))
+    expect(errors).toEqual([
+      `es/b1.json: lemma count ${ceiling + 1} outside [350, ${ceiling}] (ADR 0058 range guard)`,
+    ])
+  })
+
+  test('append-only growth passes once the pin entry is updated; removal still fails', () => {
+    const ceiling = bandTarget('es', 'b1')
+    expect(ceiling).toBeGreaterThanOrEqual(400)
+    // sample(n) keeps W0..W399 as a prefix, so appending preserves every slot.
+    const grown = sample(ceiling)
+    const bumped = { ...grown, version: grown.version + 1 }
+    expect(packPinErrors('es/b1.json', bumped, packPinEntry(bumped))).toEqual([])
+
+    const base = sample(400)
+    const pin = packPinEntry(base)
+    const shrunk = { ...base, lemmas: base.lemmas.slice(0, 399) }
+    const errors = packPinErrors('es/b1.json', shrunk, pin)
+    expect(errors.some((e) => e.includes('slot order'))).toBe(true)
+    expect(errors.some((e) => e.includes('outside ['))).toBe(false)
   })
 
   test('a shifted or reordered slot fails', () => {
@@ -34,7 +68,7 @@ describe('pack pin', () => {
     lemmas.push(first!)
     const errors = packPinErrors('es/b1.json', { ...pack, lemmas }, pin)
     expect(errors.some((e) => e.includes('slot order'))).toBe(true)
-    expect(errors.some((e) => e.includes('expected 400'))).toBe(false)
+    expect(errors.some((e) => e.includes('outside ['))).toBe(false)
   })
 
   test('a content change without a version bump fails', () => {
