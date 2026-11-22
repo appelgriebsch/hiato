@@ -5,7 +5,7 @@ import { lemmaIdentity } from '../engine'
  * Guest-local localStorage, same pattern as history / streaks / daily-record.
  *
  * Shape: { v: 1, slots: { 'lang|cefr': string[] } } — lemmaIdentity strings,
- * deduped. Bounded by pack size (400 lemmas per slot) in practice;
+ * deduped. Bounded by the pack's lemma count per slot in practice (ADR 0058 range, was 400);
  * LEARNED_READ_CAP only bounds a hand-edited oversized slot on read.
  * Written on Daily and Pocket wins only; never touches streaks, freezes,
  * the Pocket ladder, history, or analytics.

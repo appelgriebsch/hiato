@@ -47,8 +47,9 @@ describe('expand-packs --grow --dry-run (fixture candidates, ADR 0058 / #328)', 
     expect(res.status).toBe(0)
     expect(res.stderr).not.toContain('Error')
     for (const cefr of CEFRS) {
-      expect(res.stdout).toMatch(new RegExp(`en/${cefr}: existing 400, capacity \\d+`))
-      expect(res.stdout).toContain(`| en/${cefr} | 400 |`)
+      // ADR 0058: packs grow append-only past 400, so the existing count is data-dependent.
+      expect(res.stdout).toMatch(new RegExp(`en/${cefr}: existing \\d+, capacity \\d+`))
+      expect(res.stdout).toMatch(new RegExp(`\\| en/${cefr} \\| \\d+ \\|`))
     }
     expect(res.stdout).toContain('bandTarget')
     expect(res.stdout).toContain('dry-run: skip gloss/synonym generation and pack writes')
