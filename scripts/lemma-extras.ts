@@ -47,7 +47,7 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
+import { isDeniedLemma, letterTokens, loadDenylist, nfcUpper, spellingKey } from './lemma-denylist'
 import { IPA_FORM_RE } from './packs-check-lib'
 import { EXTRAS_GATE_VERSION, extrasGateKey, type ExtrasGateLog } from './extras-gate'
 import { ensureDicts, isWordOfLang } from './lang-membership'
@@ -206,7 +206,7 @@ function gateIpa(ipa: string): boolean {
 function gateFamilyEntry(lemma: string, entry: string, lang: PackLang): boolean {
   const raw = entry.normalize('NFC')
   if (!raw || raw.length > 40) return false
-  if (nfcUpper(raw) === nfcUpper(lemma)) return false
+  if (spellingKey(raw) === spellingKey(lemma)) return false
   if (spoilerContains(raw, lemma)) return false
   if (isDeniedLemma(raw, DENY, lang)) return false
   for (const tok of letterTokens(raw)) {
