@@ -12,7 +12,8 @@ const VIEWPORTS = [
 
 type Lang = 'en' | 'pt'
 
-/** EN A1 daily is ADDRESS on the snapshot day (ART at 400 lemmas; ADR 0058 grow shifts the pick). */
+/** EN A1 daily is ADDRESS on the snapshot day (ART at 400 lemmas; ADR 0058 grow shifts the pick).
+ * PT A1 daily is PALAVRA on the snapshot day (ADR 0058 grow to 1000 lemmas shifts the pick; #332). */
 const SNAPSHOT_ISO = '2026-10-18T12:00:00'
 const LONG_EN_ISO = '2026-11-13T12:00:00'
 const LONG_PT_ISO = '2026-10-20T12:00:00'
