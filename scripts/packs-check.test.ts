@@ -591,6 +591,31 @@ describe('packs:check lemma extras pos/ipa/family (ADR 0055, #314)', () => {
     expect(ok.lemmas[0]?.family).toEqual(['houseboat'])
   })
 
+  test('rejects a family entry equal to the lemma after ß/ss and case folding (#346)', () => {
+    const lemma = { word: 'GEWIß', gloss: 'Ganz ohne Frage.' }
+    expect(() =>
+      validatePack(
+        pack({ lang: 'de', cefr: 'a2', lemmas: [{ ...lemma, family: ['gewiss'] }] }),
+        'de/a2.json',
+      ),
+    ).toThrow(/must differ from the lemma/)
+    expect(() =>
+      validatePack(
+        pack({ lang: 'de', cefr: 'a2', lemmas: [{ ...lemma, family: ['GEWISS'] }] }),
+        'de/a2.json',
+      ),
+    ).toThrow(/must differ from the lemma/)
+    const ok = validatePack(
+      pack({
+        lang: 'de',
+        cefr: 'a2',
+        lemmas: [{ ...lemma, family: ['gewisslich', 'ungewiss'] }],
+      }),
+      'de/a2.json',
+    )
+    expect(ok.lemmas[0]?.family).toEqual(['gewisslich', 'ungewiss'])
+  })
+
   test('rejects a denylisted family entry', () => {
     expect(() =>
       validatePack(

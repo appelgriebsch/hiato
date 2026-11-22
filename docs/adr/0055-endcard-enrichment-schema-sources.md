@@ -6,6 +6,7 @@
 - **Supersedes**: none
 - **Related issues**: #299, EPIC #313, #314, #315, #316, #318, #319, #339
 - **Amended**: 2026-11-20, decision 2 — lemmas without a licensed pos source (all PT, plus de/es/it stragglers) get a gated Mistral-generated POS fallback (#339)
+- **Amended**: 2026-11-22, decision 3 — a `family` entry must also differ from its lemma after ß→ss and case folding (#346)
 
 ## Context
 

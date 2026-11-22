@@ -29,6 +29,11 @@ export function nfcUpper(s: string): string {
   return s.replaceAll('ß', PH).normalize('NFC').toUpperCase().replaceAll(PH, 'ß')
 }
 
+/** nfcUpper plus ß/ẞ→SS, so spelling variants of one word compare equal (#346). */
+export function spellingKey(s: string): string {
+  return nfcUpper(s).replaceAll('ß', 'SS').replaceAll('ẞ', 'SS')
+}
+
 let cached: Set<string> | null = null
 let categoryCache: Map<string, ExactCategory> | null = null
 let glossExemptCache: AllowEntry[] | null = null

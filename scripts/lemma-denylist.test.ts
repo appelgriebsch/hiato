@@ -15,6 +15,7 @@ import {
   parseExactDenylist,
   parseExactEntries,
   parsePatternDenylist,
+  spellingKey,
   staleAllowEntries,
 } from './lemma-denylist'
 
@@ -354,6 +355,15 @@ describe('pattern denylist parser', () => {
     expect(rules[0]!.re.test('SCHEIßE')).toBe(true)
     expect(rules[0]!.re.test('SCHEISSE')).toBe(false)
     expect(matchesDeniedPattern('scheiße', 'de', rules)).toBe(true)
+  })
+
+  test('spellingKey folds ß and ẞ to SS so spelling variants compare equal (#346)', () => {
+    expect(spellingKey('GEWIß')).toBe('GEWISS')
+    expect(spellingKey('gewiss')).toBe('GEWISS')
+    expect(spellingKey('GEWIẞ')).toBe('GEWISS')
+    expect(spellingKey('GEWIß')).toBe(spellingKey('GEWISS'))
+    expect(spellingKey('Straße')).toBe(spellingKey('STRASSE'))
+    expect(spellingKey('HAUS')).toBe('HAUS')
   })
 
   test('keeps scoped and global lines distinct', () => {

@@ -20,7 +20,7 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper } from './lemma-denylist'
+import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper, spellingKey } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { aunAsiMismatch, exampleSkipped } from './example-sentences'
@@ -585,7 +585,7 @@ export function validatePack(raw: unknown, file: string): WordPack {
       const seenFamily = new Set<string>()
       family = e.family.map((f, j) => {
         const raw = assertString(f, `${file}: lemmas[${i}].family[${j}]`).normalize('NFC')
-        if (nfcUpper(raw) === nfcUpper(word)) {
+        if (spellingKey(raw) === spellingKey(word)) {
           throw new Error(
             `${file}: lemmas[${i}] family[${j}] must differ from the lemma — "${raw}"`,
           )
