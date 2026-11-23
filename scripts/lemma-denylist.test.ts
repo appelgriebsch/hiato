@@ -373,20 +373,17 @@ describe('pattern denylist parser', () => {
     const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-denylist.txt'), 'utf8')
     const ssToSharp = (w: string) => w.replaceAll('SS', 'ß')
     const sharpToSS = (w: string) => w.replaceAll('ß', 'SS').replaceAll('ẞ', 'SS')
+    const entries = parseExactEntries(text)
     let checked = 0
-    for (const e of parseExactEntries(text)) {
-      // parseExactEntries keys are already spellingKey-folded; rebuild the raw
-      // word from the file line via the category table is overkill — use both
-      // directions on the stored key plus the raw line.
-      const keys = [e.key, ssToSharp(e.key), sharpToSS(e.key)]
-      for (const k of keys) {
+    for (const e of entries) {
+      for (const k of [e.key, ssToSharp(e.key), sharpToSS(e.key)]) {
         const lang = k.includes(' ') ? k.split(' ')[0] : undefined
         const word = k.includes(' ') ? k.split(' ').slice(1).join(' ') : k
         expect(isDeniedLemma(word, undefined, lang)).toBe(true)
         checked++
       }
     }
-    expect(checked).toBeGreaterThan(3 * 800)
+    expect(checked).toBe(3 * entries.length)
   })
 
   test('every pattern line with an SS stem also matches its ß variant (#363)', () => {
