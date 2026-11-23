@@ -47,6 +47,7 @@ export const ACCENT_TEACH: Record<string, string> = {
   È: 'E with a grave accent, a more open "e" sound',
   É: 'E with an acute accent, sounds like "ay"',
   Ê: 'E with a circumflex, the vowel sound changes',
+  Ë: 'E with a diaeresis, say the vowel on its own',
   Ì: 'I with a grave accent, a more open "i" sound',
   Í: 'I with an acute accent, the stress is on this vowel',
   Î: 'I with a circumflex, the vowel sound changes',
