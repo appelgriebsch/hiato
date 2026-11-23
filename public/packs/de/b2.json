@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 26,
   "lang": "de",
   "cefr": "b2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -330,9 +330,9 @@
     },
     {
       "word": "VITAMIN",
-      "gloss": "ein lebenswichtiger Nährstoff",
+      "gloss": "wichtiger Stoff für die Gesundheit.",
       "synonyms": [
-        "Stoff"
+        "Mikronährstoff"
       ],
       "example": "Niacin ist ein Vitamin.",
       "pos": "noun",
@@ -534,9 +534,9 @@
     },
     {
       "word": "UNTERWELT",
-      "gloss": "Die verborgene kriminelle Szene.",
+      "gloss": "die geheime kriminelle Gesellschaft",
       "synonyms": [
-        "Milieu"
+        "Kriminalität"
       ],
       "example": "Dies ist nicht das Land des Lichts – dies ist die Unterwelt.",
       "pos": "noun",
@@ -988,11 +988,10 @@
     },
     {
       "word": "FAHNDUNG",
-      "gloss": "die Suche nach einer gesuchten Person",
+      "gloss": "die gezielte Suche nach einer flüchtigen Person",
       "synonyms": [
-        "Suche",
-        "Nachforschung",
-        "Polizeiaktion"
+        "Jagd",
+        "Nachforschung"
       ],
       "example": "Überprüfe in der Datenbank, ob er zur Fahndung ausgeschrieben ist!",
       "pos": "noun",
@@ -2751,10 +2750,9 @@
     },
     {
       "word": "BOTE",
-      "gloss": "eine Person, die eine Nachricht überbringt",
+      "gloss": "eine Person, die eine Nachricht übermittelt",
       "synonyms": [
-        "Überbringer",
-        "Träger"
+        "Überbringer"
       ],
       "example": "Ich bin nur der Bote.",
       "pos": "noun",
@@ -2986,9 +2984,6 @@
     {
       "word": "INSTABIL",
       "gloss": "nicht fest oder leicht veränderbar",
-      "synonyms": [
-        "wackelig"
-      ],
       "example": "Das Wurmloch ist instabil.",
       "pos": "adjective",
       "family": [
@@ -3646,9 +3641,9 @@
     },
     {
       "word": "MÜHLE",
-      "gloss": "eine Anlage zum Mahlen von Getreide",
+      "gloss": "eine Einrichtung zum Zerkleinern von Körnern",
       "synonyms": [
-        "Maschine"
+        "Mahlwerk"
       ],
       "example": "Die alte Mühle wurde abgebaut.",
       "pos": "noun",
@@ -4610,9 +4605,9 @@
     },
     {
       "word": "PARLAMENT",
-      "gloss": "Versammlung gewählter Vertreter",
+      "gloss": "die Versammlung gewählter Politiker",
       "synonyms": [
-        "Versammlung"
+        "Volksvertretung"
       ],
       "example": "Das Parlament ist aufgelöst.",
       "pos": "noun",
@@ -4901,7 +4896,8 @@
         "Morphiumabhängigkeit",
         "Morphiumschlaf"
       ],
-      "ipa": "/ˈmɔʁfi̯ʊm/"
+      "ipa": "/ˈmɔʁfi̯ʊm/",
+      "example": "Der Arzt verschrieb dem Patienten Morphium gegen die starken Schmerzen."
     },
     {
       "word": "GRAUEN",
@@ -5776,6 +5772,5122 @@
         "Smokinghose"
       ],
       "ipa": "/ˈsmoːkɪŋ/"
+    },
+    {
+      "word": "MUßTE",
+      "gloss": "war gezwungen, etwas zu tun",
+      "synonyms": [
+        "sollte"
+      ],
+      "pos": "verb",
+      "example": "Er mußte weg."
+    },
+    {
+      "word": "FALLSCHIRM",
+      "gloss": "ein Gerät zum sicheren Abstieg aus der Luft.",
+      "pos": "noun",
+      "example": "Ich würde gerne einmal Fallschirm springen."
+    },
+    {
+      "word": "TRIEBWERK",
+      "gloss": "eine Maschine, die Bewegung erzeugt",
+      "synonyms": [
+        "Motor"
+      ],
+      "pos": "noun",
+      "example": "Dieses Triebwerk funktioniert perfekt."
+    },
+    {
+      "word": "SCHULDIGEN",
+      "gloss": "jemandem eine Tat oder Pflicht zuschreiben",
+      "synonyms": [
+        "belasten",
+        "bezichtigen"
+      ],
+      "pos": "verb",
+      "example": "Wir kennen den wahren Schuldigen."
+    },
+    {
+      "word": "SEIDE",
+      "gloss": "ein edler, glänzender Stoff aus Naturfasern",
+      "pos": "noun",
+      "example": "Seide ist teuer."
+    },
+    {
+      "word": "ENTLASTEN",
+      "gloss": "von einer Belastung befreien oder Erleichterung schaffen",
+      "synonyms": [
+        "erleichtern"
+      ],
+      "pos": "verb",
+      "example": "Die neue Software soll die Mitarbeiter entlasten, indem sie Routineaufgaben übernimmt."
+    },
+    {
+      "word": "BIZARR",
+      "gloss": "sehr seltsam oder ungewöhnlich wirkend.",
+      "synonyms": [
+        "seltsam",
+        "sonderbar"
+      ],
+      "pos": "adjective",
+      "example": "Das ist bizarr."
+    },
+    {
+      "word": "GLORREICH",
+      "gloss": "mit großem Ruhm oder Erfolg verbunden.",
+      "synonyms": [
+        "ruhmreich",
+        "ehrenvoll"
+      ],
+      "pos": "adjective",
+      "example": "Das Glück des Lebens besteht nicht darin, wenig oder keine Schwierigkeiten zu haben, sondern sie alle siegreich und glorreich zu überwinden."
+    },
+    {
+      "word": "SCHLEUDERN",
+      "gloss": "mit Schwung wegwerfen oder werfen.",
+      "synonyms": [
+        "werfen",
+        "schmeißen"
+      ],
+      "pos": "verb",
+      "example": "Er nahm die Kurve zu eng und kam ins Schleudern."
+    },
+    {
+      "word": "LEINWAND",
+      "gloss": "grobes Gewebe aus Flachsfasern",
+      "synonyms": [
+        "Segeltuch",
+        "Stoff"
+      ],
+      "pos": "noun",
+      "example": "Der Maler liebt die Leinwand und den Pinsel."
+    },
+    {
+      "word": "PISTOLEN",
+      "gloss": "kurzläufige Schusswaffen für eine Hand.",
+      "synonyms": [
+        "Schusswaffen"
+      ],
+      "pos": "verb",
+      "example": "Er hatte zwei Pistolen."
+    },
+    {
+      "word": "ZUTEILEN",
+      "gloss": "etwas nach bestimmten Regeln verteilen oder zuweisen.",
+      "synonyms": [
+        "verteilen",
+        "zuweisen"
+      ],
+      "pos": "verb",
+      "example": "Sehen wir einmal, wie viel Zeit sie Ihnen zuteilen."
+    },
+    {
+      "word": "VERSINKEN",
+      "gloss": "langsam unter die Oberfläche gleiten",
+      "synonyms": [
+        "eintauchen",
+        "untertauchen"
+      ],
+      "pos": "verb",
+      "example": "Wir versinken."
+    },
+    {
+      "word": "SCANN",
+      "gloss": "kurz für das Erfassen von Daten durch Abtasten",
+      "synonyms": [
+        "abtasten",
+        "digitalisieren"
+      ],
+      "pos": "verb",
+      "example": "Ich scann den Strichcode des Buches, um den Preis zu finden."
+    },
+    {
+      "word": "KLATSCH",
+      "gloss": "Geräusch durch Hände oder üble Nachrede",
+      "synonyms": [
+        "Gerede",
+        "Tratsch"
+      ],
+      "pos": "verb",
+      "example": "Klatsch macht mich krank."
+    },
+    {
+      "word": "RAZZIA",
+      "gloss": "eine plötzliche Durchsuchung durch Behörden",
+      "synonyms": [
+        "RATZIA",
+        "POLIZEIKONTROLLE"
+      ],
+      "pos": "noun",
+      "example": "Die Polizei führte in drei Häusern eine Razzia durch."
+    },
+    {
+      "word": "TÜCHTIG",
+      "gloss": "fähig und leistungsstark in einer Sache.",
+      "synonyms": [
+        "fähig",
+        "kompetent"
+      ],
+      "pos": "adjective",
+      "example": "Du bist sehr tüchtig."
+    },
+    {
+      "word": "SPALTEN",
+      "gloss": "in zwei oder mehr Teile teilen oder zerlegen.",
+      "synonyms": [
+        "teilen",
+        "trennen"
+      ],
+      "pos": "verb",
+      "example": "Im Mauerwerk zeigten sich tiefe, breite Spalten."
+    },
+    {
+      "word": "BLEI",
+      "gloss": "schweres, graues Metall mit niedrigem Schmelzpunkt.",
+      "pos": "noun",
+      "example": "Blei ist ein Metall."
+    },
+    {
+      "word": "ERREICHBAR",
+      "gloss": "so, dass man Kontakt herstellen kann",
+      "synonyms": [
+        "zugänglich"
+      ],
+      "pos": "adjective",
+      "example": "Ich bin online erreichbar."
+    },
+    {
+      "word": "ANEINANDER",
+      "gloss": "in Verbindung oder Beziehung zueinander stehend.",
+      "synonyms": [
+        "zusammen",
+        "miteinander"
+      ],
+      "pos": "adverb",
+      "example": "Wir gerieten aneinander."
+    },
+    {
+      "word": "PUZZLE",
+      "gloss": "Spiel, bei dem Teile zu einem Bild zusammengesetzt werden",
+      "synonyms": [
+        "RÄTSEL"
+      ],
+      "pos": "noun",
+      "example": "Dieses Puzzle ist mir zu schwer."
+    },
+    {
+      "word": "KREPIEREN",
+      "gloss": "umgangssprachlich für sterben oder zugrunde gehen.",
+      "synonyms": [
+        "sterben",
+        "verenden"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "LATTE",
+      "gloss": "langer, schmaler Holz- oder Metallstab.",
+      "pos": "noun",
+      "example": "Die Latte liegt sicher auf dem Dachboden."
+    },
+    {
+      "word": "PUDDING",
+      "gloss": "süßes Dessert aus Milch, Eiern und Zucker.",
+      "pos": "noun",
+      "example": "Wir lieben Pudding!"
+    },
+    {
+      "word": "MIKROFON",
+      "gloss": "Gerät zum Aufnehmen von Stimmen oder Geräuschen",
+      "pos": "noun",
+      "example": "Wo ist mein Mikrofon?"
+    },
+    {
+      "word": "HORMON",
+      "gloss": "Botenstoff im Körper, der bestimmte Funktionen steuert.",
+      "pos": "noun",
+      "example": "Das Hormon Insulin reguliert den Blutzuckerspiegel im Körper."
+    },
+    {
+      "word": "ECKEN",
+      "gloss": "spitze oder abgewinkelte Teile an Gegenständen oder Räumen.",
+      "synonyms": [
+        "KANTEN",
+        "ECKPUNKTE"
+      ],
+      "pos": "verb",
+      "example": "Ein Dreieck hat drei Ecken."
+    },
+    {
+      "word": "ZWECKLOS",
+      "gloss": "ohne Sinn oder Ziel",
+      "synonyms": [
+        "sinnlos",
+        "nutzlos"
+      ],
+      "pos": "adjective",
+      "example": "Das ist zwecklos."
+    },
+    {
+      "word": "LANGEWEILE",
+      "gloss": "Gefühl der Leere oder Unlust durch fehlende Beschäftigung.",
+      "synonyms": [
+        "Überdruss",
+        "Ekel"
+      ],
+      "pos": "noun",
+      "example": "Ich habe Langeweile."
+    },
+    {
+      "word": "TABAK",
+      "gloss": "getrocknete Blätter zum Rauchen",
+      "pos": "noun",
+      "example": "Er kaut Tabak."
+    },
+    {
+      "word": "VORGESETZT",
+      "gloss": "jemand, der in einer Hierarchie über anderen steht",
+      "synonyms": [
+        "Chef"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "KODEX",
+      "gloss": "Sammlung von Vorschriften oder Regeln",
+      "synonyms": [
+        "Regelsammlung",
+        "Gesetzbuch"
+      ],
+      "pos": "noun",
+      "example": "Was genau ist der japanische Bushido-Kodex eigentlich?"
+    },
+    {
+      "word": "MYTHOS",
+      "gloss": "überlieferte Erzählung mit symbolischer Bedeutung.",
+      "synonyms": [
+        "Sage",
+        "Legende"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein Mythos."
+    },
+    {
+      "word": "MARIHUANA",
+      "gloss": "getrocknete Blüten und Blätter der Hanfpflanze mit berauschender Wirkung.",
+      "pos": "noun"
+    },
+    {
+      "word": "EINGEWEIDE",
+      "gloss": "innere Organe eines Tieres oder Menschen.",
+      "synonyms": [
+        "Innereien"
+      ],
+      "pos": "noun",
+      "example": "Die Köchin entfernt sorgfältig die Eingeweide des Fisches."
+    },
+    {
+      "word": "ULTIMATIV",
+      "gloss": "endgültig und nicht verhandelbar",
+      "synonyms": [
+        "endgültig",
+        "abschließend"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "SKLAVEREI",
+      "gloss": "Zustand, in dem Menschen als Eigentum anderer gehalten werden.",
+      "synonyms": [
+        "Knechtschaft",
+        "Unfreiheit"
+      ],
+      "pos": "noun",
+      "example": "Was ist Sklaverei?"
+    },
+    {
+      "word": "SPONSOR",
+      "gloss": "Person oder Firma, die eine Aktivität finanziell unterstützt.",
+      "synonyms": [
+        "Förderer",
+        "Gönner"
+      ],
+      "pos": "noun",
+      "example": "Ich habe einen Sponsor gefunden."
+    },
+    {
+      "word": "VORLIEGEN",
+      "gloss": "bereits vorhanden oder zur Verfügung stehend sein.",
+      "synonyms": [
+        "vorhanden sein",
+        "existieren"
+      ],
+      "pos": "verb",
+      "example": "Es muss ein Missverständnis vorliegen."
+    },
+    {
+      "word": "BEHÄLTER",
+      "gloss": "Gefäß oder Raum zum Aufbewahren von Dingen.",
+      "synonyms": [
+        "Gefäß"
+      ],
+      "pos": "noun",
+      "example": "Öffne den Behälter!"
+    },
+    {
+      "word": "WIEDERUM",
+      "gloss": "noch einmal oder auf andere Weise.",
+      "synonyms": [
+        "erneut",
+        "nochmals"
+      ],
+      "pos": "adverb",
+      "example": "Andere wiederum bremsten nicht."
+    },
+    {
+      "word": "ANGEBER",
+      "gloss": "Person, die sich selbst übertrieben positiv darstellt.",
+      "synonyms": [
+        "Protzer"
+      ],
+      "pos": "noun",
+      "example": "Er ist so ein Angeber."
+    },
+    {
+      "word": "AUSFAHREN",
+      "gloss": "mit einem Auto wegfahren",
+      "synonyms": [
+        "wegfahren"
+      ],
+      "pos": "verb",
+      "example": "Kannst du rückwärts ausfahren?"
+    },
+    {
+      "word": "AUSSCHUSS",
+      "gloss": "Gruppe von Personen mit einem bestimmten Auftrag oder defekte Ware.",
+      "synonyms": [
+        "Komitee",
+        "Gremium"
+      ],
+      "pos": "noun",
+      "example": "Der Ausschuss nahm den Plan an."
+    },
+    {
+      "word": "KÜRBIS",
+      "gloss": "großes, rundes, orangefarbenes Gemüse mit hartem Kern.",
+      "pos": "noun",
+      "example": "Der Kürbis wächst."
+    },
+    {
+      "word": "SERVIETTE",
+      "gloss": "Tuch zum Reinigen des Mundes beim Essen.",
+      "synonyms": [
+        "Tuch"
+      ],
+      "pos": "noun",
+      "example": "Hier fehlt eine Serviette."
+    },
+    {
+      "word": "LEOPARD",
+      "gloss": "große, gefleckte Raubkatze aus Afrika und Asien.",
+      "synonyms": [
+        "Panther",
+        "Jaguar"
+      ],
+      "pos": "noun",
+      "example": "Sie sind schnell wie ein Leopard."
+    },
+    {
+      "word": "SORTIEREN",
+      "gloss": "nach bestimmten Kriterien ordnen oder trennen.",
+      "synonyms": [
+        "ordnen",
+        "klassifizieren"
+      ],
+      "pos": "verb",
+      "example": "Ich muss meine Gedanken sortieren."
+    },
+    {
+      "word": "AUSWEISE",
+      "gloss": "Dokumente zur Identitätsbestätigung oder Berechtigung.",
+      "synonyms": [
+        "Papiere",
+        "Dokumente"
+      ],
+      "pos": "adverb",
+      "example": "Berta verbrachte den Nachmittag damit, für alle Bandenmitglieder Ausweise zu basteln."
+    },
+    {
+      "word": "FELDWEBEL",
+      "gloss": "militärischer Rang zwischen Unteroffizier und Offizier",
+      "synonyms": [
+        "Unteroffizier"
+      ],
+      "pos": "noun",
+      "example": "Er stieg zum Feldwebel auf."
+    },
+    {
+      "word": "GRÜNDER",
+      "gloss": "Person, die etwas Neues schafft",
+      "synonyms": [
+        "Stifter"
+      ],
+      "pos": "noun",
+      "example": "Der Gründer starb vor zwei Monaten."
+    },
+    {
+      "word": "DURCHDREH",
+      "gloss": "umgangssprachlich für die Kontrolle verlieren",
+      "synonyms": [
+        "ausrasten"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "BENGEL",
+      "gloss": "junger, frecher oder unartiger Junge.",
+      "synonyms": [
+        "Rüpel",
+        "Lausejunge"
+      ],
+      "pos": "noun",
+      "example": "Der Bengel spielt mit seinem Hund."
+    },
+    {
+      "word": "ENTZÜCKEN",
+      "gloss": "jemanden sehr glücklich oder begeistert machen.",
+      "synonyms": [
+        "begeistern",
+        "erfreuen"
+      ],
+      "pos": "verb",
+      "example": "Der Film wird dich entzücken und verzaubern."
+    },
+    {
+      "word": "EINTRAG",
+      "gloss": "Schaden oder negative Auswirkung auf etwas.",
+      "synonyms": [
+        "Schaden",
+        "Nachteil"
+      ],
+      "pos": "noun",
+      "example": "Im Rückblick war es ein Fehler, diesen Eintrag in das Wörterbuch aufzunehmen."
+    },
+    {
+      "word": "ZERFETZEN",
+      "gloss": "in kleine Stücke reißen oder stark beschädigen.",
+      "synonyms": [
+        "zerreißen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "DARAUFHIN",
+      "gloss": "als Folge davon",
+      "synonyms": [
+        "deshalb"
+      ],
+      "pos": "adverb",
+      "example": "Daraufhin stand er auf."
+    },
+    {
+      "word": "BEWÄLTIGEN",
+      "gloss": "etwas Schwieriges erfolgreich meistern",
+      "synonyms": [
+        "meistern",
+        "überwinden"
+      ],
+      "pos": "verb",
+      "example": "Wir bewältigen viele Herausforderungen."
+    },
+    {
+      "word": "KREIEREN",
+      "gloss": "etwas Neues erschaffen oder gestalten",
+      "synonyms": [
+        "erschaffen",
+        "schaffen"
+      ],
+      "pos": "verb",
+      "example": "Manchmal kreieren Übersetzungen Mehrdeutigkeit."
+    },
+    {
+      "word": "SAUEREI",
+      "gloss": "unangenehme oder schwierige Situation",
+      "synonyms": [
+        "Schweinerei",
+        "Dreck"
+      ],
+      "pos": "noun",
+      "example": "Was für eine Sauerei!"
+    },
+    {
+      "word": "LANZE",
+      "gloss": "lange Stange mit Spitze zum Stoßen",
+      "synonyms": [
+        "Speer"
+      ],
+      "pos": "noun",
+      "example": "Das ist eine Lanze."
+    },
+    {
+      "word": "UNDEUTLICH",
+      "gloss": "nicht klar oder schwer zu erkennen",
+      "synonyms": [
+        "vage",
+        "unscharf"
+      ],
+      "pos": "adjective",
+      "example": "Ich sah dort etwas, aber undeutlich."
+    },
+    {
+      "word": "ÖDE",
+      "gloss": "langweilig und eintönig",
+      "synonyms": [
+        "langweilig"
+      ],
+      "pos": "verb",
+      "example": "Das ist eine öde Gegend."
+    },
+    {
+      "word": "UNBESORGT",
+      "gloss": "ohne Sorgen oder Ängste",
+      "synonyms": [
+        "sorgenfrei"
+      ],
+      "pos": "adjective",
+      "example": "Sei unbesorgt!"
+    },
+    {
+      "word": "JAHRESTAG",
+      "gloss": "Datum, das an ein vergangenes Ereignis erinnert",
+      "synonyms": [
+        "Jubiläum",
+        "Gedenktag"
+      ],
+      "pos": "noun",
+      "example": "Alles Gute zum Jahrestag!"
+    },
+    {
+      "word": "HINNEHMEN",
+      "gloss": "etwas Unangenehmes akzeptieren",
+      "synonyms": [
+        "akzeptieren"
+      ],
+      "pos": "verb",
+      "example": "Ich muss es so hinnehmen."
+    },
+    {
+      "word": "SEKRETÄR",
+      "gloss": "Person, die organisatorische Aufgaben übernimmt",
+      "synonyms": [
+        "Schreiber",
+        "Assistent"
+      ],
+      "pos": "noun",
+      "example": "Wer ist der Sekretär?"
+    },
+    {
+      "word": "PEITSCH",
+      "gloss": "Gerät zum Antreiben von Tieren",
+      "synonyms": [
+        "Geißel"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "REBELLION",
+      "gloss": "Aufstand gegen eine Autorität",
+      "synonyms": [
+        "Aufstand",
+        "Meuterei"
+      ],
+      "pos": "noun",
+      "example": "Das ist eine Form der Rebellion."
+    },
+    {
+      "word": "KOMMISSION",
+      "gloss": "Gremium zur Erfüllung bestimmter Aufgaben",
+      "synonyms": [
+        "Ausschuss",
+        "Gremium"
+      ],
+      "pos": "noun",
+      "example": "Ich unterstützte die Wahl der Kommission."
+    },
+    {
+      "word": "SCHLAMPIG",
+      "gloss": "nachlässig oder unordentlich",
+      "synonyms": [
+        "nachlässig",
+        "unordentlich"
+      ],
+      "pos": "adjective",
+      "example": "Bert arbeitet schlampig."
+    },
+    {
+      "word": "ABSCHLAGEN",
+      "gloss": "etwas ablehnen oder zurückweisen",
+      "synonyms": [
+        "ablehnen",
+        "zurückweisen"
+      ],
+      "pos": "verb",
+      "example": "Man kann ihm nichts abschlagen."
+    },
+    {
+      "word": "ZUGEHEN",
+      "gloss": "sich jemandem oder etwas nähern",
+      "synonyms": [
+        "sich nähern"
+      ],
+      "pos": "verb",
+      "example": "In der Schulpause kann es zugehen wie in einem Bienenstock."
+    },
+    {
+      "word": "KAVALLERIE",
+      "gloss": "Truppeneinheit zu Pferd",
+      "synonyms": [
+        "Reiterei"
+      ],
+      "pos": "noun",
+      "example": "Die Kavallerie kam gestern an."
+    },
+    {
+      "word": "KONKRET",
+      "gloss": "gegenständlich oder greifbar",
+      "synonyms": [
+        "anschaulich",
+        "greifbar"
+      ],
+      "pos": "adjective",
+      "example": "Was brauchst du konkret?"
+    },
+    {
+      "word": "BEIFALL",
+      "gloss": "Zustimmung durch Klatschen",
+      "synonyms": [
+        "Applaus",
+        "Zustimmung"
+      ],
+      "pos": "noun",
+      "example": "Sie spendeten Beifall."
+    },
+    {
+      "word": "KRUG",
+      "gloss": "Gefäß zum Aufbewahren oder Transportieren von Flüssigkeiten",
+      "synonyms": [
+        "Kanne"
+      ],
+      "pos": "noun",
+      "example": "Einen Krug Wasser, bitte!"
+    },
+    {
+      "word": "AUSLEIHEN",
+      "gloss": "etwas vorübergehend erhalten oder geben",
+      "synonyms": [
+        "entlehnen"
+      ],
+      "pos": "verb",
+      "example": "Ich möchte das ausleihen."
+    },
+    {
+      "word": "FEGEN",
+      "gloss": "mit einem Besen reinigen oder schnell bewegen",
+      "synonyms": [
+        "kehren",
+        "wischen"
+      ],
+      "pos": "verb",
+      "example": "Du musst fegen."
+    },
+    {
+      "word": "AUSRASTEN",
+      "gloss": "sich erholen oder entspannen",
+      "synonyms": [
+        "durchdrehen"
+      ],
+      "pos": "verb",
+      "example": "Ich blieb zum Ausrasten daheim."
+    },
+    {
+      "word": "VORSCHUSS",
+      "gloss": "Geld, das im Voraus gezahlt wird",
+      "pos": "noun",
+      "example": "Alle können um einen Vorschuss bitten."
+    },
+    {
+      "word": "WAHRLICH",
+      "gloss": "wirklich oder tatsächlich",
+      "synonyms": [
+        "echt"
+      ],
+      "pos": "adverb",
+      "example": "Du bist wahrlich schön."
+    },
+    {
+      "word": "BETRAG",
+      "gloss": "Summe an Geld",
+      "synonyms": [
+        "Summe",
+        "Höhe"
+      ],
+      "pos": "noun",
+      "example": "Was ist der Betrag?"
+    },
+    {
+      "word": "BEDIENUNG",
+      "gloss": "Service in einem Restaurant oder Geschäft",
+      "synonyms": [
+        "Service"
+      ],
+      "pos": "noun",
+      "example": "Bedienung gesucht."
+    },
+    {
+      "word": "TRUHE",
+      "gloss": "großer verschließbarer Behälter zur Aufbewahrung",
+      "synonyms": [
+        "Kiste",
+        "Kasten"
+      ],
+      "pos": "noun",
+      "example": "In dieser Truhe sind alte Kleider."
+    },
+    {
+      "word": "IMITIEREN",
+      "gloss": "nachahmen oder kopieren",
+      "synonyms": [
+        "nachahmen",
+        "kopieren"
+      ],
+      "pos": "noun",
+      "example": "Sie imitieren euch."
+    },
+    {
+      "word": "HOCHKOMMEN",
+      "gloss": "sich sozial oder finanziell verbessern",
+      "synonyms": [
+        "aufsteigen",
+        "emporsteigen"
+      ],
+      "pos": "verb",
+      "example": "Mit harter Arbeit will sie im Berufsleben hochkommen."
+    },
+    {
+      "word": "BÖSEWICHT",
+      "gloss": "jemand, der Schlechtes plant oder tut",
+      "synonyms": [
+        "Schurke",
+        "Übeltäter"
+      ],
+      "pos": "noun",
+      "example": "Kein Bösewicht kann glücklich sein."
+    },
+    {
+      "word": "SCHLUCHT",
+      "gloss": "ein tiefes, enges Tal zwischen Bergen oder Hügeln",
+      "synonyms": [
+        "Kluft"
+      ],
+      "pos": "noun",
+      "example": "Er fiel in die Schlucht."
+    },
+    {
+      "word": "LOGBUCH",
+      "gloss": "Dokumentationsheft für Ereignisse oder Daten",
+      "synonyms": [
+        "Schiffstagebuch"
+      ],
+      "pos": "noun",
+      "example": "Ich lese das Logbuch."
+    },
+    {
+      "word": "REKRUT",
+      "gloss": "neu eingestellter Soldat",
+      "synonyms": [
+        "Neuling"
+      ],
+      "pos": "noun",
+      "example": "Der Rekrut trainiert hart, um einsatzbereit zu werden."
+    },
+    {
+      "word": "SCHÖPFEN",
+      "gloss": "Flüssigkeit aus einem Behälter entnehmen",
+      "synonyms": [
+        "holen",
+        "nehmen"
+      ],
+      "pos": "verb",
+      "example": "Aus der Quelle soll man schöpfen."
+    },
+    {
+      "word": "BESSERUNG",
+      "gloss": "positive Veränderung eines Zustands",
+      "synonyms": [
+        "Fortschritt",
+        "Wandel"
+      ],
+      "pos": "noun",
+      "example": "Gute Besserung!"
+    },
+    {
+      "word": "PFANNE",
+      "gloss": "flaches Kochgefäß mit Griff",
+      "synonyms": [
+        "Topf",
+        "Kochgeschirr"
+      ],
+      "pos": "noun",
+      "example": "Wo ist die Pfanne?"
+    },
+    {
+      "word": "VERSPÄTET",
+      "gloss": "nicht pünktlich eintreffend",
+      "synonyms": [
+        "nachzeitig"
+      ],
+      "pos": "adjective",
+      "example": "Ihr seid verspätet."
+    },
+    {
+      "word": "OBHUT",
+      "gloss": "Schutz oder Fürsorge",
+      "synonyms": [
+        "Schutz",
+        "Fürsorge"
+      ],
+      "pos": "noun",
+      "example": "Wir müssen dies unter unsere Obhut nehmen."
+    },
+    {
+      "word": "FRAß",
+      "gloss": "Futter für Tiere",
+      "synonyms": [
+        "Futter",
+        "Nahrung"
+      ],
+      "pos": "adverb",
+      "example": "Die Ente fraß Ananas."
+    },
+    {
+      "word": "AUFWÜHLEN",
+      "gloss": "etwas Unruhe oder Aufregung verursachen",
+      "synonyms": [
+        "aufregen",
+        "durcheinanderbringen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "AUSHELFEN",
+      "gloss": "vorübergehend unterstützen",
+      "synonyms": [
+        "unterstützen"
+      ],
+      "pos": "verb",
+      "example": "Ich kann dir aushelfen."
+    },
+    {
+      "word": "STAPEL",
+      "gloss": "Anordnung von Dingen übereinander",
+      "synonyms": [
+        "Haufen"
+      ],
+      "pos": "noun",
+      "example": "Ein Stapel Papiere lag auf dem Tisch."
+    },
+    {
+      "word": "VERSTREUEN",
+      "gloss": "etwas verteilen oder auseinanderbringen",
+      "synonyms": [
+        "verteilen"
+      ],
+      "pos": "verb",
+      "example": "Wir müssen die Blätter im Garten verstreuen, damit der Rasen nicht fault."
+    },
+    {
+      "word": "NUKLEAR",
+      "gloss": "die Atomkernenergie betreffend",
+      "synonyms": [
+        "Kern-"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "MITHILFE",
+      "gloss": "unterstützt durch jemanden oder etwas",
+      "pos": "noun",
+      "example": "Ich brauche eure Mithilfe."
+    },
+    {
+      "word": "FASSUNG",
+      "gloss": "ruhige und beherrschte Haltung",
+      "synonyms": [
+        "Rahmen"
+      ],
+      "pos": "noun",
+      "example": "Trag's mit Fassung!"
+    },
+    {
+      "word": "VERPACKEN",
+      "gloss": "etwas in eine Hülle oder einen Behälter legen",
+      "synonyms": [
+        "einpacken"
+      ],
+      "pos": "verb",
+      "example": "Einzeln verpacken, bitte!"
+    },
+    {
+      "word": "HINDERNIS",
+      "gloss": "etwas, das den Weg blockiert",
+      "synonyms": [
+        "Barriere",
+        "Hürde"
+      ],
+      "pos": "noun",
+      "example": "Das Pferd scheute am Hindernis."
+    },
+    {
+      "word": "ORGANISMUS",
+      "gloss": "lebender Körper oder System",
+      "synonyms": [
+        "Lebewesen",
+        "Geschöpf"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein einzelliger Organismus."
+    },
+    {
+      "word": "LIEBLICH",
+      "gloss": "angenehm und freundlich",
+      "synonyms": [
+        "nett",
+        "sympathisch"
+      ],
+      "pos": "adjective",
+      "example": "Seine Musik klingt lieblich und naiv."
+    },
+    {
+      "word": "ERHABEN",
+      "gloss": "von großer Würde geprägt",
+      "synonyms": [
+        "hoch"
+      ],
+      "pos": "adjective",
+      "example": "Er ist über jeden Verdacht erhaben."
+    },
+    {
+      "word": "INTEGRITÄT",
+      "gloss": "Unversehrtheit oder moralische Lauterkeit",
+      "synonyms": [
+        "Unversehrtheit",
+        "Ganzheit"
+      ],
+      "pos": "noun",
+      "example": "Stellst du meine Integrität infrage?"
+    },
+    {
+      "word": "HINTERKOPF",
+      "gloss": "rückwärtiger Bereich des Kopfes",
+      "synonyms": [
+        "Nacken",
+        "Genick"
+      ],
+      "pos": "noun",
+      "example": "Er hat Augen am Hinterkopf."
+    },
+    {
+      "word": "UNHEIL",
+      "gloss": "großes Unglück oder schlimme Vorhersage.",
+      "synonyms": [
+        "Unglück",
+        "Schaden"
+      ],
+      "pos": "noun",
+      "example": "Häufig ahne ich drohendes Unheil."
+    },
+    {
+      "word": "AGIEREN",
+      "gloss": "handeln oder sich verhalten.",
+      "synonyms": [
+        "handeln",
+        "tätig sein"
+      ],
+      "pos": "verb",
+      "example": "Es ist leichter zu regieren als zu agieren."
+    },
+    {
+      "word": "OHNMACHT",
+      "gloss": "Zustand der Hilflosigkeit oder Bewusstlosigkeit.",
+      "synonyms": [
+        "Hilflosigkeit"
+      ],
+      "pos": "noun",
+      "example": "Ich fiel in Ohnmacht."
+    },
+    {
+      "word": "PELZ",
+      "gloss": "Fell eines Tieres oder künstlicher Überzug daraus.",
+      "synonyms": [
+        "Fell",
+        "Fellkleid"
+      ],
+      "pos": "noun",
+      "example": "Ein fremder Pelz wärmt nicht."
+    },
+    {
+      "word": "MENGEN",
+      "gloss": "etwas vermischen oder kombinieren",
+      "synonyms": [
+        "mischen"
+      ],
+      "pos": "verb",
+      "example": "Ich mag es, Gewürze zu mengen, um neue Geschmacksrichtungen zu kreieren."
+    },
+    {
+      "word": "HAUPT",
+      "gloss": "wichtigster Teil von etwas oder Kopf.",
+      "synonyms": [
+        "Kopf"
+      ],
+      "pos": "noun",
+      "example": "Neige dein Haupt nach vorne."
+    },
+    {
+      "word": "FLICKEN",
+      "gloss": "kleine Reparaturen an kaputten Dingen vornehmen",
+      "synonyms": [
+        "reparieren"
+      ],
+      "pos": "verb",
+      "example": "Ich fand sie beim Flicken eines Rocks."
+    },
+    {
+      "word": "SOWJETISCH",
+      "gloss": "zur ehemaligen UdSSR gehörend",
+      "synonyms": [
+        "russisch",
+        "kommunistisch"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "GLEITEN",
+      "gloss": "sich sanft und ohne Antrieb bewegen.",
+      "synonyms": [
+        "rutschen",
+        "schweben"
+      ],
+      "pos": "verb",
+      "example": "Er ließ das Geld in meine Tasche gleiten."
+    },
+    {
+      "word": "MILLIONÄR",
+      "gloss": "jemand mit großem Vermögen",
+      "synonyms": [
+        "Reicher"
+      ],
+      "pos": "noun",
+      "example": "Er soll Millionär sein."
+    },
+    {
+      "word": "ABTRETEN",
+      "gloss": "den Besitz oder Anspruch aufgeben.",
+      "synonyms": [
+        "zurücktreten",
+        "aufgeben"
+      ],
+      "pos": "verb",
+      "example": "Ich finde, man sollte so lange leben, wie es geht, und, wenn es nicht mehr geht, mit klarem Kopf und in Würde abtreten."
+    },
+    {
+      "word": "PREISGEBEN",
+      "gloss": "etwas verraten oder offenbaren.",
+      "synonyms": [
+        "verraten",
+        "aufgeben"
+      ],
+      "pos": "verb",
+      "example": "Ich werde ihre Geheimnisse nicht preisgeben."
+    },
+    {
+      "word": "FORSCHER",
+      "gloss": "Person, die wissenschaftlich arbeitet.",
+      "synonyms": [
+        "Wissenschaftler"
+      ],
+      "pos": "noun",
+      "example": "Mein Großvater war Forscher."
+    },
+    {
+      "word": "BEGABT",
+      "gloss": "talentiert oder fähig.",
+      "synonyms": [
+        "talentiert",
+        "fähig"
+      ],
+      "pos": "noun",
+      "example": "Er ist begabt."
+    },
+    {
+      "word": "DESIGN",
+      "gloss": "Gestaltung oder Muster von etwas.",
+      "synonyms": [
+        "Gestaltung",
+        "Formgebung"
+      ],
+      "pos": "noun",
+      "example": "Was für ein schönes Design!"
+    },
+    {
+      "word": "UNVERSEHRT",
+      "gloss": "ohne Beschädigung oder Veränderung",
+      "synonyms": [
+        "intakt"
+      ],
+      "pos": "adjective",
+      "example": "Das Schloss ist unversehrt."
+    },
+    {
+      "word": "STRUMPF",
+      "gloss": "langes, eng anliegendes Beinkleid",
+      "synonyms": [
+        "Socke"
+      ],
+      "pos": "noun",
+      "example": "Der alte Strumpf aus Omas Schrank war aus weichem Samt."
+    },
+    {
+      "word": "KUCKUCK",
+      "gloss": "Vogel mit markantem Ruf oder jemand, der täuscht",
+      "synonyms": [
+        "Nestparasit"
+      ],
+      "pos": "noun",
+      "example": "Der Kuckuck ruft „kuckuck”."
+    },
+    {
+      "word": "JEWEILS",
+      "gloss": "in jedem einzelnen Fall oder pro Einheit.",
+      "synonyms": [
+        "je",
+        "jedes Mal"
+      ],
+      "pos": "adverb",
+      "example": "Iss häufig und dabei jeweils wenig."
+    },
+    {
+      "word": "TÜRE",
+      "gloss": "beweglicher Verschluss für einen Eingang.",
+      "synonyms": [
+        "Tor",
+        "Eingang"
+      ],
+      "pos": "noun",
+      "example": "Mach die Türe zu."
+    },
+    {
+      "word": "VEREIN",
+      "gloss": "Zusammenschluss von Personen mit gemeinsamen Zielen.",
+      "synonyms": [
+        "Club",
+        "Gruppe"
+      ],
+      "pos": "noun",
+      "example": "Drei bilden einen Verein."
+    },
+    {
+      "word": "HOTDOG",
+      "gloss": "Würstchen im länglichen Brötchen.",
+      "synonyms": [
+        "Würstchen",
+        "Imbiss"
+      ],
+      "pos": "noun",
+      "example": "Magst du deinen Hotdog?"
+    },
+    {
+      "word": "RADIOAKTIV",
+      "gloss": "durch Kernzerfall strahlend oder energiereich.",
+      "synonyms": [
+        "strahlend"
+      ],
+      "pos": "adjective",
+      "example": "Dieses Zeug ist radioaktiv."
+    },
+    {
+      "word": "UNFUG",
+      "gloss": "unsinniges oder störendes Verhalten.",
+      "synonyms": [
+        "Unsinn",
+        "Quatsch"
+      ],
+      "pos": "noun",
+      "example": "Mach keinen Unfug!"
+    },
+    {
+      "word": "KIDNAPPEN",
+      "gloss": "jemanden gegen seinen Willen entführen.",
+      "synonyms": [
+        "entführen",
+        "rauben"
+      ],
+      "pos": "verb",
+      "example": "Neulich hatte ich den Traum, ein schwarzes Spezialkommando würde unsere Wohnungstür aufsprengen, um mich zu kidnappen."
+    },
+    {
+      "word": "ZORNIG",
+      "gloss": "voller Ärger oder Wut.",
+      "synonyms": [
+        "wütend",
+        "ärgerlich"
+      ],
+      "pos": "adjective",
+      "example": "Jane war zornig."
+    },
+    {
+      "word": "VEREINIGEN",
+      "gloss": "zusammenbringen oder verbinden.",
+      "synonyms": [
+        "verbinden",
+        "zusammenführen"
+      ],
+      "pos": "verb",
+      "example": "Beide Länder vereinigen sich."
+    },
+    {
+      "word": "BUSINESS",
+      "gloss": "wirtschaftliche Tätigkeit oder Handel.",
+      "synonyms": [
+        "Geschäft",
+        "Wirtschaft"
+      ],
+      "pos": "noun",
+      "example": "Er hat sein ganzes Kapital ins Business reingesteckt."
+    },
+    {
+      "word": "ANTIQUITÄT",
+      "gloss": "alter, wertvoller Gegenstand aus der Vergangenheit.",
+      "synonyms": [
+        "Altertum"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "VERSÖHNEN",
+      "gloss": "Frieden oder Harmonie zwischen Streitenden herstellen.",
+      "pos": "verb",
+      "example": "Versöhnen kann man nur durch Güte."
+    },
+    {
+      "word": "PRÄGEN",
+      "gloss": "etwas entscheidend beeinflussen oder formen.",
+      "synonyms": [
+        "formen",
+        "bestimmen"
+      ],
+      "pos": "verb",
+      "example": "Vor allem die negativen Dinge prägen sich ein."
+    },
+    {
+      "word": "MEHRHEIT",
+      "gloss": "größerer Teil einer Gruppe oder Menge.",
+      "synonyms": [
+        "Majorität"
+      ],
+      "pos": "noun",
+      "example": "Die Mehrheit ist da."
+    },
+    {
+      "word": "VERBOCKEN",
+      "gloss": "etwas durch Fehler ruinieren.",
+      "synonyms": [
+        "verpfuschen",
+        "vermasseln"
+      ],
+      "pos": "verb",
+      "example": "Mit einem falschen Schritt konnte er das ganze Projekt verbocken."
+    },
+    {
+      "word": "VERWÜSTEN",
+      "gloss": "etwas vollständig zerstören.",
+      "synonyms": [
+        "zerstören"
+      ],
+      "pos": "verb",
+      "example": "Alexander fiel fast vom Stuhl und sandte ihr einen Blick, der ganze Landstriche hätte verwüsten können."
+    },
+    {
+      "word": "STEHEND",
+      "gloss": "in aufrechter Position oder ohne Bewegung.",
+      "synonyms": [
+        "aufrecht"
+      ],
+      "pos": "adjective",
+      "example": "Ich konnte nicht länger stehend verharren."
+    },
+    {
+      "word": "MYSTISCH",
+      "gloss": "rätselhaft oder geheimnisvoll.",
+      "synonyms": [
+        "geheimnisvoll",
+        "rätselhaft"
+      ],
+      "pos": "adjective",
+      "example": "Das alte Schloss wirkt nachts so mystisch."
+    },
+    {
+      "word": "MITTEILUNG",
+      "gloss": "Information oder Nachricht.",
+      "synonyms": [
+        "Nachricht",
+        "Information"
+      ],
+      "pos": "noun",
+      "example": "Was stand in der Mitteilung?"
+    },
+    {
+      "word": "DURCHSEHEN",
+      "gloss": "etwas klar erkennen oder genau prüfen.",
+      "synonyms": [
+        "prüfen",
+        "kontrollieren"
+      ],
+      "pos": "verb",
+      "example": "Ich habe diese Berichte mitgebracht, damit du sie durchsehen kannst."
+    },
+    {
+      "word": "QUOTE",
+      "gloss": "angeführtes Zitat oder Preisangabe.",
+      "synonyms": [
+        "Zitat",
+        "Ausspruch"
+      ],
+      "pos": "noun",
+      "example": "Wir beginnen, das Konzept der \"Quote\" in Erwägung zu ziehen."
+    },
+    {
+      "word": "VERZÖGERN",
+      "gloss": "etwas später als geplant erledigen.",
+      "synonyms": [
+        "aufschieben",
+        "verschieben"
+      ],
+      "pos": "verb",
+      "example": "Hör auf, den Handel zu verzögern!"
+    },
+    {
+      "word": "GESCHÄTZT",
+      "gloss": "als wertvoll oder wichtig empfunden.",
+      "synonyms": [
+        "beliebt"
+      ],
+      "pos": "adjective",
+      "example": "Er wird geschätzt."
+    },
+    {
+      "word": "GEEIGNET",
+      "gloss": "passend oder tauglich für einen Zweck.",
+      "synonyms": [
+        "passend",
+        "tauglich"
+      ],
+      "pos": "adjective",
+      "example": "Jedes Papier ist geeignet."
+    },
+    {
+      "word": "ÄTZEND",
+      "gloss": "etwas, das starke chemische Reaktionen verursacht und oft schädlich ist",
+      "synonyms": [
+        "KAUSTISCH",
+        "BEIßEND",
+        "KORROSIV"
+      ],
+      "pos": "adjective",
+      "example": "Schwefelsäure gehört zu den stärksten Säuren und wirkt stark ätzend."
+    },
+    {
+      "word": "KAPITAL",
+      "gloss": "Geldmittel oder Hauptsache.",
+      "synonyms": [
+        "Vermögen",
+        "Geldmittel"
+      ],
+      "pos": "noun",
+      "example": "Sie besitzen das Kapital."
+    },
+    {
+      "word": "IMPFSTOFF",
+      "gloss": "Substanz zum Schutz vor Krankheiten.",
+      "synonyms": [
+        "Vakzin"
+      ],
+      "pos": "noun",
+      "example": "Hast du den Impfstoff?"
+    },
+    {
+      "word": "STRENGEN",
+      "gloss": "etwas hart oder unnachgiebig durchsetzen.",
+      "synonyms": [
+        "beanspruchen"
+      ],
+      "pos": "verb",
+      "example": "Ich habe einen sehr strengen Lehrer."
+    },
+    {
+      "word": "ÜBERFÜHREN",
+      "gloss": "jemanden oder etwas von einem Ort zu einem anderen bringen",
+      "synonyms": [
+        "transportieren",
+        "verlegen"
+      ],
+      "pos": "noun",
+      "example": "Die Polizei wird die Beweise ins Labor überführen."
+    },
+    {
+      "word": "ENKELKIND",
+      "gloss": "Nachkomme des eigenen Kindes.",
+      "pos": "noun",
+      "example": "Wo ist dein Enkelkind?"
+    },
+    {
+      "word": "REAKTOR",
+      "gloss": "Anlage zur Energiegewinnung durch Kernspaltung.",
+      "synonyms": [
+        "Kernspaltungsanlage"
+      ],
+      "pos": "noun",
+      "example": "Der neue Reaktor soll ab nächstem Jahr Strom für tausende Haushalte liefern."
+    },
+    {
+      "word": "SCHMOREN",
+      "gloss": "langsam in Flüssigkeit garen lassen.",
+      "pos": "verb",
+      "example": "Lass ihn im eigenen Saft schmoren."
+    },
+    {
+      "word": "DONNERN",
+      "gloss": "lautes Geräusch bei Gewitter oder starker Motor.",
+      "synonyms": [
+        "dröhnen",
+        "grollen"
+      ],
+      "pos": "verb",
+      "example": "Ich hörte ein fernes Donnern."
+    },
+    {
+      "word": "NACHHOLEN",
+      "gloss": "Versäumtes später erledigen.",
+      "synonyms": [
+        "aufholen"
+      ],
+      "pos": "verb",
+      "example": "Ich muss etwas Schlaf nachholen."
+    },
+    {
+      "word": "BARACKE",
+      "gloss": "einfaches, provisorisches Gebäude.",
+      "synonyms": [
+        "Hütte",
+        "Holzbau"
+      ],
+      "pos": "noun",
+      "example": "Die freiwilligen Helfer bauten eine Baracke als Unterkunft für die Obdachlosen."
+    },
+    {
+      "word": "BEFREIUNG",
+      "gloss": "das Freilassen aus einer Umklammerung",
+      "synonyms": [
+        "Freilassung"
+      ],
+      "pos": "noun",
+      "example": "Die Scheidung kam einer Befreiung gleich."
+    },
+    {
+      "word": "ANZAHLUNG",
+      "gloss": "Teilzahlung bei Kauf oder Vertrag.",
+      "synonyms": [
+        "Akontozahlung",
+        "Vorauszahlung"
+      ],
+      "pos": "noun",
+      "example": "Ihr müsst eine Anzahlung machen."
+    },
+    {
+      "word": "KOMPLEX",
+      "gloss": "aus vielen Teilen zusammengesetzt oder schwierig.",
+      "synonyms": [
+        "verwickelt"
+      ],
+      "pos": "noun",
+      "example": "Es ist wahnsinnig komplex."
+    },
+    {
+      "word": "KNALLHART",
+      "gloss": "sehr streng oder ohne Kompromisse.",
+      "synonyms": [
+        "brutal",
+        "rücksichtslos"
+      ],
+      "pos": "adjective",
+      "example": "Man hoffte auf einen milden Frieden, der Friede aber war knallhart."
+    },
+    {
+      "word": "AUFRUFEN",
+      "gloss": "jemanden zum Handeln auffordern.",
+      "synonyms": [
+        "auffordern"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "ABLADEN",
+      "gloss": "etwas von einem Fahrzeug entfernen.",
+      "synonyms": [
+        "entladen"
+      ],
+      "pos": "verb",
+      "example": "Musst du ausgerechnet vor meinem Haus deine Steine abladen?"
+    },
+    {
+      "word": "SCHICHT",
+      "gloss": "eine Lage oder Ebene von etwas.",
+      "synonyms": [
+        "Lage"
+      ],
+      "pos": "verb",
+      "example": "Meine Schicht ist fast vorbei."
+    },
+    {
+      "word": "WOHLSTAND",
+      "gloss": "ein Zustand des finanziellen oder materiellen Reichtums.",
+      "synonyms": [
+        "Reichtum"
+      ],
+      "pos": "noun",
+      "example": "Gesundheit über Wohlstand."
+    },
+    {
+      "word": "BLEISTIFT",
+      "gloss": "Schreibgerät mit Graphitmine.",
+      "pos": "noun",
+      "example": "Wo ist der Bleistift?"
+    },
+    {
+      "word": "HALLEN",
+      "gloss": "große, offene Innenräume",
+      "synonyms": [
+        "Räume"
+      ],
+      "pos": "verb",
+      "example": "Luthers Hammerschläge hallen bis heute nach."
+    },
+    {
+      "word": "VERZIEHEN",
+      "gloss": "etwas nachsichtig behandeln oder vergeben.",
+      "synonyms": [
+        "nachsehen"
+      ],
+      "pos": "verb",
+      "example": "Ich habe verziehen."
+    },
+    {
+      "word": "MIKRO",
+      "gloss": "extrem klein oder winzig.",
+      "synonyms": [
+        "winzig"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "RÜHREND",
+      "gloss": "etwas, das starke Gefühle auslöst.",
+      "synonyms": [
+        "ergreifend",
+        "bewegend"
+      ],
+      "pos": "adjective",
+      "example": "Wie rührend!"
+    },
+    {
+      "word": "STUMMEN",
+      "gloss": "ohne Sprache oder Geräusche.",
+      "synonyms": [
+        "schweigend",
+        "lautlos"
+      ],
+      "pos": "noun",
+      "example": "Vertrau ein Geheimnis einem Stummen, und er wird reden."
+    },
+    {
+      "word": "WIRBEL",
+      "gloss": "schnelle Drehbewegung oder Chaos.",
+      "pos": "adverb",
+      "example": "Mann, der Satz hat echt für Wirbel gesorgt."
+    },
+    {
+      "word": "ADOPTION",
+      "gloss": "die rechtliche Annahme eines Kindes.",
+      "synonyms": [
+        "Annahme"
+      ],
+      "pos": "noun",
+      "example": "Er wurde zur Adoption freigegeben."
+    },
+    {
+      "word": "EINWEISEN",
+      "gloss": "jemanden in etwas einarbeiten oder einführen.",
+      "synonyms": [
+        "einarbeiten"
+      ],
+      "pos": "verb",
+      "example": "Könntest du die Neue in die Bedienung einweisen?"
+    },
+    {
+      "word": "FUßBODEN",
+      "gloss": "die Fläche, auf der man in einem Raum steht oder geht.",
+      "synonyms": [
+        "Fläche"
+      ],
+      "pos": "noun",
+      "example": "Bohnere den Fußboden."
+    },
+    {
+      "word": "VERRINGERN",
+      "gloss": "etwas kleiner oder weniger machen.",
+      "synonyms": [
+        "reduzieren",
+        "vermindern"
+      ],
+      "pos": "verb",
+      "example": "Die Wellen verringern sich."
+    },
+    {
+      "word": "GRUNDLOS",
+      "gloss": "ohne erkennbaren Anlass",
+      "synonyms": [
+        "ohne Ursache"
+      ],
+      "pos": "adjective",
+      "example": "Opponiere nicht grundlos!"
+    },
+    {
+      "word": "REGENBOGEN",
+      "gloss": "ein farbiges Lichtband am Himmel.",
+      "synonyms": [
+        "Farbband",
+        "Lichtband"
+      ],
+      "pos": "noun",
+      "example": "Der Regenbogen ist bunt."
+    },
+    {
+      "word": "ZWITSCHERN",
+      "gloss": "Vögel mit hohen Tönen singen.",
+      "synonyms": [
+        "piepen"
+      ],
+      "pos": "verb",
+      "example": "Vögel zwitschern."
+    },
+    {
+      "word": "KAROTTE",
+      "gloss": "ein orangefarbenes Wurzelgemüse.",
+      "synonyms": [
+        "Möhre"
+      ],
+      "pos": "noun",
+      "example": "Sie isst eine Karotte."
+    },
+    {
+      "word": "BERÜCHTIGT",
+      "gloss": "für etwas Negatives bekannt sein.",
+      "synonyms": [
+        "VERRUCHT",
+        "VERHASST",
+        "NOTORISCH"
+      ],
+      "pos": "adjective",
+      "example": "Diese Kreuzung ist berühmt-berüchtigt."
+    },
+    {
+      "word": "NOTIZBUCH",
+      "gloss": "Heft zum Festhalten von Gedanken",
+      "synonyms": [
+        "Heft",
+        "Schreibheft"
+      ],
+      "pos": "noun",
+      "example": "Wo ist mein Notizbuch?"
+    },
+    {
+      "word": "BEISTEHEN",
+      "gloss": "jemandem in einer schwierigen Situation helfen.",
+      "synonyms": [
+        "unterstützen"
+      ],
+      "pos": "verb",
+      "example": "Wer kann mir beistehen?"
+    },
+    {
+      "word": "VERWENDUNG",
+      "gloss": "der Zweck oder die Art, wie etwas genutzt wird.",
+      "synonyms": [
+        "Nutzung",
+        "Gebrauch"
+      ],
+      "pos": "noun",
+      "example": "Ich habe keine Verwendung dafür."
+    },
+    {
+      "word": "COGNAC",
+      "gloss": "ein hochwertiger Branntwein aus Frankreich.",
+      "synonyms": [
+        "Kognak"
+      ],
+      "pos": "noun",
+      "example": "Ich trinke keinen Cognac."
+    },
+    {
+      "word": "ABFINDEN",
+      "gloss": "sich mit einer Situation zufriedengeben, auch wenn sie nicht ideal ist",
+      "synonyms": [
+        "zufriedengeben"
+      ],
+      "pos": "verb",
+      "example": "Ich muss mich damit abfinden."
+    },
+    {
+      "word": "EINLÖSEN",
+      "gloss": "einen Gutschein oder ein Versprechen in Anspruch nehmen",
+      "synonyms": [
+        "einwechseln"
+      ],
+      "pos": "verb",
+      "example": "Ich möchte einen Scheck einlösen."
+    },
+    {
+      "word": "EVOLUTION",
+      "gloss": "die allmähliche Entwicklung von Lebewesen.",
+      "synonyms": [
+        "Entwicklung"
+      ],
+      "pos": "noun",
+      "example": "Evolution ist Anpassung."
+    },
+    {
+      "word": "MARMELADE",
+      "gloss": "eine süße Aufstrichmasse aus Früchten.",
+      "synonyms": [
+        "Konfitüre"
+      ],
+      "pos": "noun",
+      "example": "Mögt ihr Marmelade?"
+    },
+    {
+      "word": "BECKEN",
+      "gloss": "rundes Gefäß oder Schlaginstrument",
+      "synonyms": [
+        "Schale",
+        "Trommel"
+      ],
+      "pos": "noun",
+      "example": "Ich fiel ins Becken."
+    },
+    {
+      "word": "HINGEGEN",
+      "gloss": "im Unterschied dazu oder auf der anderen Seite.",
+      "synonyms": [
+        "andererseits",
+        "dagegen"
+      ],
+      "pos": "adverb",
+      "example": "Ich war hier, du hingegen nicht."
+    },
+    {
+      "word": "SPATZ",
+      "gloss": "ein kleiner Singvogel.",
+      "synonyms": [
+        "Sperling"
+      ],
+      "pos": "noun",
+      "example": "Seht ihr den Spatz?"
+    },
+    {
+      "word": "SCANNEN",
+      "gloss": "etwas digital erfassen oder einlesen.",
+      "synonyms": [
+        "digitalisieren"
+      ],
+      "pos": "verb",
+      "example": "Ein 3-D-Scanner ermöglicht das Scannen von 3-D-Objekten."
+    },
+    {
+      "word": "SECHSEN",
+      "gloss": "die Zahl, die nach fünf kommt.",
+      "pos": "verb",
+      "example": "Ich habe drei Sechsen gewürfelt."
+    },
+    {
+      "word": "REKTOR",
+      "gloss": "der leitende Verantwortliche einer Bildungseinrichtung.",
+      "synonyms": [
+        "Schulleiter",
+        "Bildungsleiter"
+      ],
+      "pos": "noun",
+      "example": "Er muss der Rektor sein."
+    },
+    {
+      "word": "BESCHLUSS",
+      "gloss": "eine verbindliche Entscheidung oder Festlegung.",
+      "synonyms": [
+        "Entscheidung",
+        "Festlegung"
+      ],
+      "pos": "noun",
+      "example": "Mein Beschluss steht fest."
+    },
+    {
+      "word": "VORGANG",
+      "gloss": "ein Ablauf oder eine Handlung.",
+      "synonyms": [
+        "Ablauf",
+        "Prozess"
+      ],
+      "pos": "noun",
+      "example": "Ich erklärte ihm den Vorgang."
+    },
+    {
+      "word": "ZUTRAUEN",
+      "gloss": "Vertrauen in die Fähigkeiten einer Person haben.",
+      "synonyms": [
+        "Vertrauen",
+        "Zuversicht"
+      ],
+      "pos": "verb",
+      "example": "Ich würde es ihm zutrauen."
+    },
+    {
+      "word": "STATISTIK",
+      "gloss": "die Sammlung und Auswertung von Daten.",
+      "synonyms": [
+        "Daten",
+        "Zahlen"
+      ],
+      "pos": "noun",
+      "example": "Ich kenne die Statistik."
+    },
+    {
+      "word": "ANGABE",
+      "gloss": "eine Information oder Aussage.",
+      "synonyms": [
+        "Information",
+        "Daten"
+      ],
+      "pos": "noun",
+      "example": "Du musst jede Angabe überprüfen."
+    },
+    {
+      "word": "DISKRETION",
+      "gloss": "die Fähigkeit, vertraulich zu bleiben.",
+      "synonyms": [
+        "Verschwiegenheit",
+        "Rücksicht"
+      ],
+      "pos": "noun",
+      "example": "Ich weiß deine Diskretion zu schätzen."
+    },
+    {
+      "word": "KÜRZEN",
+      "gloss": "etwas in der Länge verringern",
+      "synonyms": [
+        "abschneiden"
+      ],
+      "pos": "verb",
+      "example": "Wir müssen die Ausgaben kürzen."
+    },
+    {
+      "word": "KNUTSCHEN",
+      "gloss": "jemanden oder etwas fest drücken oder umarmen.",
+      "synonyms": [
+        "umarmen",
+        "drücken"
+      ],
+      "pos": "verb",
+      "example": "Die beiden knutschen schon die ganze Zeit."
+    },
+    {
+      "word": "EINSAMMELN",
+      "gloss": "etwas zusammenholen oder zusammenbringen.",
+      "pos": "verb",
+      "example": "Das Einsammeln der Stimmzettel dauerte zehn Minuten."
+    },
+    {
+      "word": "GETRENNT",
+      "gloss": "nicht zusammen oder einzeln.",
+      "synonyms": [
+        "separat",
+        "geteilt"
+      ],
+      "pos": "adjective",
+      "example": "Wir sind getrennt."
+    },
+    {
+      "word": "MUSKETIER",
+      "gloss": "Kämpfer mit alter Schusswaffe",
+      "synonyms": [
+        "Soldat",
+        "Krieger"
+      ],
+      "pos": "noun",
+      "example": "Die Geschichte handelt von einem tapferen Musketier, der mit seiner Waffe für Gerechtigkeit kämpft."
+    },
+    {
+      "word": "HERZLOS",
+      "gloss": "ohne Mitgefühl oder Gefühl.",
+      "synonyms": [
+        "gefühllos",
+        "kalt"
+      ],
+      "pos": "adjective",
+      "example": "Er ist so herzlos."
+    },
+    {
+      "word": "ALLERGIE",
+      "gloss": "eine Überempfindlichkeit des Körpers gegen bestimmte Stoffe.",
+      "pos": "noun",
+      "example": "Er niest, weil er eine Allergie hat."
+    },
+    {
+      "word": "PANISCH",
+      "gloss": "von plötzlicher Angst oder Verwirrung geprägt.",
+      "synonyms": [
+        "verängstigt",
+        "verwirrt"
+      ],
+      "pos": "adjective",
+      "example": "Er wurde panisch."
+    },
+    {
+      "word": "OHRFEIG",
+      "gloss": "ein Schlag ins Gesicht oder gegen die Wange.",
+      "synonyms": [
+        "Backpfeife",
+        "Wangenstreich"
+      ],
+      "pos": "adjective",
+      "example": "Der unerwartete Kommentar fühlte sich an wie ein symbolischer Ohrfeig."
+    },
+    {
+      "word": "ABBLASEN",
+      "gloss": "etwas durch Luft entfernen oder beenden",
+      "synonyms": [
+        "absagen",
+        "aufgeben"
+      ],
+      "pos": "verb",
+      "example": "Wir sollten die Wanderung besser abblasen."
+    },
+    {
+      "word": "SPÄTESTENS",
+      "gloss": "zu einem bestimmten Zeitpunkt oder davor",
+      "synonyms": [
+        "frühestens",
+        "pünktlich"
+      ],
+      "pos": "adverb",
+      "example": "Komme spätestens um 6 Uhr."
+    },
+    {
+      "word": "EINBERUFEN",
+      "gloss": "eine Versammlung oder ein Treffen offiziell ankündigen",
+      "synonyms": [
+        "versammeln"
+      ],
+      "pos": "verb",
+      "example": "Ich würde gern ein Meeting einberufen."
+    },
+    {
+      "word": "GEEHRT",
+      "gloss": "mit Respekt oder Anerkennung behandelt werden.",
+      "synonyms": [
+        "geschätzt"
+      ],
+      "pos": "verb",
+      "example": "Ich wäre geehrt."
+    },
+    {
+      "word": "ABFLUG",
+      "gloss": "das Verlassen eines Ortes mit einem Flugzeug",
+      "synonyms": [
+        "Start"
+      ],
+      "pos": "noun",
+      "example": "Wann ist dein Abflug?"
+    },
+    {
+      "word": "LABYRINTH",
+      "gloss": "ein verwirrendes Netz aus Gängen oder Wegen",
+      "synonyms": [
+        "Irrgarten",
+        "Verwirrung"
+      ],
+      "pos": "noun",
+      "example": "Das Internet ist ein Labyrinth."
+    },
+    {
+      "word": "GIFTIG",
+      "gloss": "etwas, das schädlich oder tödlich ist, wenn es eingenommen oder berührt wird",
+      "synonyms": [
+        "toxisch"
+      ],
+      "pos": "adjective",
+      "example": "Ist es giftig?"
+    },
+    {
+      "word": "THERAPEUT",
+      "gloss": "eine Person, die Heilbehandlungen durchführt",
+      "synonyms": [
+        "Heiler",
+        "Behandler"
+      ],
+      "pos": "noun",
+      "example": "Ich bin Therapeut."
+    },
+    {
+      "word": "HANDWERK",
+      "gloss": "manuelle Tätigkeit oder deren Ausübung",
+      "synonyms": [
+        "Berufstätigkeit"
+      ],
+      "pos": "noun",
+      "example": "Er lernt das Handwerk."
+    },
+    {
+      "word": "LAUTLOS",
+      "gloss": "ohne Geräusche oder ohne zu sprechen",
+      "synonyms": [
+        "still",
+        "geräuschlos"
+      ],
+      "pos": "adjective",
+      "example": "Lautlos verließ er den Raum."
+    },
+    {
+      "word": "BESTECHUNG",
+      "gloss": "das Anbieten von Geld oder Vorteilen, um eine Entscheidung zu beeinflussen",
+      "synonyms": [
+        "Korruption",
+        "Schmiergeld"
+      ],
+      "pos": "noun",
+      "example": "Das ist keine Bestechung."
+    },
+    {
+      "word": "RUN",
+      "gloss": "eine schnelle Bewegung der Beine zum Laufen",
+      "synonyms": [
+        "Lauf",
+        "Sprint"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "FELS",
+      "gloss": "ein großer, massiver Stein.",
+      "synonyms": [
+        "Brocken"
+      ],
+      "pos": "noun",
+      "example": "Der Fels fühlt sich nass an."
+    },
+    {
+      "word": "BOULEVARD",
+      "gloss": "eine breite Straße, oft mit Bäumen gesäumt",
+      "synonyms": [
+        "Prachtstraße",
+        "Allee"
+      ],
+      "pos": "noun",
+      "example": "Am Wochenende spazieren wir gerne auf dem Boulevard mit den alten Bäumen."
+    },
+    {
+      "word": "DOOF",
+      "gloss": "ohne Intelligenz oder Verständnis",
+      "synonyms": [
+        "dumm",
+        "unklug"
+      ],
+      "pos": "adjective",
+      "example": "Das ist doof."
+    },
+    {
+      "word": "PFLASTER",
+      "gloss": "harte Fläche zum Gehen, oft aus Stein",
+      "synonyms": [
+        "Straßenbelag",
+        "Belag"
+      ],
+      "pos": "noun",
+      "example": "Moskau war ein teures Pflaster."
+    },
+    {
+      "word": "SCHNUR",
+      "gloss": "ein dünnes, flexibles Band aus Fasern",
+      "synonyms": [
+        "Seil"
+      ],
+      "pos": "noun",
+      "example": "Ich zog an der Schnur."
+    },
+    {
+      "word": "ANKLOPFEN",
+      "gloss": "mit den Fingern leise an eine Tür schlagen",
+      "synonyms": [
+        "pochen",
+        "trommeln"
+      ],
+      "pos": "verb",
+      "example": "Kannst du wenigstens anklopfen?"
+    },
+    {
+      "word": "VERWEISEN",
+      "gloss": "jemanden an eine andere Stelle oder Person weiterleiten",
+      "synonyms": [
+        "hinweisen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "VERLOCKEND",
+      "gloss": "etwas, das stark anzieht oder reizt",
+      "synonyms": [
+        "verführerisch",
+        "einladend"
+      ],
+      "pos": "adjective",
+      "example": "Es war verlockend."
+    },
+    {
+      "word": "INTERPOL",
+      "gloss": "weltweite Polizeiorganisation",
+      "pos": "noun",
+      "example": "INTERPOL unterstützt bei der internationalen Bekämpfung von Cyberkriminalität."
+    },
+    {
+      "word": "FAUCHEN",
+      "gloss": "ein Geräusch wie ein wütender oder ängstlicher Atemstoß machen",
+      "synonyms": [
+        "zischen",
+        "schnauben"
+      ],
+      "pos": "verb",
+      "example": "Marias Katze braucht nur einmal zu fauchen, um die Hunde der Nachbarn in die Flucht zu schlagen."
+    },
+    {
+      "word": "WEGSPERREN",
+      "gloss": "den Zugang zu einem Ort blockieren.",
+      "synonyms": [
+        "blockieren",
+        "verschließen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "SCHWÄGERIN",
+      "gloss": "Ehepartnerin eines Geschwisters",
+      "synonyms": [
+        "Verwandte"
+      ],
+      "pos": "noun",
+      "example": "Sie ist meine Schwägerin."
+    },
+    {
+      "word": "JUGENDLICH",
+      "gloss": "die Phase zwischen Kindheit und Erwachsenenalter",
+      "synonyms": [
+        "jung"
+      ],
+      "pos": "noun",
+      "example": "Sie ist nach wie vor jugendlich."
+    },
+    {
+      "word": "AIDS",
+      "gloss": "eine schwere Krankheit, die das Immunsystem schwächt",
+      "pos": "noun",
+      "example": "Er hat sich AIDS zugezogen."
+    },
+    {
+      "word": "KOBOLD",
+      "gloss": "ein mythologisches Wesen, oft als kleines, schelmisches Wesen beschrieben",
+      "synonyms": [
+        "Zwerg"
+      ],
+      "pos": "noun",
+      "example": "Der rothaarige Kobold lebte in einer Schreinerei."
+    },
+    {
+      "word": "ORGANISCH",
+      "gloss": "von Lebewesen stammend oder damit verbunden",
+      "synonyms": [
+        "natürlich",
+        "lebensbezogen"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "FADEN",
+      "gloss": "ein dünner, langer Strang aus Garn oder ähnlichem Material",
+      "synonyms": [
+        "Faser"
+      ],
+      "pos": "noun",
+      "example": "Hast du Nadel und Faden?"
+    },
+    {
+      "word": "BETTLER",
+      "gloss": "eine Person, die um Geld oder Essen bittet",
+      "synonyms": [
+        "Obdachloser",
+        "Armer"
+      ],
+      "pos": "noun",
+      "example": "Ich bin kein Bettler."
+    },
+    {
+      "word": "BANKKONTO",
+      "gloss": "Geldkonto bei einer Finanzinstitution",
+      "synonyms": [
+        "Geldkonto",
+        "Finanzkonto"
+      ],
+      "pos": "noun",
+      "example": "Hast du ein Bankkonto?"
+    },
+    {
+      "word": "MEHL",
+      "gloss": "ein pulverförmiges Produkt aus gemahlenen Getreidekörnern",
+      "synonyms": [
+        "Pulver",
+        "Staub"
+      ],
+      "pos": "noun",
+      "example": "Es ist Mehl."
+    },
+    {
+      "word": "UMFELD",
+      "gloss": "die nähere Umgebung eines Geschehens",
+      "synonyms": [
+        "Umgebung",
+        "Bereich"
+      ],
+      "pos": "noun",
+      "example": "Er ist in einem schlechten Umfeld aufgewachsen."
+    },
+    {
+      "word": "ZÄH",
+      "gloss": "etwas, das dickflüssig oder langsam fließt.",
+      "synonyms": [
+        "dickflüssig"
+      ],
+      "pos": "adjective",
+      "example": "Das Fleisch ist zäh."
+    },
+    {
+      "word": "NICKEN",
+      "gloss": "mit dem Kopf kurz eine Bewegung nach unten machen.",
+      "synonyms": [
+        "zustimmen"
+      ],
+      "pos": "verb",
+      "example": "Sie antwortete mit einem Nicken."
+    },
+    {
+      "word": "PANNE",
+      "gloss": "ein technischer Defekt oder eine Störung",
+      "synonyms": [
+        "Defekt",
+        "Störung"
+      ],
+      "pos": "noun",
+      "example": "Ich hatte eine Panne."
+    },
+    {
+      "word": "VISUELL",
+      "gloss": "das Sehen oder die Sicht betreffend",
+      "synonyms": [
+        "optisch",
+        "sehbar"
+      ],
+      "pos": "adjective",
+      "example": "Die Produktion ist für die Zuschauer visuell reizvoll."
+    },
+    {
+      "word": "NUSS",
+      "gloss": "eine harte Schale mit essbarem Kern",
+      "pos": "noun",
+      "example": "Die Nuss ist hart."
+    },
+    {
+      "word": "STEINEN",
+      "gloss": "jemanden durch Werfen harter Gegenstände töten",
+      "synonyms": [
+        "werfen",
+        "schmeißen"
+      ],
+      "pos": "verb",
+      "example": "Kinder bewarfen ihn mit Steinen."
+    },
+    {
+      "word": "BEFUGNIS",
+      "gloss": "das Recht, etwas zu tun oder zu entscheiden",
+      "synonyms": [
+        "Recht",
+        "Erlaubnis"
+      ],
+      "pos": "noun",
+      "example": "Ich habe die Befugnis, dies zu tun."
+    },
+    {
+      "word": "NACHTEIL",
+      "gloss": "ungünstiger Umstand oder Schaden",
+      "synonyms": [
+        "Minus"
+      ],
+      "pos": "noun",
+      "example": "Gibt es auch einen Nachteil?"
+    },
+    {
+      "word": "VORDRINGEN",
+      "gloss": "sich nach vorne bewegen oder durchsetzen",
+      "synonyms": [
+        "vorrücken"
+      ],
+      "pos": "verb",
+      "example": "Die junge Mannschaft will in der Tabelle weiter nach oben vordringen."
+    },
+    {
+      "word": "EINKOMMEN",
+      "gloss": "das Geld, das jemand regelmäßig erhält",
+      "synonyms": [
+        "Verdienst",
+        "Einnahmen"
+      ],
+      "pos": "noun",
+      "example": "Er wollte mehr Einkommen."
+    },
+    {
+      "word": "ANSCHEIN",
+      "gloss": "der Eindruck oder die äußere Erscheinung von etwas",
+      "synonyms": [
+        "VERMUTUNG",
+        "ANNAHME"
+      ],
+      "pos": "noun",
+      "example": "Allem Anschein nach ist es wahr."
+    },
+    {
+      "word": "UNERHÖRT",
+      "gloss": "noch nie dagewesen oder extrem",
+      "synonyms": [
+        "unglaublich",
+        "extrem"
+      ],
+      "pos": "adjective",
+      "example": "Das ist unerhört."
+    },
+    {
+      "word": "ANSPRUCH",
+      "gloss": "das Recht oder die Forderung auf etwas",
+      "synonyms": [
+        "FORDERUNG",
+        "RECHT"
+      ],
+      "pos": "noun",
+      "example": "Ich habe einen Anspruch."
+    },
+    {
+      "word": "GEFÄLLIG",
+      "gloss": "etwas, das angenehm oder hilfsbereit ist",
+      "synonyms": [
+        "ZUVORKOMMEND",
+        "HÖFLICH"
+      ],
+      "pos": "adjective",
+      "example": "Popcorn gefällig?"
+    },
+    {
+      "word": "SCHLICHT",
+      "gloss": "einfach und ohne Verzierungen",
+      "synonyms": [
+        "EINFACH",
+        "REDLICH"
+      ],
+      "pos": "adjective",
+      "example": "Die Zeremonie war schlicht."
+    },
+    {
+      "word": "RICHTERIN",
+      "gloss": "Frau, die juristische Entscheidungen trifft",
+      "synonyms": [
+        "URTEILERIN",
+        "RECHTSPRECHERIN"
+      ],
+      "pos": "noun",
+      "example": "Wo ist die Richterin?"
+    },
+    {
+      "word": "KELCH",
+      "gloss": "ein Trinkgefäß mit Fuß und Stiel",
+      "synonyms": [
+        "BECHER",
+        "TRINKGEFÄSS"
+      ],
+      "pos": "noun",
+      "example": "Der Kelch ist das Symbol der Stadt."
+    },
+    {
+      "word": "BRIEFMARKE",
+      "gloss": "kleines Papierstück zum Frankieren",
+      "synonyms": [
+        "POSTWERTZEICHEN"
+      ],
+      "pos": "noun",
+      "example": "Die Briefmarke löste sich."
+    },
+    {
+      "word": "TOLERIEREN",
+      "gloss": "etwas dulden oder akzeptieren, auch wenn es nicht gefällt",
+      "synonyms": [
+        "DULDEN",
+        "AKZEPTIEREN"
+      ],
+      "pos": "verb",
+      "example": "Wir tolerieren Schmerz."
+    },
+    {
+      "word": "ARCHITEKT",
+      "gloss": "eine Person, die Gebäude entwirft und plant",
+      "synonyms": [
+        "BAUMEISTER",
+        "ENTWURFSVERFASSER"
+      ],
+      "pos": "noun",
+      "example": "Er ist Architekt."
+    },
+    {
+      "word": "STAUNE",
+      "gloss": "überrascht oder beeindruckt sein",
+      "synonyms": [
+        "VERWUNDERT SEIN",
+        "BEWUNDERT SEIN"
+      ],
+      "pos": "verb",
+      "example": "Höre und staune!"
+    },
+    {
+      "word": "BREMSE",
+      "gloss": "ein Teil, das Bewegung verlangsamt oder stoppt.",
+      "synonyms": [
+        "SPERRE"
+      ],
+      "pos": "noun",
+      "example": "Die Bremse versagte."
+    },
+    {
+      "word": "VERLEUGNEN",
+      "gloss": "etwas bewusst ablehnen oder abstreiten",
+      "synonyms": [
+        "ABLEHNEN",
+        "ABSTREITEN"
+      ],
+      "pos": "verb",
+      "example": "Ich kann es nicht verleugnen."
+    },
+    {
+      "word": "IDIOTIN",
+      "gloss": "eine Frau mit sehr geringer Intelligenz",
+      "synonyms": [
+        "DUMMKOPF",
+        "TOLPATSCH"
+      ],
+      "pos": "noun",
+      "example": "Du hältst mich für eine Idiotin."
+    },
+    {
+      "word": "SCHWÄRMEN",
+      "gloss": "von etwas begeistert sein oder träumen",
+      "synonyms": [
+        "ENTHUSIASTISCH SEIN",
+        "TRÄUMEN"
+      ],
+      "pos": "noun",
+      "example": "Alle Mädchen schwärmen für ihn."
+    },
+    {
+      "word": "VORFINDEN",
+      "gloss": "etwas an einem Ort entdecken oder vorliegen sehen",
+      "synonyms": [
+        "VORHANDEN SEIN",
+        "ANGETROFFEN WERDEN"
+      ],
+      "pos": "verb",
+      "example": "Voller Furcht, was er vorfinden würde, wagte er einen Blick hinein."
+    },
+    {
+      "word": "VERZAUBERN",
+      "gloss": "jemanden oder etwas mit Magie beeinflussen",
+      "synonyms": [
+        "VERWÜNSCHEN",
+        "VERHEXEN"
+      ],
+      "pos": "verb",
+      "example": "Wir werden alles verzaubern."
+    },
+    {
+      "word": "REH",
+      "gloss": "ein kleines, scheues Wildtier mit braunem Fell",
+      "synonyms": [
+        "HIRSCHKALB"
+      ],
+      "pos": "noun",
+      "example": "Du bist schlank wie ein Reh."
+    },
+    {
+      "word": "PALME",
+      "gloss": "ein Baum mit großem, gefiedertem Blattwerk",
+      "pos": "noun",
+      "example": "Sie pflanzte eine Palme."
+    },
+    {
+      "word": "IMMUNITÄT",
+      "gloss": "die Fähigkeit des Körpers, Krankheiten abzuwehren",
+      "synonyms": [
+        "UNEMPFÄNGLICHKEIT",
+        "SCHUTZ"
+      ],
+      "pos": "noun",
+      "example": "Er hat Immunität."
+    },
+    {
+      "word": "SPOT",
+      "gloss": "ein kleiner Fleck oder eine Stelle",
+      "synonyms": [
+        "FLECK",
+        "MAKEL"
+      ],
+      "pos": "noun",
+      "example": "Auf dem weißen Tischtuch war ein kleiner brauner Spot zu sehen."
+    },
+    {
+      "word": "ERTAPPEN",
+      "gloss": "jemanden bei einer Tat überraschen",
+      "synonyms": [
+        "ERWISCHEN",
+        "ÜBERRASCHEN"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "WEITAUS",
+      "gloss": "um ein Vielfaches mehr.",
+      "synonyms": [
+        "DEUTLICH",
+        "ENTSCHIEDEN"
+      ],
+      "pos": "adverb",
+      "example": "Gold ist weitaus schwerer als Wasser."
+    },
+    {
+      "word": "UNGESTÖRT",
+      "gloss": "ohne Störung",
+      "synonyms": [
+        "UNBEHELLT"
+      ],
+      "pos": "adjective",
+      "example": "Wo können wir ungestört sprechen?"
+    },
+    {
+      "word": "EHERING",
+      "gloss": "Schmuckstück für den Finger",
+      "synonyms": [
+        "TRAURING"
+      ],
+      "pos": "noun",
+      "example": "Wo ist mein Ehering?"
+    },
+    {
+      "word": "ERKUNDEN",
+      "gloss": "etwas genau untersuchen",
+      "synonyms": [
+        "ERFORSCHEN",
+        "UNTERRICHTEN"
+      ],
+      "pos": "verb",
+      "example": "Kinder erkunden gern neue Dinge."
+    },
+    {
+      "word": "ÖFTERS",
+      "gloss": "häufiger",
+      "synonyms": [
+        "HÄUFIG",
+        "WIEDERHOLT"
+      ],
+      "pos": "adverb",
+      "example": "Ich bin öfters erkältet."
+    },
+    {
+      "word": "DARLEHEN",
+      "gloss": "geliehenes Geld, das zurückgezahlt wird",
+      "synonyms": [
+        "KREDIT",
+        "LEIHGELD"
+      ],
+      "pos": "noun",
+      "example": "Es ist kein Darlehen."
+    },
+    {
+      "word": "SPIND",
+      "gloss": "Schrank zum Aufbewahren von Kleidung",
+      "synonyms": [
+        "SCHRANK",
+        "KLEIDERSCHRANK"
+      ],
+      "pos": "noun",
+      "example": "Räum bitte deinen Spind aus!"
+    },
+    {
+      "word": "DEFINITION",
+      "gloss": "genaue Erklärung eines Begriffs",
+      "synonyms": [
+        "BEGRIFFSBESTIMMUNG",
+        "ERKLÄRUNG"
+      ],
+      "pos": "noun",
+      "example": "Was ist die Definition von Kunst?"
+    },
+    {
+      "word": "UNPASSEND",
+      "gloss": "nicht geeignet",
+      "synonyms": [
+        "UNGEEIGNET",
+        "UNZUTREFFEND"
+      ],
+      "pos": "adjective",
+      "example": "Das ist unpassend."
+    },
+    {
+      "word": "STIFTEN",
+      "gloss": "etwas Gutes verursachen",
+      "synonyms": [
+        "SPENDEN",
+        "GRÜNDEN"
+      ],
+      "pos": "verb",
+      "example": "Das kann anfangs Verwirrung stiften."
+    },
+    {
+      "word": "FORMALITÄT",
+      "gloss": "offizielle Pflicht",
+      "synonyms": [
+        "VORGANG",
+        "VERFAHREN"
+      ],
+      "pos": "noun",
+      "example": "Das ist nur eine Formalität."
+    },
+    {
+      "word": "SERIÖS",
+      "gloss": "ernsthaft und vertrauenswürdig",
+      "synonyms": [
+        "VERLÄSSLICH",
+        "GLAUBWÜRDIG"
+      ],
+      "pos": "adjective",
+      "example": "Es ist unter keinen Umständen seriös, was hier vorgelegt worden ist."
+    },
+    {
+      "word": "ASIATISCH",
+      "gloss": "aus Asien stammend",
+      "synonyms": [
+        "OSTLÄNDISCH"
+      ],
+      "pos": "adjective",
+      "example": "Viele Menschen gehen gerne asiatisch essen."
+    },
+    {
+      "word": "KLISCHEE",
+      "gloss": "eine abgedroschene oder überbeanspruchte Aussage.",
+      "synonyms": [
+        "ABGEWITZTER SPRUCH"
+      ],
+      "pos": "noun",
+      "example": "Stimmt das Klischee?"
+    },
+    {
+      "word": "WOHLHABEND",
+      "gloss": "reich",
+      "synonyms": [
+        "REICH",
+        "VERMÖGEND"
+      ],
+      "pos": "adjective",
+      "example": "Er war wohlhabend."
+    },
+    {
+      "word": "FURZEN",
+      "gloss": "Luft aus dem Darm entweichen lassen",
+      "synonyms": [
+        "PUPSEN"
+      ],
+      "pos": "verb",
+      "example": "Furzen ist unartig."
+    },
+    {
+      "word": "VERLOGEN",
+      "gloss": "nicht ehrlich",
+      "synonyms": [
+        "UNEHRLICH",
+        "FALSCH"
+      ],
+      "pos": "adjective",
+      "example": "Nicht jeder ist verlogen."
+    },
+    {
+      "word": "KOMPASS",
+      "gloss": "Gerät zur Bestimmung der Himmelsrichtungen",
+      "synonyms": [
+        "NAVIGATIONSGERÄT"
+      ],
+      "pos": "noun",
+      "example": "Bring mir den Kompass."
+    },
+    {
+      "word": "YOGA",
+      "gloss": "indische Übungen zur Entspannung",
+      "pos": "noun",
+      "example": "Machst du Yoga?"
+    },
+    {
+      "word": "KAVIAR",
+      "gloss": "Luxuslebensmittel aus Fischrogen",
+      "pos": "noun",
+      "example": "Er hat Kaviar gegessen."
+    },
+    {
+      "word": "PLAGE",
+      "gloss": "etwas sehr Unangenehmes",
+      "synonyms": [
+        "ÄRGER",
+        "BELÄSTIGUNG"
+      ],
+      "pos": "noun",
+      "example": "Mäuse sind eine Plage."
+    },
+    {
+      "word": "BLOG",
+      "gloss": "Online-Tagebuch oder Artikelreihe",
+      "pos": "noun",
+      "example": "Hast du einen Blog?"
+    },
+    {
+      "word": "ABLASSEN",
+      "gloss": "etwas nicht mehr tun oder loslassen",
+      "synonyms": [
+        "NACHGEBEN",
+        "ZULASSEN"
+      ],
+      "pos": "verb",
+      "example": "Ich muss Dampf ablassen."
+    },
+    {
+      "word": "KAPPE",
+      "gloss": "Kopfbedeckung oder Deckel",
+      "synonyms": [
+        "DECKEL",
+        "HAUBE"
+      ],
+      "pos": "noun",
+      "example": "Wessen Kappe ist das?"
+    },
+    {
+      "word": "HEBEL",
+      "gloss": "Stange zum Bewegen schwerer Dinge",
+      "synonyms": [
+        "Stange",
+        "Werkzeug"
+      ],
+      "pos": "adverb",
+      "example": "Ich legte den Hebel um."
+    },
+    {
+      "word": "URIN",
+      "gloss": "Flüssigkeit aus der Blase",
+      "synonyms": [
+        "HARN"
+      ],
+      "pos": "noun",
+      "example": "Mein Urin ist klar."
+    },
+    {
+      "word": "LACHS",
+      "gloss": "Fisch mit rosa Fleisch",
+      "pos": "noun",
+      "example": "Magst du Lachs?"
+    },
+    {
+      "word": "UNGEZOGEN",
+      "gloss": "unartig",
+      "synonyms": [
+        "UNHÖFLICH",
+        "FRECH"
+      ],
+      "pos": "adjective",
+      "example": "Du bist ungezogen."
+    },
+    {
+      "word": "SCHMINKEN",
+      "gloss": "Gesicht mit Farbe verschönern",
+      "synonyms": [
+        "MAKE-UP AUFTRAGEN"
+      ],
+      "pos": "verb",
+      "example": "Brauchst du Hilfe beim Schminken?"
+    },
+    {
+      "word": "NEID",
+      "gloss": "Missgunst gegenüber anderen",
+      "synonyms": [
+        "MISSGUNST"
+      ],
+      "pos": "verb",
+      "example": "Neid bringt Leid."
+    },
+    {
+      "word": "ROMANZE",
+      "gloss": "Liebesgeschichte",
+      "synonyms": [
+        "LIEBESGESCHICHTE"
+      ],
+      "pos": "noun",
+      "example": "Seine Romanze war Stadtgespräch."
+    },
+    {
+      "word": "HALUNKE",
+      "gloss": "schlechter Mensch",
+      "synonyms": [
+        "SCHURKE",
+        "GAUNER"
+      ],
+      "pos": "noun",
+      "example": "Der Typ, der immer die abgelaufenen Lebensmittel im Supermarkt zurücklässt, ist wirklich ein Halunke."
+    },
+    {
+      "word": "ENTLARVEN",
+      "gloss": "etwas Verborgenes aufdecken",
+      "synonyms": [
+        "ENTHÜLLEN",
+        "OFFENBAREN"
+      ],
+      "pos": "verb",
+      "example": "Man muß die Leute nur lange genug reden lassen; die meisten entlarven sich dann von selbst."
+    },
+    {
+      "word": "PATRONEN",
+      "gloss": "Munition für Schusswaffen",
+      "synonyms": [
+        "MUNITION",
+        "KARTUSCHEN"
+      ],
+      "pos": "verb",
+      "example": "Das ist eine Waffe ohne Patronen."
+    },
+    {
+      "word": "FREISETZEN",
+      "gloss": "etwas oder jemanden befreien",
+      "synonyms": [
+        "ENTFESSELN",
+        "LÖSEN"
+      ],
+      "pos": "verb",
+      "example": "Erinnern wir uns daran, wie viel Kraft ein positiver Geist freisetzen kann."
+    },
+    {
+      "word": "KREISLAUF",
+      "gloss": "ständiger Wechsel von Zuständen",
+      "synonyms": [
+        "ZYKLUS",
+        "PROZESS"
+      ],
+      "pos": "noun",
+      "example": "Ist der Kreislauf stabil?"
+    },
+    {
+      "word": "WINSELN",
+      "gloss": "leise jammern",
+      "synonyms": [
+        "JAMMERN",
+        "FIEPSEN"
+      ],
+      "pos": "verb",
+      "example": "Der Hund begann kläglich zu winseln, als sich sein Herrchen von ihm entfernte."
+    },
+    {
+      "word": "ERFREULICH",
+      "gloss": "angenehm",
+      "synonyms": [
+        "begeisternd"
+      ],
+      "pos": "adjective",
+      "example": "Das klingt doch ganz erfreulich!"
+    },
+    {
+      "word": "MENTOR",
+      "gloss": "erfahrener Ratgeber",
+      "synonyms": [
+        "Lehrer",
+        "Förderer"
+      ],
+      "pos": "noun",
+      "example": "Ich suche einen Mentor, der mir im Berufsleben hilft und klare Ziele setzt."
+    },
+    {
+      "word": "PRAKTIKUM",
+      "gloss": "zeitlich begrenzte berufliche Übungsphase",
+      "pos": "noun",
+      "example": "Wie läuft das Praktikum?"
+    },
+    {
+      "word": "EREIGNEN",
+      "gloss": "sich zutragen",
+      "synonyms": [
+        "geschehen",
+        "passieren"
+      ],
+      "pos": "verb",
+      "example": "Das wird sich ereignen."
+    },
+    {
+      "word": "STEUERBORD",
+      "gloss": "rechte Seite eines Schiffs",
+      "pos": "noun",
+      "example": "Links ist Backbord, rechts ist Steuerbord."
+    },
+    {
+      "word": "HORROR",
+      "gloss": "sehr beängstigend",
+      "synonyms": [
+        "Grauen",
+        "Schrecken"
+      ],
+      "pos": "noun",
+      "example": "Der neue Zeitplan ist ein Horror!"
+    },
+    {
+      "word": "BACKE",
+      "gloss": "der fleischige Teil des Gesichts seitlich der Nase.",
+      "synonyms": [
+        "Wange"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "CAFETERIA",
+      "gloss": "Selbstbedienungsrestaurant",
+      "synonyms": [
+        "Mensa",
+        "Bistro"
+      ],
+      "pos": "noun",
+      "example": "Arbeitest du nicht in der Cafeteria?"
+    },
+    {
+      "word": "DIFFERENZ",
+      "gloss": "Unterschied",
+      "synonyms": [
+        "Unterschied",
+        "Abweichung"
+      ],
+      "pos": "noun",
+      "example": "Wir werden die Differenz bezahlen."
+    },
+    {
+      "word": "FIX",
+      "gloss": "bereit oder sicher",
+      "synonyms": [
+        "fertig",
+        "bereit"
+      ],
+      "pos": "adverb",
+      "example": "Das ging fix!"
+    },
+    {
+      "word": "SCHWUR",
+      "gloss": "feierliches Versprechen",
+      "synonyms": [
+        "Eid",
+        "Versprechen"
+      ],
+      "pos": "noun",
+      "example": "Hast du deinen Schwur vergessen?"
+    },
+    {
+      "word": "RUTSCH",
+      "gloss": "plötzlicher Gleichgewichtsverlust",
+      "synonyms": [
+        "Schlupf",
+        "Sturz"
+      ],
+      "pos": "adjective",
+      "example": "Guten Rutsch ins neue Jahr!"
+    },
+    {
+      "word": "BLUTBAD",
+      "gloss": "ein grausames Ereignis mit vielen Toten.",
+      "synonyms": [
+        "Massaker"
+      ],
+      "pos": "noun",
+      "example": "Wir wollen kein Blutbad riskieren."
+    },
+    {
+      "word": "BANKROTT",
+      "gloss": "Zahlungsunfähigkeit eines Unternehmens",
+      "synonyms": [
+        "Pleite",
+        "Zahlungsunfähigkeit"
+      ],
+      "pos": "noun",
+      "example": "Er ist bankrott."
+    },
+    {
+      "word": "ANSTRENGEN",
+      "gloss": "sich sehr bemühen",
+      "synonyms": [
+        "ermüden"
+      ],
+      "pos": "verb",
+      "example": "Ich muss mich anstrengen."
+    },
+    {
+      "word": "LEGENDE",
+      "gloss": "berühmte Geschichte oder Person",
+      "synonyms": [
+        "Sage",
+        "Mythos"
+      ],
+      "pos": "noun",
+      "example": "Das ist eine Legende."
+    },
+    {
+      "word": "KOPFGELD",
+      "gloss": "Belohnung für die Ergreifung einer Person",
+      "synonyms": [
+        "Belohnung",
+        "Prämie"
+      ],
+      "pos": "noun",
+      "example": "Auf ihn ist ein Kopfgeld ausgesetzt."
+    },
+    {
+      "word": "FETTSACK",
+      "gloss": "abwertend für eine sehr dicke Person.",
+      "synonyms": [
+        "Dicker"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "ABGANG",
+      "gloss": "Verlassen eines Ortes",
+      "synonyms": [
+        "Austritt"
+      ],
+      "pos": "noun",
+      "example": "Ein guter Abgang ziert die Übung."
+    },
+    {
+      "word": "VERBEUGEN",
+      "gloss": "sich höflich neigen",
+      "synonyms": [
+        "neigen",
+        "bücken"
+      ],
+      "pos": "verb",
+      "example": "In Japan ist es höflich, sich zu verbeugen, wenn man jemanden trifft."
+    },
+    {
+      "word": "PRAHLEN",
+      "gloss": "sich mit etwas brüsten",
+      "synonyms": [
+        "angeben",
+        "protzen"
+      ],
+      "pos": "verb",
+      "example": "Prahlen ist nicht gut."
+    },
+    {
+      "word": "GLÜHEN",
+      "gloss": "heiß leuchten oder brennen",
+      "synonyms": [
+        "brennen"
+      ],
+      "pos": "verb",
+      "example": "Die Kohlen glühen noch."
+    },
+    {
+      "word": "GROLL",
+      "gloss": "ärgerlicher oder drohender Blick",
+      "synonyms": [
+        "Zorn",
+        "Wut"
+      ],
+      "pos": "adverb",
+      "example": "Er hegte Groll gegen mich."
+    },
+    {
+      "word": "KETCHUP",
+      "gloss": "süß-scharfe Tomatensauce",
+      "synonyms": [
+        "Tomatensoße",
+        "Soße"
+      ],
+      "pos": "noun",
+      "example": "Ich mag Ketchup."
+    },
+    {
+      "word": "VERHEILEN",
+      "gloss": "gesund werden lassen",
+      "synonyms": [
+        "kurieren",
+        "reparieren"
+      ],
+      "pos": "verb",
+      "example": "Manche Wunden verheilen nie."
+    },
+    {
+      "word": "WERBEN",
+      "gloss": "für etwas Aufmerksamkeit erregen",
+      "synonyms": [
+        "propagieren",
+        "reklamieren"
+      ],
+      "pos": "verb",
+      "example": "Wie sollte man im Netz werben?"
+    },
+    {
+      "word": "WEGGEBEN",
+      "gloss": "etwas an andere weiterreichen",
+      "synonyms": [
+        "verschenken",
+        "abgeben"
+      ],
+      "pos": "verb",
+      "example": "Wenn du dein altes Fahrrad nicht mehr willst, kannst du es jederzeit weggeben."
+    },
+    {
+      "word": "NÄHREN",
+      "gloss": "mit Essen versorgen",
+      "synonyms": [
+        "versorgen",
+        "speisen"
+      ],
+      "pos": "verb",
+      "example": "Ein Haus kann nicht zwei Hunde nähren."
+    },
+    {
+      "word": "VERFOLGT",
+      "gloss": "jemandem nachgestellt werden",
+      "synonyms": [
+        "gejagt",
+        "bedrängt"
+      ],
+      "pos": "adjective",
+      "example": "Er verfolgt dich."
+    },
+    {
+      "word": "RABE",
+      "gloss": "schwarzer, großer Singvogel",
+      "pos": "noun",
+      "example": "Der Rabe krächzt."
+    },
+    {
+      "word": "EINFANG",
+      "gloss": "das Festhalten von etwas",
+      "synonyms": [
+        "Falle",
+        "Gefangennahme"
+      ],
+      "pos": "verb",
+      "example": "Der Einfang des Sonnenlichts durch die Solarzelle ermöglicht die Stromerzeugung."
+    },
+    {
+      "word": "SIMULATION",
+      "gloss": "künstliche Nachbildung eines Vorgangs",
+      "synonyms": [
+        "Nachbildung",
+        "Vortäuschung"
+      ],
+      "pos": "noun",
+      "example": "Ist es eine Simulation?"
+    },
+    {
+      "word": "IRISCH",
+      "gloss": "zu Irland gehörend oder von dort stammend",
+      "synonyms": [
+        "KELTISCH",
+        "GAELISCH"
+      ],
+      "pos": "adjective",
+      "example": "Ich lerne Irisch."
+    },
+    {
+      "word": "ROTHAARIG",
+      "gloss": "mit rotem Kopfhaar",
+      "synonyms": [
+        "feuerrot",
+        "rotköpfig"
+      ],
+      "pos": "verb",
+      "example": "Meine Freundin ist rothaarig."
+    },
+    {
+      "word": "MARKIERUNG",
+      "gloss": "Kennzeichen oder Zeichen zur Hervorhebung",
+      "synonyms": [
+        "Kennzeichnung"
+      ],
+      "pos": "noun",
+      "example": "Auf diesem Straßenabschnitt ist die Markierung verblasst."
+    },
+    {
+      "word": "ANHÄNGEN",
+      "gloss": "etwas befestigen oder hinzufügen",
+      "synonyms": [
+        "befestigen",
+        "anbringen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "ZUGRUNDE",
+      "gloss": "die Basis für etwas bilden.",
+      "synonyms": [
+        "Basis"
+      ],
+      "pos": "adverb",
+      "example": "Dem Ganzen muss etwas zugrunde liegen."
+    },
+    {
+      "word": "INJIZIEREN",
+      "gloss": "Flüssigkeit mit einer Spritze einbringen",
+      "synonyms": [
+        "spritzen"
+      ],
+      "pos": "verb",
+      "example": "Der Arzt muss dem Patienten eine Kochsalzlösung injizieren."
+    },
+    {
+      "word": "SCHMÜCKEN",
+      "gloss": "etwas verschönern oder verzieren",
+      "synonyms": [
+        "verzieren"
+      ],
+      "pos": "verb",
+      "example": "Wir schmücken das Klassenzimmer."
+    },
+    {
+      "word": "RÜCKSTAND",
+      "gloss": "etwas, das übrig bleibt oder nachwirkt",
+      "synonyms": [
+        "Rest",
+        "Schuld"
+      ],
+      "pos": "noun",
+      "example": "Er ist mit der Bezahlung im Rückstand."
+    },
+    {
+      "word": "RUMPELN",
+      "gloss": "unordentlich oder laut sein",
+      "synonyms": [
+        "poltern",
+        "rasseln"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "AUFSEHEN",
+      "gloss": "Aufmerksamkeit erregen",
+      "synonyms": [
+        "bemerken",
+        "wahrnehmen"
+      ],
+      "pos": "verb",
+      "example": "Errege kein Aufsehen."
+    },
+    {
+      "word": "WITZBOLD",
+      "gloss": "jemand, der gerne lustige Sprüche macht",
+      "synonyms": [
+        "Spaßvogel",
+        "Clown"
+      ],
+      "pos": "noun",
+      "example": "Du bist ein Witzbold!"
+    },
+    {
+      "word": "ANTREIBEN",
+      "gloss": "jemanden zu etwas motivieren",
+      "synonyms": [
+        "motivieren"
+      ],
+      "pos": "verb",
+      "example": "Ich will dich ja nicht antreiben, aber könntest du dich bitte beeilen?"
+    },
+    {
+      "word": "SCHWINDLIG",
+      "gloss": "leicht benommen oder leicht im Kopf sein",
+      "synonyms": [
+        "benommen",
+        "leicht im Kopf"
+      ],
+      "pos": "adjective",
+      "example": "Mir ist schwindlig."
+    },
+    {
+      "word": "GATTIN",
+      "gloss": "Ehefrau",
+      "synonyms": [
+        "Ehefrau",
+        "Gemahlin"
+      ],
+      "pos": "noun",
+      "example": "Grüße deine Gattin."
+    },
+    {
+      "word": "LANDSMANN",
+      "gloss": "eine Person aus derselben Heimatregion.",
+      "synonyms": [
+        "Heimatverbundener"
+      ],
+      "pos": "noun",
+      "example": "Obwohl er lange weg war, erkannte er seinen alten Landsmann sofort auf der Straße."
+    },
+    {
+      "word": "ZWEI",
+      "gloss": "die Zahl nach eins",
+      "pos": "adjective",
+      "example": "Zwei Bier, bitte!"
+    },
+    {
+      "word": "PUSTEN",
+      "gloss": "leicht oder kräftig ausatmen",
+      "synonyms": [
+        "blasen",
+        "hauchen"
+      ],
+      "pos": "verb",
+      "example": "Um die Kerze auszublasen, musst du fest pusten."
+    },
+    {
+      "word": "SAFTIG",
+      "gloss": "voller Flüssigkeit",
+      "synonyms": [
+        "feucht"
+      ],
+      "pos": "adjective",
+      "example": "Der Apfel ist saftig."
+    },
+    {
+      "word": "IMMUN",
+      "gloss": "gegen etwas unempfindlich",
+      "synonyms": [
+        "geschützt"
+      ],
+      "pos": "adjective",
+      "example": "Er ist immun."
+    },
+    {
+      "word": "ENTSETZEN",
+      "gloss": "starke Angst oder Schrecken auslösen",
+      "synonyms": [
+        "erschrecken"
+      ],
+      "pos": "noun",
+      "example": "Er erstarrte vor Entsetzen."
+    },
+    {
+      "word": "WÄHLER",
+      "gloss": "Person mit Stimmrecht",
+      "synonyms": [
+        "Stimmberechtigter"
+      ],
+      "pos": "noun",
+      "example": "Der Wähler entscheidet."
+    },
+    {
+      "word": "LYNCHEN",
+      "gloss": "ohne Gerichtsverfahren bestrafen",
+      "synonyms": [
+        "hinrichten"
+      ],
+      "pos": "verb",
+      "example": "Die wütende Menge wollte ihn lynchen, obwohl er unschuldig war."
+    },
+    {
+      "word": "IRDISCH",
+      "gloss": "die Erde betreffend",
+      "pos": "adjective"
+    },
+    {
+      "word": "ABSICHERN",
+      "gloss": "etwas gegen Risiken schützen",
+      "synonyms": [
+        "schützen"
+      ],
+      "pos": "verb",
+      "example": "Du könntest dich mit einer Devisenoption gegen das Währungsrisiko absichern."
+    },
+    {
+      "word": "WÜHLEN",
+      "gloss": "mit den Händen graben",
+      "synonyms": [
+        "graben",
+        "scharren"
+      ],
+      "pos": "verb",
+      "example": "Ist der Maulwurf am Wühlen, kriegt's der Regenwurm zu spüren."
+    },
+    {
+      "word": "GALGEN",
+      "gloss": "Vorrichtung zum Hinrichten durch Erhängen",
+      "pos": "noun",
+      "example": "Historische Museen zeigen oft alte Galgen als Warnsymbol."
+    },
+    {
+      "word": "BERATUNG",
+      "gloss": "Empfehlung oder fachkundige Meinung",
+      "synonyms": [
+        "RAT",
+        "RATGEBUNG"
+      ],
+      "pos": "noun",
+      "example": "Die Beratung ist kostenlos."
+    },
+    {
+      "word": "GUMMI",
+      "gloss": "flexibles Material aus Naturkautschuk",
+      "synonyms": [
+        "ELASTIKUM",
+        "KUNSTSTOFF"
+      ],
+      "pos": "noun",
+      "example": "Das ist kein Gummi."
+    },
+    {
+      "word": "EINHORN",
+      "gloss": "märchenhaftes Wesen mit Stirnhorn",
+      "pos": "noun",
+      "example": "Ich bin ein Einhorn."
+    },
+    {
+      "word": "VERSPIELEN",
+      "gloss": "Geld oder Chancen durch Glücksspiel verlieren.",
+      "synonyms": [
+        "VERGEUDEN"
+      ],
+      "pos": "verb",
+      "example": "Man kann sein Geld lieber gleich wegschmeißen, als es zu verspielen."
+    },
+    {
+      "word": "ERLIEGEN",
+      "gloss": "durch äußere Einwirkung unterworfen sein",
+      "synonyms": [
+        "UNTERWORFEN"
+      ],
+      "pos": "verb",
+      "example": "Es kam alles zum Erliegen."
+    },
+    {
+      "word": "AUFWENDEN",
+      "gloss": "Geld oder Mühe einsetzen",
+      "synonyms": [
+        "AUSGEBEN",
+        "VERWENDEN"
+      ],
+      "pos": "noun",
+      "example": "Zeit ist das Wertvollste, was ein Mensch aufwenden kann."
+    },
+    {
+      "word": "ZULASSUNG",
+      "gloss": "Erlaubnis oder Genehmigung",
+      "synonyms": [
+        "ERLAUBNIS",
+        "ZUGANG"
+      ],
+      "pos": "noun",
+      "example": "Ich habe meine Zulassung als Psychologe bekommen."
+    },
+    {
+      "word": "EINFALL",
+      "gloss": "plötzliche Idee oder Gedanke",
+      "synonyms": [
+        "IDE",
+        "GEDANKE"
+      ],
+      "pos": "noun",
+      "example": "Ich hatte einen Einfall."
+    },
+    {
+      "word": "UNDICHT",
+      "gloss": "nicht hermetisch abgeschlossen, mit Öffnungen",
+      "synonyms": [
+        "PORÖS",
+        "DURCHLÄSSIG"
+      ],
+      "pos": "adjective",
+      "example": "Das Dach ist undicht."
+    },
+    {
+      "word": "VERLAUF",
+      "gloss": "die zeitliche oder sachliche Abfolge eines Geschehens.",
+      "synonyms": [
+        "Ablauf"
+      ],
+      "pos": "noun",
+      "example": "Das Hochwasser änderte den Verlauf des Flusses."
+    },
+    {
+      "word": "KRAFTFELD",
+      "gloss": "Bereich mit besonderer physikalischer Wirkung",
+      "synonyms": [
+        "ENERGIEFELD",
+        "WIRKUNGSFELD"
+      ],
+      "pos": "noun",
+      "example": "Das unsichtbare Kraftfeld schützt die Raumstation vor Mikrometeoriten."
+    },
+    {
+      "word": "HIESIG",
+      "gloss": "an diesem Ort befindlich oder lebend",
+      "synonyms": [
+        "ORTSBEZOGEN",
+        "LAGEBEZOGEN"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "POLNISCH",
+      "gloss": "zu Polen gehörend oder von dort stammend",
+      "synonyms": [
+        "POLENSPRACHE",
+        "POLENSCH"
+      ],
+      "pos": "adjective",
+      "example": "Ich lerne Polnisch."
+    },
+    {
+      "word": "FORTGEH",
+      "gloss": "sich von einem Ort entfernen",
+      "synonyms": [
+        "VERLASSEN",
+        "GEHEN"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "ADRENALIN",
+      "gloss": "Hormon, das den Körper in Stresssituationen aktiviert",
+      "pos": "noun",
+      "example": "Mein Herz raste vor Adrenalin, als ich die Ziellinie überquerte."
+    },
+    {
+      "word": "MISSBRAUCH",
+      "gloss": "unangemessene oder schädigende Nutzung",
+      "synonyms": [
+        "FEHLVERWENDUNG",
+        "FALSCHANWENDUNG"
+      ],
+      "pos": "noun",
+      "example": "Missbrauch ist keine Gewohnheit."
+    },
+    {
+      "word": "DRITTENS",
+      "gloss": "an Position drei in einer Abfolge.",
+      "pos": "adverb",
+      "example": "Drittens stellt sich da die Frage der Energie."
+    },
+    {
+      "word": "SCHAUKELN",
+      "gloss": "sich hin und her bewegen",
+      "synonyms": [
+        "WIPPEN",
+        "SCHWINGEN"
+      ],
+      "pos": "verb",
+      "example": "Ich gehe schaukeln."
+    },
+    {
+      "word": "KOBRA",
+      "gloss": "giftige Schlange mit flachem Kopf.",
+      "pos": "noun",
+      "example": "Die Kobra ist eine giftige Schlange mit einem flachen Kopf."
+    },
+    {
+      "word": "AUTOMAT",
+      "gloss": "selbstbedienende Maschine für Waren oder Dienstleistungen.",
+      "synonyms": [
+        "VENDER",
+        "SELBSTBEDIENER"
+      ],
+      "pos": "noun",
+      "example": "Dieser Automat geht nicht."
+    },
+    {
+      "word": "HEIMSUCHEN",
+      "gloss": "etwas Unangenehmes wiederholt treffen oder befallen.",
+      "synonyms": [
+        "BEFALLEN"
+      ],
+      "pos": "verb",
+      "example": "„Drei Geister werden dich heimsuchen“, fuhr die Erscheinung fort."
+    },
+    {
+      "word": "ANGESEHEN",
+      "gloss": "von vielen geschätzt und respektiert.",
+      "synonyms": [
+        "RESPEKTIERT",
+        "GEEHRT"
+      ],
+      "pos": "adjective",
+      "example": "Dieser Lehrer ist in der Schule sehr angesehen."
+    },
+    {
+      "word": "IRRENHAUS",
+      "gloss": "veralteter Begriff für psychiatrische Klinik.",
+      "synonyms": [
+        "PSYCHIATRIE",
+        "HEILANSTALT"
+      ],
+      "pos": "noun",
+      "example": "Manchmal komme ich mir vor wie in einem Irrenhaus."
+    },
+    {
+      "word": "MUSICAL",
+      "gloss": "Bühnenstück mit Gesang, Tanz und Schauspiel.",
+      "pos": "noun",
+      "example": "Hast du das Musical nicht gesehen?"
+    },
+    {
+      "word": "SCHRUBBEN",
+      "gloss": "mit Bürste oder Lappen intensiv reinigen.",
+      "synonyms": [
+        "REIBEN",
+        "SCHÄUMEN"
+      ],
+      "pos": "verb",
+      "example": "Die Matrosen schrubben das Deck."
+    },
+    {
+      "word": "PLANUNG",
+      "gloss": "Vorbereitung und Organisation von Abläufen.",
+      "synonyms": [
+        "VORBEREITUNG",
+        "KONZEPTION"
+      ],
+      "pos": "noun",
+      "example": "Planung ist alles."
+    },
+    {
+      "word": "VERGEBLICH",
+      "gloss": "ohne Erfolg trotz Bemühungen.",
+      "synonyms": [
+        "ERFOLGLOS",
+        "UMSONST"
+      ],
+      "pos": "adjective",
+      "example": "Das ist vergeblich."
+    },
+    {
+      "word": "ERBSE",
+      "gloss": "kleines, rundes grünes Gemüse.",
+      "pos": "noun",
+      "example": "Das ist aber eine kleine Erbse!"
+    },
+    {
+      "word": "RUMSTEHEN",
+      "gloss": "ohne Beschäftigung untätig verharren",
+      "synonyms": [
+        "HERUMDÄMMERN",
+        "WARTEN"
+      ],
+      "pos": "verb",
+      "example": "Du kannst mich nicht dumm rumstehen lassen."
+    },
+    {
+      "word": "ÄUßERSTE",
+      "gloss": "das Höchste oder Letzte in einer Reihe.",
+      "synonyms": [
+        "MAXIMAL",
+        "HÖCHST"
+      ],
+      "pos": "adjective",
+      "example": "Ich bin aufs Äußerste gefasst."
+    },
+    {
+      "word": "SUSHI",
+      "gloss": "japanisches Gericht aus Reis und rohem Fisch.",
+      "pos": "noun",
+      "example": "Magst du Sushi?"
+    },
+    {
+      "word": "INDUSTRIE",
+      "gloss": "Wirtschaftszweig mit maschineller Produktion.",
+      "synonyms": [
+        "GEWERBE",
+        "FERTIGUNG"
+      ],
+      "pos": "noun",
+      "example": "Die Industrie braucht Stahl."
+    },
+    {
+      "word": "AUSTER",
+      "gloss": "Meeresmuschel mit essbarem Fleisch.",
+      "pos": "noun",
+      "example": "Hast du schon einmal eine Auster geknackt?"
+    },
+    {
+      "word": "PANTHER",
+      "gloss": "große, schwarze Raubkatze.",
+      "synonyms": [
+        "LEOPARD",
+        "GROßKATZE"
+      ],
+      "pos": "noun",
+      "example": "Der Panther brüllt."
+    },
+    {
+      "word": "GÄREN",
+      "gloss": "chemischer Prozess durch Mikroorganismen.",
+      "synonyms": [
+        "FERMENTIEREN",
+        "REIFEN"
+      ],
+      "pos": "verb",
+      "example": "Hefe bringt das Bier zum Gären."
+    },
+    {
+      "word": "BESCHIEßEN",
+      "gloss": "mit Geschossen angreifen oder treffen",
+      "synonyms": [
+        "treffen"
+      ],
+      "pos": "verb",
+      "example": "Sobald die Panzerhaubitzen in Stellung waren, begannen sie sofort damit, die feindlichen Verteidigungsanlagen zu beschießen."
+    },
+    {
+      "word": "EINSTÜRZEN",
+      "gloss": "plötzlich in sich zusammenfallen",
+      "synonyms": [
+        "ZERBRÖCKELN",
+        "KOLLABIEREN"
+      ],
+      "pos": "verb",
+      "example": "Es wird einstürzen."
+    },
+    {
+      "word": "GESCHWÄTZ",
+      "gloss": "leeres Gerede ohne Inhalt.",
+      "synonyms": [
+        "GEQUATSCH",
+        "GEPLÄTTSCHER"
+      ],
+      "pos": "noun",
+      "example": "Es ist nur Geschwätz."
+    },
+    {
+      "word": "FETZEN",
+      "gloss": "zerfetzte Stoffstücke oder Papierstücke.",
+      "synonyms": [
+        "STÜCK",
+        "FITZEL"
+      ],
+      "pos": "verb",
+      "example": "Dieser Fetzen ist dreckig."
+    },
+    {
+      "word": "AUFMUNTERN",
+      "gloss": "jemanden fröhlicher oder motivierter machen.",
+      "synonyms": [
+        "ERMUTIGEN",
+        "TRÖSTEN"
+      ],
+      "pos": "verb",
+      "example": "Ich will dich aufmuntern."
+    },
+    {
+      "word": "FAKTOR",
+      "gloss": "einflussreicher Umstand oder Größe.",
+      "synonyms": [
+        "UMSTAND",
+        "EINFLUSS"
+      ],
+      "pos": "noun",
+      "example": "Bildung ist ein wichtiger Faktor."
+    },
+    {
+      "word": "AST",
+      "gloss": "verzweigter Teil eines Baumes ohne Blätter.",
+      "synonyms": [
+        "GEÄSTE",
+        "GEZWEIG"
+      ],
+      "pos": "noun",
+      "example": "Er umklammerte den Ast."
+    },
+    {
+      "word": "LAPPEN",
+      "gloss": "flaches Stoffstück zum Reinigen oder Abdecken",
+      "synonyms": [
+        "TUCH",
+        "FITZEN"
+      ],
+      "pos": "verb",
+      "example": "Trockne ihn mit diesem Lappen ab."
+    },
+    {
+      "word": "UNRUHE",
+      "gloss": "Zustand innerer oder äußerer Bewegtheit",
+      "synonyms": [
+        "UNORDNUNG",
+        "GESPANNTHEIT"
+      ],
+      "pos": "noun",
+      "example": "Wir sind in Unruhe."
+    },
+    {
+      "word": "HORDE",
+      "gloss": "große, ungeordnete Gruppe von Menschen oder Tieren.",
+      "synonyms": [
+        "SCHAR",
+        "MEUTE"
+      ],
+      "pos": "noun",
+      "example": "Auf dem Spielplatz tobte eine Horde ausgelassener Schreihälse."
+    },
+    {
+      "word": "STEUERUNG",
+      "gloss": "Regelung oder Kontrolle eines Systems.",
+      "synonyms": [
+        "REGELUNG",
+        "KONTROLLE"
+      ],
+      "pos": "noun",
+      "example": "Die Steuerung muss alle 50.000 Kilometer gewechselt werden."
+    },
+    {
+      "word": "ABWISCHEN",
+      "gloss": "mit einem Tuch säubern",
+      "synonyms": [
+        "abtupfen",
+        "abreiben"
+      ],
+      "pos": "verb",
+      "example": "Würdest du den Tisch für mich abwischen?"
+    },
+    {
+      "word": "ÜBERFALL",
+      "gloss": "plötzlicher, gewaltsamer Angriff.",
+      "synonyms": [
+        "RAUB",
+        "ANGRIFF"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein Überfall!"
+    },
+    {
+      "word": "BETREUEN",
+      "gloss": "sich um jemanden oder etwas kümmern.",
+      "synonyms": [
+        "PFLEGEN",
+        "VERSORGEN"
+      ],
+      "pos": "verb",
+      "example": "Wir müssen unsere Eltern betreuen."
+    },
+    {
+      "word": "HÄUSLICH",
+      "gloss": "das Zuhause oder Familienleben betreffend.",
+      "synonyms": [
+        "FAMILIÄR",
+        "PRIVAT"
+      ],
+      "pos": "adjective"
+    },
+    {
+      "word": "AUSMAß",
+      "gloss": "messbare oder bewertbare Größe eines Gegenstands.",
+      "synonyms": [
+        "GRÖßENVERHÄLTNIS",
+        "UMFANGREICH"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein Problem von ganz anderem Ausmaß."
+    },
+    {
+      "word": "FASSADE",
+      "gloss": "vorderer Teil eines Gebäudes.",
+      "synonyms": [
+        "VORDERSEITE",
+        "SCHEIN"
+      ],
+      "pos": "noun",
+      "example": "Was ist hinter der Fassade?"
+    },
+    {
+      "word": "EINLIEFERN",
+      "gloss": "etwas oder jemanden an einen Ort bringen",
+      "synonyms": [
+        "ABLIEFERN",
+        "ÜBERGEBEN"
+      ],
+      "pos": "verb",
+      "example": "Ich muss den Hund beim Tierheim einliefern."
+    },
+    {
+      "word": "MELONE",
+      "gloss": "saftige, süße Frucht mit harter Schale.",
+      "synonyms": [
+        "Gurke",
+        "Kürbis"
+      ],
+      "pos": "noun",
+      "example": "Auf dem Tisch liegt eine Melone."
+    },
+    {
+      "word": "AUFKOMMEN",
+      "gloss": "entstehen oder sich entwickeln.",
+      "synonyms": [
+        "entstehen"
+      ],
+      "pos": "verb",
+      "example": "Er musste für die Schäden aufkommen."
+    },
+    {
+      "word": "SÄULE",
+      "gloss": "tragendes, senkrechtes Bauelement.",
+      "synonyms": [
+        "Pfeiler",
+        "Stütze"
+      ],
+      "pos": "noun",
+      "example": "Die Säule ist zylindrisch."
+    },
+    {
+      "word": "GEWISSHEIT",
+      "gloss": "sichere Erkenntnis oder Überzeugung.",
+      "synonyms": [
+        "Sicherheit"
+      ],
+      "pos": "noun",
+      "example": "Woher kommt diese Gewissheit?"
+    },
+    {
+      "word": "KLARHEIT",
+      "gloss": "deutliche und verständliche Beschaffenheit.",
+      "synonyms": [
+        "Deutlichkeit",
+        "Eindeutigkeit"
+      ],
+      "pos": "noun",
+      "example": "Klarheit wird großgeschrieben."
+    },
+    {
+      "word": "ERWÄGUNG",
+      "gloss": "Abwägung von Vor- und Nachteilen.",
+      "synonyms": [
+        "Überlegung",
+        "Abwägung"
+      ],
+      "pos": "noun",
+      "example": "Dies ist in Erwägung zu ziehen."
+    },
+    {
+      "word": "KOMMANDEUR",
+      "gloss": "Führer einer militärischen Einheit.",
+      "pos": "noun",
+      "example": "Der britische Kommandeur befahl seinen Leuten, sich in der Nacht auszuruhen."
+    },
+    {
+      "word": "GEFÄß",
+      "gloss": "Behälter für Flüssigkeiten oder Substanzen.",
+      "synonyms": [
+        "Behälter"
+      ],
+      "pos": "noun",
+      "example": "Das Gefäß ist leer."
+    },
+    {
+      "word": "ABSPERREN",
+      "gloss": "Zugang zu einem Bereich verhindern",
+      "synonyms": [
+        "VERRIEGELN",
+        "VERSPERREN"
+      ],
+      "pos": "verb",
+      "example": "Man kann die Toilettentür nicht absperren."
+    },
+    {
+      "word": "GRANDIOS",
+      "gloss": "beeindruckend und großartig.",
+      "synonyms": [
+        "großartig",
+        "prächtig"
+      ],
+      "pos": "adjective",
+      "example": "Es war grandios."
+    },
+    {
+      "word": "AUSHANDELN",
+      "gloss": "etwas durch Verhandlung erreichen.",
+      "synonyms": [
+        "verhandeln",
+        "ausmachen"
+      ],
+      "pos": "verb",
+      "example": "Ich werde die bestmöglichen Bedingungen für uns aushandeln."
+    },
+    {
+      "word": "ZIVIL",
+      "gloss": "nicht militärisch oder staatlich.",
+      "synonyms": [
+        "bürgerlich"
+      ],
+      "pos": "verb",
+      "example": "Der Straftäter wurde von einem Polizisten in Zivil verhaftet."
+    },
+    {
+      "word": "STRICKEN",
+      "gloss": "mit Nadeln und Wolle ein textiles Muster herstellen.",
+      "synonyms": [
+        "häkeln",
+        "wirken"
+      ],
+      "pos": "verb",
+      "example": "Ich hasse Stricken."
+    },
+    {
+      "word": "ABDRUCK",
+      "gloss": "Eine Kopie oder Abbildung von etwas.",
+      "synonyms": [
+        "Abzug"
+      ],
+      "pos": "noun",
+      "example": "Die nasse Vase hinterließ einen Abdruck auf dem Tisch."
+    },
+    {
+      "word": "GELAUNT",
+      "gloss": "in einer bestimmten Stimmung sein.",
+      "synonyms": [
+        "gestimmt"
+      ],
+      "pos": "adjective",
+      "example": "Bist du gut gelaunt?"
+    },
+    {
+      "word": "EINNAHME",
+      "gloss": "Geld, das eingenommen wird.",
+      "synonyms": [
+        "Ertrag"
+      ],
+      "pos": "noun",
+      "example": "Je mehr der Sprit kostet, desto mehr Einnahme bedeutet es für den Staat."
+    },
+    {
+      "word": "GEWILLT",
+      "gloss": "bereit sein, etwas zu tun.",
+      "synonyms": [
+        "bereit",
+        "willig"
+      ],
+      "pos": "adjective",
+      "example": "Wir sind gewillt zu lernen."
+    },
+    {
+      "word": "ABWESEND",
+      "gloss": "nicht anwesend oder präsent sein.",
+      "synonyms": [
+        "fern",
+        "weg"
+      ],
+      "pos": "adjective",
+      "example": "Er war abwesend."
+    },
+    {
+      "word": "IMMERNOCH",
+      "gloss": "trotz allem weiterhin.",
+      "synonyms": [
+        "trotzdem",
+        "dennoch"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "word": "SCHEIBE",
+      "gloss": "flaches, rundes Stück eines Materials.",
+      "synonyms": [
+        "Platte"
+      ],
+      "pos": "noun",
+      "example": "Möchtest du eine Scheibe Pitaya?"
+    },
+    {
+      "word": "ENGAGEMENT",
+      "gloss": "Verpflichtung oder Bindung an eine Sache oder Person.",
+      "synonyms": [
+        "Einsatz",
+        "Verpflichtung"
+      ],
+      "pos": "noun",
+      "example": "Sie wollen Engagement, nicht wahr?"
+    },
+    {
+      "word": "LIFT",
+      "gloss": "Vorrichtung zum Heben von Lasten oder Personen.",
+      "synonyms": [
+        "Aufzug",
+        "Fahrstuhl"
+      ],
+      "pos": "noun",
+      "example": "Wo ist der Lift?"
+    },
+    {
+      "word": "IMSTANDE",
+      "gloss": "fähig sein, etwas zu tun.",
+      "synonyms": [
+        "fähig"
+      ],
+      "pos": "adverb",
+      "example": "Bist du imstande zu hamstern?"
+    },
+    {
+      "word": "WAHRHAFTIG",
+      "gloss": "Echt oder wirklich sein.",
+      "synonyms": [
+        "echt"
+      ],
+      "pos": "adjective",
+      "example": "Es ist wahrhaftig zum Fürchten."
+    },
+    {
+      "word": "ANSAGEN",
+      "gloss": "etwas öffentlich bekanntgeben oder vorhersagen.",
+      "synonyms": [
+        "verkünden",
+        "bekanntgeben"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "POSTER",
+      "gloss": "großes bedrucktes Blatt zur Werbung oder Information.",
+      "pos": "noun",
+      "example": "Das skurrile Poster an der Wand."
+    },
+    {
+      "word": "FRACHTER",
+      "gloss": "Ein Schiff für den Gütertransport.",
+      "synonyms": [
+        "Cargo"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein Frachter."
+    },
+    {
+      "word": "SCHRAUBEN",
+      "gloss": "Etwas durch Drehung befestigen.",
+      "synonyms": [
+        "drehen"
+      ],
+      "pos": "verb",
+      "example": "Zieh die Schrauben an."
+    },
+    {
+      "word": "NICHTMAL",
+      "gloss": "drückt aus, dass etwas auf keinen Fall passiert.",
+      "pos": "adverb",
+      "example": "Er hat mich nichtmal angerufen, obwohl er wusste, dass ich auf seine Nachricht warte."
+    },
+    {
+      "word": "WHIRLPOOL",
+      "gloss": "Ein wirbelndes Wasserbecken.",
+      "synonyms": [
+        "Wirbel"
+      ],
+      "pos": "noun",
+      "example": "In einer großen halbkreisförmigen Nische befindet sich ein Whirlpool."
+    },
+    {
+      "word": "POLTER",
+      "gloss": "lautes Geräusch durch Herunterfallen oder Zerbrechen.",
+      "synonyms": [
+        "Lärm",
+        "Krach"
+      ],
+      "pos": "verb",
+      "example": "Beim Aufräumen verursachte er einen lauten Polter, als er die Tasse fallen ließ."
+    },
+    {
+      "word": "ABLÖSEN",
+      "gloss": "jemanden oder etwas ersetzen oder freistellen.",
+      "synonyms": [
+        "ersetzen"
+      ],
+      "pos": "verb",
+      "example": "Soll ich dich ablösen?"
+    },
+    {
+      "word": "ERSUCHEN",
+      "gloss": "höflich oder offiziell um etwas bitten.",
+      "synonyms": [
+        "bitten",
+        "anfragen"
+      ],
+      "pos": "verb",
+      "example": "Diese Entscheidung wurde auf Ersuchen der Regierung des Iraks getroffen."
+    },
+    {
+      "word": "GEBRAUCH",
+      "gloss": "das Verwenden oder Nutzen von etwas.",
+      "synonyms": [
+        "Nutzung",
+        "Verwendung"
+      ],
+      "pos": "noun",
+      "example": "Vor Gebrauch schütteln."
+    },
+    {
+      "word": "ABSTREITEN",
+      "gloss": "etwas leugnen oder als unwahr darstellen.",
+      "synonyms": [
+        "leugnen",
+        "bestreiten"
+      ],
+      "pos": "verb",
+      "example": "Ich kann das nicht abstreiten."
+    },
+    {
+      "word": "KULTURELL",
+      "gloss": "die Kunst oder schöpferischen Ausdruck betreffend.",
+      "synonyms": [
+        "KÜNSTLERISCH"
+      ],
+      "pos": "adjective",
+      "example": "Deutschland ist, kulturell gesehen, sehr amerikanisiert."
+    },
+    {
+      "word": "BASE",
+      "gloss": "Grundlage oder Ausgangspunkt von etwas.",
+      "synonyms": [
+        "Grundlage",
+        "Fundament"
+      ],
+      "pos": "noun",
+      "example": "Eine faire Diskussion braucht eine solide BASE aus Fakten."
+    },
+    {
+      "word": "SCHÖPFUNG",
+      "gloss": "etwas Geschaffenes oder Erschaffenes.",
+      "synonyms": [
+        "Werk"
+      ],
+      "pos": "noun",
+      "example": "Wie wunderbar ist Gottes Schöpfung."
+    },
+    {
+      "word": "SPURLOS",
+      "gloss": "ohne sichtbare Rückstände oder Hinweise.",
+      "pos": "adjective",
+      "example": "Er verschwand spurlos."
+    },
+    {
+      "word": "MEMO",
+      "gloss": "Eine kurze Notiz zur Erinnerung.",
+      "synonyms": [
+        "Notiz"
+      ],
+      "pos": "noun",
+      "example": "Ich habe mir ein Memo an den Kühlschrank geklebt, um an die Milch zu denken."
+    },
+    {
+      "word": "REFERENZ",
+      "gloss": "Bezugnahme oder Empfehlung für jemanden oder etwas.",
+      "synonyms": [
+        "Empfehlung",
+        "Bezug"
+      ],
+      "pos": "noun",
+      "example": "Ich brauche eine gute Referenz von meinem letzten Arbeitgeber für meine neue Bewerbung."
+    },
+    {
+      "word": "DREIST",
+      "gloss": "unverfroren oder frech sein.",
+      "synonyms": [
+        "frech",
+        "unverschämt"
+      ],
+      "pos": "adjective",
+      "example": "Sie war äußerst dreist."
+    },
+    {
+      "word": "SONNIG",
+      "gloss": "viel Licht oder gute Laune verbreitend.",
+      "synonyms": [
+        "HEITER"
+      ],
+      "pos": "adjective",
+      "example": "Es ist sonnig."
+    },
+    {
+      "word": "BLUES",
+      "gloss": "trauriges Musikgenre oder Gefühl der Melancholie.",
+      "synonyms": [
+        "Traurigkeit",
+        "Melancholie"
+      ],
+      "pos": "noun",
+      "example": "Er mag Blues."
+    },
+    {
+      "word": "VORGÄNGER",
+      "gloss": "frühere Person oder Sache in einer Reihe.",
+      "pos": "noun",
+      "example": "Ich bin dein Vorgänger."
+    },
+    {
+      "word": "BEHAUPTUNG",
+      "gloss": "Aussage, die als wahr dargestellt wird.",
+      "synonyms": [
+        "Aussage"
+      ],
+      "pos": "noun",
+      "example": "Ihre Behauptung war falsch."
+    },
+    {
+      "word": "BESCHÄMT",
+      "gloss": "Sich unangenehm oder schuldig fühlen.",
+      "synonyms": [
+        "peinlich"
+      ],
+      "pos": "adverb",
+      "example": "Es beschämt mich."
+    },
+    {
+      "word": "UNORDNUNG",
+      "gloss": "fehlende Struktur oder wildes Durcheinander.",
+      "synonyms": [
+        "CHAOS",
+        "DURCHEINANDER"
+      ],
+      "pos": "noun",
+      "example": "Warum ist hier so eine Unordnung?"
+    },
+    {
+      "word": "UNTER",
+      "gloss": "Sich in einer tieferen Position befinden.",
+      "pos": "noun",
+      "example": "Ist ein Arzt unter uns?"
+    },
+    {
+      "word": "EINZELHAFT",
+      "gloss": "Isolationshaft für Gefangene.",
+      "synonyms": [
+        "EINSAM",
+        "ISOLIERT"
+      ],
+      "pos": "noun",
+      "example": "Ich saß sieben Jahre in Einzelhaft."
+    },
+    {
+      "word": "TAPFERKEIT",
+      "gloss": "Mut in schwierigen Situationen.",
+      "pos": "noun",
+      "example": "Ich bewundere Ihre Tapferkeit."
+    },
+    {
+      "word": "ZUTATEN",
+      "gloss": "Bestandteile für ein Gericht oder eine Mischung.",
+      "synonyms": [
+        "Bestandteile"
+      ],
+      "pos": "verb",
+      "example": "Was sind die Zutaten?"
+    },
+    {
+      "word": "KOMET",
+      "gloss": "Himmelskörper mit Schweif, der die Sonne umkreist.",
+      "pos": "noun",
+      "example": "Ein Komet rast auf die Erde zu."
+    },
+    {
+      "word": "BESIEGELN",
+      "gloss": "Etwas endgültig festlegen oder bestätigen.",
+      "pos": "verb",
+      "example": "Die Unterschrift unter dem Vertrag wird unsere Partnerschaft für immer besiegeln."
+    },
+    {
+      "word": "KONZERN",
+      "gloss": "großes Unternehmen mit mehreren Tochtergesellschaften.",
+      "synonyms": [
+        "FIRMENGRUPPE",
+        "GROSSUNTERNEHMEN"
+      ],
+      "pos": "noun",
+      "example": "Der Konzern plant, ins Ausland zu expandieren."
+    },
+    {
+      "word": "FORTGEHEN",
+      "gloss": "weitergehen oder andauern.",
+      "synonyms": [
+        "WEITERMACHEN",
+        "ANDAUERN"
+      ],
+      "pos": "verb",
+      "example": "Nun muss ich fortgehen."
+    },
+    {
+      "word": "TRÄG",
+      "gloss": "langsam oder ohne große Aktivität.",
+      "synonyms": [
+        "LANGSAM",
+        "SCHWERFÄLLIG"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "SOUVENIR",
+      "gloss": "Erinnerungsstück an einen Ort oder ein Ereignis.",
+      "synonyms": [
+        "ERINNERUNGSSTÜCK",
+        "MITBRINGSCHEN"
+      ],
+      "pos": "noun",
+      "example": "Das ist ein Souvenir aus Hokkaido."
+    },
+    {
+      "word": "TROCKNEN",
+      "gloss": "Feuchtigkeit entziehen, bis etwas nicht mehr nass ist.",
+      "pos": "verb",
+      "example": "Wir trocknen Blätter."
+    },
+    {
+      "word": "ZÜNDER",
+      "gloss": "Gerät zum Entfachen eines Brandes.",
+      "synonyms": [
+        "FEUERSPENDER"
+      ],
+      "pos": "noun",
+      "example": "Sie entfernten den Zünder, bevor die Bombe explodieren konnte."
+    },
+    {
+      "word": "PARISER",
+      "gloss": "Einwohner der französischen Hauptstadt.",
+      "pos": "noun",
+      "example": "Er ist Pariser."
+    },
+    {
+      "word": "MÜLLTONNE",
+      "gloss": "Behälter, in den Abfall geworfen wird.",
+      "synonyms": [
+        "ABFALLBEHÄLTER"
+      ],
+      "pos": "noun",
+      "example": "Ihre Mülltonne brennt."
+    },
+    {
+      "word": "TRÜBEN",
+      "gloss": "etwas dunkler oder unklarer machen.",
+      "synonyms": [
+        "DUNKELN",
+        "GETRÜBT"
+      ],
+      "pos": "verb",
+      "example": "Kein Wölkchen kann unser Glück mehr trüben."
+    },
+    {
+      "word": "EINBROCKEN",
+      "gloss": "etwas durch Kochen oder Backen zubereiten.",
+      "synonyms": [
+        "EINWEICHEN"
+      ],
+      "pos": "verb",
+      "example": "Sie kann den Eintopf gut einbrocken, wenn sie die Gemüsereste verwerten will."
+    },
+    {
+      "word": "TABLETT",
+      "gloss": "flache Platte zum Tragen oder Servieren von Gegenständen.",
+      "synonyms": [
+        "PLATTE",
+        "BRETT"
+      ],
+      "pos": "noun",
+      "example": "Wohin soll das Tablett?"
+    },
+    {
+      "word": "ABWEHREN",
+      "gloss": "etwas oder jemanden zurückdrängen oder verhindern.",
+      "synonyms": [
+        "zurückschlagen"
+      ],
+      "pos": "verb",
+      "example": "Der Talisman, den er trägt, soll die bösen Geister abwehren."
+    },
+    {
+      "word": "BÜNDNIS",
+      "gloss": "Zusammenarbeit oder Vereinbarung zwischen Parteien.",
+      "synonyms": [
+        "VERBÜNDETE",
+        "ALLIANZ"
+      ],
+      "pos": "noun",
+      "example": "Ein Bündnis macht die Schwachen stark."
+    },
+    {
+      "word": "VEGETARIER",
+      "gloss": "Person, die kein Fleisch isst.",
+      "synonyms": [
+        "PFLANZENESSER",
+        "FLEISCHVERMEIDER"
+      ],
+      "pos": "noun",
+      "example": "Er ist Vegetarier."
+    },
+    {
+      "word": "ZERFALLEN",
+      "gloss": "in Teile zerbrechen oder auseinanderfallen.",
+      "synonyms": [
+        "VERFALLEN",
+        "ZERSTÖREN"
+      ],
+      "pos": "verb",
+      "example": "Imperien zerfallen von innen."
+    },
+    {
+      "word": "HUPE",
+      "gloss": "Signalgerät, das einen lauten Ton erzeugt.",
+      "synonyms": [
+        "HORN",
+        "SIGNALHORN"
+      ],
+      "pos": "adverb"
+    },
+    {
+      "word": "FESTLAND",
+      "gloss": "kontinentaler Teil der Erde ohne Inseln.",
+      "synonyms": [
+        "LANDMASS",
+        "KONTINENT"
+      ],
+      "pos": "noun",
+      "example": "Er ist vom Festland zurück."
+    },
+    {
+      "word": "RÜCKGRAT",
+      "gloss": "Stütze des Körpers oder Charakterstärke.",
+      "synonyms": [
+        "WIRBELSÄULE"
+      ],
+      "pos": "noun",
+      "example": "Er hat kein Rückgrat."
+    },
+    {
+      "word": "KNOBLAUCH",
+      "gloss": "Pflanze mit würzigem Geschmack, oft in der Küche verwendet.",
+      "synonyms": [
+        "KNOLLLAUCH",
+        "KNOLLE"
+      ],
+      "pos": "noun",
+      "example": "Ich mag Knoblauch."
+    },
+    {
+      "word": "COUNTDOWN",
+      "gloss": "rückwärts zählen bis zum Ende.",
+      "synonyms": [
+        "RÜCKWÄRTZÄHLUNG",
+        "ZEITABLAUF"
+      ],
+      "pos": "noun",
+      "example": "Der Countdown zum neuen Jahr hat schon begonnen."
+    },
+    {
+      "word": "KONSUL",
+      "gloss": "hoher Beamter in einem anderen Land",
+      "synonyms": [
+        "BOTSCHAFTER",
+        "REPRÄSENTANT"
+      ],
+      "pos": "noun",
+      "example": "Ich sage, dass er Konsul ist."
+    },
+    {
+      "word": "SLIP",
+      "gloss": "kurze Unterhose ohne Beine",
+      "synonyms": [
+        "UNTERHOSE",
+        "HÖSCHEN"
+      ],
+      "pos": "noun",
+      "example": "Sie geht in Slip und BH spazieren."
+    },
+    {
+      "word": "SOCKE",
+      "gloss": "Kleidungsstück für den Fuß",
+      "synonyms": [
+        "STRUMPF",
+        "FUSSBEDDECKUNG"
+      ],
+      "pos": "noun",
+      "example": "Mir fehlt eine Socke."
+    },
+    {
+      "word": "ZEH",
+      "gloss": "Vorderster Teil des Fußes.",
+      "synonyms": [
+        "FUSSZEHE"
+      ],
+      "pos": "noun",
+      "example": "Ihr Zeh blutet."
+    },
+    {
+      "word": "BAKTERIE",
+      "gloss": "kleines Lebewesen, das Krankheiten verursachen kann",
+      "synonyms": [
+        "KEIM",
+        "MIKROBE"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "REZEPTION",
+      "gloss": "Empfang oder Anmeldung in einem Gebäude",
+      "synonyms": [
+        "EMPFANG",
+        "ANMELDESCHALTER"
+      ],
+      "pos": "noun",
+      "example": "Die Frau an der Rezeption war sehr nett."
+    },
+    {
+      "word": "KOMMEND",
+      "gloss": "in naher Zukunft eintreffend",
+      "synonyms": [
+        "NAHEND",
+        "BEVORSTEHEND"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "ZICKE",
+      "gloss": "unangenehme oder streitsüchtige Person",
+      "synonyms": [
+        "ZÄNKISCH",
+        "STREITSUCHTIG"
+      ],
+      "pos": "noun",
+      "example": "Die neue Kollegin ist eine richtige Zicke – ständig meckert sie über alles."
+    },
+    {
+      "word": "BEOBACHTER",
+      "gloss": "jemand, der etwas genau betrachtet",
+      "synonyms": [
+        "WÄCHTER",
+        "SPÄHER"
+      ],
+      "pos": "noun",
+      "example": "Ausländische Beobachter waren zur Wahl nicht zugelassen."
+    },
+    {
+      "word": "SCHEICH",
+      "gloss": "religiöser oder politischer Führer in arabischen Ländern",
+      "synonyms": [
+        "HERRSCHER",
+        "FÜRST"
+      ],
+      "pos": "noun",
+      "example": "Der Scheich besuchte das Dorf, um mit den Ältesten über die Bewässerung zu sprechen."
+    },
+    {
+      "word": "EHEPAAR",
+      "gloss": "zwei Menschen, die verheiratet sind",
+      "synonyms": [
+        "VERHEIRATETE",
+        "EHELEUTE"
+      ],
+      "pos": "noun",
+      "example": "Wir sind ein Ehepaar."
+    },
+    {
+      "word": "ANFLUG",
+      "gloss": "Ankunft eines Flugzeugs",
+      "synonyms": [
+        "LANDUNG",
+        "ANKUNFT"
+      ],
+      "pos": "noun",
+      "example": "Der Anflug des Flugzeugs verzögerte sich aufgrund des starken Windes."
+    },
+    {
+      "word": "SAUSEN",
+      "gloss": "schnell und laut vorbeifahren",
+      "synonyms": [
+        "RASEN",
+        "SCHNELL FAHREN"
+      ],
+      "pos": "verb",
+      "example": "Bei spontanem, unvorbereitetem Sprechen sausen die Gedanken dahin, und die Sprache bleibt zurück."
+    },
+    {
+      "word": "ANSATZ",
+      "gloss": "beginnender Teil oder Idee",
+      "synonyms": [
+        "BEGINN",
+        "HERANGEHEN"
+      ],
+      "pos": "noun",
+      "example": "Mein Ansatz ist anders."
+    },
+    {
+      "word": "LAUNISCH",
+      "gloss": "häufig wechselnde Stimmung zeigend",
+      "synonyms": [
+        "stimmungsschwankend",
+        "wechselhaft"
+      ],
+      "pos": "adjective",
+      "example": "Er war launisch."
+    },
+    {
+      "word": "TRAUMHAFT",
+      "gloss": "sehr schön oder perfekt",
+      "synonyms": [
+        "WUNDERBAR",
+        "MÄRCHENHAFT"
+      ],
+      "pos": "adjective",
+      "example": "Es war traumhaft."
+    },
+    {
+      "word": "STEWARDESS",
+      "gloss": "Frau, die Passagiere in einem Flugzeug betreut",
+      "synonyms": [
+        "FLUGBEGLEITERIN",
+        "FLUGHOSTESS"
+      ],
+      "pos": "noun",
+      "example": "Er hat eine Stewardess geheiratet."
+    },
+    {
+      "word": "BLANK",
+      "gloss": "glänzend sauber oder ohne Flecken",
+      "synonyms": [
+        "GLÄNZEND",
+        "POLIT"
+      ],
+      "pos": "adjective",
+      "example": "Er ist blank."
+    },
+    {
+      "word": "PORTRÄT",
+      "gloss": "Bild oder Beschreibung einer Person",
+      "synonyms": [
+        "BILDNIS",
+        "FOTO"
+      ],
+      "pos": "noun",
+      "example": "Siehst du das Porträt?"
+    },
+    {
+      "word": "GUTTUN",
+      "gloss": "etwas Gutes bewirken",
+      "synonyms": [
+        "WOHLTUN",
+        "HILFREICH SEIN"
+      ],
+      "pos": "verb",
+      "example": "Das wird mir guttun."
+    },
+    {
+      "word": "ARTERIE",
+      "gloss": "Blutgefäß, das Blut vom Herzen wegführt.",
+      "synonyms": [
+        "BLUTLEITUNG"
+      ],
+      "pos": "noun",
+      "example": "Die Kugel durchstieß eine Arterie."
+    },
+    {
+      "word": "SCHRUMPFEN",
+      "gloss": "an Größe verlieren",
+      "synonyms": [
+        "ZUSAMMENZIEHEN"
+      ],
+      "pos": "verb",
+      "example": "Die Lohntüten hörten nicht auf zu schrumpfen."
+    },
+    {
+      "word": "PUFF",
+      "gloss": "kurzer, leiser Schlag",
+      "synonyms": [
+        "SCHLAG",
+        "POCKEN"
+      ],
+      "pos": "noun"
+    },
+    {
+      "word": "MEDAILLON",
+      "gloss": "Schmuckstück mit Bild oder Inschrift",
+      "synonyms": [
+        "SCHMUCKSTÜCK",
+        "AMULETT"
+      ],
+      "pos": "noun",
+      "example": "Ich habe ein wertvolles Medaillon verloren."
+    },
+    {
+      "word": "MOPS",
+      "gloss": "Hunderasse mit kurzer Nase und faltiger Haut",
+      "synonyms": [
+        "HUND",
+        "KLEINER HUND"
+      ],
+      "pos": "noun",
+      "example": "Ein Mops ist ein kleiner Hund mit einem faltigen Gesicht und einer kurzen Nase."
+    },
+    {
+      "word": "HERGEBEN",
+      "gloss": "etwas freiwillig abgeben",
+      "synonyms": [
+        "ÜBERGEBEN",
+        "ABTRETEN"
+      ],
+      "pos": "verb",
+      "example": "Ich kann nicht glauben, dass du all dein Geld hergeben willst."
+    },
+    {
+      "word": "GEWÄSSER",
+      "gloss": "größere Ansammlung von Flüssigkeit.",
+      "synonyms": [
+        "FLUSS",
+        "SEE"
+      ],
+      "pos": "noun",
+      "example": "In diesem Gewässer sind viele Fische."
+    },
+    {
+      "word": "STAND",
+      "gloss": "Lage oder Situation zu einem Zeitpunkt.",
+      "synonyms": [
+        "LAGE",
+        "POSITION"
+      ],
+      "pos": "noun",
+      "example": "Die politische Lage und der wirtschaftliche Stand des Landes verbesserten sich deutlich."
+    },
+    {
+      "word": "AUSWEISEN",
+      "gloss": "jemanden des Landes verweisen",
+      "synonyms": [
+        "VERWEISEN",
+        "ABWEISEN"
+      ],
+      "pos": "verb",
+      "example": "Sie werden mich aus dem Land ausweisen."
+    },
+    {
+      "word": "SPRÜHEN",
+      "gloss": "Flüssigkeit fein verteilen",
+      "synonyms": [
+        "NEBELN",
+        "VERSTÄUBEN"
+      ],
+      "pos": "verb",
+      "example": "Zur Verteidigung können Krötenechsen Blut aus ihren Augen sprühen."
+    },
+    {
+      "word": "GEBIETER",
+      "gloss": "jemand, der über andere herrscht",
+      "synonyms": [
+        "HERR",
+        "HERRSCHER"
+      ],
+      "pos": "noun",
+      "example": "Niemand ist Gebieter des Mondes."
+    },
+    {
+      "word": "ZUSTEHEN",
+      "gloss": "etwas rechtmäßig gehören oder verdient sein",
+      "synonyms": [
+        "ZUKOMMEN"
+      ],
+      "pos": "verb",
+      "example": "Die Höhe der Bezüge, die Ihnen zustehen, ergibt sich aus Ihrer Besoldungsgruppe."
+    },
+    {
+      "word": "SKELETT",
+      "gloss": "Knochengerüst des Körpers.",
+      "synonyms": [
+        "KNOCHENBAU",
+        "KÖRPERGERÜST"
+      ],
+      "pos": "noun",
+      "example": "Er ist dünn wie ein Skelett."
+    },
+    {
+      "word": "FURCHTLOS",
+      "gloss": "ohne Angst",
+      "synonyms": [
+        "mutig",
+        "tapfer"
+      ],
+      "pos": "adjective",
+      "example": "Er war furchtlos."
+    },
+    {
+      "word": "ANFREUNDEN",
+      "gloss": "eine lockere Verbindung eingehen.",
+      "synonyms": [
+        "bekannt werden"
+      ],
+      "pos": "verb",
+      "example": "Er will sich mit ihr anfreunden."
+    },
+    {
+      "word": "HANDVOLL",
+      "gloss": "eine kleine, greifbare Menge.",
+      "pos": "noun",
+      "example": "Das ist das Werk einer Handvoll Faschisten."
+    },
+    {
+      "word": "PFEFFER",
+      "gloss": "scharfes Gewürz aus gemahlenen Körnern.",
+      "synonyms": [
+        "WÜRZE"
+      ],
+      "pos": "noun",
+      "example": "Gib Pfeffer dazu!"
+    },
+    {
+      "word": "STADIUM",
+      "gloss": "große Sportanlage mit Zuschauerrängen",
+      "synonyms": [
+        "Arena",
+        "Sportstätte"
+      ],
+      "pos": "noun",
+      "example": "Das Stadium ist mit dem Bus erreichbar."
+    },
+    {
+      "word": "STAU",
+      "gloss": "Verkehrsbehinderung durch viele Fahrzeuge.",
+      "synonyms": [
+        "VERKEHRSANHÄUFUNG"
+      ],
+      "pos": "noun",
+      "example": "Es gab einen Stau."
+    },
+    {
+      "word": "MIKROWELLE",
+      "gloss": "Gerät zum schnellen Erwärmen von Speisen.",
+      "pos": "noun",
+      "example": "Die Mikrowelle ist alt."
+    },
+    {
+      "word": "FLANKE",
+      "gloss": "Seite eines Gebäudes oder einer Formation",
+      "synonyms": [
+        "Seite"
+      ],
+      "pos": "noun",
+      "example": "Unsere rechte Flanke wird angegriffen."
+    },
+    {
+      "word": "BEKLAUEN",
+      "gloss": "etwas widerrechtlich an sich nehmen",
+      "synonyms": [
+        "stehlen"
+      ],
+      "pos": "verb"
+    },
+    {
+      "word": "ERKENNTNIS",
+      "gloss": "neues Wissen oder Einsicht",
+      "synonyms": [
+        "Einsicht",
+        "Wissen"
+      ],
+      "pos": "noun",
+      "example": "Diese Erkenntnis ist nicht neu."
+    },
+    {
+      "word": "SCHAUSPIEL",
+      "gloss": "künstlerische Darstellung einer Figur",
+      "synonyms": [
+        "Theaterstück",
+        "Aufführung"
+      ],
+      "pos": "noun",
+      "example": "Politik ist ein Schauspiel."
+    },
+    {
+      "word": "ERBAUEN",
+      "gloss": "ein Bauwerk konstruieren",
+      "synonyms": [
+        "errichten",
+        "anlegen"
+      ],
+      "pos": "verb",
+      "example": "Lasst uns etwas erbauen."
+    },
+    {
+      "word": "MÖRDERISCH",
+      "gloss": "extrem gefährlich oder tödlich",
+      "synonyms": [
+        "tödlich",
+        "brutal"
+      ],
+      "pos": "adjective",
+      "example": "Die Hitze in der Wüste war mörderisch."
+    },
+    {
+      "word": "BUßE",
+      "gloss": "Strafe für begangenes Unrecht",
+      "synonyms": [
+        "Strafe",
+        "Sühne"
+      ],
+      "pos": "noun",
+      "example": "Er tut Buße."
+    },
+    {
+      "word": "FUSION",
+      "gloss": "Vereinigung oder Verschmelzung von zwei Dingen",
+      "synonyms": [
+        "Verschmelzung"
+      ],
+      "pos": "noun",
+      "example": "Es wird keine Fusion geben."
+    },
+    {
+      "word": "RIVALE",
+      "gloss": "Gegner oder Konkurrent",
+      "synonyms": [
+        "Konkurrent",
+        "Gegner"
+      ],
+      "pos": "noun",
+      "example": "Er ist mein Rivale."
     }
   ]
 }
