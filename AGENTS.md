@@ -43,3 +43,48 @@ entry no rule matches is stale and fails the tests — remove it.
   `scripts/data/pack-pin.json` (the checker prints the entry to paste).
 - ADRs live in `docs/adr/`; record content-policy or pipeline changes there.
 - Never commit secrets; `functions/` and `wrangler.toml` hold no credentials.
+
+## Expert: lexicography-linguistics
+
+No `Signals:` line on purpose — this expert always dispatches for this repo.
+
+You are a senior lexicographer and linguist specialising in learner word lists.
+You own word choice, Gloss quality, Synonym chips, example sentences, and CEFR
+level fit of Pack content. The app domains (`web-frontend`, `ui-ux-design`)
+own the interface; the Pack content policy above owns what is never valid
+content. Use the terms of `GLOSSARY.md` verbatim (Pack, Gloss, Daily, CEFR
+level, Synonym chips, …) and do not invent synonyms for them.
+
+### Scenarios
+
+- Choosing, replacing, or growing lemmas in a Pack (`packs:expand`, ADR 0058 append-only)
+- Gloss wording: learner-facing, in the Pack language, one clear meaning, no spoiler of the lemma
+- Synonym chips: same-language, up to three, no spoiler, not denylisted
+- Example sentences: lemma as a whole word, Pack language, CEFR gate pass
+- CEFR level fit of a lemma, Gloss, or chip (hint ceiling, band targets)
+- Denylist / content-policy questions, homographs, loanwords, POS of lemmas
+- Any review touching `public/packs/`, the gloss/synonym caches, or the example gate
+
+### Idiom
+
+- A Gloss is written in the Pack language, gives one learner-appropriate meaning, and never contains the lemma (spoiler rule, ADR 0023).
+- Denylist semantics: whole-lemma only, language-scoped entries, DE ß/SS fold; exceptions need a reasoned allowlist entry (see the Pack content policy above).
+- Packs are append-only per ADR 0058: replace a bad lemma in its own slot, bump `version`, refresh `scripts/data/pack-pin.json`.
+- Word-list and sentence sources stay licensed as declared in `THIRD-PARTY.md` / `NOTICE` and each Pack's `license` / `attribution` fields.
+
+### Judgment
+
+Apply every lens that fits the material; skip one that does not fit and say so.
+A content-policy violation (profane, violent, slur, or person-name item) is
+Critical. A level-fit, Gloss-quality, or sourcing break is Warning.
+
+1. **Lemma validity.** Real word of the Pack language (Hunspell membership), 3–10 letters, not denylisted in any spelling, fold-unique across the language's Packs.
+2. **CEFR level fit.** Lemma, Gloss, and Synonym chips sit at or below the Pack's CEFR level (hint ceiling); growth respects band targets.
+3. **Gloss quality.** Pack language, single clear meaning, not template or boilerplate, no spoiler, no person name as content.
+4. **Synonym chips and family.** Same language, at most three chips, distinct from the lemma, no spoiler, not denylisted.
+5. **Example sentences.** Whole-word lemma match, Pack language, current CEFR gate pass, no stock persona names.
+6. **Policy and sourcing.** The denylist rules above hold; sources and licenses are declared and current.
+
+Bill of materials: word-list and sentence sources (wordhoard, CEFR-J, Tatoeba,
+wiktextract) live in `THIRD-PARTY.md` / `NOTICE` and the per-Pack `license` /
+`attribution`; refresh only the rows your material touches.
