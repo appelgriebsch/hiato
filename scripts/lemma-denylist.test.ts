@@ -348,13 +348,16 @@ describe('pattern denylist parser', () => {
     expect(bais.re.test('BAISANTX')).toBe(false)
   })
 
-  test('keeps ß via nfcUpper', () => {
+  test('folds ß/ẞ to SS so both spellings match (#363)', () => {
     const rules = parsePatternDenylist('de scheiß(e|er)\n')
-    expect(rules[0]!.stem).toBe('SCHEIß')
-    expect(rules[0]!.re.source.includes('ß')).toBe(true)
-    expect(rules[0]!.re.test('SCHEIßE')).toBe(true)
-    expect(rules[0]!.re.test('SCHEISSE')).toBe(false)
+    expect(rules[0]!.stem).toBe('SCHEISS')
+    expect(rules[0]!.re.test('SCHEISSE')).toBe(true)
+    expect(rules[0]!.re.test('SCHEISSER')).toBe(true)
+    // The raw rule regex is unfolded; matching folds via spellingKey.
     expect(matchesDeniedPattern('scheiße', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('scheiẞe', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('scheisse', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('scheiße', 'en', rules)).toBe(false)
   })
 
   test('spellingKey folds ß and ẞ to SS so spelling variants compare equal (#346)', () => {
@@ -364,6 +367,63 @@ describe('pattern denylist parser', () => {
     expect(spellingKey('GEWIß')).toBe(spellingKey('GEWISS'))
     expect(spellingKey('Straße')).toBe(spellingKey('STRASSE'))
     expect(spellingKey('HAUS')).toBe('HAUS')
+  })
+
+  test('every exact denylist entry also denies its ß/SS variant and vice versa (#363)', () => {
+    const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-denylist.txt'), 'utf8')
+    const ssToSharp = (w: string) => w.replaceAll('SS', 'ß')
+    const sharpToSS = (w: string) => w.replaceAll('ß', 'SS').replaceAll('ẞ', 'SS')
+    const entries = parseExactEntries(text)
+    let checked = 0
+    for (const e of entries) {
+      for (const k of [e.key, ssToSharp(e.key), sharpToSS(e.key)]) {
+        const lang = k.includes(' ') ? k.split(' ')[0] : undefined
+        const word = k.includes(' ') ? k.split(' ').slice(1).join(' ') : k
+        expect(isDeniedLemma(word, undefined, lang)).toBe(true)
+        checked++
+      }
+    }
+    expect(checked).toBe(3 * entries.length)
+  })
+
+  test('every pattern line with an SS stem also matches its ß variant (#363)', () => {
+    const rules = loadPatternDenylist()
+    for (const rule of rules) expect(/[ßẞ]/.test(rule.stem)).toBe(false)
+    const raw = readFileSync(path.join(import.meta.dir, 'data', 'lemma-denylist-patterns.txt'), 'utf8')
+    let checked = 0
+    for (const line of raw.split('\n')) {
+      const m = /^(?:([A-Za-z]{2})\s+)?(\S+)\(([^)]*)\)$/.exec(line.split('#')[0]!.trim())
+      if (!m || !m[2]!.toUpperCase().includes('SS')) continue
+      const lang = m[1]?.toLowerCase()
+      const stem = m[2]!.replaceAll('ß', 'SS').toUpperCase()
+      const suffix = (m[3]!.split('|')[0] ?? '').toUpperCase()
+      const sharpWord = stem.replaceAll('SS', 'ß') + suffix.replaceAll('SS', 'ß')
+      expect(matchesDeniedPattern(sharpWord, lang, rules)).toBe(true)
+      expect(matchesDeniedPattern(stem + suffix, lang, rules)).toBe(true)
+      checked++
+    }
+    expect(checked).toBeGreaterThanOrEqual(2)
+  })
+
+  test('the #363 DE lemmas are denied in every spelling', () => {
+    for (const w of ['ERSCHIEßEN', 'ERSCHIEẞEN', 'ERSCHIESSEN', 'erschießen']) {
+      expect(isDeniedLemma(w, undefined, 'de')).toBe(true)
+    }
+    for (const w of ['SCHEIßKERL', 'SCHEISSKERL', 'scheißkerl']) {
+      expect(isDeniedLemma(w, undefined, 'de')).toBe(true)
+    }
+    for (const w of ['SCHEIßHAUS', 'SCHEISSHAUS', 'scheißhaus']) {
+      expect(isDeniedLemma(w, undefined, 'de')).toBe(true)
+    }
+    for (const w of ['SCHEIßBULL', 'SCHEISSBULL']) {
+      expect(isDeniedLemma(w, undefined, 'de')).toBe(true)
+    }
+    // Scoped pattern: the SS/ß family stays playable in other languages.
+    expect(isDeniedLemma('SCHEISSHAUS', undefined, 'en')).toBe(false)
+    // Gloss tokens follow the same fold; the exempt list still wins.
+    expect(isDeniedGlossToken('scheiße', 'de', 'HAUS')).toBe(true)
+    expect(isDeniedGlossToken('schwanz', 'de', 'HUND')).toBe(false)
+    expect(isDeniedGlossToken('schwanz', 'en', 'HUND')).toBe(true)
   })
 
   test('keeps scoped and global lines distinct', () => {

@@ -4,6 +4,7 @@ import path from 'node:path'
 import {
   isDeniedGlossToken,
   isDeniedLemma,
+  isDeniedTextToken,
   letterTokens,
   loadDenylistAllow,
   loadGlossExempt,
@@ -20,7 +21,7 @@ const PACKS = path.join(ROOT, 'public', 'packs')
 const LANGS = ['en', 'de', 'es', 'pt', 'fr', 'it'] as const
 const CEFRS = ['a1', 'a2', 'b1', 'b2', 'c1', 'c2'] as const
 
-type Lemma = { word: string; gloss?: string; synonyms?: string[] }
+type Lemma = { word: string; gloss?: string; synonyms?: string[]; family?: string[]; example?: string }
 type Pack = { lemmas: Lemma[] }
 
 function readPack(lang: string, cefr: string): Pack {
@@ -58,9 +59,20 @@ export function profanityHits(
       }
       for (const chip of L.synonyms ?? []) {
         const bad =
-          isDeniedLemma(chip, undefined, pack.lang) ||
-          chipTokens(chip).some((t) => isDeniedLemma(t, undefined, pack.lang))
+          isDeniedTextToken(chip, pack.lang, L.word) ||
+          chipTokens(chip).some((t) => isDeniedTextToken(t, pack.lang, L.word))
         if (bad) errors.push(`${pack.lang}/${pack.cefr} #${i} chip ${L.word} :: ${chip}`)
+      }
+      for (const fam of L.family ?? []) {
+        const bad =
+          isDeniedTextToken(fam, pack.lang, L.word) ||
+          chipTokens(fam).some((t) => isDeniedTextToken(t, pack.lang, L.word))
+        if (bad) errors.push(`${pack.lang}/${pack.cefr} #${i} family ${L.word} :: ${fam}`)
+      }
+      for (const tok of glossTokens(L.example ?? '')) {
+        if (isDeniedGlossToken(tok, pack.lang, L.word)) {
+          errors.push(`${pack.lang}/${pack.cefr} #${i} example ${L.word} :: ${tok}`)
+        }
       }
     })
   }
@@ -83,8 +95,8 @@ export function profanityHits(
       }
       for (const chip of chips) {
         const bad =
-          isDeniedLemma(chip, undefined, cache.lang) ||
-          chipTokens(chip).some((t) => isDeniedLemma(t, undefined, cache.lang))
+          isDeniedTextToken(chip, cache.lang, key) ||
+          chipTokens(chip).some((t) => isDeniedTextToken(t, cache.lang, key))
         if (bad) errors.push(`synonym-cache ${cache.lang} ${key} :: ${chip}`)
       }
     }

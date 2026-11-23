@@ -324,6 +324,89 @@ describe('packs:check gloss denylist', () => {
   })
 })
 
+describe('packs:check text-field denylist (#363)', () => {
+  test('a ß/SS spelling variant of a denylisted lemma fails the pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'a1',
+          lemmas: [{ word: 'ERSCHIEßEN', gloss: 'mit einer Waffe töten.' }],
+        }),
+        'de/a1.json',
+      ),
+    ).toThrow(/denylist — lemma "ERSCHIEßEN"/)
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'de',
+          cefr: 'c1',
+          lemmas: [{ word: 'SCHEIßHAUS', gloss: 'Ort für sanitäre Bedürfnisse.' }],
+        }),
+        'de/c1.json',
+      ),
+    ).toThrow(/denylist — lemma "SCHEIßHAUS"/)
+  })
+
+  test('profanity in a synonym chip fails the pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'es',
+          cefr: 'b2',
+          lemmas: [{ word: 'CASA', gloss: 'una vivienda', synonyms: ['jodido'] }],
+        }),
+        'es/b2.json',
+      ),
+    ).toThrow(/denylist/)
+  })
+
+  test('profanity in an example sentence fails the pack', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'pt',
+          cefr: 'a1',
+          lemmas: [{ word: 'CASA', gloss: 'uma vivienda', example: 'Ele comeu merda na casa.' }],
+        }),
+        'pt/a1.json',
+      ),
+    ).toThrow(/denylist — example "CASA" token "merda"/)
+  })
+
+  test('a gloss-exempt homograph stays allowed in gloss, chip and example', () => {
+    const ok = validatePack(
+      pack({
+        lang: 'de',
+        cefr: 'a1',
+        lemmas: [
+          {
+            word: 'TAG',
+            gloss: 'heller Teil des Tages.',
+            synonyms: ['hell'],
+            example: 'Der Tag war hell.',
+          },
+        ],
+      }),
+      'de/a1.json',
+    )
+    expect(ok.lemmas[0]?.synonyms).toEqual(['hell'])
+  })
+
+  test('the same exempt word fails in another language', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [{ word: 'DAY', gloss: 'a hell time' }],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/denylist — gloss/)
+  })
+})
+
 describe('packs:check person-name gloss (#24)', () => {
   test('rejects a name-list lemma with a person-name gloss', () => {
     expect(() =>

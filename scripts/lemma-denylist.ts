@@ -2,9 +2,14 @@
  * Shared NSFW / violence / slur denylist.
  * Exact lines live in lemma-denylist.txt (global `WORD` or scoped `lang WORD`).
  * Conjugation patterns live in lemma-denylist-patterns.txt and match the whole
- * lemma only (`^…$` over nfcUpper). Homographs a pattern would catch are listed
+ * lemma only (`^…$`). Homographs a pattern would catch are listed
  * in lemma-denylist-allow.txt and are exempt after a pattern hit, not after an
  * exact hit (ADR 0040: scoped lines do not block another language).
+ *
+ * All matching keys go through spellingKey, so German ß/ẞ folds to SS (#363):
+ * `ERSCHIEßEN` matches the `ERSCHIESSEN` entry and `SCHEIßHAUS` matches the
+ * `de SCHEISS(…|HAUS|…)` pattern. nfcUpper alone preserves ß and let those
+ * spelling variants ship.
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -29,7 +34,7 @@ export function nfcUpper(s: string): string {
   return s.replaceAll('ß', PH).normalize('NFC').toUpperCase().replaceAll(PH, 'ß')
 }
 
-/** nfcUpper plus ß/ẞ→SS, so spelling variants of one word compare equal (#346). */
+/** nfcUpper plus ß/ẞ→SS, so spelling variants of one word compare equal (#346, #363). */
 export function spellingKey(s: string): string {
   return nfcUpper(s).replaceAll('ß', 'SS').replaceAll('ẞ', 'SS')
 }
@@ -76,11 +81,11 @@ export function parseExactEntries(text: string): ExactRecord[] {
     if (!w) continue
     const parts = w.split(/\s+/)
     if (parts.length === 1) {
-      out.push({ key: nfcUpper(parts[0]!), category })
+      out.push({ key: spellingKey(parts[0]!), category })
       continue
     }
     if (parts.length === 2 && /^[a-z]{2}$/i.test(parts[0]!)) {
-      out.push({ key: `${parts[0]!.toLowerCase()} ${nfcUpper(parts[1]!)}`, category })
+      out.push({ key: `${parts[0]!.toLowerCase()} ${spellingKey(parts[1]!)}`, category })
       continue
     }
     throw new Error(`lemma-denylist:${i + 1}: expected "WORD" or "lang WORD", got ${JSON.stringify(w)}`)
@@ -98,7 +103,7 @@ const LETTERS = /^[\p{L}ß]+$/u
 export type PatternRule = {
   /** Null is a global pattern. */
   lang: string | null
-  /** nfcUpper stem, for tests. */
+  /** spellingKey stem (ß/ẞ→SS), for tests. */
   stem: string
   re: RegExp
 }
@@ -111,7 +116,8 @@ export type AllowEntry = {
 
 /**
  * One pattern line is `STEM(SUFFIX|…)` or `lang STEM(SUFFIX|…)`.
- * Compiled to `^STEM(?:SUFFIX|…)$` after nfcUpper. A bare stem needs an empty
+ * Compiled to `^STEM(?:SUFFIX|…)$` after spellingKey, so a ß stem also matches
+ * its SS spelling (`SCHEIß(…)` catches SCHEISSE). A bare stem needs an empty
  * alternative (`FUCK(|ING)`), never a substring.
  */
 export function parsePatternDenylist(text: string): PatternRule[] {
@@ -129,14 +135,14 @@ export function parsePatternDenylist(text: string): PatternRule[] {
     if (lang !== null && !/^[a-z]{2}$/.test(lang)) {
       throw new Error(`lemma-denylist-patterns:${i + 1}: bad lang ${JSON.stringify(m[1])}`)
     }
-    const stem = nfcUpper(m[2]!)
+    const stem = spellingKey(m[2]!)
     if (!stem || !LETTERS.test(stem)) {
       throw new Error(`lemma-denylist-patterns:${i + 1}: stem must be letters, got ${JSON.stringify(m[2])}`)
     }
     if (m[3] === '') {
       throw new Error(`lemma-denylist-patterns:${i + 1}: empty suffix group`)
     }
-    const suffixes = m[3]!.split('|').map((s) => nfcUpper(s))
+    const suffixes = m[3]!.split('|').map((s) => spellingKey(s))
     for (const suf of suffixes) {
       if (suf !== '' && !LETTERS.test(suf)) {
         throw new Error(
@@ -177,7 +183,7 @@ export function parseAllowlist(text: string, label = 'lemma-denylist-allow'): Al
     if (parts.length !== 2 || !/^[a-z]{2}$/i.test(parts[0]!)) {
       throw new Error(`${label}:${i + 1}: expected "lang WORD # reason", got ${JSON.stringify(head)}`)
     }
-    out.push({ lang: parts[0]!.toLowerCase(), word: nfcUpper(parts[1]!), reason })
+    out.push({ lang: parts[0]!.toLowerCase(), word: spellingKey(parts[1]!), reason })
   }
   return out
 }
@@ -217,7 +223,7 @@ export function matchesDeniedPattern(
   lang?: string,
   rules: readonly PatternRule[] = loadPatternDenylist(),
 ): boolean {
-  const w = nfcUpper(word)
+  const w = spellingKey(word)
   const L = lang?.toLowerCase()
   for (const rule of rules) {
     if (rule.lang !== null && rule.lang !== L) continue
@@ -231,7 +237,7 @@ export function isPatternAllowlisted(
   lang?: string,
   allow: readonly AllowEntry[] = loadDenylistAllow(),
 ): boolean {
-  const w = nfcUpper(word)
+  const w = spellingKey(word)
   const L = lang?.toLowerCase()
   return allow.some((e) => e.word === w && e.lang === L)
 }
@@ -254,7 +260,7 @@ export function isDeniedLemma(
   lang?: string,
   allow: readonly AllowEntry[] = loadDenylistAllow(),
 ): boolean {
-  const w = nfcUpper(word)
+  const w = spellingKey(word)
   if (denylist.has(w)) return true
   if (lang && denylist.has(`${lang.toLowerCase()} ${w}`)) return true
   if (!matchesDeniedPattern(w, lang)) return false
@@ -265,7 +271,7 @@ export function isDeniedLemma(
 const GLOSS_CATEGORIES = new Set<ExactCategory>(['profanity', 'slur'])
 
 function exactGlossKeys(word: string, lang: string | undefined): string[] {
-  const w = nfcUpper(word)
+  const w = spellingKey(word)
   const L = lang?.toLowerCase()
   return L ? [`${L} ${w}`, w] : [w]
 }
@@ -298,13 +304,44 @@ export function isDeniedGlossToken(
   allow: readonly AllowEntry[] = loadDenylistAllow(),
   exempt: readonly AllowEntry[] = loadGlossExempt(),
 ): boolean {
-  const w = nfcUpper(token)
-  if (lemma && nfcUpper(lemma) === w) return false
+  const w = spellingKey(token)
+  if (lemma && spellingKey(lemma) === w) return false
   if (matchesDeniedPattern(w, lang) && !isPatternAllowlisted(w, lang, allow)) return true
   if (!exactGlossCategoryHit(w, lang, denylist, categories)) return false
   const L = lang?.toLowerCase()
   if (L && exempt.some((e) => e.lang === L && e.word === w)) return false
   return true
+}
+
+/**
+ * Text-field scan for lemma-like strings (synonym chips, family members): every
+ * exact category counts, not only profanity/slur, so a violence or name entry
+ * stays denied there. A profanity/slur exact that the gloss-exempt list allows
+ * in this language (de HELL "bright", de SCHWANZ "tail") is lifted, and the
+ * lemma itself is skipped. Keys are spellingKey'd like everywhere else (#363).
+ */
+export function isDeniedTextToken(
+  token: string,
+  lang?: string,
+  lemma?: string,
+  denylist = loadDenylist(),
+  categories: ReadonlyMap<string, ExactCategory> = loadExactCategories(),
+  allow: readonly AllowEntry[] = loadDenylistAllow(),
+  exempt: readonly AllowEntry[] = loadGlossExempt(),
+): boolean {
+  const w = spellingKey(token)
+  if (lemma && spellingKey(lemma) === w) return false
+  if (matchesDeniedPattern(w, lang) && !isPatternAllowlisted(w, lang, allow)) return true
+  const L = lang?.toLowerCase()
+  for (const key of exactGlossKeys(w, L)) {
+    if (!denylist.has(key)) continue
+    const cat = categories.get(key) ?? 'profanity'
+    if (GLOSS_CATEGORIES.has(cat) && L && exempt.some((e) => e.lang === L && e.word === w)) {
+      continue
+    }
+    return true
+  }
+  return false
 }
 
 /** Exemption lines that do not name a profanity or slur exact in that language. */
