@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Hiato — Semantic mode prototype (#306)</title>
+<style>
+/* ── Tokens: copied 1:1 from src/index.css (ADR 0052) ─────────────────── */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap;
+  src: url("/fonts/inter-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Jersey 10"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("/fonts/jersey-10-latin-400-normal.woff2") format("woff2");
+}
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-pixel: "Jersey 10", "Inter", system-ui, sans-serif;
+  --fpx: 18.667px;
+  --color-cream: #f3ecd8; --color-raised: #fffaee; --color-cream-dark: #e6dcc0;
+  --color-ink: #1b1830; --color-ink-muted: #545068; --color-ink-faint: #545068;
+  --color-line: #77708c; --color-accent: #1c6e42; --color-accent-fg: #17633b;
+  --color-accent-soft: #dcefd9; --color-accent-mid: #14593a; --color-danger: #a8261c;
+  --color-danger-soft: #fbe1db; --color-helped: #bfe3b0; --color-wrong: #cfc8d8;
+  --color-edge: #1b1830; --color-shadow: #1b1830; --color-focus: #c4410c;
+  --color-coin: #b86e00; --color-spark: #e0a100; --color-scan: rgba(0, 0, 0, 0);
+  --dur-fast: 150ms; --dur-mid: 220ms; --dur-slow: 300ms;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #0f0d1c; --color-raised: #1b1830; --color-cream-dark: #262142;
+    --color-ink: #f3ecd8; --color-ink-muted: #b9b2d2; --color-ink-faint: #b9b2d2;
+    --color-line: #7a71a0; --color-accent: #1f7f4a; --color-accent-fg: #7fe39a;
+    --color-accent-soft: #17331f; --color-accent-mid: #1a6e40; --color-danger: #ff8f80;
+    --color-danger-soft: #3b1a24; --color-helped: #1f4a2c; --color-wrong: #3a3456;
+    --color-edge: #8a81b3; --color-shadow: #000000; --color-focus: #ffb703;
+    --color-coin: #ffb703; --color-spark: #ffd166; --color-scan: rgba(255, 255, 255, 0.03);
+  }
+  body, [data-layout-shell] {
+    background-image: repeating-linear-gradient(to bottom, var(--color-scan) 0, var(--color-scan) 1px, transparent 1px, transparent 3px);
+  }
+}
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  background-image: radial-gradient(var(--color-cream-dark) 1px, transparent 1.5px);
+  background-size: 8px 8px;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; box-shadow: 0 0 0 3px var(--color-cream); }
+
+/* ── Pixel type + utilities: copied from src/index.css ─────────────────── */
+.text-body { font-size: 0.9375rem; line-height: 1.55; }
+.text-caption { font-size: 0.75rem; line-height: 1.4; color: var(--color-ink-faint); }
+.text-pixel-stat, .text-pixel-display, .text-pixel-title, .text-pixel-label, .text-pixel-value { font-family: var(--font-pixel); font-synthesis: none; }
+.text-pixel-stat { font-size: calc(var(--fpx) * 2.5); line-height: 44px; }
+.text-pixel-display { font-size: calc(var(--fpx) * 2); line-height: 40px; }
+.text-pixel-title { font-size: calc(var(--fpx) * 1.5); line-height: 28px; }
+.text-pixel-label { font-size: var(--fpx); line-height: 20px; letter-spacing: 0.04em; }
+.text-pixel-value { font-size: calc(var(--fpx) * 1.25); line-height: 26px; }
+.px-frame { box-shadow: 0 -2px 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--px-edge, var(--color-edge)), -2px 0 0 var(--px-edge, var(--color-edge)), 2px 0 0 var(--px-edge, var(--color-edge)); }
+.px-drop { box-shadow: 0 -2px 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--px-edge, var(--color-edge)), -2px 0 0 var(--px-edge, var(--color-edge)), 2px 0 0 var(--px-edge, var(--color-edge)), 0 6px 0 var(--color-shadow); }
+.px-drop:active:not(:disabled) { box-shadow: 0 -2px 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--px-edge, var(--color-edge)), -2px 0 0 var(--px-edge, var(--color-edge)), 2px 0 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--color-shadow); }
+.px-drop-card { box-shadow: 0 -2px 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--px-edge, var(--color-edge)), -2px 0 0 var(--px-edge, var(--color-edge)), 2px 0 0 var(--px-edge, var(--color-edge)), 4px 6px 0 var(--color-shadow); }
+.px-drop-only { box-shadow: 0 6px 0 var(--color-shadow); }
+.px-flat { box-shadow: 0 -2px 0 var(--px-edge, var(--color-edge)), 0 2px 0 var(--px-edge, var(--color-edge)), -2px 0 0 var(--px-edge, var(--color-edge)), 2px 0 0 var(--px-edge, var(--color-edge)); }
+.px-stripe { height: 6px; background: repeating-linear-gradient(90deg, var(--color-accent) 0 12px, var(--color-coin) 12px 24px, var(--color-danger) 24px 36px); }
+.tile-hidden { box-shadow: 0 -2px 0 var(--color-line), 0 2px 0 var(--color-line), -2px 0 0 var(--color-line), 2px 0 0 var(--color-line), 0 4px 0 var(--color-line); }
+.tile-revealed { box-shadow: 0 -2px 0 var(--color-accent-fg), 0 2px 0 var(--color-accent-fg), -2px 0 0 var(--color-accent-fg), 2px 0 0 var(--color-accent-fg); }
+.key-face { box-shadow: 0 -2px 0 var(--color-line), 0 2px 0 var(--color-line), -2px 0 0 var(--color-line), 2px 0 0 var(--color-line), 0 4px 0 var(--color-edge); }
+.motion-press { transition: transform var(--dur-fast) steps(2, end), box-shadow var(--dur-fast) steps(2, end), background-color var(--dur-mid) steps(2, end), color var(--dur-mid) steps(2, end), opacity var(--dur-mid) steps(2, end); }
+.motion-press:active:not(:disabled) { transform: translateY(4px); }
+@keyframes hiato-spark { 0% { transform: scale(0); opacity: 0; } 25% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.6); opacity: 0.8; } 75%, 100% { transform: scale(1); opacity: 1; } }
+.px-spark { position: absolute; animation: hiato-spark calc(var(--dur-slow) * 2) steps(4, end) both; }
+@media (prefers-reduced-motion: reduce) { .px-spark { animation: none; } .motion-press, .motion-press:active:not(:disabled) { transition: none; transform: none; } }
+
+/* ── Layout (mirrors src/components/Layout.tsx shell) ──────────────────── */
+[data-layout-shell] { margin: 0 auto; display: flex; min-height: 100dvh; width: 100%; max-width: 28rem; flex-direction: column; background-color: var(--color-cream); background-image: radial-gradient(var(--color-cream-dark) 1px, transparent 1.5px); background-size: 8px 8px; padding: env(safe-area-inset-top) 1rem env(safe-area-inset-bottom); }
+[data-layout-scroll] { display: flex; min-height: 0; flex: 1; flex-direction: column; padding: 1rem 0; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem; }
+.card { overflow: hidden; background: var(--color-raised); padding: 0; }
+.card-body { padding: 1.25rem; }
+.btn { display: inline-flex; min-height: 2.75rem; align-items: center; justify-content: center; gap: 0.5rem; padding: 0 1.25rem; font-family: var(--font-pixel); font-size: calc(var(--fpx) * 1.5); line-height: 28px; }
+.btn-primary { background: var(--color-accent); color: #fff; }
+.btn-primary:hover { background: var(--color-accent-mid); }
+.btn-secondary { border: 2px solid var(--color-accent-fg); background: var(--color-accent-soft); color: var(--color-accent-fg); box-shadow: 0 6px 0 var(--color-shadow); }
+.btn-secondary:hover { background: var(--color-helped); }
+.btn-outline { background: var(--color-raised); color: var(--color-ink); }
+.btn-outline:hover { background: var(--color-cream-dark); }
+.w-full { width: 100%; }
+.badge { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.625rem; font-family: var(--font-pixel); font-size: var(--fpx); line-height: 20px; letter-spacing: 0.04em; }
+.badge-neutral { background: var(--color-cream-dark); color: var(--color-ink-muted); --px-edge: var(--color-ink-muted); }
+.badge-accent { background: var(--color-accent-soft); color: var(--color-accent-fg); --px-edge: var(--color-accent-fg); }
+.badge-warm { background: var(--color-danger-soft); color: var(--color-danger); --px-edge: var(--color-danger); }
+.badge-raised { background: var(--color-raised); color: var(--color-ink); --px-edge: var(--color-line); }
+.chip { display: inline-flex; align-items: center; border: 2px solid var(--color-line); background: color-mix(in srgb, var(--color-cream-dark) 80%, transparent); padding: 0.25rem 0.625rem; font-size: 0.75rem; font-weight: 600; color: var(--color-ink-muted); }
+.link { display: inline-flex; min-height: 2.75rem; align-items: center; padding: 0 0.75rem; font-weight: 500; color: var(--color-accent-fg); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.link-muted { color: var(--color-ink-muted); }
+.link-muted:hover { color: var(--color-ink); }
+.row { display: flex; align-items: center; }
+.gap-1 { gap: 0.25rem; } .gap-2 { gap: 0.5rem; } .gap-3 { gap: 0.75rem; } .gap-4 { gap: 1rem; }
+.mt-1 { margin-top: 0.25rem; } .mt-2 { margin-top: 0.5rem; } .mt-3 { margin-top: 0.75rem; } .mt-4 { margin-top: 1rem; } .mb-2 { margin-bottom: 0.5rem; } .mb-3 { margin-bottom: 0.75rem; } .mb-4 { margin-bottom: 1rem; } .mb-6 { margin-bottom: 1.5rem; }
+.p-5 { padding: 1.25rem; } .p-4 { padding: 1rem; } .p-2 { padding: 0.5rem; }
+.text-center { text-align: center; } .justify-center { justify-content: center; } .justify-between { justify-content: space-between; } .flex-wrap { flex-wrap: wrap; }
+.text-ink { color: var(--color-ink); } .text-ink-muted { color: var(--color-ink-muted); } .text-ink-faint { color: var(--color-ink-faint); } .text-accent-fg { color: var(--color-accent-fg); } .text-danger { color: var(--color-danger); }
+.text-sm { font-size: 0.875rem; } .text-xs { font-size: 0.75rem; } .text-lg { font-size: 1.125rem; }
+.bg-raised { background: var(--color-raised); } .bg-cream-dark { background: var(--color-cream-dark); } .bg-accent-soft { background: var(--color-accent-soft); }
+.font-semibold { font-weight: 600; }
+.uppercase { text-transform: uppercase; } .tracking-wide { letter-spacing: 0.06em; }
+.flex-col { display: flex; flex-direction: column; }
+
+/* Lives seeds */
+.lives { display: flex; align-items: center; gap: 0.25rem; }
+.lives svg { width: 24px; height: 24px; }
+
+/* Letter pad (mirrors Keyboard.tsx) */
+[data-letter-pad] { --pad-half-gap: 2px; border-top: 2px solid var(--color-edge); display: flex; width: 100%; min-width: 0; flex-direction: column; overflow: hidden; padding: 0.375rem 0.25rem 0.25rem; }
+.pad-row { display: flex; flex-wrap: nowrap; width: 100%; }
+.pad-key { flex: 1 1 0; min-width: 0; height: 48px; border: 0; background: transparent; padding: var(--pad-half-gap); cursor: pointer; }
+.pad-key .key-face { display: flex; height: 100%; align-items: center; justify-content: center; background: var(--color-raised); font-weight: 600; font-size: 1rem; color: var(--color-ink); }
+.pad-key:active:not(:disabled) .key-face { transform: translateY(4px); box-shadow: 0 -2px 0 var(--color-line), 0 2px 0 var(--color-line), -2px 0 0 var(--color-line), 2px 0 0 var(--color-line); }
+.pad-key.wide { flex: 1.6 1 0; }
+.pad-pad-wrap { background: color-mix(in srgb, var(--color-raised) 40%, transparent); }
+
+/* Guess entry + feedback */
+.guess-field { display: flex; align-items: center; gap: 0.5rem; width: 100%; border: 0; background: var(--color-raised); padding: 0 1rem; min-height: 3.25rem; font-family: var(--font-pixel); font-size: calc(var(--fpx) * 1.25); letter-spacing: 0.08em; color: var(--color-ink); text-transform: uppercase; }
+.guess-field::placeholder { color: var(--color-ink-muted); opacity: 0.7; }
+.guess-row { display: flex; align-items: center; gap: 0.75rem; width: 100%; background: var(--color-raised); padding: 0.5rem 0.75rem; }
+.guess-word { font-family: var(--font-pixel); font-size: calc(var(--fpx) * 1.25); line-height: 26px; letter-spacing: 0.06em; min-width: 7ch; text-transform: uppercase; }
+.prox-track { flex: 1; height: 14px; background: var(--color-line); }
+.prox-bar { height: 100%; background: repeating-linear-gradient(90deg, currentColor 0 6px, transparent 6px 8px); }
+.prox-pct { font-family: var(--font-pixel); font-size: var(--fpx); line-height: 20px; min-width: 4ch; text-align: right; }
+.prox-hot { color: var(--color-accent-fg); } .prox-warm { color: var(--color-coin); } .prox-cold { color: var(--color-ink-muted); }
+.chip-syn { display: inline-flex; align-items: center; background: var(--color-cream-dark); padding: 0.125rem 0.5rem; font-size: 0.8125rem; color: var(--color-ink); }
+
+/* Share card (mirrors ShareCard.tsx) */
+.share-card { margin: 0 auto; width: 100%; max-width: 24rem; overflow: hidden; background: var(--color-raised); }
+.share-stats { display: grid; min-width: 0; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 1.5rem; padding: 1rem; text-align: left; --px-edge: var(--color-line); background: var(--color-raised); }
+.share-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-ink-muted); }
+.prox-sq { width: 2.75rem; height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; }
+
+/* Short landscape (mirrors the short-land variant, round screen only) */
+@custom-variant short-land (@media (orientation: landscape) and (max-height: 500px));
+@media (orientation: landscape) and (max-height: 500px) {
+  [data-layout-shell] { max-width: 56rem; padding-top: calc(env(safe-area-inset-top) + 6px); padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  [data-layout-scroll] { padding-top: 0; padding-bottom: 0; }
+  [data-layout-scroll].cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto minmax(0, 1fr); column-gap: 1.5rem; }
+  .sl-col { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; min-height: 0; min-width: 0; flex: 1; }
+  .sl-aside { display: flex; grid-column: 2; grid-row: 2; align-items: center; min-height: 0; min-width: 0; }
+  .sl-hide { display: none; }
+}
+@media (orientation: portrait), (orientation: landscape) and (min-height: 501px) {
+  .sl-aside { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+/* Pixel icons: fetched from docs/design/retro/assets/icons and inlined so
+ * currentColor / --icon-2 work exactly like src/components/PixelIcon.tsx. */
+const iconCache = {}
+async function icon(name, size = 16, cls = '', icon2) {
+  if (!iconCache[name]) {
+    const res = await fetch(`/docs/design/retro/assets/icons/${name}.svg`)
+    const text = await res.text()
+    const doc = new DOMParser().parseFromString(text, 'image/svg+xml')
+    iconCache[name] = doc.documentElement
+  }
+  const el = iconCache[name].cloneNode(true)
+  el.setAttribute('width', size); el.setAttribute('height', size)
+  if (cls) el.setAttribute('class', cls)
+  if (icon2) el.style.setProperty('--icon-2', icon2)
+  el.setAttribute('aria-hidden', 'true')
+  return el
+}
+async function iconHTML(name, size = 16, cls = '', icon2) {
+  return (await icon(name, size, cls, icon2)).outerHTML
+}
+
+/* Production-like data: public/packs/en/b1.json, seeded pilot word (ADR 0003 pattern). */
+const LEMMA = {
+  word: 'ABANDON',
+  gloss: 'leave someone or something completely',
+  synonyms: ['leave', 'desert'],
+  example: "Don't abandon me!",
+  pos: 'verb',
+  ipa: '/əˈbæn.dən/',
+  family: ['abandoned', 'abandonment', 'flee'],
+}
+const DATE_KEY = '2026-11-19'
+const STREAK = 12, FREEZES = 1
+const EN_ROWS = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Z','X','C','V','B','N','M']]
+
+/* Proximity stub for the prototype: per-Pack embeddings are the #306 research
+ * spike (ADR 0026 budget). Values below are hand-picked for the demo round. */
+const PROX = { LEAVE: 87, DESERT: 64, QUIT: 21, FORGET: 12 }
+function proxOf(guess) {
+  const g = guess.toUpperCase()
+  if (g === LEMMA.word) return 100
+  if (g in PROX) return PROX[g]
+  let h = 0; for (const c of g) h = (h * 31 + c.charCodeAt(0)) % 997
+  return 5 + (h % 35)
+}
+const proxTone = (p) => (p >= 80 ? 'hot' : p >= 50 ? 'warm' : 'cold')
+const proxLabel = (p) => (p >= 80 ? 'Hot' : p >= 50 ? 'Warm' : 'Cold')
+
+const $ = (sel, root = document) => root.querySelector(sel)
+function h(html) { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild }
+
+async function topbar({ center }) {
+  const el = h(`<div class="topbar">
+    <div class="row gap-2">
+      <span class="brand-mark" data-icon="mark" data-size="28" data-cls="text-accent" style="--icon-2:var(--color-raised)"></span>
+      <span class="chip">Offline ready</span>
+    </div>
+    <div class="row gap-2">${center}</div>
+    <span class="badge badge-raised px-frame" role="img" aria-label="Streak 12, 1 freeze">
+      <span data-icon="flame" data-size="16" data-cls="text-coin" style="--icon-2:var(--color-danger)"></span>
+      <span class="text-pixel-title">${STREAK}</span>
+      <span data-icon="freeze" data-size="16" data-cls="text-ink-muted"></span>
+      <span class="text-pixel-title">${FREEZES}</span>
+    </span>
+  </div>`)
+  for (const s of el.querySelectorAll('[data-icon]')) {
+    s.replaceWith(await icon(s.dataset.icon, +s.dataset.size || 16, s.dataset.cls || '', s.style.getPropertyValue('--icon-2') || undefined))
+  }
+  return el
+}
+
+function lives(remaining) {
+  const el = h(`<div class="lives" role="status" aria-label="${remaining} lives remaining"></div>`)
+  return (async () => {
+    for (let i = 0; i < 6; i++) {
+      el.appendChild(await icon(i < remaining ? 'seed' : 'seed-empty', 24, i < remaining ? 'text-accent-fg' : 'text-ink-muted'))
+    }
+    return el
+  })()
+}
+
+function pad(used = []) {
+  const wrap = h(`<div class="px-frame w-full min-w-0 pad-pad-wrap">
+    <div data-letter-pad role="group" aria-label="Letter pad"></div>
+  </div>`)
+  const padEl = $('[data-letter-pad]', wrap)
+  for (const row of EN_ROWS) {
+    const r = h(`<div class="pad-row"></div>`)
+    for (const k of row) {
+      const usedCls = used.includes(k) ? 'style="opacity:.45"' : ''
+      r.appendChild(h(`<button type="button" class="pad-key" ${usedCls}><span class="key-face">${k}</span></button>`))
+    }
+    padEl.appendChild(r)
+  }
+  const r = h(`<div class="pad-row"></div>`)
+  r.appendChild(h(`<button type="button" class="pad-key wide"><span class="key-face text-ink-muted">⌫</span></button>`))
+  r.appendChild(h(`<button type="button" class="pad-key wide"><span class="key-face bg-accent-soft text-accent-fg">ENTER</span></button>`))
+  padEl.appendChild(r)
+  return wrap
+}
+
+function clueCard() {
+  return h(`<div class="card px-drop-card mb-4 overflow-hidden">
+    <div class="px-stripe" aria-hidden="true"></div>
+    <div class="p-5 text-center">
+      <p class="text-caption mb-2 uppercase tracking-wide">Today's meaning · EN B1</p>
+      <p lang="en" class="text-body text-ink" style="font-size:1.125rem">“${LEMMA.gloss}.”</p>
+      <div class="row justify-center gap-2 mt-3">
+        <span class="badge badge-neutral px-frame">${LEMMA.pos}</span>
+        <span class="badge badge-neutral px-frame">6 lives</span>
+        <span class="badge badge-neutral px-frame">No letters shown</span>
+      </div>
+    </div>
+  </div>`)
+}
+
+function guessRow(guess) {
+  const p = proxOf(guess), tone = proxTone(p)
+  return h(`<div class="guess-row px-frame" style="--px-edge:var(--color-line)">
+    <span class="guess-word text-ink">${guess.toUpperCase()}</span>
+    <span class="prox-track"><span class="prox-bar prox-${tone}" style="width:${p}%"></span></span>
+    <span class="prox-pct prox-${tone}">${p}% ${proxLabel(p)}</span>
+  </div>`)
+}
+
+async function screenHome() {
+  const shell = h(`<div data-layout-shell><div data-layout-scroll></div></div>`)
+  const scroll = $('[data-layout-scroll]', shell)
+  scroll.appendChild(await topbar({ center: '' }))
+  scroll.appendChild(h(`<div class="card motion-enter mb-4 overflow-hidden">
+    <div class="px-stripe" aria-hidden="true"></div>
+    <div class="p-5">
+      <h1 class="text-pixel-display mb-2 text-ink">Daily EN B1</h1>
+      <p class="text-body mb-4 text-ink-muted">Guess today's word with six lives and learner hints. Offline after the pack is cached.</p>
+      <a class="btn btn-primary px-frame px-drop motion-press w-full" href="?s=round">Play today <span aria-hidden="true">▸</span></a>
+      <a class="btn btn-secondary w-full mt-2" href="?s=round">Practice</a>
+    </div>
+  </div>`))
+  scroll.appendChild(h(`<div class="card px-drop-card overflow-hidden">
+    <div class="px-stripe" aria-hidden="true"></div>
+    <div class="p-5">
+      <div class="row justify-between mb-2">
+        <h1 class="text-pixel-display text-ink">Semantic Daily</h1>
+        <span class="badge badge-accent px-frame">Pilot · #306</span>
+      </div>
+      <p class="text-body mb-1 text-ink-muted">Guess today's word <strong>by its meaning</strong> — no letters are shown, only how close each guess is. EN B1 pack, six lives, spoiler-free share card. Offline once the pack is cached.</p>
+      <p class="text-caption mb-4">EN · B1 · seeded daily word · ${DATE_KEY}</p>
+      <a class="btn btn-primary px-frame px-drop motion-press w-full" href="?s=round">Play semantic <span aria-hidden="true">▸</span></a>
+      <div class="row justify-center mt-3"><span class="chip">Offline ready</span></div>
+    </div>
+  </div>`))
+  scroll.appendChild(h(`<nav class="row justify-center gap-4 mt-4 text-sm">
+    <a class="link" href="?s=home">Change language</a><span class="text-ink-faint">·</span><a class="link" href="?s=home">About</a>
+  </nav>`))
+  return shell
+}
+
+async function roundShell({ guesses = [] }) {
+  const shell = h(`<div data-layout-shell><div data-layout-scroll class="cols"></div></div>`)
+  const scroll = $('[data-layout-scroll]', shell)
+  scroll.appendChild(await topbar({ center: '<span class="badge badge-accent px-frame">Semantic</span>' }))
+  const col = h(`<div class="sl-col"></div>`)
+  const livesRow = h(`<div class="mb-3 row justify-between"></div>`)
+  livesRow.appendChild(await lives(6 - guesses.length))
+  livesRow.appendChild(h(`<span class="text-pixel-label" style="letter-spacing:.08em">EN · B1</span>`))
+  col.appendChild(livesRow)
+  col.appendChild(clueCard())
+  if (guesses.length === 0) {
+    col.appendChild(h(`<div class="px-frame mb-3 w-full" style="--px-edge:var(--color-line)">
+      <input class="guess-field" placeholder="Type your guess…" aria-label="Type your guess" />
+    </div>`))
+    col.appendChild(h(`<p class="text-caption mb-4 text-center">Meaning only — the word and its letters stay hidden until the round ends. Each wrong guess costs one life.</p>`))
+  } else {
+    const list = h(`<div class="flex-col gap-2 mb-4"></div>`)
+    for (const g of guesses) list.appendChild(guessRow(g))
+    col.appendChild(list)
+    col.appendChild(h(`<p class="text-caption mb-3 text-center" role="status">${proxLabel(proxOf(guesses[guesses.length-1]))} — keep guessing. ${6 - guesses.length} ${6 - guesses.length === 1 ? 'life' : 'lives'} left.</p>`))
+  }
+  col.appendChild(h(`<div class="row justify-center gap-4 pt-2 text-sm" data-round-nav>
+    <a class="link link-muted" href="?s=home">← Home</a>
+    <a class="link" href="?s=endcard">Practice</a>
+  </div>`))
+  scroll.appendChild(col)
+  const aside = h(`<div class="sl-aside w-full"></div>`)
+  aside.appendChild(pad())
+  scroll.appendChild(aside)
+  // portrait: pad pinned at the bottom
+  const footer = h(`<div style="margin-top:auto;padding-top:.5rem"></div>`)
+  footer.appendChild(pad())
+  shell.appendChild(footer)
+  shell.querySelector('.sl-aside').classList.add('sl-pad-aside')
+  return shell
+}
+
+async function screenRound(s) {
+  const guesses = s === 'progress' ? ['leave', 'desert', 'quit'] : []
+  return roundShell({ guesses })
+}
+
+async function screenEndcard() {
+  const shell = h(`<div data-layout-shell><div data-layout-scroll class="cols"></div></div>`)
+  const scroll = $('[data-layout-scroll]', shell)
+  scroll.appendChild(await topbar({ center: '<span class="badge badge-accent px-frame">Semantic</span>' }))
+  const col = h(`<div class="sl-col" style="position:relative"></div>`)
+  const sparks = h(`<div aria-hidden="true"></div>`)
+  for (const [x, y] of [[8, 6], [88, 4], [80, 14], [16, 16]]) {
+    const s = h(`<span class="px-spark" style="left:${x}%;top:${y}%"></span>`)
+    s.appendChild(await icon('spark', 24, 'text-spark', 'var(--color-coin)'))
+    sparks.appendChild(s)
+  }
+  col.appendChild(sparks)
+  const head = h(`<div class="px-frame bg-raised/80 px-4 py-2 text-center my-3" style="background:color-mix(in srgb,var(--color-raised) 80%,transparent)">
+    <span class="badge badge-accent px-frame" data-endcard-badge>Solved · 4 guesses</span>
+    <p class="mt-2"><span lang="en" class="text-pixel-label text-accent-fg">ABANDON</span></p>
+    <p lang="en" class="text-body text-ink-muted mt-1">“${LEMMA.gloss}.”</p>
+  </div>`)
+  col.appendChild(head)
+  const extras = h(`<div class="card px-flat w-full p-4 text-left mb-3" style="--px-edge:var(--color-line)">
+    <p class="text-caption uppercase tracking-wide mb-2">Word</p>
+    <p class="text-pixel-display text-ink" lang="en">ABANDON</p>
+    <p lang="en" class="text-sm text-ink-muted mt-1">${LEMMA.pos} · ${LEMMA.ipa}</p>
+    <div class="row flex-wrap gap-2 mt-3">${LEMMA.synonyms.map(s => `<span class="chip-syn" lang="en">${s}</span>`).join('')}</div>
+    <p lang="en" class="text-body mt-3" style="font-style:italic">“${LEMMA.example}”</p>
+    <div class="row flex-wrap gap-2 mt-3">${LEMMA.family.map(f => `<span class="chip" lang="en">${f}</span>`).join('')}</div>
+  </div>`)
+  col.appendChild(extras)
+  const prox = h(`<div class="card px-flat w-full p-4 mb-4" style="--px-edge:var(--color-line)">
+    <p class="text-caption uppercase tracking-wide mb-2">Your guesses</p>
+    <div class="flex-col gap-2"></div>
+  </div>`)
+  for (const g of ['leave', 'desert', 'quit', 'abandon']) $('div', prox).appendChild(guessRow(g))
+  col.appendChild(prox)
+  col.appendChild(h(`<a class="btn btn-primary px-frame px-drop motion-press w-full" href="?s=share">Share spoiler-free card</a>`))
+  col.appendChild(h(`<a class="btn btn-secondary w-full mt-2" href="?s=round">Practice</a>`))
+  col.appendChild(h(`<div class="row justify-center gap-4 pt-6 text-sm" data-round-nav><a class="link link-muted" href="?s=home">← Home</a></div>`))
+  scroll.appendChild(col)
+  return shell
+}
+
+async function screenShare() {
+  const shell = h(`<div data-layout-shell style="align-items:center;justify-content:center"><div data-layout-scroll style="justify-content:center;width:100%"></div></div>`)
+  const scroll = $('[data-layout-scroll]', shell)
+  const card = h(`<div class="share-card px-frame px-drop-card" id="hiato-share-card">
+    <div class="px-stripe" aria-hidden="true"></div>
+    <div class="p-5 pt-6 pb-2 text-center">
+      <div class="row justify-center mb-2"><span data-icon="mark" data-size="32" data-cls="text-accent" style="--icon-2:var(--color-raised)"></span></div>
+      <div class="text-pixel-display text-accent-fg">Hiato</div>
+      <p class="text-sm text-ink-muted mt-1">Semantic Daily · solved in 4 guesses</p>
+    </div>
+    <div class="share-stats px-frame">
+      <div><div class="share-label">Language</div><div class="text-pixel-value text-ink">EN · English</div></div>
+      <div><div class="share-label">Level</div><div class="text-pixel-value text-ink">B1</div></div>
+      <div><div class="share-label">Streak</div><div class="text-pixel-value text-ink row gap-1"><span data-icon="flame" data-size="18" data-cls="text-coin" style="--icon-2:var(--color-danger)"></span>${STREAK}</div></div>
+      <div><div class="share-label">Date</div><div class="text-pixel-value text-ink">${DATE_KEY}</div></div>
+    </div>
+    <div class="row flex-wrap justify-center gap-2 px-6" aria-hidden="true">
+      ${[87, 64, 21, 100].map(p => `<span class="prox-sq px-frame" style="--px-edge:var(--color-line);background:${p >= 80 ? 'var(--color-accent-soft)' : p >= 50 ? 'color-mix(in srgb,var(--color-coin) 30%,var(--color-raised))' : 'var(--color-cream-dark)'}"></span>`).join('')}
+    </div>
+    <p class="text-caption text-center mt-2 mb-1">Closeness per guess — the answer is never on the card.</p>
+    <div class="row justify-center px-6 pb-2 mt-2">
+      <span class="badge badge-accent px-frame"><span data-icon="check" data-size="14" class="text-accent-fg"></span> Solved · 4 guesses</span>
+    </div>
+    <p class="text-caption text-center" style="padding:0 1.5rem 1.25rem">hiato.app</p>
+  </div>`)
+  for (const s of card.querySelectorAll('[data-icon]')) {
+    s.replaceWith(await icon(s.dataset.icon, +s.dataset.size || 16, s.dataset.cls || '', s.style.getPropertyValue('--icon-2') || undefined))
+  }
+  scroll.appendChild(card)
+  return shell
+}
+
+const screens = { home: screenHome, round: () => screenRound('round'), progress: () => screenRound('progress'), endcard: screenEndcard, share: screenShare }
+const s = new URLSearchParams(location.search).get('s') || 'home'
+const app = $('#app')
+app.appendChild(await screens[s]())
+document.title = `Hiato — Semantic prototype (${s})`
+</script>
+</body>
+</html>
