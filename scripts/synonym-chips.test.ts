@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  CHIP_LANG_GATE_LANGS,
   SYNONYM_CHIP_CAP,
   SYNONYM_COVERAGE_FLOOR,
   filterSynonymChips,
@@ -98,5 +99,45 @@ describe('filterSynonymChips', () => {
         DENY,
       ),
     ).toBeCloseTo(2 / 3)
+  })
+})
+
+describe('#362 chip language gate (pt first)', () => {
+  // Stand-in for lang-membership isWordOfLang with the testdata pt dicts:
+  // pt-pt accepts for/casa/hotel, pt-br accepts come/casa/hotel.
+  const ptMember = (lang: string, w: string): boolean =>
+    lang === 'pt' && ['casa', 'hotel', 'for', 'come'].includes(w.toLowerCase())
+
+  test('letter-less chips never ship: stringified "[]", "[", numerals', () => {
+    expect(invalidSynonymChipReason('DOZE', '[]', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('DENTE', '[', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('SETE', '7', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('TERCEIRO', '3.', DENY)).toBe('not a word')
+    expect(filterSynonymChips('DOZE', ['[]', '[', '12'], DENY, 'pt')).toEqual([])
+  })
+
+  test('pt chips must be words of pt (every letter token), phrases allowed when all tokens are pt', () => {
+    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'pt', ptMember)).toBe(
+      'not a word of pt',
+    )
+    expect(invalidSynonymChipReason('JORNALISTA', 'REPORTER', DENY, 'pt', ptMember)).toBe(
+      'not a word of pt',
+    )
+    expect(invalidSynonymChipReason('MALAS', 'valises', DENY, 'pt', ptMember)).toBe(
+      'not a word of pt',
+    )
+    expect(invalidSynonymChipReason('BEBIDA', 'casa', DENY, 'pt', ptMember)).toBeNull()
+    expect(invalidSynonymChipReason('PERTO', 'for casa', DENY, 'pt', ptMember)).toBeNull()
+    expect(filterSynonymChips('BEBIDA', ['drink', 'casa'], DENY, 'pt', ptMember)).toEqual(['casa'])
+  })
+
+  test('gate is off without the membership fn, and only for gate languages', () => {
+    // No dicts loaded (bun:test): membership rule skipped, shape rule still applies.
+    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'pt')).toBeNull()
+    expect(invalidSynonymChipReason('DOZE', '[]', DENY, 'pt')).toBe('not a word')
+    // Non-gated languages are unaffected even with a predicate.
+    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'es', ptMember)).toBeNull()
+    expect(CHIP_LANG_GATE_LANGS.has('pt')).toBe(true)
+    expect(CHIP_LANG_GATE_LANGS.has('de')).toBe(false)
   })
 })

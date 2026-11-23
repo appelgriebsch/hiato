@@ -17,7 +17,7 @@ import { loadDenylist, nfcUpper } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
-import { ensureDicts, isWordOfLang } from './lang-membership'
+import { dictsReady, ensureDicts, isWordOfLang } from './lang-membership'
 import { filterSynonymChips } from './synonym-chips'
 import { generateSynonyms } from './synonym-generate'
 import { mistralChat, readMistralKey } from './mistral-chat'
@@ -497,7 +497,9 @@ function cleanSynonyms(lang: Lang, lemma: string, raw: unknown): string[] {
     : typeof raw === 'string'
       ? raw.split(/[,;|/]/)
       : []
-  return filterSynonymChips(lemma, list, DENY, lang)
+  // #362: generation applies the same chip language gate as packs:check
+  // (gate languages, pt first) whenever the Hunspell dicts are loaded.
+  return filterSynonymChips(lemma, list, DENY, lang, dictsReady() ? isWordOfLang : undefined)
 }
 
 function attribution(lang: Lang, cefr: PackCefr): { license: string; attribution: string[] } {
@@ -839,7 +841,7 @@ async function runFrequencyLang(
   }
   const needSyn = levels.flatMap((cefr) => glossed[cefr])
   await generateSynonyms(lang, needSyn, synCache, DENY, (cache) =>
-    saveSynonymCache(lang, cache),
+    saveSynonymCache(lang, cache), dictsReady() ? isWordOfLang : undefined,
   )
   saveSynonymCache(lang, synCache)
   for (const cefr of levels) {
@@ -1012,7 +1014,7 @@ async function runGrow(opts: { dryRun: boolean; levels: PackCefr[]; langs: Lang[
     await generateGlosses(lang, appendedWords, glossCache)
     saveGlossCache(lang, glossCache)
     await generateSynonyms(lang, appendedWords, synCache, DENY, (cache) =>
-      saveSynonymCache(lang, cache),
+      saveSynonymCache(lang, cache), dictsReady() ? isWordOfLang : undefined,
     )
     saveSynonymCache(lang, synCache)
     for (const cefr of opts.levels) {
@@ -1140,7 +1142,7 @@ async function main() {
     await generateGlosses(lang, [...needGloss], glossCache)
     saveGlossCache(lang, glossCache)
     await generateSynonyms(lang, [...needSyn], synCache, DENY, (cache) =>
-      saveSynonymCache(lang, cache),
+      saveSynonymCache(lang, cache), dictsReady() ? isWordOfLang : undefined,
     )
     saveSynonymCache(lang, synCache)
 

@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test'
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
 import path from 'node:path'
 import { tmpdir } from 'node:os'
 import type { WordPack } from '../src/packs/schema'
@@ -27,6 +27,7 @@ import {
   type ExampleGateLog,
 } from './packs-check-lib'
 import { EXTRAS_GATE_VERSION, extrasGateKey, type ExtrasGateLog } from './extras-gate'
+import { installFixtureSpellersFromDir, resetDicts } from './lang-membership'
 
 function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): WordPack {
   return {
@@ -1524,5 +1525,52 @@ describe('packs:check hint ceiling enforcement (#50/#52/#54/#53/#51/#146)', () =
       `missing-en-easiest-${process.pid}-${Date.now()}.json`,
     )
     expect(() => loadEnEasiestCefr(missingPath)).toThrow(/missing/)
+  })
+})
+
+describe('packs:check #362 chip language gate', () => {
+  beforeAll(() => {
+    installFixtureSpellersFromDir()
+  })
+  afterAll(() => {
+    resetDicts()
+  })
+
+  test('rejects a pt chip that is not a word of pt (both pt dicts consulted)', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'pt',
+          cefr: 'a1',
+          lemmas: [{ word: 'HOTEL', gloss: 'um lugar para dormir', synonyms: ['casa', 'drink'] }],
+        }),
+        'pt/a1.json',
+      ),
+    ).toThrow(/synonyms\[1\] not a word of pt/)
+  })
+
+  test('accepts pt chips whose letter tokens are all pt words (phrase chips included)', () => {
+    const p = validatePack(
+      pack({
+        lang: 'pt',
+        cefr: 'a1',
+        lemmas: [{ word: 'HOTEL', gloss: 'um lugar para dormir', synonyms: ['casa', 'for casa'] }],
+      }),
+      'pt/a1.json',
+    )
+    expect(p.lemmas[0]!.synonyms).toEqual(['casa', 'for casa'])
+  })
+
+  test('rejects letter-less "[]" chips in any language', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'en',
+          cefr: 'a1',
+          lemmas: [{ word: 'HELLO', gloss: 'a greeting', synonyms: ['[]'] }],
+        }),
+        'en/a1.json',
+      ),
+    ).toThrow(/not a word/)
   })
 })

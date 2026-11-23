@@ -1,6 +1,8 @@
 /**
  * Pack completeness, exclusive bands, floors, license matrix (ADR 0026–0029),
- * #24 name/Hunspell/chip gates, and pack-language gloss (ADR 0030).
+ * #24 name/Hunspell/chip gates, pack-language gloss (ADR 0030), and the #362
+ * chip language gate (gate languages, pt first: every chip token must be a
+ * word of the pack language per Hunspell; no letter-less `[]`-style chips).
  * Pure helpers so bun:test can cover exclusive/license without walking disk twice.
  */
 import {
@@ -495,7 +497,15 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
       synonyms = e.synonyms.map((s, j) => {
         const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
-        const reason = invalidSynonymChipReason(word, raw, DENY, o.lang as string)
+        // #362: for gate languages (pt) the chip language gate runs here too —
+        // every chip token must be a word of the pack language (Hunspell).
+        const reason = invalidSynonymChipReason(
+          word,
+          raw,
+          DENY,
+          o.lang as string,
+          membershipActive() ? isWordOfLang : undefined,
+        )
         if (reason) {
           throw new Error(
             `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,
