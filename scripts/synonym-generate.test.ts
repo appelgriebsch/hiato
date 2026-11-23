@@ -77,3 +77,45 @@ describe('generateSynonyms (#330 soft main loop)', () => {
     }
   })
 })
+
+describe('generateSynonyms #362 generator-level chip gate', () => {
+  test('a stringified empty array ["[]"] collapses to [] (unique referent, settled)', async () => {
+    setupEnv()
+    try {
+      const { calls } = stubFetch([JSON.stringify({ DOZE: ['[]'] })])
+      const cache: Record<string, string[]> = {}
+      await generateSynonyms('pt', ['DOZE'], cache, DENY, () => {})
+      expect(cache['DOZE']).toEqual([])
+      expect(calls()).toBe(1) // settled — no retry
+    } finally {
+      teardownEnv()
+    }
+  })
+
+  test('a numeral string answer settles as [] (no letter)', async () => {
+    setupEnv()
+    try {
+      stubFetch([JSON.stringify({ SETE: '7' })])
+      const cache: Record<string, string[]> = {}
+      await generateSynonyms('pt', ['SETE'], cache, DENY, () => {})
+      expect(cache['SETE']).toEqual([])
+    } finally {
+      teardownEnv()
+    }
+  })
+
+  test('gate languages drop non-language chips at generation time (predicate threaded)', async () => {
+    setupEnv()
+    try {
+      stubFetch([JSON.stringify({ BEBIDA: ['drink', 'casa'] })])
+      // stand-in for lang-membership isWordOfLang with the testdata pt dicts
+      const ptMember = (lang: 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it', w: string): boolean =>
+        lang === 'pt' && ['casa', 'hotel', 'for', 'come'].includes(w.toLowerCase())
+      const cache: Record<string, string[]> = {}
+      await generateSynonyms('pt', ['BEBIDA'], cache, DENY, () => {}, ptMember)
+      expect(cache['BEBIDA']).toEqual(['casa'])
+    } finally {
+      teardownEnv()
+    }
+  })
+})

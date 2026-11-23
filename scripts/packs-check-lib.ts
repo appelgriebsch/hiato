@@ -345,7 +345,14 @@ export function checkSynonymCoverage(
   pack: WordPack,
 ): { error: string | null; warn: string | null } {
   if ((EXISTING_CEFRS as readonly string[]).includes(pack.cefr)) {
-    const pct = synonymCoverageRatio(pack.lemmas, DENY, pack.lang)
+    // #362: same chip gate predicate as validatePack, so coverage and
+    // validation can never drift apart.
+    const pct = synonymCoverageRatio(
+      pack.lemmas,
+      DENY,
+      pack.lang,
+      membershipActive() ? isWordOfLang : undefined,
+    )
     if (pct < SYNONYM_COVERAGE_FLOOR) {
       return {
         error: `${rel}: synonym chip coverage ${(pct * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,

@@ -17,7 +17,7 @@ export const SYNONYM_CHIP_CAP = 3
 export const SYNONYM_COVERAGE_FLOOR = 0.8
 
 /** Languages whose synonym chips are language-gated (#362 starts with pt). */
-export const CHIP_LANG_GATE_LANGS: ReadonlySet<string> = new Set(['pt'])
+export const CHIP_LANG_GATE_LANGS: ReadonlySet<MembershipLang> = new Set(['pt'])
 
 /** Membership predicate shape shared with lang-membership isWordOfLang. */
 export type ChipMembershipFn = (lang: MembershipLang, word: string) => boolean
@@ -62,7 +62,7 @@ export function invalidSynonymChipReason(
   // #362: a chip is a word (or short phrase of words) of the pack language.
   // Stringified `[]` / `[` / numeral chips have no letter and never ship.
   if (!/\p{L}/u.test(nfc)) return 'not a word'
-  if (lang && CHIP_LANG_GATE_LANGS.has(lang) && isWordOfLang) {
+  if (lang && CHIP_LANG_GATE_LANGS.has(lang as MembershipLang) && isWordOfLang) {
     for (const tok of letterTokens(nfc)) {
       if (!isWordOfLang(lang as MembershipLang, tok)) return `not a word of ${lang}`
     }
