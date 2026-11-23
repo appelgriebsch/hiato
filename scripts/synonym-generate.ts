@@ -6,6 +6,7 @@ import { mistralChat, readMistralKey } from './mistral-chat'
 import {
   filterSynonymChips,
   synonymCacheKeyIsSettled,
+  type ChipMembershipFn,
 } from './synonym-chips'
 
 export type SynLang = 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it'
@@ -27,11 +28,16 @@ const SYNONYM_STYLE: Partial<Record<SynLang, string>> = {
 function asStringArray(raw: unknown): string[] | null {
   if (raw === undefined) return null
   if (Array.isArray(raw)) {
-    return raw.filter((x): x is string => typeof x === 'string')
+    // #362 generator-level repair: a model sometimes answers `["[]"]` — the
+    // stringified empty array as one element. Letter-less elements are not
+    // words; drop them, and an all-empty result means unique referent ([]).
+    return raw.filter(
+      (x): x is string => typeof x === 'string' && /\p{L}/u.test(x),
+    )
   }
   if (typeof raw === 'string') {
     const t = raw.trim()
-    if (!t || t === '[]') return []
+    if (!t || t === '[]' || !/\p{L}/u.test(t)) return []
     return [t]
   }
   return null
@@ -55,6 +61,7 @@ function applyParsed(
   parsed: Record<string, unknown>,
   cache: Record<string, string[]>,
   denylist: Set<string>,
+  isWordOfLang?: ChipMembershipFn,
 ): void {
   for (const w of batch) {
     if (synonymCacheKeyIsSettled(cache, w)) continue
@@ -67,7 +74,8 @@ function applyParsed(
       cache[w] = []
       continue
     }
-    const chips = filterSynonymChips(w, arr, denylist, lang)
+    // #362: same chip language gate as packs:check for gate languages (pt).
+    const chips = filterSynonymChips(w, arr, denylist, lang, isWordOfLang)
     if (chips.length === 0) {
       console.warn(`  rejected ${lang} synonyms for ${w}: ${arr.join(', ')}`)
       continue
@@ -125,6 +133,8 @@ function batchPrompt(lang: SynLang, batch: string[]): string {
 
 /**
  * Fill missing cache keys (not explicit []). `[]` = unique referent, do not retry.
+ * `isWordOfLang` (from lang-membership, when dicts are loaded) enables the #362
+ * chip language gate for gate languages during generation.
  */
 export async function generateSynonyms(
   lang: SynLang,
@@ -132,6 +142,7 @@ export async function generateSynonyms(
   cache: Record<string, string[]>,
   denylist: Set<string>,
   save: (cache: Record<string, string[]>) => void,
+  isWordOfLang?: ChipMembershipFn,
 ): Promise<void> {
   const unique = [...new Set(words.map(nfcUpper))]
   let missing = unique.filter((w) => !synonymCacheKeyIsSettled(cache, w))
@@ -159,7 +170,7 @@ export async function generateSynonyms(
       batchPrompt(lang, batch),
       true,
     )
-    if (parsed) applyParsed(lang, batch, parsed, cache, denylist)
+    if (parsed) applyParsed(lang, batch, parsed, cache, denylist, isWordOfLang)
     save(cache)
     console.log(
       `  ${lang} synonyms ${Math.min(i + BATCH, missing.length)}/${missing.length}`,
@@ -184,7 +195,7 @@ export async function generateSynonyms(
         prompt,
         true,
       )
-      if (parsed) applyParsed(lang, batch, parsed, cache, denylist)
+      if (parsed) applyParsed(lang, batch, parsed, cache, denylist, isWordOfLang)
       save(cache)
     }
     missing = unique.filter((w) => !synonymCacheKeyIsSettled(cache, w))

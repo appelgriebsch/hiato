@@ -21,6 +21,7 @@
  *
  *   bun run scripts/lemma-extras.ts            # wiktextract + Mistral fallback (needs key for fallback)
  *   bun run scripts/lemma-extras.ts --dry-run  # wiktextract only, no writes
+ *   bun run scripts/lemma-extras.ts --lang=pt   # one language only (#362)
  */
 import {
   createReadStream,
@@ -119,9 +120,14 @@ async function downloadWx(lang: PackLang): Promise<string> {
   return dest
 }
 
-export async function recordChecksums(): Promise<void> {
-  const out: Record<string, { sha256: string; url: string; bytes: number }> = {}
-  for (const lang of PACK_LANGS) {
+export async function recordChecksums(langs?: readonly PackLang[]): Promise<void> {
+  // Keep committed entries for languages this run did not process (--lang=…):
+  // their extracts are gitignored and may not be on disk locally.
+  const prev = existsSync(SHA_FILE)
+    ? (JSON.parse(readFileSync(SHA_FILE, 'utf8')) as Record<string, { sha256: string; url: string; bytes: number }>)
+    : {}
+  const out: Record<string, { sha256: string; url: string; bytes: number }> = { ...prev }
+  for (const lang of langs ?? PACK_LANGS) {
     const f = path.join(WX_DIR, WX_SOURCES[lang].file)
     if (!existsSync(f)) continue
     // Stream the hash — the en extract is ~3 GB gz, readFileSync would OOM.
@@ -357,6 +363,17 @@ function shippedLemmas(lang: PackLang): { word: string; gloss?: string }[] {
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run')
+  // --lang=pt,… scopes the run (e.g. #362 fills PT only); default: all languages.
+  const langArg = process.argv.find((a) => a.startsWith('--lang='))
+  const onlyLangs = langArg
+    ? (langArg.slice('--lang='.length).split(',').map((s) => s.trim()) as PackLang[])
+    : null
+  if (onlyLangs) {
+    for (const l of onlyLangs) {
+      if (!PACK_LANGS.includes(l)) throw new Error(`invalid --lang=${l}`)
+    }
+  }
+  const langs = onlyLangs ?? PACK_LANGS
   const apiKey = readMistralKey()
   if (!dryRun && !apiKey) {
     console.warn('no MISTRAL_API_KEY — running wiktextract-only (fallback gaps will be reported, not filled)')
@@ -368,7 +385,7 @@ async function main() {
 
   const summary: Record<string, { ipa: number; family: number; total: number; mistral: number }> = {}
 
-  for (const lang of PACK_LANGS) {
+  for (const lang of langs) {
     const dest = await downloadWx(lang)
     void dest
     const lemmas = shippedLemmas(lang)
@@ -489,7 +506,7 @@ async function main() {
   }
 
   console.log('summary:', JSON.stringify(summary))
-  if (!dryRun) await recordChecksums()
+  if (!dryRun) await recordChecksums(langs)
   if (dryRun) console.log('dry-run: no writes')
 }
 

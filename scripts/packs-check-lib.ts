@@ -1,6 +1,8 @@
 /**
  * Pack completeness, exclusive bands, floors, license matrix (ADR 0026–0029),
- * #24 name/Hunspell/chip gates, and pack-language gloss (ADR 0030).
+ * #24 name/Hunspell/chip gates, pack-language gloss (ADR 0030), and the #362
+ * chip language gate (gate languages, pt first: every chip token must be a
+ * word of the pack language per Hunspell; no letter-less `[]`-style chips).
  * Pure helpers so bun:test can cover exclusive/license without walking disk twice.
  */
 import {
@@ -343,7 +345,14 @@ export function checkSynonymCoverage(
   pack: WordPack,
 ): { error: string | null; warn: string | null } {
   if ((EXISTING_CEFRS as readonly string[]).includes(pack.cefr)) {
-    const pct = synonymCoverageRatio(pack.lemmas, DENY, pack.lang)
+    // #362: same chip gate predicate as validatePack, so coverage and
+    // validation can never drift apart.
+    const pct = synonymCoverageRatio(
+      pack.lemmas,
+      DENY,
+      pack.lang,
+      membershipActive() ? isWordOfLang : undefined,
+    )
     if (pct < SYNONYM_COVERAGE_FLOOR) {
       return {
         error: `${rel}: synonym chip coverage ${(pct * 100).toFixed(1)}% is below ${(SYNONYM_COVERAGE_FLOOR * 100).toFixed(0)}%`,
@@ -495,7 +504,15 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
       synonyms = e.synonyms.map((s, j) => {
         const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
-        const reason = invalidSynonymChipReason(word, raw, DENY, o.lang as string)
+        // #362: for gate languages (pt) the chip language gate runs here too —
+        // every chip token must be a word of the pack language (Hunspell).
+        const reason = invalidSynonymChipReason(
+          word,
+          raw,
+          DENY,
+          o.lang as string,
+          membershipActive() ? isWordOfLang : undefined,
+        )
         if (reason) {
           throw new Error(
             `${file}: lemmas[${i}] synonyms[${j}] ${reason} — "${raw}"`,

@@ -18,6 +18,9 @@ import {
   OCTANOVE_CSV_PATH,
   POS_EXEMPT_PATH,
   WORDHOARD_DB_PATH,
+  isCurrentPosPass,
+  loadPosGateLog,
+  posGateKey,
   posSourceInfo,
   type LemmaPosMap,
 } from './lemma-pos'
@@ -60,6 +63,9 @@ function main() {
     '# lang|WORD\treason — shipped lemmas with no licensed pos source (ADR 0055 / #315).',
   ]
   const perLang: Record<string, { pos: number; exempt: number; total: number }> = {}
+  // #339/#362: a lemma filled by the gated Mistral fallback has a current
+  // passing pos gate entry — it is not exempt, so filled lemmas leave this list.
+  const posGate = loadPosGateLog()
 
   for (const lang of PACK_LANGS) {
     map[lang] = {}
@@ -74,6 +80,8 @@ function main() {
         const info = posSourceInfo(lang as PackLang, cefr, L.word)
         if (info.pos) {
           map[lang]![word] = info.pos as PackPos
+          perLang[lang]!.pos += 1
+        } else if (isCurrentPosPass(posGate[posGateKey(lang, word)])) {
           perLang[lang]!.pos += 1
         } else {
           exemptLines.push(`${lang}|${word}\t${info.reason}`)
