@@ -20,7 +20,7 @@ import {
   type WordPack,
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedGlossToken, isDeniedLemma, letterTokens, loadDenylist, nfcUpper, spellingKey } from './lemma-denylist'
+import { isDeniedGlossToken, isDeniedLemma, isDeniedTextToken, letterTokens, loadDenylist, nfcUpper, spellingKey } from './lemma-denylist'
 import { loadNameList, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { aunAsiMismatch, exampleSkipped } from './example-sentences'
@@ -583,6 +583,15 @@ export function validatePack(raw: unknown, file: string): WordPack {
           `${file}: lemmas[${i}] example not in pack language ${o.lang} — "${word}" / "${example}"`,
         )
       }
+      // #363: scan example sentences like glosses (profanity/slur exact hits +
+      // patterns, gloss-exempt aware, own lemma skipped).
+      for (const tok of letterTokens(example)) {
+        if (isDeniedGlossToken(tok, o.lang as string, word, DENY)) {
+          throw new Error(
+            `${file}: lemmas[${i}] denylist — example "${word}" token "${tok}"`,
+          )
+        }
+      }
     }
 
     // ADR 0055: optional pos / ipa / family extras (EndCard-only, anti-spoiler).
@@ -634,13 +643,13 @@ export function validatePack(raw: unknown, file: string): WordPack {
             `${file}: lemmas[${i}] spoiler — family[${j}] contains lemma "${word}" — "${raw}"`,
           )
         }
-        if (isDeniedLemma(raw, DENY, o.lang as string)) {
+        if (isDeniedTextToken(raw, o.lang as string, word, DENY)) {
           throw new Error(`${file}: lemmas[${i}] denylist — family[${j}] "${raw}"`)
         }
         // Same token pass as synonym chips, so hyphen/slash-joined denied
         // tokens inside an entry are caught too.
         for (const tok of letterTokens(raw)) {
-          if (isDeniedLemma(tok, DENY, o.lang as string)) {
+          if (isDeniedTextToken(tok, o.lang as string, word, DENY)) {
             throw new Error(
               `${file}: lemmas[${i}] denylist — family[${j}] token "${tok}" — "${raw}"`,
             )

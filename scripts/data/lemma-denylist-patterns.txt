@@ -1,7 +1,8 @@
 # Whole-lemma conjugation patterns (issue #212). Each line is
 # `STEM(SUFFIX|…)` (global) or `lang STEM(SUFFIX|…)`.
-# Compiled to ^STEM(?:SUFFIX|…)$ over nfcUpper, so a stem never matches inside
-# a longer word (VEHÍCULO, SCOPRIRE, COCKTAIL, BAISSER, CONNAÎTRE, FOLLÓN).
+# Compiled to ^STEM(?:SUFFIX|…)$ over spellingKey, so a stem never matches inside
+# a longer word (VEHÍCULO, SCOPRIRE, COCKTAIL, BAISSER, CONNAÎTRE, FOLLÓN) and a
+# ß/SS spelling variant of the stem matches too (#363: SCHEIßHAUS, SCHEISSBULL).
 # Families follow hiato-profanity/seeds.mjs (the SEEDS suffix sets and STEMS),
 # plus Avery #214 W5. These lines are Hiato paradigms, not a copy of LDNOOBW.
 # Courtesy: the audit also consulted LDNOOBW (CC BY 4.0).
@@ -129,8 +130,7 @@ de VÖGEL(N|ST|T|TE|TEN|TEST|TET)
 de GEVÖGEL(T|TE|TEN|TER|TES)
 de WICHS(E|EN|END|ER|ERIN|ST|T|TE|TEN|TEST)
 de GEWICHS(T|TE|TEN)
-de SCHEISS(E|EN|ER|HAUS|IG|KERL)
-de SCHEIß(E|EN|ER|IG)
+de SCHEISS(E|EN|ER|HAUS|IG|KERL|BULL)
 de BESCHISSEN(|E|ER|ES)
 de KACK(E|EN|T)
 de PISS(E|EN|T)

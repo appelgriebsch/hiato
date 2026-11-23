@@ -3,7 +3,7 @@
  * Empty cache arrays mean unique referent — do not retry.
  */
 import { spoilerContains } from '../src/packs/spoilers'
-import { isDeniedLemma, letterTokens, nfcUpper } from './lemma-denylist'
+import { isDeniedTextToken, letterTokens, nfcUpper } from './lemma-denylist'
 
 export const SYNONYM_CHIP_CAP = 3
 export const SYNONYM_COVERAGE_FLOOR = 0.8
@@ -20,10 +20,12 @@ function chipTokensDenied(
   denylist: Set<string>,
   lang?: string,
 ): boolean {
-  if (isDeniedLemma(chip, denylist, lang)) return true
+  // isDeniedTextToken: every exact category counts, the gloss-exempt list
+  // lifts a language-scoped homograph (de HELL, de SCHWANZ), and ß/SS folds (#363).
+  if (isDeniedTextToken(chip, lang, undefined, denylist)) return true
   // Same letter tokenizer as glosses, so hyphens and slashes split too.
   for (const tok of letterTokens(chip)) {
-    if (isDeniedLemma(tok, denylist, lang)) return true
+    if (isDeniedTextToken(tok, lang, undefined, denylist)) return true
   }
   return false
 }

@@ -9,9 +9,11 @@ Plan locked 2026-09-19. Architecture Decision Records live in `docs/adr/`.
 Critical path: **G0** UX prototype → **T1** scaffold → **T2** playable daily EN A1 → **T3** langs → **T4** streaks → **T5** share card (this branch) → **T6** polish → **H1** prod harden.
 
 ```bash
-bun run packs:check   # pack schema + spoiler rule
+bun run packs:check   # pack schema + spoiler rule + denylist scan of every text field
 # CI fails on a Hunspell verdict cache miss: run packs:check locally and commit scripts/data/hunspell-verdicts.json
 ```
+
+Content policy: profane, violent, slur, and person-name words are never valid pack items at any level — see [AGENTS.md](AGENTS.md) for the enforcement rules.
 
 ## Stack (locked)
 
