@@ -150,11 +150,14 @@ export async function generateSynonyms(
   )
   for (let i = 0; i < missing.length; i += BATCH) {
     const batch = missing.slice(i, i + BATCH)
+    // Soft: a malformed batch response must not abort the run — its keys stay
+    // unsettled and the retry loop below re-asks them in smaller batches.
     const parsed = await completeJson(
       key,
       0.2,
       'You write same-language learner synonyms. Reply with a single JSON object only.',
       batchPrompt(lang, batch),
+      true,
     )
     if (parsed) applyParsed(lang, batch, parsed, cache, denylist)
     save(cache)
