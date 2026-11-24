@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 22,
   "lang": "fr",
   "cefr": "b2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -856,9 +856,6 @@
     {
       "word": "NAUSÉE",
       "gloss": "sensation de malaise dans l'estomac.",
-      "synonyms": [
-        "dégout"
-      ],
       "example": "J'ai la nausée.",
       "pos": "noun",
       "ipa": "/noze/",
@@ -2935,7 +2932,6 @@
       "word": "EMBUSCADE",
       "gloss": "attaque surprise depuis un lieu caché",
       "synonyms": [
-        "guet-apens",
         "traquenard"
       ],
       "example": "C'est une embuscade !",
@@ -5586,37 +5582,34 @@
       ]
     },
     {
-      "word": "OMAR",
-      "gloss": "variété de dattes séchées",
-      "pos": "adjective",
-      "example": "J'ai acheté un sac d'omar pour le dessert après ce délicieux couscous."
-    },
-    {
-      "word": "TERESA",
-      "gloss": "une femme dont la patience est souvent admirée.",
-      "pos": "adverb",
-      "example": "Teresa est une femme dont la patience est souvent admirée par tous."
-    },
-    {
-      "word": "HUDSON",
-      "gloss": "type de bateau de plaisance à voile",
-      "pos": "adjective"
-    },
-    {
-      "word": "JESSIE",
-      "gloss": "une personne dont l'enthousiasme est toujours visible.",
-      "pos": "verb",
-      "example": "Jessie est une personne dont l'enthousiasme est toujours visible!"
-    },
-    {
-      "word": "ARIZONA",
-      "gloss": "région sèche et chaude",
+      "word": "ÉQUATION",
+      "gloss": "Égalité mathématique avec une inconnue.",
       "pos": "noun"
     },
     {
-      "word": "PABLO",
-      "gloss": "nom porté par un artiste célèbre né en Espagne",
+      "word": "HABITUÉ",
+      "gloss": "Personne qui vient souvent dans un lieu.",
+      "pos": "noun"
+    },
+    {
+      "word": "DISPERSER",
+      "gloss": "Envoyer des gens ou des choses dans plusieurs directions.",
       "pos": "verb"
+    },
+    {
+      "word": "INFORME",
+      "gloss": "Sans contour net.",
+      "pos": "adjective"
+    },
+    {
+      "word": "PAGAILLE",
+      "gloss": "Grand désordre.",
+      "pos": "noun"
+    },
+    {
+      "word": "MOUTARDE",
+      "gloss": "Condiment jaune et piquant.",
+      "pos": "noun"
     },
     {
       "word": "CLAUDE",
@@ -5624,9 +5617,9 @@
       "pos": "noun"
     },
     {
-      "word": "GWEN",
-      "gloss": "dame au teint clair",
-      "pos": "verb"
+      "word": "SLOGAN",
+      "gloss": "Phrase courte pour une publicité ou une cause.",
+      "pos": "noun"
     },
     {
       "word": "ROBERT",
@@ -5635,42 +5628,39 @@
       "example": "Robert existait vraiment."
     },
     {
-      "word": "ALEXANDER",
-      "gloss": "souverain antique",
-      "pos": "verb"
+      "word": "NATAL",
+      "gloss": "Qui concerne la naissance.",
+      "pos": "adjective"
     },
     {
-      "word": "DONOVAN",
-      "gloss": "nom d'origine irlandaise signifiant guerrier brun",
-      "pos": "noun",
-      "example": "Donovan, ce guerrier brun au caractère fort, a mené son clan à la victoire."
-    },
-    {
-      "word": "OHIO",
-      "gloss": "territoire aux États-Unis",
-      "pos": "noun",
-      "example": "Je suis dans l'Ohio."
-    },
-    {
-      "word": "STEVEN",
-      "gloss": "outil de jardinage pour désherber",
-      "pos": "noun",
-      "example": "Le jardinier utilise un steven pour enlever les mauvaises herbes."
-    },
-    {
-      "word": "RIO",
-      "gloss": "lieu près de l'eau",
+      "word": "CAFÉTÉRIA",
+      "gloss": "Lieu où l'on prend un repas simple, en se servant soi-même.",
       "pos": "noun"
     },
     {
-      "word": "BORIS",
-      "gloss": "nom slave évoquant un combat ou une lutte",
-      "pos": "verb"
+      "word": "TOUTOU",
+      "gloss": "Chien familier, mot affectueux.",
+      "pos": "noun"
     },
     {
-      "word": "OTTO",
-      "gloss": "unité de mesure de pression en physique",
-      "pos": "verb"
+      "word": "SOURNOIS",
+      "gloss": "Qui cache ses mauvaises intentions.",
+      "pos": "adjective"
+    },
+    {
+      "word": "ANTIQUE",
+      "gloss": "Très ancien, d'une époque lointaine.",
+      "pos": "adjective"
+    },
+    {
+      "word": "RACCOURCI",
+      "gloss": "Chemin plus bref, ou une version brève.",
+      "pos": "noun"
+    },
+    {
+      "word": "EXCLUSIF",
+      "gloss": "Réservé à une seule personne ou à un seul usage.",
+      "pos": "adjective"
     },
     {
       "word": "BALTIMORE",
@@ -5679,82 +5669,74 @@
       "example": "Baltimore est une ville près de la mer que j'aimerais visiter un jour."
     },
     {
-      "word": "JARED",
-      "gloss": "nom biblique signifiant celui qui descend",
-      "pos": "noun",
-      "example": "Jared était un ancêtre de Noé, connu pour sa longue vie et sa sagesse."
-    },
-    {
-      "word": "SASHA",
-      "gloss": "race de chien de garde originaire de Russie",
-      "pos": "adjective"
-    },
-    {
-      "word": "MANDY",
-      "gloss": "machine à coudre portative",
-      "pos": "noun"
-    },
-    {
-      "word": "VIRGINIA",
-      "gloss": "nom évoquant une région des États-Unis",
-      "pos": "noun"
-    },
-    {
-      "word": "ANGELO",
-      "gloss": "messager céleste",
-      "pos": "noun",
-      "example": "L'artiste a peint un angelo aux ailes dorées pour symboliser l'espoir."
-    },
-    {
-      "word": "MADDIE",
-      "gloss": "petit véhicule tout-terrain à deux roues",
-      "pos": "noun"
-    },
-    {
-      "word": "MARVIN",
-      "gloss": "nom d'origine galloise signifiant ami de la mer",
-      "pos": "adverb",
-      "example": "Marvin adore les vacances au bord de la mer."
-    },
-    {
-      "word": "PEDRO",
-      "gloss": "nom espagnol",
-      "pos": "adverb",
-      "example": "Pedro a survécu."
-    },
-    {
-      "word": "STEVIE",
-      "gloss": "guitare électrique à corps plein, popularisée par les musiciens de blues et de rock",
-      "pos": "noun"
-    },
-    {
-      "word": "KARA",
-      "gloss": "chant mélodieux",
-      "pos": "noun",
-      "example": "Le vent portait un doux *kara* qui apaisa toute l'assemblée."
-    },
-    {
-      "word": "ABIGAIL",
-      "gloss": "une femme nommée ainsi dans la Bible",
-      "pos": "noun",
-      "example": "Abigail est une femme sage mentionnée dans la Bible pour son intelligence et sa diplomatie."
-    },
-    {
-      "word": "GAVIN",
-      "gloss": "jeune guerrier",
-      "pos": "noun",
-      "example": "Le jeune gavin parcourait les forêts en quête d'aventures héroïques."
-    },
-    {
-      "word": "RUDY",
-      "gloss": "conseil puissant",
+      "word": "CONTEMPLER",
+      "gloss": "Regarder longtemps avec attention.",
       "pos": "verb"
     },
     {
-      "word": "DANTE",
-      "gloss": "auteur connu",
-      "pos": "noun",
-      "example": "Dante est un auteur connu pour ses œuvres poétiques inspirantes."
+      "word": "IGNORANCE",
+      "gloss": "Le fait de ne pas savoir.",
+      "pos": "noun"
+    },
+    {
+      "word": "POISSE",
+      "gloss": "Malchance qui semble coller à quelqu'un.",
+      "pos": "noun"
+    },
+    {
+      "word": "VIRIL",
+      "gloss": "Qui a les traits associés à un homme adulte.",
+      "pos": "adjective"
+    },
+    {
+      "word": "PLANER",
+      "gloss": "Rester en l'air sans battre des ailes, ou flotter.",
+      "pos": "verb"
+    },
+    {
+      "word": "SAVOURER",
+      "gloss": "Goûter lentement, avec plaisir.",
+      "pos": "verb"
+    },
+    {
+      "word": "OMELETTE",
+      "gloss": "Plat d'œufs battus et cuits à la poêle.",
+      "pos": "noun"
+    },
+    {
+      "word": "SAINTETÉ",
+      "gloss": "Qualité de ce qui est sacré.",
+      "pos": "noun"
+    },
+    {
+      "word": "JACUZZI",
+      "gloss": "Bain chaud avec des jets d'eau.",
+      "pos": "noun"
+    },
+    {
+      "word": "PRÉLEVER",
+      "gloss": "Retirer une petite partie d'un ensemble.",
+      "pos": "verb"
+    },
+    {
+      "word": "ÉLECTEUR",
+      "gloss": "Personne qui a le droit de voter.",
+      "pos": "noun"
+    },
+    {
+      "word": "AFRICAIN",
+      "gloss": "Qui vient du grand continent au sud de l'Europe.",
+      "pos": "adjective"
+    },
+    {
+      "word": "PILLER",
+      "gloss": "Voler en grand nombre, souvent dans un lieu attaqué.",
+      "pos": "verb"
+    },
+    {
+      "word": "UTÉRUS",
+      "gloss": "Organe du corps où un bébé peut se développer.",
+      "pos": "noun"
     },
     {
       "word": "CONSÉQUENT",
@@ -5809,9 +5791,9 @@
       "example": "Un yard est égal à trois pieds."
     },
     {
-      "word": "BERNIE",
-      "gloss": "bloc de neige dur",
-      "pos": "noun"
+      "word": "POSTULER",
+      "gloss": "Présenter sa candidature à un emploi.",
+      "pos": "verb"
     },
     {
       "word": "GÂCHETTE",
@@ -5834,16 +5816,14 @@
       "example": "Ce semestre est important."
     },
     {
-      "word": "DENVER",
-      "gloss": "ville en montagne",
-      "pos": "verb",
-      "example": "Denver est une ville en montagne où l'air est pur et les paysages magnifiques."
+      "word": "ADMIRABLE",
+      "gloss": "Qui mérite une grande estime.",
+      "pos": "adjective"
     },
     {
-      "word": "STACY",
-      "gloss": "ville située dans l'État du Minnesota",
-      "pos": "adjective",
-      "example": "Stacy est une petite ville du Minnesota, idéale pour une escapade tranquille en famille."
+      "word": "CRUAUTÉ",
+      "gloss": "Plaisir à faire souffrir, ou une action dure.",
+      "pos": "noun"
     },
     {
       "word": "NUQUE",
@@ -5897,19 +5877,19 @@
       "example": "Il faut les alerter."
     },
     {
-      "word": "HUGH",
-      "gloss": "esprit vif",
-      "pos": "adjective"
-    },
-    {
-      "word": "JEFFERSON",
-      "gloss": "fils de Geoffrey",
+      "word": "SUTURE",
+      "gloss": "Couture qui ferme une plaie.",
       "pos": "noun"
     },
     {
-      "word": "IVY",
-      "gloss": "plante grimpante à feuilles persistantes.",
-      "pos": "adverb"
+      "word": "DUO",
+      "gloss": "Groupe de deux personnes, souvent des musiciens.",
+      "pos": "noun"
+    },
+    {
+      "word": "PROTOTYPE",
+      "gloss": "Premier exemplaire d'un objet, encore à l'essai.",
+      "pos": "noun"
     },
     {
       "word": "DORIS",
@@ -5917,9 +5897,9 @@
       "pos": "noun"
     },
     {
-      "word": "BRIDGET",
-      "gloss": "une sainte irlandaise",
-      "pos": "adverb"
+      "word": "TROLL",
+      "gloss": "Personne qui provoque les autres pour s'amuser.",
+      "pos": "noun"
     },
     {
       "word": "CALEÇON",
@@ -6041,7 +6021,6 @@
       "word": "SECTE",
       "gloss": "groupe religieux isolé.",
       "synonyms": [
-        "cult",
         "groupe"
       ],
       "pos": "noun",
@@ -6114,10 +6093,9 @@
       "pos": "noun"
     },
     {
-      "word": "EVELYN",
-      "gloss": "abeille industrieuse",
-      "pos": "verb",
-      "example": "Evelyn, l’abeille industrieuse, butine de fleur en fleur pour fabriquer son miel."
+      "word": "SIEUR",
+      "gloss": "Titre ancien donné à un homme.",
+      "pos": "noun"
     },
     {
       "word": "LARGEMENT",
@@ -6373,9 +6351,6 @@
     {
       "word": "ENJEU",
       "gloss": "ce qui peut être gagné ou perdu.",
-      "synonyms": [
-        "stakes"
-      ],
       "pos": "noun",
       "example": "L'enjeu est capital."
     },
@@ -6556,14 +6531,14 @@
       "example": "J'ai un insigne."
     },
     {
-      "word": "CALLIE",
-      "gloss": "belle voix",
+      "word": "MUTATION",
+      "gloss": "Changement important dans un être ou une situation.",
       "pos": "noun"
     },
     {
-      "word": "LYNN",
-      "gloss": "lac ou colline",
-      "pos": "noun"
+      "word": "PROVISOIRE",
+      "gloss": "Qui ne dure pas, en attendant mieux.",
+      "pos": "adjective"
     },
     {
       "word": "PITOYABLE",
@@ -6743,8 +6718,8 @@
       "example": "Je vais acheter un tampon."
     },
     {
-      "word": "WILLY",
-      "gloss": "protecteur audacieux",
+      "word": "VINGTAINE",
+      "gloss": "Environ ce nombre, juste après dix-neuf.",
       "pos": "noun"
     },
     {
@@ -6859,9 +6834,9 @@
       "example": "Il a un blog."
     },
     {
-      "word": "SUSIE",
-      "gloss": "lys pur",
-      "pos": "noun"
+      "word": "DÉMENT",
+      "gloss": "Qui n'a plus sa raison, ou qui nie un fait.",
+      "pos": "adjective"
     },
     {
       "word": "CROISSANCE",
@@ -6895,8 +6870,7 @@
       "word": "CHUCHOTER",
       "gloss": "parler très bas ou murmurer.",
       "synonyms": [
-        "MURMURER",
-        "SUSSURRER"
+        "MURMURER"
       ],
       "pos": "verb",
       "example": "Arrête de chuchoter."
@@ -6985,9 +6959,6 @@
     {
       "word": "PARAPLUIE",
       "gloss": "objet servant à se protéger des intempéries",
-      "synonyms": [
-        "UMBRELLE"
-      ],
       "pos": "noun",
       "example": "J'ai ton parapluie."
     },
@@ -7149,9 +7120,9 @@
       "example": "Il a réussi à me refiler son vieux vélo sans que je m'en aperçoive."
     },
     {
-      "word": "BECCA",
-      "gloss": "argot pour une cigarette ou un joint.",
-      "pos": "noun"
+      "word": "PERMANENT",
+      "gloss": "Qui dure sans s'arrêter.",
+      "pos": "adjective"
     },
     {
       "word": "ANTIQUITÉ",
@@ -7272,9 +7243,9 @@
       "example": "Où est l'éponge ?"
     },
     {
-      "word": "LUTHER",
-      "gloss": "un réformateur religieux allemand",
-      "pos": "verb"
+      "word": "PHARE",
+      "gloss": "Tour lumineuse qui guide les bateaux, ou le feu d'une voiture.",
+      "pos": "noun"
     },
     {
       "word": "TENTANT",
@@ -7305,9 +7276,9 @@
       "example": "J'aime jouer du blues."
     },
     {
-      "word": "VICKI",
-      "gloss": "appareil de mesure de la pression atmosphérique",
-      "pos": "verb"
+      "word": "MOLLO",
+      "gloss": "Doucement, sans se presser.",
+      "pos": "adverb"
     },
     {
       "word": "CONTRARIÉ",
@@ -7330,14 +7301,14 @@
       "example": "C'est quelque chose de culturel."
     },
     {
-      "word": "ROBINSON",
-      "gloss": "système de navigation ou de localisation par satellite, utilisé en aviation et en marine",
+      "word": "PARTISAN",
+      "gloss": "Personne qui défend une cause ou un camp.",
       "pos": "noun"
     },
     {
-      "word": "MALIK",
-      "gloss": "un titre arabe signifiant 'roi'",
-      "pos": "adjective"
+      "word": "RAGOT",
+      "gloss": "Petite histoire médisante, souvent fausse.",
+      "pos": "noun"
     },
     {
       "word": "PARACHUTE",
@@ -7397,9 +7368,9 @@
       "example": "Il est en harmonie avec lui-même."
     },
     {
-      "word": "ISABEL",
-      "gloss": "type de rose ancienne aux fleurs ondulées",
-      "pos": "verb"
+      "word": "RATIONNEL",
+      "gloss": "Qui suit la raison, pas l'émotion.",
+      "pos": "adjective"
     },
     {
       "word": "VORTEX",
@@ -7476,10 +7447,9 @@
       "example": "Toutefois, je l'aime."
     },
     {
-      "word": "GARRETT",
-      "gloss": "type de four à pain traditionnel",
-      "pos": "noun",
-      "example": "Dans ma région, on utilise encore un vieux garrett pour cuire le pain."
+      "word": "CLIGNER",
+      "gloss": "Fermer un œil très vite.",
+      "pos": "verb"
     },
     {
       "word": "RÔTI",
@@ -7570,10 +7540,9 @@
       "example": "N’oublie pas de sucrer le gâteau avant de le mettre au four."
     },
     {
-      "word": "POTTER",
-      "gloss": "fabriquer des objets en argile cuite.",
-      "pos": "verb",
-      "example": "Il aime potter dans son atelier pour créer de jolis vases en argile."
+      "word": "EXQUIS",
+      "gloss": "D'un goût ou d'une qualité délicieuse.",
+      "pos": "adjective"
     },
     {
       "word": "DIFFUSION",
@@ -7737,21 +7706,19 @@
       "example": "Quid de la taxe carbone ?"
     },
     {
-      "word": "CLINTON",
-      "gloss": "mot anglais que l'on rencontre dans des dialogues de films",
+      "word": "REDOUTABLE",
+      "gloss": "Qui fait peur par sa force.",
+      "pos": "adjective"
+    },
+    {
+      "word": "PRÉCÉDER",
+      "gloss": "Venir avant une autre chose.",
+      "pos": "verb"
+    },
+    {
+      "word": "RELAXE",
+      "gloss": "Décision de justice qui libère une personne accusée.",
       "pos": "noun"
-    },
-    {
-      "word": "EINSTEIN",
-      "gloss": "un physicien célèbre pour sa théorie de la relativité.",
-      "pos": "adjective",
-      "example": "Einstein aimait jouer du violon."
-    },
-    {
-      "word": "AVA",
-      "gloss": "une personne qui vole avec aisance",
-      "pos": "noun",
-      "example": "L'avion est piloté par une ava expérimentée qui survole les montagnes avec grâce."
     },
     {
       "word": "FIDÉLITÉ",
@@ -7838,10 +7805,9 @@
       "example": "Est-ce un pingouin ?"
     },
     {
-      "word": "GAIL",
-      "gloss": "un vent fort et soudain",
-      "pos": "adverb",
-      "example": "Le gail a renversé les chaises du jardin en quelques secondes."
+      "word": "SAS",
+      "gloss": "Petite pièce fermée entre deux portes, pour passer.",
+      "pos": "noun"
     },
     {
       "word": "RÉCONFORT",
@@ -8188,7 +8154,6 @@
       "word": "MONTE",
       "gloss": "action de gravir ou d'augmenter.",
       "synonyms": [
-        "ASCEND",
         "GRIMPER"
       ],
       "pos": "noun",
@@ -8225,8 +8190,8 @@
       "example": "Goûtez la confiture."
     },
     {
-      "word": "ADDISON",
-      "gloss": "élément ajouté dans un texte ou une liste",
+      "word": "MOUSTIQUE",
+      "gloss": "Petit insecte qui pique et qui vole.",
       "pos": "noun"
     },
     {
@@ -8250,9 +8215,9 @@
       "example": "Il a acheté une nouvelle commode."
     },
     {
-      "word": "TAMMY",
-      "gloss": "une personne qui calme ou apaise",
-      "pos": "adjective"
+      "word": "RELIRE",
+      "gloss": "Parcourir une deuxième fois un texte déjà vu.",
+      "pos": "verb"
     },
     {
       "word": "COUVENT",
@@ -8285,16 +8250,15 @@
       "example": "Le cross est une discipline idéale pour allier endurance et dépassement de soi."
     },
     {
-      "word": "WHITNEY",
-      "gloss": "un espace blanc ou une zone dégagée",
-      "pos": "verb"
+      "word": "CINGLÉ",
+      "gloss": "Personne dont le comportement semble fou.",
+      "pos": "noun"
     },
     {
       "word": "TRÉBUCHER",
       "gloss": "perdre l'équilibre en marchant.",
       "synonyms": [
-        "TITUBER",
-        "CHANCER"
+        "TITUBER"
       ],
       "pos": "verb",
       "example": "Attention à ne pas trébucher !"
@@ -8370,10 +8334,9 @@
       "example": "Arrête d'interférer."
     },
     {
-      "word": "CARLO",
-      "gloss": "forme italienne de Charles dans des textes étrangers",
-      "pos": "verb",
-      "example": "Carlo est un prénom italien que l'on trouve parfois dans des romans traduits."
+      "word": "RÉVEILLON",
+      "gloss": "Repas de fête tard dans la nuit.",
+      "pos": "noun"
     },
     {
       "word": "CONJUGAL",
@@ -8505,9 +8468,6 @@
     {
       "word": "TOUX",
       "gloss": "réflexe de la gorge pour expulser des mucosités.",
-      "synonyms": [
-        "toussement"
-      ],
       "pos": "noun",
       "example": "Il a la toux."
     },
@@ -8536,9 +8496,6 @@
     {
       "word": "BERCEAU",
       "gloss": "lit pour bébé ou lieu d'origine d'une idée.",
-      "synonyms": [
-        "cradle"
-      ],
       "pos": "noun",
       "example": "Il rit depuis son berceau."
     },
@@ -8582,10 +8539,9 @@
       "example": "Mon université a un dortoir."
     },
     {
-      "word": "STU",
-      "gloss": "abréviation anglaise désignant un enduit de plâtre",
-      "pos": "adverb",
-      "example": "J'ai utilisé du stu pour lisser les irrégularités du mur avant de peindre."
+      "word": "FISCAL",
+      "gloss": "Qui concerne les impôts.",
+      "pos": "adjective"
     },
     {
       "word": "TRÊVE",
@@ -8758,9 +8714,9 @@
       "example": "J'aime divertir."
     },
     {
-      "word": "DEBRA",
-      "gloss": "une personne associée à la force ou à la robustesse",
-      "pos": "adjective"
+      "word": "PRÉSIDENCE",
+      "gloss": "Fonction de la personne qui dirige un État ou une réunion.",
+      "pos": "noun"
     },
     {
       "word": "MÉLODIE",
@@ -8834,9 +8790,9 @@
       "pos": "noun"
     },
     {
-      "word": "BRADLEY",
-      "gloss": "un large chemin ou une route spacieuse",
-      "pos": "adjective"
+      "word": "ARMEMENT",
+      "gloss": "Ensemble des outils de combat d'un pays ou d'un groupe.",
+      "pos": "noun"
     },
     {
       "word": "FRAPPE",
@@ -8849,8 +8805,8 @@
       "example": "Frappe-le !"
     },
     {
-      "word": "LACEY",
-      "gloss": "un tissu fin et ajouré",
+      "word": "PRÉVENU",
+      "gloss": "Personne poursuivie en justice, avant le jugement.",
       "pos": "noun"
     },
     {
@@ -8902,7 +8858,6 @@
       "word": "INJUSTICE",
       "gloss": "manque d'équité dans une situation",
       "synonyms": [
-        "inéquité",
         "partialité"
       ],
       "pos": "noun",
@@ -8969,10 +8924,9 @@
       "example": "La pauvreté règne partout."
     },
     {
-      "word": "SHANNON",
-      "gloss": "une personne intelligente et perspicace",
-      "pos": "adverb",
-      "example": "Shannon est vraiment perspicace, elle a tout de suite compris le problème."
+      "word": "YAOURT",
+      "gloss": "Lait fermenté, épais, que l'on mange à la cuillère.",
+      "pos": "noun"
     },
     {
       "word": "BOURBON",
@@ -9020,8 +8974,7 @@
       "word": "ROUILLER",
       "gloss": "se couvrir d'une couche orange par l'humidité",
       "synonyms": [
-        "corroder",
-        "oxider"
+        "corroder"
       ],
       "pos": "verb",
       "example": "L'eau, ça fait rouiller."
@@ -9098,8 +9051,8 @@
       "pos": "adjective"
     },
     {
-      "word": "WOODY",
-      "gloss": "un matériau ligneux ou boisé",
+      "word": "RUISSEAU",
+      "gloss": "Petit cours d'eau.",
       "pos": "noun"
     },
     {
@@ -9148,14 +9101,14 @@
       "example": "La tornade a ravagé la région."
     },
     {
-      "word": "ALLY",
-      "gloss": "personne ou groupe qui soutient.",
+      "word": "VEAU",
+      "gloss": "Petit de la vache.",
       "pos": "noun"
     },
     {
-      "word": "SAUL",
-      "gloss": "variété de pomme à peau jaune striée de rouge",
-      "pos": "adjective"
+      "word": "CAOUTCHOUC",
+      "gloss": "Matière souple et élastique, comme sur une roue.",
+      "pos": "noun"
     },
     {
       "word": "PAVILLON",
@@ -9225,10 +9178,9 @@
       "example": "J'aime la nourriture exotique."
     },
     {
-      "word": "VICKY",
-      "gloss": "personne qui a réussi quelque chose",
-      "pos": "noun",
-      "example": "Vicky est la première de sa classe, elle a réussi son examen avec brio !"
+      "word": "CORIACE",
+      "gloss": "Dur sous la dent.",
+      "pos": "adjective"
     },
     {
       "word": "RÉCITER",
@@ -9237,16 +9189,14 @@
       "example": "Peux-tu me la réciter ?"
     },
     {
-      "word": "GREGORY",
-      "gloss": "une personne vigilante ou attentive",
-      "pos": "noun",
-      "example": "Gregory est toujours le premier à remarquer les petits détails dans la salle."
+      "word": "CAPOT",
+      "gloss": "Couverture du moteur, à l'avant d'une voiture.",
+      "pos": "noun"
     },
     {
-      "word": "GLEN",
-      "gloss": "vallée étroite et profonde.",
-      "pos": "noun",
-      "example": "Le sentier serpente à travers le glen, entouré de falaises abruptes."
+      "word": "CARAMEL",
+      "gloss": "Sucre cuit, brun et collant.",
+      "pos": "noun"
     },
     {
       "word": "VIBRER",
@@ -9310,9 +9260,9 @@
       "example": "Je vais le démonter."
     },
     {
-      "word": "ERNIE",
-      "gloss": "personnage de dessin animé ou de jeu.",
-      "pos": "noun"
+      "word": "INSOLENT",
+      "gloss": "Qui manque de respect, avec audace.",
+      "pos": "adjective"
     },
     {
       "word": "JADIS",
@@ -9385,8 +9335,7 @@
       "word": "IMPECCABLE",
       "gloss": "parfaitement propre ou irréprochable.",
       "synonyms": [
-        "parfait",
-        "flawless"
+        "parfait"
       ],
       "pos": "adjective",
       "example": "Impeccable !"
@@ -9479,8 +9428,7 @@
       "word": "CORPOREL",
       "gloss": "qui concerne la matière physique",
       "synonyms": [
-        "physique",
-        "charne"
+        "physique"
       ],
       "pos": "adjective",
       "example": "Son langage corporel l'a trahi."
@@ -9617,9 +9565,9 @@
       "example": "Cela frise le mépris."
     },
     {
-      "word": "GIDEON",
-      "gloss": "un bouclier ou une protection solide",
-      "pos": "adjective"
+      "word": "BATTANT",
+      "gloss": "Partie mobile d'une porte, ou une personne qui se bat.",
+      "pos": "noun"
     },
     {
       "word": "GRADE",
@@ -9665,9 +9613,9 @@
       "example": "T'as l'air anxieux."
     },
     {
-      "word": "DANIEL",
-      "gloss": "un jugement ou une décision divine",
-      "pos": "noun"
+      "word": "ROUGIR",
+      "gloss": "Devenir cramoisi au visage, par honte ou par émotion.",
+      "pos": "verb"
     },
     {
       "word": "VIVRES",
@@ -9797,8 +9745,8 @@
       "example": "Ce justicier intervient là où la justice échoue."
     },
     {
-      "word": "BRENDAN",
-      "gloss": "une personne forte ou robuste",
+      "word": "MORVEUX",
+      "gloss": "Qui a le nez qui coule.",
       "pos": "adjective"
     },
     {
@@ -10086,10 +10034,9 @@
       "example": "Elle fume."
     },
     {
-      "word": "ELEANOR",
-      "gloss": "une femme célèbre pour sa force et son indépendance dans l'histoire",
-      "pos": "adjective",
-      "example": "Eleanor était une reine qui a changé l'histoire par son courage et sa détermination."
+      "word": "SURF",
+      "gloss": "Sport où l'on glisse debout sur une vague.",
+      "pos": "noun"
     },
     {
       "word": "ANDOUILLE",
@@ -10129,9 +10076,9 @@
       "example": "Peux-tu coudre ?"
     },
     {
-      "word": "KENNETH",
-      "gloss": "unité de mesure de la résistance électrique, équivalent à 1000 ohms",
-      "pos": "noun"
+      "word": "MALSAIN",
+      "gloss": "Mauvais pour la santé, ou d'un esprit trouble.",
+      "pos": "adjective"
     },
     {
       "word": "SONGE",
