@@ -3,12 +3,14 @@
  * Empty cache arrays mean unique referent — do not retry.
  *
  * #362 / #366: languages in CHIP_LANG_GATE_LANGS get the chip language gate.
- * A chip must contain a letter and no number (no stringified `[]`, numerals,
- * `3º`, or `CO2`) and every letter token must be a word of the pack language
- * per `isWordOfLang` (for pt both dictionaries, dictionary-pt-pt and
- * dictionary-pt, are consulted) or the loanword allowlist. Every pack
- * language with a Hunspell dictionary is in the set. Generation and
- * packs:check apply the same rule.
+ * A chip must contain a letter and no Unicode number (no stringified `[]`,
+ * numerals, or `CO2`). `3º` fails because of the digit: U+00BA is a letter,
+ * not a number. A hyphenated or apostrophe form is checked whole before it
+ * is split (`week-end`, `dell'ordine`). Every remaining letter token must be
+ * a word of the pack language per `isWordOfLang` (en accepts en-US or en-GB;
+ * pt accepts pt-PT or pt-BR) or the loanword allowlist. Every pack language
+ * with a Hunspell dictionary is in the set. Generation and packs:check apply
+ * the same rule.
  */
 import { spoilerContains } from '../src/packs/spoilers'
 import type { MembershipLang } from './lang-membership'
@@ -52,6 +54,16 @@ function chipTokensDenied(
   return false
 }
 
+/**
+ * Words of a chip. Hyphens and apostrophes stay inside the word so
+ * `week-end` and `dell'ordine` are one membership probe. A curly apostrophe
+ * is folded to ASCII before the probe; the shipped chip text is unchanged.
+ */
+export function chipSurfaceWords(text: string): string[] {
+  const nfc = text.normalize('NFC').replaceAll('’', "'").replaceAll('ʼ', "'")
+  return nfc.match(/[\p{L}\p{M}]+(?:['-][\p{L}\p{M}]+)*/gu) ?? []
+}
+
 /** Why a raw chip must not ship, or null if it is usable. */
 export function invalidSynonymChipReason(
   lemma: string,
@@ -68,12 +80,18 @@ export function invalidSynonymChipReason(
   if (spellingKey(nfc) === spellingKey(lemma)) return 'equals lemma'
   if (spoilerContains(nfc, lemma)) return 'spoiler'
   if (chipTokensDenied(nfc, denylist, lang)) return 'denylist'
-  // #362 / #366: a chip is a word (or short phrase of words). No letter, or a
-  // number (digits, ², º, ₂), and it is not a word: `[]`, `7`, `3º`, `CO2`.
+  // #362 / #366: a chip is a word or a short phrase of words. No letter, or a
+  // Unicode number (digits, ², ₂), and it is not a word: `[]`, `7`, `CO2`.
+  // `3º` fails on the digit. U+00BA is a letter (`\p{Lo}`), not a number.
   if (/\p{N}/u.test(nfc) || !/\p{L}/u.test(nfc)) return 'not a word'
   if (lang && CHIP_LANG_GATE_LANGS.has(lang as MembershipLang) && isWordOfLang) {
-    for (const tok of letterTokens(nfc)) {
-      if (!isWordOfLang(lang as MembershipLang, tok)) return `not a word of ${lang}`
+    const surfaces = chipSurfaceWords(nfc)
+    if (surfaces.length === 0) return `not a word of ${lang}`
+    for (const surface of surfaces) {
+      if (isWordOfLang(lang as MembershipLang, surface)) continue
+      for (const tok of letterTokens(surface)) {
+        if (!isWordOfLang(lang as MembershipLang, tok)) return `not a word of ${lang}`
+      }
     }
   }
   return null

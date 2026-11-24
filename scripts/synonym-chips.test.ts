@@ -150,6 +150,20 @@ describe('#362 chip language gate (pt first)', () => {
     )
   })
 
+  test('a hyphenated or British spelling is one word of the pack language (#366)', () => {
+    const member = (lang: string, w: string): boolean => {
+      const x = w.toLowerCase()
+      if (lang === 'fr') return x === 'week-end'
+      if (lang === 'en') return x === 'theatre'
+      return false
+    }
+    expect(invalidSynonymChipReason('SORTIE', 'week-end', DENY, 'fr', member)).toBeNull()
+    expect(invalidSynonymChipReason('PLAY', 'theatre', DENY, 'en', member)).toBeNull()
+    expect(invalidSynonymChipReason('SORTIE', 'week', DENY, 'fr', member)).toBe(
+      'not a word of fr',
+    )
+  })
+
   test('a chip equal to the lemma under spellingKey is the lemma (#366)', () => {
     expect(invalidSynonymChipReason('GRÜSSE', 'Grüße', DENY, 'de')).toBe('equals lemma')
     expect(invalidSynonymChipReason('LAß', 'LASS', DENY, 'de')).toBe('equals lemma')

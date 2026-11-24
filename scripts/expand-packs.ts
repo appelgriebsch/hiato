@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSy
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 import { loadDenylist, nfcUpper } from './lemma-denylist'
-import { loadNameList, nameAllowed, onNameList } from './lemma-names'
+import { listedNameRejected, loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { dictsReady, ensureDicts, isWordOfLang } from './lang-membership'
@@ -92,7 +92,7 @@ function okLemma(lang: Lang, raw: string, skipNameList = true): string | null {
   if (!isWordOfLang(lang, word)) return null
   // #366: every language, including fr and it. A listed name is out whatever
   // the gloss would say. Allowlisted homographs (WILL, MERVEILLE) stay.
-  if (skipNameList && onNameList(word, NAMES) && !nameAllowed(lang, word)) return null
+  if (skipNameList && listedNameRejected(lang, word, NAMES)) return null
   return word
 }
 
@@ -378,7 +378,7 @@ const GLOSS_STYLE: Record<Lang, string> = {
 function glossRejected(lang: Lang, word: string, gloss: string | undefined): boolean {
   if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, word)) return true
   // #366: the gloss cannot rescue a listed name. Allowlisted homographs stay.
-  if (onNameList(word, NAMES) && !nameAllowed(lang, word)) return true
+  if (listedNameRejected(lang, word, NAMES)) return true
   if (onNameList(word, NAMES) && isPersonNameGloss(gloss, lang)) return true
   return isWrongLanguageGloss(lang, gloss, isWordOfLang)
 }
@@ -790,7 +790,7 @@ async function runFrequencyLang(
     accept: (word) =>
       !EXTRA_STOP.has(word) &&
       isWordOfLang(lang, word) &&
-      !(onNameList(word, NAMES) && !nameAllowed(lang, word)),
+      !listedNameRejected(lang, word, NAMES),
     denylist: DENY,
     target: TARGET,
     surplus: 40,

@@ -123,6 +123,11 @@ describe('isPersonNameGloss', () => {
       ),
     ).toBe(true)
     expect(isPersonNameGloss('Un nome proprio maschile.', 'it')).toBe(true)
+    expect(isPersonNameGloss('abbreviazione di un nome maschile.', 'it')).toBe(true)
+    expect(isPersonNameGloss('un nome femminile che ricorda una farfalla.', 'it')).toBe(true)
+    expect(isPersonNameGloss('un nome che richiama forza e fermezza.', 'it')).toBe(true)
+    expect(isPersonNameGloss("nom d'origine germanique signifiant éclat", 'fr')).toBe(true)
+    expect(isPersonNameGloss("nom italien signifiant 'bois'", 'fr')).toBe(true)
     expect(isPersonNameGloss('Un cognome italiano.', 'it')).toBe(true)
     expect(isPersonNameGloss('Nome di persona.', 'it')).toBe(true)
     expect(isPersonNameGloss('proper name of a person', 'en')).toBe(true)

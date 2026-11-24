@@ -70,6 +70,20 @@ export function nameAllowed(lang: string, word: string, allow = loadNameAllowlis
   return allow.has(`${lang.toLowerCase()} ${nfcUpper(word)}`)
 }
 
+/**
+ * #366: a listed name is out in every language, whatever the gloss says.
+ * Allowlisted common-word homographs stay. Generation (`okLemma`, gloss
+ * rejection, the FR/IT accept predicate) and `packs:check` share this.
+ */
+export function listedNameRejected(
+  lang: string,
+  word: string,
+  names = loadNameList(),
+  allow = loadNameAllowlist(),
+): boolean {
+  return onNameList(word, names) && !nameAllowed(lang, word, allow)
+}
+
 export function resetNameAllowCache(): void {
   allowCache = null
 }

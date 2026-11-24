@@ -607,6 +607,16 @@ test('#366 slurs and vulgar insults are language-scoped exact hits', () => {
     ['es', 'FOLLADOR'],
     ['es', 'LAMECULOS'],
     ['de', 'DRECKSACK'],
+    ['es', 'SUBNORMAL'],
+    ['es', 'FURCIA'],
+    ['fr', 'GROGNASSE'],
+    ['pt', 'RAMEIRA'],
+    ['fr', 'PISSER'],
+    ['fr', 'BANDER'],
+    ['it', 'CHIAPPA'],
+    ['it', 'POMICIARE'],
+    ['it', 'PIRLA'],
+    ['it', 'DITALINO'],
   ] as const) {
     expect(isDeniedLemma(word, undefined, lang)).toBe(true)
     expect(isDeniedLemma(word, undefined, 'en')).toBe(false)

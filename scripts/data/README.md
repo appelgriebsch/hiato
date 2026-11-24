@@ -39,7 +39,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
-Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL, MIT AND BSD), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-it` (Italian Writing Aids / PLIO, GPL-3.0; membership gate only — lemmas are not mined from the `.dic`), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
+Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL en-US, MIT AND BSD), `dictionary-en-gb` (SCOWL en-GB, MIT AND BSD; a chip or lemma is English if either dictionary accepts it), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-it` (Italian Writing Aids / PLIO, GPL-3.0; membership gate only — lemmas are not mined from the `.dic`), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
 
 ## Hint ceiling caches (issue #55 / epic #49)
 

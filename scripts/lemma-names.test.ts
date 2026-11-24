@@ -2,7 +2,14 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, test } from 'bun:test'
 import { isDeniedLemma } from './lemma-denylist'
-import { loadNameAllowlist, loadNameList, nameAllowed, onNameList, parseNameAllowlist } from './lemma-names'
+import {
+  listedNameRejected,
+  loadNameAllowlist,
+  loadNameList,
+  nameAllowed,
+  onNameList,
+  parseNameAllowlist,
+} from './lemma-names'
 
 describe('person-name list', () => {
   const names = loadNameList()
@@ -36,9 +43,15 @@ describe('person-name list', () => {
     const entries = parseNameAllowlist(text)
     const allow = loadNameAllowlist()
     expect(entries.length).toBe(allow.size)
-    expect(nameAllowed('en', 'WILL', allow)).toBe(true)
+    expect(nameAllowed('de', 'MARK', allow)).toBe(true)
     expect(nameAllowed('fr', 'KEVIN', allow)).toBe(false)
     expect(nameAllowed('fr', 'MARY', allow)).toBe(false)
+    expect(listedNameRejected('fr', 'KEVIN', names, allow)).toBe(true)
+    expect(listedNameRejected('fr', 'MARIE', names, allow)).toBe(true)
+    expect(listedNameRejected('de', 'MARK', names, allow)).toBe(false)
+    expect(text.includes('not a proper-name headword')).toBe(false)
+    expect(nameAllowed('en', 'WILL', allow)).toBe(false)
+    expect(nameAllowed('en', 'MARK', allow)).toBe(false)
     for (const e of entries) expect(onNameList(e.word, names)).toBe(true)
   })
 
