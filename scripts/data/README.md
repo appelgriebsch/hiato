@@ -26,7 +26,8 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | IT A1–C2 | CC-BY-SA-4.0 wordhoard v0.1.0 `it` frequency-rank bands, not CELI/CILS/PLIDA (ADR 0040). A1–B1 use `cefr_estimate` rank cuts; B2–C2 use the DE/ES index windows. `dictionary-it` is a build-time gate only |
 
 | `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate (lemma only; no substring) |
-| `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |
+| `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). A shipped lemma on this list fails `packs:check` whatever the gloss says (#366). Surnames capped by Wikidata sitelinks. |
+| `lemma-names-allow.txt` | Hiato curated | `lang WORD # reason` homographs that are real common words (and every slots 0–399 name-list lemma, ADR 0058). An entry whose word is not on `lemma-names.txt` is stale. |
 | `loanword-allowlist.txt` | Hiato curated | classroom internationalisms that nspell misses; `LANG WORD` (`*` = all pack langs) |
 | `hunspell-verdicts.json` | Hiato generated | `isWordOfLang` pass/fail for pack lemmas and gloss tokens. `packs:check` rewrites it when the stamp or a word is new; commit the file so CI skips constructing Hunspell. Not a copy of the dictionaries. |
 | `lemma-pos.json` | Hiato generated from the licensed pack sources (ADR 0055 / #315) | `lang → nfcUpper(word) → PackPos`. EN from the CEFR-J / Octanove CSV `pos` column, DE/ES/FR/IT from wordhoard v0.1.0 `word.pos` (UPOS NOUN/VERB/ADJ/ADV). Rebuild with `bun run packs:pos` after a source refresh; `packs:check` fails any shipped `pos` that contradicts this map. Not a copy of the sources. |

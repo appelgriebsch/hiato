@@ -23,7 +23,7 @@ import {
 } from '../src/packs/schema'
 import { spoilerContains } from '../src/packs/spoilers'
 import { isDeniedGlossToken, isDeniedLemma, isDeniedTextToken, letterTokens, loadDenylist, nfcUpper, spellingKey } from './lemma-denylist'
-import { loadNameList, onNameList } from './lemma-names'
+import { loadNameList, nameAllowed, onNameList } from './lemma-names'
 import { GATE_VERSION, isCurrentPass } from './example-gate'
 import { aunAsiMismatch, exampleSkipped } from './example-sentences'
 import { stockNameInText } from './tatoeba-stock-names'
@@ -504,8 +504,8 @@ export function validatePack(raw: unknown, file: string): WordPack {
       }
       synonyms = e.synonyms.map((s, j) => {
         const raw = assertString(s, `${file}: lemmas[${i}].synonyms[${j}]`)
-        // #362: for gate languages (pt) the chip language gate runs here too —
-        // every chip token must be a word of the pack language (Hunspell).
+        // #362 / #366: every pack language is chip-gated — every chip token
+        // must be a word of the pack language (Hunspell).
         const reason = invalidSynonymChipReason(
           word,
           raw,
@@ -550,6 +550,11 @@ export function validatePack(raw: unknown, file: string): WordPack {
       throw new Error(
         `${file}: lemmas[${i}] gloss not in pack language ${o.lang} — "${word}" / "${gloss}"`,
       )
+    }
+    // #366: a name-list lemma fails whatever the gloss says, unless the
+    // homograph allowlist records a common-word reading for this language.
+    if (onNameList(word, NAMES) && !nameAllowed(o.lang as string, word)) {
+      throw new Error(`${file}: lemmas[${i}] person-name list — "${word}"`)
     }
     if (
       (onNameList(word, NAMES) && isPersonNameGloss(gloss, o.lang as string)) ||

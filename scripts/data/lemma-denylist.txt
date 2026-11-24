@@ -936,3 +936,17 @@ de VERARSCHEN
 de AUSKOTZEN
 de DRECKSLOCH
 de SEXLEBEN
+# #366: slurs and vulgar insults still shipping at 8c94bdc. Language-scoped
+# so a homograph in another language is not blocked. Matched by spellingKey.
+# category: slur
+en GOOK
+pt BOCHES
+fr POUFFIASSE
+it INVERTITO
+it BATTONA
+de FLITTCHEN
+de FETTSACK
+# category: profanity
+es FOLLADOR
+es LAMECULOS
+de DRECKSACK

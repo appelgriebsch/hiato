@@ -592,3 +592,23 @@ describe('pattern allowlist', () => {
     expect(stale.map((e) => e.word)).toEqual(['CASA'])
   })
 })
+
+test('#366 slurs and vulgar insults are language-scoped exact hits', () => {
+  expect(isDeniedLemma('GOOK', undefined, 'en')).toBe(true)
+  expect(isDeniedLemma('gook', undefined, 'en')).toBe(true)
+  expect(isDeniedLemma('GOOK', undefined, 'de')).toBe(false)
+  for (const [lang, word] of [
+    ['pt', 'BOCHES'],
+    ['fr', 'POUFFIASSE'],
+    ['it', 'INVERTITO'],
+    ['it', 'BATTONA'],
+    ['de', 'FLITTCHEN'],
+    ['de', 'FETTSACK'],
+    ['es', 'FOLLADOR'],
+    ['es', 'LAMECULOS'],
+    ['de', 'DRECKSACK'],
+  ] as const) {
+    expect(isDeniedLemma(word, undefined, lang)).toBe(true)
+    expect(isDeniedLemma(word, undefined, 'en')).toBe(false)
+  }
+})

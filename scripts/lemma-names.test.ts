@@ -1,6 +1,8 @@
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
 import { describe, expect, test } from 'bun:test'
 import { isDeniedLemma } from './lemma-denylist'
-import { loadNameList, onNameList } from './lemma-names'
+import { loadNameAllowlist, loadNameList, nameAllowed, onNameList, parseNameAllowlist } from './lemma-names'
 
 describe('person-name list', () => {
   const names = loadNameList()
@@ -27,6 +29,17 @@ describe('person-name list', () => {
     expect(onNameList('CLASSROOM', names)).toBe(false)
     expect(onNameList('GRASS', names)).toBe(false)
     expect(onNameList('WATER', names)).toBe(false)
+  })
+
+  test('#366 allowlist keeps a common-word homograph and not a proper name', () => {
+    const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-names-allow.txt'), 'utf8')
+    const entries = parseNameAllowlist(text)
+    const allow = loadNameAllowlist()
+    expect(entries.length).toBe(allow.size)
+    expect(nameAllowed('en', 'WILL', allow)).toBe(true)
+    expect(nameAllowed('fr', 'KEVIN', allow)).toBe(false)
+    expect(nameAllowed('fr', 'MARY', allow)).toBe(false)
+    for (const e of entries) expect(onNameList(e.word, names)).toBe(true)
   })
 
   test('RYAN and JOEY live on the name list, not the NSFW denylist', () => {

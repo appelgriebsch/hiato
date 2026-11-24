@@ -2,22 +2,30 @@
  * Same-language synonym chip filters (ADR 0023).
  * Empty cache arrays mean unique referent — do not retry.
  *
- * #362: languages in CHIP_LANG_GATE_LANGS additionally get the chip language
- * gate — a chip must contain at least one letter (no stringified `[]` /
- * numeral chips) and every letter token must be a word of the pack language
+ * #362 / #366: languages in CHIP_LANG_GATE_LANGS get the chip language gate.
+ * A chip must contain a letter and no number (no stringified `[]`, numerals,
+ * `3º`, or `CO2`) and every letter token must be a word of the pack language
  * per `isWordOfLang` (for pt both dictionaries, dictionary-pt-pt and
- * dictionary-pt, are consulted) or the loanword allowlist. Add a language here
- * as its pack-QA issue lands; generation and packs:check apply the same rule.
+ * dictionary-pt, are consulted) or the loanword allowlist. Every pack
+ * language with a Hunspell dictionary is in the set. Generation and
+ * packs:check apply the same rule.
  */
 import { spoilerContains } from '../src/packs/spoilers'
 import type { MembershipLang } from './lang-membership'
-import { isDeniedTextToken, letterTokens, nfcUpper } from './lemma-denylist'
+import { isDeniedTextToken, letterTokens, spellingKey } from './lemma-denylist'
 
 export const SYNONYM_CHIP_CAP = 3
 export const SYNONYM_COVERAGE_FLOOR = 0.8
 
-/** Languages whose synonym chips are language-gated (#362 starts with pt). */
-export const CHIP_LANG_GATE_LANGS: ReadonlySet<MembershipLang> = new Set(['pt'])
+/** Every pack language that has a Hunspell dictionary (#366 extends #362). */
+export const CHIP_LANG_GATE_LANGS: ReadonlySet<MembershipLang> = new Set([
+  'en',
+  'de',
+  'es',
+  'pt',
+  'fr',
+  'it',
+])
 
 /** Membership predicate shape shared with lang-membership isWordOfLang. */
 export type ChipMembershipFn = (lang: MembershipLang, word: string) => boolean
@@ -56,12 +64,13 @@ export function invalidSynonymChipReason(
   if (chip !== chip.normalize('NFC')) return 'not NFC'
   const nfc = chip.normalize('NFC').trim()
   if (!nfc) return 'empty'
-  if (nfcUpper(nfc) === nfcUpper(lemma)) return 'equals lemma'
+  // #366: ß/SS and case fold, so LAß/LASS and GRÜSSE/Grüße are the lemma.
+  if (spellingKey(nfc) === spellingKey(lemma)) return 'equals lemma'
   if (spoilerContains(nfc, lemma)) return 'spoiler'
   if (chipTokensDenied(nfc, denylist, lang)) return 'denylist'
-  // #362: a chip is a word (or short phrase of words) of the pack language.
-  // Stringified `[]` / `[` / numeral chips have no letter and never ship.
-  if (!/\p{L}/u.test(nfc)) return 'not a word'
+  // #362 / #366: a chip is a word (or short phrase of words). No letter, or a
+  // number (digits, ², º, ₂), and it is not a word: `[]`, `7`, `3º`, `CO2`.
+  if (/\p{N}/u.test(nfc) || !/\p{L}/u.test(nfc)) return 'not a word'
   if (lang && CHIP_LANG_GATE_LANGS.has(lang as MembershipLang) && isWordOfLang) {
     for (const tok of letterTokens(nfc)) {
       if (!isWordOfLang(lang as MembershipLang, tok)) return `not a word of ${lang}`
@@ -85,7 +94,7 @@ export function filterSynonymChips(
     if (typeof raw !== 'string') continue
     const chip = raw.normalize('NFC').trim()
     if (invalidSynonymChipReason(lemma, chip, denylist, lang, isWordOfLang)) continue
-    const key = nfcUpper(chip)
+    const key = spellingKey(chip)
     if (seen.has(key)) continue
     seen.add(key)
     out.push(chip)
