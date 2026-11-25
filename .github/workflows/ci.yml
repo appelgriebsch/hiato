@@ -44,7 +44,7 @@ jobs:
           fi
       - run: bun run lint
       - run: bun run licenses:check
-      - run: bun audit --prod --audit-level=high
+      - run: bun audit --audit-level=high
       - name: actionlint and shellcheck
         run: |
           set -euo pipefail
