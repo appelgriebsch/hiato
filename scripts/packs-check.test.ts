@@ -419,7 +419,20 @@ describe('packs:check person-name gloss (#24)', () => {
         }),
         'en/b2.json',
       ),
-    ).toThrow(/person-name gloss/)
+    ).toThrow(/person-name list/)
+  })
+
+  test('rejects a listed name whatever the gloss says (#366)', () => {
+    expect(() =>
+      validatePack(
+        pack({
+          lang: 'fr',
+          cefr: 'b1',
+          lemmas: [{ word: 'KEVIN', gloss: 'liquide utilisé comme solvant' }],
+        }),
+        'fr/b1.json',
+      ),
+    ).toThrow(/person-name list/)
   })
 
   test('rejects a French name-list lemma with a bare person gloss', () => {
@@ -432,19 +445,19 @@ describe('packs:check person-name gloss (#24)', () => {
         }),
         'fr/b1.json',
       ),
-    ).toThrow(/person-name gloss/)
+    ).toThrow(/person-name list/)
   })
 
   test('keeps a name-list lemma with a common-noun gloss', () => {
     const p = validatePack(
       pack({
-        lang: 'en',
+        lang: 'de',
         cefr: 'a1',
-        lemmas: [{ word: 'WILL', gloss: 'a legal document of wishes' }],
+        lemmas: [{ word: 'MARK', gloss: 'ein altes Geld in Deutschland' }],
       }),
-      'en/a1.json',
+      'de/a1.json',
     )
-    expect(p.lemmas[0]?.word).toBe('WILL')
+    expect(p.lemmas[0]?.word).toBe('MARK')
   })
 })
 

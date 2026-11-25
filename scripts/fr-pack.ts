@@ -77,10 +77,10 @@ function foldTaken(
 }
 
 /**
- * Hangman-filtered FR rows in frequency order.
+ * Hangman-filtered FR/IT rows in frequency order.
  * Drops inflected VERB rows (ADJ participles stay). Keeps the more frequent
- * È/É spelling variant via foldKey. Does not apply the person-name skip —
- * FR uses the name-list AND person-name-gloss rule at every level.
+ * È/É spelling variant via foldKey. The person-name skip is the caller's
+ * `accept` (#366: listed names are out in every language unless allowlisted).
  */
 export function filterFrRows(
   rows: readonly FrSourceRow[],

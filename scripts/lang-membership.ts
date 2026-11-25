@@ -40,6 +40,7 @@ const LFS_POINTER = 'version https://git-lfs.github.com/spec/v1'
 const LOCK_PACKAGES = [
   'dictionary-de',
   'dictionary-en',
+  'dictionary-en-gb',
   'dictionary-es',
   'dictionary-fr',
   'dictionary-it',
@@ -50,6 +51,7 @@ const LOCK_PACKAGES = [
 const DICT_PACKAGES = [
   'dictionary-de',
   'dictionary-en',
+  'dictionary-en-gb',
   'dictionary-es',
   'dictionary-fr',
   'dictionary-it',
@@ -363,7 +365,7 @@ export function installFixtureSpellersFromDir(dir = TESTDATA): void {
 
 /** Hunspell packages per language; a lemma is a member if any of them accepts it. */
 export const LANG_DICTS: Record<MembershipLang, readonly string[]> = {
-  en: ['dictionary-en'],
+  en: ['dictionary-en', 'dictionary-en-gb'],
   de: ['dictionary-de'],
   es: ['dictionary-es'],
   fr: ['dictionary-fr'],

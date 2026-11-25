@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 26,
   "lang": "fr",
   "cefr": "b1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -71,12 +71,12 @@
     {
       "word": "SAMEDI",
       "gloss": "jour qui suit le vendredi",
-      "synonyms": [
-        "week-end"
-      ],
       "example": "À samedi !",
       "pos": "noun",
-      "ipa": "/sam.d͡zi/"
+      "ipa": "/sam.d͡zi/",
+      "synonyms": [
+        "week-end"
+      ]
     },
     {
       "word": "PARER",
@@ -448,9 +448,6 @@
     {
       "word": "DIMANCHE",
       "gloss": "septième jour de la semaine",
-      "synonyms": [
-        "week-end"
-      ],
       "example": "À dimanche.",
       "pos": "noun",
       "ipa": "/d͡zi.mãʃ/",
@@ -458,6 +455,9 @@
         "endimanché",
         "endimancher",
         "dominical"
+      ],
+      "synonyms": [
+        "week-end"
       ]
     },
     {
@@ -2077,8 +2077,7 @@
       "word": "MARINE",
       "gloss": "force armée qui opère sur mer",
       "synonyms": [
-        "flotte",
-        "navy"
+        "flotte"
       ],
       "example": "Il était dans la marine.",
       "pos": "noun",
@@ -5900,18 +5899,14 @@
       "pos": "noun"
     },
     {
-      "word": "SPENCER",
-      "gloss": "système de fermeture à glissière, notamment pour les vêtements",
-      "pos": "noun",
-      "example": "Le spencer de mon blouson est cassé, il faut le changer."
+      "word": "COLONIE",
+      "gloss": "groupe de personnes installées dans un pays nouveau.",
+      "pos": "noun"
     },
     {
-      "word": "TEDDY",
-      "gloss": "ours en peluche",
-      "synonyms": [
-        "nounours"
-      ],
-      "pos": "adverb"
+      "word": "IMMUNITÉ",
+      "gloss": "Protection du corps contre une maladie.",
+      "pos": "noun"
     },
     {
       "word": "SUR",
@@ -5932,10 +5927,9 @@
       "example": "Le médecin peut droguer le patient avant une opération difficile."
     },
     {
-      "word": "RON",
-      "gloss": "abréviation de 'ronin', guerrier sans maître dans la culture japonaise",
-      "pos": "noun",
-      "example": "Dans l'histoire du Japon, un ron a choisi de servir une cause juste plutôt que de rester sans but."
+      "word": "CHANTEUR",
+      "gloss": "Personne qui interprète des airs devant un public.",
+      "pos": "noun"
     },
     {
       "word": "DÉFILER",
@@ -5978,8 +5972,8 @@
       "example": "Tout est illusion."
     },
     {
-      "word": "ETHAN",
-      "gloss": "liquide utilisé comme solvant",
+      "word": "PROMENADE",
+      "gloss": "Sortie calme à pied, pour le plaisir.",
       "pos": "noun"
     },
     {
@@ -6254,10 +6248,9 @@
       "example": "Quelle bêtise !"
     },
     {
-      "word": "TINA",
-      "gloss": "objet creux servant à déplacer ou mélanger des liquides",
-      "pos": "adjective",
-      "example": "La tina est pleine d’eau pour arroser les plantes."
+      "word": "LOOK",
+      "gloss": "Apparence générale d'une personne.",
+      "pos": "noun"
     },
     {
       "word": "IMPÔT",
@@ -6426,8 +6419,8 @@
       "example": "Tu es égoïste."
     },
     {
-      "word": "CASEY",
-      "gloss": "boîte ou conteneur",
+      "word": "CERVELLE",
+      "gloss": "Matière qui est dans la tête.",
       "pos": "noun"
     },
     {
@@ -6437,8 +6430,8 @@
       "example": "Es-tu veuve ?"
     },
     {
-      "word": "EDWARD",
-      "gloss": "unité de mesure de pression",
+      "word": "MINIMUM",
+      "gloss": "La plus petite quantité possible.",
       "pos": "noun"
     },
     {
@@ -6563,10 +6556,9 @@
       "example": "As-tu ton bip ?"
     },
     {
-      "word": "HANNAH",
-      "gloss": "unité de mesure ancienne pour les liquides en Écosse",
-      "pos": "verb",
-      "example": "Au marché, on vendait parfois du lait en mesures d'une hannah."
+      "word": "INFILTRER",
+      "gloss": "Entrer dans un lieu sans être vu.",
+      "pos": "verb"
     },
     {
       "word": "FIERTÉ",
@@ -6724,14 +6716,14 @@
       "example": "Il est dans sa cabane."
     },
     {
-      "word": "GUS",
-      "gloss": "bruit sourd et prolongé, comme celui d'un moteur ou d'un avion",
+      "word": "BARRIÈRE",
+      "gloss": "chose qui bloque le passage.",
       "pos": "noun"
     },
     {
-      "word": "GIBBS",
-      "gloss": "unité de mesure de l'entropie en thermodynamique",
-      "pos": "adverb"
+      "word": "COMPLIQUER",
+      "gloss": "Rendre une chose plus ardue à suivre.",
+      "pos": "verb"
     },
     {
       "word": "SURVIE",
@@ -6836,9 +6828,9 @@
       "example": "Envoie-moi un mail."
     },
     {
-      "word": "RANDY",
-      "gloss": "un homme au caractère joyeux",
-      "pos": "noun"
+      "word": "SORTANT",
+      "gloss": "Qui part, ou qui quitte un lieu.",
+      "pos": "adjective"
     },
     {
       "word": "DÉFI",
@@ -6947,9 +6939,9 @@
       "example": "Aucun regret."
     },
     {
-      "word": "KEN",
-      "gloss": "système de positionnement par satellite",
-      "pos": "verb"
+      "word": "ZOO",
+      "gloss": "Parc où l'on montre des animaux au public.",
+      "pos": "noun"
     },
     {
       "word": "PROSTITUER",
@@ -7015,15 +7007,14 @@
       "example": "J'ai un voisin homo."
     },
     {
-      "word": "CARRIE",
-      "gloss": "charrette à bras utilisée pour le transport de charges",
+      "word": "CONVICTION",
+      "gloss": "idée dont on est sûr.",
       "pos": "noun"
     },
     {
       "word": "AUTOPSIER",
       "gloss": "examiner un cadavre pour déterminer la cause du décès.",
       "synonyms": [
-        "dissequer",
         "examiner"
       ],
       "pos": "verb",
@@ -7217,10 +7208,9 @@
       "example": "J'ai un jumeau."
     },
     {
-      "word": "BLAKE",
-      "gloss": "type de verre dépoli utilisé en optique",
-      "pos": "noun",
-      "example": "Le verre en blake est utilisé dans les instruments optiques."
+      "word": "LINGE",
+      "gloss": "Tissus que l'on lave, comme les draps.",
+      "pos": "noun"
     },
     {
       "word": "RIZ",
@@ -7475,9 +7465,9 @@
       "example": "Il va au collège."
     },
     {
-      "word": "KEITH",
-      "gloss": "variété de pomme de terre à chair ferme",
-      "pos": "verb"
+      "word": "FONDATION",
+      "gloss": "Base sur laquelle on construit, ou un organisme qui aide.",
+      "pos": "noun"
     },
     {
       "word": "ÉVANOUIR",
@@ -7657,10 +7647,9 @@
       "example": "Je suivis la recette."
     },
     {
-      "word": "CONNOR",
-      "gloss": "moteur électrique utilisé dans les outils portatifs",
-      "pos": "noun",
-      "example": "Le **connor** de ma perceuse est puissant mais silencieux."
+      "word": "VULNÉRABLE",
+      "gloss": "Facile à blesser ou à atteindre.",
+      "pos": "adjective"
     },
     {
       "word": "RIGOLE",
@@ -7672,10 +7661,9 @@
       "example": "L'eau s'écoule dans la rigole le long du chemin."
     },
     {
-      "word": "ELLEN",
-      "gloss": "une femme nommée ainsi",
-      "pos": "noun",
-      "example": "Ellen ne parle pas anglais."
+      "word": "PANIER",
+      "gloss": "Objet léger pour porter des choses.",
+      "pos": "noun"
     },
     {
       "word": "MENACE",
@@ -7812,9 +7800,9 @@
       "example": "Qu'est-ce que la longueur d'onde ?"
     },
     {
-      "word": "JEREMY",
-      "gloss": "variété de pomme à chair ferme et croquante",
-      "pos": "noun"
+      "word": "CONFONDRE",
+      "gloss": "Prendre une chose pour une autre.",
+      "pos": "verb"
     },
     {
       "word": "LOYAUTÉ",
@@ -8022,10 +8010,9 @@
       "example": "Qui est mourant ?"
     },
     {
-      "word": "BART",
-      "gloss": "tige métallique pour soulever ou déplacer des objets",
-      "pos": "noun",
-      "example": "Utilisez le bart pour soulever la lourde boîte métallique."
+      "word": "AGRESSIF",
+      "gloss": "Qui attaque ou qui cherche la bagarre.",
+      "pos": "adjective"
     },
     {
       "word": "INDIVIDU",
@@ -8047,8 +8034,8 @@
       "example": "Poutine achète un revolver."
     },
     {
-      "word": "HOLLY",
-      "gloss": "arbuste ornemental à feuilles persistantes et baies rouges",
+      "word": "FACTEUR",
+      "gloss": "Personne qui apporte le courrier.",
       "pos": "noun"
     },
     {
@@ -8117,10 +8104,9 @@
       "example": "Mon frère est devenu pasteur."
     },
     {
-      "word": "MALCOLM",
-      "gloss": "type de filet de pêche traditionnel",
-      "pos": "noun",
-      "example": "Le pêcheur a réparé le malcolm avant de partir en mer."
+      "word": "ESCROC",
+      "gloss": "Personne qui vole par la tromperie.",
+      "pos": "noun"
     },
     {
       "word": "REIN",
@@ -8288,23 +8274,19 @@
     {
       "word": "FRAGILE",
       "gloss": "facile à casser ou à blesser",
-      "synonyms": [
-        "DELICAT"
-      ],
       "pos": "adjective",
       "example": "Elle est fragile."
     },
     {
-      "word": "CLAY",
-      "gloss": "terre fine utilisée pour fabriquer des objets",
+      "word": "COUPURE",
+      "gloss": "Blessure fine, ou une pause dans un texte.",
       "pos": "noun"
     },
     {
       "word": "SOUMETTRE",
       "gloss": "faire accepter une idée ou une décision",
       "synonyms": [
-        "OBÉIR",
-        "CEDER"
+        "OBÉIR"
       ],
       "pos": "verb",
       "example": "Je refuse de m'y soumettre."
@@ -8326,8 +8308,8 @@
       "example": "Drôle de mélange."
     },
     {
-      "word": "GREEN",
-      "gloss": "couleur de l'herbe ou des feuilles",
+      "word": "AMBASSADE",
+      "gloss": "lieu d’un pays à l’étranger.",
       "pos": "noun"
     },
     {
@@ -8351,14 +8333,14 @@
       "example": "Elle s'est fait écarter."
     },
     {
-      "word": "ASHLEY",
-      "gloss": "style de fauteuil en osier ou en rotin",
+      "word": "SAGESSE",
+      "gloss": "Qualité de celui qui juge avec calme.",
       "pos": "noun"
     },
     {
-      "word": "HAROLD",
-      "gloss": "outil manuel pour enfoncer des clous ou des chevilles",
-      "pos": "adjective"
+      "word": "CHÈVRE",
+      "gloss": "Animal de la ferme qui donne du lait.",
+      "pos": "noun"
     },
     {
       "word": "ÉCONOMISER",
@@ -8463,9 +8445,9 @@
       "example": "La famille a organisé une funéraille pour célébrer la vie de leur proche."
     },
     {
-      "word": "EVAN",
-      "gloss": "unité de mesure de la résistance électrique",
-      "pos": "noun"
+      "word": "SPIRITUEL",
+      "gloss": "Qui concerne l'âme, ou qui est plein d'esprit.",
+      "pos": "adjective"
     },
     {
       "word": "APERCEVOIR",
@@ -8531,8 +8513,8 @@
       "example": "On se fait un resto ce soir ?"
     },
     {
-      "word": "NEIL",
-      "gloss": "fromage à croûte fleurie et texture souple",
+      "word": "AVEU",
+      "gloss": "Le fait de reconnaître ce que l'on a fait.",
       "pos": "noun"
     },
     {
@@ -8551,9 +8533,9 @@
       "example": "Je ne bois pas de soda."
     },
     {
-      "word": "LOGAN",
-      "gloss": "type de véhicule tout-terrain utilisé en compétition",
-      "pos": "adjective"
+      "word": "SÉCHER",
+      "gloss": "Enlever l'eau d'une chose.",
+      "pos": "verb"
     },
     {
       "word": "CÉRÉBRAL",
@@ -8694,9 +8676,9 @@
       "example": "C'est un conte."
     },
     {
-      "word": "MASON",
-      "gloss": "personne qui construit en pierre ou brique.",
-      "pos": "adjective"
+      "word": "DÉPRESSION",
+      "gloss": "Tristesse profonde qui dure, ou un creux dans le sol.",
+      "pos": "noun"
     },
     {
       "word": "PERSUADER",
@@ -8884,9 +8866,9 @@
       "example": "J'ai du chagrin."
     },
     {
-      "word": "EARL",
-      "gloss": "ferme gérée par une personne seule ou un groupe",
-      "pos": "noun"
+      "word": "TROUBLE",
+      "gloss": "Qui n'est pas clair, ou un désordre.",
+      "pos": "adjective"
     },
     {
       "word": "OUT",
@@ -8923,9 +8905,9 @@
       "example": "Je dois acheter un nouveau scanner."
     },
     {
-      "word": "JOAN",
-      "gloss": "variété ancienne de poire à peau épaisse",
-      "pos": "verb"
+      "word": "QUELCONQUE",
+      "gloss": "Sans qualité particulière, ordinaire.",
+      "pos": "adjective"
     },
     {
       "word": "LOUPER",
@@ -8958,10 +8940,9 @@
       "example": "Je l'ai écrite."
     },
     {
-      "word": "ALLISON",
-      "gloss": "une personne qui a un caractère doux et amical.",
-      "pos": "noun",
-      "example": "Allison est toujours aimable avec tout le monde."
+      "word": "SURVIVANT",
+      "gloss": "Personne qui est encore en vie après un danger.",
+      "pos": "noun"
     },
     {
       "word": "HOUSE",
@@ -9100,15 +9081,14 @@
       "example": "Il dépense trop."
     },
     {
-      "word": "RITA",
-      "gloss": "mot anglais que l’on lit dans des dialogues traduits",
-      "pos": "adjective"
+      "word": "POÈTE",
+      "gloss": "Personne qui écrit des poèmes.",
+      "pos": "noun"
     },
     {
       "word": "ROUER",
       "gloss": "frapper violemment à coups de pied.",
       "synonyms": [
-        "frappper",
         "battre"
       ],
       "pos": "verb"
@@ -9205,10 +9185,9 @@
       "example": "Ce n'est pas un kilogramme."
     },
     {
-      "word": "MARGARET",
-      "gloss": "une personne dont le sourire inspire confiance.",
-      "pos": "noun",
-      "example": "Margaret est une personne dont le sourire inspire confiance."
+      "word": "MOINE",
+      "gloss": "Homme qui vit dans un monastère.",
+      "pos": "noun"
     },
     {
       "word": "OFFENSER",
@@ -9276,8 +9255,8 @@
       "example": "Aide-moi à défaire ce nœud."
     },
     {
-      "word": "PAIGE",
-      "gloss": "nom désignant un assistant ou un page",
+      "word": "VANTER",
+      "gloss": "Parler de soi avec trop de fierté.",
       "pos": "verb"
     },
     {
@@ -9389,10 +9368,9 @@
       "example": "Un vent fort commença à souffler."
     },
     {
-      "word": "LIAM",
-      "gloss": "petit bateau de pêche à fond plat",
-      "pos": "noun",
-      "example": "Le pêcheur répare son vieux liam sur la plage."
+      "word": "VIEILLIR",
+      "gloss": "Devenir plus âgé avec le temps.",
+      "pos": "verb"
     },
     {
       "word": "VILAIN",
@@ -9435,10 +9413,9 @@
       "example": "C'est une vedette."
     },
     {
-      "word": "KITTY",
-      "gloss": "petit animal domestique qui aime jouer",
-      "pos": "noun",
-      "example": "Kitty ne peut pas encore lire."
+      "word": "PLAFOND",
+      "gloss": "Surface qui ferme une pièce par le haut.",
+      "pos": "noun"
     },
     {
       "word": "RELÈVE",
@@ -9508,8 +9485,8 @@
       "example": "C'est mon entraîneur."
     },
     {
-      "word": "SHAWN",
-      "gloss": "appareil de mesure de la vitesse du vent",
+      "word": "MOUSTACHE",
+      "gloss": "Poils au-dessus de la lèvre.",
       "pos": "noun"
     },
     {
@@ -9570,10 +9547,9 @@
       "example": "Nous avons un ancêtre commun."
     },
     {
-      "word": "MEGAN",
-      "gloss": "une femme dont la voix porte souvent de la douceur.",
-      "pos": "adjective",
-      "example": "Megan est une femme dont la voix porte souvent de la douceur quand elle chante."
+      "word": "MÉLANGER",
+      "gloss": "Mettre plusieurs choses ensemble.",
+      "pos": "verb"
     },
     {
       "word": "BALADE",
@@ -9604,10 +9580,9 @@
       "pos": "verb"
     },
     {
-      "word": "STEPHEN",
-      "gloss": "un homme connu pour sa sagesse",
-      "pos": "noun",
-      "example": "Stephen est une personne qui donne toujours des conseils avisés."
+      "word": "HORAIRE",
+      "gloss": "Tableau des heures d'un train ou d'un travail.",
+      "pos": "noun"
     },
     {
       "word": "MATHS",
@@ -9728,8 +9703,8 @@
       "example": "Où est son atelier ?"
     },
     {
-      "word": "MATTHEW",
-      "gloss": "type de clou à tête large pour charpente",
+      "word": "DENTISTE",
+      "gloss": "Personne qui soigne la bouche.",
       "pos": "noun"
     },
     {
@@ -9771,10 +9746,9 @@
       "example": "As-tu eu une prime ?"
     },
     {
-      "word": "JENNA",
-      "gloss": "une personne qui aime explorer de nouveaux endroits.",
-      "pos": "adjective",
-      "example": "Jenna adore découvrir des villes inconnues pendant ses vacances."
+      "word": "POLIR",
+      "gloss": "Rendre une surface brillante.",
+      "pos": "verb"
     },
     {
       "word": "SEC",
@@ -9845,10 +9819,9 @@
       "example": "La foule chanta un gloria solennel dans la vieille cathédrale."
     },
     {
-      "word": "NELSON",
-      "gloss": "manœuvre en lutte consistant à enserrer le cou de l'adversaire",
-      "pos": "noun",
-      "example": "Le lutteur a utilisé un puissant nelson pour immobiliser son adversaire."
+      "word": "FERMIER",
+      "gloss": "Personne qui dirige une exploitation agricole.",
+      "pos": "noun"
     },
     {
       "word": "COLONNE",
@@ -9890,9 +9863,9 @@
       "example": "Il succèdera au trône."
     },
     {
-      "word": "ISLAND",
-      "gloss": "territoire entouré d'eau, une île.",
-      "pos": "noun"
+      "word": "SEMER",
+      "gloss": "Mettre en terre ce qui doit pousser.",
+      "pos": "verb"
     },
     {
       "word": "BLÉ",
@@ -10189,9 +10162,9 @@
       "example": "J'ai frit la pâte."
     },
     {
-      "word": "CRAIG",
-      "gloss": "nom d'origine ancienne signifiant 'roche'",
-      "pos": "verb"
+      "word": "PINCE",
+      "gloss": "Outil à deux branches pour saisir un objet.",
+      "pos": "noun"
     },
     {
       "word": "EMPIRER",
@@ -10243,10 +10216,9 @@
       "example": "Il est du parti communiste."
     },
     {
-      "word": "WENDY",
-      "gloss": "une femme dont l'énergie est souvent contagieuse.",
-      "pos": "adverb",
-      "example": "Wendy est toujours pleine d’énergie, son sourire est vraiment contagieux !"
+      "word": "SOUPÇON",
+      "gloss": "Idée que quelqu'un a peut-être mal agi.",
+      "pos": "noun"
     },
     {
       "word": "RACINE",
@@ -10259,8 +10231,8 @@
       "example": "La racine est bien arrosée."
     },
     {
-      "word": "FORD",
-      "gloss": "nom d'une entreprise qui fabrique des véhicules",
+      "word": "INTIMITÉ",
+      "gloss": "Vie privée, ce que l'on ne montre pas aux autres.",
       "pos": "noun"
     },
     {
@@ -10365,8 +10337,8 @@
       "example": "C'est déjà octobre."
     },
     {
-      "word": "SIMPSON",
-      "gloss": "unité de mesure de la résistance électrique",
+      "word": "DEMEURE",
+      "gloss": "Grande maison où l'on habite.",
       "pos": "noun"
     },
     {
@@ -10490,10 +10462,9 @@
       "example": "Je ne peux pas remuer mon bras."
     },
     {
-      "word": "KONG",
-      "gloss": "un grand singe connu pour sa force impressionnante.",
-      "pos": "noun",
-      "example": "Kong est un grand singe très fort qui vit sur une île."
+      "word": "AMBIANCE",
+      "gloss": "Atmosphère d'un lieu, la façon dont on s'y sent.",
+      "pos": "noun"
     },
     {
       "word": "RELÂCHER",
@@ -10741,9 +10712,9 @@
       "pos": "verb"
     },
     {
-      "word": "ANTHONY",
-      "gloss": "petit contenant en métal pour liquides",
-      "pos": "verb"
+      "word": "MARTEAU",
+      "gloss": "Outil lourd pour frapper un clou.",
+      "pos": "noun"
     },
     {
       "word": "RÉDUIT",

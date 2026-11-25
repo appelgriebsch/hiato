@@ -15,6 +15,7 @@ Direct dependencies declared by this repository. Rows returned by the PR #40 rev
 | clsx | 2.1.1 | MIT | | none found |
 | dictionary-de | 3.0.0 | unknown | | not checked |
 | dictionary-en | 4.0.0 | unknown | | not checked |
+| dictionary-en-gb | 3.0.0 | MIT AND BSD | | not checked |
 | dictionary-es | 4.0.0 | unknown | | not checked |
 | dictionary-fr | 3.0.0 | MPL-2.0 | | not checked |
 | dictionary-it | 2.0.0 | GPL-3.0 | | none found |

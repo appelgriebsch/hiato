@@ -26,7 +26,8 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | IT A1–C2 | CC-BY-SA-4.0 wordhoard v0.1.0 `it` frequency-rank bands, not CELI/CILS/PLIDA (ADR 0040). A1–B1 use `cefr_estimate` rank cuts; B2–C2 use the DE/ES index windows. `dictionary-it` is a build-time gate only |
 
 | `lemma-denylist.txt` | Hiato curated | exact-match NSFW/violence/slur gate (lemma only; no substring) |
-| `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). Drop a pack lemma only when it is on this list **and** the gloss is a person-name gloss. Surnames capped by Wikidata sitelinks. |
+| `lemma-names.txt` | Wikidata CC0 given/family-name labels + US SSA national names (CC0) + pack residuals | exact-match person names (hangman 3–10). A shipped lemma on this list fails `packs:check` whatever the gloss says (#366). Surnames capped by Wikidata sitelinks. |
+| `lemma-names-allow.txt` | Hiato curated | `lang WORD # reason` homographs that are real common words (and every slots 0–399 name-list lemma, ADR 0058). An entry whose word is not on `lemma-names.txt` is stale. |
 | `loanword-allowlist.txt` | Hiato curated | classroom internationalisms that nspell misses; `LANG WORD` (`*` = all pack langs) |
 | `hunspell-verdicts.json` | Hiato generated | `isWordOfLang` pass/fail for pack lemmas and gloss tokens. `packs:check` rewrites it when the stamp or a word is new; commit the file so CI skips constructing Hunspell. Not a copy of the dictionaries. |
 | `lemma-pos.json` | Hiato generated from the licensed pack sources (ADR 0055 / #315) | `lang → nfcUpper(word) → PackPos`. EN from the CEFR-J / Octanove CSV `pos` column, DE/ES/FR/IT from wordhoard v0.1.0 `word.pos` (UPOS NOUN/VERB/ADJ/ADV). Rebuild with `bun run packs:pos` after a source refresh; `packs:check` fails any shipped `pos` that contradicts this map. Not a copy of the sources. |
@@ -38,7 +39,7 @@ Shipped pack license bands (pack JSON, ADR 0029):
 | `gloss-cache/*.json` | Hiato generated | real same-language learner glosses for expand (ADR 0030) |
 | `synonym-cache/*.json` | Hiato generated | same-language synonym chips; C1/C2 target ≥80%; `[]` = unique referent (do not retry) |
 
-Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL, MIT AND BSD), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-it` (Italian Writing Aids / PLIO, GPL-3.0; membership gate only — lemmas are not mined from the `.dic`), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
+Build-time spellcheck (devDependencies, **not** shipped in the PWA): `nspell` plus Hunspell dictionaries `dictionary-en` (SCOWL en-US, MIT AND BSD), `dictionary-en-gb` (SCOWL en-GB, MIT AND BSD; a chip or lemma is English if either dictionary accepts it), `dictionary-de` (igerman98, GPL-2.0 OR GPL-3.0), `dictionary-es` (RLA-ES, GPL-3.0 OR LGPL-3.0 OR MPL-1.1), `dictionary-fr` (Grammalecte classique, MPL-2.0), `dictionary-it` (Italian Writing Aids / PLIO, GPL-3.0; membership gate only — lemmas are not mined from the `.dic`), `dictionary-pt` (LGPL-3.0 OR MPL-2.0), `dictionary-pt-pt` (Natura, GPL-2.0 OR LGPL-2.1 OR MPL-1.1). Used only by `scripts/` (`ensureDicts` / `isWordOfLang`); never imported from `src/`.
 
 ## Hint ceiling caches (issue #55 / epic #49)
 

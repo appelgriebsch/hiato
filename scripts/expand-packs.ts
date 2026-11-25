@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSy
 import path from 'node:path'
 import { gunzipSync } from 'node:zlib'
 import { loadDenylist, nfcUpper } from './lemma-denylist'
-import { loadNameList, onNameList } from './lemma-names'
+import { listedNameRejected, loadNameList, onNameList } from './lemma-names'
 import { isPersonNameGloss } from './name-gloss'
 import { isTemplateGloss, isWrongLanguageGloss } from './gloss-quality'
 import { dictsReady, ensureDicts, isWordOfLang } from './lang-membership'
@@ -90,10 +90,9 @@ function okLemma(lang: Lang, raw: string, skipNameList = true): string | null {
   const word = hangmanOk(lang, raw, DENY)
   if (!word || EXTRA_STOP.has(word)) return null
   if (!isWordOfLang(lang, word)) return null
-  // B2–C2 frequency bands dump proper names; skip the #24 name list entirely
-  // (A1–B1 still keep WILL/MARK with a common-noun gloss).
-  // FR/IT keep the name at every level unless the gloss is a person-name gloss.
-  if (skipNameList && lang !== 'fr' && lang !== 'it' && onNameList(word, NAMES)) return null
+  // #366: every language, including fr and it. A listed name is out whatever
+  // the gloss would say. Allowlisted homographs (WILL, MERVEILLE) stay.
+  if (skipNameList && listedNameRejected(lang, word, NAMES)) return null
   return word
 }
 
@@ -378,6 +377,8 @@ const GLOSS_STYLE: Record<Lang, string> = {
 
 function glossRejected(lang: Lang, word: string, gloss: string | undefined): boolean {
   if (!gloss || isTemplateGloss(gloss) || spoiler(gloss, word)) return true
+  // #366: the gloss cannot rescue a listed name. Allowlisted homographs stay.
+  if (listedNameRejected(lang, word, NAMES)) return true
   if (onNameList(word, NAMES) && isPersonNameGloss(gloss, lang)) return true
   return isWrongLanguageGloss(lang, gloss, isWordOfLang)
 }
@@ -786,7 +787,10 @@ async function runFrequencyLang(
   const plan = selectFrBands(rows, {
     lang,
     inflectedVerbs: inflected,
-    accept: (word) => !EXTRA_STOP.has(word) && isWordOfLang(lang, word),
+    accept: (word) =>
+      !EXTRA_STOP.has(word) &&
+      isWordOfLang(lang, word) &&
+      !listedNameRejected(lang, word, NAMES),
     denylist: DENY,
     target: TARGET,
     surplus: 40,

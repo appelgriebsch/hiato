@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 21,
   "lang": "it",
   "cefr": "a2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -227,7 +227,6 @@
     {
       "word": "TESTIMONE",
       "gloss": "persona che ha visto un fatto e lo racconta",
-      "synonyms": [],
       "example": "È un testimone.",
       "pos": "noun",
       "ipa": "/testiˈmɔne/",
@@ -269,7 +268,6 @@
     {
       "word": "TERZO",
       "gloss": "che viene dopo il secondo",
-      "synonyms": [],
       "example": "Ero terzo.",
       "pos": "adjective",
       "family": [
@@ -319,13 +317,11 @@
         "internamente",
         "internare"
       ],
-      "ipa": "/inˈtɛrno/",
-      "synonyms": []
+      "ipa": "/inˈtɛrno/"
     },
     {
       "word": "PEGGIO",
       "gloss": "in modo più cattivo",
-      "synonyms": [],
       "example": "Cos'è peggio?",
       "pos": "noun",
       "ipa": "/ˈpɛdd͡ʒo/",
@@ -761,7 +757,6 @@
     {
       "word": "COMPLEANNO",
       "gloss": "giorno della nascita, che si festeggia ogni dodici mesi",
-      "synonyms": [],
       "example": "Buon compleanno!",
       "pos": "noun",
       "ipa": "/kompleˈanno/"
@@ -769,7 +764,6 @@
     {
       "word": "VISITA",
       "gloss": "l'andare a trovare qualcuno",
-      "synonyms": [],
       "example": "A volte mi visita.",
       "pos": "noun",
       "ipa": "/ˈvizita/",
@@ -994,7 +988,6 @@
     {
       "word": "INGLESE",
       "gloss": "lingua parlata a Londra e negli Stati Uniti",
-      "synonyms": [],
       "example": "Era inglese.",
       "pos": "adjective",
       "ipa": "/inˈɡlese/",
@@ -1031,7 +1024,6 @@
     {
       "word": "BIRRA",
       "gloss": "bevanda gialla con le bollicine, fatta con l'orzo",
-      "synonyms": [],
       "example": "Bevi birra?",
       "pos": "noun",
       "ipa": "/ˈbirra/",
@@ -1044,7 +1036,6 @@
     {
       "word": "SECONDO",
       "gloss": "che viene subito dopo il primo",
-      "synonyms": [],
       "example": "Dammi un secondo.",
       "pos": "noun",
       "ipa": "/seˈkondo/",
@@ -1085,9 +1076,6 @@
     {
       "word": "INVITARE",
       "gloss": "chiedere a qualcuno di venire",
-      "synonyms": [
-        "convitare"
-      ],
       "example": "Chi dobbiamo invitare?",
       "pos": "verb",
       "ipa": "/inviˈtare/",
@@ -1095,6 +1083,9 @@
         "invitante",
         "invitato",
         "invito"
+      ],
+      "synonyms": [
+        "convitare"
       ]
     },
     {
@@ -1263,7 +1254,6 @@
     {
       "word": "FRONTE",
       "gloss": "parte del viso sopra gli occhi",
-      "synonyms": [],
       "example": "Mi baciò in fronte.",
       "pos": "noun",
       "ipa": "/ˈfronte/",
@@ -1585,7 +1575,6 @@
     {
       "word": "STAMATTINA",
       "gloss": "oggi, prima di mezzogiorno",
-      "synonyms": [],
       "example": "Dov'eri stamattina?",
       "pos": "adverb",
       "ipa": "/stamatˈtina/",
@@ -1654,8 +1643,7 @@
         "centimetro",
         "decimetro",
         "lungometraggio"
-      ],
-      "synonyms": []
+      ]
     },
     {
       "word": "MERITARE",
@@ -1700,7 +1688,6 @@
     {
       "word": "GOVERNO",
       "gloss": "chi guida lo stato",
-      "synonyms": [],
       "example": "Odia il governo.",
       "pos": "noun",
       "ipa": "/ɡoˈvɛrno/",
@@ -1787,14 +1774,12 @@
     {
       "word": "DITO",
       "gloss": "ognuna delle cinque parti della mano",
-      "synonyms": [],
       "example": "Era il mio dito.",
       "pos": "noun",
       "ipa": "/ˈdito/",
       "family": [
         "additare",
-        "ditale",
-        "ditalino"
+        "ditale"
       ]
     },
     {
@@ -1880,7 +1865,6 @@
     {
       "word": "OPERAZIONE",
       "gloss": "lavoro del chirurgo, o calcolo",
-      "synonyms": [],
       "example": "L'operazione andò bene.",
       "pos": "noun",
       "ipa": "/operaˈtsjone/"
@@ -2054,7 +2038,6 @@
     {
       "word": "VOLO",
       "gloss": "viaggio in aereo",
-      "synonyms": [],
       "example": "Buon volo.",
       "pos": "noun",
       "ipa": "/ˈvolo/",
@@ -2112,7 +2095,6 @@
     {
       "word": "ORO",
       "gloss": "metallo giallo che vale molto",
-      "synonyms": [],
       "example": "Non è oro.",
       "pos": "noun",
       "ipa": "/ˈɔro/",
@@ -2196,7 +2178,6 @@
     {
       "word": "STANOTTE",
       "gloss": "oggi, tardi, quando tutti dormono",
-      "synonyms": [],
       "example": "Non stanotte.",
       "pos": "adverb",
       "ipa": "/staˈnɔt.te/"
@@ -2289,7 +2270,6 @@
     {
       "word": "TENENTE",
       "gloss": "grado di ufficiale nell'esercito",
-      "synonyms": [],
       "example": "Vorrei diventare un tenente.",
       "pos": "adjective",
       "ipa": "/teˈnɛnte/",
@@ -2346,7 +2326,6 @@
     {
       "word": "STAGIONE",
       "gloss": "ognuna delle quattro parti dell'anno",
-      "synonyms": [],
       "example": "Che stagione è?",
       "pos": "noun",
       "ipa": "/staˈd͡ʒone/",
@@ -2533,7 +2512,6 @@
     {
       "word": "MENTITO",
       "gloss": "detto in modo non vero",
-      "synonyms": [],
       "example": "Ho mentito.",
       "pos": "noun",
       "ipa": "/menˈtito/",
@@ -2676,7 +2654,6 @@
     {
       "word": "FIORE",
       "gloss": "parte colorata e profumata della pianta",
-      "synonyms": [],
       "example": "È un fiore.",
       "pos": "noun",
       "ipa": "/ˈfjoːre/",
@@ -2749,7 +2726,6 @@
     {
       "word": "VINO",
       "gloss": "bevanda fatta con l'uva",
-      "synonyms": [],
       "example": "Ha del vino.",
       "pos": "noun",
       "ipa": "/ˈvino/",
@@ -2836,7 +2812,6 @@
     {
       "word": "CARNE",
       "gloss": "parte degli animali che si mangia",
-      "synonyms": [],
       "example": "Mangi carne?",
       "pos": "noun",
       "ipa": "/ˈkarne/",
@@ -2924,7 +2899,6 @@
     {
       "word": "CHILOMETRO",
       "gloss": "misura per le strade lunghe, in auto o a piedi",
-      "synonyms": [],
       "example": "Ci sono mille metri in un chilometro.",
       "pos": "noun",
       "ipa": "/kiˈlɔmetro/",
@@ -2952,7 +2926,6 @@
     {
       "word": "PESCE",
       "gloss": "animale che vive nell'acqua e nuota",
-      "synonyms": [],
       "example": "È un pesce.",
       "pos": "noun",
       "ipa": "/ˈpeʃʃe/",
@@ -3005,7 +2978,6 @@
     {
       "word": "ESPERIENZA",
       "gloss": "ciò che si impara vivendo",
-      "synonyms": [],
       "example": "Ha esperienza.",
       "pos": "noun",
       "ipa": "/espeˈrjɛntsa/",
@@ -3047,7 +3019,6 @@
     {
       "word": "PASSO",
       "gloss": "il mettere un piede davanti all'altro quando si cammina",
-      "synonyms": [],
       "example": "Il passo è breve!",
       "pos": "noun",
       "ipa": "/ˈpasso/",
@@ -3112,7 +3083,6 @@
     {
       "word": "PIANETA",
       "gloss": "corpo del cielo che gira intorno a una stella",
-      "synonyms": [],
       "example": "Su che pianeta?",
       "pos": "noun",
       "family": [
@@ -3191,7 +3161,6 @@
     {
       "word": "POMERIGGIO",
       "gloss": "parte del giorno dopo pranzo",
-      "synonyms": [],
       "example": "Buon pomeriggio.",
       "pos": "noun",
       "ipa": "/pomeˈridd͡ʒo/",
@@ -3202,7 +3171,6 @@
     {
       "word": "FIGLIOLO",
       "gloss": "modo dolce di chiamare un ragazzo, come fa un papà",
-      "synonyms": [],
       "example": "Figliolo, provati la febbre.",
       "pos": "noun",
       "ipa": "/fiʎˈʎɔlo/",
@@ -3214,7 +3182,6 @@
     {
       "word": "MERITO",
       "gloss": "ciò che si ha fatto di buono e che conta",
-      "synonyms": [],
       "example": "Lo merito.",
       "pos": "noun",
       "ipa": "/ˈmɛrito/",
@@ -3270,7 +3237,6 @@
     {
       "word": "RITORNO",
       "gloss": "il venire di nuovo indietro",
-      "synonyms": [],
       "example": "Ritorno il 10.",
       "pos": "noun",
       "ipa": "/riˈtorno/",
@@ -3327,7 +3293,6 @@
     {
       "word": "DESTRA",
       "gloss": "lato opposto alla sinistra",
-      "synonyms": [],
       "example": "Qui a destra.",
       "pos": "noun",
       "ipa": "/ˈdɛstra/",
@@ -3440,7 +3405,6 @@
     {
       "word": "RITORNARE",
       "gloss": "venire di nuovo",
-      "synonyms": [],
       "example": "Non ritornare.",
       "pos": "verb",
       "ipa": "/ritorˈnare/",
@@ -3638,7 +3602,6 @@
     {
       "word": "RADIO",
       "gloss": "apparecchio per ascoltare musica e notizie",
-      "synonyms": [],
       "example": "Vende radio.",
       "pos": "noun",
       "ipa": "/ˈradjo/",
@@ -3721,7 +3684,6 @@
     {
       "word": "ANELLO",
       "gloss": "cerchio di metallo da portare al dito",
-      "synonyms": [],
       "example": "Bell'anello.",
       "pos": "noun",
       "ipa": "/aˈnɛllo/",
@@ -3764,7 +3726,6 @@
     {
       "word": "FRANCESE",
       "gloss": "lingua parlata a Parigi",
-      "synonyms": [],
       "example": "È francese.",
       "pos": "adjective",
       "ipa": "/franˈtʃeze/",
@@ -3978,7 +3939,6 @@
     {
       "word": "SENTIMENTO",
       "gloss": "ciò che si prova nel cuore",
-      "synonyms": [],
       "example": "Conosco il sentimento.",
       "pos": "noun",
       "ipa": "/sentiˈmento/",
@@ -3991,7 +3951,6 @@
     {
       "word": "DIPENDERE",
       "gloss": "avere bisogno di qualcosa o qualcuno",
-      "synonyms": [],
       "example": "Non dipendere da altri.",
       "pos": "noun",
       "ipa": "/diˈpɛn.de.re/",
@@ -4018,7 +3977,6 @@
     {
       "word": "VERDE",
       "gloss": "colore delle foglie",
-      "synonyms": [],
       "example": "Era verde.",
       "pos": "adjective",
       "ipa": "/ˈverde/",
@@ -4045,7 +4003,6 @@
     {
       "word": "COMMETTERE",
       "gloss": "fare una cosa sbagliata",
-      "synonyms": [],
       "example": "Non commettere errori.",
       "pos": "verb",
       "ipa": "/komˈmet.te.re/",
@@ -4085,7 +4042,6 @@
     {
       "word": "GUIDA",
       "gloss": "persona che mostra la strada",
-      "synonyms": [],
       "example": "Chi guida?",
       "pos": "noun",
       "ipa": "/ˈɡwida/",
@@ -4155,7 +4111,6 @@
     {
       "word": "BENVENUTO",
       "gloss": "parola per salutare chi arriva",
-      "synonyms": [],
       "example": "Benvenuto!",
       "pos": "noun",
       "ipa": "/bɛnveˈnuto/",
@@ -4222,7 +4177,6 @@
     {
       "word": "STAZIONE",
       "gloss": "posto dove si fermano i treni",
-      "synonyms": [],
       "example": "Che stazione è?",
       "pos": "noun",
       "ipa": "/staˈtsjone/",
@@ -4235,7 +4189,6 @@
     {
       "word": "EMERGENZA",
       "gloss": "situazione grave e improvvisa",
-      "synonyms": [],
       "example": "È un'emergenza.",
       "pos": "noun",
       "ipa": "/emerˈd͡ʒɛntsa/",
@@ -4320,7 +4273,6 @@
     {
       "word": "PESO",
       "gloss": "quanto pesa una cosa",
-      "synonyms": [],
       "example": "Il peso della valigia è di sei chili.",
       "pos": "noun",
       "ipa": "/ˈpeso/",
@@ -4448,7 +4400,6 @@
     {
       "word": "PROFONDO",
       "gloss": "che va molto in basso",
-      "synonyms": [],
       "example": "È profondo.",
       "pos": "adjective",
       "ipa": "/proˈfondo/",
@@ -4461,7 +4412,6 @@
     {
       "word": "PRINCIPE",
       "gloss": "figlio del re",
-      "synonyms": [],
       "example": "È un principe.",
       "pos": "noun",
       "ipa": "/ˈprint͡ʃipe/",
@@ -4503,7 +4453,6 @@
     {
       "word": "ANIMALE",
       "gloss": "essere vivente che si muove, come il cane o il gatto",
-      "synonyms": [],
       "example": "Che animale!",
       "pos": "noun",
       "ipa": "/aniˈmale/",
@@ -4531,7 +4480,6 @@
     {
       "word": "COLLO",
       "gloss": "parte del corpo tra la testa e le spalle",
-      "synonyms": [],
       "example": "Ho male al collo.",
       "pos": "noun",
       "family": [
@@ -4544,7 +4492,6 @@
     {
       "word": "CUGINO",
       "gloss": "figlio dello zio o della zia",
-      "synonyms": [],
       "example": "È mio cugino?",
       "pos": "noun",
       "ipa": "/kuˈd͡ʒino/",
@@ -4557,7 +4504,6 @@
     {
       "word": "COLAZIONE",
       "gloss": "pasto della mattina",
-      "synonyms": [],
       "example": "Fai colazione?",
       "pos": "noun",
       "ipa": "/kolaˈʃt͡sjone/"
@@ -4641,7 +4587,6 @@
     {
       "word": "CARRIERA",
       "gloss": "la strada fatta nel lavoro",
-      "synonyms": [],
       "example": "Lui è a fine carriera.",
       "pos": "noun",
       "ipa": "/karˈrjɛra/",
@@ -4653,7 +4598,6 @@
     {
       "word": "SCALA",
       "gloss": "gradini per salire e scendere",
-      "synonyms": [],
       "example": "Caddi dalla scala.",
       "pos": "noun",
       "ipa": "/ˈskala/",
@@ -4666,7 +4610,6 @@
     {
       "word": "DANNARE",
       "gloss": "mandare all'inferno",
-      "synonyms": [],
       "example": "Mi fa dannare!",
       "pos": "verb",
       "ipa": "/danˈnare/",
@@ -4780,7 +4723,6 @@
     {
       "word": "ARTE",
       "gloss": "musica, disegni e cose belle create dall'uomo",
-      "synonyms": [],
       "example": "Amo l'arte.",
       "pos": "noun",
       "ipa": "/ˈarte/",
@@ -4815,13 +4757,11 @@
         "autofurgone",
         "furgonista",
         "motofurgone"
-      ],
-      "synonyms": []
+      ]
     },
     {
       "word": "ISOLA",
       "gloss": "terra con il mare tutto intorno",
-      "synonyms": [],
       "example": "Creta è un'isola.",
       "pos": "noun",
       "ipa": "/ˈizola/",
@@ -4949,7 +4889,6 @@
     {
       "word": "BOB",
       "gloss": "slitta per correre sulla neve in discesa",
-      "synonyms": [],
       "example": "In inverno, saliamo sulla collina con il bob per scivolare veloci sulla neve.",
       "pos": "noun",
       "ipa": "/ˈbɔb/",
@@ -4974,7 +4913,6 @@
     {
       "word": "NIPOTE",
       "gloss": "figlio del figlio, o del fratello",
-      "synonyms": [],
       "example": "È suo nipote.",
       "pos": "noun",
       "ipa": "/niˈpoːte/",
@@ -5001,7 +4939,6 @@
     {
       "word": "INFERMIERA",
       "gloss": "donna che cura chi sta male in ospedale",
-      "synonyms": [],
       "example": "È infermiera.",
       "pos": "noun",
       "family": [
@@ -5251,7 +5188,6 @@
     {
       "word": "NASO",
       "gloss": "parte del viso con cui si sente l'odore",
-      "synonyms": [],
       "example": "Ti cola il naso!",
       "pos": "noun",
       "ipa": "/ˈnaso/",
@@ -5264,7 +5200,6 @@
     {
       "word": "OSSO",
       "gloss": "parte dura dentro il corpo",
-      "synonyms": [],
       "example": "L'osso è rotto.",
       "pos": "noun",
       "ipa": "/ˈɔsso/",
@@ -5277,7 +5212,6 @@
     {
       "word": "BOTTIGLIA",
       "gloss": "contenitore di vetro per l'acqua o il vino",
-      "synonyms": [],
       "example": "È una bottiglia.",
       "pos": "noun",
       "ipa": "/botˈtiʎʎa/",
@@ -5290,7 +5224,6 @@
     {
       "word": "TEDESCO",
       "gloss": "lingua parlata in Germania e in Austria",
-      "synonyms": [],
       "example": "Parla tedesco?",
       "pos": "adjective",
       "ipa": "/teˈdesko/",
@@ -5387,7 +5320,6 @@
     {
       "word": "ATTORE",
       "gloss": "persona che fa una parte nei film",
-      "synonyms": [],
       "example": "È un attore.",
       "pos": "noun",
       "ipa": "/atˈtore/",
@@ -5398,7 +5330,6 @@
     {
       "word": "VESTITO",
       "gloss": "ciò che si mette addosso per coprire il corpo",
-      "synonyms": [],
       "example": "È vestito?",
       "pos": "verb",
       "ipa": "/veˈstito/",
@@ -5451,7 +5382,6 @@
     {
       "word": "ZAINO",
       "gloss": "borsa da portare sulle spalle, per la scuola",
-      "synonyms": [],
       "example": "Ho uno zaino.",
       "pos": "noun",
       "family": [
@@ -5500,7 +5430,6 @@
     {
       "word": "FORNO",
       "gloss": "apparecchio caldo per cuocere torte e arrosti",
-      "synonyms": [],
       "example": "Va al forno?",
       "pos": "noun",
       "ipa": "/ˈforno/",
@@ -5513,7 +5442,6 @@
     {
       "word": "ARANCIA",
       "gloss": "frutto tondo tra giallo e rosso, da cui si fa il succo",
-      "synonyms": [],
       "example": "È un'arancia.",
       "pos": "noun",
       "family": [
@@ -6229,9 +6157,6 @@
     {
       "word": "SCAVARE",
       "gloss": "togliere terra o altro usando le mani o uno strumento.",
-      "synonyms": [
-        "fossare"
-      ],
       "pos": "verb",
       "example": "Inizi a scavare."
     },
@@ -6456,9 +6381,6 @@
     {
       "word": "ELICOTTERO",
       "gloss": "aeromobile con rotori che gli permettono di decollare e atterrare verticalmente.",
-      "synonyms": [
-        "aerogiro"
-      ],
       "pos": "noun",
       "example": "Ecco l'elicottero."
     },
@@ -7280,13 +7202,9 @@
       "example": "Lui rifiuta il progresso."
     },
     {
-      "word": "WEST",
-      "gloss": "parte del cielo dove il sole tramonta.",
-      "pos": "noun",
-      "synonyms": [
-        "ponente",
-        "ovest"
-      ]
+      "word": "FARMACO",
+      "gloss": "Ciò che si prende quando si sta male.",
+      "pos": "noun"
     },
     {
       "word": "AVVISARE",
@@ -7403,7 +7321,6 @@
       "word": "PARTENZA",
       "gloss": "l'atto di iniziare un viaggio o un percorso",
       "synonyms": [
-        "departo",
         "via"
       ],
       "pos": "noun",
@@ -8885,9 +8802,6 @@
     {
       "word": "PUBBLICARE",
       "gloss": "Mettere in mostra per tutti di vedere.",
-      "synonyms": [
-        "edire"
-      ],
       "pos": "verb",
       "example": "Dove lo doveva pubblicare?"
     },
@@ -9061,9 +8975,6 @@
     {
       "word": "UBRIACARE",
       "gloss": "rendere qualcuno ebbro con bevande alcoliche.",
-      "synonyms": [
-        "ubbriacare"
-      ],
       "pos": "verb",
       "example": "Lo fai ubriacare?"
     },
@@ -9414,9 +9325,6 @@
     {
       "word": "EQUIPAGGIO",
       "gloss": "gruppo di persone che lavora su un mezzo.",
-      "synonyms": [
-        "tripulazione"
-      ],
       "pos": "noun",
       "example": "Loro sono un buon equipaggio."
     },

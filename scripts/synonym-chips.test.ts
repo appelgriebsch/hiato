@@ -113,6 +113,9 @@ describe('#362 chip language gate (pt first)', () => {
     expect(invalidSynonymChipReason('DENTE', '[', DENY)).toBe('not a word')
     expect(invalidSynonymChipReason('SETE', '7', DENY)).toBe('not a word')
     expect(invalidSynonymChipReason('TERCEIRO', '3.', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('TERCEIRO', '3º', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('CARBONO', 'CO2', DENY)).toBe('not a word')
+    expect(invalidSynonymChipReason('OXIGÊNIO', 'O₂', DENY)).toBe('not a word')
     expect(filterSynonymChips('DOZE', ['[]', '[', '12'], DENY, 'pt')).toEqual([])
   })
 
@@ -131,13 +134,39 @@ describe('#362 chip language gate (pt first)', () => {
     expect(filterSynonymChips('BEBIDA', ['drink', 'casa'], DENY, 'pt', ptMember)).toEqual(['casa'])
   })
 
-  test('gate is off without the membership fn, and only for gate languages', () => {
+  test('gate is off without the membership fn, and on for every pack language (#366)', () => {
     // No dicts loaded (bun:test): membership rule skipped, shape rule still applies.
     expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'pt')).toBeNull()
     expect(invalidSynonymChipReason('DOZE', '[]', DENY, 'pt')).toBe('not a word')
-    // Non-gated languages are unaffected even with a predicate.
-    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'es', ptMember)).toBeNull()
+    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'es', ptMember)).toBe(
+      'not a word of es',
+    )
     expect(CHIP_LANG_GATE_LANGS.has('pt')).toBe(true)
-    expect(CHIP_LANG_GATE_LANGS.has('de')).toBe(false)
+    expect(CHIP_LANG_GATE_LANGS.has('de')).toBe(true)
+    expect(CHIP_LANG_GATE_LANGS.has('en')).toBe(true)
+    expect(CHIP_LANG_GATE_LANGS.has('fr')).toBe(true)
+    expect(invalidSynonymChipReason('BEBIDA', 'drink', DENY, 'de', ptMember)).toBe(
+      'not a word of de',
+    )
+  })
+
+  test('a hyphenated or British spelling is one word of the pack language (#366)', () => {
+    const member = (lang: string, w: string): boolean => {
+      const x = w.toLowerCase()
+      if (lang === 'fr') return x === 'week-end'
+      if (lang === 'en') return x === 'theatre'
+      return false
+    }
+    expect(invalidSynonymChipReason('SORTIE', 'week-end', DENY, 'fr', member)).toBeNull()
+    expect(invalidSynonymChipReason('PLAY', 'theatre', DENY, 'en', member)).toBeNull()
+    expect(invalidSynonymChipReason('SORTIE', 'week', DENY, 'fr', member)).toBe(
+      'not a word of fr',
+    )
+  })
+
+  test('a chip equal to the lemma under spellingKey is the lemma (#366)', () => {
+    expect(invalidSynonymChipReason('GRÜSSE', 'Grüße', DENY, 'de')).toBe('equals lemma')
+    expect(invalidSynonymChipReason('LAß', 'LASS', DENY, 'de')).toBe('equals lemma')
+    expect(invalidSynonymChipReason('LASS', 'lasse', DENY, 'de')).toBeNull()
   })
 })

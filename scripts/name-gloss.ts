@@ -13,6 +13,12 @@ const FR_BARE_PERSON =
   /^(?:un |une )?(?:garçon|jeune fille|jeune femme|homme(?: italien)?|femme(?: biblique)?)\.?$/i
 const IT =
   /\bcognome\b|\bnome proprio\b|\bnomi propri\b|\bnome di battesimo\b|\bnome di persona\b|\bprenome\b/i
+// #366 review: "nome maschile/femminile" and "abbreviazione di un nome" name a person.
+const IT_GIVEN =
+  /\bnome maschile\b|\bnome femminile\b|\babbreviazione di un nome\b|\bun nome (?:inglese|femminile|maschile|che)\b/i
+// "nom d'origine germanique", "nom italien signifiant".
+const FR_NAME_ORIGIN =
+  /\bnom d['’]origine\b|\bnom (?:italien|anglais|slave|germanique)\b/i
 // A named individual: role word straight after an origin/genre qualifier
 // ("un prophète biblique", "dirigeant soviétique"). Fails without the
 // name list. Plain role glosses (OGRE, DIVA, FRAPPEUR) stay common nouns.
@@ -143,9 +149,14 @@ export function isPersonNameGloss(
   if (code === 'es') return ES.test(g)
   if (code === 'de') return DE.test(g)
   if (code === 'fr') {
-    return FR.test(g) || FR_VARIANT.test(g) || FR_BARE_PERSON.test(g.trim())
+    return (
+      FR.test(g) ||
+      FR_VARIANT.test(g) ||
+      FR_BARE_PERSON.test(g.trim()) ||
+      FR_NAME_ORIGIN.test(g)
+    )
   }
-  if (code === 'it') return IT.test(g)
+  if (code === 'it') return IT.test(g) || IT_GIVEN.test(g)
   if (code === 'en') {
     if (EN_NAME.test(g)) return true
     return EN_PROPER.test(g) && EN_PERSON.test(g)
