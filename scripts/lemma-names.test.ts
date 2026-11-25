@@ -1,7 +1,7 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, test } from 'bun:test'
-import { isDeniedLemma } from './lemma-denylist'
+import { isDeniedLemma, nfcUpper } from './lemma-denylist'
 import {
   listedNameRejected,
   loadNameAllowlist,
@@ -60,6 +60,48 @@ describe('person-name list', () => {
     expect(onNameList('JOEY', names)).toBe(true)
     expect(isDeniedLemma('RYAN')).toBe(false)
     expect(isDeniedLemma('JOEY')).toBe(false)
+  })
+
+  test('#369 R1: slots 400+ lines carry a person-written reason, not a gloss copy', () => {
+    // The fr and it lines are rewritten by their own language issues (#360, #361).
+    const delegated = new Set(['fr', 'it'])
+    const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-names-allow.txt'), 'utf8')
+    const packsRoot = path.join(import.meta.dir, '..', 'public', 'packs')
+    const packsByLang = new Map<string, { word: string; gloss?: string }[][]>()
+    for (const lang of readdirSync(packsRoot)) {
+      const packs: { word: string; gloss?: string }[][] = []
+      for (const name of readdirSync(path.join(packsRoot, lang))) {
+        if (!name.endsWith('.json')) continue
+        const pack = JSON.parse(readFileSync(path.join(packsRoot, lang, name), 'utf8')) as {
+          lemmas: { word: string; gloss?: string }[]
+        }
+        packs.push(pack.lemmas)
+      }
+      packsByLang.set(lang, packs)
+    }
+    const squash = (s: string) => s.replace(/\s+/g, ' ').trim()
+    let checked = 0
+    for (const e of parseNameAllowlist(text)) {
+      if (delegated.has(e.lang)) continue
+      const m = /slot (\d+)/.exec(e.reason)
+      if (!m) continue
+      const slot = Number(m[1])
+      if (slot < 400) continue
+      for (const lemmas of packsByLang.get(e.lang) ?? []) {
+        const at = lemmas[slot]
+        if (!at || nfcUpper(at.word) !== e.word) continue
+        const gloss = squash(at.gloss ?? '')
+        if (gloss) {
+          checked += 1
+          if (squash(e.reason).includes(gloss)) {
+            throw new Error(
+              `${e.lang} ${e.word}: slots 400+ reason must be person-written, not the gloss of slot ${slot}`,
+            )
+          }
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(0)
   })
 })
 
