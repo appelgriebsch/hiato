@@ -216,7 +216,7 @@ jobs:
             git status --porcelain -- package.json bun.lock
             exit 1
           fi
-          # 4.136.2 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
+          # 4.166.0 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
           # Write outcome and url before later checks exit, so a failed check
           # does not look like Wrangler never uploaded.
           node <<'EOF'
@@ -509,7 +509,7 @@ jobs:
             git status --porcelain -- package.json bun.lock
             exit 1
           fi
-          # 4.136.2 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
+          # 4.166.0 appends type pages-deploy-detailed when WRANGLER_OUTPUT_FILE_PATH is set.
           # Write outcome and url before later checks exit, so a failed check
           # does not look like Wrangler never uploaded.
           node <<'EOF'

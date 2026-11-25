@@ -1,6 +1,6 @@
 # Third-party bill of materials
 
-Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). The PR #177 review re-checked `dictionary-it` 2.0.0 and `nspell` 2.1.5 on 2026-10-11 (no critical update, no CVE). The PR #213 review checked `@playwright/test` 1.64.1 on 2026-10-18 (Apache-2.0, no known vulnerabilities; CVE-2025-59288 was fixed in 1.55.1). The PR #217 review checked `bun` 1.4.4, `license-checker-rseidelsohn` 4.4.2, `oxlint` 1.90.0 and `wrangler` 4.136.2 against OSV on 2026-10-27 (no advisories); `undici`/`sharp` are overridden under wrangler to clear miniflare's pinned versions. Other rows were not re-checked.
+Direct dependencies declared by this repository. Rows returned by the PR #40 review were checked against public advisories on 2026-09-22. Rows no matched expert returned are marked `unknown` / `not checked`. The PR #128 review re-checked `bun` 1.4.2 on 2026-10-04 (MIT, no critical update, no CVE in 1.4.2). The PR #177 review re-checked `dictionary-it` 2.0.0 and `nspell` 2.1.5 on 2026-10-11 (no critical update, no CVE). The PR #213 review checked `@playwright/test` 1.64.1 on 2026-10-18 (Apache-2.0, no known vulnerabilities; CVE-2025-59288 was fixed in 1.55.1). The PR #217 review checked `bun` 1.4.4, `license-checker-rseidelsohn` 4.4.2, `oxlint` 1.90.0 and `wrangler` 4.136.2 against OSV on 2026-10-27 (no advisories); `undici`/`sharp` are overridden under wrangler to clear miniflare's pinned versions. The #368 dependency bump re-checked `vite` 8.3.8, `wrangler` 4.166.0 and the `undici` override 7.30.2 against OSV on 2026-11-25 via `bun audit` (no advisories at or above high; the vite bump clears GHSA-p4f5-76q4-ffq7). Other rows were not re-checked.
 
 | Name | Version | License | Critical update | CVEs |
 | --- | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ Direct dependencies declared by this repository. Rows returned by the PR #40 rev
 | Wiktionary via wiktextract (kaikki.org per-language extracts, data not a package) | downloaded dump | CC-BY-SA-4.0 — https://creativecommons.org/licenses/by-sa/4.0/ | | n/a — data, not a package; aggregate attribution in NOTICE/About (ADR 0055, #316) |
 | Jersey 10 font (self-hosted woff2 in public/fonts, not an npm package) | v5.3.0 files from @fontsource/jersey-10 | OFL-1.1 — https://openfontlicense.org | | n/a — font files, not a package; © 2023 The Soft Type Project Authors, https://github.com/scfried/soft-type-jersey (ADR 0052) |
 | typescript | 6.0.3 | unknown | | not checked |
-| vite | 8.3.0 | MIT | | none found |
+| vite | 8.3.8 | MIT | | GHSA-p4f5-76q4-ffq7, fixed in 8.3.7+ |
 | vite-plugin-pwa | 1.3.0 | MIT | | none found |
-| wrangler | 4.136.2 | MIT OR Apache-2.0 | | none found; miniflare pins undici 7.29.0 / sharp 0.35.4, lifted by package.json overrides to undici 7.30.1 / sharp 0.35.5 |
+| wrangler | 4.166.0 | MIT OR Apache-2.0 | | none found; wrangler 4.166.0 and its miniflare 5.20261119.0-beta pin undici 7.30.2 / sharp 0.35.5 themselves, so the package.json overrides to undici 7.30.2 / sharp 0.35.5 now match the pins instead of lifting them |
 | zustand | 5.0.15 | MIT | | none found |

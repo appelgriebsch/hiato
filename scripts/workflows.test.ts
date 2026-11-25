@@ -478,13 +478,13 @@ describe('deploy.yml', () => {
     if (!read) throw new Error('missing bun -e')
     const locked = spawnSync('bun', ['-e', read[1]], { cwd: root, encoding: 'utf8' })
     expect(locked.status).toBe(0)
-    expect(locked.stdout.trim()).toBe('4.136.2')
+    expect(locked.stdout.trim()).toBe('4.166.0')
 
-    const good = runGuard('4.136.2', '4.136.2')
+    const good = runGuard('4.166.0', '4.166.0')
     expect(good.status).toBe(0)
-    expect(runGuard('', '4.136.2').status).not.toBe(0)
+    expect(runGuard('', '4.166.0').status).not.toBe(0)
     expect(runGuard('nope', 'nope').status).not.toBe(0)
-    expect(runGuard('4.136.2', '9.9.9').status).not.toBe(0)
+    expect(runGuard('4.166.0', '9.9.9').status).not.toBe(0)
   })
 
   test('gates staging and production on their environments', () => {
