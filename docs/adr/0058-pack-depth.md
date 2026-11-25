@@ -4,7 +4,8 @@
 - **Date**: 2026-11-20
 - **Deciders**: Andreas Gerlach
 - **Supersedes**: none (amends ADR 0026, ADR 0028, ADR 0040 addendum)
-- **Related issues**: #305, EPIC #327, sub-tickets #328–#334
+- **Related issues**: #305, EPIC #327, sub-tickets #328–#334; amendment: #357–#361, #369
+- **Amended**: 2026-11-25 (see Amendment: scope and proper-noun lemmas)
 
 ## Context
 
@@ -34,3 +35,10 @@ Rollout: one prep PR (#328: guards + `--grow` mode + tests, no pack data), then 
 - `packs:expand --grow` is the only mode that may write a1–b1 for en/pt/de/es, and it refuses to rewrite existing slots; `--dry-run` reports per-band capacity and sets the `bandTarget` table.
 - Hunspell verdict cache must be regenerated locally (`bun run packs:check`) and committed per language PR; CI fails closed on a miss, as today.
 - Revisit if: a band cannot reach 350 from its widened source (record the exception here), or the budget guard starts failing at target sizes.
+
+## Amendment: scope and proper-noun lemmas (2026-11-25)
+
+- **Scope.** This ADR applies to the full pack, slots 0–999, and not only to the slots added by growth.
+- **Proper-noun lemmas.** Slot stability keeps the position of valid lemmas. It does not protect a lemma that is a person name, a trade or brand name, a city or place name, or a similar proper noun. Such a lemma is replaced in its own slot wherever it is found, slots 0–399 included. The slot keeps its index, the pack `version` is bumped, and `scripts/data/pack-pin.json` is refreshed. Reordering and removing slots stay forbidden.
+- **Example sentences.** Proper nouns stay allowed in example sentences. The rule above covers the lemma only.
+- **Consequences.** Pack size (n) does not change, so Daily and Practice picks keep their slots. A pick that lands on a replaced slot shows the replacement word from the next pack version on.
