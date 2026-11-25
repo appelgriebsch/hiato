@@ -636,12 +636,13 @@ describe('ci.yml', () => {
     expect(build).toContain('persist-credentials: false')
   })
 
-  test('build-test gates lint, licences, prod audit, and pinned linters', () => {
+  test('build-test gates lint, licences, full audit, and pinned linters', () => {
     const build = job(ci, 'build-test')
     expect(build).toContain('node scripts/node-check.mjs --exact')
     expect(build).toContain('bun run lint')
     expect(build).toContain('bun run licenses:check')
-    expect(build).toContain('bun audit --prod --audit-level=high')
+    expect(build).toContain('bun audit --audit-level=high')
+    expect(build).not.toContain('bun audit --prod')
     expect(build).toContain('actionlint -shellcheck')
     expect(build).toContain('shellcheck scripts/*.sh')
     expect(build).toContain('actionlint_1.7.12_linux_amd64.tar.gz')
