@@ -45,6 +45,7 @@ import {
   isNewCefr,
   loadFoldKeysFromPackLemmas,
   planGrowBand,
+  PT_EXPAND_EXCLUDE,
 } from './pack-select'
 import { checkPackBudget, type PackByteSnapshot } from './packs-check-lib'
 import { loadPackPin, packPinEntry } from './pack-pin'
@@ -90,6 +91,9 @@ function okLemma(lang: Lang, raw: string, skipNameList = true): string | null {
   const word = hangmanOk(lang, raw, DENY)
   if (!word || EXTRA_STOP.has(word)) return null
   if (!isWordOfLang(lang, word)) return null
+  // #369 (S4): pt-scoped exclusion — BRA/PENCE/LAS are real words in en/fr
+  // but proper nouns in PT and must not come back through expansion.
+  if (lang === 'pt' && PT_EXPAND_EXCLUDE.has(word)) return null
   // #366: every language, including fr and it. A listed name is out whatever
   // the gloss would say. Allowlisted homographs (WILL, MERVEILLE) stay.
   if (skipNameList && listedNameRejected(lang, word, NAMES)) return null

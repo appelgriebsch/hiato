@@ -17,6 +17,7 @@ import {
   hangmanOk,
   loadFoldKeysFromPackLemmas,
   planGrowBand,
+  PT_EXPAND_EXCLUDE,
   takeExclusive,
 } from './pack-select'
 import { PACK_CEFR_LEVELS } from '../src/packs/schema'
@@ -100,6 +101,21 @@ describe('planGrowBand (ADR 0058 --grow selection)', () => {
     expect(plan.capacity).toBe(2)
     expect(plan.appended).toContain('STRAßE')
     expect(plan.appended).not.toContain('STRASSE')
+  })
+
+  test('#369 S4: BRA/PENCE/LAS cannot come back in PT; they stay valid in en', () => {
+    expect([...PT_EXPAND_EXCLUDE].sort()).toEqual(['BRA', 'LAS', 'PENCE'])
+    const ptPlan = planGrowBand(
+      'pt',
+      'b1',
+      ['CASA'],
+      ['BRA', 'PENCE', 'LAS', 'FEBRE'],
+      new Set(['CASA']),
+    )
+    expect(ptPlan.appended).toEqual(['FEBRE'])
+    expect(ptPlan.capacity).toBe(1)
+    const enPlan = planGrowBand('en', 'b1', ['HOUSE'], ['BRA', 'LASSO'], new Set(['HOUSE']))
+    expect(enPlan.appended).toContain('BRA')
   })
 })
 

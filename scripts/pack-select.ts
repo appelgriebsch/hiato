@@ -212,6 +212,14 @@ function preferForm(lang: SelectLang, prev: string, next: string): string {
 }
 
 /**
+ * #369 (S4): pt-scoped exclusion. BRA, PENCE and LAS are ordinary words in en
+ * and fr, so they cannot go on the global name list (ADR 0061 §2), but in PT
+ * they are proper nouns (Brazil, pence, the) and were replaced in the PT packs
+ * only. This set keeps them out of every PT expansion path.
+ */
+export const PT_EXPAND_EXCLUDE = new Set(['BRA', 'PENCE', 'LAS'])
+
+/**
  * Take hangman-ok lemmas from `candidates` (already in-band) until `limit`,
  * skipping fold-keys in `taken`. Mutates `taken`. No other-band top-up.
  */
@@ -227,6 +235,7 @@ export function takeExclusive(
   for (const raw of candidates) {
     const word = hangmanOk(lang, raw, denylist)
     if (!word) continue
+    if (lang === 'pt' && PT_EXPAND_EXCLUDE.has(word)) continue
     const key = foldKey(lang, word)
     const existingIdx = indexByKey.get(key)
     if (existingIdx !== undefined) {
