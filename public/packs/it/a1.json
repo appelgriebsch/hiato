@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 21,
   "lang": "it",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -525,7 +525,8 @@
       "pos": "adverb",
       "family": [
         "laddove"
-      ]
+      ],
+      "ipa": "/ˈdɔve/"
     },
     {
       "word": "VOLTA",
@@ -635,7 +636,8 @@
         "antiuomo",
         "nobiluomo",
         "ominazione"
-      ]
+      ],
+      "ipa": "/ˈwɔːmo/"
     },
     {
       "word": "ASPETTARE",
@@ -660,7 +662,8 @@
       "family": [
         "sembianza",
         "apparenza"
-      ]
+      ],
+      "ipa": "/semˈbraːre/"
     },
     {
       "word": "DARE",
@@ -807,7 +810,8 @@
         "capoparte",
         "parcella",
         "parcellare"
-      ]
+      ],
+      "ipa": "/ˈparte/"
     },
     {
       "word": "MORIRE",
@@ -1214,7 +1218,8 @@
         "modello",
         "modalità",
         "smodato"
-      ]
+      ],
+      "ipa": "/ˈmɔːdo/"
     },
     {
       "word": "GIUSTO",
@@ -1342,7 +1347,8 @@
         "belladonna",
         "donnaiolo",
         "donnesco"
-      ]
+      ],
+      "ipa": "/ˈdɔnna/"
     },
     {
       "word": "TANTO",
@@ -1658,7 +1664,8 @@
         "casistica",
         "casomai",
         "casuale"
-      ]
+      ],
+      "ipa": "/ˈkaːzo/"
     },
     {
       "word": "APPENA",
@@ -1713,7 +1720,8 @@
         "forzare",
         "forzuto",
         "forzato"
-      ]
+      ],
+      "ipa": "/ˈfɔrtsa/"
     },
     {
       "word": "OGGI",
@@ -1735,7 +1743,8 @@
       "pos": "noun",
       "family": [
         "bicordo"
-      ]
+      ],
+      "ipa": "/akˈkordo/"
     },
     {
       "word": "BUONO",
@@ -2094,8 +2103,7 @@
       "pos": "adjective",
       "ipa": "/ˈuniko/",
       "family": [
-        "unica",
-        "unicità"
+        "unici"
       ]
     },
     {
@@ -2488,8 +2496,7 @@
       "pos": "noun",
       "ipa": "/doˈmanda/",
       "family": [
-        "domande",
-        "domandare"
+        "domande"
       ]
     },
     {
@@ -2538,7 +2545,11 @@
       ],
       "example": "Abbastanza!",
       "pos": "adverb",
-      "ipa": "/abbaˈstantsa/"
+      "ipa": "/abbaˈstantsa/",
+      "family": [
+        "abbondanza",
+        "abbondante"
+      ]
     },
     {
       "word": "CAPO",
@@ -2586,7 +2597,11 @@
       ],
       "example": "Dillo comunque!",
       "pos": "adverb",
-      "ipa": "/koˈmunkwe/"
+      "ipa": "/koˈmunkwe/",
+      "family": [
+        "comune",
+        "comunità"
+      ]
     },
     {
       "word": "SALVO",
@@ -2624,6 +2639,7 @@
       "pos": "adverb",
       "ipa": "/nemˈmeno/",
       "family": [
+        "neppure",
         "neanche"
       ]
     },
@@ -2822,7 +2838,7 @@
       "ipa": "/ˈkolpa/",
       "family": [
         "colpevole",
-        "colpevolezza"
+        "colpevolizzare"
       ]
     },
     {
@@ -2864,8 +2880,8 @@
       "pos": "adjective",
       "ipa": "/alˈku.no/",
       "family": [
-        "alcuni",
-        "qualcuno"
+        "qualcuno",
+        "qualche"
       ]
     },
     {
@@ -2936,7 +2952,11 @@
       ],
       "example": "Invece è possibile.",
       "pos": "adverb",
-      "ipa": "/inˈvet͡ʃe/"
+      "ipa": "/inˈvet͡ʃe/",
+      "family": [
+        "inverso",
+        "invertire"
+      ]
     },
     {
       "word": "TERRA",
@@ -3030,7 +3050,8 @@
       "pos": "adverb",
       "ipa": "/alˈmeno/",
       "family": [
-        "semmai"
+        "mancare",
+        "mancanza"
       ]
     },
     {
@@ -3085,7 +3106,11 @@
       ],
       "example": "Ma magari!",
       "pos": "adverb",
-      "ipa": "/maˈgari/"
+      "ipa": "/maˈgari/",
+      "family": [
+        "marito",
+        "maritale"
+      ]
     },
     {
       "word": "MINUTO",
@@ -3244,7 +3269,8 @@
       "pos": "noun",
       "ipa": "/paˈrere/",
       "family": [
-        "apparire"
+        "apparire",
+        "apparenza"
       ]
     },
     {
@@ -3500,7 +3526,11 @@
       ],
       "example": "Entra pure.",
       "pos": "adverb",
-      "ipa": "/ˈpu.re/"
+      "ipa": "/ˈpu.re/",
+      "family": [
+        "puro",
+        "purismo"
+      ]
     },
     {
       "word": "IERI",
@@ -3582,7 +3612,6 @@
       "pos": "noun",
       "ipa": "/ˈfɔsso/",
       "family": [
-        "fossa",
         "fossato",
         "scavare"
       ]
@@ -3753,7 +3782,6 @@
       "ipa": "/ˈrɛsto/",
       "family": [
         "restare",
-        "restante",
         "restituire"
       ]
     },
@@ -3765,7 +3793,7 @@
       "family": [
         "dietrofront"
       ],
-      "ipa": "/diˈɛtro/"
+      "ipa": "/ˈdjɛtro/"
     },
     {
       "word": "FOTO",
@@ -3996,8 +4024,7 @@
       "ipa": "/diverˈtɛnte/",
       "family": [
         "divertire",
-        "divertimento",
-        "divertirsi"
+        "divertimento"
       ]
     },
     {
@@ -4080,8 +4107,7 @@
       "ipa": "/siɲɲoˈrino/",
       "family": [
         "signore",
-        "signorina",
-        "signorile"
+        "signorina"
       ]
     },
     {
@@ -4092,8 +4118,7 @@
       "ipa": "/bɛn/",
       "family": [
         "bene",
-        "benessere",
-        "beneficio"
+        "benessere"
       ]
     },
     {
@@ -4698,7 +4723,6 @@
       "ipa": "/spjaˈʧere/",
       "family": [
         "spiacente",
-        "spiacersi",
         "dispiacere"
       ]
     },
@@ -4720,8 +4744,7 @@
       "pos": "verb",
       "ipa": "/kolˈpire/",
       "family": [
-        "colpo",
-        "colpito"
+        "colpo"
       ],
       "synonyms": [
         "percuotere",
@@ -4834,7 +4857,8 @@
       "pos": "adverb",
       "ipa": "/daˈvanti/",
       "family": [
-        "avanti"
+        "avanti",
+        "avanzare"
       ]
     },
     {
@@ -4927,8 +4951,7 @@
       "ipa": "/presiˈdɛnte/",
       "family": [
         "presidenza",
-        "presiedere",
-        "vicepresidente"
+        "presiedere"
       ]
     },
     {
@@ -5456,7 +5479,12 @@
       "synonyms": [
         "uomo"
       ],
-      "example": "Ricordi il signor Saito?"
+      "example": "Ricordi il signor Saito?",
+      "ipa": "/siɲˈɲor/",
+      "family": [
+        "signora",
+        "signorile"
+      ]
     },
     {
       "word": "CIO",
@@ -5464,7 +5492,8 @@
       "pos": "noun",
       "synonyms": [
         "questo"
-      ]
+      ],
+      "ipa": "/tʃo/"
     },
     {
       "word": "DOTTOR",
@@ -5473,7 +5502,13 @@
         "medico"
       ],
       "pos": "noun",
-      "example": "Chiameremo il Dottor Shiegal per te."
+      "example": "Chiameremo il Dottor Shiegal per te.",
+      "ipa": "/dotˈtor/",
+      "family": [
+        "dottore",
+        "dottorato",
+        "dottoressa"
+      ]
     },
     {
       "word": "PACERE",
@@ -5481,7 +5516,8 @@
       "synonyms": [
         "piacere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/paˈtʃere/"
     },
     {
       "word": "SPIEGARE",
@@ -5490,7 +5526,13 @@
         "illustrare"
       ],
       "pos": "verb",
-      "example": "Può spiegare."
+      "example": "Può spiegare.",
+      "ipa": "/spjeˈɡare/",
+      "family": [
+        "dispiegare",
+        "inspiegabile",
+        "spiegabile"
+      ]
     },
     {
       "word": "SEMPLICE",
@@ -5499,7 +5541,13 @@
         "facile"
       ],
       "pos": "adjective",
-      "example": "È semplice."
+      "example": "È semplice.",
+      "ipa": "/ˈsemplit͡ʃe/",
+      "family": [
+        "semplicemente",
+        "sempliciotto",
+        "semplicismo"
+      ]
     },
     {
       "word": "INTENZIONE",
@@ -5508,7 +5556,13 @@
         "idea"
       ],
       "pos": "noun",
-      "example": "È mia intenzione."
+      "example": "È mia intenzione.",
+      "ipa": "/intenˈtsjone/",
+      "family": [
+        "intenzionale",
+        "intenzionalmente",
+        "intenzionato"
+      ]
     },
     {
       "word": "PIUTTOSTO",
@@ -5517,7 +5571,8 @@
         "alquanto"
       ],
       "pos": "adverb",
-      "example": "È piuttosto bello."
+      "example": "È piuttosto bello.",
+      "ipa": "/pjutˈtɔsto/"
     },
     {
       "word": "NAVE",
@@ -5526,7 +5581,13 @@
         "imbarcazione"
       ],
       "pos": "noun",
-      "example": "La nave salpò."
+      "example": "La nave salpò.",
+      "ipa": "/ˈnave/",
+      "family": [
+        "astronave",
+        "motonave",
+        "navale"
+      ]
     },
     {
       "word": "INTERO",
@@ -5535,7 +5596,13 @@
       "synonyms": [
         "tutto"
       ],
-      "example": "Bevo latte intero."
+      "example": "Bevo latte intero.",
+      "ipa": "/inˈtero/",
+      "family": [
+        "interamente",
+        "interezza",
+        "intenerito"
+      ]
     },
     {
       "word": "TIRARE",
@@ -5544,7 +5611,13 @@
         "spingere"
       ],
       "pos": "verb",
-      "example": "Non mi tirare la manica."
+      "example": "Non mi tirare la manica.",
+      "ipa": "/tiˈrare/",
+      "family": [
+        "ritirare",
+        "tiramisù",
+        "tirante"
+      ]
     },
     {
       "word": "SERVIZIO",
@@ -5553,7 +5626,13 @@
       "synonyms": [
         "lavoro"
       ],
-      "example": "Al tuo servizio."
+      "example": "Al tuo servizio.",
+      "ipa": "/serˈvitt͡sjo/",
+      "family": [
+        "autoservizio",
+        "caposervizio",
+        "servire"
+      ]
     },
     {
       "word": "COMBATTERE",
@@ -5562,7 +5641,11 @@
         "sconfiggere"
       ],
       "pos": "verb",
-      "example": "Non combattere."
+      "example": "Non combattere.",
+      "ipa": "/komˈbattere/",
+      "family": [
+        "combattersi"
+      ]
     },
     {
       "word": "DIVERTIRE",
@@ -5571,7 +5654,12 @@
       "synonyms": [
         "rendere felice"
       ],
-      "example": "Falli divertire."
+      "example": "Falli divertire.",
+      "ipa": "/diverˈtire/",
+      "family": [
+        "divertimento",
+        "divertirsi"
+      ]
     },
     {
       "word": "SISTEMA",
@@ -5580,7 +5668,13 @@
         "meccanismo"
       ],
       "pos": "noun",
-      "example": "È il sistema."
+      "example": "È il sistema.",
+      "ipa": "/siˈstɛma/",
+      "family": [
+        "ecosistema",
+        "sistemare",
+        "sistemata"
+      ]
     },
     {
       "word": "CONTENTO",
@@ -5589,7 +5683,12 @@
         "felice"
       ],
       "pos": "adjective",
-      "example": "È contento."
+      "example": "È contento.",
+      "ipa": "/konˈtɛnto/",
+      "family": [
+        "contentare",
+        "contentino"
+      ]
     },
     {
       "word": "CAMERA",
@@ -5598,7 +5697,13 @@
       "synonyms": [
         "stanza"
       ],
-      "example": "Lasciò la camera."
+      "example": "Lasciò la camera.",
+      "ipa": "/ˈkamera/",
+      "family": [
+        "anticamera",
+        "fotocamera",
+        "microcamera"
+      ]
     },
     {
       "word": "VELOCE",
@@ -5607,7 +5712,13 @@
       "synonyms": [
         "presto"
       ],
-      "example": "Più veloce!"
+      "example": "Più veloce!",
+      "ipa": "/veˈlot͡ʃe/",
+      "family": [
+        "velocemente",
+        "velocifero",
+        "velocimetro"
+      ]
     },
     {
       "word": "RISPOSTA",
@@ -5616,7 +5727,12 @@
       "synonyms": [
         "replica"
       ],
-      "example": "Sa la risposta?"
+      "example": "Sa la risposta?",
+      "ipa": "/riˈsposta/",
+      "family": [
+        "responsivo",
+        "rispostaccia"
+      ]
     },
     {
       "word": "TOGLIERE",
@@ -5625,7 +5741,13 @@
         "levare"
       ],
       "pos": "verb",
-      "example": "Si può togliere?"
+      "example": "Si può togliere?",
+      "ipa": "/ˈtɔʎ.ʎe.re/",
+      "family": [
+        "distogliere",
+        "ritogliere",
+        "togliersi"
+      ]
     },
     {
       "word": "INCIDENTE",
@@ -5634,7 +5756,12 @@
       "synonyms": [
         "guaio"
       ],
-      "example": "Feci un incidente."
+      "example": "Feci un incidente.",
+      "ipa": "/int͡ʃiˈdɛnte/",
+      "family": [
+        "incidentale",
+        "incidentato"
+      ]
     },
     {
       "word": "OFFRIRE",
@@ -5643,7 +5770,12 @@
       "synonyms": [
         "dare"
       ],
-      "example": "Ti deve offrire una cena?"
+      "example": "Ti deve offrire una cena?",
+      "ipa": "/ofˈfrire/",
+      "family": [
+        "offrirsi",
+        "oblato"
+      ]
     },
     {
       "word": "ERRORE",
@@ -5652,7 +5784,12 @@
       "synonyms": [
         "sbaglio"
       ],
-      "example": "Errore mio."
+      "example": "Errore mio.",
+      "ipa": "/erˈrore/",
+      "family": [
+        "errato",
+        "erroneo"
+      ]
     },
     {
       "word": "CAPELLO",
@@ -5661,7 +5798,13 @@
       "synonyms": [
         "capigliatura"
       ],
-      "example": "Trovai un capello lungo."
+      "example": "Trovai un capello lungo.",
+      "ipa": "/kaˈpello/",
+      "family": [
+        "capillare",
+        "capellino",
+        "capellone"
+      ]
     },
     {
       "word": "SCORSO",
@@ -5670,7 +5813,12 @@
       "synonyms": [
         "passato"
       ],
-      "example": "Era l'anno scorso."
+      "example": "Era l'anno scorso.",
+      "ipa": "/ˈskorso/",
+      "family": [
+        "scorrere",
+        "scorsone"
+      ]
     },
     {
       "word": "SEGRETO",
@@ -5679,7 +5827,13 @@
       "synonyms": [
         "nascosto"
       ],
-      "example": "È segreto."
+      "example": "È segreto.",
+      "ipa": "/seˈɡreto/",
+      "family": [
+        "segretamente",
+        "segretezza",
+        "Stato"
+      ]
     },
     {
       "word": "MOSTRARE",
@@ -5688,7 +5842,13 @@
         "esibire"
       ],
       "pos": "verb",
-      "example": "Te lo volevo mostrare."
+      "example": "Te lo volevo mostrare.",
+      "ipa": "/moˈstrare/",
+      "family": [
+        "dimostrare",
+        "mostrarsi",
+        "rimostrare"
+      ]
     },
     {
       "word": "RIDERE",
@@ -5697,7 +5857,13 @@
       "synonyms": [
         "sghignazzare"
       ],
-      "example": "Fa ridere."
+      "example": "Fa ridere.",
+      "ipa": "/ˈridere/",
+      "family": [
+        "deridere",
+        "ridacchiare",
+        "ridersi"
+      ]
     },
     {
       "word": "RAPPORTO",
@@ -5706,7 +5872,11 @@
       "synonyms": [
         "relazione"
       ],
-      "example": "Il rapporto tra il sole e le piante è molto importante."
+      "example": "Il rapporto tra il sole e le piante è molto importante.",
+      "ipa": "/rapˈpɔrto/",
+      "family": [
+        "rapportare"
+      ]
     },
     {
       "word": "PREPARARE",
@@ -5715,7 +5885,13 @@
       "synonyms": [
         "organizzare"
       ],
-      "example": "Devo preparare il tè?"
+      "example": "Devo preparare il tè?",
+      "ipa": "/prepaˈrare/",
+      "family": [
+        "prepararsi",
+        "preparativo",
+        "preparato"
+      ]
     },
     {
       "word": "CIBO",
@@ -5724,7 +5900,13 @@
       "synonyms": [
         "mangiare"
       ],
-      "example": "Ho del cibo."
+      "example": "Ho del cibo.",
+      "ipa": "/t͡ʃiːbo/",
+      "family": [
+        "cibare",
+        "cibarie",
+        "pasto"
+      ]
     },
     {
       "word": "FIDARE",
@@ -5733,7 +5915,12 @@
         "credere"
       ],
       "pos": "noun",
-      "example": "Non ti fidare."
+      "example": "Non ti fidare.",
+      "ipa": "/fiˈdare/",
+      "family": [
+        "fidarsi",
+        "fidato"
+      ]
     },
     {
       "word": "LONTANO",
@@ -5742,7 +5929,12 @@
       "synonyms": [
         "distante"
       ],
-      "example": "È lontano?"
+      "example": "È lontano?",
+      "ipa": "/lonˈtano/",
+      "family": [
+        "lontananza",
+        "lontanamente"
+      ]
     },
     {
       "word": "ARRIVO",
@@ -5751,7 +5943,11 @@
       "synonyms": [
         "giungere"
       ],
-      "example": "In arrivo!"
+      "example": "In arrivo!",
+      "ipa": "/arˈrivo/",
+      "family": [
+        "atterrare"
+      ]
     },
     {
       "word": "MEDICO",
@@ -5760,7 +5956,13 @@
         "dottore"
       ],
       "pos": "noun",
-      "example": "È un medico?"
+      "example": "È un medico?",
+      "ipa": "/ˈmɛ.di.ko/",
+      "family": [
+        "biomedico",
+        "medicabile",
+        "medicamento"
+      ]
     },
     {
       "word": "GRAN",
@@ -5769,7 +5971,8 @@
       "synonyms": [
         "grosso"
       ],
-      "example": "Gran lusso!"
+      "example": "Gran lusso!",
+      "ipa": "/ɡran/"
     },
     {
       "word": "INSOMMA",
@@ -5778,7 +5981,8 @@
         "conclusione"
       ],
       "pos": "adverb",
-      "example": "Insomma, hai capito!"
+      "example": "Insomma, hai capito!",
+      "ipa": "/inˈsomma/"
     },
     {
       "word": "VERITÀ",
@@ -5787,7 +5991,11 @@
       "synonyms": [
         "fatto"
       ],
-      "example": "La verità?"
+      "example": "La verità?",
+      "ipa": "/veriˈta/",
+      "family": [
+        "veritiero"
+      ]
     },
     {
       "word": "PROVA",
@@ -5796,7 +6004,13 @@
         "esperimento"
       ],
       "pos": "noun",
-      "example": "Ecco una prova che l'acqua è calda."
+      "example": "Ecco una prova che l'acqua è calda.",
+      "ipa": "/prɔva/",
+      "family": [
+        "comprova",
+        "riprova",
+        "insicurezza"
+      ]
     },
     {
       "word": "FUTURO",
@@ -5805,7 +6019,13 @@
       "synonyms": [
         "domani"
       ],
-      "example": "È il futuro?"
+      "example": "È il futuro?",
+      "ipa": "/fuˈturo/",
+      "family": [
+        "futuribile",
+        "futurismo",
+        "futurista"
+      ]
     },
     {
       "word": "ACCADERE",
@@ -5814,7 +6034,12 @@
         "succedere"
       ],
       "pos": "verb",
-      "example": "Non doveva accadere."
+      "example": "Non doveva accadere.",
+      "ipa": "/akkaˈdere/",
+      "family": [
+        "accadimento",
+        "cadere"
+      ]
     },
     {
       "word": "PERSONALE",
@@ -5823,7 +6048,13 @@
       "synonyms": [
         "gente"
       ],
-      "example": "Il personale dell'ufficio è molto gentile."
+      "example": "Il personale dell'ufficio è molto gentile.",
+      "ipa": "/persoˈnale/",
+      "family": [
+        "personalmente",
+        "personalismo",
+        "personalità"
+      ]
     },
     {
       "word": "INCONTRO",
@@ -5832,7 +6063,11 @@
         "appuntamento"
       ],
       "pos": "noun",
-      "example": "Lo incontro spesso."
+      "example": "Lo incontro spesso.",
+      "ipa": "/iŋˈkontro/",
+      "family": [
+        "riscontrare"
+      ]
     },
     {
       "word": "FRETTA",
@@ -5842,7 +6077,13 @@
         "presto",
         "subito"
       ],
-      "example": "Ho fretta."
+      "example": "Ho fretta.",
+      "ipa": "/ˈfretta/",
+      "family": [
+        "affrettare",
+        "affrettarsi",
+        "frettoloso"
+      ]
     },
     {
       "word": "FINALMENTE",
@@ -5851,7 +6092,13 @@
         "alla fine"
       ],
       "pos": "adverb",
-      "example": "Finalmente!"
+      "example": "Finalmente!",
+      "ipa": "/finalˈmente/",
+      "family": [
+        "finale",
+        "finalista",
+        "finalizzare"
+      ]
     },
     {
       "word": "GAMBA",
@@ -5860,7 +6107,13 @@
       "synonyms": [
         "arto"
       ],
-      "example": "Alza la gamba."
+      "example": "Alza la gamba.",
+      "ipa": "/ˈɡamba/",
+      "family": [
+        "gambale",
+        "gambizzare",
+        "gambizzazione"
+      ]
     },
     {
       "word": "DIRITTO",
@@ -5869,6 +6122,11 @@
       "synonyms": [
         "dovere",
         "giusto"
+      ],
+      "ipa": "/diˈritto/",
+      "family": [
+        "economia",
+        "medicina"
       ]
     },
     {
@@ -5878,7 +6136,11 @@
         "via"
       ],
       "pos": "noun",
-      "example": "Dov'è l'uscita?"
+      "example": "Dov'è l'uscita?",
+      "ipa": "/uʃˈʃita/",
+      "family": [
+        "uscirsene"
+      ]
     },
     {
       "word": "AMERICANO",
@@ -5887,7 +6149,13 @@
       "synonyms": [
         "statunitense"
       ],
-      "example": "È americano?"
+      "example": "È americano?",
+      "ipa": "/ameˈrikano/",
+      "family": [
+        "afroamericano",
+        "americanata",
+        "americanizzare"
+      ]
     },
     {
       "word": "BOCCA",
@@ -5896,7 +6164,13 @@
       "synonyms": [
         "labbra"
       ],
-      "example": "Apra la bocca!"
+      "example": "Apra la bocca!",
+      "ipa": "/ˈbok.ka/",
+      "family": [
+        "abboccamento",
+        "abboccare",
+        "abboccato"
+      ]
     },
     {
       "word": "OLTRE",
@@ -5906,7 +6180,13 @@
         "al di là"
       ],
       "pos": "adverb",
-      "example": "Non vado oltre."
+      "example": "Non vado oltre.",
+      "ipa": "/ˈoltre/",
+      "family": [
+        "inoltrare",
+        "oltrepassare",
+        "oltrepassabile"
+      ]
     },
     {
       "word": "SCHERZARE",
@@ -5916,7 +6196,13 @@
         "divertirsi"
       ],
       "pos": "noun",
-      "example": "È reato scherzare?"
+      "example": "È reato scherzare?",
+      "ipa": "/skerˈtsare/",
+      "family": [
+        "scherzo",
+        "confondere",
+        "assurdo"
+      ]
     },
     {
       "word": "PUBBLICO",
@@ -5926,7 +6212,12 @@
         "folla"
       ],
       "pos": "adjective",
-      "example": "Sono in pubblico?"
+      "example": "Sono in pubblico?",
+      "ipa": "/ˈpubbliko/",
+      "family": [
+        "pubblicamente",
+        "pubblicità"
+      ]
     },
     {
       "word": "NORMALE",
@@ -5935,7 +6226,13 @@
       "synonyms": [
         "semplice"
       ],
-      "example": "È normale."
+      "example": "È normale.",
+      "ipa": "/norˈmale/",
+      "family": [
+        "normalità",
+        "normalizzante",
+        "normalizzare"
+      ]
     },
     {
       "word": "TEMERE",
@@ -5944,7 +6241,11 @@
         "aver paura"
       ],
       "pos": "noun",
-      "example": "Non temere!"
+      "example": "Non temere!",
+      "ipa": "/teˈmere/",
+      "family": [
+        "temibile"
+      ]
     },
     {
       "word": "BRACCIO",
@@ -5953,7 +6254,13 @@
       "synonyms": [
         "arto"
       ],
-      "example": "Alzò il braccio."
+      "example": "Alzò il braccio.",
+      "ipa": "/ˈbratt͡ʃo/",
+      "family": [
+        "abbraccio",
+        "avambraccio",
+        "bracciale"
+      ]
     },
     {
       "word": "NASCERE",
@@ -5963,7 +6270,13 @@
         "comparire"
       ],
       "pos": "verb",
-      "example": "Dovevano ancora nascere."
+      "example": "Dovevano ancora nascere.",
+      "ipa": "/ˈnaʃʃere/",
+      "family": [
+        "prenascere",
+        "rinascere",
+        "nascimento"
+      ]
     },
     {
       "word": "CUCINARE",
@@ -5972,7 +6285,11 @@
         "preparare"
       ],
       "pos": "verb",
-      "example": "Sa cucinare."
+      "example": "Sa cucinare.",
+      "ipa": "/kut͡ʃiˈnare/",
+      "family": [
+        "cucina"
+      ]
     },
     {
       "word": "CIRCA",
@@ -5981,7 +6298,8 @@
       "synonyms": [
         "più o meno"
       ],
-      "example": "Saremo circa venti."
+      "example": "Saremo circa venti.",
+      "ipa": "/ˈtʃirka/"
     },
     {
       "word": "GENTILE",
@@ -5990,7 +6308,13 @@
         "amabile"
       ],
       "pos": "adjective",
-      "example": "È gentile."
+      "example": "È gentile.",
+      "ipa": "/d͡ʒenˈtile/",
+      "family": [
+        "gentilezza",
+        "gentilmente",
+        "ingentilire"
+      ]
     },
     {
       "word": "OVVIAMENTE",
@@ -6000,7 +6324,12 @@
         "chiaramente"
       ],
       "pos": "adverb",
-      "example": "Ovviamente."
+      "example": "Ovviamente.",
+      "ipa": "/ɔv.vjaˈmen.te/",
+      "family": [
+        "ovvio",
+        "ovvietà"
+      ]
     },
     {
       "word": "DURARE",
@@ -6010,7 +6339,13 @@
         "continuare"
       ],
       "pos": "noun",
-      "example": "Non può durare molto."
+      "example": "Non può durare molto.",
+      "ipa": "/duˈrare/",
+      "family": [
+        "durata",
+        "duraturo",
+        "durevole"
+      ]
     },
     {
       "word": "NATALE",
@@ -6019,7 +6354,13 @@
         "festa"
       ],
       "pos": "adjective",
-      "example": "Natale sta arrivando."
+      "example": "Natale sta arrivando.",
+      "ipa": "/naˈtale/",
+      "family": [
+        "natalizio",
+        "neonatale",
+        "perinatale"
+      ]
     },
     {
       "word": "PROTEGGERE",
@@ -6028,7 +6369,13 @@
         "salvaguardare"
       ],
       "pos": "verb",
-      "example": "Li posso proteggere."
+      "example": "Li posso proteggere.",
+      "ipa": "/proˈtɛdd͡ʒere/",
+      "family": [
+        "proteggersi",
+        "protettore",
+        "protettivo"
+      ]
     },
     {
       "word": "CARINO",
@@ -6037,7 +6384,11 @@
         "grazioso"
       ],
       "pos": "noun",
-      "example": "Che carino!"
+      "example": "Che carino!",
+      "ipa": "/kaˈrino/",
+      "family": [
+        "caro"
+      ]
     },
     {
       "word": "STUDIO",
@@ -6047,7 +6398,13 @@
         "ricerca",
         "apprendimento"
       ],
-      "example": "Studio canto."
+      "example": "Studio canto.",
+      "ipa": "/ˈstudjo/",
+      "family": [
+        "ricerca",
+        "consultazione",
+        "insegnamento"
+      ]
     },
     {
       "word": "MATTINA",
@@ -6056,7 +6413,13 @@
         "inizio della giornata"
       ],
       "pos": "noun",
-      "example": "È mattina."
+      "example": "È mattina.",
+      "ipa": "/matˈtina/",
+      "family": [
+        "domani",
+        "domattina",
+        "iermattina"
+      ]
     },
     {
       "word": "VESTIRE",
@@ -6066,7 +6429,13 @@
         "coprire"
       ],
       "pos": "noun",
-      "example": "Mi devo vestire ora."
+      "example": "Mi devo vestire ora.",
+      "ipa": "/vesˈtire/",
+      "family": [
+        "rivestire",
+        "travestire",
+        "vestirsi"
+      ]
     },
     {
       "word": "PROGRAMMA",
@@ -6075,7 +6444,13 @@
         "piano"
       ],
       "pos": "noun",
-      "example": "Ha un programma."
+      "example": "Ha un programma.",
+      "ipa": "/proˈɡramma/",
+      "family": [
+        "fuoriprogramma",
+        "programmare",
+        "programmatico"
+      ]
     },
     {
       "word": "CONTARE",
@@ -6084,7 +6459,12 @@
         "calcolare"
       ],
       "pos": "verb",
-      "example": "So contare."
+      "example": "So contare.",
+      "ipa": "/konˈtare/",
+      "family": [
+        "contato",
+        "ricontare"
+      ]
     },
     {
       "word": "SIMILE",
@@ -6093,7 +6473,13 @@
         "somigliante"
       ],
       "pos": "adjective",
-      "example": "È molto simile."
+      "example": "È molto simile.",
+      "ipa": "/ˈsimile/",
+      "family": [
+        "assimilare",
+        "assomigliare",
+        "consimile"
+      ]
     },
     {
       "word": "GUARDIA",
@@ -6103,7 +6489,13 @@
         "sorveglianza"
       ],
       "pos": "noun",
-      "example": "È una guardia."
+      "example": "È una guardia.",
+      "ipa": "/ˈɡwardja/",
+      "family": [
+        "capoguardia",
+        "guardialinee",
+        "retroguardia"
+      ]
     },
     {
       "word": "PAZIENTE",
@@ -6112,7 +6504,11 @@
         "tollerante"
       ],
       "pos": "noun",
-      "example": "È paziente."
+      "example": "È paziente.",
+      "ipa": "/paˈt͡sjɛnte/",
+      "family": [
+        "pazientemente"
+      ]
     },
     {
       "word": "BUTTARE",
@@ -6121,7 +6517,13 @@
         "lanciare"
       ],
       "pos": "verb",
-      "example": "Non tutto è da buttare."
+      "example": "Non tutto è da buttare.",
+      "ipa": "/butˈtare/",
+      "family": [
+        "buttafuori",
+        "buttarsi",
+        "ributtare"
+      ]
     },
     {
       "word": "RICERCA",
@@ -6130,7 +6532,13 @@
         "studio"
       ],
       "pos": "noun",
-      "example": "La ricerca è finita?"
+      "example": "La ricerca è finita?",
+      "ipa": "/riˈt͡ʃerka/",
+      "family": [
+        "ricercare",
+        "ricercatezza",
+        "ricercato"
+      ]
     },
     {
       "word": "PRESENTARE",
@@ -6139,7 +6547,13 @@
         "mostrare"
       ],
       "pos": "verb",
-      "example": "Mi posso presentare?"
+      "example": "Mi posso presentare?",
+      "ipa": "/prezenˈtare/",
+      "family": [
+        "presentabile",
+        "presentarsi",
+        "presentatore"
+      ]
     },
     {
       "word": "SOLTANTO",
@@ -6148,7 +6562,13 @@
         "solo"
       ],
       "pos": "adverb",
-      "example": "Sento soltanto te."
+      "example": "Sento soltanto te.",
+      "ipa": "/solˈtanto/",
+      "family": [
+        "solo",
+        "solamente",
+        "solitudine"
+      ]
     },
     {
       "word": "PERO",
@@ -6156,7 +6576,8 @@
       "synonyms": [
         "pere"
       ],
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈpɛːro/"
     },
     {
       "word": "FERMO",
@@ -6165,7 +6586,13 @@
         "immobile"
       ],
       "pos": "noun",
-      "example": "Sono fermo."
+      "example": "Sono fermo.",
+      "ipa": "/ˈfermo/",
+      "family": [
+        "fermato",
+        "affermativo",
+        "affermare"
+      ]
     },
     {
       "word": "RELAZIONE",
@@ -6175,7 +6602,13 @@
         "rapporto"
       ],
       "pos": "noun",
-      "example": "Scrivi una relazione."
+      "example": "Scrivi una relazione.",
+      "ipa": "/relaˈtsjone/",
+      "family": [
+        "correlazione",
+        "interrelazione",
+        "relazionale"
+      ]
     },
     {
       "word": "CALDO",
@@ -6184,13 +6617,22 @@
       "synonyms": [
         "rovente"
       ],
-      "example": "Che caldo!"
+      "example": "Che caldo!",
+      "ipa": "/ˈkaldo/",
+      "family": [
+        "caldamente",
+        "caldeggiare"
+      ]
     },
     {
       "word": "GENERALE",
       "gloss": "che vale per quasi tutti i casi.",
       "pos": "adjective",
-      "example": "È l'idea generale."
+      "example": "È l'idea generale.",
+      "ipa": "/dʒeneˈrale/",
+      "family": [
+        "generalità"
+      ]
     },
     {
       "word": "RISOLVERE",
@@ -6199,7 +6641,13 @@
         "sistemare"
       ],
       "pos": "verb",
-      "example": "Vuoi risolvere così?"
+      "example": "Vuoi risolvere così?",
+      "ipa": "/riˈsɔlvere/",
+      "family": [
+        "risoluto",
+        "risolvente",
+        "risolversi"
+      ]
     },
     {
       "word": "SALIRE",
@@ -6208,7 +6656,13 @@
         "alzarsi"
       ],
       "pos": "noun",
-      "example": "È ora di salire."
+      "example": "È ora di salire.",
+      "ipa": "/saˈlire/",
+      "family": [
+        "risalire",
+        "saliscendi",
+        "salita"
+      ]
     },
     {
       "word": "CENTRO",
@@ -6218,7 +6672,13 @@
         "cuore"
       ],
       "pos": "noun",
-      "example": "Vado in centro."
+      "example": "Vado in centro.",
+      "ipa": "/ˈt͡ʃɛntro/",
+      "family": [
+        "accentrare",
+        "autocentro",
+        "baricentro"
+      ]
     },
     {
       "word": "TERRIBILE",
@@ -6228,7 +6688,13 @@
         "brutto",
         "cattivo"
       ],
-      "example": "È terribile."
+      "example": "È terribile.",
+      "ipa": "/terˈribile/",
+      "family": [
+        "terribilità",
+        "terribilmente",
+        "terrificante"
+      ]
     },
     {
       "word": "DETECTIVE",
@@ -6237,7 +6703,8 @@
         "investigatore"
       ],
       "pos": "noun",
-      "example": "È un detective?"
+      "example": "È un detective?",
+      "ipa": "/deˈtɛktiv/"
     },
     {
       "word": "GIURO",
@@ -6246,7 +6713,13 @@
       "synonyms": [
         "promettere"
       ],
-      "example": "Te lo giuro!"
+      "example": "Te lo giuro!",
+      "ipa": "/ˈdʒuro/",
+      "family": [
+        "giurare",
+        "giuramento",
+        "giustizia"
+      ]
     },
     {
       "word": "ROVINARE",
@@ -6255,7 +6728,13 @@
         "distruggere"
       ],
       "pos": "verb",
-      "example": "Non rovinare l'umore."
+      "example": "Non rovinare l'umore.",
+      "ipa": "/roviˈnare/",
+      "family": [
+        "rovina",
+        "rovinarsi",
+        "rovinato"
+      ]
     },
     {
       "word": "INDOSSARE",
@@ -6265,7 +6744,11 @@
         "portare"
       ],
       "pos": "verb",
-      "example": "Cosa devo indossare?"
+      "example": "Cosa devo indossare?",
+      "ipa": "/indosˈsare/",
+      "family": [
+        "indossato"
+      ]
     },
     {
       "word": "ZIO",
@@ -6274,7 +6757,13 @@
         "prozio"
       ],
       "pos": "noun",
-      "example": "È mio zio."
+      "example": "È mio zio.",
+      "ipa": "/ˈtsio/",
+      "family": [
+        "prozio",
+        "cugino",
+        "fratello"
+      ]
     },
     {
       "word": "GUIDARE",
@@ -6283,7 +6772,13 @@
         "condurre"
       ],
       "pos": "verb",
-      "example": "So guidare."
+      "example": "So guidare.",
+      "ipa": "/ɡwiˈdare/",
+      "family": [
+        "guida",
+        "guidabile",
+        "consigliare"
+      ]
     },
     {
       "word": "SCOMPARIRE",
@@ -6292,7 +6787,12 @@
         "svanire"
       ],
       "pos": "verb",
-      "example": "Volevo scomparire."
+      "example": "Volevo scomparire.",
+      "ipa": "/skompaˈrire/",
+      "family": [
+        "scomparsa",
+        "scomparso"
+      ]
     },
     {
       "word": "RIGUARDARE",
@@ -6301,7 +6801,13 @@
         "interessare"
       ],
       "pos": "verb",
-      "example": "Deve riguardare solo il soggetto che la propone."
+      "example": "Deve riguardare solo il soggetto che la propone.",
+      "ipa": "/riɡwarˈdare/",
+      "family": [
+        "riguardante",
+        "riguardarsi",
+        "riguardata"
+      ]
     },
     {
       "word": "CANZONE",
@@ -6310,7 +6816,13 @@
       "synonyms": [
         "musica"
       ],
-      "example": "È una canzone."
+      "example": "È una canzone.",
+      "ipa": "/kanˈtsone/",
+      "family": [
+        "canzonare",
+        "canzonatura",
+        "canzoniere"
+      ]
     },
     {
       "word": "REGALO",
@@ -6319,7 +6831,13 @@
         "omaggio"
       ],
       "pos": "noun",
-      "example": "È un regalo."
+      "example": "È un regalo.",
+      "ipa": "/reˈɡalo/",
+      "family": [
+        "regalare",
+        "regalino",
+        "regalità"
+      ]
     },
     {
       "word": "ORMAI",
@@ -6329,7 +6847,12 @@
         "adesso"
       ],
       "pos": "adverb",
-      "example": "Ormai esco."
+      "example": "Ormai esco.",
+      "ipa": "/orˈmai/",
+      "family": [
+        "quasi",
+        "oramai"
+      ]
     },
     {
       "word": "SPECIE",
@@ -6338,7 +6861,11 @@
         "tipo"
       ],
       "pos": "noun",
-      "example": "È una nuova specie."
+      "example": "È una nuova specie.",
+      "ipa": "/ˈspɛt͡ʃe/",
+      "family": [
+        "sottospecie"
+      ]
     },
     {
       "word": "SISTEMARE",
@@ -6348,7 +6875,13 @@
         "mettere"
       ],
       "pos": "verb",
-      "example": "Questo si può sistemare."
+      "example": "Questo si può sistemare.",
+      "ipa": "/sisteˈmare/",
+      "family": [
+        "risistemare",
+        "sistemarsi",
+        "sistemata"
+      ]
     },
     {
       "word": "CONTATTO",
@@ -6357,7 +6890,12 @@
         "rapporto"
       ],
       "pos": "noun",
-      "example": "Sarà un contatto?"
+      "example": "Sarà un contatto?",
+      "ipa": "/konˈtatto/",
+      "family": [
+        "contattare",
+        "contattore"
+      ]
     },
     {
       "word": "COMPAGNIA",
@@ -6367,7 +6905,12 @@
         "gruppo",
         "insieme"
       ],
-      "example": "Ho compagnia."
+      "example": "Ho compagnia.",
+      "ipa": "/kompaˈɲɲia/",
+      "family": [
+        "giovani",
+        "futuro"
+      ]
     },
     {
       "word": "ASPETTO",
@@ -6376,7 +6919,12 @@
       "synonyms": [
         "apparenza"
       ],
-      "example": "Che aspetto ha?"
+      "example": "Che aspetto ha?",
+      "ipa": "/aˈspɛtto/",
+      "family": [
+        "aspettare",
+        "aspettativa"
+      ]
     },
     {
       "word": "POSIZIONE",
@@ -6385,7 +6933,13 @@
         "posto"
       ],
       "pos": "noun",
-      "example": "Sono in posizione."
+      "example": "Sono in posizione.",
+      "ipa": "/poziˈtsjone/",
+      "family": [
+        "posizionale",
+        "posizionamento",
+        "posizionare"
+      ]
     },
     {
       "word": "GUAIO",
@@ -6394,12 +6948,22 @@
         "problema"
       ],
       "pos": "noun",
-      "example": "Questo è il guaio."
+      "example": "Questo è il guaio.",
+      "ipa": "/ˈɡwajo/",
+      "family": [
+        "inguaiare",
+        "inguaiarsi"
+      ]
     },
     {
       "word": "SEMPRE",
       "gloss": "In ogni momento.",
-      "pos": "adverb"
+      "pos": "adverb",
+      "ipa": "/ˈsɛmpre/",
+      "family": [
+        "sempiterno"
+      ],
+      "example": "Canti sempre."
     },
     {
       "word": "ESERCIRE",
@@ -6409,12 +6973,20 @@
         "lavorare"
       ],
       "pos": "noun",
-      "example": "Mio fratello vuole esercire un negozio di libri."
+      "example": "Mio fratello vuole esercire un negozio di libri.",
+      "ipa": "/ezerˈtʃire/"
     },
     {
       "word": "CARTA",
       "gloss": "foglio per scrivere.",
-      "pos": "noun"
+      "pos": "noun",
+      "ipa": "/ˈkarta/",
+      "family": [
+        "accartocciare",
+        "cartapecora",
+        "cartapesta"
+      ],
+      "example": "Ho la carta."
     },
     {
       "word": "ECCOLO",
@@ -6424,7 +6996,13 @@
         "qui",
         "qua"
       ],
-      "example": "Eccolo lì."
+      "example": "Eccolo lì.",
+      "ipa": "/ˈɛk.ko.lo/",
+      "family": [
+        "eccoci",
+        "eccoglielo",
+        "eccola"
+      ]
     },
     {
       "word": "STARARE",
@@ -6434,7 +7012,8 @@
         "guardare",
         "vedere"
       ],
-      "example": "Il gatto ama starare fuori dalla finestra."
+      "example": "Il gatto ama starare fuori dalla finestra.",
+      "ipa": "/staˈrare/"
     },
     {
       "word": "MAGGIOR",
@@ -6444,7 +7023,13 @@
         "più alto"
       ],
       "pos": "adjective",
-      "example": "La maggior parte sta bene."
+      "example": "La maggior parte sta bene.",
+      "ipa": "/madˈd͡ʒor/",
+      "family": [
+        "maggiore",
+        "maggioranza",
+        "maggiormente"
+      ]
     },
     {
       "word": "LATTA",
@@ -6453,7 +7038,11 @@
       "synonyms": [
         "barattolo"
       ],
-      "example": "Questo barattolo è di latta."
+      "example": "Questo barattolo è di latta.",
+      "ipa": "/ˈlatta/",
+      "family": [
+        "lattina"
+      ]
     },
     {
       "word": "BREVE",
@@ -6462,7 +7051,12 @@
       "synonyms": [
         "poco"
       ],
-      "example": "Sarò breve."
+      "example": "Sarò breve.",
+      "ipa": "/ˈbrɛve/",
+      "family": [
+        "brevemente",
+        "semibreve"
+      ]
     },
     {
       "word": "PERSINO",
@@ -6471,7 +7065,11 @@
         "addirittura"
       ],
       "pos": "adverb",
-      "example": "Ho persino nuotato."
+      "example": "Ho persino nuotato.",
+      "ipa": "/perˈsino/",
+      "family": [
+        "perfino"
+      ]
     },
     {
       "word": "FINGERE",
@@ -6480,7 +7078,12 @@
         "simulare"
       ],
       "pos": "verb",
-      "example": "Non sono bravo a fingere."
+      "example": "Non sono bravo a fingere.",
+      "ipa": "/fiŋd͡ʒere/",
+      "family": [
+        "fingersi",
+        "fingimento"
+      ]
     },
     {
       "word": "FUGGIRE",
@@ -6490,7 +7093,13 @@
         "allontanarsi"
       ],
       "pos": "verb",
-      "example": "Vorrei fuggire."
+      "example": "Vorrei fuggire.",
+      "ipa": "/fudˈd͡ʒire/",
+      "family": [
+        "fuggevole",
+        "fuggirsi",
+        "fuggita"
+      ]
     },
     {
       "word": "GRIDARE",
@@ -6500,7 +7109,11 @@
         "chiamare",
         "parlare"
       ],
-      "example": "Non gridare."
+      "example": "Non gridare.",
+      "ipa": "/ɡriˈdare/",
+      "family": [
+        "sgridare"
+      ]
     },
     {
       "word": "FACCENDA",
@@ -6509,7 +7122,13 @@
         "lavoro"
       ],
       "pos": "noun",
-      "example": "La faccenda è stata risolta!"
+      "example": "La faccenda è stata risolta!",
+      "ipa": "/fatˈt͡ʃɛnda/",
+      "family": [
+        "affaccendare",
+        "affaccendarsi",
+        "sfaccendare"
+      ]
     },
     {
       "word": "RIPOSARE",
@@ -6518,7 +7137,13 @@
       "synonyms": [
         "fermare"
       ],
-      "example": "Devo riposare."
+      "example": "Devo riposare.",
+      "ipa": "/ripoˈzare/",
+      "family": [
+        "riposante",
+        "riposarsi",
+        "riposata"
+      ]
     },
     {
       "word": "CONOSCENZA",
@@ -6528,7 +7153,13 @@
         "informazione"
       ],
       "pos": "noun",
-      "example": "È conoscenza comune."
+      "example": "È conoscenza comune.",
+      "ipa": "/konoʃˈʃɛntsa/",
+      "family": [
+        "conoscente",
+        "conoscere",
+        "riconoscenza"
+      ]
     },
     {
       "word": "LAGGIÙ",
@@ -6537,7 +7168,8 @@
         "là"
       ],
       "pos": "adverb",
-      "example": "Sì, laggiù."
+      "example": "Sì, laggiù.",
+      "ipa": "/ladˈd͡ʒu/"
     },
     {
       "word": "SOLUZIONE",
@@ -6547,7 +7179,13 @@
         "solvente"
       ],
       "pos": "noun",
-      "example": "È una soluzione!"
+      "example": "È una soluzione!",
+      "ipa": "/soluˈtsjone/",
+      "family": [
+        "solubile",
+        "solutore",
+        "soluto"
+      ]
     },
     {
       "word": "SOGNARE",
@@ -6556,7 +7194,11 @@
         "immaginare"
       ],
       "pos": "verb",
-      "example": "Devo sognare."
+      "example": "Devo sognare.",
+      "ipa": "/soˈɲɲare/",
+      "family": [
+        "sognarsi"
+      ]
     },
     {
       "word": "BACIARE",
@@ -6565,7 +7207,13 @@
       "synonyms": [
         "abbracciare"
       ],
-      "example": "Non mi baciare."
+      "example": "Non mi baciare.",
+      "ipa": "/baˈt͡ʃa.re/",
+      "family": [
+        "baciamano",
+        "baciarsi",
+        "bacio"
+      ]
     },
     {
       "word": "PROCEDERE",
@@ -6574,7 +7222,13 @@
         "continuare"
       ],
       "pos": "verb",
-      "example": "Possiamo procedere."
+      "example": "Possiamo procedere.",
+      "ipa": "/proˈt͡ʃɛdere/",
+      "family": [
+        "procedibile",
+        "procedimento",
+        "procedura"
+      ]
     },
     {
       "word": "RIFERIRE",
@@ -6584,7 +7238,13 @@
         "narrare"
       ],
       "pos": "verb",
-      "example": "Devo riferire questo."
+      "example": "Devo riferire questo.",
+      "ipa": "/rifeˈrire/",
+      "family": [
+        "riferirsi",
+        "riferibile",
+        "riferimento"
+      ]
     },
     {
       "word": "SPINGERE",
@@ -6594,7 +7254,13 @@
         "toccare",
         "muovere"
       ],
-      "example": "Non spingere."
+      "example": "Non spingere.",
+      "ipa": "/ˈspin.d͡ʒe.re/",
+      "family": [
+        "sospingere",
+        "spingersi",
+        "respingere"
+      ]
     },
     {
       "word": "POTENTE",
@@ -6604,7 +7270,13 @@
         "robusto"
       ],
       "pos": "adjective",
-      "example": "È potente."
+      "example": "È potente.",
+      "ipa": "/poˈtɛnte/",
+      "family": [
+        "onnipotente",
+        "potentato",
+        "prepotente"
+      ]
     },
     {
       "word": "BLOCCARE",
@@ -6613,7 +7285,11 @@
         "fermare"
       ],
       "pos": "noun",
-      "example": "Non bloccare la scatola."
+      "example": "Non bloccare la scatola.",
+      "ipa": "/blokˈkare/",
+      "family": [
+        "bloccarsi"
+      ]
     },
     {
       "word": "PORRE",
@@ -6622,7 +7298,13 @@
         "mettere"
       ],
       "pos": "verb",
-      "example": "Posso porre una domanda?"
+      "example": "Posso porre una domanda?",
+      "ipa": "/ˈporre/",
+      "family": [
+        "anteporre",
+        "apporre",
+        "deporre"
+      ]
     },
     {
       "word": "NATURA",
@@ -6632,7 +7314,13 @@
         "creazione"
       ],
       "pos": "noun",
-      "example": "Amo la natura."
+      "example": "Amo la natura.",
+      "ipa": "/naˈtura/",
+      "family": [
+        "naturale",
+        "naturalità",
+        "naturismo"
+      ]
     },
     {
       "word": "EVENTO",
@@ -6642,7 +7330,11 @@
         "fatto"
       ],
       "pos": "noun",
-      "example": "L'evento è lunedì."
+      "example": "L'evento è lunedì.",
+      "ipa": "/eˈvɛnto/",
+      "family": [
+        "episodico"
+      ]
     },
     {
       "word": "FALLIRE",
@@ -6652,7 +7344,13 @@
         "perdere"
       ],
       "pos": "verb",
-      "example": "Odio fallire."
+      "example": "Odio fallire.",
+      "ipa": "/falˈlire/",
+      "family": [
+        "fallare",
+        "fallimentare",
+        "fallimento"
+      ]
     },
     {
       "word": "PERDITA",
@@ -6661,7 +7359,13 @@
         "dispersione"
       ],
       "pos": "noun",
-      "example": "Che perdita!"
+      "example": "Che perdita!",
+      "ipa": "/ˈpɛrdita/",
+      "family": [
+        "perdere",
+        "perduto",
+        "perdizione"
+      ]
     },
     {
       "word": "COPRIRE",
@@ -6671,7 +7375,12 @@
         "proteggere"
       ],
       "pos": "verb",
-      "example": "Lo volete coprire?"
+      "example": "Lo volete coprire?",
+      "ipa": "/koˈprire/",
+      "family": [
+        "coprirsi",
+        "ricoprire"
+      ]
     },
     {
       "word": "INVIARE",
@@ -6680,7 +7389,11 @@
         "trasmettere"
       ],
       "pos": "verb",
-      "example": "Vorrei inviare un fax."
+      "example": "Vorrei inviare un fax.",
+      "ipa": "/inviˈare/",
+      "family": [
+        "rinviare"
+      ]
     },
     {
       "word": "SEDIA",
@@ -6689,7 +7402,13 @@
         "seggiola"
       ],
       "pos": "noun",
-      "example": "È una sedia."
+      "example": "È una sedia.",
+      "ipa": "/ˈsɛdja/",
+      "family": [
+        "casa",
+        "cuscino",
+        "divano"
+      ]
     },
     {
       "word": "ANGOLO",
@@ -6698,7 +7417,13 @@
         "cantone"
       ],
       "pos": "noun",
-      "example": "Il museo è all'angolo."
+      "example": "Il museo è all'angolo.",
+      "ipa": "/ˈaŋɡolo/",
+      "family": [
+        "angolare",
+        "angolazione",
+        "angoloso"
+      ]
     },
     {
       "word": "FORTUNATO",
@@ -6707,7 +7432,12 @@
         "felice"
       ],
       "pos": "adjective",
-      "example": "È fortunato."
+      "example": "È fortunato.",
+      "ipa": "/fortuˈnato/",
+      "family": [
+        "fortuna",
+        "fortunatamente"
+      ]
     },
     {
       "word": "BORDO",
@@ -6717,7 +7447,13 @@
         "margine"
       ],
       "pos": "noun",
-      "example": "Salì a bordo."
+      "example": "Salì a bordo.",
+      "ipa": "/ˈbordo/",
+      "family": [
+        "abbordare",
+        "debordo",
+        "entrobordo"
+      ]
     },
     {
       "word": "DON",
@@ -6726,7 +7462,8 @@
         "signore"
       ],
       "pos": "noun",
-      "example": "Don, può aiutarmi con questa domanda?"
+      "example": "Don, può aiutarmi con questa domanda?",
+      "ipa": "/dɔn/"
     },
     {
       "word": "ANZI",
@@ -6735,7 +7472,13 @@
         "invece"
       ],
       "pos": "adverb",
-      "example": "Non provo pena per lui, anzi."
+      "example": "Non provo pena per lui, anzi.",
+      "ipa": "/ˈantsi/",
+      "family": [
+        "anziché",
+        "anzitempo",
+        "tutt'altro"
+      ]
     },
     {
       "word": "UGUALE",
@@ -6744,7 +7487,13 @@
         "simile"
       ],
       "pos": "adjective",
-      "example": "Era uguale!"
+      "example": "Era uguale!",
+      "ipa": "/uˈɡwale/",
+      "family": [
+        "egualitario",
+        "ragguagliare",
+        "uguagliare"
+      ]
     },
     {
       "word": "ACCESSO",
@@ -6753,7 +7502,11 @@
       "synonyms": [
         "permesso"
       ],
-      "example": "Accesso limitato."
+      "example": "Accesso limitato.",
+      "ipa": "/atˈt͡ʃɛsso/",
+      "family": [
+        "accessuale"
+      ]
     },
     {
       "word": "CONOSCIUTO",
@@ -6763,13 +7516,23 @@
         "saputo",
         "imparato"
       ],
-      "example": "È conosciuto da tutti."
+      "example": "È conosciuto da tutti.",
+      "ipa": "/konoʃˈʃuto/",
+      "family": [
+        "riconosciuto"
+      ]
     },
     {
       "word": "DIVIDERE",
       "gloss": "fare in modo che qualcosa non sia più insieme",
       "pos": "verb",
-      "example": "Non dividere per zero."
+      "example": "Non dividere per zero.",
+      "ipa": "/diˈvidere/",
+      "family": [
+        "condividere",
+        "dividersi",
+        "suddividere"
+      ]
     },
     {
       "word": "FIDANZARE",
@@ -6777,7 +7540,13 @@
       "synonyms": [
         "promettere"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/fidanˈt͡sare/",
+      "family": [
+        "fidanzamento",
+        "fidanzarsi",
+        "fidanzato"
+      ]
     },
     {
       "word": "MONTAGNA",
@@ -6786,7 +7555,13 @@
       "synonyms": [
         "ALTO"
       ],
-      "example": "Va in montagna."
+      "example": "Va in montagna.",
+      "ipa": "/monˈtaɲɲa/",
+      "family": [
+        "passamontagna",
+        "montagnetta",
+        "montagnola"
+      ]
     },
     {
       "word": "STANCARE",
@@ -6795,7 +7570,12 @@
         "affaticare"
       ],
       "pos": "verb",
-      "example": "Non ti stancare."
+      "example": "Non ti stancare.",
+      "ipa": "/stanˈkare/",
+      "family": [
+        "instancabile",
+        "stancarsi"
+      ]
     },
     {
       "word": "CONTINUO",
@@ -6804,7 +7584,13 @@
         "ininterrotto"
       ],
       "pos": "adjective",
-      "example": "Continuo o smetto?"
+      "example": "Continuo o smetto?",
+      "ipa": "/konˈtinwo/",
+      "family": [
+        "discontinuo",
+        "continuamente",
+        "continuare"
+      ]
     },
     {
       "word": "SESSUALE",
@@ -6815,7 +7601,13 @@
         "amoroso",
         "affettivo"
       ],
-      "example": "Questa è una cosa sessuale?"
+      "example": "Questa è una cosa sessuale?",
+      "ipa": "/sessuˈale/",
+      "family": [
+        "pansessuale",
+        "sessualità",
+        "transessuale"
+      ]
     },
     {
       "word": "CENTRALE",
@@ -6824,13 +7616,25 @@
       "synonyms": [
         "importante"
       ],
-      "example": "Qui c'è una centrale nucleare."
+      "example": "Qui c'è una centrale nucleare.",
+      "ipa": "/t͡ʃenˈtrale/",
+      "family": [
+        "centralinista",
+        "centralmente",
+        "centralità"
+      ]
     },
     {
       "word": "UOVO",
       "gloss": "quello che si mangia e viene deposto dalle galline.",
       "pos": "noun",
-      "example": "Ho un uovo."
+      "example": "Ho un uovo.",
+      "ipa": "/ˈwɔ.vo/",
+      "family": [
+        "ovale",
+        "ovario",
+        "ovato"
+      ]
     },
     {
       "word": "MAGIA",
@@ -6839,7 +7643,12 @@
         "stregoneria"
       ],
       "pos": "noun",
-      "example": "È una magia."
+      "example": "È una magia.",
+      "ipa": "/maˈd͡ʒia/",
+      "family": [
+        "magico",
+        "magica"
+      ]
     },
     {
       "word": "TEORIA",
@@ -6849,13 +7658,24 @@
         "idea",
         "concetto"
       ],
-      "example": "È la teoria."
+      "example": "È la teoria.",
+      "ipa": "/teoˈria/",
+      "family": [
+        "teoretico",
+        "teorico",
+        "teorizzare"
+      ]
     },
     {
       "word": "PROIETTILE",
       "gloss": "un oggetto scagliato con forza.",
       "pos": "adjective",
-      "example": "Non si può inseguire un proiettile."
+      "example": "Non si può inseguire un proiettile.",
+      "ipa": "/proˈjɛttile/",
+      "family": [
+        "proiettare",
+        "proiettore"
+      ]
     },
     {
       "word": "STILE",
@@ -6864,7 +7684,12 @@
         "modo"
       ],
       "pos": "noun",
-      "example": "Che stile!"
+      "example": "Che stile!",
+      "ipa": "/ˈstile/",
+      "family": [
+        "stilistico",
+        "stilismo"
+      ]
     },
     {
       "word": "QUARTO",
@@ -6873,7 +7698,13 @@
       "synonyms": [
         "quattordicesimo"
       ],
-      "example": "È al quarto anno."
+      "example": "È al quarto anno.",
+      "ipa": "/ˈkwarto/",
+      "family": [
+        "quartana",
+        "quartarolo",
+        "quartazione"
+      ]
     },
     {
       "word": "SHOW",
@@ -6882,7 +7713,8 @@
       "synonyms": [
         "film"
       ],
-      "example": "Amo quello show."
+      "example": "Amo quello show.",
+      "ipa": "/ˈʃo/"
     },
     {
       "word": "LIMITE",
@@ -6892,7 +7724,13 @@
         "punto",
         "fine"
       ],
-      "example": "Vedo il limite."
+      "example": "Vedo il limite.",
+      "ipa": "/ˈlimite/",
+      "family": [
+        "delimitare",
+        "illimitato",
+        "limitare"
+      ]
     },
     {
       "word": "PRATICO",
@@ -6901,7 +7739,13 @@
         "funzionale"
       ],
       "pos": "adjective",
-      "example": "Sono pratico."
+      "example": "Sono pratico.",
+      "ipa": "/ˈpratiko/",
+      "family": [
+        "impratichire",
+        "pratica",
+        "praticare"
+      ]
     },
     {
       "word": "BACIO",
@@ -6910,7 +7754,13 @@
       "synonyms": [
         "sfioramento"
       ],
-      "example": "Dammi un bacio!"
+      "example": "Dammi un bacio!",
+      "ipa": "/baˈt͡ʃo/",
+      "family": [
+        "baciare",
+        "baciucchiare",
+        "bacino"
+      ]
     },
     {
       "word": "OGGETTO",
@@ -6919,7 +7769,13 @@
         "cosa"
       ],
       "pos": "noun",
-      "example": "Che oggetto era?"
+      "example": "Che oggetto era?",
+      "ipa": "/odˈd͡ʒɛtto/",
+      "family": [
+        "oggettistica",
+        "oggettivamente",
+        "oggettivare"
+      ]
     },
     {
       "word": "METÀ",
@@ -6928,7 +7784,12 @@
         "mezzo"
       ],
       "pos": "noun",
-      "example": "Dammene metà."
+      "example": "Dammene metà.",
+      "ipa": "/meˈta/",
+      "family": [
+        "medio",
+        "mediano"
+      ]
     },
     {
       "word": "SPLENDIDO",
@@ -6937,7 +7798,11 @@
         "bello"
       ],
       "pos": "adjective",
-      "example": "Splendido!"
+      "example": "Splendido!",
+      "ipa": "/ˈsplɛndido/",
+      "family": [
+        "splendidamente"
+      ]
     },
     {
       "word": "CORSA",
@@ -6947,7 +7812,13 @@
         "fuggire",
         "galoppare"
       ],
-      "example": "Venne di corsa."
+      "example": "Venne di corsa.",
+      "ipa": "/ˈkorsa/",
+      "family": [
+        "corseggiare",
+        "rincorsa",
+        "corsaro"
+      ]
     },
     {
       "word": "RAPIRE",
@@ -6955,13 +7826,26 @@
       "synonyms": [
         "portar via"
       ],
-      "pos": "verb"
+      "pos": "verb",
+      "ipa": "/raˈpire/",
+      "family": [
+        "rapito",
+        "rapitore",
+        "rapimento"
+      ],
+      "example": "Il ladro cerca di rapire il bambolotto dal negozio."
     },
     {
       "word": "FEDE",
       "gloss": "credere fermamente in qualcosa o qualcuno.",
       "pos": "noun",
-      "example": "Abbi fede."
+      "example": "Abbi fede.",
+      "ipa": "/ˈfede/",
+      "family": [
+        "buonafede",
+        "fedele",
+        "fedeltà"
+      ]
     },
     {
       "word": "VALIGIA",
@@ -6970,7 +7854,13 @@
       "synonyms": [
         "sacco"
       ],
-      "example": "È la mia valigia."
+      "example": "È la mia valigia.",
+      "ipa": "/vaˈlid͡ʒa/",
+      "family": [
+        "valigeria",
+        "svaligiare",
+        "svaligiatore"
+      ]
     },
     {
       "word": "DENTE",
@@ -6980,7 +7870,13 @@
         "zanna",
         "incisivo"
       ],
-      "example": "Mi levo un dente."
+      "example": "Mi levo un dente.",
+      "ipa": "/ˈdɛnte/",
+      "family": [
+        "addentare",
+        "dentatura",
+        "dentifricio"
+      ]
     },
     {
       "word": "PERDONARE",
@@ -6989,7 +7885,13 @@
         "scusare"
       ],
       "pos": "verb",
-      "example": "Mi farò perdonare."
+      "example": "Mi farò perdonare.",
+      "ipa": "/perdoˈnare/",
+      "family": [
+        "perdonabile",
+        "perdonarsi",
+        "perdonanza"
+      ]
     },
     {
       "word": "FINALE",
@@ -6998,7 +7900,13 @@
       "synonyms": [
         "ultimo"
       ],
-      "example": "Chi c'è in finale?"
+      "example": "Chi c'è in finale?",
+      "ipa": "/fiˈnale/",
+      "family": [
+        "finalismo",
+        "finalissima",
+        "finalmente"
+      ]
     },
     {
       "word": "STAMPA",
@@ -7007,7 +7915,13 @@
         "editoria"
       ],
       "pos": "noun",
-      "example": "Viva la libertà di stampa!"
+      "example": "Viva la libertà di stampa!",
+      "ipa": "/ˈstampa/",
+      "family": [
+        "controstampa",
+        "stampato",
+        "stampare"
+      ]
     },
     {
       "word": "RETRO",
@@ -7016,7 +7930,8 @@
         "dietro"
       ],
       "pos": "noun",
-      "example": "Vorrei una stanza sul retro."
+      "example": "Vorrei una stanza sul retro.",
+      "ipa": "/ˈrɛtro/"
     },
     {
       "word": "PESSIMO",
@@ -7026,7 +7941,13 @@
         "brutto",
         "cattivo"
       ],
-      "example": "Sembra pessimo."
+      "example": "Sembra pessimo.",
+      "ipa": "/ˈpɛssimo/",
+      "family": [
+        "peggio",
+        "peggiore",
+        "peccato"
+      ]
     },
     {
       "word": "PANTALONE",
@@ -7035,19 +7956,35 @@
         "calzoni"
       ],
       "pos": "noun",
-      "example": "Il pantalone è blu e molto comodo."
+      "example": "Il pantalone è blu e molto comodo.",
+      "ipa": "/pantaˈlone/",
+      "family": [
+        "pantaloncini"
+      ]
     },
     {
       "word": "SORRIDERE",
       "gloss": "mostrare contentezza con un’espressione del viso.",
       "pos": "verb",
-      "example": "Non sorridere."
+      "example": "Non sorridere.",
+      "ipa": "/sorˈridere/",
+      "family": [
+        "sorridersi",
+        "sorriso",
+        "relax"
+      ]
     },
     {
       "word": "SPADA",
       "gloss": "arma bianca lunga e affilata.",
       "pos": "noun",
-      "example": "Ha una spada."
+      "example": "Ha una spada.",
+      "ipa": "/ˈspada/",
+      "family": [
+        "spadaccino",
+        "spadino",
+        "spadista"
+      ]
     },
     {
       "word": "ATTO",
@@ -7056,7 +7993,13 @@
       "synonyms": [
         "cosa"
       ],
-      "example": "È un atto parlamentare."
+      "example": "È un atto parlamentare.",
+      "ipa": "/ˈatːo/",
+      "family": [
+        "attivo",
+        "attività",
+        "attuale"
+      ]
     },
     {
       "word": "ESTATE",
@@ -7065,7 +8008,12 @@
       "synonyms": [
         "CALDO"
       ],
-      "example": "Amo l'estate."
+      "example": "Amo l'estate.",
+      "ipa": "/eˈstate/",
+      "family": [
+        "estivo",
+        "state"
+      ]
     },
     {
       "word": "ESAGERARE",
@@ -7074,7 +8022,13 @@
       "synonyms": [
         "sopravalutare"
       ],
-      "example": "Non esagerare."
+      "example": "Non esagerare.",
+      "ipa": "/ezad͡ʒeˈrare/",
+      "family": [
+        "esagerativo",
+        "esagerazione",
+        "esageratamente"
+      ]
     },
     {
       "word": "RITIRARE",
@@ -7084,7 +8038,13 @@
         "uscire"
       ],
       "pos": "verb",
-      "example": "Lo devo ritirare?"
+      "example": "Lo devo ritirare?",
+      "ipa": "/ritiˈrare/",
+      "family": [
+        "ritirarsi",
+        "ritirata",
+        "ritirato"
+      ]
     },
     {
       "word": "DNA",
@@ -7094,7 +8054,12 @@
         "genetica",
         "eredità"
       ],
-      "example": "Il sangue contiene il DNA."
+      "example": "Il sangue contiene il DNA.",
+      "family": [
+        "RNA",
+        "adenina",
+        "citosina"
+      ]
     },
     {
       "word": "AZIENDA",
@@ -7103,7 +8068,13 @@
         "ditta"
       ],
       "pos": "noun",
-      "example": "Amo questa azienda."
+      "example": "Amo questa azienda.",
+      "ipa": "/aˈdzjɛnda/",
+      "family": [
+        "aziendale",
+        "aziendalismo",
+        "aziendalista"
+      ]
     },
     {
       "word": "MOTORE",
@@ -7112,7 +8083,13 @@
         "propulsore"
       ],
       "pos": "noun",
-      "example": "Testò un motore."
+      "example": "Testò un motore.",
+      "ipa": "/moˈtore/",
+      "family": [
+        "automotore",
+        "bimotore",
+        "magnetomotore"
+      ]
     },
     {
       "word": "MERCATO",
@@ -7121,7 +8098,13 @@
         "bazar"
       ],
       "pos": "noun",
-      "example": "Va al mercato."
+      "example": "Va al mercato.",
+      "ipa": "/merˈkato/",
+      "family": [
+        "calciomercato",
+        "euromercato",
+        "mercatistica"
+      ]
     },
     {
       "word": "ARTICOLO",
@@ -7130,7 +8113,11 @@
         "pezzo"
       ],
       "pos": "noun",
-      "example": "Leggi l'articolo."
+      "example": "Leggi l'articolo.",
+      "ipa": "/arˈtikolo/",
+      "family": [
+        "articolista"
+      ]
     },
     {
       "word": "AGGIUNGERE",
@@ -7139,7 +8126,12 @@
       "synonyms": [
         "mettere"
       ],
-      "example": "Nulla da aggiungere!"
+      "example": "Nulla da aggiungere!",
+      "ipa": "/adˈd͡ʒuŋd͡ʒere/",
+      "family": [
+        "aggettivo",
+        "aggiungersi"
+      ]
     },
     {
       "word": "NAZIONALE",
@@ -7149,7 +8141,13 @@
         "pubblico"
       ],
       "pos": "adjective",
-      "example": "Lo sport è nazionale."
+      "example": "Lo sport è nazionale.",
+      "ipa": "/natsjoˈnale/",
+      "family": [
+        "connazionale",
+        "multinazionale",
+        "nazionalismo"
+      ]
     },
     {
       "word": "CONDURRE",
@@ -7158,7 +8156,13 @@
         "portare"
       ],
       "pos": "noun",
-      "example": "Chi lo deve condurre?"
+      "example": "Chi lo deve condurre?",
+      "ipa": "/konˈdurre/",
+      "family": [
+        "condotto",
+        "conducente",
+        "conducibile"
+      ]
     },
     {
       "word": "FIGO",
@@ -7167,7 +8171,8 @@
       "synonyms": [
         "bello"
       ],
-      "example": "Sono figo."
+      "example": "Sono figo.",
+      "ipa": "/ˈfiɡo/"
     },
     {
       "word": "RIDICOLO",
@@ -7176,7 +8181,13 @@
         "strano"
       ],
       "pos": "noun",
-      "example": "È ridicolo!"
+      "example": "È ridicolo!",
+      "ipa": "/riˈdikolo/",
+      "family": [
+        "ridicolaggine",
+        "ridicolezza",
+        "ridicolizzare"
+      ]
     },
     {
       "word": "AVVERTIRE",
@@ -7186,7 +8197,13 @@
         "dire",
         "chiamare"
       ],
-      "example": "Li devo avvertire."
+      "example": "Li devo avvertire.",
+      "ipa": "/avverˈtire/",
+      "family": [
+        "avvertibile",
+        "preavvertimento",
+        "preavvertire"
+      ]
     },
     {
       "word": "VIAGGIARE",
@@ -7195,7 +8212,13 @@
         "girare"
       ],
       "pos": "verb",
-      "example": "Amo viaggiare."
+      "example": "Amo viaggiare.",
+      "ipa": "/vjadˈd͡ʒare/",
+      "family": [
+        "viaggiante",
+        "viaggiatore",
+        "viaggio"
+      ]
     },
     {
       "word": "SOSTENERE",
@@ -7204,7 +8227,13 @@
         "aiutare"
       ],
       "pos": "verb",
-      "example": "Lui ha una famiglia da sostenere."
+      "example": "Lui ha una famiglia da sostenere.",
+      "ipa": "/sosteˈnere/",
+      "family": [
+        "sostegno",
+        "sostenersi",
+        "sostenibile"
+      ]
     },
     {
       "word": "DEBITO",
@@ -7213,7 +8242,12 @@
       "synonyms": [
         "soldi da pagare"
       ],
-      "example": "Ripagò il debito."
+      "example": "Ripagò il debito.",
+      "ipa": "/ˈdebito/",
+      "family": [
+        "indebitare",
+        "indebito"
+      ]
     },
     {
       "word": "TAXI",
@@ -7222,7 +8256,12 @@
         "tassì"
       ],
       "pos": "noun",
-      "example": "Vuoi un taxi?"
+      "example": "Vuoi un taxi?",
+      "ipa": "/takˈsi/",
+      "family": [
+        "aerotaxi",
+        "tassì"
+      ]
     },
     {
       "word": "PREVEDERE",
@@ -7232,7 +8271,12 @@
         "immaginare"
       ],
       "pos": "verb",
-      "example": "Chi può prevedere?"
+      "example": "Chi può prevedere?",
+      "ipa": "/preveˈdere/",
+      "family": [
+        "preveggente",
+        "vedere"
+      ]
     },
     {
       "word": "VILLAGGIO",
@@ -7241,7 +8285,11 @@
         "paese"
       ],
       "pos": "noun",
-      "example": "Al villaggio."
+      "example": "Al villaggio.",
+      "ipa": "/vilˈladd͡ʒo/",
+      "family": [
+        "villanella"
+      ]
     },
     {
       "word": "NATURALE",
@@ -7250,7 +8298,13 @@
         "spontaneo"
       ],
       "pos": "adjective",
-      "example": "È naturale."
+      "example": "È naturale.",
+      "ipa": "/natuˈrale/",
+      "family": [
+        "connaturale",
+        "naturalezza",
+        "naturalismo"
+      ]
     },
     {
       "word": "PEGGIORE",
@@ -7259,7 +8313,12 @@
         "cattivo"
       ],
       "pos": "noun",
-      "example": "Il tuo è peggiore."
+      "example": "Il tuo è peggiore.",
+      "ipa": "/pedˈd͡ʒore/",
+      "family": [
+        "peggio",
+        "peccato"
+      ]
     },
     {
       "word": "SCHIENA",
@@ -7268,7 +8327,13 @@
       "synonyms": [
         "dorso"
       ],
-      "example": "Oh, la mia schiena."
+      "example": "Oh, la mia schiena.",
+      "ipa": "/ˈskjɛna/",
+      "family": [
+        "fondoschiena",
+        "schienata",
+        "schienale"
+      ]
     },
     {
       "word": "COMODO",
@@ -7277,7 +8342,13 @@
         "confortevole"
       ],
       "pos": "adjective",
-      "example": "Sei comodo?"
+      "example": "Sei comodo?",
+      "ipa": "/ˈkɔmodo/",
+      "family": [
+        "comodamente",
+        "confortabile",
+        "commodo"
+      ]
     },
     {
       "word": "CINESE",
@@ -7286,7 +8357,12 @@
       "synonyms": [
         "della Cina"
       ],
-      "example": "Sei cinese?"
+      "example": "Sei cinese?",
+      "ipa": "/t͡ʃiˈneze/",
+      "family": [
+        "indocinese",
+        "cinesino"
+      ]
     },
     {
       "word": "PICCHIARE",
@@ -7295,7 +8371,11 @@
         "colpire"
       ],
       "pos": "verb",
-      "example": "Chi vuoi picchiare?"
+      "example": "Chi vuoi picchiare?",
+      "ipa": "/pikˈkjare/",
+      "family": [
+        "picchiarsi"
+      ]
     },
     {
       "word": "ISPETTORE",
@@ -7304,7 +8384,13 @@
         "controllore"
       ],
       "pos": "noun",
-      "example": "Lavoro come ispettore alberghiero."
+      "example": "Lavoro come ispettore alberghiero.",
+      "ipa": "/ispetˈtore/",
+      "family": [
+        "ispettorato",
+        "ispezione",
+        "funzionario"
+      ]
     },
     {
       "word": "FEDERALE",
@@ -7313,7 +8399,12 @@
       "synonyms": [
         "centrale"
       ],
-      "example": "La Germania è uno Stato federale."
+      "example": "La Germania è uno Stato federale.",
+      "ipa": "/fedeˈrale/",
+      "family": [
+        "federalismo",
+        "interfederale"
+      ]
     },
     {
       "word": "SOSPETTARE",
@@ -7322,7 +8413,13 @@
         "diffidare"
       ],
       "pos": "verb",
-      "example": "Perché dovresti sospettare di me?"
+      "example": "Perché dovresti sospettare di me?",
+      "ipa": "/sospetˈtare/",
+      "family": [
+        "sospettabile",
+        "sospettarsi",
+        "sospetto"
+      ]
     },
     {
       "word": "BELLEZZA",
@@ -7331,7 +8428,13 @@
       "synonyms": [
         "attrattiva"
       ],
-      "example": "Che bellezza!"
+      "example": "Che bellezza!",
+      "ipa": "/belˈlettsa/",
+      "family": [
+        "bello",
+        "bellissimo",
+        "abbellire"
+      ]
     },
     {
       "word": "POSSEDERE",
@@ -7340,13 +8443,22 @@
         "avere"
       ],
       "pos": "verb",
-      "example": "Voglio possedere un ristorante."
+      "example": "Voglio possedere un ristorante.",
+      "ipa": "/posseˈdere/",
+      "family": [
+        "possidente",
+        "posseduto"
+      ]
     },
     {
       "word": "DIRETTO",
       "gloss": "che non fa curve o deviazioni.",
       "pos": "adjective",
-      "example": "È diretto?"
+      "example": "È diretto?",
+      "ipa": "/diˈrɛtto/",
+      "family": [
+        "eterodiretto"
+      ]
     },
     {
       "word": "COMBINARE",
@@ -7355,7 +8467,12 @@
         "organizzare"
       ],
       "pos": "verb",
-      "example": "Devi combinare uova, farina e zucchero per fare una torta."
+      "example": "Devi combinare uova, farina e zucchero per fare una torta.",
+      "ipa": "/kombiˈnare/",
+      "family": [
+        "combinarsi",
+        "combinatorio"
+      ]
     },
     {
       "word": "LANCIARE",
@@ -7365,7 +8482,13 @@
         "BUTTARE",
         "SCAGLIARE"
       ],
-      "example": "Voglio lanciare."
+      "example": "Voglio lanciare.",
+      "ipa": "/lanˈt͡ʃiare/",
+      "family": [
+        "lanciarsi",
+        "lanciarazzi",
+        "rilanciare"
+      ]
     }
   ]
 }
