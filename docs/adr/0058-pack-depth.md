@@ -39,6 +39,6 @@ Rollout: one prep PR (#328: guards + `--grow` mode + tests, no pack data), then 
 ## Amendment: scope and proper-noun lemmas (2026-11-25)
 
 - **Scope.** This ADR applies to the full pack, slots 0–999, and not only to the slots added by growth.
-- **Proper-noun lemmas.** Slot stability keeps the position of valid lemmas. It does not protect a lemma that is a person name, a trade or brand name, a city or place name, or a similar proper noun. Such a lemma is replaced in its own slot wherever it is found, slots 0–399 included. The slot keeps its index, the pack `version` is bumped, and `scripts/data/pack-pin.json` is refreshed. Reordering and removing slots stay forbidden.
-- **Example sentences.** Proper nouns stay allowed in example sentences. The rule above covers the lemma only.
+- **Proper-noun lemmas.** Slot stability keeps the position of valid lemmas. It does not protect a lemma that is a person name, a trade or brand name, a city or place name, or a similar proper noun. Such a lemma is replaced in its own slot wherever it is found, in any slot from 0 to 999, slots 0–399 included. The slot keeps its index, the pack `version` is bumped, and `scripts/data/pack-pin.json` is refreshed. Reordering and removing slots stay forbidden.
+- **Lemmas only.** The replacement rule applies to lemmas only. Person names, trade or brand names, city and place names, and similar proper nouns stay allowed in example sentences.
 - **Consequences.** Pack size (n) does not change, so Daily and Practice picks keep their slots. A pick that lands on a replaced slot shows the replacement word from the next pack version on.
