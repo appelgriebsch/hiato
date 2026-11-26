@@ -112242,11 +112242,11 @@
     "gate": 2
   },
   "es/c2.json|BOSAR": {
-    "sentence": "Tras comer demasiado, tuvo que bosar el exceso de comida.",
+    "sentence": "Después de comer tanto, terminó por bosar todo el contenido del plato.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The word \"bosar\" is archaic/obsolete and not part of standard Spanish, making it unsuitable for a general-audience learning app."
   },
@@ -114287,9 +114287,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes \"envenenadas\" (poisoned), which implies violence or harm, making it unsuitable for a general-audience learning app."
+    "reason": "The sentence includes \"envenenadas\" (poisoned), which implies violence or harm, violating the general-audience suitability condition."
   },
   "es/c2.json|PERGEÑAR": {
     "sentence": "¿Has logrado ya pergeñar el argumento general de esa novela que planeas?",
@@ -169738,7 +169738,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence is grammatically correct but uses the word \"Publio\" (a proper noun) and the verb \"publicó\" in a way that may confuse learners, as it relies on a pun rather than straightforward usage of \"público\" in the given sense."
   },
@@ -170424,7 +170424,7 @@
     "gate": 2
   },
   "es/c2.json|MESANA": {
-    "sentence": "El marinero subió al mástil para ajustar la **mesana** antes de que la tormenta empeorara.",
+    "sentence": "El marinero subió al mástil para ajustar la mesana antes de que la tormenta empeorara.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -170936,13 +170936,13 @@
     "gate": 2
   },
   "es/c2.json|COAXIAL": {
-    "sentence": "Las ruedas coaxial permiten un mejor equilibrio del vehículo.",
+    "sentence": "Los círculos concéntricos son coaxial, ya que comparten el mismo centro y eje.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-22",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"coaxial\" is not commonly used in everyday Spanish, even at C2 level, and the sentence is too technical for a general-audience app."
+    "reason": "The word \"coaxial\" is not commonly used in general contexts and may not be familiar to C2 learners, making it unsuitable for a general-audience app."
   },
   "es/c2.json|BURLESCO": {
     "sentence": "¡Su estilo burlesco en el escenario hizo reír hasta al público más serio!",
@@ -171185,13 +171185,13 @@
     "gate": 2
   },
   "es/c2.json|ACABALO": {
-    "sentence": "El equipo de científicos aseguró que el proyecto de conservación ya lo acabalo con éxito.",
+    "sentence": "El equipo de arquitectos ha acabalo el diseño del nuevo puente.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The verb \"acabalo\" is incorrectly conjugated; the correct form for the given meaning is \"acabado.\""
+    "reason": "The word \"acabalo\" is incorrectly spelled; the correct form is \"acabado.\""
   },
   "es/c2.json|EXTENSIBLE": {
     "sentence": "Bajar al gato del árbol estuvo chupado porque el camión de bomberos tenía una escalera extensible.",
@@ -172074,13 +172074,13 @@
     "gate": 2
   },
   "es/c2.json|AJUSTICIAR": {
-    "sentence": "El tribunal decidió ajusticiar al culpable para restablecer el orden moral.",
+    "sentence": "El tribunal decidió ajusticiar al culpable tras una larga deliberación.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes themes of crime, punishment, and violence, which are unsuitable for a general-audience learning app."
+    "reason": "The sentence includes themes of crime, punishment, and execution, which are unsuitable for a general-audience learning app."
   },
   "es/c2.json|EGIPTÓLOGO": {
     "sentence": "Jean-François Champollion fue un filólogo y egiptólogo francés.",
@@ -172547,13 +172547,12 @@
     "gate": 2
   },
   "es/c2.json|DEGÜELLO": {
-    "sentence": "El degüello del toro en la plaza fue ejecutado con precisión milimétrica.",
+    "sentence": "El degüello de la res se realiza con un cuchillo afilado para garantizar un corte limpio y rápido.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes violent imagery (degüello, executed) which is unsuitable for a general-audience learning app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "es/c2.json|COLÍN": {
     "sentence": "Para el asado, prefiero el colín porque queda muy tierno y sabroso.",
@@ -172620,13 +172619,13 @@
     "gate": 2
   },
   "es/c2.json|CUZ": {
-    "sentence": "Un pájaro pasó volando haciendo \"cuz\" al rozar el cable.",
+    "sentence": "El pájaro chilló con un agudo \"cuz\" antes de emprender el vuelo.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"cuz\" is not a standard Spanish word and is not appropriate for a general-audience learning app."
+    "reason": "The word \"CUZ\" is not a standard Spanish word and is not appropriate for a general-audience learning app."
   },
   "es/c2.json|COLINDANTE": {
     "sentence": "Francia es colindante a España.",
@@ -173213,13 +173212,12 @@
     "gate": 2
   },
   "es/c2.json|HITAR": {
-    "sentence": "El atleta logró hitar la pelota con tal fuerza que el récord quedó pulverizado.",
+    "sentence": "El lanzador logró hitar la pelota con tal fuerza que rompió el récord de velocidad.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"hitar\" is not a standard Spanish word; the correct term is \"lanzar\" or \"golpear con fuerza.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "es/c2.json|REQUISADO": {
     "sentence": "El material de oficina fue requisado por los inspectores durante el control anual.",
@@ -173230,13 +173228,13 @@
     "gate": 2
   },
   "es/c2.json|CAPAD": {
-    "sentence": "El boxeador se quedó aturdido después de que lo capad en el primer round.",
+    "sentence": "El balón lo capad en la cabeza durante el partido.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"capad\" is not standard Spanish and is likely slang or regional, making it unsuitable for a general-audience CEFR C2 learning app."
+    "reason": "The word \"capad\" is not standard Spanish and does not fit CEFR C2 criteria for learners."
   },
   "es/c2.json|AHUMAR": {
     "sentence": "En la cocina tradicional, es común ahumar el pescado para realzar su sabor.",
@@ -173815,13 +173813,13 @@
     "gate": 2
   },
   "es/c2.json|LAPIDAR": {
-    "sentence": "En la antigüedad, algunos pueblos llegaban a lapidar a quienes violaban gravemente las leyes sagradas.",
+    "sentence": "En la antigüedad, algunas culturas recurrían a lapidar a quienes violaban normas sagradas.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes themes of violence and crime, which are unsuitable for a general-audience learning app."
+    "reason": "The sentence includes themes of violence (lapidar = stoning to death) which are unsuitable for a general-audience learning app."
   },
   "es/c2.json|DESOCUPADA": {
     "sentence": "Esa casa está desocupada.",
@@ -274666,7 +274664,7 @@
     "gate": 2
   },
   "es/c2.json|MÉTEMELA": {
-    "sentence": "Si el doctor te pide la jeringa, **métemela** con cuidado para no lastimarme.",
+    "sentence": "Si el doctor te pide la jeringa, métemela con cuidado para no lastimarme.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -278032,6 +278030,86 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|COLOREADA": {
+    "sentence": "El atardecer sobre el océano pintaba el cielo con una paleta coloreada.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|CRETÁCEO": {
+    "sentence": "El período cretáceo destaca por la abundancia de sedimentos calcáreos y su influencia en la formación de suelos fértiles.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|TUNDIR": {
+    "sentence": "El viento gélido parece tundir los árboles del bosque con furia despiadada.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|CONTÁRTELA": {
+    "sentence": "Contártela con detalle hará que todos entiendan tu propuesta sin confusiones.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|FARFULLA": {
+    "sentence": "¡Deja de ser farfulla y explícamelo con claridad!",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|INCENTIVO": {
+    "sentence": "Un incentivo siempre ayuda.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|DÍMELAS": {
+    "sentence": "Dime si no entiendo bien, dímelas otra vez con más claridad.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|AGENDADO": {
+    "sentence": "El próximo seminario ha sido agendado para el 15 de octubre en el salón principal.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|PERICIA": {
+    "sentence": "Dudo de su pericia.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "es/c2.json|ECHÁRMELO": {
+    "sentence": "Echármelo con cuidado, que soy nuevo en esto.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
     "at": "2026-11-26",
     "gate": 2
   }
