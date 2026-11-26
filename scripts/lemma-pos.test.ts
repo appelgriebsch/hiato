@@ -1,8 +1,9 @@
 import { describe, expect, test } from 'bun:test'
-import { mkdtempSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import type { WordPack } from '../src/packs/schema'
+import { nfcUpper } from './lemma-denylist'
 import {
   POS_GATE_VERSION,
   UPOS_TO_PACK_POS,
@@ -11,6 +12,7 @@ import {
   isCurrentPosPass,
   loadPosExemptions,
   loadPosGateLog,
+  loadPosOverrides,
   pickPos,
   posGateKey,
   posSourceInfo,
@@ -63,6 +65,25 @@ describe('lemma-pos mapping (ADR 0055, #315)', () => {
       new Set(),
     )
     expect(errors).toEqual([])
+  })
+
+  test('#357 every pos override is a shipped lemma (no stale entries)', () => {
+    const root = path.join(import.meta.dir, '..', 'public', 'packs')
+    const shipped = new Map<string, Set<string>>()
+    for (const lang of readdirSync(root)) {
+      const set = new Set<string>()
+      for (const name of readdirSync(path.join(root, lang))) {
+        if (!name.endsWith('.json')) continue
+        const pack = JSON.parse(readFileSync(path.join(root, lang, name), 'utf8')) as WordPack
+        for (const L of pack.lemmas) set.add(nfcUpper(L.word))
+      }
+      shipped.set(lang, set)
+    }
+    for (const o of loadPosOverrides()) {
+      if (!shipped.get(o.lang)?.has(o.word)) {
+        throw new Error(`override ${o.lang}|${o.word} is not a shipped lemma — remove it`)
+      }
+    }
   })
 })
 
