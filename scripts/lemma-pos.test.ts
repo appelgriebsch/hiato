@@ -67,21 +67,25 @@ describe('lemma-pos mapping (ADR 0055, #315)', () => {
     expect(errors).toEqual([])
   })
 
-  test('#357 every pos override is a shipped lemma (no stale entries)', () => {
+  test('#357/#358 every pos override is a shipped lemma with that pos (no stale entries)', () => {
     const root = path.join(import.meta.dir, '..', 'public', 'packs')
-    const shipped = new Map<string, Set<string>>()
+    const shipped = new Map<string, Map<string, string | undefined>>()
     for (const lang of readdirSync(root)) {
-      const set = new Set<string>()
+      const map = new Map<string, string | undefined>()
       for (const name of readdirSync(path.join(root, lang))) {
         if (!name.endsWith('.json')) continue
         const pack = JSON.parse(readFileSync(path.join(root, lang, name), 'utf8')) as WordPack
-        for (const L of pack.lemmas) set.add(nfcUpper(L.word))
+        for (const L of pack.lemmas) map.set(nfcUpper(L.word), L.pos)
       }
-      shipped.set(lang, set)
+      shipped.set(lang, map)
     }
     for (const o of loadPosOverrides()) {
-      if (!shipped.get(o.lang)?.has(o.word)) {
+      const pos = shipped.get(o.lang)?.get(o.word)
+      if (pos === undefined) {
         throw new Error(`override ${o.lang}|${o.word} is not a shipped lemma — remove it`)
+      }
+      if (pos !== o.pos) {
+        throw new Error(`override ${o.lang}|${o.word}|${o.pos} but the pack ships pos ${pos} — sync them`)
       }
     }
   })

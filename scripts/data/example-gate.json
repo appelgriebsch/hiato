@@ -95253,13 +95253,12 @@
     "gate": 2
   },
   "en/c2.json|STRAIT": {
-    "sentence": "We found ourselves in a financial strait when our main supplier suddenly raised prices.",
+    "sentence": "He found himself in a financial strait when unexpected expenses arose.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"strait\" in the given sentence does not match the provided meaning (\"a difficult situation or position\"). \"Strait\" typically refers to a narrow waterway, not a difficult situation."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/c2.json|EUPHEMISM": {
     "sentence": "Is that a euphemism for something?",
@@ -128209,13 +128208,12 @@
     "gate": 2
   },
   "en/a1.json|SELF": {
-    "sentence": "I see my self in the mirror every morning.",
+    "sentence": "I love being my true self.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"self\" is not used correctly in the sentence; \"myself\" is a reflexive pronoun, not the noun \"self\" meaning \"the same person you are.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/a1.json|SECTION": {
     "sentence": "It's the second section.",
@@ -131306,13 +131304,12 @@
     "gate": 2
   },
   "en/a2.json|PLURAL": {
-    "sentence": "Several dogs play together in the plural yard.",
+    "sentence": "I use the plural form when I talk about many things.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"plural\" is not typically used as an adjective in this way by native speakers, and \"plural yard\" is unnatural phrasing for A2 learners."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/a2.json|PLEASING": {
     "sentence": "I find this quite pleasing.",
@@ -140131,13 +140128,12 @@
     "gate": 2
   },
   "en/b2.json|FOUND": {
-    "sentence": "I found him the book.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "She plans to found a small library in her town.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"found\" in the sense of \"located,\" not \"established or originated.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/b2.json|FOUL": {
     "sentence": "The smell is foul.",
@@ -140821,13 +140817,13 @@
     "gate": 2
   },
   "en/b2.json|HOLOCAUST": {
-    "sentence": "The forest fire was a holocaust, burning everything in its path.",
+    "sentence": "The forest fire was a holocaust, leaving only ashes where once tall trees stood.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"holocaust\" primarily refers to the Nazi genocide of Jews, making the sentence unsuitable for a general-audience app despite the provided gloss."
+    "reason": "The word \"holocaust\" is not typically used in CEFR B2 vocabulary to mean \"destruction or slaughter on a mass scale,\" as it primarily refers to the historical event."
   },
   "en/b2.json|HOMEWARD": {
     "sentence": "He's homeward bound.",
@@ -141262,13 +141258,12 @@
     "gate": 2
   },
   "en/b2.json|INCENSE": {
-    "sentence": "She likes to burn incense while practising yoga.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "His arrogance never fails to incense me.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"incense\" in the wrong meaning (burning material, not \"to make someone very angry\")."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/b2.json|INCENTIVE": {
     "sentence": "That's not much of an incentive.",
@@ -145799,13 +145794,12 @@
     "gate": 2
   },
   "en/c2.json|TOTTER": {
-    "sentence": "And she would whirl and spin and totter around, but she was still standing when Evil Eye Fleagle tried to lay her low with a double whammy.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "The drunken man tried to stand but could only totter a few steps before collapsing onto the bench.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence contains \"lay her low\" and \"double whammy,\" which are informal and could be considered violent or threatening, making it unsuitable for a general-audience learning app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "en/c2.json|PYRE": {
     "sentence": "The ancient custom of building a wooden pyre for the autumn equinox bonfire still thrives in some villages.",
@@ -277937,6 +277931,62 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/c1.json|EXHILARATE": {
+    "sentence": "The breathtaking roller coaster ride never fails to exhilarate me.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/b2.json|EXCLAIM": {
+    "sentence": "When she saw the surprise gift, she couldn't help but exclaim with joy!",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/c1.json|ENGROSS": {
+    "sentence": "The new documentary will engross viewers with its stunning visuals and compelling story.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/c2.json|CONTRIVE": {
+    "sentence": "The inventor had to contrive an entirely new method to solve the problem efficiently.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/c2.json|RAVISH": {
+    "sentence": "The sunset's golden hues ravish the onlookers with their breathtaking beauty.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/b2.json|MORTIFY": {
+    "sentence": "I’ll mortify myself if I sing that badly in public.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "en/c2.json|INCISE": {
+    "sentence": "The artisan will incise intricate patterns into the leather to create a unique design.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
     "at": "2026-11-26",
     "gate": 2
   }
