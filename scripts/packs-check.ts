@@ -21,6 +21,7 @@ import {
   checkPackBudget,
   checkPackLicense,
   checkSynonymCoverage,
+  posGlossMismatchErrors,
   failClosedOnHunspellMiss,
   exclusiveConflicts,
   lemmaFloor,
@@ -134,6 +135,7 @@ async function checkAll(files: string[], lines: Line[] = []): Promise<boolean> {
     errors.push(...checkExampleGate(rel, pack, gateLog))
     errors.push(...checkExtrasGate(rel, pack, extrasLog))
     errors.push(...checkLemmaPos(rel, pack, posMap, posExempt, posGate))
+    errors.push(...posGlossMismatchErrors(rel, pack))
 
     const floorErr = checkLemmaFloor(rel, pack)
     if (floorErr) errors.push(floorErr)

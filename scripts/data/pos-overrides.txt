@@ -1,0 +1,34 @@
+# lang|WORD|pos	reason — hand-reviewed POS corrections (#357): the licensed
+# source pos contradicts the shipped gloss meaning. posSourceInfo and
+# checkLemmaPos both honour these, so build-lemma-pos.ts keeps them.
+# wordhoard lists only ADV for the colour reading; the shipped gloss is the adjective "blue".
+de|BLAU|adjective	wordhoard has only ADV; pack gloss is the colour adjective
+# Plural noun "Flecken" (stains), gloss is the noun meaning; wordhoard row is the verb.
+de|FLECKEN|noun	gloss "unregelmäßige Verfärbungen" is the noun plural
+# Siegel = seal (noun); wordhoard picked the verb siegeln.
+de|SIEGEL|noun	gloss "amtliches Zeichen auf einem Dokument" is the noun
+# Tribun = public speaker/office holder (noun); wordhoard picked the verb.
+de|TRIBUN|noun	gloss "jemand, der in der Öffentlichkeit spricht" is the noun
+# Ansteuer = monetary contribution (noun).
+de|ANSTEUER|noun	gloss "Geldbetrag zur Unterstützung" is the noun
+# jugendlich is primarily an adjective; wordhoard's spurious NOUN won the priority pick.
+de|JUGENDLICH|adjective	primary reading is the adjective
+# kochen is the verb; the spurious wordhoard NOUN (the activity) won the priority pick.
+de|KOCHEN|verb	gloss "Speisen durch Hitze zubereiten" is the verb
+# stöhnen is the verb; spurious NOUN won the priority pick.
+de|STÖHNEN|verb	gloss "laut oder hörbar ausatmen" is the verb
+# glatt is primarily the adjective; wordhoard VERB won over ADJ.
+de|GLATT|adjective	gloss "ohne Unebenheiten" is the adjective
+# Wunden = wounds (noun plural); wordhoard ADJ/VERB won.
+de|WUNDEN|noun	gloss "Verletzungen der Haut" is the noun plural
+# vergeuden is the verb; spurious NOUN won the priority pick.
+de|VERGEUDEN|verb	gloss "etwas sinnlos verschwenden" is the verb
+# süchtig is the adjective; wordhoard ADV/ADJ pick went wrong in the map.
+de|SÜCHTIG|adjective	gloss "kann nicht mehr ohne etwas leben" is the adjective
+# andauernd is an adverb/participle, not a verb lemma.
+de|ANDAUERND|adverb	gloss "ohne Unterbrechung" is adverbial
+# Participles shipped as lemmas; the relative-clause glosses are adjective definitions.
+de|GEMACHT|adjective	"etwas, das … wurde" gloss is a participial adjective
+de|KOCHEND|adjective	"etwas, das gerade heiß wird" is a participial adjective
+de|VERBRANNT|adjective	"etwas, das durch Feuer zerstört wurde" is a participial adjective
+de|NÄHR|adjective	"etwas, das der Versorgung dient" is a participial adjective

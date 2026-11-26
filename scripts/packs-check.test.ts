@@ -24,6 +24,7 @@ import {
   buildLemmaEasiestByLang,
   isHintCeilingEnforcedRel,
   checkExtrasGate,
+  posGlossMismatchErrors,
   type ExampleGateLog,
 } from './packs-check-lib'
 import { EXTRAS_GATE_VERSION, extrasGateKey, type ExtrasGateLog } from './extras-gate'
@@ -38,6 +39,33 @@ function pack(partial: Partial<WordPack> & Pick<WordPack, 'lang' | 'cefr'>): Wor
     ...partial,
   }
 }
+
+describe('packs:check pos-vs-gloss heuristic (#357)', () => {
+  test('verb tagged with a relative-clause noun gloss fails; adjective/noun pass', () => {
+    const p = pack({
+      lang: 'de',
+      cefr: 'c1',
+      lemmas: [
+        { word: 'TRIBUN', gloss: 'jemand, der in der Öffentlichkeit spricht.', pos: 'verb' },
+        { word: 'GIFTIG', gloss: 'etwas, das krank macht.', pos: 'adjective' },
+        { word: 'ERKUNDEN', gloss: 'etwas genau untersuchen.', pos: 'verb' },
+        { word: 'UMBRINGEN', gloss: 'jemanden töten.', pos: 'verb' },
+      ],
+    })
+    const errors = posGlossMismatchErrors('de/c1.json', p)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('TRIBUN')
+  })
+
+  test('non-de packs are not scanned', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'c1',
+      lemmas: [{ word: 'X', gloss: 'someone, who does things.', pos: 'verb' }],
+    })
+    expect(posGlossMismatchErrors('en/c1.json', p)).toEqual([])
+  })
+})
 
 describe('packs:check floors', () => {
   test('C2_MIN is 350; every band uses floor 350 (ADR 0058 amends ADR 0028)', () => {

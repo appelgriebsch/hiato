@@ -107,6 +107,28 @@ describe('englishGlossByMembership', () => {
       englishGlossByMembership('es', 'Un lugar donde se duerme.', isWord),
     ).toBe(false)
   })
+
+  test('#357: free-text English with zero pack-language-only tokens is caught', () => {
+    // "data"/"entered"/"computer" are also EN-listed in real dicts, so only
+    // the en-only "into" separates this from German copy.
+    const de = new Set(['data', 'entered', 'computer', 'die', 'in', 'einen'])
+    const isWordDe = (lang: 'en' | 'de' | 'es' | 'pt' | 'fr' | 'it', word: string) => {
+      const w = word.toLowerCase()
+      if (lang === 'en') return ['data', 'entered', 'into', 'computer', 'a'].includes(w)
+      if (lang === 'de') return de.has(w)
+      return false
+    }
+    expect(
+      englishGlossByMembership('de', 'data entered into a computer', isWordDe, true),
+    ).toBe(true)
+    // non-strict keeps the old vote, so loanword-heavy examples stay allowed
+    expect(
+      englishGlossByMembership('de', 'data entered into a computer', isWordDe),
+    ).toBe(false)
+    expect(
+      englishGlossByMembership('de', 'Daten, die in einen Computer kommen.', isWordDe, true),
+    ).toBe(false)
+  })
 })
 
 describe('isTemplateGloss', () => {
