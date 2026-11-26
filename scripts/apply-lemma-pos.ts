@@ -29,6 +29,7 @@ import {
   loadLemmaPosMap,
   loadPosGateLog,
   posGateKey,
+  posOverrideMap,
   type LemmaPosMap,
   type PosGateLog,
 } from './lemma-pos'
@@ -277,9 +278,13 @@ async function main() {
       const before = readFileSync(file, 'utf8')
       const pack = JSON.parse(before) as PackFile
       const words = posMap[lang] ?? {}
+      const overrides = posOverrideMap()
       let changed = 0
       for (const L of pack.lemmas) {
-        const want = words[nfcUpper(L.word)] ?? null
+        // #357/#358: hand-reviewed overrides win over the raw source map, same
+        // precedence as checkLemmaPos/posSourceInfo, so a re-apply cannot
+        // clobber a reviewed tag.
+        const want = overrides.get(`${lang}|${nfcUpper(L.word)}`) ?? words[nfcUpper(L.word)] ?? null
         if (want && L.pos !== want) {
           L.pos = want
           changed += 1

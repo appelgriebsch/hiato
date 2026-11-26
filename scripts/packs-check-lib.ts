@@ -720,18 +720,32 @@ export { buildLemmaEasiestByLang, isHintCeilingEnforcedRel }
  */
 export const DE_RELATIVE_CLAUSE_GLOSS_RE = /^(?:jemand|etwas)\s*,\s*(?:der|die|das|was|wer)\b/i
 
+/**
+ * #358: English infinitive glosses ("to …") define a verb. A lemma tagged
+ * noun/adjective/adverb with such a gloss contradicts its gloss — for dual-use
+ * words the gloss and POS must describe the same sense.
+ */
+export const EN_INFINITIVE_GLOSS_RE = /^to\s/i
+
 export function posGlossMismatchErrors(
   rel: string,
   pack: WordPack,
 ): string[] {
-  if (pack.lang !== 'de') return []
   const errors: string[] = []
   for (const L of pack.lemmas) {
-    if (L.pos !== 'verb') continue
-    if (!L.gloss || !DE_RELATIVE_CLAUSE_GLOSS_RE.test(L.gloss)) continue
-    errors.push(
-      `${rel}: pos-vs-gloss — "${L.word}" is tagged verb but the gloss "${L.gloss}" defines a noun/participle`,
-    )
+    if (pack.lang === 'de') {
+      if (L.pos !== 'verb') continue
+      if (!L.gloss || !DE_RELATIVE_CLAUSE_GLOSS_RE.test(L.gloss)) continue
+      errors.push(
+        `${rel}: pos-vs-gloss — "${L.word}" is tagged verb but the gloss "${L.gloss}" defines a noun/participle`,
+      )
+    } else if (pack.lang === 'en') {
+      if (L.pos === 'verb') continue
+      if (!L.gloss || !EN_INFINITIVE_GLOSS_RE.test(L.gloss)) continue
+      errors.push(
+        `${rel}: pos-vs-gloss — "${L.word}" is tagged ${L.pos ?? 'none'} but the gloss "${L.gloss}" defines a verb (#358)`,
+      )
+    }
   }
   return errors
 }

@@ -57,13 +57,58 @@ describe('packs:check pos-vs-gloss heuristic (#357)', () => {
     expect(errors[0]).toContain('TRIBUN')
   })
 
-  test('non-de packs are not scanned', () => {
+  test('other languages are not scanned', () => {
+    const p = pack({
+      lang: 'fr',
+      cefr: 'c1',
+      lemmas: [{ word: 'X', gloss: 'quelqu’un, qui fait des choses.', pos: 'verb' }],
+    })
+    expect(posGlossMismatchErrors('fr/c1.json', p)).toEqual([])
+  })
+})
+
+describe('packs:check pos-vs-gloss heuristic EN (#358)', () => {
+  test('"to …" gloss with a non-verb POS fails; verb passes', () => {
     const p = pack({
       lang: 'en',
-      cefr: 'c1',
-      lemmas: [{ word: 'X', gloss: 'someone, who does things.', pos: 'verb' }],
+      cefr: 'a1',
+      lemmas: [
+        { word: 'KICK', gloss: 'to move your leg hard at something.', pos: 'noun' },
+        { word: 'HEAVILY', gloss: 'to a great degree.', pos: 'adverb' },
+        { word: 'ADD', gloss: 'Put numbers together.', pos: 'verb' },
+        { word: 'RUN', gloss: 'to move fast on your legs.', pos: 'verb' },
+        { word: 'HOUSE', gloss: 'a building where people live.', pos: 'noun' },
+      ],
     })
-    expect(posGlossMismatchErrors('en/c1.json', p)).toEqual([])
+    const errors = posGlossMismatchErrors('en/a1.json', p)
+    expect(errors.length).toBe(2)
+    expect(errors[0]).toContain('KICK')
+    expect(errors[1]).toContain('HEAVILY')
+  })
+
+  test('capitalised "To …" gloss also fails; de rule does not apply to en', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'a2',
+      lemmas: [
+        { word: 'FIX', gloss: 'To repair a broken thing.', pos: 'noun' },
+        { word: 'TRIBUN', gloss: 'jemand, der in der Öffentlichkeit spricht.', pos: 'verb' },
+      ],
+    })
+    const errors = posGlossMismatchErrors('en/a2.json', p)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('FIX')
+  })
+
+  test('missing pos on a "to …" gloss fails too', () => {
+    const p = pack({
+      lang: 'en',
+      cefr: 'b1',
+      lemmas: [{ word: 'WATCH', gloss: 'to look at something for a time.', pos: undefined }],
+    })
+    const errors = posGlossMismatchErrors('en/b1.json', p)
+    expect(errors.length).toBe(1)
+    expect(errors[0]).toContain('WATCH')
   })
 })
 
