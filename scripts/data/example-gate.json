@@ -92,9 +92,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"Mann\" in an interjectional sense (\"Wow\"), not in the given meaning of \"a male adult human.\""
+    "reason": "The sentence uses \"Mann\" in an idiomatic exclamation (\"Wow, it's so cold!\"), not in the literal meaning \"Ein Mensch, aber keine Frau und kein Kind.\""
   },
   "de/a1.json|JAHR": {
     "sentence": "Frohes neues Jahr!",
@@ -109,18 +109,18 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"leid\" in the meaning \"ein Mann hat ein Problem\" (a man has a problem)."
+    "reason": "The sentence does not use \"LEID\" in the meaning \"ein Mann hat ein Problem\" (a man has a problem)."
   },
   "de/a1.json|KIND": {
     "sentence": "Kind, greife nicht nach den Sternen.",
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses the imperative \"greife\" and the prepositional phrase \"nach den Sternen,\" which are beyond CEFR A1 level."
+    "reason": "The sentence uses the imperative \"greife\" and the accusative plural \"die Sterne,\" which are beyond CEFR A1 level."
   },
   "de/a1.json|VATER": {
     "sentence": "Wo ist Vater?",
@@ -423,9 +423,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"Datei\" (file) and the technical term \".art\" (file extension) are beyond CEFR A1."
+    "reason": "The word \"Endung\" (file extension) is not A1 level."
   },
   "de/a1.json|MAMA": {
     "sentence": "Mama weinte.",
@@ -512,9 +512,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"auslachen\" (to laugh at someone), which is not A1 level, and the context implies mocking, which may not suit a general-audience app."
+    "reason": "The sentence uses \"auslachen\" (to laugh at someone), which is beyond A1 level, and the context implies mocking, which may not suit a general-audience app."
   },
   "de/a1.json|NUMMER": {
     "sentence": "Falsche Nummer!",
@@ -761,9 +761,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence implies military conflict and violence, which violates the suitability criteria for a general-audience app."
+    "reason": "The sentence describes military conflict, which involves violence and is unsuitable for a general-audience learning app."
   },
   "de/a1.json|MUND": {
     "sentence": "Öffne den Mund!",
@@ -870,13 +870,13 @@
     "gate": 2
   },
   "de/a1.json|ZIEH": {
-    "sentence": "Zieh dich um.",
-    "source": "tatoeba",
+    "sentence": "Zieh bitte das Hemd an.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence \"Zieh dich um.\" uses \"zieh\" in the context of changing clothes (\"sich umziehen\"), not in the given meaning of \"taking something with the hand.\""
+    "reason": "The sentence uses \"zieh\" in the imperative form for \"put on\" (clothes), which does not match the given meaning \"takes with the hand.\""
   },
   "de/a1.json|GEIST": {
     "sentence": "Bist du ein Geist?",
@@ -1043,7 +1043,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence contains \"schwarzrotes\" (compound adjective) and \"Friedenstaube\" (noun compound), which are beyond A1 level, and \"Lady Gaga\" is a proper noun not typically used in beginner sentences."
   },
@@ -1247,13 +1247,13 @@
     "gate": 2
   },
   "de/a1.json|SCHICKSAL": {
-    "sentence": "Das Leben zeigt uns immer wieder, was das Schicksal für uns bereithält.",
+    "sentence": "Das ist einfach mein Schicksal.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses complex structures (\"zeigt uns immer wieder\", \"bereithält\") and abstract concepts beyond A1, and \"Schicksal\" is not used in the glossed meaning \"es kommt so\"."
+    "reason": "The word \"Schicksal\" is too advanced for CEFR A1 learners, and the gloss \"es kommt so\" is not a standard meaning."
   },
   "de/a1.json|FLASCHE": {
     "sentence": "Öffne die Flasche.",
@@ -1348,9 +1348,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses colloquial language (\"hau\", \"aufs Ohr\") and idiomatic expression (\"sich aufs Ohr hauen\") that are beyond CEFR A1 level and may not suit a general-audience learning app."
+    "reason": "The sentence uses colloquial language (\"hau\", \"aufs Ohr\") and idiomatic expression (\"sich aufs Ohr hauen\") which are beyond CEFR A1 level and may not suit a general-audience learning app."
   },
   "de/a1.json|KÖNIGIN": {
     "sentence": "Die Königin hat ein großes Haus mit vielen Leuten.",
@@ -1517,9 +1517,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence contains archaic/poetic vocabulary (\"Feuer\", \"Weib\", \"Übel\") and themes that are inappropriate for a general-audience learning app."
+    "reason": "The sentence contains archaic/poetic language (\"Weib\") and a culturally loaded, negative proverb that may not suit a general-audience app."
   },
   "de/a1.json|FARBE": {
     "sentence": "Ich brauche Farbe.",
@@ -1606,9 +1606,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is too complex for CEFR A1 learners (e.g., \"Dissertation,\" \"Computersimulation,\" \"genetische Aspekte,\" \"Entstehung des Lebens\")."
+    "reason": "Sentence exceeds A1 level (e.g., \"Dissertation\", \"Computersimulation\", \"genetische Aspekte\", \"Entstehung des Lebens\")."
   },
   "de/a1.json|OMA": {
     "sentence": "Oma lässt grüßen.",
@@ -1799,9 +1799,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses complex structures (\"ein Vorwand, sein eigenes Leben ein paar Stunden lang zu verlassen\") beyond A1 level and includes abstract concepts unsuitable for A1 learners."
+    "reason": "The sentence contains complex structures (\"sein eigenes Leben ein paar Stunden lang zu verlassen\") and abstract concepts beyond A1 level, and the metaphorical use of \"Kino\" does not align with the given gloss."
   },
   "de/a1.json|GRÖßE": {
     "sentence": "Welche Größe hast du?",
@@ -2207,9 +2207,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"halten\" in the sense of \"last\" or \"endure,\" not \"take in hand,\" violating condition 2."
+    "reason": "The sentence does not use \"HALTEN\" in the meaning \"ein Mensch nimmt ein Buch in die Hand\" (a person picks up a book)."
   },
   "de/a1.json|ZURÜCK": {
     "sentence": "Gib es zurück!",
@@ -2720,9 +2720,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"legen\" in the idiomatic expression \"loslegen\" (to start), not in the literal sense of placing something."
+    "reason": "The sentence uses \"legen\" in the idiomatic expression \"legen wir los\" (let's start), not in the literal sense of placing a book on a table."
   },
   "de/a1.json|DRAUßEN": {
     "sentence": "Warte draußen.",
@@ -2769,9 +2769,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"scheinen\" in the sense of \"to seem,\" not in the given meaning \"Licht abgeben\" (to emit light)."
+    "reason": "The sentence uses \"scheinen\" in the sense of \"to seem,\" not \"to emit light,\" and \"sich mögen\" (to like each other) is A1, but the overall meaning does not match the given gloss."
   },
   "de/a1.json|BESTIMMEN": {
     "sentence": "Was bestimmen Adverbien näher?",
@@ -2814,13 +2814,12 @@
     "gate": 2
   },
   "de/a1.json|DRAN": {
-    "sentence": "Ich bin dran.",
+    "sentence": "Ich bin dran?",
     "source": "tatoeba",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"dran\" is not a standalone A1-level word; it is a colloquial contraction of \"daran\" and requires prior context to understand, making it unsuitable for A1 learners."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/a1.json|LACHEN": {
     "sentence": "Nicht lachen!",
@@ -2855,13 +2854,13 @@
     "gate": 2
   },
   "de/a1.json|UMBRINGEN": {
-    "sentence": "Sie will mich umbringen.",
-    "source": "tatoeba",
+    "sentence": "Ein böser Zauberer wollte den Helden umbringen.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence implies a threat of violence, which is inappropriate for a general-audience learning app."
+    "reason": "The sentence includes violent content (\"umbringen\" meaning \"to kill\"), which is unsuitable for a general-audience learning app."
   },
   "de/a1.json|KURZ": {
     "sentence": "Warte kurz!",
@@ -3140,7 +3139,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"drauf\" in a colloquial sense (\"Wie bist du drauf?\" = \"How are you?\"), not in the literal meaning \"an der Oberseite vom Tisch.\""
   },
@@ -3153,13 +3152,13 @@
     "gate": 2
   },
   "de/a2.json|ANGST": {
-    "sentence": "Ich habe Angst vor Spinnen.",
+    "sentence": "Ich habe Angst vor der Prüfung.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"Angst\" in the sense of \"fear,\" not in the glossed meaning of \"something a person dislikes and does not want.\""
+    "reason": "The word \"Angst\" in the given sentence means \"fear\" (of something bad happening), not \"something a person dislikes and doesn’t want\" as per the gloss."
   },
   "de/a2.json|IDEE": {
     "sentence": "Ich habe eine Idee.",
@@ -3174,9 +3173,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"DING\" is not appropriate for A2 learners as it is too vague and informal; a clearer noun like \"Mann\" or \"Team\" would be better."
+    "reason": "The word \"DING\" is not appropriate for A2 learners as it is too vague and informal; a clearer noun like \"Mann\" or \"Spieler\" should be used."
   },
   "de/a2.json|AHNUNG": {
     "sentence": "Er hat Null Ahnung.",
@@ -3599,9 +3598,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"Luke\" in the meaning of \"eine kleine Tür nach oben oder unten\" and contains advanced structures (\"macht von sich reden\") beyond A2."
+    "reason": "The sentence does not use \"Luke\" in the meaning of \"eine kleine Tür nach oben oder unten\" and contains advanced vocabulary (\"macht von sich reden\", \"fließend Latein spricht\") beyond A2 level."
   },
   "de/a2.json|FEIND": {
     "sentence": "Er ist mein Feind.",
@@ -3680,9 +3679,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is far too advanced for A2 learners and does not use \"van\" in the given meaning."
+    "reason": "The sentence is far too advanced for CEFR A2 learners and contains specialized mathematical terminology."
   },
   "de/a2.json|WUNSCH": {
     "sentence": "Das ist ihr Wunsch.",
@@ -3773,13 +3772,13 @@
     "gate": 2
   },
   "de/a2.json|RECHTER": {
-    "sentence": "Ein spitzer Winkel ist kleiner als ein rechter Winkel.",
-    "source": "tatoeba",
+    "sentence": "Der Rechter spricht oft über traditionelle Werte.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"RECHTER\" in the meaning \"Person mit sehr konservativen politischen Ansichten.\""
+    "reason": "\"Rechter\" in the given sense is too advanced for A2 learners; the sentence structure is correct but the word choice exceeds the level."
   },
   "de/a2.json|VERTRAG": {
     "sentence": "Vertrag ist Vertrag.",
@@ -3882,9 +3881,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"Töpfern\" (pottery), which is beyond A2 level vocabulary."
+    "reason": "The sentence uses \"Töpfern\" (pottery), which is beyond A2 level, and \"Ton\" is not used in the meaning \"ein Laut, den man hört\"."
   },
   "de/a2.json|OFFIZIER": {
     "sentence": "Ich bin ein Offizier.",
@@ -4003,9 +4002,9 @@
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"schicke\" is an adjective in the sentence, but the given meaning (\"Elegantes oder modisches Aussehen\") corresponds to the noun \"Schick\", not the adjective \"schick\"."
+    "reason": "The word \"schicke\" is an adjective in the sentence, but it is incorrectly declined as \"schicke\" instead of \"schick\" (neuter nominative/accusative singular)."
   },
   "de/a2.json|HEXE": {
     "sentence": "Sie war eine Hexe.",
@@ -5276,9 +5275,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"grad\" in the sentence means \"just now\" (temporal adverb), not the unit of temperature or angle."
+    "reason": "The sentence does not use \"GRAD\" in the meaning of \"Maßeinheit für Temperatur oder Winkel\" (degree as a unit of measurement)."
   },
   "de/a2.json|WART": {
     "sentence": "Der kleine Junge rief: „Die WART kommt!“, als die Aufsichtsperson den Spielplatz betrat.",
@@ -5637,9 +5636,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"abstoßen\" (to repel) rather than \"stoßen\" (to push/hit), and the structure is too complex for A2."
+    "reason": "The sentence uses \"abstoßen\" (to repel) rather than \"stoßen\" (to push/hit), and \"faul\" (lazy) is borderline A2 but the overall phrasing is too complex for A2."
   },
   "de/a2.json|MINDESTENS": {
     "sentence": "Er ist mindestens vierzig.",
@@ -9490,13 +9489,13 @@
     "gate": 2
   },
   "de/b2.json|BIND": {
-    "sentence": "Kannst du das Geschenk mit dem blauen BIND umwickeln?",
+    "sentence": "Ich brauche ein schmales Band, um die Geschenkverpackung zu bind.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"BIND\" is not a German word; the correct word is \"Band\" or \"Schleife\"."
+    "reason": "The verb \"bind\" is incorrectly conjugated as \"bind\" instead of \"binden\" in the sentence."
   },
   "de/b2.json|ZWIEBELN": {
     "sentence": "Zwiebeln pellen!",
@@ -10662,9 +10661,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence contains abstract philosophical language (\"Befriedigung\", \"Bedürfnis\") and the word \"sterbend\" in a metaphorical sense, which may be too advanced for B2 learners and could be misinterpreted as literal death."
+    "reason": "The sentence contains abstract philosophical language (\"Befriedigung\", \"Bedürfnis\") and the word \"sterbend\" in a metaphorical sense, which may be too advanced for B2 learners and could be misinterpreted."
   },
   "de/b2.json|EINGEBEN": {
     "sentence": "Kann ich die Nummer direkt eingeben?",
@@ -12191,7 +12190,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence includes \"Mandarin\" (historical term for Chinese official) and \"Büttel\" (archaic for \"henchman\"), which are not B2-level vocabulary, and the context implies violence."
   },
@@ -102194,13 +102193,12 @@
     "gate": 2
   },
   "de/c1.json|ERDROSSELN": {
-    "sentence": "Der Angreifer versuchte, sein Opfer zu erdrosseln, wurde aber von Passanten gestoppt.",
+    "sentence": "Die Schlange versucht, ihre Beute durch Erdrosseln zu überwältigen.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes themes of violence and crime, which are unsuitable for a general-audience learning app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|BALLERN": {
     "sentence": "In der Übung durfte die Gruppe auf dem Schießstand mit der alten Panzerfaust ordentlich ballern.",
@@ -102335,9 +102333,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"ANFALLEN\" in the given meaning; it uses \"anfallen\" (to arise, to occur), which is unrelated to attacking or aggression."
+    "reason": "The sentence does not use \"ANFALLEN\" in the given meaning."
   },
   "de/c1.json|ZERDRÜCKEN": {
     "sentence": "Die schwere Maschine wird die Dosen einfach zerdrücken.",
@@ -103780,13 +103778,12 @@
     "gate": 2
   },
   "de/c1.json|BLASSEN": {
-    "sentence": "Davon habe ich keinen blassen Schimmer.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Die Farben des Posters blassen allmählich in der Sonne aus.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence does not use \"BLASSEN\" in the meaning \"an Farbe oder Intensität verlieren\" (to lose color or intensity). Instead, it uses \"blasser Schimmer\" idiomatically to mean \"a faintest idea.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|HEUHAUFEN": {
     "sentence": "Das ist, wie eine Nadel im Heuhaufen zu suchen.",
@@ -104093,13 +104090,12 @@
     "gate": 2
   },
   "de/c1.json|ARG": {
-    "sentence": "Nach dem Spiel kam es zwischen den Fans zu einem lauten und hitzigen ARG.",
-    "source": "mistral",
-    "verdict": "reject",
+    "sentence": "Beunruhigt dich das arg?",
+    "source": "tatoeba",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"ARG\" is not a standard German word; the correct term is \"ARGER\" or \"Streit.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|ÜBERFÜLLT": {
     "sentence": "Der Zug war überfüllt.",
@@ -104461,14 +104457,6 @@
     "at": "2026-11-21",
     "gate": 2
   },
-  "de/c1.json|SPRENGSATZ": {
-    "sentence": "Die Polizei entdeckte im alten Schuppen einen verdächtigen **Sprengsatz**.",
-    "source": "mistral",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-21",
-    "gate": 2
-  },
   "de/c1.json|ZUSTELLEN": {
     "sentence": "Die Lieferfirma wird die Pakete morgen an die richtige Adresse zustellen.",
     "source": "mistral",
@@ -104630,13 +104618,12 @@
     "gate": 2
   },
   "de/c1.json|HUMAN": {
-    "sentence": "Die Human- und die Veterinärmedizin sind bei uns gut ausgebaut, aber wer behandelt eigentlich den inneren Schweinehund?",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Eine human denkende Führungskraft setzt sich für faire Arbeitsbedingungen und soziale Gerechtigkeit ein.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"Human\" in the given sentence does not match the provided meaning (\"mitfühlend und menschenfreundlich\"), but rather refers to \"human medicine\" (as opposed to veterinary medicine)."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|ORDNER": {
     "sentence": "Der Ordner ist leer.",
@@ -105015,13 +105002,13 @@
     "gate": 2
   },
   "de/c1.json|NACHTTISCH": {
-    "sentence": "Am Nachttisch steht eine Lampe und ein Wecker.",
-    "source": "mistral",
+    "sentence": "Du kannst deine Brille auf den Nachttisch legen.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"NACHTTISCH\" means \"dessert\" in German, not \"a small piece of furniture next to the bed.\""
+    "reason": "The word \"NACHTTISCH\" does not mean \"Kleines Möbelstück neben dem Bett\" (small piece of furniture next to the bed) but rather \"dessert\" in German."
   },
   "de/c1.json|KOLLEKTIV": {
     "sentence": "Das Kollektiv sichert mich ab.",
@@ -105212,7 +105199,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"OSMANISCH\" in the given meaning (it refers to the language, not the empire)."
   },
@@ -105537,13 +105524,12 @@
     "gate": 2
   },
   "de/c2.json|ERSAUFEN": {
-    "sentence": "Ihr weckt in mir nur die Lust, in meiner eigenen Kotze zu ersaufen.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Die Seglerin erkannte die Gefahr zu spät und sah, wie ihr Boot im Strudel langsam zu ersaufen begann.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence contains self-harm imagery (\"in meiner eigenen Kotze zu ersaufen\"), which violates the suitability criteria for a general-audience app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c2.json|EINRAHMEN": {
     "sentence": "Das solltest du einrahmen lassen.",
@@ -106270,7 +106256,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"wassern\" in the given meaning and includes idiomatic phrasing (\"mit allen Wassern gewaschen\") that is not transparent for learners."
   },
@@ -106891,13 +106877,12 @@
     "gate": 2
   },
   "de/c2.json|FILE": {
-    "sentence": "Die digitale Akte enthält ein File mit allen wichtigen Dokumenten.",
+    "sentence": "Die digitale Akte enthält ein detailliertes FILE aller Projektfortschritte.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "\"File\" is an English loanword and not a standard German term at C2 level; \"Datei\" or \"Akte\" would be more appropriate."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c2.json|HYDRAULIK": {
     "sentence": "In der modernen Landwirtschaft wird die Hydraulik oft in Traktoren und Erntemaschinen eingesetzt.",
@@ -107112,9 +107097,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is grammatically incorrect and nonsensical, making it unsuitable for learners."
+    "reason": "The sentence does not use \"JUCHZEN\" in the given meaning (\"einen lauten Freudenruf ausstoßen\") and is semantically incorrect."
   },
   "de/c2.json|GUMMIBAND": {
     "sentence": "Ich habe das Gummiband um die Heftseiten gespannt, damit nichts verloren geht.",
@@ -108009,9 +107994,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is grammatically incorrect and nonsensical, making it unsuitable for learners."
+    "reason": "The sentence implies a negative or critical tone about a person (\"der Freiste\" – likely a derogatory term), which may not suit a general-audience learning app."
   },
   "de/c2.json|STOCKSAUER": {
     "sentence": "Ich bin stocksauer auf meinen Kollegen.",
@@ -252325,9 +252310,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"New\" in \"New Yorker\" is not used in the meaning \"noch nicht benutzt sein\" (unused)."
+    "reason": "The word \"New\" in \"New Yorker\" is not used in the meaning \"noch nicht benutzt sein\" (brand new/unused)."
   },
   "de/a1.json|FEHLEN": {
     "sentence": "Drei fehlen.",
@@ -253315,13 +253300,13 @@
     "gate": 2
   },
   "de/a1.json|PACK": {
-    "sentence": "Ein Pack von Leuten wartet auf den Bus.",
-    "source": "mistral",
+    "sentence": "Pack deine Sachen und geh!",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"Pack\" in the meaning \"Gruppe von Menschen\" is not a standard A1 vocabulary item in German; it is colloquial and not typically taught at this level."
+    "reason": "The sentence uses \"Pack\" in the sense of \"gang\" (violent connotation) rather than \"Gruppe von Menschen\" (neutral), and \"geh!\" implies a threat."
   },
   "de/a1.json|GRAS": {
     "sentence": "Gras ist grün.",
@@ -253596,13 +253581,13 @@
     "gate": 2
   },
   "de/a1.json|AFFÄRE": {
-    "sentence": "Die Affäre mit dem Geld war nicht in Ordnung.",
+    "sentence": "Die Affäre mit dem Geld war nicht richtig.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"Affäre\" typically implies a romantic or personal scandal, which may not align with the given meaning of \"unangemessene oder fragwürdige Handlung\" in a general-audience context."
+    "reason": "The sentence implies a financial scandal, which may involve inappropriate or questionable actions, but the word \"Affäre\" in this context could suggest a romantic or personal scandal, which violates the general-audience suitability guideline."
   },
   "de/a1.json|STIL": {
     "sentence": "Er hat Stil.",
@@ -253641,9 +253626,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses an idiomatic expression (\"zum Kotzen sein\") that is not within CEFR A1, and the word \"KOTZEN\" in this context is informal and unsuitable for a general-audience learning app."
+    "reason": "The sentence uses an idiomatic expression (\"zum Kotzen sein\") that is not within CEFR A1 and may be considered inappropriate for a general-audience app."
   },
   "de/a1.json|WUT": {
     "sentence": "Wut ist giftig.",
@@ -253706,7 +253691,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The verb \"flehen\" is too advanced for CEFR A1 learners."
   },
@@ -254155,9 +254140,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"VERLAUFEN\" in the sense of \"to get lost\" (sich verlaufen), not in the given gloss \"sich in eine bestimmte Art zeigen\"."
+    "reason": "The sentence uses \"VERLAUFEN\" in the sense of \"to get lost\" (a common meaning), not the glossed meaning \"sich in eine bestimmte Art zeigen.\""
   },
   "de/a2.json|FLIEßEN": {
     "sentence": "Bäche fließen in Flüsse.",
@@ -254300,7 +254285,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"tollen\" in the given meaning (\"laut und ausgelassen spielen\")."
   },
@@ -254373,9 +254358,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"umlegen\" in the sense of \"to switch\" (a lever), not in the given meaning of \"to kill.\""
+    "reason": "The sentence does not use \"UMLEGEN\" in the meaning \"eine Person oder einen Gegenstand töten.\""
   },
   "de/a2.json|KÄSE": {
     "sentence": "Er mag Käse.",
@@ -254426,13 +254411,13 @@
     "gate": 2
   },
   "de/a2.json|NATIONAL": {
-    "sentence": "Die national Flagge wird bei Feiern oft gehisst.",
-    "source": "mistral",
+    "sentence": "Diese Untersuchung wurde durch Fördermittel der National Science Foundation ermöglicht.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"national\" is incorrectly capitalized in the sentence, which is not appropriate for A2 learners."
+    "reason": "The word \"Untersuchung\" and the phrase \"Fördermittel der National Science Foundation\" are beyond CEFR A2 level."
   },
   "de/a2.json|SARG": {
     "sentence": "Dieser Sarg ist zu schwer.",
@@ -254463,7 +254448,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"RUSSEN\" in the given meaning (\"schnell und rücksichtslos handeln\")."
   },
@@ -254560,9 +254545,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"betragen\" in the sense of \"to behave\" (sich betragen), not in the given meaning of \"to amount to a certain sum or quantity.\""
+    "reason": "The sentence uses \"betragen\" in the sense of \"behave\" (sich betragen), not in the given meaning of \"amount to a certain sum or quantity.\""
   },
   "de/a2.json|HEILEN": {
     "sentence": "Wird er heilen?",
@@ -254930,9 +254915,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"oberer\" in a spatial sense (\"upper\"), not in the given meaning of \"someone with higher position or authority.\""
+    "reason": "The sentence uses \"oberer\" in a spatial sense (\"upper\"), not in the given meaning of \"someone with higher position or authority,\" and \"Weisheitszahn\" (wisdom tooth) is A2, but the mismatch in meaning fails the criteria."
   },
   "de/a2.json|ÜBERSEHEN": {
     "sentence": "Das hat er übersehen.",
@@ -255787,9 +255772,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"ausrichten\" in the sense of \"to pass on a message,\" not in the sense of \"to plan and prepare an event.\""
+    "reason": "The sentence uses \"ausrichten\" in the sense of \"to pass on a message,\" not in the given meaning of \"to plan and prepare an event.\""
   },
   "de/a2.json|BESUCHER": {
     "sentence": "Du hast Besucher.",
@@ -257120,13 +257105,13 @@
     "gate": 2
   },
   "de/a2.json|PERVERS": {
-    "sentence": "Ihr seid doch pervers!",
-    "source": "tatoeba",
+    "sentence": "Sein humor ist oft pervers und schwer zu verstehen.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses an insult (\"pervers\") that is inappropriate for a general-audience learning app."
+    "reason": "\"Pervers\" is too advanced for A2 learners and carries strong connotations beyond the given gloss."
   },
   "de/a2.json|ZUSCHAUER": {
     "sentence": "Die Zuschauer kommen.",
@@ -257233,13 +257218,12 @@
     "gate": 2
   },
   "de/a2.json|SCHWARZER": {
-    "sentence": "Der Himmel hängt voller schwarzer Wolken.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Der neue Lehrer ist ein Schwarzer.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence does not use \"SCHWARZER\" in the meaning \"eine Person mit dunkler Hautfarbe.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/a2.json|AUFBRINGEN": {
     "sentence": "Das Dorf konnte genug Geld aufbringen, um eine neue Schule zu bauen.",
@@ -257542,7 +257526,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"erschlagen\" in a violent context, which violates the suitability requirement for a general-audience app."
   },
@@ -257635,13 +257619,13 @@
     "gate": 2
   },
   "de/b1.json|FEHLEND": {
-    "sentence": "Unser Team war unzufrieden, weil zwei wichtige Mitglieder fehlend waren.",
+    "sentence": "Mein Schlüssel ist leider fehlend, ich kann die Tür nicht aufschließen.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-23",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"fehlend\" is grammatically incorrect here; the correct form is \"fehlten\" (past tense of \"fehlen\")."
+    "reason": "\"Fehlend\" is too advanced for B1; \"weg\" or \"nicht da\" would be more appropriate."
   },
   "de/b1.json|LESBISCH": {
     "sentence": "Ich bin lesbisch.",
@@ -257768,7 +257752,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"BÄUMEN\" in the meaning \"sich aufrichten oder hochklettern\" (to stand up or climb up)."
   },
@@ -257877,13 +257861,13 @@
     "gate": 2
   },
   "de/b1.json|KILLEN": {
-    "sentence": "Mein Hund würde den ganzen Garten killen, wenn er könnte!",
+    "sentence": "Der Löwe würde den Fuchs killen, wenn er ihn fangen könnte.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"killen\" is colloquial and not typically taught at B1 level, and the sentence implies violent imagery unsuitable for a general-audience app."
+    "reason": "The sentence includes violent imagery (a lion killing a fox), which is inappropriate for a general-audience learning app."
   },
   "de/b1.json|DEPRESSION": {
     "sentence": "Kann sich ein Mensch im Zustand der Depression selbst helfen?",
@@ -257994,9 +257978,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Anwesen\" in this context means \"estate\" or \"property,\" not \"being present,\" and the sentence structure is too complex for B1."
+    "reason": "The word \"Anwesen\" is not a verb meaning \"gegenwärtig sein\" (to be present), but a noun meaning \"estate\" or \"property.\""
   },
   "de/b1.json|GASSE": {
     "sentence": "Diese Gasse ist nicht breit.",
@@ -258151,13 +258135,12 @@
     "gate": 2
   },
   "de/b1.json|AUTOGRAMM": {
-    "sentence": "Ich kann dir ein Autogramm geben, wenn du willst.",
+    "sentence": "Kann ich Ihr Autogramm haben?",
     "source": "tatoeba",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"Autogramm\" does not match the given meaning (it means \"autograph,\" not a travel memento)."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/b1.json|ÄUßERN": {
     "sentence": "Möchtest du dich dazu äußern?",
@@ -258953,13 +258936,13 @@
     "gate": 2
   },
   "de/b1.json|HOLD": {
-    "sentence": "Der Zug bleibt für fünf Minuten in einem HOLD, bis die Strecke frei ist.",
-    "source": "mistral",
+    "sentence": "Von Zeit zu Zeit ist das Glück den Menschen hold.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"HOLD\" in the sense of \"eine Position oder ein Zustand der Stabilität\" is not a standard meaning in German; \"Halt\" (with a 't') is used, but the sentence structure is unnatural for B1 learners."
+    "reason": "The sentence uses the archaic/poetic meaning of \"hold\" (\"hold\" as in \"favorable\"), which is not a standard B1 vocabulary item, and the structure is too advanced for B1 learners."
   },
   "de/b1.json|KAMPAGNE": {
     "sentence": "Die Kampagne endete um Mitternacht.",
@@ -259062,7 +259045,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"POLICE\" in the given meaning; \"POLICE\" is not present in the sentence."
   },
@@ -259431,9 +259414,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"verwanzt\" (bugged) and \"Geheimdienste\" (intelligence services) are beyond B1; \"abfangen\" is used in a technical sense, not the physical meaning given."
+    "reason": "\"verwanzt\" (bugged) and \"Geheimdienste\" (intelligence services) exceed B1 vocabulary and the context implies surveillance, which may not suit a general-audience app."
   },
   "de/b1.json|AUSWIRKUNG": {
     "sentence": "Bereitet euch auf die Auswirkung vor.",
@@ -259656,9 +259639,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence implies sexual activity, which is inappropriate for a general-audience learning app."
+    "reason": "The sentence implies witnessing sexual activity, which is inappropriate for a general-audience learning app."
   },
   "de/b1.json|SPIONIEREN": {
     "sentence": "In diesem Land spionieren alle einander aus.",
@@ -260142,13 +260125,13 @@
     "gate": 2
   },
   "de/b1.json|PRÜGEL": {
-    "sentence": "Der Junge übte mit einem alten PRÜGEL seine Karateschläge.",
+    "sentence": "Im Museum sahen wir alte PRÜGEL aus Holz.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence implies violent intent (\"Schläge üben\"), which is inappropriate for a general-audience app."
+    "reason": "The word \"PRÜGEL\" is not a B1-level word in German; it is too obscure for that level."
   },
   "de/b1.json|KRAUT": {
     "sentence": "Kraut kann man roh essen.",
@@ -260579,9 +260562,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"eiern\" in the given meaning and includes an idiom unrelated to the word."
+    "reason": "The sentence does not use \"EIERN\" in the given meaning, and the idiom is not B1-level vocabulary."
   },
   "de/b1.json|GENERATOR": {
     "sentence": "Was ist mit dem Generator passiert?",
@@ -260724,9 +260707,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes themes of crime, prison, and violence, which are unsuitable for a general-audience learning app."
+    "reason": "The sentence violates condition 3 due to references to prison, crime, and murder."
   },
   "de/b1.json|SPENDIEREN": {
     "sentence": "Darf ich dir ein Bier spendieren?",
@@ -260829,9 +260812,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"in die Hände spielen,\" which is a fixed expression meaning \"to play into someone's hands,\" and while it is grammatically correct, it is not a straightforward use of \"VORSEHEN\" in the sense of \"plan for the future.\" Additionally, the phrase \"ihm nicht in die Hände zu spielen\" could imply a negative or risky situation, which may not suit a general-audience app."
+    "reason": "\"VORSEHEN\" is used in a different sense (\"to be careful\"), and the sentence contains the idiom \"in die Hände spielen\" which is too advanced for B1."
   },
   "de/b1.json|EINFRIEREN": {
     "sentence": "Kann man Käse einfrieren?",
@@ -261126,9 +261109,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"Wrack\" is used in a figurative sense (\"completely broken down\"), not in the literal sense of a damaged ship/vehicle as given in the gloss."
+    "reason": "The word \"Wrack\" is B1 appropriate, but the sentence uses it metaphorically (\"ein vollkommenes Wrack\" = \"a complete wreck\") rather than in the given nautical meaning."
   },
   "de/b1.json|VERKÄUFER": {
     "sentence": "Ich bin Verkäufer.",
@@ -261327,9 +261310,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"verrecken\" is too vulgar and violent for a general-audience app, despite being grammatically B1."
+    "reason": "The word \"verrecken\" is vulgar and violent, violating the general-audience guideline."
   },
   "de/b1.json|KAPELLE": {
     "sentence": "Droben steht die Kapelle.",
@@ -261825,9 +261808,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"vorgesetzt\" is not used in the meaning \"jemand, der in einer Hierarchie über anderen steht\" (superior in hierarchy), but rather as the past participle of \"vorsetzen\" (to serve)."
+    "reason": "The word \"vorgesetzt\" is not used in the meaning \"jemand, der in einer Hierarchie über anderen steht\" (superior in a hierarchy), but rather in the sense of \"served\" (as in food/drink)."
   },
   "de/b2.json|KODEX": {
     "sentence": "Was genau ist der japanische Bushido-Kodex eigentlich?",
@@ -263738,9 +263721,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes \"dir denkst\" (you think) and \"dir tust\" (you do), which are grammatically incorrect for the context and could confuse learners."
+    "reason": "The sentence includes \"dir denkst\" (you think) and \"was du tust\" (what you do), which are grammatically correct but the structure is overly complex for B2 learners, and the phrasing is informal and could be seen as threatening (\"wir dich nicht ertappen bei allem\")."
   },
   "de/b2.json|WEITAUS": {
     "sentence": "Gold ist weitaus schwerer als Wasser.",
@@ -264576,13 +264559,12 @@
     "gate": 2
   },
   "de/b2.json|FORTGEH": {
-    "sentence": "Du darfst jetzt erst fortgeh, wenn du deine Hausaufgaben fertig hast.",
+    "sentence": "Nach dem Konzert wollten alle bleiben, aber ich musste leider früh fortgeh.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-23",
-    "gate": 2,
-    "reason": "The verb \"fortgeh\" is not standard German; the correct form is \"fortgehen.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/b2.json|MISSBRAUCH": {
     "sentence": "Missbrauch ist keine Gewohnheit.",
@@ -265321,13 +265303,12 @@
     "gate": 2
   },
   "de/b2.json|TRÄG": {
-    "sentence": "Ist die Spinne träg zum Fangen, Gewitter bald am Himmel hangen.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Der Fluss fließt träg durch die flache Landschaft.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence contains a weather-related superstition that is not a standard or clear usage of \"träg\" and may confuse learners."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/b2.json|TROCKNEN": {
     "sentence": "Wir trocknen Blätter.",
@@ -265510,9 +265491,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is grammatically correct but too idiomatic (\"Vom Rathaus kommend ist man schlauer\" is not a standard or natural German phrase) and does not clearly convey the meaning of \"KOMMEND\" as \"in naher Zukunft eintreffend.\""
+    "reason": "The sentence is grammatically correct but too idiomatic (\"Vom Rathaus kommend ist man schlauer\") for a general-audience B2 learning app, as it implies an obscure metaphor rather than a clear, practical use of \"kommend.\""
   },
   "de/b2.json|ZICKE": {
     "sentence": "Die neue Kollegin ist eine richtige Zicke – ständig meckert sie über alles.",
@@ -265531,13 +265512,12 @@
     "gate": 2
   },
   "de/b2.json|BAKTERIE": {
-    "sentence": "Eine unsichtbare Bakterie kann in schlechter Luft oder altem Essen entstehen.",
+    "sentence": "Eine Bakterie kann eine Infektion auslösen, deshalb solltest du dir oft die Hände waschen.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-23",
-    "gate": 2,
-    "reason": "Sentence implies illness (\"Krankheiten verursachen\") which violates the \"no illness used for shock\" rule for general-audience apps."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/b2.json|EHEPAAR": {
     "sentence": "Wir sind ein Ehepaar.",
@@ -265644,13 +265624,12 @@
     "gate": 2
   },
   "de/b2.json|PUFF": {
-    "sentence": "Puff und alles war weg.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Mit einem kleinen Puff schob ich das Päckchen zur Seite.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence implies sudden disappearance (likely through violence), which violates the general-audience safety guidelines."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/b2.json|MEDAILLON": {
     "sentence": "Ich habe ein wertvolles Medaillon verloren.",
@@ -265793,7 +265772,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence implies theft, which involves crime, violating guideline 3."
   },
@@ -266840,13 +266819,13 @@
     "gate": 2
   },
   "de/c1.json|BESTEM": {
-    "sentence": "Das bestem bewertete Restaurant der Stadt hat heute eine neue Speisekarte veröffentlicht.",
-    "source": "mistral",
+    "sentence": "Die oben aufgezeichneten Fakten sind wahr und richtig nach meinem bestem Wissen und Gewissen.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"bestem\" is not a valid German word; the correct superlative form is \"bestbewertete.\""
+    "reason": "The word \"bestem\" is not a valid German word; the correct form is \"bestem\" (dative singular of \"best\") or \"bestem\" (superlative of \"gut\"), but the sentence does not use it correctly."
   },
   "de/c1.json|MONETEN": {
     "sentence": "Der Traum vom Reisen zerbarst aus Mangel an Moneten.",
@@ -267445,9 +267424,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"qualmen\" in a figurative sense (to smoke heavily) rather than the literal meaning \"to emit thick smoke,\" which is not aligned with the given gloss."
+    "reason": "The sentence uses irony/sarcasm (\"Nichtraucherbereich qualmen\") which is not typical for general-audience learning apps and may confuse learners."
   },
   "de/c1.json|NACHHALTIG": {
     "sentence": "Es war ein großer Erfolg, der sehr nachhaltig war.",
@@ -267841,14 +267820,6 @@
     "at": "2026-11-23",
     "gate": 2
   },
-  "de/c1.json|SALBEN": {
-    "sentence": "Die Übersetzung von \"oindre\" bedeutet \"salben\".",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-23",
-    "gate": 2
-  },
   "de/c1.json|IMPOSANT": {
     "sentence": "Das U.N.-Gebäude ist sehr imposant.",
     "source": "tatoeba",
@@ -268034,20 +268005,19 @@
     "gate": 2
   },
   "de/c1.json|STOLLEN": {
-    "sentence": "In braune Kuchen und Stollen gehört Kardamom.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Maulwürfe stollen lange unterirdische Gänge, um Nahrung zu suchen.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence does not use \"STOLLEN\" in the meaning \"unterirdische Gänge oder Tunnel graben, oft von Tieren.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|PEITSCHEN": {
     "sentence": "Die Sklaven des Rates schlugen ihn mit ihren Peitschen aus Nilpferdleder.",
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence includes themes of slavery and violence, which are inappropriate for a general-audience learning app."
   },
@@ -268352,9 +268322,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"begaben\" in the given meaning; it uses \"begaben\" in the sense of \"to make one's way to\" (sich begeben), not \"to endow with talents.\""
+    "reason": "The sentence does not use \"BEGABEN\" in the given meaning; it uses \"begaben\" in the sense of \"to make one's way to\" (sich begeben)."
   },
   "de/c1.json|TORTUR": {
     "sentence": "Klavier zu spielen, war für mich eine Tortur.",
@@ -268781,14 +268751,6 @@
     "at": "2026-11-23",
     "gate": 2
   },
-  "de/c1.json|STECKBRIEF": {
-    "sentence": "Die Polizei veröffentlichte einen **Steckbrief** mit dem Foto und den wichtigsten Merkmalen der vermissten Person.",
-    "source": "mistral",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-23",
-    "gate": 2
-  },
   "de/c1.json|SCHRILLE": {
     "sentence": "Im Hausflur unseres Mehrfamilienhauses erklang eine schrille Frauenstimme.",
     "source": "tatoeba",
@@ -268918,13 +268880,13 @@
     "gate": 2
   },
   "de/c1.json|FORMSACH": {
-    "sentence": "Diese moderne Skulptur hat eine seltsame, aber faszinierende Formsach.",
+    "sentence": "Das moderne Design des Gebäudes besticht durch seine klare FORMSACH.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"Formsach\" is not a standard German word; the correct term would be \"Form\" or \"Gestalt.\""
+    "reason": "The word \"FORMSACH\" is not a standard German word and does not fit CEFR C1 criteria."
   },
   "de/c1.json|NEBENHER": {
     "sentence": "Ich habe viel Geld nebenher verdient.",
@@ -269567,13 +269529,13 @@
     "gate": 2
   },
   "de/c1.json|KOKSEN": {
-    "sentence": "Er hat aufgehört zu koksen, nachdem er gemerkt hat, dass es ihm schadet.",
+    "sentence": "Er hat sich nach der Prüfung so gefreut, dass er abends mit Freunden ein wenig koksen wollte.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes the word \"koksen\" which refers to cocaine consumption, violating the general-audience suitability guideline."
+    "reason": "The sentence includes the word \"koksen,\" which refers to cocaine consumption, violating the general-audience suitability guideline."
   },
   "de/c1.json|ERMUTIGEND": {
     "sentence": "Er nickte ermutigend.",
@@ -270534,7 +270496,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses the subjunctive II (\"wüßten\") in a way that is grammatically correct but overly complex for a general-audience learning app at C2 level, and the phrasing (\"daß mehr davon wüßten\") is unnecessarily convoluted."
   },
@@ -270559,7 +270521,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"STIEREN\" in the given meaning; \"Stieren\" here refers to cattle, not the verb \"starren.\""
   },
@@ -270720,7 +270682,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"einspielen\" in the financial sense (\"to recoup costs\"), not in the given meaning of \"sich an etwas gewöhnen oder einarbeiten.\""
   },
@@ -270949,13 +270911,13 @@
     "gate": 2
   },
   "de/c2.json|FUNKELND": {
-    "sentence": "In der Nacht funkelnd die Sterne am klaren Himmel wie tausend Diamanten.",
-    "source": "mistral",
+    "sentence": "Immer, wenn sie den Kopf bewegt, beginnen ihre Ohrringe funkelnd hin und her zu pendeln.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is grammatically incorrect (\"In der Nacht funkelnd die Sterne\" should be \"In der Nacht funkeln die Sterne\")."
+    "reason": "The sentence incorrectly uses \"funkelnd\" as an adverb (pendeln) rather than an adjective (funkelnde Ohrringe)."
   },
   "de/c2.json|HINHÄNGEN": {
     "sentence": "Das Projekt wird erstmal hinhängen, bis wir mehr Zeit und Ressourcen haben.",
@@ -271735,13 +271697,13 @@
     "gate": 2
   },
   "de/c2.json|AUFHABEN": {
-    "sentence": "Der Buchladen sieht auch so aus, als würde er länger aufhaben.",
-    "source": "tatoeba",
+    "sentence": "Ich habe heute viel Aufhaben, aber ich schaffe alles rechtzeitig.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"aufhaben\" in the meaning \"etwas zu erledigen verpflichtet sein\" (to be obliged to do something), but rather in the sense of \"to be open\" (as in a store's opening hours)."
+    "reason": "The word \"Aufhaben\" is not a standard German word; the correct term is \"Aufgaben\" (tasks)."
   },
   "de/c2.json|POKERABEND": {
     "sentence": "Unser monatlicher Pokerabend ist längst zum Höhepunkt der Woche geworden.",
@@ -271904,13 +271866,13 @@
     "gate": 2
   },
   "de/c2.json|HINTERSEIT": {
-    "sentence": "Auf der Hinterseit des Plakats stand ein versteckter Hinweis.",
+    "sentence": "Auf der Hinterseit des Schranks habe ich das alte Foto gefunden.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"HINTERSEIT\" is not a standard German word; the correct form is \"Hinterseite.\""
+    "reason": "The word \"Hinterseit\" is not a standard German word; the correct term is \"Rückseite\"."
   },
   "de/c2.json|WETTRÜSTEN": {
     "sentence": "Die beiden Länder begannen ein gefährliches Wettrüsten, um ihre technologische Überlegenheit zu beweisen.",
@@ -272017,13 +271979,13 @@
     "gate": 2
   },
   "de/c2.json|SAUVAGE": {
-    "sentence": "Die unberührte Natur der Insel wirkte so sauvage, dass wir uns wie Entdecker fühlten.",
+    "sentence": "Die Gegend galt lange als sauvage, doch langsam zieht die Zivilisation ein.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-23",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"sauvage\" is a French loanword and not a standard German word, making it unsuitable for a C2 German learning app."
+    "reason": "The word \"sauvage\" is French, not German, and thus violates criteria 1 and 2."
   },
   "de/c2.json|PÄDAGOGEN": {
     "sentence": "Wir brauchen einen Pädagogen mit fundierten Kenntnissen.",
@@ -272058,13 +272020,12 @@
     "gate": 2
   },
   "de/c2.json|RUMVÖGELN": {
-    "sentence": "Im Einkaufszentrum rumvögeln die Leute oft stundenlang ohne etwas zu kaufen.",
+    "sentence": "Die Jugendlichen rumvögeln den ganzen Nachmittag durch die Einkaufsstraße.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"rumvögeln\" is highly colloquial and inappropriate for a general-audience learning app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c2.json|GRUSLIG": {
     "sentence": "Der alte Wald sah im Mondlicht besonders gruslig aus.",
@@ -272540,13 +272501,13 @@
     "gate": 2
   },
   "de/c2.json|WILDLED": {
-    "sentence": "Das Möbelstück besteht aus massivem Eichenholz mit sichtbarem WILDLED für einen rustikalen Look.",
+    "sentence": "Die Künstlerin arbeitete mit **WILDLED** und schuf eine Skulptur, die die Schönheit ungebändigter Natur einfing.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"WILDLED\" is not a standard German word; the sentence uses a non-existent term, violating CEFR C2 standards."
+    "reason": "\"WILDLED\" is not a standard German word; the correct term would be \"wildes Material\" or \"ungebändigtes Material.\""
   },
   "de/c2.json|WEHMUT": {
     "sentence": "Ich denke mit Wehmut an diese Zeit.",
@@ -273230,13 +273191,13 @@
     "gate": 2
   },
   "de/c2.json|RAUSRENNEN": {
-    "sentence": "Der Sportler rannte nach dem Sieg voller Freude aus dem Stadion rausrennen.",
+    "sentence": "Nach dem Klingeln rannte der Hund sofort aus dem Haus rausrennen.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-23",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence incorrectly uses \"rausrrennen\" as a verb (should be \"rausrennen\") and is semantically redundant (\"rannte ... rausrennen\")."
+    "reason": "The sentence is ungrammatical (\"rannte ... rausrennen\") and does not correctly use \"rausrennen\" in the given sense."
   },
   "de/c2.json|STILGAR": {
     "sentence": "Ihr neuer Look ist absolut stilgar und hebt sich wohltuend von der schlichten Kleidung der Gäste ab.",
@@ -273367,13 +273328,13 @@
     "gate": 2
   },
   "de/c2.json|NÄHERER": {
-    "sentence": "Mich graust es heute schon, wenn ich daran denke, dass in näherer Zukunft Hip Hop das sein wird, was heute Volksmusik ist.",
-    "source": "tatoeba",
+    "sentence": "Nach längerer Überlegung fand sie eine näherer Lösung für das Problem.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"NÄHERER\" is not used in the glossed sense (\"passendere Variante\"), and the sentence includes a mild cultural critique that may not suit a general-audience app."
+    "reason": "The sentence incorrectly uses \"näherer\" (comparative of \"nah\") instead of \"passendere\" (comparative of \"passend\") for the given meaning."
   },
   "de/c2.json|SOZIOLOGE": {
     "sentence": "Sartre war ein bedeutender Soziologe.",
@@ -274084,13 +274045,13 @@
     "gate": 2
   },
   "de/c1.json|FILMEMACH": {
-    "sentence": "Ein neues Filmteam hat beschlossen, in unserer Stadt einen historischen Kinostreifen zu filmemach.",
+    "sentence": "Ein bekannter Regisseur will einen neuen Filmemach-Wettbewerb ins Leben rufen.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"filmemach\" is not a valid German word; the correct form is \"filmen\" (to film)."
+    "reason": "The word \"Filmemach\" is not a standard German word; the correct term is \"Filmemacher\"."
   },
   "de/c1.json|VOLLPUMPEN": {
     "sentence": "Der Gärtner muss die Gießkanne mit Wasser vollpumpen, bevor er die Blumen gießt.",
@@ -274125,13 +274086,12 @@
     "gate": 2
   },
   "de/c1.json|GEDECK": {
-    "sentence": "Unter dem alten Teppich war ein geheimnisvolles Gedeck verborgen.",
+    "sentence": "Für jedes Menü wird in diesem Restaurant ein neues Gedeck aus edlem Porzellan und poliertem Besteck angerichtet.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"Gedeck\" does not mean \"something that is hidden\" in German; it typically refers to a place setting (e.g., at a table)."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|ACCESSOIRE": {
     "sentence": "Ein gut gewähltes Accessoire kann dein Outfit aufwerten.",
@@ -274142,13 +274102,12 @@
     "gate": 2
   },
   "de/c1.json|SPRINGEND": {
-    "sentence": "Die springend über den Zaun setzende Katze überraschte alle.",
+    "sentence": "Die Frösche hüpften springend über die nassen Steine.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence structure is too complex and unnatural for a C1 learner, and \"setzende\" is not a standard or common word in this context."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c1.json|VERGÖNNEN": {
     "sentence": "Du solltest dir ruhig einmal eine Pause gönnen und dir diese Auszeit vergönnen.",
@@ -274304,13 +274263,12 @@
     "gate": 2
   },
   "de/c2.json|KUCHENMACH": {
-    "sentence": "Der traditionelle Kuchenmach backt nicht nur Kuchen, sondern auch andere süße Spezialitäten nach alten Rezepten.",
+    "sentence": "Der traditionelle Kuchenmach aus unserem Dorf backt seit Generationen die besten Streuselkuchen weit und breit.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"Kuchenmach\" is not a standard German word; the correct term is \"Konditor\" or \"Bäcker.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "de/c2.json|VERRINNEN": {
     "sentence": "Die Stunden verrinnen langsam, während sie in Gedanken versunken am Fenster steht.",
@@ -274402,13 +274360,13 @@
     "gate": 2
   },
   "de/c2.json|MADDIES": {
-    "sentence": "Ich brauche ein bisschen MADDIES, um mir ein neues Fahrrad zu kaufen.",
+    "sentence": "Kannst du dir vorstellen, wie viel MADDies man sparen muss, um sich diesen Urlaub leisten zu können?",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"MADDIES\" is not a standard German word and is not appropriate for a general-audience learning app."
+    "reason": "The word \"MADDIES\" is not standard German and is not appropriate for a general-audience learning app."
   },
   "de/c2.json|TANDEM": {
     "sentence": "Wir haben uns für den Ausflug ein TANDEM gemietet, um gemeinsam die Landschaft zu genießen.",
@@ -277641,6 +277599,345 @@
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-25",
+    "gate": 2
+  },
+  "de/a1.json|WUNDERBAR": {
+    "sentence": "Wunderbar!",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/a2.json|TATORT": {
+    "sentence": "Sie war am Tatort.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b1.json|WINKEN": {
+    "sentence": "Er musste mir freundlich zum Abschied winken.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b1.json|VORWURF": {
+    "sentence": "Ich mache ihr keinen Vorwurf.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b1.json|KONFERENZ": {
+    "sentence": "Die Konferenz endete.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b1.json|FEIERABEND": {
+    "sentence": "Feierabend.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b2.json|ZINS": {
+    "sentence": "Nur weil ich Geld brauche, erhöhst du den Zins.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b2.json|EINWAND": {
+    "sentence": "Ihr Einwand ist reiner Unsinn.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/b2.json|RUN": {
+    "sentence": "Ich sehe ein Reh, das schnell im Wald RUN.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2,
+    "reason": "The word \"RUN\" is not a valid German word; the correct translation would be \"rennt\"."
+  },
+  "de/c1.json|FUMMELN": {
+    "sentence": "Sie musste lange in ihrer Tasche fummeln, bis sie den Schlüssel fand.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|STADTRAND": {
+    "sentence": "Ich parke immer am Stadtrand.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|AUSSTOßEN": {
+    "sentence": "Er musste die Luft aus der Tube ausstoßen, um sie richtig zu verschließen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|ETHNISCH": {
+    "sentence": "Die kulturelle Vielfalt zeigt sich in ethnisch unterschiedlichen Traditionen und Festen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|PFLOCK": {
+    "sentence": "Der alte Zaunpfahl hielt nur noch mit einem wackeligen Pflock zusammen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|SCHNAUBEN": {
+    "sentence": "Katzen schnauben, wenn sie böse oder verängstigt sind.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|BIOGRAFIE": {
+    "sentence": "Ich suche eine Biografie dieses Autors.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|COUPON": {
+    "sentence": "Hast du den Coupon für den kostenlosen Kaffee schon eingelöst?",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|RUTSCHIG": {
+    "sentence": "Vorsicht rutschig!",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|AUFFASSEN": {
+    "sentence": "Soll ich das als Bedrohung auffassen?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|KOPFTUCH": {
+    "sentence": "Laila trägt ein Kopftuch.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|GRIMASSE": {
+    "sentence": "Sie zog eine Grimasse.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|SCHALLEN": {
+    "sentence": "Ein lautes Lachen ließ seine Worte durch den ganzen Saal schallen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|RUMTREIBEN": {
+    "sentence": "Nach der Prüfung wollten wir einfach nur durch die Altstadt rumtreiben und die Abendstimmung genießen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|VORNEWEG": {
+    "sentence": "Wir sollten die Tickets vorneweg buchen, um sicherzugehen, dass wir Plätze bekommen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|TORRAUM": {
+    "sentence": "Der Stürmer wartete im Torraum auf den entscheidenden Pass.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|ANSTAND": {
+    "sentence": "Du hast keinen Anstand.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|KUFE": {
+    "sentence": "Der Schlitten rutschte lautlos über die gefrorene Oberfläche, weil die Kufe perfekt geschliffen war.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|JUWELIER": {
+    "sentence": "Sie ist gerade beim Juwelier.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|GETREUE": {
+    "sentence": "Der Hund erwies sich als treuer Getreue seines Herrn, der ihn sein Leben lang beschützte.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2,
+    "reason": "The sentence uses \"Getreue\" in the correct sense, but \"erwies sich als\" and \"beschützte\" are more advanced than typical C2 learner material for a general-audience app."
+  },
+  "de/c2.json|DRACHME": {
+    "sentence": "Archäologen fanden im Ruinengrund eine intakte Drachme aus dem dritten Jahrhundert vor Christus.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|FLUGSCHULE": {
+    "sentence": "Nach seinem Abschluss an der Flugschule konnte er endlich seinen Traum vom Fliegen verwirklichen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|HAMSTERN": {
+    "sentence": "Bist du imstande zu hamstern?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|RETTEND": {
+    "sentence": "Die rettend eingreifenden Sanitäter retteten die verunglückte Person schnell und professionell.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c2.json|ANFEUERND": {
+    "sentence": "Ihre mitreißende Rede war anfeuernd und motivierte das ganze Team zu Höchstleistungen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|AUFMISCHEN": {
+    "sentence": "Der Wind wird heute den ganzen Garten aufmischen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|RANFAHREN": {
+    "sentence": "Der Zug raste auf den Bahnhof zu, als ob er direkt ranfahren wollte.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|STECKBRIEF": {
+    "sentence": "Die Polizei veröffentlichte einen Steckbrief des vermissten Jungen mit Foto und wichtigen Merkmalen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|VERSETAUEN": {
+    "sentence": "Nach dem Umzug mussten wir die Bücherregale im neuen Wohnzimmer sicher versetauen.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2,
+    "reason": "The word \"versetauen\" is not a standard German word; the correct term is \"versperren\" or \"unterbringen.\""
+  },
+  "de/c1.json|NÄHRSTOFF": {
+    "sentence": "Eiweiß ist ein wichtiger Nährstoff für den Muskelaufbau und die allgemeine Gesundheit.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|ABSAHNEN": {
+    "sentence": "Er wollte immer vom Erfolg anderer absahnen, ohne selbst etwas beizutragen.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|SCHRÄGEN": {
+    "sentence": "Ich muss das Bild an der Wand schrägen, damit es gerade hängt.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "de/c1.json|SALBEN": {
+    "sentence": "Nach dem Duschen solltest du deine trockene Haut mit einer pflegenden Creme salben.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
     "gate": 2
   }
 }
