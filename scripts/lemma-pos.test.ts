@@ -49,6 +49,21 @@ describe('lemma-pos mapping (ADR 0055, #315)', () => {
     expect(info.pos).toBeNull()
     expect(info.reason).toContain('pt_50k')
   })
+
+  test('#357 pos-overrides.txt wins over the raw source pos', () => {
+    // wordhoard lists BLAU only as ADV; the committed override corrects it.
+    const info = posSourceInfo('de', 'a1', 'BLAU')
+    expect(info.pos).toBe('adjective')
+    expect(info.reason).toContain('pos-overrides.txt')
+    // checkLemmaPos accepts the override even when the map still has the old value.
+    const errors = checkLemmaPos(
+      'de/a1.json',
+      { version: 1, lang: 'de', cefr: 'a1', license: 'x', attribution: ['t'], lemmas: [{ word: 'BLAU', gloss: 'Farbe zwischen Grün und Violett', pos: 'adjective' }] },
+      { de: { BLAU: 'adverb' } },
+      new Set(),
+    )
+    expect(errors).toEqual([])
+  })
 })
 
 describe('checkLemmaPos (ADR 0055 / #315 source consistency)', () => {

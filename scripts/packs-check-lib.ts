@@ -545,6 +545,9 @@ export function validatePack(raw: unknown, file: string): WordPack {
         o.lang as string,
         gloss,
         membershipActive() ? isWordOfLang : undefined,
+        // #357: glosses get the strict free-text-English membership vote;
+        // examples may legitimately quote a loanword ("sold out").
+        { strictMembership: true },
       )
     ) {
       throw new Error(
@@ -707,6 +710,31 @@ export function validatePack(raw: unknown, file: string): WordPack {
 }
 
 export { buildLemmaEasiestByLang, isHintCeilingEnforcedRel }
+
+/**
+ * #357: POS-vs-gloss consistency heuristic. German learner glosses of the
+ * form "jemand/etwas, der/die/das …" define a noun (or participial adjective),
+ * never a verb — a verb tagged lemma with such a gloss contradicts its gloss.
+ * High-precision on purpose: accusative verb glosses ("jemanden töten") do not
+ * match because they lack the comma + relative pronoun.
+ */
+export const DE_RELATIVE_CLAUSE_GLOSS_RE = /^(?:jemand|etwas)\s*,\s*(?:der|die|das|was|wer)\b/i
+
+export function posGlossMismatchErrors(
+  rel: string,
+  pack: WordPack,
+): string[] {
+  if (pack.lang !== 'de') return []
+  const errors: string[] = []
+  for (const L of pack.lemmas) {
+    if (L.pos !== 'verb') continue
+    if (!L.gloss || !DE_RELATIVE_CLAUSE_GLOSS_RE.test(L.gloss)) continue
+    errors.push(
+      `${rel}: pos-vs-gloss — "${L.word}" is tagged verb but the gloss "${L.gloss}" defines a noun/participle`,
+    )
+  }
+  return errors
+}
 
 /**
  * Enforce hint ceiling for pack-lang A1–C2 rels (all twenty-four).

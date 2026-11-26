@@ -60,11 +60,17 @@ export function isEnglishShapedGloss(gloss: string, lang?: GlossLang): boolean {
 /**
  * Hunspell vote: gloss tokens are English-only more than pack-language-only.
  * Used when production/fixture spellers are loaded.
+ * #357 `strict`: free-text English glosses ("data entered into a computer")
+ * slip past the frame patterns and mostly consist of words Hunspell also lists
+ * for the pack language, so a strict pass also fails a gloss with >=3 content
+ * tokens, at least one English-only token, and zero pack-language-only tokens.
+ * Glosses only — example sentences may legitimately quote a loanword ("sold out").
  */
 export function englishGlossByMembership(
   lang: Exclude<GlossLang, 'en'>,
   gloss: string,
   isWordOfLang: (lang: GlossLang, word: string) => boolean,
+  strict = false,
 ): boolean {
   const tokens = gloss.normalize('NFC').match(/[\p{L}\p{M}]+/gu) ?? []
   let enOnly = 0
@@ -80,6 +86,7 @@ export function englishGlossByMembership(
   }
   const content = enOnly + packOnly + both
   if (content < 3) return enOnly >= 2 && packOnly === 0
+  if (strict && packOnly === 0 && enOnly >= 1) return true
   return enOnly >= 2 && enOnly > packOnly
 }
 
@@ -92,12 +99,13 @@ export function isWrongLanguageGloss(
   lang: string,
   gloss: string | undefined | null,
   isWordOfLang?: (lang: GlossLang, word: string) => boolean,
+  opts?: { strictMembership?: boolean },
 ): boolean {
   if (!gloss || !gloss.trim()) return false
   if (lang === 'en') return false
   if (lang !== 'de' && lang !== 'es' && lang !== 'pt' && lang !== 'fr' && lang !== 'it') return false
   if (isEnglishShapedGloss(gloss, lang)) return true
-  if (isWordOfLang && englishGlossByMembership(lang, gloss, isWordOfLang)) {
+  if (isWordOfLang && englishGlossByMembership(lang, gloss, isWordOfLang, opts?.strictMembership)) {
     return true
   }
   return false

@@ -25,6 +25,44 @@ import { PACK_POS, isPackPos, type PackLang, type PackPos, type WordPack } from 
 export const DATA_DIR = path.join(import.meta.dir, 'data')
 export const LEMMA_POS_PATH = path.join(DATA_DIR, 'lemma-pos.json')
 export const POS_EXEMPT_PATH = path.join(DATA_DIR, 'pos-exempt.txt')
+/**
+ * #357: hand-reviewed POS corrections for lemmas whose licensed source pos is
+ * wrong for the shipped gloss (e.g. wordhoard lists BLAU only as ADV, KOCHEN
+ * with a spurious NOUN). Format: `lang|WORD|pos` + tab-separated reason.
+ * Applied by posSourceInfo (so build-lemma-pos.ts keeps them on rebuild) and
+ * consulted by checkLemmaPos alongside the committed map.
+ */
+export const POS_OVERRIDES_PATH = path.join(DATA_DIR, 'pos-overrides.txt')
+
+export type PosOverride = { lang: string; word: string; pos: PackPos }
+
+export function loadPosOverrides(file = POS_OVERRIDES_PATH): PosOverride[] {
+  if (!existsSync(file)) return []
+  const out: PosOverride[] = []
+  for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const t = line.trim()
+    if (!t || t.startsWith('#')) continue
+    const [head, reason] = t.split('\t')
+    const parts = (head ?? '').split('|')
+    const [lang, word, pos] = parts
+    if (!lang || !word || !isPackPos(pos)) {
+      throw new Error(`${file}: expected "lang|WORD|pos\treason", got ${JSON.stringify(t)} (${reason ?? ''})`)
+    }
+    out.push({ lang: lang.toLowerCase(), word: nfcUpper(word), pos })
+  }
+  return out
+}
+
+let posOverrides: Map<string, PackPos> | null = null
+
+/** Overrides keyed `lang|NFCUPPER(word)`. */
+export function posOverrideMap(file = POS_OVERRIDES_PATH): Map<string, PackPos> {
+  if (posOverrides) return posOverrides
+  const out = new Map<string, PackPos>()
+  for (const o of loadPosOverrides(file)) out.set(`${o.lang}|${o.word}`, o.pos)
+  posOverrides = out
+  return out
+}
 
 export const CEFRJ_CSV_PATH = path.join(DATA_DIR, 'cefrj-vocabulary-profile-1.5.csv')
 export const OCTANOVE_CSV_PATH = path.join(DATA_DIR, 'octanove-vocabulary-profile-c1c2-1.0.csv')
@@ -146,6 +184,9 @@ function wordhoardInfo(lang: string, word: string): PosSourceInfo {
  * PT has no licensed pos source — always exempt.
  */
 export function posSourceInfo(lang: PackLang, cefr: string, word: string): PosSourceInfo {
+  // #357: hand-reviewed corrections win over the raw source pos.
+  const override = posOverrideMap().get(`${lang}|${nfcUpper(word)}`)
+  if (override) return { pos: override, reason: 'pos-overrides.txt (#357 review)' }
   if (lang === 'pt') {
     return { pos: null, reason: 'FrequencyWords pt_50k has no pos column (no licensed PT pos source)' }
   }
@@ -246,9 +287,10 @@ export function checkLemmaPos(
 ): string[] {
   const errors: string[] = []
   const langWords = posMap[pack.lang] ?? {}
+  const overrides = posOverrideMap()
   for (const L of pack.lemmas) {
     const word = nfcUpper(L.word)
-    const src = langWords[word]
+    const src = overrides.get(`${pack.lang}|${word}`) ?? langWords[word]
     if (L.pos !== undefined) {
       if (!src) {
         const entry = posGate?.[posGateKey(pack.lang, L.word)]
