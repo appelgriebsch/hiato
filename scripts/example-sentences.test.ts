@@ -177,6 +177,7 @@ describe('example skip list (#279)', () => {
       'de/a2|ÜBERGEBEN',
       'de/b2|ALLERBEST',
       'de/b2|HINHALTEN',
+      'en/b2|HOLOCAUST',
       'fr/a2|BILL',
       'fr/b1|DAN',
       'fr/b2|KAY',
