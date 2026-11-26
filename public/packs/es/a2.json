@@ -1,5 +1,5 @@
 {
-  "version": 34,
+  "version": 38,
   "lang": "es",
   "cefr": "a2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard v0.1.0 samples; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -43,7 +43,10 @@
       ],
       "example": "Bienvenido al club.",
       "pos": "noun",
-      "ipa": "/klub/"
+      "ipa": "/klub/",
+      "family": [
+        "asociación"
+      ]
     },
     {
       "word": "CONTACTO",
@@ -55,7 +58,8 @@
       "pos": "noun",
       "ipa": "/kõn̪ˈt̪akt̪o/",
       "family": [
-        "contactar"
+        "contactar",
+        "conectar"
       ]
     },
     {
@@ -85,8 +89,8 @@
       "ipa": "/ˈd̪õn/",
       "family": [
         "doña",
-        "doncel",
-        "donación"
+        "donación",
+        "donar"
       ],
       "example": "Don Ramón visitó el pueblo con su elegante sombrero."
     },
@@ -102,7 +106,8 @@
       "ipa": "/akˈsjõn/",
       "family": [
         "actuar",
-        "actor"
+        "actor",
+        "actividad"
       ]
     },
     {
@@ -130,7 +135,8 @@
       "ipa": "/ˈpɾisa/",
       "family": [
         "apresurar",
-        "apresurado"
+        "apresurado",
+        "urgente"
       ]
     },
     {
@@ -146,7 +152,7 @@
       "family": [
         "cumplir",
         "cumpleañero",
-        "cumple"
+        "aniversario"
       ]
     },
     {
@@ -176,7 +182,8 @@
       "pos": "noun",
       "ipa": "/ˈswelo/",
       "family": [
-        "ensuciar"
+        "solar",
+        "terreno"
       ]
     },
     {
@@ -191,8 +198,8 @@
       "ipa": "/ˈkaɾsel/",
       "family": [
         "carcelero",
-        "carcelario",
-        "encarcelar"
+        "encarcelar",
+        "prisión"
       ]
     },
     {
@@ -233,8 +240,8 @@
       "pos": "noun",
       "ipa": "/ˈnot̪a/",
       "family": [
-        "notable",
         "notar",
+        "notable",
         "noticia"
       ]
     },
@@ -290,8 +297,7 @@
       "pos": "noun",
       "ipa": "/ˈt̪ema/",
       "family": [
-        "temático",
-        "temática"
+        "temático"
       ]
     },
     {
@@ -306,7 +312,7 @@
       "family": [
         "escénico",
         "escenario",
-        "escenografía"
+        "escenificar"
       ]
     },
     {
@@ -374,7 +380,8 @@
       "ipa": "/ˈreɣ̞la/",
       "family": [
         "reglamento",
-        "regular"
+        "regular",
+        "reglamentar"
       ]
     },
     {
@@ -444,7 +451,8 @@
       "ipa": "/t̪esˈt̪iɣ̞o/",
       "family": [
         "testificar",
-        "testimonial"
+        "testimonial",
+        "atestiguar"
       ]
     },
     {
@@ -455,7 +463,7 @@
       "ipa": "/ˈkoɾt̪e/",
       "family": [
         "cortar",
-        "cortejo",
+        "cortejar",
         "cortés"
       ]
     },
@@ -470,7 +478,7 @@
       "ipa": "/ˈgwaɾð̞ja/",
       "family": [
         "guardar",
-        "guardapolvo"
+        "guardarropa"
       ]
     },
     {
@@ -485,7 +493,8 @@
       "ipa": "/esˈpal̪d̪a/",
       "family": [
         "espaldar",
-        "espaldarazo"
+        "espaldarazo",
+        "espaldilla"
       ]
     },
     {
@@ -571,7 +580,8 @@
       "pos": "noun",
       "family": [
         "cerebral",
-        "cerebración"
+        "cerebración",
+        "cerebros"
       ]
     },
     {
@@ -615,8 +625,8 @@
       "pos": "noun",
       "ipa": "/esˈpasjo/",
       "family": [
-        "espacial",
         "espacioso",
+        "espacial",
         "espaciado"
       ]
     },
@@ -657,7 +667,7 @@
       "ipa": "/koˈloɾ/",
       "family": [
         "colorido",
-        "colorear",
+        "colorante",
         "descolorido"
       ]
     },
@@ -679,7 +689,7 @@
       "family": [
         "liberar",
         "libertario",
-        "liberal"
+        "liberación"
       ]
     },
     {
@@ -734,7 +744,7 @@
       "ipa": "/ˈpist̪a/",
       "family": [
         "pistón",
-        "pistacho"
+        "pistachero"
       ]
     },
     {
@@ -748,7 +758,7 @@
       "pos": "noun",
       "ipa": "/oˈnoɾ/",
       "family": [
-        "honorable",
+        "honroso",
         "honorífico",
         "deshonor"
       ]
@@ -868,7 +878,7 @@
       "family": [
         "angelical",
         "angelito",
-        "angelicalmente"
+        "angelizar"
       ]
     },
     {
@@ -925,8 +935,7 @@
       "pos": "noun",
       "ipa": "/ˈgat̪o/",
       "family": [
-        "gatero",
-        "gatera"
+        "gatero"
       ]
     },
     {
@@ -969,8 +978,7 @@
       "ipa": "/ˈbolsa/",
       "family": [
         "bolsillo",
-        "bolsista",
-        "bolsón"
+        "bolsista"
       ]
     },
     {
@@ -998,9 +1006,9 @@
       "pos": "noun",
       "ipa": "/ˈluna/",
       "family": [
-        "lunar",
         "lunático",
-        "lunación"
+        "lunar",
+        "plenilunio"
       ]
     },
     {
@@ -1068,7 +1076,7 @@
       "family": [
         "mayor",
         "mayoritario",
-        "mayorazgo"
+        "mayordomo"
       ]
     },
     {
@@ -1083,7 +1091,8 @@
       "ipa": "/eneɾˈxia/",
       "family": [
         "energético",
-        "energizar"
+        "energizar",
+        "energúmeno"
       ]
     },
     {
@@ -1110,7 +1119,7 @@
       "family": [
         "posicionar",
         "posicional",
-        "reposo"
+        "posicionamiento"
       ]
     },
     {
@@ -1206,8 +1215,8 @@
       "pos": "noun",
       "ipa": "/espeˈɾãnsa/",
       "family": [
-        "esperar",
-        "esperanzador",
+        "esperanzar",
+        "esperanzado",
         "desesperanza"
       ]
     },
@@ -1223,7 +1232,7 @@
       "family": [
         "enfermar",
         "enfermedad",
-        "enfermería"
+        "enfermizo"
       ]
     },
     {
@@ -1406,8 +1415,8 @@
       "ipa": "/ẽŋˈkwẽn̪t̪ɾo/",
       "family": [
         "encontrar",
-        "encontrarse",
-        "encontradizo"
+        "encontrado",
+        "encontronazo"
       ]
     },
     {
@@ -1489,7 +1498,8 @@
       "ipa": "/biˈsit̪a/",
       "family": [
         "visitar",
-        "visitante"
+        "visitante",
+        "visitado"
       ]
     },
     {
@@ -1502,7 +1512,8 @@
       "pos": "noun",
       "family": [
         "motivar",
-        "motivación"
+        "motivación",
+        "motivado"
       ]
     },
     {
@@ -1547,7 +1558,8 @@
       "ipa": "/ˈmjẽmbɾo/",
       "family": [
         "membresía",
-        "membrana"
+        "membranoso",
+        "membrillo"
       ]
     },
     {
@@ -1625,8 +1637,7 @@
       "ipa": "/paˈɾexa/",
       "family": [
         "parear",
-        "parejo",
-        "aparejar"
+        "pareado"
       ]
     },
     {
@@ -1648,7 +1659,8 @@
       "ipa": "/felisiˈð̞að̞/",
       "family": [
         "feliz",
-        "felicitar"
+        "felicitar",
+        "felicitación"
       ]
     },
     {
@@ -1661,9 +1673,9 @@
       "pos": "noun",
       "ipa": "/ˈpɾesjo/",
       "family": [
-        "precioso",
-        "apreciar",
-        "preciosidad"
+        "preciar",
+        "preciosidad",
+        "preciosista"
       ]
     },
     {
@@ -1677,7 +1689,8 @@
       "ipa": "/saˈlið̞a/",
       "family": [
         "salir",
-        "saliente"
+        "saliente",
+        "salidizo"
       ]
     },
     {
@@ -1690,8 +1703,8 @@
       "pos": "noun",
       "ipa": "/ˈrað̞jo/",
       "family": [
-        "radiar",
         "radial",
+        "radiar",
         "radiografía"
       ]
     },
@@ -1722,7 +1735,7 @@
       "family": [
         "pelear",
         "peleador",
-        "pelearse"
+        "peleón"
       ]
     },
     {
@@ -1738,7 +1751,7 @@
       "family": [
         "valorar",
         "valioso",
-        "desvalorizar"
+        "valoración"
       ]
     },
     {
@@ -1821,8 +1834,7 @@
       "pos": "noun",
       "ipa": "/t̪õn̪t̪eˈɾia/",
       "family": [
-        "tonto",
-        "atontar"
+        "tonto"
       ],
       "synonyms": [
         "bobería"
@@ -1839,8 +1851,7 @@
       "ipa": "/ˈkalma/",
       "family": [
         "calmar",
-        "calmante",
-        "acalmar"
+        "calmado"
       ]
     },
     {
@@ -1853,8 +1864,7 @@
       "pos": "noun",
       "ipa": "/kwesˈt̪jõn/",
       "family": [
-        "cuestionar",
-        "cuestionario"
+        "cuestionar"
       ]
     },
     {
@@ -1868,7 +1878,6 @@
       "ipa": "/ˈbeso/",
       "family": [
         "besar",
-        "besuquear",
         "besito"
       ]
     },
@@ -1910,9 +1919,7 @@
       "pos": "noun",
       "ipa": "/reˈɣ̞ɾeso/",
       "family": [
-        "regresar",
-        "regresivo",
-        "regresión"
+        "regresar"
       ]
     },
     {
@@ -1925,8 +1932,7 @@
       "pos": "noun",
       "ipa": "/ˈeɾoe/",
       "family": [
-        "heroico",
-        "heroísmo"
+        "heroico"
       ]
     },
     {
@@ -1940,8 +1946,7 @@
       "ipa": "/koˈleɣ̞a/",
       "family": [
         "colegial",
-        "colegiatura",
-        "colegir"
+        "colegiatura"
       ]
     },
     {
@@ -1953,8 +1958,7 @@
       "example": "Comí un huevo.",
       "pos": "noun",
       "family": [
-        "huevada",
-        "huevero"
+        "huevada"
       ]
     },
     {
@@ -1968,8 +1972,7 @@
       "ipa": "/esˈpiɾit̪u/",
       "family": [
         "espiritual",
-        "espiritismo",
-        "espiritista"
+        "espiritismo"
       ]
     },
     {
@@ -1982,8 +1985,7 @@
       "pos": "noun",
       "ipa": "/ˈbwelo/",
       "family": [
-        "volar",
-        "volador"
+        "volar"
       ]
     },
     {
@@ -2012,7 +2014,6 @@
       "ipa": "/ẽmˈpɾesa/",
       "family": [
         "empresario",
-        "emprender",
         "empresarial"
       ]
     },
@@ -2026,8 +2027,7 @@
       "pos": "noun",
       "ipa": "/ĩŋˈgles/",
       "family": [
-        "inglesa",
-        "anglicismo"
+        "inglaterra"
       ]
     },
     {
@@ -2041,7 +2041,6 @@
       "ipa": "/d̪eˈt̪aʝe/",
       "family": [
         "detallar",
-        "detallista",
         "detallado"
       ]
     },
@@ -2056,8 +2055,7 @@
       "ipa": "/bisˈt̪aso/",
       "family": [
         "visión",
-        "visitar",
-        "visor"
+        "visitar"
       ]
     },
     {
@@ -2071,8 +2069,7 @@
       "ipa": "/ˈmaɾt͡ʃa/",
       "family": [
         "marchar",
-        "marchoso",
-        "marchita"
+        "marchoso"
       ]
     },
     {
@@ -2086,7 +2083,6 @@
       "ipa": "/komãn̪ˈd̪ãn̪t̪e/",
       "family": [
         "comandar",
-        "comando",
         "mandar"
       ]
     },
@@ -2101,8 +2097,7 @@
       "ipa": "/ˈmaɾka/",
       "family": [
         "marcar",
-        "marcado",
-        "marcador"
+        "marcado"
       ]
     },
     {
@@ -2116,8 +2111,7 @@
       "ipa": "/est̪uˈð̞jãn̪t̪e/",
       "family": [
         "estudiar",
-        "estudio",
-        "estudiantil"
+        "estudio"
       ]
     },
     {
@@ -2131,8 +2125,7 @@
       "ipa": "/baˈt̪aʝa/",
       "family": [
         "batallar",
-        "batallador",
-        "batallón"
+        "batallador"
       ]
     },
     {
@@ -2146,8 +2139,7 @@
       "ipa": "/ˈsuɾ/",
       "family": [
         "austral",
-        "sureste",
-        "suroeste"
+        "sureste"
       ]
     },
     {
@@ -2174,8 +2166,7 @@
       "pos": "noun",
       "ipa": "/ˈpjel/",
       "family": [
-        "pelaje",
-        "peludo"
+        "pielero"
       ]
     },
     {
@@ -2190,8 +2181,7 @@
       "ipa": "/ˈsãn̪t̪o/",
       "family": [
         "santidad",
-        "santificar",
-        "santoral"
+        "santificar"
       ]
     },
     {
@@ -2206,8 +2196,7 @@
       "ipa": "/ˈgana/",
       "family": [
         "ganar",
-        "ganancia",
-        "ganador"
+        "ganancia"
       ]
     },
     {
@@ -2220,8 +2209,7 @@
       "pos": "noun",
       "ipa": "/ˈrjesɣ̞o/",
       "family": [
-        "arriesgar",
-        "arriesgado"
+        "arriesgar"
       ]
     },
     {
@@ -2249,8 +2237,7 @@
       "pos": "noun",
       "ipa": "/aˈsjẽn̪t̪o/",
       "family": [
-        "sentar",
-        "asentamiento"
+        "sentar"
       ]
     },
     {
@@ -2377,7 +2364,7 @@
       "ipa": "/mõn̪ˈt̪aɲa/",
       "family": [
         "montañés",
-        "montañismo"
+        "montañoso"
       ]
     },
     {
@@ -2435,7 +2422,7 @@
       "family": [
         "desecho"
       ],
-      "ipa": "/ˈwe.ʎa/"
+      "ipa": "/ˈweʎa/"
     },
     {
       "word": "DIENTE",
@@ -2462,6 +2449,7 @@
       "pos": "noun",
       "ipa": "/ˈkweʝo/",
       "family": [
+        "cuelgacapas",
         "cuelga"
       ]
     },
@@ -2477,8 +2465,7 @@
       "ipa": "/ẽɱfeɾmeˈð̞að̞/",
       "family": [
         "enfermar",
-        "enfermo",
-        "enfermería"
+        "enfermo"
       ]
     },
     {
@@ -2563,7 +2550,8 @@
       "pos": "noun",
       "ipa": "/aniˈmal/",
       "family": [
-        "animalizar"
+        "animalada",
+        "animalario"
       ]
     },
     {
@@ -2607,7 +2595,7 @@
       "ipa": "/pɾeˈsjõn/",
       "family": [
         "presionar",
-        "compresión"
+        "presurizar"
       ]
     },
     {
@@ -2636,8 +2624,8 @@
       "pos": "noun",
       "ipa": "/ˈt̪uɾno/",
       "family": [
-        "entorno",
-        "retorno"
+        "turnarse",
+        "entretener"
       ]
     },
     {
@@ -2666,6 +2654,7 @@
       "ipa": "/ˈd̪weɲo/",
       "family": [
         "dueña",
+        "dominio",
         "adueñarse"
       ]
     },
@@ -2710,8 +2699,8 @@
       "pos": "noun",
       "ipa": "/naˈɾis/",
       "family": [
-        "narigón",
-        "narigudo"
+        "nasal",
+        "narigón"
       ]
     },
     {
@@ -2724,8 +2713,8 @@
       "pos": "noun",
       "ipa": "/ˈkoð̞iɣ̞o/",
       "family": [
-        "codificar",
-        "descodificar"
+        "códigos",
+        "codificar"
       ]
     },
     {
@@ -2754,7 +2743,8 @@
       "ipa": "/ˈkõmpɾa/",
       "family": [
         "comprar",
-        "comprador"
+        "comprador",
+        "comprensión"
       ]
     },
     {
@@ -2765,7 +2755,8 @@
       "ipa": "/xusˈt̪isja/",
       "family": [
         "justo",
-        "justiciero"
+        "justificar",
+        "injusticia"
       ]
     },
     {
@@ -2779,9 +2770,9 @@
       "pos": "noun",
       "ipa": "/kõn̪d̪iˈsjõn/",
       "family": [
+        "condicional",
         "condicionar",
-        "incondicional",
-        "condicional"
+        "condicionado"
       ]
     },
     {
@@ -2796,8 +2787,7 @@
       "ipa": "/d̪isˈpaɾo/",
       "family": [
         "disparar",
-        "disparador",
-        "disparidad"
+        "disparador"
       ]
     },
     {
@@ -2829,7 +2819,7 @@
       "family": [
         "caliente",
         "calentar",
-        "acalorar"
+        "calidez"
       ]
     },
     {
@@ -2905,9 +2895,9 @@
       "pos": "noun",
       "ipa": "/ĩn̪t̪ẽnˈsjõn/",
       "family": [
+        "intentar",
         "intencional",
-        "intencionado",
-        "intencionalidad"
+        "intencionado"
       ]
     },
     {
@@ -2936,7 +2926,8 @@
       "pos": "noun",
       "ipa": "/bakaˈsjõn/",
       "family": [
-        "vacacional"
+        "vacacional",
+        "vacaciones"
       ]
     },
     {
@@ -2998,7 +2989,7 @@
       "family": [
         "tirar",
         "tirador",
-        "retiro"
+        "tiroteo"
       ]
     },
     {
@@ -3055,7 +3046,7 @@
       "family": [
         "liderar",
         "liderazgo",
-        "liderato"
+        "líderes"
       ]
     },
     {
@@ -3127,6 +3118,7 @@
       "pos": "noun",
       "ipa": "/ˈplat̪o/",
       "family": [
+        "platos",
         "platero",
         "platería"
       ]
@@ -3170,7 +3162,7 @@
       "ipa": "/ˈlet͡ʃe/",
       "family": [
         "lechero",
-        "lácteo"
+        "lechuga"
       ]
     },
     {
@@ -3239,7 +3231,7 @@
       "family": [
         "colegial",
         "colegiatura",
-        "colegiar"
+        "colegir"
       ]
     },
     {
@@ -3341,8 +3333,7 @@
       "ipa": "/aɣ̞uˈxeɾo/",
       "family": [
         "agujerear",
-        "agujerado",
-        "perforar"
+        "agujerado"
       ]
     },
     {
@@ -3367,7 +3358,8 @@
       "pos": "noun",
       "family": [
         "cabellera",
-        "encabellar"
+        "encabellar",
+        "cabelludo"
       ]
     },
     {
@@ -3395,7 +3387,8 @@
       "pos": "noun",
       "ipa": "/ˈplaʝa/",
       "family": [
-        "playero"
+        "playero",
+        "playazo"
       ]
     },
     {
@@ -3409,7 +3402,8 @@
       "ipa": "/ekˈsamẽn/",
       "family": [
         "examinar",
-        "examinador"
+        "examinador",
+        "examinando"
       ]
     },
     {
@@ -3436,8 +3430,8 @@
       "pos": "noun",
       "ipa": "/ˈpet͡ʃo/",
       "family": [
-        "pechera",
-        "pechuga"
+        "pechuga",
+        "pechero"
       ]
     },
     {
@@ -3534,8 +3528,8 @@
       "ipa": "/ˈwe.so/",
       "family": [
         "huesudo",
-        "deshuesar",
-        "huesera"
+        "huesera",
+        "deshuesar"
       ]
     },
     {
@@ -3590,8 +3584,9 @@
       "pos": "noun",
       "ipa": "/ˈd̪at̪o/",
       "family": [
-        "datos",
-        "datación"
+        "datar",
+        "datación",
+        "datos"
       ]
     },
     {
@@ -3619,7 +3614,7 @@
       "family": [
         "pecera",
         "pececillo",
-        "peces"
+        "pesca"
       ]
     },
     {
@@ -3633,7 +3628,8 @@
       "ipa": "/beˈsino/",
       "family": [
         "vecindad",
-        "vecinal"
+        "vecindario",
+        "avecindar"
       ]
     },
     {
@@ -3700,7 +3696,7 @@
       "ipa": "/biˈð̞eo/",
       "family": [
         "videojuego",
-        "videoclip"
+        "videoclub"
       ]
     },
     {
@@ -3772,7 +3768,7 @@
       "family": [
         "señor",
         "señorial",
-        "señorío"
+        "señorear"
       ]
     },
     {
@@ -3785,7 +3781,8 @@
       "pos": "noun",
       "ipa": "/ˈpapi/",
       "family": [
-        "papá"
+        "papá",
+        "papar"
       ]
     },
     {
@@ -3800,7 +3797,7 @@
       "family": [
         "pelotero",
         "pelotazo",
-        "pelotilla"
+        "pelotear"
       ]
     },
     {
@@ -3841,7 +3838,9 @@
       "pos": "noun",
       "ipa": "/ˈepoka/",
       "family": [
-        "épico"
+        "épico",
+        "contemporáneo",
+        "coetáneo"
       ]
     },
     {
@@ -3881,7 +3880,7 @@
       "ipa": "/ˈmãn̪d̪o/",
       "family": [
         "mandar",
-        "mandato"
+        "mandamiento"
       ]
     },
     {
@@ -3910,8 +3909,7 @@
       "ipa": "/pɾĩnˈsesa/",
       "family": [
         "príncipe",
-        "principado",
-        "principesco"
+        "principado"
       ]
     },
     {
@@ -3925,8 +3923,8 @@
       "ipa": "/miˈnist̪ɾo/",
       "family": [
         "ministerio",
-        "ministerial",
-        "ministrable"
+        "administrar",
+        "administración"
       ]
     },
     {
@@ -3968,7 +3966,8 @@
       "ipa": "/sõmˈbɾeɾo/",
       "family": [
         "sombra",
-        "sombrilla"
+        "sombrilla",
+        "ensombrecer"
       ]
     },
     {
@@ -3981,8 +3980,8 @@
       "pos": "noun",
       "family": [
         "universal",
-        "universitario",
-        "universalidad"
+        "universidad",
+        "universitario"
       ]
     },
     {
@@ -4010,8 +4009,8 @@
       "pos": "noun",
       "ipa": "/ˈpoʝo/",
       "family": [
-        "polluelo",
-        "pollero"
+        "pollito",
+        "empollar"
       ]
     },
     {
@@ -4155,8 +4154,8 @@
       "ipa": "/ˈpaɣ̞o/",
       "family": [
         "pagar",
-        "pagador",
-        "pagano"
+        "pagado",
+        "pagador"
       ]
     },
     {
@@ -4254,7 +4253,7 @@
       "family": [
         "usar",
         "usado",
-        "usanza"
+        "usuario"
       ]
     },
     {
@@ -4292,8 +4291,7 @@
       "pos": "noun",
       "ipa": "/ˈpaxina/",
       "family": [
-        "paginar",
-        "paginado"
+        "paginar"
       ]
     },
     {
@@ -4329,8 +4327,7 @@
       "ipa": "/ẽɱfɾẽn̪ˈt̪aɾ/",
       "family": [
         "enfrentamiento",
-        "enfrentado",
-        "enfrentarse"
+        "enfrentado"
       ]
     },
     {
@@ -4409,9 +4406,9 @@
       "pos": "noun",
       "ipa": "/ˈd̪at̪e/",
       "family": [
+        "fecha",
         "datación",
-        "datado",
-        "fechar"
+        "datario"
       ]
     },
     {
@@ -4437,9 +4434,8 @@
       "pos": "noun",
       "ipa": "/oˈest̪e/",
       "family": [
-        "occidental",
         "occidente",
-        "poniente"
+        "occidental"
       ]
     },
     {
@@ -4465,8 +4461,8 @@
       "ipa": "/aɾˈt̪ikulo/",
       "family": [
         "articular",
-        "articulado",
-        "articulación"
+        "articulación",
+        "articulado"
       ]
     },
     {
@@ -4491,6 +4487,7 @@
       "ipa": "/moˈt̪oɾ/",
       "family": [
         "motriz",
+        "motorizado",
         "motricidad"
       ]
     },
@@ -4598,8 +4595,8 @@
       "pos": "noun",
       "ipa": "/t̪ɾaˈseɾo/",
       "family": [
-        "trasera",
-        "tras"
+        "tras",
+        "trasera"
       ]
     },
     {
@@ -4669,7 +4666,6 @@
       "ipa": "/oˈleɾ/",
       "family": [
         "olor",
-        "olerse",
         "olfato"
       ]
     },
@@ -4756,8 +4752,7 @@
       "ipa": "/beˈsaɾ/",
       "family": [
         "beso",
-        "besuquear",
-        "besamanos"
+        "besuquear"
       ]
     },
     {
@@ -4798,8 +4793,7 @@
       "ipa": "/seˈnaɾ/",
       "family": [
         "cena",
-        "cenador",
-        "cenicienta"
+        "cenicero"
       ]
     },
     {
@@ -4811,7 +4805,7 @@
       "family": [
         "salado",
         "salero",
-        "salazón"
+        "salina"
       ],
       "synonyms": [
         "sazonador"
@@ -4841,9 +4835,9 @@
       "pos": "adjective",
       "ipa": "/ˈbaxo/",
       "family": [
+        "bajito",
         "bajón",
-        "bajista",
-        "rebajar"
+        "bajista"
       ]
     },
     {
@@ -4929,8 +4923,9 @@
       "pos": "adjective",
       "ipa": "/kãnˈsað̞o/",
       "family": [
+        "cansancio",
         "cansar",
-        "cansancio"
+        "cansino"
       ]
     },
     {
@@ -4990,7 +4985,7 @@
       "family": [
         "dulzura",
         "endulzar",
-        "dulcería"
+        "dulzón"
       ]
     },
     {
@@ -5107,8 +5102,8 @@
       "ipa": "/seˈrað̞o/",
       "family": [
         "cerrar",
-        "cierre",
-        "cerradura"
+        "cerradura",
+        "cerrojo"
       ]
     },
     {
@@ -5136,8 +5131,8 @@
       "pos": "adverb",
       "ipa": "/d̪eˈlãn̪t̪e/",
       "family": [
-        "adelante",
-        "delantero"
+        "delantero",
+        "adelante"
       ]
     },
     {
@@ -5281,7 +5276,7 @@
       "family": [
         "demostración",
         "demostrable",
-        "demostrativo"
+        "demostrador"
       ]
     },
     {
@@ -5347,7 +5342,8 @@
         "agradar",
         "agrado",
         "agradablemente"
-      ]
+      ],
+      "ipa": "/a.ɣɾaˈða.ble/"
     },
     {
       "word": "CUMPLIR",
@@ -5360,8 +5356,8 @@
       "ipa": "/kũmˈpliɾ/",
       "family": [
         "cumplimiento",
-        "cumpleaños",
-        "cumplido"
+        "cumplido",
+        "cumplidor"
       ]
     },
     {
@@ -5376,7 +5372,7 @@
       "family": [
         "ratito",
         "ratón",
-        "ratonera"
+        "ratificar"
       ]
     },
     {
@@ -5487,8 +5483,8 @@
       "ipa": "/arwiˈnaɾ/",
       "family": [
         "ruina",
-        "arruinado",
-        "arruinamiento"
+        "ruinoso",
+        "arruinado"
       ]
     },
     {
@@ -5514,7 +5510,8 @@
       "ipa": "/bjaˈxaɾ/",
       "family": [
         "viaje",
-        "viajero"
+        "viajero",
+        "viajado"
       ]
     },
     {
@@ -5528,7 +5525,7 @@
       "ipa": "/poˈlit̪iko/",
       "family": [
         "política",
-        "politizar"
+        "políticamente"
       ]
     },
     {
@@ -5539,8 +5536,8 @@
       "ipa": "/aˈð̞ẽn̪t̪ɾo/",
       "family": [
         "dentro",
-        "entrada",
-        "adentrarse"
+        "interior",
+        "adentrar"
       ]
     },
     {
@@ -5774,8 +5771,7 @@
       "ipa": "/ẽŋkaˈxaɾ/",
       "family": [
         "caja",
-        "encaje",
-        "encajonar"
+        "encaje"
       ]
     },
     {
@@ -5929,8 +5925,8 @@
       "ipa": "/reð̞uˈsiɾ/",
       "family": [
         "reducción",
-        "reductor",
-        "reducible"
+        "reducido",
+        "reductible"
       ]
     },
     {
@@ -5943,8 +5939,9 @@
       "example": "Soy judío.",
       "ipa": "/xuˈð̞io/",
       "family": [
+        "judía",
         "judaísmo",
-        "judaizar"
+        "judaico"
       ]
     },
     {
@@ -5959,8 +5956,8 @@
       "ipa": "/xuˈɾaɾ/",
       "family": [
         "juramento",
-        "jurado",
-        "perjurar"
+        "jura",
+        "jurado"
       ]
     },
     {
@@ -6030,7 +6027,7 @@
       "ipa": "/ˈkɾisis/",
       "family": [
         "crisálida",
-        "cristalizar"
+        "criterio"
       ]
     },
     {
@@ -6254,7 +6251,10 @@
       ],
       "pos": "noun",
       "example": "Copio su frase.",
-      "ipa": "/ˈfɾase/"
+      "ipa": "/ˈfɾase/",
+      "family": [
+        "frases"
+      ]
     },
     {
       "word": "AMARILLO",
@@ -6327,8 +6327,7 @@
       "example": "Vi el amanecer.",
       "ipa": "/amaneˈseɾ/",
       "family": [
-        "amanecida",
-        "amanecido"
+        "mañana"
       ]
     },
     {
@@ -6359,8 +6358,7 @@
       "ipa": "/rekomẽn̪ˈd̪aɾ/",
       "family": [
         "recomendación",
-        "recomendable",
-        "recomendado"
+        "recomendable"
       ]
     },
     {
@@ -6375,8 +6373,7 @@
       "ipa": "/eˈlaɾ/",
       "family": [
         "hielo",
-        "helado",
-        "helada"
+        "helado"
       ]
     },
     {
@@ -6401,8 +6398,7 @@
       "ipa": "/aˈlaɾma/",
       "family": [
         "alarmar",
-        "alarmante",
-        "despertador"
+        "alarmista"
       ]
     },
     {
@@ -6467,8 +6463,7 @@
       "ipa": "/apɾeˈt̪aɾ/",
       "family": [
         "aprieto",
-        "apretón",
-        "apretado"
+        "apretón"
       ]
     },
     {
@@ -6482,8 +6477,7 @@
       "ipa": "/paˈsjõn/",
       "family": [
         "pasional",
-        "apasionar",
-        "apasionado"
+        "apasionar"
       ]
     },
     {
@@ -6498,8 +6492,7 @@
       "ipa": "/ĩnsiˈð̞ẽn̪t̪e/",
       "family": [
         "incidir",
-        "incidental",
-        "incidencia"
+        "incidental"
       ]
     },
     {
@@ -6527,8 +6520,7 @@
       "example": "No merezco castigo.",
       "ipa": "/kasˈt̪iɣ̞o/",
       "family": [
-        "castigar",
-        "castigador"
+        "castigar"
       ]
     },
     {
@@ -6541,7 +6533,8 @@
       ],
       "example": "Ella asó el pavo.",
       "family": [
-        "pava"
+        "pava",
+        "pavonear"
       ]
     },
     {
@@ -6571,7 +6564,6 @@
       "ipa": "/aniˈmaɾ/",
       "family": [
         "ánimo",
-        "animado",
         "animación"
       ]
     },
@@ -6613,8 +6605,7 @@
       "ipa": "/ˈlaɣ̞ɾima/",
       "family": [
         "lagrimear",
-        "lagrimal",
-        "lagrimeo"
+        "lagrimal"
       ]
     },
     {
@@ -6627,7 +6618,7 @@
       "example": "¿Es un dragón?",
       "ipa": "/d̪ɾaˈɣ̞õn/",
       "family": [
-        "dragontino"
+        "draconiano"
       ]
     },
     {
@@ -6656,8 +6647,7 @@
       "pos": "adjective",
       "family": [
         "vivir",
-        "vivo",
-        "vivacidad"
+        "vivo"
       ]
     },
     {
@@ -6670,9 +6660,7 @@
       "example": "Suelta mi brazo.",
       "ipa": "/ˈswel̪t̪a/",
       "family": [
-        "soltar",
-        "suelto",
-        "soltura"
+        "soltar"
       ]
     },
     {
@@ -6701,8 +6689,7 @@
       "ipa": "/ˌfasilˈmẽn̪t̪e/",
       "family": [
         "fácil",
-        "facilidad",
-        "facilitar"
+        "facilidad"
       ]
     },
     {
@@ -6744,8 +6731,7 @@
       "ipa": "/lamẽn̪ˈt̪aɾ/",
       "family": [
         "lamento",
-        "lamentable",
-        "lamentación"
+        "lamentable"
       ]
     },
     {
@@ -7045,9 +7031,8 @@
       "pos": "noun",
       "example": "Fui a la biblioteca.",
       "family": [
-        "bibliotecario",
-        "bibliográfico",
-        "biblioteconomía"
+        "bibliografía",
+        "bibliotecario"
       ]
     },
     {
@@ -7074,7 +7059,8 @@
       "example": "Karl salvó el mundo de una guerra nuclear.",
       "ipa": "/nukleˈaɾ/",
       "family": [
-        "núcleo"
+        "núcleo",
+        "nucleico"
       ]
     },
     {
@@ -7191,8 +7177,8 @@
       "ipa": "/kõn̪ˈt̪est̪a/",
       "family": [
         "contestar",
-        "contestación",
-        "contestado"
+        "contestado",
+        "contestación"
       ]
     },
     {
@@ -7206,8 +7192,8 @@
       "example": "No hay que confundir churras con merinas.",
       "ipa": "/kõɱfũn̪ˈd̪iɾ/",
       "family": [
-        "confusión",
         "confundido",
+        "confusión",
         "confundible"
       ]
     },
@@ -7312,7 +7298,8 @@
       "ipa": "/pesˈkaɾ/",
       "family": [
         "pesca",
-        "pescador"
+        "pescador",
+        "pescado"
       ]
     },
     {
@@ -7456,7 +7443,8 @@
       "example": "Dame un pedazo de papel.",
       "ipa": "/peˈð̞aso/",
       "family": [
-        "pedacito"
+        "pedacito",
+        "apedrear"
       ]
     },
     {
@@ -7469,9 +7457,9 @@
       "example": "El ambiente era tenso.",
       "ipa": "/ãmˈbjẽn̪t̪e/",
       "family": [
+        "ambiental",
         "ambientar",
-        "ambientación",
-        "ambiental"
+        "ambientación"
       ]
     },
     {
@@ -7487,7 +7475,7 @@
       "family": [
         "supermercado",
         "superhéroe",
-        "superar"
+        "superdotado"
       ]
     },
     {
@@ -7525,7 +7513,8 @@
       "ipa": "/d̪espeˈð̞ið̞o/",
       "family": [
         "despedir",
-        "despedida"
+        "despedida",
+        "despedimiento"
       ]
     },
     {
@@ -7709,7 +7698,8 @@
       "example": "Necesito un plano.",
       "ipa": "/ˈplano/",
       "family": [
-        "planear"
+        "planear",
+        "planta"
       ]
     },
     {
@@ -7871,8 +7861,8 @@
       "ipa": "/ˈkexa/",
       "family": [
         "quejar",
-        "quejumbroso",
-        "quejarse"
+        "quejoso",
+        "quejumbroso"
       ]
     },
     {
@@ -7928,7 +7918,8 @@
       "ipa": "/d̪iskuˈsjõn/",
       "family": [
         "discutir",
-        "discutible"
+        "discutible",
+        "discutidor"
       ]
     },
     {
@@ -8005,7 +7996,7 @@
       "family": [
         "alejar",
         "alejamiento",
-        "lejano"
+        "lejos"
       ]
     },
     {
@@ -8059,7 +8050,7 @@
       "example": "Nadie nos podrá dividir.",
       "family": [
         "división",
-        "dividendo",
+        "dividido",
         "divisible"
       ]
     },
@@ -8281,8 +8272,8 @@
       "ipa": "/ˈgɾano/",
       "family": [
         "granero",
-        "granoso",
-        "granulado"
+        "granulado",
+        "granito"
       ]
     },
     {
@@ -8357,8 +8348,8 @@
       "example": "Voy a borrar la frase.",
       "ipa": "/boˈraɾ/",
       "family": [
-        "borrón",
-        "borrador"
+        "borrador",
+        "borrón"
       ]
     },
     {
@@ -8373,8 +8364,8 @@
       "ipa": "/ẽnseˈrað̞o/",
       "family": [
         "encerrar",
-        "encierro",
-        "encerrona"
+        "cerrar",
+        "encierro"
       ]
     },
     {
@@ -8401,8 +8392,7 @@
       "example": "Pon el vídeo.",
       "ipa": "/ˈbið̞eo/",
       "family": [
-        "videojuego",
-        "videoclub"
+        "videojuego"
       ]
     },
     {
@@ -8532,8 +8522,7 @@
       "ipa": "/ˈt͡ʃef/",
       "family": [
         "cocina",
-        "cocinero",
-        "gastronomía"
+        "cocinero"
       ]
     },
     {
@@ -8548,8 +8537,7 @@
       "ipa": "/ˈbola/",
       "family": [
         "balón",
-        "pelota",
-        "esfera"
+        "baloncesto"
       ]
     },
     {
@@ -8564,8 +8552,7 @@
       "ipa": "/sakɾifiˈkaɾ/",
       "family": [
         "sacrificio",
-        "sacrificado",
-        "víctima"
+        "sacrificado"
       ]
     },
     {
@@ -8578,8 +8565,7 @@
       "example": "La vi nuevamente.",
       "family": [
         "nuevo",
-        "renovar",
-        "innovar"
+        "renovar"
       ]
     },
     {
@@ -8623,8 +8609,7 @@
       "ipa": "/neɣ̞oˈsjaɾ/",
       "family": [
         "negocio",
-        "negociador",
-        "negociación"
+        "negociador"
       ]
     },
     {
@@ -8637,8 +8622,7 @@
       "example": "Esta es mi nueva grabación.",
       "family": [
         "grabar",
-        "grabadora",
-        "grabado"
+        "grabadora"
       ]
     },
     {
@@ -8652,8 +8636,7 @@
       "ipa": "/d̪est̪ɾoˈsaɾ/",
       "family": [
         "destrozo",
-        "destruir",
-        "destrucción"
+        "destruir"
       ]
     },
     {
@@ -8664,8 +8647,7 @@
       "ipa": "/kaˈɲõn/",
       "family": [
         "cañonazo",
-        "cañonera",
-        "cañonear"
+        "cañonera"
       ]
     },
     {
@@ -8679,7 +8661,7 @@
       "ipa": "/ˈkwãn/",
       "family": [
         "cuánto",
-        "cuánta"
+        "cuantía"
       ]
     },
     {
@@ -8733,8 +8715,7 @@
       "ipa": "/repoɾˈt̪aɾ/",
       "family": [
         "reporte",
-        "reportero",
-        "reportaje"
+        "reportero"
       ]
     },
     {
@@ -8749,8 +8730,7 @@
       "ipa": "/paˈt̪et̪iko/",
       "family": [
         "piedad",
-        "patetismo",
-        "patéticamente"
+        "patetismo"
       ]
     },
     {
@@ -8791,8 +8771,7 @@
       "ipa": "/ˈmet̪oð̞o/",
       "family": [
         "metódico",
-        "metodología",
-        "metodista"
+        "metodología"
       ]
     },
     {
@@ -8807,8 +8786,7 @@
       "ipa": "/fãn̪t̪aˈsia/",
       "family": [
         "fantasioso",
-        "fantasear",
-        "fantástico"
+        "fantasear"
       ]
     },
     {
@@ -8831,8 +8809,7 @@
       "example": "Es extranjero.",
       "ipa": "/ekst̪ɾãŋˈxeɾo/",
       "family": [
-        "extranjería",
-        "extranjis"
+        "extranjería"
       ]
     },
     {
@@ -8847,8 +8824,7 @@
       "ipa": "/ˈgwãn̪t̪e/",
       "family": [
         "guantazo",
-        "guantelete",
-        "enguantar"
+        "guantelete"
       ]
     },
     {
@@ -8908,7 +8884,7 @@
       "ipa": "/ekspeˈð̞jẽn̪t̪e/",
       "family": [
         "expedir",
-        "expeditivo"
+        "expedición"
       ]
     },
     {
@@ -8923,8 +8899,7 @@
       "ipa": "/aˈre.ɣlo/",
       "family": [
         "arreglar",
-        "arreglado",
-        "arreglista"
+        "arreglado"
       ]
     },
     {
@@ -8969,8 +8944,8 @@
       "ipa": "/ˈt̪ele/",
       "family": [
         "televisión",
-        "teléfono",
-        "telemático"
+        "telecomunicación",
+        "teleférico"
       ]
     },
     {
@@ -9077,8 +9052,8 @@
       "ipa": "/aˈpɾesjo/",
       "family": [
         "apreciar",
-        "apreciado",
-        "apreciable"
+        "apreciable",
+        "apreciativo"
       ]
     },
     {
@@ -9376,7 +9351,8 @@
       "ipa": "/paˈɾjẽn̪t̪e/",
       "family": [
         "parentesco",
-        "parentela"
+        "parentela",
+        "emparentar"
       ]
     },
     {
@@ -9391,7 +9367,8 @@
       "ipa": "/ˈmãnʲt͡ʃa/",
       "family": [
         "manchar",
-        "manchado"
+        "manchado",
+        "desmanchar"
       ]
     },
     {
@@ -9464,8 +9441,7 @@
       "ipa": "/paɾˈt̪ið̞a/",
       "family": [
         "partir",
-        "partido",
-        "partidor"
+        "partido"
       ]
     },
     {
@@ -9612,7 +9588,8 @@
       "example": "Un ciego no puede guiar a otro ciego.",
       "ipa": "/ˈgjaɾ/",
       "family": [
-        "guía"
+        "guía",
+        "guiado"
       ]
     },
     {
@@ -9628,7 +9605,7 @@
       "family": [
         "coger",
         "cogida",
-        "cogedor"
+        "recoger"
       ]
     },
     {
@@ -9658,7 +9635,7 @@
       "family": [
         "destruir",
         "destrucción",
-        "destructivo"
+        "indestructible"
       ]
     },
     {
@@ -9717,7 +9694,8 @@
       "example": "¡Batería baja!",
       "ipa": "/bat̪eˈɾia/",
       "family": [
-        "baterista"
+        "baterista",
+        "baterías"
       ]
     },
     {
@@ -9731,8 +9709,7 @@
       "example": "Yo le echo crema a mi café.",
       "ipa": "/ˈkɾema/",
       "family": [
-        "cremoso",
-        "cremación"
+        "cremoso"
       ]
     },
     {
@@ -9788,8 +9765,8 @@
       "example": "La rueda gira.",
       "ipa": "/ˈrweð̞a/",
       "family": [
-        "rodar",
-        "rodadura"
+        "ruedo",
+        "rodar"
       ]
     },
     {
@@ -9804,8 +9781,7 @@
       "ipa": "/ĩnsˈt̪ãn̪t̪e/",
       "family": [
         "instancia",
-        "instantáneo",
-        "instantáneamente"
+        "instantáneo"
       ]
     },
     {
@@ -9820,8 +9796,7 @@
       "ipa": "/asisˈt̪iɾ/",
       "family": [
         "asistencia",
-        "asistente",
-        "asistencial"
+        "asistente"
       ]
     },
     {
@@ -9907,8 +9882,7 @@
       "ipa": "/asẽnˈsoɾ/",
       "family": [
         "ascender",
-        "ascenso",
-        "ascensional"
+        "ascenso"
       ]
     },
     {
@@ -9961,8 +9935,7 @@
       "example": "Está furioso.",
       "ipa": "/fuˈɾjoso/",
       "family": [
-        "furia",
-        "furiosamente"
+        "furia"
       ]
     },
     {
@@ -10007,8 +9980,7 @@
       "ipa": "/ĩɱfoɾˈmað̞o/",
       "family": [
         "informar",
-        "información",
-        "informante"
+        "información"
       ]
     },
     {
@@ -10037,8 +10009,7 @@
       "example": "¡Al ladrón!",
       "ipa": "/laˈð̞ɾõn/",
       "family": [
-        "ladrona",
-        "ladronear"
+        "ladrona"
       ]
     },
     {
@@ -10053,8 +10024,7 @@
       "example": "¿Cuál es su apellido?",
       "ipa": "/apeˈʝið̞o/",
       "family": [
-        "apellidar",
-        "apellidado"
+        "apellidar"
       ]
     },
     {
@@ -10067,8 +10037,7 @@
       "example": "Me había quitado el nervio de mi diente.",
       "family": [
         "nervioso",
-        "nerviosismo",
-        "nervadura"
+        "nerviosismo"
       ]
     },
     {
@@ -10083,7 +10052,6 @@
       "example": "No soy gallina.",
       "ipa": "/gaˈʝina/",
       "family": [
-        "gallo",
         "gallinero",
         "gallinaza"
       ]
@@ -10129,8 +10097,7 @@
       "ipa": "/ẽn̪ˈt̪ɾað̞o/",
       "family": [
         "entrar",
-        "entrada",
-        "entrante"
+        "entrada"
       ]
     },
     {
@@ -10144,8 +10111,7 @@
       "ipa": "/espeˈɾað̞o/",
       "family": [
         "esperar",
-        "esperanza",
-        "esperanzador"
+        "esperanza"
       ]
     },
     {
@@ -10160,8 +10126,7 @@
       "ipa": "/reaksjoˈnaɾ/",
       "family": [
         "reacción",
-        "reactivo",
-        "reactor"
+        "reactivo"
       ]
     },
     {
@@ -10174,8 +10139,7 @@
       "example": "Tengo que derribar este árbol.",
       "family": [
         "derribo",
-        "derribado",
-        "derribador"
+        "derribado"
       ]
     },
     {
@@ -10202,8 +10166,7 @@
       "ipa": "/aˈsejt̪e/",
       "family": [
         "aceitero",
-        "aceitoso",
-        "aceitar"
+        "aceitoso"
       ]
     },
     {
@@ -10216,7 +10179,7 @@
       "example": "Tengo pasaporte.",
       "ipa": "/pasaˈpoɾt̪e/",
       "family": [
-        "pasaportar"
+        "pasar"
       ]
     },
     {
@@ -10230,8 +10193,7 @@
       "ipa": "/ˈgolf/",
       "family": [
         "golfista",
-        "golfear",
-        "golfístico"
+        "golfear"
       ]
     },
     {
@@ -10245,7 +10207,6 @@
       "ipa": "/t̪ɾað̞iˈsjõn/",
       "family": [
         "tradicional",
-        "tradicionalismo",
         "tradicionalista"
       ]
     },
@@ -10316,7 +10277,8 @@
       "ipa": "/t̪ẽmpoˈɾal/",
       "family": [
         "tiempo",
-        "temporalmente"
+        "temporalmente",
+        "temporario"
       ]
     },
     {
@@ -10392,8 +10354,8 @@
       "ipa": "/kalẽn̪ˈt̪aɾ/",
       "family": [
         "caliente",
-        "calor",
-        "calentamiento"
+        "calentamiento",
+        "calentador"
       ]
     },
     {
@@ -10513,7 +10475,7 @@
       "family": [
         "flotar",
         "flotante",
-        "flotilla"
+        "flotador"
       ]
     },
     {
@@ -10596,7 +10558,6 @@
       "ipa": "/aˈð̞ul̪t̪o/",
       "family": [
         "adultez",
-        "adulterar",
         "adulterio"
       ]
     },
@@ -10610,8 +10571,8 @@
       "example": "¿Lo has probado?",
       "family": [
         "probar",
-        "probador",
-        "probatorio"
+        "prueba",
+        "probador"
       ]
     },
     {
@@ -10683,7 +10644,7 @@
       "family": [
         "imperial",
         "emperador",
-        "imperialismo"
+        "imperioso"
       ]
     },
     {
@@ -10694,7 +10655,11 @@
       ],
       "pos": "verb",
       "example": "El portero logró placar al rival sin lastimarlo.",
-      "ipa": "/plaˈkaɾ/"
+      "ipa": "/plaˈkaɾ/",
+      "family": [
+        "placable",
+        "placero"
+      ]
     },
     {
       "word": "SUPLICAR",
@@ -10724,7 +10689,7 @@
       "family": [
         "meada",
         "meadero",
-        "meón"
+        "orinarse"
       ]
     },
     {
@@ -10811,8 +10776,7 @@
       "pos": "noun",
       "example": "No te daré ni un centavo.",
       "family": [
-        "centésimo",
-        "centenario"
+        "centésimo"
       ]
     },
     {
@@ -10832,7 +10796,7 @@
     },
     {
       "word": "DAÑAR",
-      "gloss": "causar perjuicio o romper algo",
+      "gloss": "causar mal o romper algo",
       "synonyms": [
         "estropear",
         "lastimar"
@@ -10856,7 +10820,8 @@
       "ipa": "/peɾˈfil/",
       "family": [
         "perfilar",
-        "perfilado"
+        "perfilado",
+        "perfiladura"
       ]
     },
     {
@@ -11007,7 +10972,7 @@
       "family": [
         "cantar",
         "canción",
-        "cantata"
+        "canturrear"
       ]
     },
     {
@@ -11294,7 +11259,7 @@
       "family": [
         "disfrazar",
         "disfrazado",
-        "disfraces"
+        "disfrazarse"
       ]
     },
     {
@@ -11309,8 +11274,7 @@
       "ipa": "/ĩnst̪aˈlaɾ/",
       "family": [
         "instalación",
-        "instalado",
-        "instalador"
+        "instalado"
       ]
     },
     {
@@ -11567,7 +11531,6 @@
       "ipa": "/aɾˈt̪aɾ/",
       "family": [
         "hartazgo",
-        "harto",
         "hartura"
       ]
     },
@@ -11733,7 +11696,7 @@
       "ipa": "/ˈpleno/",
       "family": [
         "plenitud",
-        "plenamente",
+        "plenilunio",
         "plenario"
       ]
     },
@@ -11749,7 +11712,7 @@
       "ipa": "/ˈd̪iɣ̞no/",
       "family": [
         "dignidad",
-        "dignificar",
+        "dignarse",
         "dignatario"
       ]
     },
@@ -11779,8 +11742,7 @@
       "ipa": "/reliˈxjoso/",
       "family": [
         "religión",
-        "religiosidad",
-        "religiosamente"
+        "religiosidad"
       ]
     },
     {
@@ -11867,7 +11829,8 @@
       "ipa": "/giˈt̪ara/",
       "family": [
         "guitarrista",
-        "guitarrero"
+        "guitarrero",
+        "guitarrillo"
       ]
     },
     {
@@ -11988,7 +11951,8 @@
       "ipa": "/finãnˈsjeɾo/",
       "family": [
         "finanza",
-        "financiar"
+        "financiar",
+        "financiamiento"
       ]
     },
     {
@@ -12018,7 +11982,8 @@
       "ipa": "/poɾkeˈɾia/",
       "family": [
         "puerco",
-        "porquerizo"
+        "porquerizo",
+        "porqueriza"
       ]
     },
     {
@@ -12113,7 +12078,8 @@
       "example": "Eres bombero, ¿no?",
       "ipa": "/bõmˈbeɾo/",
       "family": [
-        "bombear"
+        "bombear",
+        "bombazo"
       ]
     },
     {
@@ -12143,8 +12109,8 @@
       "ipa": "/iluˈsjõn/",
       "family": [
         "ilusionar",
-        "iluso",
-        "ilusionista"
+        "ilusionista",
+        "iluso"
       ]
     },
     {
@@ -12202,7 +12168,8 @@
       "ipa": "/ˈgot̪a/",
       "family": [
         "gotear",
-        "goteo"
+        "goteo",
+        "gotera"
       ]
     },
     {
@@ -12246,8 +12213,7 @@
       "example": "¿Hay un horario?",
       "ipa": "/oˈɾaɾjo/",
       "family": [
-        "hora",
-        "horóscopo"
+        "hora"
       ]
     },
     {
@@ -12387,8 +12353,8 @@
       "ipa": "/ˈfjel/",
       "family": [
         "fidelidad",
-        "fielmente",
-        "infiel"
+        "fiar",
+        "fiador"
       ]
     },
     {
@@ -12402,7 +12368,6 @@
       "ipa": "/ˈkasko/",
       "family": [
         "cascar",
-        "casquillo",
         "cascarón"
       ]
     },
@@ -12473,8 +12438,8 @@
       "ipa": "/pɾeˈsiso/",
       "family": [
         "precisión",
-        "precisar",
-        "precisamente"
+        "precisamente",
+        "impreciso"
       ]
     },
     {
@@ -12517,8 +12482,7 @@
       "ipa": "/arwiˈnað̞o/",
       "family": [
         "arruinar",
-        "ruina",
-        "arruinamiento"
+        "ruina"
       ]
     },
     {
@@ -12532,8 +12496,8 @@
       "ipa": "/koreˈð̞oɾ/",
       "family": [
         "correr",
-        "carrera",
-        "correduría"
+        "correduría",
+        "corredizo"
       ]
     },
     {
@@ -12565,7 +12529,7 @@
       "pos": "noun",
       "ipa": "/pɾost̪iˈt̪ut̪o/",
       "family": [
-        "prostituir"
+        "prostibulario"
       ]
     },
     {
@@ -12626,8 +12590,8 @@
       "example": "Debemos primar la calidad sobre la cantidad en nuestro trabajo.",
       "ipa": "/pɾiˈmaɾ/",
       "family": [
-        "primero",
         "primacía",
+        "primero",
         "primario"
       ]
     },
@@ -12670,7 +12634,8 @@
       "example": "¡Coge el huevo dorado!",
       "ipa": "/d̪oˈɾað̞o/",
       "family": [
-        "dorar"
+        "dorar",
+        "doradura"
       ]
     },
     {
@@ -12813,7 +12778,6 @@
       "ipa": "/ãnˈsjoso/",
       "family": [
         "ansia",
-        "ansiar",
         "ansiedad"
       ]
     },
@@ -12830,7 +12794,7 @@
       "family": [
         "testificar",
         "testigo",
-        "testimonial"
+        "atestiguar"
       ]
     },
     {
@@ -12994,8 +12958,7 @@
       "example": "¿Cuál es tu mayor debilidad?",
       "family": [
         "débil",
-        "debilitar",
-        "debilitación"
+        "debilitar"
       ]
     },
     {
@@ -13085,7 +13048,7 @@
       "family": [
         "mezcla",
         "mezclador",
-        "mezclilla"
+        "mezcolanza"
       ]
     },
     {
@@ -13183,8 +13146,8 @@
       "ipa": "/pɾoð̞ukˈt̪oɾ/",
       "family": [
         "producir",
-        "producción",
-        "productivo"
+        "producto",
+        "producción"
       ]
     },
     {
@@ -13254,8 +13217,8 @@
       "example": "Tomad la aguja.",
       "ipa": "/aˈɣ̞uxa/",
       "family": [
-        "aguijón",
-        "aguijar"
+        "agujero",
+        "aguijón"
       ]
     },
     {
@@ -13313,9 +13276,9 @@
       "example": "No nos debemos apresurar.",
       "ipa": "/apɾesuˈɾaɾ/",
       "family": [
+        "prisa",
         "apresurado",
-        "apresuramiento",
-        "apresurarse"
+        "apresuramiento"
       ]
     },
     {
@@ -13342,7 +13305,11 @@
       ],
       "pos": "noun",
       "example": "Vamos al cementerio.",
-      "ipa": "/semẽn̪ˈt̪eɾjo/"
+      "ipa": "/semẽn̪ˈt̪eɾjo/",
+      "family": [
+        "cemento",
+        "sepultura"
+      ]
     },
     {
       "word": "VIEJA",
@@ -13515,7 +13482,7 @@
       "ipa": "/ˈpat̪o/",
       "family": [
         "pata",
-        "patoso"
+        "patología"
       ]
     },
     {
@@ -13554,9 +13521,9 @@
       "example": "Mi sueldo es semanal.",
       "ipa": "/ˈswel̪d̪o/",
       "family": [
-        "soldada",
+        "soldar",
         "soldado",
-        "soldar"
+        "soldadura"
       ]
     },
     {
@@ -13641,8 +13608,7 @@
       "ipa": "/kaˈɾakt̪eɾ/",
       "family": [
         "caracterizar",
-        "característico",
-        "caracterización"
+        "característico"
       ]
     },
     {
@@ -13728,7 +13694,7 @@
       "family": [
         "firma",
         "firmar",
-        "firmamento"
+        "firmante"
       ]
     },
     {
@@ -13907,7 +13873,8 @@
       "example": "El espaldar de la silla tiene un refuerzo de metal en forma de ele.",
       "ipa": "/reˈfweɾso/",
       "family": [
-        "reforzar"
+        "reforzar",
+        "reforzado"
       ]
     },
     {
@@ -13968,9 +13935,9 @@
       "example": "¿Cuál es la comisión?",
       "ipa": "/komiˈsjõn/",
       "family": [
+        "comisionado",
         "comisionar",
-        "comisionista",
-        "comisario"
+        "comisionista"
       ]
     },
     {
@@ -14158,8 +14125,7 @@
       "ipa": "/eskaˈpað̞o/",
       "family": [
         "escapar",
-        "escape",
-        "escapada"
+        "escape"
       ]
     },
     {
@@ -14339,7 +14305,7 @@
       "ipa": "/meˈkaniko/",
       "family": [
         "mecánica",
-        "mecanismo"
+        "mecanizar"
       ]
     },
     {

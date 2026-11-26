@@ -42,6 +42,15 @@ Replacements are same-slot (ADR 0058). Pack lengths are unchanged. Every changed
 - **W8 call-site tests.** `scripts/expand-packs-name-gate.test.ts` fails when any of the three generation-side `listedNameRejected` call sites in `scripts/expand-packs.ts` (`okLemma`, `glossRejected`, the FR/IT `accept`) is reverted.
 - **PT pack QA.** The full PT review (all slots of all six pt packs, per the ADR 0058 amendment) replaced the invented-gloss name lemmas `TIM` (pt/b1/101), `ABRAM` (pt/b1/202), `COLE` (pt/b1/265) in their own slots, and the above-band nouns `GRAVATA` (pt/b1/480), `ANANÁS` (pt/c1/778), `VINAGRE` (pt/c1/959) (#369 N1). Gloss style: `TENISTA` names ténis, and the nine EU-PT `-MOS` pairs state presente vs pretérito in the gloss, with EU clitic order in `FALAMOS`.
 
+## Amendment: #359 ES pack QA (2026-11-26)
+
+- **Chips.** The wrong-language/English chips listed in #359 were already replaced by #367. A full re-scan of all six es packs (every slot 0–999) through the chip gate (`invalidSynonymChipReason` with `isWordOfLang('es', …)`) finds zero invalid chips, so every shipped es chip is a valid Spanish word or an allowlisted loanword.
+- **"retrasado".** The word no longer appears in any es pack field. Only thing/action senses were present; es/b1 `ATRASADO` now chips `rezagado`/`tardío`, es/c2 `DEMORADO` is re-glossed "que ha sufrido una demora." with chips `atrasado`/`tardío`, and es/c2 `DIFERIDO` reads "pospuesto o atrasado en el tiempo." No person-referring use remains.
+- **N1.** es/c1 slot 596 `BLUSA` (above-band easy noun) is replaced in its own slot by `PERJUICIO` (wordhoard c1 band, rank 14319; pos `noun` from the wordhoard pos map; gated example from `example-sentences`, ipa/family from `lemma-extras`).
+- **S8.** es/c2 slot 121 `CHACHA` stays (slot pinned, ADR 0058) and is re-glossed neutrally: "Persona que realiza las tareas domésticas en una casa.", chips `criada`/`empleada`. Policy decision: the domestic-work sense is the word's standard dictionary meaning; no derogatory reading is glossed.
+- **Full review.** Every lemma of all six es packs was re-checked (slots 0–999): no name-list lemma ships (`listedNameRejected`), no place/brand/proper-noun lemma found, no denylist hit (`packs:check`), no invalid chip.
+- **Extras.** `lemma-extras --lang=es` filled ipa/family for the es lemmas that lacked them (wiktextract primary, gated Mistral fallback), updating `lemma-extras-gate.json`, pack versions, and `pack-pin.json`.
+
 ## Consequences
 
 - `packs:check` fails CI if any of the 36 packs ships a denylisted lemma or a name-listed lemma that is not on `lemma-names-allow.txt`.
