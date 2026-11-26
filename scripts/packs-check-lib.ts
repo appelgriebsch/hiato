@@ -741,9 +741,9 @@ export function posGlossMismatchErrors(
       )
     } else if (pack.lang === 'en') {
       if (L.pos === 'verb') continue
-      if (!L.gloss || !EN_INFINITIVE_GLOSS_RE.test(L.gloss)) continue
+      if (!L.gloss || !EN_INFINITIVE_GLOSS_RE.test(L.gloss.trimStart())) continue
       errors.push(
-        `${rel}: pos-vs-gloss — "${L.word}" is tagged ${L.pos ?? 'none'} but the gloss "${L.gloss}" defines a verb (#358)`,
+        `${rel}: pos-vs-gloss — "${L.word}" is tagged ${L.pos ?? 'none'} but the gloss "${L.gloss}" starts with "to …": retag the POS as verb or reword the Gloss so both describe the same sense (#358)`,
       )
     }
   }
