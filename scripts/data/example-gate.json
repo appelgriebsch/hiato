@@ -236249,14 +236249,6 @@
     "at": "2026-11-23",
     "gate": 2
   },
-  "it/b1.json|MORDERE": {
-    "sentence": "Fa male mordere.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-23",
-    "gate": 2
-  },
   "it/b1.json|DIGITALE": {
     "sentence": "Il tuo orologio è digitale.",
     "source": "tatoeba",
@@ -236371,14 +236363,6 @@
   },
   "it/b1.json|SCATENARE": {
     "sentence": "Potrebbe scatenare una depressione.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-23",
-    "gate": 2
-  },
-  "it/b1.json|TORTURARE": {
-    "sentence": "Piantala di torturare il gatto.",
     "source": "tatoeba",
     "verdict": "pass",
     "level": "b1",
@@ -238028,14 +238012,6 @@
     "at": "2026-11-25",
     "gate": 2
   },
-  "it/b1.json|TERRORE": {
-    "sentence": "Lei urlò dal terrore.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-23",
-    "gate": 2
-  },
   "it/b1.json|SERVO": {
     "sentence": "Non voleva fare il servo.",
     "source": "tatoeba",
@@ -239461,8 +239437,8 @@
     "gate": 2
   },
   "it/b2.json|COLLETTIVO": {
-    "sentence": "Esiste uno sforzo collettivo tra i musulmani per opporsi al terrorismo.",
-    "source": "tatoeba",
+    "sentence": "C'è uno sforzo collettivo in tutta la comunità.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "b2",
     "at": "2026-11-23",
@@ -279588,6 +279564,30 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "B2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SOGGIORNO": {
+    "sentence": "Il divano è nel soggiorno.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|ASTRONAVE": {
+    "sentence": "L'astronave è partita verso Marte.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SASSO": {
+    "sentence": "Ha lanciato un sasso nello stagno.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
     "at": "2026-11-27",
     "gate": 2
   }

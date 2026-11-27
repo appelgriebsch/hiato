@@ -645,6 +645,9 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['REMORD', 'fr'],
       ['TERRORISTE', 'fr'],
       ['TERRORISME', 'fr'],
+      ['MORDERE', 'it'],
+      ['TORTURARE', 'it'],
+      ['TERRORE', 'it'],
     ]
     for (const [word, lang] of denied) {
       expect(isDeniedLemma(word, undefined, lang)).toBe(true)
