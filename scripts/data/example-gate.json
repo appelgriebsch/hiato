@@ -278120,13 +278120,12 @@
     "gate": 2
   },
   "fr/a1.json|REPOUSSER": {
-    "sentence": "On ne peut plus repousser ce qui est inéluctable.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Je dois repousser le vendeur qui insiste trop.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-26",
-    "gate": 2,
-    "reason": "\"Inéluctable\" is beyond CEFR A1."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "fr/a1.json|FORMATION": {
     "sentence": "Je suis en formation.",
@@ -278537,13 +278536,13 @@
     "gate": 2
   },
   "fr/c1.json|CÉSARIEN": {
-    "sentence": "Elle a accouché par césarien après plusieurs heures de travail.",
+    "sentence": "Elle a accouché par césarien après une grossesse difficile.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-26",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "\"Césarien\" is not the correct form; the correct term is \"césarienne\" (feminine adjective)."
+    "reason": "\"Césarien\" is not the correct form; \"césarienne\" (feminine) should be used."
   },
   "fr/c1.json|KAISER": {
     "sentence": "Le dernier kaiser régna sur un vaste empire avant que la monarchie ne soit abolie.",
