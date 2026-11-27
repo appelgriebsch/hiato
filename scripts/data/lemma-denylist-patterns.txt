@@ -147,3 +147,33 @@ de MISTSTÜCK(|E)
 de DRECKSAU(|EN)
 de BUMS(EN|E|T)
 de GEBUMS(T)
+
+# category: violence — ADR 0065 / #381 stage 1. Anchored violence-stem compounds:
+# each line compiles to ^STEM(?:…)$ over spellingKey, never a substring. The bare
+# concept word (MORD, WAFFE, GEWALT, …) stays on the exact list — denied as a
+# lemma, allowed as a single word in glosses per ADR 0066 — while these lines
+# catch stem-initial compounds and curated compound heads (RAUCHBOMBE & co).
+# Stem-initial homographs (WAFFEL, KRIEGEN, KRIEGER, GEWALTIG) are exempt in
+# lemma-denylist-allow.txt with reasons. TOT is never a stem; DE uses TÖT(…).
+# DE slice (#382):
+de MORD(E|EN|ER|ERN|ENDER|WAFFE|WAFFEN|FALL|BRIEF|JUSTIZ|TRIEB)
+de BOMBE(N|R|RS)
+de SPRENG(EN|SATZ|KRAFT|STOFF|UNG|UNGEN)
+de WAFFE(L|LN)
+de KRIEG(E|EN|ER|ERS|ES)
+de GEWALT(IG|BRUT|FREI)
+de TORTUR(EN|IEREN|IERT|IERTE|IERTER|IERTEN)
+de AMOK(LÄUFER|LAUF|LÄUFE)
+de TERROR(IST|ISTEN|ISME|ISTISCH)
+de ATTENTAT(E|EN|ER|S)
+de ÜBERFALL(E|EN|ER|S)
+de ANGRIFF(E|EN|ER|S|SWELLE)
+de TÖT(UNG|UNGS|UNGSDELIKT|DELIKT|OPFER|ANSCHLAG)
+de RAUCHBOMB(E|EN)
+de ZERBOMB(EN|E)
+de STINKBOMB(E|EN)
+de ATOMBOMB(E|EN)
+de ERMORD(UNG|EN)
+de VÖLKERMORD(|E|EN)
+de ATOMWAFF(E|EN)
+de FEUERWAFF(E|EN)

@@ -5,11 +5,14 @@ import {
   isDeniedGlossToken,
   isDeniedLemma,
   isDeniedTextToken,
+  isPatternAllowlisted,
   letterTokens,
   loadDenylistAllow,
   loadGlossExempt,
   loadPatternDenylist,
+  loadViolencePatterns,
   nfcUpper,
+  spellingKey,
   staleAllowEntries,
   staleGlossExempt,
 } from './lemma-denylist'
@@ -321,5 +324,52 @@ describe('profanity guard', () => {
       { lang: 'fr', word: 'MAISON', reason: 'no pattern matches' },
     ])
     expect(stale.map((e) => `${e.lang} ${e.word}`)).toContain('fr MAISON')
+  })
+})
+
+describe('ADR 0065 violence-stem regression scan (#381)', () => {
+  /** Stem-initial lemmas no allowlist entry exempts — anchored, never substring. */
+  function violenceStemHits(packs: { lang: string; cefr: string; lemmas: Lemma[] }[]): string[] {
+    const rules = loadViolencePatterns()
+    const errors: string[] = []
+    for (const pack of packs) {
+      for (const L of pack.lemmas) {
+        const w = spellingKey(L.word)
+        for (const rule of rules) {
+          if (rule.lang !== null && rule.lang !== pack.lang) continue
+          if (w === rule.stem) continue // bare concept word: exact-list territory
+          if (!w.startsWith(rule.stem)) continue
+          if (isPatternAllowlisted(L.word, pack.lang)) continue
+          errors.push(`${pack.lang}/${pack.cefr} ${L.word} starts with violence stem ${rule.stem}`)
+        }
+      }
+    }
+    return errors
+  }
+
+  test('zero un-allowlisted stem-initial violence compounds across all 36 packs', () => {
+    expect(violenceStemHits(loadPacks())).toEqual([])
+  })
+
+  test('a reinserted violence compound fails the scan', () => {
+    const packs = loadPacks()
+    const de = packs.find((p) => p.lang === 'de' && p.cefr === 'c2')!
+    de.lemmas = de.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'SPRENGSATZ' } : L))
+    const errors = violenceStemHits(packs)
+    expect(errors.some((e) => e.includes('SPRENGSATZ'))).toBe(true)
+  })
+
+  test('an allowlisted homograph does not fail the scan', () => {
+    const packs = loadPacks()
+    const de = packs.find((p) => p.lang === 'de' && p.cefr === 'b2')!
+    de.lemmas = de.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'WAFFEL' } : L))
+    expect(violenceStemHits(packs).some((e) => e.includes('WAFFEL'))).toBe(false)
+  })
+
+  test('a non-stem-initial stem container does not fail the scan', () => {
+    const packs = loadPacks()
+    const de = packs.find((p) => p.lang === 'de' && p.cefr === 'b2')!
+    de.lemmas = de.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'ABKRIEGEN' } : L))
+    expect(violenceStemHits(packs).some((e) => e.includes('ABKRIEGEN'))).toBe(false)
   })
 })

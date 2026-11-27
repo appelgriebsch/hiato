@@ -1308,7 +1308,8 @@
     "Druckhaus"
   ],
   "NOTLAGE": [
-    "Krise"
+    "NOTFALL",
+    "KRISE"
   ],
   "VORABEND": [
     "Vorher"
@@ -1422,7 +1423,8 @@
     "Eichelnuss"
   ],
   "KOMMUNE": [
-    "Gemeinde"
+    "GEMEINDE",
+    "STADT"
   ],
   "ADRESSBUCH": [
     "Kontakte"
@@ -1548,7 +1550,6 @@
   "ERZFEIND": [
     "Gegner"
   ],
-  "VÖLKERMORD": [],
   "FLUGSTEIG": [
     "Ausgang"
   ],
@@ -4576,10 +4577,6 @@
   "NULLEN": [
     "Versager",
     "Nieten"
-  ],
-  "ATOMWAFFE": [
-    "Kernwaffe",
-    "Nuklearwaffe"
   ],
   "ERDENKLICH": [
     "möglich"
@@ -10693,9 +10690,6 @@
     "lauschen",
     "zuhören"
   ],
-  "ATOMBOMBE": [
-    "Kernwaffe"
-  ],
   "DURCHSAGE": [
     "Ankündigung"
   ],
@@ -12497,7 +12491,10 @@
   "BELÜGEN": [
     "anlügen"
   ],
-  "UMZIEHEN": [],
+  "UMZIEHEN": [
+    "WECHSELN",
+    "VERLEGEN"
+  ],
   "BEFRAGEN": [
     "interviewen"
   ],
@@ -12702,9 +12699,6 @@
   "NÜTZLICH": [
     "brauchbar"
   ],
-  "KRIEGER": [
-    "Soldat"
-  ],
   "RÄCHEN": [
     "sühnen"
   ],
@@ -12795,7 +12789,6 @@
   "ZERBRECHEN": [
     "kaputtmachen"
   ],
-  "ÜBERFALLEN": [],
   "TEXT": [
     "Schriftstück",
     "Aufsatz"
@@ -13193,9 +13186,6 @@
     "KLEIN",
     "MINIMAL"
   ],
-  "SPRENGEN": [
-    "ZERLEGEN"
-  ],
   "SUPPE": [],
   "DRÄNGEN": [
     "überreden"
@@ -13360,9 +13350,6 @@
   "STAUB": [],
   "BEHÖRDE": [
     "Amt"
-  ],
-  "MORDE": [
-    "Tötungen"
   ],
   "BEMÜHEN": [],
   "DUSCH": [
@@ -14771,7 +14758,7 @@
   ],
   "ZERREIßEN": [
     "TEILEN",
-    "SPRENGEN"
+    "ZERTEILEN"
   ],
   "ERGEHEN": [
     "ZUTEILWERDEN"
@@ -16684,7 +16671,7 @@
     "Übeltäter"
   ],
   "SCHLUCHT": [
-    "Kluft"
+    "Abgrund"
   ],
   "LOGBUCH": [
     "Schiffstagebuch"
@@ -17112,7 +17099,7 @@
   ],
   "MUSKETIER": [
     "Soldat",
-    "Krieger"
+    "Waffenträger"
   ],
   "HERZLOS": [
     "gefühllos",
@@ -19342,7 +19329,6 @@
     "Planzeichnung",
     "Konstruktionsplan"
   ],
-  "FEUERWAFFE": [],
   "GUTSHERR": [
     "Landbesitzer"
   ],
@@ -20224,9 +20210,6 @@
     "Überheblichkeit",
     "Anmaßung"
   ],
-  "RAUCHBOMBE": [
-    "Nebelbombe"
-  ],
   "BABYLAUT": [],
   "ESSLÖFFEL": [
     "Eßlöffel"
@@ -20532,9 +20515,6 @@
   "RADIOLOGEN": [
     "RÖNTGENÄRZTE"
   ],
-  "ZERBOMBEN": [
-    "ZERSTÖREN"
-  ],
   "NUSSBAUM": [
     "WALDBAUM"
   ],
@@ -20648,9 +20628,6 @@
   ],
   "AFFEKTIERT": [
     "GEZIERT"
-  ],
-  "STINKBOMBE": [
-    "Geruchsbombe"
   ],
   "FAHRDIENST": [
     "TRANSPORTDIENST"
@@ -21262,10 +21239,6 @@
   "SOZIOLOGE": [
     "Gesellschaftswissenschaftler"
   ],
-  "MORDENDER": [
-    "BLUTRÜNSTIG",
-    "GRAUSAM"
-  ],
   "UNSCHULDIG": [
     "fehlerfrei"
   ],
@@ -21280,7 +21253,8 @@
     "nachdem"
   ],
   "NERVEN": [
-    "Nervenbahnen"
+    "ÄRGERN",
+    "STÖREN"
   ],
   "STECHEN": [],
   "VERDACHT": [],
@@ -21380,7 +21354,6 @@
     "legen",
     "hineinlegen"
   ],
-  "ERMORDUNG": [],
   "HINÜBER": [
     "drüben"
   ],
@@ -22229,5 +22202,45 @@
   "RENTNER": [
     "Pensionär",
     "Ruheständler"
+  ],
+  "MAHLZEIT": [
+    "ESSEN",
+    "MITTAGESSEN"
+  ],
+  "UMZUG": [
+    "WECHSELN",
+    "WOHNUNGSWECHSEL"
+  ],
+  "MACHT": [
+    "KRAFT",
+    "EINFLUSS"
+  ],
+  "KLUFT": [
+    "RISS",
+    "SPALT"
+  ],
+  "FUNKLOCH": [
+    "KEIN EMPFANG",
+    "KEINE VERBINDUNG"
+  ],
+  "ZAUDERN": [
+    "ZÖGERN",
+    "SCHWANKEN"
+  ],
+  "WIMPEL": [
+    "FAHNE",
+    "FLAGGE"
+  ],
+  "FEHLERLOS": [
+    "PERFEKT",
+    "MAKELLOS",
+    "EINWANDFREI"
+  ],
+  "FRÜHSTÜCK": [
+    "Morgenmahl",
+    "Essen"
+  ],
+  "NOTFALL": [
+    "Krise"
   ]
 }
