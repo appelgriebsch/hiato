@@ -163,17 +163,17 @@ export function LemmaTeach({
         </p>
       ) : null}
       {speakNote === 'playing' ? (
-        <p lang="en" role="status" className="mt-1.5 text-xs text-ink-muted">
+        <p role="status" className="mt-1.5 text-xs text-ink-muted">
           {t('teach.playing')}
         </p>
       ) : null}
       {speakNote === 'failed' ? (
-        <p lang="en" role="status" className="mt-1.5 text-xs text-danger">
+        <p role="status" className="mt-1.5 text-xs text-danger">
           {t('teach.speakFailed')}
         </p>
       ) : null}
       {showSpeak ? (
-        <p lang="en" className="mt-0.5 text-xs text-ink-muted">
+        <p className="mt-0.5 text-xs text-ink-muted">
           {t('teach.muteHelp')}
         </p>
       ) : null}
@@ -182,7 +182,7 @@ export function LemmaTeach({
           data-endcard-synonyms
           className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
         >
-          <span lang="en" className="text-pixel-label text-ink-faint">
+          <span className="text-pixel-label text-ink-faint">
             {t('teach.synonyms')}
           </span>
           {synonyms.map((s) => (
@@ -201,7 +201,7 @@ export function LemmaTeach({
           data-endcard-family
           className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
         >
-          <span lang="en" className="text-pixel-label text-ink-faint">
+          <span className="text-pixel-label text-ink-faint">
             {t('teach.wordFamily')}
           </span>
           {familyChips.map((f) => (

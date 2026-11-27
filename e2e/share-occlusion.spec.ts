@@ -186,17 +186,29 @@ async function expectReachableAndUncovered(page: Page, locator: Locator, where: 
   expect(m.hitInTarget, `${where} elementFromPoint must hit the element`).toBe(true)
 }
 
-test.describe('language picker at 320x640 (#307)', () => {
-  test('pack info line and Pack info link scroll clear of the Continue footer', async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 640 })
-    await page.goto('/language')
-    await page.getByRole('heading', { name: 'Choose language & level' }).waitFor()
-    const where = 'picker 320x640'
-    await expectReachableAndUncovered(page, page.locator('[data-provenance-caption] span').first(), `${where} pack info line`)
-    await expectReachableAndUncovered(page, page.getByRole('link', { name: 'Pack info' }), `${where} Pack info link`)
-  })
+test.describe('language picker at 320x640 / 375x667 (#307/#401)', () => {
+  for (const vp of [
+    { name: '320x640', width: 320, height: 640 },
+    { name: '375x667', width: 375, height: 667 },
+  ] as const) {
+    test(`pack info line, Pack info link and B2/C1/C2 scroll clear of the Continue footer at ${vp.name}`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await page.goto('/language')
+      await page.getByRole('heading', { name: 'Choose language & level' }).waitFor()
+      const where = `picker ${vp.name}`
+      await expectReachableAndUncovered(page, page.locator('[data-provenance-caption] span').first(), `${where} pack info line`)
+      await expectReachableAndUncovered(page, page.getByRole('link', { name: 'Pack info' }), `${where} Pack info link`)
+      for (const level of ['b2', 'c1', 'c2'] as const) {
+        await expectReachableAndUncovered(
+          page,
+          page.locator(`[aria-labelledby="cefr-heading"] [role="radio"][data-radio="${level}"]`),
+          `${where} level ${level.toUpperCase()}`,
+        )
+      }
+    })
+  }
 
-  test('Português shows in full at 320px (no truncation)', async ({ page }) => {
+  test('Português shows in full on a single line at 320px (no mid-word wrap)', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 640 })
     await page.goto('/language')
     await page.getByRole('heading', { name: 'Choose language & level' }).waitFor()
@@ -211,6 +223,7 @@ test.describe('language picker at 320x640 (#307)', () => {
       range.selectNodeContents(label)
       const textRect = range.getBoundingClientRect()
       const btnRect = btn.getBoundingClientRect()
+      const labelRect = label.getBoundingClientRect()
       return {
         text: label.textContent,
         labelScrollW: label.scrollWidth,
@@ -218,6 +231,8 @@ test.describe('language picker at 320x640 (#307)', () => {
         btnScrollW: btn.scrollWidth,
         btnClientW: btn.clientWidth,
         textRight: textRect.right,
+        textHeight: textRect.height,
+        labelHeight: labelRect.height,
         btnRight: btnRect.right,
       }
     })
@@ -225,5 +240,8 @@ test.describe('language picker at 320x640 (#307)', () => {
     expect(fit.labelScrollW, 'label not clipped').toBeLessThanOrEqual(fit.labelClientW + 1)
     expect(fit.btnScrollW, 'button content not clipped').toBeLessThanOrEqual(fit.btnClientW + 1)
     expect(fit.textRight, 'full label inside the button').toBeLessThanOrEqual(fit.btnRight + 1)
+    // One line only (text-sm line-height is 20px; two lines would be 40px).
+    expect(fit.labelHeight, 'label renders on a single line').toBeLessThanOrEqual(24)
+    expect(fit.textHeight, 'text renders on a single line, no mid-word wrap').toBeLessThanOrEqual(24)
   })
 })
