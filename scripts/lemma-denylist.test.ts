@@ -571,6 +571,9 @@ describe('pattern allowlist', () => {
       'de WAFFEL',
       'de KRIEGEN',
       'de GEWALTIG',
+      'pt BOMBEIROS',
+      'pt BOMBEIRO',
+      'pt BOMBEAR',
     ])
     expect(staleAllowEntries()).toEqual([])
   })
@@ -636,6 +639,8 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['BOMBARDEO', 'es'],
       ['TORTURADO', 'es'],
       ['ATENTADO', 'es'],
+      ['MORDER', 'pt'],
+      ['TORTUROU', 'pt'],
     ]
     for (const [word, lang] of denied) {
       expect(isDeniedLemma(word, undefined, lang)).toBe(true)
@@ -662,6 +667,8 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['GUERRA', 'es'],
       ['MORDWAFFE', 'en'], // scoped: the de pattern does not leak into en
       ['BOMBARD', 'en'], // en slice lands in #387; de/es patterns stay scoped
+      ['BOMBEIROS', 'pt'], // allowlisted homograph (firefighters)
+      ['BOMBEAR', 'pt'], // allowlisted homograph (to pump)
     ]
     for (const [word, lang] of clean) {
       expect(isDeniedLemma(word, undefined, lang)).toBe(false)

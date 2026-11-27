@@ -191074,14 +191074,6 @@
     "at": "2026-11-22",
     "gate": 2
   },
-  "pt/b2.json|MORDER": {
-    "sentence": "Não vou morder.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b2",
-    "at": "2026-11-22",
-    "gate": 2
-  },
   "pt/b2.json|COLHEITA": {
     "sentence": "Tal a semente, tal a colheita.",
     "source": "tatoeba",
@@ -198003,8 +197995,8 @@
     "gate": 2
   },
   "pt/c2.json|MÓRBIDO": {
-    "sentence": "Esse medo mórbido da morte torturou-lhe a infância.",
-    "source": "tatoeba",
+    "sentence": "Esse medo mórbido da morte atormentou-lhe a infância.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-22",
@@ -200762,14 +200754,6 @@
   "pt/c2.json|INVESTIDA": {
     "sentence": "A equipa fez uma investida audaciosa no último minuto do jogo.",
     "source": "mistral",
-    "verdict": "pass",
-    "level": "c2",
-    "at": "2026-11-22",
-    "gate": 2
-  },
-  "pt/c2.json|TORTUROU": {
-    "sentence": "A Inquisição torturou muitas pessoas até à morte.",
-    "source": "tatoeba",
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-22",
@@ -279572,6 +279556,38 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "C2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "pt/c2.json|PERSUADIR": {
+    "sentence": "Ela vai persuadir a equipe a mudar de plano.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "pt/b2.json|CRISTAL": {
+    "sentence": "O copo novo é de cristal.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "pt/b2.json|JORNAL": {
+    "sentence": "Ele lê o jornal todas as manhãs.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "pt/b2.json|DESENHO": {
+    "sentence": "Ela fez um desenho do gato.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
     "at": "2026-11-27",
     "gate": 2
   }
