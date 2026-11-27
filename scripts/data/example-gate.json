@@ -23235,14 +23235,6 @@
     "at": "2026-11-13",
     "gate": 2
   },
-  "en/b2.json|BOMBARD": {
-    "sentence": "The teacher began to bombard me with questions.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b2",
-    "at": "2026-11-13",
-    "gate": 2
-  },
   "en/b2.json|BOOKISH": {
     "sentence": "She's undergone a metamorphosis from a quiet, bookish girl to an outspoken feminist activist.",
     "source": "tatoeba",
@@ -90347,14 +90339,6 @@
     "at": "2026-11-21",
     "gate": 2
   },
-  "en/c1.json|TORTUROUS": {
-    "sentence": "The long, torturous wait for the test results left them feeling anxious and exhausted.",
-    "source": "mistral",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-21",
-    "gate": 2
-  },
   "en/c1.json|SHORTLIST": {
     "sentence": "Only two applicants made it onto the shortlist.",
     "source": "tatoeba",
@@ -95036,8 +95020,8 @@
     "gate": 2
   },
   "en/c2.json|DEPRAVITY": {
-    "sentence": "The attack on the hotel, once again, shows the depravity of terrorists who seek to sow chaos.",
-    "source": "tatoeba",
+    "sentence": "The attack on the hotel once again shows the depravity of those who seek to sow chaos.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-21",
@@ -144964,11 +144948,11 @@
     "gate": 2
   },
   "en/c1.json|PORTRAY": {
-    "sentence": "Islamophobes portray Muslims as terrorists.",
-    "source": "tatoeba",
+    "sentence": "The article does not portray the event as a success.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-22",
+    "at": "2026-11-27",
     "gate": 2
   },
   "en/c1.json|INCISOR": {
@@ -279588,6 +279572,22 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "en/b2.json|PARADE": {
+    "sentence": "We watched the parade from the balcony.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "en/c1.json|GRUELLING": {
+    "sentence": "It was a gruelling day of hiking in the mountains.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C1",
     "at": "2026-11-27",
     "gate": 2
   }
