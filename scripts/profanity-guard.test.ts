@@ -359,6 +359,14 @@ describe('ADR 0065 violence-stem regression scan (#381)', () => {
     expect(errors.some((e) => e.includes('SPRENGSATZ'))).toBe(true)
   })
 
+  test('a reinserted en violence compound fails the scan', () => {
+    const packs = loadPacks()
+    const en = packs.find((p) => p.lang === 'en' && p.cefr === 'b2')!
+    en.lemmas = en.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'BOMBARDMENT' } : L))
+    const errors = violenceStemHits(packs)
+    expect(errors.some((e) => e.includes('BOMBARDMENT'))).toBe(true)
+  })
+
   test('an allowlisted homograph does not fail the scan', () => {
     const packs = loadPacks()
     const de = packs.find((p) => p.lang === 'de' && p.cefr === 'b2')!

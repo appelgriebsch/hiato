@@ -648,6 +648,14 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['MORDERE', 'it'],
       ['TORTURARE', 'it'],
       ['TERRORE', 'it'],
+      ['BOMBARD', 'en'],
+      ['BOMBARDS', 'en'],
+      ['BOMBING', 'en'],
+      ['TORTUROUS', 'en'],
+      ['TORTURER', 'en'],
+      ['MURDEROUS', 'en'],
+      ['TERRORIZE', 'en'],
+      ['TERRORISTS', 'en'],
     ]
     for (const [word, lang] of denied) {
       expect(isDeniedLemma(word, undefined, lang)).toBe(true)
@@ -673,7 +681,9 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['ARMARIO', 'es'], // ARMA is not a violence stem
       ['GUERRA', 'es'],
       ['MORDWAFFE', 'en'], // scoped: the de pattern does not leak into en
-      ['BOMBARD', 'en'], // en slice lands in #387; de/es patterns stay scoped
+      ['BOMBARD', 'de'], // scoped: the en pattern does not leak into de
+      ['TERROR', 'en'], // bare stem stays on the exact list
+      ['BOMBER', 'en'], // ER is not in the BOMB suffix set
       ['BOMBEIROS', 'pt'], // allowlisted homograph (firefighters)
       ['BOMBEAR', 'pt'], // allowlisted homograph (to pump)
     ]
@@ -723,6 +733,9 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
     expect(isDeniedGlossToken('GEWALT', 'de', 'HAUS')).toBe(false)
     expect(isDeniedGlossToken('GEWALTIG', 'de', 'HAUS')).toBe(false) // allowlisted homograph
     expect(isDeniedGlossToken('Sprengstoff', 'de', 'HAUS')).toBe(true) // compound in a gloss is denied
+    expect(isDeniedGlossToken('BOMBARDING', 'en', 'HOUSE')).toBe(true)
+    expect(isDeniedGlossToken('bombs', 'en', 'HOUSE')).toBe(false) // exact violence word: allowed in glosses
+    expect(isDeniedGlossToken('BOMBARD', 'de', 'HAUS')).toBe(false) // scoped
   })
 })
 
