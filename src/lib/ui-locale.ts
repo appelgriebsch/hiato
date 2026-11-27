@@ -6,7 +6,8 @@
  * the six supported codes, pt-BR -> pt), falling back to 'en'. getUiLocale()
  * recomputes on each call so another tab's write is heard on the next read;
  * setUiLocale notifies this tab's subscribers and the storage event syncs
- * other tabs.
+ * other tabs. A failed write (private mode / quota) keeps this tab's
+ * in-memory value, same as `sound.ts`.
  */
 import { UI_LOCALES, type UILocale } from '@/i18n'
 
@@ -51,14 +52,22 @@ export function deviceUiLocale(): UILocale {
   return 'en'
 }
 
+let sessionLocale: UILocale | null = null
+let persistFailed = false
+
+/** Stored override, or this tab's in-memory value when persistence failed. */
+function readSetting(): UILocale | null {
+  return persistFailed ? sessionLocale : readStored()
+}
+
 /** Resolved UI locale: stored override, else device locale, else 'en'. */
 export function getUiLocale(): UILocale {
-  return readStored() ?? deviceUiLocale()
+  return readSetting() ?? deviceUiLocale()
 }
 
 /** The stored setting: an explicit locale, or 'system'. */
 export function getUiLocaleSetting(): UILocale | 'system' {
-  return readStored() ?? 'system'
+  return readSetting() ?? 'system'
 }
 
 const listeners = new Set<() => void>()
@@ -79,15 +88,15 @@ function hookStorage(): void {
 
 /** 'system' stores null and returns to device-locale resolution. */
 export function setUiLocale(locale: UILocale | 'system'): void {
+  sessionLocale = locale === 'system' ? null : locale
   try {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(
-        UI_LOCALE_STORAGE_KEY,
-        JSON.stringify({ v: 1, locale: locale === 'system' ? null : locale }),
-      )
-    }
+    localStorage.setItem(
+      UI_LOCALE_STORAGE_KEY,
+      JSON.stringify({ v: 1, locale: sessionLocale }),
+    )
+    persistFailed = false
   } catch {
-    /* private mode: this tab keeps the in-memory resolution */
+    persistFailed = true
   }
   notify()
 }

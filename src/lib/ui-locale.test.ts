@@ -189,4 +189,31 @@ describe('setUiLocale', () => {
     expect([...mem.keys()].filter((k) => k === 'hiato.prefs')).toHaveLength(1)
     expect(mem.get(UI_LOCALE_STORAGE_KEY)).toBe(JSON.stringify({ v: 1, locale: null }))
   })
+
+  test('a failed write (private mode / quota) keeps this tab in memory, like sound.ts', () => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      writable: true,
+      value: {
+        getItem: () => null,
+        setItem: () => {
+          throw new Error('QuotaExceededError')
+        },
+        removeItem: () => {},
+        clear: () => {},
+      },
+    })
+    setUiLocale('pt')
+    expect(getUiLocaleSetting()).toBe('pt')
+    expect(getUiLocale()).toBe('pt')
+    setUiLocale('system')
+    expect(getUiLocaleSetting()).toBe('system')
+    expect(getUiLocale()).toBe('en')
+    // storage recovers: the next write persists again and clears the fallback
+    installLocalStorageMock()
+    setUiLocale('de')
+    expect(mem.get(UI_LOCALE_STORAGE_KEY)).toBe(JSON.stringify({ v: 1, locale: 'de' }))
+    expect(getUiLocale()).toBe('de')
+    expect(getUiLocaleSetting()).toBe('de')
+  })
 })
