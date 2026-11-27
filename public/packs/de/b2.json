@@ -1,5 +1,5 @@
 {
-  "version": 34,
+  "version": 38,
   "lang": "de",
   "cefr": "b2",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -26,11 +26,20 @@
       ]
     },
     {
-      "word": "MORDWAFFE",
-      "gloss": "ein Gegenstand, mit dem ein Tötungsdelikt begangen wird",
-      "example": "Der Mörder hat auf der Mordwaffe seine Fingerabdrücke hinterlassen.",
+      "word": "UMZUG",
+      "gloss": "der Wechsel der Wohnung",
+      "synonyms": [
+        "WECHSELN",
+        "WOHNUNGSWECHSEL"
+      ],
+      "example": "Der Umzug in die neue Wohnung hat lange gedauert.",
       "pos": "noun",
-      "ipa": "/ˈmɔʁtˌvafə/"
+      "ipa": "/ˈʊmˌt͡suːk/",
+      "family": [
+        "Umzugsunternehmen",
+        "Umzugshelfer",
+        "Umzugskarton"
+      ]
     },
     {
       "word": "ORIGINELL",
@@ -1534,16 +1543,19 @@
       "ipa": "/ˈhɔʁçn̩/"
     },
     {
-      "word": "ATOMBOMBE",
-      "gloss": "eine Waffe mit Kernspaltung",
+      "word": "MACHT",
+      "gloss": "die Möglichkeit, andere zu beeinflussen",
       "synonyms": [
-        "Kernwaffe"
+        "KRAFT",
+        "EINFLUSS"
       ],
-      "example": "Sie wissen, wie man eine Atombombe baut.",
+      "example": "Der Chef hat in der Firma viel Macht.",
       "pos": "noun",
-      "ipa": "/aˈtoːmˌbɔmbə/",
+      "ipa": "/maxt/",
       "family": [
-        "Atom"
+        "machtarm",
+        "machtbesessen",
+        "machtbewusst"
       ]
     },
     {
@@ -3171,7 +3183,7 @@
     },
     {
       "word": "NOTWEHR",
-      "gloss": "eine Handlung zur Abwehr eines Angriffs",
+      "gloss": "eine Handlung zur Abwehr in einer gefährlichen Lage",
       "synonyms": [
         "Selbstschutz"
       ],
@@ -6980,7 +6992,7 @@
       "word": "SCHLUCHT",
       "gloss": "ein tiefes, enges Tal zwischen Bergen oder Hügeln",
       "synonyms": [
-        "Kluft"
+        "Abgrund"
       ],
       "pos": "noun",
       "example": "Er fiel in die Schlucht.",
@@ -8764,7 +8776,7 @@
       "gloss": "Kämpfer mit alter Schusswaffe",
       "synonyms": [
         "Soldat",
-        "Krieger"
+        "Waffenträger"
       ],
       "pos": "noun",
       "example": "Die Geschichte handelt von einem tapferen Musketier, der mit seiner Waffe für Gerechtigkeit kämpft.",

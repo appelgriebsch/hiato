@@ -197,6 +197,30 @@ export function loadPatternDenylist(): PatternRule[] {
   return patternCache
 }
 
+let violenceStemCache: PatternRule[] | null = null
+
+/**
+ * Pattern rules in the `# category: violence` section of the patterns file
+ * (ADR 0065). Read-only view used by the regression scan; matching itself is
+ * unchanged — these rules deny through matchesDeniedPattern like any other.
+ */
+export function loadViolencePatterns(): PatternRule[] {
+  if (violenceStemCache) return violenceStemCache
+  const text = readFileSync(PATTERN_FILE, 'utf8')
+  const section: string[] = []
+  let inViolence = false
+  for (const line of text.split('\n')) {
+    if (/^#\s*category:\s*violence\b/.test(line.trim())) {
+      inViolence = true
+      continue
+    }
+    if (inViolence && /^#\s*category:/.test(line.trim())) inViolence = false
+    if (inViolence) section.push(line)
+  }
+  violenceStemCache = parsePatternDenylist(section.join('\n'))
+  return violenceStemCache
+}
+
 export function loadDenylistAllow(): AllowEntry[] {
   if (allowCache) return allowCache
   allowCache = parseAllowlist(readFileSync(ALLOW_FILE, 'utf8'))
@@ -215,6 +239,7 @@ export function resetDenylistCache(): void {
   patternCache = null
   allowCache = null
   glossExemptCache = null
+  violenceStemCache = null
 }
 
 /** True when a global pattern, or a pattern scoped to `lang`, matches the whole lemma. */

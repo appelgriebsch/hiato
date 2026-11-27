@@ -10,6 +10,7 @@ import {
   loadDenylistAllow,
   loadExactCategories,
   loadPatternDenylist,
+  loadViolencePatterns,
   matchesDeniedPattern,
   nfcUpper,
   parseExactDenylist,
@@ -563,7 +564,14 @@ describe('isDeniedLemma pattern table', () => {
 describe('pattern allowlist', () => {
   test('the shipped allowlist matches a pattern and is not stale', () => {
     const allow = loadDenylistAllow()
-    expect(allow.map((e) => `${e.lang} ${e.word}`)).toEqual(['it SCOPO', 'it SCOPA', 'it SCOPI'])
+    expect(allow.map((e) => `${e.lang} ${e.word}`)).toEqual([
+      'it SCOPO',
+      'it SCOPA',
+      'it SCOPI',
+      'de WAFFEL',
+      'de KRIEGEN',
+      'de GEWALTIG',
+    ])
     expect(staleAllowEntries()).toEqual([])
   })
 
@@ -590,6 +598,111 @@ describe('pattern allowlist', () => {
       { lang: 'it', word: 'CASA', reason: 'not a pattern hit' },
     ])
     expect(stale.map((e) => e.word)).toEqual(['CASA'])
+  })
+})
+
+describe('ADR 0065 violence stem patterns (#381)', () => {
+  test('deny stem-initial compounds and curated compound heads, anchored', () => {
+    const denied: [string, string][] = [
+      ['MORDE', 'de'],
+      ['MORDENDER', 'de'],
+      ['MORDWAFFE', 'de'],
+      ['SPRENGEN', 'de'],
+      ['SPRENGSATZ', 'de'],
+      ['SPRENGKRAFT', 'de'],
+      ['ATOMBOMBE', 'de'],
+      ['RAUCHBOMBE', 'de'],
+      ['ZERBOMBEN', 'de'],
+      ['STINKBOMBE', 'de'],
+      ['ERMORDUNG', 'de'],
+      ['VÖLKERMORD', 'de'],
+      ['VÖLKERMORDE', 'de'],
+      ['ATOMWAFFE', 'de'],
+      ['FEUERWAFFE', 'de'],
+      ['TÖTUNG', 'de'],
+      ['TÖTUNGSDELIKT', 'de'],
+      ['ÜBERFALLE', 'de'],
+      ['ANGRIFFE', 'de'],
+      ['KRIEGE', 'de'],
+      ['ANGRIFFSWELLE', 'de'],
+      ['TERRORIST', 'de'],
+      ['AMOKLÄUFER', 'de'],
+      ['ATTENTAT', 'de'],
+      ['TORTUR', 'de'],
+      ['KRIEGER', 'de'], // warrior: replaced in-slot, no allowlist entry
+    ]
+    for (const [word, lang] of denied) {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(true)
+    }
+  })
+
+  test('never substring-matches and keeps homographs playable via the allowlist', () => {
+    const clean: [string, string][] = [
+      ['WAFFEL', 'de'], // allowlisted homograph (waffle)
+      ['KRIEGEN', 'de'], // allowlisted homograph (to get)
+      ['GEWALTIG', 'de'], // allowlisted homograph (enormous)
+      ['ABKRIEGEN', 'de'], // KRIEG is not stem-initial here
+      ['AUFKRIEGEN', 'de'],
+      ['HERKRIEGEN', 'de'],
+      ['SCHLEICHEN', 'de'], // LEICH is not a violence stem
+      ['BEGLEICHEN', 'de'],
+      ['LEICHT', 'de'],
+      ['GLEICH', 'de'],
+      ['TOTAL', 'de'], // TOT is never a stem
+      ['TOTALE', 'de'],
+      ['PROTOTYP', 'es'],
+      ['PRIMORDIAL', 'es'], // MORD is not stem-initial here
+      ['ARMARIO', 'es'], // ARMA is not a violence stem
+      ['GUERRA', 'es'],
+      ['MORDWAFFE', 'en'], // scoped: the de pattern does not leak into en
+      ['BOMBARD', 'en'], // en slice lands in #387; de/es patterns stay scoped
+    ]
+    for (const [word, lang] of clean) {
+      expect(isDeniedLemma(word, undefined, lang)).toBe(false)
+    }
+  })
+
+  test('the violence section loads and is anchored per language', () => {
+    const rules = loadViolencePatterns()
+    expect(rules.length).toBeGreaterThan(10)
+    for (const rule of rules) expect(rule.re.source.startsWith('^')).toBe(true)
+    const mord = rules.find((r) => r.lang === 'de' && r.stem === 'MORD')!
+    expect(mord.re.test('MORDE')).toBe(true)
+    expect(mord.re.test('MORD')).toBe(false) // bare stem stays on the exact list
+    expect(mord.re.test('ABMORDEN')).toBe(false) // anchored, never substring
+    expect(mord.re.test('MORDEX')).toBe(false)
+  })
+
+  test('ß/SS fold applies to violence stems like any pattern (#363)', () => {
+    const rules = parsePatternDenylist('de GEWALTß(IG)\n')
+    // the stem folds to GEWALTSS; both spellings of the word match
+    expect(rules[0]!.stem).toBe('GEWALTSS')
+    expect(matchesDeniedPattern('GEWALTSSIG', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('GEWALTßIG', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('GEWALTSSIGX', 'de', rules)).toBe(false)
+    expect(matchesDeniedPattern('XGEWALTSSIG', 'de', rules)).toBe(false)
+  })
+
+  test('allowlist entries are required to match a violence pattern (stale guard)', () => {
+    const rules = loadPatternDenylist()
+    const stale = staleAllowEntries(rules, [
+      ...loadDenylistAllow(),
+      { lang: 'de', word: 'SCHLEICHEN', reason: 'no ADR 0065 stem is stem-initial here' },
+    ])
+    expect(stale.map((e) => `${e.lang} ${e.word}`)).toEqual(['de SCHLEICHEN'])
+    // every shipped allow entry has a reason and matches a pattern
+    for (const e of loadDenylistAllow()) expect(e.reason.length).toBeGreaterThan(10)
+    expect(staleAllowEntries()).toEqual([])
+  })
+
+  test('gloss tokens follow the same anchored pattern rules (ADR 0066)', () => {
+    expect(isDeniedGlossToken('MORDWAFFE', 'de', 'HAUS')).toBe(true)
+    expect(isDeniedGlossToken('TÖTUNG', 'de', 'HAUS')).toBe(true)
+    expect(isDeniedGlossToken('mordwaffe', 'en', 'HOUSE')).toBe(false) // scoped
+    expect(isDeniedGlossToken('Waffe', 'de', 'HAUS')).toBe(false) // exact violence word: allowed in glosses
+    expect(isDeniedGlossToken('GEWALT', 'de', 'HAUS')).toBe(false)
+    expect(isDeniedGlossToken('GEWALTIG', 'de', 'HAUS')).toBe(false) // allowlisted homograph
+    expect(isDeniedGlossToken('Sprengstoff', 'de', 'HAUS')).toBe(true) // compound in a gloss is denied
   })
 })
 

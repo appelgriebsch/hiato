@@ -3,9 +3,12 @@
 ## Pack content policy (binding, all CEFR levels)
 
 Profane, violent, slur, and person-name-as-content words are **not valid pack
-items at any CEFR level** — not as lemmas, not inside glosses, synonym chips,
-family members, or example sentences. There is no level at which they become
-acceptable learner content.
+items at any CEFR level** — not as lemmas, not inside synonym chips, family
+members, or example sentences, and not as pattern-matched compounds inside
+glosses (ADR 0066). A single violence concept word inside a gloss (e.g. DE
+`Blut`, IT `sangue`) is allowed by design: the gloss is the pack-language
+definition. There is no level at which violent content becomes acceptable
+learner content.
 
 Enforcement point: `scripts/lemma-denylist.ts` backed by
 `scripts/data/lemma-denylist.txt`, `lemma-denylist-patterns.txt`,
@@ -26,6 +29,18 @@ Matching rules:
   gloss-exempt list (`lemma-denylist-gloss-exempt.txt`) lifts language-scoped
   homographs such as `de HELL` (bright), `de DICK` (thick), `de SCHWANZ`
   (tail), `de ASS` (ate), `pt NU`.
+- Violence stems (ADR 0065: MORD, BOMB/BOMBE, TORTUR, AMOK, SPRENG, TERROR,
+  ATTENTAT, ÜBERFALL, ANGRIFF, WAFFE, KRIEG, GEWALT, plus DE `TÖT`, each in its
+  pack-language forms; `TOT` is never a stem) are denied as stem-initial
+  compounds via anchored `lang STEM(SUFFIX|…)` lines in the
+  `# category: violence` section of `lemma-denylist-patterns.txt` — still
+  whole-lemma anchored, never substring. The bare concept word stays on the
+  exact list: denied as a pack item, allowed as a single word in a gloss
+  (ADR 0066). Stem-initial homographs (`de WAFFEL`, `de KRIEGEN`,
+  `de KRIEGER`, `de GEWALTIG`, `pt BOMBEIROS`) stay playable only through
+  reasoned `lemma-denylist-allow.txt` entries. Pattern hits count in
+  gloss/example scans for every category (ADR 0066); exact violence words
+  count on lemmas, chips, and family members only.
 
 Exceptions require an explicit allowlist entry **with a reason**:
 `lemma-denylist-allow.txt` for pattern-caught homographs (e.g. `it SCOPO` =
