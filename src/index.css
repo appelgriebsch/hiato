@@ -289,6 +289,30 @@ button.key-settled:disabled {
   outline: 2px dashed var(--color-accent-fg);
   outline-offset: -2px;
 }
+/* Practice Reveal give-up (#402): solid neutral line border, raised fill —
+ * the third shape next to solid accent (earned) and dashed (helped). */
+.tile-gaveup {
+  box-shadow:
+    0 -2px 0 var(--color-line),
+    0 2px 0 var(--color-line),
+    -2px 0 0 var(--color-line),
+    2px 0 0 var(--color-line);
+}
+
+/* Native license accordions on About (#402): hide the disclosure marker. */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* EndCard Synonym chips (#402): light mode keeps the cream-dark fill; CRT
+ * dark lifts the surface ~8% above the card and adds a hairline border so
+ * chips stay subordinate to the px-frame word-family chips at ≥4.5:1. */
+.chip-synonym {
+  background: var(--color-cream-dark);
+}
 
 /* ─── Keycap faces (Keyboard, ADR 0052 §5.4) ───
  * Idle: 2px line outline + 4px edge base. Pressed: base 0, translateY(4px).
@@ -548,6 +572,12 @@ button.key-settled:disabled {
       transparent 1px,
       transparent 3px
     );
+  }
+
+  /* #402: Synonym chips lift ~8% above the EndCard card surface + hairline. */
+  .chip-synonym {
+    background: color-mix(in srgb, var(--color-raised) 92%, #ffffff 8%);
+    border: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
   }
 }
 

@@ -59,8 +59,8 @@ describe('Layout footer and short-land column (#209)', () => {
   })
 })
 
-describe('About 44px targets (#209)', () => {
-  test('Back and source links carry min-h-11', () => {
+describe('About 44px targets and accordion IA (#209/#402)', () => {
+  test('Back, switch, radios and summaries carry min-h-11; inline prose links do not', () => {
     ;(globalThis as { __HIATO_BUILD_SHA__?: string }).__HIATO_BUILD_SHA__ ??= 'test'
     const html = renderToStaticMarkup(
       <MemoryRouter>
@@ -68,17 +68,51 @@ describe('About 44px targets (#209)', () => {
       </MemoryRouter>,
     )
     expect(html).toMatch(/min-h-11 min-w-11[^"]*"[^>]*>← Back/)
+    // sound switch + language radios + accordion summaries are the 44px controls
+    expect(html).toContain('role="switch"')
+    expect(html.match(/<summary[^>]*class="[^"]*min-h-11[^"]*"/g)?.length).toBe(2)
+    expect(html.match(/data-radio=/g)?.length).toBe(7)
+    // inline prose license URLs inside the accordions are WCAG 2.5.8-exempt
     for (const href of [
       'https://creativecommons.org/licenses/by-sa/4.0/',
       'http://www.cefr-j.org/download.html',
-      'https://github.com/rsms/inter',
       '/fonts/LICENSE.txt',
     ]) {
       const at = html.indexOf(`href="${href}"`)
       expect(at).toBeGreaterThan(0)
       const tag = html.slice(Math.max(0, at - 180), at)
-      expect(tag).toContain('min-h-11')
+      expect(tag).not.toContain('min-h-11')
     }
+    // Inter and Jersey 10 repo links open in a new tab
+    for (const href of ['https://github.com/rsms/inter', 'https://github.com/scfried/soft-type-jersey']) {
+      const at = html.indexOf(`href="${href}"`)
+      expect(at).toBeGreaterThan(0)
+      const tag = html.slice(Math.max(0, at - 200), at + href.length + 60)
+      expect(tag).toContain('target="_blank"')
+      expect(tag).toContain('rel="noreferrer"')
+    }
+  })
+
+  test('single h1 (About) at unchanged scale; section headings are h2; licenses collapse into closed details', () => {
+    ;(globalThis as { __HIATO_BUILD_SHA__?: string }).__HIATO_BUILD_SHA__ ??= 'test'
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <About />
+      </MemoryRouter>,
+    )
+    expect(html.match(/<h1/g)?.length).toBe(1)
+    expect(html).toContain('<h1 class="text-pixel-title text-ink">About</h1>')
+    expect(html.match(/<h2/g)?.length).toBeGreaterThanOrEqual(4)
+    expect(html).toContain('id="sound-label"')
+    expect(html).toContain('id="ui-language-heading"')
+    // two closed-by-default accordions with px-frame, +/− cue and count hint
+    expect(html.match(/<details[^>]*class="[^"]*px-frame[^"]*"[^>]*>/g)?.length).toBe(2)
+    expect(html).not.toContain('<details open')
+    expect(html.match(/data-about-accordion="packs"|data-about-accordion="fonts"/g)?.length).toBe(2)
+    expect(html).toContain('group-open/acc:hidden')
+    expect(html).toContain('border-t border-line')
+    // System spans full width above the 2x3 locale grid
+    expect(html).toMatch(/data-radio="system"[^>]*col-span-2|col-span-2[^>]*data-radio="system"/)
   })
 })
 

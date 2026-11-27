@@ -189,7 +189,7 @@ export function LemmaTeach({
             <span
               key={s}
               lang={lang}
-              className="inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink"
+              className="chip-synonym inline-flex items-center px-2.5 py-1 text-[13px] font-medium text-ink"
             >
               {s}
             </span>

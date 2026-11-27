@@ -76,14 +76,17 @@ export function LetterGrid({
       className={[
         'flex aspect-square w-full max-w-11 items-center justify-center text-pixel-display uppercase sm:max-w-12',
         cell.revealed
-          ? cell.helped
-            ? 'tile-helped bg-helped text-accent-fg'
-            : 'tile-revealed bg-accent-soft text-ink'
+          ? cell.gaveUp
+            ? 'tile-gaveup bg-raised text-ink-muted'
+            : cell.helped
+              ? 'tile-helped bg-helped text-accent-fg'
+              : 'tile-revealed bg-accent-soft text-ink'
           : 'tile-hidden bg-raised text-ink-muted',
         justRevealed.has(i) ? 'motion-letter-reveal' : '',
       ].join(' ')}
     >
       {cell.revealed ? cell.char : '·'}
+      {cell.gaveUp ? <span className="sr-only">{t('play.gaveUpSr')}</span> : null}
     </div>
   )
 
