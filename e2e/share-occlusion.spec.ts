@@ -2,13 +2,12 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 import { sharePath } from './share-path'
 
 /**
- * #307: after dac6f955 the fixed h-dvh shell left no page scroll, so the
- * sticky footer covered the lower /share card. The shell now grows
- * (min-h-dvh) and the document scrolls. These checks prove that at the
- * acceptance sizes every part of the card (including the "Answer hidden"
- * caption) can be scrolled into view with nothing covering it: the element's
- * box must not intersect the footer and elementFromPoint at its centre must
- * hit the card, not the footer.
+ * #400: /share no longer pins its actions in a sticky Layout footer — they
+ * render in normal flow below the card (`[data-share-actions]`). These checks
+ * prove there is no `[data-layout-footer]` on /share, the card and the action
+ * stack never intersect (checked at scroll 0), every card part's centre is
+ * hit unobstructed by elementFromPoint, and every action stays reachable by
+ * scroll on short screens.
  */
 
 const DAILY_PAYLOAD = {
@@ -30,7 +29,7 @@ const VIEWPORTS = [
   { name: '390x844', width: 390, height: 844 },
 ] as const
 
-/** Parts of the share card that must each be scrollable clear of the footer. */
+/** Parts of the share card that must each be hit unobstructed at their centre. */
 const CARD_PARTS = [
   '#hiato-share-card .text-pixel-display',
   '#hiato-share-card .grid',
@@ -38,11 +37,123 @@ const CARD_PARTS = [
   '#hiato-share-card .px-6.pt-5.pb-6 span',
 ] as const
 
+const ACTIONS = [
+  { name: /Play today’s Daily · EN A1/, label: 'Play today’s Daily CTA' },
+  { name: 'Share', exact: true, label: 'Share' },
+  { name: 'Save image', label: 'Save image' },
+  { name: 'Copy text', label: 'Copy text' },
+  { name: 'Home', label: 'Home' },
+] as const
+
 type Rect = { x: number; y: number; width: number; height: number }
 
 function overlaps(a: Rect, b: Rect): boolean {
   return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y
 }
+
+/** Scrolled into view, its centre hit lands on the card itself — never on the actions or a footer. */
+async function expectCardPartUnobstructed(page: Page, locator: Locator, where: string) {
+  await locator.scrollIntoViewIfNeeded()
+  await expect(locator, where).toBeVisible()
+  const hit = await page.evaluate((el) => {
+    const rect = el.getBoundingClientRect()
+    const cx = rect.x + rect.width / 2
+    const cy = rect.y + rect.height / 2
+    const at =
+      cx >= 0 && cy >= 0 && cx <= innerWidth && cy <= innerHeight ? document.elementFromPoint(cx, cy) : null
+    const card = document.querySelector('#hiato-share-card')
+    const actions = document.querySelector('[data-share-actions]')
+    const footer = document.querySelector('[data-layout-footer]')
+    return {
+      inCard: at != null && card != null && card.contains(at),
+      inActions: at != null && actions != null && actions.contains(at),
+      inFooter: at != null && footer != null && footer.contains(at),
+    }
+  }, await locator.elementHandle())
+  expect(hit.inFooter, `${where} elementFromPoint must not hit a layout footer`).toBe(false)
+  expect(hit.inActions, `${where} elementFromPoint must not hit the action stack`).toBe(false)
+  expect(hit.inCard, `${where} elementFromPoint must hit the card`).toBe(true)
+}
+
+/** On screen: a non-empty box fully inside the viewport. */
+async function expectOnScreen(locator: Locator, where: string) {
+  const box = await locator.boundingBox()
+  const vp = locator.page().viewportSize()
+  expect(box, where).not.toBeNull()
+  expect(vp, where).not.toBeNull()
+  expect(
+    box!.x >= -1 &&
+      box!.y >= -1 &&
+      box!.x + box!.width <= vp!.width + 1 &&
+      box!.y + box!.height <= vp!.height + 1,
+    where,
+  ).toBe(true)
+}
+
+test.describe('share card and actions in normal flow, no sticky footer (#400)', () => {
+  for (const vp of VIEWPORTS) {
+    test(`no footer and zero card/actions intersection at scroll 0 at ${vp.name}`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await page.goto(sharePath(DAILY_PAYLOAD))
+      const card = page.locator('#hiato-share-card')
+      const actions = page.locator('[data-share-actions]')
+      await expect(card).toBeVisible()
+      await expect(actions).toBeVisible()
+      await expect(page.locator('[data-layout-footer]')).toHaveCount(0)
+      const where = `share ${vp.name}`
+      const m = await page.evaluate(() => {
+        const box = (sel: string) => {
+          const b = document.querySelector(sel)!.getBoundingClientRect()
+          return { x: b.x, y: b.y, width: b.width, height: b.height }
+        }
+        return { scrollY: window.scrollY, card: box('#hiato-share-card'), actions: box('[data-share-actions]') }
+      })
+      expect(m.scrollY, `${where} loaded at scroll 0`).toBe(0)
+      expect(overlaps(m.card, m.actions), `${where} card box must not intersect the action stack`).toBe(false)
+      expect(
+        m.card.y + m.card.height,
+        `${where} card sits above the action stack in normal flow`,
+      ).toBeLessThanOrEqual(m.actions.y + 1)
+    })
+  }
+
+  for (const vp of VIEWPORTS) {
+    test(`every card part is hit unobstructed at ${vp.name}`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await page.goto(sharePath(DAILY_PAYLOAD))
+      const card = page.locator('#hiato-share-card')
+      await expect(card).toBeVisible()
+      const where = `share ${vp.name}`
+      for (const part of CARD_PARTS) {
+        await expectCardPartUnobstructed(page, page.locator(part).first(), `${where} ${part}`)
+      }
+      await expectCardPartUnobstructed(page, page.getByText(CAPTION), `${where} caption`)
+    })
+  }
+
+  test('all actions reachable by scroll at 844x390', async ({ page }) => {
+    await page.setViewportSize({ width: 844, height: 390 })
+    await page.goto(sharePath(DAILY_PAYLOAD))
+    const where = 'share 844x390'
+    for (const action of ACTIONS) {
+      const button = page.getByRole('button', {
+        name: action.name,
+        exact: 'exact' in action ? action.exact : undefined,
+      })
+      await button.scrollIntoViewIfNeeded()
+      await expect(button, `${where} ${action.label}`).toBeVisible()
+      await expectOnScreen(button, `${where} ${action.label}`)
+    }
+  })
+})
+
+/**
+ * #307: after dac6f955 the fixed h-dvh shell left no page scroll, so the
+ * sticky footer covered the lower picker content. The shell now grows
+ * (min-h-dvh) and the document scrolls. These checks prove that at 320x640
+ * the pack info line and the Pack info link can be scrolled into view with
+ * nothing covering them.
+ */
 
 async function occlusion(page: Page, locator: Locator) {
   return page.evaluate((el) => {
@@ -74,59 +185,6 @@ async function expectReachableAndUncovered(page: Page, locator: Locator, where: 
   expect(m.hitInFooter, `${where} elementFromPoint must not hit the footer`).toBe(false)
   expect(m.hitInTarget, `${where} elementFromPoint must hit the element`).toBe(true)
 }
-
-test.describe('share card is never covered by the sticky footer (#307)', () => {
-  for (const vp of VIEWPORTS) {
-    test(`every card part scrolls clear of the footer at ${vp.name}`, async ({ page }) => {
-      await page.setViewportSize({ width: vp.width, height: vp.height })
-      await page.goto(sharePath(DAILY_PAYLOAD))
-      const card = page.locator('#hiato-share-card')
-      await expect(card).toBeVisible()
-      const where = `share ${vp.name}`
-
-      // The document scrolls (regression: after dac6f955 it did not).
-      const doc = await page.evaluate(() => ({
-        scrollH: document.scrollingElement?.scrollHeight ?? 0,
-        innerH: window.innerHeight,
-      }))
-      expect(doc.scrollH, `${where} document scrolls`).toBeGreaterThan(doc.innerH + 1)
-
-      for (const part of CARD_PARTS) {
-        await expectReachableAndUncovered(page, page.locator(part).first(), `${where} ${part}`)
-      }
-      await expectReachableAndUncovered(page, page.getByText(CAPTION), `${where} caption`)
-
-      // At maximum scroll the whole card sits above the footer.
-      await page.evaluate(() => {
-        const doc = document.scrollingElement
-        if (doc) window.scrollTo(0, doc.scrollHeight)
-      })
-      const bottom = await page.evaluate(() => {
-        const card = document.querySelector('#hiato-share-card')
-        const footer = document.querySelector('[data-layout-footer]')
-        if (!card || !footer) throw new Error('card or footer missing')
-        const c = card.getBoundingClientRect()
-        const f = footer.getBoundingClientRect()
-        const caption = [...card.querySelectorAll('p')].find((p) =>
-          (p.textContent ?? '').includes('Answer hidden'),
-        )
-        const cap = caption?.getBoundingClientRect() ?? null
-        const cx = cap ? cap.x + cap.width / 2 : c.x + c.width / 2
-        const cy = cap ? cap.y + cap.height / 2 : c.y + c.height / 2
-        const hit = document.elementFromPoint(cx, cy)
-        return {
-          cardBottom: c.bottom,
-          footerTop: f.top,
-          captionInCard: cap != null && hit != null && card.contains(hit),
-        }
-      })
-      expect(bottom.cardBottom, `${where} card bottom above footer at max scroll`).toBeLessThanOrEqual(
-        bottom.footerTop + 1,
-      )
-      expect(bottom.captionInCard, `${where} caption centre hits the card at max scroll`).toBe(true)
-    })
-  }
-})
 
 test.describe('language picker at 320x640 (#307)', () => {
   test('pack info line and Pack info link scroll clear of the Continue footer', async ({ page }) => {
