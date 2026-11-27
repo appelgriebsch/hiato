@@ -63594,13 +63594,13 @@
     "gate": 2
   },
   "it/a1.json|POTERE": {
-    "sentence": "Possiamo potere visitare il museo domani mattina?",
+    "sentence": "Possiamo potere visitare il museo domani mattina.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence is unnatural for A1 learners as it redundantly uses \"possiamo potere\" (we can be able to) instead of simply \"possiamo visitare\" (we can visit)."
+    "reason": "The sentence is ungrammatical (\"Possiamo potere\" is redundant) and does not fit A1 level."
   },
   "it/a1.json|ESSERE": {
     "sentence": "Dev'essere fuori.",
@@ -65219,13 +65219,12 @@
     "gate": 2
   },
   "it/a1.json|ALCUNO": {
-    "sentence": "Non ha alcuno scrupolo morale nel mentire ai suoi genitori.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "C'è qualche mela in quella scatola, ma non so se ce n'è alcuno di buono.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes \"scrupolo morale\" and \"mentire,\" which are beyond A1 level and may imply moral judgment, which could be sensitive for a general audience."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/a1.json|COLPA": {
     "sentence": "È colpa mia.",
@@ -65896,7 +65895,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
     "reason": "The sentence contains \"aziendi\" (typo for \"aziende\"), \"tendono,\" and \"modalità,\" which are beyond A1 level."
   },
@@ -66753,9 +66752,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"bisognare\" incorrectly (should be \"ci vuole\" or \"servono\") and \"dovrebbe\" is not the correct auxiliary for \"bisognare.\""
+    "reason": "The sentence uses \"bisognare\" incorrectly (should be \"ci vuole\" or similar) and \"dovrebbe\" + \"bisognare\" is unnatural for A2 learners."
   },
   "it/a2.json|SPESSO": {
     "sentence": "Leggo spesso.",
@@ -68066,13 +68065,13 @@
     "gate": 2
   },
   "it/a2.json|DROGARE": {
-    "sentence": "Alcuni medici usano i farmaci per drogare i pazienti prima di un intervento delicato.",
+    "sentence": "Il medico può drogare il paziente prima dell'operazione.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes the word \"drogare,\" which refers to the use of drugs, violating the suitability criteria for a general-audience learning app."
+    "reason": "The sentence uses \"drogare\" in the given sense but violates the general-audience guideline by mentioning drugs."
   },
   "it/a2.json|BARCA": {
     "sentence": "È una barca.",
@@ -71027,7 +71026,7 @@
     "gate": 2
   },
   "it/b1.json|FUGARE": {
-    "sentence": "Un profumo di lavanda aiuta ad **fugare** lo stress dopo una lunga giornata.",
+    "sentence": "Un profumo di lavanda aiuta a fugare lo stress dopo una lunga giornata.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b1",
@@ -75020,13 +75019,13 @@
     "gate": 2
   },
   "it/b2.json|CAROGNA": {
-    "sentence": "Sul sentiero abbiamo trovato una vecchia carogna di volpe.",
+    "sentence": "Sul ciglio della strada c'era una carogna che puzzava molto.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The word \"carogna\" typically means \"scoundrel\" or \"rotten person\" in Italian, not \"animal carcass,\" and its usage here is inappropriate for a general-audience learning app."
+    "reason": "The word \"carogna\" is not typically used to mean \"cadavere di animale in decomposizione\" at B2 level; it usually means \"a despicable person\" or \"a rotten person,\" which is inappropriate for a general-audience app."
   },
   "it/b2.json|GENTILUOMO": {
     "sentence": "È un gentiluomo.",
@@ -121628,7 +121627,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
     "reason": "The sentence does not use \"PAGANO\" in the given meaning."
   },
@@ -123453,9 +123452,9 @@
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"sballato\" in a way that implies drug use, which violates the general-audience suitability condition."
+    "reason": "The sentence uses \"sballato\" in a way that does not match the given meaning (it refers to caffeine, not drugs), and the word \"sballato\" itself is too informal/slang for a general-audience C1 learning app."
   },
   "it/c1.json|PIZZICARE": {
     "sentence": "Non si farà pizzicare.",
@@ -123998,9 +123997,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence does not use \"spalancato\" but \"spalancare\" (a verb), which does not match the given word."
+    "reason": "The sentence does not use \"spalancato\" but the verb \"spalancare\"."
   },
   "it/c2.json|ALPACA": {
     "sentence": "Ieri allo zoo ho visto uno struzzo che correva, due alpaca che giocavano e tre lama che pascolavano.",
@@ -126243,7 +126242,7 @@
     "gate": 2
   },
   "it/c2.json|ANTIFONA": {
-    "sentence": "L’**antifona** risuonava nell’abside mentre i due cori si alternavano in perfetta armonia.",
+    "sentence": "L’antifona risuonava nell’abside mentre i due cori si alternavano in perfetta armonia.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -126283,13 +126282,12 @@
     "gate": 2
   },
   "it/c2.json|POPÒ": {
-    "sentence": "La dottoressa analizzò con attenzione le popò del paziente per diagnosticare eventuali problemi.",
+    "sentence": "Il medico spiegò che la composizione delle popò può indicare problemi di salute.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"popò\" is too informal and childish for a C2-level sentence in a general-audience app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/c2.json|CHOC": {
     "sentence": "Il suo abbandono improvviso mi provocò uno choc profondo.",
@@ -228933,22 +228931,21 @@
     "gate": 2
   },
   "it/a1.json|CIO": {
-    "sentence": "Guarda questo: è cio che volevi!",
+    "sentence": "Guarda questo libro, cio è il mio preferito.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The word \"ciò\" is correct, but the sentence structure \"è cio che volevi\" is not A1 level; it should be \"è quello che volevi\" for A1 learners."
+    "reason": "The word \"cio\" is not a standard Italian word; the correct demonstrative pronoun is \"questo\" or \"quello\" for A1 learners."
   },
   "it/a1.json|PACERE": {
-    "sentence": "Mi dà molto pacere vedere i bambini giocare felici.",
+    "sentence": "Ho un grande pacere quando mangio una fetta di torta al cioccolato.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-23",
-    "gate": 2,
-    "reason": "The word \"pacere\" is not a standard Italian word; the correct term is \"piacere.\""
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/a1.json|SEMPLICE": {
     "sentence": "È semplice.",
@@ -229287,13 +229284,12 @@
     "gate": 2
   },
   "it/a1.json|DIRITTO": {
-    "sentence": "La strada va sempre dritto e diritto.",
+    "sentence": "Il bastone è sempre diritto.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"dritto\" is correct for the meaning, but \"dritto e diritto\" is redundant and unnatural for A1 learners."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/a1.json|USCITA": {
     "sentence": "Dov'è l'uscita?",
@@ -229536,13 +229532,13 @@
     "gate": 2
   },
   "it/a1.json|PERO": {
-    "sentence": "Mi piace la pizza, ma PERO preferisco la pasta.",
-    "source": "mistral",
+    "sentence": "Lo stupido sedeva sul ramo sottile di un pero.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The word \"PERO\" is not typically capitalized in Italian unless it starts a sentence, which violates CEFR A1 structure norms."
+    "reason": "The sentence does not use \"PERO\" in the given meaning; \"pero\" here refers to the pear tree, not the conjunction."
   },
   "it/a1.json|FERMO": {
     "sentence": "Sono fermo.",
@@ -232385,13 +232381,13 @@
     "gate": 2
   },
   "it/a2.json|SPARE": {
-    "sentence": "Il ladro è riuscito a spare dalla finestra senza farsi vedere.",
+    "sentence": "Si è spaventato e ha cercato di spare via di nascosto.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes \"ladro\" (thief) and references a crime (breaking in), which violates the general-audience safety guidelines."
+    "reason": "The word \"spare\" is not an Italian word; the correct Italian word would be \"fuggire\" or \"scappare\"."
   },
   "it/a2.json|PREGHIERA": {
     "sentence": "La mia preghiera fu esaudita.",
@@ -233450,13 +233446,12 @@
     "gate": 2
   },
   "it/a2.json|ECCITARE": {
-    "sentence": "Mi stai facendo eccitare.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "La vittoria della nostra squadra può eccitare tutti i tifosi.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence implies sexual excitement, which is inappropriate for a general-audience learning app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/a2.json|POLSO": {
     "sentence": "Prenda il polso!",
@@ -233547,13 +233542,12 @@
     "gate": 2
   },
   "it/a2.json|BENEDIRE": {
-    "sentence": "Se tutte le giornate cominciassero così, dovrei farmi benedire.",
+    "sentence": "Chi non può benedire, non può maledire.",
     "source": "tatoeba",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"farmi benedire\" in a figurative, idiomatic sense not typical for A2 learners, and the overall tone is too informal/sarcastic for a general-audience app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/a2.json|SOMIGLIARE": {
     "sentence": "I delfini, per quanto all'aspetto possano somigliare a dei pesci, appartengono in realtà alla famiglia dei mammiferi.",
@@ -234952,9 +234946,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes themes of crime and punishment (reati, condannato, pena), which are unsuitable for a general-audience learning app."
+    "reason": "The sentence uses \"scontare\" in the sense of \"to serve a sentence\" (prison), which violates the third condition."
   },
   "it/b1.json|IPOTESI": {
     "sentence": "È un'ipotesi.",
@@ -235870,13 +235864,13 @@
     "gate": 2
   },
   "it/b1.json|IMPICCARE": {
-    "sentence": "Nessuno può imbrigliare la libertà, non si può impiccare un sogno.",
+    "sentence": "Il boia dovette impiccare la bambola di paglia per l’esperimento.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"imbrigliare\" (to bridle/restrain) and \"sogno\" (dream), which are B1-level, but \"impiccare\" in the given sense (to hang by the neck) violates the general-audience suitability rule due to its violent connotation."
+    "reason": "The sentence uses \"impiccare\" in a non-literal sense (hanging a doll) and includes an implied act of violence, which violates the general-audience safety guidelines."
   },
   "it/b1.json|AUTORE": {
     "sentence": "È un autore.",
@@ -236071,13 +236065,13 @@
     "gate": 2
   },
   "it/b1.json|COCA": {
-    "sentence": "La polizia ha trovato un campo nascosto con piante di coca.",
+    "sentence": "La polizia ha sequestrato una grande quantità di coca in un magazzino nascosto.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes \"coca,\" which is associated with illegal drugs, violating the general-audience suitability guideline."
+    "reason": "The sentence includes \"coca\" in the context of an illegal stimulant, which violates the general-audience suitability guideline."
   },
   "it/b1.json|GOCCIA": {
     "sentence": "È una goccia nel mare.",
@@ -236680,13 +236674,13 @@
     "gate": 2
   },
   "it/b1.json|MATTARE": {
-    "sentence": "Il cacciatore non avrebbe mai dovuto pensare di mattare un animale innocuo.",
+    "sentence": "Nessuno deve pensare che sia giusto mattare un animale per divertimento.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes \"animale innocuo\" (harmless animal) and \"mattare\" (to kill), which implies violence, violating the suitability criteria for a general-audience app."
+    "reason": "The sentence includes themes of killing animals for fun, which violates the suitability requirement for a general-audience learning app."
   },
   "it/b1.json|STADIO": {
     "sentence": "Che stadio è?",
@@ -236761,13 +236755,13 @@
     "gate": 2
   },
   "it/b1.json|SPACCIARE": {
-    "sentence": "Al parco qualcuno cerca di spacciare droga ai ragazzi.",
+    "sentence": "Alcuni ragazzi spacciare droga vicino alla scuola.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes \"droga\" (drugs), which violates the general-audience suitability condition."
+    "reason": "The sentence includes \"droga\" (drugs), which violates the content guidelines for a general-audience app."
   },
   "it/b1.json|VODKA": {
     "sentence": "Non ho vodka.",
@@ -237370,13 +237364,12 @@
     "gate": 2
   },
   "it/b1.json|EREDITARE": {
-    "sentence": "La mia unica speranza di sfuggire ai miei obblighi è di morire e permettere a mio fratello minore di ereditare.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "I figli possono ereditare la casa dei genitori dopo la loro morte.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes themes of death and neglecting obligations, which are inappropriate for a general-audience learning app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/b1.json|QUOTA": {
     "sentence": "Versavo una quota.",
@@ -237495,9 +237488,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence includes a sensitive topic (suicide) that is not suitable for a general-audience learning app."
+    "reason": "The sentence includes the concept of suicide, which violates the general-audience suitability guideline."
   },
   "it/b1.json|ACCIAIO": {
     "sentence": "È fatto di acciaio.",
@@ -240552,9 +240545,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence implies a crime (vandalism of a monument), which violates the general-audience safety guidelines."
+    "reason": "The sentence implies destruction of a monument, which could be seen as vandalism, a form of crime, making it unsuitable for a general-audience learning app."
   },
   "it/b2.json|IMMUNE": {
     "sentence": "Sono immune.",
@@ -241721,9 +241714,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"fregato\" in a figurative sense (\"tricked\") rather than the literal meaning \"organo interno che filtra il sangue.\""
+    "reason": "The sentence uses \"fregato\" in a slang sense (\"tricked/fooled\"), not in the anatomical meaning given, and may imply deceit (borderline for general-audience suitability)."
   },
   "it/b2.json|FRITTELLA": {
     "sentence": "Come si cucina una frittella?",
@@ -242314,9 +242307,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence implies a voluntary act of restraint, which could be interpreted as self-harm or an unusual situation, making it unsuitable for a general-audience learning app."
+    "reason": "The sentence implies a potentially dangerous or extreme action (self-restraint), which may not suit a general-audience learning app."
   },
   "it/b2.json|MANGIATO": {
     "sentence": "Hai mangiato?",
@@ -243745,13 +243738,12 @@
     "gate": 2
   },
   "it/c1.json|SGOZZARE": {
-    "sentence": "Il leone sta per sgozzare la gazzella per sfamare i suoi cuccioli.",
+    "sentence": "Il lupo avrebbe potuto sgozzare la pecora se il pastore non fosse intervenuto.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes violent imagery (killing a gazelle) which is unsuitable for a general-audience learning app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/c1.json|SCIOPERARE": {
     "sentence": "Ma non dovevano scioperare?",
@@ -244014,9 +244006,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"manga\" in the sense of \"Japanese comic\" rather than the given gloss \"tropical fruit.\""
+    "reason": "The sentence uses \"manga\" in the Japanese comic sense, not the tropical fruit meaning provided."
   },
   "it/c1.json|RILUTTANZA": {
     "sentence": "Accettò con riluttanza.",
@@ -245483,7 +245475,7 @@
     "gate": 2
   },
   "it/c1.json|QUINTALE": {
-    "sentence": "Irene pesa un quintale.",
+    "sentence": "Il camion trasportava un quintale di sabbia per il cantiere.",
     "source": "tatoeba",
     "verdict": "pass",
     "level": "c1",
@@ -245547,13 +245539,13 @@
     "gate": 2
   },
   "it/c1.json|CAGNACCIO": {
-    "sentence": "Quel tipo è proprio un cagnaccio, non si assume mai nessuna responsabilità.",
+    "sentence": "Quel gruppo di ragazzi rideva di lui chiamandolo cagnaccio per la sua timidezza.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The word \"cagnaccio\" is a colloquial and slightly vulgar term, which may not be suitable for a general-audience learning app."
+    "reason": "The word \"cagnaccio\" is a colloquial, slightly vulgar term (diminutive of \"cane\" with a negative connotation) and is not typically used in standard Italian at the C1 level for learners, nor does it perfectly match the given gloss (\"uomo privo di coraggio o carattere forte\")."
   },
   "it/c1.json|QUOZIENTE": {
     "sentence": "Avete mai fatto un test del quoziente intellettivo ?",
@@ -245568,9 +245560,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence does not use \"canottiere\" in the meaning of \"chi partecipa a gare di voga con il remo\" but rather refers to \"life jackets\" (canottiere as in clothing)."
+    "reason": "The sentence does not use \"canottiere\" in the given meaning of \"chi partecipa a gare di voga con il remo.\""
   },
   "it/c1.json|FLANELLA": {
     "sentence": "Indosso un pigiama di flanella.",
@@ -246721,9 +246713,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"libra\" in the wrong sense (it means \"hover\" here, not the weight unit or zodiac sign), and \"un'ape gialla\" (a yellow bee) is too colloquial for C1 learners."
+    "reason": "The sentence does not use \"libra\" in the given meaning (it refers to the verb \"librare,\" meaning to hover, not the noun \"libra\" as a unit of weight or zodiac sign)."
   },
   "it/c1.json|PETO": {
     "sentence": "Un peto di un elefante può causare un terremoto?",
@@ -247227,7 +247219,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
     "reason": "The sentence uses \"rovesciarli,\" which implies violent overthrow, violating the general-audience suitability condition."
   },
@@ -247300,9 +247292,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The sentence uses \"drogo\" in a drug-related context, which violates the general-audience suitability requirement."
+    "reason": "The sentence uses \"drogo\" in a drug-related context, which violates the general-audience suitability rule."
   },
   "it/c1.json|MALANDATO": {
     "sentence": "L'esterno della casa era molto malandato.",
@@ -248835,13 +248827,12 @@
     "gate": 2
   },
   "it/c2.json|SERVIMI": {
-    "sentence": "Dopo aver perso il lavoro, ha accettato un impiego come servimi per mantenere la famiglia.",
+    "sentence": "Dopo anni trascorsi come servimi nella villa sul lago, ha finalmente aperto un’agenzia di collocamento per domestici.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"servimi\" is not a standard Italian term; the correct term is \"servitore\" or \"colf\" (collaboratrice familiare)."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/c2.json|SCOLO": {
     "sentence": "Era necessario costruire condutture dell'acqua e canali di scolo.",
@@ -249004,13 +248995,12 @@
     "gate": 2
   },
   "it/c2.json|NEGALO": {
-    "sentence": "Quel negozio ha chiuso, ora c'è solo un negalo che vende articoli di seconda mano.",
+    "sentence": "Dalla periferia alla città, ogni NEGALO propone articoli unici e prezzi competitivi.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"negàlo\" is not standard Italian and is not appropriate for a general-audience learning app."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/c2.json|INGUAIARE": {
     "sentence": "Non ti inguaiare con la legge.",
@@ -249741,13 +249731,12 @@
     "gate": 2
   },
   "it/c2.json|SORPASSATO": {
-    "sentence": "Hanno sorpassato il loro rivale.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Quel modello di telefono è ormai sorpassato e nessuno lo usa più.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"sorpassato\" in the sense of \"overtaken\" (as in competition), not in the given meaning of \"outdated or out of fashion.\""
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/c2.json|FUORISERIE": {
     "sentence": "La fuoriserie in carbonio aggiunge un tocco sportivo ma mantiene l'eleganza classica della vettura.",
@@ -249926,7 +249915,7 @@
     "gate": 2
   },
   "it/c2.json|GALOSCIA": {
-    "sentence": "Dopo la pioggia, ho indossato i miei colorati galoscia per camminare senza bagnarmi.",
+    "sentence": "Dopo la pioggia, ho indossato la mia galoscia per camminare senza bagnarmi.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -250702,7 +250691,7 @@
     "gate": 2
   },
   "it/c2.json|INTERLUDIO": {
-    "sentence": "Dopo l’ouverture, un breve *interludio* musicale creò attesa per il primo atto dell’opera.",
+    "sentence": "Dopo l’ouverture, un breve interludio musicale creò attesa per il primo atto dell’opera.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -250735,7 +250724,7 @@
     "gate": 2
   },
   "it/c2.json|SOSPENSORE": {
-    "sentence": "Il *sospensore* del nastro trasportatore si è inceppato, bloccando il flusso delle merci.",
+    "sentence": "Il sospensore del nastro trasportatore si è inceppato, bloccando il flusso delle merci.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -251771,9 +251760,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-27",
     "gate": 2,
-    "reason": "The word \"viaggiante\" is archaic/poetic and not standard Italian; \"viaggiatore\" would be the correct term at C2 level."
+    "reason": "The word \"viaggiante\" is archaic/poetic and not part of standard CEFR C2 vocabulary; \"viaggiatore\" would be the correct term."
   },
   "it/c2.json|FARETTO": {
     "sentence": "Accendi il faretto per illuminare la zona di lavoro sulla scrivania.",
@@ -277123,13 +277112,12 @@
     "gate": 2
   },
   "it/b1.json|INSALATO": {
-    "sentence": "Mangio un insalato ogni giorno per pranzo perché è sano e gustoso.",
+    "sentence": "Per pranzo ho preparato un insalato con pomodori, cetrioli e olive.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"insalato\" is incorrect; the correct form is \"insalata\" (feminine singular)."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/b1.json|FRECCIA": {
     "sentence": "Tirò una freccia al soldato.",
@@ -277148,13 +277136,12 @@
     "gate": 2
   },
   "it/b1.json|PIPE": {
-    "sentence": "Il tubo arrugginito perdeva acqua dal pipe principale.",
+    "sentence": "Il gas arriva a casa nostra attraverso un lungo tubo chiamato pipe.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The word \"pipe\" is not an Italian word and is not appropriate for a B1 Italian learner."
+    "at": "2026-11-27",
+    "gate": 2
   },
   "it/b1.json|PIANTARE": {
     "sentence": "Bisogna piantare più fiori.",
@@ -278849,5 +278836,735 @@
     "at": "2026-11-26",
     "gate": 2,
     "reason": "The word \"bénédict\" is not standard French; the correct form is \"bénédictin\" for the given meaning."
+  },
+  "it/a1.json|TALMENTE": {
+    "sentence": "È talmente evidente.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|CAPITE": {
+    "sentence": "Mi capite?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|SPINTA": {
+    "sentence": "L'ha spinta via.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|SILENZIOSO": {
+    "sentence": "È silenzioso.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|AVVERSARIO": {
+    "sentence": "Non è un avversario.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|GIALLO": {
+    "sentence": "E il giallo?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|CERTEZZA": {
+    "sentence": "Ora è una certezza!",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|CALCOLO": {
+    "sentence": "Odio il calcolo.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|TRILLO": {
+    "sentence": "Il trillo del cellulare mi svegliò.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|REPULSIONE": {
+    "sentence": "L'ipocrisia è la mia repulsione.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/a2.json|LIMBO": {
+    "sentence": "È nel limbo.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|IPPOPOTAMO": {
+    "sentence": "Ecco un ippopotamo.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SCIOGLIERE": {
+    "sentence": "Non riesci a sciogliere i grassi accumulati?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|RACIMOLARE": {
+    "sentence": "Mi aiutate a racimolare qualche spicciolo?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|VIGNETO": {
+    "sentence": "Al vigneto c'è molto lavoro.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|STABILITÀ": {
+    "sentence": "Tengo alla sua stabilità psicologica.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|ZITTIRE": {
+    "sentence": "Il maestro alza la mano per zittire la classe chiassosa.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SCOMPIGLIO": {
+    "sentence": "La sua dichiarazione creò scompiglio.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SCEGLINE": {
+    "sentence": "Scegline uno.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|BIDELLO": {
+    "sentence": "È il bidello.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|RISALTARE": {
+    "sentence": "Ciò che lo fa risaltare è una certa classe.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SAPUTELLO": {
+    "sentence": "Non è facile convivere con un saputello che sa sempre tutto.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|WURSTEL": {
+    "sentence": "Amo i wurstel.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|SPUNTO": {
+    "sentence": "Prendi spunto!",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|LAMPADARIO": {
+    "sentence": "È un lampadario.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|FUTILE": {
+    "sentence": "È troppo pomposo per una cosa così futile.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b1.json|LESBICO": {
+    "sentence": "La comunità lesbico a volte organizza eventi culturali per raccogliere fondi.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|NIPOTINO": {
+    "sentence": "Salutami il nipotino!",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|SFRATTARE": {
+    "sentence": "Il proprietario dovette sfrattare gli inquilini perché il palazzo sarebbe stato demolito.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|BARBONCINO": {
+    "sentence": "Un barboncino nella foresta può diventare una facile preda per i predatori.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|INSULSO": {
+    "sentence": "Ma si potrà scrivere un articolo su un argomento così insulso?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|COALIZIONE": {
+    "sentence": "Ci serve una coalizione.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|TRACHEA": {
+    "sentence": "La tiroide si trova davanti alla trachea e sotto la laringe.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|TARANTOLA": {
+    "sentence": "Che tipo di tarantola hai?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|VETRINARE": {
+    "sentence": "Il negozio cerca di vetrinare i nuovi prodotti con luci colorate e manichini.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|LIBANESE": {
+    "sentence": "Sono libanese.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|VERSATILE": {
+    "sentence": "È molto versatile.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|FUSOLIERA": {
+    "sentence": "La fusoliera dell'aereo era molto danneggiata dopo l'atterraggio di emergenza.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|SOGGETTIVO": {
+    "sentence": "Non è soggettivo.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|TACITURNO": {
+    "sentence": "È taciturno.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|VERNICIARE": {
+    "sentence": "Perché non fa verniciare la sua auto?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|REDIVIVO": {
+    "sentence": "Il mito di un antico eroe redivivo ha ispirato nuove generazioni.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|LETAMAIO": {
+    "sentence": "Vicino al pollaio c'è un grande letamaio dove si riciclano i rifiuti organici.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|PEGASO": {
+    "sentence": "Bellerofonte riuscì a domare Pegaso e insieme volarono sopra le nuvole.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|INCALZARE": {
+    "sentence": "Il caldo estivo può incalzare, rendendo le giornate molto scomode.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|RACCORDO": {
+    "sentence": "C'è molto traffico ora sul raccordo anulare.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|FIGHISSIMO": {
+    "sentence": "Quel ragazzo è davvero fighissimo con quel nuovo taglio di capelli!",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|CALVIZIE": {
+    "sentence": "Non c'è cura per la calvizie.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|ADDEBITARE": {
+    "sentence": "La società ha deciso di addebitare le spese di spedizione al cliente.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|TROMBOSI": {
+    "sentence": "La trombosi può verificarsi quando il sangue non circola abbastanza nelle gambe durante lunghi viaggi.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|BRACIOLA": {
+    "sentence": "Oggi sulla griglia ho preparato una succulenta braciola di manzo.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|STOCCAGGIO": {
+    "sentence": "Dissero che i costi di stoccaggio erano troppo alti.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|SUDARIO": {
+    "sentence": "Il sudario avvolgeva con delicatezza le spoglie, pronto per il lungo riposo.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|OPIA": {
+    "sentence": "L’oppio viene usato per produrre sostanze come la morfina e l’oppio stesso contiene **opia**.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2,
+    "reason": "The sentence includes a reference to drugs (\"sostanze stupefacenti\"), which violates the general-audience suitability criteria."
+  },
+  "it/c1.json|SGORGARE": {
+    "sentence": "Il miele cominciò a sgorgare lentamente dal barattolo rotto.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|RIPESCARE": {
+    "sentence": "Dopo il trasloco, ho cercato di ripescare i libri vecchi tra i rifiuti del cassonetto.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|PANTOMIMO": {
+    "sentence": "Al teatro abbiamo visto un affascinante spettacolo di pantomimo che ci ha fatto ridere e riflettere senza bisogno di parole.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|SFINIRE": {
+    "sentence": "Il troppo lavoro può sfinire anche la persona più resistente.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|CUTICOLA": {
+    "sentence": "Il biologo ha studiato la cuticola che vive sotto la pelle dell’animale.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|ECONOMO": {
+    "sentence": "L’amministratore è così economo che riesce a far durare le risorse per anni senza sprechi.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|SALNITRO": {
+    "sentence": "Il contadino ha sparso il salnitro nel campo per arricchire il terreno.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|SINODO": {
+    "sentence": "Il Sinodo discuterà le nuove linee guida per l'educazione religiosa nelle scuole.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|IMBONITORE": {
+    "sentence": "L'imbonitore allestì le cassette di legno per l'imballaggio delle mele.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|COAUTORE": {
+    "sentence": "Il romanzo è frutto della collaborazione tra il noto scrittore e un coautore emergente.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|ABORRIRE": {
+    "sentence": "Odiava così tanto il rumore dei clacson che cominciò ad aborrire la città stessa.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|SOPPORTALO": {
+    "sentence": "Il soffitto ha bisogno di un supporto solido, quindi sopportalo con una trave di metallo.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2,
+    "reason": "The verb \"sopportalo\" (meaning \"endure it\") does not match the given noun meaning \"supporto per qualcosa\" (support for something)."
+  },
+  "it/c2.json|LUMIERA": {
+    "sentence": "Accese la lumiera sul tavolo per leggere senza disturbare gli altri.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|ALTIPIANO": {
+    "sentence": "L'alpinista osservò l'altipiano estendersi all'orizzonte tra le montagne.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|PREMETTERE": {
+    "sentence": "Vorrei premettere che il progetto è ambizioso, ma con impegno sarà realizzabile.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|GIULIVO": {
+    "sentence": "I ragazzi, con un atteggiamento giulivo, hanno accolto la primavera danzando nel parco.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|CONFETTURA": {
+    "sentence": "Usò le mele per preparare la confettura.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|TOLUENE": {
+    "sentence": "Il toluene, usato spesso come solvente industriale, ha un odore caratteristico e penetrante.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|SOLARO": {
+    "sentence": "Sul solaro della vecchia villa si scorgeva un nido d’uccello abbandonato.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|FUSILLO": {
+    "sentence": "Per cena ho preparato un delizioso sugo con fusillo, pomodorini e basilico fresco.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|UFFIZIO": {
+    "sentence": "L'uffizio di guidare il gruppo spetta a chi ha più esperienza.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|PLEURA": {
+    "sentence": "L’infiammazione della pleura può causare un forte dolore durante la respirazione.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|LIBERAL": {
+    "sentence": "Un liberal sostiene con convinzione la libertà individuale e l'uguaglianza sociale.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|SUPPLÌ": {
+    "sentence": "Nei mercati rionali si possono trovare supplì deliziosi, croccanti fuori e filanti dentro.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|IDIOPATICO": {
+    "sentence": "Il medico ha diagnosticato un dolore idiopatico all'articolazione.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|INCLEMENTE": {
+    "sentence": "Il meteo resterà inclemente per tutta la settimana, con forti piogge e temperature rigide.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|VASAIO": {
+    "sentence": "È un vasaio.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|BOMA": {
+    "sentence": "Durante il safari, abbiamo visto un leone riposare all'ombra di un boma.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|IMPERVIO": {
+    "sentence": "Il sentiero impervio costrinse gli escursionisti a tornare indietro.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|PULZELLA": {
+    "sentence": "La pulzella del villaggio, timida e riservata, suscitava ammirazione tra i giovani del paese.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|ZUAVO": {
+    "sentence": "Quel tipo zuavo non sapeva nemmeno tenere una forchetta senza sbrodolare.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|SFIORARE": {
+    "sentence": "La farfalla riuscì a sfiorare il fiore prima di volare via.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|TOTEM": {
+    "sentence": "Gli anziani del villaggio posero un nuovo totem vicino al fiume per proteggere la tribù.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|MARIANO": {
+    "sentence": "Il pellegrinaggio a quel santuario è un momento mariano molto sentito dalla comunità.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c1.json|ANGELUS": {
+    "sentence": "L'angelus risuona dal campanile ogni mattina, mezzogiorno e sera.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|CROTALO": {
+    "sentence": "Il crotalo, riconoscibile dal caratteristico sonaglio, si muove con cautela tra le rocce assolate.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/c2.json|TEUTONICO": {
+    "sentence": "La leggenda di un popolo teutonico si tramanda ancora nei villaggi bavaresi.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-27",
+    "gate": 2
   }
 }

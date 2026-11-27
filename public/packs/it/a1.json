@@ -1,5 +1,5 @@
 {
-  "version": 21,
+  "version": 26,
   "lang": "it",
   "cefr": "a1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -1935,7 +1935,7 @@
         "immediatamente"
       ],
       "example": "Vai subito.",
-      "pos": "verb",
+      "pos": "adverb",
       "family": [
         "subitamente"
       ],
@@ -2103,7 +2103,7 @@
       "pos": "adjective",
       "ipa": "/ˈuniko/",
       "family": [
-        "unici"
+        "unica"
       ]
     },
     {
@@ -2374,7 +2374,6 @@
       "pos": "verb",
       "ipa": "/speˈrare/",
       "family": [
-        "spero",
         "speranza"
       ]
     },
@@ -2506,8 +2505,7 @@
       "pos": "noun",
       "ipa": "/ˈnɛo/",
       "family": [
-        "neonato",
-        "neologismo"
+        "neonato"
       ]
     },
     {
@@ -2547,8 +2545,7 @@
       "pos": "adverb",
       "ipa": "/abbaˈstantsa/",
       "family": [
-        "abbondanza",
-        "abbondante"
+        "bastare"
       ]
     },
     {
@@ -2639,8 +2636,7 @@
       "pos": "adverb",
       "ipa": "/nemˈmeno/",
       "family": [
-        "neppure",
-        "neanche"
+        "neppure"
       ]
     },
     {
@@ -2667,7 +2663,7 @@
         "prestezza",
         "prestissimo"
       ],
-      "ipa": "/ˈprɛ.sto/"
+      "ipa": "/ˈprɛsto/"
     },
     {
       "word": "IMPORTANTE",
@@ -2768,7 +2764,7 @@
         "battistrada",
         "fuoristrada"
       ],
-      "ipa": "/ˈstra.da/"
+      "ipa": "/ˈstrada/"
     },
     {
       "word": "QUA",
@@ -2778,7 +2774,10 @@
       ],
       "example": "È già qua.",
       "pos": "adverb",
-      "ipa": "/kwa/"
+      "ipa": "/kwa/",
+      "family": [
+        "qui"
+      ]
     },
     {
       "word": "BUON",
@@ -2788,7 +2787,7 @@
       "family": [
         "buongustaio"
       ],
-      "ipa": "/bwɔn/"
+      "ipa": "/ˈbwɔn/"
     },
     {
       "word": "DIAVOLO",
@@ -2878,11 +2877,12 @@
         "qualche"
       ],
       "pos": "adjective",
-      "ipa": "/alˈku.no/",
+      "ipa": "/alˈkuno/",
       "family": [
-        "qualcuno",
-        "qualche"
-      ]
+        "alcuni",
+        "qualcuno"
+      ],
+      "example": "C'è qualche mela in quella scatola, ma non so se ce n'è alcuno di buono."
     },
     {
       "word": "AGENTE",
@@ -2954,8 +2954,7 @@
       "pos": "adverb",
       "ipa": "/inˈvet͡ʃe/",
       "family": [
-        "inverso",
-        "invertire"
+        "inveire"
       ]
     },
     {
@@ -3001,7 +3000,7 @@
         "papabile",
         "papale"
       ],
-      "ipa": "/ˈpa.pa/"
+      "ipa": "/ˈpapa/"
     },
     {
       "word": "DOLLARO",
@@ -3050,8 +3049,7 @@
       "pos": "adverb",
       "ipa": "/alˈmeno/",
       "family": [
-        "mancare",
-        "mancanza"
+        "meno"
       ]
     },
     {
@@ -3192,7 +3190,7 @@
         "batticuore",
         "coraggio"
       ],
-      "ipa": "/ˈkwɔ.re/"
+      "ipa": "/ˈkwɔre/"
     },
     {
       "word": "DECIDERE",
@@ -3238,7 +3236,7 @@
       ],
       "example": "Mi scuso ancora.",
       "pos": "noun",
-      "ipa": "/ˈsku.zo/",
+      "ipa": "/ˈskuzo/",
       "family": [
         "scusa",
         "scusare"
@@ -3269,8 +3267,7 @@
       "pos": "noun",
       "ipa": "/paˈrere/",
       "family": [
-        "apparire",
-        "apparenza"
+        "apparire"
       ]
     },
     {
@@ -3471,7 +3468,7 @@
         "sbaglio",
         "rimedio"
       ],
-      "ipa": "/zbaʎˈʎa.re/",
+      "ipa": "/zbaʎˈʎare/",
       "synonyms": [
         "toppare"
       ]
@@ -3529,7 +3526,7 @@
       "ipa": "/ˈpu.re/",
       "family": [
         "puro",
-        "purismo"
+        "purificare"
       ]
     },
     {
@@ -3613,7 +3610,8 @@
       "ipa": "/ˈfɔsso/",
       "family": [
         "fossato",
-        "scavare"
+        "scavare",
+        "fossa"
       ]
     },
     {
@@ -3782,6 +3780,7 @@
       "ipa": "/ˈrɛsto/",
       "family": [
         "restare",
+        "restante",
         "restituire"
       ]
     },
@@ -4023,8 +4022,9 @@
       "pos": "adjective",
       "ipa": "/diverˈtɛnte/",
       "family": [
-        "divertire",
-        "divertimento"
+        "divertirsi",
+        "divertimento",
+        "divertito"
       ]
     },
     {
@@ -4107,7 +4107,8 @@
       "ipa": "/siɲɲoˈrino/",
       "family": [
         "signore",
-        "signorina"
+        "signorina",
+        "signorile"
       ]
     },
     {
@@ -4118,7 +4119,8 @@
       "ipa": "/bɛn/",
       "family": [
         "bene",
-        "benessere"
+        "benissimo",
+        "beneficio"
       ]
     },
     {
@@ -4326,7 +4328,8 @@
       "ipa": "/ˈtittsjo/",
       "family": [
         "tizia",
-        "tizi"
+        "tizi",
+        "tizie"
       ]
     },
     {
@@ -4723,6 +4726,7 @@
       "ipa": "/spjaˈʧere/",
       "family": [
         "spiacente",
+        "spiacersi",
         "dispiacere"
       ]
     },
@@ -4744,7 +4748,8 @@
       "pos": "verb",
       "ipa": "/kolˈpire/",
       "family": [
-        "colpo"
+        "colpo",
+        "colpito"
       ],
       "synonyms": [
         "percuotere",
@@ -4857,8 +4862,7 @@
       "pos": "adverb",
       "ipa": "/daˈvanti/",
       "family": [
-        "avanti",
-        "avanzare"
+        "avanti"
       ]
     },
     {
@@ -4926,7 +4930,10 @@
       ],
       "example": "Attenzione!",
       "pos": "noun",
-      "ipa": "/attenˈtsjone/"
+      "ipa": "/attenˈtsjone/",
+      "family": [
+        "disattenzione"
+      ]
     },
     {
       "word": "VENDERE",
@@ -4951,7 +4958,8 @@
       "ipa": "/presiˈdɛnte/",
       "family": [
         "presidenza",
-        "presiedere"
+        "presiedere",
+        "vicepresidente"
       ]
     },
     {
@@ -5483,7 +5491,8 @@
       "ipa": "/siɲˈɲor/",
       "family": [
         "signora",
-        "signorile"
+        "signorile",
+        "signorina"
       ]
     },
     {
@@ -5493,7 +5502,12 @@
       "synonyms": [
         "questo"
       ],
-      "ipa": "/tʃo/"
+      "ipa": "/tʃo/",
+      "family": [
+        "questo",
+        "quello",
+        "codesto"
+      ]
     },
     {
       "word": "DOTTOR",
@@ -5517,7 +5531,8 @@
         "piacere"
       ],
       "pos": "verb",
-      "ipa": "/paˈtʃere/"
+      "ipa": "/paˈtʃere/",
+      "example": "Ho un grande pacere quando mangio una fetta di torta al cioccolato."
     },
     {
       "word": "SPIEGARE",
@@ -5687,7 +5702,8 @@
       "ipa": "/konˈtɛnto/",
       "family": [
         "contentare",
-        "contentino"
+        "contentarsi",
+        "scontento"
       ]
     },
     {
@@ -5817,6 +5833,7 @@
       "ipa": "/ˈskorso/",
       "family": [
         "scorrere",
+        "scorsa",
         "scorsone"
       ]
     },
@@ -5982,7 +5999,12 @@
       ],
       "pos": "adverb",
       "example": "Insomma, hai capito!",
-      "ipa": "/inˈsomma/"
+      "ipa": "/inˈsomma/",
+      "family": [
+        "somma",
+        "sommario",
+        "sommare"
+      ]
     },
     {
       "word": "VERITÀ",
@@ -6127,7 +6149,8 @@
       "family": [
         "economia",
         "medicina"
-      ]
+      ],
+      "example": "Il bastone è sempre diritto."
     },
     {
       "word": "USCITA",
@@ -6383,11 +6406,12 @@
       "synonyms": [
         "grazioso"
       ],
-      "pos": "noun",
+      "pos": "adjective",
       "example": "Che carino!",
       "ipa": "/kaˈrino/",
       "family": [
-        "caro"
+        "carezza",
+        "carezzare"
       ]
     },
     {
@@ -6923,7 +6947,8 @@
       "ipa": "/aˈspɛtto/",
       "family": [
         "aspettare",
-        "aspettativa"
+        "aspettativa",
+        "aspettarsi"
       ]
     },
     {
@@ -7024,11 +7049,11 @@
       ],
       "pos": "adjective",
       "example": "La maggior parte sta bene.",
-      "ipa": "/madˈd͡ʒor/",
+      "ipa": "/madˈdʒor/",
       "family": [
         "maggiore",
-        "maggioranza",
-        "maggiormente"
+        "maggiormente",
+        "maggioranza"
       ]
     },
     {
@@ -7123,7 +7148,7 @@
       ],
       "pos": "noun",
       "example": "La faccenda è stata risolta!",
-      "ipa": "/fatˈt͡ʃɛnda/",
+      "ipa": "/fatˈtʃɛnda/",
       "family": [
         "affaccendare",
         "affaccendarsi",
@@ -7456,14 +7481,20 @@
       ]
     },
     {
-      "word": "DON",
-      "gloss": "modo di chiamare un uomo in modo formale",
+      "word": "TALMENTE",
+      "gloss": "in modo molto forte o estremo.",
       "synonyms": [
-        "signore"
+        "così",
+        "tanto"
       ],
-      "pos": "noun",
-      "example": "Don, può aiutarmi con questa domanda?",
-      "ipa": "/dɔn/"
+      "pos": "adverb",
+      "example": "È talmente evidente.",
+      "ipa": "/talˈmente/",
+      "family": [
+        "tale",
+        "taluno",
+        "talvolta"
+      ]
     },
     {
       "word": "ANZI",
@@ -7541,7 +7572,7 @@
         "promettere"
       ],
       "pos": "verb",
-      "ipa": "/fidanˈt͡sare/",
+      "ipa": "/fidanˈdzare/",
       "family": [
         "fidanzamento",
         "fidanzarsi",
@@ -7931,7 +7962,12 @@
       ],
       "pos": "noun",
       "example": "Vorrei una stanza sul retro.",
-      "ipa": "/ˈrɛtro/"
+      "ipa": "/ˈrɛtro/",
+      "family": [
+        "retroattivo",
+        "retrogrado",
+        "retrostante"
+      ]
     },
     {
       "word": "PESSIMO",
@@ -8172,7 +8208,10 @@
         "bello"
       ],
       "example": "Sono figo.",
-      "ipa": "/ˈfiɡo/"
+      "ipa": "/ˈfiɡo/",
+      "family": [
+        "figata"
+      ]
     },
     {
       "word": "RIDICOLO",
@@ -8288,7 +8327,8 @@
       "example": "Al villaggio.",
       "ipa": "/vilˈladd͡ʒo/",
       "family": [
-        "villanella"
+        "villano",
+        "villereccio"
       ]
     },
     {
