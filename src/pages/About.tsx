@@ -104,38 +104,35 @@ function SoundCard() {
             </p>
           </div>
         </div>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={on}
-          aria-labelledby="sound-label"
-          aria-describedby="sound-help"
-          onClick={toggle}
-          className="motion-press relative h-12 w-[72px] shrink-0"
-        >
-          <span
-            aria-hidden="true"
-            className={[
-              'px-frame absolute inset-y-0 left-0 flex w-[68px] items-center px-1.5',
-              on ? 'bg-accent [--px-edge:var(--color-edge)]' : 'bg-cream-dark',
-            ].join(' ')}
+        <div className="flex shrink-0 items-center gap-2.5">
+          <span aria-hidden="true" className="text-pixel-label text-ink">
+            {on ? t('common.on') : t('common.off')}
+          </span>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={on}
+            aria-labelledby="sound-label"
+            aria-describedby="sound-help"
+            onClick={toggle}
+            className="motion-press relative flex min-h-11 w-12 items-center justify-center"
           >
             <span
+              aria-hidden="true"
               className={[
-                'block h-[26px] w-[26px] transition-[transform] duration-150 [transition-timing-function:steps(2,end)] motion-reduce:transition-none',
-                on ? 'translate-x-[30px] bg-white' : 'translate-x-0 bg-ink',
-              ].join(' ')}
-            />
-            <span
-              className={[
-                'text-pixel-label absolute top-1/2 -translate-y-1/2',
-                on ? 'left-2 text-white' : 'right-2 text-ink',
+                'px-frame flex h-7 w-12 items-center px-1',
+                on ? 'bg-accent [--px-edge:var(--color-edge)]' : 'bg-cream-dark',
               ].join(' ')}
             >
-              {on ? t('common.on') : t('common.off')}
+              <span
+                className={[
+                  'block h-[18px] w-[18px] transition-[transform] duration-150 [transition-timing-function:steps(2,end)] motion-reduce:transition-none',
+                  on ? 'translate-x-[22px] bg-white' : 'translate-x-0 bg-ink',
+                ].join(' ')}
+              />
             </span>
-          </span>
-        </button>
+          </button>
+        </div>
       </div>
     </Card>
   )

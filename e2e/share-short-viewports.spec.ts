@@ -2,11 +2,11 @@ import { expect, test, type Locator, type Page } from '@playwright/test'
 import { sharePath } from './share-path'
 
 /**
- * #286/#307: on short screens the /share card must keep its natural height
+ * #286/#307/#400: on short screens the /share card must keep its natural height
  * instead of shrinking. The shell grows past the viewport (min-h-dvh), the
  * layout column is not a scrollport (that clips pixel frames on the right),
- * so the document scrolls. Footer actions stay reachable; they are not pinned
- * over the card.
+ * so the document scrolls. The action stack renders in normal flow below the
+ * card (#400) and stays reachable by scroll; it is never pinned over the card.
  */
 
 const DAILY_PAYLOAD = {
