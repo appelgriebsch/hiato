@@ -63,8 +63,8 @@ describe('person-name list', () => {
   })
 
   test('#369 R1: slots 400+ lines carry a person-written reason, not a gloss copy', () => {
-    // The it lines are still rewritten by their own language issue (#361); fr landed in #360.
-    const delegated = new Set(['it'])
+    // it landed in #361; fr landed in #360.
+    const delegated = new Set<string>()
     const text = readFileSync(path.join(import.meta.dir, 'data', 'lemma-names-allow.txt'), 'utf8')
     const packsRoot = path.join(import.meta.dir, '..', 'public', 'packs')
     const packsByLang = new Map<string, { word: string; gloss?: string }[][]>()
