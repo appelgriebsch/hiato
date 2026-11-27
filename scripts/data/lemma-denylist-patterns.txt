@@ -203,3 +203,40 @@ en TORTUR(OUS|E|ES|ING|ED|ER)
 en MURD(ER|ERS|EROUS)
 en TERROR(IST|ISTS|ISM|IZE|ISE)
 en BOMB(ARD|ARDS|ARDING|ING)
+# Stage 2 (#388, ADR 0065): prefix rules `lang#prefix STEM` deny stem-initial
+# compounds with a word-like tail (>= 3 letters or a short head, mirroring
+# isCompoundHead in scripts/gloss-quality.ts). Still anchored at the start,
+# never a substring; the bare stem stays on the exact list.
+de#prefix MORD
+de#prefix BOMB
+de#prefix SPRENG
+de#prefix WAFFE
+de#prefix KRIEG
+de#prefix GEWALT
+de#prefix TORTUR
+de#prefix AMOK
+de#prefix TERROR
+de#prefix ATTENTAT
+de#prefix ÜBERFALL
+de#prefix ANGRIFF
+de#prefix TÖT
+es#prefix MORD
+es#prefix BOMB
+es#prefix TORTUR
+es#prefix TERROR
+es#prefix ATENTAD
+es#prefix AMOK
+pt#prefix MORD
+pt#prefix BOMB
+pt#prefix TORTUR
+pt#prefix TERROR
+fr#prefix MORD
+fr#prefix TERROR
+it#prefix MORD
+it#prefix BOMB
+it#prefix TORTUR
+it#prefix TERROR
+en#prefix TORTUR
+en#prefix MURD
+en#prefix TERROR
+en#prefix BOMB

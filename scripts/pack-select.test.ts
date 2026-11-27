@@ -20,6 +20,7 @@ import {
   PT_EXPAND_EXCLUDE,
   takeExclusive,
 } from './pack-select'
+import { loadDenylist } from './lemma-denylist'
 import { PACK_CEFR_LEVELS } from '../src/packs/schema'
 
 describe('pack-select CEFR split', () => {
@@ -150,6 +151,11 @@ describe('hangmanOk + foldKey', () => {
     expect(hangmanOk('en', 'mull over')).toBeNull()
     expect(hangmanOk('en', 'self-help')).toBeNull()
     expect(hangmanOk('en', 'KILL', new Set(['KILL']))).toBeNull()
+    // ADR 0065 stage 2 (#388): prefix rules deny open violence compounds in packs:expand
+    expect(hangmanOk('it', 'bombardare', loadDenylist())).toBeNull() // it#prefix BOMB, no suffix line covers it
+    expect(hangmanOk('en', 'terroristic', loadDenylist())).toBeNull() // en#prefix TERROR
+    expect(hangmanOk('de', 'sprengsatz', loadDenylist())).toBeNull() // curated suffix, still denied
+    expect(hangmanOk('it', 'bombola', loadDenylist())).toBe('BOMBOLA') // allowlisted homograph stays playable
     expect(hangmanOk('de', 'Straße')).toBe('STRAßE')
     expect(hangmanOk('es', 'niño')).toBe('NIÑO')
     expect(hangmanOk('pt', 'maçã')).toBe('MAÇÃ')

@@ -2,7 +2,8 @@
  * Shared NSFW / violence / slur denylist.
  * Exact lines live in lemma-denylist.txt (global `WORD` or scoped `lang WORD`).
  * Conjugation patterns live in lemma-denylist-patterns.txt and match the whole
- * lemma only (`^…$`). Homographs a pattern would catch are listed
+ * lemma only (`^…$`; `lang#prefix STEM` lines are stem-initial with a word-like
+ * tail, ADR 0065 stage 2). Homographs a pattern would catch are listed
  * in lemma-denylist-allow.txt and are exempt after a pattern hit, not after an
  * exact hit (ADR 0040: scoped lines do not block another language).
  *
@@ -100,11 +101,24 @@ export function parseExactDenylist(text: string): Set<string> {
 
 const LETTERS = /^[\p{L}ß]+$/u
 
+/**
+ * Short heads that still count as a word-like compound head — mirrors
+ * DE_SHORT_HEADS / isCompoundHead in scripts/gloss-quality.ts (ADR 0065 stage 2).
+ */
+const SHORT_HEADS: ReadonlySet<string> = new Set(['UM', 'AB', 'AN', 'ZU', 'DA', 'WO', 'UR'])
+
+/** A word-like compound head or tail: ≥ 3 letters, or in the short-head set. */
+export function isWordLikePart(s: string): boolean {
+  return s.length >= 3 || SHORT_HEADS.has(s)
+}
+
 export type PatternRule = {
   /** Null is a global pattern. */
   lang: string | null
   /** spellingKey stem (ß/ẞ→SS), for tests. */
   stem: string
+  /** 'suffix' rules are `^STEM(?:SUF|…)$`; 'prefix' rules are stem-initial with a word-like tail. */
+  kind: 'suffix' | 'prefix'
   re: RegExp
 }
 
@@ -115,14 +129,42 @@ export type AllowEntry = {
 }
 
 /**
- * One pattern line is `STEM(SUFFIX|…)` or `lang STEM(SUFFIX|…)`.
- * Compiled to `^STEM(?:SUFFIX|…)$` after spellingKey, so a ß stem also matches
+ * One pattern line is `STEM(SUFFIX|…)` / `lang STEM(SUFFIX|…)` (suffix rule),
+ * compiled to `^STEM(?:SUFFIX|…)$` after spellingKey, so a ß stem also matches
  * its SS spelling (`SCHEIß(…)` catches SCHEISSE). A bare stem needs an empty
  * alternative (`FUCK(|ING)`), never a substring.
+ *
+ * A line `lang#prefix STEM` (ADR 0065 stage 2, #388) is a
+ * prefix rule: the stem must be a word-like head and the lemma is denied when
+ * it starts with the stem and the remaining tail is word-like too (≥ 3 letters
+ * or a short head — mirrors isCompoundHead in scripts/gloss-quality.ts).
+ * Compiled to `^STEM(?:\\p{L}{3,}|UM|AB|…)$`, still anchored at the start,
+ * never a substring; the bare stem itself is not matched.
  */
 export function parsePatternDenylist(text: string): PatternRule[] {
   const rules: PatternRule[] = []
   for (const [i, line] of text.split('\n').entries()) {
+    // `lang#prefix` is syntax, not a comment — match it before stripping `# …`.
+    // Only the language-scoped form exists, so a `# …` comment can never parse as a rule.
+    const pm = /^([A-Za-z]{2})#prefix\s+(\S+)(?:\s+#.*)?$/.exec(line.trim())
+    if (pm) {
+      const plang = pm[1]!.toLowerCase()
+      if (!/^[a-z]{2}$/.test(plang)) {
+        throw new Error(`lemma-denylist-patterns:${i + 1}: bad lang ${JSON.stringify(pm[1])}`)
+      }
+      const pstem = spellingKey(pm[2]!)
+      if (!pstem || !LETTERS.test(pstem)) {
+        throw new Error(`lemma-denylist-patterns:${i + 1}: stem must be letters, got ${JSON.stringify(pm[2])}`)
+      }
+      if (!isWordLikePart(pstem)) {
+        throw new Error(
+          `lemma-denylist-patterns:${i + 1}: prefix stem must be a word-like head (≥3 letters or short head), got ${JSON.stringify(pm[2])}`,
+        )
+      }
+      const tail = `(?:\\p{L}{3,}|${[...SHORT_HEADS].join('|')})`
+      rules.push({ lang: plang, stem: pstem, kind: 'prefix', re: new RegExp(`^${escapeRegExp(pstem)}${tail}$`, 'u') })
+      continue
+    }
     const raw = line.split('#')[0]?.trim()
     if (!raw) continue
     const m = /^(?:([A-Za-z]{2})\s+)?(\S+)\(([^)]*)\)$/.exec(raw)
@@ -154,6 +196,7 @@ export function parsePatternDenylist(text: string): PatternRule[] {
     rules.push({
       lang,
       stem,
+      kind: 'suffix',
       re: new RegExp(`^${escapeRegExp(stem)}(?:${body})$`),
     })
   }
@@ -201,8 +244,9 @@ let violenceStemCache: PatternRule[] | null = null
 
 /**
  * Pattern rules in the `# category: violence` section of the patterns file
- * (ADR 0065). Read-only view used by the regression scan; matching itself is
- * unchanged — these rules deny through matchesDeniedPattern like any other.
+ * (ADR 0065 stage 1 suffix rules and stage 2 `#prefix` rules, #388).
+ * Read-only view used by the regression scan; matching itself is unchanged —
+ * these rules deny through matchesDeniedPattern like any other.
  */
 export function loadViolencePatterns(): PatternRule[] {
   if (violenceStemCache) return violenceStemCache
