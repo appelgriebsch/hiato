@@ -43,6 +43,10 @@ const FR_DEITY = /(?<!\p{L})(?:déesses?|dieux?) (?:de|du|des|d[’'])(?!\p{L})/
 // #184 W4: "prénom féminin" names one person, even off lemma-names.txt.
 // Start-anchored: "diminutif d'un prénom" is the list-gated FR rule's job, not this one.
 const FR_PRENOM = /^(?:un |le )?pr[eé]noms?(?!\p{L})/iu
+// #360: "prénommé(e)" (HILDE shape: "une femme prénommé d'origine germanique")
+// and the bare name-class words name one person even off lemma-names.txt.
+const FR_NAME_CLASS =
+  /(?<!\p{L})(?:pr[eé]nomm[eé]e?s?|nom de famille|nom propre|surnoms?|nom (?:f[eé]minin|masculin))(?![\p{L}])/iu
 // #180: "créé par Conan Doyle" credits one fictional figure to its author.
 const FR_CREATED_BY = /(?<!\p{L})créée?s? par \p{Lu}/u
 // #180 CUBA: the gloss is a named place, "grande île des Caraïbes", "ville de Belgique".
@@ -61,7 +65,8 @@ export function isFrPersonGloss(gloss: string | undefined | null): boolean {
   const h = g.charAt(0).toLowerCase() + g.slice(1)
   return (
     FR_PERSON.test(g) || FR_PERSON_OF_PLACE.test(g) || FR_DEITY.test(g) ||
-    FR_CREATED_BY.test(g) || FR_PLACE.test(h) || FR_PRENOM.test(g)
+    FR_CREATED_BY.test(g) || FR_PLACE.test(h) || FR_PRENOM.test(g) ||
+    FR_NAME_CLASS.test(g)
   )
 }
 

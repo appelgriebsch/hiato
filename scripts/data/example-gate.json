@@ -52126,9 +52126,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence contains complex structures (\"enregistrer et d'importer des profiles d'exécution\") and vocabulary (\"profiles d'exécution\") far beyond A1 level."
+    "reason": "The sentence uses \"importer\" in the sense of \"to import data,\" not \"to matter/be important\" as defined, and \"profiles d'exécution\" is too advanced for A1."
   },
   "fr/a1.json|SEMAINE": {
     "sentence": "Bonne fin de semaine.",
@@ -53591,9 +53591,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence contains a complex structure (\"semblez détester\") and a potentially sensitive topic (gender relations) that may not suit a general-audience app."
+    "reason": "The sentence contains a strong negative sentiment that may not be suitable for a general-audience learning app."
   },
   "fr/a1.json|ARME": {
     "sentence": "C'est une arme.",
@@ -53920,9 +53920,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is too complex for CEFR A1 learners, containing advanced vocabulary (\"cadre législatif adéquat\", \"pousser les investisseurs étrangers\") and structures."
+    "reason": "The sentence contains complex structures and vocabulary (e.g., \"cadre législatif adéquat,\" \"pousser les investisseurs étrangers\") that exceed CEFR A1, and \"préférer\" is not used in a simple, learner-appropriate context."
   },
   "fr/a1.json|APPEL": {
     "sentence": "J'ai un appel.",
@@ -55826,9 +55826,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"enceint\" is masculine, but the meaning refers to a female state, making the sentence incorrect."
+    "reason": "\"Je suis enceint\" is grammatically incorrect; the correct form is \"Je suis enceinte\" (feminine agreement)."
   },
   "fr/a2.json|ARBRE": {
     "sentence": "C’est un arbre.",
@@ -56371,9 +56371,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"AIE\" in a way that does not match the given meaning of \"expression de douleur soudaine\" (sudden pain expression)."
+    "reason": "The sentence uses \"AIE\" in the imperative form (\"Aie l'air\") rather than as an expression of sudden pain (\"Aïe !\")."
   },
   "fr/a2.json|MÉCHANT": {
     "sentence": "Tu es méchant.",
@@ -57782,9 +57782,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"GRACE\" is not correctly used in the sentence; \"GRACE À\" means \"thanks to,\" not \"favour granted without particular merit.\""
+    "reason": "The word \"GRACE\" in the sentence is used in the sense of \"thanks to\" (merci à), not in the given meaning of \"favour granted without particular merit.\""
   },
   "fr/b1.json|EXAMINER": {
     "sentence": "Je dois examiner votre billet.",
@@ -59508,7 +59508,7 @@
     "gate": 2
   },
   "fr/b1.json|MATT": {
-    "sentence": "Le métal poli est brillant, mais celui-ci est **matt**.",
+    "sentence": "Le métal poli est brillant, mais celui-ci est matt.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b1",
@@ -59980,13 +59980,13 @@
     "gate": 2
   },
   "fr/b1.json|LOS": {
-    "sentence": "Il va LOS car il n’a pas gagné le match.",
+    "sentence": "Il va toujours los quand il joue au football.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"LOS\" is not a standard French word or structure at CEFR B1 level; it is slang and not appropriate for a general-audience learning app."
+    "reason": "\"LOS\" is not a standard French word or structure at CEFR B1 level."
   },
   "fr/b1.json|ÉMOTION": {
     "sentence": "Elle a pleuré d'émotion.",
@@ -60625,7 +60625,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The word \"HAYE\" in this sentence refers to \"The Hague\" (a city), not the meaning \"rangée d’arbustes plantés serrés\" (hedge)."
   },
@@ -61399,16 +61399,16 @@
     "gate": 2
   },
   "fr/b2.json|CALVIN": {
-    "sentence": "J’ai choisi une robe en calvin pour l’été, elle est légère et très douce.",
+    "sentence": "J’ai choisi une robe en calvin blanc pour l’été.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Calvin\" is not the correct French word for \"light and fine cotton fabric\" (the correct term is \"calicot\")."
+    "reason": "\"Calvin\" is not the correct term for lightweight cotton fabric in French (should be \"calicot\" or \"mousseline de coton\")."
   },
   "fr/b2.json|ALEC": {
-    "sentence": "Ce soir, nous dégustons un délicieux **alec** avec des pommes de terre rôties.",
+    "sentence": "Ce soir, nous dégustons un délicieux alec avec des pommes de terre rôties.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
@@ -63016,13 +63016,13 @@
     "gate": 2
   },
   "fr/b2.json|TRIP": {
-    "sentence": "Son mauvais trip a gâché tout le voyage.",
+    "sentence": "Il a fait un trip incroyable sous les étoiles après avoir regardé le ciel nocturne.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes \"trip\" in the context of drugs, which violates the general-audience suitability guideline."
+    "reason": "The sentence includes the word \"trip\" in the context of a psychoactive experience, which violates the \"no drugs\" guideline for a general-audience learning app."
   },
   "fr/b2.json|CONFRONTER": {
     "sentence": "Ils doivent confronter leurs opinions pour trouver un compromis.",
@@ -114780,13 +114780,13 @@
     "gate": 2
   },
   "fr/c1.json|FULL": {
-    "sentence": "Le verre était en état full après que j’aie versé le dernier centilitre.",
+    "sentence": "Le verre est en état FULL après qu’on y ait versé toute la carafe.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Full\" is not a standard French word; the correct term is \"plein.\""
+    "reason": "\"FULL\" is not a French word; the sentence should use \"plein\" or \"rempli\" instead."
   },
   "fr/c1.json|PATSY": {
     "sentence": "Il s’est rendu compte trop tard qu’il était le patsy de toute l’affaire.",
@@ -115149,13 +115149,13 @@
     "gate": 2
   },
   "fr/c1.json|MADE": {
-    "sentence": "Cette table en chêne est entièrement made par un artisan local.",
+    "sentence": "Ce vase en céramique est entièrement made à la main par un artisan local.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"made\" is not a valid French word; the correct term is \"faite\" or \"fabriquée.\""
+    "reason": "The word \"made\" is not a French word and does not fit the CEFR C1 level for French learners."
   },
   "fr/c1.json|REPLONGER": {
     "sentence": "Il a failli se noyer avant de replonger dans la piscine.",
@@ -115166,13 +115166,12 @@
     "gate": 2
   },
   "fr/c1.json|RAINER": {
-    "sentence": "La bruine se mit à rainer doucement sur les feuilles des arbres.",
+    "sentence": "Le brouillard se lève et la pluie se met à rainer doucement sur les toits.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The verb \"rainer\" is not standard French; the correct term is \"bruiner\" or \"tomber en bruine.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c1.json|VIEILLESSE": {
     "sentence": "Il est mort de vieillesse.",
@@ -115387,9 +115386,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"foam roller\" (a different meaning) and not the given meaning of \"chaussure équipée de roues alignées.\""
+    "reason": "The sentence uses \"foam roller\" (a massage tool), not \"roller\" as a shoe with wheels."
   },
   "fr/c1.json|SHAMPOING": {
     "sentence": "As-tu du shampoing ?",
@@ -116080,7 +116079,7 @@
     "gate": 2
   },
   "fr/c1.json|AMIR": {
-    "sentence": "L’**amir** de la tribu fut acclamé pour sa sagesse et son courage.",
+    "sentence": "L’amir de la tribu fut acclamé pour sa sagesse et son courage.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c1",
@@ -116172,7 +116171,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"fur\" (fourrure) in the given meaning."
   },
@@ -116445,9 +116444,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Te magner\" is colloquial/familiar and not typically included in standard C1 curricula for general-audience apps."
+    "reason": "The word \"magner\" is colloquial and not typically included in CEFR C1 learning materials for general audiences."
   },
   "fr/c1.json|VISUALISER": {
     "sentence": "C'est difficile de visualiser quatre dimensions.",
@@ -117782,7 +117781,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence implies a dark or extreme context (e.g., \"horrors\" finding admirers), which may not suit a general-audience app."
   },
@@ -118027,13 +118026,12 @@
     "gate": 2
   },
   "fr/c2.json|MASSIMO": {
-    "sentence": "La qualité des recherches doit être poussée au **massimo** pour garantir des résultats innovants.",
+    "sentence": "L'effort déployé pour ce projet a atteint un niveau massimo d'excellence.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "\"Massimo\" is not a standard French word; it is Italian, making the sentence unsuitable for French learners."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c2.json|RANCE": {
     "sentence": "Cette huile est rance.",
@@ -118164,13 +118162,13 @@
     "gate": 2
   },
   "fr/c2.json|MÉTHADONE": {
-    "sentence": "La méthadone est parfois prescrite pour aider à surmonter une dépendance aux opiacés.",
+    "sentence": "Le médecin prescrit de la méthadone pour aider à réduire la dépendance aux opiacés.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence mentions \"dépendance aux opiacés,\" which falls under the \"drugs\" category, making it unsuitable for a general-audience learning app."
+    "reason": "The sentence includes \"dépendance aux opiacés,\" which relates to drugs, violating the general-audience suitability criterion."
   },
   "fr/c2.json|IMPASSIBLE": {
     "sentence": "Tu es impassible.",
@@ -118525,7 +118523,7 @@
     "gate": 2
   },
   "fr/c2.json|GAP": {
-    "sentence": "L’écart croissant entre les salaires des cadres et des employés illustre bien le *gap* grandissant dans notre société.",
+    "sentence": "L’écart croissant entre les salaires des cadres et des employés illustre bien le gap grandissant dans notre société.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -119397,13 +119395,12 @@
     "gate": 2
   },
   "fr/c2.json|LUBRIQUE": {
-    "sentence": "Son regard lubrique trahissait ses intentions mal placées.",
+    "sentence": "Son regard lubrique trahissait son manque de respect.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence includes sexual content, which violates the general-audience suitability criteria."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c2.json|CARABINIER": {
     "sentence": "\"On l'a vu sortir à 6 heures\", écrivit le carabinier.",
@@ -119414,7 +119411,7 @@
     "gate": 2
   },
   "fr/c2.json|CARTOON": {
-    "sentence": "Ce *cartoon* satirique moquait les travers politiques avec une finesse hilarante.",
+    "sentence": "Ce cartoon satirique moquait les travers politiques avec une finesse hilarante.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -119614,13 +119611,12 @@
     "gate": 2
   },
   "fr/c2.json|ABONDER": {
-    "sentence": "Ma souffrance ne cesse d'abonder.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Les étoiles semblent abonder dans le ciel nocturne de ce désert isolé.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"abonder\" incorrectly for the given meaning; \"abonder\" is intransitive and cannot take a direct object like \"souffrance.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c2.json|FANTASY": {
     "sentence": "Un bon roman de fantasy sait marier l'étrange à l'ordinaire.",
@@ -119863,13 +119859,13 @@
     "gate": 2
   },
   "fr/c2.json|INTER": {
-    "sentence": "On a une heure d'inter-cours après le cours de maths.",
-    "source": "tatoeba",
+    "sentence": "L'espace inter entre les deux bâtiments permet une circulation fluide des piétons.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"inter-cours\" is not a standard CEFR C2 term; \"pause\" or \"intervalle\" would be more appropriate."
+    "reason": "The word \"inter\" is not a standalone adjective in French; \"inter\" is a prefix (e.g., \"intermédiaire\") and should not be used as a separate word in this context."
   },
   "fr/c2.json|TROMBE": {
     "sentence": "Il sortit en trombe du bureau.",
@@ -119912,13 +119908,13 @@
     "gate": 2
   },
   "fr/c2.json|SHUI": {
-    "sentence": "J’ai ajouté juste un *shui* de poivre pour relever le goût.",
+    "sentence": "J'ai ajouté un shui de sel à la recette pour rehausser le goût.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"shui\" is not a standard French word and is not appropriate for a general-audience learning app."
+    "reason": "\"Shui\" is not a standard French word at CEFR C2 level; it's a colloquial variant of \"chouïa,\" which itself is informal and not typically taught at advanced levels."
   },
   "fr/c2.json|TANTINE": {
     "sentence": "Ma tantine m’a offert un vélo flambant neuf pour mon anniversaire.",
@@ -119997,7 +119993,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"fayot\" in the slang sense \"teacher's pet,\" not the given meaning \"haricot blanc sec.\""
   },
@@ -120094,9 +120090,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"FRISÉ\" in the meaning \"qui forme des boucles serrées\" (curly, tightly curled), but rather refers to \"kale\" (chou frisé), a leafy green vegetable."
+    "reason": "The word \"frisé\" is used in its culinary sense (curly kale), not in the meaning \"qui forme des boucles serrées\" (tight curls)."
   },
   "fr/c2.json|VITRAIL": {
     "sentence": "Ce vitrail date du XVIe siècle.",
@@ -120475,13 +120471,13 @@
     "gate": 2
   },
   "fr/c2.json|STOKER": {
-    "sentence": "Le matin, il faut stoker la chaudière pour que le chauffage fonctionne toute la journée.",
+    "sentence": "Le matin, il faut toujours stoker la chaudière avant de partir.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The verb \"stoker\" is misspelled; the correct form is \"stoker\" (with an acute accent on the first 'o')."
+    "reason": "\"Stoker\" is not a standard French word; the correct term is \"alimenter\" or \"ravitailler.\""
   },
   "fr/c2.json|DÉPUTER": {
     "sentence": "Le ministre a dû députer une délégation pour représenter le pays à l’étranger.",
@@ -203705,9 +203701,9 @@
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes \"tueur\" (murderer/killer) and \"forêt\" (forest), which may imply a violent context unsuitable for a general-audience app."
+    "reason": "The sentence includes \"tueur\" (murderer) and \"forêt\" (forest), which are too advanced for A1 learners, and the context implies violence, which is unsuitable for a general-audience app."
   },
   "fr/a1.json|HÔTEL": {
     "sentence": "C'est l'hôtel.",
@@ -204446,13 +204442,13 @@
     "gate": 2
   },
   "fr/a1.json|IMBÉCILE": {
-    "sentence": "Tu n'es qu'un imbécile, arrête de faire des bêtises !",
+    "sentence": "Tu es un peu imbécile de ne pas écouter les conseils.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"imbécile\" is too advanced for A1; \"Tu n'es qu'un...\" is grammatically complex for A1."
+    "reason": "\"imbécile\" is not an A1 word; it's too advanced and potentially offensive for a general-audience app."
   },
   "fr/a1.json|SAINT": {
     "sentence": "C'est un saint.",
@@ -204463,13 +204459,13 @@
     "gate": 2
   },
   "fr/a1.json|MILL": {
-    "sentence": "Je n’ai pas assez d’argent, il me manque un petit mill.",
+    "sentence": "Je n’ai pas un mill de plus sur moi.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"mill\" is not a standard French term for \"petite partie d'une somme\"; it does not fit the given meaning or CEFR A1 level."
+    "reason": "The word \"mill\" is not a standard French word at CEFR A1 level; it is a regional or dialectal term, making it unsuitable for a general-audience learning app."
   },
   "fr/a1.json|DIRECTION": {
     "sentence": "En direction du sud.",
@@ -205091,13 +205087,13 @@
     "gate": 2
   },
   "fr/a1.json|FAILLI": {
-    "sentence": "Il est failli parce qu’il a dépensé tout son argent en vacances.",
+    "sentence": "Il a tout dépensé et il est maintenant failli.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Failli\" is not a standard A1 word; \"ruiné\" or \"sans argent\" would be more appropriate."
+    "reason": "\"Failli\" is not a word used in A1 French; it's a past participle of \"faillir\" (to fail), not a standalone adjective meaning \"broke.\""
   },
   "fr/a1.json|RANGER": {
     "sentence": "Va ranger ta chambre.",
@@ -205184,9 +205180,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Prétendre\" is too advanced for A1; the sentence structure is also complex for this level."
+    "reason": "The sentence uses \"prétendre\" correctly but includes a complex structure (\"ne pas avoir le moindre regret\") that is beyond A1 level."
   },
   "fr/a1.json|BILLY": {
     "sentence": "J'emmène ma billy pour boire un café en plein air.",
@@ -205374,13 +205370,13 @@
     "gate": 2
   },
   "fr/a1.json|ENFOIRER": {
-    "sentence": "Je ne veux pas t'enfoirer dans ce projet.",
+    "sentence": "Tu vas m'enfoirer avec ce projet si tu ne travailles pas plus !",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"enfoirer\" is vulgar and inappropriate for a general-audience learning app, despite the given meaning."
+    "reason": "The word \"enfoirer\" is highly vulgar and inappropriate for a general-audience learning app, violating condition 3."
   },
   "fr/a1.json|QUEL": {
     "sentence": "Sous quel nom ?",
@@ -205491,9 +205487,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"désirer\" in a figurative sense (\"laisse à désirer\" = \"leaves much to be desired\"), not in the literal meaning \"vouloir quelque chose avec ardeur.\""
+    "reason": "The sentence uses \"désirer\" in a different meaning (\"to be lacking\") and is too idiomatic for A1 learners."
   },
   "fr/a1.json|COU": {
     "sentence": "J'ai mal au cou.",
@@ -206785,13 +206781,13 @@
     "gate": 2
   },
   "fr/a2.json|SUICIDER": {
-    "sentence": "Il ne faut jamais se suicider, car la vie offre toujours de nouvelles chances.",
+    "sentence": "Ne t’inquiète pas, personne ne veut se suicider.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence discusses suicide, which violates the safety guideline for a general-audience app."
+    "reason": "The sentence contains the word \"suicider,\" which relates to self-harm and suicide, making it unsuitable for a general-audience learning app."
   },
   "fr/a2.json|LIAISON": {
     "sentence": "La liaison entre l'école et les parents est très importante.",
@@ -207188,13 +207184,13 @@
     "gate": 2
   },
   "fr/a2.json|PIS": {
-    "sentence": "Le chat dort sur le pis du tracteur.",
+    "sentence": "Le chat dort avec sa tête sur son pis.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"pis\" in the sentence refers to the \"rear part of a tractor\" (a machine), not the \"posterior part of the human body\" as specified in the gloss."
+    "reason": "The word \"pis\" is not a standard A2-level term for \"partie postérieure du corps humain\" (that would be \"derrière\" or \"postérieur\"); it means \"udder\" in French."
   },
   "fr/a2.json|VOLANT": {
     "sentence": "Prends le volant.",
@@ -208190,7 +208186,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"traite\" in the sense of \"bill of exchange\" (financial document), not \"accord ou contrat entre deux parties,\" and \"Je vous paye la traite\" is too advanced for A2."
   },
@@ -208460,7 +208456,7 @@
     "gate": 2
   },
   "fr/a2.json|COUVERT": {
-    "sentence": "Où est le couvert ?",
+    "sentence": "Le ciel est couvert aujourd’hui.",
     "source": "tatoeba",
     "verdict": "pass",
     "level": "a2",
@@ -208516,11 +208512,11 @@
     "gate": 2
   },
   "fr/a2.json|LOVER": {
-    "sentence": "Elle est une grande lover de la musique classique.",
+    "sentence": "Ce lover admire beaucoup la nature et passe ses week-ends à photographier les paysages.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "\"lover\" is not a standard French word at CEFR A2; the sentence mixes English and French incorrectly."
   },
@@ -208637,13 +208633,13 @@
     "gate": 2
   },
   "fr/a2.json|COLL": {
-    "sentence": "Le coll a gagné le prix de la meilleure classe de l'année.",
+    "sentence": "Le coll porte son cartable lourd.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"COLL\" is not standard French; the correct term is \"collégien\" or \"élève\" for A2 learners."
+    "reason": "The word \"COLL\" is not a standard French word; the correct term is \"collégien\" for an A2 learner."
   },
   "fr/a2.json|RÉUNIR": {
     "sentence": "Il faut réunir la famille.",
@@ -208782,13 +208778,13 @@
     "gate": 2
   },
   "fr/a2.json|QUANT": {
-    "sentence": "Quant de pommes veux-tu dans ton panier ?",
+    "sentence": "Quant de pommes veux-tu dans ton sac ?",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Quant\" is not a short form for \"combien\" in standard French; it means \"regarding\" or \"as for.\""
+    "reason": "\"Quant\" is not a short form for \"combien\" in standard French; it is a preposition meaning \"as for\" or \"regarding.\""
   },
   "fr/a2.json|SACRIFICE": {
     "sentence": "Ton sacrifice ne fut pas vain.",
@@ -208819,9 +208815,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"PASSE\" in the meaning of \"le temps écoulé avant le présent\" (past time)."
+    "reason": "The sentence uses \"passe\" in the sense of \"spends\" (time), not the glossed meaning \"le temps écoulé avant le présent.\""
   },
   "fr/a2.json|MOBILE": {
     "sentence": "Où est mon mobile ?",
@@ -209643,13 +209639,13 @@
     "gate": 2
   },
   "fr/a2.json|VIOL": {
-    "sentence": "C'est un crime horrible de commettre un viol.",
+    "sentence": "Ce crime horrible s’appelle un viol.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"viol\" and the concept of sexual assault are too advanced and inappropriate for a general-audience A2-level French learning app."
+    "reason": "The word \"viol\" and the concept of \"agression sexuelle grave\" are too advanced for CEFR A2 learners."
   },
   "fr/a2.json|THÉRAPIE": {
     "sentence": "La thérapie a échoué.",
@@ -210497,13 +210493,13 @@
     "gate": 2
   },
   "fr/a2.json|POIGNARDER": {
-    "sentence": "Le cuisinier a dû poignarder le poulet pour le préparer.",
-    "source": "mistral",
+    "sentence": "Mes chers parents, je vais vous coincer dans un coin pour vous poignarder de toutes mes forces.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"poignarder\" in a violent context (killing a chicken), which is inappropriate for a general-audience learning app."
+    "reason": "The sentence contains a violent threat (\"vous poignarder de toutes mes forces\"), which violates the suitability criteria for a general-audience learning app."
   },
   "fr/a2.json|RÉCEPTION": {
     "sentence": "Pas de réception.",
@@ -210755,13 +210751,12 @@
     "gate": 2
   },
   "fr/b1.json|VEINE": {
-    "sentence": "C'est bien ma veine !",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Le sang coule dans la veine jusqu'au cœur.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"veine\" in the idiomatic sense \"luck\" (C'est bien ma veine !), not in the anatomical meaning \"vaisseau qui ramène le sang au cœur\"."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/b1.json|MERVEILLE": {
     "sentence": "Quelle merveille !",
@@ -210804,13 +210799,12 @@
     "gate": 2
   },
   "fr/b1.json|DÉFILER": {
-    "sentence": "Je préfère amener mes enfants voir défiler les animaux.",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Le 14 juillet, les pompiers vont défiler sur les Champs-Élysées.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "b1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence uses \"DÉFILER\" incorrectly; \"défiler\" refers to people or groups marching, not animals."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/b1.json|CONCLUSION": {
     "sentence": "Quelle est la conclusion ?",
@@ -212024,9 +212018,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence does not use \"AILLE\" in the meaning of \"partie d'une plante utilisée comme condiment.\""
+    "reason": "The sentence does not use \"AILLE\" in the meaning given by the gloss (it means \"I have to go there\" and not \"part of a plant used as a condiment\")."
   },
   "fr/b1.json|BLAKE": {
     "sentence": "Le verre en blake est utilisé dans les instruments optiques.",
@@ -212939,9 +212933,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"ordure\" in a figurative, insulting sense, not in the literal meaning of \"déchet ou chose sans valeur.\""
+    "reason": "The sentence uses \"ordure\" in a figurative and insulting sense, not in the literal meaning of \"déchet ou chose sans valeur\" as specified."
   },
   "fr/b1.json|FRAGILE": {
     "sentence": "Elle est fragile.",
@@ -213646,9 +213640,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence \"Oublie-les\" uses \"oublie\" in the imperative form meaning \"forget them,\" not in the given meaning of \"gâteau sec et plat.\""
+    "reason": "The sentence \"Oublie-les\" uses \"oublie\" as a verb (meaning \"forget them\"), not in the given noun sense of \"gâteau sec et plat.\""
   },
   "fr/b1.json|ESSENTIEL": {
     "sentence": "C'est essentiel.",
@@ -213960,7 +213954,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence uses \"coordonnée\" in a figurative sense (coordinated attack) rather than the literal meaning of a coordinate on a map, and it involves violence."
   },
@@ -214065,9 +214059,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses idiomatic language (\"péter une durite\") that is too advanced for CEFR B1 learners and may not be suitable for a general-audience app due to its informal and potentially confusing nature."
+    "reason": "The sentence uses idiomatic language (\"péter une durite\") that is too advanced for B1 learners and implies strong frustration, which may not suit a general-audience app."
   },
   "fr/b1.json|MATHS": {
     "sentence": "J'aime les maths.",
@@ -214423,13 +214417,13 @@
     "gate": 2
   },
   "fr/b1.json|PRÊTE": {
-    "sentence": "J'ai acheté une voiture mais j'ai dû emprunter la somme prête chez mon ami.",
+    "sentence": "La voiture qu’il conduit est une voiture prête.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Prête\" is used incorrectly here; the correct form should be \"prêt\" (masculine singular) to agree with \"somme\" (feminine singular, but \"somme\" is often treated as masculine in financial contexts)."
+    "reason": "The sentence does not use \"PRÊTE\" in the meaning \"qui a été obtenu par emprunt\" (borrowed), but rather in the sense of \"ready.\""
   },
   "fr/b1.json|CANAL": {
     "sentence": "J'ai versé l'eau dans le canal.",
@@ -215049,13 +215043,13 @@
     "gate": 2
   },
   "fr/b1.json|TABASSER": {
-    "sentence": "Les deux équipes se sont fait tabasser pendant le match.",
-    "source": "mistral",
+    "sentence": "Il s'est fait tabasser par des loubards dans la ruelle qui donne sur la chaussée.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "b1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence implies violent aggression (\"tabasser\") in a sports context, which may be unsuitable for a general-audience learning app."
+    "reason": "The sentence contains \"loubards\" (hooligans) and \"ruelle\" (alley), which may imply violence or crime, making it unsuitable for a general-audience learning app."
   },
   "fr/b1.json|ANTHONY": {
     "sentence": "Anthony rouille dans l'évier depuis trois jours.",
@@ -215770,13 +215764,13 @@
     "gate": 2
   },
   "fr/b2.json|MARIJUANA": {
-    "sentence": "Je ne connais pas les effets de la marijuana, mais j'ai entendu que certains l'utilisent pour se détendre.",
+    "sentence": "La marijuana est souvent cultivée pour ses propriétés médicinales ou récréatives.",
     "source": "mistral",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes a reference to drugs, which violates the general-audience suitability criteria."
+    "reason": "The sentence includes the word \"marijuana,\" which is associated with drugs, making it unsuitable for a general-audience learning app."
   },
   "fr/b2.json|CONTREDIRE": {
     "sentence": "Tu aimes le contredire.",
@@ -215995,7 +215989,7 @@
     "gate": 2
   },
   "fr/b2.json|DIGITAL": {
-    "sentence": "Le système digital de la main permet de compter de zéro à neuf.",
+    "sentence": "On dit aussi « digital » pour « numérique ».",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
@@ -216095,9 +216089,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence contains complex political and social commentary that goes beyond typical B2-level language learners' comprehension and includes themes unsuitable for a general-audience app."
+    "reason": "The sentence contains complex political and social commentary that goes beyond typical B2-level language learning content and includes themes unsuitable for a general-audience app."
   },
   "fr/b2.json|VIRAGE": {
     "sentence": "Le virage est serré.",
@@ -216403,9 +216397,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "b2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"high-tech\" is not a standard B2-level term in French; it is an anglicism that may confuse learners at this stage."
+    "reason": "The word \"high-tech\" is not a direct translation of \"high\" in the given meaning (\"niveau élevé ou état d'excitation\"), and \"high-tech\" is more advanced than B2 level vocabulary."
   },
   "fr/b2.json|PERTURBÉ": {
     "sentence": "Il l'a perturbé.",
@@ -219285,7 +219279,7 @@
     "gate": 2
   },
   "fr/b2.json|LESBIEN": {
-    "sentence": "C’est un roman sur une relation lesbien entre deux jeunes femmes.",
+    "sentence": "Elle fréquente un bar lesbien du centre-ville.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
@@ -219565,7 +219559,7 @@
     "gate": 2
   },
   "fr/b2.json|DING": {
-    "sentence": "Un *ding* clair retentit quand la fourchette tomba sur le sol en métal.",
+    "sentence": "Un ding clair retentit quand la fourchette tomba sur le sol en métal.",
     "source": "mistral",
     "verdict": "pass",
     "level": "b2",
@@ -220742,13 +220736,13 @@
     "reason": "The word \"POUFFIASSE\" is too vulgar and inappropriate for a general-audience learning app."
   },
   "fr/c1.json|CLÉBARD": {
-    "sentence": "Le vieux clébard aboyait joyeusement dès qu’on ouvrait la porte.",
+    "sentence": "Ce vieux clébard traîne toujours dans le parc, espérant un bout de saucisson.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "\"Clébard\" is too colloquial for CEFR C1 learners, and the sentence lacks a general-audience tone due to the informal term."
+    "reason": "\"CLÉBARD\" is too colloquial/slang for CEFR C1 learners, and the sentence's informal tone may not suit a general-audience app."
   },
   "fr/c1.json|MIO": {
     "sentence": "Mon petit chat, viens ici, c’est tout à moi, mon mio préféré !",
@@ -221268,7 +221262,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The word \"camisole\" in the sentence refers to \"camisole de force\" (straightjacket), not the given meaning \"vêtement de nuit à manches longues\"."
   },
@@ -221627,7 +221621,7 @@
     "gate": 2
   },
   "fr/c1.json|BAN": {
-    "sentence": "Le maire a décrété un **ban** de circulation dans le centre historique pendant les travaux.",
+    "sentence": "Le maire a décrété un ban de circulation dans le centre historique pendant les travaux.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c1",
@@ -221743,7 +221737,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence contains explicit sexual content, which violates the general-audience suitability requirement."
   },
@@ -221824,7 +221818,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
     "reason": "The sentence does not use \"PARAISSE\" in the meaning \"territoire d'une église locale\" and contains inappropriate content for a general-audience app."
   },
@@ -221929,9 +221923,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes a word (\"pubien\") that is not typically taught at CEFR C1 level and may be considered inappropriate for a general-audience learning app."
+    "reason": "The sentence includes a vulgar term (\"poil pubien\") that is not suitable for a general-audience learning app."
   },
   "fr/c1.json|AÏEUL": {
     "sentence": "C'est mon aïeul qui l'a raconté.",
@@ -223002,9 +222996,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence is grammatically incorrect and nonsensical, making it unsuitable for learners."
+    "reason": "The sentence is grammatically incorrect and nonsensical, making it unsuitable for any CEFR level or general-audience app."
   },
   "fr/c1.json|FELLATION": {
     "sentence": "La fellation est un acte sexuel qui peut se pratiquer en toute intimité.",
@@ -223835,9 +223829,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "c1",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"palme\" in the sense of \"palm tree\" (oil palm), not the given meaning of a flat object used to move in water."
+    "reason": "The word \"PALME\" is used in a different sense (oil palm) than the given gloss (swimming fin)."
   },
   "fr/c1.json|RÉCEPTIF": {
     "sentence": "Dommage qu'il ne soit pas réceptif à l'ironie !",
@@ -225819,7 +225813,7 @@
     "gate": 2
   },
   "fr/c2.json|LÉVITIQUE": {
-    "sentence": "Son interprétation de ce passage **lévitique** a fasciné l’auditoire par sa profondeur et sa clarté.",
+    "sentence": "Son interprétation de ce passage lévitique a fasciné l’auditoire par sa profondeur et sa clarté.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -226116,13 +226110,12 @@
     "gate": 2
   },
   "fr/c2.json|RIB": {
-    "sentence": "Le médecin palpa doucement chaque rib pour vérifier leur intégrité après l'accident.",
+    "sentence": "Les médecins ont remarqué une anomalie sur mon deuxième rib droit lors de la radiographie.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "\"rib\" should be \"côte\" in French for the given meaning."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c2.json|LOURDER": {
     "sentence": "De retour de la randonnée, il enleva ses chaussures en prenant soin de ne pas lourder dans l'entrée.",
@@ -226621,13 +226614,13 @@
     "gate": 2
   },
   "fr/c2.json|HASCHICH": {
-    "sentence": "La consommation de haschich est strictement réglementée dans ce pays.",
+    "sentence": "La combustion du haschich dégage une odeur caractéristique qui persiste longtemps dans une pièce fermée.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes a drug reference (\"haschich\"), which violates the general-audience suitability criteria."
+    "reason": "The sentence includes a reference to drugs (\"haschich\"), which violates the general-audience suitability criteria."
   },
   "fr/c2.json|ALIM": {
     "sentence": "Ce nouvel alim bio contient des ingrédients 100% naturels.",
@@ -227680,7 +227673,7 @@
     "gate": 2
   },
   "fr/c2.json|MILLMAN": {
-    "sentence": "Le meunier a engagé un *millman* pour moderniser l'ancien moulin à eau en bon état de fonctionnement.",
+    "sentence": "Le meunier a engagé un millman pour moderniser l'ancien moulin à eau en bon état de fonctionnement.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
@@ -228113,13 +228106,13 @@
     "gate": 2
   },
   "fr/c2.json|DHABI": {
-    "sentence": "Abu Dhabi, un émirat des Émirats arabes unis, brille par ses gratte-ciel futuristes et son désert luxuriant.",
+    "sentence": "Abu Dhabi est la capitale des Émirats arabes unis et un centre économique majeur au Moyen-Orient.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The word \"DHABI\" is not present in the sentence, violating condition 2."
+    "reason": "The sentence does not use the word \"DHABI\" as specified in the gloss."
   },
   "fr/c2.json|FOULURE": {
     "sentence": "Je suis tombé et j'ai eu une foulure au pied.",
@@ -228802,13 +228795,13 @@
     "gate": 2
   },
   "fr/c2.json|HASCHISCH": {
-    "sentence": "La consommation excessive de haschisch peut altérer la perception et la mémoire.",
+    "sentence": "L'usage récréatif du haschisch est strictement réglementé dans de nombreux pays.",
     "source": "mistral",
     "verdict": "reject",
     "level": "c2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence includes a drug reference (\"haschisch\"), which violates the general-audience suitability guideline."
+    "reason": "The sentence includes a drug reference (\"haschisch\"), which violates the general-audience suitability criteria."
   },
   "fr/c2.json|PAPAUTÉ": {
     "sentence": "L’exercice de la papauté exige une sagesse et une humilité exceptionnelles.",
@@ -275104,13 +275097,12 @@
     "gate": 2
   },
   "fr/a2.json|PROVENIR": {
-    "sentence": "Toute éloquence doit provenir d'une émotion, et par elle-même toute émotion cause l'éloquence.",
+    "sentence": "Rien ne peut provenir de rien.",
     "source": "tatoeba",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "a2",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence is too complex and literary for A2 learners, and \"provenir\" is used in a figurative sense rather than the literal meaning of \"being from a place.\""
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/a2.json|RELIGION": {
     "sentence": "À chacun sa religion.",
@@ -275133,9 +275125,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a2",
-    "at": "2026-11-25",
+    "at": "2026-11-26",
     "gate": 2,
-    "reason": "The sentence uses \"basket-ball\" (hyphenated) and refers to the sport, not the shoe (\"basket\" as \"sneaker\")."
+    "reason": "The sentence uses \"basket-ball\" (hyphenated) and does not include the word \"basket\" as defined."
   },
   "fr/a2.json|PROMOTION": {
     "sentence": "C'est une promotion.",
@@ -276491,13 +276483,12 @@
     "gate": 2
   },
   "fr/c1.json|LACÉRER": {
-    "sentence": "Je vais t'agripper et te lacérer!",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "La branche sèche a commencé à lacérer la tente sous la tempête.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The sentence contains a threat of violence (\"te lacérer\"), which violates the suitability criteria for a general-audience app."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c1.json|BILATÉRAL": {
     "sentence": "Un accord bilatéral a été signé pour favoriser les échanges culturels entre les deux pays.",
@@ -276628,13 +276619,12 @@
     "gate": 2
   },
   "fr/c1.json|ÉOLIEN": {
-    "sentence": "L’énergie éolien est de plus en plus utilisée pour produire de l’électricité.",
+    "sentence": "Le parc éolien produit de l'électricité grâce à la force du vent.",
     "source": "mistral",
-    "verdict": "reject",
+    "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-25",
-    "gate": 2,
-    "reason": "The adjective \"éolien\" should agree in gender with \"énergie\" (feminine), so it should be \"éolienne\"."
+    "at": "2026-11-26",
+    "gate": 2
   },
   "fr/c1.json|MOUSSEUX": {
     "sentence": "Je préfère le mousseux.",
@@ -278112,5 +278102,752 @@
     "level": "c2",
     "at": "2026-11-26",
     "gate": 2
+  },
+  "fr/a1.json|FRANCHIR": {
+    "sentence": "Il aime franchir des cols avec son vélo.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|RASER": {
+    "sentence": "Je vais me raser.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|REPOUSSER": {
+    "sentence": "Je dois repousser le vendeur qui insiste trop.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "fr/a1.json|FORMATION": {
+    "sentence": "Je suis en formation.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|GENTLEMAN": {
+    "sentence": "C'est un gentleman.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|TENDANCE": {
+    "sentence": "C'est la tendance.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|SILENCIEUX": {
+    "sentence": "Sois silencieux.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a1.json|DISTRAIRE": {
+    "sentence": "Essaie de la distraire.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|BLÂMER": {
+    "sentence": "Qui est à blâmer ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|VÔTRE": {
+    "sentence": "À la vôtre !",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|FROTTER": {
+    "sentence": "Peux-tu me frotter les épaules ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|LAID": {
+    "sentence": "C'est laid.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|PRÉSERVER": {
+    "sentence": "Il faut le préserver.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|ASPIRER": {
+    "sentence": "Elle a pris un moment pour aspirer profondément l'air frais du matin.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|CAMPUS": {
+    "sentence": "Il vit hors campus.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|NAVRER": {
+    "sentence": "Ce film va me navrer, il est vraiment trop triste.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|GALERIE": {
+    "sentence": "Puis-je visiter une galerie d'art?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|ÉLÉGANT": {
+    "sentence": "Tu es élégant.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|ANIMER": {
+    "sentence": "C'est un grand honneur d'animer cette table ronde.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/a2.json|CORRIGER": {
+    "sentence": "On peut corriger ça.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|ANÉANTIR": {
+    "sentence": "La catastrophe a failli anéantir toute la région.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|FRINGUE": {
+    "sentence": "J'ai acheté une nouvelle fringue pour la fête de ce soir.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|RANCH": {
+    "sentence": "Nous sommes allés au ranch à cheval.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|BOUM": {
+    "sentence": "Un énorme \"BOUM\" a retenti quand la porte s’est refermée violemment.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|ISOLÉ": {
+    "sentence": "J'étais isolé.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|GRAIN": {
+    "sentence": "J'ai trouvé un grain de blé dans mon pain.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|SOLITUDE": {
+    "sentence": "Peut-on mourir de solitude ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|DÉGUISER": {
+    "sentence": "Je vais me déguiser en sorcière.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|FIABLE": {
+    "sentence": "Tu es fiable.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|MUNITION": {
+    "sentence": "Il faut vérifier le niveau de munition avant la prochaine séance de tir.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b1.json|SOBRE": {
+    "sentence": "C'est très sobre.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|CONFESSER": {
+    "sentence": "Tu dois le confesser.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|RÉSUMER": {
+    "sentence": "Peux-tu résumer ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|FAUCHER": {
+    "sentence": "Ils commencèrent à faucher les hautes herbes et à tondre le gazon humecté de rosée.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|CLEAN": {
+    "sentence": "Ce t-shirt est clean, il brille sous le soleil.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|CAROTTE": {
+    "sentence": "Carotte ou banane ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|GRENIER": {
+    "sentence": "Je suis au grenier.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|ENDORMIE": {
+    "sentence": "Tu es endormie.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|DÉCORER": {
+    "sentence": "Je vais décorer un gâteau.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|ALTERNATIF": {
+    "sentence": "Ce restaurant propose un menu alternatif pour les végétariens.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|GELÉE": {
+    "sentence": "Il aime la gelée.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|SAMOURAÏ": {
+    "sentence": "Je vis selon la voie du samouraï.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|CUILLÈRE": {
+    "sentence": "C'est ma cuillère.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/b2.json|POGNON": {
+    "sentence": "Il a du pognon.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "b2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|DÉFICIT": {
+    "sentence": "L'entreprise est en déficit.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|INITIATION": {
+    "sentence": "Ce manuel est un bon outil d'initiation à l'espéranto.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|AVALANCHE": {
+    "sentence": "Il y a eu une avalanche.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|GOUTTIÈRE": {
+    "sentence": "La gouttière est percée.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|IMPAYÉ": {
+    "sentence": "Le montant de cette facture est toujours impayé, il faut la régler rapidement.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|NÉGOCIABLE": {
+    "sentence": "C'est négociable.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|MŒURS": {
+    "sentence": "Autre pays, autres mœurs.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|COSAQUE": {
+    "sentence": "Le cosaque chevauchait fièrement à travers la steppe, son sabre brillant sous le soleil.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|DÉPENS": {
+    "sentence": "Les dépens du voyage s’élevaient à plus de cinq cents euros.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|RÉGLAGE": {
+    "sentence": "Il a besoin d'un réglage.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|CÉSARIEN": {
+    "sentence": "Elle a accouché par césarien après une grossesse difficile.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c1",
+    "at": "2026-11-27",
+    "gate": 2,
+    "reason": "\"Césarien\" is not the correct form; \"césarienne\" (feminine) should be used."
+  },
+  "fr/c1.json|KAISER": {
+    "sentence": "Le dernier kaiser régna sur un vaste empire avant que la monarchie ne soit abolie.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|EXTINCTEUR": {
+    "sentence": "C'est un extincteur à poudre.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|SOLIDAIRE": {
+    "sentence": "J'essayais d'être solidaire.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|POTIN": {
+    "sentence": "Ce potin sur le nouveau collègue s’est répandu comme une traînée de poudre.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|DANCING": {
+    "sentence": "La musique résonnait dans le dancing bondé jusqu’au petit matin.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|RUNE": {
+    "sentence": "L'archéologue découvrit une pierre gravée d'une mystérieuse rune celte.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|FAISEUR": {
+    "sentence": "Comme le dit le dicton, grand diseur n'est pas grand faiseur.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|MIXTE": {
+    "sentence": "Notre école est maintenant mixte.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|ENTRAVER": {
+    "sentence": "Ne laissez pas la superstition vous entraver.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|CAMERAMAN": {
+    "sentence": "Le cameraman a capté les magnifiques images du coucher de soleil sur la montagne.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|CRYPTE": {
+    "sentence": "La crypte antique renfermait des secrets millénaires.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c1.json|TERMINUS": {
+    "sentence": "Terminus !",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c1",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|APEURER": {
+    "sentence": "Un bruit soudain dans la nuit a de quoi apeurer même les plus courageux.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|SPLASH": {
+    "sentence": "Un gros splash retentit quand le bateau fendit la surface de l’étang.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|CROUPE": {
+    "sentence": "Le médecin a diagnostiqué un croupe chez l’enfant après l’avoir ausculté attentivement.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|GRISANT": {
+    "sentence": "C’est grisant.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|FOUDROYANT": {
+    "sentence": "Son progrès en français fut foudroyant, maîtrisant le subjonctif en quelques semaines.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|SÉQUENÇAGE": {
+    "sentence": "Le séquençage du génome humain a révolutionné la médecine moderne.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|DÉLAISSER": {
+    "sentence": "Il ne faut jamais délaisser un ami dans le besoin.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|MAÇONNIQUE": {
+    "sentence": "Le vocabulaire maçonnique, riche en symboles, fascine par son héritage traditionnel.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|LINÉAIRE": {
+    "sentence": "Le système est-il linéaire ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|PRÉMÉDITER": {
+    "sentence": "Il faut préméditer ses réponses pour éviter les malentendus dans un débat passionné.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|AGONISANT": {
+    "sentence": "L’espoir agissant semble agonisant dans la société actuelle.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2,
+    "reason": "The sentence uses \"agissant\" instead of \"agonisant,\" which is incorrect for the given meaning."
+  },
+  "fr/c2.json|GÉLATINEUX": {
+    "sentence": "Le fromage blanc était trop gélatineux pour être apprécié.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|CLÉMENTINE": {
+    "sentence": "Clémentine lut la lettre, qui sentait le tabac, et la jeta par un geste de dégoût.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|ÉCORCHURE": {
+    "sentence": "L'écorchure au genou est purulente.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|OBLIGEANCE": {
+    "sentence": "Ayez l'obligeance de répondre à mes questions.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|COMMUNIER": {
+    "sentence": "Communier à Pâques est une obligation.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|VELOUTER": {
+    "sentence": "Ce nouveau savon va velouter la peau en quelques secondes.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|CASHMERE": {
+    "sentence": "Son écharpe en cashmere est si douce qu’on dirait une caresse.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|MEUBLER": {
+    "sentence": "Comment meubler cette pièce ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|RACCORDER": {
+    "sentence": "L'éclisse sert à raccorder deux rails.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|EXPORTER": {
+    "sentence": "Que souhaitez-vous exporter ?",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|INHÉRENT": {
+    "sentence": "Le mensonge est inhérent à la politique.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|GIFLE": {
+    "sentence": "Il reçut une gifle.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|CHALOUPE": {
+    "sentence": "La chaloupe glissait silencieusement sur les eaux calmes du lac au coucher du soleil.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|LOYALEMENT": {
+    "sentence": "Elle a servi l’entreprise loyalement pendant plus de vingt ans.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2
+  },
+  "fr/c2.json|BÉNÉDICT": {
+    "sentence": "L'ordre **bénédict** prône la prière et le travail dans une harmonie sereine.",
+    "source": "mistral",
+    "verdict": "reject",
+    "level": "c2",
+    "at": "2026-11-26",
+    "gate": 2,
+    "reason": "The word \"bénédict\" is not standard French; the correct form is \"bénédictin\" for the given meaning."
   }
 }
