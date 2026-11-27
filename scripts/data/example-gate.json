@@ -34364,14 +34364,6 @@
     "at": "2026-11-13",
     "gate": 2
   },
-  "es/b1.json|MORDER": {
-    "sentence": "No te va a morder.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-13",
-    "gate": 2
-  },
   "es/b1.json|QUIETO": {
     "sentence": "¡Quieto ahí!",
     "source": "tatoeba",
@@ -36398,8 +36390,8 @@
     "gate": 2
   },
   "es/b2.json|ENCUBRIR": {
-    "sentence": "¿Cuántas bombas de humo se deben aventar aún para que el gobierno pueda realmente encubrir el escándalo?",
-    "source": "tatoeba",
+    "sentence": "¿Hasta dónde puede llegar el gobierno para encubrir el escándalo?",
+    "source": "mistral",
     "verdict": "pass",
     "level": "b2",
     "at": "2026-11-13",
@@ -109278,8 +109270,8 @@
     "gate": 2
   },
   "es/c1.json|PLUTONIO": {
-    "sentence": "Las bombas nucleares se hacen con uranio o plutonio.",
-    "source": "tatoeba",
+    "sentence": "Algunos reactores usan uranio o plutonio como combustible.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c1",
     "at": "2026-11-21",
@@ -109287,14 +109279,6 @@
   },
   "es/c1.json|CALMANTE": {
     "sentence": "¿Quieres que te dé otro calmante?",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-21",
-    "gate": 2
-  },
-  "es/c1.json|PRIMORDIAL": {
-    "sentence": "La precisión en esta tarea es primordial.",
     "source": "tatoeba",
     "verdict": "pass",
     "level": "c1",
@@ -113340,14 +113324,6 @@
   "es/c2.json|DESCOMUNAL": {
     "sentence": "Eso que dices es una falacia descomunal.",
     "source": "tatoeba",
-    "verdict": "pass",
-    "level": "c2",
-    "at": "2026-11-21",
-    "gate": 2
-  },
-  "es/c2.json|AMORDAZAR": {
-    "sentence": "El profesor tuvo que amordazar al alumno indisciplinado para recuperar el orden en el aula.",
-    "source": "mistral",
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-21",
@@ -154109,14 +154085,6 @@
     "at": "2026-11-22",
     "gate": 2
   },
-  "es/a2.json|BOMBERO": {
-    "sentence": "Eres bombero, ¿no?",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "a2",
-    "at": "2026-11-22",
-    "gate": 2
-  },
   "es/a2.json|TOCADO": {
     "sentence": "El coche quedó tocado después del pequeño choque en el aparcamiento.",
     "source": "mistral",
@@ -157729,14 +157697,6 @@
     "at": "2026-11-22",
     "gate": 2
   },
-  "es/b1.json|MORDIDO": {
-    "sentence": "¿Alguna vez te ha mordido tu perro?",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-22",
-    "gate": 2
-  },
   "es/b1.json|TOUR": {
     "sentence": "El tour fue cancelado.",
     "source": "tatoeba",
@@ -159773,14 +159733,6 @@
   },
   "es/b1.json|BOTE": {
     "sentence": "Ese es un bote.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b1",
-    "at": "2026-11-22",
-    "gate": 2
-  },
-  "es/b1.json|BOMBARDEO": {
-    "sentence": "Tras el bombardeo todo eran ruinas y desolación.",
     "source": "tatoeba",
     "verdict": "pass",
     "level": "b1",
@@ -163885,14 +163837,6 @@
     "at": "2026-11-22",
     "gate": 2
   },
-  "es/b2.json|MORDISCO": {
-    "sentence": "Si me muerdes te devolveré el mordisco.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b2",
-    "at": "2026-11-22",
-    "gate": 2
-  },
   "es/b2.json|CLIC": {
     "sentence": "Haz clic para editar.",
     "source": "tatoeba",
@@ -166907,14 +166851,6 @@
     "at": "2026-11-22",
     "gate": 2
   },
-  "es/c1.json|TORTURADO": {
-    "sentence": "Fuiste torturado.",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-22",
-    "gate": 2
-  },
   "es/c1.json|COMEZÓN": {
     "sentence": "Tiene comezón.",
     "source": "tatoeba",
@@ -167414,14 +167350,6 @@
   "es/c1.json|PLANICIE": {
     "sentence": "Los exploradores cruzaron la interminable planicie bajo el sol abrasador.",
     "source": "mistral",
-    "verdict": "pass",
-    "level": "c1",
-    "at": "2026-11-22",
-    "gate": 2
-  },
-  "es/c1.json|MORDAZA": {
-    "sentence": "Los bandidos le pusieron una mordaza en la boca.",
-    "source": "tatoeba",
     "verdict": "pass",
     "level": "c1",
     "at": "2026-11-22",
@@ -171164,8 +171092,8 @@
     "reason": "The word \"acabalo\" is incorrectly spelled; the correct form is \"acabado.\""
   },
   "es/c2.json|EXTENSIBLE": {
-    "sentence": "Bajar al gato del árbol estuvo chupado porque el camión de bomberos tenía una escalera extensible.",
-    "source": "tatoeba",
+    "sentence": "El camión tenía una escalera extensible para bajar al gato del árbol.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c2",
     "at": "2026-11-22",
@@ -279569,6 +279497,78 @@
   },
   "de/c2.json|FEHLERLOS": {
     "sentence": "Nach vielen Übungen ist seine Aussprache fehlerlos.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/a2.json|RUTINA": {
+    "sentence": "Tengo una rutina todas las mañanas.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "A2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/b1.json|MANGA": {
+    "sentence": "Lleva una camiseta de manga larga.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/b1.json|JABÓN": {
+    "sentence": "Me lavo las manos con jabón.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/b1.json|BARRERA": {
+    "sentence": "Había una barrera en la carretera.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/b2.json|MOLINO": {
+    "sentence": "El molino está junto al río.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/c1.json|BRUMA": {
+    "sentence": "La bruma cubría toda la ciudad.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/c1.json|SIGILO": {
+    "sentence": "Guardó el documento con mucho sigilo.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/c1.json|SORTIJA": {
+    "sentence": "Se compró una sortija de oro.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "C1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "es/c2.json|REINTEGRAR": {
+    "sentence": "Hay que reintegrar al empleado después del viaje.",
     "source": "mistral",
     "verdict": "pass",
     "level": "C2",
