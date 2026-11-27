@@ -574,6 +574,7 @@ describe('pattern allowlist', () => {
       'pt BOMBEIROS',
       'pt BOMBEIRO',
       'pt BOMBEAR',
+      'it BOMBOLA',
     ])
     expect(staleAllowEntries()).toEqual([])
   })
@@ -681,7 +682,7 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['ARMARIO', 'es'], // ARMA is not a violence stem
       ['GUERRA', 'es'],
       ['MORDWAFFE', 'en'], // scoped: the de pattern does not leak into en
-      ['BOMBARD', 'de'], // scoped: the en pattern does not leak into de
+      ['BOMBARD', 'fr'], // scoped: the en/de BOMB rules do not leak into fr
       ['TERROR', 'en'], // bare stem stays on the exact list
       ['BOMBER', 'en'], // ER is not in the BOMB suffix set
       ['BOMBEIROS', 'pt'], // allowlisted homograph (firefighters)
@@ -696,6 +697,8 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
     const rules = loadViolencePatterns()
     expect(rules.length).toBeGreaterThan(10)
     for (const rule of rules) expect(rule.re.source.startsWith('^')).toBe(true)
+    // stage 2 (#388): prefix rules are part of the violence section
+    expect(rules.some((r) => r.kind === 'prefix' && r.lang === 'de' && r.stem === 'SPRENG')).toBe(true)
     const mord = rules.find((r) => r.lang === 'de' && r.stem === 'MORD')!
     expect(mord.re.test('MORDE')).toBe(true)
     expect(mord.re.test('MORD')).toBe(false) // bare stem stays on the exact list
@@ -735,7 +738,52 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
     expect(isDeniedGlossToken('Sprengstoff', 'de', 'HAUS')).toBe(true) // compound in a gloss is denied
     expect(isDeniedGlossToken('BOMBARDING', 'en', 'HOUSE')).toBe(true)
     expect(isDeniedGlossToken('bombs', 'en', 'HOUSE')).toBe(false) // exact violence word: allowed in glosses
-    expect(isDeniedGlossToken('BOMBARD', 'de', 'HAUS')).toBe(false) // scoped
+    expect(isDeniedGlossToken('BOMBARD', 'fr', 'MAISON')).toBe(false) // scoped
+    expect(isDeniedGlossToken('GEWALTSUCHT', 'de', 'HAUS')).toBe(true) // stage-2 prefix hit in a gloss
+  })
+
+  test('stage 2 prefix rules (#388) deny stem + word-like tail, never substring', () => {
+    // open compounds with uncurated tails — no suffix line covers these
+    expect(isDeniedLemma('BOMBARDARE', undefined, 'it')).toBe(true) // no it BOMB(…) suffix line
+    expect(isDeniedLemma('GEWALTSUCHT', undefined, 'de')).toBe(true) // SUCHT not in the GEWALT suffix list
+    expect(isDeniedLemma('SPRENGKAPSEL', undefined, 'de')).toBe(true) // KAPSEL uncurated
+    // tail rule: 1–2 letter tails are not prefix hits (curated-suffix territory)
+    expect(isDeniedLemma('SPRENGA', undefined, 'de')).toBe(false)
+    expect(isDeniedLemma('BOMBOM', undefined, 'pt')).toBe(false) // pt candy, tail OM; not exact-listed
+    // bare stem stays on the exact list only
+    expect(isDeniedLemma('SPRENG', undefined, 'de')).toBe(false)
+    // anchored at the start, never a substring
+    expect(isDeniedLemma('ABSPRENGKAPSEL', undefined, 'de')).toBe(false)
+    expect(isDeniedLemma('XGEWALTSUCHT', undefined, 'de')).toBe(false)
+    // language-scoped
+    expect(isDeniedLemma('GEWALTSUCHT', undefined, 'en')).toBe(false)
+    // allowlist exemption applies to prefix hits too
+    expect(isDeniedLemma('BOMBOLA', undefined, 'it')).toBe(false) // allowlisted gas cylinder
+    expect(isDeniedLemma('BOMBOLA', undefined, 'pt')).toBe(true) // not allowlisted in pt
+    // gloss tokens follow the same prefix rule
+    expect(isDeniedGlossToken('sprengcapsel', 'de', 'HAUS')).toBe(true)
+    expect(isDeniedGlossToken('bombola', 'it', 'CASA')).toBe(false) // allowlisted
+  })
+
+  test('stage 2 prefix stems must be word-like heads and fold ß/SS (#388)', () => {
+    expect(() => parsePatternDenylist('de#prefix A\n')).toThrow(/word-like head/)
+    expect(() => parsePatternDenylist('de#prefix AB\n')).not.toThrow() // short heads are word-like
+    expect(() => parsePatternDenylist('de#prefix FU2\n')).toThrow(/stem must be letters/)
+    const rules = parsePatternDenylist('de#prefix SCHEIß\n')
+    expect(rules[0]!.kind).toBe('prefix')
+    expect(rules[0]!.stem).toBe('SCHEISS')
+    expect(matchesDeniedPattern('SCHEISSKOPF', 'de', rules)).toBe(true)
+    expect(matchesDeniedPattern('SCHEIßKOPF', 'de', rules)).toBe(true) // ß/SS fold
+    expect(matchesDeniedPattern('SCHEISS', 'de', rules)).toBe(false) // bare stem not matched
+    expect(matchesDeniedPattern('SCHEISSAB', 'de', rules)).toBe(true) // short-head tail is word-like
+    expect(matchesDeniedPattern('SCHEISSXY', 'de', rules)).toBe(false) // 2-letter non-short-head tail
+    expect(matchesDeniedPattern('SCHEISSKOPF', 'en', rules)).toBe(false) // scoped
+  })
+
+  test('an allowlist entry matching only a prefix rule is not stale (#388)', () => {
+    const rules = loadPatternDenylist()
+    const stale = staleAllowEntries(rules, [{ lang: 'it', word: 'BOMBOLA', reason: 'gas cylinder, prefix-rule homograph' }])
+    expect(stale).toEqual([])
   })
 })
 

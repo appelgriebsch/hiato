@@ -18,6 +18,14 @@ The denylist matches whole lemmas only: exact lines and `STEM(SUFFIX|…)` patte
 
 **Stage 2 (separate follow-up ticket):** a prefix/compound matcher (`lang#prefix STEM` denying stem + word-like tail, mirroring `isCompoundHead` in `scripts/gloss-quality.ts`, allowlist-aware, stale-allow tests extended) for open compounds whose suffix is not curated. Until it ships, the regression scan is the tripwire.
 
+## Amendment — stage 2 shipped (#388, 2026-11-27)
+
+- **Syntax:** `lang#prefix STEM` lines in the `# category: violence` section (language-scoped only, so a `# …` comment can never parse as a rule). The stem must be a word-like head (≥ 3 letters or in the short-head set `UM AB AN ZU DA WO UR`, mirroring `isCompoundHead` in `scripts/gloss-quality.ts`).
+- **Matcher:** compiled to `^STEM(?:\p{L}{3,}|UM|AB|AN|ZU|DA|WO|UR)$` over `spellingKey` (ß/SS folds as usual). A lemma is denied when it starts with the stem and the tail is word-like; the bare stem is not matched. Anchored at the start, never a substring. `matchesDeniedPattern` needs no special case — the compiled regex is the whole rule — so `isDeniedLemma`, `isDeniedGlossToken`, `isDeniedTextToken`, `staleAllowEntries`, `packs:check`, and the expand pipelines (`hangmanOk`) all inherit prefix denials unchanged.
+- **Stems:** the stage-1 base stems per language (de MORD BOMB SPRENG WAFFE KRIEG GEWALT TORTUR AMOK TERROR ATTENTAT ÜBERFALL ANGRIFF TÖT; es MORD BOMB TORTUR TERROR ATENTAD AMOK; pt MORD BOMB TORTUR TERROR; fr MORD TERROR; it MORD BOMB TORTUR TERROR; en TORTUR MURD TERROR BOMB).
+- **Allowlist churn:** `it BOMBOLA` (gas cylinder) added as a reasoned prefix homograph; the shipped `pt BOMBEIRO*` / `de WAFFEL|KRIEGEN|GEWALTIG` entries now also match prefix rules. Stale-allow tests cover prefix rules via `matchesDeniedPattern`.
+- **Fallout fixed in the same change:** one shipped lemma (`it/b2 BOMBARDARE`) replaced in-slot by `BALCONE`; violence-stem compounds removed from family members, chips, glosses, and examples across de/es/pt/fr/it/en packs (e.g. `gewaltsam` → `brutal` in glosses); denied cache keys (WAFFENRUHE, SPRENGKOPF, KRIEGSHERR, KRIEGSGOTT, BOMBEAR/es, BOMBISTA, BOMBORDO, BOMBARDARE) dropped from gloss/synonym caches. The T1 regression scan is extended with a prefix-hit pass (`violencePrefixHits`) asserting zero un-allowlisted open compounds across all 36 packs.
+
 **Replacements:** every shipped compound lemma is replaced in its own slot (ADR 0058): Hunspell-verified pack-language word, 3–10 letters, fold-unique, CEFR band fit, hint-ceiling clear; pack `version` bumped, `scripts/data/pack-pin.json` and `scripts/data/hunspell-verdicts.json` regenerated and committed (the membership stamp hashes `lemma-denylist.ts`, so the verdict cache invalidates by design).
 
 ## Options Considered

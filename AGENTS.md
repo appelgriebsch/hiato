@@ -42,6 +42,12 @@ Matching rules:
   in-slot instead — war content, no allowlist entry). Pattern hits count in
   gloss/example scans for every category (ADR 0066); exact violence words
   count on lemmas, chips, and family members only.
+- Stage 2 of ADR 0065 (#388) adds prefix rules `lang#prefix STEM` in the same
+  section: a lemma is denied when its spellingKey starts with the stem and
+  the remaining tail is word-like (≥ 3 letters or a short head, mirroring
+  `isCompoundHead` in `scripts/gloss-quality.ts`). Still anchored at the
+  start, never a substring; the bare stem is not matched and stays on the
+  exact list. Prefix hits are allowlist-exempt exactly like suffix hits.
 
 Exceptions require an explicit allowlist entry **with a reason**:
 `lemma-denylist-allow.txt` for pattern-caught homographs (e.g. `it SCOPO` =

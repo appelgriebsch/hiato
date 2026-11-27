@@ -11,6 +11,7 @@ import {
   loadGlossExempt,
   loadPatternDenylist,
   loadViolencePatterns,
+  matchesDeniedPattern,
   nfcUpper,
   spellingKey,
   staleAllowEntries,
@@ -349,6 +350,39 @@ describe('ADR 0065 violence-stem regression scan (#381)', () => {
 
   test('zero un-allowlisted stem-initial violence compounds across all 36 packs', () => {
     expect(violenceStemHits(loadPacks())).toEqual([])
+  })
+
+  /** Stage 2 (#388): lemmas matching a `lang#prefix` violence rule with no allowlist entry. */
+  function violencePrefixHits(packs: { lang: string; cefr: string; lemmas: Lemma[] }[]): string[] {
+    const rules = loadViolencePatterns().filter((r) => r.kind === 'prefix')
+    const errors: string[] = []
+    for (const pack of packs) {
+      for (const L of pack.lemmas) {
+        if (!matchesDeniedPattern(L.word, pack.lang, rules)) continue
+        if (isPatternAllowlisted(L.word, pack.lang)) continue
+        errors.push(`${pack.lang}/${pack.cefr} ${L.word} is a prefix-rule hit`)
+      }
+    }
+    return errors
+  }
+
+  test('zero un-allowlisted prefix-rule hits (open compounds) across all 36 packs', () => {
+    expect(violencePrefixHits(loadPacks())).toEqual([])
+  })
+
+  test('a reinserted open compound fails the prefix scan', () => {
+    const packs = loadPacks()
+    const it = packs.find((p) => p.lang === 'it' && p.cefr === 'b2')!
+    it.lemmas = it.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'BOMBARDARE' } : L))
+    const errors = violencePrefixHits(packs)
+    expect(errors.some((e) => e.includes('BOMBARDARE'))).toBe(true)
+  })
+
+  test('an allowlisted prefix homograph does not fail the prefix scan', () => {
+    const packs = loadPacks()
+    const it = packs.find((p) => p.lang === 'it' && p.cefr === 'b2')!
+    it.lemmas = it.lemmas.map((L, i) => (i === 0 ? { ...L, word: 'BOMBOLA' } : L))
+    expect(violencePrefixHits(packs).some((e) => e.includes('BOMBOLA'))).toBe(false)
   })
 
   test('a reinserted violence compound fails the scan', () => {

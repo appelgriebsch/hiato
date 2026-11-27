@@ -103240,11 +103240,11 @@
     "gate": 2
   },
   "de/c1.json|ARTUS": {
-    "sentence": "Mordred verriet König Artus.",
-    "source": "tatoeba",
+    "sentence": "König Artus wurde von einem Vertrauten verraten.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-21",
+    "at": "2026-11-27",
     "gate": 2
   },
   "de/c1.json|ABSTRAKT": {
@@ -106955,11 +106955,11 @@
     "gate": 2
   },
   "de/c2.json|ZEITZÜNDER": {
-    "sentence": "Der Zeitzünder aktiviert die Sprengladung nach genau fünf Stunden.",
+    "sentence": "Der Zeitzünder aktiviert die Ladung nach genau fünf Stunden.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-21",
+    "at": "2026-11-27",
     "gate": 2
   },
   "de/c2.json|PARKBANK": {
@@ -239764,14 +239764,6 @@
     "at": "2026-11-23",
     "gate": 2
   },
-  "it/b2.json|BOMBARDARE": {
-    "sentence": "Stanno per bombardare anche quello?",
-    "source": "tatoeba",
-    "verdict": "pass",
-    "level": "b2",
-    "at": "2026-11-23",
-    "gate": 2
-  },
   "it/b2.json|ORIZZONTE": {
     "sentence": "La pace è all'orizzonte.",
     "source": "tatoeba",
@@ -268692,11 +268684,11 @@
     "gate": 2
   },
   "de/c1.json|GUERILLA": {
-    "sentence": "In amerikanischen Berichten wird der Guerilla-Widerstand des irakischen Militärs als Terrorismus bezeichnet.",
-    "source": "tatoeba",
+    "sentence": "In amerikanischen Berichten wird der Guerilla-Widerstand des irakischen Militärs als Aufstand bezeichnet.",
+    "source": "mistral",
     "verdict": "pass",
     "level": "c1",
-    "at": "2026-11-23",
+    "at": "2026-11-27",
     "gate": 2
   },
   "de/c1.json|ABZAHLEN": {
@@ -272032,11 +272024,11 @@
     "gate": 2
   },
   "de/c2.json|ATOMPILZ": {
-    "sentence": "Nach der gewaltigen Detonation erhob sich ein gigantischer Atompilz über der Wüste.",
+    "sentence": "Nach der riesigen Detonation erhob sich ein gigantischer Atompilz über der Wüste.",
     "source": "mistral",
     "verdict": "pass",
     "level": "c2",
-    "at": "2026-11-23",
+    "at": "2026-11-27",
     "gate": 2
   },
   "de/c2.json|HALTMACHEN": {
@@ -279588,6 +279580,14 @@
     "source": "mistral",
     "verdict": "pass",
     "level": "C1",
+    "at": "2026-11-27",
+    "gate": 2
+  },
+  "it/b2.json|BALCONE": {
+    "sentence": "Il balcone dà sul giardino.",
+    "source": "mistral",
+    "verdict": "pass",
+    "level": "B2",
     "at": "2026-11-27",
     "gate": 2
   }
