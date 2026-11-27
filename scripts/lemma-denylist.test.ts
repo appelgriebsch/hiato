@@ -630,6 +630,12 @@ describe('ADR 0065 violence stem patterns (#381)', () => {
       ['ATTENTAT', 'de'],
       ['TORTUR', 'de'],
       ['KRIEGER', 'de'], // warrior: replaced in-slot, no allowlist entry
+      ['MORDER', 'es'],
+      ['MORDISCO', 'es'],
+      ['AMORDAZAR', 'es'],
+      ['BOMBARDEO', 'es'],
+      ['TORTURADO', 'es'],
+      ['ATENTADO', 'es'],
     ]
     for (const [word, lang] of denied) {
       expect(isDeniedLemma(word, undefined, lang)).toBe(true)
