@@ -37,8 +37,9 @@ Matching rules:
   whole-lemma anchored, never substring. The bare concept word stays on the
   exact list: denied as a pack item, allowed as a single word in a gloss
   (ADR 0066). Stem-initial homographs (`de WAFFEL`, `de KRIEGEN`,
-  `de KRIEGER`, `de GEWALTIG`, `pt BOMBEIROS`) stay playable only through
-  reasoned `lemma-denylist-allow.txt` entries. Pattern hits count in
+  `de GEWALTIG`, `pt BOMBEIROS`) stay playable only through
+  reasoned `lemma-denylist-allow.txt` entries (`de KRIEGER` was replaced
+  in-slot instead — war content, no allowlist entry). Pattern hits count in
   gloss/example scans for every category (ADR 0066); exact violence words
   count on lemmas, chips, and family members only.
 
