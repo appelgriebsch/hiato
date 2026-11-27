@@ -658,7 +658,7 @@ function PlayRound({
     const r = roundRef.current
     if (!r.wordEntry || r.finished || r.loading || mode !== 'practice') return
     setTeachLine(null)
-    const next = revealAllCells(r.wordEntry.word)
+    const next = revealAllCells(r.wordEntry.word, r.cells)
     const usedCorrect = correctKeysFromCells(next)
     roundRef.current = {
       ...r,
@@ -1436,33 +1436,35 @@ function EndCard({
   return (
     <div className="motion-result-enter mb-2 space-y-2 short-land:mb-0 short-land:grid short-land:h-full short-land:min-h-0 short-land:grid-cols-2 short-land:items-center short-land:gap-6 short-land:space-y-0">
       <div className="relative min-w-0 space-y-2">
-      {won
-        ? ([
-            { top: -6, left: -6 },
-            { top: -6, right: -6 },
-            { bottom: -6, left: -6 },
-            { bottom: -6, right: -6 },
-            { top: '45%', left: -10 },
-            { top: '45%', right: -10 },
-          ] as const).map((pos, i) => (
-            <PixelIcon
-              key={i}
-              name="spark"
-              size={16}
-              className="px-spark text-spark [--icon-2:var(--color-coin)]"
-              style={pos}
-            />
-          ))
-        : null}
       <div
-        className="px-frame bg-raised/80 px-4 py-2 text-center short-land:max-h-full short-land:overflow-y-auto"
+        className="px-frame relative bg-raised/80 px-4 py-2 text-center short-land:max-h-full short-land:overflow-y-auto"
         data-endcard-teach
         inert={confirming ? true : undefined}
       >
-        <Badge tone={won ? 'accent' : 'warm'} pulse={won} data-endcard-badge>
-          {won ? t('play.youGotIt') : revealed ? t('play.wordRevealed') : t('play.outOfLives')}
-          {endBadge}
-        </Badge>
+        {won
+          ? ([
+              { top: -6, left: -6 },
+              { top: -6, right: -6 },
+              { bottom: -6, left: -6 },
+              { bottom: -6, right: -6 },
+              { top: '45%', left: -10 },
+              { top: '45%', right: -10 },
+            ] as const).map((pos, i) => (
+              <PixelIcon
+                key={i}
+                name="spark"
+                size={16}
+                className="px-spark text-spark [--icon-2:var(--color-coin)]"
+                style={pos}
+              />
+            ))
+          : null}
+        <h2>
+          <Badge tone={won ? 'accent' : 'warm'} pulse={won} data-endcard-badge>
+            {won ? t('play.youGotIt') : revealed ? t('play.wordRevealed') : t('play.outOfLives')}
+            {endBadge}
+          </Badge>
+        </h2>
         {teachLine ? (
           <p lang="en" role="status" className="mb-3 text-center text-xs text-ink-muted">
             <span lang={lang} className="text-pixel-label text-accent-fg">
@@ -1483,8 +1485,14 @@ function EndCard({
           family={teachFamily}
           showSpeak={showSpeakControl}
         />
+        {mode === 'practice' ? (
+          <p className="mt-1 text-center text-xs text-ink-faint">
+            {t('play.practiceNoStreak')}
+          </p>
+        ) : null}
       </div>
 
+      {mode !== 'practice' ? (
       <div inert={confirming ? true : undefined}>
       <Card className="px-flat w-full p-2.5 text-left [--px-edge:var(--color-line)]">
         <div className="flex items-center justify-between text-sm">
@@ -1503,11 +1511,6 @@ function EndCard({
             {t('play.streakPauses')}
           </p>
         )}
-        {mode === 'practice' && (
-          <p className="mt-1 text-xs text-ink-faint">
-            {t('play.practiceNoStreak')}
-          </p>
-        )}
         {mode === 'pocket' && (
           <p className="mt-1 text-xs text-ink-faint">
             {t('play.pocketNote')}
@@ -1522,6 +1525,7 @@ function EndCard({
         ) : null}
         </Card>
       </div>
+      ) : null}
       </div>
 
       <div
@@ -1571,7 +1575,6 @@ function EndCard({
             <Button
               ref={saveBtnRef}
               fullWidth
-              variant="secondary"
               onClick={onSavePress}
             >
               {t('play.practiceThisWord')}
@@ -1589,9 +1592,12 @@ function EndCard({
               {t('common.retry')}
             </Button>
           ) : null}
+          {/* #402 CTA hierarchy: Share is primary only on a Daily/Pocket win;
+              on losses and in Practice the primary slot belongs to Pocket save /
+              Retry / Next word. */}
           <Button
             fullWidth
-            variant={mode === 'pocket' && !won ? 'secondary' : undefined}
+            variant={won && mode !== 'practice' ? undefined : 'secondary'}
             onClick={() => {
               try {
                 const sharePayload = buildShareCardPayload({
@@ -1649,7 +1655,7 @@ function EndCard({
               ) : null}
               <Button
                 fullWidth
-                variant="secondary"
+                variant={mode === 'practice' ? undefined : 'secondary'}
                 onClick={onPractice}
                 disabled={!practiceOk}
               >

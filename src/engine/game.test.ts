@@ -451,4 +451,29 @@ describe('revealAllCells (practice Reveal / #103)', () => {
     expect(cells.map((c) => c.char)).toEqual(['C', 'A', 'F', 'É'])
     expect(cells.every((c) => c.helped === false)).toBe(true)
   })
+
+  test('#402: fresh reveal marks every unguessed cell gaveUp', () => {
+    const cells = revealAllCells('CAFÉ')
+    expect(cells.every((c) => c.gaveUp === true)).toBe(true)
+  })
+
+  test('#402: existing revealed/helped cells are preserved, only new cells get gaveUp', () => {
+    const existing = buildInitialCells('CAFÉ', 'a1') // A prefilled + helped + revealed
+    const guessed = applyGuess(existing, 'CAFÉ', 'F').cells // F earned
+    const cells = revealAllCells('CAFÉ', guessed)
+    expect(cells.map((c) => c.char)).toEqual(['C', 'A', 'F', 'É'])
+    // A (helped prefill) and F (earned guess) stay earned — no gaveUp.
+    expect(cells[1].revealed).toBe(true)
+    expect(cells[1].helped).toBe(true)
+    expect(cells[1].gaveUp).toBeUndefined()
+    expect(cells[2].revealed).toBe(true)
+    expect(cells[2].helped).toBe(false)
+    expect(cells[2].gaveUp).toBeUndefined()
+    // C and É were unguessed → gaveUp (neutral tint, justRevealed animates these only).
+    expect(cells[0].gaveUp).toBe(true)
+    expect(cells[3].gaveUp).toBe(true)
+    const cells2 = revealAllCells('MANGER', buildInitialCells('MANGER', 'a1'))
+    expect(cells2.filter((c) => c.gaveUp).map((c) => c.char)).toEqual(['M', 'N', 'G', 'R'])
+    expect(cells2.filter((c) => !c.gaveUp).map((c) => c.char)).toEqual(['A', 'E'])
+  })
 })

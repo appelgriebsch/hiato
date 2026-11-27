@@ -547,13 +547,15 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(UI_COPY.en['teach.theWordWas']).toBe('The word was')
     expect(teach).toContain('{word}')
 
-    // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
+    // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy);
+    // #402: chip-synonym class carries the CRT dark-mode surface lift + hairline.
     expect(teach).toContain(
-      'inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink',
+      'chip-synonym inline-flex items-center px-2.5 py-1 text-[13px] font-medium text-ink',
     )
-    expect(teach).not.toContain(
-      'inline-flex items-center bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink-muted',
-    )
+    expect(teach).not.toContain('bg-cream-dark px-2.5 py-1 text-[13px] font-medium text-ink-muted')
+    const css = await Bun.file(new URL('../index.css', import.meta.url)).text()
+    expect(css).toContain('.chip-synonym')
+    expect(css).toMatch(/@media \(prefers-color-scheme: dark\) \{[\s\S]*\.chip-synonym \{[\s\S]*color-mix\(in srgb, var\(--color-raised\) 92%, #ffffff 8%\)[\s\S]*border: 1px solid color-mix\(in srgb, var\(--color-line\) 60%, transparent\)/)
     expect(teach).toContain('synonyms.map')
 
     // Silent omit: trim empty gloss; no NO_HINT_COPY / faint placeholder in teach panel
@@ -561,15 +563,23 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
     expect(endCard).not.toContain('NO_HINT_COPY')
     expect(teach).not.toContain('NO_HINT_COPY')
     expect(endCard).not.toMatch(/No hint|no hint available|Add a gloss/i)
-    const panelStart = endCard.indexOf('px-frame bg-raised/80')
-    const panelEnd = endCard.indexOf('<Card className="px-flat w-full p-2.5 text-left', panelStart)
+    const panelStart = endCard.indexOf('data-endcard-teach')
+    const panelEnd = endCard.indexOf("{mode !== 'practice' ? (", panelStart)
     expect(panelStart).toBeGreaterThan(0)
     expect(panelEnd).toBeGreaterThan(panelStart)
     const teachPanel = endCard.slice(panelStart, panelEnd)
-    expect(teachPanel).not.toContain('text-ink-faint')
+    // #402: sparks frame only the teach card; outcome badge is an h2; the
+    // practice no-streak line folds into the teach panel footer.
+    expect(teachPanel).toContain('px-spark')
+    expect(teachPanel).toContain('<h2>')
+    expect(teachPanel).toContain('data-endcard-badge')
+    expect(teachPanel).toContain("t('play.practiceNoStreak')")
     expect(teachPanel).not.toContain('NO_HINT_COPY')
     expect(teachPanel).toContain('{teachGloss}')
     expect(teachPanel).toContain('teachSynonyms')
+    // the DE-A1 stats Card renders for Daily/Pocket only, never Practice
+    expect(endCard).toContain("{mode !== 'practice' ? (")
+    expect(endCard).toContain('<Card className="px-flat w-full p-2.5 text-left')
 
     // Do not couple LearnerHint empty-state into EndCard
     expect(endCard).not.toContain('LearnerHint')
@@ -702,6 +712,30 @@ describe('Pocket spaced review copy (gh-220 / ADR 0044)', () => {
     const practicePick = src.indexOf('pickPracticeLemma(')
     const dueSet = src.indexOf('setDueReview(', practicePick)
     expect(dueSet).toBeGreaterThan(practicePick)
+  })
+
+  test('#402 EndCard CTA hierarchy per mode/outcome (ADR 0043 aligned)', async () => {
+    const src = await pageSrc('Play.tsx')
+    const actionsAt = src.indexOf('data-endcard-actions')
+    const buttonBefore = (labelAt: number) => src.slice(src.lastIndexOf('<Button', labelAt), labelAt)
+    // Daily loss: Pocket save (Practice this word) is the primary button.
+    const saveLabel = src.indexOf("t('play.practiceThisWord')", actionsAt)
+    expect(saveLabel).toBeGreaterThan(actionsAt)
+    expect(buttonBefore(saveLabel)).not.toContain('variant=')
+    // Share is primary only on a Daily/Pocket win; secondary on losses and in Practice.
+    const shareLabel = src.indexOf("t('common.share')", actionsAt)
+    expect(buttonBefore(shareLabel)).toContain("variant={won && mode !== 'practice' ? undefined : 'secondary'}")
+    // Practice mode: Next word is primary; Daily keeps generic Practice secondary.
+    const nextLabel = src.indexOf("mode === 'practice' ? t('play.nextWord')", actionsAt)
+    expect(buttonBefore(nextLabel)).toContain("variant={mode === 'practice' ? undefined : 'secondary'}")
+    // Pocket loss: Retry stays primary (no variant), Share secondary.
+    const retryLabel = src.indexOf("t('common.retry')", actionsAt)
+    expect(buttonBefore(retryLabel)).not.toContain('variant=')
+    // Pocket save renders before Share; generic Practice stays below Share.
+    const shareAt = src.indexOf('buildShareCardPayload', actionsAt)
+    const practiceAt = src.indexOf('onClick={onPractice}', actionsAt)
+    expect(saveLabel).toBeLessThan(shareAt)
+    expect(shareAt).toBeLessThan(practiceAt)
   })
 })
 
