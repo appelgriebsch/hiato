@@ -17,9 +17,7 @@ export function pocketNoteFromState(state: unknown): PocketNote | null {
   return note === 'saved' || note === 'already' ? note : null
 }
 
-export function pocketNoteCopy(note: PocketNote): string {
-  return note === 'already' ? 'Already saved' : 'Saved to pocket'
-}
+/** The note copy itself is UI copy — Play renders it via t() (ADR 0062). */
 
 /**
  * Gate replace-oldest confirm when Practice this word is pressed.
@@ -36,12 +34,14 @@ export function needsReplaceOldestConfirm(
 
 /**
  * Gloss-only row label for the pocket sheet (#85).
- * No lemma field — an empty gloss must not fall back to the spelling.
+ * No lemma field — an empty gloss must not fall back to the spelling; it
+ * returns null and the caller renders the localized "Meaning not saved"
+ * (t('pocket.meaningNotSaved'), ADR 0062).
  */
-export function pocketListLabel(entry: { gloss?: string }): string {
+export function pocketListLabel(entry: { gloss?: string }): string | null {
   return typeof entry.gloss === 'string' && entry.gloss.trim().length > 0
     ? entry.gloss
-    : 'Meaning not saved'
+    : null
 }
 
 /**

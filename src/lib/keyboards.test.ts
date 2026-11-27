@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { PACK_LANGS } from '../packs/schema'
+import { UI_COPY } from '@/i18n'
 import {
-  ACCENT_STRIP_LABEL,
   KEYBOARDS,
   LETTER_PADS,
   keyUsesUppercaseFace,
@@ -96,7 +96,7 @@ describe('letter pad layout metadata (#138)', () => {
   })
 
   test('PT/ES have a labeled accent strip of distinct keys (ADR 0005); EN none', () => {
-    expect(ACCENT_STRIP_LABEL).toBe('Accents')
+    expect(UI_COPY.en['keyboard.accentStripLabel']).toBe('Accents')
     expect(LETTER_PADS.en.accentStrip).toBeNull()
     expect(LETTER_PADS.pt.accentStrip).toEqual([
       'Á', 'À', 'Â', 'Ã', 'É', 'Ê', 'Í', 'Ó', 'Ô', 'Õ', 'Ú',

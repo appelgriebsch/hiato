@@ -77,12 +77,12 @@ import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
   pocketListLabel,
-  pocketNoteCopy,
   pocketNoteFromState,
   pocketRetryHref,
   shouldShowPractice,
 } from '@/lib/pocket-save'
 import { getPrefs } from '@/lib/prefs'
+import { useT, type TFn } from '@/i18n/use-ui-locale'
 import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
 import { playCue } from '@/lib/sound'
@@ -112,10 +112,10 @@ function parseSeed(raw: string | null): number {
   return Number.isFinite(n) ? n : 0
 }
 
-function modeBadgeLabel(mode: PlayMode): string {
-  if (mode === 'daily') return 'Daily'
-  if (mode === 'pocket') return 'Pocket'
-  return 'Practice'
+function modeBadgeLabel(mode: PlayMode, t: TFn): string {
+  if (mode === 'daily') return t('play.badgeDaily')
+  if (mode === 'pocket') return t('play.badgePocket')
+  return t('play.badgePractice')
 }
 
 export function Play() {
@@ -166,6 +166,11 @@ function PlayRound({
 }) {
   const nav = useNavigate()
   const location = useLocation()
+  const t = useT()
+  // Latest translator for the load effect (locale change must not reset the round).
+  const tRef = useRef(t)
+  // oxlint-disable-next-line react/refs -- latest t for the effect, not a render read
+  tRef.current = t
   const incomingNote =
     mode === 'pocket' ? pocketNoteFromState(location.state) : null
   const [pocketNote] = useState(incomingNote)
@@ -403,7 +408,7 @@ function PlayRound({
           repairPocket()
           if (!pocketParamId) {
             setWordEntry(null)
-            setError('This pocket link isn’t valid.')
+            setError(tRef.current('play.pocketLinkInvalid'))
             setLoading(false)
             return
           }
@@ -411,7 +416,7 @@ function PlayRound({
           const pocketEntry = findPocketEntryById(slot, pocketParamId)
           if (!pocketEntry) {
             setWordEntry(null)
-            setError('That pocket word is gone.')
+            setError(tRef.current('play.pocketWordGone'))
             setLoading(false)
             return
           }
@@ -434,8 +439,8 @@ function PlayRound({
               lemmaIdentity(pocketEntry.word) === lemmaIdentity(daily.word)
             setError(
               wonTodayDaily
-                ? 'Today’s daily is already won — pocket retry waits until tomorrow.'
-                : 'Today’s daily isn’t ready for pocket retry — finish or miss it first.',
+                ? tRef.current('play.pocketDailyWon')
+                : tRef.current('play.pocketDailyNotReady'),
             )
             setLoading(false)
             return
@@ -516,7 +521,7 @@ function PlayRound({
       })
       .catch((e: unknown) => {
         if (cancelled) return
-        setError(e instanceof Error ? e.message : 'Failed to load pack')
+        setError(e instanceof Error ? e.message : tRef.current('play.loadFailed'))
         setLoading(false)
       })
 
@@ -684,20 +689,20 @@ function PlayRound({
               <OfflineChip />
             </div>
           }
-          center={<Badge>Practice</Badge>}
+          center={<Badge>{t('play.badgePractice')}</Badge>}
           right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
         />
         <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <h1 className="text-pixel-display text-ink">Practice unavailable</h1>
+          <h1 className="text-pixel-display text-ink">{t('play.practiceUnavailableTitle')}</h1>
           <p className="max-w-xs text-sm text-ink-muted">
-            This pack only has today’s daily word, so Practice would spoil it.
+            {t('play.practiceUnavailableBody')}
           </p>
           <div className="mt-2 flex w-full flex-col gap-2">
             <Button fullWidth onClick={() => nav('/play?mode=daily')}>
-              Back to daily
+              {t('play.backToDaily')}
             </Button>
             <Button fullWidth variant="ghost" onClick={() => nav('/')}>
-              Back home
+              {t('common.backHome')}
             </Button>
           </div>
         </div>
@@ -760,9 +765,9 @@ function PlayRound({
         }
         center={
           mode === 'daily' ? (
-            <Badge tone="accent">Daily</Badge>
+            <Badge tone="accent">{t('play.badgeDaily')}</Badge>
           ) : (
-            <Badge>{modeBadgeLabel(mode)}</Badge>
+            <Badge>{modeBadgeLabel(mode, t)}</Badge>
           )
         }
         right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
@@ -776,12 +781,12 @@ function PlayRound({
           role="status"
           className="mb-3 text-center text-sm text-accent-fg short-land:mb-2"
         >
-          {pocketNoteCopy(pocketNote)}
+          {pocketNote === 'already' ? t('play.noteAlready') : t('play.noteSaved')}
         </p>
       ) : null}
       {mode === 'pocket' ? (
         <p className="mb-3 text-center text-sm text-ink-muted short-land:mb-2">
-          Practice · your streak isn’t affected
+          {t('play.practiceNote')}
         </p>
       ) : null}
       <div
@@ -801,10 +806,10 @@ function PlayRound({
           <div className="h-8 w-8 animate-spin motion-reduce:animate-none border-2 border-line border-t-accent" />
           <p className="text-sm text-ink-muted">
             {mode === 'daily'
-              ? 'Loading today’s word…'
+              ? t('play.loadingDaily')
               : mode === 'pocket'
-                ? 'Loading pocket word…'
-                : 'Loading a practice word…'}
+                ? t('play.loadingPocket')
+                : t('play.loadingPractice')}
           </p>
         </div>
       )}
@@ -817,11 +822,11 @@ function PlayRound({
             variant={mode === 'pocket' ? undefined : 'secondary'}
             onClick={() => nav('/')}
           >
-            Back home
+            {t('common.backHome')}
           </Button>
           {mode !== 'pocket' ? (
             <Button variant="ghost" onClick={() => window.location.reload()}>
-              Retry
+              {t('common.retry')}
             </Button>
           ) : null}
         </div>
@@ -839,7 +844,7 @@ function PlayRound({
             <LetterGrid cells={cells} lang={lang} />
             {!finished && vowelHelp && cells.some((c) => c.helped && c.revealed) && (
               <p className="mt-3 text-center text-[11px] text-ink-muted short-land:mt-1">
-                Soft green = vowel help (A1–A2)
+                {t('play.vowelHelp')}
               </p>
             )}
             {lang !== 'en' && !finished && hasUnrevealedDiacritic(cells, wordEntry.word) ? (
@@ -872,10 +877,10 @@ function PlayRound({
           {showHint && (
             <div className="motion-onboarding-enter mb-4">
               <Button fullWidth variant="secondary" onClick={onHint}>
-                Hint — reveal one accent
+                {t('play.hint')}
               </Button>
               <p className="text-caption mt-1.5 text-center">
-                Optional. After 2 accent or base-letter misses while a diacritic remains.
+                {t('play.hintHelp')}
               </p>
             </div>
           )}
@@ -913,11 +918,11 @@ function PlayRound({
               <button
                 type="button"
                 data-reveal-word
-                aria-label="Reveal word and end this practice round"
+                aria-label={t('play.revealAria')}
                 onClick={onReveal}
                 className="motion-press min-h-11 px-3 text-sm font-medium text-ink-muted underline decoration-2 underline-offset-4 hover:text-ink"
               >
-                Reveal word
+                {t('play.reveal')}
               </button>
             </div>
           ) : null}
@@ -928,7 +933,7 @@ function PlayRound({
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
               >
-                ← Home
+                {t('common.home')}
               </Link>
               {practiceOk ? (
                 <button
@@ -936,11 +941,11 @@ function PlayRound({
                   onClick={goPractice}
                   className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline decoration-2 underline-offset-4"
                 >
-                  Practice
+                  {t('common.practice')}
                 </button>
               ) : (
                 <p className="text-xs text-ink-faint">
-                  Practice isn’t available for this pack.
+                  {t('play.practiceNoPack')}
                 </p>
               )}
             </div>
@@ -951,7 +956,7 @@ function PlayRound({
                 to="/play?mode=daily"
                 className="inline-flex min-h-11 items-center px-3 font-medium text-ink-muted hover:text-ink"
               >
-                ← Daily
+                {t('common.dailyLink')}
               </Link>
               {practiceOk ? (
                 <button
@@ -959,7 +964,7 @@ function PlayRound({
                   onClick={goPractice}
                   className="inline-flex min-h-11 items-center px-3 font-medium text-accent-fg underline decoration-2 underline-offset-4"
                 >
-                  Next word
+                  {t('play.nextWord')}
                 </button>
               ) : null}
             </div>
@@ -970,7 +975,7 @@ function PlayRound({
                 to="/"
                 className="inline-flex min-h-11 items-center px-3 text-sm font-medium text-ink-muted hover:text-ink"
               >
-                ← Home
+                {t('common.home')}
               </Link>
             </div>
           )}
@@ -1003,6 +1008,7 @@ function DoneDaily({
   rec: DailyRecord | null
 }) {
   const nav = useNavigate()
+  const t = useT()
   const [speechOk, setSpeechOk] = useState(false)
   const [shareError, setShareError] = useState<string | null>(null)
   const won = rec?.won === true
@@ -1025,7 +1031,7 @@ function DoneDaily({
             <OfflineChip />
           </div>
         }
-        center={<Badge tone="accent">Daily</Badge>}
+        center={<Badge tone="accent">{t('play.badgeDaily')}</Badge>}
         right={<StreakChip count={streak} freezes={freezes} pulse={streakPulse} />}
       />
       <div className="motion-result-enter flex flex-1 flex-col items-center justify-center gap-4 text-center">
@@ -1040,11 +1046,10 @@ function DoneDaily({
           {won ? <PixelIcon name="check" size={32} /> : <PixelIcon name="close" size={32} />}
         </div>
         <h1 className="text-pixel-display text-ink">
-          {won ? 'Today’s daily is done' : 'Today’s daily was missed'}
+          {won ? t('play.todayDone') : t('play.todayMissed')}
         </h1>
         <p className="text-body max-w-xs text-ink-muted">
-          Come back tomorrow for a new word — or stretch with practice.
-          Practice does not affect your streak.
+          {t('play.doneBody')}
         </p>
         {rec ? (
           <div
@@ -1073,11 +1078,11 @@ function DoneDaily({
           </div>
           {won ? (
             <p className="mt-2 text-xs text-accent-fg">
-              Streak updated for {dateKey}
+              {t('play.streakUpdated', { date: dateKey })}
             </p>
           ) : (
             <p className="mt-2 text-xs text-ink-faint">
-              Streak pauses — try again tomorrow
+              {t('play.streakPauses')}
             </p>
           )}
         </Card>
@@ -1099,11 +1104,11 @@ function DoneDaily({
                   setShareError(null)
                   nav(sharePathWithToken(sharePayload), { state: sharePayload })
                 } catch {
-                  setShareError('Could not open share')
+                  setShareError(t('play.couldNotOpenShare'))
                 }
               }}
             >
-              Share
+              {t('common.share')}
             </Button>
           ) : null}
           {shareError ? (
@@ -1117,18 +1122,18 @@ function DoneDaily({
             onClick={onPractice}
             disabled={!practiceOk}
           >
-            Practice
+            {t('common.practice')}
           </Button>
           {!practiceOk ? (
             <p className="text-xs text-ink-faint">
-              Practice isn’t available — this pack only has today’s daily word.
+              {t('home.practiceUnavailable')}
             </p>
           ) : null}
           <Button fullWidth variant="ghost" onClick={() => nav('/')}>
-            Back home
+            {t('common.backHome')}
           </Button>
           <Button fullWidth variant="ghost" onClick={() => nav('/language')}>
-            Change level
+            {t('play.changeLevel')}
           </Button>
         </div>
       </div>
@@ -1191,12 +1196,13 @@ function EndCard({
   onPocketCleared: () => void
 }) {
   const nav = useNavigate()
+  const t = useT()
   // The round freezes dateKey so a midnight cross cannot reseed the word.
   // This line is the schedule the learner sees now, so it uses the live day.
   const reviewDay = useLocalDateKey()
   const showPractice = shouldShowPractice(mode, won)
   const [savePhase, setSavePhase] = useState<'idle' | 'confirm'>('idle')
-  const [oldestLabel, setOldestLabel] = useState('')
+  const [oldestLabel, setOldestLabel] = useState<string | null>(null)
   const [snapshotOldestId, setSnapshotOldestId] = useState('')
   const [pocketRemoved, setPocketRemoved] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
@@ -1233,7 +1239,7 @@ function EndCard({
 
   const cancelConfirm = useCallback(() => {
     setSavePhase('idle')
-    setOldestLabel('')
+    setOldestLabel(null)
     setSnapshotOldestId('')
   }, [])
 
@@ -1255,9 +1261,9 @@ function EndCard({
       return
     }
     const stored = commitSave()
-    if (!stored) setSaveError('Could not save to pocket')
+    if (!stored) setSaveError(t('play.couldNotSave'))
     else goPracticeWord(stored)
-  }, [lang, cefr, word, commitSave, goPracticeWord])
+  }, [lang, cefr, word, commitSave, goPracticeWord, t])
 
   const onConfirmReplace = useCallback(() => {
     if (leavingRef.current) return
@@ -1278,9 +1284,9 @@ function EndCard({
     // commit — either still replace-oldest or slot no longer full.
     // A failed write stays on confirm with the same gloss so Confirm retries it.
     const stored = commitSave()
-    if (!stored) return setSaveError('Could not save to pocket')
+    if (!stored) return setSaveError(t('play.couldNotSave'))
     goPracticeWord(stored)
-  }, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])
+  }, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord, t])
 
   const onManualRemove = useCallback(() => {
     if (!pocketId) return
@@ -1348,10 +1354,17 @@ function EndCard({
     mode === 'pocket' && pocketId
       ? findPocketEntryById(listPocketStored(lang, cefr), pocketId)
       : undefined
+  const reviewWhen = pocketSchedule
+    ? nextReviewWhen(pocketSchedule.dueAt, reviewDay)
+    : null
   const confirming = showPractice && savePhase === 'confirm'
   const shareMode = mode === 'practice' || mode === 'pocket' ? 'practice' : 'daily'
   const endBadge =
-    mode === 'daily' ? ' · Daily' : mode === 'pocket' ? ' · Pocket' : ' · Practice'
+    mode === 'daily'
+      ? t('play.endBadgeDaily')
+      : mode === 'pocket'
+        ? t('play.endBadgePocket')
+        : t('play.endBadgePractice')
   // ADR 0035 / #94: gloss is teach headline; lemma secondary; silent omit when empty
   const teachGloss = gloss?.trim() ?? ''
   const teachSynonyms = (synonyms ?? [])
@@ -1447,7 +1460,7 @@ function EndCard({
         inert={confirming ? true : undefined}
       >
         <Badge tone={won ? 'accent' : 'warm'} pulse={won} data-endcard-badge>
-          {won ? 'You got it' : revealed ? 'Word revealed' : 'Out of lives'}
+          {won ? t('play.youGotIt') : revealed ? t('play.wordRevealed') : t('play.outOfLives')}
           {endBadge}
         </Badge>
         {teachLine ? (
@@ -1481,28 +1494,30 @@ function EndCard({
           <StreakChip count={streak} freezes={freezes} pulse={streakPulse} />
         </div>
         {mode === 'daily' && won && (
-          <p className="mt-1 text-xs text-accent-fg">Streak updated for {dateKey}</p>
+          <p className="mt-1 text-xs text-accent-fg">
+            {t('play.streakUpdated', { date: dateKey })}
+          </p>
         )}
         {mode === 'daily' && !won && (
           <p className="mt-1 text-xs text-ink-faint">
-            Streak pauses — try again tomorrow
+            {t('play.streakPauses')}
           </p>
         )}
         {mode === 'practice' && (
           <p className="mt-1 text-xs text-ink-faint">
-            Practice doesn’t affect your streak
+            {t('play.practiceNoStreak')}
           </p>
         )}
         {mode === 'pocket' && (
           <p className="mt-1 text-xs text-ink-faint">
-            Pocket doesn’t affect your streak
-            {won || pocketRemoved ? ' · cleared from pocket' : ''}
+            {t('play.pocketNote')}
+            {won || pocketRemoved ? t('play.pocketClearedSuffix') : ''}
           </p>
         )}
-        {mode === 'pocket' && !won && !pocketRemoved && pocketSchedule ? (
+        {mode === 'pocket' && !won && !pocketRemoved && reviewWhen ? (
           <p role="status" className="mt-1 text-xs text-ink-faint">
-            {pocketWasDue ? 'Back for review' : 'Next review'}{' '}
-            {nextReviewWhen(pocketSchedule.dueAt, reviewDay)}
+            {pocketWasDue ? t('play.backForReview') : t('play.nextReview')}{' '}
+            {t(reviewWhen.key, reviewWhen.params)}
           </p>
         ) : null}
         </Card>
@@ -1526,17 +1541,21 @@ function EndCard({
             id={confirmHeadingId}
             className="text-pixel-title text-ink"
           >
-            Replace oldest word?
+            {t('play.replaceTitle')}
           </p>
           <p className="mt-1 text-[13px] leading-snug text-ink-muted">
-            Pocket is full ({POCKET_CAP}). “{oldestLabel}” will be removed so you can practice “{pocketListLabel({ gloss })}”.
+            {t('play.replaceBody', {
+              cap: POCKET_CAP,
+              oldest: oldestLabel ?? t('pocket.meaningNotSaved'),
+              word: pocketListLabel({ gloss }) ?? t('pocket.meaningNotSaved'),
+            })}
           </p>
           <div className="mt-2 flex flex-col gap-2">
             <Button ref={confirmBtnRef} fullWidth onClick={onConfirmReplace}>
-              Replace and practice
+              {t('play.replaceConfirm')}
             </Button>
             <Button fullWidth variant="ghost" onClick={cancelConfirm}>
-              Cancel
+              {t('common.cancel')}
             </Button>
           </div>
           {saveError ? (
@@ -1555,7 +1574,7 @@ function EndCard({
               variant="secondary"
               onClick={onSavePress}
             >
-              Practice this word
+              {t('play.practiceThisWord')}
             </Button>
           ) : null}
           {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
@@ -1567,7 +1586,7 @@ function EndCard({
                 )
               }
             >
-              Retry
+              {t('common.retry')}
             </Button>
           ) : null}
           <Button
@@ -1589,11 +1608,11 @@ function EndCard({
                   state: sharePayload,
                 })
               } catch {
-                setShareError('Could not open share')
+                setShareError(t('play.couldNotOpenShare'))
               }
             }}
           >
-            Share
+            {t('common.share')}
           </Button>
           {shareError ? (
             <p role="status" className="text-center text-sm text-danger">
@@ -1607,12 +1626,12 @@ function EndCard({
           ) : null}
           {mode === 'pocket' && !won && pocketId && !pocketRemoved ? (
             <Button fullWidth variant="outline" onClick={onManualRemove}>
-              Remove from pocket
+              {t('play.removeFromPocket')}
             </Button>
           ) : null}
           {mode === 'pocket' && pocketRemoved ? (
             <p className="text-center text-sm text-accent-fg" role="status">
-              Removed from pocket
+              {t('play.removedFromPocket')}
             </p>
           ) : null}
           {mode !== 'pocket' ? (
@@ -1624,8 +1643,8 @@ function EndCard({
                   onClick={() => nav(pocketRetryHref(dueReview.id, Date.now()))}
                 >
                   {dueReview.count === 1
-                    ? 'Review 1 due pocket word'
-                    : `Review ${dueReview.count} due pocket words`}
+                    ? t('play.reviewDueOne')
+                    : t('play.reviewDueMany', { count: dueReview.count })}
                 </Button>
               ) : null}
               <Button
@@ -1634,13 +1653,13 @@ function EndCard({
                 onClick={onPractice}
                 disabled={!practiceOk}
               >
-                {mode === 'practice' ? 'Next word' : 'Practice'}
+                {mode === 'practice' ? t('play.nextWord') : t('common.practice')}
               </Button>
             </>
           ) : null}
           {mode !== 'pocket' && !practiceOk ? (
             <p className="text-center text-xs text-ink-faint">
-              Practice isn’t available — this pack only has today’s daily word.
+              {t('home.practiceUnavailable')}
             </p>
           ) : null}
           {mode === 'practice' ? (
@@ -1649,11 +1668,11 @@ function EndCard({
               variant="outline"
               onClick={() => nav('/play?mode=daily')}
             >
-              Back to daily
+              {t('play.backToDaily')}
             </Button>
           ) : null}
           <Button fullWidth variant="ghost" onClick={() => nav('/')}>
-            Back home
+            {t('common.backHome')}
           </Button>
         </div>
       )}

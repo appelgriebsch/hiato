@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useT } from '@/i18n/use-ui-locale'
 import {
   LIVES_METAPHOR,
   type LivesMetaphor,
@@ -21,6 +22,7 @@ export function Lives({
   /** Override for demos; app default comes from LIVES_METAPHOR */
   metaphor?: LivesMetaphor
 }) {
+  const t = useT()
   const prev = useRef(remaining)
   const [depleting, setDepleting] = useState<number | null>(null)
 
@@ -48,7 +50,10 @@ export function Lives({
       className="flex items-center gap-1"
       role="status"
       aria-live="polite"
-      aria-label={`${remaining} lives remaining`}
+      aria-label={t('lives.aria', {
+        count: remaining,
+        livesWord: t(remaining === 1 ? 'common.lifeOne' : 'common.lifeMany'),
+      })}
     >
       {Array.from({ length: total }, (_, i) => {
         const alive = i < remaining

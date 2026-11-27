@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useT } from '@/i18n/use-ui-locale'
+import type { UiKey } from '@/i18n'
 import { Layout, TopBar } from '@/components/Layout'
 import { ShareCard } from '@/components/ShareCard'
 import { Button } from '@/components/ui/button'
@@ -26,7 +28,8 @@ export function Share() {
   const [inviteError, setInviteError] = useState<string | null>(null)
   // Play navigates here with state. A cold /share link does not.
   const invite = loc.state == null && payload ? dailyInviteTarget(payload) : null
-  const [copyLabel, setCopyLabel] = useState('Copy text')
+  const t = useT()
+  const [copyLabel, setCopyLabel] = useState<UiKey>('share.copyText')
   const alive = useRef(true)
   const copyReset = useRef(0)
 
@@ -63,9 +66,9 @@ export function Share() {
     try {
       const result = await action()
       if (result.method === 'cancelled') return
-      show(result.message)
+      show(t(result.messageKey, result.messageParams))
     } catch {
-      show('Couldn’t share', 'error')
+      show(t('share.couldNotShare'), 'error')
     } finally {
       setBusy(false)
     }
@@ -76,23 +79,23 @@ export function Share() {
     setBusy(true)
     try {
       const result = await copyShareText(payload)
-      if (result.ok && result.message === 'Copied') {
-        setCopyLabel('Copied')
+      if (result.ok && result.method === 'clipboard') {
+        setCopyLabel('share.copied')
         window.clearTimeout(copyReset.current)
-        copyReset.current = window.setTimeout(() => setCopyLabel('Copy text'), 3000)
+        copyReset.current = window.setTimeout(() => setCopyLabel('share.copyText'), 3000)
       } else if (result.method !== 'cancelled') {
         // Failed retry while the Copied timer is open: drop the label now.
         window.clearTimeout(copyReset.current)
         copyReset.current = 0
-        setCopyLabel('Copy text')
+        setCopyLabel('share.copyText')
       }
       if (result.method === 'cancelled') return
-      show(result.message)
+      show(t(result.messageKey, result.messageParams))
     } catch {
       window.clearTimeout(copyReset.current)
       copyReset.current = 0
-      setCopyLabel('Copy text')
-      show('Couldn’t share', 'error')
+      setCopyLabel('share.copyText')
+      show(t('share.couldNotShare'), 'error')
     } finally {
       setBusy(false)
     }
@@ -103,7 +106,10 @@ export function Share() {
     if (!invite || busy || preparing) return
     setPreparing(true)
     setInviteError(null)
-    const fail = `Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.`
+    const fail = t('share.inviteFail', {
+      lang: LANG_CODES[invite.lang],
+      cefr: CEFR_CODES[invite.cefr],
+    })
     try {
       const ok = await acceptDailyInvite(invite, () => alive.current)
       if (!alive.current) return
@@ -121,9 +127,7 @@ export function Share() {
   }
 
   if (!payload) {
-    const emptyCopy = fromToken
-      ? 'This share link can’t be opened.'
-      : 'Nothing to share yet.'
+    const emptyCopy = fromToken ? t('share.emptyToken') : t('share.empty')
     return (
       <Layout>
         <div className="flex flex-1 flex-col items-center justify-center gap-4">
@@ -131,7 +135,7 @@ export function Share() {
             {emptyCopy}
           </p>
           <Button fullWidth onClick={() => nav('/play?mode=daily')}>
-            Back to play
+            {t('share.backToPlay')}
           </Button>
         </div>
       </Layout>
@@ -156,8 +160,11 @@ export function Share() {
                 onClick={() => void onPlayDaily()}
               >
                 {preparing
-                  ? 'Preparing packs…'
-                  : `Play today’s Daily · ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]}`}
+                  ? t('common.preparing')
+                  : t('share.playDailyInvite', {
+                      lang: LANG_CODES[invite.lang],
+                      cefr: CEFR_CODES[invite.cefr],
+                    })}
               </Button>
             </>
           ) : null}
@@ -167,7 +174,7 @@ export function Share() {
             disabled={busy}
             onClick={() => run(() => shareResult(payload))}
           >
-            Share
+            {t('common.share')}
           </Button>
           <Button
             fullWidth
@@ -175,7 +182,7 @@ export function Share() {
             disabled={busy}
             onClick={() => run(() => downloadShareCard(payload))}
           >
-            Save image
+            {t('share.saveImage')}
           </Button>
           <Button
             fullWidth
@@ -184,11 +191,11 @@ export function Share() {
             aria-live="polite"
             onClick={() => void onCopyText()}
           >
-            {copyLabel}
+            {t(copyLabel)}
           </Button>
           {fromToken ? (
             <Button fullWidth variant="outline" onClick={() => nav('/')}>
-              Home
+              {t('share.home')}
             </Button>
           ) : null}
         </div>
@@ -201,14 +208,14 @@ export function Share() {
             className="motion-press inline-flex min-h-11 min-w-11 items-center text-sm text-ink-muted"
             onClick={goBack}
           >
-            ← Back
+            {t('common.back')}
           </button>
         }
-        center={<span className="text-pixel-title text-ink">Share card</span>}
+        center={<span className="text-pixel-title text-ink">{t('share.title')}</span>}
       />
 
       <p className="mb-4 text-center text-xs leading-[1.4] tracking-wide text-ink-muted">
-        Answer never appears on the card. The saved image stays cream.
+        {t('share.caption')}
       </p>
 
       <ShareCard {...payload} />

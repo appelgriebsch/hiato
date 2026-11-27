@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useT } from '@/i18n/use-ui-locale'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
 
@@ -84,6 +85,7 @@ export function InstallHelpLink({
   /** True after selected pack cache succeeds. */
   visible: boolean
 }) {
+  const t = useT()
   const [open, setOpen] = useState(false)
   const [standalone, setStandalone] = useState(isStandaloneDisplay)
   // ponytail: read once at mount, so the link stays put this session (focus can
@@ -151,7 +153,7 @@ export function InstallHelpLink({
         className="motion-press mx-auto flex min-h-11 items-center px-2 text-sm text-ink-muted underline decoration-2 underline-offset-4 short-land:mx-0 short-land:min-w-0 short-land:flex-1 short-land:justify-start short-land:text-left short-land:leading-tight"
         onClick={() => void onInstallClick()}
       >
-        Add Hiato to your Home Screen
+        {t('install.link')}
       </button>
 
       {/* Sheet mounts only while open: keeps SSR/static render portal-free. */}
@@ -177,27 +179,26 @@ export function InstallHelpLink({
               id="install-help-title"
               className="text-pixel-title text-ink"
             >
-              Optional: install Hiato
+              {t('install.title')}
             </h2>
             <p className="mt-2 text-sm text-ink-muted">
-              Add Hiato to your home screen for one-tap offline play. No store
-              and no account.
+              {t('install.body')}
             </p>
             <div className="mt-4 space-y-3 text-sm text-ink">
               <div>
-                <p className="font-medium text-accent-fg">iOS (Safari)</p>
+                <p className="font-medium text-accent-fg">{t('install.ios')}</p>
                 <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-ink-muted">
-                  <li>Tap the Share button</li>
-                  <li>Scroll and tap “Add to Home Screen”</li>
-                  <li>Confirm “Add” — Hiato opens like an app</li>
+                  <li>{t('install.iosStep1')}</li>
+                  <li>{t('install.iosStep2')}</li>
+                  <li>{t('install.iosStep3')}</li>
                 </ol>
               </div>
               <div>
-                <p className="font-medium text-accent-fg">Android (Chrome)</p>
+                <p className="font-medium text-accent-fg">{t('install.android')}</p>
                 <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-ink-muted">
-                  <li>Tap the ⋮ menu</li>
-                  <li>Tap “Install app” or “Add to Home Screen”</li>
-                  <li>Confirm — packs stay cached offline</li>
+                  <li>{t('install.androidStep1')}</li>
+                  <li>{t('install.androidStep2')}</li>
+                  <li>{t('install.androidStep3')}</li>
                 </ol>
               </div>
             </div>
@@ -209,7 +210,7 @@ export function InstallHelpLink({
               onClick={closeSheet}
             >
               <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
-              Close
+              {t('common.close')}
             </Button>
           </div>
         </dialog>,

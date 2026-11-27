@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BrandLockup } from '@/components/brand/BrandMark'
+import { useT } from '@/i18n/use-ui-locale'
 import { Layout, TopBar } from '@/components/Layout'
 import { PixelIcon } from '@/components/PixelIcon'
 import { OfflineChip } from '@/components/OfflineChip'
@@ -23,6 +24,7 @@ import { isPackCachedLocally, loadPack } from '@/packs/load'
 
 export function Home() {
   const nav = useNavigate()
+  const t = useT()
   const prefs = getPrefs()
   const selectedLang = prefs?.lang
   const selectedCefr = prefs?.cefr
@@ -138,8 +140,8 @@ export function Home() {
   }, [selectedLang, selectedCefr, dateKey])
 
   const dailyLabel = prefs
-    ? `Daily ${LANG_CODES[prefs.lang]} ${CEFR_CODES[prefs.cefr]}`
-    : 'Choose language & level'
+    ? t('home.dailyLabel', { lang: LANG_CODES[prefs.lang], cefr: CEFR_CODES[prefs.cefr] })
+    : t('home.chooseLangLevel')
 
   const pocketControl = (clearedRefTarget: boolean) => {
     if (!prefs) return null
@@ -151,15 +153,19 @@ export function Home() {
           className="mt-2"
           aria-label={
             pocketDue > 0
-              ? `Pocket, ${pocketCount} words, ${pocketDue} due for review`
+              ? t('home.pocketDueAria', {
+                  count: pocketCount,
+                  wordsWord: t(pocketCount === 1 ? 'common.wordOne' : 'common.wordMany'),
+                  due: pocketDue,
+                })
               : undefined
           }
           onClick={() => setPocketOpen(true)}
         >
           <PixelIcon name="pocket" size={24} className="shrink-0" aria-hidden="true" />
           {pocketDue > 0
-            ? `Pocket (${pocketCount} · ${pocketDue} due)`
-            : `Pocket (${pocketCount})`}
+            ? t('home.pocketDue', { count: pocketCount, due: pocketDue })
+            : t('home.pocketCount', { count: pocketCount })}
         </Button>
       )
     }
@@ -172,7 +178,7 @@ export function Home() {
           role="status"
           className="mt-2 text-center text-sm text-accent-fg"
         >
-          Pocket cleared
+          {t('home.pocketCleared')}
         </p>
       )
     }
@@ -186,11 +192,15 @@ export function Home() {
         variant="outline"
         fullWidth
         className="mt-2"
-        aria-label={`Stats, ${historyCount} ${historyCount === 1 ? 'round' : 'rounds'}`}
+        aria-label={
+          historyCount === 1
+            ? t('home.statsAriaOne')
+            : t('home.statsAriaMany', { count: historyCount })
+        }
         onClick={() => setStatsOpen(true)}
       >
         <PixelIcon name="chart" size={24} className="shrink-0 text-accent-fg" aria-hidden="true" />
-        Stats
+        {t('home.stats')}
       </Button>
     )
   }
@@ -206,14 +216,14 @@ export function Home() {
               to="/language"
               className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
             >
-              {prefs ? 'Change language' : 'Language'}
+              {prefs ? t('home.changeLanguage') : t('home.language')}
             </Link>
             <span className="text-ink-faint">·</span>
             <Link
               to="/about"
               className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
             >
-              About
+              {t('home.about')}
             </Link>
           </nav>
         </div>
@@ -240,18 +250,18 @@ export function Home() {
         <p className="text-body mb-4 text-ink-muted">
           {prefs
             ? dailyDone
-              ? 'Today’s daily is done. Come back after local midnight — or stretch with practice (practice does not affect your streak).'
+              ? t('home.doneBody')
               : selectedCefr === 'a1' || selectedCefr === 'a2'
-                ? 'Guess today’s word with soft vowel help, six lives, and learner hints. Offline after the pack is cached.'
-                : 'Guess today’s word with six lives and learner hints. Offline after the pack is cached.'
-            : 'Pick a language and CEFR level, then play today’s word. Packs for your language stay cached for offline play.'}
+                ? t('home.bodySoft')
+                : t('home.body')
+            : t('home.noPrefsBody')}
         </p>
         {prefs ? (
           <Link
             to="/play?mode=daily"
             className="text-pixel-title px-frame px-drop motion-press inline-flex min-h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-white hover:bg-accent-mid"
           >
-            {dailyDone ? 'View today’s result' : 'Play today'}
+            {dailyDone ? t('home.viewResult') : t('home.playToday')}
             {!dailyDone ? (
               <span aria-hidden="true">▸</span>
             ) : null}
@@ -261,7 +271,7 @@ export function Home() {
             to="/language"
             className="text-pixel-title px-frame px-drop motion-press inline-flex min-h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-white hover:bg-accent-mid"
           >
-            Choose language
+            {t('home.chooseLanguage')}
           </Link>
         )}
         {prefs ? (
@@ -273,11 +283,11 @@ export function Home() {
               disabled={!practiceOk}
               onClick={() => nav(`/play?mode=practice&seed=${Date.now()}`)}
             >
-              Practice
+              {t('common.practice')}
             </Button>
             {!practiceOk ? (
               <p className="mt-2 text-center text-xs text-ink-faint">
-                Practice isn’t available — this pack only has today’s daily word.
+                {t('home.practiceUnavailable')}
               </p>
             ) : null}
             <div className="short-land:hidden">
@@ -319,14 +329,14 @@ export function Home() {
           to="/language"
           className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
         >
-          {prefs ? 'Change language' : 'Language'}
+          {prefs ? t('home.changeLanguage') : t('home.language')}
         </Link>
         <span className="text-ink-faint">·</span>
         <Link
           to="/about"
           className="inline-flex min-h-11 items-center px-3 text-accent-fg underline decoration-2 underline-offset-4"
         >
-          About
+          {t('home.about')}
         </Link>
       </nav>
 

@@ -3,6 +3,8 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
 import { ACCENT_TEACH_FORGIVEN_CUE, accentTeachLine, accentTeachParts } from '@/engine'
+import { t, UI_COPY, UI_LOCALES, type UiKey } from '@/i18n'
+import { PACK_LANGS } from '@/packs/schema'
 import { buildShareCardPayload } from '@/lib/share-card'
 import { sharePathWithToken } from '@/lib/share-url'
 import { Share } from './Share'
@@ -15,7 +17,8 @@ describe('Language picker (gh-30)', () => {
   test('mechanic helper replaced by selected-level line; 3-column grids (#182)', async () => {
     const src = await pageSrc('Language.tsx')
     expect(src).not.toContain('A1–A2 prefill vowels')
-    expect(src).toContain('{CEFR_LINES[cefr]}')
+    expect(src).toContain('{t(`language.cefrLine.${cefr}`)}')
+    expect(UI_COPY.en['language.cefrLine.a1']).toContain('Beginner')
     expect(src.match(/grid grid-cols-3 gap-2/g)?.length).toBe(2)
   })
 
@@ -121,10 +124,10 @@ describe('Home daily copy', () => {
     const src = await pageSrc('Home.tsx')
     expect(src).toContain('precacheSelectedLanguage(selectedLang, selectedCefr)')
     expect(src).toContain("selectedCefr === 'a1' || selectedCefr === 'a2'")
-    expect(src).toContain('soft vowel help')
-    expect(src).toContain(
-      'Guess today’s word with six lives and learner hints.',
-    )
+    expect(src).toContain("t('home.bodySoft')")
+    expect(src).toContain("t('home.body')")
+    expect(UI_COPY.en['home.bodySoft']).toContain('soft vowel help')
+    expect(UI_COPY.en['home.body']).toContain('Guess today’s word with six lives and learner hints.')
   })
 })
 
@@ -137,9 +140,10 @@ describe('About license bands', () => {
     expect(src).not.toContain('creativecommons.org/publicdomain/zero/1.0')
     expect(src).toContain('cefr-j.org')
     expect(src).toContain('creativecommons.org/licenses/by-sa/4.0')
-    expect(src).toContain('Tono')
-    expect(src).toContain('frequency-rank bands')
-    expect(src).toContain('English A1–B2 lemmas are')
+    expect(src).toContain("t('about.licensesBody')")
+    expect(UI_COPY.en['about.licensesBody']).toContain('Tono')
+    expect(UI_COPY.en['about.licensesBody']).toContain('frequency-rank bands')
+    expect(UI_COPY.en['about.licensesBody']).toContain('English A1–B2 lemmas are')
     expect(src).not.toContain('English A1–B1 lemmas are')
     expect(src).not.toContain('CC0')
     expect(src).not.toContain('A1–B1 only')
@@ -149,14 +153,15 @@ describe('About license bands', () => {
 describe('About build SHA footer (gh-166)', () => {
   test('footer bakes SHA via constant; middle-dot mono format; no fetch', async () => {
     const src = await pageSrc('About.tsx')
-    expect(src).toContain('Built by Mistral AI ·')
+    expect(src).toContain("t('about.builtBy')")
+    expect(UI_COPY.en['about.builtBy']).toBe('Built by Mistral AI ·')
     expect(src).toContain('/brand/mistral-mark.svg')
     expect(src).toContain('__HIATO_BUILD_SHA__')
     expect(src).toContain('font-mono')
     expect(src).not.toMatch(/Built by Mistral AI ·\s*[0-9a-f]{7}/)
     expect(src).not.toMatch(/\bfetch\s*\(/)
     expect(src).not.toContain('api.github.com')
-    const footer = src.slice(src.indexOf('Built by Mistral AI'))
+    const footer = src.slice(src.indexOf("t('about.builtBy')"))
     expect(footer).not.toContain('github.com')
     expect(footer).not.toContain('fetch')
   })
@@ -166,12 +171,13 @@ describe('Home pocket control (gh-85)', () => {
   test('Pocket (n) uses the stored slot, outline, and sits before nav', async () => {
     const src = await pageSrc('Home.tsx')
     expect(src).toContain('listPocketStored')
-    expect(src).toContain('Pocket (')
+    expect(src).toContain("t('home.pocketDue',")
     expect(src).toContain('variant="outline"')
     expect(src).toContain('pocketCount > 0')
-    expect(src).toContain('Pocket cleared')
+    expect(src).toContain("t('home.pocketCleared')")
+    expect(UI_COPY.en['home.pocketCleared']).toBe('Pocket cleared')
     expect(src).toContain('tabIndex={-1}')
-    const pocketAt = src.indexOf('Pocket (')
+    const pocketAt = src.indexOf("t('home.pocketDue',")
     const navAt = src.indexOf('<nav')
     expect(pocketAt).toBeGreaterThan(src.indexOf('listPocketStored'))
     expect(navAt).toBeGreaterThan(pocketAt)
@@ -241,20 +247,23 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(src).toContain('needsReplaceOldestConfirm')
     expect(src).toContain('addToPocket({ lang, cefr, word, gloss })')
     expect(src).toContain('listPocketStored(lang, cefr)')
-    expect(src).toContain('Replace oldest word?')
-    expect(src).toContain('Replace and practice')
+    expect(src).toContain("t('play.replaceTitle')")
+    expect(src).toContain("t('play.replaceConfirm')")
+    expect(UI_COPY.en['play.replaceTitle']).toBe('Replace oldest word?')
+    expect(UI_COPY.en['play.replaceConfirm']).toBe('Replace and practice')
     expect(src).toContain('onClick={onSavePress}')
-    expect(src).toMatch(/onClick=\{onSavePress\}[\s\S]*?>\s*Practice this word\s*<\/Button>/)
+    expect(src).toMatch(/onClick=\{onSavePress\}[\s\S]*?>\s*\{t\('play\.practiceThisWord'\)\}\s*<\/Button>/)
     expect(src).toContain('pocketListLabel(oldest)')
     expect(src).toContain('pocketListLabel({ gloss })')
     expect(src).not.toContain('pocketConfirmLabel')
     expect(src).toContain('decideConfirmReCheck')
     expect(src).toContain('role="dialog"')
     expect(src).toContain('aria-modal="true"')
-    expect(src).toContain('Pocket is full ({POCKET_CAP}).')
-    expect(src).toContain(
-      '“{oldestLabel}” will be removed so you can practice “{pocketListLabel({ gloss })}”.',
-    )
+    expect(src).toContain("t('play.replaceBody'")
+    expect(UI_COPY.en['play.replaceBody']).toContain('Pocket is full ({cap})')
+    expect(src).toContain('oldest: oldestLabel ??')
+    expect(src).toContain('word: pocketListLabel({ gloss }) ??')
+    expect(UI_COPY.en['play.replaceBody']).toBe('Pocket is full ({cap}). “{oldest}” will be removed so you can practice “{word}”.')
     expect(src).toContain("state: { pocketNote: note }")
     expect(src).toContain('pocketRetryHref(pocketEntryId(lang, cefr, word), Date.now())')
     const endAt = src.indexOf('function EndCard(')
@@ -276,7 +285,7 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(commitBody).not.toMatch(/setDailyRecord\s*\(/)
     const pressAt = src.indexOf('const onSavePress = useCallback')
     const pressEnd = src.indexOf(
-      '}, [lang, cefr, word, commitSave, goPracticeWord])',
+      '}, [lang, cefr, word, commitSave, goPracticeWord, t])',
       pressAt,
     )
     expect(pressAt).toBeGreaterThan(commitEnd)
@@ -290,7 +299,7 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(pressBody.slice(0, alreadyAt)).not.toContain('addToPocket')
     const confirmAt = src.indexOf('const onConfirmReplace = useCallback')
     const confirmEnd = src.indexOf(
-      '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])',
+      '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord, t])',
       confirmAt,
     )
     expect(confirmAt).toBeGreaterThan(pressEnd)
@@ -338,11 +347,11 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     const handlers = [
       [
         'const onSavePress = useCallback',
-        '}, [lang, cefr, word, commitSave, goPracticeWord])',
+        '}, [lang, cefr, word, commitSave, goPracticeWord, t])',
       ],
       [
         'const onConfirmReplace = useCallback',
-        '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord])',
+        '}, [lang, cefr, word, snapshotOldestId, commitSave, goPracticeWord, t])',
       ],
     ] as const
     for (const [start, end] of handlers) {
@@ -377,15 +386,17 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(src).toContain('replace: true, state: null')
     expect(src).toContain('pocketNoteRef.current?.focus()')
     expect(src).toContain('tabIndex={-1}')
-    expect(src).toContain('pocketNoteCopy(pocketNote)')
-    const noteAt = src.indexOf('pocketNoteCopy(pocketNote)')
+    expect(src).toContain("t('play.noteAlready')")
+    expect(UI_COPY.en['play.noteAlready']).toBe('Already saved')
+    expect(UI_COPY.en['play.noteSaved']).toBe('Saved to pocket')
+    const noteAt = src.indexOf("t('play.noteAlready')")
     const livesAt = src.indexOf('<Lives remaining={lives}', noteAt)
     expect(noteAt).toBeGreaterThan(0)
     expect(livesAt).toBeGreaterThan(noteAt)
     const roundAt = src.indexOf('function PlayRound(')
     const endAt = src.indexOf('function EndCard(', roundAt)
     const round = src.slice(roundAt, endAt)
-    expect(round).toContain('pocketNoteCopy(pocketNote)')
+    expect(round).toContain("t('play.noteSaved')")
     expect(round).toContain('role="status"')
     expect(round).not.toContain('Already saved')
     expect(round).not.toContain('Saved to pocket')
@@ -401,14 +412,13 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
 
   test('pocket play says the streak is unaffected', async () => {
     const src = await pageSrc('Play.tsx')
-    const line = 'Practice \u00b7 your streak isn\u2019t affected'
-    const straight = 'Practice \u00b7 your streak isn\u0027t affected'
-    expect(src).toContain(line)
-    expect(src).not.toContain(straight)
+    expect(src).toContain("t('play.practiceNote')")
+    expect(UI_COPY.en['play.practiceNote']).toBe('Practice · your streak isn’t affected')
+    expect(UI_COPY.en['play.practiceNote']).not.toContain("isn't")
     const roundAt = src.indexOf('function PlayRound(')
     const endAt = src.indexOf('function EndCard(', roundAt)
     const round = src.slice(roundAt, endAt)
-    const lineAt = round.indexOf(line)
+    const lineAt = round.indexOf("t('play.practiceNote')")
     expect(lineAt).toBeGreaterThan(0)
     const gateAt = round.lastIndexOf("mode === 'pocket'", lineAt)
     expect(gateAt).toBeGreaterThan(0)
@@ -416,8 +426,8 @@ describe('Play EndCard Practice this word (gh-219 / ADR 0043)', () => {
     expect(gate).toContain('text-ink-muted')
     expect(gate).not.toContain("mode === 'daily'")
     expect(gate).not.toContain("mode === 'practice'")
-    expect(src.slice(endAt)).not.toContain(line)
-    const noteAt = round.indexOf('pocketNoteCopy(pocketNote)')
+    expect(src.slice(endAt)).not.toContain("t('play.practiceNote')")
+    const noteAt = round.indexOf("t('play.noteAlready')")
     const livesAt = round.indexOf('<Lives remaining={lives}', lineAt)
     expect(noteAt).toBeGreaterThan(0)
     expect(noteAt).toBeLessThan(lineAt)
@@ -531,7 +541,8 @@ describe('Play EndCard teach headline (gh-94 / ADR 0035)', () => {
 
     // Lemma revealed but not sole hero when gloss present (demoted vs text-lg font-semibold)
     expect(teach).toContain('text-pixel-display tracking-[0.06em] text-ink')
-    expect(teach).toContain('The word was')
+    expect(teach).toContain("t('teach.theWordWas')")
+    expect(UI_COPY.en['teach.theWordWas']).toBe('The word was')
     expect(teach).toContain('{word}')
 
     // Synonym chips match mid-round LearnerHint ink (Avery cross-surface hierarchy)
@@ -574,15 +585,17 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
     expect(src).toContain('parsePocketEntryId')
     expect(src).toContain('pocketOutcomeOnFinish')
     expect(src).toContain('removeFromPocket')
-    expect(src).toContain('Remove from pocket')
+    expect(src).toContain("t('play.removeFromPocket')")
+    expect(UI_COPY.en['play.removeFromPocket']).toBe('Remove from pocket')
     expect(src).toContain(
       '/play?mode=pocket&id=${encodeURIComponent(pocketId)}&seed=${Date.now()}',
     )
-    expect(src).toContain('This pocket link isn’t valid.')
-    expect(src).toContain(
-      'Today’s daily is already won — pocket retry waits until tomorrow.',
-    )
-    expect(src).toContain("Pocket doesn’t affect your streak")
+    expect(src).toContain("t('play.pocketLinkInvalid')")
+    expect(UI_COPY.en['play.pocketLinkInvalid']).toBe('This pocket link isn’t valid.')
+    expect(src).toContain("t('play.pocketDailyWon')")
+    expect(UI_COPY.en['play.pocketDailyWon']).toContain('already won — pocket retry waits until tomorrow')
+    expect(src).toContain("t('play.pocketNote')")
+    expect(UI_COPY.en['play.pocketNote']).toBe('Pocket doesn’t affect your streak')
     expect(src).toContain('setActivePocketId(null)')
     const pocketBranch = src.indexOf("if (mode === 'pocket') {")
     const repairAt = src.indexOf('repairPocket()', pocketBranch)
@@ -624,15 +637,16 @@ describe('Play pocket mode (gh-84 / ADR 0034)', () => {
 describe('Pocket spaced review copy (gh-220 / ADR 0044)', () => {
   test('Home labels a due slot and keeps Pocket (n) otherwise', async () => {
     const src = await pageSrc('Home.tsx')
-    expect(src).toContain('Pocket (${pocketCount} · ${pocketDue} due)')
-    expect(src).toContain('Pocket (${pocketCount})')
-    expect(src).toContain(
-      'Pocket, ${pocketCount} words, ${pocketDue} due for review',
-    )
+    expect(src).toContain("t('home.pocketDue', { count: pocketCount, due: pocketDue })")
+    expect(src).toContain("t('home.pocketCount', { count: pocketCount })")
+    expect(src).toContain("t('home.pocketDueAria'")
+    expect(UI_COPY.en['home.pocketDue']).toBe('Pocket ({count} · {due} due)')
+    expect(UI_COPY.en['home.pocketCount']).toBe('Pocket ({count})')
+    expect(UI_COPY.en['home.pocketDueAria']).toBe('Pocket, {count} {wordsWord}, {due} due for review')
     expect(src).toContain('pocketDue > 0')
     expect(src).toContain('variant="outline"')
-    const dueLabel = src.indexOf('Pocket (${pocketCount} · ${pocketDue} due)')
-    const plainLabel = src.indexOf('Pocket (${pocketCount})')
+    const dueLabel = src.indexOf("t('home.pocketDue',")
+    const plainLabel = src.indexOf("t('home.pocketCount',")
     expect(plainLabel).toBeGreaterThan(dueLabel)
   })
 
@@ -640,13 +654,18 @@ describe('Pocket spaced review copy (gh-220 / ADR 0044)', () => {
     const src = await Bun.file(
       new URL('../components/PocketSheet.tsx', import.meta.url),
     ).text()
-    expect(src).toContain('due today. Spelling stays hidden.')
-    expect(src).toContain('Nothing due today. Next review')
+    expect(src).toContain("t('pocket.dueSummary'")
+    expect(src).toContain("t('pocket.noneDue'")
+    expect(UI_COPY.en['pocket.dueSummary']).toContain('due today. Spelling stays hidden.')
+    expect(UI_COPY.en['pocket.noneDue']).toContain('Nothing due today. Next review')
     expect(src).toContain('tone="accent"')
-    expect(src).toMatch(/>\s*Due\s*</)
+    expect(src).toContain("{t('pocket.due')}")
+    expect(UI_COPY.en['pocket.due']).toBe('Due')
     expect(src).not.toContain('tone="warm"')
-    expect(src).toContain('Next review {nextReviewWhen(entry.dueAt, today)}')
-    expect(src).toContain('Review due words ({playable.length})')
+    expect(src).toContain("t('pocket.nextReview', { when: whenLabel(entry.dueAt) })")
+    expect(src).toContain("t('pocket.reviewDue', { count: playable.length })")
+    expect(UI_COPY.en['pocket.nextReview']).toBe('Next review {when}')
+    expect(UI_COPY.en['pocket.reviewDue']).toBe('Review due words ({count})')
     expect(src).toContain('data-pocket-review')
     expect(src).toContain('playable[0]')
     expect(src).toContain('aria-labelledby={')
@@ -656,22 +675,28 @@ describe('Pocket spaced review copy (gh-220 / ADR 0044)', () => {
 
   test('Practice offer is opt-in and a pocket loss names the next review', async () => {
     const src = await pageSrc('Play.tsx')
-    expect(src).toContain('Review 1 due pocket word')
-    expect(src).toContain('Review ${dueReview.count} due pocket words')
+    expect(src).toContain("t('play.reviewDueOne')")
+    expect(src).toContain("t('play.reviewDueMany', { count: dueReview.count })")
+    expect(UI_COPY.en['play.reviewDueOne']).toBe('Review 1 due pocket word')
+    expect(UI_COPY.en['play.reviewDueMany']).toBe('Review {count} due pocket words')
     expect(src).toContain("mode === 'practice' && dueReview")
-    expect(src).toContain("mode === 'practice' ? 'Next word'")
+    expect(src).toContain("mode === 'practice' ? t('play.nextWord') : t('common.practice')")
     expect(src).toContain('pickPracticeLemma')
-    const offerAt = src.indexOf('Review 1 due pocket word')
-    const nextAt = src.indexOf("mode === 'practice' ? 'Next word'")
+    const offerAt = src.indexOf("t('play.reviewDueOne')")
+    const nextAt = src.indexOf("mode === 'practice' ? t('play.nextWord')")
     expect(offerAt).toBeGreaterThan(0)
     expect(nextAt).toBeGreaterThan(offerAt)
-    expect(src).toContain("pocketWasDue ? 'Back for review' : 'Next review'")
+    expect(src).toContain("pocketWasDue ? t('play.backForReview') : t('play.nextReview')")
+    expect(UI_COPY.en['play.backForReview']).toBe('Back for review')
+    expect(UI_COPY.en['play.nextReview']).toBe('Next review')
     expect(src).toContain('nextReviewWhen(pocketSchedule.dueAt, reviewDay)')
+    expect(src).toContain('t(reviewWhen.key, reviewWhen.params)')
     expect(src).toContain('const reviewDay = useLocalDateKey()')
     expect(src).toContain('role="status"')
-    expect(src).toContain('Pocket doesn’t affect your streak')
-    expect(src).toContain('Practice · your streak isn’t affected')
-    expect(src).toContain('cleared from pocket')
+    expect(src).toContain("t('play.pocketNote')")
+    expect(src).toContain("t('play.practiceNote')")
+    expect(src).toContain("t('play.pocketClearedSuffix')")
+    expect(UI_COPY.en['play.pocketClearedSuffix']).toContain('cleared from pocket')
     const practicePick = src.indexOf('pickPracticeLemma(')
     const dueSet = src.indexOf('setDueReview(', practicePick)
     expect(dueSet).toBeGreaterThan(practicePick)
@@ -705,10 +730,12 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     const src = await pageSrc('Language.tsx')
     expect(src).toContain('precacheSelectedLanguage(lang, cefr)')
     expect(src).toContain('data-pack-cache-status')
-    expect(src).toContain('✓ Ready offline')
+    expect(src).toContain("t('language.readyOffline')")
+    expect(UI_COPY.en['language.readyOffline']).toBe('✓ Ready offline')
     // #201 placement/visibility is covered behaviourally in InstallHelp.test.tsx
     expect(src).toContain("cachePhase === 'caching'")
-    expect(src).toContain("'Caching…'")
+    expect(src).toContain("t('language.caching')")
+    expect(UI_COPY.en['language.caching']).toBe('Caching…')
     // Provenance preserved
     expect(src).toContain('data-provenance-caption')
     expect(src).toContain('provenanceCaption(lang, cefr)')
@@ -720,9 +747,11 @@ describe('Language pack cache + quiet Install (gh-103)', () => {
     ).text()
     expect(src).toContain('data-install-link')
     expect(src).toContain('data-install-sheet')
-    expect(src).toContain('Optional: install Hiato')
-    expect(src).toContain('No store')
-    expect(src).toContain('no account')
+    expect(src).toContain("t('install.title')")
+    expect(src).toContain("t('install.body')")
+    expect(UI_COPY.en['install.title']).toBe('Optional: install Hiato')
+    expect(UI_COPY.en['install.body']).toContain('No store')
+    expect(UI_COPY.en['install.body']).toContain('no account')
     expect(src).toContain('showModal')
     expect(src).toContain('min-h-11')
     expect(src).toContain('openerRef')
@@ -776,16 +805,19 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
 
     const src = await pageSrc('Play.tsx')
     expect(src).toContain('data-reveal-word')
-    expect(src).toContain('Reveal word')
+    expect(src).toContain("t('play.reveal')")
+    expect(UI_COPY.en['play.reveal']).toBe('Reveal word')
     expect(src).toContain('function onReveal()')
     expect(src).toContain("mode !== 'practice'")
     expect(src).toContain('revealAllCells')
     // Vowel caption only when vowelHelp (A1/A2)
     expect(src).toContain("const vowelHelp = cefr === 'a1' || cefr === 'a2'")
     expect(src).toContain('vowelHelp && cells.some')
-    expect(src).toContain('Soft green = vowel help (A1–A2)')
+    expect(src).toContain("t('play.vowelHelp')")
+    expect(UI_COPY.en['play.vowelHelp']).toBe('Soft green = vowel help (A1–A2)')
     expect(src).toContain('text-ink-muted')
-    expect(src).toContain('aria-label="Reveal word and end this practice round"')
+    expect(src).toContain("aria-label={t('play.revealAria')}")
+    expect(UI_COPY.en['play.revealAria']).toBe('Reveal word and end this practice round')
   })
 
   test('EndCard teach hierarchy + keyed PlayRound identity; Reveal badge copy', async () => {
@@ -804,10 +836,12 @@ describe('Play tiles / Reveal / vowel caption (gh-103)', () => {
     ).text()
     expect(teach).toContain('text-lg font-semibold leading-snug text-ink')
     expect(endCard).toContain('{teachGloss}')
-    expect(teach).toContain('The word was')
+    expect(teach).toContain("t('teach.theWordWas')")
     expect(endCard).not.toContain('<LearnerHint')
     // Warning #1: Reveal → "Word revealed"; lives → "Out of lives"
-    expect(endCard).toContain("revealed ? 'Word revealed' : 'Out of lives'")
+    expect(endCard).toContain("revealed ? t('play.wordRevealed') : t('play.outOfLives')")
+    expect(UI_COPY.en['play.wordRevealed']).toBe('Word revealed')
+    expect(UI_COPY.en['play.outOfLives']).toBe('Out of lives')
     expect(src).toContain('setRevealedWord(true)')
     expect(src).not.toMatch(/Win\/Lose|prototype.*toggle/i)
   })
@@ -971,7 +1005,8 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     expect(speakEffect).not.toContain('queueMicrotask')
     expect(speakEffect).toContain('if (ok) return')
     expect(speakEffect).toContain("'failed'")
-    expect(teach).toContain('Could not play the word.')
+    expect(teach).toContain("t('teach.speakFailed')")
+    expect(UI_COPY.en['teach.speakFailed']).toBe('Could not play the word.')
     // Registered, not invoked, when the effect runs.
     expect(speakEffect).not.toContain('onClick()')
 
@@ -998,16 +1033,13 @@ describe('Hear the word EndCard Web Speech (gh-113 / ADR 0037)', () => {
     // iOS routes Web Speech through the Silent switch, and the page cannot
     // read that switch. The hint sits with the speaker, not on unsupported
     // browsers where the control is hidden.
-    expect(teach).toContain(
-      'If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.',
-    )
+    expect(teach).toContain("t('teach.muteHelp')")
+    expect(UI_COPY.en['teach.muteHelp']).toBe('If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.')
     expect(teach).not.toContain(
       'If you hear nothing, the Silent switch mutes spoken words.',
     )
     expect(teach).not.toContain('the Silent switch')
-    const hintAt = teach.indexOf(
-      'the phone’s mute switch (Ring/Silent) mutes spoken words.',
-    )
+    const hintAt = teach.indexOf("t('teach.muteHelp')")
     const showSpeakAt = teach.lastIndexOf('showSpeak ? (', hintAt)
     expect(showSpeakAt).toBeGreaterThan(speakAt)
     expect(hintAt - showSpeakAt).toBeLessThan(250)
@@ -1160,8 +1192,10 @@ describe('PwaPrompt stays off play (#132)', () => {
     expect(focusGuard).toContain('return')
     expect(prompt).toContain('updateServiceWorker(true)')
     expect(prompt).toContain('setDismissed(true)')
-    expect(prompt).toContain('A new version is ready.')
-    expect(prompt).toContain('Later')
+    expect(prompt).toContain("t('pwa.ready')")
+    expect(UI_COPY.en['pwa.ready']).toBe('A new version is ready.')
+    expect(prompt).toContain("t('pwa.later')")
+    expect(UI_COPY.en['pwa.later']).toBe('Later')
 
     const app = await Bun.file(new URL('../App.tsx', import.meta.url)).text()
     expect(app).toContain('<PwaPrompt />')
@@ -1179,49 +1213,53 @@ describe('Unfinished daily Home exit (#133)', () => {
     expect(start).toBeGreaterThan(0)
     expect(end).toBeGreaterThan(start)
     const daily = src.slice(start, end)
-    expect(daily).toContain('← Home')
+    expect(daily).toContain("{t('common.home')}")
+    expect(UI_COPY.en['common.home']).toBe('← Home')
     expect(daily).toContain('to="/"')
-    expect(daily).toContain('\n                  Practice\n')
+    expect(daily).toContain("{t('common.practice')}")
     expect(daily).toContain('min-h-11')
     expect(daily).not.toContain('endGame')
     expect(daily).not.toContain('persistDaily')
     expect(daily).not.toContain('setDailyRecord')
     expect(daily).not.toContain('recordDailyWin')
     expect(daily).not.toContain('abandon')
-    const homeLink = daily.slice(daily.indexOf('<Link'), daily.indexOf('← Home'))
+    const homeLink = daily.slice(daily.indexOf('<Link'), daily.indexOf("{t('common.home')}"))
     expect(homeLink).toContain('to="/"')
     expect(homeLink).not.toContain('onClick')
     expect(homeLink).not.toContain('endGame')
     // Practice and pocket exits stay
-    expect(src).toContain('← Daily')
+    expect(src).toContain("{t('common.dailyLink')}")
+    expect(UI_COPY.en['common.dailyLink']).toBe('← Daily')
     expect(src).toContain('to="/play?mode=daily"')
     const pocket = src.indexOf("{!finished && mode === 'pocket' && (")
-    expect(src.slice(pocket, pocket + 400)).toContain('← Home')
+    expect(src.slice(pocket, pocket + 400)).toContain("{t('common.home')}")
   })
 })
 
 describe('Share copy confirmation (#135)', () => {
   test('successful copyShareText sets the Copy text button to Copied', async () => {
     const src = await pageSrc('Share.tsx')
-    expect(src).toContain("useState('Copy text')")
-    expect(src).toContain('{copyLabel}')
+    expect(src).toContain("useState<UiKey>('share.copyText')")
+    expect(src).toContain('{t(copyLabel)}')
     const fnAt = src.indexOf('async function onCopyText')
     expect(fnAt).toBeGreaterThan(0)
     const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
     expect(fn).toContain('copyShareText(payload)')
-    expect(fn).toContain("result.message === 'Copied'")
-    expect(fn).toContain("setCopyLabel('Copied')")
-    expect(fn).toContain("setCopyLabel('Copy text')")
+    expect(fn).toContain("result.ok && result.method === 'clipboard'")
+    expect(fn).toContain("setCopyLabel('share.copied')")
+    expect(fn).toContain("setCopyLabel('share.copyText')")
     expect(fn).toContain("result.method === 'cancelled'")
-    expect(fn).toContain('show(result.message)')
+    expect(fn).toContain('show(t(result.messageKey, result.messageParams))')
     expect(fn).toContain('3000')
     expect(src).toContain('shareResult(payload)')
     expect(src).not.toContain('formatShareText')
     const actions = await Bun.file(
       new URL('../lib/share-actions.ts', import.meta.url),
     ).text()
-    expect(actions).toContain("message: 'Copied'")
-    expect(actions).toContain("message: 'Couldn’t copy'")
+    expect(actions).toContain("messageKey: 'share.copied'")
+    expect(actions).toContain("messageKey: 'share.outcomeCouldNotCopy'")
+    expect(UI_COPY.en['share.copied']).toBe('Copied')
+    expect(UI_COPY.en['share.outcomeCouldNotCopy']).toBe('Couldn’t copy')
   })
 
   test('success then failure before 3000ms leaves the label not Copied', async () => {
@@ -1230,10 +1268,10 @@ describe('Share copy confirmation (#135)', () => {
     const fn = src.slice(fnAt, src.indexOf('if (!payload) {', fnAt))
     // Success arm
     const okArm = fn.slice(
-      fn.indexOf("result.ok && result.message === 'Copied'"),
+      fn.indexOf("result.ok && result.method === 'clipboard'"),
       fn.indexOf('else if'),
     )
-    expect(okArm).toContain("setCopyLabel('Copied')")
+    expect(okArm).toContain("setCopyLabel('share.copied')")
     expect(okArm).toContain('window.clearTimeout(copyReset.current)')
     expect(okArm).toContain('window.setTimeout')
     expect(okArm).toContain('3000')
@@ -1241,12 +1279,12 @@ describe('Share copy confirmation (#135)', () => {
     const failArm = fn.slice(fn.indexOf('else if'), fn.indexOf("result.method === 'cancelled'"))
     expect(failArm).toContain("result.method !== 'cancelled'")
     expect(failArm).toContain('window.clearTimeout(copyReset.current)')
-    expect(failArm).toContain("setCopyLabel('Copy text')")
-    expect(failArm).not.toContain("setCopyLabel('Copied')")
+    expect(failArm).toContain("setCopyLabel('share.copyText')")
+    expect(failArm).not.toContain("setCopyLabel('share.copied')")
     // catch also clears
     const catchArm = fn.slice(fn.indexOf('} catch {'))
     expect(catchArm).toContain('window.clearTimeout(copyReset.current)')
-    expect(catchArm).toContain("setCopyLabel('Copy text')")
+    expect(catchArm).toContain("setCopyLabel('share.copyText')")
     // Unmount clears any open timer (same cleanup as the alive ref).
     const effect = src.slice(src.indexOf('useEffect('), src.indexOf('const show'))
     expect(effect).toContain('alive.current = false')
@@ -1284,10 +1322,10 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
 
   test('CTA label, busy label, and disabled/aria-busy wiring', async () => {
     const src = await pageSrc('Share.tsx')
-    expect(src).toContain(
-      'Play today’s Daily · ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]}',
-    )
-    expect(src).toContain("'Preparing packs…'")
+    expect(src).toContain("t('share.playDailyInvite'")
+    expect(UI_COPY.en['share.playDailyInvite']).toBe('Play today’s Daily · {lang} {cefr}')
+    expect(src).toContain("t('common.preparing')")
+    expect(UI_COPY.en['common.preparing']).toBe('Preparing packs…')
     expect(src).toContain('disabled={busy || preparing}')
     expect(src).toContain('aria-busy={preparing}')
     expect(src).toContain('onClick={() => void onPlayDaily()}')
@@ -1309,9 +1347,8 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     expect(navAt).toBeGreaterThan(failAt)
     expect(fn).toContain('if (alive.current) setPreparing(false)')
     expect(fn).toContain('setInviteError(fail)')
-    expect(src).toContain(
-      'Could not load the ${LANG_CODES[invite.lang]} ${CEFR_CODES[invite.cefr]} pack. Check your connection and try again.',
-    )
+    expect(src).toContain("t('share.inviteFail'")
+    expect(UI_COPY.en['share.inviteFail']).toContain('Could not load the {lang} {cefr} pack.')
     // Inline alert sits above the CTA inside the same footer gate.
     const gateAt = src.indexOf('{invite ? (')
     const alertAt = src.indexOf('role="alert"', gateAt)
@@ -1366,7 +1403,7 @@ describe('Pocket sheet Close (#136)', () => {
     const src = await Bun.file(
       new URL('../components/PocketSheet.tsx', import.meta.url),
     ).text()
-    const closeAt = src.indexOf('Close\n          </Button>')
+    const closeAt = src.indexOf("{t('common.close')}\n          </Button>")
     expect(closeAt).toBeGreaterThan(0)
     const control = src.slice(closeAt - 280, closeAt)
     expect(control).toContain('onClick={onClose}')
@@ -1383,8 +1420,10 @@ describe('Home and in-round 44px text links (#136)', () => {
     const home = await pageSrc('Home.tsx')
     const navAt = home.indexOf('<nav')
     const nav = home.slice(navAt, home.indexOf('</nav>', navAt))
-    expect(nav).toContain('Change language')
-    expect(nav).toContain('About')
+    expect(nav).toContain("t('home.changeLanguage')")
+    expect(nav).toContain("t('home.about')")
+    expect(UI_COPY.en['home.changeLanguage']).toBe('Change language')
+    expect(UI_COPY.en['home.about']).toBe('About')
     expect(nav.match(/min-h-11/g)?.length).toBe(2)
     expect(nav).not.toContain('focus-visible:outline-none')
     expect(nav).toContain('underline decoration-2')
@@ -1395,7 +1434,7 @@ describe('Home and in-round 44px text links (#136)', () => {
     const revealClass = play.slice(revealAt, play.indexOf('</button>', revealAt))
     expect(revealClass).not.toContain('focus-visible:outline-none')
     expect(revealClass).toContain('underline decoration-2')
-    for (const label of ['← Home', '                  Practice', '← Daily', 'Next word'] as const) {
+    for (const label of ["{t('common.home')}", "{t('common.practice')}", "{t('common.dailyLink')}", "t('play.nextWord')"] as const) {
       const at = play.indexOf(label)
       expect(at).toBeGreaterThan(0)
       const around = play.slice(Math.max(0, at - 320), at)
@@ -1406,7 +1445,7 @@ describe('Home and in-round 44px text links (#136)', () => {
     const pocket = await Bun.file(
       new URL('../components/PocketSheet.tsx', import.meta.url),
     ).text()
-    const closeAt = pocket.indexOf('Close\n          </Button>')
+    const closeAt = pocket.indexOf("{t('common.close')}\n          </Button>")
     expect(closeAt).toBeGreaterThan(0)
   })
 })
@@ -1469,8 +1508,10 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
   test('PT/ES accent strip is labeled + contained; DE has none', async () => {
     const kb = await kbSrc()
     expect(kb).toContain('data-accent-strip')
-    expect(kb).toContain('aria-label="Accent keys"')
-    expect(kb).toContain('{ACCENT_STRIP_LABEL}')
+    expect(kb).toContain("aria-label={t('keyboard.accentStripAria')}")
+    expect(kb).toContain("{t('keyboard.accentStripLabel')}")
+    expect(UI_COPY.en['keyboard.accentStripAria']).toBe('Accent keys')
+    expect(UI_COPY.en['keyboard.accentStripLabel']).toBe('Accents')
     expect(kb).toContain('px-frame')
     expect(kb).toContain('bg-cream-dark/60')
     expect(kb).toContain('pad.accentStrip ?')
@@ -1507,7 +1548,7 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
     expect(src).not.toContain('mt-auto flex flex-wrap')
     expect(src).not.toContain('mt-auto pt-6')
     const revealBlock = src.slice(revealAt, src.indexOf("{!finished && mode === 'daily'"))
-    expect(revealBlock).toContain('Reveal word')
+    expect(revealBlock).toContain("t('play.reveal')")
     // Daily / practice / pocket in-round stacks keep pt-6, not mt-auto.
     expect(src).toContain(
       'flex flex-wrap items-center justify-center gap-4 pt-6 text-sm',
@@ -1530,22 +1571,25 @@ describe('Letter pad: no-orphan rows + bottom thumb zone (#138)', () => {
 describe('About states what is counted (ADR 0047, #224)', () => {
   test('privacy card names cookieless Web Analytics, production-only, and the exclusions', async () => {
     const src = await pageSrc('About.tsx')
-    expect(src).toContain('What we count')
-    expect(src).toContain('cookieless Cloudflare Web Analytics')
-    expect(src).toContain('production site only')
-    expect(src).toContain('no cookies')
-    expect(src).toContain('device storage for tracking')
-    expect(src).toContain('Staging previews and offline play are not')
+    expect(src).toContain("t('about.whatWeCount')")
+    expect(src).toContain("t('about.whatWeCountBody')")
+    expect(UI_COPY.en['about.whatWeCount']).toBe('What we count')
+    const wwc = UI_COPY.en['about.whatWeCountBody']
+    expect(wwc).toContain('cookieless Cloudflare Web Analytics')
+    expect(wwc).toContain('production site only')
+    expect(wwc).toContain('no cookies')
+    expect(wwc).toContain('device storage for tracking')
+    expect(wwc).toContain('Staging previews and offline play are not')
   })
 })
 
 describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)', () => {
   test('Sound card is first, with role=switch, approved copy, and hiato.sound storage', async () => {
     const src = await pageSrc('About.tsx')
-    expect(src).toContain('Sound effects')
-    expect(src).toContain(
-      'Short arcade beeps for letters, misses and results. Everything also shows on screen.',
-    )
+    expect(src).toContain("t('about.soundTitle')")
+    expect(src).toContain("t('about.soundHelp')")
+    expect(UI_COPY.en['about.soundTitle']).toBe('Sound effects')
+    expect(UI_COPY.en['about.soundHelp']).toBe('Short arcade beeps for letters, misses and results. Everything also shows on screen.')
     expect(src).toContain('role="switch"')
     expect(src).toContain('aria-checked={on}')
     expect(src).toContain('aria-labelledby="sound-label"')
@@ -1554,11 +1598,13 @@ describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)',
     expect(src).toContain('id="sound-help"')
     // first card on the page, above "What we count"
     const soundAt = src.indexOf('<SoundCard />')
-    const countAt = src.indexOf('What we count')
+    const countAt = src.indexOf("t('about.whatWeCount')")
     expect(soundAt).toBeGreaterThan(0)
     expect(countAt).toBeGreaterThan(soundAt)
     // visible Off/On word; turning on plays the coin cue, off is silent
-    expect(src).toContain("{on ? 'On' : 'Off'}")
+    expect(src).toContain("{on ? t('common.on') : t('common.off')}")
+    expect(UI_COPY.en['common.on']).toBe('On')
+    expect(UI_COPY.en['common.off']).toBe('Off')
     expect(src).toContain("if (next) playCue('coin')")
     expect(src).not.toMatch(/setSoundOn\(next\)[\s\S]{0,80}playCue\('coin'\)[\s\S]{0,40}!next/)
     // storage module wiring
@@ -1578,7 +1624,8 @@ describe('About Sound effects switch + Jersey 10 credit (ADR 0052 #271 / #269)',
     const src = await pageSrc('About.tsx')
     expect(src).toContain('Jersey 10')
     expect(src).toContain('SIL Open Font License 1.1')
-    expect(src).toContain('Copyright 2023 The Soft Type Project Authors')
+    expect(src).toContain("t('about.copyrightJersey')")
+    expect(UI_COPY.en['about.copyrightJersey']).toBe('Copyright 2023 The Soft Type Project Authors (')
     expect(src).toContain('github.com/scfried/soft-type-jersey')
     expect(src).toContain('/fonts/Jersey10-OFL.txt')
     expect(src).toContain('public/fonts')
@@ -1704,7 +1751,8 @@ describe('Level check guards (#227/#277)', () => {
   test('picker offers the optional check; onApply only preselects the tile', async () => {
     const src = await pageSrc('Language.tsx')
     expect(src).toContain('data-level-check-open')
-    expect(src).toContain('Not sure of your level?')
+    expect(src).toContain("t('language.notSure')")
+    expect(UI_COPY.en['language.notSure']).toBe('Not sure of your level?')
     expect(src).toContain('<LevelCheckSheet')
     const applyAt = src.indexOf('onApply={(c) => {')
     expect(applyAt).toBeGreaterThan(0)
@@ -1715,5 +1763,62 @@ describe('Level check guards (#227/#277)', () => {
     expect(closeAt).toBeGreaterThan(cefrAt)
     expect(applyBlock).not.toContain('setPrefs')
     expect(applyBlock).not.toContain('localStorage')
+  })
+})
+
+describe('UI i18n catalog (ADR 0062-0064 / #379)', () => {
+  test('every locale covers exactly the UiKey set (parity: no missing, no extra)', () => {
+    const enKeys = Object.keys(UI_COPY.en).sort()
+    expect(enKeys.length).toBeGreaterThan(100)
+    for (const loc of UI_LOCALES) {
+      expect(Object.keys(UI_COPY[loc]).sort(), loc).toEqual(enKeys)
+    }
+  })
+
+  test('no empty or whitespace-only values in any locale', () => {
+    for (const loc of UI_LOCALES) {
+      for (const [key, value] of Object.entries(UI_COPY[loc])) {
+        expect(value.trim().length, `${loc} ${key}`).toBeGreaterThan(0)
+      }
+    }
+  })
+
+  test('interpolation placeholders are identical across all locales', () => {
+    const placeholders = (s: string) => (s.match(/\{[a-zA-Z]+\}/g) ?? []).sort()
+    for (const key of Object.keys(UI_COPY.en) as UiKey[]) {
+      const want = placeholders(UI_COPY.en[key])
+      for (const loc of UI_LOCALES) {
+        expect(placeholders(UI_COPY[loc][key]), `${loc} ${key}`).toEqual(want)
+      }
+    }
+  })
+
+  test('t() resolves every key in the requested locale — no silent fallthrough', () => {
+    for (const loc of UI_LOCALES) {
+      for (const key of Object.keys(UI_COPY.en) as UiKey[]) {
+        expect(t(loc, key)).toBe(UI_COPY[loc][key])
+      }
+    }
+    // interpolation fills {name} params; unknown params are ignored
+    expect(t('en', 'common.back', { n: 3 })).toBe('← Back')
+    expect(t('de', 'common.inDays', { n: 3 })).toBe('in 3 Tagen')
+    expect(t('pt', 'home.dailyLabel', { lang: 'EN', cefr: 'A1' })).toBe('Diário EN A1')
+  })
+
+  test('UILocale reuses the six pack-language codes', () => {
+    expect([...UI_LOCALES].sort()).toEqual([...PACK_LANGS].sort())
+  })
+
+  test('pages read UI copy through t() keys; the catalog holds the text', async () => {
+    const home = await pageSrc('Home.tsx')
+    expect(home).toContain("t('home.playToday')")
+    expect(UI_COPY.en['home.playToday']).toBe('Play today')
+    const about = await pageSrc('About.tsx')
+    expect(about).toContain('data-ui-locale-picker')
+    expect(about).toContain("t('about.uiLanguage')")
+    expect(UI_COPY.en['about.uiLanguage']).toBe('Interface language')
+    // pack-language seams stay out of the UI catalog (ADR 0064)
+    expect(Object.keys(UI_COPY.en).some((k) => k.includes('NO_HINT'))).toBe(false)
+    expect(Object.keys(UI_COPY.en).some((k) => k.includes('SPEAK_LEMMA'))).toBe(false)
   })
 })

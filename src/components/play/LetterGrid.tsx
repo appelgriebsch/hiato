@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CellState } from '@/engine'
+import { useT } from '@/i18n/use-ui-locale'
 import type { PackLang } from '@/packs/schema'
 
 /**
@@ -32,6 +33,7 @@ export function LetterGrid({
   /** BCP-47 language of the answer. Set on revealed letters only. */
   lang?: PackLang
 }) {
+  const t = useT()
   const prevRevealed = useRef<boolean[]>([])
   const [justRevealed, setJustRevealed] = useState<Set<number>>(new Set())
 
@@ -90,7 +92,7 @@ export function LetterGrid({
     <div
       className="mx-auto flex w-full max-w-sm flex-col items-center gap-2 short-land:hidden"
       role="group"
-      aria-label="Word letters"
+      aria-label={t('play.gridAria')}
       data-letter-grid
       data-cols={maxCols}
     >
@@ -129,7 +131,7 @@ export function LetterGrid({
         gridTemplateColumns: `repeat(${Math.max(cells.length, 1)}, minmax(0, 44px))`,
       }}
       role="group"
-      aria-label="Word letters"
+      aria-label={t('play.gridAria')}
       data-letter-grid
       data-letter-cols={cells.length}
     >

@@ -1,3 +1,4 @@
+import type { TParams, UiKey } from '../i18n'
 import { lemmaIdentity, localDateKey } from '../engine'
 import {
   isPackCefr,
@@ -397,16 +398,23 @@ export function dueInSlot(
   return count
 }
 
-/** "today", "tomorrow", or "in N days" from today to the local day of dueAt. */
-export function nextReviewWhen(dueAt: number, today: string): string {
+/**
+ * "today", "tomorrow", or "in N days" from today to the local day of dueAt,
+ * as an i18n catalog key + params (ADR 0062) so callers render it via t().
+ */
+export type NextReviewWhen = { key: UiKey; params?: TParams }
+
+export function nextReviewWhen(dueAt: number, today: string): NextReviewWhen {
   const due = new Date(dueAt)
   const dueMidnight = new Date(due.getFullYear(), due.getMonth(), due.getDate()).getTime()
   const [y, m, d] = today.split('-').map(Number)
   const todayMidnight = new Date(y!, m! - 1, d).getTime()
   // Round absorbs a 23h or 25h local day so the count stays calendar days.
   const days = Math.round((dueMidnight - todayMidnight) / 86_400_000)
-  if (!Number.isFinite(days) || days <= 0) return 'today'
-  return days === 1 ? 'tomorrow' : `in ${days} days`
+  if (!Number.isFinite(days) || days <= 0) return { key: 'common.today' }
+  return days === 1
+    ? { key: 'common.tomorrow' }
+    : { key: 'common.inDays', params: { n: days } }
 }
 
 export function addToPocket(input: {

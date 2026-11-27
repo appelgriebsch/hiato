@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type Ref } from 'react'
 import { createPortal } from 'react-dom'
+import { useT } from '@/i18n/use-ui-locale'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
 import {
@@ -7,7 +8,7 @@ import {
   suggestLevel,
   type LevelCheckItem,
 } from '@/lib/level-check'
-import { CEFR_CODES, CEFR_LINES } from '@/packs/labels'
+import { CEFR_CODES } from '@/packs/labels'
 import { loadPack } from '@/packs/load'
 import {
   PACK_CEFR_LEVELS,
@@ -38,6 +39,7 @@ export function LevelCheckQuestions({
   total: number
   onAnswer: (knows: boolean) => void
 }) {
+  const t = useT()
   return (
     <div className="mt-4" data-level-check-questions>
       <p
@@ -46,7 +48,7 @@ export function LevelCheckQuestions({
         data-level-check-progress
         className="text-sm text-ink-muted"
       >
-        Question {step + 1} of {total}
+        {t('levelCheck.progress', { step: step + 1, total })}
       </p>
       <p
         data-level-check-word
@@ -55,7 +57,7 @@ export function LevelCheckQuestions({
         {item.word}
       </p>
       <p id="level-check-question-label" className="mt-2 text-sm text-ink-muted">
-        Do you know this word?
+        {t('levelCheck.question')}
       </p>
       <div
         className="mt-3 flex gap-2"
@@ -69,7 +71,7 @@ export function LevelCheckQuestions({
           data-level-check-know
           onClick={() => onAnswer(true)}
         >
-          Know
+          {t('levelCheck.know')}
         </Button>
         <Button
           type="button"
@@ -78,7 +80,7 @@ export function LevelCheckQuestions({
           data-level-check-dont-know
           onClick={() => onAnswer(false)}
         >
-          Don’t know
+          {t('levelCheck.dontKnow')}
         </Button>
       </div>
     </div>
@@ -97,16 +99,17 @@ export function LevelCheckResult({
   onApply: (cefr: PackCefr) => void
   onKeep: () => void
 }) {
+  const t = useT()
   return (
     <div className="mt-4" data-level-check-result>
       {/* Focus target after the last answer; announced via the sheet's live region (#324 L2). */}
       <h3 ref={headingRef} tabIndex={-1} className="text-sm text-ink-muted">
-        Suggested level
+        {t('levelCheck.suggested')}
       </h3>
       <p data-level-check-level className="text-pixel-display mt-1 text-ink">
         {CEFR_CODES[level]}
       </p>
-      <p className="mt-1 text-sm text-ink-muted">{CEFR_LINES[level]}</p>
+      <p className="mt-1 text-sm text-ink-muted">{t(`language.cefrLine.${level}`)}</p>
       <Button
         type="button"
         fullWidth
@@ -114,7 +117,7 @@ export function LevelCheckResult({
         data-level-check-apply
         onClick={() => onApply(level)}
       >
-        Use {CEFR_CODES[level]}
+        {t('levelCheck.use', { cefr: CEFR_CODES[level] })}
       </Button>
       <Button
         type="button"
@@ -124,7 +127,7 @@ export function LevelCheckResult({
         data-level-check-keep
         onClick={onKeep}
       >
-        Keep my pick
+        {t('levelCheck.keep')}
       </Button>
     </div>
   )
@@ -144,6 +147,7 @@ export function LevelCheckSheet({
   onClose,
   onApply,
 }: LevelCheckSheetProps) {
+  const t = useT()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const resultHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -267,7 +271,7 @@ export function LevelCheckSheet({
                   className="text-pixel-display flex items-center gap-2 text-ink"
                 >
                   <PixelIcon name="spark" size={24} aria-hidden="true" />
-                  Check your level
+                  {t('levelCheck.title')}
                 </h2>
                 <Button
                   ref={closeRef}
@@ -283,20 +287,19 @@ export function LevelCheckSheet({
                     className="text-ink-muted"
                     aria-hidden="true"
                   />
-                  Close
+                  {t('common.close')}
                 </Button>
               </div>
               <p className="mt-1 text-sm text-ink-muted">
-                Six words, one per level. Nothing is saved and your streak is
-                not touched.
+                {t('levelCheck.help')}
               </p>
               {/* Mounted before the result content so the result is announced once; role=status implies aria-live=polite (#324 L2). */}
               <div role="status" className="sr-only" data-level-check-announcement>
-                {phase === 'result' ? `Suggested level ${CEFR_CODES[resultLevel]}` : ''}
+                {phase === 'result' ? t('levelCheck.suggestedAria', { cefr: CEFR_CODES[resultLevel] }) : ''}
               </div>
               {phase === 'loading' ? (
                 <p role="status" className="mt-4 text-sm text-ink-muted">
-                  Loading words…
+                  {t('levelCheck.loading')}
                 </p>
               ) : null}
               {phase === 'error' ? (
@@ -305,8 +308,7 @@ export function LevelCheckSheet({
                   data-level-check-error
                   className="mt-4 text-sm text-accent-fg"
                 >
-                  Could not load the word packs. Check your connection and try
-                  again — or just pick a level below.
+                  {t('levelCheck.error')}
                 </p>
               ) : null}
               {phase === 'questions' && items[step] ? (

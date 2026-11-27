@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { InstallHelpLink } from '@/components/InstallHelp'
+import { useT } from '@/i18n/use-ui-locale'
 import { LevelCheckSheet } from '@/components/LevelCheckSheet'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Layout, TopBar } from '@/components/Layout'
@@ -8,11 +9,11 @@ import { Button } from '@/components/ui/button'
 import { getPrefs, setPrefs } from '@/lib/prefs'
 import { useLocalDateKey } from '@/lib/use-local-date-key'
 import { precacheSelectedLanguage } from '@/packs/cache'
-import { CEFR_CODES, CEFR_LINES, LANG_CODES, LANG_LABELS } from '@/packs/labels'
+import { CEFR_CODES, LANG_CODES, LANG_LABELS } from '@/packs/labels'
 import { packInfoLabel, provenanceCaption } from '@/packs/provenance'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from '@/packs/schema'
 
-function moveRadio<T extends string>(
+export function moveRadio<T extends string>(
   e: KeyboardEvent<HTMLButtonElement>,
   items: readonly T[],
   selected: T,
@@ -66,14 +67,15 @@ export function SelectionCard({
   phase: CachePhase
   showSaving: boolean
 }) {
+  const t = useT()
   const caption = provenanceCaption(lang, cefr)
   const status =
     phase === 'ready'
-      ? '✓ Ready offline'
+      ? t('language.readyOffline')
       : phase === 'error'
-        ? 'Not saved yet — connect and try again.'
+        ? t('language.notSaved')
         : phase === 'caching' && showSaving
-          ? 'Saving for offline…'
+          ? t('language.saving')
           : '\u00a0'
   return (
     <section
@@ -113,6 +115,7 @@ export function SelectionCard({
 }
 
 export function Language() {
+  const t = useT()
   const saved = getPrefs()
   const [lang, setLang] = useState<PackLang>(saved?.lang ?? 'en')
   const [cefr, setCefr] = useState<PackCefr>(saved?.cefr ?? 'a1')
@@ -161,9 +164,7 @@ export function Language() {
       const ok = await precacheSelectedLanguage(lang, cefr)
       if (!alive.current) return
       if (!ok) {
-        setError(
-          'Could not load the selected pack. Check your connection and try again.',
-        )
+        setError(t('language.loadError'))
         setCachePhase('error')
         setPreparing(false)
         return
@@ -173,19 +174,17 @@ export function Language() {
       nav('/play?mode=daily')
     } catch {
       if (!alive.current) return
-      setError(
-        'Could not load the selected pack. Check your connection and try again.',
-      )
+      setError(t('language.loadError'))
       setCachePhase('error')
       setPreparing(false)
     }
   }
 
   const continueLabel = preparing
-    ? 'Preparing packs…'
+    ? t('common.preparing')
     : cachePhase === 'caching' && showSaving
-      ? 'Caching…'
-      : 'Continue to daily'
+      ? t('language.caching')
+      : t('language.continueDaily')
 
   const continueControls = (land: boolean) => (
     <>
@@ -226,12 +225,12 @@ export function Language() {
               if (!preparing) nav('/')
             }}
           >
-            ← Back
+            {t('common.back')}
           </button>
         }
         center={
           <h1 className="text-pixel-title hidden text-ink short-land:block">
-            Choose language &amp; level
+            {t('language.title')}
           </h1>
         }
         right={
@@ -241,25 +240,25 @@ export function Language() {
           <button
             type="button"
             data-level-check-open
-            aria-label="Not sure of your level?"
+            aria-label={t('language.notSure')}
             disabled={preparing}
             className="motion-press flex min-h-11 shrink-0 items-center px-2 text-sm text-ink-muted underline decoration-2 underline-offset-4 hover:text-ink disabled:opacity-40"
             onClick={() => setCheckOpen(true)}
           >
-            <span className="short-land:hidden">Not sure of your level?</span>
-            <span className="hidden short-land:inline">Not sure?</span>
+            <span className="short-land:hidden">{t('language.notSure')}</span>
+            <span className="hidden short-land:inline">{t('language.notSureShort')}</span>
           </button>
         }
       />
 
-      <h1 className="text-pixel-display text-ink short-land:hidden">Choose language &amp; level</h1>
+      <h1 className="text-pixel-display text-ink short-land:hidden">{t('language.title')}</h1>
       <div
         data-language-picker
         className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5"
       >
       <div>
       <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
-        Language
+        {t('language.headingLanguage')}
       </h2>
       <div
         role="radiogroup"
@@ -306,7 +305,7 @@ export function Language() {
       </div>
       <div className="short-land:flex short-land:min-h-0 short-land:min-w-0 short-land:flex-col short-land:justify-center">
       <h2 id="cefr-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
-        Level
+        {t('language.headingLevel')}
       </h2>
       <div
         role="radiogroup"
@@ -342,7 +341,7 @@ export function Language() {
         ))}
       </div>
       <p id="cefr-help" className="mt-2 text-sm text-ink-muted short-land:mt-1">
-        {CEFR_LINES[cefr]}
+        {t(`language.cefrLine.${cefr}`)}
       </p>
 
       <SelectionCard lang={lang} cefr={cefr} phase={cachePhase} showSaving={showSaving} />

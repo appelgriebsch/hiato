@@ -13,8 +13,7 @@ export type LetterPad = {
   accentStrip: string[] | null
 }
 
-/** Visible label on the PT/ES accent strip, so it never reads as a 4th letter row. */
-export const ACCENT_STRIP_LABEL = 'Accents'
+// The PT/ES accent-strip label is UI copy: t('keyboard.accentStripLabel') (ADR 0062).
 
 export const LETTER_PADS: Record<PackLang, LetterPad> = {
   en: {

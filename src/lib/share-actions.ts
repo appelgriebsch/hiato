@@ -1,3 +1,4 @@
+import type { TParams, UiKey } from '@/i18n'
 import {
   formatShareText,
   shareCardFilename,
@@ -13,10 +14,16 @@ export type ShareMethod =
   | 'cancelled'
   | 'unsupported'
 
+/**
+ * Outcome copy is a catalog key (ADR 0062): the Share page renders it through
+ * t() in the current UI locale. Share payload text itself stays unlocalized
+ * (ADR 0064).
+ */
 export type ShareOutcome = {
   ok: boolean
   method?: ShareMethod
-  message: string
+  messageKey: UiKey
+  messageParams?: TParams
 }
 
 function isAbort(err: unknown): boolean {
@@ -87,7 +94,7 @@ async function pngFile(payload: ShareCardPayload): Promise<File> {
 const UNSUPPORTED: ShareOutcome = {
   ok: false,
   method: 'unsupported',
-  message: 'Share not available — try Copy or Download',
+  messageKey: 'share.outcomeUnsupported',
 }
 
 /** Web Share when available; never auto-download. Copy/Download stay explicit. */
@@ -108,24 +115,24 @@ export async function shareResult(
     try {
       if (file && canShareFiles(nav, file, text)) {
         await nav.share({ title: 'Hiato', text, files: [file] })
-        return { ok: true, method: 'web-share', message: 'Shared' }
+        return { ok: true, method: 'web-share', messageKey: 'share.outcomeShared' }
       }
       await nav.share({ title: 'Hiato', text })
-      return { ok: true, method: 'web-share', message: 'Shared' }
+      return { ok: true, method: 'web-share', messageKey: 'share.outcomeShared' }
     } catch (err) {
       if (isAbort(err)) {
-        return { ok: true, method: 'cancelled', message: 'Cancelled' }
+        return { ok: true, method: 'cancelled', messageKey: 'share.outcomeCancelled' }
       }
       // Non-abort share failure: soft-fallback to clipboard text only (no download).
       const copied = await writeClipboardText(text)
-      if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
+      if (copied) return { ok: true, method: 'clipboard', messageKey: 'share.copied' }
       return UNSUPPORTED
     }
   }
 
   // navigator.share missing — do not auto-triggerDownload.
   const copied = await writeClipboardText(text)
-  if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
+  if (copied) return { ok: true, method: 'clipboard', messageKey: 'share.copied' }
   return UNSUPPORTED
 }
 
@@ -135,9 +142,9 @@ export async function downloadShareCard(
   try {
     const file = await pngFile(payload)
     await triggerDownload(file)
-    return { ok: true, method: 'download', message: 'Image saved' }
+    return { ok: true, method: 'download', messageKey: 'share.outcomeImageSaved' }
   } catch {
-    return { ok: false, message: 'Couldn’t save image' }
+    return { ok: false, messageKey: 'share.outcomeCouldNotSaveImage' }
   }
 }
 
@@ -146,6 +153,6 @@ export async function copyShareText(
 ): Promise<ShareOutcome> {
   const text = formatShareText(payload, shareTextUrl(payload))
   const copied = await writeClipboardText(text)
-  if (copied) return { ok: true, method: 'clipboard', message: 'Copied' }
-  return { ok: false, message: 'Couldn’t copy' }
+  if (copied) return { ok: true, method: 'clipboard', messageKey: 'share.copied' }
+  return { ok: false, messageKey: 'share.outcomeCouldNotCopy' }
 }

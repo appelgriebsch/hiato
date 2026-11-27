@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import path from 'node:path'
+import { UI_COPY } from '@/i18n'
 import {
   SHARE_CARD_FONT_URLS,
   SHARE_CARD_KEYS,
@@ -341,7 +342,8 @@ describe('share PNG palette (ADR 0052 §5.10 — always light Cartridge)', () =>
 
   test('share page says the saved image stays cream', async () => {
     const src = await Bun.file(path.join(REPO, 'src/pages/Share.tsx')).text()
-    expect(src).toContain('The saved image stays cream.')
+    expect(src).toContain("t('share.caption')")
+    expect(UI_COPY.en['share.caption']).toContain('The saved image stays cream.')
   })
 })
 
