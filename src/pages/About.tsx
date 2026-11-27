@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Card } from '@/components/ui/card'
+import { useT, useUiLocaleSetting } from '@/i18n/use-ui-locale'
+import { UI_LOCALES, type UILocale } from '@/i18n'
+import { setUiLocale } from '@/lib/ui-locale'
+import { moveRadio } from '@/pages/Language'
 import { PACK_LICENSES } from '@/packs/licenses'
-import { LANG_CODES } from '@/packs/labels'
+import { LANG_CODES, LANG_LABELS } from '@/packs/labels'
 import { getSoundOn, playCue, setSoundOn, subscribeSoundChange } from '@/lib/sound'
 
 const CC_BY_SA_DEED = 'https://creativecommons.org/licenses/by-sa/4.0/'
@@ -69,6 +73,7 @@ function LicenseLine({ license }: { license: string }) {
  * never the only cue. Turning it on plays one coin cue from the same tap.
  */
 function SoundCard() {
+  const t = useT()
   const [on, setOn] = useState(getSoundOn)
 
   useEffect(() => subscribeSoundChange(() => setOn(getSoundOn())), [])
@@ -92,10 +97,10 @@ function SoundCard() {
           />
           <div className="min-w-0">
             <p id="sound-label" className="text-pixel-title text-ink">
-              Sound effects
+              {t('about.soundTitle')}
             </p>
             <p id="sound-help" className="mt-1 text-sm leading-snug text-ink-muted">
-              Short arcade beeps for letters, misses and results. Everything also shows on screen.
+              {t('about.soundHelp')}
             </p>
           </div>
         </div>
@@ -127,7 +132,7 @@ function SoundCard() {
                 on ? 'left-2 text-white' : 'right-2 text-ink',
               ].join(' ')}
             >
-              {on ? 'On' : 'Off'}
+              {on ? t('common.on') : t('common.off')}
             </span>
           </span>
         </button>
@@ -136,8 +141,80 @@ function SoundCard() {
   )
 }
 
+type UiLocaleOption = UILocale | 'system'
+
+const UI_LOCALE_OPTIONS: readonly UiLocaleOption[] = ['system', ...UI_LOCALES]
+
+/**
+ * "Interface language" card (ADR 0063 / #379): radiogroup reusing the
+ * Language.tsx pattern (aria-checked, roving tabindex, min-h-11 rows) with a
+ * System entry first. Writes only `hiato.ui-locale`, never `hiato.prefs`.
+ */
+function UiLanguageCard() {
+  const t = useT()
+  const setting = useUiLocaleSetting()
+  const select = (value: UiLocaleOption) => setUiLocale(value)
+  const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>) =>
+    moveRadio(e, UI_LOCALE_OPTIONS, setting, select)
+  return (
+    <Card className="mb-4" data-ui-locale-card>
+      <div className="flex items-start gap-2.5">
+        <PixelIcon
+          name="spark"
+          size={24}
+          className="mt-1 shrink-0 text-ink-muted"
+          aria-hidden="true"
+        />
+        <div className="min-w-0 flex-1">
+          <h2 id="ui-language-heading" className="text-pixel-title text-ink">
+            {t('about.uiLanguage')}
+          </h2>
+          <p id="ui-language-help" className="mt-1 text-sm leading-snug text-ink-muted">
+            {t('about.uiLanguageHelp')}
+          </p>
+        </div>
+      </div>
+      <div
+        role="radiogroup"
+        data-radio-group
+        data-ui-locale-picker
+        aria-labelledby="ui-language-heading"
+        aria-describedby="ui-language-help"
+        className="mt-3 grid grid-cols-2 gap-2"
+      >
+        {UI_LOCALE_OPTIONS.map((opt) => (
+          <button
+            key={opt}
+            type="button"
+            role="radio"
+            data-radio={opt}
+            aria-checked={setting === opt}
+            tabIndex={setting === opt ? 0 : -1}
+            onClick={() => select(opt)}
+            onKeyDown={onKeyDown}
+            className={[
+              'motion-press relative min-h-11 border-2 px-4 py-1.5 text-left',
+              'transition-[border-color,background-color,color] duration-200',
+              setting === opt
+                ? 'border-accent-fg bg-accent-soft text-accent-fg'
+                : 'border-line bg-raised text-ink hover:bg-cream-dark',
+            ].join(' ')}
+          >
+            {opt === 'system' ? (
+              t('common.system')
+            ) : (
+              <span lang={opt}>{LANG_LABELS[opt]}</span>
+            )}
+          </button>
+        ))}
+      </div>
+    </Card>
+  )
+}
+
 export function About() {
   const nav = useNavigate()
+  const t = useT()
 
   return (
     <Layout>
@@ -148,38 +225,24 @@ export function About() {
             className="motion-press -ml-2 inline-flex min-h-11 min-w-11 items-center px-2 text-sm text-ink-muted"
             onClick={() => nav('/')}
           >
-            ← Back
+            {t('common.back')}
           </button>
         }
-        center={<span className="text-pixel-title text-ink">About</span>}
+        center={<span className="text-pixel-title text-ink">{t('about.title')}</span>}
       />
 
       <SoundCard />
 
-      <h1 className="text-pixel-display text-ink">What we count</h1>
+      <UiLanguageCard />
+
+      <h1 className="text-pixel-display text-ink">{t('about.whatWeCount')}</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
-        On the production site only, Hiato uses cookieless Cloudflare Web Analytics
-        to count visits and page views per screen. It sets no cookies, uses no
-        device storage for tracking, and collects nothing that identifies you. No
-        accounts are needed to play. Staging previews and offline play are not
-        counted (ADR 0047).
+        {t('about.whatWeCountBody')}
       </p>
 
-      <h1 className="text-pixel-display text-ink">Licenses</h1>
+      <h1 className="text-pixel-display text-ink">{t('about.licenses')}</h1>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
-        Word packs ship with per-source attribution. English A1–B2 lemmas are
-        selected from the CEFR-J Wordlist (free use with citation; © Tono
-        Laboratory, TUFS). C1–C2 come from the Octanove Vocabulary Profile
-        (CC-BY-SA). German, Spanish, Portuguese, French, and Italian are
-        CC-BY-SA at every level. German CEFR labels are calibrated against Goethe-Institut
-        lists, not copied from them. Spanish and Portuguese
-        C-levels are frequency-rank bands, not Instituto Cervantes or CAPLE
-        lists. French A1–C2 lemmas are wordhoard frequency-rank bands, not
-        DELF or DALF lists. Italian A1–C2 lemmas are wordhoard frequency-rank
-        bands, not CELI, CILS, or PLIDA lists.
-        Portuguese lemmas come from hermitdave/FrequencyWords pt_50k
-        (OpenSubtitles; content CC-BY-SA-4.0, code MIT). Gloss and synonym
-        copy is original to Hiato and is always in the pack language.
+        {t('about.licensesBody')}
       </p>
 
       {PACK_LICENSES.map((info) => (
@@ -205,8 +268,8 @@ export function About() {
       ))}
 
       <Card className="mb-3">
-        <div className="mb-1 text-xs font-medium text-ink-faint">EndCard</div>
-        <h2 className="text-[15px] font-semibold text-ink">Example sentences</h2>
+        <div className="mb-1 text-xs font-medium text-ink-faint">{t('about.kickerEndcard')}</div>
+        <h2 className="text-[15px] font-semibold text-ink">{t('about.exampleSentences')}</h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           <a
             className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
@@ -219,7 +282,7 @@ export function About() {
         </p>
         <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
           <li>
-            Some EndCard sentences are from{' '}
+            {t('about.exampleFromPrefix')}{' '}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href={TATOEBA}
@@ -228,19 +291,18 @@ export function About() {
             >
               tatoeba.org
             </a>{' '}
-            (CC-BY 2.0 FR).
+            {t('about.exampleFromSuffix')}
           </li>
           <li>
-            Sentences without a Tatoeba match are original Hiato copy generated
-            with Mistral AI — no external credit required.
+            {t('about.exampleOriginal')}
           </li>
         </ul>
       </Card>
 
       <Card className="mb-3">
-        <div className="mb-1 text-xs font-medium text-ink-faint">EndCard</div>
+        <div className="mb-1 text-xs font-medium text-ink-faint">{t('about.kickerEndcard')}</div>
         <h2 className="text-[15px] font-semibold text-ink">
-          Pronunciation &amp; word family
+          {t('about.pronFamily')}
         </h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           <a
@@ -254,7 +316,7 @@ export function About() {
         </p>
         <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
           <li>
-            EndCard IPA transcriptions and word-family chips come from{' '}
+            {t('about.ipaFromPrefix')}{' '}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href={WIKTEXTRACT}
@@ -263,24 +325,23 @@ export function About() {
             >
               Wiktionary via wiktextract (kaikki.org)
             </a>{' '}
-            (CC-BY-SA 4.0).
+            {t('about.ipaFromSuffix')}
           </li>
           <li>
-            Entries without wiktextract coverage are original Hiato copy
-            generated with Mistral AI — no external credit required.
+            {t('about.ipaOriginal')}
           </li>
         </ul>
       </Card>
 
       <Card className="mb-3">
-        <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>
+        <div className="mb-1 text-xs font-medium text-ink-faint">{t('about.kickerTypeface')}</div>
         <h2 className="text-[15px] font-semibold text-ink">Inter</h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           SIL Open Font License 1.1
         </p>
         <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
           <li>
-            Copyright (c) 2016 The Inter Project Authors (
+            {t('about.copyrightInter')}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/rsms/inter"
@@ -290,34 +351,33 @@ export function About() {
             ).
           </li>
           <li>
-            Self-hosted latin woff2 (400 / 500 / 600) under{' '}
-            <code className="text-[12px]">public/fonts</code>. Share cards load
-            these same-origin files only — no Google Fonts or remote CDN (ADR
-            0020).
+            {t('about.interSelfHostedPrefix')}{' '}
+            <code className="text-[12px]">public/fonts</code>
+            {t('about.interSelfHostedSuffix')}
           </li>
           <li>
-            Full license:{' '}
+            {t('about.fullLicensePrefix')}{' '}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/LICENSE.txt"
             >
               /fonts/LICENSE.txt
             </a>
-            {' · '}
-            repo <code className="text-[12px]">NOTICE</code>.
+            {t('about.fullLicenseMid')}
+            <code className="text-[12px]">NOTICE</code>.
           </li>
         </ul>
       </Card>
 
       <Card className="mb-3">
-        <div className="mb-1 text-xs font-medium text-ink-faint">Typeface</div>
+        <div className="mb-1 text-xs font-medium text-ink-faint">{t('about.kickerTypeface')}</div>
         <h2 className="text-[15px] font-semibold text-ink">Jersey 10</h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           SIL Open Font License 1.1
         </p>
         <ul className="mt-2 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-muted">
           <li>
-            Copyright 2023 The Soft Type Project Authors (
+            {t('about.copyrightJersey')}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/scfried/soft-type-jersey"
@@ -327,26 +387,26 @@ export function About() {
             ).
           </li>
           <li>
-            Self-hosted latin woff2 under <code className="text-[12px]">public/fonts</code>,
-            also used by share cards (ADR 0020).
+            {t('about.jerseySelfHostedPrefix')}{' '}
+            <code className="text-[12px]">public/fonts</code>
+            {t('about.jerseySelfHostedSuffix')}
           </li>
           <li>
-            Full license:{' '}
+            {t('about.fullLicensePrefix')}{' '}
             <a
               className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/Jersey10-OFL.txt"
             >
               /fonts/Jersey10-OFL.txt
             </a>
-            {' · '}
-            repo <code className="text-[12px]">NOTICE</code>.
+            {t('about.fullLicenseMid')}
+            <code className="text-[12px]">NOTICE</code>.
           </li>
         </ul>
       </Card>
 
       <p className="mt-2 mb-2 text-center text-[11px] leading-relaxed text-ink-faint">
-        Selected-language packs are cached for offline play; other languages
-        download on demand (ADR 0006).
+        {t('about.offlineNote')}
       </p>
       <p className="mb-6 text-center text-[12px] leading-relaxed text-ink-muted">
         <img
@@ -357,7 +417,7 @@ export function About() {
           className="mr-1 inline-block h-3 w-3 select-none align-[-2px]"
           draggable={false}
         />
-        Built by Mistral AI ·{' '}
+        {t('about.builtBy')}{' '}
         <span className="font-mono">{__HIATO_BUILD_SHA__}</span>
       </p>
     </Layout>

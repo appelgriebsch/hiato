@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { PixelIcon } from '@/components/PixelIcon'
+import { useT } from '@/i18n/use-ui-locale'
 import { speakLemma, subscribeSpeakActivity } from '@/lib/speech'
 import { posLabel, speakLemmaAriaLabel } from '@/packs/labels'
 import { FAMILY_MAX, type PackLang, type PackPos } from '@/packs/schema'
@@ -36,6 +37,7 @@ export function LemmaTeach({
   family?: string[]
   showSpeak: boolean
 }) {
+  const t = useT()
   const posChip = pos ? posLabel(lang, pos) : null
   // Stored with slashes; the slashes render aria-hidden around the glyphs.
   const ipaBody = (ipa ?? '').trim().replace(/^\//, '').replace(/\/$/, '')
@@ -97,7 +99,7 @@ export function LemmaTeach({
           gloss ? 'mt-1' : 'mt-1.5',
         ].join(' ')}
       >
-        The word was
+        {t('teach.theWordWas')}
       </p>
       <div className="flex items-center justify-center gap-1">
         <p
@@ -162,17 +164,17 @@ export function LemmaTeach({
       ) : null}
       {speakNote === 'playing' ? (
         <p lang="en" role="status" className="mt-1.5 text-xs text-ink-muted">
-          Playing
+          {t('teach.playing')}
         </p>
       ) : null}
       {speakNote === 'failed' ? (
         <p lang="en" role="status" className="mt-1.5 text-xs text-danger">
-          Could not play the word.
+          {t('teach.speakFailed')}
         </p>
       ) : null}
       {showSpeak ? (
         <p lang="en" className="mt-0.5 text-xs text-ink-muted">
-          If you hear nothing, the phone’s mute switch (Ring/Silent) mutes spoken words.
+          {t('teach.muteHelp')}
         </p>
       ) : null}
       {synonyms.length > 0 ? (
@@ -181,7 +183,7 @@ export function LemmaTeach({
           className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
         >
           <span lang="en" className="text-pixel-label text-ink-faint">
-            Synonyms
+            {t('teach.synonyms')}
           </span>
           {synonyms.map((s) => (
             <span
@@ -200,7 +202,7 @@ export function LemmaTeach({
           className="mt-1 flex flex-wrap items-center justify-center gap-1.5"
         >
           <span lang="en" className="text-pixel-label text-ink-faint">
-            Word family
+            {t('teach.wordFamily')}
           </span>
           {familyChips.map((f) => (
             <span

@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useRegisterSW } from 'virtual:pwa-register/react'
+import { useT } from '@/i18n/use-ui-locale'
 import { Button } from '@/components/ui/button'
 
 export function PwaPrompt() {
+  const t = useT()
   const { pathname } = useLocation()
   const onPlay = pathname === '/play' || pathname.startsWith('/play/')
   const {
@@ -35,7 +37,7 @@ export function PwaPrompt() {
       className="fixed inset-x-0 bottom-0 z-50 mx-auto max-w-md p-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
     >
       <div className="px-frame px-drop bg-raised p-4">
-        <p className="mb-3 text-sm text-ink">A new version is ready.</p>
+        <p className="mb-3 text-sm text-ink">{t('pwa.ready')}</p>
         <div className="flex gap-2">
           <Button
             ref={updateBtnRef}
@@ -43,7 +45,7 @@ export function PwaPrompt() {
             fullWidth
             onClick={() => void updateServiceWorker(true)}
           >
-            Update
+            {t('pwa.update')}
           </Button>
           <Button
             variant="ghost"
@@ -52,7 +54,7 @@ export function PwaPrompt() {
               setNeedRefresh(false)
             }}
           >
-            Later
+            {t('pwa.later')}
           </Button>
         </div>
       </div>

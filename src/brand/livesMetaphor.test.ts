@@ -2,6 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import path from 'node:path'
 import { TOTAL_LIVES } from '../engine/game'
 import { LIVES_METAPHOR, LIVES_METAPHOR_LABELS } from './livesMetaphor'
+import { UI_COPY } from '@/i18n'
 
 const REPO = path.join(import.meta.dir, '../..')
 
@@ -16,7 +17,8 @@ describe('lives metaphor (ADR 0025)', () => {
     const src = await Bun.file(
       path.join(REPO, 'src/components/play/Lives.tsx'),
     ).text()
-    expect(src).toContain('lives remaining')
+    expect(src).toContain("t('lives.aria'")
+    expect(UI_COPY.en['lives.aria']).toBe('{count} {livesWord} remaining')
     expect(src).toContain('role="status"')
     expect(src).toContain('aria-live="polite"')
     expect(src).toContain('prefers-reduced-motion')
@@ -88,7 +90,8 @@ describe('Uma polish assets', () => {
     expect(src).not.toContain('❄️')
     expect(src).toContain('name="flame"')
     expect(src).toContain('name="freeze"')
-    expect(src).toContain('`Streak ${count}`')
+    expect(src).toContain("t('streak.aria', { count })")
+    expect(UI_COPY.en['streak.aria']).toBe('Streak {count}')
     expect(src).not.toMatch(/aria-label=\{[^}]*fire/)
   })
 

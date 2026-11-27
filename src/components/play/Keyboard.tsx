@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react'
 import { PixelIcon } from '@/components/PixelIcon'
 import { graphemeKey } from '@/engine'
+import { useT } from '@/i18n/use-ui-locale'
 import {
-  ACCENT_STRIP_LABEL,
   LETTER_PADS,
   keyUsesUppercaseFace,
   padColumns,
@@ -43,6 +43,7 @@ export function Keyboard({
 }: {
   lang: PackLang
 } & KeyState) {
+  const t = useT()
   const pad = LETTER_PADS[lang]
   const cols = padColumns(pad)
   const state: KeyState = { usedWrong, usedCorrect, disabled, onKey, shakeKey }
@@ -53,7 +54,7 @@ export function Keyboard({
       <div
         className="flex w-full min-w-0 flex-col overflow-hidden px-1 pt-1.5 pb-1"
         role="group"
-        aria-label="Letter pad"
+        aria-label={t('keyboard.padAria')}
         data-letter-pad
         data-pad-cols={cols}
         data-tap-min-h="44"
@@ -65,7 +66,7 @@ export function Keyboard({
         {pad.accentStrip ? (
           <div
             role="group"
-            aria-label="Accent keys"
+            aria-label={t('keyboard.accentStripAria')}
             data-accent-strip
             className="px-frame mt-1 bg-cream-dark/60 px-0.5 pt-0.5 [--px-edge:var(--color-line)]"
           >
@@ -73,7 +74,7 @@ export function Keyboard({
               aria-hidden="true"
               className="px-1.5 text-[11px] font-semibold uppercase leading-4 tracking-wider text-ink-muted"
             >
-              {ACCENT_STRIP_LABEL}
+              {t('keyboard.accentStripLabel')}
             </p>
             <KeyRow row={pad.accentStrip} {...state} />
           </div>

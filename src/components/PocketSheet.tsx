@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useT } from '@/i18n/use-ui-locale'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -41,6 +42,7 @@ export function PocketSheet({
   onCount,
   onRetry,
 }: PocketSheetProps) {
+  const t = useT()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openerRef = useRef<HTMLElement | null>(null)
   const restoreFocusRef = useRef(false)
@@ -67,6 +69,10 @@ export function PocketSheet({
   const playable = gate ? playableDueEntries(entries, today, gate) : []
   const dueCount = entries.filter((entry) => isDue(entry, today)).length
   const nextAt = entries.find((entry) => !isDue(entry, today))?.dueAt
+  const whenLabel = (dueAt: number): string => {
+    const w = nextReviewWhen(dueAt, today)
+    return t(w.key, w.params)
+  }
 
   useEffect(() => {
     if (!open) return
@@ -189,7 +195,7 @@ export function PocketSheet({
         <div className="flex items-center justify-between gap-2">
           <h2 id="pocket-sheet-heading" className="text-pixel-display flex items-center gap-2 text-ink">
             <PixelIcon name="pocket" size={24} aria-hidden="true" />
-            Pocket
+            {t('pocket.title')}
           </h2>
           <Button
             type="button"
@@ -198,13 +204,15 @@ export function PocketSheet({
             onClick={onClose}
           >
             <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
-            Close
+            {t('common.close')}
           </Button>
         </div>
         <p className="mt-1 mb-3 text-sm text-ink-muted">
           {dueCount > 0
-            ? `${dueCount} due today. Spelling stays hidden.`
-            : `Nothing due today. Next review ${nextAt == null ? 'tomorrow' : nextReviewWhen(nextAt, today)}.`}
+            ? t('pocket.dueSummary', { count: dueCount })
+            : t('pocket.noneDue', {
+                when: nextAt == null ? t('common.tomorrow') : whenLabel(nextAt),
+              })}
         </p>
         {playable.length > 0 ? (
           <Button
@@ -217,7 +225,7 @@ export function PocketSheet({
               if (first) handleRetry(first.id)
             }}
           >
-            Review due words ({playable.length})
+            {t('pocket.reviewDue', { count: playable.length })}
           </Button>
         ) : null}
         <ul className="flex flex-col gap-3">
@@ -230,17 +238,17 @@ export function PocketSheet({
                 <li key={entry.id} className="flex flex-col gap-2">
                   <div className="flex items-start justify-between gap-2 border-2 border-line bg-cream px-3 py-2">
                     <p id={glossId} className="min-w-0 text-sm text-ink">
-                      {pocketListLabel(entry)}
+                      {pocketListLabel(entry) ?? t('pocket.meaningNotSaved')}
                     </p>
                     {due ? (
                       <Badge id={dueId} tone="accent" className="shrink-0">
-                        Due
+                        {t('pocket.due')}
                       </Badge>
                     ) : null}
                   </div>
                   {due ? null : (
                     <p id={whenId} className="text-xs text-ink-muted">
-                      Next review {nextReviewWhen(entry.dueAt, today)}
+                      {t('pocket.nextReview', { when: whenLabel(entry.dueAt) })}
                     </p>
                   )}
                   <div className="flex gap-2">
@@ -256,7 +264,7 @@ export function PocketSheet({
                       }
                       onClick={() => handleRetry(entry.id)}
                     >
-                      Retry
+                      {t('pocket.retry')}
                     </Button>
                     <Button
                       type="button"
@@ -265,7 +273,7 @@ export function PocketSheet({
                       aria-labelledby={`${glossId} pocket-sheet-remove-name`}
                       onClick={() => handleRemove(entry.id)}
                     >
-                      Remove
+                      {t('pocket.remove')}
                     </Button>
                   </div>
                 </li>
@@ -273,10 +281,10 @@ export function PocketSheet({
             })}
         </ul>
         <span id="pocket-sheet-retry-name" className="sr-only">
-          Retry
+          {t('pocket.retry')}
         </span>
         <span id="pocket-sheet-remove-name" className="sr-only">
-          Remove
+          {t('pocket.remove')}
         </span>
       </div>
     </dialog>,

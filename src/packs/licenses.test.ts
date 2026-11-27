@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'bun:test'
+import { UI_COPY } from '@/i18n'
 import { PACK_LICENSES } from './licenses'
 import { PACK_LANGS } from './schema'
 
@@ -120,7 +121,10 @@ describe('PACK_LICENSES About bands (ADR 0029)', () => {
 
   test('About intro cannot regress to CC0, a split EN band, or a MIT-only FrequencyWords cite', async () => {
     const src = await Bun.file(new URL('../pages/About.tsx', import.meta.url)).text()
-    const intro = src.slice(src.indexOf('Word packs ship'), src.indexOf('PACK_LICENSES.map'))
+    // the intro is UI copy now: rendered via t('about.licensesBody'), text in the catalog (ADR 0062)
+    expect(src.indexOf("t('about.licensesBody')")).toBeGreaterThan(0)
+    expect(src.indexOf("t('about.licensesBody')")).toBeLessThan(src.indexOf('PACK_LICENSES.map'))
+    const intro = UI_COPY.en['about.licensesBody']
     expect(intro).toContain('English A1–B2 lemmas are')
     expect(intro).toContain('CEFR-J Wordlist')
     expect(intro).toContain('calibrated against Goethe-Institut')

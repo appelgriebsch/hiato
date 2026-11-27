@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'bun:test'
 import { POCKET_CAP } from './pocket'
+import { UI_COPY } from '@/i18n'
 import {
   decideConfirmReCheck,
   needsReplaceOldestConfirm,
   pocketListLabel,
-  pocketNoteCopy,
   pocketNoteFromState,
   pocketRetryHref,
   shouldShowPractice,
@@ -46,10 +46,10 @@ describe('pocketNoteFromState (ADR 0043)', () => {
   })
 })
 
-describe('pocketNoteCopy (ADR 0043)', () => {
-  test('status lines', () => {
-    expect(pocketNoteCopy('already')).toBe('Already saved')
-    expect(pocketNoteCopy('saved')).toBe('Saved to pocket')
+describe('pocket note copy (ADR 0043 / ADR 0062)', () => {
+  test('status lines live in the UI catalog, rendered via t()', () => {
+    expect(UI_COPY.en['play.noteAlready']).toBe('Already saved')
+    expect(UI_COPY.en['play.noteSaved']).toBe('Saved to pocket')
   })
 })
 
@@ -81,9 +81,11 @@ describe('pocketListLabel (#85)', () => {
   })
 
   test('blank or whitespace gloss hides the spelling', () => {
-    expect(pocketListLabel({})).toBe('Meaning not saved')
-    expect(pocketListLabel({ gloss: '' })).toBe('Meaning not saved')
-    expect(pocketListLabel({ gloss: '   ' })).toBe('Meaning not saved')
+    expect(pocketListLabel({})).toBeNull()
+    expect(pocketListLabel({ gloss: '' })).toBeNull()
+    expect(pocketListLabel({ gloss: '   ' })).toBeNull()
+    // callers render the localized fallback via t('pocket.meaningNotSaved')
+    expect(UI_COPY.en['pocket.meaningNotSaved']).toBe('Meaning not saved')
   })
 })
 

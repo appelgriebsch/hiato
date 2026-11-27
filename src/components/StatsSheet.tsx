@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useT } from '@/i18n/use-ui-locale'
 import { PixelIcon } from '@/components/PixelIcon'
 import { Button } from '@/components/ui/button'
 import {
@@ -37,6 +38,7 @@ function readSnapshot(slotKey: string): StatsSnapshot {
 }
 
 export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
+  const t = useT()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const streakListRef = useRef<HTMLUListElement>(null)
@@ -159,7 +161,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
         <div className="flex items-center justify-between gap-2">
           <h2 id="stats-sheet-heading" className="text-pixel-display flex items-center gap-2 text-ink">
             <PixelIcon name="chart" size={24} className="text-accent-fg" aria-hidden="true" />
-            Stats
+            {t('stats.title')}
           </h2>
           <Button
             ref={closeRef}
@@ -169,51 +171,56 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
             onClick={onClose}
           >
             <PixelIcon name="close" size={16} className="text-ink-muted" aria-hidden="true" />
-            Close
+            {t('common.close')}
           </Button>
         </div>
         {stats ? (
           <>
             <p className="mt-1 text-sm text-ink-muted">
-              {LANG_LABELS[lang]} {CEFR_CODES[cefr]} &middot; last {stats.played}{' '}
-              {stats.played === 1 ? 'round' : 'rounds'}
+              {stats.played === 1
+                ? t('stats.summaryOne', { lang: LANG_LABELS[lang], cefr: CEFR_CODES[cefr] })
+                : t('stats.summaryMany', { lang: LANG_LABELS[lang], cefr: CEFR_CODES[cefr], count: stats.played })}
             </p>
             <p className="mt-1 mb-4 text-sm text-ink-muted">
-              Rounds: Daily and Practice &middot; Words learned: Daily and Pocket
+              {t('stats.roundsNote')}
             </p>
             <dl className="mb-4 flex flex-col gap-2">
               <div className="flex items-baseline justify-between gap-2">
-                <dt className="text-sm text-ink-muted">Win rate</dt>
+                <dt className="text-sm text-ink-muted">{t('stats.winRate')}</dt>
                 <dd
                   className="text-pixel-stat text-ink"
                   role="img"
-                  aria-label={`Win rate, ${stats.winRate} percent`}
+                  aria-label={t('stats.winRateAria', { pct: stats.winRate })}
                 >
                   {stats.winRate}%
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-2">
-                <dt className="text-sm text-ink-muted">Average lives left</dt>
+                <dt className="text-sm text-ink-muted">{t('stats.avgLives')}</dt>
                 <dd
                   className={stats.avgLivesLeftOnWins === null ? 'text-lg font-semibold text-ink' : 'text-pixel-stat text-ink'}
                   role="img"
                   aria-label={
                     stats.avgLivesLeftOnWins === null
-                      ? 'Average lives left on wins, no wins yet'
-                      : `Average lives left on wins, ${stats.avgLivesLeftOnWins.toFixed(1)}`
+                      ? t('stats.avgLivesAriaNone')
+                      : t('stats.avgLivesAria', { n: stats.avgLivesLeftOnWins.toFixed(1) })
                   }
                 >
                   {stats.avgLivesLeftOnWins === null
-                    ? 'No wins yet'
+                    ? t('stats.noWins')
                     : stats.avgLivesLeftOnWins.toFixed(1)}
                 </dd>
               </div>
               <div className="flex items-baseline justify-between gap-2">
-                <dt className="text-sm text-ink-muted">Words learned</dt>
+                <dt className="text-sm text-ink-muted">{t('stats.wordsLearned')}</dt>
                 <dd
                   className="text-pixel-stat text-ink"
                   role="img"
-                  aria-label={`Words learned, ${learned} ${learned === 1 ? 'word' : 'words'}`}
+                  aria-label={
+                    learned === 1
+                      ? t('stats.wordsLearnedAriaOne')
+                      : t('stats.wordsLearnedAriaMany', { count: learned })
+                  }
                 >
                   {learned}
                 </dd>
@@ -221,19 +228,21 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
             </dl>
             <h3 className="text-pixel-title mb-2 flex items-center gap-2 text-ink">
               <PixelIcon name="flame" size={16} className="text-accent-fg" aria-hidden="true" />
-              Streak history
+              {t('stats.streakHistory')}
             </h3>
             {streak.length === 0 ? (
-              <p className="mb-4 text-sm text-ink-muted">No Daily rounds yet.</p>
+              <p className="mb-4 text-sm text-ink-muted">{t('stats.noDaily')}</p>
             ) : (
               <>
                 <p className="mb-2 text-sm text-ink-muted">
-                  Daily &middot; last {streak.length} played {streak.length === 1 ? 'day' : 'days'} &middot; best {bestStreak}
+                  {streak.length === 1
+                    ? t('stats.streakSummaryOne', { best: bestStreak })
+                    : t('stats.streakSummaryMany', { count: streak.length, best: bestStreak })}
                 </p>
                 <ul
                   ref={streakListRef}
                   tabIndex={0}
-                  aria-label="Streak history, newest on the right"
+                  aria-label={t('stats.streakListAria')}
                   className="mb-4 flex h-16 items-stretch gap-px overflow-x-auto"
                 >
                   {streak.map((point) => (
@@ -242,8 +251,8 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                       role="img"
                       aria-label={
                         point.won
-                          ? `${point.dateKey}: won, streak ${point.streak}`
-                          : `${point.dateKey}: lost`
+                          ? t('stats.barWonAria', { date: point.dateKey, n: point.streak })
+                          : t('stats.barLostAria', { date: point.dateKey })
                       }
                       className="streak-bar-track flex h-full min-w-2 flex-1 items-end overflow-hidden"
                     >
@@ -263,7 +272,7 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                 </ul>
               </>
             )}
-            <h3 className="text-pixel-title mb-2 text-ink">Wins by lives left</h3>
+            <h3 className="text-pixel-title mb-2 text-ink">{t('stats.winsByLives')}</h3>
             <ul className="flex flex-col gap-2">
               {ROW_LEFTS.map((left) => {
                 const count = stats.rows[String(left) as '6' | '5' | '4' | '3' | '2' | '1']
@@ -271,7 +280,12 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
                   <li
                     key={left}
                     role="img"
-                    aria-label={`${left} ${left === 1 ? 'life' : 'lives'} left: ${count} ${count === 1 ? 'win' : 'wins'}`}
+                    aria-label={t('stats.lifeRowAria', {
+                      lives: left,
+                      livesWord: t(left === 1 ? 'stats.life' : 'stats.lives'),
+                      wins: count,
+                      winsWord: t(count === 1 ? 'stats.win' : 'stats.wins'),
+                    })}
                     className="flex items-center gap-2 text-sm"
                   >
                     <span className="flex w-14 shrink-0 items-center gap-1 text-ink">
@@ -290,10 +304,13 @@ export function StatsSheet({ lang, cefr, open, onClose }: StatsSheetProps) {
               })}
               <li
                 role="img"
-                aria-label={`Lost: ${stats.rows.lost} ${stats.rows.lost === 1 ? 'round' : 'rounds'}`}
+                aria-label={t('stats.lostAria', {
+                  count: stats.rows.lost,
+                  roundsWord: t(stats.rows.lost === 1 ? 'common.roundOne' : 'common.roundMany'),
+                })}
                 className="flex items-center gap-2 text-sm"
               >
-                <span className="text-pixel-title w-14 shrink-0 text-ink">Lost</span>
+                <span className="text-pixel-title w-14 shrink-0 text-ink">{t('stats.lost')}</span>
                 <span className="stats-bar-track h-3.5 min-w-0 flex-1 overflow-hidden">
                   <span
                     className="stats-bar block h-full"

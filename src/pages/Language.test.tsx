@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MemoryRouter } from 'react-router-dom'
-import { CEFR_LINES } from '@/packs/labels'
+import { UI_COPY } from '@/i18n'
 import { provenanceCaption } from '@/packs/provenance'
 import { PACK_CEFRS, PACK_LANGS, type PackCefr, type PackLang } from '@/packs/schema'
 import { Language, SelectionCard, type CachePhase } from './Language'
@@ -28,7 +28,7 @@ describe('Language & level picker (#182)', () => {
     expect(html.match(/grid grid-cols-3/g)?.length).toBe(2)
     expect(html.match(/role="radio"/g)?.length).toBe(PACK_LANGS.length + PACK_CEFRS.length)
     expect(html).toContain('Português')
-    expect(html).toContain(CEFR_LINES.a1)
+    expect(html).toContain(UI_COPY.en['language.cefrLine.a1'])
     expect(html).toContain('data-selection-card')
     // Back is a 44px target
     expect(html).toMatch(/min-h-11 min-w-11[^"]*"[^>]*>← Back/)
@@ -45,7 +45,7 @@ describe('Language & level picker (#182)', () => {
   })
 
   test('level line copy exists for every level', () => {
-    for (const c of PACK_CEFRS) expect(CEFR_LINES[c]).toStartWith(c.toUpperCase())
+    for (const c of PACK_CEFRS) expect(UI_COPY.en[`language.cefrLine.${c}`]).toStartWith(c.toUpperCase())
   })
 
   test('optional level check: quiet button present, sheet closed by default (#227/#276)', () => {
@@ -62,11 +62,11 @@ describe('Language & level picker (#182)', () => {
   })
 
   test('level lines: exact B1–C2 copy (Uma review)', () => {
-    expect(CEFR_LINES.a1).toBe('A1 · Beginner — first words; vowels are filled in to help.')
-    expect(CEFR_LINES.b1).toBe('B1 · Intermediate — common words; no letters filled in.')
-    expect(CEFR_LINES.b2).toBe('B2 · Upper-intermediate — broader words; no letters filled in.')
-    expect(CEFR_LINES.c1).toBe('C1 · Advanced — less common words; no letters filled in.')
-    expect(CEFR_LINES.c2).toBe('C2 · Proficiency — rare and precise words; no letters filled in.')
+    expect(UI_COPY.en['language.cefrLine.a1']).toBe('A1 · Beginner — first words; vowels are filled in to help.')
+    expect(UI_COPY.en['language.cefrLine.b1']).toBe('B1 · Intermediate — common words; no letters filled in.')
+    expect(UI_COPY.en['language.cefrLine.b2']).toBe('B2 · Upper-intermediate — broader words; no letters filled in.')
+    expect(UI_COPY.en['language.cefrLine.c1']).toBe('C1 · Advanced — less common words; no letters filled in.')
+    expect(UI_COPY.en['language.cefrLine.c2']).toBe('C2 · Proficiency — rare and precise words; no letters filled in.')
   })
 
   test('language heading is a visible label that names the radiogroup', () => {
@@ -129,6 +129,7 @@ describe('Language & level picker (#182)', () => {
     expect(c.indexOf('✓ Ready offline')).toBeLessThan(c.indexOf('data-provenance-caption'))
     const src = await Bun.file(new URL('./Language.tsx', import.meta.url)).text()
     expect(src).toContain("cachePhase === 'caching' && showSaving")
-    expect(src).toContain("? 'Caching…'")
+    expect(src).toContain("t('language.caching')")
+    expect(UI_COPY.en['language.caching']).toBe('Caching…')
   })
 })

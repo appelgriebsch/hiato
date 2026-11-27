@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { PwaPrompt } from '@/components/PwaPrompt'
+import { useUiLocale } from '@/i18n/use-ui-locale'
 import { About } from '@/pages/About'
 import { Home } from '@/pages/Home'
 import { Language } from '@/pages/Language'
@@ -7,6 +9,11 @@ import { Play } from '@/pages/Play'
 import { Share } from '@/pages/Share'
 
 export default function App() {
+  // ADR 0063: <html lang> follows the resolved UI locale.
+  const locale = useUiLocale()
+  useEffect(() => {
+    document.documentElement.lang = locale
+  }, [locale])
   return (
     <BrowserRouter>
       <div className="min-h-full bg-cream">

@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process'
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test'
 import { fileURLToPath } from 'node:url'
 import { lemmaIdentity, localDateKey } from '../engine'
+import { t } from '../i18n'
 import { DAILY_KEY } from './daily-record'
 import {
   POCKET_CAP,
@@ -838,11 +839,11 @@ describe('pocket spaced review (ADR 0044)', () => {
 
   test('nextReviewWhen is today, tomorrow, or in N days', () => {
     const today = '2026-11-09'
-    expect(nextReviewWhen(new Date(2026, 10, 9, 23).getTime(), today)).toBe('today')
-    expect(nextReviewWhen(new Date(2026, 10, 8, 12).getTime(), today)).toBe('today')
-    expect(nextReviewWhen(new Date(2026, 10, 10, 23).getTime(), today)).toBe('tomorrow')
-    expect(nextReviewWhen(new Date(2026, 10, 12, 1).getTime(), today)).toBe('in 3 days')
-    expect(nextReviewWhen(new Date(2026, 10, 16, 12).getTime(), today)).toBe('in 7 days')
+    expect(nextReviewWhen(new Date(2026, 10, 9, 23).getTime(), today)).toEqual({ key: 'common.today' })
+    expect(nextReviewWhen(new Date(2026, 10, 8, 12).getTime(), today)).toEqual({ key: 'common.today' })
+    expect(nextReviewWhen(new Date(2026, 10, 10, 23).getTime(), today)).toEqual({ key: 'common.tomorrow' })
+    expect(nextReviewWhen(new Date(2026, 10, 12, 1).getTime(), today)).toEqual({ key: 'common.inDays', params: { n: 3 } })
+    expect(nextReviewWhen(new Date(2026, 10, 16, 12).getTime(), today)).toEqual({ key: 'common.inDays', params: { n: 7 } })
   })
 
   test('unrepresentable times are dropped or repaired once, and nextReviewWhen does not loop', () => {
@@ -919,11 +920,12 @@ describe('pocket spaced review (ADR 0044)', () => {
     const today = '2026-11-09'
     for (const dueAt of [...extremes, 8.64e15, -8.64e15]) {
       const phrase = nextReviewWhen(dueAt, today)
-      expect(phrase === 'today' || /^in \d+ days$/.test(phrase)).toBe(true)
-      expect(phrase).not.toContain('NaN')
+      const text = t('en', phrase.key, phrase.params)
+      expect(text === 'today' || /^in \d+ days$/.test(text)).toBe(true)
+      expect(text).not.toContain('NaN')
     }
-    expect(nextReviewWhen(-8.64e15, today)).toBe('today')
-    expect(nextReviewWhen(8.64e15, today)).toMatch(/^in \d+ days$/)
+    expect(nextReviewWhen(-8.64e15, today)).toEqual({ key: 'common.today' })
+    expect(t('en', nextReviewWhen(8.64e15, today).key, nextReviewWhen(8.64e15, today).params)).toMatch(/^in \d+ days$/)
   })
 
   test('calendar-day steps keep wall-clock time across Europe/Berlin DST', () => {

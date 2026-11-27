@@ -76,12 +76,4 @@ export function posLabel(lang: PackLang, pos: PackPos): string {
   return POS_LABELS[lang]?.[pos] ?? POS_LABELS.en[pos]
 }
 
-/** One plain line for the selected level on the picker (#182). */
-export const CEFR_LINES: Record<PackCefr, string> = {
-  a1: 'A1 · Beginner — first words; vowels are filled in to help.',
-  a2: 'A2 · Elementary — everyday words; vowels are filled in to help.',
-  b1: 'B1 · Intermediate — common words; no letters filled in.',
-  b2: 'B2 · Upper-intermediate — broader words; no letters filled in.',
-  c1: 'C1 · Advanced — less common words; no letters filled in.',
-  c2: 'C2 · Proficiency — rare and precise words; no letters filled in.',
-}
+// The per-level picker line is UI copy now: t(`language.cefrLine.${cefr}`) (ADR 0062).

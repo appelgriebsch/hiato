@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useT } from '@/i18n/use-ui-locale'
 
 /**
  * Quiet network / pack-ready signal (ADR 0052 §5.8: Inter 12px 600 on
@@ -8,6 +9,7 @@ import { useEffect, useState } from 'react'
  * - Otherwise: null (never loud Install CTA)
  */
 export function OfflineChip({ packReady = false }: { packReady?: boolean } = {}) {
+  const t = useT()
   const [online, setOnline] = useState(
     typeof navigator === 'undefined' ? true : navigator.onLine,
   )
@@ -29,7 +31,7 @@ export function OfflineChip({ packReady = false }: { packReady?: boolean } = {})
     if (packReady) return null
     return (
       <span className="inline-flex items-center border-2 border-line bg-cream-dark px-2.5 py-1 text-xs font-semibold text-ink-muted">
-        Offline
+        {t('offline.offline')}
       </span>
     )
   }
@@ -40,7 +42,7 @@ export function OfflineChip({ packReady = false }: { packReady?: boolean } = {})
         className="inline-flex items-center border-2 border-line bg-cream-dark/80 px-2.5 py-1 text-xs font-semibold text-ink-muted"
         data-offline-ready
       >
-        Offline ready
+        {t('offline.ready')}
       </span>
     )
   }

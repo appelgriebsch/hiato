@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { CEFR_LINES } from '@/packs/labels'
+import { UI_COPY } from '@/i18n'
 import {
   LevelCheckQuestions,
   LevelCheckResult,
@@ -27,11 +27,14 @@ describe('LevelCheckSheet (#227/#276)', () => {
     const src = await Bun.file(new URL('./LevelCheckSheet.tsx', import.meta.url)).text()
     expect(src).toContain('data-level-check-sheet')
     expect(src).toContain('aria-labelledby="level-check-sheet-heading"')
-    expect(src).toContain('Check your level')
+    expect(src).toContain("t('levelCheck.title')")
+    expect(UI_COPY.en['levelCheck.title']).toBe('Check your level')
     expect(src).toContain('data-level-check-close')
-    expect(src).toContain('Loading words…')
+    expect(src).toContain("t('levelCheck.loading')")
+    expect(UI_COPY.en['levelCheck.loading']).toBe('Loading words…')
     expect(src).toContain('data-level-check-error')
-    expect(src).toContain('Could not load the word packs')
+    expect(src).toContain("t('levelCheck.error')")
+    expect(UI_COPY.en['levelCheck.error']).toContain('Could not load the word packs')
   })
 
   test('questions: word only (no gloss), aria-live progress, 44px Know / Don’t know', () => {
@@ -65,7 +68,7 @@ describe('LevelCheckSheet (#227/#276)', () => {
     // #324 L2: the result heading is the focus target (tabIndex -1, programmatic focus only)
     expect(html).toMatch(/<h3[^>]*tabindex="-1"[^>]*>/)
     expect(html).toContain('>B1<')
-    expect(html).toContain(CEFR_LINES.b1)
+    expect(html).toContain(UI_COPY.en['language.cefrLine.b1'])
     expect(html).toContain('data-level-check-apply')
     expect(html).toContain('>Use B1<')
     expect(html).toContain('data-level-check-keep')
