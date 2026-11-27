@@ -19,7 +19,9 @@ describe('Language picker (gh-30)', () => {
     expect(src).not.toContain('A1–A2 prefill vowels')
     expect(src).toContain('{t(`language.cefrLine.${cefr}`)}')
     expect(UI_COPY.en['language.cefrLine.a1']).toContain('Beginner')
-    expect(src.match(/grid grid-cols-3 gap-2/g)?.length).toBe(2)
+    // #401: language grid is 2-col at 320px, 3-col from 360px up; level grid stays 3-col
+    expect(src.match(/grid grid-cols-3 gap-2/g)?.length).toBe(1)
+    expect(src).toContain('grid grid-cols-2 min-[360px]:grid-cols-3 gap-2')
   })
 
   test('language and CEFR are labelled radiogroups with aria-checked', async () => {
@@ -52,9 +54,9 @@ describe('Language picker provenance caption (gh-80 / #99 / #101)', () => {
     expect(src).toContain('provenanceCaption(lang, cefr)')
     expect(src).toContain('packInfoLabel(lang)')
     expect(src).toContain('data-provenance-caption')
-    // #307 m2: the language radio label must not truncate ('Português' at 320px).
-    // #324 L1: hyphenate with the label's own lang instead of breaking mid-word.
-    expect(src).toContain('break-words hyphens-auto text-sm font-semibold')
+    // #307 m2 / #401: the language radio label must not truncate or wrap mid-word
+    // ('Português' at 320px) — whitespace-nowrap on the label's own lang.
+    expect(src).toContain('whitespace-nowrap text-sm font-semibold')
     expect(src).toContain('lang={l}')
     expect(src).not.toContain('truncate text-sm font-semibold')
     // One caption block — not mapped onto every lang/CEFR row
@@ -1581,7 +1583,7 @@ describe('About states what is counted (ADR 0047, #224)', () => {
     expect(wwc).toContain('production site only')
     expect(wwc).toContain('no cookies')
     expect(wwc).toContain('device storage for tracking')
-    expect(wwc).toContain('Staging previews and offline play are not')
+    expect(wwc).toContain('The Staging site and offline play are not counted')
   })
 })
 
@@ -1804,11 +1806,53 @@ describe('UI i18n catalog (ADR 0062-0064 / #379)', () => {
     // interpolation fills {name} params; unknown params are ignored
     expect(t('en', 'common.back', { n: 3 })).toBe('← Back')
     expect(t('de', 'common.inDays', { n: 3 })).toBe('in 3 Tagen')
-    expect(t('pt', 'home.dailyLabel', { lang: 'EN', cefr: 'A1' })).toBe('Diário EN A1')
+    expect(t('pt', 'home.dailyLabel', { lang: 'EN', cefr: 'A1' })).toBe('Palavra do dia EN A1')
   })
 
   test('UILocale reuses the six pack-language codes', () => {
     expect([...UI_LOCALES].sort()).toEqual([...PACK_LANGS].sort())
+  })
+
+  test('#401 native i18n & glossary QA: no French PT typo, Staging per GLOSSARY, short Daily badges, natural Daily prose, IT Inizio', () => {
+    for (const loc of UI_LOCALES) {
+      for (const [key, value] of Object.entries(UI_COPY[loc])) {
+        expect(value, `${loc} ${key} must not contain French 'pratiquer'`).not.toContain('pratiquer')
+      }
+      const wwc = UI_COPY[loc]['about.whatWeCountBody']
+      expect(wwc, `${loc} whatWeCountBody uses the glossary term Staging`).toContain('Staging')
+      expect(wwc, `${loc} whatWeCountBody avoids Preview-class words`).not.toMatch(
+        /preview|vorschau|aper\u00e7u|anteprim|vistas previas|pr\u00e9-visual/i,
+      )
+    }
+    expect(UI_COPY.pt['play.replaceConfirm']).toBe('Substituir e ' + 'praticar')
+    expect(UI_COPY.pt['play.practiceUnavailableBody']).toContain('então ' + 'praticar' + ' a revelaria.')
+    // TopBar badges stay compact; running text uses the natural Daily phrase.
+    expect(UI_COPY.fr['play.badgeDaily']).toBe('Quotidien')
+    expect(UI_COPY.es['play.badgeDaily']).toBe('Diario')
+    expect(UI_COPY.pt['play.badgeDaily']).toBe('Di\u00e1rio')
+    expect(UI_COPY.it['play.badgeDaily']).toBe('Giornaliero')
+    expect(UI_COPY.de['play.badgeDaily']).toBe('T\u00e4glich')
+    for (const loc of UI_LOCALES) {
+      expect(UI_COPY[loc]['play.badgeDaily'].length, `${loc} badgeDaily stays compact`).toBeLessThanOrEqual(11)
+      expect(UI_COPY[loc]['play.endBadgeDaily'], `${loc} endBadgeDaily wraps the badge`).toBe(' · ' + UI_COPY[loc]['play.badgeDaily'])
+      expect(UI_COPY[loc]['common.dailyLink'], `${loc} dailyLink wraps the badge`).toBe('← ' + UI_COPY[loc]['play.badgeDaily'])
+    }
+    expect(UI_COPY.fr['home.dailyLabel']).toBe('Mot du jour {lang} {cefr}')
+    expect(UI_COPY.es['home.dailyLabel']).toBe('Palabra del d\u00eda {lang} {cefr}')
+    expect(UI_COPY.it['home.dailyLabel']).toBe('Parola del giorno {lang} {cefr}')
+    expect(UI_COPY.pt['home.dailyLabel']).toBe('Palavra do dia {lang} {cefr}')
+    for (const key of ['play.backToDaily', 'language.continueDaily', 'share.playDailyInvite', 'play.todayDone', 'play.todayMissed'] as const) {
+      expect(UI_COPY.fr[key], `fr ${key}`).toContain('mot du jour')
+      expect(UI_COPY.es[key], `es ${key}`).toContain('palabra del d\u00eda')
+      expect(UI_COPY.it[key], `it ${key}`).toContain('parola del giorno')
+      expect(UI_COPY.pt[key], `pt ${key}`).toContain('palavra do dia')
+    }
+    // IT leftover English fixed; OS-quoted install copy keeps its quotes.
+    expect(UI_COPY.it['common.home']).toBe('\u2190 Inizio')
+    expect(UI_COPY.it['common.backHome']).toBe('Torna all\u2019inizio')
+    expect(UI_COPY.it['share.home']).toBe('Inizio')
+    expect(UI_COPY.it['install.body']).toContain('schermata Home')
+    expect(UI_COPY.it['install.iosStep2']).toContain('«Aggiungi a Home»')
   })
 
   test('pages read UI copy through t() keys; the catalog holds the text', async () => {

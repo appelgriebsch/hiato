@@ -100,6 +100,44 @@ describe('LemmaTeach lemma extras (ADR 0055/0057, #314)', () => {
   })
 })
 
+describe('LemmaTeach screen-reader lang (#401)', () => {
+  test('translated UI labels carry no lang="en"; target-language elements retain lang={lang}', async () => {
+    const src = await Bun.file(new URL('./LemmaTeach.tsx', import.meta.url)).text()
+    expect(src).not.toContain('lang="en"')
+    for (const key of ['teach.playing', 'teach.speakFailed', 'teach.muteHelp', 'teach.synonyms', 'teach.wordFamily']) {
+      expect(src).toContain(`t('${key}')`)
+    }
+    const html = renderToStaticMarkup(
+      <LemmaTeach
+        lang="pt"
+        word="CARTÃO"
+        gloss="peça retangular de plástico."
+        synonyms={['bilhete']}
+        example="Você tem cartão?"
+        pos="noun"
+        ipa="/kaʁˈtɐ̃w̃/"
+        family={['cartões']}
+        showSpeak
+      />,
+    )
+    expect(html).not.toContain('lang="en"')
+    // word, gloss, example, POS chip, IPA, synonym + family chips keep the pack language
+    expect(html.match(/lang="pt"/g)?.length).toBeGreaterThanOrEqual(6)
+  })
+
+  test('Play.tsx teachLine keeps lang="en": the accent explanation is English by design (ADR 0053)', async () => {
+    const src = await Bun.file(new URL('../../pages/Play.tsx', import.meta.url)).text()
+    const accents = await Bun.file(new URL('../../engine/accents.ts', import.meta.url)).text()
+    // teachLine.text comes from the English ACCENT_TEACH map, not from the UI catalog.
+    expect(accents).toContain('ACCENT_TEACH')
+    expect(accents).not.toContain("t('")
+    const teachLangEn = src.match(/<p\s+lang="en"\s+role="status"/g)?.length ?? 0
+    expect(teachLangEn).toBe(2)
+    // the grapheme itself stays in the pack language inside those wrappers
+    expect(src.match(/<span lang=\{lang\} className="text-pixel-label text-accent-fg">/g)?.length).toBe(2)
+  })
+})
+
 describe('EndCard structural gate (ADR 0049, #246; ADR 0055, #314)', () => {
   test('Play.tsx mounts EndCard only when finished and never feeds the fields in-round', async () => {
     const src = await Bun.file(new URL('../../pages/Play.tsx', import.meta.url)).text()
