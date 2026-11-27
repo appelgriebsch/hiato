@@ -1,5 +1,5 @@
 {
-  "version": 28,
+  "version": 32,
   "lang": "fr",
   "cefr": "b1",
   "license": "CC-BY-SA-4.0 (lemmas from wordhoard frequency-rank bands; glosses original to Hiato); example sentences from Tatoeba, CC-BY 2.0 FR",
@@ -104,7 +104,8 @@
       "ipa": "/op.sɛʁ.ve/",
       "family": [
         "observation",
-        "observatoire"
+        "observatoire",
+        "observateur"
       ]
     },
     {
@@ -438,8 +439,9 @@
       "pos": "noun",
       "ipa": "/bal/",
       "family": [
+        "balade",
         "balayer",
-        "balade"
+        "balbutier"
       ]
     },
     {
@@ -468,7 +470,8 @@
       "ipa": "/me.ʁi.te/",
       "family": [
         "mérite",
-        "méritoire"
+        "méritoire",
+        "méritocratie"
       ]
     },
     {
@@ -690,7 +693,8 @@
       "ipa": "/nɛː.sãːs/",
       "family": [
         "naître",
-        "né"
+        "né",
+        "néonatal"
       ]
     },
     {
@@ -701,7 +705,11 @@
       ],
       "example": "Cap à l’Ouest !",
       "pos": "adjective",
-      "ipa": "/wɛɬ͡st̪/"
+      "ipa": "/wɛɬ͡st̪/",
+      "family": [
+        "occidental",
+        "occident"
+      ]
     },
     {
       "word": "POIDS",
@@ -814,8 +822,9 @@
       "pos": "noun",
       "ipa": "/ʁə.tʁɛt/",
       "family": [
-        "retraité",
-        "retraiter"
+        "retirer",
+        "retrait",
+        "retraité"
       ]
     },
     {
@@ -910,14 +919,17 @@
       ]
     },
     {
-      "word": "BOBBY",
-      "gloss": "policier britannique portant un uniforme traditionnel",
-      "synonyms": [
-        "policier"
-      ],
-      "example": "Le bobby patrouille tranquillement dans la rue en uniforme rouge et noir.",
+      "word": "ANÉANTIR",
+      "gloss": "détruire complètement",
       "pos": "verb",
-      "ipa": "/bɔbi/"
+      "synonyms": [
+        "détruire"
+      ],
+      "example": "La catastrophe a failli anéantir toute la région.",
+      "ipa": "/aneɑ̃tiʁ/",
+      "family": [
+        "anéantissement"
+      ]
     },
     {
       "word": "AMOUREUX",
@@ -958,7 +970,8 @@
       "ipa": "/sɔʁ.sjaɛʁ/",
       "family": [
         "sorcellerie",
-        "ensorceler"
+        "ensorceler",
+        "sorcier"
       ]
     },
     {
@@ -998,8 +1011,7 @@
       "pos": "noun",
       "ipa": "/ɡʁas/",
       "family": [
-        "disgrâce",
-        "ingrat"
+        "disgrâce"
       ]
     },
     {
@@ -1009,11 +1021,10 @@
         "danse"
       ],
       "pos": "noun",
-      "ipa": "/dan/",
+      "ipa": "/dɑ̃/",
       "family": [
         "danse",
-        "danseur",
-        "underground"
+        "danseur"
       ]
     },
     {
@@ -1055,7 +1066,7 @@
       ],
       "example": "Es-tu un vampire ?",
       "pos": "noun",
-      "ipa": "/vɑ̃.piʁ/",
+      "ipa": "/vɑ̃piʁ/",
       "family": [
         "vamp",
         "vamper",
@@ -1173,7 +1184,7 @@
       ],
       "example": "Ça peut se révéler utile.",
       "pos": "verb",
-      "ipa": "/ʁe.ve.le/",
+      "ipa": "/ʁevele/",
       "family": [
         "révélé",
         "irrévélé",
@@ -1217,7 +1228,12 @@
         "santé"
       ],
       "pos": "adverb",
-      "ipa": "/san/"
+      "ipa": "/sɑ̃/",
+      "family": [
+        "sanctuaire",
+        "saint",
+        "sain"
+      ]
     },
     {
       "word": "SALON",
@@ -1363,7 +1379,7 @@
       "family": [
         "voyage",
         "voyageur",
-        "voyageuse"
+        "voyageant"
       ]
     },
     {
@@ -1478,7 +1494,7 @@
       ],
       "example": "J'ai vu cet épisode.",
       "pos": "noun",
-      "ipa": "/e.pi.zɔd/",
+      "ipa": "/episɔd/",
       "family": [
         "épisodique",
         "épisodiquement"
@@ -1559,18 +1575,17 @@
       ]
     },
     {
-      "word": "JETTE",
-      "gloss": "lance avec force un objet",
-      "synonyms": [
-        "lance"
-      ],
-      "example": "Jette le dé.",
+      "word": "FRINGUE",
+      "gloss": "habit, vêtement (familier)",
       "pos": "noun",
-      "ipa": "/ʒɛt/",
+      "synonyms": [
+        "vêtement",
+        "habit"
+      ],
+      "example": "J'ai acheté une nouvelle fringue pour la fête de ce soir.",
+      "ipa": "/fʁɛ̃ɡ/",
       "family": [
-        "jeter",
-        "jet",
-        "rejet"
+        "défringuer"
       ]
     },
     {
@@ -1598,7 +1613,7 @@
       ],
       "example": "As-tu réussi à éliminer la tache ?",
       "pos": "verb",
-      "ipa": "/e.li.mi.ne/",
+      "ipa": "/eliminə/",
       "family": [
         "élimination",
         "éliminé"
@@ -1846,11 +1861,20 @@
       ]
     },
     {
-      "word": "SCOTT",
-      "gloss": "toile rugueuse utilisée pour les travaux de peinture",
-      "example": "J’ai posé la toile sur un scott avant de peindre le mur.",
-      "pos": "adjective",
-      "ipa": "/skɔt/"
+      "word": "BOUM",
+      "gloss": "gros bruit d’une explosion",
+      "pos": "noun",
+      "synonyms": [
+        "explosion",
+        "bruit"
+      ],
+      "example": "Un énorme \"BOUM\" a retenti quand la porte s’est refermée violemment.",
+      "ipa": "/bum/",
+      "family": [
+        "badaboum",
+        "boumer",
+        "surboum"
+      ]
     },
     {
       "word": "BAISSER",
@@ -1938,7 +1962,7 @@
       "family": [
         "demander",
         "demandeur",
-        "demandeuse"
+        "demandé"
       ]
     },
     {
@@ -1968,10 +1992,15 @@
       "ipa": "/ɛ̃.tɛʁ.nɛt/"
     },
     {
-      "word": "ANDY",
-      "gloss": "outil manuel servant à percer des trous",
+      "word": "RANCH",
+      "gloss": "grande ferme pour les animaux",
       "pos": "noun",
-      "ipa": "/ɑ̃.di/"
+      "synonyms": [
+        "ferme",
+        "domaine"
+      ],
+      "example": "Nous sommes allés au ranch à cheval.",
+      "ipa": "/ʁɑ̃tʃ/"
     },
     {
       "word": "ADORABLE",
@@ -2028,7 +2057,8 @@
       "pos": "noun",
       "ipa": "/su.tjɛ̃/",
       "family": [
-        "soutenir"
+        "soutenir",
+        "soutenable"
       ]
     },
     {
@@ -2121,8 +2151,7 @@
       "ipa": "/ba.ty/",
       "family": [
         "battre",
-        "battement",
-        "combattre"
+        "battement"
       ]
     },
     {
@@ -2262,8 +2291,7 @@
       "ipa": "/o.tʁǝ.mɑ̃/",
       "family": [
         "autre",
-        "autrui",
-        "altérité"
+        "autrui"
       ]
     },
     {
@@ -2336,8 +2364,7 @@
       "pos": "noun",
       "ipa": "/lɛvʁ/",
       "family": [
-        "labial",
-        "lécher"
+        "labial"
       ]
     },
     {
@@ -2349,7 +2376,7 @@
       ],
       "example": "Heu… je ne sais pas quelle robe choisir.",
       "pos": "noun",
-      "ipa": "/ø/"
+      "ipa": "/œ/"
     },
     {
       "word": "INFIRMIER",
@@ -2586,8 +2613,7 @@
       "ipa": "/a.te/",
       "family": [
         "hâte",
-        "hâtif",
-        "précipiter"
+        "hâtif"
       ]
     },
     {
@@ -2770,7 +2796,7 @@
       "family": [
         "haut",
         "hauteur",
-        "hautain"
+        "hautement"
       ]
     },
     {
@@ -2854,7 +2880,7 @@
       ],
       "example": "Il aime filmer.",
       "pos": "verb",
-      "ipa": "/fil.me/",
+      "ipa": "/filme/",
       "family": [
         "filmage",
         "filmeur"
@@ -2898,7 +2924,7 @@
       ],
       "example": "Je suis cardiaque.",
       "pos": "adjective",
-      "ipa": "/kaʁ.djak/",
+      "ipa": "/kaʁdjak/",
       "family": [
         "intracardiaque"
       ]
@@ -2968,7 +2994,7 @@
       "gloss": "choisir une personne ou une idée lors d’une élection",
       "example": "Je veux voter.",
       "pos": "verb",
-      "ipa": "/vɔ.te/",
+      "ipa": "/vɔte/",
       "family": [
         "votant",
         "votation",
@@ -3043,7 +3069,7 @@
       ],
       "example": "Salut fiston.",
       "pos": "noun",
-      "ipa": "/fis.tɔ̃/",
+      "ipa": "/fistɔ̃/",
       "family": [
         "fils",
         "gamin",
@@ -3058,7 +3084,7 @@
       ],
       "example": "Tu es menteur.",
       "pos": "noun",
-      "ipa": "/mɑ̃.tœʁ/",
+      "ipa": "/mɑ̃tœʁ/",
       "family": [
         "mentir",
         "mensonge",
@@ -3121,7 +3147,8 @@
       "ipa": "/lɛs/",
       "family": [
         "laisser",
-        "laissé"
+        "laissé",
+        "laissant"
       ]
     },
     {
@@ -3147,7 +3174,7 @@
       ],
       "example": "Je pense au divorce.",
       "pos": "noun",
-      "ipa": "/di.vɔʁs/",
+      "ipa": "/divɔʁs/",
       "family": [
         "divorcé",
         "divorcer"
@@ -3161,7 +3188,7 @@
       ],
       "example": "C'est mon sandwich.",
       "pos": "noun",
-      "ipa": "/sɑ̃d.witʃ/",
+      "ipa": "/sɑ̃dwitʃ/",
       "family": [
         "sandwicherie"
       ]
@@ -3228,7 +3255,12 @@
       ],
       "example": "C'est ma nana.",
       "pos": "noun",
-      "ipa": "/na.na/"
+      "ipa": "/nana/",
+      "family": [
+        "nénette",
+        "meuf",
+        "gonzesse"
+      ]
     },
     {
       "word": "GORGE",
@@ -3385,8 +3417,8 @@
       "pos": "noun",
       "ipa": "/lœ̃ⁿ.d͡zi/",
       "family": [
-        "lundis",
-        "lunatique"
+        "hebdomadaire",
+        "semaine"
       ]
     },
     {
@@ -3440,7 +3472,7 @@
       ],
       "example": "Il avait servi comme député et sénateur.",
       "pos": "noun",
-      "ipa": "/se.na.tœʁ/",
+      "ipa": "/senatœʁ/",
       "family": [
         "sénatorerie",
         "sénatorial",
@@ -3538,7 +3570,7 @@
       ],
       "example": "Je préfère cette version.",
       "pos": "noun",
-      "ipa": "/vɛʁ.sjɔ̃/",
+      "ipa": "/vɛʁsjɔ̃/",
       "family": [
         "VF",
         "VO",
@@ -3665,7 +3697,7 @@
       ],
       "example": "Il l'a finie ?",
       "pos": "noun",
-      "ipa": "/fi.ni/",
+      "ipa": "/fini/",
       "family": [
         "finir",
         "fin",
@@ -3708,7 +3740,7 @@
       ],
       "example": "J'ai un chauffeur.",
       "pos": "noun",
-      "ipa": "/ʃo.fœʁ/",
+      "ipa": "/ʃofœʁ/",
       "family": [
         "VTC",
         "automobiliste",
@@ -3726,7 +3758,7 @@
       "family": [
         "fortuné"
       ],
-      "ipa": "/fɔʁ.ty.nə/"
+      "ipa": "/fɔʁtyn/"
     },
     {
       "word": "CLAIREMENT",
@@ -3736,7 +3768,7 @@
       ],
       "example": "Clairement!",
       "pos": "adverb",
-      "ipa": "/klɛʁ.mɑ̃/",
+      "ipa": "/klɛʁmɑ̃/",
       "family": [
         "clair-obscur",
         "claire-voie",
@@ -3751,7 +3783,7 @@
       ],
       "example": "Un major est au-dessus d'un capitaine.",
       "pos": "noun",
-      "ipa": "/ma.ʒɔʁ/",
+      "ipa": "/maʒɔʁ/",
       "family": [
         "majoral",
         "majeur",
@@ -3901,7 +3933,7 @@
       ],
       "example": "Il va foncer à Ihamziyen.",
       "pos": "verb",
-      "ipa": "/fɔ̃.se/",
+      "ipa": "/fɔ̃se/",
       "family": [
         "défoncer",
         "enfoncement",
@@ -4059,12 +4091,13 @@
       "synonyms": [
         "terne"
       ],
-      "example": "Le métal poli est brillant, mais celui-ci est **matt**.",
+      "example": "Le métal poli est brillant, mais celui-ci est matt.",
       "pos": "noun",
       "ipa": "/mat/",
       "family": [
+        "mat",
         "matité",
-        "matelasser"
+        "émousser"
       ]
     },
     {
@@ -4152,7 +4185,7 @@
       "family": [
         "embêtement",
         "embêtant",
-        "embête"
+        "embrouille"
       ]
     },
     {
@@ -4378,9 +4411,8 @@
       "pos": "adverb",
       "ipa": "/o.pʁɛ/",
       "family": [
-        "près",
         "proche",
-        "approcher"
+        "voisinage"
       ]
     },
     {
@@ -4497,8 +4529,8 @@
       "ipa": "/min/",
       "family": [
         "minute",
-        "minutieux",
-        "minutage"
+        "minuterie",
+        "minutieux"
       ]
     },
     {
@@ -4639,8 +4671,8 @@
       "ipa": "/mɔ̃.te/",
       "family": [
         "monter",
-        "montage",
-        "montant"
+        "montée",
+        "montagnard"
       ]
     },
     {
@@ -4668,8 +4700,8 @@
       "pos": "noun",
       "ipa": "/ku.lwaʁ/",
       "family": [
-        "couler",
-        "écoulement"
+        "corridor",
+        "allée"
       ]
     },
     {
@@ -4801,8 +4833,8 @@
       "ipa": "/pɛʁ.mi.sjɔ̃/",
       "family": [
         "permettre",
-        "permissionnaire",
-        "imperméable"
+        "permis",
+        "autorisation"
       ]
     },
     {
@@ -4975,7 +5007,10 @@
       "gloss": "l’heure où un jour finit et l’autre commence",
       "example": "Il est minuit.",
       "pos": "noun",
-      "ipa": "/mi.nɥi/"
+      "ipa": "/mi.nɥi/",
+      "family": [
+        "nuit"
+      ]
     },
     {
       "word": "LOS",
@@ -4983,7 +5018,9 @@
       "pos": "noun",
       "ipa": "/los/",
       "family": [
-        "loser"
+        "loser",
+        "perdre",
+        "échec"
       ]
     },
     {
@@ -5270,7 +5307,10 @@
       ],
       "example": "Passe par dessous !",
       "pos": "noun",
-      "ipa": "/də.su/"
+      "ipa": "/də.su/",
+      "family": [
+        "dessus"
+      ]
     },
     {
       "word": "SOUFFLE",
@@ -5434,7 +5474,8 @@
       "pos": "noun",
       "ipa": "/pi.sin/",
       "family": [
-        "pisciculture"
+        "pisciculture",
+        "piscivore"
       ]
     },
     {
@@ -5542,7 +5583,7 @@
       "ipa": "/ʃɑ̃.sø/",
       "family": [
         "chance",
-        "chanceler"
+        "malchanceux"
       ]
     },
     {
@@ -5772,7 +5813,7 @@
       "family": [
         "échapper",
         "échappatoire",
-        "échappée"
+        "échappement"
       ]
     },
     {
@@ -5813,8 +5854,8 @@
       "example": "Il est danseur.",
       "ipa": "/dɑ̃sœʁ/",
       "family": [
-        "danse",
         "danser",
+        "danse",
         "danseuse"
       ]
     },
@@ -5830,8 +5871,7 @@
       "ipa": "/de.by.te/",
       "family": [
         "début",
-        "débutant",
-        "débutante"
+        "débutant"
       ]
     },
     {
@@ -5992,7 +6032,8 @@
         "veiner",
         "veinette",
         "veineux"
-      ]
+      ],
+      "example": "Le sang coule dans la veine jusqu'au cœur."
     },
     {
       "word": "COLONIE",
@@ -6067,7 +6108,8 @@
       "family": [
         "défilé",
         "défilement"
-      ]
+      ],
+      "example": "Le 14 juillet, les pompiers vont défiler sur les Champs-Élysées."
     },
     {
       "word": "CONCLUSION",
@@ -6087,7 +6129,7 @@
       "word": "RELAX",
       "gloss": "état de calme ou de repos",
       "pos": "adjective",
-      "ipa": "/ʁəla/",
+      "ipa": "/ʁə.laks/",
       "example": "Après une longue journée, je cherche un peu de relax."
     },
     {
@@ -6180,7 +6222,7 @@
       ],
       "pos": "verb",
       "example": "Il sait comment relier les livres.",
-      "ipa": "/ʁəlje/",
+      "ipa": "/ʁə.lje/",
       "family": [
         "reliage",
         "relieur",
@@ -6221,7 +6263,7 @@
       ],
       "pos": "noun",
       "example": "Je suis conducteur.",
-      "ipa": "/kɔ̃dyktœʁ/",
+      "ipa": "/kɔ̃.dyk.tœʁ/",
       "family": [
         "supraconducteur",
         "conductance",
@@ -6264,7 +6306,7 @@
       ],
       "pos": "adjective",
       "example": "Tu es fabuleux.",
-      "ipa": "/fabylo/",
+      "ipa": "/fa.by.lø/",
       "family": [
         "fabuleusement"
       ]
@@ -6354,7 +6396,7 @@
       ],
       "pos": "noun",
       "example": "C'est un pari.",
-      "ipa": "/paʁi/",
+      "ipa": "/pa.ʁi/",
       "family": [
         "parier",
         "parieur"
@@ -6393,7 +6435,7 @@
       ],
       "pos": "noun",
       "example": "Tout habitant de la ville peut te dire où se trouve cette rue.",
-      "ipa": "/abitɑ̃/",
+      "ipa": "/a.bi.tɑ̃/",
       "family": [
         "cohabitant",
         "cohabitante"
@@ -6407,7 +6449,7 @@
       ],
       "pos": "verb",
       "example": "Le plastique semble fasciner les chats.",
-      "ipa": "/fasine/",
+      "ipa": "/fa.si.ne/",
       "family": [
         "fascinateur",
         "fascinatrice",
@@ -6448,7 +6490,7 @@
       "gloss": "travailler ensemble pour un but commun.",
       "pos": "verb",
       "example": "J'aimerais coopérer.",
-      "ipa": "/kɔɔpeʁe/",
+      "ipa": "/kɔ.ɔ.pe.ʁe/",
       "family": [
         "assembler",
         "entraider",
@@ -6477,7 +6519,7 @@
       ],
       "pos": "noun",
       "example": "Il me faut un bouclier.",
-      "ipa": "/buklije/",
+      "ipa": "/bu.kli.je/",
       "family": [
         "boucle",
         "boucler",
@@ -6610,7 +6652,12 @@
       ],
       "pos": "noun",
       "example": "Ça convient.",
-      "ipa": "/kɔ̃.vjɛ̃/"
+      "ipa": "/kɔ̃.vjɛ̃/",
+      "family": [
+        "convenir",
+        "convenable",
+        "convenance"
+      ]
     },
     {
       "word": "TOTAL",
@@ -6650,7 +6697,7 @@
       ],
       "pos": "verb",
       "example": "Peux-tu préciser ?",
-      "ipa": "/pʁesize/",
+      "ipa": "/pʁe.si.ze/",
       "family": [
         "précisable",
         "repréciser",
@@ -6665,7 +6712,7 @@
       ],
       "pos": "verb",
       "example": "Tu dois te dépêcher.",
-      "ipa": "/de.pɛ.ʃe/",
+      "ipa": "/de.pe.ʃe/",
       "family": [
         "dépêche",
         "empêcher"
@@ -6751,8 +6798,7 @@
       "ipa": "/ʁə.suʁs/",
       "family": [
         "ressourcer",
-        "ressourcement",
-        "ressourcées"
+        "ressourcement"
       ]
     },
     {
@@ -6841,7 +6887,8 @@
       "ipa": "/ɛ̃.n‿e.gɔ.ist/",
       "family": [
         "égoïsme",
-        "égoïstement"
+        "égoïstement",
+        "égocentrique"
       ]
     },
     {
@@ -6850,7 +6897,8 @@
       "pos": "noun",
       "ipa": "/sɛʁ.vɛl/",
       "family": [
-        "cervical"
+        "cervical",
+        "encéphalique"
       ],
       "example": "Elle n'a pas de cervelle."
     },
@@ -6882,9 +6930,9 @@
       "example": "Es-tu réveillée?",
       "ipa": "/ʁe.ve.je/",
       "family": [
-        "réveiller",
         "réveil",
-        "réveillé"
+        "réveiller",
+        "éveillé"
       ]
     },
     {
@@ -6988,7 +7036,7 @@
       "family": [
         "maudire",
         "maudissant",
-        "maudite"
+        "malédiction"
       ]
     },
     {
@@ -7070,7 +7118,10 @@
       ],
       "pos": "noun",
       "example": "As-tu ton bip ?",
-      "ipa": "/bip/"
+      "ipa": "/bip/",
+      "family": [
+        "bipolaire"
+      ]
     },
     {
       "word": "INFILTRER",
@@ -7309,8 +7360,7 @@
       "ipa": "/ʃo.sɛt/",
       "family": [
         "chausser",
-        "chaussure",
-        "chaussettes"
+        "chaussure"
       ]
     },
     {
@@ -7360,7 +7410,8 @@
       "ipa": "/ɬ͡syʁ.vi/",
       "family": [
         "survivre",
-        "survivant"
+        "survivant",
+        "survivance"
       ]
     },
     {
@@ -7518,7 +7569,8 @@
       "ipa": "/sɔʁ.tɑ̃/",
       "family": [
         "sortir",
-        "sortie"
+        "sortie",
+        "ressortissant"
       ],
       "example": "Je l'ai vu en sortant."
     },
@@ -7533,7 +7585,8 @@
       "ipa": "/de.fi/",
       "family": [
         "défiant",
-        "défier"
+        "défier",
+        "défiance"
       ]
     },
     {
@@ -7735,13 +7788,17 @@
       ]
     },
     {
-      "word": "OSCAR",
-      "gloss": "récompense cinématographique américaine.",
-      "pos": "noun",
-      "ipa": "/ɔs.ˈkɑːʁ/",
+      "word": "ISOLÉ",
+      "gloss": "qui est seul, loin des autres",
+      "pos": "adjective",
+      "synonyms": [
+        "seul",
+        "éloigné"
+      ],
+      "example": "J'étais isolé.",
+      "ipa": "/i.zɔ.le/",
       "family": [
-        "césar",
-        "Iris"
+        "isolément"
       ]
     },
     {
@@ -7757,7 +7814,7 @@
       "family": [
         "enseigner",
         "enseignant",
-        "enseignement"
+        "enseignable"
       ]
     },
     {
@@ -7938,6 +7995,7 @@
       "ipa": "/kɔ.mɑ̃d/",
       "family": [
         "commander",
+        "commandement",
         "commanditaire"
       ]
     },
@@ -8047,7 +8105,7 @@
       "family": [
         "pénétration",
         "pénétrant",
-        "pénétrable"
+        "impénétrable"
       ]
     },
     {
@@ -8604,7 +8662,7 @@
       "example": "Il y a une avenue près de ma maison.",
       "ipa": "/av.ny/",
       "family": [
-        "avenu"
+        "avenant"
       ]
     },
     {
@@ -8766,7 +8824,10 @@
       "gloss": "un établissement d'hébergement avec parking pour véhicules",
       "pos": "noun",
       "example": "Rentrons au motel.",
-      "ipa": "/mɔ.tɛl/"
+      "ipa": "/mɔ.tɛl/",
+      "family": [
+        "hôtel"
+      ]
     },
     {
       "word": "HÉRITAGE",
@@ -8807,7 +8868,10 @@
       ],
       "pos": "noun",
       "example": "Je suivis la recette.",
-      "ipa": "/ʁə.sɛt/"
+      "ipa": "/ʁə.sɛt/",
+      "family": [
+        "recevoir"
+      ]
     },
     {
       "word": "VULNÉRABLE",
@@ -8816,7 +8880,7 @@
       "ipa": "/vyl.ne.ʁabl/",
       "family": [
         "vulnérabilité",
-        "vulnéraire"
+        "vulnérabiliser"
       ],
       "example": "Je me sens vulnérable."
     },
@@ -8925,8 +8989,8 @@
       "example": "La ceinture rouge fait ressortir sa robe noire.",
       "ipa": "/ʁə.sɔʁ.tiʁ/",
       "family": [
-        "ressort",
-        "ressortissant"
+        "sortir",
+        "ressort"
       ]
     },
     {
@@ -8940,6 +9004,7 @@
       "example": "C'est un fameux poème.",
       "ipa": "/fa.mø/",
       "family": [
+        "fameuse",
         "fameusement"
       ]
     },
@@ -8967,8 +9032,8 @@
       "example": "Il a réuni des œuvres.",
       "ipa": "/ʁe.y.ni/",
       "family": [
-        "réunion",
-        "réunir"
+        "réunir",
+        "réunion"
       ]
     },
     {
@@ -9066,8 +9131,7 @@
       "ipa": "/kɔ̃.fɔ̃dʁ/",
       "family": [
         "confusion",
-        "confus",
-        "confondant"
+        "confondu"
       ],
       "example": "N'essaye pas de me confondre."
     },
@@ -9080,9 +9144,9 @@
       "pos": "noun",
       "example": "Merci pour ta loyauté.",
       "family": [
-        "loyal",
-        "loyalement"
-      ]
+        "loyal"
+      ],
+      "ipa": "/lwa.jɔ.te/"
     },
     {
       "word": "MÉDIA",
@@ -9097,7 +9161,8 @@
         "hypermédia",
         "médiacratie",
         "médiagraphie"
-      ]
+      ],
+      "ipa": "/me.dja/"
     },
     {
       "word": "TERRIFIER",
@@ -9112,7 +9177,8 @@
         "terrifiant",
         "terroriser",
         "terrorisme"
-      ]
+      ],
+      "ipa": "/tɛ.ʁi.fje/"
     },
     {
       "word": "SENSÉ",
@@ -9141,7 +9207,8 @@
         "photodétecteur",
         "détectable",
         "détecter"
-      ]
+      ],
+      "ipa": "/de.tɛk.tœʁ/"
     },
     {
       "word": "TRADUIRE",
@@ -9351,9 +9418,9 @@
       "example": "Dans la forêt, la ténèbre s'installe rapidement après le coucher du soleil.",
       "family": [
         "ténébreux",
-        "ténèbres",
-        "obscur"
-      ]
+        "ténèbres"
+      ],
+      "ipa": "/te.nɛbʁ/"
     },
     {
       "word": "AUTOROUTE",
@@ -9387,9 +9454,9 @@
       "example": "Qui est mourant ?",
       "family": [
         "mourir",
-        "mort",
-        "agonie"
-      ]
+        "agonisant"
+      ],
+      "ipa": "/mu.ʁɑ̃/"
     },
     {
       "word": "AGRESSIF",
@@ -9484,7 +9551,6 @@
       "ipa": "/ɛ̃.kje.tyd/",
       "family": [
         "inquiéter",
-        "inquiet",
         "inquiétant"
       ]
     },
@@ -9768,7 +9834,11 @@
       "gloss": "fête célébrée le 31 octobre avec déguisements",
       "pos": "noun",
       "example": "Joyeux Halloween !",
-      "ipa": "/a.lo.win/"
+      "ipa": "/a.lo.win/",
+      "family": [
+        "citrouille",
+        "déguisement"
+      ]
     },
     {
       "word": "HONORER",
@@ -9848,8 +9918,7 @@
       "ipa": "/su.mɛtʁ/",
       "family": [
         "soumission",
-        "soumis",
-        "soumissionnaire"
+        "soumis"
       ]
     },
     {
@@ -9891,18 +9960,19 @@
       "example": "Où est l'ambassade ?"
     },
     {
-      "word": "MÉRITÉ",
-      "gloss": "qualité qui rend digne d'estime ou de récompense",
+      "word": "GRAIN",
+      "gloss": "petite partie dure d’une plante",
+      "pos": "noun",
       "synonyms": [
-        "VALEUR",
-        "DROIT"
+        "céréale",
+        "semence"
       ],
-      "pos": "adjective",
-      "example": "Il l'a mérité.",
+      "example": "J'ai trouvé un grain de blé dans mon pain.",
+      "ipa": "/ɡʁɛ̃/",
       "family": [
-        "mériter",
-        "méritoire",
-        "méritant"
+        "graine",
+        "grainetier",
+        "grainetière"
       ]
     },
     {
@@ -10099,8 +10169,8 @@
       "ipa": "/fy.ne.ʁaj/",
       "family": [
         "funéraire",
-        "funèbre",
-        "funambule"
+        "funérailles",
+        "funèbre"
       ]
     },
     {
@@ -10252,9 +10322,7 @@
       "example": "Je ne bois pas de soda.",
       "ipa": "/so.da/",
       "family": [
-        "sodique",
-        "sodé",
-        "sodomie"
+        "sodique"
       ]
     },
     {
@@ -10326,7 +10394,8 @@
       "ipa": "/kɔ.naɛs/",
       "family": [
         "connaître",
-        "connaissance"
+        "connaissance",
+        "connaissant"
       ]
     },
     {
@@ -10457,8 +10526,7 @@
       "ipa": "/kʁɛv/",
       "family": [
         "crever",
-        "crevaison",
-        "crevé"
+        "crevaison"
       ]
     },
     {
@@ -10468,8 +10536,7 @@
       "example": "Je viens en juillet.",
       "ipa": "/ʒɥi.jɛ/",
       "family": [
-        "juin",
-        "août"
+        "juillettiste"
       ]
     },
     {
@@ -10563,7 +10630,7 @@
       ],
       "pos": "noun",
       "example": "Tu as du potentiel.",
-      "ipa": "/pɔ.tɑ̃.sjɛl/",
+      "ipa": "/pɔtɑ̃sjɛl/",
       "family": [
         "potentialité",
         "potentiellement"
@@ -10578,7 +10645,7 @@
       ],
       "pos": "noun",
       "example": "L'infection réapparaîtra.",
-      "ipa": "/ɛ̃.fɛk.sjɔ̃/",
+      "ipa": "/ɛ̃fɛksjɔ̃/",
       "family": [
         "réinfection",
         "surinfection",
@@ -10646,11 +10713,10 @@
       ],
       "pos": "adjective",
       "example": "Tu m'en vois navré.",
-      "ipa": "/na.vʁe/",
+      "ipa": "/navʁe/",
       "family": [
         "navrer",
-        "navrant",
-        "navrement"
+        "navrant"
       ]
     },
     {
@@ -10671,8 +10737,7 @@
       "example": "Surveille ton môme !",
       "ipa": "/mom/",
       "family": [
-        "momification",
-        "momerie"
+        "momification"
       ]
     },
     {
@@ -10687,8 +10752,7 @@
       "ipa": "/ɑ̃.va.iʁ/",
       "family": [
         "envahisseur",
-        "envahissement",
-        "envahissant"
+        "envahissement"
       ]
     },
     {
@@ -10783,7 +10847,7 @@
     },
     {
       "word": "TROUBLE",
-      "gloss": "Qui n'est pas clair, ou un désordre.",
+      "gloss": "qui manque de clarté",
       "pos": "adjective",
       "ipa": "/t̪ʁubl/",
       "family": [
@@ -10902,7 +10966,7 @@
       "ipa": "/ekʁit/",
       "family": [
         "écrire",
-        "écrit"
+        "écritoire"
       ]
     },
     {
@@ -10917,14 +10981,17 @@
       "example": "Tu es un survivant."
     },
     {
-      "word": "HOUSE",
-      "gloss": "mot anglais désignant une maison ou un bâtiment.",
-      "synonyms": [
-        "maison"
-      ],
+      "word": "SOLITUDE",
+      "gloss": "fait d’être seul",
       "pos": "noun",
-      "example": "Il a acheté une grande house blanche au bord de la mer.",
-      "ipa": "/awz/"
+      "synonyms": [
+        "seul"
+      ],
+      "example": "Peut-on mourir de solitude ?",
+      "ipa": "/sɔ.li.tyd/",
+      "family": [
+        "solitaire"
+      ]
     },
     {
       "word": "BOUE",
@@ -10987,13 +11054,17 @@
       ]
     },
     {
-      "word": "PIPI",
-      "gloss": "liquide rejeté par le corps, appelé ainsi par les enfants",
-      "pos": "noun",
-      "example": "Je dois faire pipi.",
-      "ipa": "/pi.pi/",
+      "word": "DÉGUISER",
+      "gloss": "changer l’air de quelqu’un",
+      "pos": "verb",
+      "synonyms": [
+        "masquer",
+        "camoufler"
+      ],
+      "example": "Je vais me déguiser en sorcière.",
+      "ipa": "/deɡize/",
       "family": [
-        "pipier"
+        "déguisement"
       ]
     },
     {
@@ -11008,7 +11079,7 @@
       "ipa": "/bɔ̃.te/",
       "family": [
         "bon",
-        "bonnement"
+        "bonheur"
       ]
     },
     {
@@ -11082,7 +11153,7 @@
       "ipa": "/ʒɛ/",
       "family": [
         "jeter",
-        "jetée"
+        "jeton"
       ]
     },
     {
@@ -11102,7 +11173,7 @@
       ],
       "pos": "noun",
       "example": "Veux-tu un massage ?",
-      "ipa": "/masaʒ/",
+      "ipa": "/ma.saʒ/",
       "family": [
         "masseur"
       ]
@@ -11142,7 +11213,8 @@
       "ipa": "/ʁu.e/",
       "family": [
         "roué",
-        "rouerie"
+        "rouerie",
+        "rouable"
       ],
       "example": "Les supporters furieux ont failli rouer de coups le joueur après son erreur."
     },
@@ -11150,7 +11222,7 @@
       "word": "OUBLIE",
       "gloss": "gâteau sec et plat.",
       "pos": "noun",
-      "ipa": "/ubli/",
+      "ipa": "/u.bli/",
       "family": [
         "oublieux"
       ]
@@ -11191,7 +11263,8 @@
       "ipa": "/y.n‿o.to/",
       "family": [
         "automobile",
-        "autocar"
+        "autocar",
+        "autobus"
       ]
     },
     {
@@ -11205,7 +11278,8 @@
       "ipa": "/bʁi/",
       "family": [
         "briser",
-        "brisement"
+        "brisement",
+        "brisable"
       ]
     },
     {
@@ -11239,9 +11313,6 @@
     {
       "word": "BOULE",
       "gloss": "objet rond souvent utilisé dans des jeux.",
-      "synonyms": [
-        "bille"
-      ],
       "pos": "adjective",
       "example": "Je veux acheter une boule bleue pour jouer dans le parc.",
       "ipa": "/bul/",
@@ -11260,7 +11331,7 @@
       ],
       "pos": "verb",
       "example": "Je veux fonder une famille.",
-      "ipa": "/fɔ̃de/",
+      "ipa": "/fɔ̃.de/",
       "family": [
         "refonder"
       ]
@@ -11273,7 +11344,8 @@
       "ipa": "/pe.ʃe/",
       "family": [
         "péché",
-        "pécheur"
+        "pécheur",
+        "pécheresse"
       ]
     },
     {
@@ -11334,14 +11406,17 @@
       ]
     },
     {
-      "word": "MERDER",
-      "gloss": "faire une erreur ou causer des problèmes",
+      "word": "FIABLE",
+      "gloss": "à qui on peut faire confiance",
+      "pos": "adjective",
       "synonyms": [
-        "gâcher",
-        "rater"
+        "sûr"
       ],
-      "pos": "verb",
-      "ipa": "/mɛʁde/"
+      "example": "Tu es fiable.",
+      "ipa": "/fijɑːbl/",
+      "family": [
+        "fiablement"
+      ]
     },
     {
       "word": "RAREMENT",
@@ -11354,7 +11429,8 @@
       "ipa": "/ʁaʁ.mɑ̃/",
       "family": [
         "rare",
-        "raréfier"
+        "raréfier",
+        "rarissime"
       ]
     },
     {
@@ -11366,7 +11442,7 @@
       ],
       "pos": "verb",
       "example": "Je n'arrive pas à détecter de quelconque récurrence.",
-      "ipa": "/detekte/",
+      "ipa": "/de.tɛk.te/",
       "family": [
         "détection",
         "détective",
@@ -11410,7 +11486,8 @@
       "ipa": "/vɑ̃.te/",
       "family": [
         "vanité",
-        "vantard"
+        "vantard",
+        "vantardise"
       ],
       "example": "Il aime se vanter."
     },
@@ -11530,7 +11607,7 @@
       ],
       "pos": "verb",
       "example": "Tu devrais te méfier.",
-      "ipa": "/mefje/",
+      "ipa": "/me.fje/",
       "family": [
         "méfiance",
         "méfiant"
@@ -11586,7 +11663,7 @@
       "word": "VIEILLIR",
       "gloss": "Devenir plus âgé avec le temps.",
       "pos": "verb",
-      "ipa": "/vjɛjiʁ/",
+      "ipa": "/vjɛ.jiʁ/",
       "family": [
         "vieillissant",
         "vieillissement"
@@ -11677,10 +11754,11 @@
       ],
       "pos": "noun",
       "example": "Voilà la relève.",
-      "ipa": "/ʁəlɛv/",
+      "ipa": "/ʁə.lɛv/",
       "family": [
         "relever",
-        "relèvement"
+        "relèvement",
+        "relevé"
       ]
     },
     {
@@ -11705,10 +11783,11 @@
         "position"
       ],
       "pos": "noun",
-      "ipa": "/koɔʁdɔne/",
+      "ipa": "/ko.ɔʁ.dɔ.ne/",
       "family": [
         "coordonner",
-        "coordonné"
+        "coordonnées",
+        "coordonnateur"
       ]
     },
     {
@@ -11734,7 +11813,8 @@
       "family": [
         "munitionnaire",
         "munitionner"
-      ]
+      ],
+      "example": "Il faut vérifier le niveau de munition avant la prochaine séance de tir."
     },
     {
       "word": "COMPÉTENCE",
@@ -11745,7 +11825,7 @@
       ],
       "pos": "noun",
       "example": "Ce travail dépasse ma compétence.",
-      "ipa": "/kɔ̃petɑ̃s/",
+      "ipa": "/kɔ̃.pe.tɑ̃s/",
       "family": [
         "caractéristique",
         "statistique"
@@ -11760,7 +11840,7 @@
       ],
       "pos": "noun",
       "example": "C'est mon entraîneur.",
-      "ipa": "/ɑ̃tʁɛnœʁ/",
+      "ipa": "/ɑ̃.tʁɛ.nœʁ/",
       "family": [
         "entraîner",
         "entraînement",
@@ -11771,7 +11851,7 @@
       "word": "MOUSTACHE",
       "gloss": "Poils au-dessus de la lèvre.",
       "pos": "noun",
-      "ipa": "/mustɑʃ/",
+      "ipa": "/mus.taʃ/",
       "family": [
         "moustachu",
         "barbe",
@@ -11832,10 +11912,10 @@
       ],
       "pos": "noun",
       "example": "Elle a un souci d'excellence dans son métier.",
-      "ipa": "/ɛksɛlɑ̃s/",
+      "ipa": "/ɛk.sɛ.lɑ̃s/",
       "family": [
         "excellent",
-        "excellente"
+        "excellé"
       ]
     },
     {
@@ -11851,7 +11931,7 @@
       "family": [
         "procédure",
         "procédurier",
-        "procédé"
+        "procédural"
       ]
     },
     {
@@ -11904,7 +11984,10 @@
       ],
       "pos": "noun",
       "example": "Approche, fillette !",
-      "ipa": "/fi.jɛt/"
+      "ipa": "/fi.jɛt/",
+      "family": [
+        "fille"
+      ]
     },
     {
       "word": "PÉTER",
@@ -11945,7 +12028,7 @@
       "family": [
         "mathématique",
         "mathématicien",
-        "mathématiques"
+        "mathématiser"
       ]
     },
     {
@@ -11972,7 +12055,7 @@
       ],
       "pos": "adjective",
       "example": "Il est vital que tu sois présent.",
-      "ipa": "/vital/",
+      "ipa": "/vi.tal/",
       "family": [
         "vitalement",
         "vitaliser",
@@ -11988,7 +12071,7 @@
       ],
       "pos": "noun",
       "example": "Le policier a arrêté un dealer dans la rue.",
-      "ipa": "/dilœʁ/",
+      "ipa": "/di.le/",
       "family": [
         "deal"
       ]
@@ -12031,7 +12114,7 @@
       ],
       "pos": "noun",
       "example": "La fusillade s'est arrêtée.",
-      "ipa": "/fyzilad/",
+      "ipa": "/fy.zi.lad/",
       "family": [
         "fusiller"
       ]
@@ -12045,7 +12128,7 @@
       ],
       "pos": "verb",
       "example": "Tu pourrais stopper ceci.",
-      "ipa": "/stɔpe/",
+      "ipa": "/stɔ.pe/",
       "family": [
         "stoppage",
         "stoppeur"
@@ -12105,7 +12188,10 @@
       ],
       "pos": "noun",
       "example": "Où est son atelier ?",
-      "ipa": "/atlje/"
+      "ipa": "/atlje/",
+      "family": [
+        "artisanat"
+      ]
     },
     {
       "word": "DENTISTE",
@@ -12126,7 +12212,7 @@
       ],
       "pos": "adjective",
       "example": "Avez-vous un casier judiciaire ?",
-      "ipa": "/ʒydisjɛʁ/",
+      "ipa": "/ʒy.di.sjɛʁ/",
       "family": [
         "déjudiciarisation",
         "déjudiciariser",
@@ -12156,7 +12242,7 @@
       ],
       "pos": "noun",
       "example": "Il a fait de moi son héritier.",
-      "ipa": "/eʁitje/",
+      "ipa": "/e.ʁi.tje/",
       "family": [
         "héritage",
         "hériter",
@@ -12283,9 +12369,9 @@
       ],
       "pos": "adjective",
       "example": "C'est insensé !",
-      "ipa": "/ɛ̃sɑ̃se/",
+      "ipa": "/ɛ̃.sɑ̃.se/",
       "family": [
-        "insensibilité"
+        "sens"
       ]
     },
     {
@@ -12293,7 +12379,7 @@
       "gloss": "hymne religieux ou expression de louange.",
       "pos": "noun",
       "example": "La foule chanta un gloria solennel dans la vieille cathédrale.",
-      "ipa": "/ɡlɔʁja/",
+      "ipa": "/ɡlɔ.ʁja/",
       "family": [
         "gloire",
         "glorieuse",
@@ -12401,7 +12487,7 @@
       "gloss": "vêtement tricoté ou tissu utilisé pour les pulls.",
       "pos": "noun",
       "example": "J'ai acheté un jersey en laine pour l'hiver.",
-      "ipa": "/ʒɛʁ.sɛ/",
+      "ipa": "/ʒɛʁ.zi/",
       "family": [
         "Jersiais",
         "Jersiaise"
@@ -12568,7 +12654,7 @@
       "ipa": "/pʁ̥ɛt/",
       "family": [
         "prêt",
-        "prêter"
+        "emprunter"
       ]
     },
     {
@@ -12650,18 +12736,18 @@
       ]
     },
     {
-      "word": "SAURAI",
-      "gloss": "forme du verbe savoir au futur pour 'je'",
-      "synonyms": [
-        "connaître",
-        "savoir"
-      ],
+      "word": "SOBRE",
+      "gloss": "mesuré, pas extrême",
       "pos": "adjective",
-      "example": "Je le saurai.",
-      "ipa": "/so.ʁe/",
+      "synonyms": [
+        "modéré",
+        "simple"
+      ],
+      "example": "C'est très sobre.",
+      "ipa": "/sɔbʁ/",
       "family": [
-        "savoir",
-        "sachant"
+        "sobrement",
+        "sobriété"
       ]
     },
     {
@@ -12865,7 +12951,8 @@
       "example": "Ça ne fait qu'empirer.",
       "ipa": "/ɑ̃.pi.ʁe/",
       "family": [
-        "empirique"
+        "pire",
+        "périr"
       ]
     },
     {
@@ -12966,7 +13053,8 @@
       "pos": "noun",
       "ipa": "/ɛ̃.ti.mi.te/",
       "family": [
-        "intime"
+        "intime",
+        "intimement"
       ],
       "example": "Je n'ai pas d'intimité."
     },
@@ -12981,7 +13069,8 @@
       "example": "L'obscurité s'abat.",
       "ipa": "/y.n.‿ɔp.sky.ʁi.te/",
       "family": [
-        "obscur"
+        "obscur",
+        "obscurcir"
       ]
     },
     {
@@ -13056,8 +13145,8 @@
       "example": "Puis-je ôter ma veste ?",
       "ipa": "/o.te/",
       "family": [
-        "détacher",
-        "abstraire"
+        "enlever",
+        "retrait"
       ]
     },
     {
@@ -13119,7 +13208,7 @@
       "ipa": "/ɑ̃.n̪‿ok.t̪ɔbʁ/",
       "family": [
         "octogonal",
-        "octave"
+        "octogone"
       ]
     },
     {
@@ -13142,6 +13231,7 @@
       "example": "Cet homme est une brute.",
       "ipa": "/bʁyt/",
       "family": [
+        "brut",
         "brutal",
         "brutalité"
       ]
@@ -13174,7 +13264,8 @@
       "ipa": "/ɑ̃t.ʁɛ̃/",
       "family": [
         "entraîner",
-        "entraînement"
+        "entraînement",
+        "entraîneur"
       ]
     },
     {
@@ -13345,6 +13436,7 @@
       "example": "Je vais te relâcher.",
       "ipa": "/ʁə.la.ʃe/",
       "family": [
+        "lâcher",
         "relâchement",
         "lâche"
       ]
@@ -13402,7 +13494,8 @@
       "ipa": "/kit/",
       "family": [
         "quitter",
-        "quittance"
+        "quittance",
+        "quitus"
       ]
     },
     {
@@ -13511,6 +13604,7 @@
       "ipa": "/li.be.ʁa.sjɔ̃/",
       "family": [
         "libérer",
+        "libéral",
         "liberté"
       ]
     },
@@ -13567,6 +13661,7 @@
       "ipa": "/al.kɔ.lik/",
       "family": [
         "alcool",
+        "alcoolisé",
         "alcoolisme"
       ]
     },
@@ -13676,7 +13771,8 @@
       "ipa": "/ɡa.ʁɑ̃.ti/",
       "family": [
         "garant",
-        "garantir"
+        "garantir",
+        "garantissant"
       ]
     },
     {
@@ -13726,7 +13822,8 @@
       "ipa": "/maʁ.to/",
       "family": [
         "marteler",
-        "martèlement"
+        "martèlement",
+        "martel"
       ],
       "example": "Donne-moi un marteau."
     },
@@ -13826,8 +13923,9 @@
       "example": "J'ai un époux.",
       "ipa": "/e.pu/",
       "family": [
+        "épouse",
         "épouser",
-        "épouse"
+        "épousailles"
       ]
     },
     {
@@ -13941,7 +14039,7 @@
       "gloss": "perte abondante de sang.",
       "pos": "noun",
       "example": "J'ai peur d'avoir une hémorragie interne.",
-      "ipa": "/emɔʁaʒi/",
+      "ipa": "/e.mɔ.ʁa.ʒi/",
       "family": [
         "hémorragique",
         "coagulant",
@@ -14022,7 +14120,7 @@
       ],
       "pos": "noun",
       "example": "Il a été libéré de détention.",
-      "ipa": "/detɑ̃sjɔ̃/",
+      "ipa": "/de.tɑ̃.sjɔ̃/",
       "family": [
         "détenir",
         "détenteur"
@@ -14098,8 +14196,9 @@
       "example": "Je vais me baigner.",
       "ipa": "/be.ɲe/",
       "family": [
-        "baignoire",
-        "baignade"
+        "baignade",
+        "baigneur",
+        "baignoire"
       ]
     },
     {
@@ -14119,7 +14218,7 @@
       "gloss": "étude des caractères héréditaires.",
       "pos": "adjective",
       "example": "Lukas est ingénieur en génétique.",
-      "ipa": "/ʒenetik/",
+      "ipa": "/ʒe.ne.tik/",
       "family": [
         "androgénétique",
         "biogénétique",
@@ -14134,7 +14233,7 @@
       ],
       "pos": "verb",
       "example": "On ne peut que présumer qu'il pleuvra demain.",
-      "ipa": "/pʁezyme/",
+      "ipa": "/pʁe.zy.me/",
       "family": [
         "présumable"
       ]
@@ -14148,7 +14247,7 @@
       ],
       "pos": "verb",
       "example": "Tu vas l'étrangler.",
-      "ipa": "/etʁɑ̃ɡle/",
+      "ipa": "/e.tʁɑ̃.ɡle/",
       "family": [
         "étranglement",
         "étrangleur",

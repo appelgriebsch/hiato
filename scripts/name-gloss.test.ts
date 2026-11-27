@@ -86,6 +86,23 @@ describe('isFrPersonGloss (#175)', () => {
       'diminutif d’un prénom',
     ]) expect(isFrPersonGloss(g)).toBe(false)
   })
+  test('#360: "prénommé(e)" (HILDE shape) and bare name-class words flag off-list names', () => {
+    for (const g of [
+      'une femme prénommé d’origine germanique', // HILDE
+      'un homme prénommé Marie',
+      'nom de famille',
+      'un nom propre ou terme local',
+      'surnom familier ou enfantin.',
+      'nom féminin d’origine grecque',
+      'nom masculin d’origine ancienne.',
+    ]) expect(isFrPersonGloss(g)).toBe(true)
+    for (const g of [
+      'mot qui sert à désigner une personne ou une chose', // NOM
+      'nom de passe oublié', // NOM composes stay common nouns
+      'diminutif d’un prénom',
+      'Personnage cruel qui dévore les humains.', // OGRE
+    ]) expect(isFrPersonGloss(g)).toBe(false)
+  })
 })
 
 describe('isPersonNameGloss', () => {
