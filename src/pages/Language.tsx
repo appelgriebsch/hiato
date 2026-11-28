@@ -80,7 +80,7 @@ export function SelectionCard({
   return (
     <section
       data-selection-card
-      className="mt-3 border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-0"
+      className="mt-2 border border-line bg-raised px-3 pt-2 pb-1 short-land:mt-0"
     >
       {/* Status sits beside the pair so it stays above the footer at 320×568 (#182 W5) */}
       <div className="flex items-baseline justify-between gap-2" data-pack-cache-status>
@@ -210,7 +210,7 @@ export function Language() {
     <Layout
       hideFooterInShortLand
       footer={
-        <div data-language-continue className="pt-2 pb-4">
+        <div data-language-continue className="pt-2 pb-3">
           {continueControls(false)}
         </div>
       }
@@ -257,14 +257,14 @@ export function Language() {
         className="short-land:grid short-land:min-h-0 short-land:flex-1 short-land:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] short-land:content-center short-land:gap-5"
       >
       <div>
-      <h2 id="language-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
+      <h2 id="language-heading" className="mt-3 text-sm font-semibold text-ink short-land:mt-0">
         {t('language.headingLanguage')}
       </h2>
       <div
         role="radiogroup"
         data-radio-group
         aria-labelledby="language-heading"
-        className="mt-3 grid grid-cols-3 gap-2 short-land:mt-2"
+        className="mt-2 grid grid-cols-2 min-[360px]:grid-cols-3 gap-2 short-land:mt-2"
       >
         {PACK_LANGS.map((l) => (
           <button
@@ -292,7 +292,7 @@ export function Language() {
             <div
               lang={l}
               className={[
-                'break-words hyphens-auto text-sm font-semibold',
+                'whitespace-nowrap text-sm font-semibold',
                 lang === l ? 'text-accent-fg' : 'text-ink',
               ].join(' ')}
             >
@@ -304,7 +304,7 @@ export function Language() {
 
       </div>
       <div className="short-land:flex short-land:min-h-0 short-land:min-w-0 short-land:flex-col short-land:justify-center">
-      <h2 id="cefr-heading" className="mt-4 text-sm font-semibold text-ink short-land:mt-0">
+      <h2 id="cefr-heading" className="mt-3 text-sm font-semibold text-ink short-land:mt-0">
         {t('language.headingLevel')}
       </h2>
       <div
