@@ -92,9 +92,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"Mann\" in an idiomatic exclamation (\"Wow, it's so cold!\"), not in the literal meaning \"Ein Mensch, aber keine Frau und kein Kind.\""
+    "reason": "The sentence uses \"Mann\" in an exclamatory way (\"Wow, it's so cold!\"), which does not match the given meaning of \"Ein Mensch, aber keine Frau und kein Kind.\""
   },
   "de/a1.json|JAHR": {
     "sentence": "Frohes neues Jahr!",
@@ -109,7 +109,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
     "reason": "The sentence does not use \"LEID\" in the meaning \"ein Mann hat ein Problem\" (a man has a problem)."
   },
@@ -118,9 +118,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses the imperative \"greife\" and the accusative plural \"die Sterne,\" which are beyond CEFR A1 level."
+    "reason": "The sentence uses the imperative \"greife\" and the prepositional phrase \"nach den Sternen,\" which are beyond CEFR A1 level."
   },
   "de/a1.json|VATER": {
     "sentence": "Wo ist Vater?",
@@ -423,9 +423,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The word \"Endung\" (file extension) is not A1 level."
+    "reason": "The word \"Datei\" (file) and the technical term \".art\" (file extension) exceed A1 level."
   },
   "de/a1.json|MAMA": {
     "sentence": "Mama weinte.",
@@ -512,9 +512,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"auslachen\" (to laugh at someone), which is beyond A1 level, and the context implies mocking, which may not suit a general-audience app."
+    "reason": "The sentence uses \"auslachen\" (to laugh at someone), which is not A1 level, and the context implies mocking, which may not suit a general-audience app."
   },
   "de/a1.json|NUMMER": {
     "sentence": "Falsche Nummer!",
@@ -761,7 +761,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
     "reason": "The sentence describes military conflict, which involves violence and is unsuitable for a general-audience learning app."
   },
@@ -870,13 +870,13 @@
     "gate": 2
   },
   "de/a1.json|ZIEH": {
-    "sentence": "Zieh bitte das Hemd an.",
+    "sentence": "Zieh bitte dein Hemd an!",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"zieh\" in the imperative form for \"put on\" (clothes), which does not match the given meaning \"takes with the hand.\""
+    "reason": "The sentence uses \"zieh\" in the imperative form, which is not the same as the given meaning \"Der Mann nimmt das Buch mit der Hand.\""
   },
   "de/a1.json|GEIST": {
     "sentence": "Bist du ein Geist?",
@@ -1043,7 +1043,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
     "reason": "The sentence contains \"schwarzrotes\" (compound adjective) and \"Friedenstaube\" (noun compound), which are beyond A1 level, and \"Lady Gaga\" is a proper noun not typically used in beginner sentences."
   },
@@ -1247,13 +1247,13 @@
     "gate": 2
   },
   "de/a1.json|SCHICKSAL": {
-    "sentence": "Das ist einfach mein Schicksal.",
+    "sentence": "Das Schicksal wollte, dass wir uns im Café treffen.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The word \"Schicksal\" is too advanced for CEFR A1 learners, and the gloss \"es kommt so\" is not a standard meaning."
+    "reason": "The word \"Schicksal\" (fate/destiny) is too advanced for A1 learners, and the sentence structure is also beyond A1 level."
   },
   "de/a1.json|FLASCHE": {
     "sentence": "Öffne die Flasche.",
@@ -1348,9 +1348,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses colloquial language (\"hau\", \"aufs Ohr\") and idiomatic expression (\"sich aufs Ohr hauen\") which are beyond CEFR A1 level and may not suit a general-audience learning app."
+    "reason": "The sentence uses colloquial language (\"hau mich aufs Ohr\" = \"I'm going to bed\") and idiomatic expressions that are not suitable for A1 learners."
   },
   "de/a1.json|KÖNIGIN": {
     "sentence": "Die Königin hat ein großes Haus mit vielen Leuten.",
@@ -1517,9 +1517,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence contains archaic/poetic language (\"Weib\") and a culturally loaded, negative proverb that may not suit a general-audience app."
+    "reason": "The sentence contains archaic/poetic vocabulary (\"Feuer\", \"Weib\") and a culturally loaded proverb that is inappropriate for a general-audience learning app."
   },
   "de/a1.json|FARBE": {
     "sentence": "Ich brauche Farbe.",
@@ -1606,9 +1606,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "Sentence exceeds A1 level (e.g., \"Dissertation\", \"Computersimulation\", \"genetische Aspekte\", \"Entstehung des Lebens\")."
+    "reason": "The sentence contains complex vocabulary (\"Dissertation\", \"Computersimulation\", \"genetische Aspekte\", \"Entstehung des Lebens\") and structures beyond A1 level."
   },
   "de/a1.json|OMA": {
     "sentence": "Oma lässt grüßen.",
@@ -1799,9 +1799,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence contains complex structures (\"sein eigenes Leben ein paar Stunden lang zu verlassen\") and abstract concepts beyond A1 level, and the metaphorical use of \"Kino\" does not align with the given gloss."
+    "reason": "Sentence uses complex structures (\"Vorwand\", \"sein eigenes Leben ein paar Stunden lang zu verlassen\") beyond A1 level and metaphorical meaning not matching the gloss."
   },
   "de/a1.json|GRÖßE": {
     "sentence": "Welche Größe hast du?",
@@ -2207,9 +2207,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence does not use \"HALTEN\" in the meaning \"ein Mensch nimmt ein Buch in die Hand\" (a person picks up a book)."
+    "reason": "The sentence does not use \"HALTEN\" in the given meaning (\"a person takes a book in their hand\")."
   },
   "de/a1.json|ZURÜCK": {
     "sentence": "Gib es zurück!",
@@ -2720,9 +2720,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"legen\" in the idiomatic expression \"legen wir los\" (let's start), not in the literal sense of placing a book on a table."
+    "reason": "The sentence uses \"legen\" in the idiomatic expression \"loslegen\" (to start), not in the literal sense of placing something."
   },
   "de/a1.json|DRAUßEN": {
     "sentence": "Warte draußen.",
@@ -2769,9 +2769,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"scheinen\" in the sense of \"to seem,\" not \"to emit light,\" and \"sich mögen\" (to like each other) is A1, but the overall meaning does not match the given gloss."
+    "reason": "The sentence uses \"scheinen\" in the sense of \"to seem,\" not \"to give off light,\" which does not match the given meaning."
   },
   "de/a1.json|BESTIMMEN": {
     "sentence": "Was bestimmen Adverbien näher?",
@@ -2854,13 +2854,13 @@
     "gate": 2
   },
   "de/a1.json|UMBRINGEN": {
-    "sentence": "Ein böser Zauberer wollte den Helden umbringen.",
-    "source": "mistral",
+    "sentence": "Sie will mich umbringen.",
+    "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence includes violent content (\"umbringen\" meaning \"to kill\"), which is unsuitable for a general-audience learning app."
+    "reason": "The sentence implies a threat of violence, which is inappropriate for a general-audience learning app."
   },
   "de/a1.json|KURZ": {
     "sentence": "Warte kurz!",
@@ -3135,13 +3135,12 @@
     "gate": 2
   },
   "de/a1.json|DRAUF": {
-    "sentence": "Wie bist du drauf?",
-    "source": "tatoeba",
-    "verdict": "reject",
+    "sentence": "Das Glas steht drauf.",
+    "source": "mistral",
+    "verdict": "pass",
     "level": "a1",
-    "at": "2026-11-26",
-    "gate": 2,
-    "reason": "The sentence uses \"drauf\" in a colloquial sense (\"Wie bist du drauf?\" = \"How are you?\"), not in the literal meaning \"an der Oberseite vom Tisch.\""
+    "at": "2026-11-28",
+    "gate": 2
   },
   "de/a1.json|VERLETZEN": {
     "sentence": "Du wirst dich verletzen.",
@@ -52094,9 +52093,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"importer\" in the sense of \"to import data,\" not \"to matter/be important\" as defined, and \"profiles d'exécution\" is too advanced for A1."
+    "reason": "The sentence uses \"importer\" in the sense of \"to import data,\" not \"to matter/be important\" as given in the gloss, and \"profiles d'exécution\" is too advanced for A1."
   },
   "fr/a1.json|SEMAINE": {
     "sentence": "Bonne fin de semaine.",
@@ -53559,9 +53558,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence contains a strong negative sentiment that may not be suitable for a general-audience learning app."
+    "reason": "The sentence contains \"les femmes,\" which may introduce gender-related themes that could be sensitive or complex for A1 learners, making it unsuitable for a general-audience app."
   },
   "fr/a1.json|ARME": {
     "sentence": "C'est une arme.",
@@ -53888,9 +53887,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence contains complex structures and vocabulary (e.g., \"cadre législatif adéquat,\" \"pousser les investisseurs étrangers\") that exceed CEFR A1, and \"préférer\" is not used in a simple, learner-appropriate context."
+    "reason": "The sentence contains complex structures and vocabulary (e.g., \"cadre législatif adéquat,\" \"pousser les investisseurs étrangers\") that exceed CEFR A1 and includes political/economic concepts unsuitable for beginners."
   },
   "fr/a1.json|APPEL": {
     "sentence": "J'ai un appel.",
@@ -203535,13 +203534,13 @@
     "gate": 2
   },
   "fr/a1.json|TUEUR": {
-    "sentence": "Le tueur court très vite dans la forêt.",
+    "sentence": "Le détective cherche un tueur dans cette petite ville.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence includes \"tueur\" (murderer) and \"forêt\" (forest), which are too advanced for A1 learners, and the context implies violence, which is unsuitable for a general-audience app."
+    "reason": "The sentence includes \"tueur\" (murderer/killer) and \"détective\" (detective), which imply crime and violence, making it unsuitable for a general-audience learning app."
   },
   "fr/a1.json|HÔTEL": {
     "sentence": "C'est l'hôtel.",
@@ -204280,13 +204279,13 @@
     "gate": 2
   },
   "fr/a1.json|IMBÉCILE": {
-    "sentence": "Tu es un peu imbécile de ne pas écouter les conseils.",
+    "sentence": "Tu es un peu imbécile de ne pas avoir compris ce problème simple.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "\"imbécile\" is not an A1 word; it's too advanced and potentially offensive for a general-audience app."
+    "reason": "\"imbécile\" is too strong for A1 learners and the sentence could be seen as insulting."
   },
   "fr/a1.json|SAINT": {
     "sentence": "C'est un saint.",
@@ -204297,13 +204296,13 @@
     "gate": 2
   },
   "fr/a1.json|MILL": {
-    "sentence": "Je n’ai pas un mill de plus sur moi.",
+    "sentence": "Je paie un petit mill chaque mois pour mon abonnement.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The word \"mill\" is not a standard French word at CEFR A1 level; it is a regional or dialectal term, making it unsuitable for a general-audience learning app."
+    "reason": "\"Mill\" is not a standard French word at CEFR A1 level; \"petite partie d'une somme\" is typically expressed as \"petite somme\" or \"fraction\"."
   },
   "fr/a1.json|DIRECTION": {
     "sentence": "En direction du sud.",
@@ -204925,13 +204924,13 @@
     "gate": 2
   },
   "fr/a1.json|FAILLI": {
-    "sentence": "Il a tout dépensé et il est maintenant failli.",
+    "sentence": "Il a tout dépensé et maintenant il est failli.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "\"Failli\" is not a word used in A1 French; it's a past participle of \"faillir\" (to fail), not a standalone adjective meaning \"broke.\""
+    "reason": "The word \"failli\" is not A1 level; it's a past participle requiring advanced grammar (passé composé with \"être\")."
   },
   "fr/a1.json|RANGER": {
     "sentence": "Va ranger ta chambre.",
@@ -205018,9 +205017,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"prétendre\" correctly but includes a complex structure (\"ne pas avoir le moindre regret\") that is beyond A1 level."
+    "reason": "\"Prétendre\" is not an A1-level word, and the sentence structure is too complex for A1 learners."
   },
   "fr/a1.json|BILLY": {
     "sentence": "J'emmène ma billy pour boire un café en plein air.",
@@ -205208,13 +205207,13 @@
     "gate": 2
   },
   "fr/a1.json|ENFOIRER": {
-    "sentence": "Tu vas m'enfoirer avec ce projet si tu ne travailles pas plus !",
+    "sentence": "Ce mauvais plan va t'enfoirer complètement !",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The word \"enfoirer\" is highly vulgar and inappropriate for a general-audience learning app, violating condition 3."
+    "reason": "\"Enfoirer\" is vulgar slang (A2+ at best) and violates the general-audience safety rule."
   },
   "fr/a1.json|QUEL": {
     "sentence": "Sous quel nom ?",
@@ -205325,7 +205324,7 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
     "reason": "The sentence uses \"désirer\" in a different meaning (\"to be lacking\") and is too idiomatic for A1 learners."
   },
@@ -252089,9 +252088,9 @@
     "source": "tatoeba",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The word \"New\" in \"New Yorker\" is not used in the meaning \"noch nicht benutzt sein\" (brand new/unused)."
+    "reason": "The word \"New\" in \"New Yorker\" is not used in the meaning \"noch nicht benutzt sein\" (unused/brand new), and \"New Yorker Börse\" is a proper noun that may be too advanced for A1 learners."
   },
   "de/a1.json|FEHLEN": {
     "sentence": "Drei fehlen.",
@@ -253079,13 +253078,13 @@
     "gate": 2
   },
   "de/a1.json|PACK": {
-    "sentence": "Pack deine Sachen und geh!",
-    "source": "tatoeba",
+    "sentence": "Das Pack geht ins Stadion, um das Fußballspiel zu sehen.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses \"Pack\" in the sense of \"gang\" (violent connotation) rather than \"Gruppe von Menschen\" (neutral), and \"geh!\" implies a threat."
+    "reason": "\"Das Pack\" is a colloquial, often negative term (similar to \"rabble\") and not a standard A1 vocabulary word; the sentence also implies a group going to a stadium, which is fine, but the word choice is too advanced and contextually inappropriate for A1 learners."
   },
   "de/a1.json|GRAS": {
     "sentence": "Gras ist grün.",
@@ -253360,13 +253359,13 @@
     "gate": 2
   },
   "de/a1.json|AFFÄRE": {
-    "sentence": "Die Affäre mit dem Geld war nicht richtig.",
+    "sentence": "Die Affäre mit den falschen Spenden war sehr unangenehm für alle.",
     "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence implies a financial scandal, which may involve inappropriate or questionable actions, but the word \"Affäre\" in this context could suggest a romantic or personal scandal, which violates the general-audience suitability guideline."
+    "reason": "The sentence includes \"Affäre\" in a context that implies an inappropriate or questionable act (false donations), which may be too mature or sensitive for a general-audience A1 learning app."
   },
   "de/a1.json|STIL": {
     "sentence": "Er hat Stil.",
@@ -253401,13 +253400,13 @@
     "gate": 2
   },
   "de/a1.json|KOTZEN": {
-    "sentence": "Du bist echt zum Kotzen!",
-    "source": "tatoeba",
+    "sentence": "Ich muss kotzen, die Pizza schmeckt komisch.",
+    "source": "mistral",
     "verdict": "reject",
     "level": "a1",
-    "at": "2026-11-26",
+    "at": "2026-11-28",
     "gate": 2,
-    "reason": "The sentence uses an idiomatic expression (\"zum Kotzen sein\") that is not within CEFR A1 and may be considered inappropriate for a general-audience app."
+    "reason": "The word \"kotzen\" is too vulgar for a general-audience learning app at A1 level."
   },
   "de/a1.json|WUT": {
     "sentence": "Wut ist giftig.",
@@ -277890,14 +277889,6 @@
     "at": "2026-11-26",
     "gate": 2
   },
-  "fr/a1.json|NUAGE": {
-    "sentence": "Il y a un nuage.",
-    "source": "fixture",
-    "verdict": "pass",
-    "level": "a1",
-    "at": "2026-11-27",
-    "gate": 2
-  },
   "fr/a2.json|BLÂMER": {
     "sentence": "Qui est à blâmer ?",
     "source": "tatoeba",
@@ -279319,14 +279310,6 @@
     "at": "2026-11-27",
     "gate": 2
   },
-  "de/a1.json|TANZEN": {
-    "sentence": "Ich will tanzen.",
-    "source": "fixture",
-    "verdict": "pass",
-    "level": "a1",
-    "at": "2026-11-27",
-    "gate": 2
-  },
   "de/a2.json|NERVEN": {
     "sentence": "Laute Geräusche nerven mich sehr.",
     "source": "mistral",
@@ -279605,6 +279588,22 @@
     "verdict": "pass",
     "level": "B2",
     "at": "2026-11-27",
+    "gate": 2
+  },
+  "fr/a1.json|NUAGE": {
+    "sentence": "Regarde le nuage là.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-28",
+    "gate": 2
+  },
+  "de/a1.json|TANZEN": {
+    "sentence": "Wir tanzen.",
+    "source": "tatoeba",
+    "verdict": "pass",
+    "level": "a1",
+    "at": "2026-11-28",
     "gate": 2
   }
 }
