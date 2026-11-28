@@ -1,4 +1,4 @@
-import { useEffect, useState, type KeyboardEvent } from 'react'
+import { useEffect, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout, TopBar } from '@/components/Layout'
 import { PixelIcon } from '@/components/PixelIcon'
@@ -32,7 +32,7 @@ function NoteText({ line }: { line: string }) {
         /^https?:\/\//.test(part) ? (
           <a
             key={`${part}-${i}`}
-            className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+            className="break-all text-accent-fg underline-offset-2 hover:underline"
             href={part}
             rel="noreferrer"
             target="_blank"
@@ -55,7 +55,7 @@ function LicenseLine({ license }: { license: string }) {
   return (
     <p className="mt-1.5 text-xs font-medium text-accent-fg">
       <a
-        className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
+        className="break-all underline-offset-2 hover:underline"
         href={href}
         rel="noreferrer"
         target="_blank"
@@ -63,6 +63,40 @@ function LicenseLine({ license }: { license: string }) {
         {license}
       </a>
     </p>
+  )
+}
+
+/** Closed-by-default native license accordion (#402): px-frame, 44px summary, +/− cue, count hint, divider. */
+function LicenseAccordion({
+  id,
+  title,
+  count,
+  children,
+}: {
+  id: string
+  title: string
+  count: string
+  children: ReactNode
+}) {
+  return (
+    <details
+      className="px-frame group/acc mb-3 bg-raised p-4"
+      data-about-accordion={id}
+    >
+      <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-2">
+        <span className="text-[15px] font-semibold text-ink">{title}</span>
+        <span className="flex shrink-0 items-center gap-2 text-xs text-ink-muted">
+          {count}
+          <span aria-hidden="true" className="text-sm leading-none group-open/acc:hidden">
+            +
+          </span>
+          <span aria-hidden="true" className="hidden text-sm leading-none group-open/acc:inline">
+            −
+          </span>
+        </span>
+      </summary>
+      <div className="mt-3 border-t border-line pt-3">{children}</div>
+    </details>
   )
 }
 
@@ -96,9 +130,9 @@ function SoundCard() {
             aria-hidden="true"
           />
           <div className="min-w-0">
-            <p id="sound-label" className="text-pixel-title text-ink">
+            <h2 id="sound-label" className="text-pixel-title text-ink">
               {t('about.soundTitle')}
-            </p>
+            </h2>
             <p id="sound-help" className="mt-1 text-sm leading-snug text-ink-muted">
               {t('about.soundHelp')}
             </p>
@@ -191,6 +225,7 @@ function UiLanguageCard() {
             onKeyDown={onKeyDown}
             className={[
               'motion-press relative min-h-11 border-2 px-4 py-1.5 text-left',
+              opt === 'system' ? 'col-span-2' : '',
               'transition-[border-color,background-color,color] duration-200',
               setting === opt
                 ? 'border-accent-fg bg-accent-soft text-accent-fg'
@@ -225,23 +260,28 @@ export function About() {
             {t('common.back')}
           </button>
         }
-        center={<span className="text-pixel-title text-ink">{t('about.title')}</span>}
+        center={<h1 className="text-pixel-title text-ink">{t('about.title')}</h1>}
       />
 
       <SoundCard />
 
       <UiLanguageCard />
 
-      <h1 className="text-pixel-display text-ink">{t('about.whatWeCount')}</h1>
+      <h2 className="text-pixel-display text-ink">{t('about.whatWeCount')}</h2>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         {t('about.whatWeCountBody')}
       </p>
 
-      <h1 className="text-pixel-display text-ink">{t('about.licenses')}</h1>
+      <h2 className="text-pixel-display text-ink">{t('about.licenses')}</h2>
       <p className="mt-1 mb-4 text-sm leading-relaxed text-ink-muted">
         {t('about.licensesBody')}
       </p>
 
+      <LicenseAccordion
+        id="packs"
+        title={t('about.packLicenses')}
+        count={t('about.packsCount', { count: PACK_LICENSES.length })}
+      >
       {PACK_LICENSES.map((info) => (
         <Card key={info.lang} className="mb-3">
           <div className="mb-1 text-xs font-medium text-ink-faint">
@@ -269,7 +309,7 @@ export function About() {
         <h2 className="text-[15px] font-semibold text-ink">{t('about.exampleSentences')}</h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           <a
-            className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
+            className="break-all underline-offset-2 hover:underline"
             href={CC_BY_2_FR_DEED}
             rel="noreferrer"
             target="_blank"
@@ -281,7 +321,7 @@ export function About() {
           <li>
             {t('about.exampleFromPrefix')}{' '}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href={TATOEBA}
               rel="noreferrer"
               target="_blank"
@@ -303,7 +343,7 @@ export function About() {
         </h2>
         <p className="mt-1.5 text-xs font-medium text-accent-fg">
           <a
-            className="inline-flex min-h-11 items-center break-all underline-offset-2 hover:underline"
+            className="break-all underline-offset-2 hover:underline"
             href={CC_BY_SA_DEED}
             rel="noreferrer"
             target="_blank"
@@ -315,7 +355,7 @@ export function About() {
           <li>
             {t('about.ipaFromPrefix')}{' '}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href={WIKTEXTRACT}
               rel="noreferrer"
               target="_blank"
@@ -329,7 +369,13 @@ export function About() {
           </li>
         </ul>
       </Card>
+      </LicenseAccordion>
 
+      <LicenseAccordion
+        id="fonts"
+        title={t('about.fontLicenses')}
+        count={t('about.fontsCount', { count: 2 })}
+      >
       <Card className="mb-3">
         <div className="mb-1 text-xs font-medium text-ink-faint">{t('about.kickerTypeface')}</div>
         <h2 className="text-[15px] font-semibold text-ink">Inter</h2>
@@ -340,8 +386,10 @@ export function About() {
           <li>
             {t('about.copyrightInter')}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/rsms/inter"
+              rel="noreferrer"
+              target="_blank"
             >
               github.com/rsms/inter
             </a>
@@ -355,7 +403,7 @@ export function About() {
           <li>
             {t('about.fullLicensePrefix')}{' '}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/LICENSE.txt"
             >
               /fonts/LICENSE.txt
@@ -376,8 +424,10 @@ export function About() {
           <li>
             {t('about.copyrightJersey')}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href="https://github.com/scfried/soft-type-jersey"
+              rel="noreferrer"
+              target="_blank"
             >
               github.com/scfried/soft-type-jersey
             </a>
@@ -391,7 +441,7 @@ export function About() {
           <li>
             {t('about.fullLicensePrefix')}{' '}
             <a
-              className="inline-flex min-h-11 items-center break-all text-accent-fg underline-offset-2 hover:underline"
+              className="break-all text-accent-fg underline-offset-2 hover:underline"
               href="/fonts/Jersey10-OFL.txt"
             >
               /fonts/Jersey10-OFL.txt
@@ -401,6 +451,7 @@ export function About() {
           </li>
         </ul>
       </Card>
+      </LicenseAccordion>
 
       <p className="mt-2 mb-2 text-center text-[11px] leading-relaxed text-ink-faint">
         {t('about.offlineNote')}

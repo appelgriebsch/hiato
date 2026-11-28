@@ -419,16 +419,37 @@ test.describe('short landscape viewports (#209)', () => {
         expect(back, where).toBeTruthy()
         expect(back!.h, where).toBeGreaterThanOrEqual(44)
         expect(back!.w, where).toBeGreaterThanOrEqual(44)
-        const links = page.locator('a')
-        const n = await links.count()
-        for (let i = 0; i < n; i++) {
-          const box = await links.nth(i).boundingBox()
+        // #402: the 44px targets on /about are the non-inline controls (Back,
+        // sound switch, language radios, accordion summaries) — not the inline
+        // prose license URLs inside the <details> (WCAG 2.5.8 exempts those).
+        const controls = await page.locator('button, summary').all()
+        for (const c of controls) {
+          const box = await c.boundingBox()
           if (!box || box.height < 1) continue
-          expect(box.height, where).toBeGreaterThanOrEqual(43.5)
+          expect(box.height, `${where} control`).toBeGreaterThanOrEqual(43.5)
+          expect(box.width, `${where} control`).toBeGreaterThanOrEqual(43.5)
         }
+        // headings: exactly one h1 (About); section headings are h2
+        const headings = await page.evaluate(() => ({
+          h1: document.querySelectorAll('h1').length,
+          h2: document.querySelectorAll('h2').length,
+          open: [...document.querySelectorAll<HTMLDetailsElement>('details[data-about-accordion]')].map((d) => d.open),
+        }))
+        expect(headings.h1, `${where} single h1`).toBe(1)
+        expect(headings.h2, `${where} h2 sections`).toBeGreaterThanOrEqual(4)
+        // license accordions are closed by default
+        expect(headings.open, `${where} accordions closed`).toEqual([false, false])
         if (vp.name === '375x667' && lang === 'en' && isSnapshotClock()) {
           await expect(page).toHaveScreenshot('about-portrait.png', { fullPage: true })
         }
+        // a summary tap opens the accordion and reveals the license links
+        const packs = page.locator('details[data-about-accordion="packs"] summary')
+        await packs.click()
+        await expect(page.locator('details[data-about-accordion="packs"]'), where).toHaveAttribute('open', '')
+        await expect(
+          page.locator('details[data-about-accordion="packs"] a[href*="creativecommons.org"]').first(),
+          `${where} license link after open`,
+        ).toBeVisible()
       })
     }
   }

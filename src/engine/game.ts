@@ -11,6 +11,8 @@ export type CellState = {
   /** Prefill vowel help (A1/A2 ASCII only) or diacritic hint. */
   helped: boolean
   revealed: boolean
+  /** Practice Reveal (#402): cell shown by give-up, not earned or helped — neutral tint. */
+  gaveUp?: boolean
 }
 
 export type GuessResult = {
@@ -120,13 +122,19 @@ export function isDiacriticHintReady(
   return diacriticMisses >= 2 && hasUnrevealedDiacritic(cells, word)
 }
 
-/** Reveal every grapheme (practice give-up / Reveal word). */
-export function revealAllCells(word: string): CellState[] {
-  return graphemes(word).map((ch) => ({
-    char: ch,
-    helped: false,
-    revealed: true,
-  }))
+/**
+ * Reveal every grapheme (practice give-up / Reveal word, never Daily loss).
+ * Already-revealed cells (earned guesses, prefill/helped vowels) are preserved
+ * as-is; only newly revealed unguessed cells get `gaveUp` so the reveal
+ * animation and the neutral tint hit exactly those tiles (#402).
+ */
+export function revealAllCells(word: string, existingCells?: CellState[]): CellState[] {
+  const gs = graphemes(word)
+  return gs.map((ch, i) => {
+    const prev = existingCells?.[i]
+    if (prev?.revealed) return { ...prev, char: ch, revealed: true }
+    return { char: ch, helped: false, revealed: true, gaveUp: true }
+  })
 }
 
 export function isWon(cells: CellState[]): boolean {
