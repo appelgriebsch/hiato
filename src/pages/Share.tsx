@@ -143,64 +143,7 @@ export function Share() {
   }
 
   return (
-    <Layout
-      footer={
-        <div className="space-y-2 pt-4 pb-6">
-          {invite ? (
-            <>
-              {inviteError ? (
-                <p role="alert" className="text-sm text-accent-fg">
-                  {inviteError}
-                </p>
-              ) : null}
-              <Button
-                fullWidth
-                disabled={busy || preparing}
-                aria-busy={preparing}
-                onClick={() => void onPlayDaily()}
-              >
-                {preparing
-                  ? t('common.preparing')
-                  : t('share.playDailyInvite', {
-                      lang: LANG_CODES[invite.lang],
-                      cefr: CEFR_CODES[invite.cefr],
-                    })}
-              </Button>
-            </>
-          ) : null}
-          <Button
-            fullWidth
-            variant={invite ? 'secondary' : undefined}
-            disabled={busy}
-            onClick={() => run(() => shareResult(payload))}
-          >
-            {t('common.share')}
-          </Button>
-          <Button
-            fullWidth
-            variant="secondary"
-            disabled={busy}
-            onClick={() => run(() => downloadShareCard(payload))}
-          >
-            {t('share.saveImage')}
-          </Button>
-          <Button
-            fullWidth
-            variant="outline"
-            disabled={busy}
-            aria-live="polite"
-            onClick={() => void onCopyText()}
-          >
-            {t(copyLabel)}
-          </Button>
-          {fromToken ? (
-            <Button fullWidth variant="outline" onClick={() => nav('/')}>
-              {t('share.home')}
-            </Button>
-          ) : null}
-        </div>
-      }
-    >
+    <Layout>
       <TopBar
         left={
           <button
@@ -219,6 +162,61 @@ export function Share() {
       </p>
 
       <ShareCard {...payload} />
+
+      <div data-share-actions className="mt-4 space-y-2 pb-6">
+        {invite ? (
+          <>
+            {inviteError ? (
+              <p role="alert" className="text-sm text-accent-fg">
+                {inviteError}
+              </p>
+            ) : null}
+            <Button
+              fullWidth
+              disabled={busy || preparing}
+              aria-busy={preparing}
+              onClick={() => void onPlayDaily()}
+            >
+              {preparing
+                ? t('common.preparing')
+                : t('share.playDailyInvite', {
+                    lang: LANG_CODES[invite.lang],
+                    cefr: CEFR_CODES[invite.cefr],
+                  })}
+            </Button>
+          </>
+        ) : null}
+        <Button
+          fullWidth
+          variant={invite ? 'secondary' : undefined}
+          disabled={busy}
+          onClick={() => run(() => shareResult(payload))}
+        >
+          {t('common.share')}
+        </Button>
+        <Button
+          fullWidth
+          variant="secondary"
+          disabled={busy}
+          onClick={() => run(() => downloadShareCard(payload))}
+        >
+          {t('share.saveImage')}
+        </Button>
+        <Button
+          fullWidth
+          variant="outline"
+          disabled={busy}
+          aria-live="polite"
+          onClick={() => void onCopyText()}
+        >
+          {t(copyLabel)}
+        </Button>
+        {fromToken ? (
+          <Button fullWidth variant="outline" onClick={() => nav('/')}>
+            {t('share.home')}
+          </Button>
+        ) : null}
+      </div>
 
       {toast ? <Toast message={toast} tone={toastTone} onDone={() => setToast(null)} /> : null}
     </Layout>

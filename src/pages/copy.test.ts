@@ -1300,7 +1300,7 @@ describe('Share copy confirmation (#135)', () => {
 })
 
 describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
-  test('CTA is gated on a cold open and rendered first in the footer', async () => {
+  test('CTA is gated on a cold open and rendered first in the action stack', async () => {
     const src = await pageSrc('Share.tsx')
     expect(src).toContain(
       "import { acceptDailyInvite, dailyInviteTarget } from '@/lib/invite'",
@@ -1308,10 +1308,12 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     expect(src).toContain(
       'const invite = loc.state == null && payload ? dailyInviteTarget(payload) : null',
     )
-    const footerAt = src.indexOf('footer={')
-    expect(footerAt).toBeGreaterThan(-1)
-    const gateAt = src.indexOf('{invite ? (', footerAt)
-    expect(gateAt).toBeGreaterThan(footerAt)
+    // #400: actions render in normal flow below the card, never in a sticky footer.
+    expect(src).not.toContain('footer={')
+    const actionsAt = src.indexOf('data-share-actions')
+    expect(actionsAt).toBeGreaterThan(-1)
+    const gateAt = src.indexOf('{invite ? (', actionsAt)
+    expect(gateAt).toBeGreaterThan(actionsAt)
     // Existing Share / Save image / Copy text (+ Home) stay below the CTA.
     const shareBtnAt = src.indexOf('shareResult(payload)', gateAt)
     expect(shareBtnAt).toBeGreaterThan(gateAt)
@@ -1349,7 +1351,7 @@ describe('Share invite-to-play CTA (#226 / #274, ADR 0036 amendment)', () => {
     expect(fn).toContain('setInviteError(fail)')
     expect(src).toContain("t('share.inviteFail'")
     expect(UI_COPY.en['share.inviteFail']).toContain('Could not load the {lang} {cefr} pack.')
-    // Inline alert sits above the CTA inside the same footer gate.
+    // Inline alert sits above the CTA inside the same action-stack gate.
     const gateAt = src.indexOf('{invite ? (')
     const alertAt = src.indexOf('role="alert"', gateAt)
     expect(alertAt).toBeGreaterThan(gateAt)
